@@ -31,7 +31,8 @@ class FundCalendarEntry(BaseModel):
     """
     FundCalendarEntry
     """
-    code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry") 
+    code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry.") 
+    variant:  Optional[StrictStr] = Field(None,alias="variant", description="The Variant of the Calendar Entry. Together with the valuation point code marks the unique branch for the NavType.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
@@ -45,7 +46,7 @@ class FundCalendarEntry(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
-    __properties = ["code", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "properties", "version", "href"]
+    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "properties", "version", "href"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -161,6 +162,11 @@ class FundCalendarEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # set to None if variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variant is None and "variant" in self.__fields_set__:
+            _dict['variant'] = None
+
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -194,6 +200,7 @@ class FundCalendarEntry(BaseModel):
 
         _obj = FundCalendarEntry.parse_obj({
             "code": obj.get("code"),
+            "variant": obj.get("variant"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "nav_type_code": obj.get("navTypeCode"),

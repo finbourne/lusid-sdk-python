@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry | 
+**code** | **str** | The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry. | 
 **display_name** | **str** | The name of the Fund Calendar entry. | 
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 

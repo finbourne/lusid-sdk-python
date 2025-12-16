@@ -5,6 +5,7 @@ The ValuationPointDataRequest.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **diary_entry_code** | **str** | Unique code for the Valuation Point. | 
+**diary_entry_variant** | **str** | Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 ## Example
 
 ```python
@@ -15,7 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 diary_entry_code: StrictStr = "example_diary_entry_code"
-valuation_point_data_request_instance = ValuationPointDataRequest(diary_entry_code=diary_entry_code)
+diary_entry_variant: Optional[StrictStr] = "example_diary_entry_variant"
+valuation_point_data_request_instance = ValuationPointDataRequest(diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant)
 
 ```
 

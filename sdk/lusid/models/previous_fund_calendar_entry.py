@@ -27,7 +27,7 @@ class PreviousFundCalendarEntry(BaseModel):
     """
     PreviousFundCalendarEntry
     """
-    code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry") 
+    code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")

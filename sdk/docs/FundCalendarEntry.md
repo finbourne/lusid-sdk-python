@@ -3,7 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry | 
+**code** | **str** | The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry. | 
+**variant** | **str** | The Variant of the Calendar Entry. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 **display_name** | **str** | The name of the Fund Calendar entry. | 
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **nav_type_code** | **str** | The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with. | 
@@ -27,6 +28,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 code: StrictStr = "example_code"
+variant: Optional[StrictStr] = "example_variant"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 nav_type_code: StrictStr = "example_nav_type_code"
@@ -41,7 +43,7 @@ apply_clear_down:StrictBool = True
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
-fund_calendar_entry_instance = FundCalendarEntry(code=code, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
+fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
 
 ```
 

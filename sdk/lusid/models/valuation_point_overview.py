@@ -31,6 +31,7 @@ class ValuationPointOverview(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code for the Valuation Point.") 
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="The Variant for the Valuation Point. Together with the valuation point code marks the unique branch for the NavType.") 
     effective_from: datetime = Field(description="The effective time of the last Valuation Point.", alias="effectiveFrom")
     effective_to: datetime = Field(description="The effective time of the current Valuation Point.", alias="effectiveTo")
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the Valuation Point. Defaults to latest.", alias="queryAsAt")
@@ -40,7 +41,7 @@ class ValuationPointOverview(BaseModel):
     nav: Union[StrictFloat, StrictInt] = Field(description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Fee properties. These will be from the 'Fee' domain.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "diaryEntryCode", "effectiveFrom", "effectiveTo", "queryAsAt", "type", "status", "gav", "nav", "properties", "links"]
+    __properties = ["href", "diaryEntryCode", "diaryEntryVariant", "effectiveFrom", "effectiveTo", "queryAsAt", "type", "status", "gav", "nav", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +94,11 @@ class ValuationPointOverview(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if diary_entry_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
+            _dict['diaryEntryVariant'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -117,6 +123,7 @@ class ValuationPointOverview(BaseModel):
         _obj = ValuationPointOverview.parse_obj({
             "href": obj.get("href"),
             "diary_entry_code": obj.get("diaryEntryCode"),
+            "diary_entry_variant": obj.get("diaryEntryVariant"),
             "effective_from": obj.get("effectiveFrom"),
             "effective_to": obj.get("effectiveTo"),
             "query_as_at": obj.get("queryAsAt"),

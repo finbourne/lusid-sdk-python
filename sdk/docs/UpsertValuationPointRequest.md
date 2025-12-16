@@ -5,6 +5,7 @@ A definition for the period you wish to close
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **diary_entry_code** | **str** | Unique code for the Valuation Point. | 
+**diary_entry_variant** | **str** | Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 **name** | **str** | Identifiable Name assigned to the Valuation Point. | [optional] 
 **effective_at** | **datetime** | The effective time of the diary entry. | 
 **query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
@@ -20,13 +21,14 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 diary_entry_code: StrictStr = "example_diary_entry_code"
+diary_entry_variant: Optional[StrictStr] = "example_diary_entry_variant"
 name: Optional[StrictStr] = "example_name"
 effective_at: datetime = # Replace with your value
 query_as_at: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 apply_clear_down: Optional[StrictBool] = # Replace with your value
 apply_clear_down:Optional[StrictBool] = None
-upsert_valuation_point_request_instance = UpsertValuationPointRequest(diary_entry_code=diary_entry_code, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down)
+upsert_valuation_point_request_instance = UpsertValuationPointRequest(diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down)
 
 ```
 

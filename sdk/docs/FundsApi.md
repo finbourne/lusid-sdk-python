@@ -734,7 +734,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_nav_activity_adjustments**
-> DeletedEntityResponse delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+> DeletedEntityResponse delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant)
 
 [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
 
@@ -790,13 +790,14 @@ def main():
     valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to delete the adjustment from
     nav_type_code = 'nav_type_code_example' # str | The Nav Type Code to delete the adjustment from
     nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to delete from a specific valuation point and nav type
+    valuation_point_code_variant = 'valuation_point_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, opts=opts)
+        # api_response =  api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant, opts=opts)
 
         # [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
-        api_response = api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+        api_response = api_instance.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant)
         pprint(api_response)
 
     except ApiException as e:
@@ -814,6 +815,7 @@ Name | Type | Description  | Notes
  **valuation_point_code** | **str**| The valuation point Code to delete the adjustment from | 
  **nav_type_code** | **str**| The Nav Type Code to delete the adjustment from | 
  **nav_activity_adjustment** | [**List[NavActivityAdjustment]**](NavActivityAdjustment.md)| The request describing the Nav activity adjustments to delete from a specific valuation point and nav type | 
+ **valuation_point_code_variant** | **str**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 
 ### Return type
 
@@ -834,7 +836,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_valuation_point**
-> DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code)
+> DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code, diary_entry_code_variant=diary_entry_code_variant, nav_type_code=nav_type_code)
 
 [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
 
@@ -888,14 +890,15 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     diary_entry_code = 'diary_entry_code_example' # str | The diary entry code for the valuation Point to be deleted.
+    diary_entry_code_variant = 'diary_entry_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. This is working only for the Estimates. (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.delete_valuation_point(scope, code, diary_entry_code, diary_entry_code_variant=diary_entry_code_variant, nav_type_code=nav_type_code, opts=opts)
 
         # [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
-        api_response = api_instance.delete_valuation_point(scope, code, diary_entry_code, nav_type_code=nav_type_code)
+        api_response = api_instance.delete_valuation_point(scope, code, diary_entry_code, diary_entry_code_variant=diary_entry_code_variant, nav_type_code=nav_type_code)
         pprint(api_response)
 
     except ApiException as e:
@@ -911,6 +914,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **diary_entry_code** | **str**| The diary entry code for the valuation Point to be deleted. | 
+ **diary_entry_code_variant** | **str**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. This is working only for the Estimates. | [optional] 
  **nav_type_code** | **str**| When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
 
 ### Return type
@@ -2538,7 +2542,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_nav_activity_adjustments**
-> ResourceListOfNavActivityAdjustment list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter)
+> ResourceListOfNavActivityAdjustment list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter, valuation_point_code_variant=valuation_point_code_variant)
 
 [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 
@@ -2597,13 +2601,14 @@ def main():
     page = 'page_example' # str | The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    valuation_point_code_variant = 'valuation_point_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+        # api_response =  api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter, valuation_point_code_variant=valuation_point_code_variant, opts=opts)
 
         # [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
-        api_response = api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter)
+        api_response = api_instance.list_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, as_at=as_at, page=page, limit=limit, filter=filter, valuation_point_code_variant=valuation_point_code_variant)
         pprint(api_response)
 
     except ApiException as e:
@@ -2624,6 +2629,7 @@ Name | Type | Description  | Notes
  **page** | **str**| The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **valuation_point_code_variant** | **str**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 
 ### Return type
 
@@ -3550,7 +3556,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_nav_activity_adjustments**
-> datetime upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+> datetime upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant)
 
 [EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
 
@@ -3606,13 +3612,14 @@ def main():
     valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to apply the adjustment to
     nav_type_code = 'nav_type_code_example' # str | The Nav Type Code to apply the adjustment to
     nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to apply to a specific valuation point and nav type
+    valuation_point_code_variant = 'valuation_point_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, opts=opts)
+        # api_response =  api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant, opts=opts)
 
         # [EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
-        api_response = api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment)
+        api_response = api_instance.upsert_nav_activity_adjustments(scope, code, valuation_point_code, nav_type_code, nav_activity_adjustment, valuation_point_code_variant=valuation_point_code_variant)
         pprint(api_response)
 
     except ApiException as e:
@@ -3630,6 +3637,7 @@ Name | Type | Description  | Notes
  **valuation_point_code** | **str**| The valuation point Code to apply the adjustment to | 
  **nav_type_code** | **str**| The Nav Type Code to apply the adjustment to | 
  **nav_activity_adjustment** | [**List[NavActivityAdjustment]**](NavActivityAdjustment.md)| The request describing the Nav activity adjustments to apply to a specific valuation point and nav type | 
+ **valuation_point_code_variant** | **str**| The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 
 ### Return type
 

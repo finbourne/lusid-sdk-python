@@ -29,7 +29,8 @@ class DateOrDiaryEntry(BaseModel):
     """
     var_date:  Optional[StrictStr] = Field(None,alias="date", description="A date. If specified, DiaryEntry must not be specified.") 
     diary_entry:  Optional[StrictStr] = Field(None,alias="diaryEntry", description="The code of a diary entry. If specified, Date must not be specified.") 
-    __properties = ["date", "diaryEntry"]
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="Unique Variant for the given Diary Entry Code. If not provided, defaults to empty string.") 
+    __properties = ["date", "diaryEntry", "diaryEntryVariant"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +74,11 @@ class DateOrDiaryEntry(BaseModel):
         if self.diary_entry is None and "diary_entry" in self.__fields_set__:
             _dict['diaryEntry'] = None
 
+        # set to None if diary_entry_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
+            _dict['diaryEntryVariant'] = None
+
         return _dict
 
     @classmethod
@@ -86,7 +92,8 @@ class DateOrDiaryEntry(BaseModel):
 
         _obj = DateOrDiaryEntry.parse_obj({
             "var_date": obj.get("date"),
-            "diary_entry": obj.get("diaryEntry")
+            "diary_entry": obj.get("diaryEntry"),
+            "diary_entry_variant": obj.get("diaryEntryVariant")
         })
         return _obj
 

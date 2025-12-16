@@ -29,12 +29,13 @@ class UpsertValuationPointRequest(BaseModel):
     A definition for the period you wish to close  # noqa: E501
     """
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the Valuation Point.") 
     effective_at: datetime = Field(description="The effective time of the diary entry.", alias="effectiveAt")
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.", alias="applyClearDown")
-    __properties = ["diaryEntryCode", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown"]
+    __properties = ["diaryEntryCode", "diaryEntryVariant", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,6 +76,11 @@ class UpsertValuationPointRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # set to None if diary_entry_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
+            _dict['diaryEntryVariant'] = None
+
         # set to None if name (nullable) is None
         # and __fields_set__ contains the field
         if self.name is None and "name" in self.__fields_set__:
@@ -103,6 +109,7 @@ class UpsertValuationPointRequest(BaseModel):
 
         _obj = UpsertValuationPointRequest.parse_obj({
             "diary_entry_code": obj.get("diaryEntryCode"),
+            "diary_entry_variant": obj.get("diaryEntryVariant"),
             "name": obj.get("name"),
             "effective_at": obj.get("effectiveAt"),
             "query_as_at": obj.get("queryAsAt"),

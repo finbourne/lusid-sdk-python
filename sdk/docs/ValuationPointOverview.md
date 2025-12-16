@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **diary_entry_code** | **str** | The code for the Valuation Point. | 
+**diary_entry_variant** | **str** | The Variant for the Valuation Point. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
 **effective_from** | **datetime** | The effective time of the last Valuation Point. | 
 **effective_to** | **datetime** | The effective time of the current Valuation Point. | 
 **query_as_at** | **datetime** | The query time of the Valuation Point. Defaults to latest. | [optional] 
@@ -25,6 +26,7 @@ from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 diary_entry_code: StrictStr = "example_diary_entry_code"
+diary_entry_variant: Optional[StrictStr] = "example_diary_entry_variant"
 effective_from: datetime = # Replace with your value
 effective_to: datetime = # Replace with your value
 query_as_at: Optional[datetime] = # Replace with your value
@@ -34,7 +36,7 @@ gav: Union[StrictFloat, StrictInt] = # Replace with your value
 nav: Union[StrictFloat, StrictInt] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, properties=properties, links=links)
+valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, properties=properties, links=links)
 
 ```
 

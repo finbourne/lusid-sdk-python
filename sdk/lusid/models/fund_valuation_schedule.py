@@ -30,12 +30,13 @@ class FundValuationSchedule(BaseModel):
     effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="If present, the EffectiveFrom and EffectiveAt dates are interpreted as a range of dates for which to perform a valuation.  In this case, valuation is calculated for the portfolio(s) for each business day in the given range.") 
     effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The market data time, i.e. the time to run the valuation request effective of.") 
     diary_entry:  Optional[StrictStr] = Field(None,alias="diaryEntry", description="The diary entry to use for the valuation schedule. This is used to determine the date on which the valuation should be performed.") 
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="The diary entry variant to use, together with the diary entry to be used for the valuation schedule.") 
     tenor:  Optional[StrictStr] = Field(None,alias="tenor", description="Tenor, e.g \"1D\", \"1M\" to be used in generating the date schedule when effectiveFrom and effectiveAt are both given and are not the same.") 
     roll_convention:  Optional[StrictStr] = Field(None,alias="rollConvention", description="When Tenor is given and is \"1M\" or longer, this specifies the rule which should be used to generate the date schedule.  For example, \"EndOfMonth\" to generate end of month dates, or \"1\" to specify the first day of the applicable month.") 
     holiday_calendars: Optional[List[StrictStr]] = Field(default=None, description="The holiday calendar(s) that should be used in determining the date schedule.  Holiday calendar(s) are supplied by their names, for example, \"CoppClark\".  Note that when the calendars are not available (e.g. when the user has insufficient permissions),  a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored.", alias="holidayCalendars")
     valuation_date_times: Optional[List[StrictStr]] = Field(default=None, description="If given, this is the exact set of dates on which to perform a valuation. This will replace/override all other specified values if given.", alias="valuationDateTimes")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When Tenor is given and is not equal to \"1D\", there may be cases where \"date + tenor\" land on non-business days around month end.  In that case, the BusinessDayConvention, e.g. modified following \"MF\" would be applied to determine the next GBD.") 
-    __properties = ["effectiveFrom", "effectiveAt", "diaryEntry", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention"]
+    __properties = ["effectiveFrom", "effectiveAt", "diaryEntry", "diaryEntryVariant", "tenor", "rollConvention", "holidayCalendars", "valuationDateTimes", "businessDayConvention"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,11 @@ class FundValuationSchedule(BaseModel):
         if self.diary_entry is None and "diary_entry" in self.__fields_set__:
             _dict['diaryEntry'] = None
 
+        # set to None if diary_entry_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
+            _dict['diaryEntryVariant'] = None
+
         # set to None if tenor (nullable) is None
         # and __fields_set__ contains the field
         if self.tenor is None and "tenor" in self.__fields_set__:
@@ -124,6 +130,7 @@ class FundValuationSchedule(BaseModel):
             "effective_from": obj.get("effectiveFrom"),
             "effective_at": obj.get("effectiveAt"),
             "diary_entry": obj.get("diaryEntry"),
+            "diary_entry_variant": obj.get("diaryEntryVariant"),
             "tenor": obj.get("tenor"),
             "roll_convention": obj.get("rollConvention"),
             "holiday_calendars": obj.get("holidayCalendars"),

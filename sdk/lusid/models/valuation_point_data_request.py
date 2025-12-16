@@ -28,7 +28,8 @@ class ValuationPointDataRequest(BaseModel):
     The ValuationPointDataRequest.  # noqa: E501
     """
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
-    __properties = ["diaryEntryCode"]
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType.") 
+    __properties = ["diaryEntryCode", "diaryEntryVariant"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,6 +63,11 @@ class ValuationPointDataRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if diary_entry_variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
+            _dict['diaryEntryVariant'] = None
+
         return _dict
 
     @classmethod
@@ -74,7 +80,8 @@ class ValuationPointDataRequest(BaseModel):
             return ValuationPointDataRequest.parse_obj(obj)
 
         _obj = ValuationPointDataRequest.parse_obj({
-            "diary_entry_code": obj.get("diaryEntryCode")
+            "diary_entry_code": obj.get("diaryEntryCode"),
+            "diary_entry_variant": obj.get("diaryEntryVariant")
         })
         return _obj
 
