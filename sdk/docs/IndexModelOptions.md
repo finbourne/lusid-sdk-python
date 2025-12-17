@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **portfolio_scaling** | **str** | The available values are: Sum, AbsoluteSum, Unity | 
+**lookthrough_portfolio_relationship_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **model_options_type** | **str** | The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 portfolio_scaling: StrictStr = "example_portfolio_scaling"
+lookthrough_portfolio_relationship_id: Optional[ResourceId] = # Replace with your value
 model_options_type: StrictStr = "example_model_options_type"
-index_model_options_instance = IndexModelOptions(portfolio_scaling=portfolio_scaling, model_options_type=model_options_type)
+index_model_options_instance = IndexModelOptions(portfolio_scaling=portfolio_scaling, lookthrough_portfolio_relationship_id=lookthrough_portfolio_relationship_id, model_options_type=model_options_type)
 
 ```
 

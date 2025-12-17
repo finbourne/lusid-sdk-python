@@ -23,15 +23,17 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.model_options import ModelOptions
+from lusid.models.resource_id import ResourceId
 
 class IndexModelOptions(ModelOptions):
     """
     IndexModelOptions
     """
     portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="The available values are: Sum, AbsoluteSum, Unity") 
+    lookthrough_portfolio_relationship_id: Optional[ResourceId] = Field(default=None, alias="lookthroughPortfolioRelationshipId")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "portfolioScaling"]
+    __properties = ["modelOptionsType", "portfolioScaling", "lookthroughPortfolioRelationshipId"]
 
     @validator('portfolio_scaling')
     def portfolio_scaling_validate_enum(cls, value):
@@ -198,6 +200,9 @@ class IndexModelOptions(ModelOptions):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of lookthrough_portfolio_relationship_id
+        if self.lookthrough_portfolio_relationship_id:
+            _dict['lookthroughPortfolioRelationshipId'] = self.lookthrough_portfolio_relationship_id.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -216,7 +221,8 @@ class IndexModelOptions(ModelOptions):
 
         _obj = IndexModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "portfolio_scaling": obj.get("portfolioScaling")
+            "portfolio_scaling": obj.get("portfolioScaling"),
+            "lookthrough_portfolio_relationship_id": ResourceId.from_dict(obj.get("lookthroughPortfolioRelationshipId")) if obj.get("lookthroughPortfolioRelationshipId") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
