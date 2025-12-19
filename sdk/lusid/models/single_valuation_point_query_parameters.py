@@ -29,7 +29,8 @@ class SingleValuationPointQueryParameters(BaseModel):
     SingleValuationPointQueryParameters
     """
     date_or_diary_entry: DateOrDiaryEntry = Field(alias="dateOrDiaryEntry")
-    __properties = ["dateOrDiaryEntry"]
+    variant:  Optional[StrictStr] = Field(None,alias="variant", description="Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates.") 
+    __properties = ["dateOrDiaryEntry", "variant"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class SingleValuationPointQueryParameters(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of date_or_diary_entry
         if self.date_or_diary_entry:
             _dict['dateOrDiaryEntry'] = self.date_or_diary_entry.to_dict()
+        # set to None if variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variant is None and "variant" in self.__fields_set__:
+            _dict['variant'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +84,8 @@ class SingleValuationPointQueryParameters(BaseModel):
             return SingleValuationPointQueryParameters.parse_obj(obj)
 
         _obj = SingleValuationPointQueryParameters.parse_obj({
-            "date_or_diary_entry": DateOrDiaryEntry.from_dict(obj.get("dateOrDiaryEntry")) if obj.get("dateOrDiaryEntry") is not None else None
+            "date_or_diary_entry": DateOrDiaryEntry.from_dict(obj.get("dateOrDiaryEntry")) if obj.get("dateOrDiaryEntry") is not None else None,
+            "variant": obj.get("variant")
         })
         return _obj
 

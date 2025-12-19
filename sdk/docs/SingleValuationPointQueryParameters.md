@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **date_or_diary_entry** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | 
+**variant** | **str** | Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates. | [optional] 
 ## Example
 
 ```python
@@ -14,7 +15,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 date_or_diary_entry: DateOrDiaryEntry = # Replace with your value
-single_valuation_point_query_parameters_instance = SingleValuationPointQueryParameters(date_or_diary_entry=date_or_diary_entry)
+variant: Optional[StrictStr] = "example_variant"
+single_valuation_point_query_parameters_instance = SingleValuationPointQueryParameters(date_or_diary_entry=date_or_diary_entry, variant=variant)
 
 ```
 

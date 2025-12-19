@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | [optional] 
 **end** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | [optional] 
+**variant** | **str** | Unique Variant for the given Valuation points. If not provided, defaults to empty string. | [optional] 
 **date_mode** | **str** | The mode of calculation of the journal entry lines. The available values are: ActivityDate, AccountingDate. | [optional] 
 **general_ledger_profile_code** | **str** | The optional code of a general ledger profile used to decorate journal entry lines with levels. | [optional] 
 **property_keys** | **List[str]** | A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39; domain to decorate onto the journal entry lines. | [optional] 
@@ -19,10 +20,11 @@ from datetime import datetime
 
 start: Optional[DateOrDiaryEntry] = None
 end: Optional[DateOrDiaryEntry] = None
+variant: Optional[StrictStr] = "example_variant"
 date_mode: Optional[StrictStr] = "example_date_mode"
 general_ledger_profile_code: Optional[StrictStr] = "example_general_ledger_profile_code"
 property_keys: Optional[List[StrictStr]] = # Replace with your value
-journal_entry_lines_query_parameters_instance = JournalEntryLinesQueryParameters(start=start, end=end, date_mode=date_mode, general_ledger_profile_code=general_ledger_profile_code, property_keys=property_keys)
+journal_entry_lines_query_parameters_instance = JournalEntryLinesQueryParameters(start=start, end=end, variant=variant, date_mode=date_mode, general_ledger_profile_code=general_ledger_profile_code, property_keys=property_keys)
 
 ```
 

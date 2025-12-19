@@ -28,7 +28,7 @@ class ValuationPointDataRequest(BaseModel):
     The ValuationPointDataRequest.  # noqa: E501
     """
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="Unique code for the Valuation Point.") 
-    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType.") 
+    diary_entry_variant:  Optional[StrictStr] = Field(None,alias="diaryEntryVariant", description="Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates.") 
     __properties = ["diaryEntryCode", "diaryEntryVariant"]
 
     class Config:

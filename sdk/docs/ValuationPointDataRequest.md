@@ -5,7 +5,7 @@ The ValuationPointDataRequest.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **diary_entry_code** | **str** | Unique code for the Valuation Point. | 
-**diary_entry_variant** | **str** | Unique Variant for the given Diary Entry Code. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
+**diary_entry_variant** | **str** | Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates. | [optional] 
 ## Example
 
 ```python

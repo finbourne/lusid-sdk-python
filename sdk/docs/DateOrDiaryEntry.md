@@ -5,7 +5,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | **str** | A date. If specified, DiaryEntry must not be specified. | [optional] 
 **diary_entry** | **str** | The code of a diary entry. If specified, Date must not be specified. | [optional] 
-**diary_entry_variant** | **str** | Unique Variant for the given Diary Entry Code. If not provided, defaults to empty string. | [optional] 
 ## Example
 
 ```python
@@ -17,8 +16,7 @@ from datetime import datetime
 
 var_date: Optional[StrictStr] = "example_var_date"
 diary_entry: Optional[StrictStr] = "example_diary_entry"
-diary_entry_variant: Optional[StrictStr] = "example_diary_entry_variant"
-date_or_diary_entry_instance = DateOrDiaryEntry(var_date=var_date, diary_entry=diary_entry, diary_entry_variant=diary_entry_variant)
+date_or_diary_entry_instance = DateOrDiaryEntry(var_date=var_date, diary_entry=diary_entry)
 
 ```
 

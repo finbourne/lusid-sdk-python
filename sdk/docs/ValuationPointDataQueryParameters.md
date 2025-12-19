@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | [optional] 
 **end** | [**DateOrDiaryEntry**](DateOrDiaryEntry.md) |  | 
+**variant** | **str** | Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates. | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 start: Optional[DateOrDiaryEntry] = None
 end: DateOrDiaryEntry
-valuation_point_data_query_parameters_instance = ValuationPointDataQueryParameters(start=start, end=end)
+variant: Optional[StrictStr] = "example_variant"
+valuation_point_data_query_parameters_instance = ValuationPointDataQueryParameters(start=start, end=end, variant=variant)
 
 ```
 

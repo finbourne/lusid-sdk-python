@@ -30,10 +30,11 @@ class JournalEntryLinesQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: Optional[DateOrDiaryEntry] = None
+    variant:  Optional[StrictStr] = Field(None,alias="variant", description="Unique Variant for the given Valuation points. If not provided, defaults to empty string.") 
     date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the journal entry lines. The available values are: ActivityDate, AccountingDate.") 
     general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate journal entry lines with levels.") 
     property_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.", alias="propertyKeys")
-    __properties = ["start", "end", "dateMode", "generalLedgerProfileCode", "propertyKeys"]
+    __properties = ["start", "end", "variant", "dateMode", "generalLedgerProfileCode", "propertyKeys"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +74,11 @@ class JournalEntryLinesQueryParameters(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of end
         if self.end:
             _dict['end'] = self.end.to_dict()
+        # set to None if variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variant is None and "variant" in self.__fields_set__:
+            _dict['variant'] = None
+
         # set to None if date_mode (nullable) is None
         # and __fields_set__ contains the field
         if self.date_mode is None and "date_mode" in self.__fields_set__:
@@ -102,6 +108,7 @@ class JournalEntryLinesQueryParameters(BaseModel):
         _obj = JournalEntryLinesQueryParameters.parse_obj({
             "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
             "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None,
+            "variant": obj.get("variant"),
             "date_mode": obj.get("dateMode"),
             "general_ledger_profile_code": obj.get("generalLedgerProfileCode"),
             "property_keys": obj.get("propertyKeys")

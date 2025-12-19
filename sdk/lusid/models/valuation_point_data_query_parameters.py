@@ -30,7 +30,8 @@ class ValuationPointDataQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: DateOrDiaryEntry
-    __properties = ["start", "end"]
+    variant:  Optional[StrictStr] = Field(None,alias="variant", description="Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates.") 
+    __properties = ["start", "end", "variant"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,11 @@ class ValuationPointDataQueryParameters(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of end
         if self.end:
             _dict['end'] = self.end.to_dict()
+        # set to None if variant (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variant is None and "variant" in self.__fields_set__:
+            _dict['variant'] = None
+
         return _dict
 
     @classmethod
@@ -83,7 +89,8 @@ class ValuationPointDataQueryParameters(BaseModel):
 
         _obj = ValuationPointDataQueryParameters.parse_obj({
             "start": DateOrDiaryEntry.from_dict(obj.get("start")) if obj.get("start") is not None else None,
-            "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None
+            "end": DateOrDiaryEntry.from_dict(obj.get("end")) if obj.get("end") is not None else None,
+            "variant": obj.get("variant")
         })
         return _obj
 
