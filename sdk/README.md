@@ -252,6 +252,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
 *FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties.
+*FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 *FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
 *FundsApi* | [**get_valuation_for_fund**](docs/FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
 *FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.

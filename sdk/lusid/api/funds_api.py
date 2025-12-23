@@ -56,6 +56,7 @@ from lusid.models.valuation_point_resource_list_of_accounted_transaction import 
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
+from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 
 from lusid.api_client import ApiClient
@@ -2587,6 +2588,264 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/properties', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_holding_contributors_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, from_trade_date : Annotated[Optional[StrictStr], Field( description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[StrictStr], Field( description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, **kwargs) -> VersionedResourceListOfHoldingContributor:  # noqa: E501
+        ...
+
+    @overload
+    def get_holding_contributors_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, from_trade_date : Annotated[Optional[StrictStr], Field( description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[StrictStr], Field( description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListOfHoldingContributor:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_holding_contributors_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, from_trade_date : Annotated[Optional[StrictStr], Field( description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[StrictStr], Field( description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfHoldingContributor, Awaitable[VersionedResourceListOfHoldingContributor]]:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
+
+        Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_contributors_for_fund(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code, from_trade_date, to_trade_date, include_historic, tax_lot_id, include_unsettled_movements, limit, as_at, page, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The unique holding identifier (required)
+        :type holding_id: int
+        :param single_valuation_point_query_parameters: The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark. (required)
+        :type single_valuation_point_query_parameters: SingleValuationPointQueryParameters
+        :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param from_trade_date: The from trade date, defaults to first time this holding is opened, lower bound for transactions
+        :type from_trade_date: str
+        :param to_trade_date: The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions
+        :type to_trade_date: str
+        :param include_historic: If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.
+        :type include_historic: bool
+        :param tax_lot_id: Constrains the Holding Contributors to those which contributed to the specified tax lot.
+        :type tax_lot_id: str
+        :param include_unsettled_movements: If true, contributing transaction which have not settled yet will also be returned. False by default
+        :type include_unsettled_movements: bool
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param as_at: The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VersionedResourceListOfHoldingContributor
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_holding_contributors_for_fund_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_holding_contributors_for_fund_with_http_info(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code, from_trade_date, to_trade_date, include_historic, tax_lot_id, include_unsettled_movements, limit, as_at, page, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_holding_contributors_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, from_trade_date : Annotated[Optional[StrictStr], Field( description="The from trade date, defaults to first time this holding is opened, lower bound for transactions")] = None, to_trade_date : Annotated[Optional[StrictStr], Field( description="The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
+
+        Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_contributors_for_fund_with_http_info(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code, from_trade_date, to_trade_date, include_historic, tax_lot_id, include_unsettled_movements, limit, as_at, page, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The unique holding identifier (required)
+        :type holding_id: int
+        :param single_valuation_point_query_parameters: The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark. (required)
+        :type single_valuation_point_query_parameters: SingleValuationPointQueryParameters
+        :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param from_trade_date: The from trade date, defaults to first time this holding is opened, lower bound for transactions
+        :type from_trade_date: str
+        :param to_trade_date: The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions
+        :type to_trade_date: str
+        :param include_historic: If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.
+        :type include_historic: bool
+        :param tax_lot_id: Constrains the Holding Contributors to those which contributed to the specified tax lot.
+        :type tax_lot_id: str
+        :param include_unsettled_movements: If true, contributing transaction which have not settled yet will also be returned. False by default
+        :type include_unsettled_movements: bool
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param as_at: The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.
+        :type page: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VersionedResourceListOfHoldingContributor, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_id',
+            'single_valuation_point_query_parameters',
+            'nav_type_code',
+            'from_trade_date',
+            'to_trade_date',
+            'include_historic',
+            'tax_lot_id',
+            'include_unsettled_movements',
+            'limit',
+            'as_at',
+            'page'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_holding_contributors_for_fund" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_id']:
+            _path_params['holdingId'] = _params['holding_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('from_trade_date') is not None:  # noqa: E501
+            _query_params.append(('fromTradeDate', _params['from_trade_date']))
+
+        if _params.get('to_trade_date') is not None:  # noqa: E501
+            _query_params.append(('toTradeDate', _params['to_trade_date']))
+
+        if _params.get('include_historic') is not None:  # noqa: E501
+            _query_params.append(('includeHistoric', _params['include_historic']))
+
+        if _params.get('tax_lot_id') is not None:  # noqa: E501
+            _query_params.append(('taxLotId', _params['tax_lot_id']))
+
+        if _params.get('include_unsettled_movements') is not None:  # noqa: E501
+            _query_params.append(('includeUnsettledMovements', _params['include_unsettled_movements']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['single_valuation_point_query_parameters'] is not None:
+            _body_params = _params['single_valuation_point_query_parameters']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VersionedResourceListOfHoldingContributor",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/holdings/{holdingId}/contributors', 'POST',
             _path_params,
             _query_params,
             _header_params,

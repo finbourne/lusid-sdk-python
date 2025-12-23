@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**get_fee_properties**](FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
 [**get_fund**](FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
 [**get_fund_properties**](FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties.
+[**get_holding_contributors_for_fund**](FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 [**get_holdings_for_fund**](FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
 [**get_valuation_for_fund**](FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
 [**get_valuation_point_data**](FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
@@ -1433,6 +1434,127 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The properties of the specified fund |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_holding_contributors_for_fund**
+> VersionedResourceListOfHoldingContributor get_holding_contributors_for_fund(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code=nav_type_code, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
+
+[EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
+
+Get the holdings of transaction portfolios in a specified Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    holding_id = 56 # int | The unique holding identifier
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # single_valuation_point_query_parameters = SingleValuationPointQueryParameters.from_json("")
+    # single_valuation_point_query_parameters = SingleValuationPointQueryParameters.from_dict({})
+    single_valuation_point_query_parameters = SingleValuationPointQueryParameters()
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    from_trade_date = 'from_trade_date_example' # str | The from trade date, defaults to first time this holding is opened, lower bound for transactions (optional)
+    to_trade_date = 'to_trade_date_example' # str | The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions (optional)
+    include_historic = False # bool | If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. (optional) (default to False)
+    tax_lot_id = 'tax_lot_id_example' # str | Constrains the Holding Contributors to those which contributed to the specified tax lot. (optional)
+    include_unsettled_movements = False # bool | If true, contributing transaction which have not settled yet will also be returned. False by default (optional) (default to False)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_holding_contributors_for_fund(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code=nav_type_code, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page, opts=opts)
+
+        # [EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
+        api_response = api_instance.get_holding_contributors_for_fund(scope, code, holding_id, single_valuation_point_query_parameters, nav_type_code=nav_type_code, from_trade_date=from_trade_date, to_trade_date=to_trade_date, include_historic=include_historic, tax_lot_id=tax_lot_id, include_unsettled_movements=include_unsettled_movements, limit=limit, as_at=as_at, page=page)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_holding_contributors_for_fund: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **holding_id** | **int**| The unique holding identifier | 
+ **single_valuation_point_query_parameters** | [**SingleValuationPointQueryParameters**](SingleValuationPointQueryParameters.md)| The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark. | 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **from_trade_date** | **str**| The from trade date, defaults to first time this holding is opened, lower bound for transactions | [optional] 
+ **to_trade_date** | **str**| The to trade date upper bound date, defaults to effectiveDate. upper bound for transactions | [optional] 
+ **include_historic** | **bool**| If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened. | [optional] [default to False]
+ **tax_lot_id** | **str**| Constrains the Holding Contributors to those which contributed to the specified tax lot. | [optional] 
+ **include_unsettled_movements** | **bool**| If true, contributing transaction which have not settled yet will also be returned. False by default | [optional] [default to False]
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
+
+### Return type
+
+[**VersionedResourceListOfHoldingContributor**](VersionedResourceListOfHoldingContributor.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested holding contributors from the specified Fund and NavType. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
