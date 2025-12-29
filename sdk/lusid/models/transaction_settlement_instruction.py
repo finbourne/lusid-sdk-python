@@ -44,8 +44,9 @@ class TransactionSettlementInstruction(BaseModel):
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the settlement instruction - 'Invalid', 'Rejected' 'Applied' or 'Orphan'.") 
     instruction_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exchange rate between the Settlement Instruction and Portfolio.", alias="instructionToPortfolioRate")
     settlement_in_lieu: Optional[SettlementInLieu] = Field(default=None, alias="settlementInLieu")
+    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the settlement instruction is active. When false, the instruction has no impact on settlement positions, but remains visible. Defaults to true.", alias="isActive")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "properties"]
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "isActive", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -155,6 +156,7 @@ class TransactionSettlementInstruction(BaseModel):
             "status": obj.get("status"),
             "instruction_to_portfolio_rate": obj.get("instructionToPortfolioRate"),
             "settlement_in_lieu": SettlementInLieu.from_dict(obj.get("settlementInLieu")) if obj.get("settlementInLieu") is not None else None,
+            "is_active": obj.get("isActive"),
             "properties": dict(
                 (_k, PerpetualProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
