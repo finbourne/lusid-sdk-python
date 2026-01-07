@@ -34,7 +34,8 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
     derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
     is_filterable: StrictBool = Field(description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.", alias="isFilterable")
     value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented.") 
-    __properties = ["displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable", "valueFormat"]
+    custom_entity_type:  Optional[StrictStr] = Field(None,alias="customEntityType", description="The custom entity type that this derived property definition can be applied to.") 
+    __properties = ["displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable", "valueFormat", "customEntityType"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +82,11 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
         if self.value_format is None and "value_format" in self.__fields_set__:
             _dict['valueFormat'] = None
 
+        # set to None if custom_entity_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custom_entity_type is None and "custom_entity_type" in self.__fields_set__:
+            _dict['customEntityType'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +104,8 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
             "property_description": obj.get("propertyDescription"),
             "derivation_formula": obj.get("derivationFormula"),
             "is_filterable": obj.get("isFilterable"),
-            "value_format": obj.get("valueFormat")
+            "value_format": obj.get("valueFormat"),
+            "custom_entity_type": obj.get("customEntityType")
         })
         return _obj
 
