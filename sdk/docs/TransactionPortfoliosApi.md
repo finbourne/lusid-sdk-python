@@ -750,7 +750,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **build_transactions**
-> VersionedResourceListOfOutputTransaction build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code)
+> VersionedResourceListOfOutputTransaction build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
 
 BuildTransactions: Build transactions
 
@@ -816,13 +816,14 @@ def main():
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to BuildTransactions. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
+    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
+        # api_response =  api_instance.build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, opts=opts)
 
         # BuildTransactions: Build transactions
-        api_response = api_instance.build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code)
+        api_response = api_instance.build_transactions(scope, code, transaction_query_parameters, as_at=as_at, filter=filter, property_keys=property_keys, limit=limit, page=page, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
         pprint(api_response)
 
     except ApiException as e:
@@ -845,6 +846,7 @@ Name | Type | Description  | Notes
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to BuildTransactions. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
+ **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
 
 ### Return type
 
