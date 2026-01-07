@@ -1,10 +1,11 @@
 # QuantityInstructed
 
+The quantity of the event that was instructed, represented either as a percentage of the overall holdings or the number of units instructed.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | 
-**amount** | **float** |  | 
+**type** | **str** | The type of quantity instructed, either Percentage or Units. | 
+**amount** | **float** | The actual amount instructed. For Type Percentage, this is between 0 and 100. | 
 ## Example
 
 ```python
@@ -15,7 +16,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 type: StrictStr = "example_type"
-amount: Union[StrictFloat, StrictInt]
+amount: Union[StrictFloat, StrictInt] = # Replace with your value
 quantity_instructed_instance = QuantityInstructed(type=type, amount=amount)
 
 ```
