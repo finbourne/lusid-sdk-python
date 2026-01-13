@@ -2237,7 +2237,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the timeline used for evaluation. If provided, you must also provide a timelineCode. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the timeline used for evaluation. If provided, you must also provide a timelineScope. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2270,7 +2270,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
  **timeline_scope** | **str**| The scope of the timeline used for evaluation. If provided, you must also provide a timelineCode. | [optional] 
- **timeline_code** | **str**| The code of the timeline used for evaluation. If provided, you must also provide a timelineScope. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
 
 ### Return type
 
@@ -2351,7 +2351,7 @@ def main():
     by_taxlots = True # bool | Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the Timeline. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
     closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. (optional)
 
     try:
@@ -2381,7 +2381,7 @@ Name | Type | Description  | Notes
  **by_taxlots** | **bool**| Whether or not to expand the holdings to return the underlying tax-lots. Defaults to              False. | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
  **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
- **timeline_code** | **str**| The code of the Timeline. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
  **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. | [optional] 
 
 ### Return type
@@ -2682,7 +2682,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the timeline used for evaluation. If provided, you must also provide a timelineCode. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the timeline used for evaluation. If provided, you must also provide a timelineScope. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2715,7 +2715,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors. | [optional] 
  **timeline_scope** | **str**| The scope of the timeline used for evaluation. If provided, you must also provide a timelineCode. | [optional] 
- **timeline_code** | **str**| The code of the timeline used for evaluation. If provided, you must also provide a timelineScope. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
 
 ### Return type
 
