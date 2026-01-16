@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **amount** | **float** | Amount to be drawn down.  Must be positive. | 
 **var_date** | **datetime** | Date of the drawdown | [optional] 
 **contract_details** | [**ContractDetails**](ContractDetails.md) |  | 
+**agency_fx_rate** | **float** | Agency FX rate for multi-currency drawdowns.  When a drawdown is in a currency that&#39;s different to the facility&#39;s, an agency FX rate is specified for converting drawdown amount into facility currency to alter the facility&#39;s balance.  Default value of 1. | [optional] [default to 1]
 **instrument_event_type** | **str** | The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent | 
 ## Example
 
@@ -20,8 +21,9 @@ from datetime import datetime
 amount: Union[StrictFloat, StrictInt] = # Replace with your value
 var_date: Optional[datetime] = # Replace with your value
 contract_details: ContractDetails = # Replace with your value
+agency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-drawdown_event_instance = DrawdownEvent(amount=amount, var_date=var_date, contract_details=contract_details, instrument_event_type=instrument_event_type)
+drawdown_event_instance = DrawdownEvent(amount=amount, var_date=var_date, contract_details=contract_details, agency_fx_rate=agency_fx_rate, instrument_event_type=instrument_event_type)
 
 ```
 

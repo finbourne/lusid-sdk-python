@@ -32,9 +32,10 @@ class DrawdownEvent(InstrumentEvent):
     amount: Union[StrictFloat, StrictInt] = Field(description="Amount to be drawn down.  Must be positive.")
     var_date: Optional[datetime] = Field(default=None, description="Date of the drawdown", alias="date")
     contract_details: ContractDetails = Field(alias="contractDetails")
+    agency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=1, description="Agency FX rate for multi-currency drawdowns.  When a drawdown is in a currency that's different to the facility's, an agency FX rate is specified for converting drawdown amount into facility currency to alter the facility's balance.  Default value of 1.", alias="agencyFxRate")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. The available values are: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "amount", "date", "contractDetails"]
+    __properties = ["instrumentEventType", "amount", "date", "contractDetails", "agencyFxRate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -158,7 +159,8 @@ class DrawdownEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "amount": obj.get("amount"),
             "var_date": obj.get("date"),
-            "contract_details": ContractDetails.from_dict(obj.get("contractDetails")) if obj.get("contractDetails") is not None else None
+            "contract_details": ContractDetails.from_dict(obj.get("contractDetails")) if obj.get("contractDetails") is not None else None,
+            "agency_fx_rate": obj.get("agencyFxRate") if obj.get("agencyFxRate") is not None else 1
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

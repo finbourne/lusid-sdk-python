@@ -42,7 +42,8 @@ class NavTypeDefinition(BaseModel):
     transaction_type_scope:  StrictStr = Field(...,alias="transactionTypeScope") 
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId"]
+    leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode") 
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode"]
 
     class Config:
         """Pydantic configuration"""
@@ -118,6 +119,11 @@ class NavTypeDefinition(BaseModel):
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
 
+        # set to None if leader_nav_type_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
+            _dict['leaderNavTypeCode'] = None
+
         return _dict
 
     @classmethod
@@ -143,7 +149,8 @@ class NavTypeDefinition(BaseModel):
             "amortisation_method": obj.get("amortisationMethod"),
             "transaction_type_scope": obj.get("transactionTypeScope"),
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
-            "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None
+            "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
+            "leader_nav_type_code": obj.get("leaderNavTypeCode")
         })
         return _obj
 

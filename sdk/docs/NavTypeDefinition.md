@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **transaction_type_scope** | **str** |  | 
 **cash_gain_loss_calculation_date** | **str** |  | 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**leader_nav_type_code** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -40,7 +41,8 @@ amortisation_method: StrictStr = "example_amortisation_method"
 transaction_type_scope: StrictStr = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: StrictStr = "example_cash_gain_loss_calculation_date"
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
-nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id)
+leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
+nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code)
 
 ```
 
