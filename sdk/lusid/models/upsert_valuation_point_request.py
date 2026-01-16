@@ -35,7 +35,8 @@ class UpsertValuationPointRequest(BaseModel):
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.", alias="applyClearDown")
-    __properties = ["diaryEntryCode", "diaryEntryVariant", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown"]
+    update_inclusion_date_nav_adjustments: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities.", alias="updateInclusionDateNavAdjustments")
+    __properties = ["diaryEntryCode", "diaryEntryVariant", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown", "updateInclusionDateNavAdjustments"]
 
     class Config:
         """Pydantic configuration"""
@@ -119,7 +120,8 @@ class UpsertValuationPointRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "apply_clear_down": obj.get("applyClearDown")
+            "apply_clear_down": obj.get("applyClearDown"),
+            "update_inclusion_date_nav_adjustments": obj.get("updateInclusionDateNavAdjustments")
         })
         return _obj
 
