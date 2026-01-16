@@ -838,7 +838,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instrument_event_instruction**
-> InstrumentEventInstruction get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at)
+> InstrumentEventInstruction get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
 
@@ -894,13 +894,16 @@ def main():
     instrument_event_instruction_id = 'instrument_event_instruction_id_example' # str | The id of the instruction to be retrieved.
     portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
-        api_response = api_instance.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at)
+        api_response = api_instance.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -918,6 +921,9 @@ Name | Type | Description  | Notes
  **instrument_event_instruction_id** | **str**| The id of the instruction to be retrieved. | 
  **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. | [optional] 
 
 ### Return type
 
@@ -2081,7 +2087,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_instrument_event_instructions**
-> PagedResourceListOfInstrumentEventInstruction list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+> PagedResourceListOfInstrumentEventInstruction list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions
 
@@ -2140,13 +2146,16 @@ def main():
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+        # api_response =  api_instance.list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions
-        api_response = api_instance.list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        api_response = api_instance.list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -2167,6 +2176,9 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. | [optional] 
 
 ### Return type
 

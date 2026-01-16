@@ -1546,22 +1546,22 @@ class PortfoliosApi:
 
 
     @overload
-    async def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
+    async def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
         ...
 
     @overload
-    def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
+    def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=True, **kwargs) -> InstrumentEventInstruction:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEventInstruction, Awaitable[InstrumentEventInstruction]]:  # noqa: E501
+    def get_instrument_event_instruction(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[InstrumentEventInstruction, Awaitable[InstrumentEventInstruction]]:  # noqa: E501
         """[EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction  # noqa: E501
 
         Get a particular instruction for a particular portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, async_req=True)
+        >>> thread = api.get_instrument_event_instruction(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -1574,6 +1574,12 @@ class PortfoliosApi:
         :type portfolio_effective_at: str
         :param as_at: The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1590,17 +1596,17 @@ class PortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, **kwargs)  # noqa: E501
+        return self.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_instrument_event_instruction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_instrument_event_instruction_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], instrument_event_instruction_id : Annotated[StrictStr, Field(..., description="The id of the instruction to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction  # noqa: E501
 
         Get a particular instruction for a particular portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, async_req=True)
+        >>> thread = api.get_instrument_event_instruction_with_http_info(scope, code, instrument_event_instruction_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -1613,6 +1619,12 @@ class PortfoliosApi:
         :type portfolio_effective_at: str
         :param as_at: The asAt datetime at which to retrieve the instruction. Defaults to return the latest version of the instruction if not specified.
         :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1644,7 +1656,10 @@ class PortfoliosApi:
             'code',
             'instrument_event_instruction_id',
             'portfolio_effective_at',
-            'as_at'
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1693,6 +1708,15 @@ class PortfoliosApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -3957,22 +3981,22 @@ class PortfoliosApi:
 
 
     @overload
-    async def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> PagedResourceListOfInstrumentEventInstruction:  # noqa: E501
+    async def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> PagedResourceListOfInstrumentEventInstruction:  # noqa: E501
         ...
 
     @overload
-    def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstrumentEventInstruction:  # noqa: E501
+    def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstrumentEventInstruction:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstrumentEventInstruction, Awaitable[PagedResourceListOfInstrumentEventInstruction]]:  # noqa: E501
+    def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstrumentEventInstruction, Awaitable[PagedResourceListOfInstrumentEventInstruction]]:  # noqa: E501
         """[EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions  # noqa: E501
 
         Lists all instructions for a particular portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instrument_event_instructions(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_instrument_event_instructions(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -3991,6 +4015,12 @@ class PortfoliosApi:
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
         :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -4007,17 +4037,17 @@ class PortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_instrument_event_instructions_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, **kwargs)  # noqa: E501
+        return self.list_instrument_event_instructions_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_instrument_event_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_instrument_event_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions  # noqa: E501
 
         Lists all instructions for a particular portfolio  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_instrument_event_instructions_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, async_req=True)
+        >>> thread = api.list_instrument_event_instructions_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -4036,6 +4066,12 @@ class PortfoliosApi:
         :type filter: str
         :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
         :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -4070,7 +4106,10 @@ class PortfoliosApi:
             'page',
             'limit',
             'filter',
-            'sort_by'
+            'sort_by',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -4129,6 +4168,15 @@ class PortfoliosApi:
         if _params.get('sort_by') is not None:  # noqa: E501
             _query_params.append(('sortBy', _params['sort_by']))
             _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
