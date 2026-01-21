@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.settlement_in_lieu import SettlementInLieu
+from lusid.models.version import Version
 
 class TransactionSettlementInstruction(BaseModel):
     """
@@ -46,7 +47,8 @@ class TransactionSettlementInstruction(BaseModel):
     settlement_in_lieu: Optional[SettlementInLieu] = Field(default=None, alias="settlementInLieu")
     is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the settlement instruction is active. When false, the instruction has no impact on settlement positions, but remains visible. Defaults to true.", alias="isActive")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "isActive", "properties"]
+    version: Optional[Version] = None
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "isActive", "properties", "version"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +102,9 @@ class TransactionSettlementInstruction(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # set to None if contractual_settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
@@ -162,7 +167,8 @@ class TransactionSettlementInstruction(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
 
