@@ -453,7 +453,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **batch_upsert_settlement_instructions**
-> BatchUpsertTransactionSettlementInstructionResponse batch_upsert_settlement_instructions(scope, code, request_body)
+> BatchUpsertTransactionSettlementInstructionResponse batch_upsert_settlement_instructions(scope, code, request_body, success_mode=success_mode)
 
 [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
 
@@ -507,13 +507,14 @@ def main():
     scope = 'scope_example' # str | The scope of the portfolio.
     code = 'code_example' # str | The code of the portfolio.
     request_body = {"request-1":{"settlementInstructionId":"settlementInstructionId","transactionId":"transactionId1","settlementCategory":"CashSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"contractualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-01T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{},"properties":[]},"request-2":{"settlementInstructionId":"settlementInstructionId-2","transactionId":"transactionId2","settlementCategory":"StockSettlement","instructionType":"Complete","instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9"},"contractualSettlementDate":"2024-01-02T00:00:00.0000000+00:00","actualSettlementDate":"2024-01-05T00:00:00.0000000+00:00","units":10,"subHoldingKeyOverrides":{},"properties":[]}} # Dict[str, SettlementInstructionRequest] | The definition of the settlement instruction.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (optional) (default to 'Partial')
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.batch_upsert_settlement_instructions(scope, code, request_body, opts=opts)
+        # api_response =  api_instance.batch_upsert_settlement_instructions(scope, code, request_body, success_mode=success_mode, opts=opts)
 
         # [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
-        api_response = api_instance.batch_upsert_settlement_instructions(scope, code, request_body)
+        api_response = api_instance.batch_upsert_settlement_instructions(scope, code, request_body, success_mode=success_mode)
         pprint(api_response)
 
     except ApiException as e:
@@ -529,6 +530,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the portfolio. | 
  **code** | **str**| The code of the portfolio. | 
  **request_body** | [**Dict[str, SettlementInstructionRequest]**](SettlementInstructionRequest.md)| The definition of the settlement instruction. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [optional] [default to &#39;Partial&#39;]
 
 ### Return type
 

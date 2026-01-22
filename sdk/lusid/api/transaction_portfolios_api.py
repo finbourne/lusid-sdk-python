@@ -870,22 +870,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
+    async def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], async_req: Optional[bool]=True, **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
+    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertTransactionSettlementInstructionResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertTransactionSettlementInstructionResponse, Awaitable[BatchUpsertTransactionSettlementInstructionResponse]]:  # noqa: E501
+    def batch_upsert_settlement_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertTransactionSettlementInstructionResponse, Awaitable[BatchUpsertTransactionSettlementInstructionResponse]]:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.  # noqa: E501
 
         Create or update instructions to settle specific transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_settlement_instructions(scope, code, request_body, async_req=True)
+        >>> thread = api.batch_upsert_settlement_instructions(scope, code, request_body, success_mode, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -894,6 +894,8 @@ class TransactionPortfoliosApi:
         :type code: str
         :param request_body: The definition of the settlement instruction. (required)
         :type request_body: Dict[str, SettlementInstructionRequest]
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
+        :type success_mode: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -910,17 +912,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, **kwargs)  # noqa: E501
+        return self.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, success_mode, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_upsert_settlement_instructions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio.")], request_body : Annotated[Dict[str, SettlementInstructionRequest], Field(description="The definition of the settlement instruction.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.  # noqa: E501
 
         Create or update instructions to settle specific transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, async_req=True)
+        >>> thread = api.batch_upsert_settlement_instructions_with_http_info(scope, code, request_body, success_mode, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the portfolio. (required)
@@ -929,6 +931,8 @@ class TransactionPortfoliosApi:
         :type code: str
         :param request_body: The definition of the settlement instruction. (required)
         :type request_body: Dict[str, SettlementInstructionRequest]
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
+        :type success_mode: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -958,7 +962,8 @@ class TransactionPortfoliosApi:
         _all_params = [
             'scope',
             'code',
-            'request_body'
+            'request_body',
+            'success_mode'
         ]
         _all_params.extend(
             [
@@ -996,6 +1001,9 @@ class TransactionPortfoliosApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
