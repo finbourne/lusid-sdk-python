@@ -1706,18 +1706,18 @@ class TimelinesApi:
 
 
     @overload
-    async def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="Specifies collection of post close activities")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
+    async def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period.")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="This specifies a collection of post-close activities.")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
         ...
 
     @overload
-    def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="Specifies collection of post close activities")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
+    def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period.")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="This specifies a collection of post-close activities.")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
         ...
 
     @validate_arguments
-    def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="Specifies collection of post close activities")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
-        """[EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.  # noqa: E501
+    def set_post_close_activity(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period.")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="This specifies a collection of post-close activities.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
+        """[EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.  # noqa: E501
 
-        Sets empty or more post close activities to the specific closed period.  # noqa: E501
+        This sets the given post-close activities to the given Closed Period.                **This is an overwriting action!**                The possible types of entity are:  * `PortfolioTransaction`,  * `Instrument`,  * `InstrumentEvent`,  * `InstrumentEventInstruction`,  * `PortfolioSettlementInstruction`, and,  * `Quote`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1728,9 +1728,9 @@ class TimelinesApi:
         :type scope: str
         :param code: The code of the Timeline. (required)
         :type code: str
-        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod (required)
+        :param closed_period_id: The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period. (required)
         :type closed_period_id: str
-        :param post_close_activities_request: Specifies collection of post close activities
+        :param post_close_activities_request: This specifies a collection of post-close activities.
         :type post_close_activities_request: PostCloseActivitiesRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1751,10 +1751,10 @@ class TimelinesApi:
         return self.set_post_close_activity_with_http_info(scope, code, closed_period_id, post_close_activities_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def set_post_close_activity_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="Specifies collection of post close activities")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.  # noqa: E501
+    def set_post_close_activity_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period.")], post_close_activities_request : Annotated[Optional[PostCloseActivitiesRequest], Field(description="This specifies a collection of post-close activities.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.  # noqa: E501
 
-        Sets empty or more post close activities to the specific closed period.  # noqa: E501
+        This sets the given post-close activities to the given Closed Period.                **This is an overwriting action!**                The possible types of entity are:  * `PortfolioTransaction`,  * `Instrument`,  * `InstrumentEvent`,  * `InstrumentEventInstruction`,  * `PortfolioSettlementInstruction`, and,  * `Quote`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1765,9 +1765,9 @@ class TimelinesApi:
         :type scope: str
         :param code: The code of the Timeline. (required)
         :type code: str
-        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod (required)
+        :param closed_period_id: The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period. (required)
         :type closed_period_id: str
-        :param post_close_activities_request: Specifies collection of post close activities
+        :param post_close_activities_request: This specifies a collection of post-close activities.
         :type post_close_activities_request: PostCloseActivitiesRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

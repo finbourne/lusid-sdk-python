@@ -28,7 +28,7 @@ class PostCloseActivitiesRequest(BaseModel):
     """
     PostCloseActivitiesRequest
     """
-    post_close_activities: List[PostCloseActivity] = Field(description="Collection of post close activites.", alias="postCloseActivities")
+    post_close_activities: List[PostCloseActivity] = Field(description="A collection of post-close activities.", alias="postCloseActivities")
     __properties = ["postCloseActivities"]
 
     class Config:

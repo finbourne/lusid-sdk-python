@@ -27,10 +27,10 @@ class PostCloseActivity(BaseModel):
     """
     PostCloseActivity
     """
-    entity_type:  StrictStr = Field(...,alias="entityType") 
-    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId") 
-    as_at: datetime = Field(alias="asAt")
-    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity, possible values are: * `PortfolioTransaction`, * `Instrument`, * `InstrumentEvent`, * `InstrumentEventInstruction`, * `PortfolioSettlementInstruction`, and, * `Quote`.") 
+    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The entity unique ID. The expected format for each entity is: | entityType                       | entityUniqueId                                    | |----------------------------------|---------------------------------------------------| | `PortfolioTransaction`           | `portfolioUniqueId_transactionId`                 | | `Instrument`                     | `instrumentUniqueId`                              | | `InstrumentEvent`                | `corporateActionSourceUniqueId_instrumentEventId` | | `InstrumentEventInstruction`     | `portfolioUniqueId_instructionId`                 | | `PortfolioSettlementInstruction` | `portfolioUniqueId_settlementInstructionId`       | | `Quote`                          | `quoteSeriesUniqueId_quoteSeriesInstrumentId`     |") 
+    as_at: datetime = Field(description="The `AsAt` time of the event that needs to be added to the closed period.", alias="asAt")
+    effective_at:  Optional[StrictStr] = Field(None,alias="effectiveAt", description="The `EffectiveAt` time of the event that need to be added to the closed period. This can be a date or cut label. Only applicable for `Quote` post-close activities.") 
     __properties = ["entityType", "entityUniqueId", "asAt", "effectiveAt"]
 
     class Config:

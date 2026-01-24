@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**get_timeline**](TimelinesApi.md#get_timeline) | **GET** /api/timelines/{scope}/{code} | [EXPERIMENTAL] GetTimeline: Get a single Timeline by scope and code.
 [**list_closed_periods**](TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
 [**list_timelines**](TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
-[**set_post_close_activity**](TimelinesApi.md#set_post_close_activity) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity | [EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.
+[**set_post_close_activity**](TimelinesApi.md#set_post_close_activity) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity | [EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.
 [**unconfirm_closed_period**](TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
 [**update_timeline**](TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 
@@ -922,9 +922,9 @@ Name | Type | Description  | Notes
 # **set_post_close_activity**
 > ClosedPeriod set_post_close_activity(scope, code, closed_period_id, post_close_activities_request=post_close_activities_request)
 
-[EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.
+[EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.
 
-Sets empty or more post close activities to the specific closed period.
+This sets the given post-close activities to the given Closed Period.                **This is an overwriting action!**                The possible types of entity are:  * `PortfolioTransaction`,  * `Instrument`,  * `InstrumentEvent`,  * `InstrumentEventInstruction`,  * `PortfolioSettlementInstruction`, and,  * `Quote`.
 
 ### Example
 
@@ -973,7 +973,7 @@ def main():
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the Timeline.
     code = 'code_example' # str | The code of the Timeline.
-    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod
+    closed_period_id = 'closed_period_id_example' # str | The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -985,7 +985,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_post_close_activity(scope, code, closed_period_id, post_close_activities_request=post_close_activities_request, opts=opts)
 
-        # [EXPERIMENTAL] SetPostCloseActivity: Sets post close activities to a closed period.
+        # [EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.
         api_response = api_instance.set_post_close_activity(scope, code, closed_period_id, post_close_activities_request=post_close_activities_request)
         pprint(api_response)
 
@@ -1001,8 +1001,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Timeline. | 
  **code** | **str**| The code of the Timeline. | 
- **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod | 
- **post_close_activities_request** | [**PostCloseActivitiesRequest**](PostCloseActivitiesRequest.md)| Specifies collection of post close activities | [optional] 
+ **closed_period_id** | **str**| The ID of the Closed Period.               This ID together with the scope and code of the Timeline uniquely defines the Closed Period. | 
+ **post_close_activities_request** | [**PostCloseActivitiesRequest**](PostCloseActivitiesRequest.md)| This specifies a collection of post-close activities. | [optional] 
 
 ### Return type
 
@@ -1016,7 +1016,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The updated closed period |  -  |
+**200** | The updated Closed Period. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

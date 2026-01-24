@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**post_close_activities** | [**List[PostCloseActivity]**](PostCloseActivity.md) | Collection of post close activites. | 
+**post_close_activities** | [**List[PostCloseActivity]**](PostCloseActivity.md) | A collection of post-close activities. | 
 ## Example
 
 ```python
