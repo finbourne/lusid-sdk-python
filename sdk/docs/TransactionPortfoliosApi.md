@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**adjust_holdings**](TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | AdjustHoldings: Adjust holdings
 [**batch_adjust_holdings**](TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | BatchAdjustHoldings: Batch adjust holdings
+[**batch_amend_settlement_instructions**](TransactionPortfoliosApi.md#batch_amend_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchAmend | [EARLY ACCESS] BatchAmendSettlementInstructions: Batch Amend Settlement Instructions.
 [**batch_create_trade_tickets**](TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
 [**batch_set_holdings**](TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
 [**batch_upsert_settlement_instructions**](TransactionPortfoliosApi.md#batch_upsert_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchUpsert | [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
@@ -251,6 +252,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The successful AdjustHolding requests along with any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_amend_settlement_instructions**
+> BatchAmendTransactionSettlementInstructionResponse batch_amend_settlement_instructions(scope, code, request_body, success_mode=success_mode)
+
+[EARLY ACCESS] BatchAmendSettlementInstructions: Batch Amend Settlement Instructions.
+
+Update active state and / or properties of instructions.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio.
+    request_body = {"activate-and-add-properties":{"settlementInstructionId":"settlementInstructionId-1","operation":"Activate","properties":[{"key":"SettlementInstruction/scope/label","value":{"labelValue":"newValue"}},{"key":"SettlementInstruction/scope/metric","value":{"metricValue":{"value":1,"unit":"GBP"}}}]},"deactivate-and-delete-property":{"settlementInstructionId":"settlementInstructionId-2","operation":"Deactivate","properties":[{"key":"SettlementInstruction/scope/delete"}]},"amend-properties":{"settlementInstructionId":"settlementInstructionId-3","properties":[{"key":"SettlementInstruction/scope/label","value":{"labelValue":"newValue"}},{"key":"SettlementInstruction/scope/metric","value":{"metricValue":{"value":1,"unit":"GBP"}}},{"key":"SettlementInstruction/scope/delete"}]}} # Dict[str, SettlementInstructionAmendRequest] | The amendments to make to the settlement instructions.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_amend_settlement_instructions(scope, code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EARLY ACCESS] BatchAmendSettlementInstructions: Batch Amend Settlement Instructions.
+        api_response = api_instance.batch_amend_settlement_instructions(scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->batch_amend_settlement_instructions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. | 
+ **request_body** | [**Dict[str, SettlementInstructionAmendRequest]**](SettlementInstructionAmendRequest.md)| The amendments to make to the settlement instructions. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchAmendTransactionSettlementInstructionResponse**](BatchAmendTransactionSettlementInstructionResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The newly amended Settlement Instructions. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -544,7 +643,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | The newly created or undated Settlement Instructions. |  -  |
+**201** | The newly created or updated Settlement Instructions. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

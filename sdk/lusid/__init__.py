@@ -186,6 +186,7 @@ from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
+from lusid.models.batch_amend_transaction_settlement_instruction_response import BatchAmendTransactionSettlementInstructionResponse
 from lusid.models.batch_delete_relational_data_response import BatchDeleteRelationalDataResponse
 from lusid.models.batch_update_user_review_for_comparison_result_request import BatchUpdateUserReviewForComparisonResultRequest
 from lusid.models.batch_update_user_review_for_comparison_result_response import BatchUpdateUserReviewForComparisonResultResponse
@@ -1183,6 +1184,7 @@ from lusid.models.set_transaction_configuration_source_request import SetTransac
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_cycle import SettlementCycle
 from lusid.models.settlement_in_lieu import SettlementInLieu
+from lusid.models.settlement_instruction_amend_request import SettlementInstructionAmendRequest
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
 from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
@@ -1619,6 +1621,7 @@ __all__ = [
     "BasketIdentifier",
     "BatchAdjustHoldingsResponse",
     "BatchAmendCustomDataModelMembershipResponse",
+    "BatchAmendTransactionSettlementInstructionResponse",
     "BatchDeleteRelationalDataResponse",
     "BatchUpdateUserReviewForComparisonResultRequest",
     "BatchUpdateUserReviewForComparisonResultResponse",
@@ -2616,6 +2619,7 @@ __all__ = [
     "SettlementConfigurationCategory",
     "SettlementCycle",
     "SettlementInLieu",
+    "SettlementInstructionAmendRequest",
     "SettlementInstructionQuery",
     "SettlementInstructionRequest",
     "SettlementInstructionWithTransaction",

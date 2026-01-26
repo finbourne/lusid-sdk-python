@@ -621,6 +621,7 @@ Class | Method | HTTP request | Description
 *TransactionFeesApi* | [**upsert_transaction_fee_rules**](docs/TransactionFeesApi.md#upsert_transaction_fee_rules) | **POST** /api/transactions/fees/rules | UpsertTransactionFeeRules: Upsert fee rules.
 *TransactionPortfoliosApi* | [**adjust_holdings**](docs/TransactionPortfoliosApi.md#adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings | AdjustHoldings: Adjust holdings
 *TransactionPortfoliosApi* | [**batch_adjust_holdings**](docs/TransactionPortfoliosApi.md#batch_adjust_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchAdjust | BatchAdjustHoldings: Batch adjust holdings
+*TransactionPortfoliosApi* | [**batch_amend_settlement_instructions**](docs/TransactionPortfoliosApi.md#batch_amend_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchAmend | [EARLY ACCESS] BatchAmendSettlementInstructions: Batch Amend Settlement Instructions.
 *TransactionPortfoliosApi* | [**batch_create_trade_tickets**](docs/TransactionPortfoliosApi.md#batch_create_trade_tickets) | **POST** /api/transactionportfolios/{scope}/{code}/$batchtradetickets | BatchCreateTradeTickets: Batch Create Trade Tickets
 *TransactionPortfoliosApi* | [**batch_set_holdings**](docs/TransactionPortfoliosApi.md#batch_set_holdings) | **POST** /api/transactionportfolios/{scope}/{code}/holdings/$batchSet | BatchSetHoldings: Batch set holdings
 *TransactionPortfoliosApi* | [**batch_upsert_settlement_instructions**](docs/TransactionPortfoliosApi.md#batch_upsert_settlement_instructions) | **POST** /api/transactionportfolios/{scope}/{code}/settlementinstructions/$batchUpsert | [EARLY ACCESS] BatchUpsertSettlementInstructions: Batch Upsert Settlement Instructions.
@@ -764,6 +765,7 @@ Class | Method | HTTP request | Description
  - [BasketIdentifier](docs/BasketIdentifier.md)
  - [BatchAdjustHoldingsResponse](docs/BatchAdjustHoldingsResponse.md)
  - [BatchAmendCustomDataModelMembershipResponse](docs/BatchAmendCustomDataModelMembershipResponse.md)
+ - [BatchAmendTransactionSettlementInstructionResponse](docs/BatchAmendTransactionSettlementInstructionResponse.md)
  - [BatchDeleteRelationalDataResponse](docs/BatchDeleteRelationalDataResponse.md)
  - [BatchUpdateUserReviewForComparisonResultRequest](docs/BatchUpdateUserReviewForComparisonResultRequest.md)
  - [BatchUpdateUserReviewForComparisonResultResponse](docs/BatchUpdateUserReviewForComparisonResultResponse.md)
@@ -1761,6 +1763,7 @@ Class | Method | HTTP request | Description
  - [SettlementConfigurationCategory](docs/SettlementConfigurationCategory.md)
  - [SettlementCycle](docs/SettlementCycle.md)
  - [SettlementInLieu](docs/SettlementInLieu.md)
+ - [SettlementInstructionAmendRequest](docs/SettlementInstructionAmendRequest.md)
  - [SettlementInstructionQuery](docs/SettlementInstructionQuery.md)
  - [SettlementInstructionRequest](docs/SettlementInstructionRequest.md)
  - [SettlementInstructionWithTransaction](docs/SettlementInstructionWithTransaction.md)
