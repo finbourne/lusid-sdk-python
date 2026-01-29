@@ -32,7 +32,9 @@ class PreviousFundCalendarEntry(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
     as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
-    __properties = ["code", "displayName", "description", "effectiveAt", "asAt"]
+    holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest.", alias="holdingsAsAtOverride")
+    valuations_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest.", alias="valuationsAsAtOverride")
+    __properties = ["code", "displayName", "description", "effectiveAt", "asAt", "holdingsAsAtOverride", "valuationsAsAtOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,16 @@ class PreviousFundCalendarEntry(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if holdings_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_override is None and "holdings_as_at_override" in self.__fields_set__:
+            _dict['holdingsAsAtOverride'] = None
+
+        # set to None if valuations_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuations_as_at_override is None and "valuations_as_at_override" in self.__fields_set__:
+            _dict['valuationsAsAtOverride'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +99,9 @@ class PreviousFundCalendarEntry(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "effective_at": obj.get("effectiveAt"),
-            "as_at": obj.get("asAt")
+            "as_at": obj.get("asAt"),
+            "holdings_as_at_override": obj.get("holdingsAsAtOverride"),
+            "valuations_as_at_override": obj.get("valuationsAsAtOverride")
         })
         return _obj
 

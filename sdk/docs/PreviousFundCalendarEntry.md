@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +24,9 @@ display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 effective_at: Optional[datetime] = # Replace with your value
 as_at: datetime = # Replace with your value
-previous_fund_calendar_entry_instance = PreviousFundCalendarEntry(code=code, display_name=display_name, description=description, effective_at=effective_at, as_at=as_at)
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
+previous_fund_calendar_entry_instance = PreviousFundCalendarEntry(code=code, display_name=display_name, description=description, effective_at=effective_at, as_at=as_at, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override)
 
 ```
 

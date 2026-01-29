@@ -102,7 +102,9 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
                                     'RelativeMonthRegularity',
                                     'SpecificMonthRegularity',
                                     'WeekRegularity',
-                                    'YearRegularity']:
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
            return value
         
         # Only validate the 'type' property of the class

@@ -27,7 +27,7 @@ class InvestorIdentifier(BaseModel):
     """
     Identification of an Investor on the LUSID API.  # noqa: E501
     """
-    investor_type:  StrictStr = Field(...,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person or a LegalEntity") 
+    investor_type:  StrictStr = Field(...,alias="investorType", description="The type of the investor of the Investor Record. Can be either a Person, LegalEntity or Nominee.") 
     identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Single identifier that should target the desired person or legal entity")
     __properties = ["investorType", "identifiers"]
 

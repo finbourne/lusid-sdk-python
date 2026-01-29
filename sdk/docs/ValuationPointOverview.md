@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **status** | **str** | The status of the Valuation Point. Can be &#39;Estimate&#39;, &#39;Candidate&#39; or &#39;Final&#39;. | 
 **gav** | **float** | The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types &#39;Asset&#39; and &#39;Liabilities&#39;. | 
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
@@ -34,9 +36,11 @@ type: StrictStr = "example_type"
 status: StrictStr = "example_status"
 gav: Union[StrictFloat, StrictInt] = # Replace with your value
 nav: Union[StrictFloat, StrictInt] = # Replace with your value
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, properties=properties, links=links)
+valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, links=links)
 
 ```
 

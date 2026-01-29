@@ -35,8 +35,10 @@ class UpsertValuationPointRequest(BaseModel):
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you want that the closed period to have the clear down applied.", alias="applyClearDown")
+    holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest.", alias="holdingsAsAtOverride")
+    valuations_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest.", alias="valuationsAsAtOverride")
     update_inclusion_date_nav_adjustments: Optional[StrictBool] = Field(default=None, description="Defaults to false. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities.", alias="updateInclusionDateNavAdjustments")
-    __properties = ["diaryEntryCode", "diaryEntryVariant", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown", "updateInclusionDateNavAdjustments"]
+    __properties = ["diaryEntryCode", "diaryEntryVariant", "name", "effectiveAt", "queryAsAt", "properties", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "updateInclusionDateNavAdjustments"]
 
     class Config:
         """Pydantic configuration"""
@@ -97,6 +99,16 @@ class UpsertValuationPointRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if holdings_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_override is None and "holdings_as_at_override" in self.__fields_set__:
+            _dict['holdingsAsAtOverride'] = None
+
+        # set to None if valuations_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuations_as_at_override is None and "valuations_as_at_override" in self.__fields_set__:
+            _dict['valuationsAsAtOverride'] = None
+
         return _dict
 
     @classmethod
@@ -121,6 +133,8 @@ class UpsertValuationPointRequest(BaseModel):
             if obj.get("properties") is not None
             else None,
             "apply_clear_down": obj.get("applyClearDown"),
+            "holdings_as_at_override": obj.get("holdingsAsAtOverride"),
+            "valuations_as_at_override": obj.get("valuationsAsAtOverride"),
             "update_inclusion_date_nav_adjustments": obj.get("updateInclusionDateNavAdjustments")
         })
         return _obj

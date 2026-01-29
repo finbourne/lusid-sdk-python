@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
 **apply_clear_down** | **bool** | Defaults to false. Set to true if you want that the closed period to have the clear down applied. | [optional] 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest. | [optional] 
 **update_inclusion_date_nav_adjustments** | **bool** | Defaults to false. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] 
 ## Example
 
@@ -29,9 +31,11 @@ query_as_at: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 apply_clear_down: Optional[StrictBool] = # Replace with your value
 apply_clear_down:Optional[StrictBool] = None
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
 update_inclusion_date_nav_adjustments: Optional[StrictBool] = # Replace with your value
 update_inclusion_date_nav_adjustments:Optional[StrictBool] = None
-upsert_valuation_point_request_instance = UpsertValuationPointRequest(diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments)
+upsert_valuation_point_request_instance = UpsertValuationPointRequest(diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments)
 
 ```
 

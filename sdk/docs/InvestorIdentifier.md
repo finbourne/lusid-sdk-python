@@ -4,7 +4,7 @@ Identification of an Investor on the LUSID API.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**investor_type** | **str** | The type of the investor of the Investor Record. Can be either a Person or a LegalEntity | 
+**investor_type** | **str** | The type of the investor of the Investor Record. Can be either a Person, LegalEntity or Nominee. | 
 **identifiers** | **Dict[str, Optional[str]]** | Single identifier that should target the desired person or legal entity | [optional] 
 ## Example
 

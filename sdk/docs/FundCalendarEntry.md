@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **entry_type** | **str** | The type of the Fund Calendar Entry. Only &#39;ValuationPoint&#39; currently supported. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry | 
 **status** | **str** | The status of the Fund Calendar Entry. Can be &#39;Estimate&#39;, &#39;Candidate&#39; or &#39;Final&#39;. | [optional] 
 **apply_clear_down** | **bool** | Set to true if that closed period shoould have the clear down applied. | 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties for the Calendar Entry. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
@@ -40,10 +42,12 @@ entry_type: StrictStr = "example_entry_type"
 status: Optional[StrictStr] = "example_status"
 apply_clear_down: StrictBool = # Replace with your value
 apply_clear_down:StrictBool = True
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
-fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, properties=properties, version=version, href=href)
+fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href)
 
 ```
 

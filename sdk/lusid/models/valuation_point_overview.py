@@ -39,9 +39,11 @@ class ValuationPointOverview(BaseModel):
     status:  StrictStr = Field(...,alias="status", description="The status of the Valuation Point. Can be 'Estimate', 'Candidate' or 'Final'.") 
     gav: Union[StrictFloat, StrictInt] = Field(description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
     nav: Union[StrictFloat, StrictInt] = Field(description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
+    holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest.", alias="holdingsAsAtOverride")
+    valuations_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest.", alias="valuationsAsAtOverride")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Fee properties. These will be from the 'Fee' domain.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "diaryEntryCode", "diaryEntryVariant", "effectiveFrom", "effectiveTo", "queryAsAt", "type", "status", "gav", "nav", "properties", "links"]
+    __properties = ["href", "diaryEntryCode", "diaryEntryVariant", "effectiveFrom", "effectiveTo", "queryAsAt", "type", "status", "gav", "nav", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -99,6 +101,16 @@ class ValuationPointOverview(BaseModel):
         if self.diary_entry_variant is None and "diary_entry_variant" in self.__fields_set__:
             _dict['diaryEntryVariant'] = None
 
+        # set to None if holdings_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_override is None and "holdings_as_at_override" in self.__fields_set__:
+            _dict['holdingsAsAtOverride'] = None
+
+        # set to None if valuations_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuations_as_at_override is None and "valuations_as_at_override" in self.__fields_set__:
+            _dict['valuationsAsAtOverride'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -131,6 +143,8 @@ class ValuationPointOverview(BaseModel):
             "status": obj.get("status"),
             "gav": obj.get("gav"),
             "nav": obj.get("nav"),
+            "holdings_as_at_override": obj.get("holdingsAsAtOverride"),
+            "valuations_as_at_override": obj.get("valuationsAsAtOverride"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
