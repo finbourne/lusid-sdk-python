@@ -48,7 +48,8 @@ class FundCalendarEntry(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
-    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href"]
+    leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
+    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -201,6 +202,11 @@ class FundCalendarEntry(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if leader_nav_type_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
+            _dict['leaderNavTypeCode'] = None
+
         return _dict
 
     @classmethod
@@ -234,7 +240,8 @@ class FundCalendarEntry(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "href": obj.get("href")
+            "href": obj.get("href"),
+            "leader_nav_type_code": obj.get("leaderNavTypeCode")
         })
         return _obj
 
