@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **effective_at** | **datetime** | The effective time of the Bookmark. | 
 **query_as_at** | **datetime** | The query time of the Bookmark. Defaults to latest. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Bookmark. | [optional] 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Bookmark. Defaults to Latest. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Bookmark. Defaults to Latest. | [optional] 
 ## Example
 
 ```python
@@ -25,7 +27,9 @@ description: Optional[StrictStr] = "example_description"
 effective_at: datetime = # Replace with your value
 query_as_at: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-upsert_fund_bookmark_request_instance = UpsertFundBookmarkRequest(bookmark_code=bookmark_code, display_name=display_name, description=description, effective_at=effective_at, query_as_at=query_as_at, properties=properties)
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
+upsert_fund_bookmark_request_instance = UpsertFundBookmarkRequest(bookmark_code=bookmark_code, display_name=display_name, description=description, effective_at=effective_at, query_as_at=query_as_at, properties=properties, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override)
 
 ```
 

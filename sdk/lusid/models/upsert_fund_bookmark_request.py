@@ -34,7 +34,9 @@ class UpsertFundBookmarkRequest(BaseModel):
     effective_at: datetime = Field(description="The effective time of the Bookmark.", alias="effectiveAt")
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the Bookmark. Defaults to latest.", alias="queryAsAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Bookmark.")
-    __properties = ["bookmarkCode", "displayName", "description", "effectiveAt", "queryAsAt", "properties"]
+    holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Bookmark. Defaults to Latest.", alias="holdingsAsAtOverride")
+    valuations_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for performing valuations in the Bookmark. Defaults to Latest.", alias="valuationsAsAtOverride")
+    __properties = ["bookmarkCode", "displayName", "description", "effectiveAt", "queryAsAt", "properties", "holdingsAsAtOverride", "valuationsAsAtOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +92,16 @@ class UpsertFundBookmarkRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if holdings_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_as_at_override is None and "holdings_as_at_override" in self.__fields_set__:
+            _dict['holdingsAsAtOverride'] = None
+
+        # set to None if valuations_as_at_override (nullable) is None
+        # and __fields_set__ contains the field
+        if self.valuations_as_at_override is None and "valuations_as_at_override" in self.__fields_set__:
+            _dict['valuationsAsAtOverride'] = None
+
         return _dict
 
     @classmethod
@@ -112,7 +124,9 @@ class UpsertFundBookmarkRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "holdings_as_at_override": obj.get("holdingsAsAtOverride"),
+            "valuations_as_at_override": obj.get("valuationsAsAtOverride")
         })
         return _obj
 

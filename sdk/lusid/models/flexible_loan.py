@@ -33,11 +33,12 @@ class FlexibleLoan(LusidInstrument):
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
+    parent_facility_details: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The details of the parent loan facility of this loan if this loan is a contract on a facility.", alias="parentFacilityDetails")
     schedules: List[Schedule] = Field(description="Repayment schedules for the loan.")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="The available values are: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "schedules", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "parentFacilityDetails", "schedules", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -137,6 +138,7 @@ class FlexibleLoan(LusidInstrument):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "parent_facility_details",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -155,6 +157,11 @@ class FlexibleLoan(LusidInstrument):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if parent_facility_details (nullable) is None
+        # and __fields_set__ contains the field
+        if self.parent_facility_details is None and "parent_facility_details" in self.__fields_set__:
+            _dict['parentFacilityDetails'] = None
+
         return _dict
 
     @classmethod
@@ -171,6 +178,7 @@ class FlexibleLoan(LusidInstrument):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "dom_ccy": obj.get("domCcy"),
+            "parent_facility_details": obj.get("parentFacilityDetails"),
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
