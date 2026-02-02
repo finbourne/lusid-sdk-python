@@ -24,17 +24,16 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 
-class PortfolioTransaction(NavActivityAdjustment):
+class InstrumentActivity(NavActivityAdjustment):
     """
-    PortfolioTransaction
+    InstrumentActivity
     """
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
-    portfolio_scope:  StrictStr = Field(...,alias="portfolioScope", description="The portfolio scope of the given entity") 
-    portfolio_code:  StrictStr = Field(...,alias="portfolioCode", description="The portfolio code of the given entity") 
-    transaction_id:  StrictStr = Field(...,alias="transactionId", description="The transaction Id of the PortfolioTransaction being adjusted") 
+    scope:  StrictStr = Field(...,alias="scope", description="The Scope of the given entity") 
+    lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the given entity") 
     nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["navActivityAdjustmentType", "asAt", "portfolioScope", "portfolioCode", "transactionId"]
+    __properties = ["navActivityAdjustmentType", "asAt", "scope", "lusidInstrumentId"]
 
     @validator('nav_activity_adjustment_type')
     def nav_activity_adjustment_type_validate_enum(cls, value):
@@ -47,7 +46,7 @@ class PortfolioTransaction(NavActivityAdjustment):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PortfolioTransaction' not in [ 
+        if 'InstrumentActivity' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -126,8 +125,8 @@ class PortfolioTransaction(NavActivityAdjustment):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PortfolioTransaction:
-        """Create an instance of PortfolioTransaction from a JSON string"""
+    def from_json(cls, json_str: str) -> InstrumentActivity:
+        """Create an instance of InstrumentActivity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -145,20 +144,19 @@ class PortfolioTransaction(NavActivityAdjustment):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PortfolioTransaction:
-        """Create an instance of PortfolioTransaction from a dict"""
+    def from_dict(cls, obj: dict) -> InstrumentActivity:
+        """Create an instance of InstrumentActivity from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PortfolioTransaction.parse_obj(obj)
+            return InstrumentActivity.parse_obj(obj)
 
-        _obj = PortfolioTransaction.parse_obj({
+        _obj = InstrumentActivity.parse_obj({
             "nav_activity_adjustment_type": obj.get("navActivityAdjustmentType"),
             "as_at": obj.get("asAt"),
-            "portfolio_scope": obj.get("portfolioScope"),
-            "portfolio_code": obj.get("portfolioCode"),
-            "transaction_id": obj.get("transactionId")
+            "scope": obj.get("scope"),
+            "lusid_instrument_id": obj.get("lusidInstrumentId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -167,4 +165,4 @@ class PortfolioTransaction(NavActivityAdjustment):
 
         return _obj
 
-PortfolioTransaction.update_forward_refs()
+InstrumentActivity.update_forward_refs()

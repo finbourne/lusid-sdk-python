@@ -668,6 +668,7 @@ from lusid.models.inline_valuation_request import InlineValuationRequest
 from lusid.models.inline_valuations_reconciliation_request import InlineValuationsReconciliationRequest
 from lusid.models.input_transition import InputTransition
 from lusid.models.instrument import Instrument
+from lusid.models.instrument_activity import InstrumentActivity
 from lusid.models.instrument_capabilities import InstrumentCapabilities
 from lusid.models.instrument_cash_flow import InstrumentCashFlow
 from lusid.models.instrument_definition import InstrumentDefinition
@@ -950,6 +951,7 @@ from lusid.models.portfolio_result_data_key_rule import PortfolioResultDataKeyRu
 from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 from lusid.models.portfolio_search_result import PortfolioSearchResult
 from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
+from lusid.models.portfolio_settlement_instruction import PortfolioSettlementInstruction
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_transaction import PortfolioTransaction
 from lusid.models.portfolio_type import PortfolioType
@@ -2103,6 +2105,7 @@ __all__ = [
     "InlineValuationsReconciliationRequest",
     "InputTransition",
     "Instrument",
+    "InstrumentActivity",
     "InstrumentCapabilities",
     "InstrumentCashFlow",
     "InstrumentDefinition",
@@ -2385,6 +2388,7 @@ __all__ = [
     "PortfolioReturnBreakdown",
     "PortfolioSearchResult",
     "PortfolioSettlementConfiguration",
+    "PortfolioSettlementInstruction",
     "PortfolioTradeTicket",
     "PortfolioTransaction",
     "PortfolioType",

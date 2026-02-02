@@ -32,6 +32,8 @@ class NavActivityAdjustmentType(str, Enum):
     allowed enum values
     """
     PORTFOLIOTRANSACTION = 'PortfolioTransaction'
+    PORTFOLIOSETTLEMENTINSTRUCTION = 'PortfolioSettlementInstruction'
+    INSTRUMENTACTIVITY = 'InstrumentActivity'
 
     @classmethod
     def from_json(cls, json_str: str) -> NavActivityAdjustmentType:
