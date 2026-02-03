@@ -557,6 +557,7 @@ Class | Method | HTTP request | Description
 *SearchApi* | [**search_portfolios**](docs/SearchApi.md#search_portfolios) | **GET** /api/search/portfolios | SearchPortfolios: Search Portfolios
 *SearchApi* | [**search_properties**](docs/SearchApi.md#search_properties) | **GET** /api/search/propertydefinitions | SearchProperties: Search Property Definitions
 *SequencesApi* | [**create_sequence**](docs/SequencesApi.md#create_sequence) | **POST** /api/sequences/{scope} | [EARLY ACCESS] CreateSequence: Create a new sequence
+*SequencesApi* | [**delete_sequence**](docs/SequencesApi.md#delete_sequence) | **DELETE** /api/sequences/{scope}/{code} | [EARLY ACCESS] DeleteSequence: Delete a sequence
 *SequencesApi* | [**get_sequence**](docs/SequencesApi.md#get_sequence) | **GET** /api/sequences/{scope}/{code} | [EARLY ACCESS] GetSequence: Get a specified sequence
 *SequencesApi* | [**list_sequences**](docs/SequencesApi.md#list_sequences) | **GET** /api/sequences | [EARLY ACCESS] ListSequences: List Sequences
 *SequencesApi* | [**next**](docs/SequencesApi.md#next) | **GET** /api/sequences/{scope}/{code}/next | [EARLY ACCESS] Next: Get next values from sequence

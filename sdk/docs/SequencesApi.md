@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_sequence**](SequencesApi.md#create_sequence) | **POST** /api/sequences/{scope} | [EARLY ACCESS] CreateSequence: Create a new sequence
+[**delete_sequence**](SequencesApi.md#delete_sequence) | **DELETE** /api/sequences/{scope}/{code} | [EARLY ACCESS] DeleteSequence: Delete a sequence
 [**get_sequence**](SequencesApi.md#get_sequence) | **GET** /api/sequences/{scope}/{code} | [EARLY ACCESS] GetSequence: Get a specified sequence
 [**list_sequences**](SequencesApi.md#list_sequences) | **GET** /api/sequences | [EARLY ACCESS] ListSequences: List Sequences
 [**next**](SequencesApi.md#next) | **GET** /api/sequences/{scope}/{code}/next | [EARLY ACCESS] Next: Get next values from sequence
@@ -104,6 +105,100 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | The newly created Sequence |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_sequence**
+> DeletedEntityResponse delete_sequence(scope, code)
+
+[EARLY ACCESS] DeleteSequence: Delete a sequence
+
+Delete a specific sequence                WARNING! Deleting a sequence is an inherently unsafe operation. It would allow a new sequence using the same pattern to be created, which may result in existing values being returned.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    SequencesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(SequencesApi)
+    scope = 'scope_example' # str | Scope of the sequence.
+    code = 'code_example' # str | Code of the sequence. This together with stated scope uniquely identifies the sequence.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_sequence(scope, code, opts=opts)
+
+        # [EARLY ACCESS] DeleteSequence: Delete a sequence
+        api_response = api_instance.delete_sequence(scope, code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling SequencesApi->delete_sequence: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| Scope of the sequence. | 
+ **code** | **str**| Code of the sequence. This together with stated scope uniquely identifies the sequence. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The response of the deleted sequence. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
