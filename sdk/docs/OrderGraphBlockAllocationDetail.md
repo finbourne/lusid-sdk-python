@@ -4,6 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
+**allocated_order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**quantity** | **float** | The quantity of this allocation, with direction relative to the containing block. | 
 ## Example
 
 ```python
@@ -14,7 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 id: ResourceId
-order_graph_block_allocation_detail_instance = OrderGraphBlockAllocationDetail(id=id)
+allocated_order_id: Optional[ResourceId] = # Replace with your value
+quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+order_graph_block_allocation_detail_instance = OrderGraphBlockAllocationDetail(id=id, allocated_order_id=allocated_order_id, quantity=quantity)
 
 ```
 

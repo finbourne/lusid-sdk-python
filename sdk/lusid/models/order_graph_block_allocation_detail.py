@@ -29,7 +29,9 @@ class OrderGraphBlockAllocationDetail(BaseModel):
     OrderGraphBlockAllocationDetail
     """
     id: ResourceId
-    __properties = ["id"]
+    allocated_order_id: Optional[ResourceId] = Field(default=None, alias="allocatedOrderId")
+    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of this allocation, with direction relative to the containing block.")
+    __properties = ["id", "allocatedOrderId", "quantity"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +68,9 @@ class OrderGraphBlockAllocationDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of allocated_order_id
+        if self.allocated_order_id:
+            _dict['allocatedOrderId'] = self.allocated_order_id.to_dict()
         return _dict
 
     @classmethod
@@ -78,7 +83,9 @@ class OrderGraphBlockAllocationDetail(BaseModel):
             return OrderGraphBlockAllocationDetail.parse_obj(obj)
 
         _obj = OrderGraphBlockAllocationDetail.parse_obj({
-            "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None
+            "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
+            "allocated_order_id": ResourceId.from_dict(obj.get("allocatedOrderId")) if obj.get("allocatedOrderId") is not None else None,
+            "quantity": obj.get("quantity")
         })
         return _obj
 
