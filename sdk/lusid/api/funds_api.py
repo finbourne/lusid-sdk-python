@@ -6403,7 +6403,7 @@ class FundsApi:
     def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
-        Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.  # noqa: E501
+        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                It is not possible to update an existing Valuation Point. As an alternative, the Valuation Point could be deleted and recreated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -6440,7 +6440,7 @@ class FundsApi:
     def upsert_diary_entry_type_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
-        Update or insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                If the Valuation Point already exists and is in estimate state, the Valuation Point will be updated with the newly specified information in this request.  # noqa: E501
+        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                It is not possible to update an existing Valuation Point. As an alternative, the Valuation Point could be deleted and recreated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
