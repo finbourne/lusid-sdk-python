@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_workspace**
-> DeletedEntityResponse delete_workspace(visibility, workspace_name)
+> DeletedEntityResponse delete_workspace(visibility, workspace_name, recurse=recurse)
 
 [EXPERIMENTAL] DeleteWorkspace: Delete a workspace.
 
@@ -369,13 +369,14 @@ def main():
     api_instance = api_client_factory.build(WorkspaceApi)
     visibility = 'visibility_example' # str | The visibility for the workspace. Must be `shared` or `personal`; case is important.
     workspace_name = 'workspace_name_example' # str | The name of the workspace.
+    recurse = False # bool | If true, recursively delete items in the workspace. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.delete_workspace(visibility, workspace_name, opts=opts)
+        # api_response =  api_instance.delete_workspace(visibility, workspace_name, recurse=recurse, opts=opts)
 
         # [EXPERIMENTAL] DeleteWorkspace: Delete a workspace.
-        api_response = api_instance.delete_workspace(visibility, workspace_name)
+        api_response = api_instance.delete_workspace(visibility, workspace_name, recurse=recurse)
         pprint(api_response)
 
     except ApiException as e:
@@ -390,6 +391,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
  **workspace_name** | **str**| The name of the workspace. | 
+ **recurse** | **bool**| If true, recursively delete items in the workspace. | [optional] [default to False]
 
 ### Return type
 

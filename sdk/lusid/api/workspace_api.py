@@ -20,7 +20,7 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
-from pydantic.v1 import Field, StrictInt, StrictStr
+from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.deleted_entity_response import DeletedEntityResponse
@@ -579,28 +579,30 @@ class WorkspaceApi:
 
 
     @overload
-    async def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], recurse : Annotated[Optional[StrictBool], Field(description="If true, recursively delete items in the workspace.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], recurse : Annotated[Optional[StrictBool], Field(description="If true, recursively delete items in the workspace.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], recurse : Annotated[Optional[StrictBool], Field(description="If true, recursively delete items in the workspace.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteWorkspace: Delete a workspace.  # noqa: E501
 
         Delete a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_workspace(visibility, workspace_name, async_req=True)
+        >>> thread = api.delete_workspace(visibility, workspace_name, recurse, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
         :param workspace_name: The name of the workspace. (required)
         :type workspace_name: str
+        :param recurse: If true, recursively delete items in the workspace.
+        :type recurse: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -617,23 +619,25 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_workspace_with_http_info(visibility, workspace_name, **kwargs)  # noqa: E501
+        return self.delete_workspace_with_http_info(visibility, workspace_name, recurse, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The name of the workspace.")], recurse : Annotated[Optional[StrictBool], Field(description="If true, recursively delete items in the workspace.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteWorkspace: Delete a workspace.  # noqa: E501
 
         Delete a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_workspace_with_http_info(visibility, workspace_name, async_req=True)
+        >>> thread = api.delete_workspace_with_http_info(visibility, workspace_name, recurse, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
         :param workspace_name: The name of the workspace. (required)
         :type workspace_name: str
+        :param recurse: If true, recursively delete items in the workspace.
+        :type recurse: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -662,7 +666,8 @@ class WorkspaceApi:
 
         _all_params = [
             'visibility',
-            'workspace_name'
+            'workspace_name',
+            'recurse'
         ]
         _all_params.extend(
             [
@@ -700,6 +705,9 @@ class WorkspaceApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('recurse') is not None:  # noqa: E501
+            _query_params.append(('recurse', _params['recurse']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
