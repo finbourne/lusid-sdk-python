@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **method** | **str** | The method of settlement for the movements of the relevant type(s). Allowed values: &#39;Automatic&#39; and &#39;Instructed&#39;. A value of &#39;Instructed&#39; means that such movements can only be settled with a SettlementInstruction. A value of &#39;Automatic&#39; means that such movements will settle automatically but a SettlementInstruction will still override automatic settlement. | [optional] 
 **calculate_instruction_to_portfolio_rate** | **bool** | An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified. | [optional] 
 **calculate_in_lieu_settlement_amount** | **bool** | An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified. | [optional] 
+**method_override** | [**SettlementConfigurationMethodOverride**](SettlementConfigurationMethodOverride.md) |  | [optional] 
 ## Example
 
 ```python
@@ -20,7 +21,8 @@ calculate_instruction_to_portfolio_rate: Optional[StrictBool] = # Replace with y
 calculate_instruction_to_portfolio_rate:Optional[StrictBool] = None
 calculate_in_lieu_settlement_amount: Optional[StrictBool] = # Replace with your value
 calculate_in_lieu_settlement_amount:Optional[StrictBool] = None
-settlement_configuration_category_instance = SettlementConfigurationCategory(method=method, calculate_instruction_to_portfolio_rate=calculate_instruction_to_portfolio_rate, calculate_in_lieu_settlement_amount=calculate_in_lieu_settlement_amount)
+method_override: Optional[SettlementConfigurationMethodOverride] = # Replace with your value
+settlement_configuration_category_instance = SettlementConfigurationCategory(method=method, calculate_instruction_to_portfolio_rate=calculate_instruction_to_portfolio_rate, calculate_in_lieu_settlement_amount=calculate_in_lieu_settlement_amount, method_override=method_override)
 
 ```
 

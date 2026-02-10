@@ -1184,6 +1184,7 @@ from lusid.models.set_share_class_instruments_request import SetShareClassInstru
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
+from lusid.models.settlement_configuration_method_override import SettlementConfigurationMethodOverride
 from lusid.models.settlement_cycle import SettlementCycle
 from lusid.models.settlement_in_lieu import SettlementInLieu
 from lusid.models.settlement_instruction_amend_request import SettlementInstructionAmendRequest
@@ -2621,6 +2622,7 @@ __all__ = [
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
     "SettlementConfigurationCategory",
+    "SettlementConfigurationMethodOverride",
     "SettlementCycle",
     "SettlementInLieu",
     "SettlementInstructionAmendRequest",

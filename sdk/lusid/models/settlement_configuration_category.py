@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.settlement_configuration_method_override import SettlementConfigurationMethodOverride
 
 class SettlementConfigurationCategory(BaseModel):
     """
@@ -30,7 +31,8 @@ class SettlementConfigurationCategory(BaseModel):
     method:  Optional[StrictStr] = Field(None,alias="method", description="The method of settlement for the movements of the relevant type(s). Allowed values: 'Automatic' and 'Instructed'. A value of 'Instructed' means that such movements can only be settled with a SettlementInstruction. A value of 'Automatic' means that such movements will settle automatically but a SettlementInstruction will still override automatic settlement.") 
     calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInstructionToPortfolioRate")
     calculate_in_lieu_settlement_amount: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInLieuSettlementAmount")
-    __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount"]
+    method_override: Optional[SettlementConfigurationMethodOverride] = Field(default=None, alias="methodOverride")
+    __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount", "methodOverride"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,9 @@ class SettlementConfigurationCategory(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of method_override
+        if self.method_override:
+            _dict['methodOverride'] = self.method_override.to_dict()
         # set to None if method (nullable) is None
         # and __fields_set__ contains the field
         if self.method is None and "method" in self.__fields_set__:
@@ -83,7 +88,8 @@ class SettlementConfigurationCategory(BaseModel):
         _obj = SettlementConfigurationCategory.parse_obj({
             "method": obj.get("method"),
             "calculate_instruction_to_portfolio_rate": obj.get("calculateInstructionToPortfolioRate"),
-            "calculate_in_lieu_settlement_amount": obj.get("calculateInLieuSettlementAmount")
+            "calculate_in_lieu_settlement_amount": obj.get("calculateInLieuSettlementAmount"),
+            "method_override": SettlementConfigurationMethodOverride.from_dict(obj.get("methodOverride")) if obj.get("methodOverride") is not None else None
         })
         return _obj
 
