@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **calculate_instruction_to_portfolio_rate** | **bool** | An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified. | [optional] 
 **calculate_in_lieu_settlement_amount** | **bool** | An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified. | [optional] 
 **method_override** | [**SettlementConfigurationMethodOverride**](SettlementConfigurationMethodOverride.md) |  | [optional] 
+**calculate_trade_date_to_settlement_fx_pn_l** | **bool** | An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,9 @@ calculate_instruction_to_portfolio_rate:Optional[StrictBool] = None
 calculate_in_lieu_settlement_amount: Optional[StrictBool] = # Replace with your value
 calculate_in_lieu_settlement_amount:Optional[StrictBool] = None
 method_override: Optional[SettlementConfigurationMethodOverride] = # Replace with your value
-settlement_configuration_category_instance = SettlementConfigurationCategory(method=method, calculate_instruction_to_portfolio_rate=calculate_instruction_to_portfolio_rate, calculate_in_lieu_settlement_amount=calculate_in_lieu_settlement_amount, method_override=method_override)
+calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = # Replace with your value
+calculate_trade_date_to_settlement_fx_pn_l:Optional[StrictBool] = None
+settlement_configuration_category_instance = SettlementConfigurationCategory(method=method, calculate_instruction_to_portfolio_rate=calculate_instruction_to_portfolio_rate, calculate_in_lieu_settlement_amount=calculate_in_lieu_settlement_amount, method_override=method_override, calculate_trade_date_to_settlement_fx_pn_l=calculate_trade_date_to_settlement_fx_pn_l)
 
 ```
 

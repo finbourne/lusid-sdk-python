@@ -39,7 +39,8 @@ class TransactionTypeMovement(BaseModel):
     settlement_date_override:  Optional[StrictStr] = Field(None,alias="settlementDateOverride", description="Optional property key that must be in the Transaction domain when specified. When the movement is processed and the transaction has this property set to a valid date, then the property value will override the SettlementDate of the transaction.") 
     condition:  Optional[StrictStr] = Field(None,alias="condition", description="The condition that the transaction must satisfy to generate the movement, such as: Portfolio.BaseCurrency eq 'GBP'. The condition can contain fields and properties from transactions and portfolios. If no condition is provided, the movement will apply for all transactions of this type.") 
     settlement_mode:  Optional[StrictStr] = Field(None,alias="settlementMode", description="Configures how movements should settle. Allowed values: 'Internal' and 'External'. A movement with 'Internal' settlement mode will settle automatically on the contractual settlement date regardlesss of portfolio configuration or settlement instruction. An 'External' movement can be settled automatically or by a settlement instruction.") 
-    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride", "condition", "settlementMode"]
+    calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = Field(default=None, description="Configures whether Trade To Settlement Date Realised Gain Loss should be calculated. This overrides the value set at the Portfolio level.If null, then the Portfolio Settlement Configuration TradeToSettlementDateRealisedFxPnl setting will be used.If false, then no TradeToSettlementDateRealisedFxPnl will apply for this movement and if true, then TradeToSettlementDateRealisedFxPnlwill be calculated for this movement.", alias="calculateTradeDateToSettlementFxPnL")
+    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride", "condition", "settlementMode", "calculateTradeDateToSettlementFxPnL"]
 
     class Config:
         """Pydantic configuration"""
@@ -122,6 +123,11 @@ class TransactionTypeMovement(BaseModel):
         if self.settlement_mode is None and "settlement_mode" in self.__fields_set__:
             _dict['settlementMode'] = None
 
+        # set to None if calculate_trade_date_to_settlement_fx_pn_l (nullable) is None
+        # and __fields_set__ contains the field
+        if self.calculate_trade_date_to_settlement_fx_pn_l is None and "calculate_trade_date_to_settlement_fx_pn_l" in self.__fields_set__:
+            _dict['calculateTradeDateToSettlementFxPnL'] = None
+
         return _dict
 
     @classmethod
@@ -148,7 +154,8 @@ class TransactionTypeMovement(BaseModel):
             "movement_options": obj.get("movementOptions"),
             "settlement_date_override": obj.get("settlementDateOverride"),
             "condition": obj.get("condition"),
-            "settlement_mode": obj.get("settlementMode")
+            "settlement_mode": obj.get("settlementMode"),
+            "calculate_trade_date_to_settlement_fx_pn_l": obj.get("calculateTradeDateToSettlementFxPnL")
         })
         return _obj
 

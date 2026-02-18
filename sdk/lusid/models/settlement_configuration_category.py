@@ -32,7 +32,8 @@ class SettlementConfigurationCategory(BaseModel):
     calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInstructionToPortfolioRate")
     calculate_in_lieu_settlement_amount: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateInLieuSettlementAmount")
     method_override: Optional[SettlementConfigurationMethodOverride] = Field(default=None, alias="methodOverride")
-    __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount", "methodOverride"]
+    calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the in lieu amount for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction. Defaults to false if not specified.", alias="calculateTradeDateToSettlementFxPnL")
+    __properties = ["method", "calculateInstructionToPortfolioRate", "calculateInLieuSettlementAmount", "methodOverride", "calculateTradeDateToSettlementFxPnL"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,7 +90,8 @@ class SettlementConfigurationCategory(BaseModel):
             "method": obj.get("method"),
             "calculate_instruction_to_portfolio_rate": obj.get("calculateInstructionToPortfolioRate"),
             "calculate_in_lieu_settlement_amount": obj.get("calculateInLieuSettlementAmount"),
-            "method_override": SettlementConfigurationMethodOverride.from_dict(obj.get("methodOverride")) if obj.get("methodOverride") is not None else None
+            "method_override": SettlementConfigurationMethodOverride.from_dict(obj.get("methodOverride")) if obj.get("methodOverride") is not None else None,
+            "calculate_trade_date_to_settlement_fx_pn_l": obj.get("calculateTradeDateToSettlementFxPnL")
         })
         return _obj
 
