@@ -43,7 +43,8 @@ class NavTypeDefinition(BaseModel):
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate") 
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode") 
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode"]
+    transaction_template_scope:  Optional[StrictStr] = Field(None,alias="transactionTemplateScope") 
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope"]
 
     class Config:
         """Pydantic configuration"""
@@ -124,6 +125,11 @@ class NavTypeDefinition(BaseModel):
         if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
             _dict['leaderNavTypeCode'] = None
 
+        # set to None if transaction_template_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_template_scope is None and "transaction_template_scope" in self.__fields_set__:
+            _dict['transactionTemplateScope'] = None
+
         return _dict
 
     @classmethod
@@ -150,7 +156,8 @@ class NavTypeDefinition(BaseModel):
             "transaction_type_scope": obj.get("transactionTypeScope"),
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
-            "leader_nav_type_code": obj.get("leaderNavTypeCode")
+            "leader_nav_type_code": obj.get("leaderNavTypeCode"),
+            "transaction_template_scope": obj.get("transactionTemplateScope")
         })
         return _obj
 

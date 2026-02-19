@@ -1105,22 +1105,22 @@ class CorporateActionSourcesApi:
 
 
     @overload
-    async def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, **kwargs) -> PagedResourceListOfInstrumentEventHolder:  # noqa: E501
+    async def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> PagedResourceListOfInstrumentEventHolder:  # noqa: E501
         ...
 
     @overload
-    def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstrumentEventHolder:  # noqa: E501
+    def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfInstrumentEventHolder:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstrumentEventHolder, Awaitable[PagedResourceListOfInstrumentEventHolder]]:  # noqa: E501
+    def get_instrument_events(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfInstrumentEventHolder, Awaitable[PagedResourceListOfInstrumentEventHolder]]:  # noqa: E501
         """[EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.  # noqa: E501
 
         Retrieves extrinsic corporate actions out of a corporate actions source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_events(scope, code, as_at, limit, page, filter, async_req=True)
+        >>> thread = api.get_instrument_events(scope, code, as_at, limit, page, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the corporate action source. (required)
@@ -1135,6 +1135,12 @@ class CorporateActionSourcesApi:
         :type page: str
         :param filter: Optional. Expression to filter the result set.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1151,17 +1157,17 @@ class CorporateActionSourcesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_instrument_events_with_http_info(scope, code, as_at, limit, page, filter, **kwargs)  # noqa: E501
+        return self.get_instrument_events_with_http_info(scope, code, as_at, limit, page, filter, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_instrument_events_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_instrument_events_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the corporate action source.")], code : Annotated[StrictStr, Field(..., description="The code of the corporate action source.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The AsAt date of the data.")] = None, limit : Annotated[Optional[StrictInt], Field(description="Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used.")] = None, page : Annotated[Optional[StrictStr], Field( description="Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Optional. Expression to filter the result set.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.  # noqa: E501
 
         Retrieves extrinsic corporate actions out of a corporate actions source  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_instrument_events_with_http_info(scope, code, as_at, limit, page, filter, async_req=True)
+        >>> thread = api.get_instrument_events_with_http_info(scope, code, as_at, limit, page, filter, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the corporate action source. (required)
@@ -1176,6 +1182,12 @@ class CorporateActionSourcesApi:
         :type page: str
         :param filter: Optional. Expression to filter the result set.
         :type filter: str
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1208,7 +1220,10 @@ class CorporateActionSourcesApi:
             'as_at',
             'limit',
             'page',
-            'filter'
+            'filter',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -1260,6 +1275,15 @@ class CorporateActionSourcesApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

@@ -601,7 +601,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_instrument_events**
-> PagedResourceListOfInstrumentEventHolder get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter)
+> PagedResourceListOfInstrumentEventHolder get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.
 
@@ -658,13 +658,16 @@ def main():
     limit = 1000 # int | Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. (optional) (default to 1000)
     page = 'page_example' # str | Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified. (optional)
     filter = 'filter_example' # str | Optional. Expression to filter the result set. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, opts=opts)
+        # api_response =  api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] GetInstrumentEvents: Get extrinsic instrument events out of a given corporate actions source.
-        api_response = api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter)
+        api_response = api_instance.get_instrument_events(scope, code, as_at=as_at, limit=limit, page=page, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -683,6 +686,9 @@ Name | Type | Description  | Notes
  **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. If not specified, a default  of 1000 is used. | [optional] [default to 1000]
  **page** | **str**| Optional. The pagination token to use to continue listing items from a previous call. Page values are  return from list calls, and must be supplied exactly as returned. Additionally, when specifying this  value, asAt, filter and limit must not  be modified. | [optional] 
  **filter** | **str**| Optional. Expression to filter the result set. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode and closedPeriodId must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and closedPeriodId must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope and timelineCode must also be provided. | [optional] 
 
 ### Return type
 
