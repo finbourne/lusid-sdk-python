@@ -6266,34 +6266,36 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The id of the transaction")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.")] = None, **kwargs) -> TransactionSettlementStatus:  # noqa: E501
+    async def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The ID of the transaction.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, **kwargs) -> TransactionSettlementStatus:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The id of the transaction")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSettlementStatus:  # noqa: E501
+    def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The ID of the transaction.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionSettlementStatus:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The id of the transaction")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSettlementStatus, Awaitable[TransactionSettlementStatus]]:  # noqa: E501
-        """[EARLY ACCESS] GetTransactionSettlementStatus: Gets the Transaction Settlement Status for the requested transaction.  # noqa: E501
+    def get_transaction_settlement_status(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The ID of the transaction.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSettlementStatus, Awaitable[TransactionSettlementStatus]]:  # noqa: E501
+        """[EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status  # noqa: E501
 
         Gets the Transaction Settlement Status for the requested transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_settlement_status(scope, code, transaction_id, effective_at, as_at, async_req=True)
+        >>> thread = api.get_transaction_settlement_status(scope, code, transaction_id, effective_at, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :param code: The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio. (required)
         :type code: str
-        :param transaction_id: The id of the transaction (required)
+        :param transaction_id: The ID of the transaction. (required)
         :type transaction_id: str
-        :param effective_at: The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.
+        :param as_at: The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -6310,29 +6312,31 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_transaction_settlement_status_with_http_info(scope, code, transaction_id, effective_at, as_at, **kwargs)  # noqa: E501
+        return self.get_transaction_settlement_status_with_http_info(scope, code, transaction_id, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_settlement_status_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The id of the transaction")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetTransactionSettlementStatus: Gets the Transaction Settlement Status for the requested transaction.  # noqa: E501
+    def get_transaction_settlement_status_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio.")], transaction_id : Annotated[StrictStr, Field(..., description="The ID of the transaction.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status  # noqa: E501
 
         Gets the Transaction Settlement Status for the requested transaction.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_transaction_settlement_status_with_http_info(scope, code, transaction_id, effective_at, as_at, async_req=True)
+        >>> thread = api.get_transaction_settlement_status_with_http_info(scope, code, transaction_id, effective_at, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
-        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
+        :param code: The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio. (required)
         :type code: str
-        :param transaction_id: The id of the transaction (required)
+        :param transaction_id: The ID of the transaction. (required)
         :type transaction_id: str
-        :param effective_at: The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified.
         :type effective_at: str
-        :param as_at: The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified.
+        :param as_at: The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -6364,7 +6368,8 @@ class TransactionPortfoliosApi:
             'code',
             'transaction_id',
             'effective_at',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -6413,6 +6418,10 @@ class TransactionPortfoliosApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

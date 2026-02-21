@@ -35,7 +35,7 @@ Method | HTTP request | Description
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
 [**get_transaction_history**](TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
-[**get_transaction_settlement_status**](TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Gets the Transaction Settlement Status for the requested transaction.
+[**get_transaction_settlement_status**](TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
 [**get_upsertable_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_upsertable_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/upsertablecashflows | GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 [**list_custodian_accounts**](TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | ListCustodianAccounts: List Custodian Accounts
@@ -3263,9 +3263,9 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_transaction_settlement_status**
-> TransactionSettlementStatus get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at)
+> TransactionSettlementStatus get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EARLY ACCESS] GetTransactionSettlementStatus: Gets the Transaction Settlement Status for the requested transaction.
+[EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 
 Gets the Transaction Settlement Status for the requested transaction.
 
@@ -3315,17 +3315,18 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionPortfoliosApi)
     scope = 'scope_example' # str | The scope of the transaction portfolio.
-    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
-    transaction_id = 'transaction_id_example' # str | The id of the transaction
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified. (optional)
+    code = 'code_example' # str | The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio.
+    transaction_id = 'transaction_id_example' # str | The ID of the transaction.
+    effective_at = 'effective_at_example' # str | The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EARLY ACCESS] GetTransactionSettlementStatus: Gets the Transaction Settlement Status for the requested transaction.
-        api_response = api_instance.get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at)
+        # [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
+        api_response = api_instance.get_transaction_settlement_status(scope, code, transaction_id, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -3339,10 +3340,11 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the transaction portfolio. | 
- **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
- **transaction_id** | **str**| The id of the transaction | 
- **effective_at** | **str**| The effective datetime or cut label for which to get the transaction               settlement status. Defaults to the current LUSID system datetime if not specified. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to get the transaction settlement status.               Defaults to return the latest status if not specified. | [optional] 
+ **code** | **str**| The code of the transaction portfolio. This together with the scope uniquely identifies the transaction portfolio. | 
+ **transaction_id** | **str**| The ID of the transaction. | 
+ **effective_at** | **str**| The effective date and time or cut label to get the transaction settlement status.              This defaults to the current LUSID system time if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt date and time to get the transaction settlement status.               This defaults to return the latest status if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;SettlementInstruction&#39;, &#39;Instrument&#39; or &#39;Portfolio&#39; domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39; or &#39;SettlementInstruction/strategy/quantsignal&#39;. | [optional] 
 
 ### Return type
 
