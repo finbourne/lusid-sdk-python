@@ -1,10 +1,10 @@
-# FundCalendarEntry
+# FinalisedValuationPoint
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** | The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry. | 
-**variant** | **str** | The Variant of the Calendar Entry. Together with the valuation point code marks the unique branch for the NavType. | [optional] 
+**code** | **str** | The unique code of the Valuation Point. The Valuation Point Code, together with the Fund Scope and Code, uniquely identifies a Valuation Point. | 
+**finalised_from_variant** | **str** | The variant of the Estimate Valuation Point that was finalised to create the Finalised Valuation Point. | [optional] 
 **display_name** | **str** | The name of the Fund Calendar entry. | 
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **nav_type_code** | **str** | The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with. | 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **previous_entry** | [**PreviousFundCalendarEntry**](PreviousFundCalendarEntry.md) |  | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
-**entry_type** | **str** | The type of the Fund Calendar Entry. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry | 
+**entry_type** | **str** | The type of the Fund Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark | 
 **status** | **str** | The status of the Fund Calendar Entry. Can be &#39;Estimate&#39;, &#39;Unofficial&#39; or &#39;Final&#39;. | [optional] 
 **apply_clear_down** | **bool** | Set to true if that closed period should have the clear down applied. | 
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
@@ -21,17 +21,18 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
+**fund_calendar_entries_type** | **str** | The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark | 
 ## Example
 
 ```python
-from lusid.models.fund_calendar_entry import FundCalendarEntry
+from lusid.models.finalised_valuation_point import FinalisedValuationPoint
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
 code: StrictStr = "example_code"
-variant: Optional[StrictStr] = "example_variant"
+finalised_from_variant: Optional[StrictStr] = "example_finalised_from_variant"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 nav_type_code: StrictStr = "example_nav_type_code"
@@ -49,7 +50,8 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
-fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code)
+fund_calendar_entries_type: StrictStr = "example_fund_calendar_entries_type"
+finalised_valuation_point_instance = FinalisedValuationPoint(code=code, finalised_from_variant=finalised_from_variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code, fund_calendar_entries_type=fund_calendar_entries_type)
 
 ```
 

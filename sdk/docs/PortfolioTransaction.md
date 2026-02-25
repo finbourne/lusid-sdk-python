@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **portfolio_scope** | **str** | The portfolio scope of the given entity | 
 **portfolio_code** | **str** | The portfolio code of the given entity | 
 **transaction_id** | **str** | The transaction Id of the PortfolioTransaction being adjusted | 
-**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity | 
+**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity | 
 ## Example
 
 ```python

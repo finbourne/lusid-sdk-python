@@ -24,15 +24,15 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 import lusid.models
 
-class NavActivityAdjustment(BaseModel):
+class FundCalendarEntries(BaseModel):
     """
-    NavActivityAdjustment
+    FundCalendarEntries
     """
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
-    __properties = ["navActivityAdjustmentType"]
+    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    __properties = ["fundCalendarEntriesType"]
 
-    @validator('nav_activity_adjustment_type')
-    def nav_activity_adjustment_type_validate_enum(cls, value):
+    @validator('fund_calendar_entries_type')
+    def fund_calendar_entries_type_validate_enum(cls, value):
         """Validates the enum"""
 
         # Finbourne have removed enum validation on all models, except for this use case:
@@ -42,7 +42,7 @@ class NavActivityAdjustment(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'NavActivityAdjustment' not in [ 
+        if 'FundCalendarEntries' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -92,11 +92,11 @@ class NavActivityAdjustment(BaseModel):
            return value
         
         # Only validate the 'type' property of the class
-        if "nav_activity_adjustment_type" != "type":
+        if "fund_calendar_entries_type" != "type":
             return value
 
-        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity']:
-            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity')")
+        if value not in ['FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark']:
+            raise ValueError("must be one of enum values ('FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark')")
         return value
 
     class Config:
@@ -105,14 +105,13 @@ class NavActivityAdjustment(BaseModel):
         validate_assignment = True
 
     # JSON field name that stores the object type
-    __discriminator_property_name = 'navActivityAdjustmentType'
+    __discriminator_property_name = 'fundCalendarEntriesType'
 
     # discriminator mappings
     __discriminator_value_class_map = {
-        'InstrumentActivity': 'InstrumentActivity',
-        'PortfolioSettlementInstruction': 'PortfolioSettlementInstruction',
-        'PortfolioTransaction': 'PortfolioTransaction',
-        'QuoteActivity': 'QuoteActivity'
+        'FinalisedValuationPoint': 'FinalisedValuationPoint',
+        'FundBookmark': 'FundBookmark',
+        'FundEstimateValuationPoint': 'FundEstimateValuationPoint'
     }
 
     @classmethod
@@ -141,8 +140,8 @@ class NavActivityAdjustment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
-        """Create an instance of NavActivityAdjustment from a JSON string"""
+    def from_json(cls, json_str: str) -> Union(FinalisedValuationPoint, FundBookmark, FundEstimateValuationPoint):
+        """Create an instance of FundCalendarEntries from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -154,16 +153,16 @@ class NavActivityAdjustment(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
-        """Create an instance of NavActivityAdjustment from a dict"""
+    def from_dict(cls, obj: dict) -> Union(FinalisedValuationPoint, FundBookmark, FundEstimateValuationPoint):
+        """Create an instance of FundCalendarEntries from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         if object_type:
             klass = getattr(lusid.models, object_type)
             return klass.from_dict(obj)
         else:
-            raise ValueError("NavActivityAdjustment failed to lookup discriminator value from " +
+            raise ValueError("FundCalendarEntries failed to lookup discriminator value from " +
                              json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
                              ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
 
-NavActivityAdjustment.update_forward_refs()
+FundCalendarEntries.update_forward_refs()

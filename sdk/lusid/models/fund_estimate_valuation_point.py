@@ -22,34 +22,28 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.model_property import ModelProperty
+from lusid.models.estimate_variant import EstimateVariant
+from lusid.models.fund_calendar_entries import FundCalendarEntries
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.resource_id import ResourceId
-from lusid.models.version import Version
 
-class FundCalendarEntry(BaseModel):
+class FundEstimateValuationPoint(FundCalendarEntries):
     """
-    FundCalendarEntry
+    FundEstimateValuationPoint
     """
     code:  StrictStr = Field(...,alias="code", description="The unique Code of the Calendar Entry. The Calendar Entry, together with the Fund Scope and Code, uniquely identifies a Fund Calendar Entry.") 
-    variant:  Optional[StrictStr] = Field(None,alias="variant", description="The Variant of the Calendar Entry. Together with the valuation point code marks the unique branch for the NavType.") 
-    display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund Calendar entry.") 
-    description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund Calendar entry.") 
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The navTypeCode of the Fund Calendar Entry. This is the code of the NAV type that this Calendar Entry is associated with.") 
     timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
     previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
-    as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
-    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry") 
+    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Unofficial' or 'Final'.") 
-    apply_clear_down: StrictBool = Field(description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
-    holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest.", alias="holdingsAsAtOverride")
-    valuations_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest.", alias="valuationsAsAtOverride")
-    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties for the Calendar Entry. These will be from the 'ClosedPeriod' domain.")
-    version: Version
-    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
+    apply_clear_down: Optional[StrictBool] = Field(default=None, description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
-    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode"]
+    variants: Optional[List[EstimateVariant]] = Field(default=None, description="The variants of the Estimate Valuation Point. ")
+    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    additional_properties: Dict[str, Any] = {}
+    __properties = ["fundCalendarEntriesType", "code", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "entryType", "status", "applyClearDown", "leaderNavTypeCode", "variants"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -62,7 +56,7 @@ class FundCalendarEntry(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'FundCalendarEntry' not in [ 
+        if 'FundEstimateValuationPoint' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -115,8 +109,76 @@ class FundCalendarEntry(BaseModel):
         if "entry_type" != "type":
             return value
 
-        if value not in ['ValuationPointFundCalendarEntry', 'BookmarkFundCalendarEntry']:
-            raise ValueError("must be one of enum values ('ValuationPointFundCalendarEntry', 'BookmarkFundCalendarEntry')")
+        if value not in ['FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark']:
+            raise ValueError("must be one of enum values ('FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark')")
+        return value
+
+    @validator('fund_calendar_entries_type')
+    def fund_calendar_entries_type_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'FundEstimateValuationPoint' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "fund_calendar_entries_type" != "type":
+            return value
+
+        if value not in ['FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark']:
+            raise ValueError("must be one of enum values ('FinalisedValuationPoint', 'FundEstimateValuationPoint', 'FundBookmark')")
         return value
 
     class Config:
@@ -141,14 +203,15 @@ class FundCalendarEntry(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundCalendarEntry:
-        """Create an instance of FundCalendarEntry from a JSON string"""
+    def from_json(cls, json_str: str) -> FundEstimateValuationPoint:
+        """Create an instance of FundEstimateValuationPoint from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "additional_properties"
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of timeline_id
@@ -157,92 +220,62 @@ class FundCalendarEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of previous_entry
         if self.previous_entry:
             _dict['previousEntry'] = self.previous_entry.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
-        _field_dict = {}
-        if self.properties:
-            for _key in self.properties:
-                if self.properties[_key]:
-                    _field_dict[_key] = self.properties[_key].to_dict()
-            _dict['properties'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of version
-        if self.version:
-            _dict['version'] = self.version.to_dict()
-        # set to None if variant (nullable) is None
-        # and __fields_set__ contains the field
-        if self.variant is None and "variant" in self.__fields_set__:
-            _dict['variant'] = None
-
-        # set to None if description (nullable) is None
-        # and __fields_set__ contains the field
-        if self.description is None and "description" in self.__fields_set__:
-            _dict['description'] = None
+        # override the default output from pydantic by calling `to_dict()` of each item in variants (list)
+        _items = []
+        if self.variants:
+            for _item in self.variants:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['variants'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
 
         # set to None if status (nullable) is None
         # and __fields_set__ contains the field
         if self.status is None and "status" in self.__fields_set__:
             _dict['status'] = None
 
-        # set to None if holdings_as_at_override (nullable) is None
-        # and __fields_set__ contains the field
-        if self.holdings_as_at_override is None and "holdings_as_at_override" in self.__fields_set__:
-            _dict['holdingsAsAtOverride'] = None
-
-        # set to None if valuations_as_at_override (nullable) is None
-        # and __fields_set__ contains the field
-        if self.valuations_as_at_override is None and "valuations_as_at_override" in self.__fields_set__:
-            _dict['valuationsAsAtOverride'] = None
-
-        # set to None if properties (nullable) is None
-        # and __fields_set__ contains the field
-        if self.properties is None and "properties" in self.__fields_set__:
-            _dict['properties'] = None
-
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if leader_nav_type_code (nullable) is None
         # and __fields_set__ contains the field
         if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
             _dict['leaderNavTypeCode'] = None
 
+        # set to None if variants (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variants is None and "variants" in self.__fields_set__:
+            _dict['variants'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundCalendarEntry:
-        """Create an instance of FundCalendarEntry from a dict"""
+    def from_dict(cls, obj: dict) -> FundEstimateValuationPoint:
+        """Create an instance of FundEstimateValuationPoint from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundCalendarEntry.parse_obj(obj)
+            return FundEstimateValuationPoint.parse_obj(obj)
 
-        _obj = FundCalendarEntry.parse_obj({
+        _obj = FundEstimateValuationPoint.parse_obj({
+            "fund_calendar_entries_type": obj.get("fundCalendarEntriesType"),
             "code": obj.get("code"),
-            "variant": obj.get("variant"),
-            "display_name": obj.get("displayName"),
-            "description": obj.get("description"),
             "nav_type_code": obj.get("navTypeCode"),
             "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None,
             "previous_entry": PreviousFundCalendarEntry.from_dict(obj.get("previousEntry")) if obj.get("previousEntry") is not None else None,
             "effective_at": obj.get("effectiveAt"),
-            "as_at": obj.get("asAt"),
             "entry_type": obj.get("entryType"),
             "status": obj.get("status"),
             "apply_clear_down": obj.get("applyClearDown"),
-            "holdings_as_at_override": obj.get("holdingsAsAtOverride"),
-            "valuations_as_at_override": obj.get("valuationsAsAtOverride"),
-            "properties": dict(
-                (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("properties").items()
-            )
-            if obj.get("properties") is not None
-            else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "href": obj.get("href"),
-            "leader_nav_type_code": obj.get("leaderNavTypeCode")
+            "leader_nav_type_code": obj.get("leaderNavTypeCode"),
+            "variants": [EstimateVariant.from_dict(_item) for _item in obj.get("variants")] if obj.get("variants") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
-FundCalendarEntry.update_forward_refs()
+FundEstimateValuationPoint.update_forward_refs()

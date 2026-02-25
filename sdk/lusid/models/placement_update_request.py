@@ -32,10 +32,13 @@ class PlacementUpdateRequest(BaseModel):
     id: ResourceId
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this placement.")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of this placement (Market, Limit, etc).") 
+    limit_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="limitPrice")
+    stop_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="stopPrice")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
     entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement.") 
-    __properties = ["id", "quantity", "properties", "counterparty", "executionSystem", "entryType"]
+    __properties = ["id", "quantity", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +92,21 @@ class PlacementUpdateRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type is None and "type" in self.__fields_set__:
+            _dict['type'] = None
+
+        # set to None if limit_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.limit_price is None and "limit_price" in self.__fields_set__:
+            _dict['limitPrice'] = None
+
+        # set to None if stop_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.stop_price is None and "stop_price" in self.__fields_set__:
+            _dict['stopPrice'] = None
+
         # set to None if counterparty (nullable) is None
         # and __fields_set__ contains the field
         if self.counterparty is None and "counterparty" in self.__fields_set__:
@@ -124,6 +142,9 @@ class PlacementUpdateRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
+            "type": obj.get("type"),
+            "limit_price": obj.get("limitPrice"),
+            "stop_price": obj.get("stopPrice"),
             "counterparty": obj.get("counterparty"),
             "execution_system": obj.get("executionSystem"),
             "entry_type": obj.get("entryType")

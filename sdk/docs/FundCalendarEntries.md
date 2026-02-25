@@ -1,20 +1,20 @@
-# NavActivityAdjustment
+# FundCalendarEntries
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity | 
+**fund_calendar_entries_type** | **str** | The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark | 
 ## Example
 
 ```python
-from lusid.models.nav_activity_adjustment import NavActivityAdjustment
+from lusid.models.fund_calendar_entries import FundCalendarEntries
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-nav_activity_adjustment_type: StrictStr = "example_nav_activity_adjustment_type"
-nav_activity_adjustment_instance = NavActivityAdjustment(nav_activity_adjustment_type=nav_activity_adjustment_type)
+fund_calendar_entries_type: StrictStr = "example_fund_calendar_entries_type"
+fund_calendar_entries_instance = FundCalendarEntries(fund_calendar_entries_type=fund_calendar_entries_type)
 
 ```
 

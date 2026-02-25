@@ -262,6 +262,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
 *FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
 *FundsApi* | [**list_fund_calendar**](docs/FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EXPERIMENTAL] ListFundCalendar: List Fund Calendar.
+*FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.
 *FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
 *FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 *FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
@@ -1081,6 +1082,7 @@ Class | Method | HTTP request | Description
  - [EquityVolDependency](docs/EquityVolDependency.md)
  - [EquityVolSurfaceData](docs/EquityVolSurfaceData.md)
  - [ErrorDetail](docs/ErrorDetail.md)
+ - [EstimateVariant](docs/EstimateVariant.md)
  - [EventDateRange](docs/EventDateRange.md)
  - [ExDividendConfiguration](docs/ExDividendConfiguration.md)
  - [ExchangeTradedOption](docs/ExchangeTradedOption.md)
@@ -1111,6 +1113,7 @@ Class | Method | HTTP request | Description
  - [FilterPredicateComplianceParameter](docs/FilterPredicateComplianceParameter.md)
  - [FilterStep](docs/FilterStep.md)
  - [FilterStepRequest](docs/FilterStepRequest.md)
+ - [FinalisedValuationPoint](docs/FinalisedValuationPoint.md)
  - [FixedLeg](docs/FixedLeg.md)
  - [FixedLegAllOfOverrides](docs/FixedLegAllOfOverrides.md)
  - [FixedSchedule](docs/FixedSchedule.md)
@@ -1130,6 +1133,9 @@ Class | Method | HTTP request | Description
  - [FromRecipe](docs/FromRecipe.md)
  - [Fund](docs/Fund.md)
  - [FundAmount](docs/FundAmount.md)
+ - [FundBookmark](docs/FundBookmark.md)
+ - [FundCalendarEntries](docs/FundCalendarEntries.md)
+ - [FundCalendarEntriesType](docs/FundCalendarEntriesType.md)
  - [FundCalendarEntry](docs/FundCalendarEntry.md)
  - [FundCalendarEntryType](docs/FundCalendarEntryType.md)
  - [FundConfiguration](docs/FundConfiguration.md)
@@ -1137,6 +1143,7 @@ Class | Method | HTTP request | Description
  - [FundConfigurationRequest](docs/FundConfigurationRequest.md)
  - [FundDefinitionRequest](docs/FundDefinitionRequest.md)
  - [FundDetails](docs/FundDetails.md)
+ - [FundEstimateValuationPoint](docs/FundEstimateValuationPoint.md)
  - [FundIdList](docs/FundIdList.md)
  - [FundJournalEntryLine](docs/FundJournalEntryLine.md)
  - [FundPnlBreakdown](docs/FundPnlBreakdown.md)
@@ -1451,6 +1458,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfFee](docs/PagedResourceListOfFee.md)
  - [PagedResourceListOfFeeType](docs/PagedResourceListOfFeeType.md)
  - [PagedResourceListOfFund](docs/PagedResourceListOfFund.md)
+ - [PagedResourceListOfFundCalendarEntries](docs/PagedResourceListOfFundCalendarEntries.md)
  - [PagedResourceListOfFundCalendarEntry](docs/PagedResourceListOfFundCalendarEntry.md)
  - [PagedResourceListOfFundConfiguration](docs/PagedResourceListOfFundConfiguration.md)
  - [PagedResourceListOfGeneralLedgerProfileResponse](docs/PagedResourceListOfGeneralLedgerProfileResponse.md)
@@ -1593,6 +1601,7 @@ Class | Method | HTTP request | Description
  - [Quote](docs/Quote.md)
  - [QuoteAccessMetadataRule](docs/QuoteAccessMetadataRule.md)
  - [QuoteAccessMetadataRuleId](docs/QuoteAccessMetadataRuleId.md)
+ - [QuoteActivity](docs/QuoteActivity.md)
  - [QuoteDependency](docs/QuoteDependency.md)
  - [QuoteId](docs/QuoteId.md)
  - [QuoteInstrumentIdType](docs/QuoteInstrumentIdType.md)

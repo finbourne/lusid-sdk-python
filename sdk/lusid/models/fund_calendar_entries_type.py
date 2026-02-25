@@ -23,20 +23,19 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 
-class NavActivityAdjustmentType(str, Enum):
+class FundCalendarEntriesType(str, Enum):
     """
-    Discriminator for NavActivityAdjustment
+    FundCalendarEntriesType
     """
 
     """
     allowed enum values
     """
-    PORTFOLIOTRANSACTION = 'PortfolioTransaction'
-    PORTFOLIOSETTLEMENTINSTRUCTION = 'PortfolioSettlementInstruction'
-    INSTRUMENTACTIVITY = 'InstrumentActivity'
-    QUOTEACTIVITY = 'QuoteActivity'
+    FINALISEDVALUATIONPOINT = 'FinalisedValuationPoint'
+    FUNDESTIMATEVALUATIONPOINT = 'FundEstimateValuationPoint'
+    FUNDBOOKMARK = 'FundBookmark'
 
     @classmethod
-    def from_json(cls, json_str: str) -> NavActivityAdjustmentType:
-        """Create an instance of NavActivityAdjustmentType from a JSON string"""
-        return NavActivityAdjustmentType(json.loads(json_str))
+    def from_json(cls, json_str: str) -> FundCalendarEntriesType:
+        """Create an instance of FundCalendarEntriesType from a JSON string"""
+        return FundCalendarEntriesType(json.loads(json_str))

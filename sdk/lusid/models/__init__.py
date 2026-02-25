@@ -403,6 +403,7 @@ from lusid.models.equity_swap import EquitySwap
 from lusid.models.equity_vol_dependency import EquityVolDependency
 from lusid.models.equity_vol_surface_data import EquityVolSurfaceData
 from lusid.models.error_detail import ErrorDetail
+from lusid.models.estimate_variant import EstimateVariant
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.exchange_traded_option import ExchangeTradedOption
@@ -433,6 +434,7 @@ from lusid.models.file_response import FileResponse
 from lusid.models.filter_predicate_compliance_parameter import FilterPredicateComplianceParameter
 from lusid.models.filter_step import FilterStep
 from lusid.models.filter_step_request import FilterStepRequest
+from lusid.models.finalised_valuation_point import FinalisedValuationPoint
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
@@ -452,6 +454,9 @@ from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
 from lusid.models.fund_amount import FundAmount
+from lusid.models.fund_bookmark import FundBookmark
+from lusid.models.fund_calendar_entries import FundCalendarEntries
+from lusid.models.fund_calendar_entries_type import FundCalendarEntriesType
 from lusid.models.fund_calendar_entry import FundCalendarEntry
 from lusid.models.fund_calendar_entry_type import FundCalendarEntryType
 from lusid.models.fund_configuration import FundConfiguration
@@ -459,6 +464,7 @@ from lusid.models.fund_configuration_properties import FundConfigurationProperti
 from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
+from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoint
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
@@ -773,6 +779,7 @@ from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExe
 from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
+from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResourceListOfFundCalendarEntries
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
@@ -915,6 +922,7 @@ from lusid.models.queryable_key import QueryableKey
 from lusid.models.quote import Quote
 from lusid.models.quote_access_metadata_rule import QuoteAccessMetadataRule
 from lusid.models.quote_access_metadata_rule_id import QuoteAccessMetadataRuleId
+from lusid.models.quote_activity import QuoteActivity
 from lusid.models.quote_dependency import QuoteDependency
 from lusid.models.quote_id import QuoteId
 from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
@@ -1755,6 +1763,7 @@ __all__ = [
     "EquityVolDependency",
     "EquityVolSurfaceData",
     "ErrorDetail",
+    "EstimateVariant",
     "EventDateRange",
     "ExDividendConfiguration",
     "ExchangeTradedOption",
@@ -1785,6 +1794,7 @@ __all__ = [
     "FilterPredicateComplianceParameter",
     "FilterStep",
     "FilterStepRequest",
+    "FinalisedValuationPoint",
     "FixedLeg",
     "FixedLegAllOfOverrides",
     "FixedSchedule",
@@ -1804,6 +1814,9 @@ __all__ = [
     "FromRecipe",
     "Fund",
     "FundAmount",
+    "FundBookmark",
+    "FundCalendarEntries",
+    "FundCalendarEntriesType",
     "FundCalendarEntry",
     "FundCalendarEntryType",
     "FundConfiguration",
@@ -1811,6 +1824,7 @@ __all__ = [
     "FundConfigurationRequest",
     "FundDefinitionRequest",
     "FundDetails",
+    "FundEstimateValuationPoint",
     "FundIdList",
     "FundJournalEntryLine",
     "FundPnlBreakdown",
@@ -2125,6 +2139,7 @@ __all__ = [
     "PagedResourceListOfFee",
     "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
+    "PagedResourceListOfFundCalendarEntries",
     "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
@@ -2267,6 +2282,7 @@ __all__ = [
     "Quote",
     "QuoteAccessMetadataRule",
     "QuoteAccessMetadataRuleId",
+    "QuoteActivity",
     "QuoteDependency",
     "QuoteId",
     "QuoteInstrumentIdType",

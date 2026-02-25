@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **as_at** | **datetime** | The asAt time for which the adjustment is being applied. | 
 **scope** | **str** | The Scope of the given entity | 
 **lusid_instrument_id** | **str** | The LusidInstrumentId of the given entity | 
-**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity | 
+**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity | 
 ## Example
 
 ```python

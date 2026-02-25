@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this placement. | [optional] 
+**type** | **str** | The type of this placement (Market, Limit, etc). | [optional] 
+**limit_price** | **float** | The optional price, as currency and amount, associated with this placement. | [optional] 
+**stop_price** | **float** | The optional price, as currency and amount, associated with this placement. | [optional] 
 **counterparty** | **str** | Optionally specifies the market entity this placement is placed with. | [optional] 
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 
 **entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
@@ -22,10 +25,13 @@ from datetime import datetime
 id: ResourceId
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+type: Optional[StrictStr] = "example_type"
+limit_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+stop_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 counterparty: Optional[StrictStr] = "example_counterparty"
 execution_system: Optional[StrictStr] = "example_execution_system"
 entry_type: Optional[StrictStr] = "example_entry_type"
-placement_update_request_instance = PlacementUpdateRequest(id=id, quantity=quantity, properties=properties, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
+placement_update_request_instance = PlacementUpdateRequest(id=id, quantity=quantity, properties=properties, type=type, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
 
 ```
 

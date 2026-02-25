@@ -31,7 +31,7 @@ class InstrumentActivity(NavActivityAdjustment):
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
     scope:  StrictStr = Field(...,alias="scope", description="The Scope of the given entity") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the given entity") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "asAt", "scope", "lusidInstrumentId"]
 
@@ -99,8 +99,8 @@ class InstrumentActivity(NavActivityAdjustment):
         if "nav_activity_adjustment_type" != "type":
             return value
 
-        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity']:
-            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity')")
+        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity']:
+            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity')")
         return value
 
     class Config:

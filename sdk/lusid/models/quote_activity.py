@@ -22,14 +22,19 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-import lusid.models
+from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 
-class NavActivityAdjustment(BaseModel):
+class QuoteActivity(NavActivityAdjustment):
     """
-    NavActivityAdjustment
+    QuoteActivity
     """
+    as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the quote event that need to be added to the closed period.") 
+    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the quote which needs to be added as a post close activity.") 
+    instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The InstrumentId from the quote which needs to be added as a post close activity.") 
     nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
-    __properties = ["navActivityAdjustmentType"]
+    additional_properties: Dict[str, Any] = {}
+    __properties = ["navActivityAdjustmentType", "asAt", "effectiveAt", "entityUniqueId", "instrumentId"]
 
     @validator('nav_activity_adjustment_type')
     def nav_activity_adjustment_type_validate_enum(cls, value):
@@ -42,7 +47,7 @@ class NavActivityAdjustment(BaseModel):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'NavActivityAdjustment' not in [ 
+        if 'QuoteActivity' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -104,26 +109,6 @@ class NavActivityAdjustment(BaseModel):
         allow_population_by_field_name = True
         validate_assignment = True
 
-    # JSON field name that stores the object type
-    __discriminator_property_name = 'navActivityAdjustmentType'
-
-    # discriminator mappings
-    __discriminator_value_class_map = {
-        'InstrumentActivity': 'InstrumentActivity',
-        'PortfolioSettlementInstruction': 'PortfolioSettlementInstruction',
-        'PortfolioTransaction': 'PortfolioTransaction',
-        'QuoteActivity': 'QuoteActivity'
-    }
-
-    @classmethod
-    def get_discriminator_value(cls, obj: dict) -> str:
-        """Returns the discriminator value (object type) of the data"""
-        discriminator_value = obj[cls.__discriminator_property_name]
-        if discriminator_value:
-            return cls.__discriminator_value_class_map.get(discriminator_value)
-        else:
-            return None
-
     def __str__(self):
         """For `print` and `pprint`"""
         return pprint.pformat(self.dict(by_alias=False))
@@ -141,29 +126,45 @@ class NavActivityAdjustment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
-        """Create an instance of NavActivityAdjustment from a JSON string"""
+    def from_json(cls, json_str: str) -> QuoteActivity:
+        """Create an instance of QuoteActivity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "additional_properties"
                           },
                           exclude_none=True)
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
-        """Create an instance of NavActivityAdjustment from a dict"""
-        # look up the object type based on discriminator mapping
-        object_type = cls.get_discriminator_value(obj)
-        if object_type:
-            klass = getattr(lusid.models, object_type)
-            return klass.from_dict(obj)
-        else:
-            raise ValueError("NavActivityAdjustment failed to lookup discriminator value from " +
-                             json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                             ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+    def from_dict(cls, obj: dict) -> QuoteActivity:
+        """Create an instance of QuoteActivity from a dict"""
+        if obj is None:
+            return None
 
-NavActivityAdjustment.update_forward_refs()
+        if not isinstance(obj, dict):
+            return QuoteActivity.parse_obj(obj)
+
+        _obj = QuoteActivity.parse_obj({
+            "nav_activity_adjustment_type": obj.get("navActivityAdjustmentType"),
+            "as_at": obj.get("asAt"),
+            "effective_at": obj.get("effectiveAt"),
+            "entity_unique_id": obj.get("entityUniqueId"),
+            "instrument_id": obj.get("instrumentId")
+        })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
+        return _obj
+
+QuoteActivity.update_forward_refs()
