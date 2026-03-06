@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **when_staged** | **str** | The specific Uniform Resource Identifier (URI) for the staged modification change at the time when the change was requested. | [optional] 
 **preview** | **str** | The specific Uniform Resource Identifier (URI) for the preview of staged modification change once applied. | [optional] 
 **latest** | **str** | The specific Uniform Resource Identifier (URI) for the staged modification at latest time. | [optional] 
+**when_closed** | **str** | The specific Uniform Resource Identifier (URI) for the staged modification after it has been applied. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -19,8 +20,9 @@ from datetime import datetime
 when_staged: Optional[StrictStr] = "example_when_staged"
 preview: Optional[StrictStr] = "example_preview"
 latest: Optional[StrictStr] = "example_latest"
+when_closed: Optional[StrictStr] = "example_when_closed"
 links: Optional[List[Link]] = None
-staged_modifications_entity_hrefs_instance = StagedModificationsEntityHrefs(when_staged=when_staged, preview=preview, latest=latest, links=links)
+staged_modifications_entity_hrefs_instance = StagedModificationsEntityHrefs(when_staged=when_staged, preview=preview, latest=latest, when_closed=when_closed, links=links)
 
 ```
 

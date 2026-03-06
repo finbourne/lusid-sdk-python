@@ -31,8 +31,9 @@ class StagedModificationsEntityHrefs(BaseModel):
     when_staged:  Optional[StrictStr] = Field(None,alias="whenStaged", description="The specific Uniform Resource Identifier (URI) for the staged modification change at the time when the change was requested.") 
     preview:  Optional[StrictStr] = Field(None,alias="preview", description="The specific Uniform Resource Identifier (URI) for the preview of staged modification change once applied.") 
     latest:  Optional[StrictStr] = Field(None,alias="latest", description="The specific Uniform Resource Identifier (URI) for the staged modification at latest time.") 
+    when_closed:  Optional[StrictStr] = Field(None,alias="whenClosed", description="The specific Uniform Resource Identifier (URI) for the staged modification after it has been applied.") 
     links: Optional[List[Link]] = None
-    __properties = ["whenStaged", "preview", "latest", "links"]
+    __properties = ["whenStaged", "preview", "latest", "whenClosed", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,6 +89,11 @@ class StagedModificationsEntityHrefs(BaseModel):
         if self.latest is None and "latest" in self.__fields_set__:
             _dict['latest'] = None
 
+        # set to None if when_closed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.when_closed is None and "when_closed" in self.__fields_set__:
+            _dict['whenClosed'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -108,6 +114,7 @@ class StagedModificationsEntityHrefs(BaseModel):
             "when_staged": obj.get("whenStaged"),
             "preview": obj.get("preview"),
             "latest": obj.get("latest"),
+            "when_closed": obj.get("whenClosed"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

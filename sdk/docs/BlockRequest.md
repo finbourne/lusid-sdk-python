@@ -1,11 +1,11 @@
 # BlockRequest
 
-A request to create or update an Order.
+A request to create or update a Block.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**order_ids** | [**List[ResourceId]**](ResourceId.md) | The related order ids. | 
+**order_ids** | [**List[ResourceId]**](ResourceId.md) | The related order ids. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The total quantity of given instrument ordered. | 
@@ -26,7 +26,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 id: ResourceId
-order_ids: List[ResourceId] = # Replace with your value
+order_ids: Optional[List[ResourceId]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value

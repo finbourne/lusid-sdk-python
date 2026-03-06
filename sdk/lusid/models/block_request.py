@@ -28,10 +28,10 @@ from lusid.models.resource_id import ResourceId
 
 class BlockRequest(BaseModel):
     """
-    A request to create or update an Order.  # noqa: E501
+    A request to create or update a Block.  # noqa: E501
     """
     id: ResourceId
-    order_ids: List[ResourceId] = Field(description="The related order ids.", alias="orderIds")
+    order_ids: Optional[List[ResourceId]] = Field(default=None, description="The related order ids.", alias="orderIds")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this block.")
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
     quantity: Union[StrictFloat, StrictInt] = Field(description="The total quantity of given instrument ordered.")
@@ -99,6 +99,11 @@ class BlockRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of stop_price
         if self.stop_price:
             _dict['stopPrice'] = self.stop_price.to_dict()
+        # set to None if order_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.order_ids is None and "order_ids" in self.__fields_set__:
+            _dict['orderIds'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
