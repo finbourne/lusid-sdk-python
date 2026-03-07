@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **quantity** | **float** | The quantity of given instrument ordered. | 
-**state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | 
+**state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | [optional] 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
 **time_in_force** | **str** | The time in force applicable to this placement (GTC, FOK, Day, etc) | 
 **type** | **str** | The type of this placement (Market, Limit, etc). | 
@@ -35,7 +35,7 @@ block_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
-state: StrictStr = "example_state"
+state: Optional[StrictStr] = "example_state"
 side: StrictStr = "example_side"
 time_in_force: StrictStr = "example_time_in_force"
 type: StrictStr = "example_type"

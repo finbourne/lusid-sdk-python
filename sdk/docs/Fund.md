@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **inception_date** | **datetime** | Inception date of the Fund | 
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
 **year_end_date** | [**DayMonth**](DayMonth.md) |  | [optional] 
-**primary_nav_type** | [**NavTypeDefinition**](NavTypeDefinition.md) |  | [optional] 
-**additional_nav_types** | [**List[NavTypeDefinition]**](NavTypeDefinition.md) | The definitions for any additional NAVs on the Fund. | [optional] 
+**primary_nav_type** | [**NavType**](NavType.md) |  | [optional] 
+**additional_nav_types** | [**List[NavType]**](NavType.md) | The definitions for any additional NAVs on the Fund. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -47,8 +47,8 @@ inception_date: datetime = # Replace with your value
 decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
 year_end_date: Optional[DayMonth] = # Replace with your value
-primary_nav_type: Optional[NavTypeDefinition] = # Replace with your value
-additional_nav_types: Optional[List[NavTypeDefinition]] = # Replace with your value
+primary_nav_type: Optional[NavType] = # Replace with your value
+additional_nav_types: Optional[List[NavType]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
 links: Optional[List[Link]] = None

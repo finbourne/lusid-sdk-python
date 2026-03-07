@@ -26,7 +26,7 @@ from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
-from lusid.models.nav_type_definition import NavTypeDefinition
+from lusid.models.nav_type import NavType
 from lusid.models.portfolio_entity_id_with_details import PortfolioEntityIdWithDetails
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -49,8 +49,8 @@ class Fund(BaseModel):
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     year_end_date: Optional[DayMonth] = Field(default=None, alias="yearEndDate")
-    primary_nav_type: Optional[NavTypeDefinition] = Field(default=None, alias="primaryNavType")
-    additional_nav_types: Optional[List[NavTypeDefinition]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
+    primary_nav_type: Optional[NavType] = Field(default=None, alias="primaryNavType")
+    additional_nav_types: Optional[List[NavType]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
@@ -222,8 +222,8 @@ class Fund(BaseModel):
             "inception_date": obj.get("inceptionDate"),
             "decimal_places": obj.get("decimalPlaces"),
             "year_end_date": DayMonth.from_dict(obj.get("yearEndDate")) if obj.get("yearEndDate") is not None else None,
-            "primary_nav_type": NavTypeDefinition.from_dict(obj.get("primaryNavType")) if obj.get("primaryNavType") is not None else None,
-            "additional_nav_types": [NavTypeDefinition.from_dict(_item) for _item in obj.get("additionalNavTypes")] if obj.get("additionalNavTypes") is not None else None,
+            "primary_nav_type": NavType.from_dict(obj.get("primaryNavType")) if obj.get("primaryNavType") is not None else None,
+            "additional_nav_types": [NavType.from_dict(_item) for _item in obj.get("additionalNavTypes")] if obj.get("additionalNavTypes") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

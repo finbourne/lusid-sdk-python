@@ -696,6 +696,7 @@ from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 from lusid.models.nav_activity_adjustment_type import NavActivityAdjustmentType
+from lusid.models.nav_type import NavType
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
@@ -2056,6 +2057,7 @@ __all__ = [
     "MultiCurrencyAmounts",
     "NavActivityAdjustment",
     "NavActivityAdjustmentType",
+    "NavType",
     "NavTypeDefinition",
     "NewInstrument",
     "NextValueInSequenceResponse",

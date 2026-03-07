@@ -36,7 +36,7 @@ class PlacementRequest(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
     quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of given instrument ordered.")
-    state:  StrictStr = Field(...,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
+    state:  Optional[StrictStr] = Field(None,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
     side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this placement.") 
     time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)") 
     type:  StrictStr = Field(...,alias="type", description="The type of this placement (Market, Limit, etc).") 
@@ -110,6 +110,11 @@ class PlacementRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if state (nullable) is None
+        # and __fields_set__ contains the field
+        if self.state is None and "state" in self.__fields_set__:
+            _dict['state'] = None
 
         # set to None if counterparty (nullable) is None
         # and __fields_set__ contains the field
