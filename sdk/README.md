@@ -548,6 +548,12 @@ Class | Method | HTTP request | Description
 *RelationshipDefinitionsApi* | [**update_relationship_definition**](docs/RelationshipDefinitionsApi.md#update_relationship_definition) | **PUT** /api/relationshipdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationshipDefinition: Update Relationship Definition
 *RelationshipsApi* | [**create_relationship**](docs/RelationshipsApi.md#create_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships | CreateRelationship: Create Relationship
 *RelationshipsApi* | [**delete_relationship**](docs/RelationshipsApi.md#delete_relationship) | **POST** /api/relationshipdefinitions/{scope}/{code}/relationships/$delete | [EARLY ACCESS] DeleteRelationship: Delete Relationship
+*ResourceRecordApi* | [**delete_resource_record**](docs/ResourceRecordApi.md#delete_resource_record) | **DELETE** /api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record
+*ResourceRecordApi* | [**get_resource_record**](docs/ResourceRecordApi.md#get_resource_record) | **GET** /api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] GetResourceRecord: Get a Resource Record
+*ResourceRecordApi* | [**list_resource_record_codes**](docs/ResourceRecordApi.md#list_resource_record_codes) | **GET** /api/resourcerecords/{scope} | [EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope
+*ResourceRecordApi* | [**list_resource_record_scopes**](docs/ResourceRecordApi.md#list_resource_record_scopes) | **GET** /api/resourcerecords | [EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes
+*ResourceRecordApi* | [**list_resource_records**](docs/ResourceRecordApi.md#list_resource_records) | **GET** /api/resourcerecords/{scope}/{code} | [EARLY ACCESS] ListResourceRecords: List Resource Records
+*ResourceRecordApi* | [**upsert_resource_record**](docs/ResourceRecordApi.md#upsert_resource_record) | **POST** /api/resourcerecords | [EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
 *SchemasApi* | [**get_property_schema**](docs/SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
 *SchemasApi* | [**get_value_types**](docs/SchemasApi.md#get_value_types) | **GET** /api/schemas/types | [EARLY ACCESS] GetValueTypes: Get value types
@@ -1501,6 +1507,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfRelationalDataPointResponse](docs/PagedResourceListOfRelationalDataPointResponse.md)
  - [PagedResourceListOfRelationalDatasetDefinition](docs/PagedResourceListOfRelationalDatasetDefinition.md)
  - [PagedResourceListOfRelationshipDefinition](docs/PagedResourceListOfRelationshipDefinition.md)
+ - [PagedResourceListOfResourceRecord](docs/PagedResourceListOfResourceRecord.md)
  - [PagedResourceListOfSequenceDefinition](docs/PagedResourceListOfSequenceDefinition.md)
  - [PagedResourceListOfStagedModification](docs/PagedResourceListOfStagedModification.md)
  - [PagedResourceListOfStagedModificationsRequestedChangeInterval](docs/PagedResourceListOfStagedModificationsRequestedChangeInterval.md)
@@ -1745,6 +1752,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfTransactionSettlementInstruction](docs/ResourceListOfTransactionSettlementInstruction.md)
  - [ResourceListOfTransactionType](docs/ResourceListOfTransactionType.md)
  - [ResourceListOfValueType](docs/ResourceListOfValueType.md)
+ - [ResourceRecord](docs/ResourceRecord.md)
  - [ResponseMetaData](docs/ResponseMetaData.md)
  - [ResultDataKeyRule](docs/ResultDataKeyRule.md)
  - [ResultDataSchema](docs/ResultDataSchema.md)
@@ -2005,6 +2013,7 @@ Class | Method | HTTP request | Description
  - [UpsertReferencePortfolioConstituentsRequest](docs/UpsertReferencePortfolioConstituentsRequest.md)
  - [UpsertReferencePortfolioConstituentsResponse](docs/UpsertReferencePortfolioConstituentsResponse.md)
  - [UpsertRelationalDataPointRequest](docs/UpsertRelationalDataPointRequest.md)
+ - [UpsertResourceRecordRequest](docs/UpsertResourceRecordRequest.md)
  - [UpsertResultValuesDataRequest](docs/UpsertResultValuesDataRequest.md)
  - [UpsertReturnsResponse](docs/UpsertReturnsResponse.md)
  - [UpsertSingleStructuredDataResponse](docs/UpsertSingleStructuredDataResponse.md)

@@ -78,6 +78,7 @@ from lusid.api.relational_datasets_api import RelationalDatasetsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
+from lusid.api.resource_record_api import ResourceRecordApi
 from lusid.api.schemas_api import SchemasApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
@@ -907,6 +908,7 @@ from lusid.models.paged_resource_list_of_reference_list_response import PagedRes
 from lusid.models.paged_resource_list_of_relational_data_point_response import PagedResourceListOfRelationalDataPointResponse
 from lusid.models.paged_resource_list_of_relational_dataset_definition import PagedResourceListOfRelationalDatasetDefinition
 from lusid.models.paged_resource_list_of_relationship_definition import PagedResourceListOfRelationshipDefinition
+from lusid.models.paged_resource_list_of_resource_record import PagedResourceListOfResourceRecord
 from lusid.models.paged_resource_list_of_sequence_definition import PagedResourceListOfSequenceDefinition
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
 from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
@@ -1151,6 +1153,7 @@ from lusid.models.resource_list_of_transaction_fee import ResourceListOfTransact
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
+from lusid.models.resource_record import ResourceRecord
 from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.result_data_key_rule import ResultDataKeyRule
 from lusid.models.result_data_schema import ResultDataSchema
@@ -1411,6 +1414,7 @@ from lusid.models.upsert_reference_portfolio_constituent_properties_response imp
 from lusid.models.upsert_reference_portfolio_constituents_request import UpsertReferencePortfolioConstituentsRequest
 from lusid.models.upsert_reference_portfolio_constituents_response import UpsertReferencePortfolioConstituentsResponse
 from lusid.models.upsert_relational_data_point_request import UpsertRelationalDataPointRequest
+from lusid.models.upsert_resource_record_request import UpsertResourceRecordRequest
 from lusid.models.upsert_result_values_data_request import UpsertResultValuesDataRequest
 from lusid.models.upsert_returns_response import UpsertReturnsResponse
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
@@ -1541,6 +1545,7 @@ __all__ = [
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
+    "ResourceRecordApi",
     "SchemasApi",
     "ScopesApi",
     "ScriptedTranslationApi",
@@ -2360,6 +2365,7 @@ __all__ = [
     "PagedResourceListOfRelationalDataPointResponse",
     "PagedResourceListOfRelationalDatasetDefinition",
     "PagedResourceListOfRelationshipDefinition",
+    "PagedResourceListOfResourceRecord",
     "PagedResourceListOfSequenceDefinition",
     "PagedResourceListOfStagedModification",
     "PagedResourceListOfStagedModificationsRequestedChangeInterval",
@@ -2604,6 +2610,7 @@ __all__ = [
     "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
     "ResourceListOfValueType",
+    "ResourceRecord",
     "ResponseMetaData",
     "ResultDataKeyRule",
     "ResultDataSchema",
@@ -2864,6 +2871,7 @@ __all__ = [
     "UpsertReferencePortfolioConstituentsRequest",
     "UpsertReferencePortfolioConstituentsResponse",
     "UpsertRelationalDataPointRequest",
+    "UpsertResourceRecordRequest",
     "UpsertResultValuesDataRequest",
     "UpsertReturnsResponse",
     "UpsertSingleStructuredDataResponse",

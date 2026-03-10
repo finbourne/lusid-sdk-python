@@ -62,6 +62,7 @@ from lusid.api.relational_datasets_api import RelationalDatasetsApi
 from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
+from lusid.api.resource_record_api import ResourceRecordApi
 from lusid.api.schemas_api import SchemasApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
@@ -145,6 +146,7 @@ __all__ = [
     "RelationsApi",
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
+    "ResourceRecordApi",
     "SchemasApi",
     "ScopesApi",
     "ScriptedTranslationApi",
