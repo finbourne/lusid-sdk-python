@@ -66,7 +66,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def batch_delete_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], request_body : Annotated[Dict[str, DeleteRelationalDataPointRequest], Field(description="The Delete Request.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchDeleteRelationalDataResponse, Awaitable[BatchDeleteRelationalDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -103,7 +103,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def batch_delete_relational_data_with_http_info(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], request_body : Annotated[Dict[str, DeleteRelationalDataPointRequest], Field(description="The Delete Request.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Batch Delete Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -249,7 +249,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def batch_upsert_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], request_body : Annotated[Dict[str, UpsertRelationalDataPointRequest], Field(description="The DataPoints to upsert.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertRelationalDatasetsResponse, Awaitable[BatchUpsertRelationalDatasetsResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -286,7 +286,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def batch_upsert_relational_data_with_http_info(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], request_body : Annotated[Dict[str, UpsertRelationalDataPointRequest], Field(description="The DataPoints to upsert.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.              Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Batch Upsert Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -432,7 +432,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def query_relational_data(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDataPointResponse, Awaitable[PagedResourceListOfRelationalDataPointResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -475,7 +475,7 @@ class RelationalDatasetsApi:
 
     @validate_arguments
     def query_relational_data_with_http_info(self, relational_dataset_definition_scope : Annotated[StrictStr, Field(..., description="The Scope of the relational dataset definition.")], relational_dataset_definition_code : Annotated[StrictStr, Field(..., description="The Code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the dataset(s). Defaults to returning the latest version of each dataset if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to query the datasets.              Defaults to the current LUSID system datetime if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue query datasets. This value is returned from the previous call.              If a pagination token is provided, the filter, customSortBy, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, query_relational_dataset_request : Annotated[Optional[QueryRelationalDatasetRequest], Field(description="The query request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
+        """QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
 
         Query Relational Data Points for a given Relational Dataset Definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

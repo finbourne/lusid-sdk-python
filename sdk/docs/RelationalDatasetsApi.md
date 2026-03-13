@@ -4,15 +4,15 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_delete_relational_data**](RelationalDatasetsApi.md#batch_delete_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchDelete | [EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
-[**batch_upsert_relational_data**](RelationalDatasetsApi.md#batch_upsert_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchUpsert | [EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
-[**query_relational_data**](RelationalDatasetsApi.md#query_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$query | [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
+[**batch_delete_relational_data**](RelationalDatasetsApi.md#batch_delete_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchDelete | BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+[**batch_upsert_relational_data**](RelationalDatasetsApi.md#batch_upsert_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$batchUpsert | BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
+[**query_relational_data**](RelationalDatasetsApi.md#query_relational_data) | **POST** /api/relationaldatasets/{relationalDatasetDefinitionScope}/{relationalDatasetDefinitionCode}/$query | QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
 
 
 # **batch_delete_relational_data**
 > BatchDeleteRelationalDataResponse batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
 
-[EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
 
 Batch Delete Relational Data Points for a given Relational Dataset Definition.
 
@@ -70,7 +70,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode, opts=opts)
 
-        # [EXPERIMENTAL] BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
+        # BatchDeleteRelationalData: Batch Delete Relational Data Points for a given Relational Dataset Definition.
         api_response = api_instance.batch_delete_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
         pprint(api_response)
 
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 # **batch_upsert_relational_data**
 > BatchUpsertRelationalDatasetsResponse batch_upsert_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
 
-[EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
+BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
 
 Batch Upsert Relational Data Points for a given Relational Dataset Definition.
 
@@ -168,7 +168,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.batch_upsert_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode, opts=opts)
 
-        # [EXPERIMENTAL] BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
+        # BatchUpsertRelationalData: Batch Upsert Relational Data Points for a given Relational Dataset Definition.
         api_response = api_instance.batch_upsert_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, request_body, success_mode=success_mode)
         pprint(api_response)
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **query_relational_data**
 > PagedResourceListOfRelationalDataPointResponse query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request)
 
-[EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
+QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
 
 Query Relational Data Points for a given Relational Dataset Definition.
 
@@ -274,7 +274,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request, opts=opts)
 
-        # [EXPERIMENTAL] QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
+        # QueryRelationalData: Query Relational Data Points for a given Relational Dataset Definition.
         api_response = api_instance.query_relational_data(relational_dataset_definition_scope, relational_dataset_definition_code, as_at=as_at, effective_at=effective_at, page=page, limit=limit, query_relational_dataset_request=query_relational_dataset_request)
         pprint(api_response)
 

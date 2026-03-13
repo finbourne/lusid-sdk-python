@@ -38,6 +38,7 @@ class Operator(str, Enum):
     LESSTHAN = 'LessThan'
     LESSTHANOREQUALTO = 'LessThanOrEqualTo'
     IN = 'In'
+    STARTSWITH = 'StartsWith'
 
     @classmethod
     def from_json(cls, json_str: str) -> Operator:

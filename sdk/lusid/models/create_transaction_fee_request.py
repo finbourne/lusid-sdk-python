@@ -32,13 +32,13 @@ class CreateTransactionFeeRequest(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The display name of the transaction fee.") 
     description:  StrictStr = Field(...,alias="description", description="A description of the transaction fee.") 
     calculation: FeeCalculationRequest
-    conditions: List[StrictStr] = Field(description="The conditions that the transaction must meet in order for the fee to be applied.")
+    condition:  StrictStr = Field(...,alias="condition", description="The condition that the transaction must meet in order for the fee to be applied.") 
     capitalised:  StrictStr = Field(...,alias="capitalised", description="Specifies whether the fee should be capitalised, not capitalised or conditionally capitalised.") 
     capitalisation_condition:  Optional[StrictStr] = Field(None,alias="capitalisationCondition", description="If the fee Capitalisation is Conditional, this condition determines whether the fee is capitalised, when applied to the transaction.") 
     txn_property_key:  StrictStr = Field(...,alias="txnPropertyKey", description="The property key to which the fee value will be applied and decorated onto the transaction. Must be in the 'Transaction' property domain.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee.")
     is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee is currently active and should be applied to transactions. Optional when creating a transaction fee, defaults to true, if a value is not provided.", alias="isActive")
-    __properties = ["name", "description", "calculation", "conditions", "capitalised", "capitalisationCondition", "txnPropertyKey", "properties", "isActive"]
+    __properties = ["name", "description", "calculation", "condition", "capitalised", "capitalisationCondition", "txnPropertyKey", "properties", "isActive"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,7 +107,7 @@ class CreateTransactionFeeRequest(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "calculation": FeeCalculationRequest.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None,
-            "conditions": obj.get("conditions"),
+            "condition": obj.get("condition"),
             "capitalised": obj.get("capitalised"),
             "capitalisation_condition": obj.get("capitalisationCondition"),
             "txn_property_key": obj.get("txnPropertyKey"),

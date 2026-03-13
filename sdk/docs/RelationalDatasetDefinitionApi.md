@@ -4,19 +4,19 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#create_relational_dataset_definition) | **POST** /api/relationaldatasetdefinitions | [EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
-[**delete_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#delete_relational_dataset_definition) | **DELETE** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
-[**get_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#get_relational_dataset_definition) | **GET** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
-[**list_relational_dataset_definitions**](RelationalDatasetDefinitionApi.md#list_relational_dataset_definitions) | **GET** /api/relationaldatasetdefinitions | [EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
-[**update_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#update_relational_dataset_definition) | **PUT** /api/relationaldatasetdefinitions/{scope}/{code} | [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
-[**update_relational_dataset_details**](RelationalDatasetDefinitionApi.md#update_relational_dataset_details) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/details/$update | [EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
-[**update_relational_dataset_field_schema**](RelationalDatasetDefinitionApi.md#update_relational_dataset_field_schema) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/fieldschema/$update | [EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
+[**create_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#create_relational_dataset_definition) | **POST** /api/relationaldatasetdefinitions | CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
+[**delete_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#delete_relational_dataset_definition) | **DELETE** /api/relationaldatasetdefinitions/{scope}/{code} | DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
+[**get_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#get_relational_dataset_definition) | **GET** /api/relationaldatasetdefinitions/{scope}/{code} | GetRelationalDatasetDefinition: Get a Relational Dataset Definition
+[**list_relational_dataset_definitions**](RelationalDatasetDefinitionApi.md#list_relational_dataset_definitions) | **GET** /api/relationaldatasetdefinitions | ListRelationalDatasetDefinitions: List Relational Dataset Definitions
+[**update_relational_dataset_definition**](RelationalDatasetDefinitionApi.md#update_relational_dataset_definition) | **PUT** /api/relationaldatasetdefinitions/{scope}/{code} | UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
+[**update_relational_dataset_details**](RelationalDatasetDefinitionApi.md#update_relational_dataset_details) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/details/$update | UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+[**update_relational_dataset_field_schema**](RelationalDatasetDefinitionApi.md#update_relational_dataset_field_schema) | **POST** /api/relationaldatasetdefinitions/{scope}/{code}/fieldschema/$update | UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
 
 
 # **create_relational_dataset_definition**
 > RelationalDatasetDefinition create_relational_dataset_definition(create_relational_dataset_definition_request)
 
-[EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
+CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
 
 Create a new relational dataset definition.
 
@@ -76,7 +76,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_relational_dataset_definition(create_relational_dataset_definition_request, opts=opts)
 
-        # [EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
+        # CreateRelationalDatasetDefinition: Create a Relational Dataset Definition
         api_response = api_instance.create_relational_dataset_definition(create_relational_dataset_definition_request)
         pprint(api_response)
 
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 # **delete_relational_dataset_definition**
 > DeletedEntityResponse delete_relational_dataset_definition(scope, code)
 
-[EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
+DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
 
 Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.
 
@@ -169,7 +169,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_relational_dataset_definition(scope, code, opts=opts)
 
-        # [EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
+        # DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition
         api_response = api_instance.delete_relational_dataset_definition(scope, code)
         pprint(api_response)
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 # **get_relational_dataset_definition**
 > RelationalDatasetDefinition get_relational_dataset_definition(scope, code, as_at=as_at)
 
-[EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
+GetRelationalDatasetDefinition: Get a Relational Dataset Definition
 
 Retrieve a relational dataset definition by its identifier.
 
@@ -264,7 +264,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_relational_dataset_definition(scope, code, as_at=as_at, opts=opts)
 
-        # [EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition
+        # GetRelationalDatasetDefinition: Get a Relational Dataset Definition
         api_response = api_instance.get_relational_dataset_definition(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 # **list_relational_dataset_definitions**
 > PagedResourceListOfRelationalDatasetDefinition list_relational_dataset_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
 
-[EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
+ListRelationalDatasetDefinitions: List Relational Dataset Definitions
 
 List all relational dataset definitions matching particular criteria.
 
@@ -362,7 +362,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_relational_dataset_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-        # [EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions
+        # ListRelationalDatasetDefinitions: List Relational Dataset Definitions
         api_response = api_instance.list_relational_dataset_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 # **update_relational_dataset_definition**
 > RelationalDatasetDefinition update_relational_dataset_definition(scope, code, update_relational_dataset_definition_request=update_relational_dataset_definition_request)
 
-[EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
+UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
 
 Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.
 
@@ -465,7 +465,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_relational_dataset_definition(scope, code, update_relational_dataset_definition_request=update_relational_dataset_definition_request, opts=opts)
 
-        # [EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
+        # UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition
         api_response = api_instance.update_relational_dataset_definition(scope, code, update_relational_dataset_definition_request=update_relational_dataset_definition_request)
         pprint(api_response)
 
@@ -504,7 +504,7 @@ Name | Type | Description  | Notes
 # **update_relational_dataset_details**
 > RelationalDatasetDefinition update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details)
 
-[EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
 
 Update an existing relational dataset definition.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.
 
@@ -566,7 +566,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details, opts=opts)
 
-        # [EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
+        # UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes
         api_response = api_instance.update_relational_dataset_details(scope, code, update_relational_dataset_details=update_relational_dataset_details)
         pprint(api_response)
 
@@ -605,7 +605,7 @@ Name | Type | Description  | Notes
 # **update_relational_dataset_field_schema**
 > RelationalDatasetDefinition update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema)
 
-[EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
+UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
 
 Update an existing relational dataset definition with the new field schema.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.
 
@@ -667,7 +667,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema, opts=opts)
 
-        # [EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
+        # UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema
         api_response = api_instance.update_relational_dataset_field_schema(scope, code, update_relational_dataset_field_schema=update_relational_dataset_field_schema)
         pprint(api_response)
 

@@ -31,12 +31,12 @@ class UpdateTransactionFeeRequest(BaseModel):
     """
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the transaction fee.") 
     calculation: Optional[FeeCalculationRequest] = None
-    conditions: Optional[List[StrictStr]] = Field(default=None, description="The conditions that the transaction must meet in order for the fee to be applied.")
+    condition:  Optional[StrictStr] = Field(None,alias="condition", description="The condition that the transaction must meet in order for the fee to be applied.") 
     capitalisation_condition:  Optional[StrictStr] = Field(None,alias="capitalisationCondition", description="If the fee Capitalisation is Conditional, this condition determines whether the fee is capitalised, when applied to the transaction.") 
     txn_property_key:  Optional[StrictStr] = Field(None,alias="txnPropertyKey", description="The property key to which the fee value will be applied and decorated onto the transaction. Must be in the 'Transaction' property domain.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee.")
     is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee is currently active and should be applied to transactions. Optional when creating a transaction fee, defaults to true, if a value is not provided.", alias="isActive")
-    __properties = ["description", "calculation", "conditions", "capitalisationCondition", "txnPropertyKey", "properties", "isActive"]
+    __properties = ["description", "calculation", "condition", "capitalisationCondition", "txnPropertyKey", "properties", "isActive"]
 
     class Config:
         """Pydantic configuration"""
@@ -85,10 +85,10 @@ class UpdateTransactionFeeRequest(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
-        # set to None if conditions (nullable) is None
+        # set to None if condition (nullable) is None
         # and __fields_set__ contains the field
-        if self.conditions is None and "conditions" in self.__fields_set__:
-            _dict['conditions'] = None
+        if self.condition is None and "condition" in self.__fields_set__:
+            _dict['condition'] = None
 
         # set to None if capitalisation_condition (nullable) is None
         # and __fields_set__ contains the field
@@ -124,7 +124,7 @@ class UpdateTransactionFeeRequest(BaseModel):
         _obj = UpdateTransactionFeeRequest.parse_obj({
             "description": obj.get("description"),
             "calculation": FeeCalculationRequest.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None,
-            "conditions": obj.get("conditions"),
+            "condition": obj.get("condition"),
             "capitalisation_condition": obj.get("capitalisationCondition"),
             "txn_property_key": obj.get("txnPropertyKey"),
             "properties": dict(

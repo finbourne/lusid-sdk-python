@@ -67,7 +67,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def create_relational_dataset_definition(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
+        """CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
 
         Create a new relational dataset definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -98,7 +98,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def create_relational_dataset_definition_with_http_info(self, create_relational_dataset_definition_request : Annotated[CreateRelationalDatasetDefinitionRequest, Field(description="The relational dataset definition to create.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
+        """CreateRelationalDatasetDefinition: Create a Relational Dataset Definition  # noqa: E501
 
         Create a new relational dataset definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -226,7 +226,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def delete_relational_dataset_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
+        """DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
 
         Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -259,7 +259,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def delete_relational_dataset_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
+        """DeleteRelationalDatasetDefinition: Delete a Relational Dataset Definition  # noqa: E501
 
         Delete a relational dataset definition.  WARNING! This operation is irreversible. Deleting a relational dataset definition will also delete all associated data points.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -386,7 +386,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def get_relational_dataset_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relational dataset definition. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition  # noqa: E501
+        """GetRelationalDatasetDefinition: Get a Relational Dataset Definition  # noqa: E501
 
         Retrieve a relational dataset definition by its identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -421,7 +421,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def get_relational_dataset_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the relational dataset definition. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetRelationalDatasetDefinition: Get a Relational Dataset Definition  # noqa: E501
+        """GetRelationalDatasetDefinition: Get a Relational Dataset Definition  # noqa: E501
 
         Retrieve a relational dataset definition by its identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -557,7 +557,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def list_relational_dataset_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRelationalDatasetDefinition, Awaitable[PagedResourceListOfRelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
+        """ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
 
         List all relational dataset definitions matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -596,7 +596,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def list_relational_dataset_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the relational dataset definitions. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing relational dataset definitions from a previous call to list relational dataset definitions.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
+        """ListRelationalDatasetDefinitions: List Relational Dataset Definitions  # noqa: E501
 
         List all relational dataset definitions matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -745,7 +745,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_definition_request : Annotated[Optional[UpdateRelationalDatasetDefinitionRequest], Field(description="The updated relational dataset definition.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
+        """UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
 
         Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -780,7 +780,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_definition_request : Annotated[Optional[UpdateRelationalDatasetDefinitionRequest], Field(description="The updated relational dataset definition.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
+        """UpdateRelationalDatasetDefinition: Update a Relational Dataset Definition  # noqa: E501
 
         Update an existing relational dataset definition.  Applicable only to the definitions that are not yet in use i.e. there are no DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -920,7 +920,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_details : Annotated[Optional[UpdateRelationalDatasetDetails], Field(description="The updated details of the relational dataset.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes  # noqa: E501
+        """UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes  # noqa: E501
 
         Update an existing relational dataset definition.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -955,7 +955,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_details : Annotated[Optional[UpdateRelationalDatasetDetails], Field(description="The updated details of the relational dataset.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes  # noqa: E501
+        """UpdateRelationalDatasetDetails: Update Relational Dataset Details: DisplayName, Description and ApplicableEntityTypes  # noqa: E501
 
         Update an existing relational dataset definition.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1095,7 +1095,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_field_schema(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_field_schema : Annotated[Optional[UpdateRelationalDatasetFieldSchema], Field(description="Relational dataset fields to add, update or remove.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RelationalDatasetDefinition, Awaitable[RelationalDatasetDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema  # noqa: E501
+        """UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema  # noqa: E501
 
         Update an existing relational dataset definition with the new field schema.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1130,7 +1130,7 @@ class RelationalDatasetDefinitionApi:
 
     @validate_arguments
     def update_relational_dataset_field_schema_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The code of the relational dataset definition.")], update_relational_dataset_field_schema : Annotated[Optional[UpdateRelationalDatasetFieldSchema], Field(description="Relational dataset fields to add, update or remove.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema  # noqa: E501
+        """UpdateRelationalDatasetFieldSchema: Update Relational Dataset Field Schema  # noqa: E501
 
         Update an existing relational dataset definition with the new field schema.  Applicable only to the definitions that are already in use i.e. contain DataPoints associated with this definition.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
