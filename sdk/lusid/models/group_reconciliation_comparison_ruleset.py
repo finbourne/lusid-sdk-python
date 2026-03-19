@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.group_reconciliation_aggregate_attribute_rule import GroupReconciliationAggregateAttributeRule
 from lusid.models.group_reconciliation_core_attribute_rule import GroupReconciliationCoreAttributeRule
+from lusid.models.group_reconciliation_filters import GroupReconciliationFilters
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -35,12 +36,13 @@ class GroupReconciliationComparisonRuleset(BaseModel):
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
     reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
+    filters: Optional[GroupReconciliationFilters] = None
     core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = Field(description="The core comparison rules", alias="coreAttributeRules")
     aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = Field(description="The aggregate comparison rules", alias="aggregateAttributeRules")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "displayName", "reconciliationType", "coreAttributeRules", "aggregateAttributeRules", "href", "version", "links"]
+    __properties = ["id", "displayName", "reconciliationType", "filters", "coreAttributeRules", "aggregateAttributeRules", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,9 @@ class GroupReconciliationComparisonRuleset(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of filters
+        if self.filters:
+            _dict['filters'] = self.filters.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in core_attribute_rules (list)
         _items = []
         if self.core_attribute_rules:
@@ -126,6 +131,7 @@ class GroupReconciliationComparisonRuleset(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "reconciliation_type": obj.get("reconciliationType"),
+            "filters": GroupReconciliationFilters.from_dict(obj.get("filters")) if obj.get("filters") is not None else None,
             "core_attribute_rules": [GroupReconciliationCoreAttributeRule.from_dict(_item) for _item in obj.get("coreAttributeRules")] if obj.get("coreAttributeRules") is not None else None,
             "aggregate_attribute_rules": [GroupReconciliationAggregateAttributeRule.from_dict(_item) for _item in obj.get("aggregateAttributeRules")] if obj.get("aggregateAttributeRules") is not None else None,
             "href": obj.get("href"),

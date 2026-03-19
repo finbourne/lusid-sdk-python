@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The name of the ruleset | 
 **reconciliation_type** | **str** | The type of reconciliation to perform. \&quot;Holding\&quot; | \&quot;Transaction\&quot; | \&quot;Valuation\&quot; | 
+**filters** | [**GroupReconciliationFilters**](GroupReconciliationFilters.md) |  | [optional] 
 **core_attribute_rules** | [**List[GroupReconciliationCoreAttributeRule]**](GroupReconciliationCoreAttributeRule.md) | The core comparison rules | 
 **aggregate_attribute_rules** | [**List[GroupReconciliationAggregateAttributeRule]**](GroupReconciliationAggregateAttributeRule.md) | The aggregate comparison rules | 
 ## Example
@@ -18,9 +19,10 @@ from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
 reconciliation_type: StrictStr = "example_reconciliation_type"
+filters: Optional[GroupReconciliationFilters] = None
 core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = # Replace with your value
 aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = # Replace with your value
-update_group_reconciliation_comparison_ruleset_request_instance = UpdateGroupReconciliationComparisonRulesetRequest(display_name=display_name, reconciliation_type=reconciliation_type, core_attribute_rules=core_attribute_rules, aggregate_attribute_rules=aggregate_attribute_rules)
+update_group_reconciliation_comparison_ruleset_request_instance = UpdateGroupReconciliationComparisonRulesetRequest(display_name=display_name, reconciliation_type=reconciliation_type, filters=filters, core_attribute_rules=core_attribute_rules, aggregate_attribute_rules=aggregate_attribute_rules)
 
 ```
 

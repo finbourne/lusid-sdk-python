@@ -542,6 +542,7 @@ from lusid.models.group_reconciliation_definition_comparison_ruleset_ids import 
 from lusid.models.group_reconciliation_definition_currencies import GroupReconciliationDefinitionCurrencies
 from lusid.models.group_reconciliation_definition_portfolio_entity_ids import GroupReconciliationDefinitionPortfolioEntityIds
 from lusid.models.group_reconciliation_definition_recipe_ids import GroupReconciliationDefinitionRecipeIds
+from lusid.models.group_reconciliation_filters import GroupReconciliationFilters
 from lusid.models.group_reconciliation_instance_id import GroupReconciliationInstanceId
 from lusid.models.group_reconciliation_result_statuses import GroupReconciliationResultStatuses
 from lusid.models.group_reconciliation_result_types import GroupReconciliationResultTypes
@@ -1906,6 +1907,7 @@ __all__ = [
     "GroupReconciliationDefinitionCurrencies",
     "GroupReconciliationDefinitionPortfolioEntityIds",
     "GroupReconciliationDefinitionRecipeIds",
+    "GroupReconciliationFilters",
     "GroupReconciliationInstanceId",
     "GroupReconciliationResultStatuses",
     "GroupReconciliationResultTypes",

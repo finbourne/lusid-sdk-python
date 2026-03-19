@@ -185,6 +185,7 @@ Class | Method | HTTP request | Description
 *CustomEntitiesApi* | [**upsert_custom_entity**](docs/CustomEntitiesApi.md#upsert_custom_entity) | **POST** /api/customentities/{entityType} | UpsertCustomEntity: Upsert a Custom Entity instance
 *CustomEntitiesApi* | [**upsert_custom_entity_access_metadata**](docs/CustomEntitiesApi.md#upsert_custom_entity_access_metadata) | **PUT** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] UpsertCustomEntityAccessMetadata: Upsert a Custom Entity Access Metadata entry associated with a specific metadataKey. This creates or updates the data in LUSID.
 *CustomEntityDefinitionsApi* | [**create_custom_entity_definition**](docs/CustomEntityDefinitionsApi.md#create_custom_entity_definition) | **POST** /api/customentities/entitytypes | [EARLY ACCESS] CreateCustomEntityDefinition: Define a new Custom Entity type.
+*CustomEntityDefinitionsApi* | [**delete_definition**](docs/CustomEntityDefinitionsApi.md#delete_definition) | **DELETE** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] DeleteDefinition: Delete a Custom Entity type definition.
 *CustomEntityDefinitionsApi* | [**get_definition**](docs/CustomEntityDefinitionsApi.md#get_definition) | **GET** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] GetDefinition: Get a Custom Entity type definition.
 *CustomEntityDefinitionsApi* | [**list_custom_entity_definitions**](docs/CustomEntityDefinitionsApi.md#list_custom_entity_definitions) | **GET** /api/customentities/entitytypes | [EARLY ACCESS] ListCustomEntityDefinitions: List the Custom Entity type definitions
 *CustomEntityDefinitionsApi* | [**update_custom_entity_definition**](docs/CustomEntityDefinitionsApi.md#update_custom_entity_definition) | **PUT** /api/customentities/entitytypes/{entityType} | [EARLY ACCESS] UpdateCustomEntityDefinition: Modify an existing Custom Entity type.
@@ -196,6 +197,7 @@ Class | Method | HTTP request | Description
 *CustomDataModelsApi* | [**list_supported_entity_types**](docs/CustomDataModelsApi.md#list_supported_entity_types) | **GET** /api/datamodel/entitytype | [EXPERIMENTAL] ListSupportedEntityTypes: List the currently supported entity types for use in Custom Data Models.
 *CustomDataModelsApi* | [**update_custom_data_model**](docs/CustomDataModelsApi.md#update_custom_data_model) | **PUT** /api/datamodel/{entityType}/{scope}/{code} | [EXPERIMENTAL] UpdateCustomDataModel: Update a Custom Data Model
 *CustomEntityTypesApi* | [**create_custom_entity_type**](docs/CustomEntityTypesApi.md#create_custom_entity_type) | **POST** /api/customentitytypes | [EARLY ACCESS] CreateCustomEntityType: Define a new Custom Entity Type.
+*CustomEntityTypesApi* | [**delete_custom_entity_type**](docs/CustomEntityTypesApi.md#delete_custom_entity_type) | **DELETE** /api/customentitytypes/{entityType} | [EARLY ACCESS] DeleteCustomEntityType: Delete a Custom Entity type.
 *CustomEntityTypesApi* | [**get_custom_entity_type**](docs/CustomEntityTypesApi.md#get_custom_entity_type) | **GET** /api/customentitytypes/{entityType} | [EARLY ACCESS] GetCustomEntityType: Get a Custom Entity Type.
 *CustomEntityTypesApi* | [**list_custom_entity_types**](docs/CustomEntityTypesApi.md#list_custom_entity_types) | **GET** /api/customentitytypes | [EARLY ACCESS] ListCustomEntityTypes: List Custom Entity Types.
 *CustomEntityTypesApi* | [**update_custom_entity_type**](docs/CustomEntityTypesApi.md#update_custom_entity_type) | **PUT** /api/customentitytypes/{entityType} | [EARLY ACCESS] UpdateCustomEntityType: Modify an existing Custom Entity Type.
@@ -1235,6 +1237,7 @@ Class | Method | HTTP request | Description
  - [GroupReconciliationDefinitionCurrencies](docs/GroupReconciliationDefinitionCurrencies.md)
  - [GroupReconciliationDefinitionPortfolioEntityIds](docs/GroupReconciliationDefinitionPortfolioEntityIds.md)
  - [GroupReconciliationDefinitionRecipeIds](docs/GroupReconciliationDefinitionRecipeIds.md)
+ - [GroupReconciliationFilters](docs/GroupReconciliationFilters.md)
  - [GroupReconciliationInstanceId](docs/GroupReconciliationInstanceId.md)
  - [GroupReconciliationResultStatuses](docs/GroupReconciliationResultStatuses.md)
  - [GroupReconciliationResultTypes](docs/GroupReconciliationResultTypes.md)

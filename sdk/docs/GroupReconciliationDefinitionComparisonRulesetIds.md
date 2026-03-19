@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **transaction_reconciliation** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **holding_reconciliation** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **valuation_reconciliation** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**cash_holding_reconciliation** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ from datetime import datetime
 transaction_reconciliation: Optional[ResourceId] = # Replace with your value
 holding_reconciliation: Optional[ResourceId] = # Replace with your value
 valuation_reconciliation: Optional[ResourceId] = # Replace with your value
-group_reconciliation_definition_comparison_ruleset_ids_instance = GroupReconciliationDefinitionComparisonRulesetIds(transaction_reconciliation=transaction_reconciliation, holding_reconciliation=holding_reconciliation, valuation_reconciliation=valuation_reconciliation)
+cash_holding_reconciliation: Optional[ResourceId] = # Replace with your value
+group_reconciliation_definition_comparison_ruleset_ids_instance = GroupReconciliationDefinitionComparisonRulesetIds(transaction_reconciliation=transaction_reconciliation, holding_reconciliation=holding_reconciliation, valuation_reconciliation=valuation_reconciliation, cash_holding_reconciliation=cash_holding_reconciliation)
 
 ```
 
