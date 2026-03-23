@@ -5,7 +5,7 @@ The request used to create a Fund.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie, currently limited to one. | 
-**share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. | 
+**share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures. | 
 ## Example
 
 ```python

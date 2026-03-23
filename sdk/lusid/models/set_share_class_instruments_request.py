@@ -29,7 +29,7 @@ class SetShareClassInstrumentsRequest(BaseModel):
     The request used to create a Fund.  # noqa: E501
     """
     share_class_instrument_scopes: List[StrictStr] = Field(description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
-    share_class_instruments: List[InstrumentResolutionDetail] = Field(description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
+    share_class_instruments: List[InstrumentResolutionDetail] = Field(description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
     __properties = ["shareClassInstrumentScopes", "shareClassInstruments"]
 
     class Config:

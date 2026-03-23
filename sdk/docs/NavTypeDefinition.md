@@ -3,22 +3,22 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **str** |  | [optional] 
-**display_name** | **str** |  | [optional] 
-**description** | **str** |  | [optional] 
+**code** | **str** | The Code for the Nav Type. Must be unique within the Fund. | [optional] 
+**display_name** | **str** | The Display Name for the Nav Type. Must be unique within the Fund. | [optional] 
+**description** | **str** | The Description for the Nav Type. | [optional] 
 **chart_of_accounts_id** | [**ResourceId**](ResourceId.md) |  | 
-**posting_module_codes** | **List[str]** |  | [optional] 
-**cleardown_module_codes** | **List[str]** |  | [optional] 
+**posting_module_codes** | **List[str]** | The Posting Module Codes from which the rules to be applied are retrieved. | [optional] 
+**cleardown_module_codes** | **List[str]** | The Cleardown Module Codes from which the rules to be applied are retrieved. | [optional] 
 **valuation_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **holding_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
-**accounting_method** | **str** |  | 
-**sub_holding_keys** | **List[str]** | Set of unique holding identifiers, e.g. trader, desk, strategy. | [optional] 
-**amortisation_method** | **str** |  | 
-**transaction_type_scope** | **str** |  | 
-**cash_gain_loss_calculation_date** | **str** |  | 
+**accounting_method** | **str** | Determines the accounting treatment given to the simple position portfolio&#39;s tax lots. A non-default value is required. | 
+**sub_holding_keys** | **List[str]** | A set of unique transaction properties to group the derived transaction portfolio&#39;s holdings by, perhaps for strategy tagging. Each property must be from the &#39;Transaction&#39; domain and identified by a key in the format {domain}/{scope}/{code}, for example &#39;Transaction/strategies/quantsignal&#39;. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information. | [optional] 
+**amortisation_method** | **str** | The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate | 
+**transaction_type_scope** | **str** | The scope of the transaction types. | 
+**cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. A non-default value is required. | 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**leader_nav_type_code** | **str** |  | [optional] 
-**transaction_template_scope** | **str** |  | [optional] 
+**leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
+**transaction_template_scope** | **str** | The Transaction Template Scope used by the NavType. Will default to the scope set on the parent portfolio. If the fund has multiple parent portfolios, then the Transaction Template Scope must be provided. | [optional] 
 ## Example
 
 ```python

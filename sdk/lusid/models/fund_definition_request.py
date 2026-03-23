@@ -22,11 +22,13 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.allocation_method_property import AllocationMethodProperty
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.model_property import ModelProperty
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
+from lusid.models.share_class_definition import ShareClassDefinition
 
 class FundDefinitionRequest(BaseModel):
     """
@@ -40,14 +42,17 @@ class FundDefinitionRequest(BaseModel):
     portfolio_ids: List[PortfolioEntityId] = Field(description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.", alias="portfolioIds")
     fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
     share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
-    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
+    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     primary_nav_type: NavTypeDefinition = Field(alias="primaryNavType")
     additional_nav_types: Optional[List[NavTypeDefinition]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
-    __properties = ["code", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties"]
+    create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create an instrument for the Fund upon creation. Defaults to false.", alias="createInstrument")
+    apportionment_method_property: Optional[AllocationMethodProperty] = Field(default=None, alias="apportionmentMethodProperty")
+    share_classes: Optional[List[ShareClassDefinition]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
+    __properties = ["code", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "apportionmentMethodProperty", "shareClasses"]
 
     class Config:
         """Pydantic configuration"""
@@ -115,6 +120,16 @@ class FundDefinitionRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of apportionment_method_property
+        if self.apportionment_method_property:
+            _dict['apportionmentMethodProperty'] = self.apportionment_method_property.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in share_classes (list)
+        _items = []
+        if self.share_classes:
+            for _item in self.share_classes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['shareClasses'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -155,6 +170,11 @@ class FundDefinitionRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if share_classes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.share_classes is None and "share_classes" in self.__fields_set__:
+            _dict['shareClasses'] = None
+
         return _dict
 
     @classmethod
@@ -186,7 +206,10 @@ class FundDefinitionRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "create_instrument": obj.get("createInstrument"),
+            "apportionment_method_property": AllocationMethodProperty.from_dict(obj.get("apportionmentMethodProperty")) if obj.get("apportionmentMethodProperty") is not None else None,
+            "share_classes": [ShareClassDefinition.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None
         })
         return _obj
 

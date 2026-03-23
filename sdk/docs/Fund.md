@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **portfolio_ids** | [**List[PortfolioEntityIdWithDetails]**](PortfolioEntityIdWithDetails.md) | A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency. | [optional] 
 **fund_configuration_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **abor_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. | [optional] 
+**share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures. | [optional] 
 **type** | **str** | The type of fund; &#39;Standalone&#39;, &#39;Master&#39; or &#39;Feeder&#39; | [optional] 
 **inception_date** | **datetime** | Inception date of the Fund | 
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **primary_nav_type** | [**NavType**](NavType.md) |  | [optional] 
 **additional_nav_types** | [**List[NavType]**](NavType.md) | The definitions for any additional NAVs on the Fund. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
+**create_instrument** | **bool** | Whether to create an instrument for the Fund upon creation. Defaults to false. | [optional] 
+**apportionment_method_property** | [**AllocationMethodProperty**](AllocationMethodProperty.md) |  | [optional] 
+**allocation_groups** | [**List[AllocationGroup]**](AllocationGroup.md) | An optional list of Allocation Group definitions for the Fund. | [optional] 
+**share_classes** | [**List[ShareClass]**](ShareClass.md) | An optional list of Share Class definitions for the Fund. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
@@ -50,9 +54,14 @@ year_end_date: Optional[DayMonth] = # Replace with your value
 primary_nav_type: Optional[NavType] = # Replace with your value
 additional_nav_types: Optional[List[NavType]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+create_instrument: Optional[StrictBool] = # Replace with your value
+create_instrument:Optional[StrictBool] = None
+apportionment_method_property: Optional[AllocationMethodProperty] = # Replace with your value
+allocation_groups: Optional[List[AllocationGroup]] = # Replace with your value
+share_classes: Optional[List[ShareClass]] = # Replace with your value
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, version=version, links=links)
+fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, apportionment_method_property=apportionment_method_property, allocation_groups=allocation_groups, share_classes=share_classes, version=version, links=links)
 
 ```
 

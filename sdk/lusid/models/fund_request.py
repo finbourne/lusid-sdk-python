@@ -37,7 +37,7 @@ class FundRequest(BaseModel):
     fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
     abor_id: ResourceId = Field(alias="aborId")
     share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
-    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them.", alias="shareClassInstruments")
+    share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
     type:  StrictStr = Field(...,alias="type", description="The type of fund; 'Standalone', 'Master' or 'Feeder'") 
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")

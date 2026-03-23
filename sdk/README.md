@@ -241,6 +241,7 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
+*FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
 *FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
@@ -761,6 +762,11 @@ Class | Method | HTTP request | Description
  - [AggregationType](docs/AggregationType.md)
  - [Alias](docs/Alias.md)
  - [Allocation](docs/Allocation.md)
+ - [AllocationGroup](docs/AllocationGroup.md)
+ - [AllocationGroupClass](docs/AllocationGroupClass.md)
+ - [AllocationGroupClassDefinition](docs/AllocationGroupClassDefinition.md)
+ - [AllocationGroupDefinition](docs/AllocationGroupDefinition.md)
+ - [AllocationMethodProperty](docs/AllocationMethodProperty.md)
  - [AllocationRequest](docs/AllocationRequest.md)
  - [AllocationServiceRunResponse](docs/AllocationServiceRunResponse.md)
  - [AllocationSetRequest](docs/AllocationSetRequest.md)
@@ -1811,10 +1817,12 @@ Class | Method | HTTP request | Description
  - [SettlementInstructionWithTransaction](docs/SettlementInstructionWithTransaction.md)
  - [SettlementProblem](docs/SettlementProblem.md)
  - [SettlementSchedule](docs/SettlementSchedule.md)
+ - [ShareClass](docs/ShareClass.md)
  - [ShareClassAmount](docs/ShareClassAmount.md)
  - [ShareClassBreakdown](docs/ShareClassBreakdown.md)
  - [ShareClassData](docs/ShareClassData.md)
  - [ShareClassDealingBreakdown](docs/ShareClassDealingBreakdown.md)
+ - [ShareClassDefinition](docs/ShareClassDefinition.md)
  - [ShareClassDetails](docs/ShareClassDetails.md)
  - [ShareClassPnlBreakdown](docs/ShareClassPnlBreakdown.md)
  - [SideConfigurationData](docs/SideConfigurationData.md)

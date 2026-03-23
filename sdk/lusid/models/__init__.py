@@ -66,6 +66,11 @@ from lusid.models.aggregation_query import AggregationQuery
 from lusid.models.aggregation_type import AggregationType
 from lusid.models.alias import Alias
 from lusid.models.allocation import Allocation
+from lusid.models.allocation_group import AllocationGroup
+from lusid.models.allocation_group_class import AllocationGroupClass
+from lusid.models.allocation_group_class_definition import AllocationGroupClassDefinition
+from lusid.models.allocation_group_definition import AllocationGroupDefinition
+from lusid.models.allocation_method_property import AllocationMethodProperty
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
@@ -1116,10 +1121,12 @@ from lusid.models.settlement_instruction_request import SettlementInstructionReq
 from lusid.models.settlement_instruction_with_transaction import SettlementInstructionWithTransaction
 from lusid.models.settlement_problem import SettlementProblem
 from lusid.models.settlement_schedule import SettlementSchedule
+from lusid.models.share_class import ShareClass
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_breakdown import ShareClassBreakdown
 from lusid.models.share_class_data import ShareClassData
 from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdown
+from lusid.models.share_class_definition import ShareClassDefinition
 from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
 from lusid.models.side_configuration_data import SideConfigurationData
@@ -1431,6 +1438,11 @@ __all__ = [
     "AggregationType",
     "Alias",
     "Allocation",
+    "AllocationGroup",
+    "AllocationGroupClass",
+    "AllocationGroupClassDefinition",
+    "AllocationGroupDefinition",
+    "AllocationMethodProperty",
     "AllocationRequest",
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
@@ -2481,10 +2493,12 @@ __all__ = [
     "SettlementInstructionWithTransaction",
     "SettlementProblem",
     "SettlementSchedule",
+    "ShareClass",
     "ShareClassAmount",
     "ShareClassBreakdown",
     "ShareClassData",
     "ShareClassDealingBreakdown",
+    "ShareClassDefinition",
     "ShareClassDetails",
     "ShareClassPnlBreakdown",
     "SideConfigurationData",
