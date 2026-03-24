@@ -56,22 +56,22 @@ class TransactionTransactionFeesApi:
 
 
     @overload
-    async def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the TransactionFee should be effective.")] = None, **kwargs) -> TransactionFee:  # noqa: E501
+    async def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @overload
-    def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the TransactionFee should be effective.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
+    def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the TransactionFee should be effective.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
+    def create_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
         """[EXPERIMENTAL] CreateTransactionFee: Create a TransactionFee  # noqa: E501
 
         Create a TransactionFee for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_transaction_fee(scope, code, create_transaction_fee_request, effective_at, async_req=True)
+        >>> thread = api.create_transaction_fee(scope, code, create_transaction_fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the TransactionFee. (required)
@@ -80,8 +80,6 @@ class TransactionTransactionFeesApi:
         :type code: str
         :param create_transaction_fee_request: The contents of the TransactionFee. (required)
         :type create_transaction_fee_request: CreateTransactionFeeRequest
-        :param effective_at: The date and time at which the TransactionFee should be effective.
-        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -98,17 +96,17 @@ class TransactionTransactionFeesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.create_transaction_fee_with_http_info(scope, code, create_transaction_fee_request, effective_at, **kwargs)  # noqa: E501
+        return self.create_transaction_fee_with_http_info(scope, code, create_transaction_fee_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the TransactionFee should be effective.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], create_transaction_fee_request : Annotated[CreateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateTransactionFee: Create a TransactionFee  # noqa: E501
 
         Create a TransactionFee for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_transaction_fee_with_http_info(scope, code, create_transaction_fee_request, effective_at, async_req=True)
+        >>> thread = api.create_transaction_fee_with_http_info(scope, code, create_transaction_fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the TransactionFee. (required)
@@ -117,8 +115,6 @@ class TransactionTransactionFeesApi:
         :type code: str
         :param create_transaction_fee_request: The contents of the TransactionFee. (required)
         :type create_transaction_fee_request: CreateTransactionFeeRequest
-        :param effective_at: The date and time at which the TransactionFee should be effective.
-        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -148,8 +144,7 @@ class TransactionTransactionFeesApi:
         _all_params = [
             'scope',
             'code',
-            'create_transaction_fee_request',
-            'effective_at'
+            'create_transaction_fee_request'
         ]
         _all_params.extend(
             [
@@ -187,9 +182,6 @@ class TransactionTransactionFeesApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('effective_at') is not None:  # noqa: E501
-            _query_params.append(('effectiveAt', _params['effective_at']))
-
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -399,15 +391,15 @@ class TransactionTransactionFeesApi:
 
 
     @overload
-    async def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, **kwargs) -> TransactionFee:  # noqa: E501
+    async def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @overload
-    def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
+    def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
+    def get_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionFee: Get a TransactionFee  # noqa: E501
 
         Get the TransactionFee for the specified scope and code.  # noqa: E501
@@ -421,7 +413,7 @@ class TransactionTransactionFeesApi:
         :type scope: str
         :param code: The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee. (required)
         :type code: str
-        :param effective_at: The date and time at which the query is effective.
+        :param effective_at: The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.
         :type as_at: datetime
@@ -446,7 +438,7 @@ class TransactionTransactionFeesApi:
         return self.get_transaction_fee_with_http_info(scope, code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on identifies the TransactionFee.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetTransactionFee: Get a TransactionFee  # noqa: E501
 
         Get the TransactionFee for the specified scope and code.  # noqa: E501
@@ -460,7 +452,7 @@ class TransactionTransactionFeesApi:
         :type scope: str
         :param code: The code of the TransactionFee.              Together with the scope this uniquely identifies the TransactionFee. (required)
         :type code: str
-        :param effective_at: The date and time at which the query is effective.
+        :param effective_at: The effective datetime at which to retrieve the TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.
         :type as_at: datetime
@@ -587,15 +579,15 @@ class TransactionTransactionFeesApi:
 
 
     @overload
-    async def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, **kwargs) -> ResourceListOfTransactionFee:  # noqa: E501
+    async def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, **kwargs) -> ResourceListOfTransactionFee:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionFee:  # noqa: E501
+    def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfTransactionFee:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionFee, Awaitable[ResourceListOfTransactionFee]]:  # noqa: E501
+    def list_transaction_fees(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionFee, Awaitable[ResourceListOfTransactionFee]]:  # noqa: E501
         """[EXPERIMENTAL] ListTransactionFees: List TransactionFees  # noqa: E501
 
         List TransactionFees that match the specified criteria.  # noqa: E501
@@ -605,11 +597,11 @@ class TransactionTransactionFeesApi:
         >>> thread = api.list_transaction_fees(effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The date and time at which the query is effective.
+        :param effective_at: The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.
+        :param page: The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
         :type limit: int
@@ -638,7 +630,7 @@ class TransactionTransactionFeesApi:
         return self.list_transaction_fees_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_fees_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the query is effective.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_fees_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListTransactionFees: List TransactionFees  # noqa: E501
 
         List TransactionFees that match the specified criteria.  # noqa: E501
@@ -648,11 +640,11 @@ class TransactionTransactionFeesApi:
         >>> thread = api.list_transaction_fees_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The date and time at which the query is effective.
+        :param effective_at: The effective datetime at which to retrieve TransactionFee properties.              Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the TransactionFees.              Defaults to latest if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy and asAt field must not have changed since the original request.
+        :param page: The pagination token to use to continue listing TransactionFees from a previous call to list TransactionFees.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
         :type limit: int
@@ -792,32 +784,30 @@ class TransactionTransactionFeesApi:
 
 
     @overload
-    async def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the update should take effect.             The updated contents of the TransactionFee.")] = None, **kwargs) -> TransactionFee:  # noqa: E501
+    async def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The updated contents of the TransactionFee.")], **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @overload
-    def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the update should take effect.             The updated contents of the TransactionFee.")] = None, async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
+    def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The updated contents of the TransactionFee.")], async_req: Optional[bool]=True, **kwargs) -> TransactionFee:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the update should take effect.             The updated contents of the TransactionFee.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
+    def update_transaction_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The updated contents of the TransactionFee.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFee, Awaitable[TransactionFee]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateTransactionFee: Update a TransactionFee  # noqa: E501
 
         Update a TransactionFee by providing the new contents of the TransactionFee.  The name field and the capitalisation field can not be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_transaction_fee(scope, code, update_transaction_fee_request, effective_at, async_req=True)
+        >>> thread = api.update_transaction_fee(scope, code, update_transaction_fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the TransactionFee. (required)
         :type scope: str
         :param code: The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee. (required)
         :type code: str
-        :param update_transaction_fee_request: The contents of the TransactionFee. (required)
+        :param update_transaction_fee_request: The updated contents of the TransactionFee. (required)
         :type update_transaction_fee_request: UpdateTransactionFeeRequest
-        :param effective_at: The date and time at which the update should take effect.             The updated contents of the TransactionFee.
-        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -834,27 +824,25 @@ class TransactionTransactionFeesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_transaction_fee_with_http_info(scope, code, update_transaction_fee_request, effective_at, **kwargs)  # noqa: E501
+        return self.update_transaction_fee_with_http_info(scope, code, update_transaction_fee_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The contents of the TransactionFee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The date and time at which the update should take effect.             The updated contents of the TransactionFee.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_transaction_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the TransactionFee.")], code : Annotated[StrictStr, Field(..., description="The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee.")], update_transaction_fee_request : Annotated[UpdateTransactionFeeRequest, Field(description="The updated contents of the TransactionFee.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateTransactionFee: Update a TransactionFee  # noqa: E501
 
         Update a TransactionFee by providing the new contents of the TransactionFee.  The name field and the capitalisation field can not be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_transaction_fee_with_http_info(scope, code, update_transaction_fee_request, effective_at, async_req=True)
+        >>> thread = api.update_transaction_fee_with_http_info(scope, code, update_transaction_fee_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the TransactionFee. (required)
         :type scope: str
         :param code: The code of the specified TransactionFee.              Together with the scope this uniquely identifies the TransactionFee. (required)
         :type code: str
-        :param update_transaction_fee_request: The contents of the TransactionFee. (required)
+        :param update_transaction_fee_request: The updated contents of the TransactionFee. (required)
         :type update_transaction_fee_request: UpdateTransactionFeeRequest
-        :param effective_at: The date and time at which the update should take effect.             The updated contents of the TransactionFee.
-        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -884,8 +872,7 @@ class TransactionTransactionFeesApi:
         _all_params = [
             'scope',
             'code',
-            'update_transaction_fee_request',
-            'effective_at'
+            'update_transaction_fee_request'
         ]
         _all_params.extend(
             [
@@ -923,9 +910,6 @@ class TransactionTransactionFeesApi:
 
         # process the query parameters
         _query_params = []
-        if _params.get('effective_at') is not None:  # noqa: E501
-            _query_params.append(('effectiveAt', _params['effective_at']))
-
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
