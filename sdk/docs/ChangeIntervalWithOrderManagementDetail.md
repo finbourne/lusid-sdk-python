@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **previous_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **new_value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **effective_range** | [**EffectiveRange**](EffectiveRange.md) |  | [optional] 
+**is_inherited** | **bool** | Indicates whether this change interval is a result of a change to an ancestor or the entity itself. | [optional] 
 ## Example
 
 ```python
@@ -40,7 +41,9 @@ attribute_name: Optional[StrictStr] = "example_attribute_name"
 previous_value: Optional[PropertyValue] = # Replace with your value
 new_value: Optional[PropertyValue] = # Replace with your value
 effective_range: Optional[EffectiveRange] = # Replace with your value
-change_interval_with_order_management_detail_instance = ChangeIntervalWithOrderManagementDetail(detail=detail, action_description=action_description, as_at_modified=as_at_modified, user_id_modified=user_id_modified, request_id_modified=request_id_modified, reason_modified=reason_modified, as_at_version_number=as_at_version_number, staged_modification_id_modified=staged_modification_id_modified, action=action, attribute_name=attribute_name, previous_value=previous_value, new_value=new_value, effective_range=effective_range)
+is_inherited: Optional[StrictBool] = # Replace with your value
+is_inherited:Optional[StrictBool] = None
+change_interval_with_order_management_detail_instance = ChangeIntervalWithOrderManagementDetail(detail=detail, action_description=action_description, as_at_modified=as_at_modified, user_id_modified=user_id_modified, request_id_modified=request_id_modified, reason_modified=reason_modified, as_at_version_number=as_at_version_number, staged_modification_id_modified=staged_modification_id_modified, action=action, attribute_name=attribute_name, previous_value=previous_value, new_value=new_value, effective_range=effective_range, is_inherited=is_inherited)
 
 ```
 

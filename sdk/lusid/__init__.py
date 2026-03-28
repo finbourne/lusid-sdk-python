@@ -164,7 +164,6 @@ from lusid.models.allocation_group import AllocationGroup
 from lusid.models.allocation_group_class import AllocationGroupClass
 from lusid.models.allocation_group_class_definition import AllocationGroupClassDefinition
 from lusid.models.allocation_group_definition import AllocationGroupDefinition
-from lusid.models.allocation_method_property import AllocationMethodProperty
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
@@ -186,6 +185,7 @@ from lusid.models.append_market_data_type import AppendMarketDataType
 from lusid.models.applicable_entity import ApplicableEntity
 from lusid.models.applicable_entity_types import ApplicableEntityTypes
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
+from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
 from lusid.models.barrier import Barrier
@@ -1473,6 +1473,7 @@ from lusid.models.workspace_creation_request import WorkspaceCreationRequest
 from lusid.models.workspace_item import WorkspaceItem
 from lusid.models.workspace_item_creation_request import WorkspaceItemCreationRequest
 from lusid.models.workspace_item_update_request import WorkspaceItemUpdateRequest
+from lusid.models.workspace_permitted_item_actions import WorkspacePermittedItemActions
 from lusid.models.workspace_update_request import WorkspaceUpdateRequest
 from lusid.models.workspace_visibility import WorkspaceVisibility
 from lusid.models.year_month_day import YearMonthDay
@@ -1629,7 +1630,6 @@ __all__ = [
     "AllocationGroupClass",
     "AllocationGroupClassDefinition",
     "AllocationGroupDefinition",
-    "AllocationMethodProperty",
     "AllocationRequest",
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
@@ -1651,6 +1651,7 @@ __all__ = [
     "ApplicableEntity",
     "ApplicableEntityTypes",
     "ApplicableInstrumentEvent",
+    "ApportionmentMethodProperty",
     "AssetClass",
     "AssetLeg",
     "Barrier",
@@ -2938,6 +2939,7 @@ __all__ = [
     "WorkspaceItem",
     "WorkspaceItemCreationRequest",
     "WorkspaceItemUpdateRequest",
+    "WorkspacePermittedItemActions",
     "WorkspaceUpdateRequest",
     "WorkspaceVisibility",
     "YearMonthDay",

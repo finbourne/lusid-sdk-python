@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** | The display name of the Allocation Group. | 
 **description** | **str** | An optional description for the Allocation Group. | [optional] 
 **share_class_short_code** | **str** | The short code that identifies the Allocation Group. | 
-**apportionment_method_property** | [**AllocationMethodProperty**](AllocationMethodProperty.md) |  | [optional] 
+**apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
 **formula** | **str** | An optional filter expression used to define which classes belong to this group, based on fund grouping criteria. You can provide this or the Classes, but not both. | [optional] 
 ## Example
 
@@ -24,7 +24,7 @@ code: StrictStr = "example_code"
 name: StrictStr = "example_name"
 description: Optional[StrictStr] = "example_description"
 share_class_short_code: StrictStr = "example_share_class_short_code"
-apportionment_method_property: Optional[AllocationMethodProperty] = # Replace with your value
+apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
 formula: Optional[StrictStr] = "example_formula"
 allocation_group_definition_instance = AllocationGroupDefinition(classes=classes, code=code, name=name, description=description, share_class_short_code=share_class_short_code, apportionment_method_property=apportionment_method_property, formula=formula)
 

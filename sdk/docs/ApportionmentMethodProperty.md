@@ -1,4 +1,4 @@
-# AllocationMethodProperty
+# ApportionmentMethodProperty
 
 ## Properties
 Name | Type | Description | Notes
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.allocation_method_property import AllocationMethodProperty
+from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
@@ -16,7 +16,7 @@ from datetime import datetime
 
 code: StrictStr = "example_code"
 scope: StrictStr = "example_scope"
-allocation_method_property_instance = AllocationMethodProperty(code=code, scope=scope)
+apportionment_method_property_instance = ApportionmentMethodProperty(code=code, scope=scope)
 
 ```
 

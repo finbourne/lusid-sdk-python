@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
 **realised_gain_loss** | [**List[RealisedGainLoss]**](RealisedGainLoss.md) | The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created. | [optional] 
 **holding_ids** | **List[int]** | The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio. | [optional] 
-**source_type** | **str** | The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment | [optional] 
+**source_type** | **str** | The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction | [optional] 
 **source_instrument_event_id** | **str** | The unique ID of the instrument event that the transaction is related to. | [optional] 
 **custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **sequence** | **int** | The sequential position in which this transaction was processed. | [optional] 
 **sequence_priority** | **int** | The calculated priority level for this transaction. | [optional] 
 **settlement_summary** | [**TransactionSettlementSummary**](TransactionSettlementSummary.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 ## Example
 
 ```python
@@ -91,7 +92,8 @@ sequence: Optional[StrictInt] = None
 sequence_priority: Optional[StrictInt] = # Replace with your value
 sequence_priority: Optional[StrictInt] = None
 settlement_summary: Optional[TransactionSettlementSummary] = # Replace with your value
-output_transaction_instance = OutputTransaction(transaction_id=transaction_id, type=type, description=description, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_amount=transaction_amount, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_to_portfolio_rate=transaction_to_portfolio_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, transaction_status=transaction_status, entry_date_time=entry_date_time, cancel_date_time=cancel_date_time, realised_gain_loss=realised_gain_loss, holding_ids=holding_ids, source_type=source_type, source_instrument_event_id=source_instrument_event_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, resolved_transaction_type_details=resolved_transaction_type_details, gross_transaction_amount=gross_transaction_amount, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, accounting_date=accounting_date, economics=economics, data_model_membership=data_model_membership, sequence=sequence, sequence_priority=sequence_priority, settlement_summary=settlement_summary)
+version: Optional[Version] = None
+output_transaction_instance = OutputTransaction(transaction_id=transaction_id, type=type, description=description, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_amount=transaction_amount, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_to_portfolio_rate=transaction_to_portfolio_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, transaction_status=transaction_status, entry_date_time=entry_date_time, cancel_date_time=cancel_date_time, realised_gain_loss=realised_gain_loss, holding_ids=holding_ids, source_type=source_type, source_instrument_event_id=source_instrument_event_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, resolved_transaction_type_details=resolved_transaction_type_details, gross_transaction_amount=gross_transaction_amount, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, accounting_date=accounting_date, economics=economics, data_model_membership=data_model_membership, sequence=sequence, sequence_priority=sequence_priority, settlement_summary=settlement_summary, version=version)
 
 ```
 

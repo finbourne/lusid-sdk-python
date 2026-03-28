@@ -236,28 +236,30 @@ class WorkspaceApi:
 
 
     @overload
-    async def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, **kwargs) -> Workspace:  # noqa: E501
+    async def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[WorkspaceCreationRequest, Field(description="The workspace to be created.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @overload
-    def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
+    def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[WorkspaceCreationRequest, Field(description="The workspace to be created.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @validate_arguments
-    def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
+    def create_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[WorkspaceCreationRequest, Field(description="The workspace to be created.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
         """[EXPERIMENTAL] CreateWorkspace: Create a new workspace.  # noqa: E501
 
         Create a new workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_workspace(visibility, workspace_creation_request, async_req=True)
+        >>> thread = api.create_workspace(visibility, workspace_creation_request, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace being created. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
-        :param workspace_creation_request: The workspace to be created.
+        :param workspace_creation_request: The workspace to be created. (required)
         :type workspace_creation_request: WorkspaceCreationRequest
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -274,23 +276,25 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.create_workspace_with_http_info(visibility, workspace_creation_request, **kwargs)  # noqa: E501
+        return self.create_workspace_with_http_info(visibility, workspace_creation_request, include_item_access, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def create_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[Optional[WorkspaceCreationRequest], Field(description="The workspace to be created.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def create_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace being created. Must be `shared` or `personal`; case is important.")], workspace_creation_request : Annotated[WorkspaceCreationRequest, Field(description="The workspace to be created.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateWorkspace: Create a new workspace.  # noqa: E501
 
         Create a new workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.create_workspace_with_http_info(visibility, workspace_creation_request, async_req=True)
+        >>> thread = api.create_workspace_with_http_info(visibility, workspace_creation_request, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace being created. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
-        :param workspace_creation_request: The workspace to be created.
+        :param workspace_creation_request: The workspace to be created. (required)
         :type workspace_creation_request: WorkspaceCreationRequest
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -319,7 +323,8 @@ class WorkspaceApi:
 
         _all_params = [
             'visibility',
-            'workspace_creation_request'
+            'workspace_creation_request',
+            'include_item_access'
         ]
         _all_params.extend(
             [
@@ -354,6 +359,9 @@ class WorkspaceApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('include_item_access') is not None:  # noqa: E501
+            _query_params.append(('includeItemAccess', _params['include_item_access']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -934,22 +942,22 @@ class WorkspaceApi:
 
 
     @overload
-    async def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, **kwargs) -> Workspace:  # noqa: E501
+    async def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @overload
-    def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
+    def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
+    def get_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
         """[EXPERIMENTAL] GetWorkspace: Get a workspace.  # noqa: E501
 
         Get a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_workspace(visibility, workspace_name, as_at, async_req=True)
+        >>> thread = api.get_workspace(visibility, workspace_name, as_at, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
@@ -958,6 +966,8 @@ class WorkspaceApi:
         :type workspace_name: str
         :param as_at: The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.
         :type as_at: datetime
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -974,17 +984,17 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_workspace_with_http_info(visibility, workspace_name, as_at, **kwargs)  # noqa: E501
+        return self.get_workspace_with_http_info(visibility, workspace_name, as_at, include_item_access, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetWorkspace: Get a workspace.  # noqa: E501
 
         Get a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_workspace_with_http_info(visibility, workspace_name, as_at, async_req=True)
+        >>> thread = api.get_workspace_with_http_info(visibility, workspace_name, as_at, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
@@ -993,6 +1003,8 @@ class WorkspaceApi:
         :type workspace_name: str
         :param as_at: The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.
         :type as_at: datetime
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1022,7 +1034,8 @@ class WorkspaceApi:
         _all_params = [
             'visibility',
             'workspace_name',
-            'as_at'
+            'as_at',
+            'include_item_access'
         ]
         _all_params.extend(
             [
@@ -1065,6 +1078,9 @@ class WorkspaceApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('include_item_access') is not None:  # noqa: E501
+            _query_params.append(('includeItemAccess', _params['include_item_access']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1309,22 +1325,22 @@ class WorkspaceApi:
 
 
     @overload
-    async def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfWorkspace:  # noqa: E501
+    async def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> PagedResourceListOfWorkspace:  # noqa: E501
         ...
 
     @overload
-    def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorkspace:  # noqa: E501
+    def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfWorkspace:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspace, Awaitable[PagedResourceListOfWorkspace]]:  # noqa: E501
+    def list_workspaces(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfWorkspace, Awaitable[PagedResourceListOfWorkspace]]:  # noqa: E501
         """[EXPERIMENTAL] ListWorkspaces: List workspaces.  # noqa: E501
 
         List workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_workspaces(visibility, as_at, page, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_workspaces(visibility, as_at, page, sort_by, limit, filter, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspaces. Must be `shared` or `personal`; case is important. (required)
@@ -1339,6 +1355,8 @@ class WorkspaceApi:
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1355,17 +1373,17 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_workspaces_with_http_info(visibility, as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+        return self.list_workspaces_with_http_info(visibility, as_at, page, sort_by, limit, filter, include_item_access, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_workspaces_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_workspaces_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspaces. Must be `shared` or `personal`; case is important.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListWorkspaces: List workspaces.  # noqa: E501
 
         List workspaces.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_workspaces_with_http_info(visibility, as_at, page, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_workspaces_with_http_info(visibility, as_at, page, sort_by, limit, filter, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspaces. Must be `shared` or `personal`; case is important. (required)
@@ -1380,6 +1398,8 @@ class WorkspaceApi:
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1412,7 +1432,8 @@ class WorkspaceApi:
             'page',
             'sort_by',
             'limit',
-            'filter'
+            'filter',
+            'include_item_access'
         ]
         _all_params.extend(
             [
@@ -1465,6 +1486,9 @@ class WorkspaceApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('include_item_access') is not None:  # noqa: E501
+            _query_params.append(('includeItemAccess', _params['include_item_access']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1892,30 +1916,32 @@ class WorkspaceApi:
 
 
     @overload
-    async def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, **kwargs) -> Workspace:  # noqa: E501
+    async def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[WorkspaceUpdateRequest, Field(description="The new workspace details.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @overload
-    def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
+    def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[WorkspaceUpdateRequest, Field(description="The new workspace details.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=True, **kwargs) -> Workspace:  # noqa: E501
         ...
 
     @validate_arguments
-    def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
+    def update_workspace(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[WorkspaceUpdateRequest, Field(description="The new workspace details.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Workspace, Awaitable[Workspace]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateWorkspace: Update a workspace.  # noqa: E501
 
         Update a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_workspace(visibility, workspace_name, workspace_update_request, async_req=True)
+        >>> thread = api.update_workspace(visibility, workspace_name, workspace_update_request, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
         :param workspace_name: The workspace name. (required)
         :type workspace_name: str
-        :param workspace_update_request: The new workspace details.
+        :param workspace_update_request: The new workspace details. (required)
         :type workspace_update_request: WorkspaceUpdateRequest
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1932,25 +1958,27 @@ class WorkspaceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.update_workspace_with_http_info(visibility, workspace_name, workspace_update_request, **kwargs)  # noqa: E501
+        return self.update_workspace_with_http_info(visibility, workspace_name, workspace_update_request, include_item_access, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def update_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[Optional[WorkspaceUpdateRequest], Field(description="The new workspace details.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def update_workspace_with_http_info(self, visibility : Annotated[StrictStr, Field(..., description="The visibility for the workspace. Must be `shared` or `personal`; case is important.")], workspace_name : Annotated[StrictStr, Field(..., description="The workspace name.")], workspace_update_request : Annotated[WorkspaceUpdateRequest, Field(description="The new workspace details.")], include_item_access : Annotated[Optional[StrictBool], Field(description="If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateWorkspace: Update a workspace.  # noqa: E501
 
         Update a workspace.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.update_workspace_with_http_info(visibility, workspace_name, workspace_update_request, async_req=True)
+        >>> thread = api.update_workspace_with_http_info(visibility, workspace_name, workspace_update_request, include_item_access, async_req=True)
         >>> result = thread.get()
 
         :param visibility: The visibility for the workspace. Must be `shared` or `personal`; case is important. (required)
         :type visibility: str
         :param workspace_name: The workspace name. (required)
         :type workspace_name: str
-        :param workspace_update_request: The new workspace details.
+        :param workspace_update_request: The new workspace details. (required)
         :type workspace_update_request: WorkspaceUpdateRequest
+        :param include_item_access: If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false.
+        :type include_item_access: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1980,7 +2008,8 @@ class WorkspaceApi:
         _all_params = [
             'visibility',
             'workspace_name',
-            'workspace_update_request'
+            'workspace_update_request',
+            'include_item_access'
         ]
         _all_params.extend(
             [
@@ -2018,6 +2047,9 @@ class WorkspaceApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('include_item_access') is not None:  # noqa: E501
+            _query_params.append(('includeItemAccess', _params['include_item_access']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

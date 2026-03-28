@@ -119,7 +119,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_workspace**
-> Workspace create_workspace(visibility, workspace_creation_request=workspace_creation_request)
+> Workspace create_workspace(visibility, workspace_creation_request, include_item_access=include_item_access)
 
 [EXPERIMENTAL] CreateWorkspace: Create a new workspace.
 
@@ -177,13 +177,14 @@ def main():
     # workspace_creation_request = WorkspaceCreationRequest.from_json("")
     # workspace_creation_request = WorkspaceCreationRequest.from_dict({})
     workspace_creation_request = WorkspaceCreationRequest()
+    include_item_access = False # bool | If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.create_workspace(visibility, workspace_creation_request=workspace_creation_request, opts=opts)
+        # api_response =  api_instance.create_workspace(visibility, workspace_creation_request, include_item_access=include_item_access, opts=opts)
 
         # [EXPERIMENTAL] CreateWorkspace: Create a new workspace.
-        api_response = api_instance.create_workspace(visibility, workspace_creation_request=workspace_creation_request)
+        api_response = api_instance.create_workspace(visibility, workspace_creation_request, include_item_access=include_item_access)
         pprint(api_response)
 
     except ApiException as e:
@@ -197,7 +198,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **visibility** | **str**| The visibility for the workspace being created. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
- **workspace_creation_request** | [**WorkspaceCreationRequest**](WorkspaceCreationRequest.md)| The workspace to be created. | [optional] 
+ **workspace_creation_request** | [**WorkspaceCreationRequest**](WorkspaceCreationRequest.md)| The workspace to be created. | 
+ **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
 
 ### Return type
 
@@ -512,7 +514,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_workspace**
-> Workspace get_workspace(visibility, workspace_name, as_at=as_at)
+> Workspace get_workspace(visibility, workspace_name, as_at=as_at, include_item_access=include_item_access)
 
 [EXPERIMENTAL] GetWorkspace: Get a workspace.
 
@@ -566,13 +568,14 @@ def main():
     visibility = 'visibility_example' # str | The visibility for the workspace. Must be `shared` or `personal`; case is important.
     workspace_name = 'workspace_name_example' # str | The workspace name.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
+    include_item_access = False # bool | If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_workspace(visibility, workspace_name, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_workspace(visibility, workspace_name, as_at=as_at, include_item_access=include_item_access, opts=opts)
 
         # [EXPERIMENTAL] GetWorkspace: Get a workspace.
-        api_response = api_instance.get_workspace(visibility, workspace_name, as_at=as_at)
+        api_response = api_instance.get_workspace(visibility, workspace_name, as_at=as_at, include_item_access=include_item_access)
         pprint(api_response)
 
     except ApiException as e:
@@ -588,6 +591,7 @@ Name | Type | Description  | Notes
  **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
  **workspace_name** | **str**| The workspace name. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. | [optional] 
+ **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
 
 ### Return type
 
@@ -712,7 +716,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_workspaces**
-> PagedResourceListOfWorkspace list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+> PagedResourceListOfWorkspace list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, include_item_access=include_item_access)
 
 [EXPERIMENTAL] ListWorkspaces: List workspaces.
 
@@ -769,13 +773,14 @@ def main():
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    include_item_access = False # bool | If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+        # api_response =  api_instance.list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, include_item_access=include_item_access, opts=opts)
 
         # [EXPERIMENTAL] ListWorkspaces: List workspaces.
-        api_response = api_instance.list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        api_response = api_instance.list_workspaces(visibility, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, include_item_access=include_item_access)
         pprint(api_response)
 
     except ApiException as e:
@@ -794,6 +799,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
 
 ### Return type
 
@@ -1021,7 +1027,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **update_workspace**
-> Workspace update_workspace(visibility, workspace_name, workspace_update_request=workspace_update_request)
+> Workspace update_workspace(visibility, workspace_name, workspace_update_request, include_item_access=include_item_access)
 
 [EXPERIMENTAL] UpdateWorkspace: Update a workspace.
 
@@ -1080,13 +1086,14 @@ def main():
     # workspace_update_request = WorkspaceUpdateRequest.from_json("")
     # workspace_update_request = WorkspaceUpdateRequest.from_dict({})
     workspace_update_request = WorkspaceUpdateRequest()
+    include_item_access = False # bool | If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.update_workspace(visibility, workspace_name, workspace_update_request=workspace_update_request, opts=opts)
+        # api_response =  api_instance.update_workspace(visibility, workspace_name, workspace_update_request, include_item_access=include_item_access, opts=opts)
 
         # [EXPERIMENTAL] UpdateWorkspace: Update a workspace.
-        api_response = api_instance.update_workspace(visibility, workspace_name, workspace_update_request=workspace_update_request)
+        api_response = api_instance.update_workspace(visibility, workspace_name, workspace_update_request, include_item_access=include_item_access)
         pprint(api_response)
 
     except ApiException as e:
@@ -1101,7 +1108,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
  **workspace_name** | **str**| The workspace name. | 
- **workspace_update_request** | [**WorkspaceUpdateRequest**](WorkspaceUpdateRequest.md)| The new workspace details. | [optional] 
+ **workspace_update_request** | [**WorkspaceUpdateRequest**](WorkspaceUpdateRequest.md)| The new workspace details. | 
+ **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
 
 ### Return type
 

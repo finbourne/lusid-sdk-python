@@ -31,6 +31,7 @@ class ShareClass(BaseModel):
     """
     ShareClass
     """
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     code:  StrictStr = Field(...,alias="code", description="The unique code for the Share Class. Must be unique within the Fund.") 
     name:  StrictStr = Field(...,alias="name", description="The display name of the Share Class.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Share Class.") 
@@ -50,7 +51,7 @@ class ShareClass(BaseModel):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Supported values are: Gross, Net.") 
     hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Supported values are: Invalid, None, ApplyHedging.") 
-    __properties = ["code", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
+    __properties = ["instrumentIdentifiers", "code", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
 
     class Config:
         """Pydantic configuration"""
@@ -173,6 +174,7 @@ class ShareClass(BaseModel):
             return ShareClass.parse_obj(obj)
 
         _obj = ShareClass.parse_obj({
+            "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "code": obj.get("code"),
             "name": obj.get("name"),
             "description": obj.get("description"),

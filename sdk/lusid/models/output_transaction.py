@@ -33,6 +33,7 @@ from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_settlement_summary import TransactionSettlementSummary
 from lusid.models.transaction_type_details import TransactionTypeDetails
+from lusid.models.version import Version
 
 class OutputTransaction(BaseModel):
     """
@@ -61,7 +62,7 @@ class OutputTransaction(BaseModel):
     cancel_date_time: Optional[datetime] = Field(default=None, description="If the transaction has been cancelled, the asAt datetime that the transaction was cancelled.", alias="cancelDateTime")
     realised_gain_loss: Optional[List[RealisedGainLoss]] = Field(default=None, description="The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created.", alias="realisedGainLoss")
     holding_ids: Optional[List[StrictInt]] = Field(default=None, description="The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio.", alias="holdingIds")
-    source_type:  Optional[StrictStr] = Field(None,alias="sourceType", description="The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment") 
+    source_type:  Optional[StrictStr] = Field(None,alias="sourceType", description="The type of source that the transaction originated from, eg: InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction") 
     source_instrument_event_id:  Optional[StrictStr] = Field(None,alias="sourceInstrumentEventId", description="The unique ID of the instrument event that the transaction is related to.") 
     custodian_account: Optional[CustodianAccount] = Field(default=None, alias="custodianAccount")
     transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
@@ -76,7 +77,8 @@ class OutputTransaction(BaseModel):
     sequence: Optional[StrictInt] = Field(default=None, description="The sequential position in which this transaction was processed.")
     sequence_priority: Optional[StrictInt] = Field(default=None, description="The calculated priority level for this transaction.", alias="sequencePriority")
     settlement_summary: Optional[TransactionSettlementSummary] = Field(default=None, alias="settlementSummary")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary"]
+    version: Optional[Version] = None
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -229,6 +231,9 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settlement_summary
         if self.settlement_summary:
             _dict['settlementSummary'] = self.settlement_summary.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -373,7 +378,8 @@ class OutputTransaction(BaseModel):
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "sequence": obj.get("sequence"),
             "sequence_priority": obj.get("sequencePriority"),
-            "settlement_summary": TransactionSettlementSummary.from_dict(obj.get("settlementSummary")) if obj.get("settlementSummary") is not None else None
+            "settlement_summary": TransactionSettlementSummary.from_dict(obj.get("settlementSummary")) if obj.get("settlementSummary") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
         })
         return _obj
 

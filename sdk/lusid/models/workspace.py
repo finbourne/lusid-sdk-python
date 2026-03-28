@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.version import Version
+from lusid.models.workspace_permitted_item_actions import WorkspacePermittedItemActions
 
 class Workspace(BaseModel):
     """
@@ -32,8 +33,9 @@ class Workspace(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="A workspace's name.") 
     description:  StrictStr = Field(...,alias="description", description="A friendly description for the workspace.") 
     version: Optional[Version] = None
+    permitted_item_actions: Optional[WorkspacePermittedItemActions] = Field(default=None, alias="permittedItemActions")
     links: Optional[List[Link]] = None
-    __properties = ["name", "description", "version", "links"]
+    __properties = ["name", "description", "version", "permittedItemActions", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +72,9 @@ class Workspace(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of permitted_item_actions
+        if self.permitted_item_actions:
+            _dict['permittedItemActions'] = self.permitted_item_actions.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -97,6 +102,7 @@ class Workspace(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "permitted_item_actions": WorkspacePermittedItemActions.from_dict(obj.get("permittedItemActions")) if obj.get("permittedItemActions") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

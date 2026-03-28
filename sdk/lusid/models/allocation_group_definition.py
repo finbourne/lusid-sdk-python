@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_group_class_definition import AllocationGroupClassDefinition
-from lusid.models.allocation_method_property import AllocationMethodProperty
+from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 
 class AllocationGroupDefinition(BaseModel):
     """
@@ -34,7 +34,7 @@ class AllocationGroupDefinition(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The display name of the Allocation Group.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Allocation Group.") 
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="The short code that identifies the Allocation Group.") 
-    apportionment_method_property: Optional[AllocationMethodProperty] = Field(default=None, alias="apportionmentMethodProperty")
+    apportionment_method_property: Optional[ApportionmentMethodProperty] = Field(default=None, alias="apportionmentMethodProperty")
     formula:  Optional[StrictStr] = Field(None,alias="formula", description="An optional filter expression used to define which classes belong to this group, based on fund grouping criteria. You can provide this or the Classes, but not both.") 
     __properties = ["classes", "code", "name", "description", "shareClassShortCode", "apportionmentMethodProperty", "formula"]
 
@@ -112,7 +112,7 @@ class AllocationGroupDefinition(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "share_class_short_code": obj.get("shareClassShortCode"),
-            "apportionment_method_property": AllocationMethodProperty.from_dict(obj.get("apportionmentMethodProperty")) if obj.get("apportionmentMethodProperty") is not None else None,
+            "apportionment_method_property": ApportionmentMethodProperty.from_dict(obj.get("apportionmentMethodProperty")) if obj.get("apportionmentMethodProperty") is not None else None,
             "formula": obj.get("formula")
         })
         return _obj

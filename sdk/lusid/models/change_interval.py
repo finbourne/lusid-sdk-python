@@ -40,7 +40,8 @@ class ChangeInterval(BaseModel):
     previous_value: Optional[PropertyValue] = Field(default=None, alias="previousValue")
     new_value: Optional[PropertyValue] = Field(default=None, alias="newValue")
     effective_range: Optional[EffectiveRange] = Field(default=None, alias="effectiveRange")
-    __properties = ["asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange"]
+    is_inherited: Optional[StrictBool] = Field(default=None, description="Indicates whether this change interval is a result of a change to an ancestor or the entity itself.", alias="isInherited")
+    __properties = ["asAtModified", "userIdModified", "requestIdModified", "reasonModified", "asAtVersionNumber", "stagedModificationIdModified", "action", "attributeName", "previousValue", "newValue", "effectiveRange", "isInherited"]
 
     class Config:
         """Pydantic configuration"""
@@ -135,7 +136,8 @@ class ChangeInterval(BaseModel):
             "attribute_name": obj.get("attributeName"),
             "previous_value": PropertyValue.from_dict(obj.get("previousValue")) if obj.get("previousValue") is not None else None,
             "new_value": PropertyValue.from_dict(obj.get("newValue")) if obj.get("newValue") is not None else None,
-            "effective_range": EffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None
+            "effective_range": EffectiveRange.from_dict(obj.get("effectiveRange")) if obj.get("effectiveRange") is not None else None,
+            "is_inherited": obj.get("isInherited")
         })
         return _obj
 

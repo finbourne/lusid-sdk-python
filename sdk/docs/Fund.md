@@ -21,8 +21,8 @@ Name | Type | Description | Notes
 **primary_nav_type** | [**NavType**](NavType.md) |  | [optional] 
 **additional_nav_types** | [**List[NavType]**](NavType.md) | The definitions for any additional NAVs on the Fund. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
-**create_instrument** | **bool** | Whether to create an instrument for the Fund upon creation. Defaults to false. | [optional] 
-**apportionment_method_property** | [**AllocationMethodProperty**](AllocationMethodProperty.md) |  | [optional] 
+**create_instrument** | **bool** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] 
+**apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
 **allocation_groups** | [**List[AllocationGroup]**](AllocationGroup.md) | An optional list of Allocation Group definitions for the Fund. | [optional] 
 **share_classes** | [**List[ShareClass]**](ShareClass.md) | An optional list of Share Class definitions for the Fund. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
@@ -56,7 +56,7 @@ additional_nav_types: Optional[List[NavType]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
-apportionment_method_property: Optional[AllocationMethodProperty] = # Replace with your value
+apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
 allocation_groups: Optional[List[AllocationGroup]] = # Replace with your value
 share_classes: Optional[List[ShareClass]] = # Replace with your value
 version: Optional[Version] = None

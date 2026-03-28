@@ -23,13 +23,15 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class AllocationMethodProperty(BaseModel):
+class WorkspacePermittedItemActions(BaseModel):
     """
-    AllocationMethodProperty
+    The workspace item actions a user is permitted to perform within a workspace.  # noqa: E501
     """
-    code:  StrictStr = Field(...,alias="code", description="The code identifying the allocation method property.") 
-    scope:  StrictStr = Field(...,alias="scope", description="The scope of the allocation method property.") 
-    __properties = ["code", "scope"]
+    read_item: Optional[StrictBool] = Field(default=None, description="Whether the user is permitted to read workspace items.", alias="readItem")
+    add_item: Optional[StrictBool] = Field(default=None, description="Whether the user is permitted to add workspace items.", alias="addItem")
+    update_item: Optional[StrictBool] = Field(default=None, description="Whether the user is permitted to update workspace items.", alias="updateItem")
+    delete_item: Optional[StrictBool] = Field(default=None, description="Whether the user is permitted to delete workspace items.", alias="deleteItem")
+    __properties = ["readItem", "addItem", "updateItem", "deleteItem"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +55,8 @@ class AllocationMethodProperty(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AllocationMethodProperty:
-        """Create an instance of AllocationMethodProperty from a JSON string"""
+    def from_json(cls, json_str: str) -> WorkspacePermittedItemActions:
+        """Create an instance of WorkspacePermittedItemActions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,18 +68,20 @@ class AllocationMethodProperty(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AllocationMethodProperty:
-        """Create an instance of AllocationMethodProperty from a dict"""
+    def from_dict(cls, obj: dict) -> WorkspacePermittedItemActions:
+        """Create an instance of WorkspacePermittedItemActions from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AllocationMethodProperty.parse_obj(obj)
+            return WorkspacePermittedItemActions.parse_obj(obj)
 
-        _obj = AllocationMethodProperty.parse_obj({
-            "code": obj.get("code"),
-            "scope": obj.get("scope")
+        _obj = WorkspacePermittedItemActions.parse_obj({
+            "read_item": obj.get("readItem"),
+            "add_item": obj.get("addItem"),
+            "update_item": obj.get("updateItem"),
+            "delete_item": obj.get("deleteItem")
         })
         return _obj
 
-AllocationMethodProperty.update_forward_refs()
+WorkspacePermittedItemActions.update_forward_refs()
