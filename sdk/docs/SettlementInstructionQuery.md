@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **filter** | **str** |  | [optional] 
 **settlement_instruction_property_keys** | **List[str]** |  | [optional] 
 **transaction_property_keys** | **List[str]** |  | [optional] 
+**timeline_scope** | **str** |  | [optional] 
+**timeline_code** | **str** |  | [optional] 
+**closed_period_id** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +32,10 @@ page: Optional[StrictStr] = "example_page"
 filter: Optional[StrictStr] = "example_filter"
 settlement_instruction_property_keys: Optional[List[StrictStr]] = # Replace with your value
 transaction_property_keys: Optional[List[StrictStr]] = # Replace with your value
-settlement_instruction_query_instance = SettlementInstructionQuery(as_at=as_at, start_date=start_date, end_date=end_date, limit=limit, page=page, filter=filter, settlement_instruction_property_keys=settlement_instruction_property_keys, transaction_property_keys=transaction_property_keys)
+timeline_scope: Optional[StrictStr] = "example_timeline_scope"
+timeline_code: Optional[StrictStr] = "example_timeline_code"
+closed_period_id: Optional[StrictStr] = "example_closed_period_id"
+settlement_instruction_query_instance = SettlementInstructionQuery(as_at=as_at, start_date=start_date, end_date=end_date, limit=limit, page=page, filter=filter, settlement_instruction_property_keys=settlement_instruction_property_keys, transaction_property_keys=transaction_property_keys, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 ```
 

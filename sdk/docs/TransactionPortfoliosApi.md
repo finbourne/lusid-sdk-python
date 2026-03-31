@@ -3908,7 +3908,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_settlement_instructions**
-> VersionedResourceListOfTransactionSettlementInstruction list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys)
+> VersionedResourceListOfTransactionSettlementInstruction list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
 
@@ -3968,13 +3968,16 @@ def main():
     filter = 'filter_example' # str | The expression to filter out settlement instructions (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'SettlementInstruction', 'Instrument' or 'Portfolio' domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name' or 'SettlementInstruction/strategy/quantsignal'. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
-        api_response = api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys)
+        api_response = api_instance.list_settlement_instructions(scope, code, from_date=from_date, to_date=to_date, page=page, limit=limit, filter=filter, as_at=as_at, property_keys=property_keys, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -3996,6 +3999,9 @@ Name | Type | Description  | Notes
  **filter** | **str**| The expression to filter out settlement instructions | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the settlement instructions. Defaults to return the latest if not specified. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;SettlementInstruction&#39;, &#39;Instrument&#39; or &#39;Portfolio&#39; domains to decorate onto              settlement instructions. These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39; or &#39;SettlementInstruction/strategy/quantsignal&#39;. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
+ **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. | [optional] 
 
 ### Return type
 
