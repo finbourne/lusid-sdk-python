@@ -31,7 +31,8 @@ class AllocationGroupClass(BaseModel):
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund and is attached to the transaction.") 
     share_class_fund_id: Optional[ResourceId] = Field(default=None, alias="shareClassFundId")
     apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weighting factor used for apportionment across this share class.", alias="apportionmentFactor")
-    __properties = ["shareClassShortCode", "shareClassFundId", "apportionmentFactor"]
+    share_class_series_code:  Optional[StrictStr] = Field(None,alias="shareClassSeriesCode", description="An optional series identifier for the share class. If not provided, the share class will include all series.") 
+    __properties = ["shareClassShortCode", "shareClassFundId", "apportionmentFactor", "shareClassSeriesCode"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +74,11 @@ class AllocationGroupClass(BaseModel):
         if self.apportionment_factor is None and "apportionment_factor" in self.__fields_set__:
             _dict['apportionmentFactor'] = None
 
+        # set to None if share_class_series_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.share_class_series_code is None and "share_class_series_code" in self.__fields_set__:
+            _dict['shareClassSeriesCode'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +93,8 @@ class AllocationGroupClass(BaseModel):
         _obj = AllocationGroupClass.parse_obj({
             "share_class_short_code": obj.get("shareClassShortCode"),
             "share_class_fund_id": ResourceId.from_dict(obj.get("shareClassFundId")) if obj.get("shareClassFundId") is not None else None,
-            "apportionment_factor": obj.get("apportionmentFactor")
+            "apportionment_factor": obj.get("apportionmentFactor"),
+            "share_class_series_code": obj.get("shareClassSeriesCode")
         })
         return _obj
 

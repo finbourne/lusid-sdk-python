@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_estimate_valuation_point**](FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 [**add_allocation_groups**](FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.
+[**add_series**](FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EXPERIMENTAL] AddSeries: Add Series to a Fund.
 [**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 [**create_fund**](FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
 [**create_fund_v2**](FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
@@ -239,6 +240,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund with the added Allocation Groups. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **add_series**
+> Fund add_series(scope, code, series_definition_request)
+
+[EXPERIMENTAL] AddSeries: Add Series to a Fund.
+
+Add the given Series definitions to the specified Share Classes of the Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    series_definition_request = [{"shareClassCode":"ShareClass1","seriesDefinitions":[{"seriesIdentifier":"Series1","seriesType":"Lead","launchDate":"2024-01-01T00:00:00.0000000+00:00","launchPriceType":"Manual","domCcy":"GBP","properties":{}}]}] # List[SeriesDefinitionRequest] | The definitions of the Series to add.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.add_series(scope, code, series_definition_request, opts=opts)
+
+        # [EXPERIMENTAL] AddSeries: Add Series to a Fund.
+        api_response = api_instance.add_series(scope, code, series_definition_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->add_series: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **series_definition_request** | [**List[SeriesDefinitionRequest]**](SeriesDefinitionRequest.md)| The definitions of the Series to add. | 
+
+### Return type
+
+[**Fund**](Fund.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated Fund with the added Series. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

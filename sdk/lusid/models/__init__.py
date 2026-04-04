@@ -754,6 +754,7 @@ from lusid.models.order_update_request import OrderUpdateRequest
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.output_transition import OutputTransition
+from lusid.models.override_virtual_transactions_response import OverrideVirtualTransactionsResponse
 from lusid.models.package import Package
 from lusid.models.package_request import PackageRequest
 from lusid.models.package_set_request import PackageSetRequest
@@ -1103,6 +1104,9 @@ from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
 from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.sequence_definition import SequenceDefinition
+from lusid.models.series import Series
+from lusid.models.series_definition import SeriesDefinition
+from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
@@ -2127,6 +2131,7 @@ __all__ = [
     "OtcConfirmation",
     "OutputTransaction",
     "OutputTransition",
+    "OverrideVirtualTransactionsResponse",
     "Package",
     "PackageRequest",
     "PackageSetRequest",
@@ -2476,6 +2481,9 @@ __all__ = [
     "SecurityElection",
     "SecurityOfferElection",
     "SequenceDefinition",
+    "Series",
+    "SeriesDefinition",
+    "SeriesDefinitionRequest",
     "SetAmortisationRulesRequest",
     "SetLegalEntityIdentifiersRequest",
     "SetLegalEntityPropertiesRequest",

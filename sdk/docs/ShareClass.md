@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | 
+**series** | [**List[Series]**](Series.md) | The series that belong to this Share Class. | [optional] 
 **code** | **str** | The unique code for the Share Class. Must be unique within the Fund. | 
 **name** | **str** | The display name of the Share Class. | 
 **description** | **str** | An optional description for the Share Class. | [optional] 
@@ -33,6 +34,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
+series: Optional[List[Series]] = # Replace with your value
 code: StrictStr = "example_code"
 name: StrictStr = "example_name"
 description: Optional[StrictStr] = "example_description"
@@ -54,7 +56,7 @@ rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
 hedging: StrictStr = "example_hedging"
-share_class_instance = ShareClass(instrument_identifiers=instrument_identifiers, code=code, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, apportionment_factor=apportionment_factor, properties=properties, fund_share_class_type=fund_share_class_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, units_precision=units_precision, price_precision=price_precision, rounding_conventions=rounding_conventions, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
+share_class_instance = ShareClass(instrument_identifiers=instrument_identifiers, series=series, code=code, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, apportionment_factor=apportionment_factor, properties=properties, fund_share_class_type=fund_share_class_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, units_precision=units_precision, price_precision=price_precision, rounding_conventions=rounding_conventions, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
 
 ```
 

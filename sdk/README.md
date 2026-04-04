@@ -242,6 +242,7 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.
+*FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EXPERIMENTAL] AddSeries: Add Series to a Fund.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
 *FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
@@ -677,6 +678,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**list_custodian_accounts**](docs/TransactionPortfoliosApi.md#list_custodian_accounts) | **GET** /api/transactionportfolios/{scope}/{code}/custodianaccounts | ListCustodianAccounts: List Custodian Accounts
 *TransactionPortfoliosApi* | [**list_holdings_adjustments**](docs/TransactionPortfoliosApi.md#list_holdings_adjustments) | **GET** /api/transactionportfolios/{scope}/{code}/holdingsadjustments | ListHoldingsAdjustments: List holdings adjustments
 *TransactionPortfoliosApi* | [**list_settlement_instructions**](docs/TransactionPortfoliosApi.md#list_settlement_instructions) | **GET** /api/transactionportfolios/{scope}/{code}/settlementinstructions | [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
+*TransactionPortfoliosApi* | [**override_virtual_transactions**](docs/TransactionPortfoliosApi.md#override_virtual_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/overridevirtualtransactions | [EARLY ACCESS] OverrideVirtualTransactions: [EARLY ACCESS] Override virtual transactions
 *TransactionPortfoliosApi* | [**patch_portfolio_details**](docs/TransactionPortfoliosApi.md#patch_portfolio_details) | **PATCH** /api/transactionportfolios/{scope}/{code}/details | PatchPortfolioDetails: Patch portfolio details
 *TransactionPortfoliosApi* | [**preview_transaction**](docs/TransactionPortfoliosApi.md#preview_transaction) | **POST** /api/transactionportfolios/{scope}/{code}/previewTransaction | PreviewTransaction: Preview a transaction
 *TransactionPortfoliosApi* | [**resolve_instrument**](docs/TransactionPortfoliosApi.md#resolve_instrument) | **POST** /api/transactionportfolios/{scope}/{code}/$resolve | ResolveInstrument: Resolve instrument
@@ -1451,6 +1453,7 @@ Class | Method | HTTP request | Description
  - [OtcConfirmation](docs/OtcConfirmation.md)
  - [OutputTransaction](docs/OutputTransaction.md)
  - [OutputTransition](docs/OutputTransition.md)
+ - [OverrideVirtualTransactionsResponse](docs/OverrideVirtualTransactionsResponse.md)
  - [Package](docs/Package.md)
  - [PackageRequest](docs/PackageRequest.md)
  - [PackageSetRequest](docs/PackageSetRequest.md)
@@ -1800,6 +1803,9 @@ Class | Method | HTTP request | Description
  - [SecurityElection](docs/SecurityElection.md)
  - [SecurityOfferElection](docs/SecurityOfferElection.md)
  - [SequenceDefinition](docs/SequenceDefinition.md)
+ - [Series](docs/Series.md)
+ - [SeriesDefinition](docs/SeriesDefinition.md)
+ - [SeriesDefinitionRequest](docs/SeriesDefinitionRequest.md)
  - [SetAmortisationRulesRequest](docs/SetAmortisationRulesRequest.md)
  - [SetLegalEntityIdentifiersRequest](docs/SetLegalEntityIdentifiersRequest.md)
  - [SetLegalEntityPropertiesRequest](docs/SetLegalEntityPropertiesRequest.md)
