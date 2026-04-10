@@ -390,6 +390,7 @@ Class | Method | HTTP request | Description
 *OrderManagementApi* | [**move_orders**](docs/OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 *OrderManagementApi* | [**place_blocks**](docs/OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
 *OrderManagementApi* | [**run_allocation_service**](docs/OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | RunAllocationService: Runs the Allocation Service
+*OrderManagementApi* | [**run_allocation_service_with_weights**](docs/OrderManagementApi.md#run_allocation_service_with_weights) | **POST** /api/ordermanagement/allocate/weighted | [EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
 *OrderManagementApi* | [**sweep_blocks**](docs/OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
 *OrderManagementApi* | [**update_orders**](docs/OrderManagementApi.md#update_orders) | **POST** /api/ordermanagement/updateorders | [EARLY ACCESS] UpdateOrders: Update existing orders
 *OrderManagementApi* | [**update_placements**](docs/OrderManagementApi.md#update_placements) | **POST** /api/ordermanagement/$updateplacements | [EARLY ACCESS] UpdatePlacements: Update existing placements
@@ -1580,6 +1581,7 @@ Class | Method | HTTP request | Description
  - [PortfolioTradeTicket](docs/PortfolioTradeTicket.md)
  - [PortfolioTransaction](docs/PortfolioTransaction.md)
  - [PortfolioType](docs/PortfolioType.md)
+ - [PortfolioWeight](docs/PortfolioWeight.md)
  - [PortfolioWithoutHref](docs/PortfolioWithoutHref.md)
  - [PortfoliosReconciliationRequest](docs/PortfoliosReconciliationRequest.md)
  - [PostCloseActivitiesRequest](docs/PostCloseActivitiesRequest.md)
@@ -2074,6 +2076,7 @@ Class | Method | HTTP request | Description
  - [VirtualRow](docs/VirtualRow.md)
  - [Warning](docs/Warning.md)
  - [WeekendMask](docs/WeekendMask.md)
+ - [WeightedAllocationServiceRunRequest](docs/WeightedAllocationServiceRunRequest.md)
  - [WeightedInstrument](docs/WeightedInstrument.md)
  - [WeightedInstrumentInLineLookupIdentifiers](docs/WeightedInstrumentInLineLookupIdentifiers.md)
  - [WeightedInstruments](docs/WeightedInstruments.md)

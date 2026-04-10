@@ -31,7 +31,7 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
     """
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="A set of instrument identifiers that can resolve the holding adjustment to a unique instrument.", alias="instrumentIdentifiers")
     sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding properties which identify the holding. Each property must be from the 'Transaction' domain.", alias="subHoldingKeys")
-    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Holding currency.") 
+    currency:  StrictStr = Field(...,alias="currency", description="The Holding currency.") 
     custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     __properties = ["instrumentIdentifiers", "subHoldingKeys", "currency", "custodianAccountId"]
 
@@ -81,11 +81,6 @@ class CancelSingleHoldingAdjustmentRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
-
-        # set to None if currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.currency is None and "currency" in self.__fields_set__:
-            _dict['currency'] = None
 
         return _dict
 

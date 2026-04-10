@@ -975,6 +975,7 @@ from lusid.models.portfolio_settlement_instruction import PortfolioSettlementIns
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_transaction import PortfolioTransaction
 from lusid.models.portfolio_type import PortfolioType
+from lusid.models.portfolio_weight import PortfolioWeight
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
 from lusid.models.post_close_activities_request import PostCloseActivitiesRequest
@@ -1469,6 +1470,7 @@ from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
 from lusid.models.warning import Warning
 from lusid.models.weekend_mask import WeekendMask
+from lusid.models.weighted_allocation_service_run_request import WeightedAllocationServiceRunRequest
 from lusid.models.weighted_instrument import WeightedInstrument
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 from lusid.models.weighted_instruments import WeightedInstruments
@@ -2445,6 +2447,7 @@ __all__ = [
     "PortfolioTradeTicket",
     "PortfolioTransaction",
     "PortfolioType",
+    "PortfolioWeight",
     "PortfolioWithoutHref",
     "PortfoliosReconciliationRequest",
     "PostCloseActivitiesRequest",
@@ -2939,6 +2942,7 @@ __all__ = [
     "VirtualRow",
     "Warning",
     "WeekendMask",
+    "WeightedAllocationServiceRunRequest",
     "WeightedInstrument",
     "WeightedInstrumentInLineLookupIdentifiers",
     "WeightedInstruments",

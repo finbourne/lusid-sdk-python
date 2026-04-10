@@ -99,6 +99,11 @@ class UpsertInstrumentEventRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if sequence_number (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sequence_number is None and "sequence_number" in self.__fields_set__:
+            _dict['sequenceNumber'] = None
+
         # set to None if participation_type (nullable) is None
         # and __fields_set__ contains the field
         if self.participation_type is None and "participation_type" in self.__fields_set__:

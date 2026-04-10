@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the Fund Calendar entry. | 
 **description** | **str** | A description for the Fund Calendar entry. | [optional] 
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
-**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to Latest. | [optional] 
-**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to Latest. | [optional] 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties for the Calendar Entry. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | 
 ## Example

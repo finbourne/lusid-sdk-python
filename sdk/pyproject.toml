@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lusid-sdk"
-version = "2.3.94"
+version = "2.3.95"
 description = "LUSID API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
@@ -18,7 +18,7 @@ python = "^3.11"
 urllib3 = "^2.6.0"
 python-dateutil = "^2.8.2"
 requests = "^2"
-aiohttp = "^3.8.4"
+aiohttp = "^3.13.4"
 pydantic = "^2.6.3"
 aenum = "^3.1.11"
 

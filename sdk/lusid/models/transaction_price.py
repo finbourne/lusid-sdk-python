@@ -28,7 +28,7 @@ class TransactionPrice(BaseModel):
     TransactionPrice
     """
     price: Optional[Union[StrictFloat, StrictInt]] = None
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice, CdsPrice") 
     __properties = ["price", "type"]
 
     @validator('type')
@@ -88,7 +88,8 @@ class TransactionPrice(BaseModel):
                                     'WeekRegularity',
                                     'YearRegularity',
                                     'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse']:
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -98,8 +99,8 @@ class TransactionPrice(BaseModel):
         if value is None:
             return value
 
-        if value not in ['Price', 'Yield', 'Spread', 'CashFlowPerUnit', 'CleanPrice', 'DirtyPrice']:
-            raise ValueError("must be one of enum values ('Price', 'Yield', 'Spread', 'CashFlowPerUnit', 'CleanPrice', 'DirtyPrice')")
+        if value not in ['Price', 'Yield', 'Spread', 'CashFlowPerUnit', 'CleanPrice', 'DirtyPrice', 'CdsPrice']:
+            raise ValueError("must be one of enum values ('Price', 'Yield', 'Spread', 'CashFlowPerUnit', 'CleanPrice', 'DirtyPrice', 'CdsPrice')")
         return value
 
     class Config:
