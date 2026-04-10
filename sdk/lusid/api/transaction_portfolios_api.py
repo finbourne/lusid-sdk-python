@@ -4952,22 +4952,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.")] = None, **kwargs) -> HoldingsAdjustment:  # noqa: E501
+    async def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> HoldingsAdjustment:  # noqa: E501
         ...
 
     @overload
-    def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.")] = None, async_req: Optional[bool]=True, **kwargs) -> HoldingsAdjustment:  # noqa: E501
+    def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=True, **kwargs) -> HoldingsAdjustment:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[HoldingsAdjustment, Awaitable[HoldingsAdjustment]]:  # noqa: E501
+    def get_holdings_adjustment(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[HoldingsAdjustment, Awaitable[HoldingsAdjustment]]:  # noqa: E501
         """GetHoldingsAdjustment: Get holdings adjustment  # noqa: E501
 
         Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effective datetime.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_holdings_adjustment(scope, code, effective_at, as_at, property_keys, async_req=True)
+        >>> thread = api.get_holdings_adjustment(scope, code, effective_at, as_at, property_keys, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -4978,8 +4978,10 @@ class TransactionPortfoliosApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.
+        :param property_keys: A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.
         :type property_keys: List[str]
+        :param filter: Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -4996,17 +4998,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_holdings_adjustment_with_http_info(scope, code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
+        return self.get_holdings_adjustment_with_http_info(scope, code, effective_at, as_at, property_keys, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_holdings_adjustment_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_holdings_adjustment_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], effective_at : Annotated[StrictStr, Field(..., description="The effective datetime or cut label of the holdings adjustment.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetHoldingsAdjustment: Get holdings adjustment  # noqa: E501
 
         Get a holdings adjustment made to a transaction portfolio at a specific effective datetime. Note that a  holdings adjustment will only be returned if one exists for the specified effective datetime.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_holdings_adjustment_with_http_info(scope, code, effective_at, as_at, property_keys, async_req=True)
+        >>> thread = api.get_holdings_adjustment_with_http_info(scope, code, effective_at, as_at, property_keys, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -5017,8 +5019,10 @@ class TransactionPortfoliosApi:
         :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustment. Defaults to the return the latest              version of the holdings adjustment if not specified.
         :type as_at: datetime
-        :param property_keys: A list of property keys from the ‘Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding’ domain are automatically returned.
+        :param property_keys: A list of property keys from the 'Instrument' domain to decorate onto holdings adjustments.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.              Note that properties from the 'Holding' domain are automatically returned.
         :type property_keys: List[str]
+        :param filter: Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -5050,7 +5054,8 @@ class TransactionPortfoliosApi:
             'code',
             'effective_at',
             'as_at',
-            'property_keys'
+            'property_keys',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -5100,6 +5105,9 @@ class TransactionPortfoliosApi:
         if _params.get('property_keys') is not None:  # noqa: E501
             _query_params.append(('propertyKeys', _params['property_keys']))
             _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -7383,22 +7391,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, **kwargs) -> ResourceListOfHoldingsAdjustmentHeader:  # noqa: E501
+    async def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ResourceListOfHoldingsAdjustmentHeader:  # noqa: E501
         ...
 
     @overload
-    def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfHoldingsAdjustmentHeader:  # noqa: E501
+    def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfHoldingsAdjustmentHeader:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfHoldingsAdjustmentHeader, Awaitable[ResourceListOfHoldingsAdjustmentHeader]]:  # noqa: E501
+    def list_holdings_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfHoldingsAdjustmentHeader, Awaitable[ResourceListOfHoldingsAdjustmentHeader]]:  # noqa: E501
         """ListHoldingsAdjustments: List holdings adjustments  # noqa: E501
 
         List the holdings adjustments made to the specified transaction portfolio over a specified interval of effective time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_holdings_adjustments(scope, code, from_effective_at, to_effective_at, as_at, async_req=True)
+        >>> thread = api.list_holdings_adjustments(scope, code, from_effective_at, to_effective_at, as_at, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7411,6 +7419,8 @@ class TransactionPortfoliosApi:
         :type to_effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -7427,17 +7437,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_holdings_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, **kwargs)  # noqa: E501
+        return self.list_holdings_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_holdings_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_holdings_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The lower bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no lower bound if this is not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The upper bound effective datetime or cut label (inclusive) from which to retrieve the holdings              adjustments. There is no upper bound if this is not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListHoldingsAdjustments: List holdings adjustments  # noqa: E501
 
         List the holdings adjustments made to the specified transaction portfolio over a specified interval of effective time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_holdings_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, async_req=True)
+        >>> thread = api.list_holdings_adjustments_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -7450,6 +7460,8 @@ class TransactionPortfoliosApi:
         :type to_effective_at: str
         :param as_at: The asAt datetime at which to retrieve the holdings adjustments. Defaults to return the              latest version of each holding adjustment if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the holding adjustments result set.              Supported fields: InstrumentUid, InstrumentScope, Currency, Properties[Holding/{scope}/{code}], SubHoldingKeys[Transaction/{scope}/{code}].              For example, to filter on a specific instrument, specify \"InstrumentUid eq 'LUID_00003D4X'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -7481,7 +7493,8 @@ class TransactionPortfoliosApi:
             'code',
             'from_effective_at',
             'to_effective_at',
-            'as_at'
+            'as_at',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -7530,6 +7543,9 @@ class TransactionPortfoliosApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
