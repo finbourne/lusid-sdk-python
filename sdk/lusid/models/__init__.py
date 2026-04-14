@@ -1150,6 +1150,7 @@ from lusid.models.staged_modification import StagedModification
 from lusid.models.staged_modification_decision import StagedModificationDecision
 from lusid.models.staged_modification_decision_request import StagedModificationDecisionRequest
 from lusid.models.staged_modification_effective_range import StagedModificationEffectiveRange
+from lusid.models.staged_modification_source_entity import StagedModificationSourceEntity
 from lusid.models.staged_modification_staging_rule import StagedModificationStagingRule
 from lusid.models.staged_modifications_entity_hrefs import StagedModificationsEntityHrefs
 from lusid.models.staged_modifications_info import StagedModificationsInfo
@@ -1200,6 +1201,7 @@ from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndA
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
 from lusid.models.transaction_fee import TransactionFee
+from lusid.models.transaction_fee_capitalisation import TransactionFeeCapitalisation
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_matching_alternative_id import TransactionMatchingAlternativeId
 from lusid.models.transaction_price import TransactionPrice
@@ -2529,6 +2531,7 @@ __all__ = [
     "StagedModificationDecision",
     "StagedModificationDecisionRequest",
     "StagedModificationEffectiveRange",
+    "StagedModificationSourceEntity",
     "StagedModificationStagingRule",
     "StagedModificationsEntityHrefs",
     "StagedModificationsInfo",
@@ -2579,6 +2582,7 @@ __all__ = [
     "TransactionDateWindows",
     "TransactionDiagnostics",
     "TransactionFee",
+    "TransactionFeeCapitalisation",
     "TransactionFieldMap",
     "TransactionMatchingAlternativeId",
     "TransactionPrice",

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **requested_changes** | [**RequestedChanges**](RequestedChanges.md) |  | [optional] 
 **entity_hrefs** | [**StagedModificationsEntityHrefs**](StagedModificationsEntityHrefs.md) |  | [optional] 
 **display_name** | **str** | The display name of the entity the staged modification applies to. | [optional] 
+**source_entity** | [**StagedModificationSourceEntity**](StagedModificationSourceEntity.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -48,8 +49,9 @@ entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
 requested_changes: Optional[RequestedChanges] = # Replace with your value
 entity_hrefs: Optional[StagedModificationsEntityHrefs] = # Replace with your value
 display_name: Optional[StrictStr] = "example_display_name"
+source_entity: Optional[StagedModificationSourceEntity] = # Replace with your value
 links: Optional[List[Link]] = None
-staged_modification_instance = StagedModification(id=id, as_at_staged=as_at_staged, user_id_staged=user_id_staged, requested_id_staged=requested_id_staged, request_reason=request_reason, action=action, staging_rule=staging_rule, decisions=decisions, decisions_count=decisions_count, status=status, as_at_closed=as_at_closed, entity_type=entity_type, scope=scope, entity_unique_id=entity_unique_id, requested_changes=requested_changes, entity_hrefs=entity_hrefs, display_name=display_name, links=links)
+staged_modification_instance = StagedModification(id=id, as_at_staged=as_at_staged, user_id_staged=user_id_staged, requested_id_staged=requested_id_staged, request_reason=request_reason, action=action, staging_rule=staging_rule, decisions=decisions, decisions_count=decisions_count, status=status, as_at_closed=as_at_closed, entity_type=entity_type, scope=scope, entity_unique_id=entity_unique_id, requested_changes=requested_changes, entity_hrefs=entity_hrefs, display_name=display_name, source_entity=source_entity, links=links)
 
 ```
 

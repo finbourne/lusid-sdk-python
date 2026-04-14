@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 **type** | **str** | The type of calculation to perform | 
 **side** | **str** | The side to which the calculation is applied | [optional] 
 **formula** | **str** | The formula used to derive the total consideration amount when it is not provided on the transaction | [optional] 
+**transaction_fee_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**transaction_fee_capitalisation** | [**TransactionFeeCapitalisation**](TransactionFeeCapitalisation.md) |  | [optional] 
 ## Example
 
 ```python
@@ -18,7 +20,9 @@ from datetime import datetime
 type: StrictStr = "example_type"
 side: Optional[StrictStr] = "example_side"
 formula: Optional[StrictStr] = "example_formula"
-transaction_type_calculation_instance = TransactionTypeCalculation(type=type, side=side, formula=formula)
+transaction_fee_id: Optional[ResourceId] = # Replace with your value
+transaction_fee_capitalisation: Optional[TransactionFeeCapitalisation] = # Replace with your value
+transaction_type_calculation_instance = TransactionTypeCalculation(type=type, side=side, formula=formula, transaction_fee_id=transaction_fee_id, transaction_fee_capitalisation=transaction_fee_capitalisation)
 
 ```
 

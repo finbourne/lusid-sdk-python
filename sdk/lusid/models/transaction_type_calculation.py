@@ -22,6 +22,8 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
+from lusid.models.transaction_fee_capitalisation import TransactionFeeCapitalisation
 
 class TransactionTypeCalculation(BaseModel):
     """
@@ -30,7 +32,9 @@ class TransactionTypeCalculation(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="The type of calculation to perform") 
     side:  Optional[StrictStr] = Field(None,alias="side", description="The side to which the calculation is applied") 
     formula:  Optional[StrictStr] = Field(None,alias="formula", description="The formula used to derive the total consideration amount when it is not provided on the transaction") 
-    __properties = ["type", "side", "formula"]
+    transaction_fee_id: Optional[ResourceId] = Field(default=None, alias="transactionFeeId")
+    transaction_fee_capitalisation: Optional[TransactionFeeCapitalisation] = Field(default=None, alias="transactionFeeCapitalisation")
+    __properties = ["type", "side", "formula", "transactionFeeId", "transactionFeeCapitalisation"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +68,12 @@ class TransactionTypeCalculation(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of transaction_fee_id
+        if self.transaction_fee_id:
+            _dict['transactionFeeId'] = self.transaction_fee_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of transaction_fee_capitalisation
+        if self.transaction_fee_capitalisation:
+            _dict['transactionFeeCapitalisation'] = self.transaction_fee_capitalisation.to_dict()
         # set to None if side (nullable) is None
         # and __fields_set__ contains the field
         if self.side is None and "side" in self.__fields_set__:
@@ -88,7 +98,9 @@ class TransactionTypeCalculation(BaseModel):
         _obj = TransactionTypeCalculation.parse_obj({
             "type": obj.get("type"),
             "side": obj.get("side"),
-            "formula": obj.get("formula")
+            "formula": obj.get("formula"),
+            "transaction_fee_id": ResourceId.from_dict(obj.get("transactionFeeId")) if obj.get("transactionFeeId") is not None else None,
+            "transaction_fee_capitalisation": TransactionFeeCapitalisation.from_dict(obj.get("transactionFeeCapitalisation")) if obj.get("transactionFeeCapitalisation") is not None else None
         })
         return _obj
 
