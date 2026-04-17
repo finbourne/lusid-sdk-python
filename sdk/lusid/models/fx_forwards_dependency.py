@@ -68,6 +68,8 @@ class FxForwardsDependency(EconomicDependency):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',

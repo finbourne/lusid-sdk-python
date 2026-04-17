@@ -68,6 +68,8 @@ class PortfolioSettlementInstruction(NavActivityAdjustment):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',

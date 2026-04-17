@@ -76,6 +76,8 @@ class CreditSpreadCurveData(ComplexMarketData):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',

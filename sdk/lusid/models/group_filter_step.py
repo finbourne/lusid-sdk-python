@@ -67,6 +67,8 @@ class GroupFilterStep(ComplianceStep):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',

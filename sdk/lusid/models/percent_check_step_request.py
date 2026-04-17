@@ -65,6 +65,8 @@ class PercentCheckStepRequest(ComplianceStepRequest):
                                     'TriggerParentTaskAction',
                                     'CreateChildTasksActionResponse', 
                                     'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
                                     'TriggerParentTaskActionResponse',
                                     'CreateNewTaskActivity',
                                     'UpdateMatchingTasksActivity',

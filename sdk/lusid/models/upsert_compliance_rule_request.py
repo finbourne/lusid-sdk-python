@@ -36,7 +36,7 @@ class UpsertComplianceRuleRequest(BaseModel):
     active: StrictBool
     template_id: ResourceId = Field(alias="templateId")
     variation:  StrictStr = Field(...,alias="variation") 
-    portfolio_group_id: ResourceId = Field(alias="portfolioGroupId")
+    portfolio_group_id: Optional[ResourceId] = Field(default=None, alias="portfolioGroupId")
     parameters: Dict[str, ComplianceParameter]
     properties: Dict[str, PerpetualProperty]
     __properties = ["id", "name", "description", "active", "templateId", "variation", "portfolioGroupId", "parameters", "properties"]

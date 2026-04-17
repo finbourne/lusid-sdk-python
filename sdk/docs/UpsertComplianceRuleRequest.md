@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **active** | **bool** |  | 
 **template_id** | [**ResourceId**](ResourceId.md) |  | 
 **variation** | **str** |  | 
-**portfolio_group_id** | [**ResourceId**](ResourceId.md) |  | 
+**portfolio_group_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **parameters** | [**Dict[str, ComplianceParameter]**](ComplianceParameter.md) |  | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | 
 ## Example
@@ -28,7 +28,7 @@ active: StrictBool
 active:StrictBool = True
 template_id: ResourceId = # Replace with your value
 variation: StrictStr = "example_variation"
-portfolio_group_id: ResourceId = # Replace with your value
+portfolio_group_id: Optional[ResourceId] = # Replace with your value
 parameters: Dict[str, ComplianceParameter]
 properties: Dict[str, PerpetualProperty]
 upsert_compliance_rule_request_instance = UpsertComplianceRuleRequest(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties)
