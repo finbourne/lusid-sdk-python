@@ -19,7 +19,7 @@ from lusid.extensions.tcp_keep_alive_connector import (
 )
 from aiohttp import ClientSession
 import logging
-from typing import Any, Callable, Optional, Tuple, TypeVar, Type, Iterable, Union
+from typing import Any, Callable, Dict, Optional, Tuple, TypeVar, Type, Iterable, Union
 import os
 from requests import Response
 
@@ -69,6 +69,7 @@ class SyncApiClientFactory:
         ] = keep_alive_socket_options(),
         correlation_id: Optional[str] = None,
         app_name: Optional[str] = None,
+        default_headers: Optional[Dict[str, str]] = None,
         opts: Optional[ConfigurationOptions] = None,
     ):
         """Create an ApiClientFactory which can build
@@ -93,6 +94,8 @@ class SyncApiClientFactory:
         A correlation ID that can be sent with each request, by default None
         app_name : Optional[str], optional
         The name of the application in LUSID, by default None
+        default_headers : Optional[Dict[str, str]], optional
+        A dictionary of headers to set on all requests, by default None
         """
         api_config = get_api_configuration(config_loaders=config_loaders)
         api_client_config = api_config.build_api_client_config(
@@ -111,13 +114,17 @@ class SyncApiClientFactory:
             rc.pool_manager.pool_classes_by_scheme = {"http": TCPKeepAliveHTTPConnectionPool, "https": TCPKeepAliveHTTPSConnectionPool}
 
         wrapped_rest_client = rest_client_wrapper(
-            rest_object=rc, 
+            rest_object=rc,
             rate_limit_retries=api_client_config.rate_limit_retries)
         self.__api_client.rest_client = wrapped_rest_client
 
         set_additional_api_client_headers(
-            self.__api_client, app_name=app_name, correlation_id=correlation_id
+            self.__api_client, app_name=app_name or api_config.app_name, correlation_id=correlation_id
         )
+
+        if default_headers is not None:
+            for header_name, header_value in default_headers.items():
+                self.__api_client.set_default_header(header_name, header_value)
 
     def __enter__(self):
         self.__api_client.__enter__()
@@ -157,18 +164,19 @@ class ApiClientFactory:
         ] = keep_alive_socket_options(),
         correlation_id: Optional[str] = None,
         app_name: Optional[str] = None,
+        default_headers: Optional[Dict[str, str]] = None,
         client_session: Optional[ClientSession] = None,
         trace_configs: Optional[List[TraceConfig]] = None,
         opts: Optional[ConfigurationOptions] = None,
     ):
-        """Create an ApiClientFactory which can build api 
+        """Create an ApiClientFactory which can build api
         objects with a configured ApiClient object
 
         Parameters
         ----------
         config_loaders : Iterable[ConfigurationLoader], optional
         An Iterable of ConfigurationLoaders we can load configuration from.
-        Config settings are updated by each loader (last write wins), 
+        Config settings are updated by each loader (last write wins),
         by default default_config_loaders
         id_provider_response_handler : Callable[[Response], None], optional
         A function that is called when a response is received from the token_url,
@@ -182,8 +190,10 @@ class ApiClientFactory:
         A correlation ID that can be sent with each request, by default None
         app_name : Optional[str], optional
         The name of the application in LUSID, by default None
+        default_headers : Optional[Dict[str, str]], optional
+        A dictionary of headers to set on all requests, by default None
         client_session : Optional[ClientSession], optional
-        An aiohttp.ClientSession, pass this to re-use 
+        An aiohttp.ClientSession, pass this to re-use
         connections across different ApiFactories,
         by default None
         trace_configs: Optional[List[TraceConfig]], optional
@@ -226,12 +236,16 @@ class ApiClientFactory:
                              " object with an initialised TCP Connector")
         rest_client_wrapper = RetryingRestWrapperAsync
         wrapped_rest_client = rest_client_wrapper(
-            rest_object=rc, 
+            rest_object=rc,
             rate_limit_retries=api_client_config.rate_limit_retries)
         self.__api_client.rest_client = wrapped_rest_client
         set_additional_api_client_headers(
-            self.__api_client, app_name=app_name, correlation_id=correlation_id
+            self.__api_client, app_name=app_name or api_config.app_name, correlation_id=correlation_id
         )
+
+        if default_headers is not None:
+            for header_name, header_value in default_headers.items():
+                self.__api_client.set_default_header(header_name, header_value)
 
     async def __aenter__(self):
         await self.__api_client.__aenter__()

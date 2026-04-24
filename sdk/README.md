@@ -1139,6 +1139,7 @@ Class | Method | HTTP request | Description
  - [FilterPredicateComplianceParameter](docs/FilterPredicateComplianceParameter.md)
  - [FilterStep](docs/FilterStep.md)
  - [FilterStepRequest](docs/FilterStepRequest.md)
+ - [FilteredFundIdList](docs/FilteredFundIdList.md)
  - [FinalisedValuationPoint](docs/FinalisedValuationPoint.md)
  - [FixedLeg](docs/FixedLeg.md)
  - [FixedLegAllOfOverrides](docs/FixedLegAllOfOverrides.md)

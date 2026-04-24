@@ -22,17 +22,18 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.model_property import ModelProperty
 from lusid.models.reference_list import ReferenceList
+from lusid.models.resource_id import ResourceId
 
-class PropertyList(ReferenceList):
+class FilteredFundIdList(ReferenceList):
     """
-    PropertyList
+    FilteredFundIdList
     """
-    values: List[ModelProperty]
+    filter:  StrictStr = Field(...,alias="filter", description="") 
+    values: Optional[List[ResourceId]] = None
     reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["referenceListType", "values"]
+    __properties = ["referenceListType", "filter", "values"]
 
     @validator('reference_list_type')
     def reference_list_type_validate_enum(cls, value):
@@ -45,7 +46,7 @@ class PropertyList(ReferenceList):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyList' not in [ 
+        if 'FilteredFundIdList' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -127,14 +128,15 @@ class PropertyList(ReferenceList):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PropertyList:
-        """Create an instance of PropertyList from a JSON string"""
+    def from_json(cls, json_str: str) -> FilteredFundIdList:
+        """Create an instance of FilteredFundIdList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "values",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -150,20 +152,26 @@ class PropertyList(ReferenceList):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if values (nullable) is None
+        # and __fields_set__ contains the field
+        if self.values is None and "values" in self.__fields_set__:
+            _dict['values'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PropertyList:
-        """Create an instance of PropertyList from a dict"""
+    def from_dict(cls, obj: dict) -> FilteredFundIdList:
+        """Create an instance of FilteredFundIdList from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PropertyList.parse_obj(obj)
+            return FilteredFundIdList.parse_obj(obj)
 
-        _obj = PropertyList.parse_obj({
+        _obj = FilteredFundIdList.parse_obj({
             "reference_list_type": obj.get("referenceListType"),
-            "values": [ModelProperty.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
+            "filter": obj.get("filter"),
+            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -172,4 +180,4 @@ class PropertyList(ReferenceList):
 
         return _obj
 
-PropertyList.update_forward_refs()
+FilteredFundIdList.update_forward_refs()

@@ -226,22 +226,22 @@ class ComplexMarketDataApi:
 
 
     @overload
-    async def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, **kwargs) -> GetComplexMarketDataResponse:  # noqa: E501
+    async def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, **kwargs) -> GetComplexMarketDataResponse:  # noqa: E501
         ...
 
     @overload
-    def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetComplexMarketDataResponse:  # noqa: E501
+    def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> GetComplexMarketDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetComplexMarketDataResponse, Awaitable[GetComplexMarketDataResponse]]:  # noqa: E501
+    def get_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GetComplexMarketDataResponse, Awaitable[GetComplexMarketDataResponse]]:  # noqa: E501
         """GetComplexMarketData: Get complex market data  # noqa: E501
 
         Get one or more items of complex market data from a single scope.                Each item can be identified by its time invariant complex market data identifier.                For each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.                An optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime.  LUSID will return the most recent item within this window.                In the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each item in the response.                The response will return three collections. One, the successfully retrieved complex market data. Two, those that had a  valid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.                For the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.                It is important to always check the failed and not found sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_complex_market_data(scope, request_body, effective_at, as_at, max_age, async_req=True)
+        >>> thread = api.get_complex_market_data(scope, request_body, effective_at, as_at, max_age, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the complex market data to retrieve. (required)
@@ -254,6 +254,12 @@ class ComplexMarketDataApi:
         :type as_at: datetime
         :param max_age: The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.
         :type max_age: str
+        :param timeline_scope: The scope of the Timeline.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.
+        :type timeline_code: str
+        :param closed_period_id: The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -270,17 +276,17 @@ class ComplexMarketDataApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_complex_market_data_with_http_info(scope, request_body, effective_at, as_at, max_age, **kwargs)  # noqa: E501
+        return self.get_complex_market_data_with_http_info(scope, request_body, effective_at, as_at, max_age, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_complex_market_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_complex_market_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the complex market data to retrieve.")], request_body : Annotated[Dict[str, ComplexMarketDataId], Field(description="The time invariant set of complex data identifiers to retrieve the data for. These need to be               keyed by a unique correlation id allowing the retrieved item to be identified in the response.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the complex market data.               Defaults to the current LUSID system datetime if not specified.               Must match the Effective at of each ComplexMarketDataId given in the request body.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the complex market data. Defaults to return the latest version if not specified.")] = None, max_age : Annotated[Optional[StrictStr], Field( description="The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetComplexMarketData: Get complex market data  # noqa: E501
 
         Get one or more items of complex market data from a single scope.                Each item can be identified by its time invariant complex market data identifier.                For each id LUSID will return the most recent matched item with respect to the provided (or default) effective datetime.                An optional maximum age range window can be specified which defines how far back to look back for data from the specified effective datetime.  LUSID will return the most recent item within this window.                In the request each complex market data id must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each item in the response.                The response will return three collections. One, the successfully retrieved complex market data. Two, those that had a  valid identifier but could not be found. Three, those that failed because LUSID could not construct a valid identifier from the request.                For the ids that failed to resolve or could not be found a reason will be provided explaining why that is the case.                It is important to always check the failed and not found sets for any unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_complex_market_data_with_http_info(scope, request_body, effective_at, as_at, max_age, async_req=True)
+        >>> thread = api.get_complex_market_data_with_http_info(scope, request_body, effective_at, as_at, max_age, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the complex market data to retrieve. (required)
@@ -293,6 +299,12 @@ class ComplexMarketDataApi:
         :type as_at: datetime
         :param max_age: The duration of the look back window in an ISO8601 time interval format e.g. P1Y2M3DT4H30M (1 year, 2 months, 3 days, 4 hours and 30 minutes).               This is subtracted from the provided effectiveAt datetime to generate a effective datetime window inside which a complex market data item must exist to be retrieved.
         :type max_age: str
+        :param timeline_scope: The scope of the Timeline.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.
+        :type timeline_code: str
+        :param closed_period_id: The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -324,7 +336,10 @@ class ComplexMarketDataApi:
             'request_body',
             'effective_at',
             'as_at',
-            'max_age'
+            'max_age',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -370,6 +385,15 @@ class ComplexMarketDataApi:
 
         if _params.get('max_age') is not None:  # noqa: E501
             _query_params.append(('maxAge', _params['max_age']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -420,22 +444,22 @@ class ComplexMarketDataApi:
 
 
     @overload
-    async def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
+    async def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
         ...
 
     @overload
-    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
+    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfListComplexMarketDataWithMetaDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfListComplexMarketDataWithMetaDataResponse, Awaitable[ResourceListOfListComplexMarketDataWithMetaDataResponse]]:  # noqa: E501
+    def list_complex_market_data(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfListComplexMarketDataWithMetaDataResponse, Awaitable[ResourceListOfListComplexMarketDataWithMetaDataResponse]]:  # noqa: E501
         """ListComplexMarketData: List the set of ComplexMarketData  # noqa: E501
 
         List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_complex_market_data(as_at, effective_at, page, limit, async_req=True)
+        >>> thread = api.list_complex_market_data(as_at, effective_at, page, limit, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.
@@ -446,6 +470,12 @@ class ComplexMarketDataApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.
         :type limit: int
+        :param timeline_scope: The scope of the Timeline.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.
+        :type timeline_code: str
+        :param closed_period_id: The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -462,17 +492,17 @@ class ComplexMarketDataApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, **kwargs)  # noqa: E501
+        return self.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_complex_market_data_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_complex_market_data_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListComplexMarketData: List the set of ComplexMarketData  # noqa: E501
 
         List the set of ComplexMarketData at the specified date/time,  along with the scope the data was stored in and its identifier in that scope.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, async_req=True)
+        >>> thread = api.list_complex_market_data_with_http_info(as_at, effective_at, page, limit, timeline_scope, timeline_code, closed_period_id, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified.
@@ -483,6 +513,12 @@ class ComplexMarketDataApi:
         :type page: str
         :param limit: When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future.
         :type limit: int
+        :param timeline_scope: The scope of the Timeline.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods.
+        :type timeline_code: str
+        :param closed_period_id: The closed period ID. If this is specified, both timelineScope and timelineCode must be specified.
+        :type closed_period_id: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -513,7 +549,10 @@ class ComplexMarketDataApi:
             'as_at',
             'effective_at',
             'page',
-            'limit'
+            'limit',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
         ]
         _all_params.extend(
             [
@@ -559,6 +598,15 @@ class ComplexMarketDataApi:
 
         if _params.get('limit') is not None:  # noqa: E501
             _query_params.append(('limit', _params['limit']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

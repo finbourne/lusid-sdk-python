@@ -35,7 +35,8 @@ class AccountedTransaction(BaseModel):
     portfolio_id: Optional[PortfolioId] = Field(default=None, alias="portfolioId")
     valuation_point_origin:  Optional[StrictStr] = Field(None,alias="valuationPointOrigin", description="Designates if the transaction was originally part of the Valuation Point or if it was added as part of a Complex Close action.") 
     added_origin_valuation_point_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointCode", description="The Valuation Point, only for transaction added as part of a Complex Close action.") 
-    __properties = ["accountingDate", "journalEntryAction", "transaction", "portfolioId", "valuationPointOrigin", "addedOriginValuationPointCode"]
+    added_origin_valuation_point_variant_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointVariantCode", description="The Valuation Point variant, only for transactions added as part of a Complex Close action.") 
+    __properties = ["accountingDate", "journalEntryAction", "transaction", "portfolioId", "valuationPointOrigin", "addedOriginValuationPointCode", "addedOriginValuationPointVariantCode"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +91,11 @@ class AccountedTransaction(BaseModel):
         if self.added_origin_valuation_point_code is None and "added_origin_valuation_point_code" in self.__fields_set__:
             _dict['addedOriginValuationPointCode'] = None
 
+        # set to None if added_origin_valuation_point_variant_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.added_origin_valuation_point_variant_code is None and "added_origin_valuation_point_variant_code" in self.__fields_set__:
+            _dict['addedOriginValuationPointVariantCode'] = None
+
         return _dict
 
     @classmethod
@@ -107,7 +113,8 @@ class AccountedTransaction(BaseModel):
             "transaction": OutputTransaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None,
             "portfolio_id": PortfolioId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "valuation_point_origin": obj.get("valuationPointOrigin"),
-            "added_origin_valuation_point_code": obj.get("addedOriginValuationPointCode")
+            "added_origin_valuation_point_code": obj.get("addedOriginValuationPointCode"),
+            "added_origin_valuation_point_variant_code": obj.get("addedOriginValuationPointVariantCode")
         })
         return _obj
 

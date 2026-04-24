@@ -884,9 +884,9 @@ def main():
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities              onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The optional scope of a timeline to use for post-close activity. (optional)
-    timeline_code = 'timeline_code_example' # str | The optional code of a timeline to use for post-close activity. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The optional id of a closed period within the timeline to view. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -915,9 +915,9 @@ Name | Type | Description  | Notes
  **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities              onto the instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
- **timeline_scope** | **str**| The optional scope of a timeline to use for post-close activity. | [optional] 
- **timeline_code** | **str**| The optional code of a timeline to use for post-close activity. | [optional] 
- **closed_period_id** | **str**| The optional id of a closed period within the timeline to view. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
+ **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. | [optional] 
 
 ### Return type
 
@@ -1657,7 +1657,7 @@ Name | Type | Description  | Notes
 
 ListInstruments: List instruments
 
-List all the instruments in the instrument master.                To retrieve a particular set of instruments instead, use the Get instruments endpoint.  The maximum number of instruments that this method can list per request is 2,000.
+List all the instruments in the instrument master.                To retrieve a particular set of instruments instead, use the Get instruments endpoint.    Use scope '*' to list instruments across all scopes.  The maximum number of instruments that this method can list per request is 2,000.
 
 ### Example
 
@@ -1711,14 +1711,14 @@ def main():
     limit = 56 # int | When paginating, limit the results to this number. (optional)
     filter = 'State eq 'Active'' # str | Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. (optional) (default to 'State eq 'Active'')
     instrument_property_keys = ['instrument_property_keys_example'] # List[str] | A list of property keys from the 'Instrument' domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'. (optional)
-    scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'. (optional) (default to 'default')
+    scope = 'default' # str | The scope in which the instrument lies. When not supplied the scope is 'default'.                 Use '*' to list instruments across all scopes. (optional) (default to 'default')
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
     membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
-    timeline_scope = 'timeline_scope_example' # str | The scope of the timeline to use for PCA (Post Close Activity) support. (optional)
-    timeline_code = 'timeline_code_example' # str | The code of the timeline to use for PCA (Post Close Activity) support. (optional)
-    closed_period_id = 'closed_period_id_example' # str | The id of the closed period on the timeline to use for PCA (Post Close Activity) support. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1745,14 +1745,14 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the results to this number. | [optional] 
  **filter** | **str**| Expression to filter the result set. Defaults to filtering out inactive instruments               (that is, those that have been deleted). For more information about filtering results,               see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] [default to &#39;State eq &#39;Active&#39;&#39;]
  **instrument_property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39; domain to decorate onto               instruments, or from any domain that supports relationships to decorate onto related entities.               These must have the format {domain}/{scope}/{code}, for example &#39;Instrument/system/Name&#39;. | [optional] 
- **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **scope** | **str**| The scope in which the instrument lies. When not supplied the scope is &#39;default&#39;.                 Use &#39;*&#39; to list instruments across all scopes. | [optional] [default to &#39;default&#39;]
  **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
  **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
- **timeline_scope** | **str**| The scope of the timeline to use for PCA (Post Close Activity) support. | [optional] 
- **timeline_code** | **str**| The code of the timeline to use for PCA (Post Close Activity) support. | [optional] 
- **closed_period_id** | **str**| The id of the closed period on the timeline to use for PCA (Post Close Activity) support. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
+ **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. | [optional] 
 
 ### Return type
 

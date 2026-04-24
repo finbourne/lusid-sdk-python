@@ -533,6 +533,7 @@ from lusid.models.file_response import FileResponse
 from lusid.models.filter_predicate_compliance_parameter import FilterPredicateComplianceParameter
 from lusid.models.filter_step import FilterStep
 from lusid.models.filter_step_request import FilterStepRequest
+from lusid.models.filtered_fund_id_list import FilteredFundIdList
 from lusid.models.finalised_valuation_point import FinalisedValuationPoint
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
@@ -2007,6 +2008,7 @@ __all__ = [
     "FilterPredicateComplianceParameter",
     "FilterStep",
     "FilterStepRequest",
+    "FilteredFundIdList",
     "FinalisedValuationPoint",
     "FixedLeg",
     "FixedLegAllOfOverrides",

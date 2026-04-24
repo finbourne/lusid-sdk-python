@@ -30,7 +30,7 @@ class PortfolioGroupIdList(ReferenceList):
     PortfolioGroupIdList
     """
     values: List[ResourceId]
-    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList") 
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
 
@@ -101,8 +101,8 @@ class PortfolioGroupIdList(ReferenceList):
         if "reference_list_type" != "type":
             return value
 
-        if value not in ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList']:
-            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList')")
+        if value not in ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList']:
+            raise ValueError("must be one of enum values ('PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList')")
         return value
 
     class Config:
