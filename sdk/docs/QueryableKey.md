@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **life_cycle_status** | **str** | Within an API where an item can be accessed through an address or property, there is an associated status that determines whether the item is stable or likely to change. This status is one of [Experimental, Beta, EAP, Prod,  Deprecated]. If the item is deprecated it will be removed on or after the associated DateTime RemovalDate field. That field will not otherwise be set. | 
 **removal_date** | **datetime** | If the life cycle status is set to deprecated then this will be populated with the date on or after which removal of the address query will happen | [optional] 
 **applicable_options** | [**Dict[str, AddressKeyOptionDefinition]**](AddressKeyOptionDefinition.md) | A mapping from option names to the definition that the corresponding option value must match. | [optional] 
-**derivation_formula** | **str** | Derivation formula for when the for when the query key represents a DerivedValuation property. | [optional] 
+**derivation_formula** | **str** | Derivation formula for when the query key represents a DerivedValuation property. | [optional] 
 ## Example
 
 ```python

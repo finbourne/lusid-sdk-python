@@ -5,7 +5,7 @@ Metadata related to an api response
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The type of meta data information being provided | [optional] 
-**description** | **str** | The description of what occured for this specific piece of meta data | [optional] 
+**description** | **str** | The description of what occurred for this specific piece of meta data | [optional] 
 **identifier_type** | **str** | The type of the listed identifiers | [optional] 
 **identifiers** | **List[str]** | The related identifiers that were impacted by this event | [optional] 
 ## Example

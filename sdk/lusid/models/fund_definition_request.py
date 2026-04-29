@@ -39,7 +39,7 @@ class FundDefinitionRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
     investor_structure:  Optional[StrictStr] = Field(None,alias="investorStructure", description="The Investor structure to be used by the Fund. Supported values are 'NonUnitised' and 'Classes'.") 
-    portfolio_ids: List[PortfolioEntityId] = Field(description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also much the Fund Base Currency.", alias="portfolioIds")
+    portfolio_ids: List[PortfolioEntityId] = Field(description="A list of the Portfolio IDs associated with the fund, which are part of the Fund. Note: These must all have the same base currency, which must also match the Fund Base Currency.", alias="portfolioIds")
     fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
     share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
     share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")

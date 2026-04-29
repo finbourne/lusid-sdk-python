@@ -32,7 +32,7 @@ class FundValuationPointData(BaseModel):
     The Valuation Point Data for a Fund on a specified date.  # noqa: E501
     """
     back_out: Dict[str, FundAmount] = Field(description="Bucket of detail for the Valuation Point where data points have been 'backed out'.", alias="backOut")
-    dealing: Dict[str, FundAmount] = Field(description="Bucket of detail for any 'Dealing' that has occured inside the queried period.")
+    dealing: Dict[str, FundAmount] = Field(description="Bucket of detail for any 'Dealing' that has occurred inside the queried period.")
     pn_l: FundPnlBreakdown = Field(alias="pnL")
     gav: Union[StrictFloat, StrictInt] = Field(description="The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types 'Asset' and 'Liabilities'.")
     fees: Dict[str, FeeAccrual] = Field(description="Bucket of detail for any 'Fees' that have been charged in the selected period.")

@@ -29,8 +29,8 @@ class ShareClassDealingBreakdown(BaseModel):
     """
     The breakdown of Dealing for a Share Class.  # noqa: E501
     """
-    class_dealing: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for any 'Dealing' specific to the share class that has occured inside the queried period.", alias="classDealing")
-    class_dealing_units: Dict[str, Amount] = Field(description="Bucket of detail for any 'Dealing' units specific to the share class that has occured inside the queried period.", alias="classDealingUnits")
+    class_dealing: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for any 'Dealing' specific to the share class that has occurred inside the queried period.", alias="classDealing")
+    class_dealing_units: Dict[str, Amount] = Field(description="Bucket of detail for any 'Dealing' units specific to the share class that has occurred inside the queried period.", alias="classDealingUnits")
     __properties = ["classDealing", "classDealingUnits"]
 
     class Config:
