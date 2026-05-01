@@ -30,7 +30,7 @@ class SetTransactionConfigurationAlias(BaseModel):
     type:  StrictStr = Field(...,alias="type") 
     description:  StrictStr = Field(...,alias="description") 
     transaction_class:  StrictStr = Field(...,alias="transactionClass") 
-    transaction_role:  StrictStr = Field(...,alias="transactionRole") 
+    transaction_role:  StrictStr = Field(...,alias="transactionRole", description="Available values: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles.") 
     is_default: Optional[StrictBool] = Field(default=None, alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionRole", "isDefault"]
 

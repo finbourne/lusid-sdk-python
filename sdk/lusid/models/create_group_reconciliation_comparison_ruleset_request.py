@@ -33,7 +33,7 @@ class CreateGroupReconciliationComparisonRulesetRequest(BaseModel):
     """
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the ruleset") 
-    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. Available values: Holding, Transaction, Valuation, CashHolding.") 
     filters: Optional[GroupReconciliationFilters] = None
     core_attribute_rules: List[GroupReconciliationCoreAttributeRule] = Field(description="The core comparison rules", alias="coreAttributeRules")
     aggregate_attribute_rules: List[GroupReconciliationAggregateAttributeRule] = Field(description="The aggregate comparison rules", alias="aggregateAttributeRules")

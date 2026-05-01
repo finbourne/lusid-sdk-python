@@ -28,7 +28,7 @@ class AppendMarketData(BaseModel):
     """
     Base class for types containing required data to append to complex market data.  # noqa: E501
     """
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData.") 
     __properties = ["marketDataType"]
 
     @validator('market_data_type')

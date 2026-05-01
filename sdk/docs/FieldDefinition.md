@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **key** | **str** |  | 
 **is_required** | **bool** |  | 
 **is_unique** | **bool** |  | 
-**value_type** | **str** |  | [optional] 
+**value_type** | **str** | Available values: String, Decimal. | [optional] 
 ## Example
 
 ```python

@@ -5,7 +5,7 @@ Certain bonds will follow certain rounding conventions.  For example, Thai gover
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **precision** | **int** | The precision of the rounding. The decimal places or significant figures to which the rounding takes place.  Defaults to 0 if not set. | [optional] 
-**rounding_type** | **str** | The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Nearest].  Defaults to \&quot;None\&quot; if not set. | [optional] 
+**rounding_type** | **str** | The type of rounding.  Default value: None. Available values: None, Down, Up, Nearest. | [optional] 
 ## Example
 
 ```python

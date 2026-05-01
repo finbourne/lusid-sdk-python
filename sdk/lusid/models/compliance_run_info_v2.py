@@ -31,7 +31,7 @@ class ComplianceRunInfoV2(BaseModel):
     run_id: ResourceId = Field(alias="runId")
     instigated_at: datetime = Field(alias="instigatedAt")
     completed_at: datetime = Field(alias="completedAt")
-    schedule:  StrictStr = Field(...,alias="schedule") 
+    schedule:  StrictStr = Field(...,alias="schedule", description="Available values: PreTrade, PostTrade, PreAndPostTrade.") 
     instigated_by:  StrictStr = Field(...,alias="instigatedBy") 
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "instigatedBy"]
 

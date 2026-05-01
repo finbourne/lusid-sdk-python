@@ -69,8 +69,8 @@ def main():
     scope = 'scope_example' # str | The scope of the dialect.
     vendor = 'vendor_example' # str | The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE.
     source_system = 'source_system_example' # str | The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib.
-    entity_type = 'entity_type_example' # str | The type of entity this dialect describes e.g. Instrument.
-    serialisation_format = 'serialisation_format_example' # str | The serialisation format of a document in this dialect. e.g. JSON, XML.
+    entity_type = 'entity_type_example' # str | The type of entity this dialect describes e.g. Instrument. Available values: Instrument.
+    serialisation_format = 'serialisation_format_example' # str | The serialisation format of a document in this dialect. Available values: Json, Xml.
     version = 'version_example' # str | The semantic version of the dialect: MAJOR.MINOR.PATCH.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the dialect. Defaults to return the latest version of the dialect if not specified. (optional)
 
@@ -95,8 +95,8 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the dialect. | 
  **vendor** | **str**| The vendor of the dialect, the entity that created it. e.g. ISDA, FINBOURNE. | 
  **source_system** | **str**| The source system of the dialect, the system that understands it. e.g. LUSID, QuantLib. | 
- **entity_type** | **str**| The type of entity this dialect describes e.g. Instrument. | 
- **serialisation_format** | **str**| The serialisation format of a document in this dialect. e.g. JSON, XML. | 
+ **entity_type** | **str**| The type of entity this dialect describes e.g. Instrument. Available values: Instrument. | 
+ **serialisation_format** | **str**| The serialisation format of a document in this dialect. Available values: Json, Xml. | 
  **version** | **str**| The semantic version of the dialect: MAJOR.MINOR.PATCH. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the dialect. Defaults to return the latest version of the dialect if not specified. | [optional] 
 

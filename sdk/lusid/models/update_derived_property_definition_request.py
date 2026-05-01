@@ -33,7 +33,7 @@ class UpdateDerivedPropertyDefinitionRequest(BaseModel):
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     derivation_formula:  StrictStr = Field(...,alias="derivationFormula", description="The rule that defines how data is composed for a derived property.") 
     is_filterable: StrictBool = Field(description="Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering.", alias="isFilterable")
-    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented.") 
+    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented. Available values: Text, Html.") 
     custom_entity_type:  Optional[StrictStr] = Field(None,alias="customEntityType", description="The custom entity type that this derived property definition can be applied to.") 
     __properties = ["displayName", "dataTypeId", "propertyDescription", "derivationFormula", "isFilterable", "valueFormat", "customEntityType"]
 

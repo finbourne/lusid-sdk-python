@@ -30,7 +30,7 @@ class FieldDefinition(BaseModel):
     key:  StrictStr = Field(...,alias="key") 
     is_required: StrictBool = Field(alias="isRequired")
     is_unique: StrictBool = Field(alias="isUnique")
-    value_type:  Optional[StrictStr] = Field(None,alias="valueType") 
+    value_type:  Optional[StrictStr] = Field(None,alias="valueType", description="Available values: String, Decimal.") 
     __properties = ["key", "isRequired", "isUnique", "valueType"]
 
     class Config:

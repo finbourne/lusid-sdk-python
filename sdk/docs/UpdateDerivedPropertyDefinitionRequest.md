@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **property_description** | **str** | Describes the property | [optional] 
 **derivation_formula** | **str** | The rule that defines how data is composed for a derived property. | 
 **is_filterable** | **bool** | Bool indicating whether the values of this property are fitlerable, this is true for all non-derived property defintions.  For a derived definition this must be set true to enable filtering. | 
-**value_format** | **str** | The format in which values for this property definition should be represented. | [optional] 
+**value_format** | **str** | The format in which values for this property definition should be represented. Available values: Text, Html. | [optional] 
 **custom_entity_type** | **str** | The custom entity type that this derived property definition can be applied to. | [optional] 
 ## Example
 

@@ -29,7 +29,7 @@ class GroupReconciliationComparisonRuleStringValueMap(BaseModel):
     """
     left_value:  StrictStr = Field(...,alias="leftValue", description="The left string to map") 
     right_value:  StrictStr = Field(...,alias="rightValue", description="The right string to map") 
-    direction:  StrictStr = Field(...,alias="direction", description="The direction to map. \"UniDirectional\" | \"BiDirectional\"") 
+    direction:  StrictStr = Field(...,alias="direction", description="The direction to map. Available values: BiDirectional, UniDirectional.") 
     __properties = ["leftValue", "rightValue", "direction"]
 
     class Config:

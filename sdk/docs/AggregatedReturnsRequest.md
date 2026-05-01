@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **metrics** | [**List[PerformanceReturnsMetric]**](PerformanceReturnsMetric.md) | A list of metrics to calculate in the AggregatedReturns. | 
 **return_ids** | [**List[ResourceId]**](ResourceId.md) | The Scope and code of the returns. | [optional] 
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**composite_method** | **str** | The method used to calculate the Portfolio performance: Equal/Asset. | [optional] 
-**period** | **str** | The type of the returns used to calculate the aggregation result: Daily/Monthly. | [optional] 
-**output_frequency** | **str** | The type of calculated output: Daily/Weekly/Monthly/Quarterly/Half-Yearly/Yearly. | [optional] 
+**composite_method** | **str** | The method used to calculate the Portfolio performance. Available values: Equal, Asset. | [optional] 
+**period** | **str** | The type of the returns used to calculate the aggregation result. Available values: Daily, Monthly. | [optional] 
+**output_frequency** | **str** | The type of calculated output. Available values: Daily, Weekly, Monthly, Quarterly, HalfYearly, Yearly. | [optional] 
 **alternative_inception_date** | **str** | Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request. | [optional] 
 **holiday_calendars** | **List[str]** | The holiday calendar(s) that should be used in determining the date schedule. Holiday calendar(s) are supplied by their codes, for example, &#39;CoppClark&#39;. Note that when the calendars are not available (e.g. when the user has insufficient permissions), a recipe setting will be used to determine whether the whole batch should then fail or whether the calendar not being available should simply be ignored. | [optional] 
 **currency** | **str** | Optional - either a string or a property. If provided, the results will be converted to the specified currency | [optional] 
-**run_mode** | **str** | The dates the AggregatedReturns output will be calculated: ReturnData/WeekDays/AllDays/MonthEnd. Defaults to ReturnData. | [optional] 
+**run_mode** | **str** | The dates the AggregatedReturns output will be calculated. Default value: ReturnData. Available values: ReturnData, WeekDays, AllDays, MonthEnd. | [optional] 
 ## Example
 
 ```python

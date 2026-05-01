@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **filter_id** | **str** |  | 
 **filter** | **str** |  | 
-**applies_to** | **str** |  | 
+**applies_to** | **str** | Available values: Undefined, PnLBucket, Fees. | 
 ## Example
 
 ```python

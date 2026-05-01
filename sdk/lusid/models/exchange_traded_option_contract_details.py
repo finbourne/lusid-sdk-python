@@ -42,7 +42,7 @@ class ExchangeTradedOptionContractDetails(BaseModel):
     underlying: LusidInstrument
     underlying_code:  StrictStr = Field(...,alias="underlyingCode", description="Code of the underlying, for an option on futures this should be the futures code.") 
     delivery_days: Optional[StrictInt] = Field(default=None, description="Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set.", alias="deliveryDays")
-    business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].  Defaults to \"F\" if not set.") 
+    business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Default value: F. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid.") 
     settlement_calendars: Optional[List[StrictStr]] = Field(default=None, description="An array of strings denoting calendars used in calculating the option settlement date.", alias="settlementCalendars")
     __properties = ["domCcy", "strike", "contractSize", "country", "deliveryType", "description", "exchangeCode", "exerciseDate", "exerciseType", "optionCode", "optionType", "underlying", "underlyingCode", "deliveryDays", "businessDayConvention", "settlementCalendars"]
 

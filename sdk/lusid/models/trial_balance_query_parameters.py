@@ -30,7 +30,7 @@ class TrialBalanceQueryParameters(BaseModel):
     """
     start: Optional[DateOrDiaryEntry] = None
     end: Optional[DateOrDiaryEntry] = None
-    date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the trial balance. The available values are: ActivityDate, AccountingDate.") 
+    date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the trial balance. Available values: ActivityDate, AccountingDate.") 
     general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate trial balance with levels.") 
     property_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of property keys from the 'Account' domain to decorate onto the trial balance.", alias="propertyKeys")
     exclude_cleardown_module: Optional[StrictBool] = Field(default=None, description="By deafult this flag is set to false, if this is set to true, no cleardown module will be applied to the trial balance.", alias="excludeCleardownModule")

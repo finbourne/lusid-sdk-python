@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entitlement_date** | **str** |  | 
-**eligible_units** | **str** |  | 
+**eligible_units** | **str** | Available values: TotalUnits, SettledUnits, NotApplicable. | 
 **date_modifiable_by_instruction** | **bool** |  | [optional] 
 ## Example
 

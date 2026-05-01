@@ -32,7 +32,7 @@ class IndexProjectionDependency(EconomicDependency):
     tenor:  StrictStr = Field(...,alias="tenor", description="The tenor of the corresponding IndexConvention. E.g. this would be \"6M\" for a convention named USD.6M.LIBOR") 
     index_name:  StrictStr = Field(...,alias="indexName", description="The IndexName of the corresponding IndexConvention. E.g. this would be \"LIBOR\" for a convention named USD.6M.LIBOR") 
     var_date: datetime = Field(description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "tenor", "indexName", "date"]
 

@@ -37,7 +37,7 @@ class CleardownModuleResponse(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Cleardown Module.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Cleardown Module.") 
     rules: Optional[List[CleardownModuleRule]] = Field(default=None, description="The Cleardown Rules that apply for the Cleardown Module. Rules are evaluated in the order they occur in this collection.")
-    status:  StrictStr = Field(...,alias="status", description="The Cleardown Module status. Can be Active, Inactive or Deleted. Defaults to Active.") 
+    status:  StrictStr = Field(...,alias="status", description="The Cleardown Module status. Default value: Active. Available values: Active, Inactive, Deleted.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
     __properties = ["href", "cleardownModuleCode", "chartOfAccountsId", "displayName", "description", "rules", "status", "version", "links"]

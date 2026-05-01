@@ -29,7 +29,7 @@ class Operation(BaseModel):
     """
     value: Optional[Any] = None
     path:  StrictStr = Field(...,alias="path") 
-    op:  StrictStr = Field(...,alias="op") 
+    op:  StrictStr = Field(...,alias="op", description="Available values: add, remove.") 
     var_from:  Optional[StrictStr] = Field(None,alias="from") 
     __properties = ["value", "path", "op", "from"]
 

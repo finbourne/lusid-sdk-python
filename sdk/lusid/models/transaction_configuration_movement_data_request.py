@@ -29,7 +29,7 @@ class TransactionConfigurationMovementDataRequest(BaseModel):
     """
     TransactionConfigurationMovementDataRequest
     """
-    movement_types:  StrictStr = Field(...,alias="movementTypes", description=". The available values are: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment, Deferred, CashDeferred") 
+    movement_types:  StrictStr = Field(...,alias="movementTypes", description="The movement types. Available values: Settlement, Traded, StockMovement, FutureCash, Commitment, Receivable, CashSettlement, CashForward, CashCommitment, CashReceivable, Accrual, CashAccrual, ForwardFx, CashFxForward, Carry, CarryAsPnl, VariationMargin, Capital, Fee, LimitAdjustment, BalanceAdjustment, Deferred, CashDeferred.") 
     side:  StrictStr = Field(...,alias="side", description="The movement side") 
     direction: StrictInt = Field(description="The movement direction")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties associated with the underlying Movement.")

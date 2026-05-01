@@ -33,13 +33,13 @@ class DataType(BaseModel):
     """
     DataType
     """
-    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="The available values are: Open, Closed") 
+    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="Available values: Open, Closed.") 
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName") 
     description:  StrictStr = Field(...,alias="description") 
-    value_type:  StrictStr = Field(...,alias="valueType", description="The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="Available values: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText.") 
     acceptable_values: Optional[List[StrictStr]] = Field(default=None, alias="acceptableValues")
-    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The available values are: NoUnits, Basic, Iso4217Currency") 
+    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="Available values: NoUnits, Basic, Iso4217Currency.") 
     acceptable_units: Optional[List[IUnitDefinitionDto]] = Field(default=None, alias="acceptableUnits")
     reference_data: Optional[ReferenceData] = Field(default=None, alias="referenceData")
     version: Optional[Version] = None

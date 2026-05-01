@@ -32,7 +32,7 @@ class ComplianceSummaryRuleResultRequest(BaseModel):
     rule_id: ResourceId = Field(alias="ruleId")
     template_id: ResourceId = Field(alias="templateId")
     variation:  StrictStr = Field(...,alias="variation") 
-    rule_status:  StrictStr = Field(...,alias="ruleStatus") 
+    rule_status:  StrictStr = Field(...,alias="ruleStatus", description="Available values: Passed, Failed, MissingData, Warning.") 
     affected_portfolios: List[ResourceId] = Field(alias="affectedPortfolios")
     affected_orders: List[ResourceId] = Field(alias="affectedOrders")
     parameters_used: Dict[str, Optional[StrictStr]] = Field(alias="parametersUsed")

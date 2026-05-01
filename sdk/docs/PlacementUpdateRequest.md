@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **stop_price** | **float** | The optional price, as currency and amount, associated with this placement. | [optional] 
 **counterparty** | **str** | Optionally specifies the market entity this placement is placed with. | [optional] 
 **execution_system** | **str** | Optionally specifies the execution system in use. | [optional] 
-**entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
+**entry_type** | **str** | Optionally specifies the entry type of this placement. Available values: Undecided, Manual, Direct, Ems, External. | [optional] 
 ## Example
 
 ```python

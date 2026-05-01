@@ -29,7 +29,7 @@ class SettlementProblem(BaseModel):
     """
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId", description="The id of the problematic settlement instruction. Combined with the portfolio id this uniquely identifies a settlement instruction") 
     category:  StrictStr = Field(...,alias="category", description="The category this instruction belongs to") 
-    status:  StrictStr = Field(...,alias="status", description="The status of the settlement instruction. Possible values are 'Invalid' or 'Rejected'.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the settlement instruction. Available values: Invalid, Rejected, Applied, Orphan.") 
     __properties = ["settlementInstructionId", "category", "status"]
 
     class Config:

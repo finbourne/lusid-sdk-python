@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the ruleset | 
-**reconciliation_type** | **str** | The type of reconciliation to perform. \&quot;Holding\&quot; | \&quot;Transaction\&quot; | \&quot;Valuation\&quot; | 
+**reconciliation_type** | **str** | The type of reconciliation to perform. Available values: Holding, Transaction, Valuation, CashHolding. | 
 **filters** | [**GroupReconciliationFilters**](GroupReconciliationFilters.md) |  | [optional] 
 **core_attribute_rules** | [**List[GroupReconciliationCoreAttributeRule]**](GroupReconciliationCoreAttributeRule.md) | The core comparison rules | 
 **aggregate_attribute_rules** | [**List[GroupReconciliationAggregateAttributeRule]**](GroupReconciliationAggregateAttributeRule.md) | The aggregate comparison rules | 

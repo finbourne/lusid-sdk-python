@@ -28,7 +28,7 @@ class TransactionPrice(BaseModel):
     TransactionPrice
     """
     price: Optional[Union[StrictFloat, StrictInt]] = None
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice, CdsPrice") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: Price, Yield, Spread, CashFlowPerUnit, CleanPrice, DirtyPrice, CdsPrice.") 
     __properties = ["price", "type"]
 
     @validator('type')

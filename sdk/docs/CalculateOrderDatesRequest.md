@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **instrument_scope** | **str** |  | [optional] 
 **received_date** | **datetime** |  | [optional] 
 **price_date** | **datetime** |  | [optional] 
-**transaction_category** | **str** |  | [optional] 
+**transaction_category** | **str** | Available values: Subscription, Redemption, SwitchOut, SwitchIn, TransferOut, TransferIn. | [optional] 
 **liquidating_share_class_identifier** | **str** |  | [optional] 
 **liquidating_share_class_identifier_type** | **str** |  | [optional] 
 **liquidating_share_class_instrument_scope** | **str** |  | [optional] 

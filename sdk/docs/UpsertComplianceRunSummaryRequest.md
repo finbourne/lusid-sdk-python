@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **run_id** | [**ResourceId**](ResourceId.md) |  | 
 **instigated_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | 
-**schedule** | **str** |  | 
+**schedule** | **str** | Available values: None, PreTrade, PostTrade, PreAndPostTrade. | 
 **results** | [**List[ComplianceSummaryRuleResultRequest]**](ComplianceSummaryRuleResultRequest.md) |  | 
 ## Example
 

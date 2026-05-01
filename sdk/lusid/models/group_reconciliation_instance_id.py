@@ -27,7 +27,7 @@ class GroupReconciliationInstanceId(BaseModel):
     """
     GroupReconciliationInstanceId
     """
-    instance_id_type:  StrictStr = Field(...,alias="instanceIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). \"Manual\" | \"WorkflowServiceTaskId\"") 
+    instance_id_type:  StrictStr = Field(...,alias="instanceIdType", description="Type of the reconciliation run, manual or automatic (via the workflow). Available values: WorkflowServiceTaskId, Manual.") 
     instance_id_value:  StrictStr = Field(...,alias="instanceIdValue", description="Reconciliation run identifier: a manually-provided key or taskId.") 
     __properties = ["instanceIdType", "instanceIdValue"]
 

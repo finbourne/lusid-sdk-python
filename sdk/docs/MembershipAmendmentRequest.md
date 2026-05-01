@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **custom_data_model_id** | [**ResourceId**](ResourceId.md) |  | 
 **entity_type** | **str** | The type of the entity that is being added or removed from the Custom Data Model. | 
 **entity_unique_id** | **str** | The entity unique identifier of the entity that is being added or removed from the Custom Data Model. | 
-**operation** | **str** | The operation to be performed on the entity&#39;s membership in the Custom Data Model. Either &#39;Add&#39; or &#39;Remove&#39;. | 
+**operation** | **str** | The operation to be performed on the entity&#39;s membership in the Custom Data Model. Available values: Add, Remove. | 
 ## Example
 
 ```python

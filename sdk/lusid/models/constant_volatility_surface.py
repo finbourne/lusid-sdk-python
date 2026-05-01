@@ -34,7 +34,7 @@ class ConstantVolatilitySurface(ComplexMarketData):
     lineage:  Optional[StrictStr] = Field(None,alias="lineage") 
     volatility: Union[StrictFloat, StrictInt] = Field(description="Volatility value.")
     version: Optional[Version] = None
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "assetType", "lineage", "volatility", "version"]
 

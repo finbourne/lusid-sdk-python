@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action_in** | **List[str]** |  | [optional] 
+**action_in** | **List[str]** | Available values: Create, Update, Delete. | [optional] 
 **requesting_user** | **str** |  | [optional] 
 **entity_attributes** | **str** |  | [optional] 
 **changed_attribute_name_in** | **List[str]** |  | [optional] 

@@ -32,7 +32,7 @@ class AggregatedReturnsDispersionRequest(BaseModel):
     years_count: Optional[StrictInt] = Field(default=None, description="For how many years to calculate the dispersion. Default to 10.", alias="yearsCount")
     return_ids: Optional[List[ResourceId]] = Field(default=None, description="The Scope and code of the returns.", alias="returnIds")
     recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
-    composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance: Equal/Asset.") 
+    composite_method:  Optional[StrictStr] = Field(None,alias="compositeMethod", description="The method used to calculate the Portfolio performance. Available values: Equal, Asset.") 
     alternative_inception_date:  Optional[StrictStr] = Field(None,alias="alternativeInceptionDate", description="Optional - either a date, or the key for a portfolio property containing a date. If provided, the given date will override the inception date for this request.") 
     __properties = ["toEffectiveAt", "yearsCount", "returnIds", "recipeId", "compositeMethod", "alternativeInceptionDate"]
 

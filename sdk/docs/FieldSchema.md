@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **display_name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
-**type** | **str** | The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText | [optional] 
+**type** | **str** | Available values: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText. | [optional] 
 **display_order** | **int** |  | [optional] 
 ## Example
 

@@ -29,7 +29,7 @@ class BranchStepRequest(ComplianceStepRequest):
     BranchStepRequest
     """
     label:  StrictStr = Field(...,alias="label", description="The label of the compliance step") 
-    compliance_step_type_request:  StrictStr = Field(...,alias="complianceStepTypeRequest", description=". The available values are: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest") 
+    compliance_step_type_request:  StrictStr = Field(...,alias="complianceStepTypeRequest", description="The type of the compliance step. Available values: FilterStepRequest, GroupByStepRequest, GroupFilterStepRequest, BranchStepRequest, CheckStepRequest, PercentCheckStepRequest.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["complianceStepTypeRequest", "label"]
 

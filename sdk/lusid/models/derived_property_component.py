@@ -31,7 +31,7 @@ class DerivedPropertyComponent(BaseModel):
     """
     component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the formula which is being evaluated.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the component being evaluated.") 
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the formula component. This can be a Literal, Variable, DerivedProperty, or PartialFormula.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the formula component. Available values: Variable, DerivedProperty, Literal, PartialFormula.") 
     value: Optional[PropertyValue] = None
     derivation_formula:  Optional[StrictStr] = Field(None,alias="derivationFormula", description="The derivation formula of the component. This field will only be populated if the component is a derived property.") 
     sub_components: Optional[List[DerivedPropertyComponent]] = Field(default=None, description="Any sub-components of this formula. If this formula cannot be further decomposed, this collection will be null.", alias="subComponents")

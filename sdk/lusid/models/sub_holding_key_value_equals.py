@@ -30,7 +30,7 @@ class SubHoldingKeyValueEquals(MatchCriterion):
     """
     sub_holding_key:  StrictStr = Field(...,alias="subHoldingKey", description="The sub holding key whose value will form the left-hand side of the operation") 
     value:  StrictStr = Field(...,alias="value", description="The value to be compared against") 
-    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="Available values: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["criterionType", "subHoldingKey", "value"]
 

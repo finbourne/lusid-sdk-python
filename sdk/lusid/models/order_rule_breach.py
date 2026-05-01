@@ -28,7 +28,7 @@ class OrderRuleBreach(BaseModel):
     OrderRuleBreach
     """
     breach_task_id:  StrictStr = Field(...,alias="breachTaskId", description="Uniquely identifies this historical order breach workflow task.") 
-    compliance_state:  StrictStr = Field(...,alias="complianceState", description="The compliance state of this order breach. Possible values are 'Pending', 'Failed', 'Manually approved', 'Passed' and 'Warning'.") 
+    compliance_state:  StrictStr = Field(...,alias="complianceState", description="The compliance state of this order breach. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning.") 
     __properties = ["breachTaskId", "complianceState"]
 
     class Config:

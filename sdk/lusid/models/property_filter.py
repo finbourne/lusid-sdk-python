@@ -28,9 +28,9 @@ class PropertyFilter(BaseModel):
     PropertyFilter
     """
     left:  Optional[StrictStr] = Field(None,alias="left", description="The key that uniquely identifies a queryable address in Lusid.") 
-    operator:  Optional[StrictStr] = Field(None,alias="operator", description="The available values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, In, StartsWith") 
+    operator:  Optional[StrictStr] = Field(None,alias="operator", description="Available values: Equals, NotEquals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, In, StartsWith.") 
     right: Optional[Any] = None
-    right_operand_type:  Optional[StrictStr] = Field(None,alias="rightOperandType", description="The available values are: Absolute, Property") 
+    right_operand_type:  Optional[StrictStr] = Field(None,alias="rightOperandType", description="Available values: Absolute, Property.") 
     __properties = ["left", "operator", "right", "rightOperandType"]
 
     @validator('operator')

@@ -4,7 +4,7 @@ The quantity of the event that was instructed, represented either as a percentag
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | The type of quantity instructed, either Percentage or Units. | 
+**type** | **str** | The type of quantity instructed. Available values: Percentage, Units, Invalid. | 
 **amount** | **float** | The actual amount instructed. For Type Percentage, this is between 0 and 100. | 
 ## Example
 

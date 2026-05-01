@@ -28,7 +28,7 @@ class SimpleRoundingConvention(BaseModel):
     Certain bonds will follow certain rounding conventions.  For example, Thai government bonds will round accrued interest and cashflow values 2dp, whereas for  French government bonds, the rounding is to 7dp.  # noqa: E501
     """
     precision: Optional[StrictInt] = Field(default=None, description="The precision of the rounding. The decimal places or significant figures to which the rounding takes place.  Defaults to 0 if not set.")
-    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Nearest].  Defaults to \"None\" if not set.") 
+    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  Default value: None. Available values: None, Down, Up, Nearest.") 
     __properties = ["precision", "roundingType"]
 
     class Config:

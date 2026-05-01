@@ -40,7 +40,7 @@ class FundBookmark(FundCalendarEntries):
     previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
     as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
-    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry") 
+    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Available values: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry.") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Unofficial' or 'Final'.") 
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
     holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt.", alias="holdingsAsAtOverride")
@@ -49,7 +49,7 @@ class FundBookmark(FundCalendarEntries):
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
-    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["fundCalendarEntriesType", "code", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode"]
 

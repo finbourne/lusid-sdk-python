@@ -28,7 +28,7 @@ class ReferenceList(BaseModel):
     """
     ReferenceList
     """
-    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList") 
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
     __properties = ["referenceListType"]
 
     @validator('reference_list_type')

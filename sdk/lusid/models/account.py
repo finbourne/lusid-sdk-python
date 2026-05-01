@@ -30,9 +30,9 @@ class Account(BaseModel):
     """
     code:  StrictStr = Field(...,alias="code", description="The code given for the Account.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Account.") 
-    type:  StrictStr = Field(...,alias="type", description="The Account type. Can have the values: Asset/Liabilities/Income/Expense/Capital/Revenue.") 
-    status:  StrictStr = Field(...,alias="status", description="The Account status. Can be Active, Inactive or Deleted. The available values are: Active, Inactive, Deleted") 
-    control:  Optional[StrictStr] = Field(None,alias="control", description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”.") 
+    type:  StrictStr = Field(...,alias="type", description="The Account type. Available values: Asset, Liabilities, Income, Expense, Capital, Revenue.") 
+    status:  StrictStr = Field(...,alias="status", description="The Account status. Available values: Active, Inactive, Deleted.") 
+    control:  Optional[StrictStr] = Field(None,alias="control", description="This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Default value: Manual. Available values: Manual, System.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Account.")
     __properties = ["code", "description", "type", "status", "control", "properties"]
 

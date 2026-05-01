@@ -29,9 +29,9 @@ class Series(BaseModel):
     Series
     """
     series_identifier:  StrictStr = Field(...,alias="seriesIdentifier", description="The identifier that uniquely identifies this Series within the Share Class.") 
-    series_type:  StrictStr = Field(...,alias="seriesType", description="The type of the Series. Valid values are: Lead, Standard.") 
+    series_type:  StrictStr = Field(...,alias="seriesType", description="The type of the Series. Available values: Lead, Standard.") 
     launch_date: datetime = Field(description="The date on which the Series was launched.", alias="launchDate")
-    launch_price_type:  StrictStr = Field(...,alias="launchPriceType", description="The type of launch price for the Series. Valid values are: Manual, Calculated.") 
+    launch_price_type:  StrictStr = Field(...,alias="launchPriceType", description="The type of launch price for the Series. Available values: Manual, Calculated.") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The denomination currency of the Series.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to associate with the Series. Only applied if createInstrument is set to true on the parent Fund.")
     __properties = ["seriesIdentifier", "seriesType", "launchDate", "launchPriceType", "domCcy", "properties"]

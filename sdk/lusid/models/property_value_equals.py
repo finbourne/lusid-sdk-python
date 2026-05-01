@@ -30,7 +30,7 @@ class PropertyValueEquals(MatchCriterion):
     """
     property_key:  StrictStr = Field(...,alias="propertyKey", description="The property key whose value will form the left-hand side of the operation") 
     value:  StrictStr = Field(...,alias="value", description="The value to be compared against") 
-    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="Available values: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["criterionType", "propertyKey", "value"]
 

@@ -4,7 +4,7 @@ Base class for representing market data options in LUSID.  Abstractly, these are
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**market_data_options_type** | **str** | The available values are: CurveOptions | 
+**market_data_options_type** | **str** | Available values: CurveOptions. Available values: CurveOptions. | 
 ## Example
 
 ```python

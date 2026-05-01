@@ -33,7 +33,7 @@ class RelationalDatasetFieldDefinition(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A detailed description of the field and its purpose.") 
     data_type_id: ResourceId = Field(alias="dataTypeId")
     required: Optional[StrictBool] = Field(default=None, description="Whether this field is mandatory in the dataset.")
-    category:  StrictStr = Field(...,alias="category", description="The intended category of the field (SeriesIdentifier, Value, or Metadata).") 
+    category:  StrictStr = Field(...,alias="category", description="The intended category of the field (SeriesIdentifier, Value, or Metadata). Available values: SeriesIdentifier, Value, Metadata.") 
     __properties = ["fieldName", "displayName", "description", "dataTypeId", "required", "category"]
 
     class Config:

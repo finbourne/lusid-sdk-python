@@ -30,7 +30,7 @@ class FundIdList(ReferenceList):
     FundIdList
     """
     values: List[ResourceId]
-    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. The available values are: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList") 
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
 

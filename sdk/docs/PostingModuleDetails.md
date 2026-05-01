@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The name of the Posting Module. | 
 **description** | **str** | A description for the Posting Module. | [optional] 
-**status** | **str** | The Posting Module status. Can be Active or Inactive. Defaults to Active. | 
+**status** | **str** | The Posting Module status. Default value: Active. Available values: Active, Inactive. | 
 ## Example
 
 ```python

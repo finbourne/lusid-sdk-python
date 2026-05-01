@@ -28,7 +28,7 @@ class EligibilityCalculation(BaseModel):
     EligibilityCalculation
     """
     entitlement_date:  StrictStr = Field(...,alias="entitlementDate") 
-    eligible_units:  StrictStr = Field(...,alias="eligibleUnits") 
+    eligible_units:  StrictStr = Field(...,alias="eligibleUnits", description="Available values: TotalUnits, SettledUnits, NotApplicable.") 
     date_modifiable_by_instruction: Optional[StrictBool] = Field(default=None, alias="dateModifiableByInstruction")
     __properties = ["entitlementDate", "eligibleUnits", "dateModifiableByInstruction"]
 

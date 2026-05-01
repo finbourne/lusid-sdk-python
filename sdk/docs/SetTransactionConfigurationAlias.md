@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **description** | **str** |  | 
 **transaction_class** | **str** |  | 
-**transaction_role** | **str** |  | 
+**transaction_role** | **str** | Available values: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles. | 
 **is_default** | **bool** |  | [optional] 
 ## Example
 

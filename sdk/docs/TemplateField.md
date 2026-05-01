@@ -4,10 +4,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **field_name** | **str** |  | 
-**specificity** | **str** |  | 
+**specificity** | **str** | Available values: AllEventsAndHoldings, InstrumentEventType, ElectionType. | 
 **description** | **str** |  | 
-**type** | **str** |  | 
-**availability** | **str** |  | 
+**type** | **str** | Available values: String, Decimal, InstrumentScope, Currency, DateTime, PriceType, InstrumentId, PropertyKey, Boolean. | 
+**availability** | **str** | Available values: Guaranteed, DataDependent, Informational. | 
 **usage** | **List[str]** |  | 
 ## Example
 

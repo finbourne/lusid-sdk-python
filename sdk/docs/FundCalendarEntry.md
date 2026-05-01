@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **previous_entry** | [**PreviousFundCalendarEntry**](PreviousFundCalendarEntry.md) |  | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
-**entry_type** | **str** | The type of the Fund Calendar Entry. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry | 
+**entry_type** | **str** | The type of the Fund Calendar Entry. Available values: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry. | 
 **status** | **str** | The status of the Fund Calendar Entry. Can be &#39;Estimate&#39;, &#39;Unofficial&#39; or &#39;Final&#39;. | [optional] 
 **apply_clear_down** | **bool** | Set to true if that closed period should have the clear down applied. | 
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 

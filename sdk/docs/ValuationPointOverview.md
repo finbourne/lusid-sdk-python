@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **effective_from** | **datetime** | The effective time of the last Valuation Point. | 
 **effective_to** | **datetime** | The effective time of the current Valuation Point. | 
 **query_as_at** | **datetime** | The query time of the Valuation Point. Defaults to latest. | [optional] 
-**type** | **str** | The type of the diary entry. This is &#39;ValuationPoint&#39;. | 
-**status** | **str** | The status of the Valuation Point. Can be &#39;Estimate&#39;, &#39;Candidate&#39; or &#39;Final&#39;. | 
+**type** | **str** | The type of the diary entry. This is &#39;ValuationPoint&#39;. Available values: PeriodBoundary, ValuationPoint, Other. | 
+**status** | **str** | The status of the Valuation Point. Available values: Undefined, Estimate, Final, Candidate, Unofficial. | 
 **gav** | **float** | The Gross Asset Value of the Fund or Share Class at the Valuation Point. This is effectively a summation of all Trial balance entries linked to accounts of types &#39;Asset&#39; and &#39;Liabilities&#39;. | 
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 

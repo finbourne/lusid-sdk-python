@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settlement_instruction_id** | **str** |  | 
-**operation** | **str** |  | [optional] 
+**operation** | **str** | Available values: Activate, Deactivate. | [optional] 
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 ## Example
 

@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **left_value** | **str** | The left string to map | 
 **right_value** | **str** | The right string to map | 
-**direction** | **str** | The direction to map. \&quot;UniDirectional\&quot; | \&quot;BiDirectional\&quot; | 
+**direction** | **str** | The direction to map. Available values: BiDirectional, UniDirectional. | 
 ## Example
 
 ```python

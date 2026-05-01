@@ -28,7 +28,7 @@ class FundCalendarEntries(BaseModel):
     """
     FundCalendarEntries
     """
-    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     __properties = ["fundCalendarEntriesType"]
 
     @validator('fund_calendar_entries_type')

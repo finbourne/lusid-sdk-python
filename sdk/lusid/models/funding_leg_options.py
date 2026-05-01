@@ -29,7 +29,7 @@ class FundingLegOptions(ModelOptions):
     FundingLegOptions
     """
     expected_funding_leg_notional:  StrictStr = Field(...,alias="expectedFundingLegNotional", description="Assumption made on future expected notional of the funding leg.") 
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "expectedFundingLegNotional"]
 

@@ -29,7 +29,7 @@ class ResultValueCurrency(ResultValue):
     A simple result for a currency value  # noqa: E501
     """
     value:  Optional[StrictStr] = Field(None,alias="value", description="The value itself") 
-    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="Available values: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "value"]
 

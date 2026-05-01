@@ -30,7 +30,7 @@ class CashDependency(EconomicDependency):
     """
     currency:  StrictStr = Field(...,alias="currency", description="The Currency that is depended upon.") 
     var_date: datetime = Field(description="The effectiveDate of the entity that this is a dependency for.  Unless there is an obvious date this should be, like for a historic reset, then this is the valuation date.", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "currency", "date"]
 

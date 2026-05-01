@@ -32,7 +32,7 @@ class CalculateOrderDatesRequest(BaseModel):
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope") 
     received_date: Optional[datetime] = Field(default=None, alias="receivedDate")
     price_date: Optional[datetime] = Field(default=None, alias="priceDate")
-    transaction_category:  Optional[StrictStr] = Field(None,alias="transactionCategory") 
+    transaction_category:  Optional[StrictStr] = Field(None,alias="transactionCategory", description="Available values: Subscription, Redemption, SwitchOut, SwitchIn, TransferOut, TransferIn.") 
     liquidating_share_class_identifier:  Optional[StrictStr] = Field(None,alias="liquidatingShareClassIdentifier") 
     liquidating_share_class_identifier_type:  Optional[StrictStr] = Field(None,alias="liquidatingShareClassIdentifierType") 
     liquidating_share_class_instrument_scope:  Optional[StrictStr] = Field(None,alias="liquidatingShareClassInstrumentScope") 

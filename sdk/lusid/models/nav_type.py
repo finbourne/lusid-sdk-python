@@ -28,7 +28,7 @@ class NavType(BaseModel):
     """
     NavType
     """
-    status:  StrictStr = Field(...,alias="status", description="The Status of the Nav Type. Can be 'Active' or 'Inactive'.") 
+    status:  StrictStr = Field(...,alias="status", description="The Status of the Nav Type. Available values: Active, Inactive.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="The Code for the Nav Type. Must be unique within the Fund.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The Display Name for the Nav Type. Must be unique within the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The Description for the Nav Type.") 
@@ -37,11 +37,11 @@ class NavType(BaseModel):
     cleardown_module_codes: Optional[List[StrictStr]] = Field(default=None, description="The Cleardown Module Codes from which the rules to be applied are retrieved.", alias="cleardownModuleCodes")
     valuation_recipe_id: ResourceId = Field(alias="valuationRecipeId")
     holding_recipe_id: ResourceId = Field(alias="holdingRecipeId")
-    accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="Determines the accounting treatment given to the simple position portfolio's tax lots. A non-default value is required.") 
+    accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="Determines the accounting treatment given to the simple position portfolio's tax lots. A non-default value is required. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
     sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, description="A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.", alias="subHoldingKeys")
-    amortisation_method:  StrictStr = Field(...,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
+    amortisation_method:  StrictStr = Field(...,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. Available values: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate.") 
     transaction_type_scope:  StrictStr = Field(...,alias="transactionTypeScope", description="The scope of the transaction types.") 
-    cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. A non-default value is required.") 
+    cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. A non-default value is required. Available values: SettlementDate, TransactionDate.") 
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
     transaction_template_scope:  Optional[StrictStr] = Field(None,alias="transactionTemplateScope", description="The Transaction Template Scope used by the NavType. Will default to the scope set on the parent portfolio. If the fund has multiple parent portfolios, then the Transaction Template Scope must be provided.") 

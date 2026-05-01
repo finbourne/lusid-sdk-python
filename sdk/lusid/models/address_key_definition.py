@@ -30,7 +30,7 @@ class AddressKeyDefinition(BaseModel):
     AddressKeyDefinition
     """
     address_key:  StrictStr = Field(...,alias="addressKey", description="The address key of the address key definition.") 
-    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition. Available values: Text, Integer, Decimal, Boolean, DateTime, Result0D.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
     __properties = ["addressKey", "type", "version", "links"]

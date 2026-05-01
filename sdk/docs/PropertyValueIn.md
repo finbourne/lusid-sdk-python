@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **property_key** | **str** | The property key whose value will form the left-hand side of the operation | 
 **value** | **List[str]** | The value to be compared against | 
-**criterion_type** | **str** | The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals | 
+**criterion_type** | **str** | Available values: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals. | 
 ## Example
 
 ```python

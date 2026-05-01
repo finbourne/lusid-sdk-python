@@ -482,7 +482,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(InstrumentsApi)
     request_body = ["LUID_12345678","LUID_87654321"] # List[str] | The list of lusidInstrumentId's to delete.
-    delete_mode = 'delete_mode_example' # str | The delete mode to use (defaults to 'Soft'). (optional)
+    delete_mode = 'delete_mode_example' # str | The delete mode to use. Default value: Soft. Available values: Soft, Hard. (optional)
     scope = 'default' # str | The scope in which the instruments lie. When not supplied the scope is 'default'. (optional) (default to 'default')
 
     try:
@@ -504,7 +504,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_body** | [**List[str]**](str.md)| The list of lusidInstrumentId&#39;s to delete. | 
- **delete_mode** | **str**| The delete mode to use (defaults to &#39;Soft&#39;). | [optional] 
+ **delete_mode** | **str**| The delete mode to use. Default value: Soft. Available values: Soft, Hard. | [optional] 
  **scope** | **str**| The scope in which the instruments lie. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
 
 ### Return type
@@ -1715,7 +1715,7 @@ def main():
     relationship_definition_ids = ['relationship_definition_ids_example'] # List[str] | A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
-    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
+    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
     timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
     closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
@@ -1749,7 +1749,7 @@ Name | Type | Description  | Notes
  **relationship_definition_ids** | [**List[str]**](str.md)| A list of relationship definitions that are used to decorate related entities               onto each instrument in the response. These must take the form {relationshipDefinitionScope}/{relationshipDefinitionCode}. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
- **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
+ **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] 
  **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
  **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
  **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. | [optional] 

@@ -28,7 +28,7 @@ class GroupReconciliationCoreComparisonRuleOperand(BaseModel):
     GroupReconciliationCoreComparisonRuleOperand
     """
     key:  StrictStr = Field(...,alias="key", description="The key of the value to compare") 
-    operation:  StrictStr = Field(...,alias="operation", description="What to do with the value pointed to by the key, e.g. Sum. Only \"Value is allowed for core rules\"") 
+    operation:  StrictStr = Field(...,alias="operation", description="What to do with the value pointed to by the key, e.g. Sum. Only \"Value is allowed for core rules\". Available values: Value.") 
     __properties = ["key", "operation"]
 
     class Config:

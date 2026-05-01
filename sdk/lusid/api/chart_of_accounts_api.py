@@ -773,15 +773,15 @@ class ChartOfAccountsApi:
 
 
     @overload
-    async def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use (defaults to 'Soft').")] = None, **kwargs) -> DeleteAccountsResponse:  # noqa: E501
+    async def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, **kwargs) -> DeleteAccountsResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use (defaults to 'Soft').")] = None, async_req: Optional[bool]=True, **kwargs) -> DeleteAccountsResponse:  # noqa: E501
+    def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeleteAccountsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use (defaults to 'Soft').")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteAccountsResponse, Awaitable[DeleteAccountsResponse]]:  # noqa: E501
+    def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteAccountsResponse, Awaitable[DeleteAccountsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
 
         Delete one or more account from the Chart of Accounts. Soft deletion marks the account as inactive  While the Hard deletion is deleting the account.  The maximum number of accounts that this method can delete per request is 2,000.  # noqa: E501
@@ -797,7 +797,7 @@ class ChartOfAccountsApi:
         :type code: str
         :param request_body: The codes of the accounts to delete. (required)
         :type request_body: List[str]
-        :param delete_mode: The delete mode to use (defaults to 'Soft').
+        :param delete_mode: The delete mode to use. Default value: Soft. Available values: Soft, Hard.
         :type delete_mode: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -818,7 +818,7 @@ class ChartOfAccountsApi:
         return self.delete_accounts_with_http_info(scope, code, request_body, delete_mode, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use (defaults to 'Soft').")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
 
         Delete one or more account from the Chart of Accounts. Soft deletion marks the account as inactive  While the Hard deletion is deleting the account.  The maximum number of accounts that this method can delete per request is 2,000.  # noqa: E501
@@ -834,7 +834,7 @@ class ChartOfAccountsApi:
         :type code: str
         :param request_body: The codes of the accounts to delete. (required)
         :type request_body: List[str]
-        :param delete_mode: The delete mode to use (defaults to 'Soft').
+        :param delete_mode: The delete mode to use. Default value: Soft. Available values: Soft, Hard.
         :type delete_mode: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

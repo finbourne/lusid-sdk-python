@@ -39,9 +39,9 @@ class FxForwardTenorCurveData(ComplexMarketData):
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     calendars: Optional[List[FxTenorConvention]] = Field(default=None, description="The list of conventions that should be used when interpreting tenors as dates.")
-    spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided.  Supported string (enumeration) values are: [ SingleCalendar, UnionCalendars ]") 
+    spot_days_calculation_type:  Optional[StrictStr] = Field(None,alias="spotDaysCalculationType", description="Configures how to calculate the spot date from the build date using the Calendars provided. Available values: SingleCalendar, UnionCalendars.") 
     version: Optional[Version] = None
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "tenors", "rates", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType", "version"]
 

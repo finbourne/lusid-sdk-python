@@ -30,7 +30,7 @@ class AppendFxForwardTenorPipsCurveData(AppendMarketData):
     """
     tenor:  StrictStr = Field(...,alias="tenor", description="Tenor for which the forward rate applies.") 
     pip_rate: Union[StrictFloat, StrictInt] = Field(description="Rate provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips.", alias="pipRate")
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: AppendFxForwardCurveByQuoteReference, AppendFxForwardCurveData, AppendFxForwardPipsCurveData, AppendFxForwardTenorCurveData, AppendFxForwardTenorPipsCurveData.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "tenor", "pipRate"]
 

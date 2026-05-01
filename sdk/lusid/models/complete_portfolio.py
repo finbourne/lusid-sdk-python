@@ -38,7 +38,7 @@ class CompletePortfolio(BaseModel):
     created: Optional[datetime] = Field(default=None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
     is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
     version: Version
     properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.") 

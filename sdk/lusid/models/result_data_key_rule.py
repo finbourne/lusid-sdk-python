@@ -36,7 +36,7 @@ class ResultDataKeyRule(ResultKeyRule):
     resource_key:  StrictStr = Field(...,alias="resourceKey", description="The result data key that identifies the address pattern that this is a rule for") 
     document_result_type:  StrictStr = Field(...,alias="documentResultType") 
     use_document_to_infer_holdings: Optional[StrictBool] = Field(default=None, description="Indicates whether the relevant document should be used to infer the set of holdings in the valuation.", alias="useDocumentToInferHoldings")
-    result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule") 
+    result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="Available values: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultKeyRuleType", "supplier", "dataScope", "documentCode", "quoteInterval", "asAt", "resourceKey", "documentResultType", "useDocumentToInferHoldings"]
 

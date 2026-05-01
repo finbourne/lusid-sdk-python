@@ -36,7 +36,7 @@ class EquityVolSurfaceData(ComplexMarketData):
     quotes: List[MarketQuote] = Field(description="The set of market quotes that define the surface, in NormalVol or LogNormalVol terms.")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     version: Optional[Version] = None
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="The available values are: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "version"]
 

@@ -30,7 +30,7 @@ class CashFlowValueSet(ResultValue):
     Result value for a collection of cash flow values  # noqa: E501
     """
     cashflows: Optional[List[CashFlowValue]] = Field(default=None, description="The set of cash flows in the result")
-    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="Available values: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "cashflows"]
 

@@ -28,10 +28,10 @@ class TemplateField(BaseModel):
     TemplateField
     """
     field_name:  StrictStr = Field(...,alias="fieldName") 
-    specificity:  StrictStr = Field(...,alias="specificity") 
+    specificity:  StrictStr = Field(...,alias="specificity", description="Available values: AllEventsAndHoldings, InstrumentEventType, ElectionType.") 
     description:  StrictStr = Field(...,alias="description") 
-    type:  StrictStr = Field(...,alias="type") 
-    availability:  StrictStr = Field(...,alias="availability") 
+    type:  StrictStr = Field(...,alias="type", description="Available values: String, Decimal, InstrumentScope, Currency, DateTime, PriceType, InstrumentId, PropertyKey, Boolean.") 
+    availability:  StrictStr = Field(...,alias="availability", description="Available values: Guaranteed, DataDependent, Informational.") 
     usage: List[StrictStr]
     __properties = ["fieldName", "specificity", "description", "type", "availability", "usage"]
 

@@ -28,7 +28,7 @@ class AddressDefinition(BaseModel):
     AddressDefinition
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the address key.") 
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The available values are: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for this result.") 
     life_cycle_status:  Optional[StrictStr] = Field(None,alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.") 
     removal_date: Optional[datetime] = Field(default=None, description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.", alias="removalDate")

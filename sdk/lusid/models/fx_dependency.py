@@ -31,7 +31,7 @@ class FxDependency(EconomicDependency):
     domestic_currency:  StrictStr = Field(...,alias="domesticCurrency", description="DomesticCurrency is the first currency in a currency pair quote e.g. eur-gbp, eur is the domestic currency.") 
     foreign_currency:  StrictStr = Field(...,alias="foreignCurrency", description="ForeignCurrency is the second currency in a currency pair quote e.g. eur-gbp, gbp is the foreign currency.") 
     var_date: datetime = Field(description="The effectiveAt of the fx rate.", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "domesticCurrency", "foreignCurrency", "date"]
 

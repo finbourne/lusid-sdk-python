@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **timeline_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **previous_entry** | [**PreviousFundCalendarEntry**](PreviousFundCalendarEntry.md) |  | [optional] 
 **effective_at** | **datetime** | The effective at of the Calendar Entry. | [optional] 
-**entry_type** | **str** | The type of the Fund Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark | 
+**entry_type** | **str** | The type of the Fund Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark. | 
 **status** | **str** | The status of the Fund Calendar Entry. Can be &#39;Estimate&#39;, &#39;Unofficial&#39; or &#39;Final&#39;. | [optional] 
 **apply_clear_down** | **bool** | Set to true if that closed period should have the clear down applied. | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
 **variants** | [**List[EstimateVariant]**](EstimateVariant.md) | The variants of the Estimate Valuation Point.  | [optional] 
-**fund_calendar_entries_type** | **str** | The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark | 
+**fund_calendar_entries_type** | **str** | The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark. | 
 ## Example
 
 ```python

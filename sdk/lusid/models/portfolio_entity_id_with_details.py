@@ -31,7 +31,7 @@ class PortfolioEntityIdWithDetails(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description") 
     scope:  StrictStr = Field(...,alias="scope", description="The scope within which the portfolio or portfolio group lives.") 
     code:  StrictStr = Field(...,alias="code", description="Portfolio name or code.") 
-    portfolio_entity_type:  Optional[StrictStr] = Field(None,alias="portfolioEntityType", description="String identifier for portfolio e.g. \"SinglePortfolio\" and \"GroupPortfolio\". If not specified, it is assumed to be a single portfolio.") 
+    portfolio_entity_type:  Optional[StrictStr] = Field(None,alias="portfolioEntityType", description="String identifier for portfolio e.g. \"SinglePortfolio\" and \"GroupPortfolio\". If not specified, it is assumed to be a single portfolio. Available values: SinglePortfolio, GroupPortfolio.") 
     __properties = ["displayName", "description", "scope", "code", "portfolioEntityType"]
 
     class Config:

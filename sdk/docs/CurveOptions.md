@@ -4,10 +4,10 @@ Options for configuring how ComplexMarketData representing a 'curve' is interpre
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**day_count_convention** | **str** | Day count convention of the curve. Defaults to \&quot;Act360\&quot;. | [optional] 
-**front_extrapolation_type** | **str** | What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \&quot;front\&quot; direction is the closest point on the curve onward.    example: 0D tenor to past  Defaults to \&quot;Flat\&quot;. Supported string (enumeration) values are: [None, Flat, Linear]. | [optional] 
-**back_extrapolation_type** | **str** | What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \&quot;back\&quot; direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Defaults to \&quot;Flat\&quot;. Supported string (enumeration) values are: [None, Flat, Linear]. | [optional] 
-**market_data_options_type** | **str** | The available values are: CurveOptions | 
+**day_count_convention** | **str** | Day count convention of the curve. Default value: Act360. Available values: Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM, Invalid. | [optional] 
+**front_extrapolation_type** | **str** | What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \&quot;front\&quot; direction is the closest point on the curve onward.    example: 0D tenor to past  Default value: Flat. Available values: None, Flat, Linear. | [optional] 
+**back_extrapolation_type** | **str** | What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \&quot;back\&quot; direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Default value: Flat. Available values: None, Flat, Linear. | [optional] 
+**market_data_options_type** | **str** | Available values: CurveOptions. Available values: CurveOptions. | 
 ## Example
 
 ```python

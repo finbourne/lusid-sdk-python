@@ -37,7 +37,7 @@ class PlacementUpdateRequest(BaseModel):
     stop_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="stopPrice")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
-    entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement.") 
+    entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement. Available values: Undecided, Manual, Direct, Ems, External.") 
     __properties = ["id", "quantity", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
 
     class Config:

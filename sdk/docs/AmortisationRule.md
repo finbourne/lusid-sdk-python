@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **name** | **str** | The name of the rule. | 
 **description** | **str** | A description of the rule. | [optional] 
 **filter** | **str** | The filter for this rule. | 
-**amortisation_method** | **str** | The filter for this rule. | 
+**amortisation_method** | **str** | The filter for this rule. Available values: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate. | 
 ## Example
 
 ```python

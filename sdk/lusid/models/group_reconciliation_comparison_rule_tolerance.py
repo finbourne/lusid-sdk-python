@@ -27,7 +27,7 @@ class GroupReconciliationComparisonRuleTolerance(BaseModel):
     """
     GroupReconciliationComparisonRuleTolerance
     """
-    type:  StrictStr = Field(...,alias="type", description="The type of tolerance to allow. \"Relative\" | \"Absolute\"") 
+    type:  StrictStr = Field(...,alias="type", description="The type of tolerance to allow. Available values: Relative, Absolute.") 
     value: Union[StrictFloat, StrictInt] = Field(description="The decimal value of how much tolerance to allow when comparing in relative (i.e percentage) or absolute terms depending on the ToleranceType specified")
     __properties = ["type", "value"]
 

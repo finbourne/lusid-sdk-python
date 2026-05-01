@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**portfolio_scaling** | **str** | The available values are: Sum, AbsoluteSum, Unity | 
+**portfolio_scaling** | **str** | Available values: Sum, AbsoluteSum, Unity. | 
 **lookthrough_portfolio_relationship_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**model_options_type** | **str** | The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions | 
+**model_options_type** | **str** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions. | 
 ## Example
 
 ```python

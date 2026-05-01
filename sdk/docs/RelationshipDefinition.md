@@ -5,13 +5,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **version** | [**Version**](Version.md) |  | [optional] 
 **relationship_definition_id** | [**ResourceId**](ResourceId.md) |  | 
-**source_entity_type** | **str** | The entity type of the source entity object. | 
-**target_entity_type** | **str** | The entity type of the target entity object. | 
+**source_entity_type** | **str** | The entity type of the source entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction. | 
+**target_entity_type** | **str** | The entity type of the target entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction. | 
 **display_name** | **str** | The display name of the relationship. | 
 **outward_description** | **str** | The description to relate source entity object and target entity object | 
 **inward_description** | **str** | The description to relate target entity object and source entity object | 
-**life_time** | **str** | Describes how the relationships can change over time. | 
-**relationship_cardinality** | **str** | Describes the cardinality of the relationship between source entity and target entity. | 
+**life_time** | **str** | Describes how the relationships can change over time. Available values: Perpetual, TimeVariant. | 
+**relationship_cardinality** | **str** | Describes the cardinality of the relationship between source entity and target entity. Available values: ManyToOne, ManyToMany. | 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 

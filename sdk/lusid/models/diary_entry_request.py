@@ -30,7 +30,7 @@ class DiaryEntryRequest(BaseModel):
     """
     diary_entry_code:  StrictStr = Field(...,alias="diaryEntryCode", description="The code of the diary entry.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="The name of the diary entry.") 
-    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'.") 
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of a Diary Entry of Type 'Other'. Defaults to 'Undefined' and supports 'Undefined', 'Estimate', 'Candidate', and 'Final'. Available values: Undefined, Estimate, Final, Candidate, Unofficial.") 
     effective_at: datetime = Field(description="The effective time of the diary entry.", alias="effectiveAt")
     query_as_at: Optional[datetime] = Field(default=None, description="The query time of the diary entry. Defaults to latest.", alias="queryAsAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")

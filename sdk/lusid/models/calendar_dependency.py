@@ -29,7 +29,7 @@ class CalendarDependency(EconomicDependency):
     For indicating a dependency upon calendar codes  # noqa: E501
     """
     calendars: List[StrictStr] = Field(description="The Codes of the calendars that are depended upon.")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "calendars"]
 

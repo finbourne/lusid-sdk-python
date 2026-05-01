@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the property. | 
 **property_description** | **str** | Describes the property | [optional] 
 **custom_entity_types** | **List[str]** | The custom entity types that properties relating to this property definition can be applied to. | [optional] 
-**value_format** | **str** | The format in which values for this property definition should be represented. | [optional] 
+**value_format** | **str** | The format in which values for this property definition should be represented. Available values: Text, Html. | [optional] 
 ## Example
 
 ```python

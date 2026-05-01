@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settlement_instruction_id** | **str** | The id of the problematic settlement instruction. Combined with the portfolio id this uniquely identifies a settlement instruction | 
 **category** | **str** | The category this instruction belongs to | 
-**status** | **str** | The status of the settlement instruction. Possible values are &#39;Invalid&#39; or &#39;Rejected&#39;. | 
+**status** | **str** | The status of the settlement instruction. Available values: Invalid, Rejected, Applied, Orphan. | 
 ## Example
 
 ```python

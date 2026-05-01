@@ -28,7 +28,7 @@ class ComplianceStep(BaseModel):
     """
     ComplianceStep
     """
-    compliance_step_type:  StrictStr = Field(...,alias="complianceStepType", description=". The available values are: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep") 
+    compliance_step_type:  StrictStr = Field(...,alias="complianceStepType", description="The type of the compliance step. Available values: FilterStep, GroupByStep, GroupFilterStep, BranchStep, RecombineStep, CheckStep, PercentCheckStep.") 
     __properties = ["complianceStepType"]
 
     @validator('compliance_step_type')

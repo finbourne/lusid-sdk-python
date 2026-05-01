@@ -4,7 +4,7 @@ Base class for representing result key rules in LUSID, which describe how to res
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result_key_rule_type** | **str** | The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule | 
+**result_key_rule_type** | **str** | Available values: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule. | 
 ## Example
 
 ```python

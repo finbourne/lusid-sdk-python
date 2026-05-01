@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **type** | **str** | The transaction type | 
 **description** | **str** | Brief description of the transaction | 
 **transaction_class** | **str** | Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut | 
-**transaction_roles** | **str** | Transactions role within a class. E.g. Increase a long position | 
+**transaction_roles** | **str** | Transactions role within a class. E.g. Increase a long position. Available values: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles. | 
 **is_default** | **bool** | IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source. | [optional] 
 ## Example
 

@@ -31,7 +31,7 @@ class JournalEntryLinesQueryParameters(BaseModel):
     start: Optional[DateOrDiaryEntry] = None
     end: Optional[DateOrDiaryEntry] = None
     variant:  Optional[StrictStr] = Field(None,alias="variant", description="Unique Variant for the given Valuation points. If not provided, defaults to empty string.") 
-    date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the journal entry lines. The available values are: ActivityDate, AccountingDate.") 
+    date_mode:  Optional[StrictStr] = Field(None,alias="dateMode", description="The mode of calculation of the journal entry lines. Available values: ActivityDate, AccountingDate.") 
     general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The optional code of a general ledger profile used to decorate journal entry lines with levels.") 
     property_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount' domain to decorate onto the journal entry lines.", alias="propertyKeys")
     __properties = ["start", "end", "variant", "dateMode", "generalLedgerProfileCode", "propertyKeys"]

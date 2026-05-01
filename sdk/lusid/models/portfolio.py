@@ -37,7 +37,7 @@ class Portfolio(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId
-    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
@@ -49,8 +49,8 @@ class Portfolio(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the portfolio.")
     instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The instrument scope resolution strategy of this portfolio.", alias="instrumentScopes")
-    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description=". The available values are: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency") 
-    amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. The available values are: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate") 
+    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="The AccountingMethod used for the portfolio. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
+    amortisation_method:  Optional[StrictStr] = Field(None,alias="amortisationMethod", description="The amortisation method used by the portfolio for the calculation. Available values: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate.") 
     transaction_type_scope:  Optional[StrictStr] = Field(None,alias="transactionTypeScope", description="The scope of the transaction types.") 
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The scope of the transaction types.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")

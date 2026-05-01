@@ -42,8 +42,8 @@ class ShareClass(BaseModel):
     launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
     apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weighting factor used for apportionment across this share class.", alias="apportionmentFactor")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true.")
-    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The Type of Share Class. Supported values are: Unitised / Non-Unitised / Series / Private Equity / Partnership.") 
-    distribution_type:  StrictStr = Field(...,alias="distributionType", description="The type of distribution the ShareClass will calculate. Supported values are: Income, Accumulation.") 
+    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership.") 
+    distribution_type:  StrictStr = Field(...,alias="distributionType", description="The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the ShareClass instrument.") 
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
     units_precision: Optional[StrictInt] = Field(default=None, description="Decimal places for the share class units.", alias="unitsPrecision")
@@ -51,8 +51,8 @@ class ShareClass(BaseModel):
     rounding_conventions: Optional[List[SimpleRoundingConvention]] = Field(default=None, description="Rounding conventions used for the ShareClass quotes.", alias="roundingConventions")
     rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = Field(default=None, description="Rounding conventions used for the ShareClass units.", alias="roundingConventionsUnits")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
-    distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Supported values are: Gross, Net.") 
-    hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Supported values are: Invalid, None, ApplyHedging.") 
+    distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Available values: Invalid, Gross, Net.") 
+    hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.") 
     __properties = ["instrumentIdentifiers", "series", "code", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
 
     class Config:

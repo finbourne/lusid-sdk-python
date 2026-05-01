@@ -35,7 +35,7 @@ class PortfolioResultDataKeyRule(ResultKeyRule):
     as_at: Optional[datetime] = Field(default=None, description="The AsAt predicate specification.", alias="asAt")
     portfolio_code:  Optional[StrictStr] = Field(None,alias="portfolioCode") 
     portfolio_scope:  Optional[StrictStr] = Field(None,alias="portfolioScope") 
-    result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule") 
+    result_key_rule_type:  StrictStr = Field(...,alias="resultKeyRuleType", description="Available values: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultKeyRuleType", "supplier", "dataScope", "documentCode", "quoteInterval", "asAt", "portfolioCode", "portfolioScope"]
 

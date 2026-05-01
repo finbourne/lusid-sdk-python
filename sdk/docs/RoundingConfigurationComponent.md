@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rounding_type** | **str** | The type of rounding that should be used, eg: Up, Down, NearestRoundHalfAwayFromZero | 
+**rounding_type** | **str** | The type of rounding that should be used. Available values: Up, Down, NearestRoundHalfAwayFromZero. | 
 ## Example
 
 ```python

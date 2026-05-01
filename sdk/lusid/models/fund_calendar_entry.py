@@ -40,7 +40,7 @@ class FundCalendarEntry(BaseModel):
     previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
     as_at: datetime = Field(description="The asAt datetime for the Calendar Entry.", alias="asAt")
-    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. The available values are: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry") 
+    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Available values: ValuationPointFundCalendarEntry, BookmarkFundCalendarEntry.") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Unofficial' or 'Final'.") 
     apply_clear_down: StrictBool = Field(description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
     holdings_as_at_override: Optional[datetime] = Field(default=None, description="The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt.", alias="holdingsAsAtOverride")

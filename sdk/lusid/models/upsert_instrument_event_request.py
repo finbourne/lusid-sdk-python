@@ -36,7 +36,7 @@ class UpsertInstrumentEventRequest(BaseModel):
     instrument_event: InstrumentEvent = Field(alias="instrumentEvent")
     properties: Optional[List[PerpetualProperty]] = Field(default=None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(default=None, description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.", alias="sequenceNumber")
-    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
+    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary.") 
     event_date_stamps: Optional[Dict[str, YearMonthDay]] = Field(default=None, description="The date stamps corresponding to the relevant date-time fields for the instrument event. The key for each provided date stamp must match the field name of a valid datetime field from the InstrumentEvent DTO.", alias="eventDateStamps")
     __properties = ["instrumentEventId", "instrumentIdentifiers", "description", "instrumentEvent", "properties", "sequenceNumber", "participationType", "eventDateStamps"]
 

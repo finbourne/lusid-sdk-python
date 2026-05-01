@@ -28,7 +28,7 @@ class OrderBySpec(BaseModel):
     OrderBySpec
     """
     key:  StrictStr = Field(...,alias="key", description="The key that uniquely identifies a queryable address in Lusid.") 
-    sort_order:  StrictStr = Field(...,alias="sortOrder", description="The available values are: Ascending, Descending") 
+    sort_order:  StrictStr = Field(...,alias="sortOrder", description="Available values: Ascending, Descending.") 
     __properties = ["key", "sortOrder"]
 
     @validator('sort_order')

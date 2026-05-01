@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **identifiers** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Unique client-defined identifiers of the Investment Account. | 
 **display_name** | **str** | The display name of the Investment Account | 
 **description** | **str** | The description of the Investment Account | [optional] 
-**account_type** | **str** | The type of the of the Investment Account. | 
+**account_type** | **str** | The type of the of the Investment Account. Available values: Individual, Corporate, Joint, Nominee. | 
 **account_holders** | [**List[AccountHolderIdentifier]**](AccountHolderIdentifier.md) | The identification of the account holders associated with this investment account | [optional] 
 **investment_portfolios** | [**List[InvestmentPortfolioIdentifier]**](InvestmentPortfolioIdentifier.md) | The identification of the investment portfolios associated with this investment account | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties associated to the Investment Account. | [optional] 

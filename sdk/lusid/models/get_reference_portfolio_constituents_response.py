@@ -30,8 +30,8 @@ class GetReferencePortfolioConstituentsResponse(BaseModel):
     GetReferencePortfolioConstituentsResponse
     """
     effective_from: datetime = Field(alias="effectiveFrom")
-    weight_type:  StrictStr = Field(...,alias="weightType", description="The available values are: Static, Floating, Periodical") 
-    period_type:  Optional[StrictStr] = Field(None,alias="periodType", description="The available values are: Daily, Weekly, Monthly, Quarterly, Annually") 
+    weight_type:  StrictStr = Field(...,alias="weightType", description="Available values: Static, Floating, Periodical.") 
+    period_type:  Optional[StrictStr] = Field(None,alias="periodType", description="Available values: Daily, Weekly, Monthly, Quarterly, Annually.") 
     period_count: Optional[StrictInt] = Field(default=None, alias="periodCount")
     constituents: List[ReferencePortfolioConstituent] = Field(description="Set of constituents (instrument/weight pairings)")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The Uri that returns the same result as the original request,  but may include resolved as at time(s).") 

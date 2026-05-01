@@ -32,7 +32,7 @@ class QuoteActivity(NavActivityAdjustment):
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the quote event that need to be added to the closed period.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the quote which needs to be added as a post close activity.") 
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The InstrumentId from the quote which needs to be added as a post close activity.") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "asAt", "effectiveAt", "entityUniqueId", "instrumentId"]
 

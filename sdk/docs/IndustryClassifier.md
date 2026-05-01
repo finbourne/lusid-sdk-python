@@ -4,7 +4,7 @@ Object describing a particular industry classifier,  which comprises a classific
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**classification_system_name** | **str** | The name of the classification system to which the classification code belongs (e.g. GICS). | 
+**classification_system_name** | **str** | The name of the classification system to which the classification code belongs (e.g. GICS). Available values: GICS2018. | 
 **classification_code** | **str** | The specific industry classification code assigned to the legal entity. | 
 ## Example
 

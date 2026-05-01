@@ -29,7 +29,7 @@ class Strategy(BaseModel):
     Strategy
     """
     keys: List[PerpetualProperty]
-    value_type:  StrictStr = Field(...,alias="valueType") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="Available values: Units, Weight.") 
     value: Union[StrictFloat, StrictInt]
     __properties = ["keys", "valueType", "value"]
 

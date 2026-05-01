@@ -4,7 +4,7 @@ The base class for representing a Trade Ticket in LUSID.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**trade_ticket_type** | **str** | The available values are: LusidTradeTicket, ExternalTradeTicket | 
+**trade_ticket_type** | **str** | Available values: LusidTradeTicket, ExternalTradeTicket. | 
 ## Example
 
 ```python

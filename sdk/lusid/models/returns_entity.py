@@ -30,11 +30,11 @@ class ReturnsEntity(BaseModel):
     """
     id: ResourceId
     recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
-    recipe_entity:  Optional[StrictStr] = Field(None,alias="recipeEntity", description="Entity a recipe is retrieved from for use in the aggregated returns calculation. Either RecipeId or RecipeEntity must be specified.") 
-    fee_handling:  Optional[StrictStr] = Field(None,alias="feeHandling", description="Configures how fees are handled in the aggregated returns calculation.") 
-    flow_handling:  Optional[StrictStr] = Field(None,alias="flowHandling", description="Configures how flows are handled in the aggregated returns calculation.") 
+    recipe_entity:  Optional[StrictStr] = Field(None,alias="recipeEntity", description="Entity a recipe is retrieved from for use in the aggregated returns calculation. Either RecipeId or RecipeEntity must be specified. Available values: Portfolio, PortfolioGroup, ABOR.") 
+    fee_handling:  Optional[StrictStr] = Field(None,alias="feeHandling", description="Configures how fees are handled in the aggregated returns calculation. Available values: Net, Gross.") 
+    flow_handling:  Optional[StrictStr] = Field(None,alias="flowHandling", description="Configures how flows are handled in the aggregated returns calculation. Available values: BeginningOfDay, EndOfDay.") 
     business_calendar:  Optional[StrictStr] = Field(None,alias="businessCalendar", description="Calendar used in the aggregated returns calculation.") 
-    handle_flow_discrepancy:  Optional[StrictStr] = Field(None,alias="handleFlowDiscrepancy", description="Configures handling for the case where net flows do not match the sum of tagged flows.") 
+    handle_flow_discrepancy:  Optional[StrictStr] = Field(None,alias="handleFlowDiscrepancy", description="Configures handling for the case where net flows do not match the sum of tagged flows. Available values: TreatAsFlow, TreatAsGainloss, Error.") 
     __properties = ["id", "recipeId", "recipeEntity", "feeHandling", "flowHandling", "businessCalendar", "handleFlowDiscrepancy"]
 
     class Config:

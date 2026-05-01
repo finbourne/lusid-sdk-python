@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **launch_date** | **datetime** | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] 
 **apportionment_factor** | **float** | The weighting factor used for apportionment across this share class. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] 
-**fund_share_class_type** | **str** | The Type of Share Class. Supported values are: Unitised / Non-Unitised / Series / Private Equity / Partnership. | 
-**distribution_type** | **str** | The type of distribution the ShareClass will calculate. Supported values are: Income, Accumulation. | 
+**fund_share_class_type** | **str** | The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership. | 
+**distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | 
 **dom_ccy** | **str** | The domestic currency of the ShareClass instrument. | 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **units_precision** | **int** | Decimal places for the share class units. | [optional] 
@@ -20,8 +20,8 @@ Name | Type | Description | Notes
 **rounding_conventions** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] 
 **rounding_conventions_units** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass units. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
-**distribution_payment_type** | **str** | The tax treatment applied to distributions. Supported values are: Gross, Net. | [optional] 
-**hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Supported values are: Invalid, None, ApplyHedging. | 
+**distribution_payment_type** | **str** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] 
+**hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | 
 ## Example
 
 ```python

@@ -262,7 +262,7 @@ def main():
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Orders\" domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \"Orders/system/Name\".                  All properties, except derived properties, are returned by default, without specifying here. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
-    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
+    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Orders\&quot; domain to decorate onto each order.                  These take the format {domain}/{scope}/{code} e.g. \&quot;Orders/system/Name\&quot;.                  All properties, except derived properties, are returned by default, without specifying here. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
- **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
+ **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] 
 
 ### Return type
 

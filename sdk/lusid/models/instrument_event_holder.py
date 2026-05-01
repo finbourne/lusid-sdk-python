@@ -38,13 +38,13 @@ class InstrumentEventHolder(BaseModel):
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope of the instrument.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the instrument event.") 
     event_date_range: EventDateRange = Field(alias="eventDateRange")
-    completeness:  Optional[StrictStr] = Field(None,alias="completeness", description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete).") 
+    completeness:  Optional[StrictStr] = Field(None,alias="completeness", description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). Available values: Complete, Incomplete.") 
     instrument_event: InstrumentEvent = Field(alias="instrumentEvent")
     properties: Optional[List[PerpetualProperty]] = Field(default=None, description="The properties attached to this instrument event.")
     sequence_number: Optional[StrictInt] = Field(default=None, description="The order of the instrument event relative others on the same date (0 being processed first). Must be non negative.", alias="sequenceNumber")
-    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary.") 
+    participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary.") 
     as_at: Optional[datetime] = Field(default=None, description="The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert.", alias="asAt")
-    group_code:  Optional[StrictStr] = Field(None,alias="groupCode", description="The group code that determines the processing order of instrument events with the same effective datetime.") 
+    group_code:  Optional[StrictStr] = Field(None,alias="groupCode", description="The group code that determines the processing order of instrument events with the same effective datetime. Available values: Tier1, Tier2, Tier3, Legacy.") 
     __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType", "asAt", "groupCode"]
 
     class Config:

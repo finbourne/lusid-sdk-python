@@ -32,7 +32,7 @@ class HoldingsAdjustment(BaseModel):
     """
     effective_at: datetime = Field(description="The effective datetime from which the adjustment is valid. There can only be one holdings adjustment for a transaction portfolio at a specific effective datetime, so this uniquely identifies the adjustment.", alias="effectiveAt")
     version: Version
-    unmatched_holding_method:  StrictStr = Field(...,alias="unmatchedHoldingMethod", description="Describes how the holdings were adjusted. If 'PositionToZero' the entire transaction portfolio's holdings were set via a call to 'Set holdings'. If 'KeepTheSame' only the specified holdings were adjusted via a call to 'Adjust holdings'. The available values are: PositionToZero, KeepTheSame") 
+    unmatched_holding_method:  StrictStr = Field(...,alias="unmatchedHoldingMethod", description="Describes how the holdings were adjusted. If 'PositionToZero' the entire transaction portfolio's holdings were set via a call to 'Set holdings'. If 'KeepTheSame' only the specified holdings were adjusted via a call to 'Adjust holdings'. Available values: PositionToZero, KeepTheSame.") 
     adjustments: List[HoldingAdjustment] = Field(description="The holding adjustments.")
     links: Optional[List[Link]] = None
     __properties = ["effectiveAt", "version", "unmatchedHoldingMethod", "adjustments", "links"]

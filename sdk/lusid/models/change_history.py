@@ -32,7 +32,7 @@ class ChangeHistory(BaseModel):
     user_id:  StrictStr = Field(...,alias="userId", description="The unique identifier of the user that made the change.") 
     modified_as_at: datetime = Field(description="The date/time of the change.", alias="modifiedAsAt")
     request_id:  StrictStr = Field(...,alias="requestId", description="The unique identifier of the request that the changes were part of.") 
-    action:  StrictStr = Field(...,alias="action", description="The action performed on the transaction, either created, updated, or deleted. The available values are: Create, Update, Delete") 
+    action:  StrictStr = Field(...,alias="action", description="The action performed on the transaction. Available values: Create, Update, Delete.") 
     changes: List[ChangeItem] = Field(description="The collection of changes that were made.")
     links: Optional[List[Link]] = None
     __properties = ["userId", "modifiedAsAt", "requestId", "action", "changes", "links"]

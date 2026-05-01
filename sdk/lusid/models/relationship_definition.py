@@ -32,13 +32,13 @@ class RelationshipDefinition(BaseModel):
     """
     version: Optional[Version] = None
     relationship_definition_id: ResourceId = Field(alias="relationshipDefinitionId")
-    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object.") 
-    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object.") 
+    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction.") 
+    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relationship.") 
     outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object") 
     inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object") 
-    life_time:  StrictStr = Field(...,alias="lifeTime", description="Describes how the relationships can change over time.") 
-    relationship_cardinality:  StrictStr = Field(...,alias="relationshipCardinality", description="Describes the cardinality of the relationship between source entity and target entity.") 
+    life_time:  StrictStr = Field(...,alias="lifeTime", description="Describes how the relationships can change over time. Available values: Perpetual, TimeVariant.") 
+    relationship_cardinality:  StrictStr = Field(...,alias="relationshipCardinality", description="Describes the cardinality of the relationship between source entity and target entity. Available values: ManyToOne, ManyToMany.") 
     links: Optional[List[Link]] = None
     __properties = ["version", "relationshipDefinitionId", "sourceEntityType", "targetEntityType", "displayName", "outwardDescription", "inwardDescription", "lifeTime", "relationshipCardinality", "links"]
 

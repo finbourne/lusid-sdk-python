@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **effective_at** | **str** | The EffectiveAt time of the quote event that need to be added to the closed period. | 
 **entity_unique_id** | **str** | The EntityUniqueId from the quote which needs to be added as a post close activity. | 
 **instrument_id** | **str** | The InstrumentId from the quote which needs to be added as a post close activity. | 
-**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity | 
+**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | 
 ## Example
 
 ```python

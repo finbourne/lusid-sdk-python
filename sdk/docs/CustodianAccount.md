@@ -4,14 +4,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | 
-**status** | **str** | The Account status. Can be Active, Inactive or Deleted. | 
+**status** | **str** | The Account status. Available values: Active, Inactive, Deleted. | 
 **account_number** | **str** | The Custodian Account Number | 
 **account_name** | **str** | The identifiable name given to the Custodian Account | 
-**accounting_method** | **str** | The Accounting method to be used | 
+**accounting_method** | **str** | The Accounting method to be used. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | 
 **currency** | **str** | The Currency for the Account | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
-**account_type** | **str** | The Type of the Custodian Account. Can be Margin, Cash or Swap. Defaults to Margin. | 
+**account_type** | **str** | The Type of the Custodian Account. Default value: Margin. Available values: Margin, Cash, Swap. | 
 ## Example
 
 ```python

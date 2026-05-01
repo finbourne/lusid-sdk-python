@@ -31,7 +31,7 @@ class Mapping(BaseModel):
     scope:  StrictStr = Field(...,alias="scope", description="The scope for this mapping.") 
     code:  StrictStr = Field(...,alias="code", description="The code for this mapping.") 
     name:  StrictStr = Field(...,alias="name", description="The mapping name") 
-    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="What type of reconciliation this mapping is for") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="What type of reconciliation this mapping is for. Available values: Transaction, Holding, Valuation, Cash, CashHolding.") 
     rules: Optional[List[MappingRule]] = Field(default=None, description="The rules in this mapping, keyed by the left field/property name")
     __properties = ["scope", "code", "name", "reconciliationType", "rules"]
 

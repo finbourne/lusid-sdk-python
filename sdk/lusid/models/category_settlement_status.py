@@ -28,7 +28,7 @@ class CategorySettlementStatus(BaseModel):
     """
     CategorySettlementStatus
     """
-    status:  StrictStr = Field(...,alias="status", description="The Status of the settlement category - 'Settled', 'Part Settled' or 'Unsettled'.") 
+    status:  StrictStr = Field(...,alias="status", description="The Status of the settlement category. Available values: Unsettled, PartSettled, Settled, None.") 
     is_overdue: StrictBool = Field(description="Whether the category has any overdue movements", alias="isOverdue")
     problems: List[SettlementProblem] = Field(description="Instruction level detail of rejected or invalid settlement instructions")
     __properties = ["status", "isOverdue", "problems"]

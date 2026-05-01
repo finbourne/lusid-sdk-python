@@ -46,7 +46,7 @@ class LusidTradeTicket(BaseModel):
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Counterparty") 
     instrument_properties: Optional[List[ModelProperty]] = Field(default=None, description="Set of instrument properties (as defined by client/user).", alias="instrumentProperties")
     transaction_properties: Optional[List[ModelProperty]] = Field(default=None, description="Set of transaction properties (as defined by client/user).", alias="transactionProperties")
-    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket") 
+    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="Available values: LusidTradeTicket, ExternalTradeTicket.") 
     __properties = ["transactionId", "transactionType", "source", "transactionDate", "settlementDate", "totalConsideration", "units", "instrumentIdentifiers", "instrumentScope", "instrumentName", "instrumentDefinition", "counterpartyAgreementId", "counterparty", "instrumentProperties", "transactionProperties", "tradeTicketType"]
 
     @validator('trade_ticket_type')

@@ -27,7 +27,7 @@ class TradeTicket(BaseModel):
     """
     The base class for representing a Trade Ticket in LUSID.  # noqa: E501
     """
-    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="The available values are: LusidTradeTicket, ExternalTradeTicket") 
+    trade_ticket_type:  StrictStr = Field(...,alias="tradeTicketType", description="Available values: LusidTradeTicket, ExternalTradeTicket.") 
     __properties = ["tradeTicketType"]
 
     @validator('trade_ticket_type')

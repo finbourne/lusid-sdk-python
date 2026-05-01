@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **type** | **str** | The Type of fixing (index, ratio or assumption) | 
 **code** | **str** | The Code of the fixing, typically the index name | 
 **var_date** | **datetime** | The effectiveAt of the inflation fixing | 
-**dependency_type** | **str** | The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency | 
+**dependency_type** | **str** | Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency. | 
 ## Example
 
 ```python

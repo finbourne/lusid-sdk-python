@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **address_key** | **str** | The address key of the address key definition. | 
-**type** | **str** | The type of the address key definition | 
+**type** | **str** | The type of the address key definition. Available values: Text, Integer, Decimal, Boolean, DateTime, Result0D. | 
 ## Example
 
 ```python

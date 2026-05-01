@@ -5,8 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settlement_instruction_id** | **str** |  | 
 **transaction_id** | **str** |  | 
-**settlement_category** | **str** |  | 
-**instruction_type** | **str** |  | [optional] 
+**settlement_category** | **str** | Available values: StockSettlement, CashSettlement, DeferredCashReceipt. | 
+**instruction_type** | **str** | Available values: Complete, CancelAutomatic, Partial. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** |  | 
 **contractual_settlement_date** | **datetime** |  | [optional] 
 **actual_settlement_date** | **datetime** |  | 

@@ -32,8 +32,8 @@ class SettlementInstructionRequest(BaseModel):
     """
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId") 
     transaction_id:  StrictStr = Field(...,alias="transactionId") 
-    settlement_category:  StrictStr = Field(...,alias="settlementCategory") 
-    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType") 
+    settlement_category:  StrictStr = Field(...,alias="settlementCategory", description="Available values: StockSettlement, CashSettlement, DeferredCashReceipt.") 
+    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="Available values: Complete, CancelAutomatic, Partial.") 
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(alias="instrumentIdentifiers")
     contractual_settlement_date: Optional[datetime] = Field(default=None, alias="contractualSettlementDate")
     actual_settlement_date: datetime = Field(alias="actualSettlementDate")

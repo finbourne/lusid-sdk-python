@@ -33,7 +33,7 @@ class LifeCycleEventValue(ResultValue):
     effective_date: Optional[datetime] = Field(default=None, description="The effective date of the event", alias="effectiveDate")
     event_values: Optional[ResultValueDictionary] = Field(default=None, alias="eventValues")
     event_lineage: Optional[LifeCycleEventLineage] = Field(default=None, alias="eventLineage")
-    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="Available values: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "effectiveDate", "eventValues", "eventLineage"]
 

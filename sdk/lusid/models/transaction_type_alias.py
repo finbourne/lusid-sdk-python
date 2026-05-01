@@ -30,7 +30,7 @@ class TransactionTypeAlias(BaseModel):
     type:  StrictStr = Field(...,alias="type", description="The transaction type") 
     description:  StrictStr = Field(...,alias="description", description="Brief description of the transaction") 
     transaction_class:  StrictStr = Field(...,alias="transactionClass", description="Relates types of a similar class. E.g. Buy/Sell, StockIn/StockOut") 
-    transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description="Transactions role within a class. E.g. Increase a long position") 
+    transaction_roles:  StrictStr = Field(...,alias="transactionRoles", description="Transactions role within a class. E.g. Increase a long position. Available values: None, LongLonger, LongShorter, ShortShorter, Shorter, ShortLonger, Longer, AllRoles.") 
     is_default: Optional[StrictBool] = Field(default=None, description="IsDefault is a flag that denotes the default alias for a source. There can only be, at most, one per source.", alias="isDefault")
     __properties = ["type", "description", "transactionClass", "transactionRoles", "isDefault"]
 

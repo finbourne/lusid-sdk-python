@@ -27,7 +27,7 @@ class QuantityInstructed(BaseModel):
     """
     The quantity of the event that was instructed, represented either as a percentage of the overall holdings or the number of units instructed.  # noqa: E501
     """
-    type:  StrictStr = Field(...,alias="type", description="The type of quantity instructed, either Percentage or Units.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of quantity instructed. Available values: Percentage, Units, Invalid.") 
     amount: Union[StrictFloat, StrictInt] = Field(description="The actual amount instructed. For Type Percentage, this is between 0 and 100.")
     __properties = ["type", "amount"]
 

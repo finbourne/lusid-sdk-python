@@ -32,7 +32,7 @@ class UpsertComplianceRunSummaryResult(BaseModel):
     run_id: ResourceId = Field(alias="runId")
     instigated_at: datetime = Field(alias="instigatedAt")
     completed_at: datetime = Field(alias="completedAt")
-    schedule:  StrictStr = Field(...,alias="schedule") 
+    schedule:  StrictStr = Field(...,alias="schedule", description="Available values: None, PreTrade, PostTrade, PreAndPostTrade.") 
     results: List[ComplianceSummaryRuleResult]
     __properties = ["runId", "instigatedAt", "completedAt", "schedule", "results"]
 

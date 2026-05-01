@@ -28,7 +28,7 @@ class NavActivityAdjustment(BaseModel):
     """
     NavActivityAdjustment
     """
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.") 
     __properties = ["navActivityAdjustmentType"]
 
     @validator('nav_activity_adjustment_type')

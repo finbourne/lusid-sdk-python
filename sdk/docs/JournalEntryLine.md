@@ -19,20 +19,20 @@ Name | Type | Description | Notes
 **posting_rule** | **str** | The rule generating the Journal Entry Line. | 
 **as_at_date** | **datetime** | The corresponding input date and time of the Transaction generating the Journal Entry Line. | 
 **activities_description** | **str** | This would be the description of the business activities this Journal Entry Line is for. | [optional] 
-**source_type** | **str** | So far are 4 types: LusidTxn, LusidValuation, Manual and External. | 
+**source_type** | **str** | The type of source for the Journal Entry Line. Available values: LusidTransaction, LusidValuation, Manual, External. | 
 **source_id** | **str** | For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Abor. | [optional] 
 **movement_name** | **str** | If the JE Line is generated from a transaction, the name of the side in the transaction type&#39;s movement. If from a valuation, this is &#39;MarkToMarket&#39;. | [optional] 
 **holding_type** | **str** | One of the LUSID holding types such as &#39;P&#39; for position or &#39;B&#39; for settled cash balance. | 
 **economic_bucket** | **str** | LUSID automatically categorises a JE Line into a broad economic bucket such as &#39;NA_Cost&#39; or &#39;PL_RealPriceGL&#39;. | 
-**economic_bucket_component** | **str** | Sub bucket of the economic bucket. | [optional] 
-**economic_bucket_variant** | **str** | Categorisation of a Mark-to-market journal entry line into LongTerm or ShortTerm based on whether the ActivityDate is more than a year after the purchase trade date or not. | [optional] 
+**economic_bucket_component** | **str** | Sub bucket of the economic bucket. Available values: Undefined, Premium, OID, MarketDiscount, AcquisitionPremium, CoreMarket, CrossGainLoss, TradedInterest, Income, Expense. | [optional] 
+**economic_bucket_variant** | **str** | Further categorisation of a journal entry line. LongTerm/ShortTerm: based on whether the ActivityDate is more than a year after the purchase trade date. TradeDateToSettlementDate: FX gain/loss between trade date and settlement date. InLieuSubstitution: FX gain/loss from settling in a different currency when the original settlement currency is the portfolio base currency. Available values: Undefined, ShortTerm, LongTerm, Bought, Sold, TradeDateToSettlementDate, Rounding, InLieuSubstitution. | [optional] 
 **levels** | **List[str]** | Resolved data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] 
 **source_levels** | **List[str]** | Source data from the general ledger profile where the GeneralLedgerProfileCode is specified in the GetJournalEntryLines request body. | [optional] 
-**movement_sign** | **str** | Indicates if the Journal Entry Line corresponds to a Long or Short movement. | [optional] 
-**holding_sign** | **str** | Indicates if the Journal Entry Line is operating against a Long or Short holding. | [optional] 
-**ledger_column** | **str** | Indicates if the Journal Entry Line is credit or debit. | [optional] 
-**journal_entry_line_type** | **str** | Indicates the Journal Entry Line type | [optional] 
+**movement_sign** | **str** | Indicates if the Journal Entry Line corresponds to a Long or Short movement. Available values: NA, Long, Short. | [optional] 
+**holding_sign** | **str** | Indicates if the Journal Entry Line is operating against a Long or Short holding. Available values: NA, Long, Short. | [optional] 
+**ledger_column** | **str** | Indicates if the Journal Entry Line is credit or debit. Available values: Debit, Credit. | [optional] 
+**journal_entry_line_type** | **str** | Indicates the Journal Entry Line type. Available values: Default, Reversal, TrueUp. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 

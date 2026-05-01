@@ -27,7 +27,7 @@ class TransactionFeeCapitalisation(BaseModel):
     """
     TransactionFeeCapitalisation
     """
-    capitalisation:  Optional[StrictStr] = Field(None,alias="capitalisation", description="Whether the transaction fee should be capitalised, not capitalised, or conditionally capitalised. The allowed values are Capitalised, NonCapitalised, Conditional.") 
+    capitalisation:  Optional[StrictStr] = Field(None,alias="capitalisation", description="Whether the transaction fee should be capitalised, not capitalised, or conditionally capitalised. Available values: Capitalised, NonCapitalised, Conditional.") 
     capitalised_condition:  Optional[StrictStr] = Field(None,alias="capitalisedCondition", description="The condition that determines whether the fee is capitalised when applied to the transaction. Required only when Capitalisation is 'Conditional'.") 
     __properties = ["capitalisation", "capitalisedCondition"]
 

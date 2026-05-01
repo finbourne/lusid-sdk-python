@@ -30,7 +30,7 @@ class ComplianceRunInfo(BaseModel):
     run_id:  StrictStr = Field(...,alias="runId", description="The unique identifier of a compliance run") 
     instigated_at: datetime = Field(description="The time the compliance run was launched (e.g. button pressed). Currently it is also both the as at and effective at time in whichthe rule set and portfolio data (including any pending trades if the run is pretrade) is taken for the caluation, although it may be possible to run compliance for historical effective at and as at dates in the future.", alias="instigatedAt")
     completed_at: datetime = Field(description="The time the compliance run calculation was completed", alias="completedAt")
-    schedule:  StrictStr = Field(...,alias="schedule", description="Whether the compliance run was pre or post trade") 
+    schedule:  StrictStr = Field(...,alias="schedule", description="Whether the compliance run was pre or post trade. Available values: PreTrade, PostTrade, PreAndPostTrade.") 
     all_rules_passed: StrictBool = Field(description="True if all rules passed, for all the portfolios they were assigned to", alias="allRulesPassed")
     has_results: StrictBool = Field(description="False when no results have been returned eg. when no rules exist", alias="hasResults")
     as_at: datetime = Field(description="Legacy AsAt time for backwards compatibility", alias="asAt")

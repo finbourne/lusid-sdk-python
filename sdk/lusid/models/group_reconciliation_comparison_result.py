@@ -36,14 +36,14 @@ class GroupReconciliationComparisonResult(BaseModel):
     GroupReconciliationComparisonResult
     """
     id: ResourceId
-    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. Available values: Holding, Transaction, Valuation, CashHolding.") 
     group_reconciliation_definition_id: ResourceId = Field(alias="groupReconciliationDefinitionId")
     instance_id: GroupReconciliationInstanceId = Field(alias="instanceId")
     comparison_result_id:  StrictStr = Field(...,alias="comparisonResultId", description="Comparison result identifier, encoded value for core attribute results, aggregate attribute results, reconciliation type and run instanceId.") 
     reconciliation_run_as_at: datetime = Field(description="The timestamp when the run occurred.", alias="reconciliationRunAsAt")
-    result_type:  StrictStr = Field(...,alias="resultType", description="Reconciliation run general result. \"Break\" | \"Match\" | \"PartialMatch\" | \"NotFound") 
-    result_status:  StrictStr = Field(...,alias="resultStatus", description="Indicates how a particular result evolves from one run to the next. \"New\" | \"Confirmed\" | \"Changed\"") 
-    review_status:  StrictStr = Field(...,alias="reviewStatus", description="Status of whether user has provided any input (comments, manual matches, break codes). \"Pending\" | \"Reviewed\" | \"Matched\" | \"Invalid\"") 
+    result_type:  StrictStr = Field(...,alias="resultType", description="Reconciliation run general result. Available values: Match, PartialMatch, Break, NotFound, Resolved.") 
+    result_status:  StrictStr = Field(...,alias="resultStatus", description="Indicates how a particular result evolves from one run to the next. Available values: New, Confirmed, Changed.") 
+    review_status:  StrictStr = Field(...,alias="reviewStatus", description="Status of whether user has provided any input (comments, manual matches, break codes). Available values: Pending, Reviewed, Matched, Invalid.") 
     dates_reconciled: GroupReconciliationDates = Field(alias="datesReconciled")
     core_attributes: GroupReconciliationCoreAttributeValues = Field(alias="coreAttributes")
     aggregate_attributes: GroupReconciliationAggregateAttributeValues = Field(alias="aggregateAttributes")

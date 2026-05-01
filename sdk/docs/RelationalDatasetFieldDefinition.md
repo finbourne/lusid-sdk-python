@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **description** | **str** | A detailed description of the field and its purpose. | [optional] 
 **data_type_id** | [**ResourceId**](ResourceId.md) |  | 
 **required** | **bool** | Whether this field is mandatory in the dataset. | [optional] 
-**category** | **str** | The intended category of the field (SeriesIdentifier, Value, or Metadata). | 
+**category** | **str** | The intended category of the field (SeriesIdentifier, Value, or Metadata). Available values: SeriesIdentifier, Value, Metadata. | 
 ## Example
 
 ```python

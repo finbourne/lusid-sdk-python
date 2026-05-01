@@ -5,7 +5,7 @@ For indicating a dependency upon calendar codes
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **calendars** | **List[str]** | The Codes of the calendars that are depended upon. | 
-**dependency_type** | **str** | The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency | 
+**dependency_type** | **str** | Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency. | 
 ## Example
 
 ```python

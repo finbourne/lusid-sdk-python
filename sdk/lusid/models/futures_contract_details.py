@@ -41,7 +41,7 @@ class FuturesContractDetails(BaseModel):
     ticker_step: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Minimal step size change in ticker.", alias="tickerStep")
     unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value in the currency of a 1 unit change in the contract price.", alias="unitValue")
     calendars: Optional[List[StrictStr]] = Field(default=None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
-    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Delivery type to be used on settling the contract.  Optional: Defaults to DeliveryType.Physical if not provided.    Supported string (enumeration) values are: [Cash, Physical].") 
+    delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Delivery type to be used on settling the contract.  Default value: Physical. Available values: Cash, Physical.") 
     __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType"]
 
     class Config:

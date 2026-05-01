@@ -27,7 +27,7 @@ class PerformanceReturnsMetric(BaseModel):
     """
     The request used in the AggregatedReturns.  # noqa: E501
     """
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the metric. Default to Return") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the metric. Default value: Return. Available values: Return, Volatility, IndicativeAmount, Dispersion.") 
     window:  Optional[StrictStr] = Field(None,alias="window", description="The given metric for the calculation i.e. 1Y, 1D.") 
     allow_partial: Optional[StrictBool] = Field(default=None, description="Bool if the metric is allowed partial results. Default to false.", alias="allowPartial")
     annualised: Optional[StrictBool] = Field(default=None, description="Bool if the metric is annualized. Default to false.")

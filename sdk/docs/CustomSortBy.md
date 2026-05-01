@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **field_name** | **str** | The name of the field to sort by. | 
 **priority_values** | **List[str]** | An optional list of priority field values to sort by, in the order they should be prioritized. | [optional] 
-**remainder_order** | **str** | The sorting direction for the remaining field values. Either ascending (ASC) or descending (DESC). | 
+**remainder_order** | **str** | The sorting direction for the remaining field values. Either ascending (ASC) or descending (DESC). Available values: ASC, DESC. | 
 ## Example
 
 ```python

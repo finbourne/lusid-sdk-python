@@ -35,7 +35,7 @@ class CashFlowValue(ResultValue):
     cash_flow_lineage: Optional[CashFlowLineage] = Field(default=None, alias="cashFlowLineage")
     payment_amount: Union[StrictFloat, StrictInt] = Field(description="The amount paid or received", alias="paymentAmount")
     payment_ccy:  StrictStr = Field(...,alias="paymentCcy", description="The currency of the transaction") 
-    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset") 
+    result_value_type:  StrictStr = Field(...,alias="resultValueType", description="Available values: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["resultValueType", "paymentDate", "diagnostics", "cashFlowLineage", "paymentAmount", "paymentCcy"]
 

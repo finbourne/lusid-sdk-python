@@ -27,8 +27,8 @@ class CdsProtectionDetailSpecification(BaseModel):
     """
     CDSs generally conform to fairly standard definitions, but can be tweaked in a number of different ways.  This class gathers a number of common features which may deviate. These will default to the market standard when  no overrides are provided.  # noqa: E501
     """
-    seniority:  Optional[StrictStr] = Field(None,alias="seniority", description="The seniority level of the CDS.  Supported string (enumeration) values are: [SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2].  Defaults to \"SUB\" if not set.") 
-    restructuring_type:  Optional[StrictStr] = Field(None,alias="restructuringType", description="The restructuring clause.  Supported string (enumeration) values are: [CR, MR, MM, XR]. Defaults to \"MM\" if not set.") 
+    seniority:  Optional[StrictStr] = Field(None,alias="seniority", description="The seniority level of the CDS. Default value: SUB. Available values: Unknown, SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2.") 
+    restructuring_type:  Optional[StrictStr] = Field(None,alias="restructuringType", description="The restructuring clause. Default value: MM. Available values: Unknown, CR, MR, MM, XR, XR14, CR14, MR14, MM14.") 
     protect_start_day: Optional[StrictBool] = Field(default=True, description="Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.", alias="protectStartDay")
     pay_accrued_interest_on_default: Optional[StrictBool] = Field(default=True, description="Should accrued interest on the premium leg be paid if a credit event occurs. Defaults to true if not set.", alias="payAccruedInterestOnDefault")
     __properties = ["seniority", "restructuringType", "protectStartDay", "payAccruedInterestOnDefault"]

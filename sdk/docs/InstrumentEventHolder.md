@@ -11,13 +11,13 @@ Name | Type | Description | Notes
 **instrument_scope** | **str** | The scope of the instrument. | 
 **description** | **str** | The description of the instrument event. | 
 **event_date_range** | [**EventDateRange**](EventDateRange.md) |  | 
-**completeness** | **str** | Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). | [optional] [readonly] 
+**completeness** | **str** | Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). Available values: Complete, Incomplete. | [optional] [readonly] 
 **instrument_event** | [**InstrumentEvent**](InstrumentEvent.md) |  | 
 **properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | The properties attached to this instrument event. | [optional] 
 **sequence_number** | **int** | The order of the instrument event relative others on the same date (0 being processed first). Must be non negative. | [optional] 
-**participation_type** | **str** | Is participation in this event Mandatory, MandatoryWithChoices, or Voluntary. | [optional] [default to 'Mandatory']
+**participation_type** | **str** | Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary. | [optional] [default to 'Mandatory']
 **as_at** | **datetime** | The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert. | [optional] [readonly] 
-**group_code** | **str** | The group code that determines the processing order of instrument events with the same effective datetime. | [optional] 
+**group_code** | **str** | The group code that determines the processing order of instrument events with the same effective datetime. Available values: Tier1, Tier2, Tier3, Legacy. | [optional] 
 ## Example
 
 ```python

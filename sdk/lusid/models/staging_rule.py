@@ -31,7 +31,7 @@ class StagingRule(BaseModel):
     """
     rule_id:  StrictStr = Field(...,alias="ruleId", description="The ID of the staging rule.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the staging rule.") 
-    status:  StrictStr = Field(...,alias="status", description="Whether the rule is 'Active' or 'Inactive'.") 
+    status:  StrictStr = Field(...,alias="status", description="Status of the rule. Available values: Active, Inactive.") 
     match_criteria: StagingRuleMatchCriteria = Field(alias="matchCriteria")
     approval_criteria: StagingRuleApprovalCriteria = Field(alias="approvalCriteria")
     __properties = ["ruleId", "description", "status", "matchCriteria", "approvalCriteria"]

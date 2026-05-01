@@ -29,7 +29,7 @@ class SpecificHoldingPricingInfo(BaseModel):
     Allows a user to specify fallbacks/overrides using Holding fields for sources that match a particular DependencySourceFilter.  # noqa: E501
     """
     dependency_source_filter: DependencySourceFilter = Field(alias="dependencySourceFilter")
-    field:  StrictStr = Field(...,alias="field", description="The Holding field which the fallback/override should use to create a price quote.") 
+    field:  StrictStr = Field(...,alias="field", description="The Holding field which the fallback/override should use to create a price quote. Available values: None, UnitCost, LastTradedPrice, UnitAmortisedCost, UnitCostClean, UnitCostDirty, UnitAmortisedCostClean, UnitAmortisedCostDirty.") 
     __properties = ["dependencySourceFilter", "field"]
 
     class Config:

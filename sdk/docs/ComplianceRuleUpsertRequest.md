@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 **scope** | **str** |  | 
 **code** | **str** |  | [optional] 
 **display_name** | **str** |  | [optional] 
-**type** | **str** |  | 
+**type** | **str** | Available values: RangeNumberSecurities, RangePercentSecurityType, RangePercentCash, RangePercentPropertyKey. | 
 **property_key** | **str** |  | [optional] 
 **value** | **str** |  | [optional] 
 **lower_bound** | **float** |  | 
 **upper_bound** | **float** |  | 
-**schedule** | **str** |  | 
+**schedule** | **str** | Available values: PreTrade, PostTrade, PreAndPostTrade. | 
 **hard_requirement** | **bool** |  | 
 **target_portfolio_ids** | [**List[ResourceId]**](ResourceId.md) |  | 
 **description** | **str** |  | [optional] 

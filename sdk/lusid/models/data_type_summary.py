@@ -30,13 +30,13 @@ class DataTypeSummary(BaseModel):
     """
     DataTypeSummary
     """
-    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="Indicates the range of data acceptable by a data type. The available values are: Open, Closed") 
+    type_value_range:  StrictStr = Field(...,alias="typeValueRange", description="Indicates the range of data acceptable by a data type. Available values: Open, Closed.") 
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the data type.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the data type.") 
-    value_type:  StrictStr = Field(...,alias="valueType", description="The expected type of the values. The available values are: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText") 
+    value_type:  StrictStr = Field(...,alias="valueType", description="The expected type of the values. Available values: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText.") 
     acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies to 'open' value type range.", alias="acceptableValues")
-    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The schema of the data type's units. The available values are: NoUnits, Basic, Iso4217Currency") 
+    unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The schema of the data type's units. Available values: NoUnits, Basic, Iso4217Currency.") 
     acceptable_units: Optional[List[IUnitDefinitionDto]] = Field(default=None, description="The definitions of the acceptable units.", alias="acceptableUnits")
     version: Optional[Version] = None
     __properties = ["typeValueRange", "id", "displayName", "description", "valueType", "acceptableValues", "unitSchema", "acceptableUnits", "version"]

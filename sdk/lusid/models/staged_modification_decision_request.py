@@ -27,7 +27,7 @@ class StagedModificationDecisionRequest(BaseModel):
     """
     StagedModificationDecisionRequest
     """
-    decision:  StrictStr = Field(...,alias="decision", description="The decision on the requested staged modification, can be 'Approve' or 'Reject'.") 
+    decision:  StrictStr = Field(...,alias="decision", description="The decision on the requested staged modification, can be 'Approve' or 'Reject'. Available values: Approve, Reject.") 
     comment:  StrictStr = Field(...,alias="comment", description="Comment on decision.") 
     __properties = ["decision", "comment"]
 

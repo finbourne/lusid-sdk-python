@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **component** | **str** | The component of the formula which is being evaluated. | [optional] 
 **display_name** | **str** | The display name of the component being evaluated. | [optional] 
-**type** | **str** | The type of the formula component. This can be a Literal, Variable, DerivedProperty, or PartialFormula. | [optional] 
+**type** | **str** | The type of the formula component. Available values: Variable, DerivedProperty, Literal, PartialFormula. | [optional] 
 **value** | [**PropertyValue**](PropertyValue.md) |  | [optional] 
 **derivation_formula** | **str** | The derivation formula of the component. This field will only be populated if the component is a derived property. | [optional] 
 **sub_components** | [**List[DerivedPropertyComponent]**](DerivedPropertyComponent.md) | Any sub-components of this formula. If this formula cannot be further decomposed, this collection will be null. | [optional] 

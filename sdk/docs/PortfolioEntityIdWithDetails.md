@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **scope** | **str** | The scope within which the portfolio or portfolio group lives. | 
 **code** | **str** | Portfolio name or code. | 
-**portfolio_entity_type** | **str** | String identifier for portfolio e.g. \&quot;SinglePortfolio\&quot; and \&quot;GroupPortfolio\&quot;. If not specified, it is assumed to be a single portfolio. | [optional] 
+**portfolio_entity_type** | **str** | String identifier for portfolio e.g. \&quot;SinglePortfolio\&quot; and \&quot;GroupPortfolio\&quot;. If not specified, it is assumed to be a single portfolio. Available values: SinglePortfolio, GroupPortfolio. | [optional] 
 ## Example
 
 ```python

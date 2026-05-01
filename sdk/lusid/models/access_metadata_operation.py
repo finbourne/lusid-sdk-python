@@ -30,7 +30,7 @@ class AccessMetadataOperation(BaseModel):
     """
     value: List[AccessMetadataValue]
     path:  StrictStr = Field(...,alias="path") 
-    op:  StrictStr = Field(...,alias="op", description="The available values are: add, remove") 
+    op:  StrictStr = Field(...,alias="op", description="Available values: add, remove.") 
     var_from:  Optional[StrictStr] = Field(None,alias="from") 
     __properties = ["value", "path", "op", "from"]
 

@@ -37,7 +37,7 @@ class GroupReconciliationSummary(BaseModel):
     """
     run_details: Optional[GroupReconciliationRunDetails] = Field(default=None, alias="runDetails")
     group_reconciliation_definition_id: Optional[ResourceId] = Field(default=None, alias="groupReconciliationDefinitionId")
-    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. \"Holding\" | \"Transaction\" | \"Valuation\"") 
+    reconciliation_type:  StrictStr = Field(...,alias="reconciliationType", description="The type of reconciliation to perform. Available values: Holding, Transaction, Valuation, CashHolding.") 
     instance_id: GroupReconciliationInstanceId = Field(alias="instanceId")
     dates_reconciled: GroupReconciliationDates = Field(alias="datesReconciled")
     reconciliation_run_as_at: datetime = Field(description="The date and time the reconciliation was run", alias="reconciliationRunAsAt")

@@ -31,7 +31,7 @@ class InflationFixingDependency(EconomicDependency):
     type:  StrictStr = Field(...,alias="type", description="The Type of fixing (index, ratio or assumption)") 
     code:  StrictStr = Field(...,alias="code", description="The Code of the fixing, typically the index name") 
     var_date: datetime = Field(description="The effectiveAt of the inflation fixing", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "type", "code", "date"]
 

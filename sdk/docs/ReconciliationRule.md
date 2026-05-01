@@ -4,7 +4,7 @@ Base class for representing reconciliation rules in LUSID.  Reconciliation rules
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rule_type** | **str** | The available values are: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact | 
+**rule_type** | **str** | Available values: ReconcileNumericRule, ReconcileDateTimeRule, ReconcileStringRule, ReconcileExact. | 
 ## Example
 
 ```python

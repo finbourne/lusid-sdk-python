@@ -28,7 +28,7 @@ class AddressKeyOptionDefinition(BaseModel):
     The definition of an Address Key Option  # noqa: E501
     """
     name:  StrictStr = Field(...,alias="name", description="The name of the option") 
-    type:  StrictStr = Field(...,alias="type", description="The type of the option") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the option. Available values: Bool, Int, Decimal, DateTimeOffset, String, Enum, TimeZoneId, Invalid.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the option") 
     optional: StrictBool = Field(description="Is this option required or optional?")
     allowed_value_set: Optional[List[StrictStr]] = Field(default=None, description="If the option is a string or enum, the allowed set of values it can take.", alias="allowedValueSet")

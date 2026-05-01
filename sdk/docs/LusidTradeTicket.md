@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **counterparty** | **str** | Counterparty | [optional] 
 **instrument_properties** | [**List[ModelProperty]**](ModelProperty.md) | Set of instrument properties (as defined by client/user). | [optional] 
 **transaction_properties** | [**List[ModelProperty]**](ModelProperty.md) | Set of transaction properties (as defined by client/user). | [optional] 
-**trade_ticket_type** | **str** | The available values are: LusidTradeTicket, ExternalTradeTicket | 
+**trade_ticket_type** | **str** | Available values: LusidTradeTicket, ExternalTradeTicket. | 
 ## Example
 
 ```python

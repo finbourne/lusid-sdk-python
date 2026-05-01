@@ -497,7 +497,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Chart of Accounts.
     code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.
     request_body = ["AccountCode1","AccountCode2"] # List[str] | The codes of the accounts to delete.
-    delete_mode = 'delete_mode_example' # str | The delete mode to use (defaults to 'Soft'). (optional)
+    delete_mode = 'delete_mode_example' # str | The delete mode to use. Default value: Soft. Available values: Soft, Hard. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -520,7 +520,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Chart of Accounts. | 
  **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts. | 
  **request_body** | [**List[str]**](str.md)| The codes of the accounts to delete. | 
- **delete_mode** | **str**| The delete mode to use (defaults to &#39;Soft&#39;). | [optional] 
+ **delete_mode** | **str**| The delete mode to use. Default value: Soft. Available values: Soft, Hard. | [optional] 
 
 ### Return type
 

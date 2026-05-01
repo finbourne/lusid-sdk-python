@@ -4,7 +4,7 @@ A condition to be evaluated.  Each supported CriterionType has a corresponding s
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**criterion_type** | **str** | The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals | 
+**criterion_type** | **str** | Available values: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals. | 
 ## Example
 
 ```python

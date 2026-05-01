@@ -30,7 +30,7 @@ class AmortisationRule(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The name of the rule.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the rule.") 
     filter:  StrictStr = Field(...,alias="filter", description="The filter for this rule.") 
-    amortisation_method:  StrictStr = Field(...,alias="amortisationMethod", description="The filter for this rule.") 
+    amortisation_method:  StrictStr = Field(...,alias="amortisationMethod", description="The filter for this rule. Available values: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate.") 
     __properties = ["name", "description", "filter", "amortisationMethod"]
 
     class Config:

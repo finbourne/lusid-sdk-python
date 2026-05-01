@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The name of the Cleardown Module. | 
 **description** | **str** | A description for the Cleardown Module. | [optional] 
-**status** | **str** | The Cleardown Module status. Can be Active or Inactive. Defaults to Active. | 
+**status** | **str** | The Cleardown Module status. Default value: Active. Available values: Active, Inactive. | 
 ## Example
 
 ```python

@@ -27,7 +27,7 @@ class RoundingConfigurationComponent(BaseModel):
     """
     RoundingConfigurationComponent
     """
-    rounding_type:  StrictStr = Field(...,alias="roundingType", description="The type of rounding that should be used, eg: Up, Down, NearestRoundHalfAwayFromZero") 
+    rounding_type:  StrictStr = Field(...,alias="roundingType", description="The type of rounding that should be used. Available values: Up, Down, NearestRoundHalfAwayFromZero.") 
     __properties = ["roundingType"]
 
     class Config:

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the Posting Module. | 
 **description** | **str** | A description for the Posting Module. | [optional] 
 **rules** | [**List[PostingModuleRule]**](PostingModuleRule.md) | The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection. | [optional] 
-**status** | **str** | The Posting Module status. Can be Active, Inactive or Deleted. Defaults to Active. | 
+**status** | **str** | The Posting Module status. Default value: Active. Available values: Active, Inactive, Deleted. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **keys** | [**List[PerpetualProperty]**](PerpetualProperty.md) |  | 
-**value_type** | **str** |  | 
+**value_type** | **str** | Available values: Units, Weight. | 
 **value** | **float** |  | 
 ## Example
 

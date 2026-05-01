@@ -29,9 +29,9 @@ class IndexModelOptions(ModelOptions):
     """
     IndexModelOptions
     """
-    portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="The available values are: Sum, AbsoluteSum, Unity") 
+    portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="Available values: Sum, AbsoluteSum, Unity.") 
     lookthrough_portfolio_relationship_id: Optional[ResourceId] = Field(default=None, alias="lookthroughPortfolioRelationshipId")
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="The available values are: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "portfolioScaling", "lookthroughPortfolioRelationshipId"]
 

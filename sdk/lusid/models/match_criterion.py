@@ -28,7 +28,7 @@ class MatchCriterion(BaseModel):
     """
     A condition to be evaluated.  Each supported CriterionType has a corresponding schema.  # noqa: E501
     """
-    criterion_type:  StrictStr = Field(...,alias="criterionType", description="The available values are: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals") 
+    criterion_type:  StrictStr = Field(...,alias="criterionType", description="Available values: PropertyValueEquals, PropertyValueIn, SubHoldingKeyValueEquals.") 
     __properties = ["criterionType"]
 
     @validator('criterion_type')

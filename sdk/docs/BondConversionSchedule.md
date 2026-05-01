@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **mandatory_conversion** | **bool** | Set this to true if a conversion is mandatory if the trigger occurs. Defaults to false. | [optional] 
 **notification_period_end** | **datetime** | The last day in the notification period for the conversion of the bond | [optional] 
 **notification_period_start** | **datetime** | The first day in the notification period for the conversion of the bond | [optional] 
-**schedule_type** | **str** | The available values are: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid | 
+**schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid. | 
 ## Example
 
 ```python

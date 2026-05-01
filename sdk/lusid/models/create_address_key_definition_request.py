@@ -28,7 +28,7 @@ class CreateAddressKeyDefinitionRequest(BaseModel):
     CreateAddressKeyDefinitionRequest
     """
     address_key:  StrictStr = Field(...,alias="addressKey", description="The address key of the address key definition.") 
-    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the address key definition. Available values: Text, Integer, Decimal, Boolean, DateTime, Result0D.") 
     __properties = ["addressKey", "type"]
 
     class Config:

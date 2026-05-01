@@ -554,7 +554,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(ReconciliationsApi)
-    reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. (optional)
+    reconciliation_type = 'reconciliation_type_example' # str | Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -574,7 +574,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **reconciliation_type** | **str**| Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided. | [optional] 
+ **reconciliation_type** | **str**| Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding. | [optional] 
 
 ### Return type
 

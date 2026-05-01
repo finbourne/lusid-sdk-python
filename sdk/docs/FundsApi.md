@@ -37,6 +37,7 @@ Method | HTTP request | Description
 [**list_valuation_point_overview**](FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 [**patch_fee**](FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
 [**patch_fund**](FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EXPERIMENTAL] PatchFund: Patch a Fund.
+[**query_cash_statement**](FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [EXPERIMENTAL] QueryCashStatement: [EXPERIMENTAL] QueryCashStatement: Query cash statement for a Fund valuation point.
 [**revert_valuation_point_to_estimate**](FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 [**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 [**upsert_bookmark**](FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.
@@ -697,7 +698,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     request_body = ["NavTypeCode1","NavTypeCode2"] # List[str] | The codes of the nav types to be deactivated.
-    delete_mode = 'delete_mode_example' # str | The delete mode to use (defaults to 'Soft'). (optional)
+    delete_mode = 'delete_mode_example' # str | The delete mode to use. Default value: Soft. Available values: Soft, Hard. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -720,7 +721,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **request_body** | [**List[str]**](str.md)| The codes of the nav types to be deactivated. | 
- **delete_mode** | **str**| The delete mode to use (defaults to &#39;Soft&#39;). | [optional] 
+ **delete_mode** | **str**| The delete mode to use. Default value: Soft. Available values: Soft, Hard. | [optional] 
 
 ### Return type
 
@@ -2468,7 +2469,7 @@ def main():
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
     show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
-    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. (optional)
+    membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2500,7 +2501,7 @@ Name | Type | Description  | Notes
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
  **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] 
- **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Allowable values are Member, Candidate and All. Defaults to Member. | [optional] 
+ **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] 
 
 ### Return type
 
@@ -3466,6 +3467,119 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **query_cash_statement**
+> ValuationPointResourceListOfFundCashStatementRow query_cash_statement(scope, code, query_fund_cash_statement_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+
+[EXPERIMENTAL] QueryCashStatement: [EXPERIMENTAL] QueryCashStatement: Query cash statement for a Fund valuation point.
+
+Returns settled cash movements with running balance, cost basis, average FX rate, and realised FX PnL  for the specified Fund valuation point period. The cash statement is derived from Journal Entry Lines  filtered to settled cash (HoldType='B', SourceType=LusidTransaction). Use the DisplayMode parameter  on the request body to choose between ShowReversal (full reversal/TrueUp detail) and Consolidated  (collapses reversals into AvgRateCorrection rows).
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # query_fund_cash_statement_parameters = QueryFundCashStatementParameters.from_json("")
+    # query_fund_cash_statement_parameters = QueryFundCashStatementParameters.from_dict({})
+    query_fund_cash_statement_parameters = QueryFundCashStatementParameters()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to get the next page of results. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys to decorate onto the cash statement rows. (optional)
+    nav_type_code = 'nav_type_code_example' # str | The code of the NAV type to use. Defaults to the primary NAV type if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.query_cash_statement(scope, code, query_fund_cash_statement_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+
+        # [EXPERIMENTAL] QueryCashStatement: [EXPERIMENTAL] QueryCashStatement: Query cash statement for a Fund valuation point.
+        api_response = api_instance.query_cash_statement(scope, code, query_fund_cash_statement_parameters, as_at=as_at, filter=filter, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->query_cash_statement: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **query_fund_cash_statement_parameters** | [**QueryFundCashStatementParameters**](QueryFundCashStatementParameters.md)| The query parameters specifying the diary entry period and display mode. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to get the next page of results. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys to decorate onto the cash statement rows. | [optional] 
+ **nav_type_code** | **str**| The code of the NAV type to use. Defaults to the primary NAV type if not specified. | [optional] 
+
+### Return type
+
+[**ValuationPointResourceListOfFundCashStatementRow**](ValuationPointResourceListOfFundCashStatementRow.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The cash statement for the specified Fund valuation point. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

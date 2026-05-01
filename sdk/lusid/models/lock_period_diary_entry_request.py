@@ -28,7 +28,7 @@ class LockPeriodDiaryEntryRequest(BaseModel):
     A definition for the period you wish to lock  # noqa: E501
     """
     diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="Unique code assigned to a period. When left blank last closed period will be located.") 
-    closing_options: Optional[List[StrictStr]] = Field(default=None, description="The options which will be executed once a period is closed or locked.", alias="closingOptions")
+    closing_options: Optional[List[StrictStr]] = Field(default=None, description="The options which will be executed once a period is closed or locked. Available values: ApplyClearDown.", alias="closingOptions")
     __properties = ["diaryEntryCode", "closingOptions"]
 
     class Config:

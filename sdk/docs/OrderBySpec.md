@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | **str** | The key that uniquely identifies a queryable address in Lusid. | 
-**sort_order** | **str** | The available values are: Ascending, Descending | 
+**sort_order** | **str** | Available values: Ascending, Descending. | 
 ## Example
 
 ```python

@@ -34,7 +34,7 @@ class UpsertInvestmentAccountRequest(BaseModel):
     identifiers: Dict[str, ModelProperty] = Field(description="Unique client-defined identifiers of the Investment Account.")
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the Investment Account") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the Investment Account") 
-    account_type:  StrictStr = Field(...,alias="accountType", description="The type of the of the Investment Account.") 
+    account_type:  StrictStr = Field(...,alias="accountType", description="The type of the of the Investment Account. Available values: Individual, Corporate, Joint, Nominee.") 
     account_holders: Optional[List[AccountHolderIdentifier]] = Field(default=None, description="The identification of the account holders associated with this investment account", alias="accountHolders")
     investment_portfolios: Optional[List[InvestmentPortfolioIdentifier]] = Field(default=None, description="The identification of the investment portfolios associated with this investment account", alias="investmentPortfolios")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties associated to the Investment Account.")

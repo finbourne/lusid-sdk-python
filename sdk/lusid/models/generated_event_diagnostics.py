@@ -28,7 +28,7 @@ class GeneratedEventDiagnostics(BaseModel):
     Represents a set of diagnostics per generatedEvent, where applicable.  # noqa: E501
     """
     instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId") 
-    type:  StrictStr = Field(...,alias="type") 
+    type:  StrictStr = Field(...,alias="type", description="Available values: MarketDataFailure, TransactionFailure, EventCombinationFailure, RepodOutHolding, ScheduleFailure.") 
     detail:  StrictStr = Field(...,alias="detail") 
     error_details: List[StrictStr] = Field(alias="errorDetails")
     __properties = ["instrumentEventId", "type", "detail", "errorDetails"]

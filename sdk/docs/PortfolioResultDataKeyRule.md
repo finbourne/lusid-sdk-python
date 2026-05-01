@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **as_at** | **datetime** | The AsAt predicate specification. | [optional] 
 **portfolio_code** | **str** |  | [optional] 
 **portfolio_scope** | **str** |  | [optional] 
-**result_key_rule_type** | **str** | The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule | 
+**result_key_rule_type** | **str** | Available values: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule. | 
 ## Example
 
 ```python

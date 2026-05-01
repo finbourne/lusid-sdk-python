@@ -903,15 +903,15 @@ class ReconciliationsApi:
 
 
     @overload
-    async def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, **kwargs) -> ResourceListOfMapping:  # noqa: E501
+    async def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.")] = None, **kwargs) -> ResourceListOfMapping:  # noqa: E501
         ...
 
     @overload
-    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMapping:  # noqa: E501
+    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfMapping:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMapping, Awaitable[ResourceListOfMapping]]:  # noqa: E501
+    def list_reconciliation_mappings(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfMapping, Awaitable[ResourceListOfMapping]]:  # noqa: E501
         """[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings  # noqa: E501
 
         Lists all mappings this user is entitled to see  # noqa: E501
@@ -921,7 +921,7 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliation_mappings(reconciliation_type, async_req=True)
         >>> result = thread.get()
 
-        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.
+        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.
         :type reconciliation_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -942,7 +942,7 @@ class ReconciliationsApi:
         return self.list_reconciliation_mappings_with_http_info(reconciliation_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_reconciliation_mappings_with_http_info(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_reconciliation_mappings_with_http_info(self, reconciliation_type : Annotated[Optional[StrictStr], Field( description="Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListReconciliationMappings: List the reconciliation mappings  # noqa: E501
 
         Lists all mappings this user is entitled to see  # noqa: E501
@@ -952,7 +952,7 @@ class ReconciliationsApi:
         >>> thread = api.list_reconciliation_mappings_with_http_info(reconciliation_type, async_req=True)
         >>> result = thread.get()
 
-        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Defaults to Transaction if not provided.
+        :param reconciliation_type: Optional parameter to specify which type of mappings should be returned.  Default value: Transaction. Available values: Transaction, Holding, Valuation, Cash, CashHolding.
         :type reconciliation_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

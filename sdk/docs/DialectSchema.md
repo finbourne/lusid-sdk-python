@@ -4,7 +4,7 @@ A schema that a given document must obey. A representation of the validation of 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** | The type of schema this represents | 
+**type** | **str** | The type of schema this represents. Available values: None, JsonSchema. | 
 **body** | **str** | The body of the schema | [optional] 
 ## Example
 

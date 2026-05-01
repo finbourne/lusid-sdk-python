@@ -36,12 +36,12 @@ class FundEstimateValuationPoint(FundCalendarEntries):
     timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
     previous_entry: Optional[PreviousFundCalendarEntry] = Field(default=None, alias="previousEntry")
     effective_at: Optional[datetime] = Field(default=None, description="The effective at of the Calendar Entry.", alias="effectiveAt")
-    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    entry_type:  StrictStr = Field(...,alias="entryType", description="The type of the Fund Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the Fund Calendar Entry. Can be 'Estimate', 'Unofficial' or 'Final'.") 
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
     variants: Optional[List[EstimateVariant]] = Field(default=None, description="The variants of the Estimate Valuation Point. ")
-    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. The available values are: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark") 
+    fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["fundCalendarEntriesType", "code", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "entryType", "status", "applyClearDown", "leaderNavTypeCode", "variants"]
 

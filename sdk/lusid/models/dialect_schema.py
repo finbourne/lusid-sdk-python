@@ -27,7 +27,7 @@ class DialectSchema(BaseModel):
     """
     A schema that a given document must obey. A representation of the validation of a particular Dialect,  in a given language.  # noqa: E501
     """
-    type:  StrictStr = Field(...,alias="type", description="The type of schema this represents") 
+    type:  StrictStr = Field(...,alias="type", description="The type of schema this represents. Available values: None, JsonSchema.") 
     body:  Optional[StrictStr] = Field(None,alias="body", description="The body of the schema") 
     __properties = ["type", "body"]
 

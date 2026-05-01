@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the relationship definition. | 
 **outward_description** | **str** | The description to relate source entity object and target entity object. | 
 **inward_description** | **str** | The description to relate target entity object and source entity object. | 
-**life_time** | **str** | Describes how the relationships can change over time. Allowed values are &#39;Perpetual&#39; and &#39;TimeVariant&#39;, defaults to &#39;Perpetual&#39; if not specified. | [optional] 
-**relationship_cardinality** | **str** | Describes the cardinality of the relationship with a specific source entity object and relationships under this definition. Allowed values are &#39;ManyToMany&#39; and &#39;ManyToOne&#39;, defaults to &#39;ManyToMany&#39; if not specified. | [optional] 
+**life_time** | **str** | Describes how the relationships can change over time. Default value: Perpetual. Available values: Perpetual, TimeVariant. | [optional] 
+**relationship_cardinality** | **str** | Describes the cardinality of the relationship with a specific source entity object and relationships under this definition. Default value: ManyToMany. Available values: ManyToOne, ManyToMany. | [optional] 
 ## Example
 
 ```python

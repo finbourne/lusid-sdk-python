@@ -5,7 +5,7 @@ Result value for a collection of cash flow values
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cashflows** | [**List[CashFlowValue]**](CashFlowValue.md) | The set of cash flows in the result | [optional] 
-**result_value_type** | **str** | The available values are: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset | 
+**result_value_type** | **str** | Available values: ResultValue, ResultValueDictionary, ResultValue0D, ResultValueDecimal, ResultValueInt, ResultValueString, ResultValueBool, ResultValueCurrency, CashFlowValue, CashFlowValueSet, ResultValueLifeCycleEventValue, ResultValueDateTimeOffset. | 
 ## Example
 
 ```python

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **resource_key** | **str** | The result data key that identifies the address pattern that this is a rule for | 
 **document_result_type** | **str** |  | 
 **use_document_to_infer_holdings** | **bool** | Indicates whether the relevant document should be used to infer the set of holdings in the valuation. | [optional] 
-**result_key_rule_type** | **str** | The available values are: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule | 
+**result_key_rule_type** | **str** | Available values: Invalid, ResultDataKeyRule, PortfolioResultDataKeyRule. | 
 ## Example
 
 ```python

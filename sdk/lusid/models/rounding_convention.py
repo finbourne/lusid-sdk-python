@@ -29,8 +29,8 @@ class RoundingConvention(BaseModel):
     """
     face_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The face value to round against.  The number to be rounded is scaled to this face value before being rounded, and then re-scaled to the holding amount.  For example if rounding an accrued interest value using a FaceValue of 1,000, but 10,000 units are held,  then the initial calculated value would be divided by 10,000, then multiplied by 1,000 and rounded per the convention.  The result of this would then be divided by 1,000 and multiplied by 10,000 to get the final value.", alias="faceValue")
     precision: Optional[StrictInt] = Field(default=None, description="The precision of the rounding.  The decimal places to which the rounding takes place.  Defaults to 0 if not set.")
-    rounding_target:  Optional[StrictStr] = Field(None,alias="roundingTarget", description="The target of the rounding convention.  Accepted values are 'AccruedInterest', 'Cashflows', or 'All'    Supported string (enumeration) values are: [All, AccruedInterest, Cashflows].  Defaults to \"All\" if not set.") 
-    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  e.g. Round Up, Round Down    Supported string (enumeration) values are: [Down, Up, Floor, Ceiling, Nearest].  Defaults to \"Nearest\" if not set.") 
+    rounding_target:  Optional[StrictStr] = Field(None,alias="roundingTarget", description="The target of the rounding convention.    Default value: All. Available values: All, AccruedInterest, Cashflows.") 
+    rounding_type:  Optional[StrictStr] = Field(None,alias="roundingType", description="The type of rounding.  Default value: Nearest. Available values: None, Down, Up, Nearest.") 
     __properties = ["faceValue", "precision", "roundingTarget", "roundingType"]
 
     class Config:

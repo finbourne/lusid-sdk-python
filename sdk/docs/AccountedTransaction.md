@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **journal_entry_action** | **str** | The journal entry line action associated with this transaction. | [optional] 
 **transaction** | [**OutputTransaction**](OutputTransaction.md) |  | [optional] 
 **portfolio_id** | [**PortfolioId**](PortfolioId.md) |  | [optional] 
-**valuation_point_origin** | **str** | Designates if the transaction was originally part of the Valuation Point or if it was added as part of a Complex Close action. | [optional] 
+**valuation_point_origin** | **str** | Designates if the transaction was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added. | [optional] 
 **added_origin_valuation_point_code** | **str** | The Valuation Point, only for transaction added as part of a Complex Close action. | [optional] 
 **added_origin_valuation_point_variant_code** | **str** | The Valuation Point variant, only for transactions added as part of a Complex Close action. | [optional] 
 ## Example

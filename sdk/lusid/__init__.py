@@ -339,6 +339,7 @@ from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
+from lusid.models.consent_event import ConsentEvent
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
 from lusid.models.contract_details import ContractDetails
@@ -559,6 +560,7 @@ from lusid.models.fund_calendar_entries import FundCalendarEntries
 from lusid.models.fund_calendar_entries_type import FundCalendarEntriesType
 from lusid.models.fund_calendar_entry import FundCalendarEntry
 from lusid.models.fund_calendar_entry_type import FundCalendarEntryType
+from lusid.models.fund_cash_statement_row import FundCashStatementRow
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
@@ -1020,6 +1022,7 @@ from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
+from lusid.models.query_fund_cash_statement_parameters import QueryFundCashStatementParameters
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
 from lusid.models.query_relational_dataset_request import QueryRelationalDatasetRequest
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
@@ -1445,6 +1448,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
+from lusid.models.valuation_point_resource_list_of_fund_cash_statement_row import ValuationPointResourceListOfFundCashStatementRow
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
@@ -1814,6 +1818,7 @@ __all__ = [
     "CompositeDispersionResponse",
     "Compounding",
     "ConfigurationRecipe",
+    "ConsentEvent",
     "ConstantVolatilitySurface",
     "ConstituentsAdjustmentHeader",
     "ContractDetails",
@@ -2034,6 +2039,7 @@ __all__ = [
     "FundCalendarEntriesType",
     "FundCalendarEntry",
     "FundCalendarEntryType",
+    "FundCashStatementRow",
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
@@ -2495,6 +2501,7 @@ __all__ = [
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",
+    "QueryFundCashStatementParameters",
     "QueryInstrumentEventsRequest",
     "QueryRelationalDatasetRequest",
     "QueryTradeTicketsRequest",
@@ -2920,6 +2927,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedTransaction",
+    "ValuationPointResourceListOfFundCashStatementRow",
     "ValuationPointResourceListOfFundJournalEntryLine",
     "ValuationPointResourceListOfPnlJournalEntryLine",
     "ValuationPointResourceListOfTrialBalance",

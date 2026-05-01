@@ -31,7 +31,7 @@ class PortfolioSearchResult(BaseModel):
     A list of portfolios.  # noqa: E501
     """
     id: ResourceId
-    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. The available values are: Transaction, Reference, DerivedTransaction, SimplePosition") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 

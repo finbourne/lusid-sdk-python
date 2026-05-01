@@ -27,7 +27,7 @@ class StagingRuleMatchCriteria(BaseModel):
     """
     StagingRuleMatchCriteria
     """
-    action_in: Optional[List[StrictStr]] = Field(default=None, alias="actionIn")
+    action_in: Optional[List[StrictStr]] = Field(default=None, description="Available values: Create, Update, Delete.", alias="actionIn")
     requesting_user:  Optional[StrictStr] = Field(None,alias="requestingUser") 
     entity_attributes:  Optional[StrictStr] = Field(None,alias="entityAttributes") 
     changed_attribute_name_in: Optional[List[StrictStr]] = Field(default=None, alias="changedAttributeNameIn")

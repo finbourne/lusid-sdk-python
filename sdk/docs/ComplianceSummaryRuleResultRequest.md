@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **rule_id** | [**ResourceId**](ResourceId.md) |  | 
 **template_id** | [**ResourceId**](ResourceId.md) |  | 
 **variation** | **str** |  | 
-**rule_status** | **str** |  | 
+**rule_status** | **str** | Available values: Passed, Failed, MissingData, Warning. | 
 **affected_portfolios** | [**List[ResourceId]**](ResourceId.md) |  | 
 **affected_orders** | [**List[ResourceId]**](ResourceId.md) |  | 
 **parameters_used** | **Dict[str, Optional[str]]** |  | 

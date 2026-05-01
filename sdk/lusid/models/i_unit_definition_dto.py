@@ -27,7 +27,7 @@ class IUnitDefinitionDto(BaseModel):
     """
     IUnitDefinitionDto
     """
-    var_schema:  Optional[StrictStr] = Field(None,alias="schema", description="The available values are: NoUnits, Basic, Iso4217Currency") 
+    var_schema:  Optional[StrictStr] = Field(None,alias="schema", description="Available values: NoUnits, Basic, Iso4217Currency.") 
     code:  Optional[StrictStr] = Field(None,alias="code") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName") 
     description:  Optional[StrictStr] = Field(None,alias="description") 

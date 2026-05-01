@@ -31,7 +31,7 @@ class MembershipAmendmentRequest(BaseModel):
     custom_data_model_id: ResourceId = Field(alias="customDataModelId")
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the entity that is being added or removed from the Custom Data Model.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The entity unique identifier of the entity that is being added or removed from the Custom Data Model.") 
-    operation:  StrictStr = Field(...,alias="operation", description="The operation to be performed on the entity's membership in the Custom Data Model. Either 'Add' or 'Remove'.") 
+    operation:  StrictStr = Field(...,alias="operation", description="The operation to be performed on the entity's membership in the Custom Data Model. Available values: Add, Remove.") 
     __properties = ["customDataModelId", "entityType", "entityUniqueId", "operation"]
 
     class Config:

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **portfolio_scope** | **str** | The portfolio scope of the given entity | 
 **portfolio_code** | **str** | The portfolio code of the given entity | 
 **settlement_instruction_id** | **str** | The settlement instruction Id of the SettlementInstruction being adjusted | 
-**nav_activity_adjustment_type** | **str** | . The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity | 
+**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | 
 ## Example
 
 ```python

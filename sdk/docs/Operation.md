@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **object** |  | [optional] 
 **path** | **str** |  | 
-**op** | **str** |  | 
+**op** | **str** | Available values: add, remove. | 
 **var_from** | **str** |  | [optional] 
 ## Example
 

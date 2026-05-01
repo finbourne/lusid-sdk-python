@@ -32,7 +32,7 @@ class PortfolioTransaction(NavActivityAdjustment):
     portfolio_scope:  StrictStr = Field(...,alias="portfolioScope", description="The portfolio scope of the given entity") 
     portfolio_code:  StrictStr = Field(...,alias="portfolioCode", description="The portfolio code of the given entity") 
     transaction_id:  StrictStr = Field(...,alias="transactionId", description="The transaction Id of the PortfolioTransaction being adjusted") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description=". The available values are: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "asAt", "portfolioScope", "portfolioCode", "transactionId"]
 

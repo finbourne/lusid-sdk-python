@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | 
 **underlying_code** | **str** | Code of the underlying, for an option on futures this should be the futures code. | 
 **delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set. | [optional] 
-**business_day_convention** | **str** | The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Supported string (enumeration) values are: [NoAdjustment, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest].  Defaults to \&quot;F\&quot; if not set. | [optional] 
+**business_day_convention** | **str** | The adjustment type to apply to dates that fall upon a non-business day, e.g. modified following or following.  Default value: F. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid. | [optional] 
 **settlement_calendars** | **List[str]** | An array of strings denoting calendars used in calculating the option settlement date. | [optional] 
 ## Example
 

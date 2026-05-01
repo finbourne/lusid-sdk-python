@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**calculation_method** | **str** | Method of calculating the fees or commission among: BasisPoints, Percentage, Rate, Flat etc. | 
-**multiplier** | **str** | Field by which to multiply the numerical amount. Eg: Quantity, Value | 
+**calculation_method** | **str** | Method of calculating the fees or commission among: BasisPoints, Percentage, Rate, Flat etc. Available values: Rate, BasisPoints, Percentage, Flat. | 
+**multiplier** | **str** | Field by which to multiply the numerical amount. Available values: None, Quantity, Value. | 
 **calculation_amount** | **float** | Numerical fee amount | 
 ## Example
 

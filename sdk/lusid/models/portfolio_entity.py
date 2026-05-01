@@ -32,14 +32,14 @@ class PortfolioEntity(BaseModel):
     href:  StrictStr = Field(...,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The unique id of the entity.") 
     as_at_version_number: Optional[StrictInt] = Field(default=None, description="The integer version number for the entity (the entity was created at version 1)", alias="asAtVersionNumber")
-    status:  StrictStr = Field(...,alias="status", description="The status of the entity at the current time.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the entity at the current time. Available values: Prevailing, Deleted, DoesNotExist.") 
     as_at_deleted: Optional[datetime] = Field(default=None, description="The asAt datetime at which the entity was deleted.", alias="asAtDeleted")
     user_id_deleted:  Optional[StrictStr] = Field(None,alias="userIdDeleted", description="The unique id of the user who deleted the entity.") 
     request_id_deleted:  Optional[StrictStr] = Field(None,alias="requestIdDeleted", description="The unique request id of the command that deleted the entity.") 
     effective_at_created: Optional[datetime] = Field(default=None, description="The EffectiveAt this Entity is created, if entity does not currently exist in EffectiveAt.", alias="effectiveAtCreated")
     prevailing_portfolio: Optional[PortfolioWithoutHref] = Field(default=None, alias="prevailingPortfolio")
     deleted_portfolio: Optional[PortfolioWithoutHref] = Field(default=None, alias="deletedPortfolio")
-    previewed_status:  Optional[StrictStr] = Field(None,alias="previewedStatus", description="The status of the previewed entity.") 
+    previewed_status:  Optional[StrictStr] = Field(None,alias="previewedStatus", description="The status of the previewed entity. Available values: Prevailing, Deleted, DoesNotExist.") 
     previewed_portfolio: Optional[PortfolioWithoutHref] = Field(default=None, alias="previewedPortfolio")
     links: Optional[List[Link]] = None
     __properties = ["href", "entityUniqueId", "asAtVersionNumber", "status", "asAtDeleted", "userIdDeleted", "requestIdDeleted", "effectiveAtCreated", "prevailingPortfolio", "deletedPortfolio", "previewedStatus", "previewedPortfolio", "links"]

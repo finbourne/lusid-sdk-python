@@ -29,7 +29,7 @@ class CleardownModuleDetails(BaseModel):
     """
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Cleardown Module.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Cleardown Module.") 
-    status:  StrictStr = Field(...,alias="status", description="The Cleardown Module status. Can be Active or Inactive. Defaults to Active.") 
+    status:  StrictStr = Field(...,alias="status", description="The Cleardown Module status. Default value: Active. Available values: Active, Inactive.") 
     __properties = ["displayName", "description", "status"]
 
     class Config:

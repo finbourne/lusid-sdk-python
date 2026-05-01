@@ -31,7 +31,7 @@ class VendorDependency(EconomicDependency):
     vendor_name:  StrictStr = Field(...,alias="vendorName", description="The name of the outside vendor") 
     vendor_path: List[StrictStr] = Field(description="The specific dependency path", alias="vendorPath")
     var_date: datetime = Field(description="The effectiveDate of the entity that this is a dependency for.", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "vendorName", "vendorPath", "date"]
 

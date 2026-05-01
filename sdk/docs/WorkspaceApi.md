@@ -69,7 +69,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The item's workspace name.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -96,7 +96,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The item&#39;s workspace name. | 
  **workspace_item_creation_request** | [**WorkspaceItemCreationRequest**](WorkspaceItemCreationRequest.md)| The item to be created. | [optional] 
 
@@ -170,7 +170,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the workspace being created. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the workspace being created; case is important. Available values: shared, personal.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -197,7 +197,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the workspace being created. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the workspace being created; case is important. Available values: shared, personal. | 
  **workspace_creation_request** | [**WorkspaceCreationRequest**](WorkspaceCreationRequest.md)| The workspace to be created. | 
  **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
 
@@ -271,7 +271,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The name of the workspace.
     group_name = 'group_name_example' # str | The group containing the item.
     item_name = 'item_name_example' # str | The name of the item.
@@ -294,7 +294,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The name of the workspace. | 
  **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
@@ -369,7 +369,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The name of the workspace.
     recurse = False # bool | If true, recursively delete items in the workspace. (optional) (default to False)
 
@@ -391,7 +391,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The name of the workspace. | 
  **recurse** | **bool**| If true, recursively delete items in the workspace. | [optional] [default to False]
 
@@ -465,7 +465,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The name of the workspace.
     group_name = 'group_name_example' # str | The group containing the item.
     item_name = 'item_name_example' # str | The name of the item.
@@ -489,7 +489,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The name of the workspace. | 
  **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The name of the item. | 
@@ -565,7 +565,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The workspace name.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
     include_item_access = False # bool | If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. (optional) (default to False)
@@ -588,7 +588,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The workspace name. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. | [optional] 
  **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]
@@ -663,7 +663,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The item's workspace name.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
@@ -689,7 +689,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The item&#39;s workspace name. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
@@ -767,7 +767,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the workspaces. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the workspaces; case is important. Available values: shared, personal.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspaces. Defaults to 'latest' if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
@@ -793,7 +793,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the workspaces. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the workspaces; case is important. Available values: shared, personal. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve workspaces. Defaults to &#39;latest&#39; if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing workspaces from a previous call to list workspaces.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
@@ -871,7 +871,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve workspace items. Defaults to 'latest' if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
@@ -896,7 +896,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve workspace items. Defaults to &#39;latest&#39; if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing workspaces items from a previous call to list workspaces items.              This value is returned from the previous call. If a pagination token is provided the sortBy, filter, effectiveAt, and asAt fields              must not have changed since the original request. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
@@ -973,7 +973,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the containing workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the containing workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The workspace name.
     group_name = 'group_name_example' # str | The group containing the item.
     item_name = 'item_name_example' # str | The item name.
@@ -1002,7 +1002,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the containing workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the containing workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The workspace name. | 
  **group_name** | **str**| The group containing the item. | 
  **item_name** | **str**| The item name. | 
@@ -1078,7 +1078,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(WorkspaceApi)
-    visibility = 'visibility_example' # str | The visibility for the workspace. Must be `shared` or `personal`; case is important.
+    visibility = 'visibility_example' # str | The visibility for the workspace; case is important. Available values: shared, personal.
     workspace_name = 'workspace_name_example' # str | The workspace name.
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
@@ -1106,7 +1106,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **visibility** | **str**| The visibility for the workspace. Must be &#x60;shared&#x60; or &#x60;personal&#x60;; case is important. | 
+ **visibility** | **str**| The visibility for the workspace; case is important. Available values: shared, personal. | 
  **workspace_name** | **str**| The workspace name. | 
  **workspace_update_request** | [**WorkspaceUpdateRequest**](WorkspaceUpdateRequest.md)| The new workspace details. | 
  **include_item_access** | **bool**| If true, includes the workspace item actions the user is permitted to perform in the response. Defaults to false. | [optional] [default to False]

@@ -32,8 +32,8 @@ class ValuationPointDataResponse(BaseModel):
     The Valuation Point Data Response for the Fund and specified date.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    type:  StrictStr = Field(...,alias="type", description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used).") 
-    status:  StrictStr = Field(...,alias="status", description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used.") 
+    type:  StrictStr = Field(...,alias="type", description="The Type of the associated Diary Entry ('PeriodBoundary','ValuationPoint','Other' or 'Adhoc' when a diary entry wasn't used). Available values: PeriodBoundary, ValuationPoint, Other, Adhoc.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of a Diary Entry of Type 'ValuationPoint'. Defaults to 'Estimate' when upserting a diary entry, moves to 'Candidate' or 'Final' when a ValuationPoint is accepted, and 'Final' when it is finalised. The status of a Diary Entry becomes 'Unofficial' when a diary entry wasn't used. Available values: Undefined, Estimate, Final, Candidate, Unofficial.") 
     fund_details: FundDetails = Field(alias="fundDetails")
     fund_valuation_point_data: FundValuationPointData = Field(alias="fundValuationPointData")
     share_class_data: List[ShareClassData] = Field(description="The data for all share classes in fund. Share classes are identified by their short codes.", alias="shareClassData")

@@ -33,7 +33,7 @@ class AccountedTransaction(BaseModel):
     journal_entry_action:  Optional[StrictStr] = Field(None,alias="journalEntryAction", description="The journal entry line action associated with this transaction.") 
     transaction: Optional[OutputTransaction] = None
     portfolio_id: Optional[PortfolioId] = Field(default=None, alias="portfolioId")
-    valuation_point_origin:  Optional[StrictStr] = Field(None,alias="valuationPointOrigin", description="Designates if the transaction was originally part of the Valuation Point or if it was added as part of a Complex Close action.") 
+    valuation_point_origin:  Optional[StrictStr] = Field(None,alias="valuationPointOrigin", description="Designates if the transaction was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added.") 
     added_origin_valuation_point_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointCode", description="The Valuation Point, only for transaction added as part of a Complex Close action.") 
     added_origin_valuation_point_variant_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointVariantCode", description="The Valuation Point variant, only for transactions added as part of a Complex Close action.") 
     __properties = ["accountingDate", "journalEntryAction", "transaction", "portfolioId", "valuationPointOrigin", "addedOriginValuationPointCode", "addedOriginValuationPointVariantCode"]

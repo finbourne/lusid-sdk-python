@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** | The code given for the Account. | 
 **description** | **str** | A description for the Account. | [optional] 
-**type** | **str** | The Account type. Can have the values: Asset/Liabilities/Income/Expense/Capital/Revenue. | 
-**status** | **str** | The Account status. Can be Active, Inactive or Deleted. The available values are: Active, Inactive, Deleted | 
-**control** | **str** | This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Can have the values: System/ManualIt will default to “Manual”. | [optional] 
+**type** | **str** | The Account type. Available values: Asset, Liabilities, Income, Expense, Capital, Revenue. | 
+**status** | **str** | The Account status. Available values: Active, Inactive, Deleted. | 
+**control** | **str** | This allows users to specify whether this a protected Account that prevents direct manual journal adjustment. Default value: Manual. Available values: Manual, System. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Account. | [optional] 
 ## Example
 

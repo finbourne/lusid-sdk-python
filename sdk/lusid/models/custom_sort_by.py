@@ -29,7 +29,7 @@ class CustomSortBy(BaseModel):
     """
     field_name:  StrictStr = Field(...,alias="fieldName", description="The name of the field to sort by.") 
     priority_values: Optional[List[StrictStr]] = Field(default=None, description="An optional list of priority field values to sort by, in the order they should be prioritized.", alias="priorityValues")
-    remainder_order:  StrictStr = Field(...,alias="remainderOrder", description="The sorting direction for the remaining field values. Either ascending (ASC) or descending (DESC).") 
+    remainder_order:  StrictStr = Field(...,alias="remainderOrder", description="The sorting direction for the remaining field values. Either ascending (ASC) or descending (DESC). Available values: ASC, DESC.") 
     __properties = ["fieldName", "priorityValues", "remainderOrder"]
 
     class Config:

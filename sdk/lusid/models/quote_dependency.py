@@ -31,7 +31,7 @@ class QuoteDependency(EconomicDependency):
     market_identifier:  StrictStr = Field(...,alias="marketIdentifier", description="Type of the code identifying the asset, e.g. ISIN or CUSIP") 
     code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 
     var_date: datetime = Field(description="The effectiveAt of the quote for the identified entity.", alias="date")
-    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="The available values are: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency") 
+    dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["dependencyType", "marketIdentifier", "code", "date"]
 

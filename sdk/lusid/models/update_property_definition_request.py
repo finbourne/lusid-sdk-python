@@ -30,7 +30,7 @@ class UpdatePropertyDefinitionRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the property.") 
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     custom_entity_types: Optional[List[StrictStr]] = Field(default=None, description="The custom entity types that properties relating to this property definition can be applied to.", alias="customEntityTypes")
-    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented.") 
+    value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented. Available values: Text, Html.") 
     __properties = ["displayName", "propertyDescription", "customEntityTypes", "valueFormat"]
 
     class Config:

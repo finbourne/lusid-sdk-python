@@ -29,7 +29,7 @@ class SettlementInstructionAmendRequest(BaseModel):
     SettlementInstructionAmendRequest
     """
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId") 
-    operation:  Optional[StrictStr] = Field(None,alias="operation") 
+    operation:  Optional[StrictStr] = Field(None,alias="operation", description="Available values: Activate, Deactivate.") 
     properties: Optional[List[PerpetualProperty]] = None
     __properties = ["settlementInstructionId", "operation", "properties"]
 

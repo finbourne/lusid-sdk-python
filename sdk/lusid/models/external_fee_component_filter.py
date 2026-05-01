@@ -29,7 +29,7 @@ class ExternalFeeComponentFilter(BaseModel):
     """
     filter_id:  StrictStr = Field(...,alias="filterId") 
     filter:  StrictStr = Field(...,alias="filter") 
-    applies_to:  StrictStr = Field(...,alias="appliesTo") 
+    applies_to:  StrictStr = Field(...,alias="appliesTo", description="Available values: Undefined, PnLBucket, Fees.") 
     __properties = ["filterId", "filter", "appliesTo"]
 
     class Config:
