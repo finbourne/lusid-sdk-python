@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **movement_name** | **str** | The name of the movement. | [optional] 
 **effective_date** | **datetime** | The date of the movement. | [optional] 
 **units** | **float** | The number of units of the instrument that are affected by the movement. | [optional] 
+**running_units** | **float** | The cumulative number of units for this sub-holding, as at this movement. | [optional] 
+**running_balance** | [**A2BCategory**](A2BCategory.md) |  | [optional] 
+**running_cost** | **float** | The running cost in portfolio currency for this sub-holding, as at this movement. | [optional] 
 **start** | [**A2BCategory**](A2BCategory.md) |  | [optional] 
 **flows** | [**A2BCategory**](A2BCategory.md) |  | [optional] 
 **gains** | [**A2BCategory**](A2BCategory.md) |  | [optional] 
@@ -41,6 +44,9 @@ transaction_id: Optional[StrictStr] = "example_transaction_id"
 movement_name: Optional[StrictStr] = "example_movement_name"
 effective_date: Optional[datetime] = # Replace with your value
 units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+running_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+running_balance: Optional[A2BCategory] = # Replace with your value
+running_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 start: Optional[A2BCategory] = None
 flows: Optional[A2BCategory] = None
 gains: Optional[A2BCategory] = None
@@ -49,7 +55,7 @@ end: Optional[A2BCategory] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 group_id: Optional[StrictStr] = "example_group_id"
 errors: Optional[List[ResponseMetaData]] = # Replace with your value
-a2_b_movement_record_instance = A2BMovementRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, movement_name=movement_name, effective_date=effective_date, units=units, start=start, flows=flows, gains=gains, carry=carry, end=end, properties=properties, group_id=group_id, errors=errors)
+a2_b_movement_record_instance = A2BMovementRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, movement_name=movement_name, effective_date=effective_date, units=units, running_units=running_units, running_balance=running_balance, running_cost=running_cost, start=start, flows=flows, gains=gains, carry=carry, end=end, properties=properties, group_id=group_id, errors=errors)
 
 ```
 

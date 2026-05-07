@@ -25,18 +25,17 @@ from datetime import datetime
 from lusid.models.fee_calculation_request import FeeCalculationRequest
 from lusid.models.model_property import ModelProperty
 
-class CreateTransactionFeeRequest(BaseModel):
+class UpdateTransactionFeeTypeRequest(BaseModel):
     """
-    CreateTransactionFeeRequest
+    UpdateTransactionFeeTypeRequest
     """
-    name:  StrictStr = Field(...,alias="name", description="The display name of the transaction fee.") 
-    description:  StrictStr = Field(...,alias="description", description="A description of the transaction fee.") 
-    calculation: FeeCalculationRequest
-    condition:  StrictStr = Field(...,alias="condition", description="The condition that the transaction must meet in order for the fee to be applied.") 
-    txn_property_key:  StrictStr = Field(...,alias="txnPropertyKey", description="The property key to which the fee value will be applied and decorated onto the transaction. Must be in the 'Transaction' property domain.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee.")
-    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee is currently active and should be applied to transactions. Optional when creating a transaction fee, defaults to true, if a value is not provided.", alias="isActive")
-    __properties = ["name", "description", "calculation", "condition", "txnPropertyKey", "properties", "isActive"]
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the transaction fee type.") 
+    calculation: Optional[FeeCalculationRequest] = None
+    condition:  Optional[StrictStr] = Field(None,alias="condition", description="The condition that the transaction must meet in order for the fee to be applied.") 
+    txn_property_key:  Optional[StrictStr] = Field(None,alias="txnPropertyKey", description="The property key to which the fee value will be applied and decorated onto the transaction. Must be in the 'Transaction' property domain.") 
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee type.")
+    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee type is currently active and should be applied to transactions. Optional when creating a transaction fee type, defaults to true, if a value is not provided.", alias="isActive")
+    __properties = ["description", "calculation", "condition", "txnPropertyKey", "properties", "isActive"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,8 +59,8 @@ class CreateTransactionFeeRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreateTransactionFeeRequest:
-        """Create an instance of CreateTransactionFeeRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> UpdateTransactionFeeTypeRequest:
+        """Create an instance of UpdateTransactionFeeTypeRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -80,24 +79,43 @@ class CreateTransactionFeeRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
+        # set to None if condition (nullable) is None
+        # and __fields_set__ contains the field
+        if self.condition is None and "condition" in self.__fields_set__:
+            _dict['condition'] = None
+
+        # set to None if txn_property_key (nullable) is None
+        # and __fields_set__ contains the field
+        if self.txn_property_key is None and "txn_property_key" in self.__fields_set__:
+            _dict['txnPropertyKey'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if is_active (nullable) is None
+        # and __fields_set__ contains the field
+        if self.is_active is None and "is_active" in self.__fields_set__:
+            _dict['isActive'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreateTransactionFeeRequest:
-        """Create an instance of CreateTransactionFeeRequest from a dict"""
+    def from_dict(cls, obj: dict) -> UpdateTransactionFeeTypeRequest:
+        """Create an instance of UpdateTransactionFeeTypeRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreateTransactionFeeRequest.parse_obj(obj)
+            return UpdateTransactionFeeTypeRequest.parse_obj(obj)
 
-        _obj = CreateTransactionFeeRequest.parse_obj({
-            "name": obj.get("name"),
+        _obj = UpdateTransactionFeeTypeRequest.parse_obj({
             "description": obj.get("description"),
             "calculation": FeeCalculationRequest.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None,
             "condition": obj.get("condition"),
@@ -112,4 +130,4 @@ class CreateTransactionFeeRequest(BaseModel):
         })
         return _obj
 
-CreateTransactionFeeRequest.update_forward_refs()
+UpdateTransactionFeeTypeRequest.update_forward_refs()

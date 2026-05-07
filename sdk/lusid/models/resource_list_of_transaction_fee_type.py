@@ -23,13 +23,13 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
-from lusid.models.transaction_fee import TransactionFee
+from lusid.models.transaction_fee_type import TransactionFeeType
 
-class ResourceListOfTransactionFee(BaseModel):
+class ResourceListOfTransactionFeeType(BaseModel):
     """
-    ResourceListOfTransactionFee
+    ResourceListOfTransactionFeeType
     """
-    values: List[TransactionFee]
+    values: List[TransactionFeeType]
     href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[List[Link]] = None
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
@@ -58,8 +58,8 @@ class ResourceListOfTransactionFee(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResourceListOfTransactionFee:
-        """Create an instance of ResourceListOfTransactionFee from a JSON string"""
+    def from_json(cls, json_str: str) -> ResourceListOfTransactionFeeType:
+        """Create an instance of ResourceListOfTransactionFeeType from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -105,16 +105,16 @@ class ResourceListOfTransactionFee(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResourceListOfTransactionFee:
-        """Create an instance of ResourceListOfTransactionFee from a dict"""
+    def from_dict(cls, obj: dict) -> ResourceListOfTransactionFeeType:
+        """Create an instance of ResourceListOfTransactionFeeType from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResourceListOfTransactionFee.parse_obj(obj)
+            return ResourceListOfTransactionFeeType.parse_obj(obj)
 
-        _obj = ResourceListOfTransactionFee.parse_obj({
-            "values": [TransactionFee.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+        _obj = ResourceListOfTransactionFeeType.parse_obj({
+            "values": [TransactionFeeType.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None,
             "next_page": obj.get("nextPage"),
@@ -122,4 +122,4 @@ class ResourceListOfTransactionFee(BaseModel):
         })
         return _obj
 
-ResourceListOfTransactionFee.update_forward_refs()
+ResourceListOfTransactionFeeType.update_forward_refs()

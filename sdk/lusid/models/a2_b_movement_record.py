@@ -42,6 +42,9 @@ class A2BMovementRecord(BaseModel):
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="The name of the movement.") 
     effective_date: Optional[datetime] = Field(default=None, description="The date of the movement.", alias="effectiveDate")
     units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of units of the instrument that are affected by the movement.")
+    running_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cumulative number of units for this sub-holding, as at this movement.", alias="runningUnits")
+    running_balance: Optional[A2BCategory] = Field(default=None, alias="runningBalance")
+    running_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The running cost in portfolio currency for this sub-holding, as at this movement.", alias="runningCost")
     start: Optional[A2BCategory] = None
     flows: Optional[A2BCategory] = None
     gains: Optional[A2BCategory] = None
@@ -50,7 +53,7 @@ class A2BMovementRecord(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' domain.")
     group_id:  Optional[StrictStr] = Field(None,alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.") 
     errors: Optional[List[ResponseMetaData]] = Field(default=None, description="Any errors with the record are reported here.")
-    __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "movementName", "effectiveDate", "units", "start", "flows", "gains", "carry", "end", "properties", "groupId", "errors"]
+    __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "movementName", "effectiveDate", "units", "runningUnits", "runningBalance", "runningCost", "start", "flows", "gains", "carry", "end", "properties", "groupId", "errors"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,6 +97,9 @@ class A2BMovementRecord(BaseModel):
                 if self.sub_holding_keys[_key]:
                     _field_dict[_key] = self.sub_holding_keys[_key].to_dict()
             _dict['subHoldingKeys'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of running_balance
+        if self.running_balance:
+            _dict['runningBalance'] = self.running_balance.to_dict()
         # override the default output from pydantic by calling `to_dict()` of start
         if self.start:
             _dict['start'] = self.start.to_dict()
@@ -158,6 +164,16 @@ class A2BMovementRecord(BaseModel):
         if self.movement_name is None and "movement_name" in self.__fields_set__:
             _dict['movementName'] = None
 
+        # set to None if running_units (nullable) is None
+        # and __fields_set__ contains the field
+        if self.running_units is None and "running_units" in self.__fields_set__:
+            _dict['runningUnits'] = None
+
+        # set to None if running_cost (nullable) is None
+        # and __fields_set__ contains the field
+        if self.running_cost is None and "running_cost" in self.__fields_set__:
+            _dict['runningCost'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -200,6 +216,9 @@ class A2BMovementRecord(BaseModel):
             "movement_name": obj.get("movementName"),
             "effective_date": obj.get("effectiveDate"),
             "units": obj.get("units"),
+            "running_units": obj.get("runningUnits"),
+            "running_balance": A2BCategory.from_dict(obj.get("runningBalance")) if obj.get("runningBalance") is not None else None,
+            "running_cost": obj.get("runningCost"),
             "start": A2BCategory.from_dict(obj.get("start")) if obj.get("start") is not None else None,
             "flows": A2BCategory.from_dict(obj.get("flows")) if obj.get("flows") is not None else None,
             "gains": A2BCategory.from_dict(obj.get("gains")) if obj.get("gains") is not None else None,

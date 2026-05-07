@@ -1,25 +1,25 @@
-# CreateTransactionFeeRequest
+# CreateTransactionFeeTypeRequest
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | The display name of the transaction fee. | 
-**description** | **str** | A description of the transaction fee. | 
+**display_name** | **str** | The display name of the transaction fee type. | 
+**description** | **str** | A description of the transaction fee type. | 
 **calculation** | [**FeeCalculationRequest**](FeeCalculationRequest.md) |  | 
 **condition** | **str** | The condition that the transaction must meet in order for the fee to be applied. | 
 **txn_property_key** | **str** | The property key to which the fee value will be applied and decorated onto the transaction. Must be in the &#39;Transaction&#39; property domain. | 
-**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the transaction fee. | [optional] 
-**is_active** | **bool** | Indicates whether the transaction fee is currently active and should be applied to transactions. Optional when creating a transaction fee, defaults to true, if a value is not provided. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the transaction fee type. | [optional] 
+**is_active** | **bool** | Indicates whether the transaction fee type is currently active and should be applied to transactions. Optional when creating a transaction fee type, defaults to true, if a value is not provided. | [optional] 
 ## Example
 
 ```python
-from lusid.models.create_transaction_fee_request import CreateTransactionFeeRequest
+from lusid.models.create_transaction_fee_type_request import CreateTransactionFeeTypeRequest
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-name: StrictStr = "example_name"
+display_name: StrictStr = "example_display_name"
 description: StrictStr = "example_description"
 calculation: FeeCalculationRequest
 condition: StrictStr = "example_condition"
@@ -27,7 +27,7 @@ txn_property_key: StrictStr = "example_txn_property_key"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 is_active: Optional[StrictBool] = # Replace with your value
 is_active:Optional[StrictBool] = None
-create_transaction_fee_request_instance = CreateTransactionFeeRequest(name=name, description=description, calculation=calculation, condition=condition, txn_property_key=txn_property_key, properties=properties, is_active=is_active)
+create_transaction_fee_type_request_instance = CreateTransactionFeeTypeRequest(display_name=display_name, description=description, calculation=calculation, condition=condition, txn_property_key=txn_property_key, properties=properties, is_active=is_active)
 
 ```
 

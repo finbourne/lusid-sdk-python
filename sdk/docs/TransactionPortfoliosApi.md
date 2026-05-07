@@ -1973,7 +1973,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_a2_b_movements_trading_vs_holding**
-> VersionedResourceListOfA2BMovementRecord get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter)
+> VersionedResourceListOfA2BMovementRecord get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&L split between holding and trading returns.
 
@@ -2033,13 +2033,16 @@ def main():
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
     filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the timeline to use for loading data per closed period. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the timeline to use for loading data per closed period. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period's data is returned within that window. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, opts=opts)
+        # api_response =  api_instance.get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&L split between holding and trading returns.
-        api_response = api_instance.get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter)
+        api_response = api_instance.get_a2_b_movements_trading_vs_holding(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -2061,6 +2064,9 @@ Name | Type | Description  | Notes
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **timeline_scope** | **str**| The scope of the timeline to use for loading data per closed period. | [optional] 
+ **timeline_code** | **str**| The code of the timeline to use for loading data per closed period. | [optional] 
+ **closed_period_id** | **str**| The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. | [optional] 
 
 ### Return type
 

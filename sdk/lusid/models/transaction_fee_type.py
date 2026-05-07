@@ -23,19 +23,27 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.fee_calculation_request import FeeCalculationRequest
+from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
+from lusid.models.resource_id import ResourceId
+from lusid.models.version import Version
 
-class UpdateTransactionFeeRequest(BaseModel):
+class TransactionFeeType(BaseModel):
     """
-    UpdateTransactionFeeRequest
+    TransactionFeeType
     """
-    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the transaction fee.") 
+    id: Optional[ResourceId] = None
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the transaction fee type.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the transaction fee type.") 
     calculation: Optional[FeeCalculationRequest] = None
     condition:  Optional[StrictStr] = Field(None,alias="condition", description="The condition that the transaction must meet in order for the fee to be applied.") 
     txn_property_key:  Optional[StrictStr] = Field(None,alias="txnPropertyKey", description="The property key to which the fee value will be applied and decorated onto the transaction. Must be in the 'Transaction' property domain.") 
-    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee.")
-    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee is currently active and should be applied to transactions. Optional when creating a transaction fee, defaults to true, if a value is not provided.", alias="isActive")
-    __properties = ["description", "calculation", "condition", "txnPropertyKey", "properties", "isActive"]
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the transaction fee type.")
+    version: Optional[Version] = None
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the transaction fee type is currently active and should be applied to transactions. Optional when creating a transaction fee type, defaults to true, if a value is not provided.", alias="isActive")
+    links: Optional[List[Link]] = None
+    __properties = ["id", "displayName", "description", "calculation", "condition", "txnPropertyKey", "properties", "version", "href", "isActive", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -59,8 +67,8 @@ class UpdateTransactionFeeRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpdateTransactionFeeRequest:
-        """Create an instance of UpdateTransactionFeeRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> TransactionFeeType:
+        """Create an instance of TransactionFeeType from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -69,6 +77,9 @@ class UpdateTransactionFeeRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of calculation
         if self.calculation:
             _dict['calculation'] = self.calculation.to_dict()
@@ -79,6 +90,21 @@ class UpdateTransactionFeeRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -99,23 +125,30 @@ class UpdateTransactionFeeRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
-        # set to None if is_active (nullable) is None
+        # set to None if href (nullable) is None
         # and __fields_set__ contains the field
-        if self.is_active is None and "is_active" in self.__fields_set__:
-            _dict['isActive'] = None
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpdateTransactionFeeRequest:
-        """Create an instance of UpdateTransactionFeeRequest from a dict"""
+    def from_dict(cls, obj: dict) -> TransactionFeeType:
+        """Create an instance of TransactionFeeType from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpdateTransactionFeeRequest.parse_obj(obj)
+            return TransactionFeeType.parse_obj(obj)
 
-        _obj = UpdateTransactionFeeRequest.parse_obj({
+        _obj = TransactionFeeType.parse_obj({
+            "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
+            "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "calculation": FeeCalculationRequest.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None,
             "condition": obj.get("condition"),
@@ -126,8 +159,11 @@ class UpdateTransactionFeeRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "is_active": obj.get("isActive")
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "href": obj.get("href"),
+            "is_active": obj.get("isActive"),
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-UpdateTransactionFeeRequest.update_forward_refs()
+TransactionFeeType.update_forward_refs()

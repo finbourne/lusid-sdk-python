@@ -92,9 +92,9 @@ from lusid.api.system_configuration_api import SystemConfigurationApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
 from lusid.api.timelines_api import TimelinesApi
 from lusid.api.transaction_configuration_api import TransactionConfigurationApi
+from lusid.api.transaction_fee_types_api import TransactionFeeTypesApi
 from lusid.api.transaction_fees_api import TransactionFeesApi
 from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
-from lusid.api.transaction_transaction_fees_api import TransactionTransactionFeesApi
 from lusid.api.transfer_agency_api import TransferAgencyApi
 from lusid.api.translation_api import TranslationApi
 from lusid.api.workspace_api import WorkspaceApi
@@ -392,7 +392,7 @@ from lusid.models.create_staging_rule_set_request import CreateStagingRuleSetReq
 from lusid.models.create_tax_rule_set_request import CreateTaxRuleSetRequest
 from lusid.models.create_timeline_request import CreateTimelineRequest
 from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
-from lusid.models.create_transaction_fee_request import CreateTransactionFeeRequest
+from lusid.models.create_transaction_fee_type_request import CreateTransactionFeeTypeRequest
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.credit_default_swap import CreditDefaultSwap
@@ -1161,7 +1161,7 @@ from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefi
 from lusid.models.resource_list_of_string import ResourceListOfString
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
-from lusid.models.resource_list_of_transaction_fee import ResourceListOfTransactionFee
+from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTransactionFeeType
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
@@ -1298,8 +1298,8 @@ from lusid.models.transaction_configuration_type_alias import TransactionConfigu
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
-from lusid.models.transaction_fee import TransactionFee
 from lusid.models.transaction_fee_capitalisation import TransactionFeeCapitalisation
+from lusid.models.transaction_fee_type import TransactionFeeType
 from lusid.models.transaction_field_map import TransactionFieldMap
 from lusid.models.transaction_matching_alternative_id import TransactionMatchingAlternativeId
 from lusid.models.transaction_price import TransactionPrice
@@ -1387,7 +1387,7 @@ from lusid.models.update_series_identifier_field import UpdateSeriesIdentifierFi
 from lusid.models.update_staging_rule_set_request import UpdateStagingRuleSetRequest
 from lusid.models.update_tax_rule_set_request import UpdateTaxRuleSetRequest
 from lusid.models.update_timeline_request import UpdateTimelineRequest
-from lusid.models.update_transaction_fee_request import UpdateTransactionFeeRequest
+from lusid.models.update_transaction_fee_type_request import UpdateTransactionFeeTypeRequest
 from lusid.models.update_unit_request import UpdateUnitRequest
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
 from lusid.models.upsert_complex_market_data_request import UpsertComplexMarketDataRequest
@@ -1581,9 +1581,9 @@ __all__ = [
     "TaxRuleSetsApi",
     "TimelinesApi",
     "TransactionConfigurationApi",
+    "TransactionFeeTypesApi",
     "TransactionFeesApi",
     "TransactionPortfoliosApi",
-    "TransactionTransactionFeesApi",
     "TransferAgencyApi",
     "TranslationApi",
     "WorkspaceApi",
@@ -1871,7 +1871,7 @@ __all__ = [
     "CreateTaxRuleSetRequest",
     "CreateTimelineRequest",
     "CreateTradeTicketsResponse",
-    "CreateTransactionFeeRequest",
+    "CreateTransactionFeeTypeRequest",
     "CreateTransactionPortfolioRequest",
     "CreateUnitDefinition",
     "CreditDefaultSwap",
@@ -2640,7 +2640,7 @@ __all__ = [
     "ResourceListOfString",
     "ResourceListOfTaxRuleSet",
     "ResourceListOfTransaction",
-    "ResourceListOfTransactionFee",
+    "ResourceListOfTransactionFeeType",
     "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
     "ResourceListOfValueType",
@@ -2777,8 +2777,8 @@ __all__ = [
     "TransactionCurrencyAndAmount",
     "TransactionDateWindows",
     "TransactionDiagnostics",
-    "TransactionFee",
     "TransactionFeeCapitalisation",
+    "TransactionFeeType",
     "TransactionFieldMap",
     "TransactionMatchingAlternativeId",
     "TransactionPrice",
@@ -2866,7 +2866,7 @@ __all__ = [
     "UpdateStagingRuleSetRequest",
     "UpdateTaxRuleSetRequest",
     "UpdateTimelineRequest",
-    "UpdateTransactionFeeRequest",
+    "UpdateTransactionFeeTypeRequest",
     "UpdateUnitRequest",
     "UpsertCdsFlowConventionsRequest",
     "UpsertComplexMarketDataRequest",
