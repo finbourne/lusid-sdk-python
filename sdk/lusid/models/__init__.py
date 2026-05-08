@@ -594,6 +594,7 @@ from lusid.models.inline_valuations_reconciliation_request import InlineValuatio
 from lusid.models.input_transition import InputTransition
 from lusid.models.instrument import Instrument
 from lusid.models.instrument_activity import InstrumentActivity
+from lusid.models.instrument_activity_adjustment import InstrumentActivityAdjustment
 from lusid.models.instrument_capabilities import InstrumentCapabilities
 from lusid.models.instrument_cash_flow import InstrumentCashFlow
 from lusid.models.instrument_definition import InstrumentDefinition
@@ -704,6 +705,8 @@ from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
 from lusid.models.nav_activity_adjustment import NavActivityAdjustment
+from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
+from lusid.models.nav_activity_adjustment_response_type import NavActivityAdjustmentResponseType
 from lusid.models.nav_activity_adjustment_type import NavActivityAdjustmentType
 from lusid.models.nav_type import NavType
 from lusid.models.nav_type_definition import NavTypeDefinition
@@ -881,8 +884,10 @@ from lusid.models.portfolio_return_breakdown import PortfolioReturnBreakdown
 from lusid.models.portfolio_search_result import PortfolioSearchResult
 from lusid.models.portfolio_settlement_configuration import PortfolioSettlementConfiguration
 from lusid.models.portfolio_settlement_instruction import PortfolioSettlementInstruction
+from lusid.models.portfolio_settlement_instruction_adjustment import PortfolioSettlementInstructionAdjustment
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_transaction import PortfolioTransaction
+from lusid.models.portfolio_transaction_adjustment import PortfolioTransactionAdjustment
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_weight import PortfolioWeight
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
@@ -937,6 +942,7 @@ from lusid.models.quote import Quote
 from lusid.models.quote_access_metadata_rule import QuoteAccessMetadataRule
 from lusid.models.quote_access_metadata_rule_id import QuoteAccessMetadataRuleId
 from lusid.models.quote_activity import QuoteActivity
+from lusid.models.quote_activity_adjustment import QuoteActivityAdjustment
 from lusid.models.quote_dependency import QuoteDependency
 from lusid.models.quote_id import QuoteId
 from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
@@ -1038,7 +1044,7 @@ from lusid.models.resource_list_of_legal_entity import ResourceListOfLegalEntity
 from lusid.models.resource_list_of_list_complex_market_data_with_meta_data_response import ResourceListOfListComplexMarketDataWithMetaDataResponse
 from lusid.models.resource_list_of_mapping import ResourceListOfMapping
 from lusid.models.resource_list_of_moved_order_to_different_block_response import ResourceListOfMovedOrderToDifferentBlockResponse
-from lusid.models.resource_list_of_nav_activity_adjustment import ResourceListOfNavActivityAdjustment
+from lusid.models.resource_list_of_nav_activity_adjustment_response import ResourceListOfNavActivityAdjustmentResponse
 from lusid.models.resource_list_of_order import ResourceListOfOrder
 from lusid.models.resource_list_of_order_instruction import ResourceListOfOrderInstruction
 from lusid.models.resource_list_of_output_transaction import ResourceListOfOutputTransaction
@@ -1980,6 +1986,7 @@ __all__ = [
     "InputTransition",
     "Instrument",
     "InstrumentActivity",
+    "InstrumentActivityAdjustment",
     "InstrumentCapabilities",
     "InstrumentCashFlow",
     "InstrumentDefinition",
@@ -2090,6 +2097,8 @@ __all__ = [
     "MovementType",
     "MultiCurrencyAmounts",
     "NavActivityAdjustment",
+    "NavActivityAdjustmentResponse",
+    "NavActivityAdjustmentResponseType",
     "NavActivityAdjustmentType",
     "NavType",
     "NavTypeDefinition",
@@ -2267,8 +2276,10 @@ __all__ = [
     "PortfolioSearchResult",
     "PortfolioSettlementConfiguration",
     "PortfolioSettlementInstruction",
+    "PortfolioSettlementInstructionAdjustment",
     "PortfolioTradeTicket",
     "PortfolioTransaction",
+    "PortfolioTransactionAdjustment",
     "PortfolioType",
     "PortfolioWeight",
     "PortfolioWithoutHref",
@@ -2323,6 +2334,7 @@ __all__ = [
     "QuoteAccessMetadataRule",
     "QuoteAccessMetadataRuleId",
     "QuoteActivity",
+    "QuoteActivityAdjustment",
     "QuoteDependency",
     "QuoteId",
     "QuoteInstrumentIdType",
@@ -2424,7 +2436,7 @@ __all__ = [
     "ResourceListOfListComplexMarketDataWithMetaDataResponse",
     "ResourceListOfMapping",
     "ResourceListOfMovedOrderToDifferentBlockResponse",
-    "ResourceListOfNavActivityAdjustment",
+    "ResourceListOfNavActivityAdjustmentResponse",
     "ResourceListOfOrder",
     "ResourceListOfOrderInstruction",
     "ResourceListOfOutputTransaction",

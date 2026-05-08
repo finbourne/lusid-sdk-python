@@ -39,6 +39,7 @@ from lusid.models.fund_valuation_request import FundValuationRequest
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.model_property import ModelProperty
 from lusid.models.nav_activity_adjustment import NavActivityAdjustment
+from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
 from lusid.models.operation import Operation
 from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
@@ -46,7 +47,7 @@ from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResou
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.query_fund_cash_statement_parameters import QueryFundCashStatementParameters
-from lusid.models.resource_list_of_nav_activity_adjustment import ResourceListOfNavActivityAdjustment
+from lusid.models.resource_list_of_nav_activity_adjustment_response import ResourceListOfNavActivityAdjustmentResponse
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
@@ -1828,22 +1829,22 @@ class FundsApi:
 
 
     @overload
-    async def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
 
         Delete Nav activity adjustments on a Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_activity_adjustment, nav_type_code, valuation_point_code_variant, async_req=True)
+        >>> thread = api.delete_nav_activity_adjustments(scope, code, valuation_point_code, nav_activity_adjustment_response, nav_type_code, valuation_point_code_variant, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -1852,8 +1853,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_code: The valuation point Code to delete the adjustment from (required)
         :type valuation_point_code: str
-        :param nav_activity_adjustment: The request describing the Nav activity adjustments to delete from a specific valuation point and nav type (required)
-        :type nav_activity_adjustment: List[NavActivityAdjustment]
+        :param nav_activity_adjustment_response: The request describing the Nav activity adjustments to delete from a specific valuation point and nav type (required)
+        :type nav_activity_adjustment_response: List[NavActivityAdjustmentResponse]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
         :param valuation_point_code_variant: The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.
@@ -1874,17 +1875,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.delete_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_activity_adjustment, nav_type_code, valuation_point_code_variant, **kwargs)  # noqa: E501
+        return self.delete_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_activity_adjustment_response, nav_type_code, valuation_point_code_variant, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
 
         Delete Nav activity adjustments on a Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.delete_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_activity_adjustment, nav_type_code, valuation_point_code_variant, async_req=True)
+        >>> thread = api.delete_nav_activity_adjustments_with_http_info(scope, code, valuation_point_code, nav_activity_adjustment_response, nav_type_code, valuation_point_code_variant, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -1893,8 +1894,8 @@ class FundsApi:
         :type code: str
         :param valuation_point_code: The valuation point Code to delete the adjustment from (required)
         :type valuation_point_code: str
-        :param nav_activity_adjustment: The request describing the Nav activity adjustments to delete from a specific valuation point and nav type (required)
-        :type nav_activity_adjustment: List[NavActivityAdjustment]
+        :param nav_activity_adjustment_response: The request describing the Nav activity adjustments to delete from a specific valuation point and nav type (required)
+        :type nav_activity_adjustment_response: List[NavActivityAdjustmentResponse]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
         :param valuation_point_code_variant: The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.
@@ -1929,7 +1930,7 @@ class FundsApi:
             'scope',
             'code',
             'valuation_point_code',
-            'nav_activity_adjustment',
+            'nav_activity_adjustment_response',
             'nav_type_code',
             'valuation_point_code_variant'
         ]
@@ -1985,8 +1986,8 @@ class FundsApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['nav_activity_adjustment'] is not None:
-            _body_params = _params['nav_activity_adjustment']
+        if _params['nav_activity_adjustment_response'] is not None:
+            _body_params = _params['nav_activity_adjustment_response']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -5805,15 +5806,15 @@ class FundsApi:
 
 
     @overload
-    async def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
+    async def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ResourceListOfNavActivityAdjustmentResponse:  # noqa: E501
         ...
 
     @overload
-    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfNavActivityAdjustment:  # noqa: E501
+    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfNavActivityAdjustmentResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfNavActivityAdjustment, Awaitable[ResourceListOfNavActivityAdjustment]]:  # noqa: E501
+    def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfNavActivityAdjustmentResponse, Awaitable[ResourceListOfNavActivityAdjustmentResponse]]:  # noqa: E501
         """[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
 
         Lists the NAV adjustment activities applied to the specified valuation point for a Fund.  # noqa: E501
@@ -5849,7 +5850,7 @@ class FundsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfNavActivityAdjustment
+        :rtype: ResourceListOfNavActivityAdjustmentResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -5909,7 +5910,7 @@ class FundsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfNavActivityAdjustment, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(ResourceListOfNavActivityAdjustmentResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -6000,7 +6001,7 @@ class FundsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ResourceListOfNavActivityAdjustment",
+            '200': "ResourceListOfNavActivityAdjustmentResponse",
             '400': "LusidValidationProblemDetails",
         }
 

@@ -1,9 +1,9 @@
-# ResourceListOfNavActivityAdjustment
+# ResourceListOfNavActivityAdjustmentResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**List[NavActivityAdjustment]**](NavActivityAdjustment.md) |  | 
+**values** | [**List[NavActivityAdjustmentResponse]**](NavActivityAdjustmentResponse.md) |  | 
 **href** | **str** |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 **next_page** | **str** |  | [optional] 
@@ -11,18 +11,18 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.resource_list_of_nav_activity_adjustment import ResourceListOfNavActivityAdjustment
+from lusid.models.resource_list_of_nav_activity_adjustment_response import ResourceListOfNavActivityAdjustmentResponse
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-values: List[NavActivityAdjustment]
+values: List[NavActivityAdjustmentResponse]
 href: Optional[StrictStr] = "example_href"
 links: Optional[List[Link]] = None
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
-resource_list_of_nav_activity_adjustment_instance = ResourceListOfNavActivityAdjustment(values=values, href=href, links=links, next_page=next_page, previous_page=previous_page)
+resource_list_of_nav_activity_adjustment_response_instance = ResourceListOfNavActivityAdjustmentResponse(values=values, href=href, links=links, next_page=next_page, previous_page=previous_page)
 
 ```
 

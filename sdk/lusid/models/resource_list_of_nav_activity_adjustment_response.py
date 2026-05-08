@@ -23,13 +23,13 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
-from lusid.models.nav_activity_adjustment import NavActivityAdjustment
+from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
 
-class ResourceListOfNavActivityAdjustment(BaseModel):
+class ResourceListOfNavActivityAdjustmentResponse(BaseModel):
     """
-    ResourceListOfNavActivityAdjustment
+    ResourceListOfNavActivityAdjustmentResponse
     """
-    values: List[NavActivityAdjustment]
+    values: List[NavActivityAdjustmentResponse]
     href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[List[Link]] = None
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
@@ -58,8 +58,8 @@ class ResourceListOfNavActivityAdjustment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResourceListOfNavActivityAdjustment:
-        """Create an instance of ResourceListOfNavActivityAdjustment from a JSON string"""
+    def from_json(cls, json_str: str) -> ResourceListOfNavActivityAdjustmentResponse:
+        """Create an instance of ResourceListOfNavActivityAdjustmentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -105,16 +105,16 @@ class ResourceListOfNavActivityAdjustment(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResourceListOfNavActivityAdjustment:
-        """Create an instance of ResourceListOfNavActivityAdjustment from a dict"""
+    def from_dict(cls, obj: dict) -> ResourceListOfNavActivityAdjustmentResponse:
+        """Create an instance of ResourceListOfNavActivityAdjustmentResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResourceListOfNavActivityAdjustment.parse_obj(obj)
+            return ResourceListOfNavActivityAdjustmentResponse.parse_obj(obj)
 
-        _obj = ResourceListOfNavActivityAdjustment.parse_obj({
-            "values": [NavActivityAdjustment.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+        _obj = ResourceListOfNavActivityAdjustmentResponse.parse_obj({
+            "values": [NavActivityAdjustmentResponse.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None,
             "next_page": obj.get("nextPage"),
@@ -122,4 +122,4 @@ class ResourceListOfNavActivityAdjustment(BaseModel):
         })
         return _obj
 
-ResourceListOfNavActivityAdjustment.update_forward_refs()
+ResourceListOfNavActivityAdjustmentResponse.update_forward_refs()
