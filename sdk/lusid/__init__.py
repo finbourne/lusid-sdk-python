@@ -554,6 +554,8 @@ from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
+from lusid.models.fund_a2_b_data_record import FundA2BDataRecord
+from lusid.models.fund_a2_b_movement_record import FundA2BMovementRecord
 from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_bookmark import FundBookmark
 from lusid.models.fund_calendar_entries import FundCalendarEntries
@@ -1469,6 +1471,8 @@ from lusid.models.version import Version
 from lusid.models.version_summary_dto import VersionSummaryDto
 from lusid.models.versioned_resource_list_of_a2_b_data_record import VersionedResourceListOfA2BDataRecord
 from lusid.models.versioned_resource_list_of_a2_b_movement_record import VersionedResourceListOfA2BMovementRecord
+from lusid.models.versioned_resource_list_of_fund_a2_b_data_record import VersionedResourceListOfFundA2BDataRecord
+from lusid.models.versioned_resource_list_of_fund_a2_b_movement_record import VersionedResourceListOfFundA2BMovementRecord
 from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from lusid.models.versioned_resource_list_of_journal_entry_line import VersionedResourceListOfJournalEntryLine
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
@@ -2039,6 +2043,8 @@ __all__ = [
     "ForwardRateAgreement",
     "FromRecipe",
     "Fund",
+    "FundA2BDataRecord",
+    "FundA2BMovementRecord",
     "FundAmount",
     "FundBookmark",
     "FundCalendarEntries",
@@ -2954,6 +2960,8 @@ __all__ = [
     "VersionSummaryDto",
     "VersionedResourceListOfA2BDataRecord",
     "VersionedResourceListOfA2BMovementRecord",
+    "VersionedResourceListOfFundA2BDataRecord",
+    "VersionedResourceListOfFundA2BMovementRecord",
     "VersionedResourceListOfHoldingContributor",
     "VersionedResourceListOfJournalEntryLine",
     "VersionedResourceListOfOutputTransaction",

@@ -253,6 +253,8 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
 *FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
 *FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
+*FundsApi* | [**get_a2_b_data_for_fund**](docs/FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EXPERIMENTAL] GetA2BDataForFund: Get A2B data for a Fund.
+*FundsApi* | [**get_a2_b_movements_for_fund**](docs/FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EXPERIMENTAL] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
 *FundsApi* | [**get_fee**](docs/FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
 *FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
@@ -1161,6 +1163,8 @@ Class | Method | HTTP request | Description
  - [ForwardRateAgreement](docs/ForwardRateAgreement.md)
  - [FromRecipe](docs/FromRecipe.md)
  - [Fund](docs/Fund.md)
+ - [FundA2BDataRecord](docs/FundA2BDataRecord.md)
+ - [FundA2BMovementRecord](docs/FundA2BMovementRecord.md)
  - [FundAmount](docs/FundAmount.md)
  - [FundBookmark](docs/FundBookmark.md)
  - [FundCalendarEntries](docs/FundCalendarEntries.md)
@@ -2076,6 +2080,8 @@ Class | Method | HTTP request | Description
  - [VersionSummaryDto](docs/VersionSummaryDto.md)
  - [VersionedResourceListOfA2BDataRecord](docs/VersionedResourceListOfA2BDataRecord.md)
  - [VersionedResourceListOfA2BMovementRecord](docs/VersionedResourceListOfA2BMovementRecord.md)
+ - [VersionedResourceListOfFundA2BDataRecord](docs/VersionedResourceListOfFundA2BDataRecord.md)
+ - [VersionedResourceListOfFundA2BMovementRecord](docs/VersionedResourceListOfFundA2BMovementRecord.md)
  - [VersionedResourceListOfHoldingContributor](docs/VersionedResourceListOfHoldingContributor.md)
  - [VersionedResourceListOfJournalEntryLine](docs/VersionedResourceListOfJournalEntryLine.md)
  - [VersionedResourceListOfOutputTransaction](docs/VersionedResourceListOfOutputTransaction.md)
