@@ -452,6 +452,7 @@ Class | Method | HTTP request | Description
 *PortfolioGroupsApi* | [**get_portfolio_group_relations**](docs/PortfolioGroupsApi.md#get_portfolio_group_relations) | **GET** /api/portfoliogroups/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioGroupRelations: Get Relations for Portfolio Group
 *PortfolioGroupsApi* | [**get_portfolio_group_relationships**](docs/PortfolioGroupsApi.md#get_portfolio_group_relationships) | **GET** /api/portfoliogroups/{scope}/{code}/relationships | [EARLY ACCESS] GetPortfolioGroupRelationships: Get Relationships for Portfolio Group
 *PortfolioGroupsApi* | [**get_transactions_for_portfolio_group**](docs/PortfolioGroupsApi.md#get_transactions_for_portfolio_group) | **GET** /api/portfoliogroups/{scope}/{code}/transactions | GetTransactionsForPortfolioGroup: Get transactions for transaction portfolios in a portfolio group
+*PortfolioGroupsApi* | [**list_all_portfolio_groups**](docs/PortfolioGroupsApi.md#list_all_portfolio_groups) | **GET** /api/portfoliogroups | ListAllPortfolioGroups: List all portfolio groups
 *PortfolioGroupsApi* | [**list_portfolio_groups**](docs/PortfolioGroupsApi.md#list_portfolio_groups) | **GET** /api/portfoliogroups/{scope} | ListPortfolioGroups: List portfolio groups
 *PortfolioGroupsApi* | [**patch_portfolio_group_access_metadata**](docs/PortfolioGroupsApi.md#patch_portfolio_group_access_metadata) | **PATCH** /api/portfoliogroups/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioGroupAccessMetadata: Patch Access Metadata rules for a Portfolio Group.
 *PortfolioGroupsApi* | [**update_portfolio_group**](docs/PortfolioGroupsApi.md#update_portfolio_group) | **PUT** /api/portfoliogroups/{scope}/{code} | [EARLY ACCESS] UpdatePortfolioGroup: Update portfolio group
@@ -1089,6 +1090,7 @@ Class | Method | HTTP request | Description
  - [DividendOptionEvent](docs/DividendOptionEvent.md)
  - [DividendReinvestmentEvent](docs/DividendReinvestmentEvent.md)
  - [DrawdownEvent](docs/DrawdownEvent.md)
+ - [DrawingEvent](docs/DrawingEvent.md)
  - [EarlyCloseOutEvent](docs/EarlyCloseOutEvent.md)
  - [EarlyRedemptionElection](docs/EarlyRedemptionElection.md)
  - [EarlyRedemptionEvent](docs/EarlyRedemptionEvent.md)

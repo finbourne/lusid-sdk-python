@@ -1988,30 +1988,32 @@ class GroupReconciliationsApi:
 
 
     @overload
-    async def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, **kwargs) -> GroupReconciliationRunResponse:  # noqa: E501
+    async def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : GroupReconciliationRunRequest, instance_run_type : Annotated[Optional[StrictStr], Field( description="The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.")] = None, **kwargs) -> GroupReconciliationRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationRunResponse:  # noqa: E501
+    def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : GroupReconciliationRunRequest, instance_run_type : Annotated[Optional[StrictStr], Field( description="The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.")] = None, async_req: Optional[bool]=True, **kwargs) -> GroupReconciliationRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationRunResponse, Awaitable[GroupReconciliationRunResponse]]:  # noqa: E501
+    def run_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : GroupReconciliationRunRequest, instance_run_type : Annotated[Optional[StrictStr], Field( description="The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GroupReconciliationRunResponse, Awaitable[GroupReconciliationRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation  # noqa: E501
 
         Runs a Group Reconciliation using the definition specified by the Scope and Code  Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_reconciliation(scope, code, group_reconciliation_run_request, async_req=True)
+        >>> thread = api.run_reconciliation(scope, code, group_reconciliation_run_request, instance_run_type, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the group reconciliation definition to use for the reconciliation. (required)
         :type scope: str
         :param code: The code of the group reconciliation definition to use for the reconciliation. (required)
         :type code: str
-        :param group_reconciliation_run_request: 
+        :param group_reconciliation_run_request:  (required)
         :type group_reconciliation_run_request: GroupReconciliationRunRequest
+        :param instance_run_type: The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.
+        :type instance_run_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2028,25 +2030,27 @@ class GroupReconciliationsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.run_reconciliation_with_http_info(scope, code, group_reconciliation_run_request, **kwargs)  # noqa: E501
+        return self.run_reconciliation_with_http_info(scope, code, group_reconciliation_run_request, instance_run_type, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : Optional[GroupReconciliationRunRequest] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the group reconciliation definition to use for the reconciliation.")], code : Annotated[StrictStr, Field(..., description="The code of the group reconciliation definition to use for the reconciliation.")], group_reconciliation_run_request : GroupReconciliationRunRequest, instance_run_type : Annotated[Optional[StrictStr], Field( description="The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation  # noqa: E501
 
         Runs a Group Reconciliation using the definition specified by the Scope and Code  Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_reconciliation_with_http_info(scope, code, group_reconciliation_run_request, async_req=True)
+        >>> thread = api.run_reconciliation_with_http_info(scope, code, group_reconciliation_run_request, instance_run_type, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the group reconciliation definition to use for the reconciliation. (required)
         :type scope: str
         :param code: The code of the group reconciliation definition to use for the reconciliation. (required)
         :type code: str
-        :param group_reconciliation_run_request: 
+        :param group_reconciliation_run_request:  (required)
         :type group_reconciliation_run_request: GroupReconciliationRunRequest
+        :param instance_run_type: The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId.
+        :type instance_run_type: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2076,7 +2080,8 @@ class GroupReconciliationsApi:
         _all_params = [
             'scope',
             'code',
-            'group_reconciliation_run_request'
+            'group_reconciliation_run_request',
+            'instance_run_type'
         ]
         _all_params.extend(
             [
@@ -2114,6 +2119,9 @@ class GroupReconciliationsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('instance_run_type') is not None:  # noqa: E501
+            _query_params.append(('instanceRunType', _params['instance_run_type']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

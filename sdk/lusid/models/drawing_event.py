@@ -24,17 +24,18 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class SwapPrincipalEvent(InstrumentEvent):
+class DrawingEvent(InstrumentEvent):
     """
-    Definition of a Swap Principal Event.  This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
+    Mandatory partial bond redemption (DRAW) where the issuer lottery-selects specific bonds for early redemption.  The affected face amount (AFFB) is pre-determined externally from the vendor notification and supplied on the event.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(default=None, description="The entitlement date of the principal payment.", alias="exDate")
-    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the principal.", alias="paymentDate")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the principal is paid.") 
-    principal_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The principal amount received for each unit of the instrument held on the ex date.", alias="principalPerUnit")
+    payment_date: Optional[datetime] = Field(default=None, description="Date the cash actually flows for the drawn portion of the holding.", alias="paymentDate")
+    effective_date: Optional[datetime] = Field(default=None, description="Lottery Date (= Record Date). Holdings are snapshotted at the close of this date to determine the affected balance.", alias="effectiveDate")
+    affected_amount: Union[StrictFloat, StrictInt] = Field(description="Affected face amount (AFFB) — the lottery-selected portion of the holding that is redeemed. Must be strictly positive.", alias="affectedAmount")
+    price_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Redemption price per unit (OFFR / 100). Clean price convention.  Optional: AFFB is typically known before the issuer publishes OFFR, so a null price is permitted on upsert.", alias="pricePerUnit")
+    currency:  StrictStr = Field(...,alias="currency", description="Settlement currency for the redemption.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "principalPerUnit"]
+    __properties = ["instrumentEventType", "paymentDate", "effectiveDate", "affectedAmount", "pricePerUnit", "currency"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -47,7 +48,7 @@ class SwapPrincipalEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'SwapPrincipalEvent' not in [ 
+        if 'DrawingEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -129,8 +130,8 @@ class SwapPrincipalEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> SwapPrincipalEvent:
-        """Create an instance of SwapPrincipalEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DrawingEvent:
+        """Create an instance of DrawingEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -145,23 +146,29 @@ class SwapPrincipalEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if price_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_per_unit is None and "price_per_unit" in self.__fields_set__:
+            _dict['pricePerUnit'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> SwapPrincipalEvent:
-        """Create an instance of SwapPrincipalEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DrawingEvent:
+        """Create an instance of DrawingEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return SwapPrincipalEvent.parse_obj(obj)
+            return DrawingEvent.parse_obj(obj)
 
-        _obj = SwapPrincipalEvent.parse_obj({
+        _obj = DrawingEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
-            "currency": obj.get("currency"),
-            "principal_per_unit": obj.get("principalPerUnit")
+            "effective_date": obj.get("effectiveDate"),
+            "affected_amount": obj.get("affectedAmount"),
+            "price_per_unit": obj.get("pricePerUnit"),
+            "currency": obj.get("currency")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -170,4 +177,4 @@ class SwapPrincipalEvent(InstrumentEvent):
 
         return _obj
 
-SwapPrincipalEvent.update_forward_refs()
+DrawingEvent.update_forward_refs()

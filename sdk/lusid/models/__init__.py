@@ -386,6 +386,7 @@ from lusid.models.discounting_method import DiscountingMethod
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.drawdown_event import DrawdownEvent
+from lusid.models.drawing_event import DrawingEvent
 from lusid.models.early_close_out_event import EarlyCloseOutEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
@@ -1782,6 +1783,7 @@ __all__ = [
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
     "DrawdownEvent",
+    "DrawingEvent",
     "EarlyCloseOutEvent",
     "EarlyRedemptionElection",
     "EarlyRedemptionEvent",

@@ -1095,7 +1095,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **run_reconciliation**
-> GroupReconciliationRunResponse run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request)
+> GroupReconciliationRunResponse run_reconciliation(scope, code, group_reconciliation_run_request, instance_run_type=instance_run_type)
 
 [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
 
@@ -1154,13 +1154,14 @@ def main():
     # group_reconciliation_run_request = GroupReconciliationRunRequest.from_json("")
     # group_reconciliation_run_request = GroupReconciliationRunRequest.from_dict({})
     group_reconciliation_run_request = GroupReconciliationRunRequest()
+    instance_run_type = 'instance_run_type_example' # str | The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request, opts=opts)
+        # api_response =  api_instance.run_reconciliation(scope, code, group_reconciliation_run_request, instance_run_type=instance_run_type, opts=opts)
 
         # [EXPERIMENTAL] RunReconciliation: Runs a Group Reconciliation
-        api_response = api_instance.run_reconciliation(scope, code, group_reconciliation_run_request=group_reconciliation_run_request)
+        api_response = api_instance.run_reconciliation(scope, code, group_reconciliation_run_request, instance_run_type=instance_run_type)
         pprint(api_response)
 
     except ApiException as e:
@@ -1175,7 +1176,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the group reconciliation definition to use for the reconciliation. | 
  **code** | **str**| The code of the group reconciliation definition to use for the reconciliation. | 
- **group_reconciliation_run_request** | [**GroupReconciliationRunRequest**](GroupReconciliationRunRequest.md)|  | [optional] 
+ **group_reconciliation_run_request** | [**GroupReconciliationRunRequest**](GroupReconciliationRunRequest.md)|  | 
+ **instance_run_type** | **str**| The run type of the group reconciliation run instance. Default value: Manual. Available values: Manual, WorkflowServiceTaskId. | [optional] 
 
 ### Return type
 

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The display name of the transaction fee type. | 
-**description** | **str** | A description of the transaction fee type. | 
+**description** | **str** | A description of the transaction fee type. | [optional] 
 **calculation** | [**FeeCalculationRequest**](FeeCalculationRequest.md) |  | 
 **condition** | **str** | The condition that the transaction must meet in order for the fee to be applied. | 
 **txn_property_key** | **str** | The property key to which the fee value will be applied and decorated onto the transaction. Must be in the &#39;Transaction&#39; property domain. | 
@@ -20,7 +20,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 display_name: StrictStr = "example_display_name"
-description: StrictStr = "example_description"
+description: Optional[StrictStr] = "example_description"
 calculation: FeeCalculationRequest
 condition: StrictStr = "example_condition"
 txn_property_key: StrictStr = "example_txn_property_key"

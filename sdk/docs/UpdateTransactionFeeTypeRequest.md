@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 **description** | **str** | A description of the transaction fee type. | [optional] 
 **calculation** | [**FeeCalculationRequest**](FeeCalculationRequest.md) |  | [optional] 
 **condition** | **str** | The condition that the transaction must meet in order for the fee to be applied. | [optional] 
-**txn_property_key** | **str** | The property key to which the fee value will be applied and decorated onto the transaction. Must be in the &#39;Transaction&#39; property domain. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the transaction fee type. | [optional] 
 **is_active** | **bool** | Indicates whether the transaction fee type is currently active and should be applied to transactions. Optional when creating a transaction fee type, defaults to true, if a value is not provided. | [optional] 
 ## Example
@@ -21,11 +20,10 @@ from datetime import datetime
 description: Optional[StrictStr] = "example_description"
 calculation: Optional[FeeCalculationRequest] = None
 condition: Optional[StrictStr] = "example_condition"
-txn_property_key: Optional[StrictStr] = "example_txn_property_key"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 is_active: Optional[StrictBool] = # Replace with your value
 is_active:Optional[StrictBool] = None
-update_transaction_fee_type_request_instance = UpdateTransactionFeeTypeRequest(description=description, calculation=calculation, condition=condition, txn_property_key=txn_property_key, properties=properties, is_active=is_active)
+update_transaction_fee_type_request_instance = UpdateTransactionFeeTypeRequest(description=description, calculation=calculation, condition=condition, properties=properties, is_active=is_active)
 
 ```
 
