@@ -839,6 +839,7 @@ from lusid.models.paged_resource_list_of_timeline import PagedResourceListOfTime
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
+from lusid.models.paged_resource_list_of_valuation_point_instrument import PagedResourceListOfValuationPointInstrument
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
@@ -1270,6 +1271,7 @@ from lusid.models.unit_schema import UnitSchema
 from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
+from lusid.models.unsettled_transaction import UnsettledTransaction
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_check_definition_request import UpdateCheckDefinitionRequest
@@ -1361,12 +1363,14 @@ from lusid.models.user import User
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+from lusid.models.valuation_point_instrument import ValuationPointInstrument
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_fund_cash_statement_row import ValuationPointResourceListOfFundCashStatementRow
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_pnl_journal_entry_line import ValuationPointResourceListOfPnlJournalEntryLine
 from lusid.models.valuation_point_resource_list_of_trial_balance import ValuationPointResourceListOfTrialBalance
+from lusid.models.valuation_point_resource_list_of_unsettled_transaction import ValuationPointResourceListOfUnsettledTransaction
 from lusid.models.valuation_request import ValuationRequest
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.valuations_reconciliation_request import ValuationsReconciliationRequest
@@ -2236,6 +2240,7 @@ __all__ = [
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
     "PagedResourceListOfTranslationScriptId",
+    "PagedResourceListOfValuationPointInstrument",
     "PagedResourceListOfValuationPointOverview",
     "PagedResourceListOfVirtualRow",
     "PagedResourceListOfWorkspace",
@@ -2667,6 +2672,7 @@ __all__ = [
     "UnitisationData",
     "UnitsRatio",
     "UnmatchedHoldingMethod",
+    "UnsettledTransaction",
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
     "UpdateCheckDefinitionRequest",
@@ -2758,12 +2764,14 @@ __all__ = [
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
+    "ValuationPointInstrument",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfFundCashStatementRow",
     "ValuationPointResourceListOfFundJournalEntryLine",
     "ValuationPointResourceListOfPnlJournalEntryLine",
     "ValuationPointResourceListOfTrialBalance",
+    "ValuationPointResourceListOfUnsettledTransaction",
     "ValuationRequest",
     "ValuationSchedule",
     "ValuationsReconciliationRequest",

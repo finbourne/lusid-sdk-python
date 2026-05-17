@@ -267,11 +267,13 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_valuation_point_pnl_summary**](docs/FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 *FundsApi* | [**get_valuation_point_transactions**](docs/FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
 *FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
+*FundsApi* | [**get_valuation_point_unsettled_transactions**](docs/FundsApi.md#get_valuation_point_unsettled_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/unsettledtransactions/$query | [EXPERIMENTAL] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
 *FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
 *FundsApi* | [**list_fund_calendar**](docs/FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EXPERIMENTAL] ListFundCalendar: List Fund Calendar.
 *FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.
 *FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
 *FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+*FundsApi* | [**list_valuation_point_instruments**](docs/FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EXPERIMENTAL] ListValuationPointInstruments: List Instruments inside a valuation point
 *FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 *FundsApi* | [**patch_fee**](docs/FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
 *FundsApi* | [**patch_fund**](docs/FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EXPERIMENTAL] PatchFund: Patch a Fund.
@@ -1543,6 +1545,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfTransactionTemplate](docs/PagedResourceListOfTransactionTemplate.md)
  - [PagedResourceListOfTransactionTemplateSpecification](docs/PagedResourceListOfTransactionTemplateSpecification.md)
  - [PagedResourceListOfTranslationScriptId](docs/PagedResourceListOfTranslationScriptId.md)
+ - [PagedResourceListOfValuationPointInstrument](docs/PagedResourceListOfValuationPointInstrument.md)
  - [PagedResourceListOfValuationPointOverview](docs/PagedResourceListOfValuationPointOverview.md)
  - [PagedResourceListOfVirtualRow](docs/PagedResourceListOfVirtualRow.md)
  - [PagedResourceListOfWorkspace](docs/PagedResourceListOfWorkspace.md)
@@ -1974,6 +1977,7 @@ Class | Method | HTTP request | Description
  - [UnitisationData](docs/UnitisationData.md)
  - [UnitsRatio](docs/UnitsRatio.md)
  - [UnmatchedHoldingMethod](docs/UnmatchedHoldingMethod.md)
+ - [UnsettledTransaction](docs/UnsettledTransaction.md)
  - [UpdateAmortisationRuleSetDetailsRequest](docs/UpdateAmortisationRuleSetDetailsRequest.md)
  - [UpdateCalendarRequest](docs/UpdateCalendarRequest.md)
  - [UpdateCheckDefinitionRequest](docs/UpdateCheckDefinitionRequest.md)
@@ -2065,12 +2069,14 @@ Class | Method | HTTP request | Description
  - [ValuationPointDataQueryParameters](docs/ValuationPointDataQueryParameters.md)
  - [ValuationPointDataRequest](docs/ValuationPointDataRequest.md)
  - [ValuationPointDataResponse](docs/ValuationPointDataResponse.md)
+ - [ValuationPointInstrument](docs/ValuationPointInstrument.md)
  - [ValuationPointOverview](docs/ValuationPointOverview.md)
  - [ValuationPointResourceListOfAccountedTransaction](docs/ValuationPointResourceListOfAccountedTransaction.md)
  - [ValuationPointResourceListOfFundCashStatementRow](docs/ValuationPointResourceListOfFundCashStatementRow.md)
  - [ValuationPointResourceListOfFundJournalEntryLine](docs/ValuationPointResourceListOfFundJournalEntryLine.md)
  - [ValuationPointResourceListOfPnlJournalEntryLine](docs/ValuationPointResourceListOfPnlJournalEntryLine.md)
  - [ValuationPointResourceListOfTrialBalance](docs/ValuationPointResourceListOfTrialBalance.md)
+ - [ValuationPointResourceListOfUnsettledTransaction](docs/ValuationPointResourceListOfUnsettledTransaction.md)
  - [ValuationRequest](docs/ValuationRequest.md)
  - [ValuationSchedule](docs/ValuationSchedule.md)
  - [ValuationsReconciliationRequest](docs/ValuationsReconciliationRequest.md)
