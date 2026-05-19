@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lusid-sdk"
-version = "2.3.116"
+version = "2.3.117"
 description = "LUSID API"
 authors = ["FINBOURNE Technology <info@finbourne.com>"]
 license = "MIT"
@@ -15,7 +15,7 @@ include = ["lusid/**/*"]
 [tool.poetry.dependencies]
 python = "^3.11"
 
-urllib3 = "^2.6.0"
+urllib3 = "^2.7.0"
 python-dateutil = "^2.8.2"
 requests = "^2"
 aiohttp = "^3.13.4"
