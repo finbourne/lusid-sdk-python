@@ -115,6 +115,7 @@ class PropertyDomain(str, Enum):
     IDENTIFIERDEFINITION = 'IdentifierDefinition'
     SETTLEMENTINSTRUCTION = 'SettlementInstruction'
     TRANSACTIONFEETYPE = 'TransactionFeeType'
+    TRANSACTIONFEE = 'TransactionFee'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:

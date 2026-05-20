@@ -53,6 +53,7 @@ from lusid.models.revert_valuation_point_data_request import RevertValuationPoin
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
+from lusid.models.update_valuation_point_request import UpdateValuationPointRequest
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
@@ -8070,6 +8071,190 @@ class FundsApi:
 
 
     @overload
+    async def update_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> DiaryEntry:  # noqa: E501
+        ...
+
+    @overload
+    def update_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> DiaryEntry:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
+
+        Updates an existing Valuation Point.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_valuation_point(scope, code, update_valuation_point_request, nav_type_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param update_valuation_point_request: The Valuation Point Estimate definition to upsert. (required)
+        :type update_valuation_point_request: UpdateValuationPointRequest
+        :param nav_type_code: When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DiaryEntry
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_valuation_point_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_valuation_point_with_http_info(scope, code, update_valuation_point_request, nav_type_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
+
+        Updates an existing Valuation Point.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_valuation_point_with_http_info(scope, code, update_valuation_point_request, nav_type_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param update_valuation_point_request: The Valuation Point Estimate definition to upsert. (required)
+        :type update_valuation_point_request: UpdateValuationPointRequest
+        :param nav_type_code: When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DiaryEntry, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_valuation_point_request',
+            'nav_type_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_valuation_point" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_valuation_point_request'] is not None:
+            _body_params = _params['update_valuation_point_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DiaryEntry",
+            '400': "LusidValidationProblemDetails",
+            '404': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/valuationpoints', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def upsert_bookmark(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_fund_bookmark_request : Annotated[UpsertFundBookmarkRequest, Field(description="The bookmark definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> FundCalendarEntry:  # noqa: E501
         ...
 
@@ -8264,7 +8449,7 @@ class FundsApi:
     def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
-        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                It is not possible to update an existing Valuation Point. As an alternative, the Valuation Point could be deleted and recreated.  # noqa: E501
+        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8301,7 +8486,7 @@ class FundsApi:
     def upsert_diary_entry_type_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
-        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.                It is not possible to update an existing Valuation Point. As an alternative, the Valuation Point could be deleted and recreated.  # noqa: E501
+        Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

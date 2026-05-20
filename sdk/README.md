@@ -280,6 +280,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**query_cash_statement**](docs/FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [EXPERIMENTAL] QueryCashStatement: [EXPERIMENTAL] QueryCashStatement: Query cash statement for a Fund valuation point.
 *FundsApi* | [**revert_valuation_point_to_estimate**](docs/FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 *FundsApi* | [**set_share_class_instruments**](docs/FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
+*FundsApi* | [**update_valuation_point**](docs/FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.
 *FundsApi* | [**upsert_bookmark**](docs/FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.
 *FundsApi* | [**upsert_diary_entry_type_valuation_point**](docs/FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
 *FundsApi* | [**upsert_fee_properties**](docs/FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
@@ -702,6 +703,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**upsert_transaction_properties**](docs/TransactionPortfoliosApi.md#upsert_transaction_properties) | **POST** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/properties | UpsertTransactionProperties: Upsert transaction properties
 *TransactionPortfoliosApi* | [**upsert_transactions**](docs/TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
 *TransferAgencyApi* | [**calculate_order_dates**](docs/TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
+*TransferAgencyApi* | [**upsert_transfer_agency_orders**](docs/TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
 *TranslationApi* | [**translate_instrument_definitions**](docs/TranslationApi.md#translate_instrument_definitions) | **POST** /api/translation/instrumentdefinitions | [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 *TranslationApi* | [**translate_trade_tickets**](docs/TranslationApi.md#translate_trade_tickets) | **POST** /api/translation/tradetickets | [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
 *WorkspaceApi* | [**create_item**](docs/WorkspaceApi.md#create_item) | **POST** /api/workspaces/{visibility}/{workspaceName}/items | [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
@@ -1956,6 +1958,8 @@ Class | Method | HTTP request | Description
  - [TransactionTypeRequest](docs/TransactionTypeRequest.md)
  - [TransactionsReconciliationsResponse](docs/TransactionsReconciliationsResponse.md)
  - [TransferAgencyDates](docs/TransferAgencyDates.md)
+ - [TransferAgencyOrderResult](docs/TransferAgencyOrderResult.md)
+ - [TransferAgencyOrdersResponse](docs/TransferAgencyOrdersResponse.md)
  - [TransitionEvent](docs/TransitionEvent.md)
  - [TranslateEntitiesInlinedRequest](docs/TranslateEntitiesInlinedRequest.md)
  - [TranslateEntitiesRequest](docs/TranslateEntitiesRequest.md)
@@ -2012,6 +2016,7 @@ Class | Method | HTTP request | Description
  - [UpdateTimelineRequest](docs/UpdateTimelineRequest.md)
  - [UpdateTransactionFeeTypeRequest](docs/UpdateTransactionFeeTypeRequest.md)
  - [UpdateUnitRequest](docs/UpdateUnitRequest.md)
+ - [UpdateValuationPointRequest](docs/UpdateValuationPointRequest.md)
  - [UpsertCdsFlowConventionsRequest](docs/UpsertCdsFlowConventionsRequest.md)
  - [UpsertComplexMarketDataRequest](docs/UpsertComplexMarketDataRequest.md)
  - [UpsertComplianceRuleRequest](docs/UpsertComplianceRuleRequest.md)
@@ -2063,6 +2068,7 @@ Class | Method | HTTP request | Description
  - [UpsertStructuredDataResponse](docs/UpsertStructuredDataResponse.md)
  - [UpsertStructuredResultDataRequest](docs/UpsertStructuredResultDataRequest.md)
  - [UpsertTransactionPropertiesResponse](docs/UpsertTransactionPropertiesResponse.md)
+ - [UpsertTransferAgencyOrderRequest](docs/UpsertTransferAgencyOrderRequest.md)
  - [UpsertTranslationScriptRequest](docs/UpsertTranslationScriptRequest.md)
  - [UpsertValuationPointRequest](docs/UpsertValuationPointRequest.md)
  - [User](docs/User.md)
