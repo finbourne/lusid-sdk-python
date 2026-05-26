@@ -805,6 +805,8 @@ from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
 from lusid.models.nav_activity_adjustment_response_type import NavActivityAdjustmentResponseType
 from lusid.models.nav_activity_adjustment_type import NavActivityAdjustmentType
+from lusid.models.nav_settlement_configuration import NavSettlementConfiguration
+from lusid.models.nav_settlement_configuration_category import NavSettlementConfigurationCategory
 from lusid.models.nav_type import NavType
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.new_instrument import NewInstrument
@@ -2303,6 +2305,8 @@ __all__ = [
     "NavActivityAdjustmentResponse",
     "NavActivityAdjustmentResponseType",
     "NavActivityAdjustmentType",
+    "NavSettlementConfiguration",
+    "NavSettlementConfigurationCategory",
     "NavType",
     "NavTypeDefinition",
     "NewInstrument",

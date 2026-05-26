@@ -26,6 +26,7 @@ from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferEl
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.lapse_election import LapseElection
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.security_offer_election import SecurityOfferElection
 
@@ -38,15 +39,17 @@ class ConversionEvent(InstrumentEvent):
     new_instrument: NewInstrument = Field(alias="newInstrument")
     response_deadline_date: Optional[datetime] = Field(default=None, description="Date/time that the account servicer has set as the deadline to respond,  with instructions, to an outstanding event. Not required.", alias="responseDeadlineDate")
     market_deadline_date: Optional[datetime] = Field(default=None, description="Date/time which the issuer or issuer's agent has set as the deadline to respond,  with an instruction, to an outstanding offer or privilege. Not required.", alias="marketDeadlineDate")
+    effective_date: Optional[datetime] = Field(default=None, description="Date which establishes when the conversion is recognised.", alias="effectiveDate")
     period_of_action: Optional[EventDateRange] = Field(default=None, alias="periodOfAction")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cash price paid in lieu of fractionalUnits. Not required.  If provided, must have FractionalUnitsCashCurrency too.", alias="fractionalUnitsCashPrice")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares. Not required.  If provided, must have FractionalUnitsCashPrice too.") 
     security_offer_elections: Optional[List[SecurityOfferElection]] = Field(default=None, description="List of possible security offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:     This list must have exactly one election that is chosen and default.  CashAndSecurityOfferElections and CashOfferElections <b> must be null or empty</b>.     If the ParticipationType is Voluntary:     This list can be empty,  so long as CashAndSecurityOfferElections or CashOfferElections  has at least one election. None of these elections have to be chosen or default.", alias="securityOfferElections")
     cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = Field(default=None, description="List of possible cash and security offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list <b> must be null or empty</b>.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashOfferElections  has at least one election. None of these elections have to be chosen or default.", alias="cashAndSecurityOfferElections")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="List of possible cash offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list <b> must be null or empty</b>.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashAndSecurityOfferElections  has at least one election. None of these elections have to be chosen or default.", alias="cashOfferElections")
+    lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="List of possible lapse elections for this conversion event. There must be at most one election of this type.    If provided, the holder is not entitled to receive anything for the conversion.", alias="lapseElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "responseDeadlineDate", "marketDeadlineDate", "periodOfAction", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "responseDeadlineDate", "marketDeadlineDate", "effectiveDate", "periodOfAction", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -179,6 +182,13 @@ class ConversionEvent(InstrumentEvent):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['cashOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in lapse_elections (list)
+        _items = []
+        if self.lapse_elections:
+            for _item in self.lapse_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lapseElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -193,6 +203,11 @@ class ConversionEvent(InstrumentEvent):
         # and __fields_set__ contains the field
         if self.market_deadline_date is None and "market_deadline_date" in self.__fields_set__:
             _dict['marketDeadlineDate'] = None
+
+        # set to None if effective_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_date is None and "effective_date" in self.__fields_set__:
+            _dict['effectiveDate'] = None
 
         # set to None if fractional_units_cash_price (nullable) is None
         # and __fields_set__ contains the field
@@ -219,6 +234,11 @@ class ConversionEvent(InstrumentEvent):
         if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
             _dict['cashOfferElections'] = None
 
+        # set to None if lapse_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
+            _dict['lapseElections'] = None
+
         return _dict
 
     @classmethod
@@ -237,12 +257,14 @@ class ConversionEvent(InstrumentEvent):
             "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
             "response_deadline_date": obj.get("responseDeadlineDate"),
             "market_deadline_date": obj.get("marketDeadlineDate"),
+            "effective_date": obj.get("effectiveDate"),
             "period_of_action": EventDateRange.from_dict(obj.get("periodOfAction")) if obj.get("periodOfAction") is not None else None,
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
             "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None,
             "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
-            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

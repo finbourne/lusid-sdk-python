@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
 from lusid.models.instrument_event_holder import InstrumentEventHolder
+from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 from lusid.models.resource_id import ResourceId
 from lusid.models.transaction import Transaction
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
@@ -45,7 +46,9 @@ class ApplicableInstrumentEvent(BaseModel):
     applied_instrument_event_instruction_id:  Optional[StrictStr] = Field(None,alias="appliedInstrumentEventInstructionId") 
     transactions: Optional[List[Transaction]] = None
     transaction_diagnostics: Optional[TransactionDiagnostics] = Field(default=None, alias="transactionDiagnostics")
-    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics"]
+    applied_instrument_event_instruction: Optional[InstrumentEventInstruction] = Field(default=None, alias="appliedInstrumentEventInstruction")
+    eligible_balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="eligibleBalance")
+    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics", "appliedInstrumentEventInstruction", "eligibleBalance"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,6 +104,9 @@ class ApplicableInstrumentEvent(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of transaction_diagnostics
         if self.transaction_diagnostics:
             _dict['transactionDiagnostics'] = self.transaction_diagnostics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of applied_instrument_event_instruction
+        if self.applied_instrument_event_instruction:
+            _dict['appliedInstrumentEventInstruction'] = self.applied_instrument_event_instruction.to_dict()
         # set to None if applied_instrument_event_instruction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.applied_instrument_event_instruction_id is None and "applied_instrument_event_instruction_id" in self.__fields_set__:
@@ -110,6 +116,11 @@ class ApplicableInstrumentEvent(BaseModel):
         # and __fields_set__ contains the field
         if self.transactions is None and "transactions" in self.__fields_set__:
             _dict['transactions'] = None
+
+        # set to None if eligible_balance (nullable) is None
+        # and __fields_set__ contains the field
+        if self.eligible_balance is None and "eligible_balance" in self.__fields_set__:
+            _dict['eligibleBalance'] = None
 
         return _dict
 
@@ -135,7 +146,9 @@ class ApplicableInstrumentEvent(BaseModel):
             "loaded_event": InstrumentEventHolder.from_dict(obj.get("loadedEvent")) if obj.get("loadedEvent") is not None else None,
             "applied_instrument_event_instruction_id": obj.get("appliedInstrumentEventInstructionId"),
             "transactions": [Transaction.from_dict(_item) for _item in obj.get("transactions")] if obj.get("transactions") is not None else None,
-            "transaction_diagnostics": TransactionDiagnostics.from_dict(obj.get("transactionDiagnostics")) if obj.get("transactionDiagnostics") is not None else None
+            "transaction_diagnostics": TransactionDiagnostics.from_dict(obj.get("transactionDiagnostics")) if obj.get("transactionDiagnostics") is not None else None,
+            "applied_instrument_event_instruction": InstrumentEventInstruction.from_dict(obj.get("appliedInstrumentEventInstruction")) if obj.get("appliedInstrumentEventInstruction") is not None else None,
+            "eligible_balance": obj.get("eligibleBalance")
         })
         return _obj
 

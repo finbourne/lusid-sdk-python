@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **chart_of_accounts_id** | [**ResourceId**](ResourceId.md) |  | 
 **posting_module_codes** | **List[str]** | The Posting Module Codes from which the rules to be applied are retrieved. | [optional] 
 **cleardown_module_codes** | **List[str]** | The Cleardown Module Codes from which the rules to be applied are retrieved. | [optional] 
+**settlement_configuration** | [**NavSettlementConfiguration**](NavSettlementConfiguration.md) |  | [optional] 
 **valuation_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **holding_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **accounting_method** | **str** | Determines the accounting treatment given to the simple position portfolio&#39;s tax lots. A non-default value is required. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | 
@@ -36,6 +37,7 @@ description: Optional[StrictStr] = "example_description"
 chart_of_accounts_id: ResourceId = # Replace with your value
 posting_module_codes: Optional[List[StrictStr]] = # Replace with your value
 cleardown_module_codes: Optional[List[StrictStr]] = # Replace with your value
+settlement_configuration: Optional[NavSettlementConfiguration] = # Replace with your value
 valuation_recipe_id: ResourceId = # Replace with your value
 holding_recipe_id: ResourceId = # Replace with your value
 accounting_method: StrictStr = "example_accounting_method"
@@ -46,7 +48,7 @@ cash_gain_loss_calculation_date: StrictStr = "example_cash_gain_loss_calculation
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
 transaction_template_scope: Optional[StrictStr] = "example_transaction_template_scope"
-nav_type_instance = NavType(status=status, code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope)
+nav_type_instance = NavType(status=status, code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope)
 
 ```
 

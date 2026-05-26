@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **effective_at** | **datetime** | The effective-at timestamp for the entity | [optional] 
 **entity_type** | **str** | The type of the LUSID entity | [optional] 
 **scope** | **str** | The scope of the entity | [optional] 
+**code** | **str** | The code of the entity. Populated for scope+code entities (e.g. Portfolio). Null for identifier-based entities (e.g. Instrument). | [optional] 
 **identifier_key** | **str** | The identifier key for the entity | [optional] 
 **identifier_value** | **str** | The identifier value for the entity | [optional] 
 **entity_unique_id** | **str** | The unique identifier for the entity | [optional] 
@@ -25,11 +26,12 @@ as_at: Optional[datetime] = # Replace with your value
 effective_at: Optional[datetime] = # Replace with your value
 entity_type: Optional[StrictStr] = "example_entity_type"
 scope: Optional[StrictStr] = "example_scope"
+code: Optional[StrictStr] = "example_code"
 identifier_key: Optional[StrictStr] = "example_identifier_key"
 identifier_value: Optional[StrictStr] = "example_identifier_value"
 entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
 display_name: Optional[StrictStr] = "example_display_name"
-lusid_entity_result_instance = LusidEntityResult(as_at=as_at, effective_at=effective_at, entity_type=entity_type, scope=scope, identifier_key=identifier_key, identifier_value=identifier_value, entity_unique_id=entity_unique_id, display_name=display_name)
+lusid_entity_result_instance = LusidEntityResult(as_at=as_at, effective_at=effective_at, entity_type=entity_type, scope=scope, code=code, identifier_key=identifier_key, identifier_value=identifier_value, entity_unique_id=entity_unique_id, display_name=display_name)
 
 ```
 

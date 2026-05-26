@@ -1419,6 +1419,8 @@ Class | Method | HTTP request | Description
  - [NavActivityAdjustmentResponse](docs/NavActivityAdjustmentResponse.md)
  - [NavActivityAdjustmentResponseType](docs/NavActivityAdjustmentResponseType.md)
  - [NavActivityAdjustmentType](docs/NavActivityAdjustmentType.md)
+ - [NavSettlementConfiguration](docs/NavSettlementConfiguration.md)
+ - [NavSettlementConfigurationCategory](docs/NavSettlementConfigurationCategory.md)
  - [NavType](docs/NavType.md)
  - [NavTypeDefinition](docs/NavTypeDefinition.md)
  - [NewInstrument](docs/NewInstrument.md)
