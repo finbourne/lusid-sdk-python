@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
+from lusid.models.model_property import ModelProperty
 from lusid.models.relationship import Relationship
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
@@ -38,10 +39,11 @@ class PortfolioGroup(BaseModel):
     created: Optional[datetime] = Field(default=None, description="The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date.")
     portfolios: Optional[List[ResourceId]] = Field(default=None, description="The collection of resource identifiers for the portfolios contained in the portfolio group.")
     sub_groups: Optional[List[ResourceId]] = Field(default=None, description="The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups.", alias="subGroups")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A collection of properties from the 'PortfolioGroup' domain decorating the portfolio group. Returned only when the request specifies propertyKeys.")
     relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the portfolio group.")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "created", "portfolios", "subGroups", "relationships", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "created", "portfolios", "subGroups", "properties", "relationships", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +94,13 @@ class PortfolioGroup(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['subGroups'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in relationships (list)
         _items = []
         if self.relationships:
@@ -129,6 +138,11 @@ class PortfolioGroup(BaseModel):
         if self.sub_groups is None and "sub_groups" in self.__fields_set__:
             _dict['subGroups'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         # set to None if relationships (nullable) is None
         # and __fields_set__ contains the field
         if self.relationships is None and "relationships" in self.__fields_set__:
@@ -158,6 +172,12 @@ class PortfolioGroup(BaseModel):
             "created": obj.get("created"),
             "portfolios": [ResourceId.from_dict(_item) for _item in obj.get("portfolios")] if obj.get("portfolios") is not None else None,
             "sub_groups": [ResourceId.from_dict(_item) for _item in obj.get("subGroups")] if obj.get("subGroups") is not None else None,
+            "properties": dict(
+                (_k, ModelProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None,
             "relationships": [Relationship.from_dict(_item) for _item in obj.get("relationships")] if obj.get("relationships") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

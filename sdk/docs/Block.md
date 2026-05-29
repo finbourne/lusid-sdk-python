@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | 
 **quantity** | **float** | The total quantity of given instrument ordered. | 
 **side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | 
-**type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | 
-**time_in_force** | **str** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | 
+**type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | [optional] 
+**time_in_force** | **str** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | [optional] 
 **created_date** | **datetime** | The date on which the block was made | 
 **limit_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
@@ -36,8 +36,8 @@ instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your val
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
 side: StrictStr = "example_side"
-type: StrictStr = "example_type"
-time_in_force: StrictStr = "example_time_in_force"
+type: Optional[StrictStr] = "example_type"
+time_in_force: Optional[StrictStr] = "example_time_in_force"
 created_date: datetime = # Replace with your value
 limit_price: Optional[CurrencyAndAmount] = # Replace with your value
 stop_price: Optional[CurrencyAndAmount] = # Replace with your value

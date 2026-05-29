@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
+**date_of_last_pca_scan** | **datetime** | The last date a PCA scan was conducted for a Valuation Point | [optional] 
 **fund_calendar_entries_type** | **str** | The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark. | 
 ## Example
 
@@ -50,8 +51,9 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
+date_of_last_pca_scan: Optional[datetime] = # Replace with your value
 fund_calendar_entries_type: StrictStr = "example_fund_calendar_entries_type"
-finalised_valuation_point_instance = FinalisedValuationPoint(code=code, finalised_from_variant=finalised_from_variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code, fund_calendar_entries_type=fund_calendar_entries_type)
+finalised_valuation_point_instance = FinalisedValuationPoint(code=code, finalised_from_variant=finalised_from_variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code, date_of_last_pca_scan=date_of_last_pca_scan, fund_calendar_entries_type=fund_calendar_entries_type)
 
 ```
 

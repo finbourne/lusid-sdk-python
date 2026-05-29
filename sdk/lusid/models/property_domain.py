@@ -115,6 +115,7 @@ class PropertyDomain(str, Enum):
     IDENTIFIERDEFINITION = 'IdentifierDefinition'
     SETTLEMENTINSTRUCTION = 'SettlementInstruction'
     TRANSACTIONFEETYPE = 'TransactionFeeType'
+    ALLOCATIONMETHOD = 'AllocationMethod'
     TRANSACTIONFEE = 'TransactionFee'
 
     @classmethod

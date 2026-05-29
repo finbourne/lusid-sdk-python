@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **created** | **datetime** | The effective datetime at which the portfolio group was created. No portfolios or sub groups can be added to the group before this date. | [optional] 
 **portfolios** | [**List[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolios contained in the portfolio group. | [optional] 
 **sub_groups** | [**List[ResourceId]**](ResourceId.md) | The collection of resource identifiers for the portfolio groups contained in the portfolio group as sub groups. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A collection of properties from the &#39;PortfolioGroup&#39; domain decorating the portfolio group. Returned only when the request specifies propertyKeys. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the portfolio group. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -29,10 +30,11 @@ description: Optional[StrictStr] = "example_description"
 created: Optional[datetime] = # Replace with your value
 portfolios: Optional[List[ResourceId]] = # Replace with your value
 sub_groups: Optional[List[ResourceId]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 relationships: Optional[List[Relationship]] = # Replace with your value
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-portfolio_group_instance = PortfolioGroup(href=href, id=id, display_name=display_name, description=description, created=created, portfolios=portfolios, sub_groups=sub_groups, relationships=relationships, version=version, links=links)
+portfolio_group_instance = PortfolioGroup(href=href, id=id, display_name=display_name, description=description, created=created, portfolios=portfolios, sub_groups=sub_groups, properties=properties, relationships=relationships, version=version, links=links)
 
 ```
 

@@ -50,9 +50,10 @@ class FinalisedValuationPoint(FundCalendarEntries):
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
+    date_of_last_pca_scan: Optional[datetime] = Field(default=None, description="The last date a PCA scan was conducted for a Valuation Point", alias="dateOfLastPcaScan")
     fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["fundCalendarEntriesType", "code", "finalisedFromVariant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode"]
+    __properties = ["fundCalendarEntriesType", "code", "finalisedFromVariant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode", "dateOfLastPcaScan"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -290,6 +291,11 @@ class FinalisedValuationPoint(FundCalendarEntries):
         if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
             _dict['leaderNavTypeCode'] = None
 
+        # set to None if date_of_last_pca_scan (nullable) is None
+        # and __fields_set__ contains the field
+        if self.date_of_last_pca_scan is None and "date_of_last_pca_scan" in self.__fields_set__:
+            _dict['dateOfLastPcaScan'] = None
+
         return _dict
 
     @classmethod
@@ -325,7 +331,8 @@ class FinalisedValuationPoint(FundCalendarEntries):
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
-            "leader_nav_type_code": obj.get("leaderNavTypeCode")
+            "leader_nav_type_code": obj.get("leaderNavTypeCode"),
+            "date_of_last_pca_scan": obj.get("dateOfLastPcaScan")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
