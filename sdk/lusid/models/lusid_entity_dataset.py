@@ -29,7 +29,7 @@ class LusidEntityDataset(BaseModel):
     """
     as_at: Optional[datetime] = Field(default=None, description="The asAt date to fetch the data. Nullable. Defaults to latest.", alias="asAt")
     effective_at: Optional[datetime] = Field(default=None, description="The effectiveAt date to fetch the data. Nullable. Defaults to latest.", alias="effectiveAt")
-    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the entities to check. Required.") 
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope of the entities to check. Required for scoped entity types (Instrument, Portfolio).  Must not be provided for unscoped entity types (LegalEntity).") 
     as_at_modified_since: Optional[datetime] = Field(default=None, description="Nullable. Filters the dataset for version.asAtModified greater than or equal to this value.", alias="asAtModifiedSince")
     selector_attribute:  Optional[StrictStr] = Field(None,alias="selectorAttribute", description="An attribute (field name, propertyKey or identifierKey) to use to sub-divide the dataset.") 
     selector_value:  Optional[StrictStr] = Field(None,alias="selectorValue", description="The value of the above attribute used to sub-divide the dataset.") 

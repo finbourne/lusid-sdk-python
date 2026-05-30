@@ -249,6 +249,7 @@ from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
+from lusid.models.capital_gains_distribution_event import CapitalGainsDistributionEvent
 from lusid.models.caplet_floorlet_cash_flow_event import CapletFloorletCashFlowEvent
 from lusid.models.cash import Cash
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
@@ -395,6 +396,7 @@ from lusid.models.create_trade_tickets_response import CreateTradeTicketsRespons
 from lusid.models.create_transaction_fee_type_request import CreateTransactionFeeTypeRequest
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
 from lusid.models.create_unit_definition import CreateUnitDefinition
+from lusid.models.create_valuation_point_request import CreateValuationPointRequest
 from lusid.models.credit_default_swap import CreditDefaultSwap
 from lusid.models.credit_premium_cash_flow_event import CreditPremiumCashFlowEvent
 from lusid.models.credit_rating import CreditRating
@@ -1005,6 +1007,7 @@ from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
 from lusid.models.previous_nav import PreviousNAV
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
+from lusid.models.previous_valuation_point import PreviousValuationPoint
 from lusid.models.pricing_context import PricingContext
 from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
@@ -1460,6 +1463,7 @@ from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgen
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.user import User
+from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
@@ -1749,6 +1753,7 @@ __all__ = [
     "CancelledPlacementResult",
     "CapFloor",
     "CapitalDistributionEvent",
+    "CapitalGainsDistributionEvent",
     "CapletFloorletCashFlowEvent",
     "Cash",
     "CashAndSecurityOfferElection",
@@ -1895,6 +1900,7 @@ __all__ = [
     "CreateTransactionFeeTypeRequest",
     "CreateTransactionPortfolioRequest",
     "CreateUnitDefinition",
+    "CreateValuationPointRequest",
     "CreditDefaultSwap",
     "CreditPremiumCashFlowEvent",
     "CreditRating",
@@ -2505,6 +2511,7 @@ __all__ = [
     "PreviousFundValuationPointData",
     "PreviousNAV",
     "PreviousShareClassBreakdown",
+    "PreviousValuationPoint",
     "PricingContext",
     "PricingModel",
     "PricingOptions",
@@ -2960,6 +2967,7 @@ __all__ = [
     "UpsertTranslationScriptRequest",
     "UpsertValuationPointRequest",
     "User",
+    "ValuationPoint",
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",

@@ -1,0 +1,43 @@
+# CreateValuationPointRequest
+
+A definition for the period you wish to close.
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**valuation_point_code** | **str** | Unique code for the Valuation Point. | 
+**variant** | **str** | Optional variant code. Only required when it is necessary to choose between scenarios with multiple estimates. | [optional] 
+**name** | **str** | Identifiable Name assigned to the Valuation Point. | [optional] 
+**effective_at** | **datetime** | The effective time of the diary entry. | 
+**query_as_at** | **datetime** | The query time of the diary entry. Defaults to latest. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
+**apply_clear_down** | **bool** | Defaults to false. Set to true if you want that the closed period to have the clear down applied. | [optional] 
+**holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 
+**valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] 
+**update_inclusion_date_nav_adjustments** | **bool** | Defaults to false. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] 
+## Example
+
+```python
+from lusid.models.create_valuation_point_request import CreateValuationPointRequest
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
+
+valuation_point_code: StrictStr = "example_valuation_point_code"
+variant: Optional[StrictStr] = "example_variant"
+name: Optional[StrictStr] = "example_name"
+effective_at: datetime = # Replace with your value
+query_as_at: Optional[datetime] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+apply_clear_down: Optional[StrictBool] = # Replace with your value
+apply_clear_down:Optional[StrictBool] = None
+holdings_as_at_override: Optional[datetime] = # Replace with your value
+valuations_as_at_override: Optional[datetime] = # Replace with your value
+update_inclusion_date_nav_adjustments: Optional[StrictBool] = # Replace with your value
+update_inclusion_date_nav_adjustments:Optional[StrictBool] = None
+create_valuation_point_request_instance = CreateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments)
+
+```
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+

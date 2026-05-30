@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **as_at** | **datetime** | The asAt date to fetch the data. Nullable. Defaults to latest. | [optional] 
 **effective_at** | **datetime** | The effectiveAt date to fetch the data. Nullable. Defaults to latest. | [optional] 
-**scope** | **str** | The scope of the entities to check. Required. | [optional] 
+**scope** | **str** | The scope of the entities to check. Required for scoped entity types (Instrument, Portfolio).  Must not be provided for unscoped entity types (LegalEntity). | [optional] 
 **as_at_modified_since** | **datetime** | Nullable. Filters the dataset for version.asAtModified greater than or equal to this value. | [optional] 
 **selector_attribute** | **str** | An attribute (field name, propertyKey or identifierKey) to use to sub-divide the dataset. | [optional] 
 **selector_value** | **str** | The value of the above attribute used to sub-divide the dataset. | [optional] 

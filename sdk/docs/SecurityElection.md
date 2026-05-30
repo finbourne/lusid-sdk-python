@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **is_default** | **bool** | Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided. | [optional] 
 **price** | **float** | Price per unit of the security. At least one of UnitsRatio or Price must be provided.  Price must non-zero. | [optional] 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | [optional] 
+**security_election_currency** | **str** | Optional currency in which the security election&#39;s price is denominated | [optional] 
 ## Example
 
 ```python
@@ -25,7 +26,8 @@ is_default: Optional[StrictBool] = # Replace with your value
 is_default:Optional[StrictBool] = None
 price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 units_ratio: Optional[UnitsRatio] = # Replace with your value
-security_election_instance = SecurityElection(election_key=election_key, is_chosen=is_chosen, is_default=is_default, price=price, units_ratio=units_ratio)
+security_election_currency: Optional[StrictStr] = "example_security_election_currency"
+security_election_instance = SecurityElection(election_key=election_key, is_chosen=is_chosen, is_default=is_default, price=price, units_ratio=units_ratio, security_election_currency=security_election_currency)
 
 ```
 

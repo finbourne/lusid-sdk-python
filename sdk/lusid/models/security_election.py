@@ -33,7 +33,8 @@ class SecurityElection(BaseModel):
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
     price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Price per unit of the security. At least one of UnitsRatio or Price must be provided.  Price must non-zero.")
     units_ratio: Optional[UnitsRatio] = Field(default=None, alias="unitsRatio")
-    __properties = ["electionKey", "isChosen", "isDefault", "price", "unitsRatio"]
+    security_election_currency:  Optional[StrictStr] = Field(None,alias="securityElectionCurrency", description="Optional currency in which the security election's price is denominated") 
+    __properties = ["electionKey", "isChosen", "isDefault", "price", "unitsRatio", "securityElectionCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,6 +76,11 @@ class SecurityElection(BaseModel):
         if self.price is None and "price" in self.__fields_set__:
             _dict['price'] = None
 
+        # set to None if security_election_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.security_election_currency is None and "security_election_currency" in self.__fields_set__:
+            _dict['securityElectionCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +97,8 @@ class SecurityElection(BaseModel):
             "is_chosen": obj.get("isChosen"),
             "is_default": obj.get("isDefault"),
             "price": obj.get("price"),
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
+            "security_election_currency": obj.get("securityElectionCurrency")
         })
         return _obj
 

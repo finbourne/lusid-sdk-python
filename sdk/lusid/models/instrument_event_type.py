@@ -104,6 +104,7 @@ class InstrumentEventType(str, Enum):
     DEPOSITROLLEVENT = 'DepositRollEvent'
     CONSENTEVENT = 'ConsentEvent'
     DRAWINGEVENT = 'DrawingEvent'
+    CAPITALGAINSDISTRIBUTIONEVENT = 'CapitalGainsDistributionEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:
