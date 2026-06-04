@@ -35,7 +35,7 @@ class ValuationPoint(BaseModel):
     valuation_point_code:  Optional[StrictStr] = Field(None,alias="valuationPointCode", description="The code of the Valuation Point.") 
     variant:  Optional[StrictStr] = Field(None,alias="variant", description="The Variant name for the Valuation Point.") 
     name:  Optional[StrictStr] = Field(None,alias="name", description="Identifiable Name assigned to the Valuation Point.") 
-    status:  StrictStr = Field(...,alias="status", description="The status of the Valuation Point. Available values: Undefined, Estimate, Final, Candidate, Unofficial.") 
+    status:  StrictStr = Field(...,alias="status", description="The status of the Valuation Point. Available values: Undefined, Estimate, Final, Candidate, Unofficial, Rejected.") 
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Indicates whether a clear down was applied when the Valuation Point was created.", alias="applyClearDown")
     effective_at: datetime = Field(description="The effective time of the Valuation Point.", alias="effectiveAt")
     query_as_at: Optional[datetime] = Field(default=None, description="The AsAt time of the Valuation Point. This is the AsAt time that will be used when requests are made using the entry.", alias="queryAsAt")

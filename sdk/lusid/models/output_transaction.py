@@ -30,6 +30,7 @@ from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.transaction_price import TransactionPrice
 from lusid.models.transaction_settlement_summary import TransactionSettlementSummary
 from lusid.models.transaction_type_details import TransactionTypeDetails
@@ -78,7 +79,8 @@ class OutputTransaction(BaseModel):
     sequence_priority: Optional[StrictInt] = Field(default=None, description="The calculated priority level for this transaction.", alias="sequencePriority")
     settlement_summary: Optional[TransactionSettlementSummary] = Field(default=None, alias="settlementSummary")
     version: Optional[Version] = None
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version"]
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -237,6 +239,9 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -382,7 +387,8 @@ class OutputTransaction(BaseModel):
             "sequence": obj.get("sequence"),
             "sequence_priority": obj.get("sequencePriority"),
             "settlement_summary": TransactionSettlementSummary.from_dict(obj.get("settlementSummary")) if obj.get("settlementSummary") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
         })
         return _obj
 

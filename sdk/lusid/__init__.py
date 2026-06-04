@@ -261,6 +261,7 @@ from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.cash_flow_value import CashFlowValue
 from lusid.models.cash_flow_value_set import CashFlowValueSet
 from lusid.models.cash_ladder_record import CashLadderRecord
+from lusid.models.cash_offer_constituent import CashOfferConstituent
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.cash_perpetual import CashPerpetual
 from lusid.models.category_settlement_status import CategorySettlementStatus
@@ -509,6 +510,7 @@ from lusid.models.error_detail import ErrorDetail
 from lusid.models.estimate_variant import EstimateVariant
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
+from lusid.models.exchange_offer_event import ExchangeOfferEvent
 from lusid.models.exchange_traded_option import ExchangeTradedOption
 from lusid.models.exchange_traded_option_contract_details import ExchangeTradedOptionContractDetails
 from lusid.models.execution import Execution
@@ -793,6 +795,7 @@ from lusid.models.membership_amendment_response import MembershipAmendmentRespon
 from lusid.models.membership_and_status import MembershipAndStatus
 from lusid.models.merger_event import MergerEvent
 from lusid.models.metric_value import MetricValue
+from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
 from lusid.models.model_property import ModelProperty
@@ -1216,6 +1219,7 @@ from lusid.models.scope_definition import ScopeDefinition
 from lusid.models.scrip_dividend_event import ScripDividendEvent
 from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
+from lusid.models.security_offer_constituent import SecurityOfferConstituent
 from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.series import Series
@@ -1765,6 +1769,7 @@ __all__ = [
     "CashFlowValue",
     "CashFlowValueSet",
     "CashLadderRecord",
+    "CashOfferConstituent",
     "CashOfferElection",
     "CashPerpetual",
     "CategorySettlementStatus",
@@ -2013,6 +2018,7 @@ __all__ = [
     "EstimateVariant",
     "EventDateRange",
     "ExDividendConfiguration",
+    "ExchangeOfferEvent",
     "ExchangeTradedOption",
     "ExchangeTradedOptionContractDetails",
     "Execution",
@@ -2297,6 +2303,7 @@ __all__ = [
     "MembershipAndStatus",
     "MergerEvent",
     "MetricValue",
+    "MixedLotConstituentsElection",
     "ModelOptions",
     "ModelOptionsType",
     "ModelProperty",
@@ -2720,6 +2727,7 @@ __all__ = [
     "ScripDividendEvent",
     "ScriptMapReference",
     "SecurityElection",
+    "SecurityOfferConstituent",
     "SecurityOfferElection",
     "SequenceDefinition",
     "Series",

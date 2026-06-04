@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **resolved_transaction_type_details** | [**TransactionTypeDetails**](TransactionTypeDetails.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 ## Example
 
 ```python
@@ -67,7 +68,8 @@ strategy_tag: Optional[List[Strategy]] = # Replace with your value
 resolved_transaction_type_details: Optional[TransactionTypeDetails] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 version: Optional[Version] = None
-transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership, version=version)
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership, version=version, staged_modifications=staged_modifications)
 
 ```
 

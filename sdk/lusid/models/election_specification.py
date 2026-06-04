@@ -27,7 +27,7 @@ class ElectionSpecification(BaseModel):
     """
     ElectionSpecification
     """
-    election_type:  StrictStr = Field(...,alias="electionType", description="Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection.") 
+    election_type:  StrictStr = Field(...,alias="electionType", description="Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection, MixedLotConstituentsElection.") 
     cardinality: Dict[str, Optional[StrictStr]]
     referenced_as: List[StrictStr] = Field(alias="referencedAs")
     __properties = ["electionType", "cardinality", "referencedAs"]

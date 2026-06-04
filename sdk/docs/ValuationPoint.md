@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **valuation_point_code** | **str** | The code of the Valuation Point. | [optional] 
 **variant** | **str** | The Variant name for the Valuation Point. | [optional] 
 **name** | **str** | Identifiable Name assigned to the Valuation Point. | [optional] 
-**status** | **str** | The status of the Valuation Point. Available values: Undefined, Estimate, Final, Candidate, Unofficial. | 
+**status** | **str** | The status of the Valuation Point. Available values: Undefined, Estimate, Final, Candidate, Unofficial, Rejected. | 
 **apply_clear_down** | **bool** | Indicates whether a clear down was applied when the Valuation Point was created. | [optional] 
 **effective_at** | **datetime** | The effective time of the Valuation Point. | 
 **query_as_at** | **datetime** | The AsAt time of the Valuation Point. This is the AsAt time that will be used when requests are made using the entry. | [optional] 
