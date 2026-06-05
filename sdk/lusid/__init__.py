@@ -56,6 +56,7 @@ from lusid.api.investment_accounts_api import InvestmentAccountsApi
 from lusid.api.investor_records_api import InvestorRecordsApi
 from lusid.api.legacy_compliance_api import LegacyComplianceApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
+from lusid.api.market_data_field_configuration_api import MarketDataFieldConfigurationApi
 from lusid.api.order_graph_api import OrderGraphApi
 from lusid.api.order_instructions_api import OrderInstructionsApi
 from lusid.api.order_management_api import OrderManagementApi
@@ -484,6 +485,7 @@ from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.drawdown_event import DrawdownEvent
 from lusid.models.drawing_event import DrawingEvent
+from lusid.models.dutch_auction_event import DutchAuctionEvent
 from lusid.models.early_close_out_event import EarlyCloseOutEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
@@ -772,6 +774,7 @@ from lusid.models.mapping_rule import MappingRule
 from lusid.models.mark_to_market_conventions import MarkToMarketConventions
 from lusid.models.market_context import MarketContext
 from lusid.models.market_context_suppliers import MarketContextSuppliers
+from lusid.models.market_data_field_configuration import MarketDataFieldConfiguration
 from lusid.models.market_data_key_rule import MarketDataKeyRule
 from lusid.models.market_data_options import MarketDataOptions
 from lusid.models.market_data_options_type import MarketDataOptionsType
@@ -794,6 +797,10 @@ from lusid.models.membership_amendment_request import MembershipAmendmentRequest
 from lusid.models.membership_amendment_response import MembershipAmendmentResponse
 from lusid.models.membership_and_status import MembershipAndStatus
 from lusid.models.merger_event import MergerEvent
+from lusid.models.metadata_field_definition import MetadataFieldDefinition
+from lusid.models.metadata_fields_to_add import MetadataFieldsToAdd
+from lusid.models.metadata_fields_to_remove import MetadataFieldsToRemove
+from lusid.models.metadata_fields_to_update import MetadataFieldsToUpdate
 from lusid.models.metric_value import MetricValue
 from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 from lusid.models.model_options import ModelOptions
@@ -1394,6 +1401,7 @@ from lusid.models.update_group_reconciliation_comparison_ruleset_request import 
 from lusid.models.update_group_reconciliation_definition_request import UpdateGroupReconciliationDefinitionRequest
 from lusid.models.update_identifier_definition_request import UpdateIdentifierDefinitionRequest
 from lusid.models.update_instrument_identifier_request import UpdateInstrumentIdentifierRequest
+from lusid.models.update_market_data_field_configuration_request import UpdateMarketDataFieldConfigurationRequest
 from lusid.models.update_orders_response import UpdateOrdersResponse
 from lusid.models.update_placements_response import UpdatePlacementsResponse
 from lusid.models.update_portfolio_group_request import UpdatePortfolioGroupRequest
@@ -1574,6 +1582,7 @@ __all__ = [
     "InvestorRecordsApi",
     "LegacyComplianceApi",
     "LegalEntitiesApi",
+    "MarketDataFieldConfigurationApi",
     "OrderGraphApi",
     "OrderInstructionsApi",
     "OrderManagementApi",
@@ -1992,6 +2001,7 @@ __all__ = [
     "DividendReinvestmentEvent",
     "DrawdownEvent",
     "DrawingEvent",
+    "DutchAuctionEvent",
     "EarlyCloseOutEvent",
     "EarlyRedemptionElection",
     "EarlyRedemptionEvent",
@@ -2280,6 +2290,7 @@ __all__ = [
     "MarkToMarketConventions",
     "MarketContext",
     "MarketContextSuppliers",
+    "MarketDataFieldConfiguration",
     "MarketDataKeyRule",
     "MarketDataOptions",
     "MarketDataOptionsType",
@@ -2302,6 +2313,10 @@ __all__ = [
     "MembershipAmendmentResponse",
     "MembershipAndStatus",
     "MergerEvent",
+    "MetadataFieldDefinition",
+    "MetadataFieldsToAdd",
+    "MetadataFieldsToRemove",
+    "MetadataFieldsToUpdate",
     "MetricValue",
     "MixedLotConstituentsElection",
     "ModelOptions",
@@ -2902,6 +2917,7 @@ __all__ = [
     "UpdateGroupReconciliationDefinitionRequest",
     "UpdateIdentifierDefinitionRequest",
     "UpdateInstrumentIdentifierRequest",
+    "UpdateMarketDataFieldConfigurationRequest",
     "UpdateOrdersResponse",
     "UpdatePlacementsResponse",
     "UpdatePortfolioGroupRequest",

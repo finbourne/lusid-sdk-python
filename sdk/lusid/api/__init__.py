@@ -40,6 +40,7 @@ from lusid.api.investment_accounts_api import InvestmentAccountsApi
 from lusid.api.investor_records_api import InvestorRecordsApi
 from lusid.api.legacy_compliance_api import LegacyComplianceApi
 from lusid.api.legal_entities_api import LegalEntitiesApi
+from lusid.api.market_data_field_configuration_api import MarketDataFieldConfigurationApi
 from lusid.api.order_graph_api import OrderGraphApi
 from lusid.api.order_instructions_api import OrderInstructionsApi
 from lusid.api.order_management_api import OrderManagementApi
@@ -124,6 +125,7 @@ __all__ = [
     "InvestorRecordsApi",
     "LegacyComplianceApi",
     "LegalEntitiesApi",
+    "MarketDataFieldConfigurationApi",
     "OrderGraphApi",
     "OrderInstructionsApi",
     "OrderManagementApi",
