@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **as_at** | **datetime** | The asAt datetime for the Calendar Entry. | 
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] 
+**date_of_last_pca_scan** | **datetime** | The last date a PCA scan was conducted for a Valuation Point | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties for the Calendar Entry. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | 
 ## Example
@@ -26,9 +27,10 @@ description: Optional[StrictStr] = "example_description"
 as_at: datetime = # Replace with your value
 holdings_as_at_override: Optional[datetime] = # Replace with your value
 valuations_as_at_override: Optional[datetime] = # Replace with your value
+date_of_last_pca_scan: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
-estimate_variant_instance = EstimateVariant(variant=variant, display_name=display_name, description=description, as_at=as_at, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version)
+estimate_variant_instance = EstimateVariant(variant=variant, display_name=display_name, description=description, as_at=as_at, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, date_of_last_pca_scan=date_of_last_pca_scan, properties=properties, version=version)
 
 ```
 

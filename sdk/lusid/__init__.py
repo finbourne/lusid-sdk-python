@@ -1526,6 +1526,7 @@ from lusid.models.workspace_item_update_request import WorkspaceItemUpdateReques
 from lusid.models.workspace_permitted_item_actions import WorkspacePermittedItemActions
 from lusid.models.workspace_update_request import WorkspaceUpdateRequest
 from lusid.models.workspace_visibility import WorkspaceVisibility
+from lusid.models.worthless_event import WorthlessEvent
 from lusid.models.year_month_day import YearMonthDay
 from lusid.models.yield_curve_data import YieldCurveData
 
@@ -3042,6 +3043,7 @@ __all__ = [
     "WorkspacePermittedItemActions",
     "WorkspaceUpdateRequest",
     "WorkspaceVisibility",
+    "WorthlessEvent",
     "YearMonthDay",
     "YieldCurveData",
     "ApiClient",

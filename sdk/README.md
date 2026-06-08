@@ -2142,6 +2142,7 @@ Class | Method | HTTP request | Description
  - [WorkspacePermittedItemActions](docs/WorkspacePermittedItemActions.md)
  - [WorkspaceUpdateRequest](docs/WorkspaceUpdateRequest.md)
  - [WorkspaceVisibility](docs/WorkspaceVisibility.md)
+ - [WorthlessEvent](docs/WorthlessEvent.md)
  - [YearMonthDay](docs/YearMonthDay.md)
  - [YieldCurveData](docs/YieldCurveData.md)
 

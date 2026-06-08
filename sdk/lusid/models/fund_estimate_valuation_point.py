@@ -41,10 +41,9 @@ class FundEstimateValuationPoint(FundCalendarEntries):
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Set to true if that closed period should have the clear down applied.", alias="applyClearDown")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
     variants: Optional[List[EstimateVariant]] = Field(default=None, description="The variants of the Estimate Valuation Point. ")
-    date_of_last_pca_scan: Optional[datetime] = Field(default=None, description="The last date a PCA scan was conducted for a Valuation Point", alias="dateOfLastPcaScan")
     fund_calendar_entries_type:  StrictStr = Field(...,alias="fundCalendarEntriesType", description="The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["fundCalendarEntriesType", "code", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "entryType", "status", "applyClearDown", "leaderNavTypeCode", "variants", "dateOfLastPcaScan"]
+    __properties = ["fundCalendarEntriesType", "code", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "entryType", "status", "applyClearDown", "leaderNavTypeCode", "variants"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -254,11 +253,6 @@ class FundEstimateValuationPoint(FundCalendarEntries):
         if self.variants is None and "variants" in self.__fields_set__:
             _dict['variants'] = None
 
-        # set to None if date_of_last_pca_scan (nullable) is None
-        # and __fields_set__ contains the field
-        if self.date_of_last_pca_scan is None and "date_of_last_pca_scan" in self.__fields_set__:
-            _dict['dateOfLastPcaScan'] = None
-
         return _dict
 
     @classmethod
@@ -281,8 +275,7 @@ class FundEstimateValuationPoint(FundCalendarEntries):
             "status": obj.get("status"),
             "apply_clear_down": obj.get("applyClearDown"),
             "leader_nav_type_code": obj.get("leaderNavTypeCode"),
-            "variants": [EstimateVariant.from_dict(_item) for _item in obj.get("variants")] if obj.get("variants") is not None else None,
-            "date_of_last_pca_scan": obj.get("dateOfLastPcaScan")
+            "variants": [EstimateVariant.from_dict(_item) for _item in obj.get("variants")] if obj.get("variants") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

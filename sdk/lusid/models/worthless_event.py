@@ -24,17 +24,16 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class SwapPrincipalEvent(InstrumentEvent):
+class WorthlessEvent(InstrumentEvent):
     """
-    Definition of a Swap Principal Event.  This is an event that describes the occurence of a cashflow due to the principal payment.  # noqa: E501
+    Mandatory corporate action that removes a security holding from the portfolio at zero proceeds (zero-recovery write-off, WRTH).  The full eligible holding is debited on the PaymentDate; no cash is received and no new security is credited.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(default=None, description="The entitlement date of the principal payment.", alias="exDate")
-    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the principal.", alias="paymentDate")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the principal is paid.") 
-    principal_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The principal amount received for each unit of the instrument held on the ex date.", alias="principalPerUnit")
+    record_date: Optional[datetime] = Field(default=None, description="Positions are struck at close of business on this date to determine eligible holdings.", alias="recordDate")
+    payment_date: Optional[datetime] = Field(default=None, description="The date the security debit is processed in LUSID; no cash payment is associated. Must be >= RecordDate.", alias="paymentDate")
+    announcement_date: Optional[datetime] = Field(default=None, description="The date the issuer or agent announces the write-off. Optional — null when no separate announcement date is provided.  When populated, must be <= RecordDate.", alias="announcementDate")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "principalPerUnit"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "announcementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -47,7 +46,7 @@ class SwapPrincipalEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'SwapPrincipalEvent' not in [ 
+        if 'WorthlessEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -129,8 +128,8 @@ class SwapPrincipalEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> SwapPrincipalEvent:
-        """Create an instance of SwapPrincipalEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> WorthlessEvent:
+        """Create an instance of WorthlessEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -145,23 +144,27 @@ class SwapPrincipalEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if announcement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> SwapPrincipalEvent:
-        """Create an instance of SwapPrincipalEvent from a dict"""
+    def from_dict(cls, obj: dict) -> WorthlessEvent:
+        """Create an instance of WorthlessEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return SwapPrincipalEvent.parse_obj(obj)
+            return WorthlessEvent.parse_obj(obj)
 
-        _obj = SwapPrincipalEvent.parse_obj({
+        _obj = WorthlessEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
+            "record_date": obj.get("recordDate"),
             "payment_date": obj.get("paymentDate"),
-            "currency": obj.get("currency"),
-            "principal_per_unit": obj.get("principalPerUnit")
+            "announcement_date": obj.get("announcementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -170,4 +173,4 @@ class SwapPrincipalEvent(InstrumentEvent):
 
         return _obj
 
-SwapPrincipalEvent.update_forward_refs()
+WorthlessEvent.update_forward_refs()

@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **apply_clear_down** | **bool** | Set to true if that closed period should have the clear down applied. | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
 **variants** | [**List[EstimateVariant]**](EstimateVariant.md) | The variants of the Estimate Valuation Point.  | [optional] 
-**date_of_last_pca_scan** | **datetime** | The last date a PCA scan was conducted for a Valuation Point | [optional] 
 **fund_calendar_entries_type** | **str** | The type of the Calendar Entry. Available values: FinalisedValuationPoint, FundEstimateValuationPoint, FundBookmark. | 
 ## Example
 
@@ -35,9 +34,8 @@ apply_clear_down: Optional[StrictBool] = # Replace with your value
 apply_clear_down:Optional[StrictBool] = None
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
 variants: Optional[List[EstimateVariant]] = # Replace with your value
-date_of_last_pca_scan: Optional[datetime] = # Replace with your value
 fund_calendar_entries_type: StrictStr = "example_fund_calendar_entries_type"
-fund_estimate_valuation_point_instance = FundEstimateValuationPoint(code=code, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, leader_nav_type_code=leader_nav_type_code, variants=variants, date_of_last_pca_scan=date_of_last_pca_scan, fund_calendar_entries_type=fund_calendar_entries_type)
+fund_estimate_valuation_point_instance = FundEstimateValuationPoint(code=code, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, leader_nav_type_code=leader_nav_type_code, variants=variants, fund_calendar_entries_type=fund_calendar_entries_type)
 
 ```
 
