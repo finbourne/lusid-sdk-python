@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
+from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -50,8 +51,9 @@ class FundCashStatementRow(BaseModel):
     cost_basis_base: Optional[CurrencyAndAmount] = Field(default=None, alias="costBasisBase")
     avg_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weighted average FX rate (costBasisBase / balanceLocal). Null when balance is zero.", alias="avgRate")
     fx_rate_movement: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="FX rate for this specific movement (CashflowBase / CashFlowLocal). Null when localAmount is zero.", alias="fxRateMovement")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested properties decorated onto the cash statement row.")
     links: Optional[List[Link]] = None
-    __properties = ["groupById", "sequenceNumber", "subHoldingKeys", "sourceId", "cashStatementActionType", "accountingDate", "activityDate", "movementName", "portfolioId", "instructionType", "diaryEntryCode", "originDiaryEntryCode", "cashflowLocal", "balanceLocal", "cashflowBase", "realisedFxPnl", "costBasisBase", "avgRate", "fxRateMovement", "links"]
+    __properties = ["groupById", "sequenceNumber", "subHoldingKeys", "sourceId", "cashStatementActionType", "accountingDate", "activityDate", "movementName", "portfolioId", "instructionType", "diaryEntryCode", "originDiaryEntryCode", "cashflowLocal", "balanceLocal", "cashflowBase", "realisedFxPnl", "costBasisBase", "avgRate", "fxRateMovement", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -110,6 +112,13 @@ class FundCashStatementRow(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of cost_basis_base
         if self.cost_basis_base:
             _dict['costBasisBase'] = self.cost_basis_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -162,6 +171,11 @@ class FundCashStatementRow(BaseModel):
         if self.fx_rate_movement is None and "fx_rate_movement" in self.__fields_set__:
             _dict['fxRateMovement'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -203,6 +217,12 @@ class FundCashStatementRow(BaseModel):
             "cost_basis_base": CurrencyAndAmount.from_dict(obj.get("costBasisBase")) if obj.get("costBasisBase") is not None else None,
             "avg_rate": obj.get("avgRate"),
             "fx_rate_movement": obj.get("fxRateMovement"),
+            "properties": dict(
+                (_k, ModelProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

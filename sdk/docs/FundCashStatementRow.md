@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **cost_basis_base** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **avg_rate** | **float** | Weighted average FX rate (costBasisBase / balanceLocal). Null when balance is zero. | [optional] 
 **fx_rate_movement** | **float** | FX rate for this specific movement (CashflowBase / CashFlowLocal). Null when localAmount is zero. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested properties decorated onto the cash statement row. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -54,8 +55,9 @@ realised_fx_pnl: Optional[CurrencyAndAmount] = # Replace with your value
 cost_basis_base: Optional[CurrencyAndAmount] = # Replace with your value
 avg_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fx_rate_movement: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-fund_cash_statement_row_instance = FundCashStatementRow(group_by_id=group_by_id, sequence_number=sequence_number, sub_holding_keys=sub_holding_keys, source_id=source_id, cash_statement_action_type=cash_statement_action_type, accounting_date=accounting_date, activity_date=activity_date, movement_name=movement_name, portfolio_id=portfolio_id, instruction_type=instruction_type, diary_entry_code=diary_entry_code, origin_diary_entry_code=origin_diary_entry_code, cashflow_local=cashflow_local, balance_local=balance_local, cashflow_base=cashflow_base, realised_fx_pnl=realised_fx_pnl, cost_basis_base=cost_basis_base, avg_rate=avg_rate, fx_rate_movement=fx_rate_movement, links=links)
+fund_cash_statement_row_instance = FundCashStatementRow(group_by_id=group_by_id, sequence_number=sequence_number, sub_holding_keys=sub_holding_keys, source_id=source_id, cash_statement_action_type=cash_statement_action_type, accounting_date=accounting_date, activity_date=activity_date, movement_name=movement_name, portfolio_id=portfolio_id, instruction_type=instruction_type, diary_entry_code=diary_entry_code, origin_diary_entry_code=origin_diary_entry_code, cashflow_local=cashflow_local, balance_local=balance_local, cashflow_base=cashflow_base, realised_fx_pnl=realised_fx_pnl, cost_basis_base=cost_basis_base, avg_rate=avg_rate, fx_rate_movement=fx_rate_movement, properties=properties, links=links)
 
 ```
 
