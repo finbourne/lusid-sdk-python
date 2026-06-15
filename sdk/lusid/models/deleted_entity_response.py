@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
+from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class DeletedEntityResponse(BaseModel):
@@ -35,8 +36,9 @@ class DeletedEntityResponse(BaseModel):
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType", description="The type of the entity that the deleted response applies to.") 
     entity_unique_id:  Optional[StrictStr] = Field(None,alias="entityUniqueId", description="The unique Id of the entity that the deleted response applies to.") 
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings or additional information related to the delete operation.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "stagedModifications", "links"]
+    __properties = ["href", "effectiveFrom", "asAt", "entityType", "entityUniqueId", "stagedModifications", "metadata", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +75,15 @@ class DeletedEntityResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of staged_modifications
         if self.staged_modifications:
             _dict['stagedModifications'] = self.staged_modifications.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
+        _field_dict_of_array = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.metadata[_key]
+                    ]
+            _dict['metadata'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -100,6 +111,11 @@ class DeletedEntityResponse(BaseModel):
         if self.entity_unique_id is None and "entity_unique_id" in self.__fields_set__:
             _dict['entityUniqueId'] = None
 
+        # set to None if metadata (nullable) is None
+        # and __fields_set__ contains the field
+        if self.metadata is None and "metadata" in self.__fields_set__:
+            _dict['metadata'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -123,6 +139,16 @@ class DeletedEntityResponse(BaseModel):
             "entity_type": obj.get("entityType"),
             "entity_unique_id": obj.get("entityUniqueId"),
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
+            "metadata": dict(
+                (_k,
+                        [ResponseMetaData.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

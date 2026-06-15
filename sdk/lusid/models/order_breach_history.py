@@ -113,7 +113,9 @@ class OrderBreachHistory(BaseModel):
                         else None
                 )
                 for _k, _v in obj.get("breachesByRule").items()
-            ),
+            )
+            if obj.get("breachesByRule") is not None
+            else None,
             "as_at": obj.get("asAt")
         })
         return _obj

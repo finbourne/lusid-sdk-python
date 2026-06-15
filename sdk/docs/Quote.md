@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **uploaded_by** | **str** | The unique id of the user that updated or inserted the quote. | 
 **as_at** | **datetime** | The asAt datetime at which the quote was committed to LUSID. | 
 **scale_factor** | **float** | An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote&#39;s Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1. | [optional] 
+**metadata_fields** | **Dict[str, Optional[object]]** | The metadata field values for this quote, keyed by field name. | [optional] 
 ## Example
 
 ```python
@@ -27,7 +28,8 @@ cut_label: Optional[StrictStr] = "example_cut_label"
 uploaded_by: StrictStr = "example_uploaded_by"
 as_at: datetime = # Replace with your value
 scale_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-quote_instance = Quote(quote_id=quote_id, metric_value=metric_value, lineage=lineage, cut_label=cut_label, uploaded_by=uploaded_by, as_at=as_at, scale_factor=scale_factor)
+metadata_fields: Optional[Dict[str, Any]] = # Replace with your value
+quote_instance = Quote(quote_id=quote_id, metric_value=metric_value, lineage=lineage, cut_label=cut_label, uploaded_by=uploaded_by, as_at=as_at, scale_factor=scale_factor, metadata_fields=metadata_fields)
 
 ```
 

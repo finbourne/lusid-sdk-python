@@ -175,6 +175,8 @@ class IntermediateComplianceStep(ComplianceStep):
                 )
                 for _k, _v in obj.get("groupedParameters").items()
             )
+            if obj.get("groupedParameters") is not None
+            else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

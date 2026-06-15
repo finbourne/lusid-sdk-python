@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.block_and_orders import BlockAndOrders
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.transaction import Transaction
 
@@ -31,7 +32,8 @@ class BookTransactionsResponse(BaseModel):
     """
     values: Optional[Dict[str, Transaction]] = None
     failed: Optional[Dict[str, ErrorDetail]] = None
-    __properties = ["values", "failed"]
+    fx_orders: Optional[List[BlockAndOrders]] = Field(default=None, alias="fxOrders")
+    __properties = ["values", "failed", "fxOrders"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,13 @@ class BookTransactionsResponse(BaseModel):
                 if self.failed[_key]:
                     _field_dict[_key] = self.failed[_key].to_dict()
             _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in fx_orders (list)
+        _items = []
+        if self.fx_orders:
+            for _item in self.fx_orders:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['fxOrders'] = _items
         # set to None if values (nullable) is None
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
@@ -88,6 +97,11 @@ class BookTransactionsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.failed is None and "failed" in self.__fields_set__:
             _dict['failed'] = None
+
+        # set to None if fx_orders (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fx_orders is None and "fx_orders" in self.__fields_set__:
+            _dict['fxOrders'] = None
 
         return _dict
 
@@ -112,7 +126,8 @@ class BookTransactionsResponse(BaseModel):
                 for _k, _v in obj.get("failed").items()
             )
             if obj.get("failed") is not None
-            else None
+            else None,
+            "fx_orders": [BlockAndOrders.from_dict(_item) for _item in obj.get("fxOrders")] if obj.get("fxOrders") is not None else None
         })
         return _obj
 

@@ -125,7 +125,9 @@ class OverrideVirtualTransactionsResponse(BaseModel):
                         else None
                 )
                 for _k, _v in obj.get("metadata").items()
-            ),
+            )
+            if obj.get("metadata") is not None
+            else None,
             "instrument_event_id": obj.get("instrumentEventId"),
             "cancel_instruction_id": obj.get("cancelInstructionId"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

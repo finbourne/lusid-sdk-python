@@ -4,6 +4,7 @@
 from lusid.api.abor_api import AborApi
 from lusid.api.abor_configuration_api import AborConfigurationApi
 from lusid.api.address_key_definition_api import AddressKeyDefinitionApi
+from lusid.api.address_key_alias_api import AddressKeyAliasApi
 from lusid.api.aggregated_returns_api import AggregatedReturnsApi
 from lusid.api.aggregation_api import AggregationApi
 from lusid.api.allocations_api import AllocationsApi
@@ -69,6 +70,7 @@ from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
 from lusid.api.search_api import SearchApi
 from lusid.api.sequences_api import SequencesApi
+from lusid.api.settlement_activity_api import SettlementActivityApi
 from lusid.api.simple_position_portfolios_api import SimplePositionPortfoliosApi
 from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
@@ -89,6 +91,7 @@ __all__ = [
     "AborApi",
     "AborConfigurationApi",
     "AddressKeyDefinitionApi",
+    "AddressKeyAliasApi",
     "AggregatedReturnsApi",
     "AggregationApi",
     "AllocationsApi",
@@ -154,6 +157,7 @@ __all__ = [
     "ScriptedTranslationApi",
     "SearchApi",
     "SequencesApi",
+    "SettlementActivityApi",
     "SimplePositionPortfoliosApi",
     "StagedModificationsApi",
     "StagingRuleSetApi",

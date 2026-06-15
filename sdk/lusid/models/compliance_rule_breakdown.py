@@ -105,7 +105,9 @@ class ComplianceRuleBreakdown(BaseModel):
                         else None
                 )
                 for _k, _v in obj.get("propertiesUsed").items()
-            ),
+            )
+            if obj.get("propertiesUsed") is not None
+            else None,
             "missing_data_information": obj.get("missingDataInformation"),
             "lineage": [LineageMember.from_dict(_item) for _item in obj.get("lineage")] if obj.get("lineage") is not None else None
         })

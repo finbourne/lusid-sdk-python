@@ -28,7 +28,8 @@ class HoldingContext(BaseModel):
     Holding context node.  Contains settings that control how LUSID handles holdings within portfolios.  # noqa: E501
     """
     tax_lot_level_holdings: Optional[StrictBool] = Field(default=None, description="Whether or not to expand the holdings to return the underlying tax-lots. Defaults to True.", alias="taxLotLevelHoldings")
-    __properties = ["taxLotLevelHoldings"]
+    aggregate_cash_commitments: Optional[StrictBool] = Field(default=None, description="When true, cash commitment holdings sharing a SubHoldingKey are folded into a single aggregated  row per portfolio, mirroring how cash balances are already aggregated. Defaults to false to  preserve existing behaviour. Ignored when TaxLotLevelHoldings is true — tax-lot granularity  takes precedence. Aggregation is per-portfolio: cross-portfolio rows in portfolio-group / fund  responses stay separate, matching the behaviour of positions and cash balances.", alias="aggregateCashCommitments")
+    __properties = ["taxLotLevelHoldings", "aggregateCashCommitments"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,7 +75,8 @@ class HoldingContext(BaseModel):
             return HoldingContext.parse_obj(obj)
 
         _obj = HoldingContext.parse_obj({
-            "tax_lot_level_holdings": obj.get("taxLotLevelHoldings")
+            "tax_lot_level_holdings": obj.get("taxLotLevelHoldings"),
+            "aggregate_cash_commitments": obj.get("aggregateCashCommitments")
         })
         return _obj
 

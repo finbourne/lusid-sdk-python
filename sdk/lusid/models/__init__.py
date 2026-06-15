@@ -42,6 +42,7 @@ from lusid.models.add_business_days_to_date_request import AddBusinessDaysToDate
 from lusid.models.add_business_days_to_date_response import AddBusinessDaysToDateResponse
 from lusid.models.additional_payment import AdditionalPayment
 from lusid.models.address_definition import AddressDefinition
+from lusid.models.address_key_alias import AddressKeyAlias
 from lusid.models.address_key_compliance_parameter import AddressKeyComplianceParameter
 from lusid.models.address_key_definition import AddressKeyDefinition
 from lusid.models.address_key_filter import AddressKeyFilter
@@ -519,6 +520,7 @@ from lusid.models.general_ledger_profile_mapping import GeneralLedgerProfileMapp
 from lusid.models.general_ledger_profile_request import GeneralLedgerProfileRequest
 from lusid.models.general_ledger_profile_response import GeneralLedgerProfileResponse
 from lusid.models.generated_event_diagnostics import GeneratedEventDiagnostics
+from lusid.models.get_address_key_alias_response import GetAddressKeyAliasResponse
 from lusid.models.get_cds_flow_conventions_response import GetCdsFlowConventionsResponse
 from lusid.models.get_complex_market_data_response import GetComplexMarketDataResponse
 from lusid.models.get_counterparty_agreement_response import GetCounterpartyAgreementResponse
@@ -662,6 +664,7 @@ from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
 from lusid.models.loan_facility import LoanFacility
 from lusid.models.loan_facility_contract_rollover_event import LoanFacilityContractRolloverEvent
+from lusid.models.loan_facility_delayed_compensation_payment_event import LoanFacilityDelayedCompensationPaymentEvent
 from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
@@ -813,6 +816,7 @@ from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResou
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
+from lusid.models.paged_resource_list_of_get_address_key_alias_response import PagedResourceListOfGetAddressKeyAliasResponse
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
@@ -947,6 +951,7 @@ from lusid.models.property_value import PropertyValue
 from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
 from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
+from lusid.models.put_redemption_event import PutRedemptionEvent
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
@@ -1095,6 +1100,7 @@ from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTra
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
+from lusid.models.resource_list_with_post_bodies_of_settlement_activity_to_settlement_activity_query import ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery
 from lusid.models.resource_record import ResourceRecord
 from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.result_data_key_rule import ResultDataKeyRule
@@ -1145,6 +1151,8 @@ from lusid.models.set_person_properties_request import SetPersonPropertiesReques
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
+from lusid.models.settlement_activity import SettlementActivity
+from lusid.models.settlement_activity_query import SettlementActivityQuery
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_configuration_method_override import SettlementConfigurationMethodOverride
 from lusid.models.settlement_cycle import SettlementCycle
@@ -1325,6 +1333,7 @@ from lusid.models.update_timeline_request import UpdateTimelineRequest
 from lusid.models.update_transaction_fee_type_request import UpdateTransactionFeeTypeRequest
 from lusid.models.update_unit_request import UpdateUnitRequest
 from lusid.models.update_valuation_point_request import UpdateValuationPointRequest
+from lusid.models.upsert_address_key_alias_request import UpsertAddressKeyAliasRequest
 from lusid.models.upsert_cds_flow_conventions_request import UpsertCdsFlowConventionsRequest
 from lusid.models.upsert_complex_market_data_request import UpsertComplexMarketDataRequest
 from lusid.models.upsert_compliance_rule_request import UpsertComplianceRuleRequest
@@ -1465,6 +1474,7 @@ __all__ = [
     "AddBusinessDaysToDateResponse",
     "AdditionalPayment",
     "AddressDefinition",
+    "AddressKeyAlias",
     "AddressKeyComplianceParameter",
     "AddressKeyDefinition",
     "AddressKeyFilter",
@@ -1942,6 +1952,7 @@ __all__ = [
     "GeneralLedgerProfileRequest",
     "GeneralLedgerProfileResponse",
     "GeneratedEventDiagnostics",
+    "GetAddressKeyAliasResponse",
     "GetCdsFlowConventionsResponse",
     "GetComplexMarketDataResponse",
     "GetCounterpartyAgreementResponse",
@@ -2085,6 +2096,7 @@ __all__ = [
     "ListComplexMarketDataWithMetaDataResponse",
     "LoanFacility",
     "LoanFacilityContractRolloverEvent",
+    "LoanFacilityDelayedCompensationPaymentEvent",
     "LoanInterestRepaymentEvent",
     "LoanPeriod",
     "LoanPrincipalRepaymentEvent",
@@ -2236,6 +2248,7 @@ __all__ = [
     "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
     "PagedResourceListOfGeneralLedgerProfileResponse",
+    "PagedResourceListOfGetAddressKeyAliasResponse",
     "PagedResourceListOfGroupReconciliationComparisonResult",
     "PagedResourceListOfGroupReconciliationComparisonRuleset",
     "PagedResourceListOfGroupReconciliationDefinition",
@@ -2370,6 +2383,7 @@ __all__ = [
     "PropertyValueEquals",
     "PropertyValueIn",
     "ProtectionPayoutCashFlowEvent",
+    "PutRedemptionEvent",
     "QuantityInstructed",
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketedCashFlowsRequest",
@@ -2518,6 +2532,7 @@ __all__ = [
     "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
     "ResourceListOfValueType",
+    "ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery",
     "ResourceRecord",
     "ResponseMetaData",
     "ResultDataKeyRule",
@@ -2568,6 +2583,8 @@ __all__ = [
     "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
+    "SettlementActivity",
+    "SettlementActivityQuery",
     "SettlementConfigurationCategory",
     "SettlementConfigurationMethodOverride",
     "SettlementCycle",
@@ -2748,6 +2765,7 @@ __all__ = [
     "UpdateTransactionFeeTypeRequest",
     "UpdateUnitRequest",
     "UpdateValuationPointRequest",
+    "UpsertAddressKeyAliasRequest",
     "UpsertCdsFlowConventionsRequest",
     "UpsertComplexMarketDataRequest",
     "UpsertComplianceRuleRequest",

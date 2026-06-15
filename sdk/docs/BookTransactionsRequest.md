@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **allocation_ids** | [**List[ResourceId]**](ResourceId.md) | A collection of Allocation IDs | 
 **transaction_properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | A collection of properties | [optional] 
+**fx_instrument_type** | **str** | The type of FX instrument to create when settlement currency differs from portfolio base currency. Use None to suppress FX instrument and order creation. Defaults to None. Available values: None, FxForward, FxSpot. | [optional] 
 ## Example
 
 ```python
@@ -16,7 +17,8 @@ from datetime import datetime
 
 allocation_ids: List[ResourceId] = # Replace with your value
 transaction_properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-book_transactions_request_instance = BookTransactionsRequest(allocation_ids=allocation_ids, transaction_properties=transaction_properties)
+fx_instrument_type: Optional[StrictStr] = "example_fx_instrument_type"
+book_transactions_request_instance = BookTransactionsRequest(allocation_ids=allocation_ids, transaction_properties=transaction_properties, fx_instrument_type=fx_instrument_type)
 
 ```
 

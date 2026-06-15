@@ -30,6 +30,10 @@ Class | Method | HTTP request | Description
 *AddressKeyDefinitionApi* | [**create_address_key_definition**](docs/AddressKeyDefinitionApi.md#create_address_key_definition) | **POST** /api/addresskeydefinitions | [EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.
 *AddressKeyDefinitionApi* | [**get_address_key_definition**](docs/AddressKeyDefinitionApi.md#get_address_key_definition) | **GET** /api/addresskeydefinitions/{key} | [EARLY ACCESS] GetAddressKeyDefinition: Get an AddressKeyDefinition.
 *AddressKeyDefinitionApi* | [**list_address_key_definitions**](docs/AddressKeyDefinitionApi.md#list_address_key_definitions) | **GET** /api/addresskeydefinitions | [EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.
+*AddressKeyAliasApi* | [**delete_address_key_alias**](docs/AddressKeyAliasApi.md#delete_address_key_alias) | **DELETE** /api/addresskeyaliases/{scope}/{code} | [EXPERIMENTAL] DeleteAddressKeyAlias: Delete an Address Key Alias, assuming that it is present.
+*AddressKeyAliasApi* | [**get_address_key_alias**](docs/AddressKeyAliasApi.md#get_address_key_alias) | **GET** /api/addresskeyaliases/{scope}/{code} | [EXPERIMENTAL] GetAddressKeyAlias: Get Address Key Alias
+*AddressKeyAliasApi* | [**list_address_key_aliases**](docs/AddressKeyAliasApi.md#list_address_key_aliases) | **GET** /api/addresskeyaliases/{scope} | [EXPERIMENTAL] ListAddressKeyAliases: List the set of Address Key Aliases
+*AddressKeyAliasApi* | [**upsert_address_key_alias**](docs/AddressKeyAliasApi.md#upsert_address_key_alias) | **POST** /api/addresskeyaliases | [EXPERIMENTAL] UpsertAddressKeyAlias: Upsert an Address Key Alias. This creates or updates the alias in LUSID.
 *AggregatedReturnsApi* | [**delete_returns_entity**](docs/AggregatedReturnsApi.md#delete_returns_entity) | **DELETE** /api/returns/{scope}/{code} | [EXPERIMENTAL] DeleteReturnsEntity: Delete returns entity.
 *AggregatedReturnsApi* | [**get_returns_entity**](docs/AggregatedReturnsApi.md#get_returns_entity) | **GET** /api/returns/{scope}/{code} | [EXPERIMENTAL] GetReturnsEntity: Get returns entity.
 *AggregatedReturnsApi* | [**list_returns_entities**](docs/AggregatedReturnsApi.md#list_returns_entities) | **GET** /api/returns | [EXPERIMENTAL] ListReturnsEntities: List returns entities.
@@ -592,6 +596,7 @@ Class | Method | HTTP request | Description
 *SequencesApi* | [**get_sequence**](docs/SequencesApi.md#get_sequence) | **GET** /api/sequences/{scope}/{code} | [EARLY ACCESS] GetSequence: Get a specified sequence
 *SequencesApi* | [**list_sequences**](docs/SequencesApi.md#list_sequences) | **GET** /api/sequences | [EARLY ACCESS] ListSequences: List Sequences
 *SequencesApi* | [**next**](docs/SequencesApi.md#next) | **GET** /api/sequences/{scope}/{code}/next | [EARLY ACCESS] Next: Get next values from sequence
+*SettlementActivityApi* | [**query_settlement_activity**](docs/SettlementActivityApi.md#query_settlement_activity) | **POST** /api/settlementactivities/$query | [EARLY ACCESS] QuerySettlementActivity: Query Settlement Activity
 *SimplePositionPortfoliosApi* | [**create_simple_position_portfolio**](docs/SimplePositionPortfoliosApi.md#create_simple_position_portfolio) | **POST** /api/simpleposition/{scope} | [EARLY ACCESS] CreateSimplePositionPortfolio: Create simple position portfolio
 *StagedModificationsApi* | [**add_decision**](docs/StagedModificationsApi.md#add_decision) | **POST** /api/stagedmodifications/{id}/decision | AddDecision: AddDecision
 *StagedModificationsApi* | [**get_staged_modification**](docs/StagedModificationsApi.md#get_staged_modification) | **GET** /api/stagedmodifications/{id} | GetStagedModification: GetStagedModification
@@ -753,6 +758,7 @@ Class | Method | HTTP request | Description
  - [AddBusinessDaysToDateResponse](docs/AddBusinessDaysToDateResponse.md)
  - [AdditionalPayment](docs/AdditionalPayment.md)
  - [AddressDefinition](docs/AddressDefinition.md)
+ - [AddressKeyAlias](docs/AddressKeyAlias.md)
  - [AddressKeyComplianceParameter](docs/AddressKeyComplianceParameter.md)
  - [AddressKeyDefinition](docs/AddressKeyDefinition.md)
  - [AddressKeyFilter](docs/AddressKeyFilter.md)
@@ -1230,6 +1236,7 @@ Class | Method | HTTP request | Description
  - [GeneralLedgerProfileRequest](docs/GeneralLedgerProfileRequest.md)
  - [GeneralLedgerProfileResponse](docs/GeneralLedgerProfileResponse.md)
  - [GeneratedEventDiagnostics](docs/GeneratedEventDiagnostics.md)
+ - [GetAddressKeyAliasResponse](docs/GetAddressKeyAliasResponse.md)
  - [GetCdsFlowConventionsResponse](docs/GetCdsFlowConventionsResponse.md)
  - [GetComplexMarketDataResponse](docs/GetComplexMarketDataResponse.md)
  - [GetCounterpartyAgreementResponse](docs/GetCounterpartyAgreementResponse.md)
@@ -1373,6 +1380,7 @@ Class | Method | HTTP request | Description
  - [ListComplexMarketDataWithMetaDataResponse](docs/ListComplexMarketDataWithMetaDataResponse.md)
  - [LoanFacility](docs/LoanFacility.md)
  - [LoanFacilityContractRolloverEvent](docs/LoanFacilityContractRolloverEvent.md)
+ - [LoanFacilityDelayedCompensationPaymentEvent](docs/LoanFacilityDelayedCompensationPaymentEvent.md)
  - [LoanInterestRepaymentEvent](docs/LoanInterestRepaymentEvent.md)
  - [LoanPeriod](docs/LoanPeriod.md)
  - [LoanPrincipalRepaymentEvent](docs/LoanPrincipalRepaymentEvent.md)
@@ -1524,6 +1532,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfFundCalendarEntry](docs/PagedResourceListOfFundCalendarEntry.md)
  - [PagedResourceListOfFundConfiguration](docs/PagedResourceListOfFundConfiguration.md)
  - [PagedResourceListOfGeneralLedgerProfileResponse](docs/PagedResourceListOfGeneralLedgerProfileResponse.md)
+ - [PagedResourceListOfGetAddressKeyAliasResponse](docs/PagedResourceListOfGetAddressKeyAliasResponse.md)
  - [PagedResourceListOfGroupReconciliationComparisonResult](docs/PagedResourceListOfGroupReconciliationComparisonResult.md)
  - [PagedResourceListOfGroupReconciliationComparisonRuleset](docs/PagedResourceListOfGroupReconciliationComparisonRuleset.md)
  - [PagedResourceListOfGroupReconciliationDefinition](docs/PagedResourceListOfGroupReconciliationDefinition.md)
@@ -1658,6 +1667,7 @@ Class | Method | HTTP request | Description
  - [PropertyValueEquals](docs/PropertyValueEquals.md)
  - [PropertyValueIn](docs/PropertyValueIn.md)
  - [ProtectionPayoutCashFlowEvent](docs/ProtectionPayoutCashFlowEvent.md)
+ - [PutRedemptionEvent](docs/PutRedemptionEvent.md)
  - [QuantityInstructed](docs/QuantityInstructed.md)
  - [QueryApplicableInstrumentEventsRequest](docs/QueryApplicableInstrumentEventsRequest.md)
  - [QueryBucketedCashFlowsRequest](docs/QueryBucketedCashFlowsRequest.md)
@@ -1806,6 +1816,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfTransactionSettlementInstruction](docs/ResourceListOfTransactionSettlementInstruction.md)
  - [ResourceListOfTransactionType](docs/ResourceListOfTransactionType.md)
  - [ResourceListOfValueType](docs/ResourceListOfValueType.md)
+ - [ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery](docs/ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery.md)
  - [ResourceRecord](docs/ResourceRecord.md)
  - [ResponseMetaData](docs/ResponseMetaData.md)
  - [ResultDataKeyRule](docs/ResultDataKeyRule.md)
@@ -1856,6 +1867,8 @@ Class | Method | HTTP request | Description
  - [SetShareClassInstrumentsRequest](docs/SetShareClassInstrumentsRequest.md)
  - [SetTransactionConfigurationAlias](docs/SetTransactionConfigurationAlias.md)
  - [SetTransactionConfigurationSourceRequest](docs/SetTransactionConfigurationSourceRequest.md)
+ - [SettlementActivity](docs/SettlementActivity.md)
+ - [SettlementActivityQuery](docs/SettlementActivityQuery.md)
  - [SettlementConfigurationCategory](docs/SettlementConfigurationCategory.md)
  - [SettlementConfigurationMethodOverride](docs/SettlementConfigurationMethodOverride.md)
  - [SettlementCycle](docs/SettlementCycle.md)
@@ -2036,6 +2049,7 @@ Class | Method | HTTP request | Description
  - [UpdateTransactionFeeTypeRequest](docs/UpdateTransactionFeeTypeRequest.md)
  - [UpdateUnitRequest](docs/UpdateUnitRequest.md)
  - [UpdateValuationPointRequest](docs/UpdateValuationPointRequest.md)
+ - [UpsertAddressKeyAliasRequest](docs/UpsertAddressKeyAliasRequest.md)
  - [UpsertCdsFlowConventionsRequest](docs/UpsertCdsFlowConventionsRequest.md)
  - [UpsertComplexMarketDataRequest](docs/UpsertComplexMarketDataRequest.md)
  - [UpsertComplianceRuleRequest](docs/UpsertComplianceRuleRequest.md)

@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **values** | [**Dict[str, Transaction]**](Transaction.md) |  | [optional] 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) |  | [optional] 
+**fx_orders** | [**List[BlockAndOrders]**](BlockAndOrders.md) |  | [optional] 
 ## Example
 
 ```python
@@ -16,7 +17,8 @@ from datetime import datetime
 
 values: Optional[Dict[str, Transaction]] = None
 failed: Optional[Dict[str, ErrorDetail]] = None
-book_transactions_response_instance = BookTransactionsResponse(values=values, failed=failed)
+fx_orders: Optional[List[BlockAndOrders]] = # Replace with your value
+book_transactions_response_instance = BookTransactionsResponse(values=values, failed=failed, fx_orders=fx_orders)
 
 ```
 

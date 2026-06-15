@@ -115,7 +115,9 @@ class BatchUpsertInstrumentPropertiesResponse(BaseModel):
                         else None
                 )
                 for _k, _v in obj.get("values").items()
-            ),
+            )
+            if obj.get("values") is not None
+            else None,
             "failed": dict(
                 (_k, ErrorDetail.from_dict(_v))
                 for _k, _v in obj.get("failed").items()

@@ -31,7 +31,8 @@ class BookTransactionsRequest(BaseModel):
     """
     allocation_ids: List[ResourceId] = Field(description="A collection of Allocation IDs", alias="allocationIds")
     transaction_properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="A collection of properties", alias="transactionProperties")
-    __properties = ["allocationIds", "transactionProperties"]
+    fx_instrument_type:  Optional[StrictStr] = Field(None,alias="fxInstrumentType", description="The type of FX instrument to create when settlement currency differs from portfolio base currency. Use None to suppress FX instrument and order creation. Defaults to None. Available values: None, FxForward, FxSpot.") 
+    __properties = ["allocationIds", "transactionProperties", "fxInstrumentType"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,11 @@ class BookTransactionsRequest(BaseModel):
         if self.transaction_properties is None and "transaction_properties" in self.__fields_set__:
             _dict['transactionProperties'] = None
 
+        # set to None if fx_instrument_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fx_instrument_type is None and "fx_instrument_type" in self.__fields_set__:
+            _dict['fxInstrumentType'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class BookTransactionsRequest(BaseModel):
                 for _k, _v in obj.get("transactionProperties").items()
             )
             if obj.get("transactionProperties") is not None
-            else None
+            else None,
+            "fx_instrument_type": obj.get("fxInstrumentType")
         })
         return _obj
 

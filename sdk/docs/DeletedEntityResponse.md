@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **entity_type** | **str** | The type of the entity that the deleted response applies to. | [optional] 
 **entity_unique_id** | **str** | The unique Id of the entity that the deleted response applies to. | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
+**metadata** | **Dict[str, Optional[List[ResponseMetaData]]]** | Contains warnings or additional information related to the delete operation. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -25,8 +26,9 @@ as_at: datetime = # Replace with your value
 entity_type: Optional[StrictStr] = "example_entity_type"
 entity_unique_id: Optional[StrictStr] = "example_entity_unique_id"
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = # Replace with your value
 links: Optional[List[Link]] = None
-deleted_entity_response_instance = DeletedEntityResponse(href=href, effective_from=effective_from, as_at=as_at, entity_type=entity_type, entity_unique_id=entity_unique_id, staged_modifications=staged_modifications, links=links)
+deleted_entity_response_instance = DeletedEntityResponse(href=href, effective_from=effective_from, as_at=as_at, entity_type=entity_type, entity_unique_id=entity_unique_id, staged_modifications=staged_modifications, metadata=metadata, links=links)
 
 ```
 

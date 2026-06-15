@@ -112,7 +112,9 @@ class CompositeBreakdownResponse(BaseModel):
                         else None
                 )
                 for _k, _v in obj.get("results").items()
-            ),
+            )
+            if obj.get("results") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **metric_value** | [**MetricValue**](MetricValue.md) |  | [optional] 
 **lineage** | **str** | Description of the quote&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **scale_factor** | **float** | An optional scale factor for non-standard scaling of quotes against the instrument. For example, if you wish the quote&#39;s Value to be scaled down by a factor of 100, enter 100. If not supplied, the default ScaleFactor is 1. | [optional] 
+**metadata_fields** | **Dict[str, Optional[object]]** | The metadata field values for this quote, keyed by field name. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ quote_id: QuoteId = # Replace with your value
 metric_value: Optional[MetricValue] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 scale_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-upsert_quote_request_instance = UpsertQuoteRequest(quote_id=quote_id, metric_value=metric_value, lineage=lineage, scale_factor=scale_factor)
+metadata_fields: Optional[Dict[str, Any]] = # Replace with your value
+upsert_quote_request_instance = UpsertQuoteRequest(quote_id=quote_id, metric_value=metric_value, lineage=lineage, scale_factor=scale_factor, metadata_fields=metadata_fields)
 
 ```
 
