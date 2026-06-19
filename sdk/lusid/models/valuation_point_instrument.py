@@ -30,7 +30,7 @@ class ValuationPointInstrument(BaseModel):
     An Instrument held at a Valuation Point, including its origin  # noqa: E501
     """
     instrument: Optional[Instrument] = None
-    valuation_point_origin:  Optional[StrictStr] = Field(None,alias="valuationPointOrigin", description="Designates if the instrument was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added.") 
+    valuation_point_origin:  Optional[StrictStr] = Field(None,alias="valuationPointOrigin", description="Designates if the instrument was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added, OriginalAndAdded.") 
     added_origin_valuation_point_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointCode", description="The Valuation Point, only for an Instrument added as part of a Complex Close action.") 
     added_origin_valuation_point_variant_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointVariantCode", description="The Valuation Point variant, only for Instruments added as part of a Complex Close action.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested instrument properties. These will be from the 'Instrument' domain.")

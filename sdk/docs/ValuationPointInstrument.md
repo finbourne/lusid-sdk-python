@@ -5,7 +5,7 @@ An Instrument held at a Valuation Point, including its origin
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument** | [**Instrument**](Instrument.md) |  | [optional] 
-**valuation_point_origin** | **str** | Designates if the instrument was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added. | [optional] 
+**valuation_point_origin** | **str** | Designates if the instrument was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added, OriginalAndAdded. | [optional] 
 **added_origin_valuation_point_code** | **str** | The Valuation Point, only for an Instrument added as part of a Complex Close action. | [optional] 
 **added_origin_valuation_point_variant_code** | **str** | The Valuation Point variant, only for Instruments added as part of a Complex Close action. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested instrument properties. These will be from the &#39;Instrument&#39; domain. | [optional] 

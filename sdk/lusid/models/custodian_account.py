@@ -38,7 +38,7 @@ class CustodianAccount(BaseModel):
     currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian: LegalEntity
-    account_type:  StrictStr = Field(...,alias="accountType", description="The Type of the Custodian Account. Default value: Margin. Available values: Margin, Cash, Swap.") 
+    account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.") 
     __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType"]
 
     class Config:
@@ -90,6 +90,11 @@ class CustodianAccount(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if account_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.account_type is None and "account_type" in self.__fields_set__:
+            _dict['accountType'] = None
 
         return _dict
 

@@ -38,7 +38,7 @@ class CustodianAccountRequest(BaseModel):
     currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian_identifier: TypedResourceId = Field(alias="custodianIdentifier")
-    account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The Type of the Custodian Account. Default value: Margin. Available values: Margin, Cash, Swap.") 
+    account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.") 
     __properties = ["scope", "code", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodianIdentifier", "accountType"]
 
     class Config:

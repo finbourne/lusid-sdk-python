@@ -729,6 +729,7 @@ from lusid.models.instrument_properties import InstrumentProperties
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.instrument_search_property import InstrumentSearchProperty
 from lusid.models.instrument_type import InstrumentType
+from lusid.models.interest_payment_event import InterestPaymentEvent
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
@@ -2257,6 +2258,7 @@ __all__ = [
     "InstrumentResolutionDetail",
     "InstrumentSearchProperty",
     "InstrumentType",
+    "InterestPaymentEvent",
     "InterestRateSwap",
     "InterestRateSwaption",
     "IntermediateComplianceStep",

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **currency** | **str** | The Currency for the Account | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian_identifier** | [**TypedResourceId**](TypedResourceId.md) |  | 
-**account_type** | **str** | The Type of the Custodian Account. Default value: Margin. Available values: Margin, Cash, Swap. | [optional] 
+**account_type** | **str** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] 
 ## Example
 
 ```python

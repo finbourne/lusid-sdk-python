@@ -1348,6 +1348,7 @@ Class | Method | HTTP request | Description
  - [InstrumentResolutionDetail](docs/InstrumentResolutionDetail.md)
  - [InstrumentSearchProperty](docs/InstrumentSearchProperty.md)
  - [InstrumentType](docs/InstrumentType.md)
+ - [InterestPaymentEvent](docs/InterestPaymentEvent.md)
  - [InterestRateSwap](docs/InterestRateSwap.md)
  - [InterestRateSwaption](docs/InterestRateSwaption.md)
  - [IntermediateComplianceStep](docs/IntermediateComplianceStep.md)

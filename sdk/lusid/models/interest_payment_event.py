@@ -22,31 +22,22 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.cash_election import CashElection
 from lusid.models.instrument_event import InstrumentEvent
-from lusid.models.new_instrument import NewInstrument
-from lusid.models.option_exercise_election import OptionExerciseElection
-from lusid.models.units_ratio import UnitsRatio
 
-class OptionExercisePhysicalEvent(InstrumentEvent):
+class InterestPaymentEvent(InstrumentEvent):
     """
-    Event for physical option exercises.  # noqa: E501
+    Interest Payment event (INTR). A cash distribution of interest from a debt issuer to its noteholders,  carrying a per-unit absolute interest rate on each CashElection. Supports Mandatory  (single declared election) and MandatoryWithChoices (one election per offered currency) participation.  # noqa: E501
     """
-    exercise_date: Optional[datetime] = Field(default=None, description="The exercise date of the option.", alias="exerciseDate")
-    delivery_date: Optional[datetime] = Field(default=None, description="The delivery date of the option.", alias="deliveryDate")
-    exercise_type:  StrictStr = Field(...,alias="exerciseType", description="The optionality type of the underlying option. Available values: None, European, Bermudan, American.") 
-    maturity_date: Optional[datetime] = Field(default=None, description="The maturity date of the option.", alias="maturityDate")
-    moneyness:  Optional[StrictStr] = Field(None,alias="moneyness", description="The moneyness of the option. Available values: Unknown, InTheMoney, OutOfTheMoney, AtTheMoney.") 
-    new_instrument: NewInstrument = Field(alias="newInstrument")
-    option_exercise_elections: Optional[List[OptionExerciseElection]] = Field(default=None, description="Option exercise election for this OptionExercisePhysicalEvent.", alias="optionExerciseElections")
-    option_type:  StrictStr = Field(...,alias="optionType", description="Type of optionality that is present. Available values: None, Call, Put.") 
-    start_date: Optional[datetime] = Field(default=None, description="The trade date of the option.", alias="startDate")
-    strike_currency:  StrictStr = Field(...,alias="strikeCurrency", description="The strike currency of the equity option.") 
-    strike_per_unit: Union[StrictFloat, StrictInt] = Field(description="The strike of the equity option times the number of shares to exchange if exercised.", alias="strikePerUnit")
-    underlying_value_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The underlying price times the number of shares to exchange if exercised.", alias="underlyingValuePerUnit")
-    units_ratio: UnitsRatio = Field(alias="unitsRatio")
+    record_date: Optional[datetime] = Field(default=None, description="The record-date cut-off determining entitlement. Required. Map from the vendor RecordDate (NOT the  ExDate sentinel).", alias="recordDate")
+    payment_date: Optional[datetime] = Field(default=None, description="The date the interest is paid to noteholders. Required. Also the effective date of the event.", alias="paymentDate")
+    response_deadline: Optional[datetime] = Field(default=None, description="The holder-instruction deadline. Required for MandatoryWithChoices; must be null for Mandatory.", alias="responseDeadline")
+    market_deadline: Optional[datetime] = Field(default=None, description="The market-organisation deadline. Required for MandatoryWithChoices; must be null for Mandatory.", alias="marketDeadline")
+    announcement_date: Optional[datetime] = Field(default=None, description="The date the event was announced by the issuer. Optional.", alias="announcementDate")
+    cash_elections: List[CashElection] = Field(description="The cash elections for this event. For Mandatory participation a single declared election is supplied  with IsDeclared, IsDefault and IsChosen all true; for MandatoryWithChoices one entry per offered  currency is supplied, with exactly one declared, one default and one chosen. Every election carries a  per-unit absolute (signed) DividendRate and an ExchangeRate of 1.", alias="cashElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exerciseDate", "deliveryDate", "exerciseType", "maturityDate", "moneyness", "newInstrument", "optionExerciseElections", "optionType", "startDate", "strikeCurrency", "strikePerUnit", "underlyingValuePerUnit", "unitsRatio"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "responseDeadline", "marketDeadline", "announcementDate", "cashElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -59,7 +50,7 @@ class OptionExercisePhysicalEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'OptionExercisePhysicalEvent' not in [ 
+        if 'InterestPaymentEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -141,8 +132,8 @@ class OptionExercisePhysicalEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> OptionExercisePhysicalEvent:
-        """Create an instance of OptionExercisePhysicalEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> InterestPaymentEvent:
+        """Create an instance of InterestPaymentEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -152,75 +143,52 @@ class OptionExercisePhysicalEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of new_instrument
-        if self.new_instrument:
-            _dict['newInstrument'] = self.new_instrument.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in option_exercise_elections (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_elections (list)
         _items = []
-        if self.option_exercise_elections:
-            for _item in self.option_exercise_elections:
+        if self.cash_elections:
+            for _item in self.cash_elections:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['optionExerciseElections'] = _items
-        # override the default output from pydantic by calling `to_dict()` of units_ratio
-        if self.units_ratio:
-            _dict['unitsRatio'] = self.units_ratio.to_dict()
+            _dict['cashElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if exercise_date (nullable) is None
+        # set to None if response_deadline (nullable) is None
         # and __fields_set__ contains the field
-        if self.exercise_date is None and "exercise_date" in self.__fields_set__:
-            _dict['exerciseDate'] = None
+        if self.response_deadline is None and "response_deadline" in self.__fields_set__:
+            _dict['responseDeadline'] = None
 
-        # set to None if delivery_date (nullable) is None
+        # set to None if market_deadline (nullable) is None
         # and __fields_set__ contains the field
-        if self.delivery_date is None and "delivery_date" in self.__fields_set__:
-            _dict['deliveryDate'] = None
+        if self.market_deadline is None and "market_deadline" in self.__fields_set__:
+            _dict['marketDeadline'] = None
 
-        # set to None if moneyness (nullable) is None
+        # set to None if announcement_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.moneyness is None and "moneyness" in self.__fields_set__:
-            _dict['moneyness'] = None
-
-        # set to None if option_exercise_elections (nullable) is None
-        # and __fields_set__ contains the field
-        if self.option_exercise_elections is None and "option_exercise_elections" in self.__fields_set__:
-            _dict['optionExerciseElections'] = None
-
-        # set to None if underlying_value_per_unit (nullable) is None
-        # and __fields_set__ contains the field
-        if self.underlying_value_per_unit is None and "underlying_value_per_unit" in self.__fields_set__:
-            _dict['underlyingValuePerUnit'] = None
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> OptionExercisePhysicalEvent:
-        """Create an instance of OptionExercisePhysicalEvent from a dict"""
+    def from_dict(cls, obj: dict) -> InterestPaymentEvent:
+        """Create an instance of InterestPaymentEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return OptionExercisePhysicalEvent.parse_obj(obj)
+            return InterestPaymentEvent.parse_obj(obj)
 
-        _obj = OptionExercisePhysicalEvent.parse_obj({
+        _obj = InterestPaymentEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "exercise_date": obj.get("exerciseDate"),
-            "delivery_date": obj.get("deliveryDate"),
-            "exercise_type": obj.get("exerciseType"),
-            "maturity_date": obj.get("maturityDate"),
-            "moneyness": obj.get("moneyness"),
-            "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
-            "option_exercise_elections": [OptionExerciseElection.from_dict(_item) for _item in obj.get("optionExerciseElections")] if obj.get("optionExerciseElections") is not None else None,
-            "option_type": obj.get("optionType"),
-            "start_date": obj.get("startDate"),
-            "strike_currency": obj.get("strikeCurrency"),
-            "strike_per_unit": obj.get("strikePerUnit"),
-            "underlying_value_per_unit": obj.get("underlyingValuePerUnit"),
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
+            "record_date": obj.get("recordDate"),
+            "payment_date": obj.get("paymentDate"),
+            "response_deadline": obj.get("responseDeadline"),
+            "market_deadline": obj.get("marketDeadline"),
+            "announcement_date": obj.get("announcementDate"),
+            "cash_elections": [CashElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -229,4 +197,4 @@ class OptionExercisePhysicalEvent(InstrumentEvent):
 
         return _obj
 
-OptionExercisePhysicalEvent.update_forward_refs()
+InterestPaymentEvent.update_forward_refs()
