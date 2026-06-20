@@ -932,6 +932,7 @@ from lusid.models.pricing_context import PricingContext
 from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
 from lusid.models.primary_schedule import PrimarySchedule
+from lusid.models.priority_issue_event import PriorityIssueEvent
 from lusid.models.processed_command import ProcessedCommand
 from lusid.models.property_definition import PropertyDefinition
 from lusid.models.property_definition_entity import PropertyDefinitionEntity
@@ -2365,6 +2366,7 @@ __all__ = [
     "PricingModel",
     "PricingOptions",
     "PrimarySchedule",
+    "PriorityIssueEvent",
     "ProcessedCommand",
     "PropertyDefinition",
     "PropertyDefinitionEntity",

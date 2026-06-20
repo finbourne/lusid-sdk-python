@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **input** | **float** | Input amount.  Denominator of the Ratio | 
 **output** | **float** | Output amount. Numerator of the Ratio | 
+**unit_scale_type** | **str** | Determines how units are scaled when processing the event.  Supported values: [NEWO, ADEX]. Available values: NEWO, ADEX. | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 input: Union[StrictFloat, StrictInt] = # Replace with your value
 output: Union[StrictFloat, StrictInt] = # Replace with your value
-units_ratio_instance = UnitsRatio(input=input, output=output)
+unit_scale_type: Optional[StrictStr] = "example_unit_scale_type"
+units_ratio_instance = UnitsRatio(input=input, output=output, unit_scale_type=unit_scale_type)
 
 ```
 

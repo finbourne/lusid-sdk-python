@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **valuation_point_origin** | **str** | Designates if the instrument was originally part of the Valuation Point or if it was added as part of a Complex Close action. Available values: None, Original, Added, OriginalAndAdded. | [optional] 
 **added_origin_valuation_point_code** | **str** | The Valuation Point, only for an Instrument added as part of a Complex Close action. | [optional] 
 **added_origin_valuation_point_variant_code** | **str** | The Valuation Point variant, only for Instruments added as part of a Complex Close action. | [optional] 
+**valuation_point_origin_source** | **List[str]** | Collection of sources of Post Close Activities which added this instrument. Available values: Undefined, Manual, Auto. | [optional] 
+**valuation_point_origin_type** | **List[str]** | Collection of types of Post Close Activities which added this instrument. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested instrument properties. These will be from the &#39;Instrument&#39; domain. | [optional] 
 ## Example
 
@@ -22,8 +24,10 @@ instrument: Optional[Instrument] = None
 valuation_point_origin: Optional[StrictStr] = "example_valuation_point_origin"
 added_origin_valuation_point_code: Optional[StrictStr] = "example_added_origin_valuation_point_code"
 added_origin_valuation_point_variant_code: Optional[StrictStr] = "example_added_origin_valuation_point_variant_code"
+valuation_point_origin_source: Optional[List[StrictStr]] = # Replace with your value
+valuation_point_origin_type: Optional[List[StrictStr]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-valuation_point_instrument_instance = ValuationPointInstrument(instrument=instrument, valuation_point_origin=valuation_point_origin, added_origin_valuation_point_code=added_origin_valuation_point_code, added_origin_valuation_point_variant_code=added_origin_valuation_point_variant_code, properties=properties)
+valuation_point_instrument_instance = ValuationPointInstrument(instrument=instrument, valuation_point_origin=valuation_point_origin, added_origin_valuation_point_code=added_origin_valuation_point_code, added_origin_valuation_point_variant_code=added_origin_valuation_point_variant_code, valuation_point_origin_source=valuation_point_origin_source, valuation_point_origin_type=valuation_point_origin_type, properties=properties)
 
 ```
 
