@@ -2508,7 +2508,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_holdings**
-> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, aggregate_cash_commitments=aggregate_cash_commitments)
 
 GetHoldings: Get holdings
 
@@ -2570,13 +2570,14 @@ def main():
     timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
     timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
     closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. (optional)
+    aggregate_cash_commitments = True # bool | When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, aggregate_cash_commitments=aggregate_cash_commitments, opts=opts)
 
         # GetHoldings: Get holdings
-        api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, aggregate_cash_commitments=aggregate_cash_commitments)
         pprint(api_response)
 
     except ApiException as e:
@@ -2600,6 +2601,7 @@ Name | Type | Description  | Notes
  **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
  **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon, followed by the Closed Period Id to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
  **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. Either closedPeriodId or effectiveAt can be used with a Timeline. | [optional] 
+ **aggregate_cash_commitments** | **bool**| When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. | [optional] 
 
 ### Return type
 
@@ -2722,7 +2724,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_holdings_with_orders**
-> VersionedResourceListWithWarningsOfPortfolioHolding get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days)
+> VersionedResourceListWithWarningsOfPortfolioHolding get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days, aggregate_cash_commitments=aggregate_cash_commitments)
 
 GetHoldingsWithOrders: Get holdings with orders
 
@@ -2783,13 +2785,14 @@ def main():
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
     include_settlement_events_after_days = 56 # int | Number of days ahead to bring back settlements from, in relation to the specified effectiveAt (optional)
+    aggregate_cash_commitments = True # bool | When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days, opts=opts)
+        # api_response =  api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days, aggregate_cash_commitments=aggregate_cash_commitments, opts=opts)
 
         # GetHoldingsWithOrders: Get holdings with orders
-        api_response = api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days)
+        api_response = api_instance.get_holdings_with_orders(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, include_settlement_events_after_days=include_settlement_events_after_days, aggregate_cash_commitments=aggregate_cash_commitments)
         pprint(api_response)
 
     except ApiException as e:
@@ -2812,6 +2815,7 @@ Name | Type | Description  | Notes
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
  **include_settlement_events_after_days** | **int**| Number of days ahead to bring back settlements from, in relation to the specified effectiveAt | [optional] 
+ **aggregate_cash_commitments** | **bool**| When true, collapses cash-commitment rows that share a sub-holding key              into a single aggregated row per portfolio with summed units/cost and the per-leg breakdown retained on the              settlement schedule. Ignored when byTaxlots is true. Defaults to False. | [optional] 
 
 ### Return type
 
