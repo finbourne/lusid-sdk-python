@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **condition** | **str** | The condition that the transaction must satisfy to generate the movement, such as: Portfolio.BaseCurrency eq &#39;GBP&#39;. The condition can contain fields and properties from transactions and portfolios. If no condition is provided, the movement will apply for all transactions of this type. | [optional] 
 **settlement_mode** | **str** | Configures how movements should settle. Allowed values: &#39;Internal&#39; and &#39;External&#39;. A movement with &#39;Internal&#39; settlement mode will settle automatically on the contractual settlement date regardlesss of portfolio configuration or settlement instruction. An &#39;External&#39; movement can be settled automatically or by a settlement instruction. Available values: Internal, External. | [optional] 
 **calculate_trade_date_to_settlement_fx_pn_l** | **bool** | Configures whether Trade To Settlement Date Realised Gain Loss should be calculated. This overrides the value set at the Portfolio level.If null, then the Portfolio Settlement Configuration TradeToSettlementDateRealisedFxPnl setting will be used.If false, then no TradeToSettlementDateRealisedFxPnl will apply for this movement and if true, then TradeToSettlementDateRealisedFxPnlwill be calculated for this movement. | [optional] 
+**custodian_account_type** | **str** | The type of custodian account this movement targets, e.g. Cash or Margin. Free text, optional. | [optional] 
+**account_selector** | **str** | An optional selector expression used to identify the specific account this movement targets. E.g. From/To. | [optional] 
 ## Example
 
 ```python
@@ -36,7 +38,9 @@ condition: Optional[StrictStr] = "example_condition"
 settlement_mode: Optional[StrictStr] = "example_settlement_mode"
 calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = # Replace with your value
 calculate_trade_date_to_settlement_fx_pn_l:Optional[StrictBool] = None
-transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition, settlement_mode=settlement_mode, calculate_trade_date_to_settlement_fx_pn_l=calculate_trade_date_to_settlement_fx_pn_l)
+custodian_account_type: Optional[StrictStr] = "example_custodian_account_type"
+account_selector: Optional[StrictStr] = "example_account_selector"
+transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition, settlement_mode=settlement_mode, calculate_trade_date_to_settlement_fx_pn_l=calculate_trade_date_to_settlement_fx_pn_l, custodian_account_type=custodian_account_type, account_selector=account_selector)
 
 ```
 
