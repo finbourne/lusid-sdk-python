@@ -290,6 +290,7 @@ from lusid.models.check_definition_rule import CheckDefinitionRule
 from lusid.models.check_definition_rule_set import CheckDefinitionRuleSet
 from lusid.models.check_step import CheckStep
 from lusid.models.check_step_request import CheckStepRequest
+from lusid.models.class_action_event import ClassActionEvent
 from lusid.models.cleardown_module_details import CleardownModuleDetails
 from lusid.models.cleardown_module_request import CleardownModuleRequest
 from lusid.models.cleardown_module_response import CleardownModuleResponse
@@ -1820,6 +1821,7 @@ __all__ = [
     "CheckDefinitionRuleSet",
     "CheckStep",
     "CheckStepRequest",
+    "ClassActionEvent",
     "CleardownModuleDetails",
     "CleardownModuleRequest",
     "CleardownModuleResponse",

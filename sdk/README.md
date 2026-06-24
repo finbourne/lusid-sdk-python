@@ -910,6 +910,7 @@ Class | Method | HTTP request | Description
  - [CheckDefinitionRuleSet](docs/CheckDefinitionRuleSet.md)
  - [CheckStep](docs/CheckStep.md)
  - [CheckStepRequest](docs/CheckStepRequest.md)
+ - [ClassActionEvent](docs/ClassActionEvent.md)
  - [CleardownModuleDetails](docs/CleardownModuleDetails.md)
  - [CleardownModuleRequest](docs/CleardownModuleRequest.md)
  - [CleardownModuleResponse](docs/CleardownModuleResponse.md)

@@ -22,19 +22,27 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.lapse_election import LapseElection
 
-class RepoPartialClosureEvent(InstrumentEvent):
+class ClassActionEvent(InstrumentEvent):
     """
-    Event representing the partial closure of a repurchase   agreement. Each event reduces the outstanding notional   and generates a corresponding receive-leg cashflow. The   final maturity cashflow is adjusted accordingly.    If multiple events are created, their effects compound.   Once the total repaid amount reaches the original purchase   price, no further receive-leg cashflows are generated. Any   event exceeding the remaining notional is marked with a   diagnostic to indicate it is invalid due to excessive repayment.    For example, for a repo with a 5% rate, 1% haircut and   collateral value of 100 (purchase price = 99), a partial   closure of cash amount 10 followed by one of 100 results in   only the first event producing a cashflow. The second,   exceeding the remaining balance, is ignored and flagged   with a diagnostic. The remaining balance is settled at   maturity of the repurchase agreement.  # noqa: E501
+    Class Action Event (CLSA) — a voluntary corporate action under which security holders  receive cash compensation from a court-approved settlement fund following litigation  against an issuer.  # noqa: E501
     """
-    entitlement_date: Optional[datetime] = Field(default=None, description="The date on which the counterparties become entitled   to exchange cash as part of a partial closure of the   repurchase agreement. The date must be before or on   the settlement date, and on or before the maturity   date of the repo. This is a required field.", alias="entitlementDate")
-    settlement_date: Optional[datetime] = Field(default=None, description="The date on which the exchange of cash is settled.   The date must be on or after the entitlement date,  and on or before the maturity date of the repo.   This is a required field.", alias="settlementDate")
-    cash_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of cash to be exchanged as part of   a partial closure of the repurchase agreement.  It cannot be more than the initial amount of   cash at the start of the repo.", alias="cashAmount")
-    cash_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Represents the proportion of cash exchanged, as   a value between 0 and 1, relative to the total   cash involved in the repurchase agreement.  This value adjusts with each partial closure,   because the total cash amount is reduced.", alias="cashPercentage")
+    payment_date: Optional[datetime] = Field(default=None, description="Date on which the settlement distribution is paid to the holder.", alias="paymentDate")
+    filing_deadline: Optional[datetime] = Field(default=None, description="Court-set deadline for submitting a proof of claim.", alias="filingDeadline")
+    class_period_start: Optional[datetime] = Field(default=None, description="Lower bound of the eligibility window (inclusive).", alias="classPeriodStart")
+    class_period_end: Optional[datetime] = Field(default=None, description="Upper bound of the eligibility window (inclusive).", alias="classPeriodEnd")
+    ex_date: Optional[datetime] = Field(default=None, description="Date from which the security trades without the settlement right.  Null for most class actions where no ex date is defined.", alias="exDate")
+    record_date: Optional[datetime] = Field(default=None, description="Date at which positions are struck for notification scope. Informational only.", alias="recordDate")
+    announcement_date: Optional[datetime] = Field(default=None, description="Settlement public-announcement or court-approval date.", alias="announcementDate")
+    case_reference:  Optional[StrictStr] = Field(None,alias="caseReference", description="Lawsuit or settlement-fund identifier (court case number, fund name). Audit-only.") 
+    cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="Cash offer elections for this event. Exactly one entry carrying the per-share  settlement amount as CashOfferPrice and settlement currency as CashOfferCurrency.", alias="cashOfferElections")
+    lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="Lapse elections for this event. Exactly one entry (NOAC) with IsDefault = true.", alias="lapseElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "entitlementDate", "settlementDate", "cashAmount", "cashPercentage"]
+    __properties = ["instrumentEventType", "paymentDate", "filingDeadline", "classPeriodStart", "classPeriodEnd", "exDate", "recordDate", "announcementDate", "caseReference", "cashOfferElections", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -47,7 +55,7 @@ class RepoPartialClosureEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'RepoPartialClosureEvent' not in [ 
+        if 'ClassActionEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -129,8 +137,8 @@ class RepoPartialClosureEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RepoPartialClosureEvent:
-        """Create an instance of RepoPartialClosureEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> ClassActionEvent:
+        """Create an instance of ClassActionEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -140,38 +148,78 @@ class RepoPartialClosureEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_offer_elections (list)
+        _items = []
+        if self.cash_offer_elections:
+            for _item in self.cash_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in lapse_elections (list)
+        _items = []
+        if self.lapse_elections:
+            for _item in self.lapse_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lapseElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if cash_amount (nullable) is None
+        # set to None if ex_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.cash_amount is None and "cash_amount" in self.__fields_set__:
-            _dict['cashAmount'] = None
+        if self.ex_date is None and "ex_date" in self.__fields_set__:
+            _dict['exDate'] = None
 
-        # set to None if cash_percentage (nullable) is None
+        # set to None if record_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.cash_percentage is None and "cash_percentage" in self.__fields_set__:
-            _dict['cashPercentage'] = None
+        if self.record_date is None and "record_date" in self.__fields_set__:
+            _dict['recordDate'] = None
+
+        # set to None if announcement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
+
+        # set to None if case_reference (nullable) is None
+        # and __fields_set__ contains the field
+        if self.case_reference is None and "case_reference" in self.__fields_set__:
+            _dict['caseReference'] = None
+
+        # set to None if cash_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
+            _dict['cashOfferElections'] = None
+
+        # set to None if lapse_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
+            _dict['lapseElections'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RepoPartialClosureEvent:
-        """Create an instance of RepoPartialClosureEvent from a dict"""
+    def from_dict(cls, obj: dict) -> ClassActionEvent:
+        """Create an instance of ClassActionEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RepoPartialClosureEvent.parse_obj(obj)
+            return ClassActionEvent.parse_obj(obj)
 
-        _obj = RepoPartialClosureEvent.parse_obj({
+        _obj = ClassActionEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "entitlement_date": obj.get("entitlementDate"),
-            "settlement_date": obj.get("settlementDate"),
-            "cash_amount": obj.get("cashAmount"),
-            "cash_percentage": obj.get("cashPercentage")
+            "payment_date": obj.get("paymentDate"),
+            "filing_deadline": obj.get("filingDeadline"),
+            "class_period_start": obj.get("classPeriodStart"),
+            "class_period_end": obj.get("classPeriodEnd"),
+            "ex_date": obj.get("exDate"),
+            "record_date": obj.get("recordDate"),
+            "announcement_date": obj.get("announcementDate"),
+            "case_reference": obj.get("caseReference"),
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -180,4 +228,4 @@ class RepoPartialClosureEvent(InstrumentEvent):
 
         return _obj
 
-RepoPartialClosureEvent.update_forward_refs()
+ClassActionEvent.update_forward_refs()
