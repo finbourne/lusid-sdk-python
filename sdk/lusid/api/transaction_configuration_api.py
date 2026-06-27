@@ -897,18 +897,18 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    async def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
+    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSideDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
+    def list_side_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
         """ListSideDefinitions: List the side definitions  # noqa: E501
 
-        List all the side definitions in the given scope  # noqa: E501
+        List all the side definitions in the given scope, or across all scopes when scope is '*'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -917,7 +917,7 @@ class TransactionConfigurationApi:
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
-        :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
+        :param scope: The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.
         :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -938,10 +938,10 @@ class TransactionConfigurationApi:
         return self.list_side_definitions_with_http_info(as_at, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_side_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_side_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListSideDefinitions: List the side definitions  # noqa: E501
 
-        List all the side definitions in the given scope  # noqa: E501
+        List all the side definitions in the given scope, or across all scopes when scope is '*'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -950,7 +950,7 @@ class TransactionConfigurationApi:
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified.
         :type as_at: datetime
-        :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
+        :param scope: The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes.
         :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1060,15 +1060,15 @@ class TransactionConfigurationApi:
 
 
     @overload
-    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    async def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @overload
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, async_req: Optional[bool]=True, **kwargs) -> Dict[str, List[TransactionType]]:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
+    def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
@@ -1080,7 +1080,7 @@ class TransactionConfigurationApi:
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
-        :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
+        :param scope: The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.
         :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1101,7 +1101,7 @@ class TransactionConfigurationApi:
         return self.list_transaction_types_with_http_info(as_at, scope, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
         Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
@@ -1113,7 +1113,7 @@ class TransactionConfigurationApi:
 
         :param as_at: The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.
         :type as_at: datetime
-        :param scope: The scope in which the side exists. When not supplied the scope is 'default'.
+        :param scope: The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.
         :type scope: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

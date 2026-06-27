@@ -66,7 +66,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def delete_resource_record(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], resource_id : Annotated[StrictStr, Field(..., description="The resource identifier of the resource record.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record  # noqa: E501
+        """DeleteResourceRecord: Delete a Resource Record  # noqa: E501
 
         Delete a resource record.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -101,7 +101,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def delete_resource_record_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], resource_id : Annotated[StrictStr, Field(..., description="The resource identifier of the resource record.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record  # noqa: E501
+        """DeleteResourceRecord: Delete a Resource Record  # noqa: E501
 
         Delete a resource record.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -234,7 +234,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def get_resource_record(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], resource_id : Annotated[StrictStr, Field(..., description="The resource identifier of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceRecord, Awaitable[ResourceRecord]]:  # noqa: E501
-        """[EARLY ACCESS] GetResourceRecord: Get a Resource Record  # noqa: E501
+        """GetResourceRecord: Get a Resource Record  # noqa: E501
 
         Retrieve a resource record by its identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -271,7 +271,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def get_resource_record_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], resource_id : Annotated[StrictStr, Field(..., description="The resource identifier of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] GetResourceRecord: Get a Resource Record  # noqa: E501
+        """GetResourceRecord: Get a Resource Record  # noqa: E501
 
         Retrieve a resource record by its identifier.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -413,7 +413,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_record_codes(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, sort_order : Annotated[Optional[StrictStr], Field( description="Order of the sort - either \"ASC\" or \"DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfString, Awaitable[ResourceListOfString]]:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope  # noqa: E501
+        """ListResourceRecordCodes: List Resource Records Codes for Scope  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -448,7 +448,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_record_codes_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, sort_order : Annotated[Optional[StrictStr], Field( description="Order of the sort - either \"ASC\" or \"DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope  # noqa: E501
+        """ListResourceRecordCodes: List Resource Records Codes for Scope  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -584,7 +584,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_record_scopes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing resource records from a previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfScopeDefinition, Awaitable[ResourceListOfScopeDefinition]]:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes  # noqa: E501
+        """ListResourceRecordScopes: List Resource Record Scopes  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -619,7 +619,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_record_scopes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing resource records from a previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes  # noqa: E501
+        """ListResourceRecordScopes: List Resource Record Scopes  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -755,7 +755,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_records(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing resource records from a previous call.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfResourceRecord, Awaitable[PagedResourceListOfResourceRecord]]:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecords: List Resource Records  # noqa: E501
+        """ListResourceRecords: List Resource Records  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -798,7 +798,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def list_resource_records_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the resource record.")], code : Annotated[StrictStr, Field(..., description="The code of the resource record.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the resource record. Defaults to return the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing resource records from a previous call.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] ListResourceRecords: List Resource Records  # noqa: E501
+        """ListResourceRecords: List Resource Records  # noqa: E501
 
         List all resource records matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -959,7 +959,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def upsert_resource_record(self, upsert_resource_record_request : Annotated[UpsertResourceRecordRequest, Field(description="The resource record to upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceRecord, Awaitable[ResourceRecord]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record  # noqa: E501
+        """UpsertResourceRecord: Upsert a Resource Record  # noqa: E501
 
         Create or update a resource record.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -990,7 +990,7 @@ class ResourceRecordApi:
 
     @validate_arguments
     def upsert_resource_record_with_http_info(self, upsert_resource_record_request : Annotated[UpsertResourceRecordRequest, Field(description="The resource record to upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record  # noqa: E501
+        """UpsertResourceRecord: Upsert a Resource Record  # noqa: E501
 
         Create or update a resource record.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

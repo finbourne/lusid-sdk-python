@@ -4026,7 +4026,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] ListSettlementInstructions: List Settlement Instructions.
 
-Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be ued to return instructions for an individual transaction.
+Display all the Settlement Instructions for a given Portfolio. The transaction Id filter can be used to return instructions for an individual transaction.
 
 ### Example
 

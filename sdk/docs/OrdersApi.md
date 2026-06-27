@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_orders**
-> PagedResourceListOfOrder list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
+> PagedResourceListOfOrder list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, get_derived_compliance_statuses=get_derived_compliance_statuses)
 
 ListOrders: List Orders
 
@@ -263,13 +263,14 @@ def main():
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
     membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
+    get_derived_compliance_statuses = False # bool | If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, opts=opts)
+        # api_response =  api_instance.list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, get_derived_compliance_statuses=get_derived_compliance_statuses, opts=opts)
 
         # ListOrders: List Orders
-        api_response = api_instance.list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type)
+        api_response = api_instance.list_orders(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, data_model_scope=data_model_scope, data_model_code=data_model_code, membership_type=membership_type, get_derived_compliance_statuses=get_derived_compliance_statuses)
         pprint(api_response)
 
     except ApiException as e:
@@ -291,6 +292,7 @@ Name | Type | Description  | Notes
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
  **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] 
+ **get_derived_compliance_statuses** | **bool**| If true, derives and decorates ComplianceState and ApprovalState onto each order using the V2 compliance engine. Defaults to false. | [optional] [default to False]
 
 ### Return type
 

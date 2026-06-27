@@ -36,8 +36,9 @@ class TransactionType(BaseModel):
     movements: List[TransactionTypeMovement] = Field(description="Movement data for the transaction type")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties attached to the transaction type")
     calculations: Optional[List[TransactionTypeCalculation]] = Field(default=None, description="Calculations to be performed for the transaction type")
+    scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the transaction type exists.") 
     links: Optional[List[Link]] = None
-    __properties = ["aliases", "movements", "properties", "calculations", "links"]
+    __properties = ["aliases", "movements", "properties", "calculations", "scope", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -116,6 +117,11 @@ class TransactionType(BaseModel):
         if self.calculations is None and "calculations" in self.__fields_set__:
             _dict['calculations'] = None
 
+        # set to None if scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.scope is None and "scope" in self.__fields_set__:
+            _dict['scope'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -142,6 +148,7 @@ class TransactionType(BaseModel):
             if obj.get("properties") is not None
             else None,
             "calculations": [TransactionTypeCalculation.from_dict(_item) for _item in obj.get("calculations")] if obj.get("calculations") is not None else None,
+            "scope": obj.get("scope"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

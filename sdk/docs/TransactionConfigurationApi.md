@@ -500,7 +500,7 @@ Name | Type | Description  | Notes
 
 ListSideDefinitions: List the side definitions
 
-List all the side definitions in the given scope
+List all the side definitions in the given scope, or across all scopes when scope is '*'.
 
 ### Example
 
@@ -548,7 +548,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
-    scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
+    scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes. (optional) (default to 'default')
 
     try:
         # uncomment the below to set overrides at the request level
@@ -569,7 +569,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. | [optional] 
- **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. | [optional] [default to &#39;default&#39;]
 
 ### Return type
 
@@ -642,7 +642,7 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
-    scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
+    scope = 'default' # str | The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes. (optional) (default to 'default')
 
     try:
         # uncomment the below to set overrides at the request level
@@ -663,7 +663,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. | [optional] 
- **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **scope** | **str**| The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. | [optional] [default to &#39;default&#39;]
 
 ### Return type
 

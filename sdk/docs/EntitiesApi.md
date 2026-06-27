@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**get_portfolio_by_entity_unique_id**](EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 [**get_portfolio_changes**](EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
 [**get_property_definition_by_entity_unique_id**](EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
+[**get_transaction_by_entity_unique_id**](EntitiesApi.md#get_transaction_by_entity_unique_id) | **GET** /api/entities/transactions/{entityUniqueId} | GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
 
 
 # **get_custom_entity_by_entity_unique_id**
@@ -700,6 +701,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested property definition entity |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_transaction_by_entity_unique_id**
+> TransactionEntity get_transaction_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code)
+
+GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+
+Retrieve a transaction by its entity unique identifier.    If the transaction's portfolio is deleted, this will return the state of the transaction immediately prior to portfolio deletion.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    EntitiesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(EntitiesApi)
+    entity_unique_id = 'entity_unique_id_example' # str | The entity unique identifier of the transaction. The expected format is '{portfolioEntityUniqueId}_{transactionId}'.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. (optional)
+    previews = ['previews_example'] # List[str] | The ids of the staged modifications to be previewed in the response. (optional)
+    data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use. (optional)
+    data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_transaction_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code, opts=opts)
+
+        # GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+        api_response = api_instance.get_transaction_by_entity_unique_id(entity_unique_id, as_at=as_at, previews=previews, data_model_scope=data_model_scope, data_model_code=data_model_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling EntitiesApi->get_transaction_by_entity_unique_id: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **entity_unique_id** | **str**| The entity unique identifier of the transaction. The expected format is &#39;{portfolioEntityUniqueId}_{transactionId}&#39;. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction. Defaults to returning the latest version of the transaction if not specified. | [optional] 
+ **previews** | [**List[str]**](str.md)| The ids of the staged modifications to be previewed in the response. | [optional] 
+ **data_model_scope** | **str**| The optional scope of a Custom Data Model to use. | [optional] 
+ **data_model_code** | **str**| The optional code of a Custom Data Model to use. | [optional] 
+
+### Return type
+
+[**TransactionEntity**](TransactionEntity.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested transaction entity |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

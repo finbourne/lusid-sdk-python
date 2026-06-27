@@ -4,18 +4,18 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_resource_record**](ResourceRecordApi.md#delete_resource_record) | **DELETE** /api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record
-[**get_resource_record**](ResourceRecordApi.md#get_resource_record) | **GET** /api/resourcerecords/{scope}/{code}/{resourceId} | [EARLY ACCESS] GetResourceRecord: Get a Resource Record
-[**list_resource_record_codes**](ResourceRecordApi.md#list_resource_record_codes) | **GET** /api/resourcerecords/{scope} | [EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope
-[**list_resource_record_scopes**](ResourceRecordApi.md#list_resource_record_scopes) | **GET** /api/resourcerecords | [EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes
-[**list_resource_records**](ResourceRecordApi.md#list_resource_records) | **GET** /api/resourcerecords/{scope}/{code} | [EARLY ACCESS] ListResourceRecords: List Resource Records
-[**upsert_resource_record**](ResourceRecordApi.md#upsert_resource_record) | **POST** /api/resourcerecords | [EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record
+[**delete_resource_record**](ResourceRecordApi.md#delete_resource_record) | **DELETE** /api/resourcerecords/{scope}/{code}/{resourceId} | DeleteResourceRecord: Delete a Resource Record
+[**get_resource_record**](ResourceRecordApi.md#get_resource_record) | **GET** /api/resourcerecords/{scope}/{code}/{resourceId} | GetResourceRecord: Get a Resource Record
+[**list_resource_record_codes**](ResourceRecordApi.md#list_resource_record_codes) | **GET** /api/resourcerecords/{scope} | ListResourceRecordCodes: List Resource Records Codes for Scope
+[**list_resource_record_scopes**](ResourceRecordApi.md#list_resource_record_scopes) | **GET** /api/resourcerecords | ListResourceRecordScopes: List Resource Record Scopes
+[**list_resource_records**](ResourceRecordApi.md#list_resource_records) | **GET** /api/resourcerecords/{scope}/{code} | ListResourceRecords: List Resource Records
+[**upsert_resource_record**](ResourceRecordApi.md#upsert_resource_record) | **POST** /api/resourcerecords | UpsertResourceRecord: Upsert a Resource Record
 
 
 # **delete_resource_record**
 > DeletedEntityResponse delete_resource_record(scope, code, resource_id)
 
-[EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record
+DeleteResourceRecord: Delete a Resource Record
 
 Delete a resource record.
 
@@ -72,7 +72,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_resource_record(scope, code, resource_id, opts=opts)
 
-        # [EARLY ACCESS] DeleteResourceRecord: Delete a Resource Record
+        # DeleteResourceRecord: Delete a Resource Record
         api_response = api_instance.delete_resource_record(scope, code, resource_id)
         pprint(api_response)
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 # **get_resource_record**
 > ResourceRecord get_resource_record(scope, code, resource_id, as_at=as_at)
 
-[EARLY ACCESS] GetResourceRecord: Get a Resource Record
+GetResourceRecord: Get a Resource Record
 
 Retrieve a resource record by its identifier.
 
@@ -169,7 +169,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_resource_record(scope, code, resource_id, as_at=as_at, opts=opts)
 
-        # [EARLY ACCESS] GetResourceRecord: Get a Resource Record
+        # GetResourceRecord: Get a Resource Record
         api_response = api_instance.get_resource_record(scope, code, resource_id, as_at=as_at)
         pprint(api_response)
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 # **list_resource_record_codes**
 > ResourceListOfString list_resource_record_codes(scope, as_at=as_at, sort_order=sort_order)
 
-[EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope
+ListResourceRecordCodes: List Resource Records Codes for Scope
 
 List all resource records matching particular criteria.
 
@@ -266,7 +266,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_resource_record_codes(scope, as_at=as_at, sort_order=sort_order, opts=opts)
 
-        # [EARLY ACCESS] ListResourceRecordCodes: List Resource Records Codes for Scope
+        # ListResourceRecordCodes: List Resource Records Codes for Scope
         api_response = api_instance.list_resource_record_codes(scope, as_at=as_at, sort_order=sort_order)
         pprint(api_response)
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 # **list_resource_record_scopes**
 > ResourceListOfScopeDefinition list_resource_record_scopes(as_at=as_at, page=page, limit=limit)
 
-[EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes
+ListResourceRecordScopes: List Resource Record Scopes
 
 List all resource records matching particular criteria.
 
@@ -362,7 +362,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_resource_record_scopes(as_at=as_at, page=page, limit=limit, opts=opts)
 
-        # [EARLY ACCESS] ListResourceRecordScopes: List Resource Record Scopes
+        # ListResourceRecordScopes: List Resource Record Scopes
         api_response = api_instance.list_resource_record_scopes(as_at=as_at, page=page, limit=limit)
         pprint(api_response)
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 # **list_resource_records**
 > PagedResourceListOfResourceRecord list_resource_records(scope, code, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
 
-[EARLY ACCESS] ListResourceRecords: List Resource Records
+ListResourceRecords: List Resource Records
 
 List all resource records matching particular criteria.
 
@@ -462,7 +462,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_resource_records(scope, code, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
 
-        # [EARLY ACCESS] ListResourceRecords: List Resource Records
+        # ListResourceRecords: List Resource Records
         api_response = api_instance.list_resource_records(scope, code, as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 # **upsert_resource_record**
 > ResourceRecord upsert_resource_record(upsert_resource_record_request)
 
-[EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record
+UpsertResourceRecord: Upsert a Resource Record
 
 Create or update a resource record.
 
@@ -565,7 +565,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_resource_record(upsert_resource_record_request, opts=opts)
 
-        # [EARLY ACCESS] UpsertResourceRecord: Upsert a Resource Record
+        # UpsertResourceRecord: Upsert a Resource Record
         api_response = api_instance.upsert_resource_record(upsert_resource_record_request)
         pprint(api_response)
 

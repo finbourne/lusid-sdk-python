@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **movements** | [**List[TransactionTypeMovement]**](TransactionTypeMovement.md) | Movement data for the transaction type | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties attached to the transaction type | [optional] 
 **calculations** | [**List[TransactionTypeCalculation]**](TransactionTypeCalculation.md) | Calculations to be performed for the transaction type | [optional] 
+**scope** | **str** | The scope in which the transaction type exists. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -21,8 +22,9 @@ aliases: List[TransactionTypeAlias] = # Replace with your value
 movements: List[TransactionTypeMovement] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 calculations: Optional[List[TransactionTypeCalculation]] = # Replace with your value
+scope: Optional[StrictStr] = "example_scope"
 links: Optional[List[Link]] = None
-transaction_type_instance = TransactionType(aliases=aliases, movements=movements, properties=properties, calculations=calculations, links=links)
+transaction_type_instance = TransactionType(aliases=aliases, movements=movements, properties=properties, calculations=calculations, scope=scope, links=links)
 
 ```
 

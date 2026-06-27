@@ -33,6 +33,7 @@ from lusid.models.account import Account
 from lusid.models.account_holder import AccountHolder
 from lusid.models.account_holder_identifier import AccountHolderIdentifier
 from lusid.models.account_properties import AccountProperties
+from lusid.models.accounted_quote import AccountedQuote
 from lusid.models.accounted_transaction import AccountedTransaction
 from lusid.models.accounting_method import AccountingMethod
 from lusid.models.accounts_upsert_response import AccountsUpsertResponse
@@ -95,6 +96,7 @@ from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 from lusid.models.asset_class import AssetClass
 from lusid.models.asset_leg import AssetLeg
+from lusid.models.bankruptcy_event import BankruptcyEvent
 from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
@@ -661,6 +663,7 @@ from lusid.models.life_cycle_event_lineage import LifeCycleEventLineage
 from lusid.models.life_cycle_event_value import LifeCycleEventValue
 from lusid.models.lineage_member import LineageMember
 from lusid.models.link import Link
+from lusid.models.liquidation_payment_event import LiquidationPaymentEvent
 from lusid.models.list_aggregation_reconciliation import ListAggregationReconciliation
 from lusid.models.list_aggregation_response import ListAggregationResponse
 from lusid.models.list_complex_market_data_with_meta_data_response import ListComplexMarketDataWithMetaDataResponse
@@ -1240,6 +1243,7 @@ from lusid.models.transaction_configuration_type_alias import TransactionConfigu
 from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndAmount
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
+from lusid.models.transaction_entity import TransactionEntity
 from lusid.models.transaction_fee_capitalisation import TransactionFeeCapitalisation
 from lusid.models.transaction_fee_type import TransactionFeeType
 from lusid.models.transaction_field_map import TransactionFieldMap
@@ -1398,6 +1402,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_instrument import ValuationPointInstrument
 from lusid.models.valuation_point_overview import ValuationPointOverview
+from lusid.models.valuation_point_resource_list_of_accounted_quote import ValuationPointResourceListOfAccountedQuote
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_fund_cash_statement_row import ValuationPointResourceListOfFundCashStatementRow
 from lusid.models.valuation_point_resource_list_of_fund_journal_entry_line import ValuationPointResourceListOfFundJournalEntryLine
@@ -1468,6 +1473,7 @@ __all__ = [
     "AccountHolder",
     "AccountHolderIdentifier",
     "AccountProperties",
+    "AccountedQuote",
     "AccountedTransaction",
     "AccountingMethod",
     "AccountsUpsertResponse",
@@ -1530,6 +1536,7 @@ __all__ = [
     "ApportionmentMethodProperty",
     "AssetClass",
     "AssetLeg",
+    "BankruptcyEvent",
     "Barrier",
     "Basket",
     "BasketIdentifier",
@@ -2096,6 +2103,7 @@ __all__ = [
     "LifeCycleEventValue",
     "LineageMember",
     "Link",
+    "LiquidationPaymentEvent",
     "ListAggregationReconciliation",
     "ListAggregationResponse",
     "ListComplexMarketDataWithMetaDataResponse",
@@ -2675,6 +2683,7 @@ __all__ = [
     "TransactionCurrencyAndAmount",
     "TransactionDateWindows",
     "TransactionDiagnostics",
+    "TransactionEntity",
     "TransactionFeeCapitalisation",
     "TransactionFeeType",
     "TransactionFieldMap",
@@ -2833,6 +2842,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointInstrument",
     "ValuationPointOverview",
+    "ValuationPointResourceListOfAccountedQuote",
     "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfFundCashStatementRow",
     "ValuationPointResourceListOfFundJournalEntryLine",
