@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. A non-default value is required. Available values: SettlementDate, TransactionDate. | 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
-**transaction_template_scope** | **str** | The Transaction Template Scope used by the NavType. Will default to the scope set on the parent portfolio. If the fund has multiple parent portfolios, then the Transaction Template Scope must be provided. | [optional] 
+**transaction_template_scope** | **str** | The Transaction Template Scope used by the NavType. | 
 ## Example
 
 ```python
@@ -45,7 +45,7 @@ transaction_type_scope: StrictStr = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: StrictStr = "example_cash_gain_loss_calculation_date"
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
-transaction_template_scope: Optional[StrictStr] = "example_transaction_template_scope"
+transaction_template_scope: StrictStr = "example_transaction_template_scope"
 nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope)
 
 ```

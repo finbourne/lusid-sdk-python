@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.version import Version
 
 class UpsertTransactionPropertiesResponse(BaseModel):
@@ -32,9 +33,10 @@ class UpsertTransactionPropertiesResponse(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
-    properties: Optional[Dict[str, PerpetualProperty]] = None
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties that were upserted on the transaction.")
+    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings related to the upsert event.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "version", "properties", "links"]
+    __properties = ["href", "version", "properties", "metadata", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +80,15 @@ class UpsertTransactionPropertiesResponse(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
+        _field_dict_of_array = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.metadata[_key]
+                    ]
+            _dict['metadata'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -94,6 +105,11 @@ class UpsertTransactionPropertiesResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if metadata (nullable) is None
+        # and __fields_set__ contains the field
+        if self.metadata is None and "metadata" in self.__fields_set__:
+            _dict['metadata'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -119,6 +135,16 @@ class UpsertTransactionPropertiesResponse(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
+            else None,
+            "metadata": dict(
+                (_k,
+                        [ResponseMetaData.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
             else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

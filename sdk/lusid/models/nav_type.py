@@ -46,7 +46,7 @@ class NavType(BaseModel):
     cash_gain_loss_calculation_date:  StrictStr = Field(...,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated, TransactionDate/SettlementDate. A non-default value is required. Available values: SettlementDate, TransactionDate.") 
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
-    transaction_template_scope:  Optional[StrictStr] = Field(None,alias="transactionTemplateScope", description="The Transaction Template Scope used by the NavType. Will default to the scope set on the parent portfolio. If the fund has multiple parent portfolios, then the Transaction Template Scope must be provided.") 
+    transaction_template_scope:  StrictStr = Field(...,alias="transactionTemplateScope", description="The Transaction Template Scope used by the NavType.") 
     __properties = ["status", "code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope"]
 
     class Config:
@@ -130,11 +130,6 @@ class NavType(BaseModel):
         # and __fields_set__ contains the field
         if self.leader_nav_type_code is None and "leader_nav_type_code" in self.__fields_set__:
             _dict['leaderNavTypeCode'] = None
-
-        # set to None if transaction_template_scope (nullable) is None
-        # and __fields_set__ contains the field
-        if self.transaction_template_scope is None and "transaction_template_scope" in self.__fields_set__:
-            _dict['transactionTemplateScope'] = None
 
         return _dict
 

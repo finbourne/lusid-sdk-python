@@ -5,7 +5,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
-**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties that were upserted on the transaction. | [optional] 
+**metadata** | **Dict[str, Optional[List[ResponseMetaData]]]** | Contains warnings related to the upsert event. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -18,9 +19,10 @@ from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
-properties: Optional[Dict[str, PerpetualProperty]] = None
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = # Replace with your value
 links: Optional[List[Link]] = None
-upsert_transaction_properties_response_instance = UpsertTransactionPropertiesResponse(href=href, version=version, properties=properties, links=links)
+upsert_transaction_properties_response_instance = UpsertTransactionPropertiesResponse(href=href, version=version, properties=properties, metadata=metadata, links=links)
 
 ```
 
