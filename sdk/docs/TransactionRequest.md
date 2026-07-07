@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 
 **strategy_tag** | [**List[Strategy]**](Strategy.md) | A list of strategies representing the allocation of units across multiple sub-holding keys | [optional] 
+**custodian_entries** | [**List[CustodianEntry]**](CustodianEntry.md) | A list of Custodian Entries associated with the transaction. | [optional] 
 ## Example
 
 ```python
@@ -50,7 +51,8 @@ allocation_id: Optional[ResourceId] = # Replace with your value
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 transaction_group_id: Optional[StrictStr] = "example_transaction_group_id"
 strategy_tag: Optional[List[Strategy]] = # Replace with your value
-transaction_request_instance = TransactionRequest(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, custodian_account_id=custodian_account_id, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag)
+custodian_entries: Optional[List[CustodianEntry]] = # Replace with your value
+transaction_request_instance = TransactionRequest(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, otc_confirmation=otc_confirmation, order_id=order_id, allocation_id=allocation_id, custodian_account_id=custodian_account_id, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, custodian_entries=custodian_entries)
 
 ```
 

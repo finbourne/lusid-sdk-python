@@ -417,6 +417,7 @@ from lusid.models.custodian_account import CustodianAccount
 from lusid.models.custodian_account_properties import CustodianAccountProperties
 from lusid.models.custodian_account_request import CustodianAccountRequest
 from lusid.models.custodian_accounts_upsert_response import CustodianAccountsUpsertResponse
+from lusid.models.custodian_entry import CustodianEntry
 from lusid.models.custom_data_model import CustomDataModel
 from lusid.models.custom_data_model_criteria import CustomDataModelCriteria
 from lusid.models.custom_data_model_identifier_type_specification import CustomDataModelIdentifierTypeSpecification
@@ -1246,6 +1247,7 @@ from lusid.models.script_map_reference import ScriptMapReference
 from lusid.models.security_election import SecurityElection
 from lusid.models.security_offer_constituent import SecurityOfferConstituent
 from lusid.models.security_offer_election import SecurityOfferElection
+from lusid.models.security_write_off_event import SecurityWriteOffEvent
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.series import Series
 from lusid.models.series_definition import SeriesDefinition
@@ -1314,6 +1316,7 @@ from lusid.models.string_list_compliance_parameter import StringListCompliancePa
 from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
+from lusid.models.subscribe_election import SubscribeElection
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
@@ -1958,6 +1961,7 @@ __all__ = [
     "CustodianAccountProperties",
     "CustodianAccountRequest",
     "CustodianAccountsUpsertResponse",
+    "CustodianEntry",
     "CustomDataModel",
     "CustomDataModelCriteria",
     "CustomDataModelIdentifierTypeSpecification",
@@ -2787,6 +2791,7 @@ __all__ = [
     "SecurityElection",
     "SecurityOfferConstituent",
     "SecurityOfferElection",
+    "SecurityWriteOffEvent",
     "SequenceDefinition",
     "Series",
     "SeriesDefinition",
@@ -2855,6 +2860,7 @@ __all__ = [
     "StructuredResultData",
     "StructuredResultDataId",
     "SubHoldingKeyValueEquals",
+    "SubscribeElection",
     "SwapCashFlowEvent",
     "SwapPrincipalEvent",
     "SweepBlocksRequest",

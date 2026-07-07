@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **values** | [**Dict[str, Transaction]**](Transaction.md) | The transactions which have been successfully upserted. | [optional] 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The transactions that could not be upserted along with a reason for their failure. | [optional] 
 **metadata** | **Dict[str, Optional[List[ResponseMetaData]]]** | Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades | [optional] 
+**staged** | [**Dict[str, Transaction]**](Transaction.md) | The transactions that have been staged pending approval. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -19,8 +20,9 @@ from datetime import datetime
 values: Optional[Dict[str, Transaction]] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
 metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = # Replace with your value
+staged: Optional[Dict[str, Transaction]] = # Replace with your value
 links: Optional[List[Link]] = None
-batch_upsert_portfolio_transactions_response_instance = BatchUpsertPortfolioTransactionsResponse(values=values, failed=failed, metadata=metadata, links=links)
+batch_upsert_portfolio_transactions_response_instance = BatchUpsertPortfolioTransactionsResponse(values=values, failed=failed, metadata=metadata, staged=staged, links=links)
 
 ```
 

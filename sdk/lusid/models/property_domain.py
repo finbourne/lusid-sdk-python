@@ -111,6 +111,7 @@ class PropertyDomain(str, Enum):
     TASKDEFINITION = 'TaskDefinition'
     TASKINSTANCE = 'TaskInstance'
     WORKER = 'Worker'
+    WORKFLOW = 'Workflow'
     STAGINGRULESET = 'StagingRuleSet'
     IDENTIFIERDEFINITION = 'IdentifierDefinition'
     SETTLEMENTINSTRUCTION = 'SettlementInstruction'

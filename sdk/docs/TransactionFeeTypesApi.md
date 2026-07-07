@@ -4,17 +4,17 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_transaction_fee_type**](TransactionFeeTypesApi.md#create_transaction_fee_type) | **POST** /api/transactions/transactionfeetypes/{scope}/{code} | [EXPERIMENTAL] CreateTransactionFeeType: Create a transaction fee type
-[**delete_transaction_fee_type**](TransactionFeeTypesApi.md#delete_transaction_fee_type) | **DELETE** /api/transactions/transactionfeetypes/{scope}/{code} | [EXPERIMENTAL] DeleteTransactionFeeType: Delete a transaction fee type
-[**get_transaction_fee_type**](TransactionFeeTypesApi.md#get_transaction_fee_type) | **GET** /api/transactions/transactionfeetypes/{scope}/{code} | [EXPERIMENTAL] GetTransactionFeeType: Get a transaction fee type
-[**list_transaction_fee_types**](TransactionFeeTypesApi.md#list_transaction_fee_types) | **GET** /api/transactions/transactionfeetypes | [EXPERIMENTAL] ListTransactionFeeTypes: List transaction fee types
-[**update_transaction_fee_type**](TransactionFeeTypesApi.md#update_transaction_fee_type) | **PUT** /api/transactions/transactionfeetypes/{scope}/{code} | [EXPERIMENTAL] UpdateTransactionFeeType: Update a transaction fee type
+[**create_transaction_fee_type**](TransactionFeeTypesApi.md#create_transaction_fee_type) | **POST** /api/transactions/transactionfeetypes/{scope}/{code} | [EARLY ACCESS] CreateTransactionFeeType: Create a transaction fee type
+[**delete_transaction_fee_type**](TransactionFeeTypesApi.md#delete_transaction_fee_type) | **DELETE** /api/transactions/transactionfeetypes/{scope}/{code} | [EARLY ACCESS] DeleteTransactionFeeType: Delete a transaction fee type
+[**get_transaction_fee_type**](TransactionFeeTypesApi.md#get_transaction_fee_type) | **GET** /api/transactions/transactionfeetypes/{scope}/{code} | [EARLY ACCESS] GetTransactionFeeType: Get a transaction fee type
+[**list_transaction_fee_types**](TransactionFeeTypesApi.md#list_transaction_fee_types) | **GET** /api/transactions/transactionfeetypes | [EARLY ACCESS] ListTransactionFeeTypes: List transaction fee types
+[**update_transaction_fee_type**](TransactionFeeTypesApi.md#update_transaction_fee_type) | **PUT** /api/transactions/transactionfeetypes/{scope}/{code} | [EARLY ACCESS] UpdateTransactionFeeType: Update a transaction fee type
 
 
 # **create_transaction_fee_type**
 > TransactionFeeType create_transaction_fee_type(scope, code, create_transaction_fee_type_request)
 
-[EXPERIMENTAL] CreateTransactionFeeType: Create a transaction fee type
+[EARLY ACCESS] CreateTransactionFeeType: Create a transaction fee type
 
 Create a transaction fee type for the specified scope and code.
 
@@ -76,7 +76,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_transaction_fee_type(scope, code, create_transaction_fee_type_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateTransactionFeeType: Create a transaction fee type
+        # [EARLY ACCESS] CreateTransactionFeeType: Create a transaction fee type
         api_response = api_instance.create_transaction_fee_type(scope, code, create_transaction_fee_type_request)
         pprint(api_response)
 
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 # **delete_transaction_fee_type**
 > DeletedEntityResponse delete_transaction_fee_type(scope, code)
 
-[EXPERIMENTAL] DeleteTransactionFeeType: Delete a transaction fee type
+[EARLY ACCESS] DeleteTransactionFeeType: Delete a transaction fee type
 
 Delete a transaction fee type for the specified scope and code. To note, this will be a monotemporal delete, meaning that  the transaction fee type will be deleted for all effective time (including past and future versions of the transaction fee type).
 
@@ -171,7 +171,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_transaction_fee_type(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteTransactionFeeType: Delete a transaction fee type
+        # [EARLY ACCESS] DeleteTransactionFeeType: Delete a transaction fee type
         api_response = api_instance.delete_transaction_fee_type(scope, code)
         pprint(api_response)
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 # **get_transaction_fee_type**
 > TransactionFeeType get_transaction_fee_type(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetTransactionFeeType: Get a transaction fee type
+[EARLY ACCESS] GetTransactionFeeType: Get a transaction fee type
 
 Get the transaction fee type for the specified scope and code.
 
@@ -268,7 +268,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_transaction_fee_type(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetTransactionFeeType: Get a transaction fee type
+        # [EARLY ACCESS] GetTransactionFeeType: Get a transaction fee type
         api_response = api_instance.get_transaction_fee_type(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 # **list_transaction_fee_types**
 > ResourceListOfTransactionFeeType list_transaction_fee_types(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListTransactionFeeTypes: List transaction fee types
+[EARLY ACCESS] ListTransactionFeeTypes: List transaction fee types
 
 List transaction fee types that match the specified criteria.
 
@@ -370,7 +370,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_transaction_fee_types(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListTransactionFeeTypes: List transaction fee types
+        # [EARLY ACCESS] ListTransactionFeeTypes: List transaction fee types
         api_response = api_instance.list_transaction_fee_types(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -413,7 +413,7 @@ Name | Type | Description  | Notes
 # **update_transaction_fee_type**
 > TransactionFeeType update_transaction_fee_type(scope, code, update_transaction_fee_type_request)
 
-[EXPERIMENTAL] UpdateTransactionFeeType: Update a transaction fee type
+[EARLY ACCESS] UpdateTransactionFeeType: Update a transaction fee type
 
 Update a transaction fee type by providing the new contents of the transaction fee type.  The displayName field cannot be updated.
 
@@ -475,7 +475,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_transaction_fee_type(scope, code, update_transaction_fee_type_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateTransactionFeeType: Update a transaction fee type
+        # [EARLY ACCESS] UpdateTransactionFeeType: Update a transaction fee type
         api_response = api_instance.update_transaction_fee_type(scope, code, update_transaction_fee_type_request)
         pprint(api_response)
 

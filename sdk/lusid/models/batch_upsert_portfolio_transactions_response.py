@@ -34,8 +34,9 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
     values: Optional[Dict[str, Transaction]] = Field(default=None, description="The transactions which have been successfully upserted.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The transactions that could not be upserted along with a reason for their failure.")
     metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings related to unresolved instruments or non-existent transaction types for the upserted trades")
+    staged: Optional[Dict[str, Transaction]] = Field(default=None, description="The transactions that have been staged pending approval.")
     links: Optional[List[Link]] = None
-    __properties = ["values", "failed", "metadata", "links"]
+    __properties = ["values", "failed", "metadata", "staged", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +93,13 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
                         _item.to_dict() for _item in self.metadata[_key]
                     ]
             _dict['metadata'] = _field_dict_of_array
+        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
+        _field_dict = {}
+        if self.staged:
+            for _key in self.staged:
+                if self.staged[_key]:
+                    _field_dict[_key] = self.staged[_key].to_dict()
+            _dict['staged'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -113,6 +121,11 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.metadata is None and "metadata" in self.__fields_set__:
             _dict['metadata'] = None
+
+        # set to None if staged (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged is None and "staged" in self.__fields_set__:
+            _dict['staged'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -152,6 +165,12 @@ class BatchUpsertPortfolioTransactionsResponse(BaseModel):
                 for _k, _v in obj.get("metadata").items()
             )
             if obj.get("metadata") is not None
+            else None,
+            "staged": dict(
+                (_k, Transaction.from_dict(_v))
+                for _k, _v in obj.get("staged").items()
+            )
+            if obj.get("staged") is not None
             else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

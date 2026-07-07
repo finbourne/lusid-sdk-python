@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.custodian_entry import CustodianEntry
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
@@ -66,7 +67,8 @@ class Transaction(BaseModel):
     data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership", "version", "stagedModifications"]
+    custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="A list of Custodian Entries associated with the transaction.", alias="custodianEntries")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership", "version", "stagedModifications", "custodianEntries"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -218,6 +220,13 @@ class Transaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of staged_modifications
         if self.staged_modifications:
             _dict['stagedModifications'] = self.staged_modifications.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in custodian_entries (list)
+        _items = []
+        if self.custodian_entries:
+            for _item in self.custodian_entries:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['custodianEntries'] = _items
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -268,6 +277,11 @@ class Transaction(BaseModel):
         if self.strategy_tag is None and "strategy_tag" in self.__fields_set__:
             _dict['strategyTag'] = None
 
+        # set to None if custodian_entries (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custodian_entries is None and "custodian_entries" in self.__fields_set__:
+            _dict['custodianEntries'] = None
+
         return _dict
 
     @classmethod
@@ -312,7 +326,8 @@ class Transaction(BaseModel):
             "resolved_transaction_type_details": TransactionTypeDetails.from_dict(obj.get("resolvedTransactionTypeDetails")) if obj.get("resolvedTransactionTypeDetails") is not None else None,
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
+            "custodian_entries": [CustodianEntry.from_dict(_item) for _item in obj.get("custodianEntries")] if obj.get("custodianEntries") is not None else None
         })
         return _obj
 

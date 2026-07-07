@@ -65,7 +65,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def create_transaction_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], create_transaction_fee_type_request : Annotated[CreateTransactionFeeTypeRequest, Field(description="The contents of the transaction fee type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFeeType, Awaitable[TransactionFeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateTransactionFeeType: Create a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] CreateTransactionFeeType: Create a transaction fee type  # noqa: E501
 
         Create a transaction fee type for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def create_transaction_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], create_transaction_fee_type_request : Annotated[CreateTransactionFeeTypeRequest, Field(description="The contents of the transaction fee type.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateTransactionFeeType: Create a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] CreateTransactionFeeType: Create a transaction fee type  # noqa: E501
 
         Create a transaction fee type for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -240,7 +240,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def delete_transaction_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the specified transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionFeeType: Delete a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] DeleteTransactionFeeType: Delete a transaction fee type  # noqa: E501
 
         Delete a transaction fee type for the specified scope and code. To note, this will be a monotemporal delete, meaning that  the transaction fee type will be deleted for all effective time (including past and future versions of the transaction fee type).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -273,7 +273,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def delete_transaction_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the specified transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteTransactionFeeType: Delete a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] DeleteTransactionFeeType: Delete a transaction fee type  # noqa: E501
 
         Delete a transaction fee type for the specified scope and code. To note, this will be a monotemporal delete, meaning that  the transaction fee type will be deleted for all effective time (including past and future versions of the transaction fee type).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -400,7 +400,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def get_transaction_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the transaction fee type properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction fee types.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on the transaction fee type.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFeeType, Awaitable[TransactionFeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionFeeType: Get a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] GetTransactionFeeType: Get a transaction fee type  # noqa: E501
 
         Get the transaction fee type for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -439,7 +439,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def get_transaction_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve the transaction fee type properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction fee types.              Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s that we want to decorate on the transaction fee type.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetTransactionFeeType: Get a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] GetTransactionFeeType: Get a transaction fee type  # noqa: E501
 
         Get the transaction fee type for the specified scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -588,7 +588,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def list_transaction_fee_types(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve transaction fee type properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction fee types.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transaction fee types from a previous call to list transaction fee types.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfTransactionFeeType, Awaitable[ResourceListOfTransactionFeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionFeeTypes: List transaction fee types  # noqa: E501
+        """[EARLY ACCESS] ListTransactionFeeTypes: List transaction fee types  # noqa: E501
 
         List transaction fee types that match the specified criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -631,7 +631,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def list_transaction_fee_types_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime at which to retrieve transaction fee type properties.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction fee types.              Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transaction fee types from a previous call to list transaction fee types.  This value is returned from the previous call. If a pagination token is provided the filter,  sortBy, effectiveAt and asAt field must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.              For example, to filter on the Scope, use \"scope eq 'ExampleScope'\"              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The collection of `PropertyKey`s to filter on")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListTransactionFeeTypes: List transaction fee types  # noqa: E501
+        """[EARLY ACCESS] ListTransactionFeeTypes: List transaction fee types  # noqa: E501
 
         List transaction fee types that match the specified criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -793,7 +793,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def update_transaction_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the specified transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], update_transaction_fee_type_request : Annotated[UpdateTransactionFeeTypeRequest, Field(description="The updated contents of the transaction fee type.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransactionFeeType, Awaitable[TransactionFeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTransactionFeeType: Update a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] UpdateTransactionFeeType: Update a transaction fee type  # noqa: E501
 
         Update a transaction fee type by providing the new contents of the transaction fee type.  The displayName field cannot be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -828,7 +828,7 @@ class TransactionFeeTypesApi:
 
     @validate_arguments
     def update_transaction_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction fee type.")], code : Annotated[StrictStr, Field(..., description="The code of the specified transaction fee type.              Together with the scope this uniquely identifies the transaction fee type.")], update_transaction_fee_type_request : Annotated[UpdateTransactionFeeTypeRequest, Field(description="The updated contents of the transaction fee type.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateTransactionFeeType: Update a transaction fee type  # noqa: E501
+        """[EARLY ACCESS] UpdateTransactionFeeType: Update a transaction fee type  # noqa: E501
 
         Update a transaction fee type by providing the new contents of the transaction fee type.  The displayName field cannot be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
+from lusid.models.custodian_entry import CustodianEntry
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -52,7 +53,8 @@ class TransactionRequest(BaseModel):
     custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     transaction_group_id:  Optional[StrictStr] = Field(None,alias="transactionGroupId", description="The identifier for grouping economic events across multiple transactions") 
     strategy_tag: Optional[List[Strategy]] = Field(default=None, description="A list of strategies representing the allocation of units across multiple sub-holding keys", alias="strategyTag")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId", "strategyTag"]
+    custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="A list of Custodian Entries associated with the transaction.", alias="custodianEntries")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "otcConfirmation", "orderId", "allocationId", "custodianAccountId", "transactionGroupId", "strategyTag", "custodianEntries"]
 
     class Config:
         """Pydantic configuration"""
@@ -118,6 +120,13 @@ class TransactionRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['strategyTag'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in custodian_entries (list)
+        _items = []
+        if self.custodian_entries:
+            for _item in self.custodian_entries:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['custodianEntries'] = _items
         # set to None if exchange_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
@@ -152,6 +161,11 @@ class TransactionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.strategy_tag is None and "strategy_tag" in self.__fields_set__:
             _dict['strategyTag'] = None
+
+        # set to None if custodian_entries (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custodian_entries is None and "custodian_entries" in self.__fields_set__:
+            _dict['custodianEntries'] = None
 
         return _dict
 
@@ -188,7 +202,8 @@ class TransactionRequest(BaseModel):
             "allocation_id": ResourceId.from_dict(obj.get("allocationId")) if obj.get("allocationId") is not None else None,
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
             "transaction_group_id": obj.get("transactionGroupId"),
-            "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None
+            "strategy_tag": [Strategy.from_dict(_item) for _item in obj.get("strategyTag")] if obj.get("strategyTag") is not None else None,
+            "custodian_entries": [CustodianEntry.from_dict(_item) for _item in obj.get("custodianEntries")] if obj.get("custodianEntries") is not None else None
         })
         return _obj
 

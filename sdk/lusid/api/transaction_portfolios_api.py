@@ -1239,22 +1239,22 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
+    async def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
+    def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertPortfolioTransactionsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioTransactionsResponse, Awaitable[BatchUpsertPortfolioTransactionsResponse]]:  # noqa: E501
+    def batch_upsert_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertPortfolioTransactionsResponse, Awaitable[BatchUpsertPortfolioTransactionsResponse]]:  # noqa: E501
         """BatchUpsertTransactions: Batch upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties, async_req=True)
+        >>> thread = api.batch_upsert_transactions(scope, code, success_mode, request_body, preserve_properties, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -1267,6 +1267,10 @@ class TransactionPortfoliosApi:
         :type request_body: Dict[str, TransactionRequest]
         :param preserve_properties: If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
         :type preserve_properties: bool
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1283,17 +1287,17 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, **kwargs)  # noqa: E501
+        return self.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, data_model_scope, data_model_code, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_upsert_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial.")], request_body : Annotated[Dict[str, TransactionRequest], Field(description="The payload describing the transactions to be created or updated.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """BatchUpsertTransactions: Batch upsert transactions  # noqa: E501
 
         Create or update transactions in the transaction portfolio. A transaction will be updated  if it already exists and created if it does not.    Each request must be keyed by a unique correlation id. This id is ephemeral and is not stored by LUSID.  It serves only as a way to easily identify each transaction in the response.    Note: If using partial failure modes, then it is important to check the response body for failures as any failures will still return a 200 status code  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, async_req=True)
+        >>> thread = api.batch_upsert_transactions_with_http_info(scope, code, success_mode, request_body, preserve_properties, data_model_scope, data_model_code, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
@@ -1306,6 +1310,10 @@ class TransactionPortfoliosApi:
         :type request_body: Dict[str, TransactionRequest]
         :param preserve_properties: If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
         :type preserve_properties: bool
+        :param data_model_scope: The optional scope of a Custom Data Model to use
+        :type data_model_scope: str
+        :param data_model_code: The optional code of a Custom Data Model to use
+        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1337,7 +1345,9 @@ class TransactionPortfoliosApi:
             'code',
             'success_mode',
             'request_body',
-            'preserve_properties'
+            'preserve_properties',
+            'data_model_scope',
+            'data_model_code'
         ]
         _all_params.extend(
             [
@@ -1380,6 +1390,12 @@ class TransactionPortfoliosApi:
 
         if _params.get('preserve_properties') is not None:  # noqa: E501
             _query_params.append(('preserveProperties', _params['preserve_properties']))
+
+        if _params.get('data_model_scope') is not None:  # noqa: E501
+            _query_params.append(('dataModelScope', _params['data_model_scope']))
+
+        if _params.get('data_model_code') is not None:  # noqa: E501
+            _query_params.append(('dataModelCode', _params['data_model_code']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
