@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the corporate action source | 
 **description** | **str** | The description of the corporate action source | [optional] 
 **instrument_scopes** | **List[str]** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] 
+**event_inheritance** | [**EventInheritance**](EventInheritance.md) |  | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ code: StrictStr = "example_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
-create_corporate_action_source_request_instance = CreateCorporateActionSourceRequest(scope=scope, code=code, display_name=display_name, description=description, instrument_scopes=instrument_scopes)
+event_inheritance: Optional[EventInheritance] = # Replace with your value
+create_corporate_action_source_request_instance = CreateCorporateActionSourceRequest(scope=scope, code=code, display_name=display_name, description=description, instrument_scopes=instrument_scopes, event_inheritance=event_inheritance)
 
 ```
 

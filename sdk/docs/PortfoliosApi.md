@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**get_portfolio_commands**](PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | GetPortfolioCommands: Get portfolio commands
 [**get_portfolio_metadata**](PortfoliosApi.md#get_portfolio_metadata) | **GET** /api/portfolios/{scope}/{code}/metadata | GetPortfolioMetadata: Get access metadata rules for a portfolio
 [**get_portfolio_properties**](PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | GetPortfolioProperties: Get portfolio properties
+[**get_portfolio_properties_time_series**](PortfoliosApi.md#get_portfolio_properties_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series/batch | [BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
 [**get_portfolio_property_time_series**](PortfoliosApi.md#get_portfolio_property_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series | GetPortfolioPropertyTimeSeries: Get portfolio property time series
 [**get_portfolio_relations**](PortfoliosApi.md#get_portfolio_relations) | **GET** /api/portfolios/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioRelations: Get portfolio relations
 [**get_portfolio_relationships**](PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships
@@ -1565,6 +1566,112 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The properties of the specified portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_portfolio_properties_time_series**
+> ResourceListOfPropertyIntervalTimeSeries get_portfolio_properties_time_series(scope, code, property_keys, portfolio_effective_at=portfolio_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
+
+[BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
+
+Show the complete time series (history) for multiple portfolio properties at once, grouped by property key.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    property_keys = ['property_keys_example'] # List[str] | The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of property keys returned per page to this number. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_portfolio_properties_time_series(scope, code, property_keys, portfolio_effective_at=portfolio_effective_at, as_at=as_at, filter=filter, page=page, limit=limit, opts=opts)
+
+        # [BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
+        api_response = api_instance.get_portfolio_properties_time_series(scope, code, property_keys, portfolio_effective_at=portfolio_effective_at, as_at=as_at, filter=filter, page=page, limit=limit)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PortfoliosApi->get_portfolio_properties_time_series: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **property_keys** | [**List[str]**](str.md)| The property keys of the properties whose history to show. These must be from the &#39;Portfolio&#39; domain and in the format {domain}/{scope}/{code}, for example &#39;Portfolio/Manager/Id&#39;. | 
+ **portfolio_effective_at** | **str**| The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the number of property keys returned per page to this number. | [optional] 
+
+### Return type
+
+[**ResourceListOfPropertyIntervalTimeSeries**](ResourceListOfPropertyIntervalTimeSeries.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The time series of the properties, grouped by property key |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

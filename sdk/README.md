@@ -487,6 +487,7 @@ Class | Method | HTTP request | Description
 *PortfoliosApi* | [**get_portfolio_commands**](docs/PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | GetPortfolioCommands: Get portfolio commands
 *PortfoliosApi* | [**get_portfolio_metadata**](docs/PortfoliosApi.md#get_portfolio_metadata) | **GET** /api/portfolios/{scope}/{code}/metadata | GetPortfolioMetadata: Get access metadata rules for a portfolio
 *PortfoliosApi* | [**get_portfolio_properties**](docs/PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | GetPortfolioProperties: Get portfolio properties
+*PortfoliosApi* | [**get_portfolio_properties_time_series**](docs/PortfoliosApi.md#get_portfolio_properties_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series/batch | [BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
 *PortfoliosApi* | [**get_portfolio_property_time_series**](docs/PortfoliosApi.md#get_portfolio_property_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series | GetPortfolioPropertyTimeSeries: Get portfolio property time series
 *PortfoliosApi* | [**get_portfolio_relations**](docs/PortfoliosApi.md#get_portfolio_relations) | **GET** /api/portfolios/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioRelations: Get portfolio relations
 *PortfoliosApi* | [**get_portfolio_relationships**](docs/PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships
@@ -1142,6 +1143,7 @@ Class | Method | HTTP request | Description
  - [ErrorDetail](docs/ErrorDetail.md)
  - [EstimateVariant](docs/EstimateVariant.md)
  - [EventDateRange](docs/EventDateRange.md)
+ - [EventInheritance](docs/EventInheritance.md)
  - [ExDividendConfiguration](docs/ExDividendConfiguration.md)
  - [ExchangeOfferEvent](docs/ExchangeOfferEvent.md)
  - [ExchangeTradedOption](docs/ExchangeTradedOption.md)
@@ -1669,6 +1671,7 @@ Class | Method | HTTP request | Description
  - [PropertyDomain](docs/PropertyDomain.md)
  - [PropertyFilter](docs/PropertyFilter.md)
  - [PropertyInterval](docs/PropertyInterval.md)
+ - [PropertyIntervalTimeSeries](docs/PropertyIntervalTimeSeries.md)
  - [PropertyKeyComplianceParameter](docs/PropertyKeyComplianceParameter.md)
  - [PropertyKeyListComplianceParameter](docs/PropertyKeyListComplianceParameter.md)
  - [PropertyLifeTime](docs/PropertyLifeTime.md)
@@ -1816,6 +1819,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfProperty](docs/ResourceListOfProperty.md)
  - [ResourceListOfPropertyDefinition](docs/ResourceListOfPropertyDefinition.md)
  - [ResourceListOfPropertyInterval](docs/ResourceListOfPropertyInterval.md)
+ - [ResourceListOfPropertyIntervalTimeSeries](docs/ResourceListOfPropertyIntervalTimeSeries.md)
  - [ResourceListOfQueryableKey](docs/ResourceListOfQueryableKey.md)
  - [ResourceListOfQuote](docs/ResourceListOfQuote.md)
  - [ResourceListOfQuoteAccessMetadataRule](docs/ResourceListOfQuoteAccessMetadataRule.md)
@@ -2164,6 +2168,7 @@ Class | Method | HTTP request | Description
  - [VirtualDocumentRow](docs/VirtualDocumentRow.md)
  - [VirtualRow](docs/VirtualRow.md)
  - [Warning](docs/Warning.md)
+ - [WarrantsExerciseEvent](docs/WarrantsExerciseEvent.md)
  - [WeekendMask](docs/WeekendMask.md)
  - [WeightedAllocationServiceRunRequest](docs/WeightedAllocationServiceRunRequest.md)
  - [WeightedInstrument](docs/WeightedInstrument.md)

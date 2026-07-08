@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the corporate action source | [optional] 
 **description** | **str** | The description of the corporate action source | [optional] 
 **instrument_scopes** | **List[str]** | The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions. | [optional] 
+**event_inheritance** | [**EventInheritance**](EventInheritance.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -26,8 +27,9 @@ version: Optional[Version] = None
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
+event_inheritance: Optional[EventInheritance] = # Replace with your value
 links: Optional[List[Link]] = None
-corporate_action_source_instance = CorporateActionSource(href=href, id=id, version=version, display_name=display_name, description=description, instrument_scopes=instrument_scopes, links=links)
+corporate_action_source_instance = CorporateActionSource(href=href, id=id, version=version, display_name=display_name, description=description, instrument_scopes=instrument_scopes, event_inheritance=event_inheritance, links=links)
 
 ```
 

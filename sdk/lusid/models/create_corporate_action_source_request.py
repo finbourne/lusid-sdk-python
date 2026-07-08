@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.event_inheritance import EventInheritance
 
 class CreateCorporateActionSourceRequest(BaseModel):
     """
@@ -32,7 +33,8 @@ class CreateCorporateActionSourceRequest(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the corporate action source") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action source") 
     instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.", alias="instrumentScopes")
-    __properties = ["scope", "code", "displayName", "description", "instrumentScopes"]
+    event_inheritance: Optional[EventInheritance] = Field(default=None, alias="eventInheritance")
+    __properties = ["scope", "code", "displayName", "description", "instrumentScopes", "eventInheritance"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +68,9 @@ class CreateCorporateActionSourceRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of event_inheritance
+        if self.event_inheritance:
+            _dict['eventInheritance'] = self.event_inheritance.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -92,7 +97,8 @@ class CreateCorporateActionSourceRequest(BaseModel):
             "code": obj.get("code"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "instrument_scopes": obj.get("instrumentScopes")
+            "instrument_scopes": obj.get("instrumentScopes"),
+            "event_inheritance": EventInheritance.from_dict(obj.get("eventInheritance")) if obj.get("eventInheritance") is not None else None
         })
         return _obj
 

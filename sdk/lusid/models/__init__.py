@@ -421,6 +421,7 @@ from lusid.models.equity_vol_surface_data import EquityVolSurfaceData
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.estimate_variant import EstimateVariant
 from lusid.models.event_date_range import EventDateRange
+from lusid.models.event_inheritance import EventInheritance
 from lusid.models.ex_dividend_configuration import ExDividendConfiguration
 from lusid.models.exchange_offer_event import ExchangeOfferEvent
 from lusid.models.exchange_traded_option import ExchangeTradedOption
@@ -948,6 +949,7 @@ from lusid.models.property_definition_type import PropertyDefinitionType
 from lusid.models.property_domain import PropertyDomain
 from lusid.models.property_filter import PropertyFilter
 from lusid.models.property_interval import PropertyInterval
+from lusid.models.property_interval_time_series import PropertyIntervalTimeSeries
 from lusid.models.property_key_compliance_parameter import PropertyKeyComplianceParameter
 from lusid.models.property_key_list_compliance_parameter import PropertyKeyListComplianceParameter
 from lusid.models.property_life_time import PropertyLifeTime
@@ -1095,6 +1097,7 @@ from lusid.models.resource_list_of_processed_command import ResourceListOfProces
 from lusid.models.resource_list_of_property import ResourceListOfProperty
 from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
+from lusid.models.resource_list_of_property_interval_time_series import ResourceListOfPropertyIntervalTimeSeries
 from lusid.models.resource_list_of_queryable_key import ResourceListOfQueryableKey
 from lusid.models.resource_list_of_quote import ResourceListOfQuote
 from lusid.models.resource_list_of_quote_access_metadata_rule import ResourceListOfQuoteAccessMetadataRule
@@ -1443,6 +1446,7 @@ from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
 from lusid.models.warning import Warning
+from lusid.models.warrants_exercise_event import WarrantsExerciseEvent
 from lusid.models.weekend_mask import WeekendMask
 from lusid.models.weighted_allocation_service_run_request import WeightedAllocationServiceRunRequest
 from lusid.models.weighted_instrument import WeightedInstrument
@@ -1869,6 +1873,7 @@ __all__ = [
     "ErrorDetail",
     "EstimateVariant",
     "EventDateRange",
+    "EventInheritance",
     "ExDividendConfiguration",
     "ExchangeOfferEvent",
     "ExchangeTradedOption",
@@ -2396,6 +2401,7 @@ __all__ = [
     "PropertyDomain",
     "PropertyFilter",
     "PropertyInterval",
+    "PropertyIntervalTimeSeries",
     "PropertyKeyComplianceParameter",
     "PropertyKeyListComplianceParameter",
     "PropertyLifeTime",
@@ -2543,6 +2549,7 @@ __all__ = [
     "ResourceListOfProperty",
     "ResourceListOfPropertyDefinition",
     "ResourceListOfPropertyInterval",
+    "ResourceListOfPropertyIntervalTimeSeries",
     "ResourceListOfQueryableKey",
     "ResourceListOfQuote",
     "ResourceListOfQuoteAccessMetadataRule",
@@ -2891,6 +2898,7 @@ __all__ = [
     "VirtualDocumentRow",
     "VirtualRow",
     "Warning",
+    "WarrantsExerciseEvent",
     "WeekendMask",
     "WeightedAllocationServiceRunRequest",
     "WeightedInstrument",

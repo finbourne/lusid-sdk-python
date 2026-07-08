@@ -50,6 +50,7 @@ from lusid.models.resource_list_of_portfolio import ResourceListOfPortfolio
 from lusid.models.resource_list_of_processed_command import ResourceListOfProcessedCommand
 from lusid.models.resource_list_of_property import ResourceListOfProperty
 from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
+from lusid.models.resource_list_of_property_interval_time_series import ResourceListOfPropertyIntervalTimeSeries
 from lusid.models.resource_list_of_relation import ResourceListOfRelation
 from lusid.models.resource_list_of_relationship import ResourceListOfRelationship
 from lusid.models.update_portfolio_request import UpdatePortfolioRequest
@@ -2962,6 +2963,218 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/{scope}/{code}/properties', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_portfolio_properties_time_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_keys : Annotated[List[StrictStr], Field(description="The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of property keys returned per page to this number.")] = None, **kwargs) -> ResourceListOfPropertyIntervalTimeSeries:  # noqa: E501
+        ...
+
+    @overload
+    def get_portfolio_properties_time_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_keys : Annotated[List[StrictStr], Field(description="The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of property keys returned per page to this number.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfPropertyIntervalTimeSeries:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_portfolio_properties_time_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_keys : Annotated[List[StrictStr], Field(description="The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of property keys returned per page to this number.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPropertyIntervalTimeSeries, Awaitable[ResourceListOfPropertyIntervalTimeSeries]]:  # noqa: E501
+        """[BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series  # noqa: E501
+
+        Show the complete time series (history) for multiple portfolio properties at once, grouped by property key.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_portfolio_properties_time_series(scope, code, property_keys, portfolio_effective_at, as_at, filter, page, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param property_keys: The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (required)
+        :type property_keys: List[str]
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.
+        :type as_at: datetime
+        :param filter: Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param page: The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of property keys returned per page to this number.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfPropertyIntervalTimeSeries
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_portfolio_properties_time_series_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_portfolio_properties_time_series_with_http_info(scope, code, property_keys, portfolio_effective_at, as_at, filter, page, limit, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_portfolio_properties_time_series_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], property_keys : Annotated[List[StrictStr], Field(description="The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of property keys returned per page to this number.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series  # noqa: E501
+
+        Show the complete time series (history) for multiple portfolio properties at once, grouped by property key.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_portfolio_properties_time_series_with_http_info(scope, code, property_keys, portfolio_effective_at, as_at, filter, page, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param property_keys: The property keys of the properties whose history to show. These must be from the 'Portfolio' domain and in the format {domain}/{scope}/{code}, for example 'Portfolio/Manager/Id'. (required)
+        :type property_keys: List[str]
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to show the history. Defaults to returning the current datetime if not supplied.
+        :type as_at: datetime
+        :param filter: Expression to filter the results. For more information about filtering,              see https://support.lusid.com/knowledgebase/article/KA-01914.
+        :type filter: str
+        :param page: The pagination token to use to continue listing properties; this value is returned from              the previous call. If a pagination token is provided, the propertyKeys, filter, portfolioEffectiveAt, and asAt              fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the number of property keys returned per page to this number.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfPropertyIntervalTimeSeries, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'property_keys',
+            'portfolio_effective_at',
+            'as_at',
+            'filter',
+            'page',
+            'limit'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_portfolio_properties_time_series" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfPropertyIntervalTimeSeries",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/properties/time-series/batch', 'GET',
             _path_params,
             _query_params,
             _header_params,
