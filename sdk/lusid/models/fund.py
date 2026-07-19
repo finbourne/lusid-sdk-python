@@ -23,7 +23,6 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_group import AllocationGroup
-from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 from lusid.models.day_month import DayMonth
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link
@@ -56,12 +55,11 @@ class Fund(BaseModel):
     additional_nav_types: Optional[List[NavType]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create instruments for the Fund's share classes, series, or partner classes upon creation. Defaults to false.", alias="createInstrument")
-    apportionment_method_property: Optional[ApportionmentMethodProperty] = Field(default=None, alias="apportionmentMethodProperty")
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Group definitions for the Fund.", alias="allocationGroups")
     share_classes: Optional[List[ShareClass]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "apportionmentMethodProperty", "allocationGroups", "shareClasses", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -138,9 +136,6 @@ class Fund(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of apportionment_method_property
-        if self.apportionment_method_property:
-            _dict['apportionmentMethodProperty'] = self.apportionment_method_property.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in allocation_groups (list)
         _items = []
         if self.allocation_groups:
@@ -265,7 +260,6 @@ class Fund(BaseModel):
             if obj.get("properties") is not None
             else None,
             "create_instrument": obj.get("createInstrument"),
-            "apportionment_method_property": ApportionmentMethodProperty.from_dict(obj.get("apportionmentMethodProperty")) if obj.get("apportionmentMethodProperty") is not None else None,
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "share_classes": [ShareClass.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,

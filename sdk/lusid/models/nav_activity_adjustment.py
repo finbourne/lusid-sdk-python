@@ -28,7 +28,7 @@ class NavActivityAdjustment(BaseModel):
     """
     NavActivityAdjustment
     """
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.") 
     __properties = ["navActivityAdjustmentType"]
 
     @validator('nav_activity_adjustment_type')
@@ -98,8 +98,8 @@ class NavActivityAdjustment(BaseModel):
         if "nav_activity_adjustment_type" != "type":
             return value
 
-        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity']:
-            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity')")
+        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity']:
+            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity')")
         return value
 
     class Config:
@@ -112,6 +112,7 @@ class NavActivityAdjustment(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map = {
+        'ComplexMarketDataActivity': 'ComplexMarketDataActivity',
         'InstrumentActivity': 'InstrumentActivity',
         'PortfolioSettlementInstruction': 'PortfolioSettlementInstruction',
         'PortfolioTransaction': 'PortfolioTransaction',
@@ -144,7 +145,7 @@ class NavActivityAdjustment(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
+    def from_json(cls, json_str: str) -> Union(ComplexMarketDataActivity, InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
         """Create an instance of NavActivityAdjustment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -157,7 +158,7 @@ class NavActivityAdjustment(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
+    def from_dict(cls, obj: dict) -> Union(ComplexMarketDataActivity, InstrumentActivity, PortfolioSettlementInstruction, PortfolioTransaction, QuoteActivity):
         """Create an instance of NavActivityAdjustment from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

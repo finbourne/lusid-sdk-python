@@ -32,7 +32,7 @@ class SimpleInstrument(LusidInstrument):
     """
     maturity_date: Optional[datetime] = Field(default=None, description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency.") 
-    asset_class:  StrictStr = Field(...,alias="assetClass", description="Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown.") 
+    asset_class:  StrictStr = Field(...,alias="assetClass", description="Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.") 
     fgn_ccys: Optional[List[StrictStr]] = Field(default=None, description="The set of foreign currencies, if any (optional).", alias="fgnCcys")
     simple_instrument_type:  StrictStr = Field(...,alias="simpleInstrumentType", description="The Instrument type of the simple instrument.") 
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
@@ -108,8 +108,8 @@ class SimpleInstrument(LusidInstrument):
         if "asset_class" != "type":
             return value
 
-        if value not in ['InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown']:
-            raise ValueError("must be one of enum values ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown')")
+        if value not in ['InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown', 'RealEstate']:
+            raise ValueError("must be one of enum values ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown', 'RealEstate')")
         return value
 
     @validator('instrument_type')

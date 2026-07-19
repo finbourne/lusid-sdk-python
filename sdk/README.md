@@ -35,6 +35,7 @@ Class | Method | HTTP request | Description
 *AddressKeyAliasApi* | [**list_address_key_aliases**](docs/AddressKeyAliasApi.md#list_address_key_aliases) | **GET** /api/addresskeyaliases/{scope} | [EXPERIMENTAL] ListAddressKeyAliases: List the set of Address Key Aliases
 *AddressKeyAliasApi* | [**upsert_address_key_alias**](docs/AddressKeyAliasApi.md#upsert_address_key_alias) | **POST** /api/addresskeyaliases | [EXPERIMENTAL] UpsertAddressKeyAlias: Upsert an Address Key Alias. This creates or updates the alias in LUSID.
 *AggregatedReturnsApi* | [**delete_returns_entity**](docs/AggregatedReturnsApi.md#delete_returns_entity) | **DELETE** /api/returns/{scope}/{code} | [EXPERIMENTAL] DeleteReturnsEntity: Delete returns entity.
+*AggregatedReturnsApi* | [**get_aggregated_returns**](docs/AggregatedReturnsApi.md#get_aggregated_returns) | **POST** /api/returns/$aggregated | [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
 *AggregatedReturnsApi* | [**get_returns_entity**](docs/AggregatedReturnsApi.md#get_returns_entity) | **GET** /api/returns/{scope}/{code} | [EXPERIMENTAL] GetReturnsEntity: Get returns entity.
 *AggregatedReturnsApi* | [**list_returns_entities**](docs/AggregatedReturnsApi.md#list_returns_entities) | **GET** /api/returns | [EXPERIMENTAL] ListReturnsEntities: List returns entities.
 *AggregatedReturnsApi* | [**upsert_returns_entity**](docs/AggregatedReturnsApi.md#upsert_returns_entity) | **POST** /api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.
@@ -246,6 +247,9 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+*FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+*FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+*FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.
 *FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EXPERIMENTAL] AddSeries: Add Series to a Fund.
@@ -281,6 +285,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.
 *FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
 *FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+*FundsApi* | [**list_valuation_point_complex_market_data**](docs/FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EXPERIMENTAL] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
 *FundsApi* | [**list_valuation_point_instruments**](docs/FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EXPERIMENTAL] ListValuationPointInstruments: List Instruments inside a valuation point
 *FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 *FundsApi* | [**patch_fee**](docs/FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
@@ -578,6 +583,10 @@ Class | Method | HTTP request | Description
 *ResourceRecordApi* | [**list_resource_record_scopes**](docs/ResourceRecordApi.md#list_resource_record_scopes) | **GET** /api/resourcerecords | ListResourceRecordScopes: List Resource Record Scopes
 *ResourceRecordApi* | [**list_resource_records**](docs/ResourceRecordApi.md#list_resource_records) | **GET** /api/resourcerecords/{scope}/{code} | ListResourceRecords: List Resource Records
 *ResourceRecordApi* | [**upsert_resource_record**](docs/ResourceRecordApi.md#upsert_resource_record) | **POST** /api/resourcerecords | UpsertResourceRecord: Upsert a Resource Record
+*ScenariosApi* | [**delete_scenario**](docs/ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
+*ScenariosApi* | [**get_scenario**](docs/ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
+*ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
+*ScenariosApi* | [**upsert_scenario**](docs/ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
 *SchemasApi* | [**get_property_schema**](docs/SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
 *SchemasApi* | [**get_value_types**](docs/SchemasApi.md#get_value_types) | **GET** /api/schemas/types | [EARLY ACCESS] GetValueTypes: Get value types
@@ -621,6 +630,10 @@ Class | Method | HTTP request | Description
 *StructuredResultDataApi* | [**get_virtual_document_rows**](docs/StructuredResultDataApi.md#get_virtual_document_rows) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType} | GetVirtualDocumentRows: Get Virtual Document Rows
 *StructuredResultDataApi* | [**upsert_result_value**](docs/StructuredResultDataApi.md#upsert_result_value) | **POST** /api/unitresults/resultvalue/{scope} | UpsertResultValue: Upsert result value
 *StructuredResultDataApi* | [**upsert_structured_result_data**](docs/StructuredResultDataApi.md#upsert_structured_result_data) | **POST** /api/unitresults/{scope} | UpsertStructuredResultData: Upsert structured result data
+*SubscriptionsApi* | [**delete_subscription**](docs/SubscriptionsApi.md#delete_subscription) | **DELETE** /api/subscriptions/holdings/{scope}/{code} | [EARLY ACCESS] DeleteSubscription: Delete a Subscription, assuming that it is present.
+*SubscriptionsApi* | [**get_subscription**](docs/SubscriptionsApi.md#get_subscription) | **GET** /api/subscriptions/holdings/{scope}/{code} | [EARLY ACCESS] GetSubscription: Get Subscription
+*SubscriptionsApi* | [**list_subscriptions**](docs/SubscriptionsApi.md#list_subscriptions) | **GET** /api/subscriptions/holdings/{scope} | [EARLY ACCESS] ListSubscriptions: List the set of Subscription definitions
+*SubscriptionsApi* | [**upsert_subscription**](docs/SubscriptionsApi.md#upsert_subscription) | **POST** /api/subscriptions/holdings | [EARLY ACCESS] UpsertSubscription: Upsert a Subscription. This creates or updates the subscription definition in LUSID.
 *SystemConfigurationApi* | [**create_configuration_transaction_type**](docs/SystemConfigurationApi.md#create_configuration_transaction_type) | **POST** /api/systemconfiguration/transactions/type | [EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
 *SystemConfigurationApi* | [**create_side_definition**](docs/SystemConfigurationApi.md#create_side_definition) | **POST** /api/systemconfiguration/transactions/side | [EXPERIMENTAL] CreateSideDefinition: Create side definition
 *SystemConfigurationApi* | [**delete_transaction_configuration_source**](docs/SystemConfigurationApi.md#delete_transaction_configuration_source) | **DELETE** /api/systemconfiguration/transactions/type/{source} | [EXPERIMENTAL] DeleteTransactionConfigurationSource: Delete all transaction configurations for a source
@@ -755,6 +768,7 @@ Class | Method | HTTP request | Description
  - [AccountHolder](docs/AccountHolder.md)
  - [AccountHolderIdentifier](docs/AccountHolderIdentifier.md)
  - [AccountProperties](docs/AccountProperties.md)
+ - [AccountedComplexMarketData](docs/AccountedComplexMarketData.md)
  - [AccountedQuote](docs/AccountedQuote.md)
  - [AccountedTransaction](docs/AccountedTransaction.md)
  - [AccountingMethod](docs/AccountingMethod.md)
@@ -779,6 +793,8 @@ Class | Method | HTTP request | Description
  - [AggregateSpec](docs/AggregateSpec.md)
  - [AggregatedReturn](docs/AggregatedReturn.md)
  - [AggregatedReturnsDispersionRequest](docs/AggregatedReturnsDispersionRequest.md)
+ - [AggregatedReturnsEntityId](docs/AggregatedReturnsEntityId.md)
+ - [AggregatedReturnsEntityRequest](docs/AggregatedReturnsEntityRequest.md)
  - [AggregatedReturnsRequest](docs/AggregatedReturnsRequest.md)
  - [AggregatedReturnsResponse](docs/AggregatedReturnsResponse.md)
  - [AggregatedTransactionsRequest](docs/AggregatedTransactionsRequest.md)
@@ -935,6 +951,8 @@ Class | Method | HTTP request | Description
  - [CompleteRelationship](docs/CompleteRelationship.md)
  - [ComplexBond](docs/ComplexBond.md)
  - [ComplexMarketData](docs/ComplexMarketData.md)
+ - [ComplexMarketDataActivity](docs/ComplexMarketDataActivity.md)
+ - [ComplexMarketDataActivityAdjustment](docs/ComplexMarketDataActivityAdjustment.md)
  - [ComplexMarketDataId](docs/ComplexMarketDataId.md)
  - [ComplianceBreachedOrderInfo](docs/ComplianceBreachedOrderInfo.md)
  - [ComplianceParameter](docs/ComplianceParameter.md)
@@ -1217,6 +1235,11 @@ Class | Method | HTTP request | Description
  - [FundProperties](docs/FundProperties.md)
  - [FundRequest](docs/FundRequest.md)
  - [FundShareClass](docs/FundShareClass.md)
+ - [FundStructure](docs/FundStructure.md)
+ - [FundStructureEdge](docs/FundStructureEdge.md)
+ - [FundStructureEdgeTarget](docs/FundStructureEdgeTarget.md)
+ - [FundStructureNode](docs/FundStructureNode.md)
+ - [FundStructureRequest](docs/FundStructureRequest.md)
  - [FundValuationPointData](docs/FundValuationPointData.md)
  - [FundValuationRequest](docs/FundValuationRequest.md)
  - [FundValuationSchedule](docs/FundValuationSchedule.md)
@@ -1261,7 +1284,9 @@ Class | Method | HTTP request | Description
  - [GetRecipeComposerResponse](docs/GetRecipeComposerResponse.md)
  - [GetRecipeResponse](docs/GetRecipeResponse.md)
  - [GetReferencePortfolioConstituentsResponse](docs/GetReferencePortfolioConstituentsResponse.md)
+ - [GetScenarioResponse](docs/GetScenarioResponse.md)
  - [GetStructuredResultDataResponse](docs/GetStructuredResultDataResponse.md)
+ - [GetSubscriptionResponse](docs/GetSubscriptionResponse.md)
  - [GetVirtualDocumentResponse](docs/GetVirtualDocumentResponse.md)
  - [GroupBySelectorComplianceParameter](docs/GroupBySelectorComplianceParameter.md)
  - [GroupByStep](docs/GroupByStep.md)
@@ -1545,8 +1570,11 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfFundCalendarEntries](docs/PagedResourceListOfFundCalendarEntries.md)
  - [PagedResourceListOfFundCalendarEntry](docs/PagedResourceListOfFundCalendarEntry.md)
  - [PagedResourceListOfFundConfiguration](docs/PagedResourceListOfFundConfiguration.md)
+ - [PagedResourceListOfFundStructure](docs/PagedResourceListOfFundStructure.md)
  - [PagedResourceListOfGeneralLedgerProfileResponse](docs/PagedResourceListOfGeneralLedgerProfileResponse.md)
  - [PagedResourceListOfGetAddressKeyAliasResponse](docs/PagedResourceListOfGetAddressKeyAliasResponse.md)
+ - [PagedResourceListOfGetScenarioResponse](docs/PagedResourceListOfGetScenarioResponse.md)
+ - [PagedResourceListOfGetSubscriptionResponse](docs/PagedResourceListOfGetSubscriptionResponse.md)
  - [PagedResourceListOfGroupReconciliationComparisonResult](docs/PagedResourceListOfGroupReconciliationComparisonResult.md)
  - [PagedResourceListOfGroupReconciliationComparisonRuleset](docs/PagedResourceListOfGroupReconciliationComparisonRuleset.md)
  - [PagedResourceListOfGroupReconciliationDefinition](docs/PagedResourceListOfGroupReconciliationDefinition.md)
@@ -1591,6 +1619,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfVirtualRow](docs/PagedResourceListOfVirtualRow.md)
  - [PagedResourceListOfWorkspace](docs/PagedResourceListOfWorkspace.md)
  - [PagedResourceListOfWorkspaceItem](docs/PagedResourceListOfWorkspaceItem.md)
+ - [PariPassuEvent](docs/PariPassuEvent.md)
  - [PartialClosureConstituent](docs/PartialClosureConstituent.md)
  - [PartialDefeasanceEvent](docs/PartialDefeasanceEvent.md)
  - [Participation](docs/Participation.md)
@@ -1759,6 +1788,7 @@ Class | Method | HTTP request | Description
  - [ResetEvent](docs/ResetEvent.md)
  - [ResolveTenorsRequest](docs/ResolveTenorsRequest.md)
  - [ResolveTenorsResponse](docs/ResolveTenorsResponse.md)
+ - [ResolvedCustodianAccount](docs/ResolvedCustodianAccount.md)
  - [ResourceId](docs/ResourceId.md)
  - [ResourceListOfAccessControlledResource](docs/ResourceListOfAccessControlledResource.md)
  - [ResourceListOfAccessMetadataValueOf](docs/ResourceListOfAccessMetadataValueOf.md)
@@ -1855,6 +1885,7 @@ Class | Method | HTTP request | Description
  - [ResultValueType](docs/ResultValueType.md)
  - [ReturnZeroPvOptions](docs/ReturnZeroPvOptions.md)
  - [ReturnsEntity](docs/ReturnsEntity.md)
+ - [ReturnsMetric](docs/ReturnsMetric.md)
  - [ReverseStockSplitEvent](docs/ReverseStockSplitEvent.md)
  - [RevertValuationPointDataRequest](docs/RevertValuationPointDataRequest.md)
  - [RollInterestUpdates](docs/RollInterestUpdates.md)
@@ -1867,6 +1898,8 @@ Class | Method | HTTP request | Description
  - [RunCheckRequest](docs/RunCheckRequest.md)
  - [RunCheckResponse](docs/RunCheckResponse.md)
  - [ScalingMethodology](docs/ScalingMethodology.md)
+ - [ScenarioDefinition](docs/ScenarioDefinition.md)
+ - [ScenarioShiftDefinition](docs/ScenarioShiftDefinition.md)
  - [Schedule](docs/Schedule.md)
  - [ScheduleType](docs/ScheduleType.md)
  - [ScopeDefinition](docs/ScopeDefinition.md)
@@ -1877,7 +1910,6 @@ Class | Method | HTTP request | Description
  - [SecurityOfferElection](docs/SecurityOfferElection.md)
  - [SecurityWriteOffEvent](docs/SecurityWriteOffEvent.md)
  - [SequenceDefinition](docs/SequenceDefinition.md)
- - [Series](docs/Series.md)
  - [SeriesDefinition](docs/SeriesDefinition.md)
  - [SeriesDefinitionRequest](docs/SeriesDefinitionRequest.md)
  - [SetAmortisationRulesRequest](docs/SetAmortisationRulesRequest.md)
@@ -1945,6 +1977,7 @@ Class | Method | HTTP request | Description
  - [StructuredResultDataId](docs/StructuredResultDataId.md)
  - [SubHoldingKeyValueEquals](docs/SubHoldingKeyValueEquals.md)
  - [SubscribeElection](docs/SubscribeElection.md)
+ - [SubscriptionDefinition](docs/SubscriptionDefinition.md)
  - [SwapCashFlowEvent](docs/SwapCashFlowEvent.md)
  - [SwapPrincipalEvent](docs/SwapPrincipalEvent.md)
  - [SweepBlocksRequest](docs/SweepBlocksRequest.md)
@@ -2120,9 +2153,11 @@ Class | Method | HTTP request | Description
  - [UpsertResourceRecordRequest](docs/UpsertResourceRecordRequest.md)
  - [UpsertResultValuesDataRequest](docs/UpsertResultValuesDataRequest.md)
  - [UpsertReturnsResponse](docs/UpsertReturnsResponse.md)
+ - [UpsertScenarioRequest](docs/UpsertScenarioRequest.md)
  - [UpsertSingleStructuredDataResponse](docs/UpsertSingleStructuredDataResponse.md)
  - [UpsertStructuredDataResponse](docs/UpsertStructuredDataResponse.md)
  - [UpsertStructuredResultDataRequest](docs/UpsertStructuredResultDataRequest.md)
+ - [UpsertSubscriptionRequest](docs/UpsertSubscriptionRequest.md)
  - [UpsertTransactionPropertiesResponse](docs/UpsertTransactionPropertiesResponse.md)
  - [UpsertTransferAgencyOrderRequest](docs/UpsertTransferAgencyOrderRequest.md)
  - [UpsertTranslationScriptRequest](docs/UpsertTranslationScriptRequest.md)
@@ -2134,6 +2169,7 @@ Class | Method | HTTP request | Description
  - [ValuationPointDataResponse](docs/ValuationPointDataResponse.md)
  - [ValuationPointInstrument](docs/ValuationPointInstrument.md)
  - [ValuationPointOverview](docs/ValuationPointOverview.md)
+ - [ValuationPointResourceListOfAccountedComplexMarketData](docs/ValuationPointResourceListOfAccountedComplexMarketData.md)
  - [ValuationPointResourceListOfAccountedQuote](docs/ValuationPointResourceListOfAccountedQuote.md)
  - [ValuationPointResourceListOfAccountedTransaction](docs/ValuationPointResourceListOfAccountedTransaction.md)
  - [ValuationPointResourceListOfFundCashStatementLocalCurrency](docs/ValuationPointResourceListOfFundCashStatementLocalCurrency.md)

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **added_origin_valuation_point_code** | **str** | The Valuation Point, only for an Instrument added as part of a Complex Close action. | [optional] 
 **added_origin_valuation_point_variant_code** | **str** | The Valuation Point variant, only for Instruments added as part of a Complex Close action. | [optional] 
 **valuation_point_origin_source** | **List[str]** | Collection of sources of Post Close Activities which added this instrument. Available values: Undefined, Manual, Auto. | [optional] 
-**valuation_point_origin_type** | **List[str]** | Collection of types of Post Close Activities which added this instrument. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity. | [optional] 
+**valuation_point_origin_type** | **List[str]** | Collection of types of Post Close Activities which added this instrument. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The requested instrument properties. These will be from the &#39;Instrument&#39; domain. | [optional] 
 ## Example
 

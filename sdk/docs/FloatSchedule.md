@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **use_annualised_direct_rates** | **bool** | Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false. | [optional] 
 **cap_rate** | **float** | The maximum floating rate which a cashflow can accrue. | [optional] 
 **floor_rate** | **float** | The minimum floating rate which a cashflow can accrue. | [optional] 
+**schedule_id** | **str** | Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent. | [optional] 
 **schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid. | 
 ## Example
 
@@ -50,8 +51,9 @@ use_annualised_direct_rates: Optional[StrictBool] = # Replace with your value
 use_annualised_direct_rates:Optional[StrictBool] = None
 cap_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+schedule_id: Optional[StrictStr] = "example_schedule_id"
 schedule_type: StrictStr = "example_schedule_type"
-float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, cap_rate=cap_rate, floor_rate=floor_rate, schedule_type=schedule_type)
+float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, cap_rate=cap_rate, floor_rate=floor_rate, schedule_id=schedule_id, schedule_type=schedule_type)
 
 ```
 

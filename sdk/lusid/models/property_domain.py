@@ -118,6 +118,8 @@ class PropertyDomain(str, Enum):
     TRANSACTIONFEETYPE = 'TransactionFeeType'
     ALLOCATIONMETHOD = 'AllocationMethod'
     TRANSACTIONFEE = 'TransactionFee'
+    SUBSCRIPTION = 'Subscription'
+    SCENARIODEFINITION = 'ScenarioDefinition'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:

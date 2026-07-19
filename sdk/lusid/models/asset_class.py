@@ -39,6 +39,7 @@ class AssetClass(str, Enum):
     COMMODITIES = 'Commodities'
     MONEY = 'Money'
     UNKNOWN = 'Unknown'
+    REALESTATE = 'RealEstate'
 
     @classmethod
     def from_json(cls, json_str: str) -> AssetClass:

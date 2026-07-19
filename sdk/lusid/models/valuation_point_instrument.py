@@ -34,7 +34,7 @@ class ValuationPointInstrument(BaseModel):
     added_origin_valuation_point_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointCode", description="The Valuation Point, only for an Instrument added as part of a Complex Close action.") 
     added_origin_valuation_point_variant_code:  Optional[StrictStr] = Field(None,alias="addedOriginValuationPointVariantCode", description="The Valuation Point variant, only for Instruments added as part of a Complex Close action.") 
     valuation_point_origin_source: Optional[List[StrictStr]] = Field(default=None, description="Collection of sources of Post Close Activities which added this instrument. Available values: Undefined, Manual, Auto.", alias="valuationPointOriginSource")
-    valuation_point_origin_type: Optional[List[StrictStr]] = Field(default=None, description="Collection of types of Post Close Activities which added this instrument. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.", alias="valuationPointOriginType")
+    valuation_point_origin_type: Optional[List[StrictStr]] = Field(default=None, description="Collection of types of Post Close Activities which added this instrument. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.", alias="valuationPointOriginType")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested instrument properties. These will be from the 'Instrument' domain.")
     __properties = ["instrument", "valuationPointOrigin", "addedOriginValuationPointCode", "addedOriginValuationPointVariantCode", "valuationPointOriginSource", "valuationPointOriginType", "properties"]
 

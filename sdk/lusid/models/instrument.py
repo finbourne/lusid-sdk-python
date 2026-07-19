@@ -47,7 +47,7 @@ class Instrument(BaseModel):
     lookthrough_portfolio: Optional[ResourceId] = Field(default=None, alias="lookthroughPortfolio")
     instrument_definition: Optional[LusidInstrument] = Field(default=None, alias="instrumentDefinition")
     state:  StrictStr = Field(...,alias="state", description="The state of of the instrument at the asAt datetime of this version of the instrument definition. Available values: Active, Inactive, Deleted.") 
-    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown.") 
+    asset_class:  Optional[StrictStr] = Field(None,alias="assetClass", description="The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate.") 
     dom_ccy:  Optional[StrictStr] = Field(None,alias="domCcy", description="The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD.") 
     relationships: Optional[List[Relationship]] = Field(default=None, description="A set of relationships associated to the instrument.")
     settlement_cycle: Optional[SettlementCycle] = Field(default=None, alias="settlementCycle")
@@ -196,8 +196,8 @@ class Instrument(BaseModel):
         if value is None:
             return value
 
-        if value not in ['InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown']:
-            raise ValueError("must be one of enum values ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown')")
+        if value not in ['InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown', 'RealEstate']:
+            raise ValueError("must be one of enum values ('InterestRates', 'FX', 'Inflation', 'Equities', 'Credit', 'Commodities', 'Money', 'Unknown', 'RealEstate')")
         return value
 
     class Config:

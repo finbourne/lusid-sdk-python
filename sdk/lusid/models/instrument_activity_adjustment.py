@@ -32,7 +32,7 @@ class InstrumentActivityAdjustment(NavActivityAdjustmentResponse):
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
     scope:  StrictStr = Field(...,alias="scope", description="The Scope of the given entity") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the given entity") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "navActivityAdjustmentSource", "asAt", "scope", "lusidInstrumentId"]
 
@@ -103,8 +103,8 @@ class InstrumentActivityAdjustment(NavActivityAdjustmentResponse):
         if "nav_activity_adjustment_type" != "type":
             return value
 
-        if value not in ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment']:
-            raise ValueError("must be one of enum values ('PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment')")
+        if value not in ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment']:
+            raise ValueError("must be one of enum values ('PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment')")
         return value
 
     class Config:

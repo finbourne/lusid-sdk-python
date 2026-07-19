@@ -31,13 +31,13 @@ class ShareClassDefinition(BaseModel):
     """
     ShareClassDefinition
     """
-    code:  StrictStr = Field(...,alias="code", description="The unique code for the Share Class. Must be unique within the Fund.") 
+    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     name:  StrictStr = Field(...,alias="name", description="The display name of the Share Class.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Share Class.") 
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund.") 
     launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price set when a shareclass is added to the fund. Defaults to 1.", alias="launchPrice")
     launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
-    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weighting factor used for apportionment across this share class.", alias="apportionmentFactor")
+    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.", alias="apportionmentFactor")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true.")
     fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership.") 
     distribution_type:  StrictStr = Field(...,alias="distributionType", description="The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.") 
@@ -50,7 +50,7 @@ class ShareClassDefinition(BaseModel):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Available values: Invalid, Gross, Net.") 
     hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.") 
-    __properties = ["code", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
+    __properties = ["instrumentIdentifiers", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
 
     class Config:
         """Pydantic configuration"""
@@ -173,7 +173,7 @@ class ShareClassDefinition(BaseModel):
             return ShareClassDefinition.parse_obj(obj)
 
         _obj = ShareClassDefinition.parse_obj({
-            "code": obj.get("code"),
+            "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "share_class_short_code": obj.get("shareClassShortCode"),

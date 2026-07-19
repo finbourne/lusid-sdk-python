@@ -33,6 +33,7 @@ from lusid.models.account import Account
 from lusid.models.account_holder import AccountHolder
 from lusid.models.account_holder_identifier import AccountHolderIdentifier
 from lusid.models.account_properties import AccountProperties
+from lusid.models.accounted_complex_market_data import AccountedComplexMarketData
 from lusid.models.accounted_quote import AccountedQuote
 from lusid.models.accounted_transaction import AccountedTransaction
 from lusid.models.accounting_method import AccountingMethod
@@ -57,6 +58,8 @@ from lusid.models.adjust_holding_request import AdjustHoldingRequest
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.aggregated_return import AggregatedReturn
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
+from lusid.models.aggregated_returns_entity_id import AggregatedReturnsEntityId
+from lusid.models.aggregated_returns_entity_request import AggregatedReturnsEntityRequest
 from lusid.models.aggregated_returns_request import AggregatedReturnsRequest
 from lusid.models.aggregated_returns_response import AggregatedReturnsResponse
 from lusid.models.aggregated_transactions_request import AggregatedTransactionsRequest
@@ -213,6 +216,8 @@ from lusid.models.complete_relation import CompleteRelation
 from lusid.models.complete_relationship import CompleteRelationship
 from lusid.models.complex_bond import ComplexBond
 from lusid.models.complex_market_data import ComplexMarketData
+from lusid.models.complex_market_data_activity import ComplexMarketDataActivity
+from lusid.models.complex_market_data_activity_adjustment import ComplexMarketDataActivityAdjustment
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 from lusid.models.compliance_breached_order_info import ComplianceBreachedOrderInfo
 from lusid.models.compliance_parameter import ComplianceParameter
@@ -495,6 +500,11 @@ from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
+from lusid.models.fund_structure import FundStructure
+from lusid.models.fund_structure_edge import FundStructureEdge
+from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
+from lusid.models.fund_structure_node import FundStructureNode
+from lusid.models.fund_structure_request import FundStructureRequest
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.fund_valuation_request import FundValuationRequest
 from lusid.models.fund_valuation_schedule import FundValuationSchedule
@@ -539,7 +549,9 @@ from lusid.models.get_quotes_response import GetQuotesResponse
 from lusid.models.get_recipe_composer_response import GetRecipeComposerResponse
 from lusid.models.get_recipe_response import GetRecipeResponse
 from lusid.models.get_reference_portfolio_constituents_response import GetReferencePortfolioConstituentsResponse
+from lusid.models.get_scenario_response import GetScenarioResponse
 from lusid.models.get_structured_result_data_response import GetStructuredResultDataResponse
+from lusid.models.get_subscription_response import GetSubscriptionResponse
 from lusid.models.get_virtual_document_response import GetVirtualDocumentResponse
 from lusid.models.group_by_selector_compliance_parameter import GroupBySelectorComplianceParameter
 from lusid.models.group_by_step import GroupByStep
@@ -823,8 +835,11 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResourceListOfFundCalendarEntries
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
+from lusid.models.paged_resource_list_of_fund_structure import PagedResourceListOfFundStructure
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_get_address_key_alias_response import PagedResourceListOfGetAddressKeyAliasResponse
+from lusid.models.paged_resource_list_of_get_scenario_response import PagedResourceListOfGetScenarioResponse
+from lusid.models.paged_resource_list_of_get_subscription_response import PagedResourceListOfGetSubscriptionResponse
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
@@ -869,6 +884,7 @@ from lusid.models.paged_resource_list_of_valuation_point_overview import PagedRe
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
 from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
+from lusid.models.pari_passu_event import PariPassuEvent
 from lusid.models.partial_closure_constituent import PartialClosureConstituent
 from lusid.models.partial_defeasance_event import PartialDefeasanceEvent
 from lusid.models.participation import Participation
@@ -1037,6 +1053,7 @@ from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
 from lusid.models.resolve_tenors_request import ResolveTenorsRequest
 from lusid.models.resolve_tenors_response import ResolveTenorsResponse
+from lusid.models.resolved_custodian_account import ResolvedCustodianAccount
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
 from lusid.models.resource_list_of_access_metadata_value_of import ResourceListOfAccessMetadataValueOf
@@ -1133,6 +1150,7 @@ from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
+from lusid.models.returns_metric import ReturnsMetric
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.roll_interest_updates import RollInterestUpdates
@@ -1145,6 +1163,8 @@ from lusid.models.rules_interval import RulesInterval
 from lusid.models.run_check_request import RunCheckRequest
 from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
+from lusid.models.scenario_definition import ScenarioDefinition
+from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
 from lusid.models.scope_definition import ScopeDefinition
@@ -1155,7 +1175,6 @@ from lusid.models.security_offer_constituent import SecurityOfferConstituent
 from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.security_write_off_event import SecurityWriteOffEvent
 from lusid.models.sequence_definition import SequenceDefinition
-from lusid.models.series import Series
 from lusid.models.series_definition import SeriesDefinition
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
@@ -1223,6 +1242,7 @@ from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
 from lusid.models.subscribe_election import SubscribeElection
+from lusid.models.subscription_definition import SubscriptionDefinition
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
@@ -1398,9 +1418,11 @@ from lusid.models.upsert_relational_data_point_request import UpsertRelationalDa
 from lusid.models.upsert_resource_record_request import UpsertResourceRecordRequest
 from lusid.models.upsert_result_values_data_request import UpsertResultValuesDataRequest
 from lusid.models.upsert_returns_response import UpsertReturnsResponse
+from lusid.models.upsert_scenario_request import UpsertScenarioRequest
 from lusid.models.upsert_single_structured_data_response import UpsertSingleStructuredDataResponse
 from lusid.models.upsert_structured_data_response import UpsertStructuredDataResponse
 from lusid.models.upsert_structured_result_data_request import UpsertStructuredResultDataRequest
+from lusid.models.upsert_subscription_request import UpsertSubscriptionRequest
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
@@ -1412,6 +1434,7 @@ from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
 from lusid.models.valuation_point_instrument import ValuationPointInstrument
 from lusid.models.valuation_point_overview import ValuationPointOverview
+from lusid.models.valuation_point_resource_list_of_accounted_complex_market_data import ValuationPointResourceListOfAccountedComplexMarketData
 from lusid.models.valuation_point_resource_list_of_accounted_quote import ValuationPointResourceListOfAccountedQuote
 from lusid.models.valuation_point_resource_list_of_accounted_transaction import ValuationPointResourceListOfAccountedTransaction
 from lusid.models.valuation_point_resource_list_of_fund_cash_statement_local_currency import ValuationPointResourceListOfFundCashStatementLocalCurrency
@@ -1485,6 +1508,7 @@ __all__ = [
     "AccountHolder",
     "AccountHolderIdentifier",
     "AccountProperties",
+    "AccountedComplexMarketData",
     "AccountedQuote",
     "AccountedTransaction",
     "AccountingMethod",
@@ -1509,6 +1533,8 @@ __all__ = [
     "AggregateSpec",
     "AggregatedReturn",
     "AggregatedReturnsDispersionRequest",
+    "AggregatedReturnsEntityId",
+    "AggregatedReturnsEntityRequest",
     "AggregatedReturnsRequest",
     "AggregatedReturnsResponse",
     "AggregatedTransactionsRequest",
@@ -1665,6 +1691,8 @@ __all__ = [
     "CompleteRelationship",
     "ComplexBond",
     "ComplexMarketData",
+    "ComplexMarketDataActivity",
+    "ComplexMarketDataActivityAdjustment",
     "ComplexMarketDataId",
     "ComplianceBreachedOrderInfo",
     "ComplianceParameter",
@@ -1947,6 +1975,11 @@ __all__ = [
     "FundProperties",
     "FundRequest",
     "FundShareClass",
+    "FundStructure",
+    "FundStructureEdge",
+    "FundStructureEdgeTarget",
+    "FundStructureNode",
+    "FundStructureRequest",
     "FundValuationPointData",
     "FundValuationRequest",
     "FundValuationSchedule",
@@ -1991,7 +2024,9 @@ __all__ = [
     "GetRecipeComposerResponse",
     "GetRecipeResponse",
     "GetReferencePortfolioConstituentsResponse",
+    "GetScenarioResponse",
     "GetStructuredResultDataResponse",
+    "GetSubscriptionResponse",
     "GetVirtualDocumentResponse",
     "GroupBySelectorComplianceParameter",
     "GroupByStep",
@@ -2275,8 +2310,11 @@ __all__ = [
     "PagedResourceListOfFundCalendarEntries",
     "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
+    "PagedResourceListOfFundStructure",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfGetAddressKeyAliasResponse",
+    "PagedResourceListOfGetScenarioResponse",
+    "PagedResourceListOfGetSubscriptionResponse",
     "PagedResourceListOfGroupReconciliationComparisonResult",
     "PagedResourceListOfGroupReconciliationComparisonRuleset",
     "PagedResourceListOfGroupReconciliationDefinition",
@@ -2321,6 +2359,7 @@ __all__ = [
     "PagedResourceListOfVirtualRow",
     "PagedResourceListOfWorkspace",
     "PagedResourceListOfWorkspaceItem",
+    "PariPassuEvent",
     "PartialClosureConstituent",
     "PartialDefeasanceEvent",
     "Participation",
@@ -2489,6 +2528,7 @@ __all__ = [
     "ResetEvent",
     "ResolveTenorsRequest",
     "ResolveTenorsResponse",
+    "ResolvedCustodianAccount",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
     "ResourceListOfAccessMetadataValueOf",
@@ -2585,6 +2625,7 @@ __all__ = [
     "ResultValueType",
     "ReturnZeroPvOptions",
     "ReturnsEntity",
+    "ReturnsMetric",
     "ReverseStockSplitEvent",
     "RevertValuationPointDataRequest",
     "RollInterestUpdates",
@@ -2597,6 +2638,8 @@ __all__ = [
     "RunCheckRequest",
     "RunCheckResponse",
     "ScalingMethodology",
+    "ScenarioDefinition",
+    "ScenarioShiftDefinition",
     "Schedule",
     "ScheduleType",
     "ScopeDefinition",
@@ -2607,7 +2650,6 @@ __all__ = [
     "SecurityOfferElection",
     "SecurityWriteOffEvent",
     "SequenceDefinition",
-    "Series",
     "SeriesDefinition",
     "SeriesDefinitionRequest",
     "SetAmortisationRulesRequest",
@@ -2675,6 +2717,7 @@ __all__ = [
     "StructuredResultDataId",
     "SubHoldingKeyValueEquals",
     "SubscribeElection",
+    "SubscriptionDefinition",
     "SwapCashFlowEvent",
     "SwapPrincipalEvent",
     "SweepBlocksRequest",
@@ -2850,9 +2893,11 @@ __all__ = [
     "UpsertResourceRecordRequest",
     "UpsertResultValuesDataRequest",
     "UpsertReturnsResponse",
+    "UpsertScenarioRequest",
     "UpsertSingleStructuredDataResponse",
     "UpsertStructuredDataResponse",
     "UpsertStructuredResultDataRequest",
+    "UpsertSubscriptionRequest",
     "UpsertTransactionPropertiesResponse",
     "UpsertTransferAgencyOrderRequest",
     "UpsertTranslationScriptRequest",
@@ -2864,6 +2909,7 @@ __all__ = [
     "ValuationPointDataResponse",
     "ValuationPointInstrument",
     "ValuationPointOverview",
+    "ValuationPointResourceListOfAccountedComplexMarketData",
     "ValuationPointResourceListOfAccountedQuote",
     "ValuationPointResourceListOfAccountedTransaction",
     "ValuationPointResourceListOfFundCashStatementLocalCurrency",

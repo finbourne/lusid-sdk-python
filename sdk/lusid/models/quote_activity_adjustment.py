@@ -30,10 +30,10 @@ class QuoteActivityAdjustment(NavActivityAdjustmentResponse):
     """
     nav_activity_adjustment_source:  StrictStr = Field(...,alias="navActivityAdjustmentSource", description="The post closed activity source of the given entity, for example Manual. Available values: Undefined, Manual, Auto.") 
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
-    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the quote event that need to be added to the closed period.") 
-    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the quote which needs to be added as a post close activity.") 
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the entity event that need to be added to the closed period.") 
+    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the entity which needs to be added as a post close activity.") 
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The InstrumentId from the quote which needs to be added as a post close activity.") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "navActivityAdjustmentSource", "asAt", "effectiveAt", "entityUniqueId", "instrumentId"]
 
@@ -104,8 +104,8 @@ class QuoteActivityAdjustment(NavActivityAdjustmentResponse):
         if "nav_activity_adjustment_type" != "type":
             return value
 
-        if value not in ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment']:
-            raise ValueError("must be one of enum values ('PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment')")
+        if value not in ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment']:
+            raise ValueError("must be one of enum values ('PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment')")
         return value
 
     class Config:

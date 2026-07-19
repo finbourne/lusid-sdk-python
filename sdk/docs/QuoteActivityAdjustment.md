@@ -5,10 +5,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **nav_activity_adjustment_source** | **str** | The post closed activity source of the given entity, for example Manual. Available values: Undefined, Manual, Auto. | 
 **as_at** | **datetime** | The asAt time for which the adjustment is being applied. | 
-**effective_at** | **str** | The EffectiveAt time of the quote event that need to be added to the closed period. | 
-**entity_unique_id** | **str** | The EntityUniqueId from the quote which needs to be added as a post close activity. | 
+**effective_at** | **str** | The EffectiveAt time of the entity event that need to be added to the closed period. | 
+**entity_unique_id** | **str** | The EntityUniqueId from the entity which needs to be added as a post close activity. | 
 **instrument_id** | **str** | The InstrumentId from the quote which needs to be added as a post close activity. | 
-**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment. | 
+**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment. | 
 ## Example
 
 ```python

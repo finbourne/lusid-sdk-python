@@ -29,10 +29,10 @@ class QuoteActivity(NavActivityAdjustment):
     QuoteActivity
     """
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
-    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the quote event that need to be added to the closed period.") 
-    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the quote which needs to be added as a post close activity.") 
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The EffectiveAt time of the entity event that need to be added to the closed period.") 
+    entity_unique_id:  StrictStr = Field(...,alias="entityUniqueId", description="The EntityUniqueId from the entity which needs to be added as a post close activity.") 
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The InstrumentId from the quote which needs to be added as a post close activity.") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "asAt", "effectiveAt", "entityUniqueId", "instrumentId"]
 
@@ -103,8 +103,8 @@ class QuoteActivity(NavActivityAdjustment):
         if "nav_activity_adjustment_type" != "type":
             return value
 
-        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity']:
-            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity')")
+        if value not in ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity']:
+            raise ValueError("must be one of enum values ('PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity')")
         return value
 
     class Config:

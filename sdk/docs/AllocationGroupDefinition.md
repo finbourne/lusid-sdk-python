@@ -4,7 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **classes** | [**List[AllocationGroupClassDefinition]**](AllocationGroupClassDefinition.md) | An optional list of share classes that belong to this group. Each entry must reference a ShareClass already present on the Fund. You can provide this or the Formula, but not both. | [optional] 
-**code** | **str** | The unique code for the Allocation Group. Must be unique within the Fund. | 
 **name** | **str** | The display name of the Allocation Group. | 
 **description** | **str** | An optional description for the Allocation Group. | [optional] 
 **share_class_short_code** | **str** | The short code that identifies the Allocation Group. | 
@@ -20,13 +19,12 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 classes: Optional[List[AllocationGroupClassDefinition]] = # Replace with your value
-code: StrictStr = "example_code"
 name: StrictStr = "example_name"
 description: Optional[StrictStr] = "example_description"
 share_class_short_code: StrictStr = "example_share_class_short_code"
 apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
 formula: Optional[StrictStr] = "example_formula"
-allocation_group_definition_instance = AllocationGroupDefinition(classes=classes, code=code, name=name, description=description, share_class_short_code=share_class_short_code, apportionment_method_property=apportionment_method_property, formula=formula)
+allocation_group_definition_instance = AllocationGroupDefinition(classes=classes, name=name, description=description, share_class_short_code=share_class_short_code, apportionment_method_property=apportionment_method_property, formula=formula)
 
 ```
 

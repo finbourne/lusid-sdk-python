@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **portfolio_scope** | **str** | The portfolio scope of the given entity | 
 **portfolio_code** | **str** | The portfolio code of the given entity | 
 **transaction_id** | **str** | The transaction Id of the PortfolioTransaction being adjusted | 
-**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment. | 
+**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment. | 
 ## Example
 
 ```python

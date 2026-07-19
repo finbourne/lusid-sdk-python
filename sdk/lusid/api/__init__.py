@@ -31,6 +31,7 @@ from lusid.api.entities_api import EntitiesApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
+from lusid.api.fund_structures_api import FundStructuresApi
 from lusid.api.funds_api import FundsApi
 from lusid.api.group_reconciliations_api import GroupReconciliationsApi
 from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
@@ -65,6 +66,7 @@ from lusid.api.relations_api import RelationsApi
 from lusid.api.relationship_definitions_api import RelationshipDefinitionsApi
 from lusid.api.relationships_api import RelationshipsApi
 from lusid.api.resource_record_api import ResourceRecordApi
+from lusid.api.scenarios_api import ScenariosApi
 from lusid.api.schemas_api import SchemasApi
 from lusid.api.scopes_api import ScopesApi
 from lusid.api.scripted_translation_api import ScriptedTranslationApi
@@ -75,6 +77,7 @@ from lusid.api.simple_position_portfolios_api import SimplePositionPortfoliosApi
 from lusid.api.staged_modifications_api import StagedModificationsApi
 from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
+from lusid.api.subscriptions_api import SubscriptionsApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
 from lusid.api.timelines_api import TimelinesApi
@@ -118,6 +121,7 @@ __all__ = [
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",
+    "FundStructuresApi",
     "FundsApi",
     "GroupReconciliationsApi",
     "IdentifierDefinitionsApi",
@@ -152,6 +156,7 @@ __all__ = [
     "RelationshipDefinitionsApi",
     "RelationshipsApi",
     "ResourceRecordApi",
+    "ScenariosApi",
     "SchemasApi",
     "ScopesApi",
     "ScriptedTranslationApi",
@@ -162,6 +167,7 @@ __all__ = [
     "StagedModificationsApi",
     "StagingRuleSetApi",
     "StructuredResultDataApi",
+    "SubscriptionsApi",
     "SystemConfigurationApi",
     "TaxRuleSetsApi",
     "TimelinesApi",

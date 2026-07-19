@@ -41,9 +41,10 @@ class FixedSchedule(Schedule):
     payment_currency:  StrictStr = Field(...,alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.") 
     stub_type:  Optional[StrictStr] = Field(None,alias="stubType", description="When a payment schedule doesn't have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None = this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both = this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set.") 
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(default=None, alias="exDividendConfiguration")
+    schedule_id:  Optional[StrictStr] = Field(None,alias="scheduleId", description="Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "exDividendDays", "notional", "paymentCurrency", "stubType", "exDividendConfiguration"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "exDividendDays", "notional", "paymentCurrency", "stubType", "exDividendConfiguration", "scheduleId"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -173,6 +174,11 @@ class FixedSchedule(Schedule):
         if self.stub_type is None and "stub_type" in self.__fields_set__:
             _dict['stubType'] = None
 
+        # set to None if schedule_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule_id is None and "schedule_id" in self.__fields_set__:
+            _dict['scheduleId'] = None
+
         return _dict
 
     @classmethod
@@ -195,7 +201,8 @@ class FixedSchedule(Schedule):
             "notional": obj.get("notional"),
             "payment_currency": obj.get("paymentCurrency"),
             "stub_type": obj.get("stubType"),
-            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None
+            "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
+            "schedule_id": obj.get("scheduleId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

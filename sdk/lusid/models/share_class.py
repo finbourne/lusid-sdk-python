@@ -23,7 +23,6 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.model_property import ModelProperty
-from lusid.models.series import Series
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
 from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.trading_conventions import TradingConventions
@@ -33,14 +32,12 @@ class ShareClass(BaseModel):
     ShareClass
     """
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
-    series: Optional[List[Series]] = Field(default=None, description="The series that belong to this Share Class.")
-    code:  StrictStr = Field(...,alias="code", description="The unique code for the Share Class. Must be unique within the Fund.") 
     name:  StrictStr = Field(...,alias="name", description="The display name of the Share Class.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Share Class.") 
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund.") 
     launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price set when a shareclass is added to the fund. Defaults to 1.", alias="launchPrice")
     launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
-    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weighting factor used for apportionment across this share class.", alias="apportionmentFactor")
+    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.", alias="apportionmentFactor")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true.")
     fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership.") 
     distribution_type:  StrictStr = Field(...,alias="distributionType", description="The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.") 
@@ -53,7 +50,7 @@ class ShareClass(BaseModel):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Available values: Invalid, Gross, Net.") 
     hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.") 
-    __properties = ["instrumentIdentifiers", "series", "code", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
+    __properties = ["instrumentIdentifiers", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,13 +84,6 @@ class ShareClass(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in series (list)
-        _items = []
-        if self.series:
-            for _item in self.series:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['series'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -121,11 +111,6 @@ class ShareClass(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
         if self.time_zone_conventions:
             _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
-        # set to None if series (nullable) is None
-        # and __fields_set__ contains the field
-        if self.series is None and "series" in self.__fields_set__:
-            _dict['series'] = None
-
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -189,8 +174,6 @@ class ShareClass(BaseModel):
 
         _obj = ShareClass.parse_obj({
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
-            "series": [Series.from_dict(_item) for _item in obj.get("series")] if obj.get("series") is not None else None,
-            "code": obj.get("code"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "share_class_short_code": obj.get("shareClassShortCode"),

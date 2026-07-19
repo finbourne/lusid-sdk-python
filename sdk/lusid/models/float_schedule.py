@@ -50,9 +50,10 @@ class FloatSchedule(Schedule):
     use_annualised_direct_rates: Optional[StrictBool] = Field(default=None, description="Flag indicating whether to use daily updated annualised interest  rates for calculating the accrued interest. Defaults to false.", alias="useAnnualisedDirectRates")
     cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum floating rate which a cashflow can accrue.", alias="capRate")
     floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The minimum floating rate which a cashflow can accrue.", alias="floorRate")
+    schedule_id:  Optional[StrictStr] = Field(None,alias="scheduleId", description="Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate", "scheduleId"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -206,6 +207,11 @@ class FloatSchedule(Schedule):
         if self.floor_rate is None and "floor_rate" in self.__fields_set__:
             _dict['floorRate'] = None
 
+        # set to None if schedule_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule_id is None and "schedule_id" in self.__fields_set__:
+            _dict['scheduleId'] = None
+
         return _dict
 
     @classmethod
@@ -235,7 +241,8 @@ class FloatSchedule(Schedule):
             "reset_convention": obj.get("resetConvention"),
             "use_annualised_direct_rates": obj.get("useAnnualisedDirectRates"),
             "cap_rate": obj.get("capRate"),
-            "floor_rate": obj.get("floorRate")
+            "floor_rate": obj.get("floorRate"),
+            "schedule_id": obj.get("scheduleId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

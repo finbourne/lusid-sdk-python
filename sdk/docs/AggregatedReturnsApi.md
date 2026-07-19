@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_returns_entity**](AggregatedReturnsApi.md#delete_returns_entity) | **DELETE** /api/returns/{scope}/{code} | [EXPERIMENTAL] DeleteReturnsEntity: Delete returns entity.
+[**get_aggregated_returns**](AggregatedReturnsApi.md#get_aggregated_returns) | **POST** /api/returns/$aggregated | [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
 [**get_returns_entity**](AggregatedReturnsApi.md#get_returns_entity) | **GET** /api/returns/{scope}/{code} | [EXPERIMENTAL] GetReturnsEntity: Get returns entity.
 [**list_returns_entities**](AggregatedReturnsApi.md#list_returns_entities) | **GET** /api/returns | [EXPERIMENTAL] ListReturnsEntities: List returns entities.
 [**upsert_returns_entity**](AggregatedReturnsApi.md#upsert_returns_entity) | **POST** /api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.
@@ -99,6 +100,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The time that the returns entity was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_aggregated_returns**
+> AggregatedReturnsResponse get_aggregated_returns(aggregated_returns_entity_request)
+
+[EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
+
+Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AggregatedReturnsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregatedReturnsApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # aggregated_returns_entity_request = AggregatedReturnsEntityRequest.from_json("")
+    # aggregated_returns_entity_request = AggregatedReturnsEntityRequest.from_dict({})
+    aggregated_returns_entity_request = AggregatedReturnsEntityRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_aggregated_returns(aggregated_returns_entity_request, opts=opts)
+
+        # [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
+        api_response = api_instance.get_aggregated_returns(aggregated_returns_entity_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AggregatedReturnsApi->get_aggregated_returns: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **aggregated_returns_entity_request** | [**AggregatedReturnsEntityRequest**](AggregatedReturnsEntityRequest.md)| The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. | 
+
+### Return type
+
+[**AggregatedReturnsResponse**](AggregatedReturnsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The aggregated returns grouped by entity. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **additional_nav_types** | [**List[NavTypeDefinition]**](NavTypeDefinition.md) | The definitions for any additional NAVs on the Fund. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
 **create_instrument** | **bool** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] 
-**apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
 **share_classes** | [**List[ShareClassDefinition]**](ShareClassDefinition.md) | An optional list of Share Class definitions for the Fund. | [optional] 
 ## Example
 
@@ -49,9 +48,8 @@ additional_nav_types: Optional[List[NavTypeDefinition]] = # Replace with your va
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
-apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
 share_classes: Optional[List[ShareClassDefinition]] = # Replace with your value
-fund_definition_request_instance = FundDefinitionRequest(code=code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, apportionment_method_property=apportionment_method_property, share_classes=share_classes)
+fund_definition_request_instance = FundDefinitionRequest(code=code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
 
 ```
 

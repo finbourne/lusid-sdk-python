@@ -4,9 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **share_class_short_code** | **str** | A short code that uniquely identifies the share class within the Fund and is attached to the transaction. | 
-**share_class_fund_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**apportionment_factor** | **float** | The weighting factor used for apportionment across this share class. | [optional] 
-**share_class_series_code** | **str** | An optional series identifier for the share class. If not provided, the share class will include all series. | [optional] 
+**apportionment_factor** | **float** | Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund. | [optional] 
 ## Example
 
 ```python
@@ -17,10 +15,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 share_class_short_code: StrictStr = "example_share_class_short_code"
-share_class_fund_id: Optional[ResourceId] = # Replace with your value
 apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-share_class_series_code: Optional[StrictStr] = "example_share_class_series_code"
-allocation_group_class_definition_instance = AllocationGroupClassDefinition(share_class_short_code=share_class_short_code, share_class_fund_id=share_class_fund_id, apportionment_factor=apportionment_factor, share_class_series_code=share_class_series_code)
+allocation_group_class_definition_instance = AllocationGroupClassDefinition(share_class_short_code=share_class_short_code, apportionment_factor=apportionment_factor)
 
 ```
 

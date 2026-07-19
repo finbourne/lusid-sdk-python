@@ -24,11 +24,13 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
+from lusid.models.custodian_entry import CustodianEntry
 from lusid.models.data_model_membership import DataModelMembership
 from lusid.models.economics import Economics
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.resolved_custodian_account import ResolvedCustodianAccount
 from lusid.models.resource_id import ResourceId
 from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.transaction_price import TransactionPrice
@@ -80,7 +82,9 @@ class OutputTransaction(BaseModel):
     settlement_summary: Optional[TransactionSettlementSummary] = Field(default=None, alias="settlementSummary")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications"]
+    custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="Set of of Custodian Entries associated with the transaction.", alias="custodianEntries")
+    resolved_custodian_accounts: Optional[List[ResolvedCustodianAccount]] = Field(default=None, description="Set of Custodian Accounts resolved from each movement on the Transaction.", alias="resolvedCustodianAccounts")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications", "custodianEntries", "resolvedCustodianAccounts"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -242,6 +246,20 @@ class OutputTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of staged_modifications
         if self.staged_modifications:
             _dict['stagedModifications'] = self.staged_modifications.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in custodian_entries (list)
+        _items = []
+        if self.custodian_entries:
+            for _item in self.custodian_entries:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['custodianEntries'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in resolved_custodian_accounts (list)
+        _items = []
+        if self.resolved_custodian_accounts:
+            for _item in self.resolved_custodian_accounts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['resolvedCustodianAccounts'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -332,6 +350,16 @@ class OutputTransaction(BaseModel):
         if self.sequence_priority is None and "sequence_priority" in self.__fields_set__:
             _dict['sequencePriority'] = None
 
+        # set to None if custodian_entries (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custodian_entries is None and "custodian_entries" in self.__fields_set__:
+            _dict['custodianEntries'] = None
+
+        # set to None if resolved_custodian_accounts (nullable) is None
+        # and __fields_set__ contains the field
+        if self.resolved_custodian_accounts is None and "resolved_custodian_accounts" in self.__fields_set__:
+            _dict['resolvedCustodianAccounts'] = None
+
         return _dict
 
     @classmethod
@@ -388,7 +416,9 @@ class OutputTransaction(BaseModel):
             "sequence_priority": obj.get("sequencePriority"),
             "settlement_summary": TransactionSettlementSummary.from_dict(obj.get("settlementSummary")) if obj.get("settlementSummary") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
+            "custodian_entries": [CustodianEntry.from_dict(_item) for _item in obj.get("custodianEntries")] if obj.get("custodianEntries") is not None else None,
+            "resolved_custodian_accounts": [ResolvedCustodianAccount.from_dict(_item) for _item in obj.get("resolvedCustodianAccounts")] if obj.get("resolvedCustodianAccounts") is not None else None
         })
         return _obj
 
