@@ -831,6 +831,8 @@ Class | Method | HTTP request | Description
  - [ApplicableEntity](docs/ApplicableEntity.md)
  - [ApplicableEntityTypes](docs/ApplicableEntityTypes.md)
  - [ApplicableInstrumentEvent](docs/ApplicableInstrumentEvent.md)
+ - [ApportionmentBreakdown](docs/ApportionmentBreakdown.md)
+ - [ApportionmentMemberFactor](docs/ApportionmentMemberFactor.md)
  - [ApportionmentMethodProperty](docs/ApportionmentMethodProperty.md)
  - [AssetClass](docs/AssetClass.md)
  - [AssetLeg](docs/AssetLeg.md)
