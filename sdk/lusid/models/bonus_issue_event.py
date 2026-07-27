@@ -37,12 +37,14 @@ class BonusIssueEvent(InstrumentEvent):
     payment_date: Optional[datetime] = Field(default=None, description="The date the Bonus Issue is executed.", alias="paymentDate")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. Used in calculating cash-in-lieu of fractional shares.", alias="fractionalUnitsCashPrice")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.") 
+    fractional_units_rounding_convention:  Optional[StrictStr] = Field(None,alias="fractionalUnitsRoundingConvention", description="The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    fractional_units_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.", alias="fractionalUnitsDecimalPlaces")
     security_offer_elections: Optional[List[SecurityOfferElection]] = Field(default=None, description="Possible SecurityElections for this Bonus Issue event, if any.", alias="securityOfferElections")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="Possible CashOfferElections for this Bonus Issue event, if any.", alias="cashOfferElections")
     lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="Possible LapseElections for this Bonus Issue event, if any.", alias="lapseElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashOfferElections", "lapseElections"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "securityOfferElections", "cashOfferElections", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -194,6 +196,16 @@ class BonusIssueEvent(InstrumentEvent):
         if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
             _dict['fractionalUnitsCashCurrency'] = None
 
+        # set to None if fractional_units_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_rounding_convention is None and "fractional_units_rounding_convention" in self.__fields_set__:
+            _dict['fractionalUnitsRoundingConvention'] = None
+
+        # set to None if fractional_units_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_decimal_places is None and "fractional_units_decimal_places" in self.__fields_set__:
+            _dict['fractionalUnitsDecimalPlaces'] = None
+
         # set to None if security_offer_elections (nullable) is None
         # and __fields_set__ contains the field
         if self.security_offer_elections is None and "security_offer_elections" in self.__fields_set__:
@@ -228,6 +240,8 @@ class BonusIssueEvent(InstrumentEvent):
             "payment_date": obj.get("paymentDate"),
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "fractional_units_rounding_convention": obj.get("fractionalUnitsRoundingConvention"),
+            "fractional_units_decimal_places": obj.get("fractionalUnitsDecimalPlaces"),
             "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None,
             "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
             "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None

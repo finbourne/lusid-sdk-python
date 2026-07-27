@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **announcement_date** | **datetime** | Date the reverse stock split was announced. | [optional] 
 **fractional_units_cash_currency** | **str** | The currency of the cash paid in lieu of fractionalUnits. | [optional] 
 **fractional_units_cash_price** | **float** | The cash price paid in lieu of fractionalUnits. | [optional] 
+**fractional_units_rounding_convention** | **str** | The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding. | [optional] 
+**fractional_units_decimal_places** | **int** | The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent. | 
 ## Example
 
@@ -28,8 +30,11 @@ record_date: Optional[datetime] = # Replace with your value
 announcement_date: Optional[datetime] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fractional_units_rounding_convention: Optional[StrictStr] = "example_fractional_units_rounding_convention"
+fractional_units_decimal_places: Optional[StrictInt] = # Replace with your value
+fractional_units_decimal_places: Optional[StrictInt] = None
 instrument_event_type: StrictStr = "example_instrument_event_type"
-reverse_stock_split_event_instance = ReverseStockSplitEvent(payment_date=payment_date, ex_date=ex_date, units_ratio=units_ratio, record_date=record_date, announcement_date=announcement_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, instrument_event_type=instrument_event_type)
+reverse_stock_split_event_instance = ReverseStockSplitEvent(payment_date=payment_date, ex_date=ex_date, units_ratio=units_ratio, record_date=record_date, announcement_date=announcement_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, instrument_event_type=instrument_event_type)
 
 ```
 

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**shift_type** | **str** |  | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition. | 
 ## Example
 
 ```python
@@ -13,8 +13,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-shift_type: StrictStr = "example_shift_type"
-scenario_shift_definition_instance = ScenarioShiftDefinition(shift_type=shift_type)
+scenario_shift_type: StrictStr = "example_scenario_shift_type"
+scenario_shift_definition_instance = ScenarioShiftDefinition(scenario_shift_type=scenario_shift_type)
 
 ```
 

@@ -84,7 +84,8 @@ class OutputTransaction(BaseModel):
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="Set of of Custodian Entries associated with the transaction.", alias="custodianEntries")
     resolved_custodian_accounts: Optional[List[ResolvedCustodianAccount]] = Field(default=None, description="Set of Custodian Accounts resolved from each movement on the Transaction.", alias="resolvedCustodianAccounts")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications", "custodianEntries", "resolvedCustodianAccounts"]
+    is_excluded: Optional[StrictBool] = Field(default=None, description="Whether the transaction was excluded from the portfolio's holdings by the portfolio's transaction exclusion filter.", alias="isExcluded")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications", "custodianEntries", "resolvedCustodianAccounts", "isExcluded"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -418,7 +419,8 @@ class OutputTransaction(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "custodian_entries": [CustodianEntry.from_dict(_item) for _item in obj.get("custodianEntries")] if obj.get("custodianEntries") is not None else None,
-            "resolved_custodian_accounts": [ResolvedCustodianAccount.from_dict(_item) for _item in obj.get("resolvedCustodianAccounts")] if obj.get("resolvedCustodianAccounts") is not None else None
+            "resolved_custodian_accounts": [ResolvedCustodianAccount.from_dict(_item) for _item in obj.get("resolvedCustodianAccounts")] if obj.get("resolvedCustodianAccounts") is not None else None,
+            "is_excluded": obj.get("isExcluded")
         })
         return _obj
 

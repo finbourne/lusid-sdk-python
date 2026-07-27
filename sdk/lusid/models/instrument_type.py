@@ -75,6 +75,8 @@ class InstrumentType(str, Enum):
     LOANFACILITY = 'LoanFacility'
     FLEXIBLEDEPOSIT = 'FlexibleDeposit'
     FLEXIBLEREPO = 'FlexibleRepo'
+    TOBEANNOUNCED = 'ToBeAnnounced'
+    VOLATILITYSWAP = 'VolatilitySwap'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentType:

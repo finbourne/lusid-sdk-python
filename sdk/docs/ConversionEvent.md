@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **period_of_action** | [**EventDateRange**](EventDateRange.md) |  | [optional] 
 **fractional_units_cash_price** | **float** | The cash price paid in lieu of fractionalUnits. Not required.  If provided, must have FractionalUnitsCashCurrency too. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. Not required.  If provided, must have FractionalUnitsCashPrice too. | [optional] 
+**fractional_units_rounding_convention** | **str** | The convention used to round the fractional units entitlement. Defaults to Floor.  Not permitted when ConversionType is Exchange144A. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding. | [optional] 
+**fractional_units_decimal_places** | **int** | The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces. | [optional] 
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | List of possible security offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:     This list must have exactly one election that is chosen and default.  CashAndSecurityOfferElections and CashOfferElections &lt;b&gt; must be null or empty&lt;/b&gt;.     If the ParticipationType is Voluntary:     This list can be empty,  so long as CashAndSecurityOfferElections or CashOfferElections  has at least one election. None of these elections have to be chosen or default. | [optional] 
 **cash_and_security_offer_elections** | [**List[CashAndSecurityOfferElection]**](CashAndSecurityOfferElection.md) | List of possible cash and security offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list &lt;b&gt; must be null or empty&lt;/b&gt;.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashOfferElections  has at least one election. None of these elections have to be chosen or default. | [optional] 
 **cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | List of possible cash offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list &lt;b&gt; must be null or empty&lt;/b&gt;.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashAndSecurityOfferElections  has at least one election. None of these elections have to be chosen or default. | [optional] 
@@ -37,13 +39,16 @@ effective_date: Optional[datetime] = # Replace with your value
 period_of_action: Optional[EventDateRange] = # Replace with your value
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
+fractional_units_rounding_convention: Optional[StrictStr] = "example_fractional_units_rounding_convention"
+fractional_units_decimal_places: Optional[StrictInt] = # Replace with your value
+fractional_units_decimal_places: Optional[StrictInt] = None
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = # Replace with your value
 cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
 lapse_elections: Optional[List[LapseElection]] = # Replace with your value
 conversion_type: Optional[StrictStr] = "example_conversion_type"
 instrument_event_type: StrictStr = "example_instrument_event_type"
-conversion_event_instance = ConversionEvent(record_date=record_date, payment_date=payment_date, new_instrument=new_instrument, response_deadline_date=response_deadline_date, market_deadline_date=market_deadline_date, effective_date=effective_date, period_of_action=period_of_action, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, lapse_elections=lapse_elections, conversion_type=conversion_type, instrument_event_type=instrument_event_type)
+conversion_event_instance = ConversionEvent(record_date=record_date, payment_date=payment_date, new_instrument=new_instrument, response_deadline_date=response_deadline_date, market_deadline_date=market_deadline_date, effective_date=effective_date, period_of_action=period_of_action, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, lapse_elections=lapse_elections, conversion_type=conversion_type, instrument_event_type=instrument_event_type)
 
 ```
 

@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **ex_date** | **datetime** | The first date on which the holder of record of the original shares has entitled ownership of the new shares. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
 **fractional_units_cash_price** | **float** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
+**fractional_units_rounding_convention** | **str** | The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding. | [optional] 
+**fractional_units_decimal_places** | **int** | The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | 
 **payment_date** | **datetime** | Date on which the merger takes place. | [optional] 
 **record_date** | **datetime** | Optional. Date you have to be the holder of record of the original shares in order to receive the new shares. | [optional] 
@@ -30,12 +32,15 @@ cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your va
 ex_date: Optional[datetime] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fractional_units_rounding_convention: Optional[StrictStr] = "example_fractional_units_rounding_convention"
+fractional_units_decimal_places: Optional[StrictInt] = # Replace with your value
+fractional_units_decimal_places: Optional[StrictInt] = None
 new_instrument: NewInstrument = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-merger_event_instance = MergerEvent(announcement_date=announcement_date, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, ex_date=ex_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, new_instrument=new_instrument, payment_date=payment_date, record_date=record_date, security_offer_elections=security_offer_elections, instrument_event_type=instrument_event_type)
+merger_event_instance = MergerEvent(announcement_date=announcement_date, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, ex_date=ex_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, new_instrument=new_instrument, payment_date=payment_date, record_date=record_date, security_offer_elections=security_offer_elections, instrument_event_type=instrument_event_type)
 
 ```
 

@@ -39,6 +39,8 @@ class TenderEvent(InstrumentEvent):
     new_instrument: NewInstrument = Field(alias="newInstrument")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cash price paid in lieu of fractionalUnits.", alias="fractionalUnitsCashPrice")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractionalUnits.") 
+    fractional_units_rounding_convention:  Optional[StrictStr] = Field(None,alias="fractionalUnitsRoundingConvention", description="The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    fractional_units_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.", alias="fractionalUnitsDecimalPlaces")
     security_offer_elections: Optional[List[SecurityOfferElection]] = Field(default=None, description="List of possible SecurityOfferElections for this event.", alias="securityOfferElections")
     cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = Field(default=None, description="List of possible CashAndSecurityOfferElections for this event.", alias="cashAndSecurityOfferElections")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="List of possible CashOfferElections for this event.", alias="cashOfferElections")
@@ -52,7 +54,7 @@ class TenderEvent(InstrumentEvent):
     early_response_deadline: Optional[datetime] = Field(default=None, description="Optional early-tender deadline. When set, must be on or before ResponseDeadlineDate.", alias="earlyResponseDeadline")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "newInstrument", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections", "offerType", "accruedInterestPerUnit", "minPieceSize", "minIncrement", "prorationRate", "responseDeadlineDate", "marketDeadlineDate", "earlyResponseDeadline"]
+    __properties = ["instrumentEventType", "announcementDate", "exDate", "recordDate", "paymentDate", "newInstrument", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections", "offerType", "accruedInterestPerUnit", "minPieceSize", "minIncrement", "prorationRate", "responseDeadlineDate", "marketDeadlineDate", "earlyResponseDeadline"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -207,6 +209,16 @@ class TenderEvent(InstrumentEvent):
         if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
             _dict['fractionalUnitsCashCurrency'] = None
 
+        # set to None if fractional_units_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_rounding_convention is None and "fractional_units_rounding_convention" in self.__fields_set__:
+            _dict['fractionalUnitsRoundingConvention'] = None
+
+        # set to None if fractional_units_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_decimal_places is None and "fractional_units_decimal_places" in self.__fields_set__:
+            _dict['fractionalUnitsDecimalPlaces'] = None
+
         # set to None if security_offer_elections (nullable) is None
         # and __fields_set__ contains the field
         if self.security_offer_elections is None and "security_offer_elections" in self.__fields_set__:
@@ -277,6 +289,8 @@ class TenderEvent(InstrumentEvent):
             "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "fractional_units_rounding_convention": obj.get("fractionalUnitsRoundingConvention"),
+            "fractional_units_decimal_places": obj.get("fractionalUnitsDecimalPlaces"),
             "security_offer_elections": [SecurityOfferElection.from_dict(_item) for _item in obj.get("securityOfferElections")] if obj.get("securityOfferElections") is not None else None,
             "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
             "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,

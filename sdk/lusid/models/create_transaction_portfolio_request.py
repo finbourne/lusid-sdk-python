@@ -35,6 +35,7 @@ class CreateTransactionPortfolioRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the transaction portfolio.") 
     code:  StrictStr = Field(...,alias="code", description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.") 
     created: Optional[datetime] = Field(default=None, description="The effective datetime at which to create the transaction portfolio. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified.")
+    enablement_date: Optional[datetime] = Field(default=None, description="The effective datetime from which transactions booked to the transaction portfolio begin contributing to holdings, valuations and other computed results. Transactions with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio's creation date if not specified.", alias="enablementDate")
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the transaction portfolio in ISO 4217 currency code format.") 
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="Determines the accounting treatment given to the transaction portfolio's tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
@@ -48,7 +49,8 @@ class CreateTransactionPortfolioRequest(BaseModel):
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
     settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
-    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration"]
+    transaction_exclusion_filter:  Optional[StrictStr] = Field(None,alias="transactionExclusionFilter", description="A filter expression that identifies transactions to exclude when building the transaction portfolio's transactions and holdings. Transactions matching this filter are flagged as excluded.") 
+    __properties = ["displayName", "description", "code", "created", "enablementDate", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -185,6 +187,11 @@ class CreateTransactionPortfolioRequest(BaseModel):
         if self.created is None and "created" in self.__fields_set__:
             _dict['created'] = None
 
+        # set to None if enablement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.enablement_date is None and "enablement_date" in self.__fields_set__:
+            _dict['enablementDate'] = None
+
         # set to None if sub_holding_keys (nullable) is None
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
@@ -220,6 +227,11 @@ class CreateTransactionPortfolioRequest(BaseModel):
         if self.tax_rule_set_scope is None and "tax_rule_set_scope" in self.__fields_set__:
             _dict['taxRuleSetScope'] = None
 
+        # set to None if transaction_exclusion_filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_exclusion_filter is None and "transaction_exclusion_filter" in self.__fields_set__:
+            _dict['transactionExclusionFilter'] = None
+
         return _dict
 
     @classmethod
@@ -236,6 +248,7 @@ class CreateTransactionPortfolioRequest(BaseModel):
             "description": obj.get("description"),
             "code": obj.get("code"),
             "created": obj.get("created"),
+            "enablement_date": obj.get("enablementDate"),
             "base_currency": obj.get("baseCurrency"),
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
             "accounting_method": obj.get("accountingMethod"),
@@ -253,7 +266,8 @@ class CreateTransactionPortfolioRequest(BaseModel):
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "tax_rule_set_scope": obj.get("taxRuleSetScope"),
-            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None
+            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
+            "transaction_exclusion_filter": obj.get("transactionExclusionFilter")
         })
         return _obj
 

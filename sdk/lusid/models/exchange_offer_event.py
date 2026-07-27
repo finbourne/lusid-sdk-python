@@ -45,10 +45,12 @@ class ExchangeOfferEvent(InstrumentEvent):
     min_increment: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="minIncrement")
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="fractionalUnitsCashPrice")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency") 
+    fractional_units_rounding_convention:  Optional[StrictStr] = Field(None,alias="fractionalUnitsRoundingConvention", description="The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    fractional_units_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.", alias="fractionalUnitsDecimalPlaces")
     instruction_reference:  Optional[StrictStr] = Field(None,alias="instructionReference") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "settlementDate", "eventSource", "newInstrument", "cashOfferElections", "securityOfferElections", "mixedLotConstituentsElections", "lapseElections", "minPieceSize", "minIncrement", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "instructionReference"]
+    __properties = ["instrumentEventType", "effectiveDate", "settlementDate", "eventSource", "newInstrument", "cashOfferElections", "securityOfferElections", "mixedLotConstituentsElections", "lapseElections", "minPieceSize", "minIncrement", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "instructionReference"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -230,6 +232,16 @@ class ExchangeOfferEvent(InstrumentEvent):
         if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
             _dict['fractionalUnitsCashCurrency'] = None
 
+        # set to None if fractional_units_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_rounding_convention is None and "fractional_units_rounding_convention" in self.__fields_set__:
+            _dict['fractionalUnitsRoundingConvention'] = None
+
+        # set to None if fractional_units_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_decimal_places is None and "fractional_units_decimal_places" in self.__fields_set__:
+            _dict['fractionalUnitsDecimalPlaces'] = None
+
         # set to None if instruction_reference (nullable) is None
         # and __fields_set__ contains the field
         if self.instruction_reference is None and "instruction_reference" in self.__fields_set__:
@@ -260,6 +272,8 @@ class ExchangeOfferEvent(InstrumentEvent):
             "min_increment": obj.get("minIncrement"),
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "fractional_units_rounding_convention": obj.get("fractionalUnitsRoundingConvention"),
+            "fractional_units_decimal_places": obj.get("fractionalUnitsDecimalPlaces"),
             "instruction_reference": obj.get("instructionReference")
         })
         # store additional fields in additional_properties

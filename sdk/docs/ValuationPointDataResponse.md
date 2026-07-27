@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **valuation_point_code** | **str** | The code of the valuation point. | [optional] 
 **previous_valuation_point_code** | **str** | The code of the previous valuation point. | [optional] 
 **apportionment_results** | [**List[ApportionmentBreakdown]**](ApportionmentBreakdown.md) | The apportionment results for the valuation point: one fund-level entry plus one entry per allocation group. | [optional] 
+**bucket_set_results** | [**List[BucketSetResult]**](BucketSetResult.md) | The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -32,8 +33,9 @@ share_class_data: List[ShareClassData] = # Replace with your value
 valuation_point_code: Optional[StrictStr] = "example_valuation_point_code"
 previous_valuation_point_code: Optional[StrictStr] = "example_previous_valuation_point_code"
 apportionment_results: Optional[List[ApportionmentBreakdown]] = # Replace with your value
+bucket_set_results: Optional[List[BucketSetResult]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, links=links)
+valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, bucket_set_results=bucket_set_results, links=links)
 
 ```
 

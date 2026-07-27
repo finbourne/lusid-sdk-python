@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **description** | **str** | A description for the transaction portfolio. | [optional] 
 **code** | **str** | The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. | 
 **created** | **datetime** | The effective datetime at which to create the transaction portfolio. No transactions can be added to the transaction portfolio before this date. Defaults to the current LUSID system datetime if not specified. | [optional] 
+**enablement_date** | **datetime** | The effective datetime from which transactions booked to the transaction portfolio begin contributing to holdings, valuations and other computed results. Transactions with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio&#39;s creation date if not specified. | [optional] 
 **base_currency** | **str** | The base currency of the transaction portfolio in ISO 4217 currency code format. | 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **accounting_method** | **str** | Determines the accounting treatment given to the transaction portfolio&#39;s tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **tax_rule_set_scope** | **str** | The scope of the tax rule sets for this portfolio. | [optional] 
 **settlement_configuration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] 
+**transaction_exclusion_filter** | **str** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] 
 ## Example
 
 ```python
@@ -33,6 +35,7 @@ display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 code: StrictStr = "example_code"
 created: Optional[datetime] = # Replace with your value
+enablement_date: Optional[datetime] = # Replace with your value
 base_currency: StrictStr = "example_base_currency"
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 accounting_method: Optional[StrictStr] = "example_accounting_method"
@@ -46,7 +49,8 @@ instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Repla
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 tax_rule_set_scope: Optional[StrictStr] = "example_tax_rule_set_scope"
 settlement_configuration: Optional[PortfolioSettlementConfiguration] = # Replace with your value
-create_transaction_portfolio_request_instance = CreateTransactionPortfolioRequest(display_name=display_name, description=description, code=code, created=created, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration)
+transaction_exclusion_filter: Optional[StrictStr] = "example_transaction_exclusion_filter"
+create_transaction_portfolio_request_instance = CreateTransactionPortfolioRequest(display_name=display_name, description=description, code=code, created=created, enablement_date=enablement_date, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, transaction_exclusion_filter=transaction_exclusion_filter)
 
 ```
 

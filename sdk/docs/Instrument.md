@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **lookthrough_portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_definition** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
 **state** | **str** | The state of of the instrument at the asAt datetime of this version of the instrument definition. Available values: Active, Inactive, Deleted. | 
-**asset_class** | **str** | The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate. | [optional] 
+**asset_class** | **str** | The nominal asset class of the instrument. Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic. | [optional] 
 **dom_ccy** | **str** | The domestic currency, meaning the currency in which the instrument would typically be expected to pay cashflows, e.g. a share in AAPL being USD. | [optional] 
 **relationships** | [**List[Relationship]**](Relationship.md) | A set of relationships associated to the instrument. | [optional] 
 **settlement_cycle** | [**SettlementCycle**](SettlementCycle.md) |  | [optional] 

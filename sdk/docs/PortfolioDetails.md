@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **tax_rule_set_scope** | **str** | The scope of the tax rule sets for this portfolio. | [optional] 
 **settlement_configuration** | [**PortfolioSettlementConfiguration**](PortfolioSettlementConfiguration.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
+**transaction_exclusion_filter** | **str** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -45,8 +46,9 @@ amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
 tax_rule_set_scope: Optional[StrictStr] = "example_tax_rule_set_scope"
 settlement_configuration: Optional[PortfolioSettlementConfiguration] = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+transaction_exclusion_filter: Optional[StrictStr] = "example_transaction_exclusion_filter"
 links: Optional[List[Link]] = None
-portfolio_details_instance = PortfolioDetails(href=href, origin_portfolio_id=origin_portfolio_id, version=version, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, sub_holding_keys=sub_holding_keys, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, staged_modifications=staged_modifications, links=links)
+portfolio_details_instance = PortfolioDetails(href=href, origin_portfolio_id=origin_portfolio_id, version=version, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, sub_holding_keys=sub_holding_keys, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, staged_modifications=staged_modifications, transaction_exclusion_filter=transaction_exclusion_filter, links=links)
 
 ```
 

@@ -143,6 +143,9 @@ from lusid.models.branch_step import BranchStep
 from lusid.models.branch_step_request import BranchStepRequest
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucket import Bucket
+from lusid.models.bucket_set_node import BucketSetNode
+from lusid.models.bucket_set_result import BucketSetResult
+from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
@@ -1000,6 +1003,8 @@ from lusid.models.quote_id import QuoteId
 from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
 from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
+from lusid.models.rate_curve_shift_definition import RateCurveShiftDefinition
+from lusid.models.rate_curve_shift_mode import RateCurveShiftMode
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
@@ -1167,6 +1172,7 @@ from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.scenario_definition import ScenarioDefinition
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
+from lusid.models.scenario_shift_type import ScenarioShiftType
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
 from lusid.models.scope_definition import ScopeDefinition
@@ -1261,6 +1267,7 @@ from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
 from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
 from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.timeline import Timeline
+from lusid.models.to_be_announced import ToBeAnnounced
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
@@ -1470,6 +1477,7 @@ from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding imp
 from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
+from lusid.models.volatility_swap import VolatilitySwap
 from lusid.models.warning import Warning
 from lusid.models.warrants_exercise_event import WarrantsExerciseEvent
 from lusid.models.weekend_mask import WeekendMask
@@ -1620,6 +1628,9 @@ __all__ = [
     "BranchStepRequest",
     "BreakCodeSource",
     "Bucket",
+    "BucketSetNode",
+    "BucketSetResult",
+    "BucketSetResultBucket",
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
     "BucketingSchedule",
@@ -2477,6 +2488,8 @@ __all__ = [
     "QuoteInstrumentIdType",
     "QuoteSeriesId",
     "QuoteType",
+    "RateCurveShiftDefinition",
+    "RateCurveShiftMode",
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
@@ -2644,6 +2657,7 @@ __all__ = [
     "ScalingMethodology",
     "ScenarioDefinition",
     "ScenarioShiftDefinition",
+    "ScenarioShiftType",
     "Schedule",
     "ScheduleType",
     "ScopeDefinition",
@@ -2738,6 +2752,7 @@ __all__ = [
     "TermDepositPrincipalEvent",
     "TimeZoneConventions",
     "Timeline",
+    "ToBeAnnounced",
     "TotalReturnSwap",
     "Touch",
     "TradeTicket",
@@ -2947,6 +2962,7 @@ __all__ = [
     "VirtualDocument",
     "VirtualDocumentRow",
     "VirtualRow",
+    "VolatilitySwap",
     "Warning",
     "WarrantsExerciseEvent",
     "WeekendMask",

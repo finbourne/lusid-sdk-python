@@ -49,8 +49,9 @@ class PortfolioDetails(BaseModel):
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
     settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    transaction_exclusion_filter:  Optional[StrictStr] = Field(None,alias="transactionExclusionFilter", description="A filter expression that identifies transactions to exclude when building the transaction portfolio's transactions and holdings. Transactions matching this filter are flagged as excluded.") 
     links: Optional[List[Link]] = None
-    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "stagedModifications", "links"]
+    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "stagedModifications", "transactionExclusionFilter", "links"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -221,6 +222,11 @@ class PortfolioDetails(BaseModel):
         if self.tax_rule_set_scope is None and "tax_rule_set_scope" in self.__fields_set__:
             _dict['taxRuleSetScope'] = None
 
+        # set to None if transaction_exclusion_filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_exclusion_filter is None and "transaction_exclusion_filter" in self.__fields_set__:
+            _dict['transactionExclusionFilter'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -254,6 +260,7 @@ class PortfolioDetails(BaseModel):
             "tax_rule_set_scope": obj.get("taxRuleSetScope"),
             "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
+            "transaction_exclusion_filter": obj.get("transactionExclusionFilter"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

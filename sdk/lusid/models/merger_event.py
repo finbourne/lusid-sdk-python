@@ -38,13 +38,15 @@ class MergerEvent(InstrumentEvent):
     ex_date: Optional[datetime] = Field(default=None, description="The first date on which the holder of record of the original shares has entitled ownership of the new shares.", alias="exDate")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.") 
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. Used in calculating cash-in-lieu of fractional shares.", alias="fractionalUnitsCashPrice")
+    fractional_units_rounding_convention:  Optional[StrictStr] = Field(None,alias="fractionalUnitsRoundingConvention", description="The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    fractional_units_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.", alias="fractionalUnitsDecimalPlaces")
     new_instrument: NewInstrument = Field(alias="newInstrument")
     payment_date: Optional[datetime] = Field(default=None, description="Date on which the merger takes place.", alias="paymentDate")
     record_date: Optional[datetime] = Field(default=None, description="Optional. Date you have to be the holder of record of the original shares in order to receive the new shares.", alias="recordDate")
     security_offer_elections: Optional[List[SecurityOfferElection]] = Field(default=None, description="List of possible SecurityOfferElections for this merger event", alias="securityOfferElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashOfferElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "newInstrument", "paymentDate", "recordDate", "securityOfferElections"]
+    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashOfferElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "newInstrument", "paymentDate", "recordDate", "securityOfferElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -204,6 +206,16 @@ class MergerEvent(InstrumentEvent):
         if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
             _dict['fractionalUnitsCashPrice'] = None
 
+        # set to None if fractional_units_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_rounding_convention is None and "fractional_units_rounding_convention" in self.__fields_set__:
+            _dict['fractionalUnitsRoundingConvention'] = None
+
+        # set to None if fractional_units_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_decimal_places is None and "fractional_units_decimal_places" in self.__fields_set__:
+            _dict['fractionalUnitsDecimalPlaces'] = None
+
         # set to None if record_date (nullable) is None
         # and __fields_set__ contains the field
         if self.record_date is None and "record_date" in self.__fields_set__:
@@ -233,6 +245,8 @@ class MergerEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
+            "fractional_units_rounding_convention": obj.get("fractionalUnitsRoundingConvention"),
+            "fractional_units_decimal_places": obj.get("fractionalUnitsDecimalPlaces"),
             "new_instrument": NewInstrument.from_dict(obj.get("newInstrument")) if obj.get("newInstrument") is not None else None,
             "payment_date": obj.get("paymentDate"),
             "record_date": obj.get("recordDate"),

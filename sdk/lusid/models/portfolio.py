@@ -41,6 +41,7 @@ class Portfolio(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
+    enablement_date: Optional[datetime] = Field(default=None, description="The effective datetime from which transactions or holdings booked to the portfolio begin contributing to holdings, valuations and other computed results. Data with an earlier effective date is still accepted and stored, but does not affect any computed results until this date. Defaults to the portfolio's creation date when not explicitly set.", alias="enablementDate")
     parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
@@ -57,8 +58,9 @@ class Portfolio(BaseModel):
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     tax_rule_set_scope:  Optional[StrictStr] = Field(None,alias="taxRuleSetScope", description="The scope of the tax rule sets for this portfolio.") 
     settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
+    transaction_exclusion_filter:  Optional[StrictStr] = Field(None,alias="transactionExclusionFilter", description="A filter expression that identifies transactions to exclude when building the transaction portfolio's transactions and holdings. Transactions matching this filter are flagged as excluded.") 
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "enablementDate", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -289,6 +291,11 @@ class Portfolio(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if enablement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.enablement_date is None and "enablement_date" in self.__fields_set__:
+            _dict['enablementDate'] = None
+
         # set to None if base_currency (nullable) is None
         # and __fields_set__ contains the field
         if self.base_currency is None and "base_currency" in self.__fields_set__:
@@ -329,6 +336,11 @@ class Portfolio(BaseModel):
         if self.tax_rule_set_scope is None and "tax_rule_set_scope" in self.__fields_set__:
             _dict['taxRuleSetScope'] = None
 
+        # set to None if transaction_exclusion_filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_exclusion_filter is None and "transaction_exclusion_filter" in self.__fields_set__:
+            _dict['transactionExclusionFilter'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -352,6 +364,7 @@ class Portfolio(BaseModel):
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "created": obj.get("created"),
+            "enablement_date": obj.get("enablementDate"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
@@ -373,6 +386,7 @@ class Portfolio(BaseModel):
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "tax_rule_set_scope": obj.get("taxRuleSetScope"),
             "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
+            "transaction_exclusion_filter": obj.get("transactionExclusionFilter"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

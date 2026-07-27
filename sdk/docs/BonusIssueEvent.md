@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **payment_date** | **datetime** | The date the Bonus Issue is executed. | [optional] 
 **fractional_units_cash_price** | **float** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
+**fractional_units_rounding_convention** | **str** | The convention used to round the fractional units entitlement. Defaults to Floor. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding. | [optional] 
+**fractional_units_decimal_places** | **int** | The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces. | [optional] 
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | Possible SecurityElections for this Bonus Issue event, if any. | [optional] 
 **cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | Possible CashOfferElections for this Bonus Issue event, if any. | [optional] 
 **lapse_elections** | [**List[LapseElection]**](LapseElection.md) | Possible LapseElections for this Bonus Issue event, if any. | [optional] 
@@ -29,11 +31,14 @@ record_date: Optional[datetime] = # Replace with your value
 payment_date: Optional[datetime] = # Replace with your value
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
+fractional_units_rounding_convention: Optional[StrictStr] = "example_fractional_units_rounding_convention"
+fractional_units_decimal_places: Optional[StrictInt] = # Replace with your value
+fractional_units_decimal_places: Optional[StrictInt] = None
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
 lapse_elections: Optional[List[LapseElection]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-bonus_issue_event_instance = BonusIssueEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, security_offer_elections=security_offer_elections, cash_offer_elections=cash_offer_elections, lapse_elections=lapse_elections, instrument_event_type=instrument_event_type)
+bonus_issue_event_instance = BonusIssueEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, security_offer_elections=security_offer_elections, cash_offer_elections=cash_offer_elections, lapse_elections=lapse_elections, instrument_event_type=instrument_event_type)
 
 ```
 

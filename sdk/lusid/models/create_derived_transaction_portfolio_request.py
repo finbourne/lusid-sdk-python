@@ -35,6 +35,7 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="The code of the derived transaction portfolio. Together with the scope this uniquely identifies the derived transaction portfolio.") 
     parent_portfolio_id: ResourceId = Field(alias="parentPortfolioId")
     created: Optional[datetime] = Field(default=None, description="This will be auto-populated to be the parent portfolio creation date.")
+    enablement_date: Optional[datetime] = Field(default=None, description="The effective datetime from which transactions booked to the derived transaction portfolio begin contributing to holdings, valuations and other computed results. Transactions with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio's creation date if not specified.", alias="enablementDate")
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="Determines the accounting treatment given to the transaction portfolio's tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
     sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, description="A set of unique transaction properties to group the derived transaction portfolio's holdings by, perhaps for strategy tagging. Each property must be from the 'Transaction' domain and identified by a key in the format {domain}/{scope}/{code}, for example 'Transaction/strategies/quantsignal'. See https://support.lusid.com/knowledgebase/article/KA-01879/en-us for more information.", alias="subHoldingKeys")
@@ -45,7 +46,8 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
     settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
-    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "instrumentEventConfiguration", "settlementConfiguration"]
+    transaction_exclusion_filter:  Optional[StrictStr] = Field(None,alias="transactionExclusionFilter", description="A filter expression that identifies transactions to exclude when building the transaction portfolio's transactions and holdings. Transactions matching this filter are flagged as excluded.") 
+    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "enablementDate", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "instrumentEventConfiguration", "settlementConfiguration", "transactionExclusionFilter"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -178,6 +180,11 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
         if self.created is None and "created" in self.__fields_set__:
             _dict['created'] = None
 
+        # set to None if enablement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.enablement_date is None and "enablement_date" in self.__fields_set__:
+            _dict['enablementDate'] = None
+
         # set to None if sub_holding_keys (nullable) is None
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
@@ -203,6 +210,11 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
         if self.cash_gain_loss_calculation_date is None and "cash_gain_loss_calculation_date" in self.__fields_set__:
             _dict['cashGainLossCalculationDate'] = None
 
+        # set to None if transaction_exclusion_filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_exclusion_filter is None and "transaction_exclusion_filter" in self.__fields_set__:
+            _dict['transactionExclusionFilter'] = None
+
         return _dict
 
     @classmethod
@@ -220,6 +232,7 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
             "code": obj.get("code"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
             "created": obj.get("created"),
+            "enablement_date": obj.get("enablementDate"),
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
             "accounting_method": obj.get("accountingMethod"),
             "sub_holding_keys": obj.get("subHoldingKeys"),
@@ -229,7 +242,8 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
             "cash_gain_loss_calculation_date": obj.get("cashGainLossCalculationDate"),
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
-            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None
+            "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
+            "transaction_exclusion_filter": obj.get("transactionExclusionFilter")
         })
         return _obj
 

@@ -34,6 +34,7 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the simple position portfolio.") 
     code:  StrictStr = Field(...,alias="code", description="The code of the simple position portfolio. Together with the scope this uniquely identifies the simple position portfolio.") 
     created: Optional[datetime] = Field(default=None, description="The effective datetime at which to create the simple position portfolio. No holdings can be set on the simple position portfolio before this date. Defaults to the current LUSID system datetime if not specified.")
+    enablement_date: Optional[datetime] = Field(default=None, description="The effective datetime from which holdings set on the simple position portfolio begin contributing to valuations and other computed results. Holdings with an earlier effective date are still accepted and stored, but do not affect any computed results until this date. Defaults to the portfolio's creation date if not specified.", alias="enablementDate")
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the simple position portfolio in ISO 4217 currency code format.") 
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="Determines the accounting treatment given to the simple position portfolio's tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
@@ -45,7 +46,7 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated. Default value: SettlementDate. Available values: Default, SettlementDate, TransactionDate.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
-    __properties = ["displayName", "description", "code", "created", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId"]
+    __properties = ["displayName", "description", "code", "created", "enablementDate", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -179,6 +180,11 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
         if self.created is None and "created" in self.__fields_set__:
             _dict['created'] = None
 
+        # set to None if enablement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.enablement_date is None and "enablement_date" in self.__fields_set__:
+            _dict['enablementDate'] = None
+
         # set to None if sub_holding_keys (nullable) is None
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
@@ -225,6 +231,7 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
             "description": obj.get("description"),
             "code": obj.get("code"),
             "created": obj.get("created"),
+            "enablement_date": obj.get("enablementDate"),
             "base_currency": obj.get("baseCurrency"),
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
             "accounting_method": obj.get("accountingMethod"),
