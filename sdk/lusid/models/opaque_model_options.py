@@ -29,7 +29,7 @@ class OpaqueModelOptions(ModelOptions):
     OpaqueModelOptions
     """
     data: Dict[str, Any]
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "data"]
 
@@ -100,8 +100,8 @@ class OpaqueModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions')")
         return value
 
     class Config:

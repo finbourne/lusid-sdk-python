@@ -28,7 +28,7 @@ class ScenarioShiftDefinition(BaseModel):
     """
     ScenarioShiftDefinition
     """
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition.") 
     __properties = ["scenarioShiftType"]
 
     @validator('scenario_shift_type')
@@ -98,8 +98,8 @@ class ScenarioShiftDefinition(BaseModel):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition')")
         return value
 
     class Config:
@@ -112,7 +112,10 @@ class ScenarioShiftDefinition(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map = {
-        'RateCurveShiftDefinition': 'RateCurveShiftDefinition'
+        'EquityShiftDefinition': 'EquityShiftDefinition',
+        'FxShiftDefinition': 'FxShiftDefinition',
+        'RateCurveShiftDefinition': 'RateCurveShiftDefinition',
+        'VolSurfaceShiftDefinition': 'VolSurfaceShiftDefinition'
     }
 
     @classmethod
@@ -141,7 +144,7 @@ class ScenarioShiftDefinition(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(RateCurveShiftDefinition):
+    def from_json(cls, json_str: str) -> Union(EquityShiftDefinition, FxShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
         """Create an instance of ScenarioShiftDefinition from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -154,7 +157,7 @@ class ScenarioShiftDefinition(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(RateCurveShiftDefinition):
+    def from_dict(cls, obj: dict) -> Union(EquityShiftDefinition, FxShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
         """Create an instance of ScenarioShiftDefinition from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

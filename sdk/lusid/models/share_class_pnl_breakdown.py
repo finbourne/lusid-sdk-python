@@ -30,8 +30,9 @@ class ShareClassPnlBreakdown(BaseModel):
     """
     apportioned_non_class_specific_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for PnL within the queried period not explicitly allocated to any share class but has been apportioned to the share class.", alias="apportionedNonClassSpecificPnl")
     class_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for PnL specific to the share class within the queried period.", alias="classPnl")
-    total_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for the sum of class PnL and PnL not specific to a class within the queried period.", alias="totalPnl")
-    __properties = ["apportionedNonClassSpecificPnl", "classPnl", "totalPnl"]
+    group_apportioned_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for the share class's apportioned share of PnL allocated to the allocation groups it belongs to, within the queried period.", alias="groupApportionedPnl")
+    total_pnl: Dict[str, ShareClassAmount] = Field(description="Bucket of detail for the total PnL within the queried period: the sum of the class-specific, apportioned non-class-specific and allocation-group-apportioned PnL.", alias="totalPnl")
+    __properties = ["apportionedNonClassSpecificPnl", "classPnl", "groupApportionedPnl", "totalPnl"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +80,13 @@ class ShareClassPnlBreakdown(BaseModel):
                 if self.class_pnl[_key]:
                     _field_dict[_key] = self.class_pnl[_key].to_dict()
             _dict['classPnl'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in group_apportioned_pnl (dict)
+        _field_dict = {}
+        if self.group_apportioned_pnl:
+            for _key in self.group_apportioned_pnl:
+                if self.group_apportioned_pnl[_key]:
+                    _field_dict[_key] = self.group_apportioned_pnl[_key].to_dict()
+            _dict['groupApportionedPnl'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each value in total_pnl (dict)
         _field_dict = {}
         if self.total_pnl:
@@ -109,6 +117,12 @@ class ShareClassPnlBreakdown(BaseModel):
                 for _k, _v in obj.get("classPnl").items()
             )
             if obj.get("classPnl") is not None
+            else None,
+            "group_apportioned_pnl": dict(
+                (_k, ShareClassAmount.from_dict(_v))
+                for _k, _v in obj.get("groupApportionedPnl").items()
+            )
+            if obj.get("groupApportionedPnl") is not None
             else None,
             "total_pnl": dict(
                 (_k, ShareClassAmount.from_dict(_v))

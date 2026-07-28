@@ -39,6 +39,7 @@ class ModelOptionsType(str, Enum):
     FUNDINGLEGMODELOPTIONS = 'FundingLegModelOptions'
     EQUITYMODELOPTIONS = 'EquityModelOptions'
     CDSMODELOPTIONS = 'CdsModelOptions'
+    FLEXIBLELOANPRICEROPTIONS = 'FlexibleLoanPricerOptions'
 
     @classmethod
     def from_json(cls, json_str: str) -> ModelOptionsType:

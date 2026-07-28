@@ -65,6 +65,7 @@ from lusid.api.order_management_api import OrderManagementApi
 from lusid.api.orders_api import OrdersApi
 from lusid.api.packages_api import PackagesApi
 from lusid.api.participations_api import ParticipationsApi
+from lusid.api.payment_instructions_api import PaymentInstructionsApi
 from lusid.api.persons_api import PersonsApi
 from lusid.api.placements_api import PlacementsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
@@ -237,6 +238,7 @@ from lusid.models.bond_principal_event import BondPrincipalEvent
 from lusid.models.bonus_issue_event import BonusIssueEvent
 from lusid.models.book_transactions_request import BookTransactionsRequest
 from lusid.models.book_transactions_response import BookTransactionsResponse
+from lusid.models.bookmark_entity import BookmarkEntity
 from lusid.models.bool_compliance_parameter import BoolComplianceParameter
 from lusid.models.bool_list_compliance_parameter import BoolListComplianceParameter
 from lusid.models.branch_step import BranchStep
@@ -289,6 +291,7 @@ from lusid.models.cds_model_options import CdsModelOptions
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
+from lusid.models.change_event import ChangeEvent
 from lusid.models.change_history import ChangeHistory
 from lusid.models.change_history_action import ChangeHistoryAction
 from lusid.models.change_interval import ChangeInterval
@@ -407,6 +410,7 @@ from lusid.models.create_relation_request import CreateRelationRequest
 from lusid.models.create_relational_dataset_definition_request import CreateRelationalDatasetDefinitionRequest
 from lusid.models.create_relationship_definition_request import CreateRelationshipDefinitionRequest
 from lusid.models.create_relationship_request import CreateRelationshipRequest
+from lusid.models.create_scenario_from_template_request import CreateScenarioFromTemplateRequest
 from lusid.models.create_sequence_request import CreateSequenceRequest
 from lusid.models.create_series_identifier_field import CreateSeriesIdentifierField
 from lusid.models.create_simple_position_portfolio_request import CreateSimplePositionPortfolioRequest
@@ -525,6 +529,8 @@ from lusid.models.equity_curve_by_prices_data import EquityCurveByPricesData
 from lusid.models.equity_curve_dependency import EquityCurveDependency
 from lusid.models.equity_model_options import EquityModelOptions
 from lusid.models.equity_option import EquityOption
+from lusid.models.equity_shift_definition import EquityShiftDefinition
+from lusid.models.equity_shift_mode import EquityShiftMode
 from lusid.models.equity_swap import EquitySwap
 from lusid.models.equity_vol_dependency import EquityVolDependency
 from lusid.models.equity_vol_surface_data import EquityVolSurfaceData
@@ -569,6 +575,7 @@ from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_schedule import FixedSchedule
 from lusid.models.flexible_deposit import FlexibleDeposit
 from lusid.models.flexible_loan import FlexibleLoan
+from lusid.models.flexible_loan_pricer_options import FlexibleLoanPricerOptions
 from lusid.models.flexible_repo import FlexibleRepo
 from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
 from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
@@ -633,6 +640,8 @@ from lusid.models.fx_forwards_dependency import FxForwardsDependency
 from lusid.models.fx_linked_notional_schedule import FxLinkedNotionalSchedule
 from lusid.models.fx_option import FxOption
 from lusid.models.fx_rate_schedule import FxRateSchedule
+from lusid.models.fx_shift_definition import FxShiftDefinition
+from lusid.models.fx_shift_mode import FxShiftMode
 from lusid.models.fx_swap import FxSwap
 from lusid.models.fx_tenor_convention import FxTenorConvention
 from lusid.models.fx_vol_dependency import FxVolDependency
@@ -995,6 +1004,15 @@ from lusid.models.partial_defeasance_event import PartialDefeasanceEvent
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
+from lusid.models.payment_details_applicable_entity import PaymentDetailsApplicableEntity
+from lusid.models.payment_details_reference import PaymentDetailsReference
+from lusid.models.payment_details_reference_response import PaymentDetailsReferenceResponse
+from lusid.models.payment_details_series_identifiers import PaymentDetailsSeriesIdentifiers
+from lusid.models.payment_instruction import PaymentInstruction
+from lusid.models.payment_instruction_request import PaymentInstructionRequest
+from lusid.models.payment_instruction_status import PaymentInstructionStatus
+from lusid.models.payment_instructions_response import PaymentInstructionsResponse
+from lusid.models.payment_record_reference import PaymentRecordReference
 from lusid.models.percent_check_step import PercentCheckStep
 from lusid.models.percent_check_step_request import PercentCheckStepRequest
 from lusid.models.performance_return import PerformanceReturn
@@ -1577,6 +1595,8 @@ from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding imp
 from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
+from lusid.models.vol_surface_shift_definition import VolSurfaceShiftDefinition
+from lusid.models.vol_surface_shift_mode import VolSurfaceShiftMode
 from lusid.models.volatility_swap import VolatilitySwap
 from lusid.models.warning import Warning
 from lusid.models.warrants_exercise_event import WarrantsExerciseEvent
@@ -1659,6 +1679,7 @@ __all__ = [
     "OrdersApi",
     "PackagesApi",
     "ParticipationsApi",
+    "PaymentInstructionsApi",
     "PersonsApi",
     "PlacementsApi",
     "PortfolioGroupsApi",
@@ -1821,6 +1842,7 @@ __all__ = [
     "BonusIssueEvent",
     "BookTransactionsRequest",
     "BookTransactionsResponse",
+    "BookmarkEntity",
     "BoolComplianceParameter",
     "BoolListComplianceParameter",
     "BranchStep",
@@ -1873,6 +1895,7 @@ __all__ = [
     "CdsProtectionDetailSpecification",
     "CdxCreditEvent",
     "Change",
+    "ChangeEvent",
     "ChangeHistory",
     "ChangeHistoryAction",
     "ChangeInterval",
@@ -1991,6 +2014,7 @@ __all__ = [
     "CreateRelationalDatasetDefinitionRequest",
     "CreateRelationshipDefinitionRequest",
     "CreateRelationshipRequest",
+    "CreateScenarioFromTemplateRequest",
     "CreateSequenceRequest",
     "CreateSeriesIdentifierField",
     "CreateSimplePositionPortfolioRequest",
@@ -2109,6 +2133,8 @@ __all__ = [
     "EquityCurveDependency",
     "EquityModelOptions",
     "EquityOption",
+    "EquityShiftDefinition",
+    "EquityShiftMode",
     "EquitySwap",
     "EquityVolDependency",
     "EquityVolSurfaceData",
@@ -2153,6 +2179,7 @@ __all__ = [
     "FixedSchedule",
     "FlexibleDeposit",
     "FlexibleLoan",
+    "FlexibleLoanPricerOptions",
     "FlexibleRepo",
     "FlexibleRepoCashFlowEvent",
     "FlexibleRepoCollateralEvent",
@@ -2217,6 +2244,8 @@ __all__ = [
     "FxLinkedNotionalSchedule",
     "FxOption",
     "FxRateSchedule",
+    "FxShiftDefinition",
+    "FxShiftMode",
     "FxSwap",
     "FxTenorConvention",
     "FxVolDependency",
@@ -2579,6 +2608,15 @@ __all__ = [
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
+    "PaymentDetailsApplicableEntity",
+    "PaymentDetailsReference",
+    "PaymentDetailsReferenceResponse",
+    "PaymentDetailsSeriesIdentifiers",
+    "PaymentInstruction",
+    "PaymentInstructionRequest",
+    "PaymentInstructionStatus",
+    "PaymentInstructionsResponse",
+    "PaymentRecordReference",
     "PercentCheckStep",
     "PercentCheckStepRequest",
     "PerformanceReturn",
@@ -3161,6 +3199,8 @@ __all__ = [
     "VirtualDocument",
     "VirtualDocumentRow",
     "VirtualRow",
+    "VolSurfaceShiftDefinition",
+    "VolSurfaceShiftMode",
     "VolatilitySwap",
     "Warning",
     "WarrantsExerciseEvent",

@@ -32,6 +32,9 @@ class ScenarioShiftType(str, Enum):
     allowed enum values
     """
     RATECURVESHIFTDEFINITION = 'RateCurveShiftDefinition'
+    FXSHIFTDEFINITION = 'FxShiftDefinition'
+    EQUITYSHIFTDEFINITION = 'EquityShiftDefinition'
+    VOLSURFACESHIFTDEFINITION = 'VolSurfaceShiftDefinition'
 
     @classmethod
     def from_json(cls, json_str: str) -> ScenarioShiftType:

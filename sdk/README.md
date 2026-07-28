@@ -223,6 +223,7 @@ Class | Method | HTTP request | Description
 *DataTypesApi* | [**update_reference_values**](docs/DataTypesApi.md#update_reference_values) | **PUT** /api/datatypes/{scope}/{code}/referencedatavalues | [EARLY ACCESS] UpdateReferenceValues: Update reference data on a data type
 *DerivedTransactionPortfoliosApi* | [**create_derived_portfolio**](docs/DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | CreateDerivedPortfolio: Create derived portfolio
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
+*EntitiesApi* | [**get_bookmark_by_entity_unique_id**](docs/EntitiesApi.md#get_bookmark_by_entity_unique_id) | **GET** /api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
@@ -428,6 +429,8 @@ Class | Method | HTTP request | Description
 *ParticipationsApi* | [**get_participation**](docs/ParticipationsApi.md#get_participation) | **GET** /api/participations/{scope}/{code} | [EARLY ACCESS] GetParticipation: Get Participation
 *ParticipationsApi* | [**list_participations**](docs/ParticipationsApi.md#list_participations) | **GET** /api/participations | [EARLY ACCESS] ListParticipations: List Participations
 *ParticipationsApi* | [**upsert_participations**](docs/ParticipationsApi.md#upsert_participations) | **POST** /api/participations | [EARLY ACCESS] UpsertParticipations: Upsert Participation
+*PaymentInstructionsApi* | [**get_payment_instruction**](docs/PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+*PaymentInstructionsApi* | [**upsert_payment_instructions**](docs/PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
 *PersonsApi* | [**delete_person**](docs/PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | DeletePerson: Delete person
 *PersonsApi* | [**delete_person_access_metadata**](docs/PersonsApi.md#delete_person_access_metadata) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
 *PersonsApi* | [**delete_person_identifiers**](docs/PersonsApi.md#delete_person_identifiers) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/identifiers | [EARLY ACCESS] DeletePersonIdentifiers: Delete Person Identifiers
@@ -583,6 +586,7 @@ Class | Method | HTTP request | Description
 *ResourceRecordApi* | [**list_resource_record_scopes**](docs/ResourceRecordApi.md#list_resource_record_scopes) | **GET** /api/resourcerecords | ListResourceRecordScopes: List Resource Record Scopes
 *ResourceRecordApi* | [**list_resource_records**](docs/ResourceRecordApi.md#list_resource_records) | **GET** /api/resourcerecords/{scope}/{code} | ListResourceRecords: List Resource Records
 *ResourceRecordApi* | [**upsert_resource_record**](docs/ResourceRecordApi.md#upsert_resource_record) | **POST** /api/resourcerecords | UpsertResourceRecord: Upsert a Resource Record
+*ScenariosApi* | [**create_scenario_from_template**](docs/ScenariosApi.md#create_scenario_from_template) | **POST** /api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 *ScenariosApi* | [**delete_scenario**](docs/ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 *ScenariosApi* | [**get_scenario**](docs/ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
 *ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
@@ -872,6 +876,7 @@ Class | Method | HTTP request | Description
  - [BonusIssueEvent](docs/BonusIssueEvent.md)
  - [BookTransactionsRequest](docs/BookTransactionsRequest.md)
  - [BookTransactionsResponse](docs/BookTransactionsResponse.md)
+ - [BookmarkEntity](docs/BookmarkEntity.md)
  - [BoolComplianceParameter](docs/BoolComplianceParameter.md)
  - [BoolListComplianceParameter](docs/BoolListComplianceParameter.md)
  - [BranchStep](docs/BranchStep.md)
@@ -924,6 +929,7 @@ Class | Method | HTTP request | Description
  - [CdsProtectionDetailSpecification](docs/CdsProtectionDetailSpecification.md)
  - [CdxCreditEvent](docs/CdxCreditEvent.md)
  - [Change](docs/Change.md)
+ - [ChangeEvent](docs/ChangeEvent.md)
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeHistoryAction](docs/ChangeHistoryAction.md)
  - [ChangeInterval](docs/ChangeInterval.md)
@@ -1042,6 +1048,7 @@ Class | Method | HTTP request | Description
  - [CreateRelationalDatasetDefinitionRequest](docs/CreateRelationalDatasetDefinitionRequest.md)
  - [CreateRelationshipDefinitionRequest](docs/CreateRelationshipDefinitionRequest.md)
  - [CreateRelationshipRequest](docs/CreateRelationshipRequest.md)
+ - [CreateScenarioFromTemplateRequest](docs/CreateScenarioFromTemplateRequest.md)
  - [CreateSequenceRequest](docs/CreateSequenceRequest.md)
  - [CreateSeriesIdentifierField](docs/CreateSeriesIdentifierField.md)
  - [CreateSimplePositionPortfolioRequest](docs/CreateSimplePositionPortfolioRequest.md)
@@ -1160,6 +1167,8 @@ Class | Method | HTTP request | Description
  - [EquityCurveDependency](docs/EquityCurveDependency.md)
  - [EquityModelOptions](docs/EquityModelOptions.md)
  - [EquityOption](docs/EquityOption.md)
+ - [EquityShiftDefinition](docs/EquityShiftDefinition.md)
+ - [EquityShiftMode](docs/EquityShiftMode.md)
  - [EquitySwap](docs/EquitySwap.md)
  - [EquityVolDependency](docs/EquityVolDependency.md)
  - [EquityVolSurfaceData](docs/EquityVolSurfaceData.md)
@@ -1204,6 +1213,7 @@ Class | Method | HTTP request | Description
  - [FixedSchedule](docs/FixedSchedule.md)
  - [FlexibleDeposit](docs/FlexibleDeposit.md)
  - [FlexibleLoan](docs/FlexibleLoan.md)
+ - [FlexibleLoanPricerOptions](docs/FlexibleLoanPricerOptions.md)
  - [FlexibleRepo](docs/FlexibleRepo.md)
  - [FlexibleRepoCashFlowEvent](docs/FlexibleRepoCashFlowEvent.md)
  - [FlexibleRepoCollateralEvent](docs/FlexibleRepoCollateralEvent.md)
@@ -1268,6 +1278,8 @@ Class | Method | HTTP request | Description
  - [FxLinkedNotionalSchedule](docs/FxLinkedNotionalSchedule.md)
  - [FxOption](docs/FxOption.md)
  - [FxRateSchedule](docs/FxRateSchedule.md)
+ - [FxShiftDefinition](docs/FxShiftDefinition.md)
+ - [FxShiftMode](docs/FxShiftMode.md)
  - [FxSwap](docs/FxSwap.md)
  - [FxTenorConvention](docs/FxTenorConvention.md)
  - [FxVolDependency](docs/FxVolDependency.md)
@@ -1630,6 +1642,15 @@ Class | Method | HTTP request | Description
  - [Participation](docs/Participation.md)
  - [ParticipationRequest](docs/ParticipationRequest.md)
  - [ParticipationSetRequest](docs/ParticipationSetRequest.md)
+ - [PaymentDetailsApplicableEntity](docs/PaymentDetailsApplicableEntity.md)
+ - [PaymentDetailsReference](docs/PaymentDetailsReference.md)
+ - [PaymentDetailsReferenceResponse](docs/PaymentDetailsReferenceResponse.md)
+ - [PaymentDetailsSeriesIdentifiers](docs/PaymentDetailsSeriesIdentifiers.md)
+ - [PaymentInstruction](docs/PaymentInstruction.md)
+ - [PaymentInstructionRequest](docs/PaymentInstructionRequest.md)
+ - [PaymentInstructionStatus](docs/PaymentInstructionStatus.md)
+ - [PaymentInstructionsResponse](docs/PaymentInstructionsResponse.md)
+ - [PaymentRecordReference](docs/PaymentRecordReference.md)
  - [PercentCheckStep](docs/PercentCheckStep.md)
  - [PercentCheckStepRequest](docs/PercentCheckStepRequest.md)
  - [PerformanceReturn](docs/PerformanceReturn.md)
@@ -2212,6 +2233,8 @@ Class | Method | HTTP request | Description
  - [VirtualDocument](docs/VirtualDocument.md)
  - [VirtualDocumentRow](docs/VirtualDocumentRow.md)
  - [VirtualRow](docs/VirtualRow.md)
+ - [VolSurfaceShiftDefinition](docs/VolSurfaceShiftDefinition.md)
+ - [VolSurfaceShiftMode](docs/VolSurfaceShiftMode.md)
  - [VolatilitySwap](docs/VolatilitySwap.md)
  - [Warning](docs/Warning.md)
  - [WarrantsExerciseEvent](docs/WarrantsExerciseEvent.md)

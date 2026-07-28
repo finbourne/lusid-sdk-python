@@ -31,9 +31,10 @@ class FxForwardModelOptions(ModelOptions):
     forward_rate_observable_type:  StrictStr = Field(...,alias="forwardRateObservableType", description="Available values: ForwardPoints, ForwardRate, RatesCurve, FxForwardCurve, Invalid.") 
     discounting_method:  StrictStr = Field(...,alias="discountingMethod", description="Available values: Standard, ConstantTimeValueOfMoney, Invalid.") 
     convert_to_report_ccy: StrictBool = Field(description="Convert all FX flows to the report currency  By setting this all FX forwards will be priced using Forward Curves that have Report Currency as the base.", alias="convertToReportCcy")
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions.") 
+    allow_spot_fallback_for_report_ccy: Optional[StrictBool] = Field(default=None, description="When converting to the report currency, allow falling back to pricing off the natural-pair forward  and converting to the report currency at spot when the report-currency cross forward curves are not  available. Defaults to false, in which case the report-currency cross forwards are required.", alias="allowSpotFallbackForReportCcy")
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "forwardRateObservableType", "discountingMethod", "convertToReportCcy"]
+    __properties = ["modelOptionsType", "forwardRateObservableType", "discountingMethod", "convertToReportCcy", "allowSpotFallbackForReportCcy"]
 
     @validator('forward_rate_observable_type')
     def forward_rate_observable_type_validate_enum(cls, value):
@@ -244,8 +245,8 @@ class FxForwardModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions')")
         return value
 
     class Config:
@@ -301,7 +302,8 @@ class FxForwardModelOptions(ModelOptions):
             "model_options_type": obj.get("modelOptionsType"),
             "forward_rate_observable_type": obj.get("forwardRateObservableType"),
             "discounting_method": obj.get("discountingMethod"),
-            "convert_to_report_ccy": obj.get("convertToReportCcy")
+            "convert_to_report_ccy": obj.get("convertToReportCcy"),
+            "allow_spot_fallback_for_report_ccy": obj.get("allowSpotFallbackForReportCcy")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

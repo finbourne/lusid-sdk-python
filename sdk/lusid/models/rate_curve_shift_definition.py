@@ -33,7 +33,7 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
     start_tenor:  Optional[StrictStr] = Field(None,alias="startTenor") 
     end_tenor:  Optional[StrictStr] = Field(None,alias="endTenor") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist.") 
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType"]
 
@@ -175,8 +175,8 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition')")
         return value
 
     class Config:

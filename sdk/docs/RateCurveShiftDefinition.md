@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **start_tenor** | **str** |  | [optional] 
 **end_tenor** | **str** |  | [optional] 
 **shift_type** | **str** | Available values: Parallel, Steepen, Flatten, Twist. | 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition. | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition. | 
 ## Example
 
 ```python

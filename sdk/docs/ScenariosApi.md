@@ -4,11 +4,111 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_scenario_from_template**](ScenariosApi.md#create_scenario_from_template) | **POST** /api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 [**delete_scenario**](ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 [**get_scenario**](ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
 [**list_scenarios**](ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
 [**upsert_scenario**](ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 
+
+# **create_scenario_from_template**
+> UpsertSingleStructuredDataResponse create_scenario_from_template(scope, create_scenario_from_template_request)
+
+[EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+
+Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario's shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ScenariosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ScenariosApi)
+    scope = 'scope_example' # str | The scope in which to create the scenario
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # create_scenario_from_template_request = CreateScenarioFromTemplateRequest.from_json("")
+    # create_scenario_from_template_request = CreateScenarioFromTemplateRequest.from_dict({})
+    create_scenario_from_template_request = CreateScenarioFromTemplateRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.create_scenario_from_template(scope, create_scenario_from_template_request, opts=opts)
+
+        # [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
+        api_response = api_instance.create_scenario_from_template(scope, create_scenario_from_template_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ScenariosApi->create_scenario_from_template: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope in which to create the scenario | 
+ **create_scenario_from_template_request** | [**CreateScenarioFromTemplateRequest**](CreateScenarioFromTemplateRequest.md)| The template, code and parameters to create the scenario from | 
+
+### Return type
+
+[**UpsertSingleStructuredDataResponse**](UpsertSingleStructuredDataResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The successfully created scenario or any failure |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **delete_scenario**
 > AnnulSingleStructuredDataResponse delete_scenario(scope, code)

@@ -49,6 +49,7 @@ from lusid.api.order_management_api import OrderManagementApi
 from lusid.api.orders_api import OrdersApi
 from lusid.api.packages_api import PackagesApi
 from lusid.api.participations_api import ParticipationsApi
+from lusid.api.payment_instructions_api import PaymentInstructionsApi
 from lusid.api.persons_api import PersonsApi
 from lusid.api.placements_api import PlacementsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
@@ -139,6 +140,7 @@ __all__ = [
     "OrdersApi",
     "PackagesApi",
     "ParticipationsApi",
+    "PaymentInstructionsApi",
     "PersonsApi",
     "PlacementsApi",
     "PortfolioGroupsApi",
