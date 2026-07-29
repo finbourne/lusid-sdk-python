@@ -921,6 +921,11 @@ from lusid.models.period_type import PeriodType
 from lusid.models.perpetual_entity_state import PerpetualEntityState
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.person import Person
+from lusid.models.pik_bond_cash_coupon_event import PikBondCashCouponEvent
+from lusid.models.pik_bond_coupon_event import PikBondCouponEvent
+from lusid.models.pik_bond_interest_capitalisation_event import PikBondInterestCapitalisationEvent
+from lusid.models.pik_bond_principal_event import PikBondPrincipalEvent
+from lusid.models.pik_election import PikElection
 from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement import Placement
 from lusid.models.placement_request import PlacementRequest
@@ -2427,6 +2432,11 @@ __all__ = [
     "PerpetualEntityState",
     "PerpetualProperty",
     "Person",
+    "PikBondCashCouponEvent",
+    "PikBondCouponEvent",
+    "PikBondInterestCapitalisationEvent",
+    "PikBondPrincipalEvent",
+    "PikElection",
     "PlaceBlocksRequest",
     "Placement",
     "PlacementRequest",
