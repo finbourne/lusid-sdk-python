@@ -32,13 +32,14 @@ class EarlyCloseOutEvent(InstrumentEvent):
     close_out_ccy:  StrictStr = Field(...,alias="closeOutCcy", description="The currency corresponding to the amount to be closed out early. Required.") 
     close_out_to_other_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate between close out amount and other amount. Optional. If provided, must be strictly positive.", alias="closeOutToOtherRate")
     effective_date: Optional[datetime] = Field(default=None, description="The date of the event.", alias="effectiveDate")
+    close_out_tolerance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Tolerance for inferring a full close-out. Optional. When set, and the recomputed close-out quantity is  within this tolerance of the holding's units, the full holding is closed out so the holding nets to zero;  otherwise the recomputed quantity is used. When absent, the recomputed quantity is always used, which may  leave a residual holding.  For example, if the tolerance is set to 0.01 and the calculated value returns 99.99 against a true  sub-holding of 100, the full holding will be closed out and no residual will be produced.", alias="closeOutTolerance")
     other_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The other amount to be closed out early. Optional. If provided, must be strictly positive.", alias="otherAmount")
     other_ccy:  Optional[StrictStr] = Field(None,alias="otherCcy", description="The currency corresponding to the other amount to be closed out early. Optional.") 
     other_to_close_out_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate between other amount and close out amount. Optional. If provided, must be strictly positive.", alias="otherToCloseOutRate")
     settlement_ccy:  StrictStr = Field(...,alias="settlementCcy", description="The settlement currency. Required.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "closeOutAmount", "closeOutCcy", "closeOutToOtherRate", "effectiveDate", "otherAmount", "otherCcy", "otherToCloseOutRate", "settlementCcy"]
+    __properties = ["instrumentEventType", "closeOutAmount", "closeOutCcy", "closeOutToOtherRate", "effectiveDate", "closeOutTolerance", "otherAmount", "otherCcy", "otherToCloseOutRate", "settlementCcy"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -154,6 +155,11 @@ class EarlyCloseOutEvent(InstrumentEvent):
         if self.close_out_to_other_rate is None and "close_out_to_other_rate" in self.__fields_set__:
             _dict['closeOutToOtherRate'] = None
 
+        # set to None if close_out_tolerance (nullable) is None
+        # and __fields_set__ contains the field
+        if self.close_out_tolerance is None and "close_out_tolerance" in self.__fields_set__:
+            _dict['closeOutTolerance'] = None
+
         # set to None if other_amount (nullable) is None
         # and __fields_set__ contains the field
         if self.other_amount is None and "other_amount" in self.__fields_set__:
@@ -186,6 +192,7 @@ class EarlyCloseOutEvent(InstrumentEvent):
             "close_out_ccy": obj.get("closeOutCcy"),
             "close_out_to_other_rate": obj.get("closeOutToOtherRate"),
             "effective_date": obj.get("effectiveDate"),
+            "close_out_tolerance": obj.get("closeOutTolerance"),
             "other_amount": obj.get("otherAmount"),
             "other_ccy": obj.get("otherCcy"),
             "other_to_close_out_rate": obj.get("otherToCloseOutRate"),

@@ -1022,6 +1022,7 @@ from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
 from lusid.models.rate_curve_shift_definition import RateCurveShiftDefinition
 from lusid.models.rate_curve_shift_mode import RateCurveShiftMode
+from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
@@ -1188,6 +1189,7 @@ from lusid.models.run_check_request import RunCheckRequest
 from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.scenario_definition import ScenarioDefinition
+from lusid.models.scenario_reference import ScenarioReference
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 from lusid.models.scenario_shift_type import ScenarioShiftType
 from lusid.models.schedule import Schedule
@@ -2526,6 +2528,7 @@ __all__ = [
     "QuoteType",
     "RateCurveShiftDefinition",
     "RateCurveShiftMode",
+    "RateCurveShiftScale",
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
@@ -2692,6 +2695,7 @@ __all__ = [
     "RunCheckResponse",
     "ScalingMethodology",
     "ScenarioDefinition",
+    "ScenarioReference",
     "ScenarioShiftDefinition",
     "ScenarioShiftType",
     "Schedule",

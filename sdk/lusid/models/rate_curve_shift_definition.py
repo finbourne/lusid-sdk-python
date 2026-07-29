@@ -29,13 +29,14 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
     RateCurveShiftDefinition
     """
     ccy:  StrictStr = Field(...,alias="ccy") 
-    amount: Union[StrictFloat, StrictInt]
+    amount: Union[StrictFloat, StrictInt] = Field(description="The size of the shift, in the units given by Scale: basis points by default (50 means +50bps),  or a percentage of each rate when Scale is Percentage (1 means rates scaled by 1.01).")
     start_tenor:  Optional[StrictStr] = Field(None,alias="startTenor") 
     end_tenor:  Optional[StrictStr] = Field(None,alias="endTenor") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist.") 
+    scale:  Optional[StrictStr] = Field(None,alias="scale", description="Available values: Bps, Percentage.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType"]
+    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType", "scale"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -106,6 +107,80 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
 
         if value not in ['Parallel', 'Steepen', 'Flatten', 'Twist']:
             raise ValueError("must be one of enum values ('Parallel', 'Steepen', 'Flatten', 'Twist')")
+        return value
+
+    @validator('scale')
+    def scale_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'RateCurveShiftDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "scale" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ['Bps', 'Percentage']:
+            raise ValueError("must be one of enum values ('Bps', 'Percentage')")
         return value
 
     @validator('scenario_shift_type')
@@ -244,7 +319,8 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
             "amount": obj.get("amount"),
             "start_tenor": obj.get("startTenor"),
             "end_tenor": obj.get("endTenor"),
-            "shift_type": obj.get("shiftType")
+            "shift_type": obj.get("shiftType"),
+            "scale": obj.get("scale")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

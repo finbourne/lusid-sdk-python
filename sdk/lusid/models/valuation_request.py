@@ -29,6 +29,7 @@ from lusid.models.order_flow_configuration import OrderFlowConfiguration
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.property_filter import PropertyFilter
 from lusid.models.resource_id import ResourceId
+from lusid.models.scenario_reference import ScenarioReference
 from lusid.models.valuation_schedule import ValuationSchedule
 
 class ValuationRequest(BaseModel):
@@ -49,7 +50,8 @@ class ValuationRequest(BaseModel):
     valuation_schedule: ValuationSchedule = Field(alias="valuationSchedule")
     market_data_overrides: Optional[MarketDataOverrides] = Field(default=None, alias="marketDataOverrides")
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
-    __properties = ["recipeId", "asAt", "metrics", "groupBy", "filters", "sort", "reportCurrency", "equipWithSubtotals", "returnResultAsExpandedTypes", "includeOrderFlow", "portfolioEntityIds", "valuationSchedule", "marketDataOverrides", "corporateActionSourceId"]
+    scenario: Optional[ScenarioReference] = None
+    __properties = ["recipeId", "asAt", "metrics", "groupBy", "filters", "sort", "reportCurrency", "equipWithSubtotals", "returnResultAsExpandedTypes", "includeOrderFlow", "portfolioEntityIds", "valuationSchedule", "marketDataOverrides", "corporateActionSourceId", "scenario"]
 
     class Config:
         """Pydantic configuration"""
@@ -126,6 +128,9 @@ class ValuationRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
         if self.corporate_action_source_id:
             _dict['corporateActionSourceId'] = self.corporate_action_source_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scenario
+        if self.scenario:
+            _dict['scenario'] = self.scenario.to_dict()
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -176,7 +181,8 @@ class ValuationRequest(BaseModel):
             "portfolio_entity_ids": [PortfolioEntityId.from_dict(_item) for _item in obj.get("portfolioEntityIds")] if obj.get("portfolioEntityIds") is not None else None,
             "valuation_schedule": ValuationSchedule.from_dict(obj.get("valuationSchedule")) if obj.get("valuationSchedule") is not None else None,
             "market_data_overrides": MarketDataOverrides.from_dict(obj.get("marketDataOverrides")) if obj.get("marketDataOverrides") is not None else None,
-            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
+            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
+            "scenario": ScenarioReference.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
         })
         return _obj
 

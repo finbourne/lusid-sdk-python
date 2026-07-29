@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **close_out_ccy** | **str** | The currency corresponding to the amount to be closed out early. Required. | 
 **close_out_to_other_rate** | **float** | The rate between close out amount and other amount. Optional. If provided, must be strictly positive. | [optional] 
 **effective_date** | **datetime** | The date of the event. | [optional] 
+**close_out_tolerance** | **float** | Tolerance for inferring a full close-out. Optional. When set, and the recomputed close-out quantity is  within this tolerance of the holding&#39;s units, the full holding is closed out so the holding nets to zero;  otherwise the recomputed quantity is used. When absent, the recomputed quantity is always used, which may  leave a residual holding.  For example, if the tolerance is set to 0.01 and the calculated value returns 99.99 against a true  sub-holding of 100, the full holding will be closed out and no residual will be produced. | [optional] 
 **other_amount** | **float** | The other amount to be closed out early. Optional. If provided, must be strictly positive. | [optional] 
 **other_ccy** | **str** | The currency corresponding to the other amount to be closed out early. Optional. | [optional] 
 **other_to_close_out_rate** | **float** | The rate between other amount and close out amount. Optional. If provided, must be strictly positive. | [optional] 
@@ -26,12 +27,13 @@ close_out_amount: Union[StrictFloat, StrictInt] = # Replace with your value
 close_out_ccy: StrictStr = "example_close_out_ccy"
 close_out_to_other_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 effective_date: Optional[datetime] = # Replace with your value
+close_out_tolerance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 other_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 other_ccy: Optional[StrictStr] = "example_other_ccy"
 other_to_close_out_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 settlement_ccy: StrictStr = "example_settlement_ccy"
 instrument_event_type: StrictStr = "example_instrument_event_type"
-early_close_out_event_instance = EarlyCloseOutEvent(close_out_amount=close_out_amount, close_out_ccy=close_out_ccy, close_out_to_other_rate=close_out_to_other_rate, effective_date=effective_date, other_amount=other_amount, other_ccy=other_ccy, other_to_close_out_rate=other_to_close_out_rate, settlement_ccy=settlement_ccy, instrument_event_type=instrument_event_type)
+early_close_out_event_instance = EarlyCloseOutEvent(close_out_amount=close_out_amount, close_out_ccy=close_out_ccy, close_out_to_other_rate=close_out_to_other_rate, effective_date=effective_date, close_out_tolerance=close_out_tolerance, other_amount=other_amount, other_ccy=other_ccy, other_to_close_out_rate=other_to_close_out_rate, settlement_ccy=settlement_ccy, instrument_event_type=instrument_event_type)
 
 ```
 
