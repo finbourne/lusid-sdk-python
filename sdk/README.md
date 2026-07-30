@@ -408,7 +408,7 @@ Class | Method | HTTP request | Description
 *OrderManagementApi* | [**cancel_orders**](docs/OrderManagementApi.md#cancel_orders) | **POST** /api/ordermanagement/cancelorders | [EARLY ACCESS] CancelOrders: Cancel existing orders
 *OrderManagementApi* | [**cancel_orders_and_move_remaining**](docs/OrderManagementApi.md#cancel_orders_and_move_remaining) | **POST** /api/ordermanagement/cancelordersandmoveremaining | [EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks
 *OrderManagementApi* | [**cancel_placements**](docs/OrderManagementApi.md#cancel_placements) | **POST** /api/ordermanagement/$cancelplacements | [EARLY ACCESS] CancelPlacements: Cancel existing placements
-*OrderManagementApi* | [**create_orders**](docs/OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | CreateOrders: Upsert a Block and associated orders
+*OrderManagementApi* | [**create_orders**](docs/OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | CreateOrders: Create Orders and create/update Block
 *OrderManagementApi* | [**get_order_history**](docs/OrderManagementApi.md#get_order_history) | **GET** /api/ordermanagement/order/{scope}/{code}/$history | GetOrderHistory: Get the history of an order and related entity changes
 *OrderManagementApi* | [**move_orders**](docs/OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 *OrderManagementApi* | [**place_blocks**](docs/OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
@@ -534,6 +534,10 @@ Class | Method | HTTP request | Description
 *QuotesApi* | [**list_quotes_for_scope**](docs/QuotesApi.md#list_quotes_for_scope) | **GET** /api/quotes/{scope} | ListQuotesForScope: List quotes for scope
 *QuotesApi* | [**upsert_quote_access_metadata_rule**](docs/QuotesApi.md#upsert_quote_access_metadata_rule) | **POST** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
 *QuotesApi* | [**upsert_quotes**](docs/QuotesApi.md#upsert_quotes) | **POST** /api/quotes/{scope} | UpsertQuotes: Upsert quotes
+*RecResultSetsApi* | [**add_rec_result_set_approval_decision**](docs/RecResultSetsApi.md#add_rec_result_set_approval_decision) | **POST** /api/recs/resultsets/{entityUniqueId}/$decide | [EXPERIMENTAL] AddRecResultSetApprovalDecision: AddRecResultSetApprovalDecision
+*RecResultSetsApi* | [**get_rec_result_set**](docs/RecResultSetsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
+*RecResultSetsApi* | [**list_rec_result_sets**](docs/RecResultSetsApi.md#list_rec_result_sets) | **GET** /api/recs/resultsets | [EXPERIMENTAL] ListRecResultSets: ListRecResultSets
+*RecResultSetsApi* | [**submit_rec_result_set_review**](docs/RecResultSetsApi.md#submit_rec_result_set_review) | **POST** /api/recs/resultsets/{entityUniqueId}/$submit | [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
 *ReconciliationsApi* | [**create_scheduled_reconciliation**](docs/ReconciliationsApi.md#create_scheduled_reconciliation) | **POST** /api/portfolios/$scheduledReconciliations/{scope} | [EXPERIMENTAL] CreateScheduledReconciliation: Create a scheduled reconciliation
 *ReconciliationsApi* | [**delete_reconciliation**](docs/ReconciliationsApi.md#delete_reconciliation) | **DELETE** /api/portfolios/$scheduledReconciliations/{scope}/{code} | [EXPERIMENTAL] DeleteReconciliation: Delete scheduled reconciliation
 *ReconciliationsApi* | [**delete_reconciliation_mapping**](docs/ReconciliationsApi.md#delete_reconciliation_mapping) | **DELETE** /api/portfolios/mapping/{scope}/{code} | [EARLY ACCESS] DeleteReconciliationMapping: Delete a mapping
@@ -1617,6 +1621,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfPostingModuleRule](docs/PagedResourceListOfPostingModuleRule.md)
  - [PagedResourceListOfPropertyDefinition](docs/PagedResourceListOfPropertyDefinition.md)
  - [PagedResourceListOfPropertyDefinitionSearchResult](docs/PagedResourceListOfPropertyDefinitionSearchResult.md)
+ - [PagedResourceListOfRecResultSet](docs/PagedResourceListOfRecResultSet.md)
  - [PagedResourceListOfReconciliation](docs/PagedResourceListOfReconciliation.md)
  - [PagedResourceListOfReferenceListResponse](docs/PagedResourceListOfReferenceListResponse.md)
  - [PagedResourceListOfRelationalDataPointResponse](docs/PagedResourceListOfRelationalDataPointResponse.md)
@@ -1770,6 +1775,27 @@ Class | Method | HTTP request | Description
  - [RawVendorEvent](docs/RawVendorEvent.md)
  - [ReOpenPeriodDiaryEntryRequest](docs/ReOpenPeriodDiaryEntryRequest.md)
  - [RealisedGainLoss](docs/RealisedGainLoss.md)
+ - [RecApprovalDecision](docs/RecApprovalDecision.md)
+ - [RecClosedExceptionCounts](docs/RecClosedExceptionCounts.md)
+ - [RecDatesReconciled](docs/RecDatesReconciled.md)
+ - [RecExceptionCountByClosureType](docs/RecExceptionCountByClosureType.md)
+ - [RecExceptionCountByResultType](docs/RecExceptionCountByResultType.md)
+ - [RecExecution](docs/RecExecution.md)
+ - [RecInstanceId](docs/RecInstanceId.md)
+ - [RecInstanceSummary](docs/RecInstanceSummary.md)
+ - [RecMatchCountByResultType](docs/RecMatchCountByResultType.md)
+ - [RecMatchCounts](docs/RecMatchCounts.md)
+ - [RecOpenExceptionCounts](docs/RecOpenExceptionCounts.md)
+ - [RecRequestedResultRevision](docs/RecRequestedResultRevision.md)
+ - [RecRequiredApproval](docs/RecRequiredApproval.md)
+ - [RecResultCountByReviewStatus](docs/RecResultCountByReviewStatus.md)
+ - [RecResultCounts](docs/RecResultCounts.md)
+ - [RecResultSet](docs/RecResultSet.md)
+ - [RecResultSetApprovalDecisionRequest](docs/RecResultSetApprovalDecisionRequest.md)
+ - [RecReview](docs/RecReview.md)
+ - [RecSubmission](docs/RecSubmission.md)
+ - [RecSupersededRun](docs/RecSupersededRun.md)
+ - [RecWorkflowTask](docs/RecWorkflowTask.md)
  - [RecipeBlock](docs/RecipeBlock.md)
  - [RecipeComposer](docs/RecipeComposer.md)
  - [RecipeValue](docs/RecipeValue.md)
@@ -2012,6 +2038,7 @@ Class | Method | HTTP request | Description
  - [StructuredResultData](docs/StructuredResultData.md)
  - [StructuredResultDataId](docs/StructuredResultDataId.md)
  - [SubHoldingKeyValueEquals](docs/SubHoldingKeyValueEquals.md)
+ - [SubmitRecResultSetReviewRequest](docs/SubmitRecResultSetReviewRequest.md)
  - [SubscribeElection](docs/SubscribeElection.md)
  - [SubscriptionDefinition](docs/SubscriptionDefinition.md)
  - [SwapCashFlowEvent](docs/SwapCashFlowEvent.md)

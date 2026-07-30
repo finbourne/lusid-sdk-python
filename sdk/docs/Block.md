@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | 
-**quantity** | **float** | The total quantity of given instrument ordered. | 
+**quantity** | **float** | The total quantity of given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | 
 **type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | [optional] 
 **time_in_force** | **str** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | [optional] 
@@ -34,7 +35,8 @@ order_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 side: StrictStr = "example_side"
 type: Optional[StrictStr] = "example_type"
 time_in_force: Optional[StrictStr] = "example_time_in_force"
@@ -46,7 +48,7 @@ is_swept:StrictBool = True
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[List[Link]] = None
-block_instance = Block(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept, version=version, data_model_membership=data_model_membership, links=links)
+block_instance = Block(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

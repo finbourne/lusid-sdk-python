@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **order_ids** | [**List[ResourceId]**](ResourceId.md) | The related order ids. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
-**quantity** | **float** | The total quantity of given instrument ordered. | 
+**quantity** | **float** | The total quantity of given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc) | 
 **type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | [optional] 
 **time_in_force** | **str** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | [optional] 
@@ -29,7 +30,8 @@ id: ResourceId
 order_ids: Optional[List[ResourceId]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 side: StrictStr = "example_side"
 type: Optional[StrictStr] = "example_type"
 time_in_force: Optional[StrictStr] = "example_time_in_force"
@@ -38,7 +40,7 @@ limit_price: Optional[CurrencyAndAmount] = # Replace with your value
 stop_price: Optional[CurrencyAndAmount] = # Replace with your value
 is_swept: Optional[StrictBool] = # Replace with your value
 is_swept:Optional[StrictBool] = None
-block_request_instance = BlockRequest(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept)
+block_request_instance = BlockRequest(id=id, order_ids=order_ids, properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, amount=amount, side=side, type=type, time_in_force=time_in_force, created_date=created_date, limit_price=limit_price, stop_price=stop_price, is_swept=is_swept)
 
 ```
 

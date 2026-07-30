@@ -31,7 +31,8 @@ class BlockedOrderRequest(BaseModel):
     BlockedOrderRequest
     """
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
-    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of the given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of the given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
     order_book_id: Optional[ResourceId] = Field(default=None, alias="orderBookId")
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     id: ResourceId
@@ -41,7 +42,7 @@ class BlockedOrderRequest(BaseModel):
     order_instruction: Optional[ResourceId] = Field(default=None, alias="orderInstruction")
     package: Optional[ResourceId] = None
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
-    __properties = ["properties", "quantity", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
+    __properties = ["properties", "quantity", "amount", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +83,9 @@ class BlockedOrderRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of order_book_id
         if self.order_book_id:
             _dict['orderBookId'] = self.order_book_id.to_dict()
@@ -104,6 +108,11 @@ class BlockedOrderRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
 
         # set to None if state (nullable) is None
         # and __fields_set__ contains the field
@@ -134,6 +143,7 @@ class BlockedOrderRequest(BaseModel):
             if obj.get("properties") is not None
             else None,
             "quantity": obj.get("quantity"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "order_book_id": ResourceId.from_dict(obj.get("orderBookId")) if obj.get("orderBookId") is not None else None,
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,

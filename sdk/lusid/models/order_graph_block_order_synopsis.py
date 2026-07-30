@@ -28,10 +28,12 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
     """
     OrderGraphBlockOrderSynopsis
     """
-    quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total number of units ordered.")
     quantity_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Total number of units placed.", alias="quantityByState")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total monetary value ordered, in the block currency.")
+    amount_by_state: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Total monetary value ordered, broken down by order state.", alias="amountByState")
     details: List[OrderGraphBlockOrderDetail] = Field(description="Identifiers and other info for each order in this block.")
-    __properties = ["quantity", "quantityByState", "details"]
+    __properties = ["quantity", "quantityByState", "amount", "amountByState", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,10 +74,25 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['details'] = _items
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
+
         # set to None if quantity_by_state (nullable) is None
         # and __fields_set__ contains the field
         if self.quantity_by_state is None and "quantity_by_state" in self.__fields_set__:
             _dict['quantityByState'] = None
+
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
+        # set to None if amount_by_state (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount_by_state is None and "amount_by_state" in self.__fields_set__:
+            _dict['amountByState'] = None
 
         return _dict
 
@@ -91,6 +108,8 @@ class OrderGraphBlockOrderSynopsis(BaseModel):
         _obj = OrderGraphBlockOrderSynopsis.parse_obj({
             "quantity": obj.get("quantity"),
             "quantity_by_state": obj.get("quantityByState"),
+            "amount": obj.get("amount"),
+            "amount_by_state": obj.get("amountByState"),
             "details": [OrderGraphBlockOrderDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj

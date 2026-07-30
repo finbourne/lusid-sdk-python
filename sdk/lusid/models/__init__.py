@@ -878,6 +878,7 @@ from lusid.models.paged_resource_list_of_posting_module_response import PagedRes
 from lusid.models.paged_resource_list_of_posting_module_rule import PagedResourceListOfPostingModuleRule
 from lusid.models.paged_resource_list_of_property_definition import PagedResourceListOfPropertyDefinition
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
+from lusid.models.paged_resource_list_of_rec_result_set import PagedResourceListOfRecResultSet
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relational_data_point_response import PagedResourceListOfRelationalDataPointResponse
@@ -1031,6 +1032,27 @@ from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.rec_approval_decision import RecApprovalDecision
+from lusid.models.rec_closed_exception_counts import RecClosedExceptionCounts
+from lusid.models.rec_dates_reconciled import RecDatesReconciled
+from lusid.models.rec_exception_count_by_closure_type import RecExceptionCountByClosureType
+from lusid.models.rec_exception_count_by_result_type import RecExceptionCountByResultType
+from lusid.models.rec_execution import RecExecution
+from lusid.models.rec_instance_id import RecInstanceId
+from lusid.models.rec_instance_summary import RecInstanceSummary
+from lusid.models.rec_match_count_by_result_type import RecMatchCountByResultType
+from lusid.models.rec_match_counts import RecMatchCounts
+from lusid.models.rec_open_exception_counts import RecOpenExceptionCounts
+from lusid.models.rec_requested_result_revision import RecRequestedResultRevision
+from lusid.models.rec_required_approval import RecRequiredApproval
+from lusid.models.rec_result_count_by_review_status import RecResultCountByReviewStatus
+from lusid.models.rec_result_counts import RecResultCounts
+from lusid.models.rec_result_set import RecResultSet
+from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
+from lusid.models.rec_review import RecReview
+from lusid.models.rec_submission import RecSubmission
+from lusid.models.rec_superseded_run import RecSupersededRun
+from lusid.models.rec_workflow_task import RecWorkflowTask
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
 from lusid.models.recipe_value import RecipeValue
@@ -1273,6 +1295,7 @@ from lusid.models.string_list_compliance_parameter import StringListCompliancePa
 from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
+from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSetReviewRequest
 from lusid.models.subscribe_election import SubscribeElection
 from lusid.models.subscription_definition import SubscriptionDefinition
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
@@ -2389,6 +2412,7 @@ __all__ = [
     "PagedResourceListOfPostingModuleRule",
     "PagedResourceListOfPropertyDefinition",
     "PagedResourceListOfPropertyDefinitionSearchResult",
+    "PagedResourceListOfRecResultSet",
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationalDataPointResponse",
@@ -2542,6 +2566,27 @@ __all__ = [
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
+    "RecApprovalDecision",
+    "RecClosedExceptionCounts",
+    "RecDatesReconciled",
+    "RecExceptionCountByClosureType",
+    "RecExceptionCountByResultType",
+    "RecExecution",
+    "RecInstanceId",
+    "RecInstanceSummary",
+    "RecMatchCountByResultType",
+    "RecMatchCounts",
+    "RecOpenExceptionCounts",
+    "RecRequestedResultRevision",
+    "RecRequiredApproval",
+    "RecResultCountByReviewStatus",
+    "RecResultCounts",
+    "RecResultSet",
+    "RecResultSetApprovalDecisionRequest",
+    "RecReview",
+    "RecSubmission",
+    "RecSupersededRun",
+    "RecWorkflowTask",
     "RecipeBlock",
     "RecipeComposer",
     "RecipeValue",
@@ -2784,6 +2829,7 @@ __all__ = [
     "StructuredResultData",
     "StructuredResultDataId",
     "SubHoldingKeyValueEquals",
+    "SubmitRecResultSetReviewRequest",
     "SubscribeElection",
     "SubscriptionDefinition",
     "SwapCashFlowEvent",

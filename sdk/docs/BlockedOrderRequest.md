@@ -4,7 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
-**quantity** | **float** | The quantity of the given instrument ordered. | 
+**quantity** | **float** | The quantity of the given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **order_book_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
@@ -24,7 +25,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 order_book_id: Optional[ResourceId] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
 id: ResourceId
@@ -34,7 +36,7 @@ price: Optional[CurrencyAndAmount] = None
 order_instruction: Optional[ResourceId] = # Replace with your value
 package: Optional[ResourceId] = None
 side: Optional[StrictStr] = "example_side"
-blocked_order_request_instance = BlockedOrderRequest(properties=properties, quantity=quantity, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, var_date=var_date, price=price, order_instruction=order_instruction, package=package, side=side)
+blocked_order_request_instance = BlockedOrderRequest(properties=properties, quantity=quantity, amount=amount, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, var_date=var_date, price=price, order_instruction=order_instruction, package=package, side=side)
 
 ```
 

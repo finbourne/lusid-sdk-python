@@ -734,7 +734,7 @@ class OrderManagementApi:
 
     @validate_arguments
     def create_orders(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfBlockAndOrders, Awaitable[ResourceListOfBlockAndOrders]]:  # noqa: E501
-        """CreateOrders: Upsert a Block and associated orders  # noqa: E501
+        """CreateOrders: Create Orders and create/update Block  # noqa: E501
 
         Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -765,7 +765,7 @@ class OrderManagementApi:
 
     @validate_arguments
     def create_orders_with_http_info(self, block_and_orders_create_request : Annotated[BlockAndOrdersCreateRequest, Field(description="The collection of block and orders requests.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """CreateOrders: Upsert a Block and associated orders  # noqa: E501
+        """CreateOrders: Create Orders and create/update Block  # noqa: E501
 
         Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

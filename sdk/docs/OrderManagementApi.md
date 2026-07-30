@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**cancel_orders**](OrderManagementApi.md#cancel_orders) | **POST** /api/ordermanagement/cancelorders | [EARLY ACCESS] CancelOrders: Cancel existing orders
 [**cancel_orders_and_move_remaining**](OrderManagementApi.md#cancel_orders_and_move_remaining) | **POST** /api/ordermanagement/cancelordersandmoveremaining | [EARLY ACCESS] CancelOrdersAndMoveRemaining: Cancel existing orders and move any unplaced quantities to new orders in new blocks
 [**cancel_placements**](OrderManagementApi.md#cancel_placements) | **POST** /api/ordermanagement/$cancelplacements | [EARLY ACCESS] CancelPlacements: Cancel existing placements
-[**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | CreateOrders: Upsert a Block and associated orders
+[**create_orders**](OrderManagementApi.md#create_orders) | **POST** /api/ordermanagement/createorders | CreateOrders: Create Orders and create/update Block
 [**get_order_history**](OrderManagementApi.md#get_order_history) | **GET** /api/ordermanagement/order/{scope}/{code}/$history | GetOrderHistory: Get the history of an order and related entity changes
 [**move_orders**](OrderManagementApi.md#move_orders) | **POST** /api/ordermanagement/moveorders | [EARLY ACCESS] MoveOrders: Move orders to new or existing block
 [**place_blocks**](OrderManagementApi.md#place_blocks) | **POST** /api/ordermanagement/placeblocks | [EARLY ACCESS] PlaceBlocks: Places blocks for a given list of placement requests.
@@ -399,7 +399,7 @@ Name | Type | Description  | Notes
 # **create_orders**
 > ResourceListOfBlockAndOrders create_orders(block_and_orders_create_request)
 
-CreateOrders: Upsert a Block and associated orders
+CreateOrders: Create Orders and create/update Block
 
 Create orders, and blocks if they don't already exist.  This will fail if the block exists and already references orders with differing blocking fields.
 
@@ -459,7 +459,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_orders(block_and_orders_create_request, opts=opts)
 
-        # CreateOrders: Upsert a Block and associated orders
+        # CreateOrders: Create Orders and create/update Block
         api_response = api_instance.create_orders(block_and_orders_create_request)
         pprint(api_response)
 
