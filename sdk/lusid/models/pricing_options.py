@@ -46,7 +46,8 @@ class PricingOptions(BaseModel):
     return_zero_pv: Optional[ReturnZeroPvOptions] = Field(default=None, alias="returnZeroPv")
     enable_leg_level_inference_for_custom_srs_columns: Optional[StrictBool] = Field(default=None, description="When enabled, allows inference between leg-level and  instrument-level data during portfolio valuation. If  data is missing at one level, it may be inferred from  the other level. For example, missing leg-level data   may be inferred from existing leg-level and instrument-  level data when ProduceSeparateResultForLinearOtcLegs  is enabled, and vice versa. Explicitly provided data  always takes precedence.", alias="enableLegLevelInferenceForCustomSrsColumns")
     use_instrument_scale_factor_as_default: Optional[StrictBool] = Field(default=None, description="When enabled, priceScaleFactor defined at the instrument level will  be used in the absence of quote scaleFactor when resolving quotes.", alias="useInstrumentScaleFactorAsDefault")
-    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault"]
+    scale_instrument_accrued_override_by_contract_size: Optional[StrictBool] = Field(default=None, description="When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV = CleanPv + Accrued consistent.", alias="scaleInstrumentAccruedOverrideByContractSize")
+    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize"]
 
     class Config:
         """Pydantic configuration"""
@@ -119,7 +120,8 @@ class PricingOptions(BaseModel):
             "conserved_quantity_for_lookthrough_expansion": obj.get("conservedQuantityForLookthroughExpansion"),
             "return_zero_pv": ReturnZeroPvOptions.from_dict(obj.get("returnZeroPv")) if obj.get("returnZeroPv") is not None else None,
             "enable_leg_level_inference_for_custom_srs_columns": obj.get("enableLegLevelInferenceForCustomSrsColumns"),
-            "use_instrument_scale_factor_as_default": obj.get("useInstrumentScaleFactorAsDefault")
+            "use_instrument_scale_factor_as_default": obj.get("useInstrumentScaleFactorAsDefault"),
+            "scale_instrument_accrued_override_by_contract_size": obj.get("scaleInstrumentAccruedOverrideByContractSize")
         })
         return _obj
 

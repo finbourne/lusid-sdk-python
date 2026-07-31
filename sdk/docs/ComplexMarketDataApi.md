@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_complex_market_data**
-> ResourceListOfListComplexMarketDataWithMetaDataResponse list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+> ResourceListOfListComplexMarketDataWithMetaDataResponse list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, filter=filter, scope=scope)
 
 ListComplexMarketData: List the set of ComplexMarketData
 
@@ -264,19 +264,21 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ComplexMarketDataApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
-    effective_at = 'effective_at_example' # str | The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    effective_at = 'effective_at_example' # str | The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. (optional)
     timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline. (optional)
     timeline_code = 'timeline_code_example' # str | The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. (optional)
     closed_period_id = 'closed_period_id_example' # str | The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. The following fields are supported:              'Scope', 'MarketDataId.MarketAsset', 'MarketDataId.Provider', 'MarketDataId.PriceSource',              'MarketDataId.Lineage' (the lineage of the stored market data) and 'MarketData.MarketDataType'.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    scope = 'scope_example' # str | Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+        # api_response =  api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, filter=filter, scope=scope, opts=opts)
 
         # ListComplexMarketData: List the set of ComplexMarketData
-        api_response = api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        api_response = api_instance.list_complex_market_data(as_at=as_at, effective_at=effective_at, page=page, limit=limit, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, filter=filter, scope=scope)
         pprint(api_response)
 
     except ApiException as e:
@@ -290,12 +292,14 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. | [optional] 
- **effective_at** | **str**| The effectiveAt datetime at which to list the ComplexMarketData. Defaults to latest if not specified. Note  that this parameter is not implemented at this time and the latest version of the ComplexMarketData will  always be returned. | [optional] 
- **page** | **str**| The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **effective_at** | **str**| The effectiveAt datetime or cut label at which to list the ComplexMarketData. Defaults to latest if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing ComplexMarketData; this              value is returned from the previous call. If a pagination token is provided, the filter, scope, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. If not specified, no pagination will be applied. It is  highly recommended to supply a value for this parameter as the default behaviour will change in the future. | [optional] 
  **timeline_scope** | **str**| The scope of the Timeline. | [optional] 
  **timeline_code** | **str**| The code of the Timeline. This can optionally include a colon followed by the Closed Period ID to use at the head of the timeline, for a timeline with unconfirmed periods. | [optional] 
  **closed_period_id** | **str**| The closed period ID. If this is specified, both timelineScope and timelineCode must be specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. The following fields are supported:              &#39;Scope&#39;, &#39;MarketDataId.MarketAsset&#39;, &#39;MarketDataId.Provider&#39;, &#39;MarketDataId.PriceSource&#39;,              &#39;MarketDataId.Lineage&#39; (the lineage of the stored market data) and &#39;MarketData.MarketDataType&#39;.              The market data document contents are not filterable.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **scope** | **str**| Optionally restrict the results to ComplexMarketData in a single scope. If not              specified, ComplexMarketData from all scopes will be returned. | [optional] 
 
 ### Return type
 
