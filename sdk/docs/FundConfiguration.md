@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **external_fee_filters** | [**List[ExternalFeeComponentFilter]**](ExternalFeeComponentFilter.md) | The set of filters used to decide which JE lines are used for inputting fees from an external source. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund Configuration. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**bucket_sets** | [**List[BucketSetDefinition]**](BucketSetDefinition.md) | The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation. | [optional] 
+**apportionment_bucket_set** | **str** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] 
+**apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -33,8 +36,11 @@ back_out_filters: Optional[List[ComponentFilter]] = # Replace with your value
 external_fee_filters: Optional[List[ExternalFeeComponentFilter]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
+bucket_sets: Optional[List[BucketSetDefinition]] = # Replace with your value
+apportionment_bucket_set: Optional[StrictStr] = "example_apportionment_bucket_set"
+apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
 links: Optional[List[Link]] = None
-fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, links=links)
+fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, bucket_sets=bucket_sets, apportionment_bucket_set=apportionment_bucket_set, apportionment_method_property=apportionment_method_property, links=links)
 
 ```
 

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
@@ -31,6 +32,7 @@ class PlacementUpdateRequest(BaseModel):
     """
     id: ResourceId
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this placement.")
     type:  Optional[StrictStr] = Field(None,alias="type", description="The type of this placement (Market, Limit, etc).") 
     limit_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="limitPrice")
@@ -38,7 +40,7 @@ class PlacementUpdateRequest(BaseModel):
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
     entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement. Available values: Undecided, Manual, Direct, Ems, External.") 
-    __properties = ["id", "quantity", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
+    __properties = ["id", "quantity", "amount", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,6 +77,9 @@ class PlacementUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -136,6 +141,7 @@ class PlacementUpdateRequest(BaseModel):
         _obj = PlacementUpdateRequest.parse_obj({
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "quantity": obj.get("quantity"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "properties": dict(
                 (_k, PerpetualProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

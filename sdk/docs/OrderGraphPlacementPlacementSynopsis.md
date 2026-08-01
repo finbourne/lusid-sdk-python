@@ -4,7 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **details** | [**List[OrderGraphPlacementChildPlacementDetail]**](OrderGraphPlacementChildPlacementDetail.md) | Identifiers for each child placement for this placement. | 
-**quantity** | **float** | Total number of units placed. | 
+**quantity** | **float** | Total number of units placed. | [optional] 
+**amount** | **float** | Total monetary value placed, in the block currency. | [optional] 
 ## Example
 
 ```python
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 details: List[OrderGraphPlacementChildPlacementDetail] = # Replace with your value
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
-order_graph_placement_placement_synopsis_instance = OrderGraphPlacementPlacementSynopsis(details=details, quantity=quantity)
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+order_graph_placement_placement_synopsis_instance = OrderGraphPlacementPlacementSynopsis(details=details, quantity=quantity, amount=amount)
 
 ```
 

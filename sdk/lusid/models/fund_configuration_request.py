@@ -22,6 +22,8 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.apportionment_method_property import ApportionmentMethodProperty
+from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.component_filter import ComponentFilter
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.model_property import ModelProperty
@@ -33,12 +35,15 @@ class FundConfigurationRequest(BaseModel):
     code:  StrictStr = Field(...,alias="code", description="") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
-    dealing_filters: List[ComponentFilter] = Field(description="The set of filters used to decide which JE lines are included in the dealing.", alias="dealingFilters")
-    pnl_filters: List[ComponentFilter] = Field(description="The set of filters used to decide which JE lines are included in the PnL.", alias="pnlFilters")
-    back_out_filters: List[ComponentFilter] = Field(description="The set of filters used to decide which JE lines are included in the back outs.", alias="backOutFilters")
+    dealing_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the dealing.", alias="dealingFilters")
+    pnl_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the PnL.", alias="pnlFilters")
+    back_out_filters: Optional[List[ComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are included in the back outs.", alias="backOutFilters")
     external_fee_filters: Optional[List[ExternalFeeComponentFilter]] = Field(default=None, description="The set of filters used to decide which JE lines are used for inputting fees from an external source.", alias="externalFeeFilters")
+    bucket_sets: Optional[List[BucketSetDefinition]] = Field(default=None, description="The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation.", alias="bucketSets")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund Configuration.")
-    __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "externalFeeFilters", "properties"]
+    apportionment_bucket_set:  Optional[StrictStr] = Field(None,alias="apportionmentBucketSet", description="The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection.") 
+    apportionment_method_property: Optional[ApportionmentMethodProperty] = Field(default=None, alias="apportionmentMethodProperty")
+    __properties = ["code", "displayName", "description", "dealingFilters", "pnlFilters", "backOutFilters", "externalFeeFilters", "bucketSets", "properties", "apportionmentBucketSet", "apportionmentMethodProperty"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +105,13 @@ class FundConfigurationRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['externalFeeFilters'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in bucket_sets (list)
+        _items = []
+        if self.bucket_sets:
+            for _item in self.bucket_sets:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['bucketSets'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -107,6 +119,9 @@ class FundConfigurationRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of apportionment_method_property
+        if self.apportionment_method_property:
+            _dict['apportionmentMethodProperty'] = self.apportionment_method_property.to_dict()
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
@@ -117,15 +132,40 @@ class FundConfigurationRequest(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if dealing_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dealing_filters is None and "dealing_filters" in self.__fields_set__:
+            _dict['dealingFilters'] = None
+
+        # set to None if pnl_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pnl_filters is None and "pnl_filters" in self.__fields_set__:
+            _dict['pnlFilters'] = None
+
+        # set to None if back_out_filters (nullable) is None
+        # and __fields_set__ contains the field
+        if self.back_out_filters is None and "back_out_filters" in self.__fields_set__:
+            _dict['backOutFilters'] = None
+
         # set to None if external_fee_filters (nullable) is None
         # and __fields_set__ contains the field
         if self.external_fee_filters is None and "external_fee_filters" in self.__fields_set__:
             _dict['externalFeeFilters'] = None
 
+        # set to None if bucket_sets (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bucket_sets is None and "bucket_sets" in self.__fields_set__:
+            _dict['bucketSets'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if apportionment_bucket_set (nullable) is None
+        # and __fields_set__ contains the field
+        if self.apportionment_bucket_set is None and "apportionment_bucket_set" in self.__fields_set__:
+            _dict['apportionmentBucketSet'] = None
 
         return _dict
 
@@ -146,12 +186,15 @@ class FundConfigurationRequest(BaseModel):
             "pnl_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("pnlFilters")] if obj.get("pnlFilters") is not None else None,
             "back_out_filters": [ComponentFilter.from_dict(_item) for _item in obj.get("backOutFilters")] if obj.get("backOutFilters") is not None else None,
             "external_fee_filters": [ExternalFeeComponentFilter.from_dict(_item) for _item in obj.get("externalFeeFilters")] if obj.get("externalFeeFilters") is not None else None,
+            "bucket_sets": [BucketSetDefinition.from_dict(_item) for _item in obj.get("bucketSets")] if obj.get("bucketSets") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "apportionment_bucket_set": obj.get("apportionmentBucketSet"),
+            "apportionment_method_property": ApportionmentMethodProperty.from_dict(obj.get("apportionmentMethodProperty")) if obj.get("apportionmentMethodProperty") is not None else None
         })
         return _obj
 

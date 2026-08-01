@@ -232,6 +232,7 @@ Class | Method | HTTP request | Description
 *EntitiesApi* | [**get_portfolio_changes**](docs/EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
 *EntitiesApi* | [**get_property_definition_by_entity_unique_id**](docs/EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
 *EntitiesApi* | [**get_transaction_by_entity_unique_id**](docs/EntitiesApi.md#get_transaction_by_entity_unique_id) | **GET** /api/entities/transactions/{entityUniqueId} | GetTransactionByEntityUniqueId: Get transaction by EntityUniqueId
+*EntitiesApi* | [**get_valuation_point_by_entity_unique_id**](docs/EntitiesApi.md#get_valuation_point_by_entity_unique_id) | **GET** /api/entities/valuationpoints/{entityUniqueId} | GetValuationPointByEntityUniqueId: Get valuation point by EntityUniqueId
 *ExecutionsApi* | [**delete_execution**](docs/ExecutionsApi.md#delete_execution) | **DELETE** /api/executions/{scope}/{code} | [EARLY ACCESS] DeleteExecution: Delete execution
 *ExecutionsApi* | [**get_execution**](docs/ExecutionsApi.md#get_execution) | **GET** /api/executions/{scope}/{code} | [EARLY ACCESS] GetExecution: Get Execution
 *ExecutionsApi* | [**list_executions**](docs/ExecutionsApi.md#list_executions) | **GET** /api/executions | ListExecutions: List Executions
@@ -594,6 +595,7 @@ Class | Method | HTTP request | Description
 *ScenariosApi* | [**delete_scenario**](docs/ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 *ScenariosApi* | [**get_scenario**](docs/ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
 *ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
+*ScenariosApi* | [**preview_scenario**](docs/ScenariosApi.md#preview_scenario) | **POST** /api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario
 *ScenariosApi* | [**upsert_scenario**](docs/ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
 *SchemasApi* | [**get_property_schema**](docs/SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
@@ -887,6 +889,8 @@ Class | Method | HTTP request | Description
  - [BranchStepRequest](docs/BranchStepRequest.md)
  - [BreakCodeSource](docs/BreakCodeSource.md)
  - [Bucket](docs/Bucket.md)
+ - [BucketDefinition](docs/BucketDefinition.md)
+ - [BucketSetDefinition](docs/BucketSetDefinition.md)
  - [BucketSetNode](docs/BucketSetNode.md)
  - [BucketSetResult](docs/BucketSetResult.md)
  - [BucketSetResultBucket](docs/BucketSetResultBucket.md)
@@ -1425,6 +1429,7 @@ Class | Method | HTTP request | Description
  - [JournalEntryLine](docs/JournalEntryLine.md)
  - [JournalEntryLineShareClassBreakdown](docs/JournalEntryLineShareClassBreakdown.md)
  - [JournalEntryLinesQueryParameters](docs/JournalEntryLinesQueryParameters.md)
+ - [KeyedMarketDataKeyRule](docs/KeyedMarketDataKeyRule.md)
  - [LabelValueSet](docs/LabelValueSet.md)
  - [LapseElection](docs/LapseElection.md)
  - [LegDefinition](docs/LegDefinition.md)
@@ -1476,6 +1481,7 @@ Class | Method | HTTP request | Description
  - [MbsInterestShortfallEvent](docs/MbsInterestShortfallEvent.md)
  - [MbsPrincipalEvent](docs/MbsPrincipalEvent.md)
  - [MbsPrincipalWriteOffEvent](docs/MbsPrincipalWriteOffEvent.md)
+ - [MdkrGroupShiftDefinition](docs/MdkrGroupShiftDefinition.md)
  - [Membership](docs/Membership.md)
  - [MembershipAmendmentRequest](docs/MembershipAmendmentRequest.md)
  - [MembershipAmendmentResponse](docs/MembershipAmendmentResponse.md)
@@ -1959,6 +1965,9 @@ Class | Method | HTTP request | Description
  - [RunCheckResponse](docs/RunCheckResponse.md)
  - [ScalingMethodology](docs/ScalingMethodology.md)
  - [ScenarioDefinition](docs/ScenarioDefinition.md)
+ - [ScenarioPreviewAppliedShift](docs/ScenarioPreviewAppliedShift.md)
+ - [ScenarioPreviewRequest](docs/ScenarioPreviewRequest.md)
+ - [ScenarioPreviewResponse](docs/ScenarioPreviewResponse.md)
  - [ScenarioReference](docs/ScenarioReference.md)
  - [ScenarioShiftDefinition](docs/ScenarioShiftDefinition.md)
  - [ScenarioShiftType](docs/ScenarioShiftType.md)
@@ -2058,6 +2067,7 @@ Class | Method | HTTP request | Description
  - [TimeZoneConventions](docs/TimeZoneConventions.md)
  - [Timeline](docs/Timeline.md)
  - [ToBeAnnounced](docs/ToBeAnnounced.md)
+ - [ToBeAnnouncedOption](docs/ToBeAnnouncedOption.md)
  - [TotalReturnSwap](docs/TotalReturnSwap.md)
  - [Touch](docs/Touch.md)
  - [TradeTicket](docs/TradeTicket.md)
@@ -2231,6 +2241,7 @@ Class | Method | HTTP request | Description
  - [ValuationPointDataQueryParameters](docs/ValuationPointDataQueryParameters.md)
  - [ValuationPointDataRequest](docs/ValuationPointDataRequest.md)
  - [ValuationPointDataResponse](docs/ValuationPointDataResponse.md)
+ - [ValuationPointEntity](docs/ValuationPointEntity.md)
  - [ValuationPointInstrument](docs/ValuationPointInstrument.md)
  - [ValuationPointOverview](docs/ValuationPointOverview.md)
  - [ValuationPointResourceListOfAccountedComplexMarketData](docs/ValuationPointResourceListOfAccountedComplexMarketData.md)

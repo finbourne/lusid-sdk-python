@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **booked** | [**OrderGraphBlockTransactionSynopsis**](OrderGraphBlockTransactionSynopsis.md) |  | 
 **derived_state** | **str** | A simple description of the overall state of a block. | 
 **derived_compliance_state** | **str** | The overall compliance state of a block, derived from the block&#39;s orders. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning. | 
-**derived_approval_state** | **str** | The overall approval state of a block, derived from approval of the block&#39;s orders. Available values: Pending, Rejected, Approved. | 
+**derived_approval_state** | **str** | The overall approval state of a block, derived from approval of the block&#39;s orders. Available values: Pending, Rejected, Approved, Placed. | 
 ## Example
 
 ```python

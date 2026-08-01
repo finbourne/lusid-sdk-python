@@ -35,7 +35,8 @@ class PlacementRequest(BaseModel):
     block_ids: List[ResourceId] = Field(description="The IDs of the Blocks associated with this placement.", alias="blockIds")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
-    quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity of given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
     state:  Optional[StrictStr] = Field(None,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
     side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this placement.") 
     time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)") 
@@ -46,7 +47,7 @@ class PlacementRequest(BaseModel):
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
     entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement. Available values: Undecided, Manual, Direct, Ems, External.") 
-    __properties = ["id", "parentPlacementId", "blockIds", "properties", "instrumentIdentifiers", "quantity", "state", "side", "timeInForce", "type", "createdDate", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
+    __properties = ["id", "parentPlacementId", "blockIds", "properties", "instrumentIdentifiers", "quantity", "amount", "state", "side", "timeInForce", "type", "createdDate", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +101,9 @@ class PlacementRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of limit_price
         if self.limit_price:
             _dict['limitPrice'] = self.limit_price.to_dict()
@@ -110,6 +114,11 @@ class PlacementRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if quantity (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quantity is None and "quantity" in self.__fields_set__:
+            _dict['quantity'] = None
 
         # set to None if state (nullable) is None
         # and __fields_set__ contains the field
@@ -154,6 +163,7 @@ class PlacementRequest(BaseModel):
             else None,
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
             "quantity": obj.get("quantity"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "state": obj.get("state"),
             "side": obj.get("side"),
             "time_in_force": obj.get("timeInForce"),

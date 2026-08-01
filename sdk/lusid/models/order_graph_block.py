@@ -41,7 +41,7 @@ class OrderGraphBlock(BaseModel):
     booked: OrderGraphBlockTransactionSynopsis
     derived_state:  StrictStr = Field(...,alias="derivedState", description="A simple description of the overall state of a block.") 
     derived_compliance_state:  StrictStr = Field(...,alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning.") 
-    derived_approval_state:  StrictStr = Field(...,alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Available values: Pending, Rejected, Approved.") 
+    derived_approval_state:  StrictStr = Field(...,alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Available values: Pending, Rejected, Approved, Placed.") 
     __properties = ["block", "ordered", "placed", "executed", "allocated", "booked", "derivedState", "derivedComplianceState", "derivedApprovalState"]
 
     class Config:

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **strike** | **float** |  | [optional] 
 **expiry** | **str** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative. | 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition. | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | 
 ## Example
 
 ```python

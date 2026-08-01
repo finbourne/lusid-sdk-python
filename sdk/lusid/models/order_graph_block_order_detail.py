@@ -31,7 +31,7 @@ class OrderGraphBlockOrderDetail(BaseModel):
     """
     id: ResourceId
     compliance_state:  StrictStr = Field(...,alias="complianceState", description="The compliance state of this order. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning.") 
-    approval_state:  StrictStr = Field(...,alias="approvalState", description="The approval state of this order. Available values: Pending, Rejected, Approved.") 
+    approval_state:  StrictStr = Field(...,alias="approvalState", description="The approval state of this order. Available values: Pending, Rejected, Approved, Placed.") 
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     portfolio_name:  Optional[StrictStr] = Field(None,alias="portfolioName", description="The name of the order's referenced Portfolio.") 
     order_approval_task_id:  Optional[StrictStr] = Field(None,alias="orderApprovalTaskId", description="The task id associated with the approval state of the order.") 

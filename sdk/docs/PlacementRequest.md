@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **block_ids** | [**List[ResourceId]**](ResourceId.md) | The IDs of the Blocks associated with this placement. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
-**quantity** | **float** | The quantity of given instrument ordered. | 
+**quantity** | **float** | The quantity of given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | [optional] 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
 **time_in_force** | **str** | The time in force applicable to this placement (GTC, FOK, Day, etc) | 
@@ -34,7 +35,8 @@ parent_placement_id: Optional[ResourceId] = # Replace with your value
 block_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 state: Optional[StrictStr] = "example_state"
 side: StrictStr = "example_side"
 time_in_force: StrictStr = "example_time_in_force"
@@ -45,7 +47,7 @@ stop_price: Optional[CurrencyAndAmount] = # Replace with your value
 counterparty: Optional[StrictStr] = "example_counterparty"
 execution_system: Optional[StrictStr] = "example_execution_system"
 entry_type: Optional[StrictStr] = "example_entry_type"
-placement_request_instance = PlacementRequest(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
+placement_request_instance = PlacementRequest(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, amount=amount, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type)
 
 ```
 

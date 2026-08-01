@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this placement. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument placement. | 
-**quantity** | **float** | The quantity of given instrument ordered. | 
+**quantity** | **float** | The quantity of given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
 **time_in_force** | **str** | The time in force applicable to this placement (GTC, FOK, Day, etc) | 
@@ -39,7 +40,8 @@ block_ids: List[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
-quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 state: StrictStr = "example_state"
 side: StrictStr = "example_side"
 time_in_force: StrictStr = "example_time_in_force"
@@ -53,7 +55,7 @@ entry_type: Optional[StrictStr] = "example_entry_type"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[List[Link]] = None
-placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
+placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

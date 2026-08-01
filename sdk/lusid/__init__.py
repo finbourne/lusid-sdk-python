@@ -246,6 +246,8 @@ from lusid.models.branch_step import BranchStep
 from lusid.models.branch_step_request import BranchStepRequest
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucket import Bucket
+from lusid.models.bucket_definition import BucketDefinition
+from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.bucket_set_node import BucketSetNode
 from lusid.models.bucket_set_result import BucketSetResult
 from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
@@ -784,6 +786,7 @@ from lusid.models.item_and_workspace import ItemAndWorkspace
 from lusid.models.journal_entry_line import JournalEntryLine
 from lusid.models.journal_entry_line_share_class_breakdown import JournalEntryLineShareClassBreakdown
 from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQueryParameters
+from lusid.models.keyed_market_data_key_rule import KeyedMarketDataKeyRule
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.lapse_election import LapseElection
 from lusid.models.leg_definition import LegDefinition
@@ -835,6 +838,7 @@ from lusid.models.mbs_interest_deferral_event import MbsInterestDeferralEvent
 from lusid.models.mbs_interest_shortfall_event import MbsInterestShortfallEvent
 from lusid.models.mbs_principal_event import MbsPrincipalEvent
 from lusid.models.mbs_principal_write_off_event import MbsPrincipalWriteOffEvent
+from lusid.models.mdkr_group_shift_definition import MdkrGroupShiftDefinition
 from lusid.models.membership import Membership
 from lusid.models.membership_amendment_request import MembershipAmendmentRequest
 from lusid.models.membership_amendment_response import MembershipAmendmentResponse
@@ -1318,6 +1322,9 @@ from lusid.models.run_check_request import RunCheckRequest
 from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.scenario_definition import ScenarioDefinition
+from lusid.models.scenario_preview_applied_shift import ScenarioPreviewAppliedShift
+from lusid.models.scenario_preview_request import ScenarioPreviewRequest
+from lusid.models.scenario_preview_response import ScenarioPreviewResponse
 from lusid.models.scenario_reference import ScenarioReference
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 from lusid.models.scenario_shift_type import ScenarioShiftType
@@ -1417,6 +1424,7 @@ from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
 from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.timeline import Timeline
 from lusid.models.to_be_announced import ToBeAnnounced
+from lusid.models.to_be_announced_option import ToBeAnnouncedOption
 from lusid.models.total_return_swap import TotalReturnSwap
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
@@ -1590,6 +1598,7 @@ from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
 from lusid.models.valuation_point_data_response import ValuationPointDataResponse
+from lusid.models.valuation_point_entity import ValuationPointEntity
 from lusid.models.valuation_point_instrument import ValuationPointInstrument
 from lusid.models.valuation_point_overview import ValuationPointOverview
 from lusid.models.valuation_point_resource_list_of_accounted_complex_market_data import ValuationPointResourceListOfAccountedComplexMarketData
@@ -1881,6 +1890,8 @@ __all__ = [
     "BranchStepRequest",
     "BreakCodeSource",
     "Bucket",
+    "BucketDefinition",
+    "BucketSetDefinition",
     "BucketSetNode",
     "BucketSetResult",
     "BucketSetResultBucket",
@@ -2419,6 +2430,7 @@ __all__ = [
     "JournalEntryLine",
     "JournalEntryLineShareClassBreakdown",
     "JournalEntryLinesQueryParameters",
+    "KeyedMarketDataKeyRule",
     "LabelValueSet",
     "LapseElection",
     "LegDefinition",
@@ -2470,6 +2482,7 @@ __all__ = [
     "MbsInterestShortfallEvent",
     "MbsPrincipalEvent",
     "MbsPrincipalWriteOffEvent",
+    "MdkrGroupShiftDefinition",
     "Membership",
     "MembershipAmendmentRequest",
     "MembershipAmendmentResponse",
@@ -2953,6 +2966,9 @@ __all__ = [
     "RunCheckResponse",
     "ScalingMethodology",
     "ScenarioDefinition",
+    "ScenarioPreviewAppliedShift",
+    "ScenarioPreviewRequest",
+    "ScenarioPreviewResponse",
     "ScenarioReference",
     "ScenarioShiftDefinition",
     "ScenarioShiftType",
@@ -3052,6 +3068,7 @@ __all__ = [
     "TimeZoneConventions",
     "Timeline",
     "ToBeAnnounced",
+    "ToBeAnnouncedOption",
     "TotalReturnSwap",
     "Touch",
     "TradeTicket",
@@ -3225,6 +3242,7 @@ __all__ = [
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",
     "ValuationPointDataResponse",
+    "ValuationPointEntity",
     "ValuationPointInstrument",
     "ValuationPointOverview",
     "ValuationPointResourceListOfAccountedComplexMarketData",
