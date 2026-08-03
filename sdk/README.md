@@ -54,6 +54,7 @@ Class | Method | HTTP request | Description
 *AmortisationRuleSetsApi* | [**set_amortisation_rules**](docs/AmortisationRuleSetsApi.md#set_amortisation_rules) | **PUT** /api/amortisation/rulesets/{scope}/{code}/rules | [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
 *AmortisationRuleSetsApi* | [**update_amortisation_rule_set_details**](docs/AmortisationRuleSetsApi.md#update_amortisation_rule_set_details) | **PUT** /api/amortisation/rulesets/{scope}/{code}/details | [EXPERIMENTAL] UpdateAmortisationRuleSetDetails: Update an amortisation rule set.
 *ApplicationMetadataApi* | [**get_excel_addin**](docs/ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | GetExcelAddin: Download Excel Addin
+*ApplicationMetadataApi* | [**get_latest_as_at**](docs/ApplicationMetadataApi.md#get_latest_as_at) | **GET** /api/metadata/asat | [EXPERIMENTAL] GetLatestAsAt: Get latest AsAt
 *ApplicationMetadataApi* | [**get_lusid_versions**](docs/ApplicationMetadataApi.md#get_lusid_versions) | **GET** /api/metadata/versions | GetLusidVersions: Get LUSID versions
 *ApplicationMetadataApi* | [**list_access_controlled_resources**](docs/ApplicationMetadataApi.md#list_access_controlled_resources) | **GET** /api/metadata/access/resources | ListAccessControlledResources: Get resources available for access control
 *BlocksApi* | [**delete_block**](docs/BlocksApi.md#delete_block) | **DELETE** /api/blocks/{scope}/{code} | [EARLY ACCESS] DeleteBlock: Delete block
@@ -1432,6 +1433,7 @@ Class | Method | HTTP request | Description
  - [KeyedMarketDataKeyRule](docs/KeyedMarketDataKeyRule.md)
  - [LabelValueSet](docs/LabelValueSet.md)
  - [LapseElection](docs/LapseElection.md)
+ - [LatestAsAt](docs/LatestAsAt.md)
  - [LegDefinition](docs/LegDefinition.md)
  - [LegalEntity](docs/LegalEntity.md)
  - [LevelStep](docs/LevelStep.md)

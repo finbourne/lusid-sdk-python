@@ -687,6 +687,7 @@ from lusid.models.journal_entry_lines_query_parameters import JournalEntryLinesQ
 from lusid.models.keyed_market_data_key_rule import KeyedMarketDataKeyRule
 from lusid.models.label_value_set import LabelValueSet
 from lusid.models.lapse_election import LapseElection
+from lusid.models.latest_as_at import LatestAsAt
 from lusid.models.leg_definition import LegDefinition
 from lusid.models.legal_entity import LegalEntity
 from lusid.models.level_step import LevelStep
@@ -2230,6 +2231,7 @@ __all__ = [
     "KeyedMarketDataKeyRule",
     "LabelValueSet",
     "LapseElection",
+    "LatestAsAt",
     "LegDefinition",
     "LegalEntity",
     "LevelStep",
