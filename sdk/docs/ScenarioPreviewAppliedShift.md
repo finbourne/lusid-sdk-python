@@ -5,7 +5,7 @@ One market data target changed by one scenario shift.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **effective_at** | **datetime** | The effective date of the market data the shift was applied to. | [optional] 
-**shift** | **str** | Description of the shift, e.g. \&quot;EquityShift on &#39;SCENARIO_EQUITY&#39;\&quot;. | [optional] 
+**shift** | **str** | Description of the shift, e.g. \&quot;PriceShift on &#39;SCENARIO_EQUITY&#39;\&quot;. | [optional] 
 **target** | **str** | Description of the market data target the shift changed. | [optional] 
 **value_before** | **float** | The target&#39;s value before the shift. Null for multi-point targets (e.g. whole curves) where a  single number is not meaningful. | [optional] 
 **value_after** | **float** | The target&#39;s value after the shift. Null for multi-point targets. | [optional] 

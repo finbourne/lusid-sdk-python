@@ -33,7 +33,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
     strike: Optional[Union[StrictFloat, StrictInt]] = None
     expiry:  Optional[StrictStr] = Field(None,alias="expiry") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative.") 
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scenarioShiftType", "instrument", "amount", "strike", "expiry", "shiftType"]
 
@@ -175,8 +175,8 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
         return value
 
     class Config:

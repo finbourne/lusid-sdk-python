@@ -23,9 +23,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 
-class EquityShiftMode(str, Enum):
+class PriceShiftMode(str, Enum):
     """
-    EquityShiftMode
+    PriceShiftMode
     """
 
     """
@@ -36,6 +36,6 @@ class EquityShiftMode(str, Enum):
     PERCENTAGE = 'percentage'
 
     @classmethod
-    def from_json(cls, json_str: str) -> EquityShiftMode:
-        """Create an instance of EquityShiftMode from a JSON string"""
-        return EquityShiftMode(json.loads(json_str))
+    def from_json(cls, json_str: str) -> PriceShiftMode:
+        """Create an instance of PriceShiftMode from a JSON string"""
+        return PriceShiftMode(json.loads(json_str))

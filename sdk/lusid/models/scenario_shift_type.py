@@ -33,7 +33,7 @@ class ScenarioShiftType(str, Enum):
     """
     RATECURVESHIFTDEFINITION = 'RateCurveShiftDefinition'
     FXSHIFTDEFINITION = 'FxShiftDefinition'
-    EQUITYSHIFTDEFINITION = 'EquityShiftDefinition'
+    PRICESHIFTDEFINITION = 'PriceShiftDefinition'
     VOLSURFACESHIFTDEFINITION = 'VolSurfaceShiftDefinition'
     MDKRGROUPSHIFTDEFINITION = 'MdkrGroupShiftDefinition'
 

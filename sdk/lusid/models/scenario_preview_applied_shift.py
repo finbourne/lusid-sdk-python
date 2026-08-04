@@ -28,7 +28,7 @@ class ScenarioPreviewAppliedShift(BaseModel):
     One market data target changed by one scenario shift.  # noqa: E501
     """
     effective_at: Optional[datetime] = Field(default=None, description="The effective date of the market data the shift was applied to.", alias="effectiveAt")
-    shift:  Optional[StrictStr] = Field(None,alias="shift", description="Description of the shift, e.g. \"EquityShift on 'SCENARIO_EQUITY'\".") 
+    shift:  Optional[StrictStr] = Field(None,alias="shift", description="Description of the shift, e.g. \"PriceShift on 'SCENARIO_EQUITY'\".") 
     target:  Optional[StrictStr] = Field(None,alias="target", description="Description of the market data target the shift changed.") 
     value_before: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The target's value before the shift. Null for multi-point targets (e.g. whole curves) where a  single number is not meaningful.", alias="valueBefore")
     value_after: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The target's value after the shift. Null for multi-point targets.", alias="valueAfter")

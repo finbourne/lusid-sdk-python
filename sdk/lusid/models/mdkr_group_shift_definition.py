@@ -30,7 +30,7 @@ class MdkrGroupShiftDefinition(ScenarioShiftDefinition):
     A group of keyed market data key rules (e.g. bid/mid/ask). When the scenario is used in a  valuation, each key's rule re-resolves the matching market data dependencies independently and  produces its own result column named scenario:key, alongside the base column - which continues to  resolve through the recipe's own rules in the standard waterfall, whether or not the same rules  appear here.  # noqa: E501
     """
     rules: List[KeyedMarketDataKeyRule] = Field(description="The keyed rules of the group. Keys must be unique within the group; each key produces one  result column.")
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scenarioShiftType", "rules"]
 
@@ -101,8 +101,8 @@ class MdkrGroupShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
         return value
 
     class Config:

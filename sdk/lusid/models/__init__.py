@@ -431,8 +431,6 @@ from lusid.models.equity_curve_by_prices_data import EquityCurveByPricesData
 from lusid.models.equity_curve_dependency import EquityCurveDependency
 from lusid.models.equity_model_options import EquityModelOptions
 from lusid.models.equity_option import EquityOption
-from lusid.models.equity_shift_definition import EquityShiftDefinition
-from lusid.models.equity_shift_mode import EquityShiftMode
 from lusid.models.equity_swap import EquitySwap
 from lusid.models.equity_vol_dependency import EquityVolDependency
 from lusid.models.equity_vol_surface_data import EquityVolSurfaceData
@@ -988,6 +986,8 @@ from lusid.models.previous_fund_valuation_point_data import PreviousFundValuatio
 from lusid.models.previous_nav import PreviousNAV
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
 from lusid.models.previous_valuation_point import PreviousValuationPoint
+from lusid.models.price_shift_definition import PriceShiftDefinition
+from lusid.models.price_shift_mode import PriceShiftMode
 from lusid.models.pricing_context import PricingContext
 from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
@@ -1983,8 +1983,6 @@ __all__ = [
     "EquityCurveDependency",
     "EquityModelOptions",
     "EquityOption",
-    "EquityShiftDefinition",
-    "EquityShiftMode",
     "EquitySwap",
     "EquityVolDependency",
     "EquityVolSurfaceData",
@@ -2540,6 +2538,8 @@ __all__ = [
     "PreviousNAV",
     "PreviousShareClassBreakdown",
     "PreviousValuationPoint",
+    "PriceShiftDefinition",
+    "PriceShiftMode",
     "PricingContext",
     "PricingModel",
     "PricingOptions",

@@ -24,16 +24,17 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 
-class EquityShiftDefinition(ScenarioShiftDefinition):
+class PriceShiftDefinition(ScenarioShiftDefinition):
     """
-    EquityShiftDefinition
+    PriceShiftDefinition
     """
     instrument:  StrictStr = Field(...,alias="instrument") 
     amount: Union[StrictFloat, StrictInt]
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative, Percentage.") 
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, EquityShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
+    quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "instrument", "amount", "shiftType"]
+    __properties = ["scenarioShiftType", "instrument", "amount", "shiftType", "quoteType"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -46,7 +47,7 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'EquityShiftDefinition' not in [ 
+        if 'PriceShiftDefinition' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -106,6 +107,80 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
             raise ValueError("must be one of enum values ('Absolute', 'Relative', 'Percentage')")
         return value
 
+    @validator('quote_type')
+    def quote_type_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'PriceShiftDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "quote_type" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ['Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor']:
+            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor')")
+        return value
+
     @validator('scenario_shift_type')
     def scenario_shift_type_validate_enum(cls, value):
         """Validates the enum"""
@@ -117,7 +192,7 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'EquityShiftDefinition' not in [ 
+        if 'PriceShiftDefinition' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -173,8 +248,8 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'EquityShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition')")
         return value
 
     class Config:
@@ -199,8 +274,8 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> EquityShiftDefinition:
-        """Create an instance of EquityShiftDefinition from a JSON string"""
+    def from_json(cls, json_str: str) -> PriceShiftDefinition:
+        """Create an instance of PriceShiftDefinition from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -215,22 +290,28 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if quote_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.quote_type is None and "quote_type" in self.__fields_set__:
+            _dict['quoteType'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> EquityShiftDefinition:
-        """Create an instance of EquityShiftDefinition from a dict"""
+    def from_dict(cls, obj: dict) -> PriceShiftDefinition:
+        """Create an instance of PriceShiftDefinition from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return EquityShiftDefinition.parse_obj(obj)
+            return PriceShiftDefinition.parse_obj(obj)
 
-        _obj = EquityShiftDefinition.parse_obj({
+        _obj = PriceShiftDefinition.parse_obj({
             "scenario_shift_type": obj.get("scenarioShiftType"),
             "instrument": obj.get("instrument"),
             "amount": obj.get("amount"),
-            "shift_type": obj.get("shiftType")
+            "shift_type": obj.get("shiftType"),
+            "quote_type": obj.get("quoteType")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -239,4 +320,4 @@ class EquityShiftDefinition(ScenarioShiftDefinition):
 
         return _obj
 
-EquityShiftDefinition.update_forward_refs()
+PriceShiftDefinition.update_forward_refs()
