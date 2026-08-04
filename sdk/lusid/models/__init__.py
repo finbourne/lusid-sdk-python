@@ -391,6 +391,7 @@ from lusid.models.delete_relation_request import DeleteRelationRequest
 from lusid.models.delete_relational_data_point_request import DeleteRelationalDataPointRequest
 from lusid.models.delete_relationship_request import DeleteRelationshipRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.delisting_event import DelistingEvent
 from lusid.models.dependency_source_filter import DependencySourceFilter
 from lusid.models.deposit_close_event import DepositCloseEvent
 from lusid.models.deposit_interest_payment_event import DepositInterestPaymentEvent
@@ -1935,6 +1936,7 @@ __all__ = [
     "DeleteRelationalDataPointRequest",
     "DeleteRelationshipRequest",
     "DeletedEntityResponse",
+    "DelistingEvent",
     "DependencySourceFilter",
     "DepositCloseEvent",
     "DepositInterestPaymentEvent",

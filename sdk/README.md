@@ -1137,6 +1137,7 @@ Class | Method | HTTP request | Description
  - [DeleteRelationalDataPointRequest](docs/DeleteRelationalDataPointRequest.md)
  - [DeleteRelationshipRequest](docs/DeleteRelationshipRequest.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
+ - [DelistingEvent](docs/DelistingEvent.md)
  - [DependencySourceFilter](docs/DependencySourceFilter.md)
  - [DepositCloseEvent](docs/DepositCloseEvent.md)
  - [DepositInterestPaymentEvent](docs/DepositInterestPaymentEvent.md)
