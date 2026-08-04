@@ -31,13 +31,12 @@ class ShareClass(BaseModel):
     """
     ShareClass
     """
-    instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
+    instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Unique instrument identifiers", alias="instrumentIdentifiers")
     name:  StrictStr = Field(...,alias="name", description="The display name of the Share Class.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Share Class.") 
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund.") 
     launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price set when a shareclass is added to the fund. Defaults to 1.", alias="launchPrice")
     launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
-    apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund.", alias="apportionmentFactor")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true.")
     fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership.") 
     distribution_type:  StrictStr = Field(...,alias="distributionType", description="The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.") 
@@ -50,7 +49,7 @@ class ShareClass(BaseModel):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Available values: Invalid, Gross, Net.") 
     hedging:  StrictStr = Field(...,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.") 
-    __properties = ["instrumentIdentifiers", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "apportionmentFactor", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
+    __properties = ["instrumentIdentifiers", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "properties", "fundShareClassType", "distributionType", "domCcy", "tradingConventions", "unitsPrecision", "pricePrecision", "roundingConventions", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +110,11 @@ class ShareClass(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
         if self.time_zone_conventions:
             _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
+        # set to None if instrument_identifiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
+            _dict['instrumentIdentifiers'] = None
+
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -125,11 +129,6 @@ class ShareClass(BaseModel):
         # and __fields_set__ contains the field
         if self.launch_date is None and "launch_date" in self.__fields_set__:
             _dict['launchDate'] = None
-
-        # set to None if apportionment_factor (nullable) is None
-        # and __fields_set__ contains the field
-        if self.apportionment_factor is None and "apportionment_factor" in self.__fields_set__:
-            _dict['apportionmentFactor'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -179,7 +178,6 @@ class ShareClass(BaseModel):
             "share_class_short_code": obj.get("shareClassShortCode"),
             "launch_price": obj.get("launchPrice"),
             "launch_date": obj.get("launchDate"),
-            "apportionment_factor": obj.get("apportionmentFactor"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

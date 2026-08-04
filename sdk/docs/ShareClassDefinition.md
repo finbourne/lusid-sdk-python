@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **share_class_short_code** | **str** | A short code that uniquely identifies the share class within the Fund. | 
 **launch_price** | **float** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] 
 **launch_date** | **datetime** | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] 
-**apportionment_factor** | **float** | Only used for fixed percentage method or be zero, must equal 1 or 0 across all classes in the fund. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] 
 **fund_share_class_type** | **str** | The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership. | 
 **distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | 
@@ -37,7 +36,6 @@ description: Optional[StrictStr] = "example_description"
 share_class_short_code: StrictStr = "example_share_class_short_code"
 launch_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 launch_date: Optional[datetime] = # Replace with your value
-apportionment_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 fund_share_class_type: StrictStr = "example_fund_share_class_type"
 distribution_type: StrictStr = "example_distribution_type"
@@ -52,7 +50,7 @@ rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
 hedging: StrictStr = "example_hedging"
-share_class_definition_instance = ShareClassDefinition(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, apportionment_factor=apportionment_factor, properties=properties, fund_share_class_type=fund_share_class_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, units_precision=units_precision, price_precision=price_precision, rounding_conventions=rounding_conventions, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
+share_class_definition_instance = ShareClassDefinition(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, fund_share_class_type=fund_share_class_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, units_precision=units_precision, price_precision=price_precision, rounding_conventions=rounding_conventions, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
 
 ```
 
