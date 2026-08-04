@@ -57,8 +57,8 @@ from lusid.api.portfolios_api import PortfoliosApi
 from lusid.api.property_definitions_api import PropertyDefinitionsApi
 from lusid.api.queryable_keys_api import QueryableKeysApi
 from lusid.api.quotes_api import QuotesApi
-from lusid.api.rec_result_sets_api import RecResultSetsApi
 from lusid.api.reconciliations_api import ReconciliationsApi
+from lusid.api.recs_api import RecsApi
 from lusid.api.reference_lists_api import ReferenceListsApi
 from lusid.api.reference_portfolio_api import ReferencePortfolioApi
 from lusid.api.relation_definitions_api import RelationDefinitionsApi
@@ -149,8 +149,8 @@ __all__ = [
     "PropertyDefinitionsApi",
     "QueryableKeysApi",
     "QuotesApi",
-    "RecResultSetsApi",
     "ReconciliationsApi",
+    "RecsApi",
     "ReferenceListsApi",
     "ReferencePortfolioApi",
     "RelationDefinitionsApi",
