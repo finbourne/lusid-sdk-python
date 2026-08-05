@@ -463,7 +463,7 @@ def main():
     api_instance = api_client_factory.build(FundConfigurationApi)
     scope = 'scope_example' # str | The scope of the FundConfiguration.
     code = 'code_example' # str | The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.
-    operation = [{"value":[{"filterId":"SUB","filter":"GeneralLedgerAccountCode eq '3001'"},{"filterId":"RED","filter":"GeneralLedgerAccountCode eq '3002'"}],"path":"/dealingFilters","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
+    operation = [{"value":[{"filterId":"SUB","filter":"GeneralLedgerAccountCode eq '3001'"},{"filterId":"RED","filter":"GeneralLedgerAccountCode eq '3002'"}],"path":"/dealingFilters","op":"add"},{"value":{"code":"PriorAdjustedNav","scope":"default"},"path":"/apportionmentMethodProperty","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
 
     try:
         # uncomment the below to set overrides at the request level

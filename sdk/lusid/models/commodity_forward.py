@@ -23,15 +23,20 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.lusid_instrument import LusidInstrument
-import lusid.models
 
-class InstrumentLeg(LusidInstrument):
+class CommodityForward(LusidInstrument):
     """
-    Base class for representing instrument legs in LUSID.  An instrument leg describes a set of cashflows that are paid at a set of points in time according to some set of conventions.  This base class should not be directly instantiated; only its inheritors should be used.  # noqa: E501
+    LUSID representation of an OTC bilateral commodity forward.  The forward settles as a single bullet at MaturityDate. Its present value is  Quantity x Price, where the price is supplied externally pre-netted (the current forward  price minus strike) via the quote store. LUSID calculates no analytics for this instrument, and it  can only be priced by lookup pricing.  # noqa: E501
     """
+    start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
+    maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
+    strike: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Agreed forward price at trade inception. Reference only — not used in the market value calculation,  which consumes the pre-netted price from the quote store.")
+    delivery_type:  StrictStr = Field(...,alias="deliveryType", description="Whether the forward settles in cash or through physical delivery of the underlying.                Supported string (enumeration) values are: [Cash, Physical]. Available values: Cash, Physical.") 
+    underlying: Optional[LusidInstrument] = None
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "strike", "deliveryType", "underlying"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -44,7 +49,7 @@ class InstrumentLeg(LusidInstrument):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'InstrumentLeg' not in [ 
+        if 'CommodityForward' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -109,25 +114,6 @@ class InstrumentLeg(LusidInstrument):
         allow_population_by_field_name = True
         validate_assignment = True
 
-    # JSON field name that stores the object type
-    __discriminator_property_name = 'instrumentType'
-
-    # discriminator mappings
-    __discriminator_value_class_map = {
-        'FixedLeg': 'FixedLeg',
-        'FloatingLeg': 'FloatingLeg',
-        'FundingLeg': 'FundingLeg'
-    }
-
-    @classmethod
-    def get_discriminator_value(cls, obj: dict) -> str:
-        """Returns the discriminator value (object type) of the data"""
-        discriminator_value = obj[cls.__discriminator_property_name]
-        if discriminator_value:
-            return cls.__discriminator_value_class_map.get(discriminator_value)
-        else:
-            return None
-
     def __str__(self):
         """For `print` and `pprint`"""
         return pprint.pformat(self.dict(by_alias=False))
@@ -145,8 +131,8 @@ class InstrumentLeg(LusidInstrument):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(FixedLeg, FloatingLeg, FundingLeg):
-        """Create an instance of InstrumentLeg from a JSON string"""
+    def from_json(cls, json_str: str) -> CommodityForward:
+        """Create an instance of CommodityForward from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -156,24 +142,44 @@ class InstrumentLeg(LusidInstrument):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of underlying
+        if self.underlying:
+            _dict['underlying'] = self.underlying.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if strike (nullable) is None
+        # and __fields_set__ contains the field
+        if self.strike is None and "strike" in self.__fields_set__:
+            _dict['strike'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(FixedLeg, FloatingLeg, FundingLeg):
-        """Create an instance of InstrumentLeg from a dict"""
-        # look up the object type based on discriminator mapping
-        object_type = cls.get_discriminator_value(obj)
-        if object_type:
-            klass = getattr(lusid.models, object_type)
-            return klass.from_dict(obj)
-        else:
-            raise ValueError("InstrumentLeg failed to lookup discriminator value from " +
-                             json.dumps(obj) + ". Discriminator property name: " + cls.__discriminator_property_name +
-                             ", mapping: " + json.dumps(cls.__discriminator_value_class_map))
+    def from_dict(cls, obj: dict) -> CommodityForward:
+        """Create an instance of CommodityForward from a dict"""
+        if obj is None:
+            return None
 
-InstrumentLeg.update_forward_refs()
+        if not isinstance(obj, dict):
+            return CommodityForward.parse_obj(obj)
+
+        _obj = CommodityForward.parse_obj({
+            "instrument_type": obj.get("instrumentType"),
+            "start_date": obj.get("startDate"),
+            "maturity_date": obj.get("maturityDate"),
+            "dom_ccy": obj.get("domCcy"),
+            "strike": obj.get("strike"),
+            "delivery_type": obj.get("deliveryType"),
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None
+        })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
+        return _obj
+
+CommodityForward.update_forward_refs()

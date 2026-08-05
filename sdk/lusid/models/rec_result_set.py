@@ -38,7 +38,7 @@ class RecResultSet(BaseModel):
     """
     The collection of reconciliation results for a given rec type within a rec instance. Identified by  its rec type and instance. The latest run's data is promoted to the root; prior runs are available  via previousRuns.  # noqa: E501
     """
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, Transaction, Valuation, CashHolding.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
     rec_instance: RecInstanceSummary = Field(alias="recInstance")
     run_number: StrictInt = Field(description="The run number within the instance. Increments with each re-run.", alias="runNumber")
     run_as_at: datetime = Field(description="The asAt datetime at which the run happened.", alias="runAsAt")

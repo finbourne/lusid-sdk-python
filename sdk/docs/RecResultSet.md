@@ -4,7 +4,7 @@ The collection of reconciliation results for a given rec type within a rec insta
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rec_type** | **str** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, Transaction, Valuation, CashHolding. | 
+**rec_type** | **str** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
 **rec_instance** | [**RecInstanceSummary**](RecInstanceSummary.md) |  | 
 **run_number** | **int** | The run number within the instance. Increments with each re-run. | 
 **run_as_at** | **datetime** | The asAt datetime at which the run happened. | 

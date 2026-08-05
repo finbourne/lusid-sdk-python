@@ -321,6 +321,7 @@ from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryR
 from lusid.models.closed_period import ClosedPeriod
 from lusid.models.collateral import Collateral
 from lusid.models.collateral_instrument import CollateralInstrument
+from lusid.models.commodity_forward import CommodityForward
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
@@ -1974,6 +1975,7 @@ __all__ = [
     "ClosedPeriod",
     "Collateral",
     "CollateralInstrument",
+    "CommodityForward",
     "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",

@@ -42,7 +42,7 @@ class ShareClassBreakdown(BaseModel):
     unitisation: Optional[UnitisationData] = None
     miscellaneous: Optional[Dict[str, ShareClassAmount]] = Field(default=None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
     share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(description="The fx rate from the Share Class currency to the fund currency at this valuation point.", alias="shareClassToFundFxRate")
-    capital_ratio: Union[StrictFloat, StrictInt] = Field(description="The proportion of the fund's adjusted beginning equity (ie: the sum of the previous NAV and the net dealing) that is invested in the share class.", alias="capitalRatio")
+    capital_ratio: Union[StrictFloat, StrictInt] = Field(description="The proportion of the fund's non-class-specific P&L apportioned to this share class. Sums to 1 across the fund's share classes.", alias="capitalRatio")
     previous_share_class_breakdown: PreviousShareClassBreakdown = Field(alias="previousShareClassBreakdown")
     __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "unitisation", "miscellaneous", "shareClassToFundFxRate", "capitalRatio", "previousShareClassBreakdown"]
 

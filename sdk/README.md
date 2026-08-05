@@ -969,6 +969,7 @@ Class | Method | HTTP request | Description
  - [ClosedPeriod](docs/ClosedPeriod.md)
  - [Collateral](docs/Collateral.md)
  - [CollateralInstrument](docs/CollateralInstrument.md)
+ - [CommodityForward](docs/CommodityForward.md)
  - [ComparisonAttributeValuePair](docs/ComparisonAttributeValuePair.md)
  - [CompletePortfolio](docs/CompletePortfolio.md)
  - [CompleteRelation](docs/CompleteRelation.md)

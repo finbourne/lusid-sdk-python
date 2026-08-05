@@ -28,13 +28,14 @@ class PriceShiftDefinition(ScenarioShiftDefinition):
     """
     PriceShiftDefinition
     """
-    instrument:  StrictStr = Field(...,alias="instrument") 
+    instrument:  Optional[StrictStr] = Field(None,alias="instrument", description="A single instrument identifier this shift applies to. Exactly one of Instrument and Filter  must be supplied.") 
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="A LUSID filter expression over the instrument entity - fields and properties - selecting which  instruments' quotes the shift applies to, e.g.  \"assetClass eq 'Bond' and properties[Instrument/Issuer/Name] eq 'X'\".  Exactly one of Instrument and Filter must be supplied.") 
     amount: Union[StrictFloat, StrictInt]
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative, Percentage.") 
     quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "instrument", "amount", "shiftType", "quoteType"]
+    __properties = ["scenarioShiftType", "instrument", "filter", "amount", "shiftType", "quoteType"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -290,6 +291,16 @@ class PriceShiftDefinition(ScenarioShiftDefinition):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if instrument (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument is None and "instrument" in self.__fields_set__:
+            _dict['instrument'] = None
+
+        # set to None if filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.filter is None and "filter" in self.__fields_set__:
+            _dict['filter'] = None
+
         # set to None if quote_type (nullable) is None
         # and __fields_set__ contains the field
         if self.quote_type is None and "quote_type" in self.__fields_set__:
@@ -309,6 +320,7 @@ class PriceShiftDefinition(ScenarioShiftDefinition):
         _obj = PriceShiftDefinition.parse_obj({
             "scenario_shift_type": obj.get("scenarioShiftType"),
             "instrument": obj.get("instrument"),
+            "filter": obj.get("filter"),
             "amount": obj.get("amount"),
             "shift_type": obj.get("shiftType"),
             "quote_type": obj.get("quoteType")
