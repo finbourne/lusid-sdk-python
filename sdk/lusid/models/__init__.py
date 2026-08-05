@@ -96,6 +96,7 @@ from lusid.models.append_market_data_type import AppendMarketDataType
 from lusid.models.applicable_entity import ApplicableEntity
 from lusid.models.applicable_entity_types import ApplicableEntityTypes
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
+from lusid.models.applied_scenario_shift import AppliedScenarioShift
 from lusid.models.apportionment_breakdown import ApportionmentBreakdown
 from lusid.models.apportionment_member_factor import ApportionmentMemberFactor
 from lusid.models.apportionment_method_property import ApportionmentMethodProperty
@@ -1229,6 +1230,7 @@ from lusid.models.run_check_request import RunCheckRequest
 from lusid.models.run_check_response import RunCheckResponse
 from lusid.models.scaling_methodology import ScalingMethodology
 from lusid.models.scenario_definition import ScenarioDefinition
+from lusid.models.scenario_diagnostics import ScenarioDiagnostics
 from lusid.models.scenario_preview_applied_shift import ScenarioPreviewAppliedShift
 from lusid.models.scenario_preview_request import ScenarioPreviewRequest
 from lusid.models.scenario_preview_response import ScenarioPreviewResponse
@@ -1649,6 +1651,7 @@ __all__ = [
     "ApplicableEntity",
     "ApplicableEntityTypes",
     "ApplicableInstrumentEvent",
+    "AppliedScenarioShift",
     "ApportionmentBreakdown",
     "ApportionmentMemberFactor",
     "ApportionmentMethodProperty",
@@ -2782,6 +2785,7 @@ __all__ = [
     "RunCheckResponse",
     "ScalingMethodology",
     "ScenarioDefinition",
+    "ScenarioDiagnostics",
     "ScenarioPreviewAppliedShift",
     "ScenarioPreviewRequest",
     "ScenarioPreviewResponse",

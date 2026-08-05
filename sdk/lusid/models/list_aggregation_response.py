@@ -26,6 +26,7 @@ from lusid.models.aggregation_measure_failure_detail import AggregationMeasureFa
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 from lusid.models.result_data_schema import ResultDataSchema
+from lusid.models.scenario_diagnostics import ScenarioDiagnostics
 
 class ListAggregationResponse(BaseModel):
     """
@@ -39,8 +40,9 @@ class ListAggregationResponse(BaseModel):
     data_schema: Optional[ResultDataSchema] = Field(default=None, alias="dataSchema")
     aggregation_failures: Optional[List[AggregationMeasureFailureDetail]] = Field(default=None, alias="aggregationFailures")
     recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    scenario_diagnostics: Optional[ScenarioDiagnostics] = Field(default=None, alias="scenarioDiagnostics")
     links: Optional[List[Link]] = None
-    __properties = ["aggregationEffectiveAt", "aggregationAsAt", "href", "data", "aggregationCurrency", "dataSchema", "aggregationFailures", "recipeId", "links"]
+    __properties = ["aggregationEffectiveAt", "aggregationAsAt", "href", "data", "aggregationCurrency", "dataSchema", "aggregationFailures", "recipeId", "scenarioDiagnostics", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,6 +89,9 @@ class ListAggregationResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of recipe_id
         if self.recipe_id:
             _dict['recipeId'] = self.recipe_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scenario_diagnostics
+        if self.scenario_diagnostics:
+            _dict['scenarioDiagnostics'] = self.scenario_diagnostics.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -139,6 +144,7 @@ class ListAggregationResponse(BaseModel):
             "data_schema": ResultDataSchema.from_dict(obj.get("dataSchema")) if obj.get("dataSchema") is not None else None,
             "aggregation_failures": [AggregationMeasureFailureDetail.from_dict(_item) for _item in obj.get("aggregationFailures")] if obj.get("aggregationFailures") is not None else None,
             "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None,
+            "scenario_diagnostics": ScenarioDiagnostics.from_dict(obj.get("scenarioDiagnostics")) if obj.get("scenarioDiagnostics") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
