@@ -34,9 +34,10 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
     end_tenor:  Optional[StrictStr] = Field(None,alias="endTenor") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist.") 
     scale:  Optional[StrictStr] = Field(None,alias="scale", description="Available values: Bps, Percentage.") 
+    apply_to:  Optional[StrictStr] = Field(None,alias="applyTo", description="A LUSID filter expression over the instrument entity scoping which instruments this shift is  for, e.g. \"properties[Instrument/default/CountryOfIssue] eq 'Italy'\". The shifted market data  is used by the whole valuation run, but when the scenario is requested as a result column the  column is only populated for matching instruments. Only usable when the scenario is applied as  a per-metric column.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType", "scale"]
+    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType", "scale", "applyTo"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -302,6 +303,11 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
         if self.end_tenor is None and "end_tenor" in self.__fields_set__:
             _dict['endTenor'] = None
 
+        # set to None if apply_to (nullable) is None
+        # and __fields_set__ contains the field
+        if self.apply_to is None and "apply_to" in self.__fields_set__:
+            _dict['applyTo'] = None
+
         return _dict
 
     @classmethod
@@ -320,7 +326,8 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
             "start_tenor": obj.get("startTenor"),
             "end_tenor": obj.get("endTenor"),
             "shift_type": obj.get("shiftType"),
-            "scale": obj.get("scale")
+            "scale": obj.get("scale"),
+            "apply_to": obj.get("applyTo")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
