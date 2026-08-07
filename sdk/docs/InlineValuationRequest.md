@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **instruments** | [**List[WeightedInstrument]**](WeightedInstrument.md) | The set of instruments, weighted by the quantities held that are required.  It is identified by an identifier tag that can be used to identify it externally.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case. | 
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**scenario** | [**ScenarioReference**](ScenarioReference.md) |  | [optional] 
 ## Example
 
 ```python
@@ -41,7 +42,8 @@ valuation_schedule: Optional[ValuationSchedule] = # Replace with your value
 instruments: List[WeightedInstrument] = # Replace with your value
 market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
-inline_valuation_request_instance = InlineValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, valuation_schedule=valuation_schedule, instruments=instruments, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id)
+scenario: Optional[ScenarioReference] = None
+inline_valuation_request_instance = InlineValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, valuation_schedule=valuation_schedule, instruments=instruments, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id, scenario=scenario)
 
 ```
 

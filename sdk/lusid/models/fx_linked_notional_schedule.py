@@ -34,7 +34,7 @@ class FxLinkedNotionalSchedule(Schedule):
     varying_notional_currency:  StrictStr = Field(...,alias="varyingNotionalCurrency", description="The currency of the varying notional amount.") 
     varying_notional_fixing_dates: RelativeDateOffset = Field(alias="varyingNotionalFixingDates")
     varying_notional_interim_exchange_payment_dates: Optional[RelativeDateOffset] = Field(default=None, alias="varyingNotionalInterimExchangePaymentDates")
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "fxConventions", "varyingNotionalCurrency", "varyingNotionalFixingDates", "varyingNotionalInterimExchangePaymentDates"]
 
@@ -105,8 +105,8 @@ class FxLinkedNotionalSchedule(Schedule):
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid')")
         return value
 
     class Config:

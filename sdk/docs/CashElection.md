@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **is_declared** | **bool** | Is this the declared CashElection.  Only one Election may be Declared per Event. | [optional] 
 **is_default** | **bool** | Is this election the default.  Only one Election may be Default per Event | [optional] 
 **dividend_currency** | **str** | The payment currency for this CashElection. | 
+**payment_date** | **datetime** | Optional option-level payment date. When set, it takes precedence over the event-level payment date; when omitted, the event-level payment date applies. | [optional] 
+**rate_breakdown** | [**List[RateBreakdownComponent]**](RateBreakdownComponent.md) | Optional tax-characterised payout lines for this election (CashDividendEvent only). When absent or empty, the election produces a single standard payment. | [optional] 
 ## Example
 
 ```python
@@ -30,7 +32,9 @@ is_declared:Optional[StrictBool] = None
 is_default: Optional[StrictBool] = # Replace with your value
 is_default:Optional[StrictBool] = None
 dividend_currency: StrictStr = "example_dividend_currency"
-cash_election_instance = CashElection(election_key=election_key, exchange_rate=exchange_rate, dividend_rate=dividend_rate, is_chosen=is_chosen, is_declared=is_declared, is_default=is_default, dividend_currency=dividend_currency)
+payment_date: Optional[datetime] = # Replace with your value
+rate_breakdown: Optional[List[RateBreakdownComponent]] = # Replace with your value
+cash_election_instance = CashElection(election_key=election_key, exchange_rate=exchange_rate, dividend_rate=dividend_rate, is_chosen=is_chosen, is_declared=is_declared, is_default=is_default, dividend_currency=dividend_currency, payment_date=payment_date, rate_breakdown=rate_breakdown)
 
 ```
 

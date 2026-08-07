@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument** | **str** | A single instrument identifier this shift applies to. Exactly one of Instrument and Filter  must be supplied. | [optional] 
 **filter** | **str** | A LUSID filter expression over the instrument entity - fields and properties - selecting which  instruments&#39; quotes the shift applies to, e.g.  \&quot;assetClass eq &#39;Bond&#39; and properties[Instrument/Issuer/Name] eq &#39;X&#39;\&quot;.  Exactly one of Instrument and Filter must be supplied. | [optional] 
-**amount** | **float** |  | 
+**amount** | **float** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative, Percentage. | 
 **quote_type** | **str** | Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor. | [optional] 
 **scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | 
@@ -20,7 +20,7 @@ from datetime import datetime
 
 instrument: Optional[StrictStr] = "example_instrument"
 filter: Optional[StrictStr] = "example_filter"
-amount: Union[StrictFloat, StrictInt]
+amount: Optional[Union[StrictFloat, StrictInt]] = None
 shift_type: StrictStr = "example_shift_type"
 quote_type: Optional[StrictStr] = "example_quote_type"
 scenario_shift_type: StrictStr = "example_scenario_shift_type"

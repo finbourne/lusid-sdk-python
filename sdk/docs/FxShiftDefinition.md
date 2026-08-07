@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency_pair** | **str** |  | 
-**amount** | **float** |  | 
+**amount** | **float** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative, Percentage. | 
 **scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | 
 ## Example
@@ -17,7 +17,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 currency_pair: StrictStr = "example_currency_pair"
-amount: Union[StrictFloat, StrictInt]
+amount: Optional[Union[StrictFloat, StrictInt]] = None
 shift_type: StrictStr = "example_shift_type"
 scenario_shift_type: StrictStr = "example_scenario_shift_type"
 fx_shift_definition_instance = FxShiftDefinition(currency_pair=currency_pair, amount=amount, shift_type=shift_type, scenario_shift_type=scenario_shift_type)

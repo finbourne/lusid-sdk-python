@@ -599,6 +599,7 @@ Class | Method | HTTP request | Description
 *ScenariosApi* | [**create_scenario_from_template**](docs/ScenariosApi.md#create_scenario_from_template) | **POST** /api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 *ScenariosApi* | [**delete_scenario**](docs/ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 *ScenariosApi* | [**get_scenario**](docs/ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
+*ScenariosApi* | [**list_scenario_versions**](docs/ScenariosApi.md#list_scenario_versions) | **GET** /api/scenarios/{scope}/{code}/versions | [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
 *ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
 *ScenariosApi* | [**preview_scenario**](docs/ScenariosApi.md#preview_scenario) | **POST** /api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario
 *ScenariosApi* | [**upsert_scenario**](docs/ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
@@ -1653,6 +1654,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfTranslationScriptId](docs/PagedResourceListOfTranslationScriptId.md)
  - [PagedResourceListOfValuationPointInstrument](docs/PagedResourceListOfValuationPointInstrument.md)
  - [PagedResourceListOfValuationPointOverview](docs/PagedResourceListOfValuationPointOverview.md)
+ - [PagedResourceListOfVersion](docs/PagedResourceListOfVersion.md)
  - [PagedResourceListOfVirtualRow](docs/PagedResourceListOfVirtualRow.md)
  - [PagedResourceListOfWorkspace](docs/PagedResourceListOfWorkspace.md)
  - [PagedResourceListOfWorkspaceItem](docs/PagedResourceListOfWorkspaceItem.md)
@@ -1683,8 +1685,10 @@ Class | Method | HTTP request | Description
  - [PikBondCashCouponEvent](docs/PikBondCashCouponEvent.md)
  - [PikBondCouponEvent](docs/PikBondCouponEvent.md)
  - [PikBondInterestCapitalisationEvent](docs/PikBondInterestCapitalisationEvent.md)
+ - [PikBondInterestEvent](docs/PikBondInterestEvent.md)
  - [PikBondPrincipalEvent](docs/PikBondPrincipalEvent.md)
  - [PikElection](docs/PikElection.md)
+ - [PikSchedule](docs/PikSchedule.md)
  - [PlaceBlocksRequest](docs/PlaceBlocksRequest.md)
  - [Placement](docs/Placement.md)
  - [PlacementRequest](docs/PlacementRequest.md)
@@ -1786,6 +1790,7 @@ Class | Method | HTTP request | Description
  - [QuoteInstrumentIdType](docs/QuoteInstrumentIdType.md)
  - [QuoteSeriesId](docs/QuoteSeriesId.md)
  - [QuoteType](docs/QuoteType.md)
+ - [RateBreakdownComponent](docs/RateBreakdownComponent.md)
  - [RateCurveShiftDefinition](docs/RateCurveShiftDefinition.md)
  - [RateCurveShiftMode](docs/RateCurveShiftMode.md)
  - [RateCurveShiftScale](docs/RateCurveShiftScale.md)

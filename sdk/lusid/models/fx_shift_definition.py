@@ -29,7 +29,7 @@ class FxShiftDefinition(ScenarioShiftDefinition):
     FxShiftDefinition
     """
     currency_pair:  StrictStr = Field(...,alias="currencyPair") 
-    amount: Union[StrictFloat, StrictInt]
+    amount: Optional[Union[StrictFloat, StrictInt]] = None
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative, Percentage.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
@@ -214,6 +214,11 @@ class FxShiftDefinition(ScenarioShiftDefinition):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
 
         return _dict
 

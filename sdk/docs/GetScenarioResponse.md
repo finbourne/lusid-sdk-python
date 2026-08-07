@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** |  | [optional] 
 **value** | [**ScenarioDefinition**](ScenarioDefinition.md) |  | [optional] 
+**version** | [**Version**](Version.md) |  | [optional] 
 **failed** | [**ErrorDetail**](ErrorDetail.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
@@ -18,9 +19,10 @@ from datetime import datetime
 
 href: Optional[StrictStr] = "example_href"
 value: Optional[ScenarioDefinition] = None
+version: Optional[Version] = None
 failed: Optional[ErrorDetail] = None
 links: Optional[List[Link]] = None
-get_scenario_response_instance = GetScenarioResponse(href=href, value=value, failed=failed, links=links)
+get_scenario_response_instance = GetScenarioResponse(href=href, value=value, version=version, failed=failed, links=links)
 
 ```
 

@@ -39,6 +39,7 @@ class ScheduleType(str, Enum):
     FXRATESCHEDULE = 'FxRateSchedule'
     FXLINKEDNOTIONALSCHEDULE = 'FxLinkedNotionalSchedule'
     BONDCONVERSIONSCHEDULE = 'BondConversionSchedule'
+    PIKSCHEDULE = 'PikSchedule'
     INVALID = 'Invalid'
 
     @classmethod

@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument** | **str** |  | 
-**amount** | **float** |  | 
+**amount** | **float** |  | [optional] 
 **strike** | **float** |  | [optional] 
 **expiry** | **str** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative. | 
@@ -19,7 +19,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 instrument: StrictStr = "example_instrument"
-amount: Union[StrictFloat, StrictInt]
+amount: Optional[Union[StrictFloat, StrictInt]] = None
 strike: Optional[Union[StrictFloat, StrictInt]] = None
 expiry: Optional[StrictStr] = "example_expiry"
 shift_type: StrictStr = "example_shift_type"

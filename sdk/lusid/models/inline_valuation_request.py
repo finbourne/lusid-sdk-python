@@ -27,6 +27,7 @@ from lusid.models.market_data_overrides import MarketDataOverrides
 from lusid.models.order_by_spec import OrderBySpec
 from lusid.models.property_filter import PropertyFilter
 from lusid.models.resource_id import ResourceId
+from lusid.models.scenario_reference import ScenarioReference
 from lusid.models.valuation_schedule import ValuationSchedule
 from lusid.models.weighted_instrument import WeightedInstrument
 
@@ -47,7 +48,8 @@ class InlineValuationRequest(BaseModel):
     instruments: List[WeightedInstrument] = Field(description="The set of instruments, weighted by the quantities held that are required.  It is identified by an identifier tag that can be used to identify it externally.  For a single, unique trade or transaction this can be thought of as equivalent to the transaction identifier, or  a composite of the sub-holding keys for a regular sub-holding. When there are multiple transactions sharing the same underlying instrument  such as purchase of shares on multiple dates where tax implications are different this would not be the case.")
     market_data_overrides: Optional[MarketDataOverrides] = Field(default=None, alias="marketDataOverrides")
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
-    __properties = ["recipeId", "asAt", "metrics", "groupBy", "filters", "sort", "reportCurrency", "equipWithSubtotals", "returnResultAsExpandedTypes", "valuationSchedule", "instruments", "marketDataOverrides", "corporateActionSourceId"]
+    scenario: Optional[ScenarioReference] = None
+    __properties = ["recipeId", "asAt", "metrics", "groupBy", "filters", "sort", "reportCurrency", "equipWithSubtotals", "returnResultAsExpandedTypes", "valuationSchedule", "instruments", "marketDataOverrides", "corporateActionSourceId", "scenario"]
 
     class Config:
         """Pydantic configuration"""
@@ -121,6 +123,9 @@ class InlineValuationRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
         if self.corporate_action_source_id:
             _dict['corporateActionSourceId'] = self.corporate_action_source_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scenario
+        if self.scenario:
+            _dict['scenario'] = self.scenario.to_dict()
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -170,7 +175,8 @@ class InlineValuationRequest(BaseModel):
             "valuation_schedule": ValuationSchedule.from_dict(obj.get("valuationSchedule")) if obj.get("valuationSchedule") is not None else None,
             "instruments": [WeightedInstrument.from_dict(_item) for _item in obj.get("instruments")] if obj.get("instruments") is not None else None,
             "market_data_overrides": MarketDataOverrides.from_dict(obj.get("marketDataOverrides")) if obj.get("marketDataOverrides") is not None else None,
-            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
+            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
+            "scenario": ScenarioReference.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
         })
         return _obj
 

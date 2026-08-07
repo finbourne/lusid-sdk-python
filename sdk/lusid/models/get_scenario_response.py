@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.scenario_definition import ScenarioDefinition
+from lusid.models.version import Version
 
 class GetScenarioResponse(BaseModel):
     """
@@ -32,9 +33,10 @@ class GetScenarioResponse(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
     value: Optional[ScenarioDefinition] = None
+    version: Optional[Version] = None
     failed: Optional[ErrorDetail] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "value", "failed", "links"]
+    __properties = ["href", "value", "version", "failed", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,9 @@ class GetScenarioResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:
             _dict['value'] = self.value.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of failed
         if self.failed:
             _dict['failed'] = self.failed.to_dict()
@@ -105,6 +110,7 @@ class GetScenarioResponse(BaseModel):
         _obj = GetScenarioResponse.parse_obj({
             "href": obj.get("href"),
             "value": ScenarioDefinition.from_dict(obj.get("value")) if obj.get("value") is not None else None,
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "failed": ErrorDetail.from_dict(obj.get("failed")) if obj.get("failed") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.rate_breakdown_component import RateBreakdownComponent
 
 class CashElection(BaseModel):
     """
@@ -34,7 +35,9 @@ class CashElection(BaseModel):
     is_declared: Optional[StrictBool] = Field(default=None, description="Is this the declared CashElection.  Only one Election may be Declared per Event.", alias="isDeclared")
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election the default.  Only one Election may be Default per Event", alias="isDefault")
     dividend_currency:  StrictStr = Field(...,alias="dividendCurrency", description="The payment currency for this CashElection.") 
-    __properties = ["electionKey", "exchangeRate", "dividendRate", "isChosen", "isDeclared", "isDefault", "dividendCurrency"]
+    payment_date: Optional[datetime] = Field(default=None, description="Optional option-level payment date. When set, it takes precedence over the event-level payment date; when omitted, the event-level payment date applies.", alias="paymentDate")
+    rate_breakdown: Optional[List[RateBreakdownComponent]] = Field(default=None, description="Optional tax-characterised payout lines for this election (CashDividendEvent only). When absent or empty, the election produces a single standard payment.", alias="rateBreakdown")
+    __properties = ["electionKey", "exchangeRate", "dividendRate", "isChosen", "isDeclared", "isDefault", "dividendCurrency", "paymentDate", "rateBreakdown"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +71,13 @@ class CashElection(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in rate_breakdown (list)
+        _items = []
+        if self.rate_breakdown:
+            for _item in self.rate_breakdown:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['rateBreakdown'] = _items
         # set to None if exchange_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
@@ -77,6 +87,16 @@ class CashElection(BaseModel):
         # and __fields_set__ contains the field
         if self.dividend_rate is None and "dividend_rate" in self.__fields_set__:
             _dict['dividendRate'] = None
+
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
+        # set to None if rate_breakdown (nullable) is None
+        # and __fields_set__ contains the field
+        if self.rate_breakdown is None and "rate_breakdown" in self.__fields_set__:
+            _dict['rateBreakdown'] = None
 
         return _dict
 
@@ -96,7 +116,9 @@ class CashElection(BaseModel):
             "is_chosen": obj.get("isChosen"),
             "is_declared": obj.get("isDeclared"),
             "is_default": obj.get("isDefault"),
-            "dividend_currency": obj.get("dividendCurrency")
+            "dividend_currency": obj.get("dividendCurrency"),
+            "payment_date": obj.get("paymentDate"),
+            "rate_breakdown": [RateBreakdownComponent.from_dict(_item) for _item in obj.get("rateBreakdown")] if obj.get("rateBreakdown") is not None else None
         })
         return _obj
 

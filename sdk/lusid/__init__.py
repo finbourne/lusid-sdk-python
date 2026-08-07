@@ -1005,6 +1005,7 @@ from lusid.models.paged_resource_list_of_transaction_template_specification impo
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
 from lusid.models.paged_resource_list_of_valuation_point_instrument import PagedResourceListOfValuationPointInstrument
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
+from lusid.models.paged_resource_list_of_version import PagedResourceListOfVersion
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
 from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
@@ -1035,8 +1036,10 @@ from lusid.models.person import Person
 from lusid.models.pik_bond_cash_coupon_event import PikBondCashCouponEvent
 from lusid.models.pik_bond_coupon_event import PikBondCouponEvent
 from lusid.models.pik_bond_interest_capitalisation_event import PikBondInterestCapitalisationEvent
+from lusid.models.pik_bond_interest_event import PikBondInterestEvent
 from lusid.models.pik_bond_principal_event import PikBondPrincipalEvent
 from lusid.models.pik_election import PikElection
+from lusid.models.pik_schedule import PikSchedule
 from lusid.models.place_blocks_request import PlaceBlocksRequest
 from lusid.models.placement import Placement
 from lusid.models.placement_request import PlacementRequest
@@ -1138,6 +1141,7 @@ from lusid.models.quote_id import QuoteId
 from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
 from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
+from lusid.models.rate_breakdown_component import RateBreakdownComponent
 from lusid.models.rate_curve_shift_definition import RateCurveShiftDefinition
 from lusid.models.rate_curve_shift_mode import RateCurveShiftMode
 from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
@@ -2661,6 +2665,7 @@ __all__ = [
     "PagedResourceListOfTranslationScriptId",
     "PagedResourceListOfValuationPointInstrument",
     "PagedResourceListOfValuationPointOverview",
+    "PagedResourceListOfVersion",
     "PagedResourceListOfVirtualRow",
     "PagedResourceListOfWorkspace",
     "PagedResourceListOfWorkspaceItem",
@@ -2691,8 +2696,10 @@ __all__ = [
     "PikBondCashCouponEvent",
     "PikBondCouponEvent",
     "PikBondInterestCapitalisationEvent",
+    "PikBondInterestEvent",
     "PikBondPrincipalEvent",
     "PikElection",
+    "PikSchedule",
     "PlaceBlocksRequest",
     "Placement",
     "PlacementRequest",
@@ -2794,6 +2801,7 @@ __all__ = [
     "QuoteInstrumentIdType",
     "QuoteSeriesId",
     "QuoteType",
+    "RateBreakdownComponent",
     "RateCurveShiftDefinition",
     "RateCurveShiftMode",
     "RateCurveShiftScale",

@@ -33,7 +33,7 @@ class FxRateSchedule(Schedule):
     fx_conversion_types: Optional[List[StrictStr]] = Field(default=None, description="List of flags to indicate if coupon payments, principal payments or both are converted", alias="fxConversionTypes")
     rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="FxRate used to convert payments. Assumed to be in units of the ToCurrency so conversion is paymentAmount x fxRate")
     to_currency:  Optional[StrictStr] = Field(None,alias="toCurrency", description="Currency that payments are converted to") 
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "flowConventions", "fxConversionTypes", "rate", "toCurrency"]
 
@@ -104,8 +104,8 @@ class FxRateSchedule(Schedule):
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'Invalid')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid')")
         return value
 
     class Config:

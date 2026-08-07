@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **cap_rate** | **float** | The maximum floating rate which a cashflow can accrue. | [optional] 
 **floor_rate** | **float** | The minimum floating rate which a cashflow can accrue. | [optional] 
 **schedule_id** | **str** | Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent. | [optional] 
-**schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, Invalid. | 
+**schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid. | 
 ## Example
 
 ```python
