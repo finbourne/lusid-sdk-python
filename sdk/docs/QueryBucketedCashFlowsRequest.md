@@ -21,6 +21,10 @@ Name | Type | Description | Notes
 **cash_flow_type** | **str** | Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this). Available values: InstrumentCashFlow, PortfolioCashFlow, TransactionCashFlow. | [optional] 
 **bucketing_schedule** | [**BucketingSchedule**](BucketingSchedule.md) |  | [optional] 
 **filter** | **str** |  | [optional] 
+**cash_flow_calculation_version** | **str** | The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering. | [optional] 
+**haircut_rules** | [**List[CashFlowHaircutRule]**](CashFlowHaircutRule.md) | Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, the additional per-bucket columns &#39;Valuation/Bucket/HaircutAmount&#39; and &#39;Valuation/Bucket/NetOfHaircutAmount&#39; are produced; with no rules the results are unchanged. Only supported for the InstrumentCashFlow CashFlowType. | [optional] 
+**border_configuration** | [**BucketBorderConfiguration**](BucketBorderConfiguration.md) |  | [optional] 
+**starting_balance** | **str** | The balance to use at the start of the bucketing window when computing open/close balances.  Supported string (enumeration) values are: [PortfolioCashBalance, Zero]. Defaults to &#39;PortfolioCashBalance&#39;. Available values: PortfolioCashBalance, Zero. | [optional] 
 ## Example
 
 ```python
@@ -49,7 +53,11 @@ exclude_unsettled_trades:Optional[StrictBool] = None
 cash_flow_type: Optional[StrictStr] = "example_cash_flow_type"
 bucketing_schedule: Optional[BucketingSchedule] = # Replace with your value
 filter: Optional[StrictStr] = "example_filter"
-query_bucketed_cash_flows_request_instance = QueryBucketedCashFlowsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, effective_at=effective_at, recipe_id=recipe_id, rounding_method=rounding_method, bucketing_dates=bucketing_dates, bucketing_tenors=bucketing_tenors, report_currency=report_currency, group_by=group_by, addresses=addresses, equip_with_subtotals=equip_with_subtotals, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_type=cash_flow_type, bucketing_schedule=bucketing_schedule, filter=filter)
+cash_flow_calculation_version: Optional[StrictStr] = "example_cash_flow_calculation_version"
+haircut_rules: Optional[List[CashFlowHaircutRule]] = # Replace with your value
+border_configuration: Optional[BucketBorderConfiguration] = # Replace with your value
+starting_balance: Optional[StrictStr] = "example_starting_balance"
+query_bucketed_cash_flows_request_instance = QueryBucketedCashFlowsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, effective_at=effective_at, recipe_id=recipe_id, rounding_method=rounding_method, bucketing_dates=bucketing_dates, bucketing_tenors=bucketing_tenors, report_currency=report_currency, group_by=group_by, addresses=addresses, equip_with_subtotals=equip_with_subtotals, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_type=cash_flow_type, bucketing_schedule=bucketing_schedule, filter=filter, cash_flow_calculation_version=cash_flow_calculation_version, haircut_rules=haircut_rules, border_configuration=border_configuration, starting_balance=starting_balance)
 
 ```
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **portfolio_entity_ids** | [**List[PortfolioEntityId]**](PortfolioEntityId.md) | The set of portfolios and portfolio groups to which the instrument events must belong. | 
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **effective_at** | **datetime** | The Effective date used in the valuation of the cashflows. | 
+**cash_flow_calculation_version** | **str** | The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified. Valid values are &#39;1&#39; and &#39;2&#39;.  &#39;1&#39; is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  &#39;2&#39; resolves cash flows via a deterministic source waterfall (structured result store &gt; transaction &gt; instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering. | [optional] 
 ## Example
 
 ```python
@@ -25,7 +26,8 @@ window_end: datetime = # Replace with your value
 portfolio_entity_ids: List[PortfolioEntityId] = # Replace with your value
 recipe_id: ResourceId = # Replace with your value
 effective_at: datetime = # Replace with your value
-query_cash_flows_request_instance = QueryCashFlowsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, recipe_id=recipe_id, effective_at=effective_at)
+cash_flow_calculation_version: Optional[StrictStr] = "example_cash_flow_calculation_version"
+query_cash_flows_request_instance = QueryCashFlowsRequest(as_at=as_at, window_start=window_start, window_end=window_end, portfolio_entity_ids=portfolio_entity_ids, recipe_id=recipe_id, effective_at=effective_at, cash_flow_calculation_version=cash_flow_calculation_version)
 
 ```
 

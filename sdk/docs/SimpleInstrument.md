@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **asset_class** | **str** | Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic. | 
 **fgn_ccys** | **List[str]** | The set of foreign currencies, if any (optional). | [optional] 
 **simple_instrument_type** | **str** | The Instrument type of the simple instrument. | 
+**contract_size** | **float** | The size of the contract of the simple instrument | [optional] [default to 1]
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward. | 
@@ -26,10 +27,11 @@ dom_ccy: StrictStr = "example_dom_ccy"
 asset_class: StrictStr = "example_asset_class"
 fgn_ccys: Optional[List[StrictStr]] = # Replace with your value
 simple_instrument_type: StrictStr = "example_simple_instrument_type"
+contract_size: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-simple_instrument_instance = SimpleInstrument(maturity_date=maturity_date, dom_ccy=dom_ccy, asset_class=asset_class, fgn_ccys=fgn_ccys, simple_instrument_type=simple_instrument_type, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
+simple_instrument_instance = SimpleInstrument(maturity_date=maturity_date, dom_ccy=dom_ccy, asset_class=asset_class, fgn_ccys=fgn_ccys, simple_instrument_type=simple_instrument_type, contract_size=contract_size, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
 ```
 

@@ -3064,7 +3064,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_portfolio_cash_flows**
-> ResourceListOfInstrumentCashFlow get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+> ResourceListOfInstrumentCashFlow get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
 
 GetPortfolioCashFlows: Get portfolio cash flows
 
@@ -3125,13 +3125,14 @@ def main():
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = False # bool | If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. (optional) (default to False)
+    cash_flow_calculation_version = 'cash_flow_calculation_version_example' # str | The version of the cash flow calculation logic to use. Defaults to '1' if not specified; valid values are '1' (the current production behaviour)               and '2' (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, opts=opts)
+        # api_response =  api_instance.get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version, opts=opts)
 
         # GetPortfolioCashFlows: Get portfolio cash flows
-        api_response = api_instance.get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+        api_response = api_instance.get_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
         pprint(api_response)
 
     except ApiException as e:
@@ -3154,6 +3155,7 @@ Name | Type | Description  | Notes
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. | [optional] [default to False]
+ **cash_flow_calculation_version** | **str**| The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified; valid values are &#39;1&#39; (the current production behaviour)               and &#39;2&#39; (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). | [optional] 
 
 ### Return type
 
@@ -3174,7 +3176,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_portfolio_cash_ladder**
-> ResourceListOfPortfolioCashLadder get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+> ResourceListOfPortfolioCashLadder get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
 
 GetPortfolioCashLadder: Get portfolio cash ladder
 
@@ -3235,13 +3237,14 @@ def main():
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = False # bool | If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. (optional) (default to False)
+    cash_flow_calculation_version = 'cash_flow_calculation_version_example' # str | The version of the cash flow calculation logic to use. Defaults to '1' if not specified; valid values are '1' (the current production behaviour)              and '2' (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, opts=opts)
+        # api_response =  api_instance.get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version, opts=opts)
 
         # GetPortfolioCashLadder: Get portfolio cash ladder
-        api_response = api_instance.get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+        api_response = api_instance.get_portfolio_cash_ladder(scope, code, from_effective_at, to_effective_at, effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
         pprint(api_response)
 
     except ApiException as e:
@@ -3264,6 +3267,7 @@ Name | Type | Description  | Notes
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. If set to true, unsettled trades will be excluded from the result set. | [optional] [default to False]
+ **cash_flow_calculation_version** | **str**| The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified; valid values are &#39;1&#39; (the current production behaviour)              and &#39;2&#39; (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). | [optional] 
 
 ### Return type
 
@@ -3710,7 +3714,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_upsertable_portfolio_cash_flows**
-> ResourceListOfTransaction get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+> ResourceListOfTransaction get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
 
 GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
 
@@ -3771,13 +3775,14 @@ def main():
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     exclude_unsettled_trades = True # bool | If absent or set to true, unsettled trades will be excluded from the result set. If set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. (optional) (default to True)
+    cash_flow_calculation_version = 'cash_flow_calculation_version_example' # str | The version of the cash flow calculation logic to use. Defaults to '1' if not specified; valid values are '1' (the current production behaviour)               and '2' (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, opts=opts)
+        # api_response =  api_instance.get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version, opts=opts)
 
         # GetUpsertablePortfolioCashFlows: Get upsertable portfolio cash flows.
-        api_response = api_instance.get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades)
+        api_response = api_instance.get_upsertable_portfolio_cash_flows(scope, code, effective_at=effective_at, window_start=window_start, window_end=window_end, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, exclude_unsettled_trades=exclude_unsettled_trades, cash_flow_calculation_version=cash_flow_calculation_version)
         pprint(api_response)
 
     except ApiException as e:
@@ -3800,6 +3805,7 @@ Name | Type | Description  | Notes
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **exclude_unsettled_trades** | **bool**| If absent or set to true, unsettled trades will be excluded from the result set. If set to false, cashflows will returned based on trade date - more specifically, cashflows from any unsettled trades will be included in the results. | [optional] [default to True]
+ **cash_flow_calculation_version** | **str**| The version of the cash flow calculation logic to use. Defaults to &#39;1&#39; if not specified; valid values are &#39;1&#39; (the current production behaviour)               and &#39;2&#39; (cash flows resolved via a deterministic source waterfall, with factual cash flows classified by transaction trade date and corporate action date filtering applied). | [optional] 
 
 ### Return type
 

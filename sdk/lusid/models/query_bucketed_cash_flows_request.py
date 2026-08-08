@@ -22,7 +22,9 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.bucket_border_configuration import BucketBorderConfiguration
 from lusid.models.bucketing_schedule import BucketingSchedule
+from lusid.models.cash_flow_haircut_rule import CashFlowHaircutRule
 from lusid.models.portfolio_entity_id import PortfolioEntityId
 from lusid.models.resource_id import ResourceId
 
@@ -47,7 +49,11 @@ class QueryBucketedCashFlowsRequest(BaseModel):
     cash_flow_type:  Optional[StrictStr] = Field(None,alias="cashFlowType", description="Indicate the requested cash flow representation InstrumentCashFlows or PortfolioCashFlows (GetCashLadder uses this). Available values: InstrumentCashFlow, PortfolioCashFlow, TransactionCashFlow.") 
     bucketing_schedule: Optional[BucketingSchedule] = Field(default=None, alias="bucketingSchedule")
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="") 
-    __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule", "filter"]
+    cash_flow_calculation_version:  Optional[StrictStr] = Field(None,alias="cashFlowCalculationVersion", description="The version of the cash flow calculation logic to use. Defaults to '1' if not specified. Valid values are '1' and '2'.  '1' is the current production behaviour: cash flows booked as transactions are de-duplicated against the  instrument cash flows by identifier, and movements are treated as factual when they settle on or before the effective date.  '2' resolves cash flows via a deterministic source waterfall (structured result store > transaction > instrument),  classifies cash flows as factual by the transaction trade date (so trades dealt on or before the effective date  that settle afterwards are factual), and applies corporate action date filtering.") 
+    haircut_rules: Optional[List[CashFlowHaircutRule]] = Field(default=None, description="Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, the additional per-bucket columns 'Valuation/Bucket/HaircutAmount' and 'Valuation/Bucket/NetOfHaircutAmount' are produced; with no rules the results are unchanged. Only supported for the InstrumentCashFlow CashFlowType.", alias="haircutRules")
+    border_configuration: Optional[BucketBorderConfiguration] = Field(default=None, alias="borderConfiguration")
+    starting_balance:  Optional[StrictStr] = Field(None,alias="startingBalance", description="The balance to use at the start of the bucketing window when computing open/close balances.  Supported string (enumeration) values are: [PortfolioCashBalance, Zero]. Defaults to 'PortfolioCashBalance'. Available values: PortfolioCashBalance, Zero.") 
+    __properties = ["asAt", "windowStart", "windowEnd", "portfolioEntityIds", "effectiveAt", "recipeId", "roundingMethod", "bucketingDates", "bucketingTenors", "reportCurrency", "groupBy", "addresses", "equipWithSubtotals", "excludeUnsettledTrades", "cashFlowType", "bucketingSchedule", "filter", "cashFlowCalculationVersion", "haircutRules", "borderConfiguration", "startingBalance"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,6 +100,16 @@ class QueryBucketedCashFlowsRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of bucketing_schedule
         if self.bucketing_schedule:
             _dict['bucketingSchedule'] = self.bucketing_schedule.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in haircut_rules (list)
+        _items = []
+        if self.haircut_rules:
+            for _item in self.haircut_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['haircutRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of border_configuration
+        if self.border_configuration:
+            _dict['borderConfiguration'] = self.border_configuration.to_dict()
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -129,6 +145,21 @@ class QueryBucketedCashFlowsRequest(BaseModel):
         if self.filter is None and "filter" in self.__fields_set__:
             _dict['filter'] = None
 
+        # set to None if cash_flow_calculation_version (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_flow_calculation_version is None and "cash_flow_calculation_version" in self.__fields_set__:
+            _dict['cashFlowCalculationVersion'] = None
+
+        # set to None if haircut_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.haircut_rules is None and "haircut_rules" in self.__fields_set__:
+            _dict['haircutRules'] = None
+
+        # set to None if starting_balance (nullable) is None
+        # and __fields_set__ contains the field
+        if self.starting_balance is None and "starting_balance" in self.__fields_set__:
+            _dict['startingBalance'] = None
+
         return _dict
 
     @classmethod
@@ -157,7 +188,11 @@ class QueryBucketedCashFlowsRequest(BaseModel):
             "exclude_unsettled_trades": obj.get("excludeUnsettledTrades"),
             "cash_flow_type": obj.get("cashFlowType"),
             "bucketing_schedule": BucketingSchedule.from_dict(obj.get("bucketingSchedule")) if obj.get("bucketingSchedule") is not None else None,
-            "filter": obj.get("filter")
+            "filter": obj.get("filter"),
+            "cash_flow_calculation_version": obj.get("cashFlowCalculationVersion"),
+            "haircut_rules": [CashFlowHaircutRule.from_dict(_item) for _item in obj.get("haircutRules")] if obj.get("haircutRules") is not None else None,
+            "border_configuration": BucketBorderConfiguration.from_dict(obj.get("borderConfiguration")) if obj.get("borderConfiguration") is not None else None,
+            "starting_balance": obj.get("startingBalance")
         })
         return _obj
 

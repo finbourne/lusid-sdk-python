@@ -145,6 +145,7 @@ from lusid.models.branch_step import BranchStep
 from lusid.models.branch_step_request import BranchStepRequest
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucket import Bucket
+from lusid.models.bucket_border_configuration import BucketBorderConfiguration
 from lusid.models.bucket_definition import BucketDefinition
 from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.bucket_set_node import BucketSetNode
@@ -177,7 +178,10 @@ from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferEl
 from lusid.models.cash_dependency import CashDependency
 from lusid.models.cash_dividend_event import CashDividendEvent
 from lusid.models.cash_election import CashElection
+from lusid.models.cash_flow_detail import CashFlowDetail
 from lusid.models.cash_flow_event import CashFlowEvent
+from lusid.models.cash_flow_haircut_rule import CashFlowHaircutRule
+from lusid.models.cash_flow_haircut_term_point import CashFlowHaircutTermPoint
 from lusid.models.cash_flow_lineage import CashFlowLineage
 from lusid.models.cash_flow_value import CashFlowValue
 from lusid.models.cash_flow_value_set import CashFlowValueSet
@@ -1022,6 +1026,7 @@ from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashF
 from lusid.models.put_redemption_event import PutRedemptionEvent
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
+from lusid.models.query_bucket_cash_flow_drill_down_request import QueryBucketCashFlowDrillDownRequest
 from lusid.models.query_bucketed_cash_flows_request import QueryBucketedCashFlowsRequest
 from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
 from lusid.models.query_fund_cash_statement_parameters import QueryFundCashStatementParameters
@@ -1135,6 +1140,7 @@ from lusid.models.resource_list_of_applicable_instrument_event import ResourceLi
 from lusid.models.resource_list_of_block import ResourceListOfBlock
 from lusid.models.resource_list_of_block_and_orders import ResourceListOfBlockAndOrders
 from lusid.models.resource_list_of_calendar_date import ResourceListOfCalendarDate
+from lusid.models.resource_list_of_cash_flow_detail import ResourceListOfCashFlowDetail
 from lusid.models.resource_list_of_change import ResourceListOfChange
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
 from lusid.models.resource_list_of_change_interval import ResourceListOfChangeInterval
@@ -1704,6 +1710,7 @@ __all__ = [
     "BranchStepRequest",
     "BreakCodeSource",
     "Bucket",
+    "BucketBorderConfiguration",
     "BucketDefinition",
     "BucketSetDefinition",
     "BucketSetNode",
@@ -1736,7 +1743,10 @@ __all__ = [
     "CashDependency",
     "CashDividendEvent",
     "CashElection",
+    "CashFlowDetail",
     "CashFlowEvent",
+    "CashFlowHaircutRule",
+    "CashFlowHaircutTermPoint",
     "CashFlowLineage",
     "CashFlowValue",
     "CashFlowValueSet",
@@ -2581,6 +2591,7 @@ __all__ = [
     "PutRedemptionEvent",
     "QuantityInstructed",
     "QueryApplicableInstrumentEventsRequest",
+    "QueryBucketCashFlowDrillDownRequest",
     "QueryBucketedCashFlowsRequest",
     "QueryCashFlowsRequest",
     "QueryFundCashStatementParameters",
@@ -2694,6 +2705,7 @@ __all__ = [
     "ResourceListOfBlock",
     "ResourceListOfBlockAndOrders",
     "ResourceListOfCalendarDate",
+    "ResourceListOfCashFlowDetail",
     "ResourceListOfChange",
     "ResourceListOfChangeHistory",
     "ResourceListOfChangeInterval",

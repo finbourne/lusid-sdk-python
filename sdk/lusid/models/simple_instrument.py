@@ -35,11 +35,12 @@ class SimpleInstrument(LusidInstrument):
     asset_class:  StrictStr = Field(...,alias="assetClass", description="Available values: InterestRates, FX, Inflation, Equities, Credit, Commodities, Money, Unknown, RealEstate, Exotic.") 
     fgn_ccys: Optional[List[StrictStr]] = Field(default=None, description="The set of foreign currencies, if any (optional).", alias="fgnCcys")
     simple_instrument_type:  StrictStr = Field(...,alias="simpleInstrumentType", description="The Instrument type of the simple instrument.") 
+    contract_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=1, description="The size of the contract of the simple instrument", alias="contractSize")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "maturityDate", "domCcy", "assetClass", "fgnCcys", "simpleInstrumentType", "timeZoneConventions", "tradingConventions"]
+    __properties = ["instrumentType", "maturityDate", "domCcy", "assetClass", "fgnCcys", "simpleInstrumentType", "contractSize", "timeZoneConventions", "tradingConventions"]
 
     @validator('asset_class')
     def asset_class_validate_enum(cls, value):
@@ -250,6 +251,7 @@ class SimpleInstrument(LusidInstrument):
             "asset_class": obj.get("assetClass"),
             "fgn_ccys": obj.get("fgnCcys"),
             "simple_instrument_type": obj.get("simpleInstrumentType"),
+            "contract_size": obj.get("contractSize") if obj.get("contractSize") is not None else 1,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
             "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
         })
