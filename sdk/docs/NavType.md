@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **chart_of_accounts_id** | [**ResourceId**](ResourceId.md) |  | 
 **posting_module_codes** | **List[str]** | The Posting Module Codes from which the rules to be applied are retrieved. | [optional] 
 **cleardown_module_codes** | **List[str]** | The Cleardown Module Codes from which the rules to be applied are retrieved. | [optional] 
-**settlement_configuration** | [**NavSettlementConfiguration**](NavSettlementConfiguration.md) |  | [optional] 
+**settlement_configuration** | [**NavSettlementConfiguration**](NavSettlementConfiguration.md) |  | 
 **valuation_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **holding_recipe_id** | [**ResourceId**](ResourceId.md) |  | 
 **accounting_method** | **str** | Determines the accounting treatment given to the simple position portfolio&#39;s tax lots. A non-default value is required. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | 
@@ -37,7 +37,7 @@ description: Optional[StrictStr] = "example_description"
 chart_of_accounts_id: ResourceId = # Replace with your value
 posting_module_codes: Optional[List[StrictStr]] = # Replace with your value
 cleardown_module_codes: Optional[List[StrictStr]] = # Replace with your value
-settlement_configuration: Optional[NavSettlementConfiguration] = # Replace with your value
+settlement_configuration: NavSettlementConfiguration = # Replace with your value
 valuation_recipe_id: ResourceId = # Replace with your value
 holding_recipe_id: ResourceId = # Replace with your value
 accounting_method: StrictStr = "example_accounting_method"

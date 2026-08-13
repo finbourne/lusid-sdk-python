@@ -4,18 +4,18 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_fund_configuration**](FundConfigurationApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
-[**delete_fund_configuration**](FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
-[**get_fund_configuration**](FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
-[**list_fund_configurations**](FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
-[**patch_fund_configuration**](FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
-[**upsert_fund_configuration_properties**](FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+[**create_fund_configuration**](FundConfigurationApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.
+[**delete_fund_configuration**](FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.
+[**get_fund_configuration**](FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.
+[**list_fund_configurations**](FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
+[**patch_fund_configuration**](FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
+[**upsert_fund_configuration_properties**](FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 
 
 # **create_fund_configuration**
 > FundConfiguration create_fund_configuration(scope, fund_configuration_request)
 
-[EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
+[EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.
 
 Create the given FundConfiguration.
 
@@ -76,7 +76,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_fund_configuration(scope, fund_configuration_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
+        # [EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.
         api_response = api_instance.create_fund_configuration(scope, fund_configuration_request)
         pprint(api_response)
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 # **delete_fund_configuration**
 > DeletedEntityResponse delete_fund_configuration(scope, code)
 
-[EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
+[EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.
 
 Delete the given FundConfiguration.
 
@@ -170,7 +170,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_fund_configuration(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
+        # [EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.
         api_response = api_instance.delete_fund_configuration(scope, code)
         pprint(api_response)
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **get_fund_configuration**
 > FundConfiguration get_fund_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
+[EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.
 
 Retrieve the definition of a particular FundConfiguration.
 
@@ -267,7 +267,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fund_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
+        # [EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.
         api_response = api_instance.get_fund_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 # **list_fund_configurations**
 > PagedResourceListOfFundConfiguration list_fund_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
+[EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
 
 List all the FundConfiguration matching particular criteria.
 
@@ -369,7 +369,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_fund_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
+        # [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
         api_response = api_instance.list_fund_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -412,7 +412,7 @@ Name | Type | Description  | Notes
 # **patch_fund_configuration**
 > FundConfiguration patch_fund_configuration(scope, code, operation)
 
-[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
+[EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
 
 Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters, BucketSets, ApportionmentBucketSet, ApportionmentMethodProperty.
 
@@ -469,7 +469,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_fund_configuration(scope, code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
+        # [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
         api_response = api_instance.patch_fund_configuration(scope, code, operation)
         pprint(api_response)
 
@@ -508,7 +508,7 @@ Name | Type | Description  | Notes
 # **upsert_fund_configuration_properties**
 > FundConfigurationProperties upsert_fund_configuration_properties(scope, code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+[EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 
 Update or insert one or more properties onto a single FundConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'FundConfiguration'.                Upserting a property that exists for an FundConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -565,7 +565,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_fund_configuration_properties(scope, code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+        # [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
         api_response = api_instance.upsert_fund_configuration_properties(scope, code, request_body=request_body)
         pprint(api_response)
 

@@ -5,28 +5,28 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AborApi* | [**add_diary_entry**](docs/AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
-*AborApi* | [**close_period**](docs/AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
-*AborApi* | [**create_abor**](docs/AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EXPERIMENTAL] CreateAbor: Create an Abor.
-*AborApi* | [**delete_abor**](docs/AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EXPERIMENTAL] DeleteAbor: Delete an Abor.
-*AborApi* | [**delete_diary_entry**](docs/AborApi.md#delete_diary_entry) | **DELETE** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
-*AborApi* | [**get_abor**](docs/AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EXPERIMENTAL] GetAbor: Get Abor.
-*AborApi* | [**get_abor_properties**](docs/AborApi.md#get_abor_properties) | **GET** /api/abor/{scope}/{code}/properties | [EXPERIMENTAL] GetAborProperties: Get Abor properties
-*AborApi* | [**get_journal_entry_lines**](docs/AborApi.md#get_journal_entry_lines) | **POST** /api/abor/{scope}/{code}/journalentrylines/$query | [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
-*AborApi* | [**get_trial_balance**](docs/AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
-*AborApi* | [**list_abors**](docs/AborApi.md#list_abors) | **GET** /api/abor | [EXPERIMENTAL] ListAbors: List Abors.
-*AborApi* | [**list_diary_entries**](docs/AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] ListDiaryEntries: List diary entries.
-*AborApi* | [**lock_period**](docs/AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
-*AborApi* | [**patch_abor**](docs/AborApi.md#patch_abor) | **PATCH** /api/abor/{scope}/{code} | [EXPERIMENTAL] PatchAbor: Patch Abor.
-*AborApi* | [**re_open_periods**](docs/AborApi.md#re_open_periods) | **POST** /api/abor/{scope}/{code}/accountingdiary/$reopenperiods | [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
-*AborApi* | [**upsert_abor_properties**](docs/AborApi.md#upsert_abor_properties) | **POST** /api/abor/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
-*AborConfigurationApi* | [**create_abor_configuration**](docs/AborConfigurationApi.md#create_abor_configuration) | **POST** /api/aborconfiguration/{scope} | [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
-*AborConfigurationApi* | [**delete_abor_configuration**](docs/AborConfigurationApi.md#delete_abor_configuration) | **DELETE** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
-*AborConfigurationApi* | [**get_abor_configuration**](docs/AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
-*AborConfigurationApi* | [**get_abor_configuration_properties**](docs/AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
-*AborConfigurationApi* | [**list_abor_configurations**](docs/AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
-*AborConfigurationApi* | [**patch_abor_configuration**](docs/AborConfigurationApi.md#patch_abor_configuration) | **PATCH** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
-*AborConfigurationApi* | [**upsert_abor_configuration_properties**](docs/AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+*AborApi* | [**add_diary_entry**](docs/AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary | [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
+*AborApi* | [**close_period**](docs/AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
+*AborApi* | [**create_abor**](docs/AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EARLY ACCESS] CreateAbor: Create an Abor.
+*AborApi* | [**delete_abor**](docs/AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EARLY ACCESS] DeleteAbor: Delete an Abor.
+*AborApi* | [**delete_diary_entry**](docs/AborApi.md#delete_diary_entry) | **DELETE** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
+*AborApi* | [**get_abor**](docs/AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EARLY ACCESS] GetAbor: Get Abor.
+*AborApi* | [**get_abor_properties**](docs/AborApi.md#get_abor_properties) | **GET** /api/abor/{scope}/{code}/properties | [EARLY ACCESS] GetAborProperties: Get Abor properties
+*AborApi* | [**get_journal_entry_lines**](docs/AborApi.md#get_journal_entry_lines) | **POST** /api/abor/{scope}/{code}/journalentrylines/$query | [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+*AborApi* | [**get_trial_balance**](docs/AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
+*AborApi* | [**list_abors**](docs/AborApi.md#list_abors) | **GET** /api/abor | [EARLY ACCESS] ListAbors: List Abors.
+*AborApi* | [**list_diary_entries**](docs/AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EARLY ACCESS] ListDiaryEntries: List diary entries.
+*AborApi* | [**lock_period**](docs/AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
+*AborApi* | [**patch_abor**](docs/AborApi.md#patch_abor) | **PATCH** /api/abor/{scope}/{code} | [EARLY ACCESS] PatchAbor: Patch Abor.
+*AborApi* | [**re_open_periods**](docs/AborApi.md#re_open_periods) | **POST** /api/abor/{scope}/{code}/accountingdiary/$reopenperiods | [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+*AborApi* | [**upsert_abor_properties**](docs/AborApi.md#upsert_abor_properties) | **POST** /api/abor/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
+*AborConfigurationApi* | [**create_abor_configuration**](docs/AborConfigurationApi.md#create_abor_configuration) | **POST** /api/aborconfiguration/{scope} | [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
+*AborConfigurationApi* | [**delete_abor_configuration**](docs/AborConfigurationApi.md#delete_abor_configuration) | **DELETE** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
+*AborConfigurationApi* | [**get_abor_configuration**](docs/AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
+*AborConfigurationApi* | [**get_abor_configuration_properties**](docs/AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
+*AborConfigurationApi* | [**list_abor_configurations**](docs/AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
+*AborConfigurationApi* | [**patch_abor_configuration**](docs/AborConfigurationApi.md#patch_abor_configuration) | **PATCH** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
+*AborConfigurationApi* | [**upsert_abor_configuration_properties**](docs/AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 *AddressKeyDefinitionApi* | [**create_address_key_definition**](docs/AddressKeyDefinitionApi.md#create_address_key_definition) | **POST** /api/addresskeydefinitions | [EARLY ACCESS] CreateAddressKeyDefinition: Create an AddressKeyDefinition.
 *AddressKeyDefinitionApi* | [**get_address_key_definition**](docs/AddressKeyDefinitionApi.md#get_address_key_definition) | **GET** /api/addresskeydefinitions/{key} | [EARLY ACCESS] GetAddressKeyDefinition: Get an AddressKeyDefinition.
 *AddressKeyDefinitionApi* | [**list_address_key_definitions**](docs/AddressKeyDefinitionApi.md#list_address_key_definitions) | **GET** /api/addresskeydefinitions | [EARLY ACCESS] ListAddressKeyDefinitions: List AddressKeyDefinitions.
@@ -76,40 +76,40 @@ Class | Method | HTTP request | Description
 *CalendarsApi* | [**list_calendars_in_scope**](docs/CalendarsApi.md#list_calendars_in_scope) | **GET** /api/calendars/generic/{scope} | ListCalendarsInScope: List all calenders in a specified scope
 *CalendarsApi* | [**resolve_tenors**](docs/CalendarsApi.md#resolve_tenors) | **POST** /api/calendars/tenors/resolve | [EARLY ACCESS] ResolveTenors: Resolve tenor strings to settlement dates.
 *CalendarsApi* | [**update_calendar**](docs/CalendarsApi.md#update_calendar) | **POST** /api/calendars/generic/{scope}/{code} | [EARLY ACCESS] UpdateCalendar: Update a calendar
-*ChartOfAccountsApi* | [**create_chart_of_accounts**](docs/ChartOfAccountsApi.md#create_chart_of_accounts) | **POST** /api/chartofaccounts/{scope} | [EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts
-*ChartOfAccountsApi* | [**create_cleardown_module**](docs/ChartOfAccountsApi.md#create_cleardown_module) | **POST** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module
-*ChartOfAccountsApi* | [**create_general_ledger_profile**](docs/ChartOfAccountsApi.md#create_general_ledger_profile) | **POST** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.
-*ChartOfAccountsApi* | [**create_posting_module**](docs/ChartOfAccountsApi.md#create_posting_module) | **POST** /api/chartofaccounts/{scope}/{code}/postingmodules | [EXPERIMENTAL] CreatePostingModule: Create a Posting Module
-*ChartOfAccountsApi* | [**delete_accounts**](docs/ChartOfAccountsApi.md#delete_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/$delete | [EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts
-*ChartOfAccountsApi* | [**delete_chart_of_accounts**](docs/ChartOfAccountsApi.md#delete_chart_of_accounts) | **DELETE** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts
-*ChartOfAccountsApi* | [**delete_cleardown_module**](docs/ChartOfAccountsApi.md#delete_cleardown_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.
-*ChartOfAccountsApi* | [**delete_general_ledger_profile**](docs/ChartOfAccountsApi.md#delete_general_ledger_profile) | **DELETE** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
-*ChartOfAccountsApi* | [**delete_posting_module**](docs/ChartOfAccountsApi.md#delete_posting_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.
-*ChartOfAccountsApi* | [**get_account**](docs/ChartOfAccountsApi.md#get_account) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode} | [EXPERIMENTAL] GetAccount: Get Account
-*ChartOfAccountsApi* | [**get_account_properties**](docs/ChartOfAccountsApi.md#get_account_properties) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties | [EXPERIMENTAL] GetAccountProperties: Get Account properties
-*ChartOfAccountsApi* | [**get_chart_of_accounts**](docs/ChartOfAccountsApi.md#get_chart_of_accounts) | **GET** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts
-*ChartOfAccountsApi* | [**get_chart_of_accounts_properties**](docs/ChartOfAccountsApi.md#get_chart_of_accounts_properties) | **GET** /api/chartofaccounts/{scope}/{code}/properties | [EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties
-*ChartOfAccountsApi* | [**get_cleardown_module**](docs/ChartOfAccountsApi.md#get_cleardown_module) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module
-*ChartOfAccountsApi* | [**get_general_ledger_profile**](docs/ChartOfAccountsApi.md#get_general_ledger_profile) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.
-*ChartOfAccountsApi* | [**get_posting_module**](docs/ChartOfAccountsApi.md#get_posting_module) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] GetPostingModule: Get a Posting Module
-*ChartOfAccountsApi* | [**list_accounts**](docs/ChartOfAccountsApi.md#list_accounts) | **GET** /api/chartofaccounts/{scope}/{code}/accounts | [EXPERIMENTAL] ListAccounts: List Accounts
-*ChartOfAccountsApi* | [**list_charts_of_accounts**](docs/ChartOfAccountsApi.md#list_charts_of_accounts) | **GET** /api/chartofaccounts | [EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts
-*ChartOfAccountsApi* | [**list_cleardown_module_rules**](docs/ChartOfAccountsApi.md#list_cleardown_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules
-*ChartOfAccountsApi* | [**list_cleardown_modules**](docs/ChartOfAccountsApi.md#list_cleardown_modules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EXPERIMENTAL] ListCleardownModules: List Cleardown Modules
-*ChartOfAccountsApi* | [**list_general_ledger_profiles**](docs/ChartOfAccountsApi.md#list_general_ledger_profiles) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.
-*ChartOfAccountsApi* | [**list_posting_module_rules**](docs/ChartOfAccountsApi.md#list_posting_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules
-*ChartOfAccountsApi* | [**list_posting_modules**](docs/ChartOfAccountsApi.md#list_posting_modules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules | [EXPERIMENTAL] ListPostingModules: List Posting Modules
-*ChartOfAccountsApi* | [**patch_chart_of_accounts**](docs/ChartOfAccountsApi.md#patch_chart_of_accounts) | **PATCH** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.
-*ChartOfAccountsApi* | [**patch_cleardown_module**](docs/ChartOfAccountsApi.md#patch_cleardown_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module
-*ChartOfAccountsApi* | [**patch_posting_module**](docs/ChartOfAccountsApi.md#patch_posting_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] PatchPostingModule: Patch a Posting Module
-*ChartOfAccountsApi* | [**set_cleardown_module_details**](docs/ChartOfAccountsApi.md#set_cleardown_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module
-*ChartOfAccountsApi* | [**set_cleardown_module_rules**](docs/ChartOfAccountsApi.md#set_cleardown_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module
-*ChartOfAccountsApi* | [**set_general_ledger_profile_mappings**](docs/ChartOfAccountsApi.md#set_general_ledger_profile_mappings) | **PUT** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode}/mappings | [EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
-*ChartOfAccountsApi* | [**set_posting_module_details**](docs/ChartOfAccountsApi.md#set_posting_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module
-*ChartOfAccountsApi* | [**set_posting_module_rules**](docs/ChartOfAccountsApi.md#set_posting_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module
-*ChartOfAccountsApi* | [**upsert_account_properties**](docs/ChartOfAccountsApi.md#upsert_account_properties) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties/$upsert | [EXPERIMENTAL] UpsertAccountProperties: Upsert account properties
-*ChartOfAccountsApi* | [**upsert_accounts**](docs/ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EXPERIMENTAL] UpsertAccounts: Upsert Accounts
-*ChartOfAccountsApi* | [**upsert_chart_of_accounts_properties**](docs/ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
+*ChartOfAccountsApi* | [**create_chart_of_accounts**](docs/ChartOfAccountsApi.md#create_chart_of_accounts) | **POST** /api/chartofaccounts/{scope} | [EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts
+*ChartOfAccountsApi* | [**create_cleardown_module**](docs/ChartOfAccountsApi.md#create_cleardown_module) | **POST** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module
+*ChartOfAccountsApi* | [**create_general_ledger_profile**](docs/ChartOfAccountsApi.md#create_general_ledger_profile) | **POST** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.
+*ChartOfAccountsApi* | [**create_posting_module**](docs/ChartOfAccountsApi.md#create_posting_module) | **POST** /api/chartofaccounts/{scope}/{code}/postingmodules | [EARLY ACCESS] CreatePostingModule: Create a Posting Module
+*ChartOfAccountsApi* | [**delete_accounts**](docs/ChartOfAccountsApi.md#delete_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/$delete | [EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts
+*ChartOfAccountsApi* | [**delete_chart_of_accounts**](docs/ChartOfAccountsApi.md#delete_chart_of_accounts) | **DELETE** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts
+*ChartOfAccountsApi* | [**delete_cleardown_module**](docs/ChartOfAccountsApi.md#delete_cleardown_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.
+*ChartOfAccountsApi* | [**delete_general_ledger_profile**](docs/ChartOfAccountsApi.md#delete_general_ledger_profile) | **DELETE** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
+*ChartOfAccountsApi* | [**delete_posting_module**](docs/ChartOfAccountsApi.md#delete_posting_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] DeletePostingModule: Delete a Posting Module.
+*ChartOfAccountsApi* | [**get_account**](docs/ChartOfAccountsApi.md#get_account) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode} | [EARLY ACCESS] GetAccount: Get Account
+*ChartOfAccountsApi* | [**get_account_properties**](docs/ChartOfAccountsApi.md#get_account_properties) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties | [EARLY ACCESS] GetAccountProperties: Get Account properties
+*ChartOfAccountsApi* | [**get_chart_of_accounts**](docs/ChartOfAccountsApi.md#get_chart_of_accounts) | **GET** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts
+*ChartOfAccountsApi* | [**get_chart_of_accounts_properties**](docs/ChartOfAccountsApi.md#get_chart_of_accounts_properties) | **GET** /api/chartofaccounts/{scope}/{code}/properties | [EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties
+*ChartOfAccountsApi* | [**get_cleardown_module**](docs/ChartOfAccountsApi.md#get_cleardown_module) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] GetCleardownModule: Get a Cleardown Module
+*ChartOfAccountsApi* | [**get_general_ledger_profile**](docs/ChartOfAccountsApi.md#get_general_ledger_profile) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.
+*ChartOfAccountsApi* | [**get_posting_module**](docs/ChartOfAccountsApi.md#get_posting_module) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] GetPostingModule: Get a Posting Module
+*ChartOfAccountsApi* | [**list_accounts**](docs/ChartOfAccountsApi.md#list_accounts) | **GET** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] ListAccounts: List Accounts
+*ChartOfAccountsApi* | [**list_charts_of_accounts**](docs/ChartOfAccountsApi.md#list_charts_of_accounts) | **GET** /api/chartofaccounts | [EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts
+*ChartOfAccountsApi* | [**list_cleardown_module_rules**](docs/ChartOfAccountsApi.md#list_cleardown_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules
+*ChartOfAccountsApi* | [**list_cleardown_modules**](docs/ChartOfAccountsApi.md#list_cleardown_modules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EARLY ACCESS] ListCleardownModules: List Cleardown Modules
+*ChartOfAccountsApi* | [**list_general_ledger_profiles**](docs/ChartOfAccountsApi.md#list_general_ledger_profiles) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.
+*ChartOfAccountsApi* | [**list_posting_module_rules**](docs/ChartOfAccountsApi.md#list_posting_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
+*ChartOfAccountsApi* | [**list_posting_modules**](docs/ChartOfAccountsApi.md#list_posting_modules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules | [EARLY ACCESS] ListPostingModules: List Posting Modules
+*ChartOfAccountsApi* | [**patch_chart_of_accounts**](docs/ChartOfAccountsApi.md#patch_chart_of_accounts) | **PATCH** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.
+*ChartOfAccountsApi* | [**patch_cleardown_module**](docs/ChartOfAccountsApi.md#patch_cleardown_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module
+*ChartOfAccountsApi* | [**patch_posting_module**](docs/ChartOfAccountsApi.md#patch_posting_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] PatchPostingModule: Patch a Posting Module
+*ChartOfAccountsApi* | [**set_cleardown_module_details**](docs/ChartOfAccountsApi.md#set_cleardown_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module
+*ChartOfAccountsApi* | [**set_cleardown_module_rules**](docs/ChartOfAccountsApi.md#set_cleardown_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module
+*ChartOfAccountsApi* | [**set_general_ledger_profile_mappings**](docs/ChartOfAccountsApi.md#set_general_ledger_profile_mappings) | **PUT** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode}/mappings | [EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
+*ChartOfAccountsApi* | [**set_posting_module_details**](docs/ChartOfAccountsApi.md#set_posting_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module
+*ChartOfAccountsApi* | [**set_posting_module_rules**](docs/ChartOfAccountsApi.md#set_posting_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module
+*ChartOfAccountsApi* | [**upsert_account_properties**](docs/ChartOfAccountsApi.md#upsert_account_properties) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties/$upsert | [EARLY ACCESS] UpsertAccountProperties: Upsert account properties
+*ChartOfAccountsApi* | [**upsert_accounts**](docs/ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] UpsertAccounts: Upsert Accounts
+*ChartOfAccountsApi* | [**upsert_chart_of_accounts_properties**](docs/ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
 *CheckDefinitionsApi* | [**create_check_definition**](docs/CheckDefinitionsApi.md#create_check_definition) | **POST** /api/dataquality/checkdefinitions | [EXPERIMENTAL] CreateCheckDefinition: Create a Check Definition
 *CheckDefinitionsApi* | [**delete_check_definition**](docs/CheckDefinitionsApi.md#delete_check_definition) | **DELETE** /api/dataquality/checkdefinitions/{scope}/{code} | [EXPERIMENTAL] DeleteCheckDefinition: Deletes a particular Check Definition
 *CheckDefinitionsApi* | [**delete_rules**](docs/CheckDefinitionsApi.md#delete_rules) | **POST** /api/dataquality/checkdefinitions/{scope}/{code}/$deleteRules | [EXPERIMENTAL] DeleteRules: Delete rules on a particular Check Definition
@@ -238,71 +238,71 @@ Class | Method | HTTP request | Description
 *ExecutionsApi* | [**get_execution**](docs/ExecutionsApi.md#get_execution) | **GET** /api/executions/{scope}/{code} | [EARLY ACCESS] GetExecution: Get Execution
 *ExecutionsApi* | [**list_executions**](docs/ExecutionsApi.md#list_executions) | **GET** /api/executions | ListExecutions: List Executions
 *ExecutionsApi* | [**upsert_executions**](docs/ExecutionsApi.md#upsert_executions) | **POST** /api/executions | UpsertExecutions: Upsert Execution
-*FeeTypesApi* | [**create_fee_type**](docs/FeeTypesApi.md#create_fee_type) | **POST** /api/feetypes/{scope} | [EXPERIMENTAL] CreateFeeType: Create a FeeType.
-*FeeTypesApi* | [**delete_fee_type**](docs/FeeTypesApi.md#delete_fee_type) | **DELETE** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
-*FeeTypesApi* | [**get_fee_template_specifications**](docs/FeeTypesApi.md#get_fee_template_specifications) | **GET** /api/feetypes/feetransactiontemplatespecification | [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
-*FeeTypesApi* | [**get_fee_type**](docs/FeeTypesApi.md#get_fee_type) | **GET** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] GetFeeType: Get a FeeType
-*FeeTypesApi* | [**list_fee_types**](docs/FeeTypesApi.md#list_fee_types) | **GET** /api/feetypes | [EXPERIMENTAL] ListFeeTypes: List FeeTypes
-*FeeTypesApi* | [**update_fee_type**](docs/FeeTypesApi.md#update_fee_type) | **PUT** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
-*FundConfigurationApi* | [**create_fund_configuration**](docs/FundConfigurationApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.
-*FundConfigurationApi* | [**delete_fund_configuration**](docs/FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.
-*FundConfigurationApi* | [**get_fund_configuration**](docs/FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.
-*FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.
-*FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.
-*FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+*FeeTypesApi* | [**create_fee_type**](docs/FeeTypesApi.md#create_fee_type) | **POST** /api/feetypes/{scope} | [EARLY ACCESS] CreateFeeType: Create a FeeType.
+*FeeTypesApi* | [**delete_fee_type**](docs/FeeTypesApi.md#delete_fee_type) | **DELETE** /api/feetypes/{scope}/{code} | [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
+*FeeTypesApi* | [**get_fee_template_specifications**](docs/FeeTypesApi.md#get_fee_template_specifications) | **GET** /api/feetypes/feetransactiontemplatespecification | [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+*FeeTypesApi* | [**get_fee_type**](docs/FeeTypesApi.md#get_fee_type) | **GET** /api/feetypes/{scope}/{code} | [EARLY ACCESS] GetFeeType: Get a FeeType
+*FeeTypesApi* | [**list_fee_types**](docs/FeeTypesApi.md#list_fee_types) | **GET** /api/feetypes | [EARLY ACCESS] ListFeeTypes: List FeeTypes
+*FeeTypesApi* | [**update_fee_type**](docs/FeeTypesApi.md#update_fee_type) | **PUT** /api/feetypes/{scope}/{code} | [EARLY ACCESS] UpdateFeeType: Update a FeeType.
+*FundConfigurationApi* | [**create_fund_configuration**](docs/FundConfigurationApi.md#create_fund_configuration) | **POST** /api/fundconfigurations/{scope} | [EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.
+*FundConfigurationApi* | [**delete_fund_configuration**](docs/FundConfigurationApi.md#delete_fund_configuration) | **DELETE** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.
+*FundConfigurationApi* | [**get_fund_configuration**](docs/FundConfigurationApi.md#get_fund_configuration) | **GET** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.
+*FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
+*FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
+*FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 *FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
 *FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
 *FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
-*FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
-*FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.
-*FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EXPERIMENTAL] AddSeries: Add Series to a Fund.
-*FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] CreateFee: Create a Fee.
-*FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EXPERIMENTAL] CreateFund: Create a Fund.
-*FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).
-*FundsApi* | [**create_valuation_point**](docs/FundsApi.md#create_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$create | [EXPERIMENTAL] CreateValuationPoint: Create a Valuation Point.
-*FundsApi* | [**deactivate_nav_types**](docs/FundsApi.md#deactivate_nav_types) | **POST** /api/funds/{scope}/{code}/deactivateNavTypes | [EXPERIMENTAL] DeactivateNavTypes: Deactivate NAV types on a Fund.
-*FundsApi* | [**delete_bookmark**](docs/FundsApi.md#delete_bookmark) | **DELETE** /api/funds/{scope}/{code}/bookmarks/{bookmarkCode} | [EXPERIMENTAL] DeleteBookmark: Delete a Bookmark.
-*FundsApi* | [**delete_fee**](docs/FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] DeleteFee: Delete a Fee.
-*FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EXPERIMENTAL] DeleteFund: Delete a Fund.
-*FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
-*FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.
-*FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
-*FundsApi* | [**get_a2_b_data_for_fund**](docs/FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EXPERIMENTAL] GetA2BDataForFund: Get A2B data for a Fund.
-*FundsApi* | [**get_a2_b_movements_for_fund**](docs/FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EXPERIMENTAL] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
-*FundsApi* | [**get_fee**](docs/FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.
-*FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EXPERIMENTAL] GetFeeProperties: Get Fee properties.
-*FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EXPERIMENTAL] GetFund: Get a Fund.
-*FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EXPERIMENTAL] GetFundProperties: Get Fund properties.
-*FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
-*FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
-*FundsApi* | [**get_valuation_for_fund**](docs/FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.
-*FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.
-*FundsApi* | [**get_valuation_point_journal_entry_lines**](docs/FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
-*FundsApi* | [**get_valuation_point_pnl_summary**](docs/FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
-*FundsApi* | [**get_valuation_point_quotes**](docs/FundsApi.md#get_valuation_point_quotes) | **POST** /api/funds/{scope}/{code}/valuationpoints/quotes/$query | [EXPERIMENTAL] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.
-*FundsApi* | [**get_valuation_point_transactions**](docs/FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.
-*FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
-*FundsApi* | [**get_valuation_point_unsettled_transactions**](docs/FundsApi.md#get_valuation_point_unsettled_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/unsettledtransactions/$query | [EXPERIMENTAL] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-*FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EXPERIMENTAL] ListFees: List Fees for a specified Fund.
-*FundsApi* | [**list_fund_calendar**](docs/FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EXPERIMENTAL] ListFundCalendar: List Fund Calendar.
-*FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.
-*FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EXPERIMENTAL] ListFunds: List Funds.
-*FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
-*FundsApi* | [**list_valuation_point_complex_market_data**](docs/FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EXPERIMENTAL] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
-*FundsApi* | [**list_valuation_point_instruments**](docs/FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EXPERIMENTAL] ListValuationPointInstruments: List Instruments inside a valuation point
-*FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
-*FundsApi* | [**patch_fee**](docs/FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EXPERIMENTAL] PatchFee: Patch Fee.
-*FundsApi* | [**patch_fund**](docs/FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EXPERIMENTAL] PatchFund: Patch a Fund.
+*FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
+*FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
+*FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+*FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
+*FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EARLY ACCESS] CreateFund: Create a Fund.
+*FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EARLY ACCESS] CreateFundV2: Create a Fund V2 (Preview).
+*FundsApi* | [**create_valuation_point**](docs/FundsApi.md#create_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$create | [EARLY ACCESS] CreateValuationPoint: Create a Valuation Point.
+*FundsApi* | [**deactivate_nav_types**](docs/FundsApi.md#deactivate_nav_types) | **POST** /api/funds/{scope}/{code}/deactivateNavTypes | [EARLY ACCESS] DeactivateNavTypes: Deactivate NAV types on a Fund.
+*FundsApi* | [**delete_bookmark**](docs/FundsApi.md#delete_bookmark) | **DELETE** /api/funds/{scope}/{code}/bookmarks/{bookmarkCode} | [EARLY ACCESS] DeleteBookmark: Delete a Bookmark.
+*FundsApi* | [**delete_fee**](docs/FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] DeleteFee: Delete a Fee.
+*FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
+*FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
+*FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.
+*FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
+*FundsApi* | [**get_a2_b_data_for_fund**](docs/FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.
+*FundsApi* | [**get_a2_b_movements_for_fund**](docs/FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
+*FundsApi* | [**get_fee**](docs/FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] GetFee: Get a Fee for a specified Fund.
+*FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EARLY ACCESS] GetFeeProperties: Get Fee properties.
+*FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund.
+*FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EARLY ACCESS] GetFundProperties: Get Fund properties.
+*FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
+*FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
+*FundsApi* | [**get_valuation_for_fund**](docs/FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
+*FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.
+*FundsApi* | [**get_valuation_point_journal_entry_lines**](docs/FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
+*FundsApi* | [**get_valuation_point_pnl_summary**](docs/FundsApi.md#get_valuation_point_pnl_summary) | **POST** /api/funds/{scope}/{code}/valuationpoints/pnlsummary/$query | [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
+*FundsApi* | [**get_valuation_point_quotes**](docs/FundsApi.md#get_valuation_point_quotes) | **POST** /api/funds/{scope}/{code}/valuationpoints/quotes/$query | [EARLY ACCESS] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.
+*FundsApi* | [**get_valuation_point_transactions**](docs/FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
+*FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
+*FundsApi* | [**get_valuation_point_unsettled_transactions**](docs/FundsApi.md#get_valuation_point_unsettled_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/unsettledtransactions/$query | [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
+*FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] ListFees: List Fees for a specified Fund.
+*FundsApi* | [**list_fund_calendar**](docs/FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EARLY ACCESS] ListFundCalendar: List Fund Calendar.
+*FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.
+*FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EARLY ACCESS] ListFunds: List Funds.
+*FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+*FundsApi* | [**list_valuation_point_complex_market_data**](docs/FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
+*FundsApi* | [**list_valuation_point_instruments**](docs/FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point
+*FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
+*FundsApi* | [**patch_fee**](docs/FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] PatchFee: Patch Fee.
+*FundsApi* | [**patch_fund**](docs/FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EARLY ACCESS] PatchFund: Patch a Fund.
 *FundsApi* | [**query_cash_statement**](docs/FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
-*FundsApi* | [**query_cash_statement_local_currency**](docs/FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EXPERIMENTAL] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
-*FundsApi* | [**revert_valuation_point_to_estimate**](docs/FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
-*FundsApi* | [**set_share_class_instruments**](docs/FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
-*FundsApi* | [**update_valuation_point**](docs/FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.
-*FundsApi* | [**upsert_bookmark**](docs/FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.
-*FundsApi* | [**upsert_diary_entry_type_valuation_point**](docs/FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
-*FundsApi* | [**upsert_fee_properties**](docs/FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.
-*FundsApi* | [**upsert_fund_properties**](docs/FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.
-*FundsApi* | [**upsert_nav_activity_adjustments**](docs/FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
+*FundsApi* | [**query_cash_statement_local_currency**](docs/FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
+*FundsApi* | [**revert_valuation_point_to_estimate**](docs/FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
+*FundsApi* | [**set_share_class_instruments**](docs/FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
+*FundsApi* | [**update_valuation_point**](docs/FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
+*FundsApi* | [**upsert_bookmark**](docs/FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
+*FundsApi* | [**upsert_diary_entry_type_valuation_point**](docs/FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
+*FundsApi* | [**upsert_fee_properties**](docs/FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.
+*FundsApi* | [**upsert_fund_properties**](docs/FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.
+*FundsApi* | [**upsert_nav_activity_adjustments**](docs/FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
 *GroupReconciliationsApi* | [**batch_update_comparison_results**](docs/GroupReconciliationsApi.md#batch_update_comparison_results) | **POST** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/comparisonresults/$batchReview | [EXPERIMENTAL] BatchUpdateComparisonResults: Add User Review entries for a range of comparison results related to a specific GroupReconciliationDefinition.
 *GroupReconciliationsApi* | [**create_comparison_ruleset**](docs/GroupReconciliationsApi.md#create_comparison_ruleset) | **POST** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] CreateComparisonRuleset: Create a Group Reconciliation Comparison Ruleset
 *GroupReconciliationsApi* | [**create_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#create_group_reconciliation_definition) | **POST** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition
@@ -553,11 +553,15 @@ Class | Method | HTTP request | Description
 *ReconciliationsApi* | [**update_reconciliation**](docs/ReconciliationsApi.md#update_reconciliation) | **POST** /api/portfolios/$scheduledReconciliations/{scope}/{code} | [EXPERIMENTAL] UpdateReconciliation: Update scheduled reconciliation
 *ReconciliationsApi* | [**upsert_reconciliation_mapping**](docs/ReconciliationsApi.md#upsert_reconciliation_mapping) | **POST** /api/portfolios/mapping | [EARLY ACCESS] UpsertReconciliationMapping: Create or update a mapping
 *RecsApi* | [**add_rec_result_set_approval_decision**](docs/RecsApi.md#add_rec_result_set_approval_decision) | **POST** /api/recs/resultsets/{entityUniqueId}/$decide | [EXPERIMENTAL] AddRecResultSetApprovalDecision: AddRecResultSetApprovalDecision
+*RecsApi* | [**batch_manage_rec_result_comments**](docs/RecsApi.md#batch_manage_rec_result_comments) | **POST** /api/recs/results/$batchManageComments | [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+*RecsApi* | [**batch_review_rec_results**](docs/RecsApi.md#batch_review_rec_results) | **POST** /api/recs/results/$batchReview | [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
 *RecsApi* | [**get_rec_instance**](docs/RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
+*RecsApi* | [**get_rec_result**](docs/RecsApi.md#get_rec_result) | **GET** /api/recs/results/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 *RecsApi* | [**get_rec_result_set**](docs/RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
 *RecsApi* | [**instantiate_rec**](docs/RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 *RecsApi* | [**list_rec_instances**](docs/RecsApi.md#list_rec_instances) | **GET** /api/recs/instances | [EXPERIMENTAL] ListRecInstances: ListRecInstances
 *RecsApi* | [**list_rec_result_sets**](docs/RecsApi.md#list_rec_result_sets) | **GET** /api/recs/resultsets | [EXPERIMENTAL] ListRecResultSets: ListRecResultSets
+*RecsApi* | [**list_rec_results**](docs/RecsApi.md#list_rec_results) | **GET** /api/recs/results | [EXPERIMENTAL] ListRecResults: ListRecResults
 *RecsApi* | [**submit_rec_result_set_review**](docs/RecsApi.md#submit_rec_result_set_review) | **POST** /api/recs/resultsets/{entityUniqueId}/$submit | [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
 *RecsApi* | [**transition_rec_instance**](docs/RecsApi.md#transition_rec_instance) | **POST** /api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
 *ReferenceListsApi* | [**delete_reference_list**](docs/ReferenceListsApi.md#delete_reference_list) | **DELETE** /api/referencelists/{scope}/{code} | [EARLY ACCESS] DeleteReferenceList: Delete Reference List
@@ -647,10 +651,10 @@ Class | Method | HTTP request | Description
 *StructuredResultDataApi* | [**get_virtual_document_rows**](docs/StructuredResultDataApi.md#get_virtual_document_rows) | **GET** /api/unitresults/virtualdocument/{scope}/{code}/{source}/{resultType} | GetVirtualDocumentRows: Get Virtual Document Rows
 *StructuredResultDataApi* | [**upsert_result_value**](docs/StructuredResultDataApi.md#upsert_result_value) | **POST** /api/unitresults/resultvalue/{scope} | UpsertResultValue: Upsert result value
 *StructuredResultDataApi* | [**upsert_structured_result_data**](docs/StructuredResultDataApi.md#upsert_structured_result_data) | **POST** /api/unitresults/{scope} | UpsertStructuredResultData: Upsert structured result data
-*SubscriptionsApi* | [**delete_subscription**](docs/SubscriptionsApi.md#delete_subscription) | **DELETE** /api/subscriptions/holdings/{scope}/{code} | [EARLY ACCESS] DeleteSubscription: Delete a Subscription, assuming that it is present.
-*SubscriptionsApi* | [**get_subscription**](docs/SubscriptionsApi.md#get_subscription) | **GET** /api/subscriptions/holdings/{scope}/{code} | [EARLY ACCESS] GetSubscription: Get Subscription
-*SubscriptionsApi* | [**list_subscriptions**](docs/SubscriptionsApi.md#list_subscriptions) | **GET** /api/subscriptions/holdings/{scope} | [EARLY ACCESS] ListSubscriptions: List the set of Subscription definitions
-*SubscriptionsApi* | [**upsert_subscription**](docs/SubscriptionsApi.md#upsert_subscription) | **POST** /api/subscriptions/holdings | [EARLY ACCESS] UpsertSubscription: Upsert a Subscription. This creates or updates the subscription definition in LUSID.
+*SubscriptionsApi* | [**delete_subscription**](docs/SubscriptionsApi.md#delete_subscription) | **DELETE** /api/subscriptions/{scope}/{code} | [EARLY ACCESS] DeleteSubscription: Delete a Subscription, assuming that it is present.
+*SubscriptionsApi* | [**get_subscription**](docs/SubscriptionsApi.md#get_subscription) | **GET** /api/subscriptions/{scope}/{code} | [EARLY ACCESS] GetSubscription: Get Subscription
+*SubscriptionsApi* | [**list_subscriptions**](docs/SubscriptionsApi.md#list_subscriptions) | **GET** /api/subscriptions/{scope} | [EARLY ACCESS] ListSubscriptions: List the set of Subscription definitions
+*SubscriptionsApi* | [**upsert_subscription**](docs/SubscriptionsApi.md#upsert_subscription) | **POST** /api/subscriptions | [EARLY ACCESS] UpsertSubscription: Upsert a Subscription. This creates or updates the subscription definition in LUSID.
 *SystemConfigurationApi* | [**create_configuration_transaction_type**](docs/SystemConfigurationApi.md#create_configuration_transaction_type) | **POST** /api/systemconfiguration/transactions/type | [EARLY ACCESS] CreateConfigurationTransactionType: Create transaction type
 *SystemConfigurationApi* | [**create_side_definition**](docs/SystemConfigurationApi.md#create_side_definition) | **POST** /api/systemconfiguration/transactions/side | [EXPERIMENTAL] CreateSideDefinition: Create side definition
 *SystemConfigurationApi* | [**delete_transaction_configuration_source**](docs/SystemConfigurationApi.md#delete_transaction_configuration_source) | **DELETE** /api/systemconfiguration/transactions/type/{source} | [EXPERIMENTAL] DeleteTransactionConfigurationSource: Delete all transaction configurations for a source
@@ -807,7 +811,9 @@ Class | Method | HTTP request | Description
  - [AdjustHolding](docs/AdjustHolding.md)
  - [AdjustHoldingForDateRequest](docs/AdjustHoldingForDateRequest.md)
  - [AdjustHoldingRequest](docs/AdjustHoldingRequest.md)
+ - [AggregateRuleValues](docs/AggregateRuleValues.md)
  - [AggregateSpec](docs/AggregateSpec.md)
+ - [AggregateToleranceBase](docs/AggregateToleranceBase.md)
  - [AggregatedReturn](docs/AggregatedReturn.md)
  - [AggregatedReturnsDispersionRequest](docs/AggregatedReturnsDispersionRequest.md)
  - [AggregatedReturnsEntityId](docs/AggregatedReturnsEntityId.md)
@@ -862,6 +868,11 @@ Class | Method | HTTP request | Description
  - [BatchAmendCustomDataModelMembershipResponse](docs/BatchAmendCustomDataModelMembershipResponse.md)
  - [BatchAmendTransactionSettlementInstructionResponse](docs/BatchAmendTransactionSettlementInstructionResponse.md)
  - [BatchDeleteRelationalDataResponse](docs/BatchDeleteRelationalDataResponse.md)
+ - [BatchManageCommentRequest](docs/BatchManageCommentRequest.md)
+ - [BatchManageCommentResponse](docs/BatchManageCommentResponse.md)
+ - [BatchReviewRecResultItemResult](docs/BatchReviewRecResultItemResult.md)
+ - [BatchReviewRecResultRequest](docs/BatchReviewRecResultRequest.md)
+ - [BatchReviewRecResultResponse](docs/BatchReviewRecResultResponse.md)
  - [BatchUpdateUserReviewForComparisonResultRequest](docs/BatchUpdateUserReviewForComparisonResultRequest.md)
  - [BatchUpdateUserReviewForComparisonResultResponse](docs/BatchUpdateUserReviewForComparisonResultResponse.md)
  - [BatchUpsertDatesForCalendarResponse](docs/BatchUpsertDatesForCalendarResponse.md)
@@ -886,6 +897,7 @@ Class | Method | HTTP request | Description
  - [BondConversionSchedule](docs/BondConversionSchedule.md)
  - [BondCouponEvent](docs/BondCouponEvent.md)
  - [BondDefaultEvent](docs/BondDefaultEvent.md)
+ - [BondOption](docs/BondOption.md)
  - [BondPrincipalEvent](docs/BondPrincipalEvent.md)
  - [BonusIssueEvent](docs/BonusIssueEvent.md)
  - [BookTransactionsRequest](docs/BookTransactionsRequest.md)
@@ -918,6 +930,7 @@ Class | Method | HTTP request | Description
  - [CancelOrdersAndMoveRemainingResponse](docs/CancelOrdersAndMoveRemainingResponse.md)
  - [CancelOrdersResponse](docs/CancelOrdersResponse.md)
  - [CancelPlacementsResponse](docs/CancelPlacementsResponse.md)
+ - [CancelSchedule](docs/CancelSchedule.md)
  - [CancelSingleHoldingAdjustmentRequest](docs/CancelSingleHoldingAdjustmentRequest.md)
  - [CancelledOrderResult](docs/CancelledOrderResult.md)
  - [CancelledPlacementResult](docs/CancelledPlacementResult.md)
@@ -977,6 +990,7 @@ Class | Method | HTTP request | Description
  - [Collateral](docs/Collateral.md)
  - [CollateralInstrument](docs/CollateralInstrument.md)
  - [CommodityForward](docs/CommodityForward.md)
+ - [CommodityForwardCashSettlementEvent](docs/CommodityForwardCashSettlementEvent.md)
  - [ComparisonAttributeValuePair](docs/ComparisonAttributeValuePair.md)
  - [CompletePortfolio](docs/CompletePortfolio.md)
  - [CompleteRelation](docs/CompleteRelation.md)
@@ -1031,6 +1045,8 @@ Class | Method | HTTP request | Description
  - [ContractInitialisationEvent](docs/ContractInitialisationEvent.md)
  - [ContributionToNonPassingRuleDetail](docs/ContributionToNonPassingRuleDetail.md)
  - [ConversionEvent](docs/ConversionEvent.md)
+ - [CoreRuleValues](docs/CoreRuleValues.md)
+ - [CoreToleranceBase](docs/CoreToleranceBase.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)
@@ -1527,6 +1543,7 @@ Class | Method | HTTP request | Description
  - [NavTypeDefinition](docs/NavTypeDefinition.md)
  - [NewInstrument](docs/NewInstrument.md)
  - [NextValueInSequenceResponse](docs/NextValueInSequenceResponse.md)
+ - [NoticeConvention](docs/NoticeConvention.md)
  - [NumericComparisonType](docs/NumericComparisonType.md)
  - [OpaqueDependency](docs/OpaqueDependency.md)
  - [OpaqueMarketData](docs/OpaqueMarketData.md)
@@ -1642,6 +1659,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfPropertyDefinition](docs/PagedResourceListOfPropertyDefinition.md)
  - [PagedResourceListOfPropertyDefinitionSearchResult](docs/PagedResourceListOfPropertyDefinitionSearchResult.md)
  - [PagedResourceListOfRecInstance](docs/PagedResourceListOfRecInstance.md)
+ - [PagedResourceListOfRecResult](docs/PagedResourceListOfRecResult.md)
  - [PagedResourceListOfRecResultSet](docs/PagedResourceListOfRecResultSet.md)
  - [PagedResourceListOfReconciliation](docs/PagedResourceListOfReconciliation.md)
  - [PagedResourceListOfReferenceListResponse](docs/PagedResourceListOfReferenceListResponse.md)
@@ -1819,14 +1837,23 @@ Class | Method | HTTP request | Description
  - [RecOpenExceptionCounts](docs/RecOpenExceptionCounts.md)
  - [RecRequestedResultRevision](docs/RecRequestedResultRevision.md)
  - [RecRequiredApproval](docs/RecRequiredApproval.md)
+ - [RecResult](docs/RecResult.md)
+ - [RecResultAssignmentUpdate](docs/RecResultAssignmentUpdate.md)
  - [RecResultCountByReviewStatus](docs/RecResultCountByReviewStatus.md)
  - [RecResultCounts](docs/RecResultCounts.md)
+ - [RecResultDecisionGroup](docs/RecResultDecisionGroup.md)
+ - [RecResultDecisionUpdate](docs/RecResultDecisionUpdate.md)
+ - [RecResultException](docs/RecResultException.md)
+ - [RecResultItem](docs/RecResultItem.md)
+ - [RecResultItemDetails](docs/RecResultItemDetails.md)
+ - [RecResultReview](docs/RecResultReview.md)
  - [RecResultSet](docs/RecResultSet.md)
  - [RecResultSetApprovalDecisionRequest](docs/RecResultSetApprovalDecisionRequest.md)
  - [RecReview](docs/RecReview.md)
  - [RecRunLogEntry](docs/RecRunLogEntry.md)
  - [RecSubmission](docs/RecSubmission.md)
  - [RecSupersededRun](docs/RecSupersededRun.md)
+ - [RecUserComment](docs/RecUserComment.md)
  - [RecWorkflowTask](docs/RecWorkflowTask.md)
  - [RecipeBlock](docs/RecipeBlock.md)
  - [RecipeComposer](docs/RecipeComposer.md)
@@ -1878,6 +1905,7 @@ Class | Method | HTTP request | Description
  - [RepurchaseOfferEvent](docs/RepurchaseOfferEvent.md)
  - [RequestedChanges](docs/RequestedChanges.md)
  - [ResetEvent](docs/ResetEvent.md)
+ - [ResetSchedule](docs/ResetSchedule.md)
  - [ResolveTenorsRequest](docs/ResolveTenorsRequest.md)
  - [ResolveTenorsResponse](docs/ResolveTenorsResponse.md)
  - [ResolvedCustodianAccount](docs/ResolvedCustodianAccount.md)
@@ -2078,6 +2106,7 @@ Class | Method | HTTP request | Description
  - [SubmitRecResultSetReviewRequest](docs/SubmitRecResultSetReviewRequest.md)
  - [SubscribeElection](docs/SubscribeElection.md)
  - [SubscriptionDefinition](docs/SubscriptionDefinition.md)
+ - [SupplementalAttributeValues](docs/SupplementalAttributeValues.md)
  - [SwapCashFlowEvent](docs/SwapCashFlowEvent.md)
  - [SwapPrincipalEvent](docs/SwapPrincipalEvent.md)
  - [SweepBlocksRequest](docs/SweepBlocksRequest.md)

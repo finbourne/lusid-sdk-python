@@ -27,8 +27,8 @@ class NavSettlementConfigurationCategory(BaseModel):
     """
     NavSettlementConfigurationCategory
     """
-    calculate_instruction_to_portfolio_rate: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction.", alias="calculateInstructionToPortfolioRate")
-    calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = Field(default=None, description="An optional flag that allows for the calculation of FxPnL between Trade and Settlement Date.", alias="calculateTradeDateToSettlementFxPnL")
+    calculate_instruction_to_portfolio_rate: StrictBool = Field(description="An optional flag that allows for the calculation of the instruction to portfolio rate for instructions with settlement category CashSettlement or DeferredCashReceipt, if it is not provided on the settlement instruction.", alias="calculateInstructionToPortfolioRate")
+    calculate_trade_date_to_settlement_fx_pn_l: StrictBool = Field(description="An optional flag that allows for the calculation of FxPnL between Trade and Settlement Date.", alias="calculateTradeDateToSettlementFxPnL")
     __properties = ["calculateInstructionToPortfolioRate", "calculateTradeDateToSettlementFxPnL"]
 
     class Config:
@@ -63,16 +63,6 @@ class NavSettlementConfigurationCategory(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if calculate_instruction_to_portfolio_rate (nullable) is None
-        # and __fields_set__ contains the field
-        if self.calculate_instruction_to_portfolio_rate is None and "calculate_instruction_to_portfolio_rate" in self.__fields_set__:
-            _dict['calculateInstructionToPortfolioRate'] = None
-
-        # set to None if calculate_trade_date_to_settlement_fx_pn_l (nullable) is None
-        # and __fields_set__ contains the field
-        if self.calculate_trade_date_to_settlement_fx_pn_l is None and "calculate_trade_date_to_settlement_fx_pn_l" in self.__fields_set__:
-            _dict['calculateTradeDateToSettlementFxPnL'] = None
-
         return _dict
 
     @classmethod

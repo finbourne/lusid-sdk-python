@@ -28,8 +28,8 @@ class NavSettlementConfiguration(BaseModel):
     """
     NavSettlementConfiguration
     """
-    cash_settlement: Optional[NavSettlementConfigurationCategory] = Field(default=None, alias="cashSettlement")
-    deferred_cash_receipt: Optional[NavSettlementConfigurationCategory] = Field(default=None, alias="deferredCashReceipt")
+    cash_settlement: NavSettlementConfigurationCategory = Field(alias="cashSettlement")
+    deferred_cash_receipt: NavSettlementConfigurationCategory = Field(alias="deferredCashReceipt")
     __properties = ["cashSettlement", "deferredCashReceipt"]
 
     class Config:

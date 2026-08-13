@@ -36,7 +36,7 @@ class NavType(BaseModel):
     chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
     posting_module_codes: Optional[List[StrictStr]] = Field(default=None, description="The Posting Module Codes from which the rules to be applied are retrieved.", alias="postingModuleCodes")
     cleardown_module_codes: Optional[List[StrictStr]] = Field(default=None, description="The Cleardown Module Codes from which the rules to be applied are retrieved.", alias="cleardownModuleCodes")
-    settlement_configuration: Optional[NavSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
+    settlement_configuration: NavSettlementConfiguration = Field(alias="settlementConfiguration")
     valuation_recipe_id: ResourceId = Field(alias="valuationRecipeId")
     holding_recipe_id: ResourceId = Field(alias="holdingRecipeId")
     accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="Determines the accounting treatment given to the simple position portfolio's tax lots. A non-default value is required. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 

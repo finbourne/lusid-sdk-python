@@ -4,18 +4,18 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_fee_type**](FeeTypesApi.md#create_fee_type) | **POST** /api/feetypes/{scope} | [EXPERIMENTAL] CreateFeeType: Create a FeeType.
-[**delete_fee_type**](FeeTypesApi.md#delete_fee_type) | **DELETE** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
-[**get_fee_template_specifications**](FeeTypesApi.md#get_fee_template_specifications) | **GET** /api/feetypes/feetransactiontemplatespecification | [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
-[**get_fee_type**](FeeTypesApi.md#get_fee_type) | **GET** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] GetFeeType: Get a FeeType
-[**list_fee_types**](FeeTypesApi.md#list_fee_types) | **GET** /api/feetypes | [EXPERIMENTAL] ListFeeTypes: List FeeTypes
-[**update_fee_type**](FeeTypesApi.md#update_fee_type) | **PUT** /api/feetypes/{scope}/{code} | [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+[**create_fee_type**](FeeTypesApi.md#create_fee_type) | **POST** /api/feetypes/{scope} | [EARLY ACCESS] CreateFeeType: Create a FeeType.
+[**delete_fee_type**](FeeTypesApi.md#delete_fee_type) | **DELETE** /api/feetypes/{scope}/{code} | [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
+[**get_fee_template_specifications**](FeeTypesApi.md#get_fee_template_specifications) | **GET** /api/feetypes/feetransactiontemplatespecification | [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+[**get_fee_type**](FeeTypesApi.md#get_fee_type) | **GET** /api/feetypes/{scope}/{code} | [EARLY ACCESS] GetFeeType: Get a FeeType
+[**list_fee_types**](FeeTypesApi.md#list_fee_types) | **GET** /api/feetypes | [EARLY ACCESS] ListFeeTypes: List FeeTypes
+[**update_fee_type**](FeeTypesApi.md#update_fee_type) | **PUT** /api/feetypes/{scope}/{code} | [EARLY ACCESS] UpdateFeeType: Update a FeeType.
 
 
 # **create_fee_type**
 > FeeType create_fee_type(scope, fee_type_request)
 
-[EXPERIMENTAL] CreateFeeType: Create a FeeType.
+[EARLY ACCESS] CreateFeeType: Create a FeeType.
 
 Create a FeeType that contains templates used to create fee transactions.
 
@@ -76,7 +76,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_fee_type(scope, fee_type_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateFeeType: Create a FeeType.
+        # [EARLY ACCESS] CreateFeeType: Create a FeeType.
         api_response = api_instance.create_fee_type(scope, fee_type_request)
         pprint(api_response)
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 # **delete_fee_type**
 > DeletedEntityResponse delete_fee_type(scope, code)
 
-[EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
+[EARLY ACCESS] DeleteFeeType: Delete a FeeType.
 
 Delete a FeeType that contains templates used to create fee transactions.
 
@@ -170,7 +170,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_fee_type(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteFeeType: Delete a FeeType.
+        # [EARLY ACCESS] DeleteFeeType: Delete a FeeType.
         api_response = api_instance.delete_fee_type(scope, code)
         pprint(api_response)
 
@@ -208,7 +208,7 @@ Name | Type | Description  | Notes
 # **get_fee_template_specifications**
 > FeeTransactionTemplateSpecification get_fee_template_specifications()
 
-[EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+[EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
 
 Get FeeTemplateSpecifications used in the FeeType.
 
@@ -262,7 +262,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fee_template_specifications(opts=opts)
 
-        # [EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
+        # [EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.
         api_response = api_instance.get_fee_template_specifications()
         pprint(api_response)
 
@@ -295,7 +295,7 @@ This endpoint does not need any parameter.
 # **get_fee_type**
 > FeeType get_fee_type(scope, code, as_at=as_at)
 
-[EXPERIMENTAL] GetFeeType: Get a FeeType
+[EARLY ACCESS] GetFeeType: Get a FeeType
 
 Get a FeeType that contains templates used to create fee transactions.
 
@@ -352,7 +352,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fee_type(scope, code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetFeeType: Get a FeeType
+        # [EARLY ACCESS] GetFeeType: Get a FeeType
         api_response = api_instance.get_fee_type(scope, code, as_at=as_at)
         pprint(api_response)
 
@@ -391,7 +391,7 @@ Name | Type | Description  | Notes
 # **list_fee_types**
 > PagedResourceListOfFeeType list_fee_types(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListFeeTypes: List FeeTypes
+[EARLY ACCESS] ListFeeTypes: List FeeTypes
 
 List FeeTypes that contain templates used to create fee transactions.
 
@@ -450,7 +450,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_fee_types(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListFeeTypes: List FeeTypes
+        # [EARLY ACCESS] ListFeeTypes: List FeeTypes
         api_response = api_instance.list_fee_types(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 # **update_fee_type**
 > FeeType update_fee_type(scope, code, update_fee_type_request)
 
-[EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+[EARLY ACCESS] UpdateFeeType: Update a FeeType.
 
 Update a FeeType that contains templates used to create fee transactions.
 
@@ -553,7 +553,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.update_fee_type(scope, code, update_fee_type_request, opts=opts)
 
-        # [EXPERIMENTAL] UpdateFeeType: Update a FeeType.
+        # [EARLY ACCESS] UpdateFeeType: Update a FeeType.
         api_response = api_instance.update_fee_type(scope, code, update_fee_type_request)
         pprint(api_response)
 

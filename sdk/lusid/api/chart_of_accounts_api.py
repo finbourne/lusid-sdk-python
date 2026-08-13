@@ -90,7 +90,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_chart_of_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], chart_of_accounts_request : Annotated[ChartOfAccountsRequest, Field(description="The definition of the Chart of Accounts.")], async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccounts, Awaitable[ChartOfAccounts]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts  # noqa: E501
+        """[EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts  # noqa: E501
 
         Create the given Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -123,7 +123,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_chart_of_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], chart_of_accounts_request : Annotated[ChartOfAccountsRequest, Field(description="The definition of the Chart of Accounts.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts  # noqa: E501
+        """[EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts  # noqa: E501
 
         Create the given Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -257,7 +257,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_cleardown_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(description="The definition of the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
 
         Create the given Cleardown Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -292,7 +292,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_cleardown_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_request : Annotated[CleardownModuleRequest, Field(description="The definition of the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module  # noqa: E501
 
         Create the given Cleardown Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -432,7 +432,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_general_ledger_profile(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts.")], general_ledger_profile_request : Annotated[GeneralLedgerProfileRequest, Field(description="The definition of the General Ledger Profile.")], async_req: Optional[bool]=None, **kwargs) -> Union[GeneralLedgerProfileResponse, Awaitable[GeneralLedgerProfileResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.  # noqa: E501
 
         Create the given General Ledger profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -467,7 +467,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_general_ledger_profile_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts.")], general_ledger_profile_request : Annotated[GeneralLedgerProfileRequest, Field(description="The definition of the General Ledger Profile.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.  # noqa: E501
 
         Create the given General Ledger profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -607,7 +607,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_posting_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_request : Annotated[PostingModuleRequest, Field(description="The definition of the Posting Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] CreatePostingModule: Create a Posting Module  # noqa: E501
+        """[EARLY ACCESS] CreatePostingModule: Create a Posting Module  # noqa: E501
 
         Create the given Posting Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -642,7 +642,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def create_posting_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_request : Annotated[PostingModuleRequest, Field(description="The definition of the Posting Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreatePostingModule: Create a Posting Module  # noqa: E501
+        """[EARLY ACCESS] CreatePostingModule: Create a Posting Module  # noqa: E501
 
         Create the given Posting Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -782,7 +782,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeleteAccountsResponse, Awaitable[DeleteAccountsResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
+        """[EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
 
         Delete one or more account from the Chart of Accounts. Soft deletion marks the account as inactive  While the Hard deletion is deleting the account.  The maximum number of accounts that this method can delete per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -819,7 +819,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the accounts to delete.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
+        """[EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts  # noqa: E501
 
         Delete one or more account from the Chart of Accounts. Soft deletion marks the account as inactive  While the Hard deletion is deleting the account.  The maximum number of accounts that this method can delete per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -965,7 +965,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_chart_of_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to be deleted. Together with the scope this uniquely identifies the Chart of Accounts.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts  # noqa: E501
+        """[EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts  # noqa: E501
 
         Delete the given Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -998,7 +998,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_chart_of_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to be deleted. Together with the scope this uniquely identifies the Chart of Accounts.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts  # noqa: E501
+        """[EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts  # noqa: E501
 
         Delete the given Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1125,7 +1125,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_cleardown_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
+        """[EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
 
         Delete the given Cleardown Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1160,7 +1160,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_cleardown_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
+        """[EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.  # noqa: E501
 
         Delete the given Cleardown Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1293,7 +1293,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_general_ledger_profile(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The Code of the General Ledger Profile.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.  # noqa: E501
 
         Delete the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1328,7 +1328,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_general_ledger_profile_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The Code of the General Ledger Profile.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.  # noqa: E501
 
         Delete the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1461,7 +1461,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_posting_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.  # noqa: E501
+        """[EARLY ACCESS] DeletePostingModule: Delete a Posting Module.  # noqa: E501
 
         Delete the given Posting Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1496,7 +1496,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def delete_posting_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.  # noqa: E501
+        """[EARLY ACCESS] DeletePostingModule: Delete a Posting Module.  # noqa: E501
 
         Delete the given Posting Module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1629,7 +1629,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_account(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The code of the Account.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Account properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Account definition. Defaults to returning the latest version of the Account definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Account' domain to decorate onto the Account.              These must take the format {domain}/{scope}/{code}, for example 'Account/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Account, Awaitable[Account]]:  # noqa: E501
-        """[EXPERIMENTAL] GetAccount: Get Account  # noqa: E501
+        """[EARLY ACCESS] GetAccount: Get Account  # noqa: E501
 
         Retrieve the definition of a particular Account which is part of a Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1670,7 +1670,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_account_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The code of the Account.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Account properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Account definition. Defaults to returning the latest version of the Account definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Account' domain to decorate onto the Account.              These must take the format {domain}/{scope}/{code}, for example 'Account/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetAccount: Get Account  # noqa: E501
+        """[EARLY ACCESS] GetAccount: Get Account  # noqa: E501
 
         Retrieve the definition of a particular Account which is part of a Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1825,7 +1825,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_account_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The unique ID of the account to get properties for.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Account's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Account's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AccountProperties, Awaitable[AccountProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] GetAccountProperties: Get Account properties  # noqa: E501
+        """[EARLY ACCESS] GetAccountProperties: Get Account properties  # noqa: E501
 
         Get all the properties of a single account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1864,7 +1864,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_account_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The unique ID of the account to get properties for.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Account's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Account's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetAccountProperties: Get Account properties  # noqa: E501
+        """[EARLY ACCESS] GetAccountProperties: Get Account properties  # noqa: E501
 
         Get all the properties of a single account.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2012,7 +2012,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_chart_of_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Chart of Accounts properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Chart of Accounts definition. Defaults to returning the latest version of the Chart of Accounts definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ChartOfAccounts' domain to decorate onto the Chart of Accounts.              These must take the format {domain}/{scope}/{code}, for example 'ChartOfAccounts/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccounts, Awaitable[ChartOfAccounts]]:  # noqa: E501
-        """[EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts  # noqa: E501
+        """[EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts  # noqa: E501
 
         Retrieve the definition of a particular Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2051,7 +2051,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_chart_of_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Chart of Accounts properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Chart of Accounts definition. Defaults to returning the latest version of the Chart of Accounts definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ChartOfAccounts' domain to decorate onto the Chart of Accounts.              These must take the format {domain}/{scope}/{code}, for example 'ChartOfAccounts/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts  # noqa: E501
+        """[EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts  # noqa: E501
 
         Retrieve the definition of a particular Chart of Accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2200,7 +2200,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_chart_of_accounts_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the chart of accounts to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the chart of accounts to list the properties for. Together with the scope this uniquely identifies the chart of accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the chart of accounts' properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the chart of accounts' properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccountsProperties, Awaitable[ChartOfAccountsProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties  # noqa: E501
+        """[EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties  # noqa: E501
 
         Get all the properties of a single chart of accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2237,7 +2237,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_chart_of_accounts_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the chart of accounts to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the chart of accounts to list the properties for. Together with the scope this uniquely identifies the chart of accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the chart of accounts' properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the chart of accounts' properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties  # noqa: E501
+        """[EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties  # noqa: E501
 
         Get all the properties of a single chart of accounts.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2379,7 +2379,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_cleardown_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] GetCleardownModule: Get a Cleardown Module  # noqa: E501
 
         Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2416,7 +2416,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_cleardown_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Cleardown Module. Defaults to return the latest version of the Cleardown Module if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] GetCleardownModule: Get a Cleardown Module  # noqa: E501
 
         Retrieve the definition of a Cleardown Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2558,7 +2558,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_general_ledger_profile(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[GeneralLedgerProfileResponse, Awaitable[GeneralLedgerProfileResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
 
         Get the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2595,7 +2595,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_general_ledger_profile_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts for the General Ledger Profile.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts for the General Ledger Profile.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The General Ledger Profile Code of the General Ledger Profile.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the General Ledger Profile. Defaults to return the latest version of the General Ledger Profile if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
+        """[EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.  # noqa: E501
 
         Get the given General Ledger Profile.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2737,7 +2737,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_posting_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetPostingModule: Get a Posting Module  # noqa: E501
+        """[EARLY ACCESS] GetPostingModule: Get a Posting Module  # noqa: E501
 
         Retrieve the definition of a Posting Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2774,7 +2774,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def get_posting_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Posting Module. Defaults to return the latest version of the Posting Module if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetPostingModule: Get a Posting Module  # noqa: E501
+        """[EARLY ACCESS] GetPostingModule: Get a Posting Module  # noqa: E501
 
         Retrieve the definition of a Posting Module complete with its rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2916,7 +2916,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties decorated on Accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Accounts. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing charts of accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Account type, specify \"code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Account' domain to decorate onto the Account.              These must have the format {domain}/{scope}/{code}, for example 'Account/system/Name'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAccount, Awaitable[PagedResourceListOfAccount]]:  # noqa: E501
-        """[EXPERIMENTAL] ListAccounts: List Accounts  # noqa: E501
+        """[EARLY ACCESS] ListAccounts: List Accounts  # noqa: E501
 
         List the accounts in a Chart of Accounts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2961,7 +2961,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties decorated on Accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Accounts. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing charts of accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Account type, specify \"code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Account' domain to decorate onto the Account.              These must have the format {domain}/{scope}/{code}, for example 'Account/system/Name'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListAccounts: List Accounts  # noqa: E501
+        """[EARLY ACCESS] ListAccounts: List Accounts  # noqa: E501
 
         List the accounts in a Chart of Accounts  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3128,7 +3128,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_charts_of_accounts(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Chart Of Accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the charts of accounts. Defaults to returning the latest version              of each Chart of Accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing charts of accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Chart of Accounts type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ChartOfAccounts' domain to decorate onto each Chart of Accounts.              These must take the format {domain}/{scope}/{code}, for example 'ChartOfAccounts/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfChartOfAccounts, Awaitable[PagedResourceListOfChartOfAccounts]]:  # noqa: E501
-        """[EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts  # noqa: E501
+        """[EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts  # noqa: E501
 
         List all the Charts of Accounts matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3171,7 +3171,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_charts_of_accounts_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Chart Of Accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the charts of accounts. Defaults to returning the latest version              of each Chart of Accounts if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing charts of accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Chart of Accounts type, specify \"id.Code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ChartOfAccounts' domain to decorate onto each Chart of Accounts.              These must take the format {domain}/{scope}/{code}, for example 'ChartOfAccounts/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts  # noqa: E501
+        """[EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts  # noqa: E501
 
         List all the Charts of Accounts matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3333,7 +3333,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_cleardown_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCleardownModuleRule, Awaitable[PagedResourceListOfCleardownModuleRule]]:  # noqa: E501
-        """[EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
+        """[EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
 
         List the Rules in a Cleardown Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3376,7 +3376,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_cleardown_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the cleardown module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing cleardown module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
+        """[EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules  # noqa: E501
 
         List the Rules in a Cleardown Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3536,7 +3536,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_cleardown_modules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfCleardownModuleResponse, Awaitable[PagedResourceListOfCleardownModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListCleardownModules: List Cleardown Modules  # noqa: E501
+        """[EARLY ACCESS] ListCleardownModules: List Cleardown Modules  # noqa: E501
 
         List all the Cleardown Modules matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3579,7 +3579,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_cleardown_modules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Cleardown Module. Defaults to returning the latest version              of each Cleardown Module if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Cleardown Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Cleardown Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListCleardownModules: List Cleardown Modules  # noqa: E501
+        """[EARLY ACCESS] ListCleardownModules: List Cleardown Modules  # noqa: E501
 
         List all the Cleardown Modules matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3740,7 +3740,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_general_ledger_profiles(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the General Ledger Profiles. Defaults to returning the latest version of each General Ledger Profile if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing General Ledger Profiles; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the General Ledger profiles type, specify \"type eq 'PeriodBoundary'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfGeneralLedgerProfileResponse, Awaitable[PagedResourceListOfGeneralLedgerProfileResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.  # noqa: E501
+        """[EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.  # noqa: E501
 
         List all the General Ledger profiles matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3783,7 +3783,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_general_ledger_profiles_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the General Ledger Profiles. Defaults to returning the latest version of each General Ledger Profile if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing General Ledger Profiles; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the General Ledger profiles type, specify \"type eq 'PeriodBoundary'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.  # noqa: E501
+        """[EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.  # noqa: E501
 
         List all the General Ledger profiles matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3944,7 +3944,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfPostingModuleRule, Awaitable[PagedResourceListOfPostingModuleRule]]:  # noqa: E501
-        """[EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
+        """[EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
 
         List the Rules in a Posting Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3987,7 +3987,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_posting_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
+        """[EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
 
         List the Rules in a Posting Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4147,7 +4147,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_posting_modules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Posting Module. Defaults to returning the latest version              of each Posting Module if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Posting Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Posting Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfPostingModuleResponse, Awaitable[PagedResourceListOfPostingModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListPostingModules: List Posting Modules  # noqa: E501
+        """[EARLY ACCESS] ListPostingModules: List Posting Modules  # noqa: E501
 
         List all the Posting Modules matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4190,7 +4190,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def list_posting_modules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Posting Module. Defaults to returning the latest version              of each Posting Module if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Posting Modules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Posting Module status, specify \"status eq 'Active'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListPostingModules: List Posting Modules  # noqa: E501
+        """[EARLY ACCESS] ListPostingModules: List Posting Modules  # noqa: E501
 
         List all the Posting Modules matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4351,7 +4351,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_chart_of_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccounts, Awaitable[ChartOfAccounts]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
+        """[EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
 
         Update fields on a Chart of Accounts.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4386,7 +4386,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_chart_of_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
+        """[EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.  # noqa: E501
 
         Update fields on a Chart of Accounts.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4526,7 +4526,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_cleardown_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
 
         Update fields on a Cleardown Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4563,7 +4563,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_cleardown_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module  # noqa: E501
 
         Update fields on a Cleardown Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4709,7 +4709,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_posting_module(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
+        """[EARLY ACCESS] PatchPostingModule: Patch a Posting Module  # noqa: E501
 
         Update fields on a Posting Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4746,7 +4746,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def patch_posting_module_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module  # noqa: E501
+        """[EARLY ACCESS] PatchPostingModule: Patch a Posting Module  # noqa: E501
 
         Update fields on a Posting Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4892,7 +4892,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_cleardown_module_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(description="The new details for the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleResponse, Awaitable[CleardownModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
 
         Update the given Cleardown Module details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4929,7 +4929,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_cleardown_module_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_details : Annotated[CleardownModuleDetails, Field(description="The new details for the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module  # noqa: E501
 
         Update the given Cleardown Module details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5075,7 +5075,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_cleardown_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[List[CleardownModuleRule], Field(description="The new rule set for the Cleardown Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[CleardownModuleRulesUpdatedResponse, Awaitable[CleardownModuleRulesUpdatedResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
 
         Set the given Cleardown Modules rules, this will replace the existing set of rules for the cleardown module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5112,7 +5112,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_cleardown_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], cleardown_module_code : Annotated[StrictStr, Field(..., description="The code of the Cleardown Module to be updated.")], cleardown_module_rule : Annotated[List[CleardownModuleRule], Field(description="The new rule set for the Cleardown Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
+        """[EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module  # noqa: E501
 
         Set the given Cleardown Modules rules, this will replace the existing set of rules for the cleardown module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5258,7 +5258,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_general_ledger_profile_mappings(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The code of the General Ledger Profile")], general_ledger_profile_mapping : Annotated[List[GeneralLedgerProfileMapping], Field(description="The updated General Ledger Profile Mappings, the previous mappings will be wholly replaced with this data. Mappings will be evaluated in the order they are provided.")], async_req: Optional[bool]=None, **kwargs) -> Union[GeneralLedgerProfileResponse, Awaitable[GeneralLedgerProfileResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.  # noqa: E501
+        """[EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.  # noqa: E501
 
         Update the given General Ledger profile Mappings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5295,7 +5295,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_general_ledger_profile_mappings_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts.")], general_ledger_profile_code : Annotated[StrictStr, Field(..., description="The code of the General Ledger Profile")], general_ledger_profile_mapping : Annotated[List[GeneralLedgerProfileMapping], Field(description="The updated General Ledger Profile Mappings, the previous mappings will be wholly replaced with this data. Mappings will be evaluated in the order they are provided.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.  # noqa: E501
+        """[EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.  # noqa: E501
 
         Update the given General Ledger profile Mappings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5441,7 +5441,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_posting_module_details(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], posting_module_details : Annotated[PostingModuleDetails, Field(description="The new details for the Posting Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleResponse, Awaitable[PostingModuleResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module  # noqa: E501
+        """[EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module  # noqa: E501
 
         Update the given Posting Module details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5478,7 +5478,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_posting_module_details_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], posting_module_details : Annotated[PostingModuleDetails, Field(description="The new details for the Posting Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module  # noqa: E501
+        """[EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module  # noqa: E501
 
         Update the given Posting Module details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5624,7 +5624,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], posting_module_rule : Annotated[List[PostingModuleRule], Field(description="The new rule set for the Posting Module.")], async_req: Optional[bool]=None, **kwargs) -> Union[PostingModuleRulesUpdatedResponse, Awaitable[PostingModuleRulesUpdatedResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module  # noqa: E501
+        """[EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module  # noqa: E501
 
         Set the given Posting Modules rules, this will replace the existing set of rules for the posting module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5661,7 +5661,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def set_posting_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the Posting Module to be updated.")], posting_module_rule : Annotated[List[PostingModuleRule], Field(description="The new rule set for the Posting Module.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module  # noqa: E501
+        """[EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module  # noqa: E501
 
         Set the given Posting Modules rules, this will replace the existing set of rules for the posting module.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5807,7 +5807,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_account_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The unique ID of the account to create or update properties for.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Account/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AccountProperties, Awaitable[AccountProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAccountProperties: Upsert account properties  # noqa: E501
+        """[EARLY ACCESS] UpsertAccountProperties: Upsert account properties  # noqa: E501
 
         Update or insert one or more properties onto a single account. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Account'.                Upserting a property that exists for an account, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5844,7 +5844,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_account_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], account_code : Annotated[StrictStr, Field(..., description="The unique ID of the account to create or update properties for.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Account/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAccountProperties: Upsert account properties  # noqa: E501
+        """[EARLY ACCESS] UpsertAccountProperties: Upsert account properties  # noqa: E501
 
         Update or insert one or more properties onto a single account. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Account'.                Upserting a property that exists for an account, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5990,7 +5990,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], account : Annotated[List[Account], Field(description="A list of accounts to be created or updated.")], async_req: Optional[bool]=None, **kwargs) -> Union[AccountsUpsertResponse, Awaitable[AccountsUpsertResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAccounts: Upsert Accounts  # noqa: E501
+        """[EARLY ACCESS] UpsertAccounts: Upsert Accounts  # noqa: E501
 
         Create or update accounts in the Chart of Accounts. An account will be updated  if it already exists and created if it does not.  The maximum number of accounts that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6025,7 +6025,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies              the Chart of Accounts.")], account : Annotated[List[Account], Field(description="A list of accounts to be created or updated.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAccounts: Upsert Accounts  # noqa: E501
+        """[EARLY ACCESS] UpsertAccounts: Upsert Accounts  # noqa: E501
 
         Create or update accounts in the Chart of Accounts. An account will be updated  if it already exists and created if it does not.  The maximum number of accounts that this method can upsert per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6165,7 +6165,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_chart_of_accounts_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"ChartOfAccounts/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ChartOfAccountsProperties, Awaitable[ChartOfAccountsProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties  # noqa: E501
+        """[EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties  # noqa: E501
 
         Update or insert one or more properties onto a single Chart of Accounts. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'ChartOfAccounts'.                Upserting a property that exists for a Chart of Accounts, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6200,7 +6200,7 @@ class ChartOfAccountsApi:
 
     @validate_arguments
     def upsert_chart_of_accounts_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts to update or insert the properties onto. Together with the scope this uniquely identifies the Chart of Accounts.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"ChartOfAccounts/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties  # noqa: E501
+        """[EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties  # noqa: E501
 
         Update or insert one or more properties onto a single Chart of Accounts. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'ChartOfAccounts'.                Upserting a property that exists for a Chart of Accounts, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

@@ -5,11 +5,15 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_rec_result_set_approval_decision**](RecsApi.md#add_rec_result_set_approval_decision) | **POST** /api/recs/resultsets/{entityUniqueId}/$decide | [EXPERIMENTAL] AddRecResultSetApprovalDecision: AddRecResultSetApprovalDecision
+[**batch_manage_rec_result_comments**](RecsApi.md#batch_manage_rec_result_comments) | **POST** /api/recs/results/$batchManageComments | [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+[**batch_review_rec_results**](RecsApi.md#batch_review_rec_results) | **POST** /api/recs/results/$batchReview | [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
 [**get_rec_instance**](RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
+[**get_rec_result**](RecsApi.md#get_rec_result) | **GET** /api/recs/results/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 [**get_rec_result_set**](RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
 [**instantiate_rec**](RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 [**list_rec_instances**](RecsApi.md#list_rec_instances) | **GET** /api/recs/instances | [EXPERIMENTAL] ListRecInstances: ListRecInstances
 [**list_rec_result_sets**](RecsApi.md#list_rec_result_sets) | **GET** /api/recs/resultsets | [EXPERIMENTAL] ListRecResultSets: ListRecResultSets
+[**list_rec_results**](RecsApi.md#list_rec_results) | **GET** /api/recs/results | [EXPERIMENTAL] ListRecResults: ListRecResults
 [**submit_rec_result_set_review**](RecsApi.md#submit_rec_result_set_review) | **POST** /api/recs/resultsets/{entityUniqueId}/$submit | [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
 [**transition_rec_instance**](RecsApi.md#transition_rec_instance) | **POST** /api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
 
@@ -113,6 +117,194 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **batch_manage_rec_result_comments**
+> BatchManageCommentResponse batch_manage_rec_result_comments(request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+
+Add, edit or delete comments on rec results in a batch.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    request_body = {"add-a-comment":{"recResultId":"rec-result-1","commentText":"Investigating this break."},"delete-a-comment":{"recResultId":"rec-result-1","commentId":"00000000-0000-0000-0000-000000000009"}} # Dict[str, BatchManageCommentRequest] | The batch of comment operations, keyed by a client-supplied correlation key.
+    success_mode = 'Partial' # str | Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_manage_rec_result_comments(request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
+        api_response = api_instance.batch_manage_rec_result_comments(request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->batch_manage_rec_result_comments: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, BatchManageCommentRequest]**](BatchManageCommentRequest.md)| The batch of comment operations, keyed by a client-supplied correlation key. | 
+ **success_mode** | **str**| Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchManageCommentResponse**](BatchManageCommentResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated rec results, keyed by batch item key. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_review_rec_results**
+> BatchReviewRecResultResponse batch_review_rec_results(request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+
+Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    request_body = {"accept-a-break":{"recResultIds":["rec-result-1"],"decision":{"value":"Accept","affirm":false}},"force-match-two":{"recResultIds":["rec-result-2","rec-result-3"],"decision":{"value":"ForceMatch","affirm":false,"coreRulesExcused":["Broker Name"]}}} # Dict[str, BatchReviewRecResultRequest] | The batch of review items, keyed by a client-supplied correlation key.
+    success_mode = 'Partial' # str | Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_review_rec_results(request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+        api_response = api_instance.batch_review_rec_results(request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->batch_review_rec_results: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, BatchReviewRecResultRequest]**](BatchReviewRecResultRequest.md)| The batch of review items, keyed by a client-supplied correlation key. | 
+ **success_mode** | **str**| Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**BatchReviewRecResultResponse**](BatchReviewRecResultResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The results affected by each batch item. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_rec_instance**
 > RecInstance get_rec_instance(instance_id_type, instance_id_value, as_at=as_at)
 
@@ -204,6 +396,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested rec instance. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_rec_result**
+> RecResult get_rec_result(id, as_at=as_at, property_keys=property_keys)
+
+[EXPERIMENTAL] GetRecResult: GetRecResult
+
+Retrieve a single rec result by its id.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    id = 'id_example' # str | The system-generated id of the rec result.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto the result. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_rec_result(id, as_at=as_at, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] GetRecResult: GetRecResult
+        api_response = api_instance.get_rec_result(id, as_at=as_at, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->get_rec_result: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| The system-generated id of the rec result. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto the result. | [optional] 
+
+### Return type
+
+[**RecResult**](RecResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested rec result. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -599,6 +887,108 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The rec result sets. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_rec_results**
+> PagedResourceListOfRecResult list_rec_results(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+
+[EXPERIMENTAL] ListRecResults: ListRecResults
+
+List rec results.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list results. Defaults to latest if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto each result. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_rec_results(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] ListRecResults: ListRecResults
+        api_response = api_instance.list_rec_results(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->list_rec_results: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| The asAt datetime at which to list results. Defaults to latest if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto each result. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfRecResult**](PagedResourceListOfRecResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The rec results. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

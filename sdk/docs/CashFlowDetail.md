@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **haircut_fraction** | **float** | The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request. | [optional] 
 **net_amount** | **float** | The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request. | [optional] 
 **haircut_rule_applied** | **str** | The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request. | [optional] 
+**error** | **str** | Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -40,8 +41,9 @@ gross_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 net_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 haircut_rule_applied: Optional[StrictStr] = "example_haircut_rule_applied"
+error: Optional[StrictStr] = "example_error"
 links: Optional[List[Link]] = None
-cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, currency=currency, source_type=source_type, instrument_id=instrument_id, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, pay_receive=pay_receive, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, links=links)
+cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, currency=currency, source_type=source_type, instrument_id=instrument_id, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, pay_receive=pay_receive, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, links=links)
 
 ```
 

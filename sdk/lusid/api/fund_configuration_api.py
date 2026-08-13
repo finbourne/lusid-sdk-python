@@ -67,7 +67,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def create_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], fund_configuration_request : Annotated[FundConfigurationRequest, Field(description="The definition of the FundConfiguration.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.  # noqa: E501
 
         Create the given FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def create_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], fund_configuration_request : Annotated[FundConfigurationRequest, Field(description="The definition of the FundConfiguration.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundConfiguration: Create a FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] CreateFundConfiguration: Create a FundConfiguration.  # noqa: E501
 
         Create the given FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -234,7 +234,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def delete_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration to be deleted.               Together with the scope this uniquely identifies the FundConfiguration.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.  # noqa: E501
 
         Delete the given FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -267,7 +267,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def delete_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration to be deleted.               Together with the scope this uniquely identifies the FundConfiguration.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFundConfiguration: Delete a FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] DeleteFundConfiguration: Delete a FundConfiguration.  # noqa: E501
 
         Delete the given FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -394,7 +394,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def get_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the scope this uniquely identifies the FundConfiguration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the FundConfiguration properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the FundConfiguration definition. Defaults to returning the latest version of the FundConfiguration definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundConfiguration' domain to decorate onto the FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'FundConfiguration/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.  # noqa: E501
 
         Retrieve the definition of a particular FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -433,7 +433,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def get_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the scope this uniquely identifies the FundConfiguration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the FundConfiguration properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the FundConfiguration definition. Defaults to returning the latest version of the FundConfiguration definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundConfiguration' domain to decorate onto the FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'FundConfiguration/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFundConfiguration: Get FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] GetFundConfiguration: Get FundConfiguration.  # noqa: E501
 
         Retrieve the definition of a particular FundConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -582,7 +582,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def list_fund_configurations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the FundConfiguration.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FundConfiguration. Defaults to returning the latest version of each FundConfiguration if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FundConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the FundConfiguration type, specify \"id.Code eq 'FundConfiguration1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundConfiguration' domain to decorate onto each FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'FundConfiguration/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundConfiguration, Awaitable[PagedResourceListOfFundConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] ListFundConfigurations: List FundConfiguration.  # noqa: E501
 
         List all the FundConfiguration matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -625,7 +625,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def list_fund_configurations_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the FundConfiguration.              Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FundConfiguration. Defaults to returning the latest version of each FundConfiguration if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FundConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the FundConfiguration type, specify \"id.Code eq 'FundConfiguration1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundConfiguration' domain to decorate onto each FundConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'FundConfiguration/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFundConfigurations: List FundConfiguration.  # noqa: E501
+        """[EARLY ACCESS] ListFundConfigurations: List FundConfiguration.  # noqa: E501
 
         List all the FundConfiguration matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -787,7 +787,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def patch_fund_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundConfiguration, Awaitable[FundConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
+        """[EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
 
         Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters, BucketSets, ApportionmentBucketSet, ApportionmentMethodProperty.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -822,7 +822,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def patch_fund_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration. Together with the              scope this uniquely identifies the FundConfiguration.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
+        """[EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.  # noqa: E501
 
         Create or update certain fields for a particular FundConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, DealingFilters, PnlFilters, BackOutFilters, ExternalFeeFilters, BucketSets, ApportionmentBucketSet, ApportionmentMethodProperty.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -962,7 +962,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def upsert_fund_configuration_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the FundConfiguration.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fund Configuration. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"FundConfiguration/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundConfigurationProperties, Awaitable[FundConfigurationProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties  # noqa: E501
+        """[EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties  # noqa: E501
 
         Update or insert one or more properties onto a single FundConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'FundConfiguration'.                Upserting a property that exists for an FundConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -997,7 +997,7 @@ class FundConfigurationApi:
 
     @validate_arguments
     def upsert_fund_configuration_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FundConfiguration to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the FundConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the FundConfiguration.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fund Configuration. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"FundConfiguration/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundConfigurationProperties: Upsert FundConfiguration properties  # noqa: E501
+        """[EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties  # noqa: E501
 
         Update or insert one or more properties onto a single FundConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'FundConfiguration'.                Upserting a property that exists for an FundConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

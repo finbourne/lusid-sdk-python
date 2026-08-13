@@ -67,7 +67,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def create_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], abor_configuration_request : Annotated[AborConfigurationRequest, Field(description="The definition of the AborConfiguration.")], async_req: Optional[bool]=None, **kwargs) -> Union[AborConfiguration, Awaitable[AborConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.  # noqa: E501
 
         Create the given AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -100,7 +100,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def create_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], abor_configuration_request : Annotated[AborConfigurationRequest, Field(description="The definition of the AborConfiguration.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.  # noqa: E501
 
         Create the given AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -234,7 +234,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def delete_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.  # noqa: E501
 
         Delete the given AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -267,7 +267,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def delete_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration to be deleted. Together with the scope this uniquely identifies the AborConfiguration.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.  # noqa: E501
 
         Delete the given AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -394,7 +394,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def get_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the AborConfiguration properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the AborConfiguration definition. Defaults to returning the latest version of the AborConfiguration definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'AborConfiguration' domain to decorate onto the AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AborConfiguration, Awaitable[AborConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.  # noqa: E501
 
         Retrieve the definition of a particular AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -433,7 +433,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def get_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration. Together with the scope this uniquely identifies the AborConfiguration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the AborConfiguration properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the AborConfiguration definition. Defaults to returning the latest version of the AborConfiguration definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'AborConfiguration' domain to decorate onto the AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.  # noqa: E501
 
         Retrieve the definition of a particular AborConfiguration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -582,7 +582,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def get_abor_configuration_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AborConfigurationProperties, Awaitable[AborConfigurationProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
+        """[EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
 
         Get all the properties of a single abor Configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -619,7 +619,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def get_abor_configuration_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Abor Configuration to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the Abor Configuration to list the properties for. Together with the scope this uniquely identifies the Abor Configuration.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Abor Configuration's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Abor Configuration's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
+        """[EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties  # noqa: E501
 
         Get all the properties of a single abor Configuration.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -761,7 +761,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def list_abor_configurations(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AborConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the AborConfiguration type, specify \"id.Code eq 'AborConfiguration1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'AborConfiguration' domain to decorate onto each AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAborConfiguration, Awaitable[PagedResourceListOfAborConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] ListAborConfigurations: List AborConfiguration.  # noqa: E501
 
         List all the AborConfiguration matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -804,7 +804,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def list_abor_configurations_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the AborConfiguration. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the AborConfiguration. Defaults to returning the latest version of each AborConfiguration if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing AborConfiguration; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the AborConfiguration type, specify \"id.Code eq 'AborConfiguration1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'AborConfiguration' domain to decorate onto each AborConfiguration.              These must take the format {domain}/{scope}/{code}, for example 'AborConfiguration/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.  # noqa: E501
+        """[EARLY ACCESS] ListAborConfigurations: List AborConfiguration.  # noqa: E501
 
         List all the AborConfiguration matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -966,7 +966,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def patch_abor_configuration(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[AborConfiguration, Awaitable[AborConfiguration]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
+        """[EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
 
         Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1001,7 +1001,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def patch_abor_configuration_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration.              Together with the scope this uniquely identifies the AborConfiguration.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
+        """[EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.  # noqa: E501
 
         Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1141,7 +1141,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def upsert_abor_configuration_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"AborConfiguration/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AborConfigurationProperties, Awaitable[AborConfigurationProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties  # noqa: E501
+        """[EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties  # noqa: E501
 
         Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'AborConfiguration'.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1176,7 +1176,7 @@ class AborConfigurationApi:
 
     @validate_arguments
     def upsert_abor_configuration_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the AborConfiguration to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the AborConfiguration to update or insert the properties onto. Together with the scope this uniquely identifies the AborConfiguration.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the chart of account. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"AborConfiguration/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties  # noqa: E501
+        """[EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties  # noqa: E501
 
         Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'AborConfiguration'.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

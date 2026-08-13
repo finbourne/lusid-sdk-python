@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.model_property import ModelProperty
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class FundCalendarEntry(BaseModel):
@@ -49,7 +50,8 @@ class FundCalendarEntry(BaseModel):
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     leader_nav_type_code:  Optional[StrictStr] = Field(None,alias="leaderNavTypeCode", description="The code of the Nav Type that this Nav Type will follow when set.") 
-    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode"]
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    __properties = ["code", "variant", "displayName", "description", "navTypeCode", "timelineId", "previousEntry", "effectiveAt", "asAt", "entryType", "status", "applyClearDown", "holdingsAsAtOverride", "valuationsAsAtOverride", "properties", "version", "href", "leaderNavTypeCode", "stagedModifications"]
 
     @validator('entry_type')
     def entry_type_validate_enum(cls, value):
@@ -111,7 +113,9 @@ class FundCalendarEntry(BaseModel):
                                     'YearRegularity',
                                     'LusidEntityDataQualityCheck',
                                     'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse']:
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -170,6 +174,9 @@ class FundCalendarEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # set to None if variant (nullable) is None
         # and __fields_set__ contains the field
         if self.variant is None and "variant" in self.__fields_set__:
@@ -244,7 +251,8 @@ class FundCalendarEntry(BaseModel):
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
-            "leader_nav_type_code": obj.get("leaderNavTypeCode")
+            "leader_nav_type_code": obj.get("leaderNavTypeCode"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
         })
         return _obj
 

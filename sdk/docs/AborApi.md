@@ -4,27 +4,27 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_diary_entry**](AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
-[**close_period**](AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
-[**create_abor**](AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EXPERIMENTAL] CreateAbor: Create an Abor.
-[**delete_abor**](AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EXPERIMENTAL] DeleteAbor: Delete an Abor.
-[**delete_diary_entry**](AborApi.md#delete_diary_entry) | **DELETE** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
-[**get_abor**](AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EXPERIMENTAL] GetAbor: Get Abor.
-[**get_abor_properties**](AborApi.md#get_abor_properties) | **GET** /api/abor/{scope}/{code}/properties | [EXPERIMENTAL] GetAborProperties: Get Abor properties
-[**get_journal_entry_lines**](AborApi.md#get_journal_entry_lines) | **POST** /api/abor/{scope}/{code}/journalentrylines/$query | [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
-[**get_trial_balance**](AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
-[**list_abors**](AborApi.md#list_abors) | **GET** /api/abor | [EXPERIMENTAL] ListAbors: List Abors.
-[**list_diary_entries**](AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EXPERIMENTAL] ListDiaryEntries: List diary entries.
-[**lock_period**](AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
-[**patch_abor**](AborApi.md#patch_abor) | **PATCH** /api/abor/{scope}/{code} | [EXPERIMENTAL] PatchAbor: Patch Abor.
-[**re_open_periods**](AborApi.md#re_open_periods) | **POST** /api/abor/{scope}/{code}/accountingdiary/$reopenperiods | [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
-[**upsert_abor_properties**](AborApi.md#upsert_abor_properties) | **POST** /api/abor/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+[**add_diary_entry**](AborApi.md#add_diary_entry) | **POST** /api/abor/{scope}/{code}/accountingdiary | [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type &#39;Other&#39;.
+[**close_period**](AborApi.md#close_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$closeperiod | [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
+[**create_abor**](AborApi.md#create_abor) | **POST** /api/abor/{scope} | [EARLY ACCESS] CreateAbor: Create an Abor.
+[**delete_abor**](AborApi.md#delete_abor) | **DELETE** /api/abor/{scope}/{code} | [EARLY ACCESS] DeleteAbor: Delete an Abor.
+[**delete_diary_entry**](AborApi.md#delete_diary_entry) | **DELETE** /api/abor/{scope}/{code}/accountingdiary/{diaryEntryCode} | [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type &#39;Other&#39; from the specified Abor.
+[**get_abor**](AborApi.md#get_abor) | **GET** /api/abor/{scope}/{code} | [EARLY ACCESS] GetAbor: Get Abor.
+[**get_abor_properties**](AborApi.md#get_abor_properties) | **GET** /api/abor/{scope}/{code}/properties | [EARLY ACCESS] GetAborProperties: Get Abor properties
+[**get_journal_entry_lines**](AborApi.md#get_journal_entry_lines) | **POST** /api/abor/{scope}/{code}/journalentrylines/$query | [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+[**get_trial_balance**](AborApi.md#get_trial_balance) | **POST** /api/abor/{scope}/{code}/trialbalance/$query | [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
+[**list_abors**](AborApi.md#list_abors) | **GET** /api/abor | [EARLY ACCESS] ListAbors: List Abors.
+[**list_diary_entries**](AborApi.md#list_diary_entries) | **GET** /api/abor/{scope}/{code}/accountingdiary | [EARLY ACCESS] ListDiaryEntries: List diary entries.
+[**lock_period**](AborApi.md#lock_period) | **POST** /api/abor/{scope}/{code}/accountingdiary/$lockperiod | [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
+[**patch_abor**](AborApi.md#patch_abor) | **PATCH** /api/abor/{scope}/{code} | [EARLY ACCESS] PatchAbor: Patch Abor.
+[**re_open_periods**](AborApi.md#re_open_periods) | **POST** /api/abor/{scope}/{code}/accountingdiary/$reopenperiods | [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+[**upsert_abor_properties**](AborApi.md#upsert_abor_properties) | **POST** /api/abor/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
 
 
 # **add_diary_entry**
 > DiaryEntry add_diary_entry(scope, code, diary_entry_request)
 
-[EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
+[EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
 
 Adds a new diary entry to the specified Abor
 
@@ -86,7 +86,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.add_diary_entry(scope, code, diary_entry_request, opts=opts)
 
-        # [EXPERIMENTAL] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
+        # [EARLY ACCESS] AddDiaryEntry: Add a diary entry to the specified Abor. This would be type 'Other'.
         api_response = api_instance.add_diary_entry(scope, code, diary_entry_request)
         pprint(api_response)
 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 # **close_period**
 > DiaryEntry close_period(scope, code, close_period_diary_entry_request)
 
-[EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+[EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
 
 Closes or Locks the current open period for the given Abor.
 
@@ -187,7 +187,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.close_period(scope, code, close_period_diary_entry_request, opts=opts)
 
-        # [EXPERIMENTAL] ClosePeriod: Closes or locks the current period for the given Abor.
+        # [EARLY ACCESS] ClosePeriod: Closes or locks the current period for the given Abor.
         api_response = api_instance.close_period(scope, code, close_period_diary_entry_request)
         pprint(api_response)
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 # **create_abor**
 > Abor create_abor(scope, abor_request)
 
-[EXPERIMENTAL] CreateAbor: Create an Abor.
+[EARLY ACCESS] CreateAbor: Create an Abor.
 
 Create the given Abor.
 
@@ -287,7 +287,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_abor(scope, abor_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateAbor: Create an Abor.
+        # [EARLY ACCESS] CreateAbor: Create an Abor.
         api_response = api_instance.create_abor(scope, abor_request)
         pprint(api_response)
 
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 # **delete_abor**
 > DeletedEntityResponse delete_abor(scope, code)
 
-[EXPERIMENTAL] DeleteAbor: Delete an Abor.
+[EARLY ACCESS] DeleteAbor: Delete an Abor.
 
 Delete the given Abor.
 
@@ -381,7 +381,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_abor(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteAbor: Delete an Abor.
+        # [EARLY ACCESS] DeleteAbor: Delete an Abor.
         api_response = api_instance.delete_abor(scope, code)
         pprint(api_response)
 
@@ -419,7 +419,7 @@ Name | Type | Description  | Notes
 # **delete_diary_entry**
 > DeletedEntityResponse delete_diary_entry(scope, code, diary_entry_code)
 
-[EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
+[EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
 
 Delete a diary entry type 'Other' from the specified Abor.
 
@@ -476,7 +476,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_diary_entry(scope, code, diary_entry_code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
+        # [EARLY ACCESS] DeleteDiaryEntry: Delete a diary entry type 'Other' from the specified Abor.
         api_response = api_instance.delete_diary_entry(scope, code, diary_entry_code)
         pprint(api_response)
 
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 # **get_abor**
 > Abor get_abor(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetAbor: Get Abor.
+[EARLY ACCESS] GetAbor: Get Abor.
 
 Retrieve the definition of a particular Abor.
 
@@ -574,7 +574,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_abor(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetAbor: Get Abor.
+        # [EARLY ACCESS] GetAbor: Get Abor.
         api_response = api_instance.get_abor(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -615,7 +615,7 @@ Name | Type | Description  | Notes
 # **get_abor_properties**
 > AborProperties get_abor_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAborProperties: Get Abor properties
+[EARLY ACCESS] GetAborProperties: Get Abor properties
 
 Get all the properties of a single abor.
 
@@ -673,7 +673,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_abor_properties(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAborProperties: Get Abor properties
+        # [EARLY ACCESS] GetAborProperties: Get Abor properties
         api_response = api_instance.get_abor_properties(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -713,7 +713,7 @@ Name | Type | Description  | Notes
 # **get_journal_entry_lines**
 > VersionedResourceListOfJournalEntryLine get_journal_entry_lines(scope, code, journal_entry_lines_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
 
-[EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+[EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
 
 Gets the Journal Entry lines for the given Abor                The Journal Entry lines have been generated from transactions and translated via posting rules
 
@@ -779,7 +779,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_journal_entry_lines(scope, code, journal_entry_lines_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
+        # [EARLY ACCESS] GetJournalEntryLines: Get the Journal Entry lines for the given Abor.
         api_response = api_instance.get_journal_entry_lines(scope, code, journal_entry_lines_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
         pprint(api_response)
 
@@ -822,9 +822,9 @@ Name | Type | Description  | Notes
 # **get_trial_balance**
 > VersionedResourceListOfTrialBalance get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
 
-[EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
+[EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
 
-Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).
+Gets the Trial Balance for the given Abor.    The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.
 
 ### Example
 
@@ -879,16 +879,16 @@ def main():
     # trial_balance_query_parameters = TrialBalanceQueryParameters.from_json("")
     # trial_balance_query_parameters = TrialBalanceQueryParameters.from_dict({})
     trial_balance_query_parameters = TrialBalanceQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    limit = 56 # int | When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] GetTrialBalance: Get the Trial Balance for the given Abor.
+        # [EARLY ACCESS] GetTrialBalance: Get the Trial Balance for the given Abor.
         api_response = api_instance.get_trial_balance(scope, code, trial_balance_query_parameters, as_at=as_at, filter=filter, limit=limit, page=page)
         pprint(api_response)
 
@@ -905,10 +905,10 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Abor. | 
  **code** | **str**| The code of the Abor. Together with the scope this uniquely identifies the Abor. | 
  **trial_balance_query_parameters** | [**TrialBalanceQueryParameters**](TrialBalanceQueryParameters.md)| The query parameters used in running the generation of the Trial Balance. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.              Defaults to returning the latest version if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results by.              For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **limit** | **int**| When paginating, limit the number of returned results to this many.              Defaults to 100 if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing Trial Balances.              This token is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields              must not have changed since the original request. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many.               Defaults to 100 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request. | [optional] 
 
 ### Return type
 
@@ -931,7 +931,7 @@ Name | Type | Description  | Notes
 # **list_abors**
 > PagedResourceListOfAbor list_abors(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListAbors: List Abors.
+[EARLY ACCESS] ListAbors: List Abors.
 
 List all the Abors matching particular criteria.
 
@@ -992,7 +992,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_abors(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListAbors: List Abors.
+        # [EARLY ACCESS] ListAbors: List Abors.
         api_response = api_instance.list_abors(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -1035,7 +1035,7 @@ Name | Type | Description  | Notes
 # **list_diary_entries**
 > PagedResourceListOfDiaryEntry list_diary_entries(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListDiaryEntries: List diary entries.
+[EARLY ACCESS] ListDiaryEntries: List diary entries.
 
 List all the diary entries matching particular criteria.
 
@@ -1098,7 +1098,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_diary_entries(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListDiaryEntries: List diary entries.
+        # [EARLY ACCESS] ListDiaryEntries: List diary entries.
         api_response = api_instance.list_diary_entries(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -1143,7 +1143,7 @@ Name | Type | Description  | Notes
 # **lock_period**
 > DiaryEntry lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request)
 
-[EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+[EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
 
 Locks the specified or last locked period for the given Abor.
 
@@ -1205,7 +1205,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request, opts=opts)
 
-        # [EXPERIMENTAL] LockPeriod: Locks the last Closed or given Closed Period.
+        # [EARLY ACCESS] LockPeriod: Locks the last Closed or given Closed Period.
         api_response = api_instance.lock_period(scope, code, lock_period_diary_entry_request=lock_period_diary_entry_request)
         pprint(api_response)
 
@@ -1244,7 +1244,7 @@ Name | Type | Description  | Notes
 # **patch_abor**
 > Abor patch_abor(scope, code, operation)
 
-[EXPERIMENTAL] PatchAbor: Patch Abor.
+[EARLY ACCESS] PatchAbor: Patch Abor.
 
 Create or update certain fields for a particular Abor.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: PortfolioIds.
 
@@ -1301,7 +1301,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_abor(scope, code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchAbor: Patch Abor.
+        # [EARLY ACCESS] PatchAbor: Patch Abor.
         api_response = api_instance.patch_abor(scope, code, operation)
         pprint(api_response)
 
@@ -1340,7 +1340,7 @@ Name | Type | Description  | Notes
 # **re_open_periods**
 > PeriodDiaryEntriesReopenedResponse re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request)
 
-[EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+[EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
 
 Reopens one or more periods.
 
@@ -1402,7 +1402,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request, opts=opts)
 
-        # [EXPERIMENTAL] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
+        # [EARLY ACCESS] ReOpenPeriods: Reopen periods from a seed Diary Entry Code or when not specified, the last Closed Period for the given Abor.
         api_response = api_instance.re_open_periods(scope, code, re_open_period_diary_entry_request=re_open_period_diary_entry_request)
         pprint(api_response)
 
@@ -1441,7 +1441,7 @@ Name | Type | Description  | Notes
 # **upsert_abor_properties**
 > AborProperties upsert_abor_properties(scope, code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+[EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
 
 Update or insert one or more properties onto a single Abor. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Abor'.                Upserting a property that exists for an Abor, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -1498,7 +1498,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_abor_properties(scope, code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAborProperties: Upsert Abor properties
+        # [EARLY ACCESS] UpsertAborProperties: Upsert Abor properties
         api_response = api_instance.upsert_abor_properties(scope, code, request_body=request_body)
         pprint(api_response)
 

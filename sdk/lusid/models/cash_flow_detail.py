@@ -42,8 +42,9 @@ class CashFlowDetail(BaseModel):
     haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request.", alias="haircutFraction")
     net_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request.", alias="netAmount")
     haircut_rule_applied:  Optional[StrictStr] = Field(None,alias="haircutRuleApplied", description="The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request.") 
+    error:  Optional[StrictStr] = Field(None,alias="error", description="Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero.") 
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "transactionId", "portfolioId", "flowType", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "links"]
+    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "transactionId", "portfolioId", "flowType", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -127,6 +128,11 @@ class CashFlowDetail(BaseModel):
         if self.haircut_rule_applied is None and "haircut_rule_applied" in self.__fields_set__:
             _dict['haircutRuleApplied'] = None
 
+        # set to None if error (nullable) is None
+        # and __fields_set__ contains the field
+        if self.error is None and "error" in self.__fields_set__:
+            _dict['error'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -157,6 +163,7 @@ class CashFlowDetail(BaseModel):
             "haircut_fraction": obj.get("haircutFraction"),
             "net_amount": obj.get("netAmount"),
             "haircut_rule_applied": obj.get("haircutRuleApplied"),
+            "error": obj.get("error"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **quantity** | **float** | The quantity of the given instrument ordered. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this order. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
@@ -24,6 +25,7 @@ from datetime import datetime
 
 id: ResourceId
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
 portfolio_id: Optional[ResourceId] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 price: Optional[CurrencyAndAmount] = None
@@ -31,7 +33,7 @@ limit_price: Optional[CurrencyAndAmount] = # Replace with your value
 stop_price: Optional[CurrencyAndAmount] = # Replace with your value
 var_date: Optional[datetime] = # Replace with your value
 side: Optional[StrictStr] = "example_side"
-order_update_request_instance = OrderUpdateRequest(id=id, quantity=quantity, portfolio_id=portfolio_id, properties=properties, price=price, limit_price=limit_price, stop_price=stop_price, var_date=var_date, side=side)
+order_update_request_instance = OrderUpdateRequest(id=id, quantity=quantity, amount=amount, portfolio_id=portfolio_id, properties=properties, price=price, limit_price=limit_price, stop_price=stop_price, var_date=var_date, side=side)
 
 ```
 

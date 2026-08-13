@@ -4,46 +4,46 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_chart_of_accounts**](ChartOfAccountsApi.md#create_chart_of_accounts) | **POST** /api/chartofaccounts/{scope} | [EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts
-[**create_cleardown_module**](ChartOfAccountsApi.md#create_cleardown_module) | **POST** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module
-[**create_general_ledger_profile**](ChartOfAccountsApi.md#create_general_ledger_profile) | **POST** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.
-[**create_posting_module**](ChartOfAccountsApi.md#create_posting_module) | **POST** /api/chartofaccounts/{scope}/{code}/postingmodules | [EXPERIMENTAL] CreatePostingModule: Create a Posting Module
-[**delete_accounts**](ChartOfAccountsApi.md#delete_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/$delete | [EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts
-[**delete_chart_of_accounts**](ChartOfAccountsApi.md#delete_chart_of_accounts) | **DELETE** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts
-[**delete_cleardown_module**](ChartOfAccountsApi.md#delete_cleardown_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.
-[**delete_general_ledger_profile**](ChartOfAccountsApi.md#delete_general_ledger_profile) | **DELETE** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
-[**delete_posting_module**](ChartOfAccountsApi.md#delete_posting_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.
-[**get_account**](ChartOfAccountsApi.md#get_account) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode} | [EXPERIMENTAL] GetAccount: Get Account
-[**get_account_properties**](ChartOfAccountsApi.md#get_account_properties) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties | [EXPERIMENTAL] GetAccountProperties: Get Account properties
-[**get_chart_of_accounts**](ChartOfAccountsApi.md#get_chart_of_accounts) | **GET** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts
-[**get_chart_of_accounts_properties**](ChartOfAccountsApi.md#get_chart_of_accounts_properties) | **GET** /api/chartofaccounts/{scope}/{code}/properties | [EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties
-[**get_cleardown_module**](ChartOfAccountsApi.md#get_cleardown_module) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module
-[**get_general_ledger_profile**](ChartOfAccountsApi.md#get_general_ledger_profile) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.
-[**get_posting_module**](ChartOfAccountsApi.md#get_posting_module) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] GetPostingModule: Get a Posting Module
-[**list_accounts**](ChartOfAccountsApi.md#list_accounts) | **GET** /api/chartofaccounts/{scope}/{code}/accounts | [EXPERIMENTAL] ListAccounts: List Accounts
-[**list_charts_of_accounts**](ChartOfAccountsApi.md#list_charts_of_accounts) | **GET** /api/chartofaccounts | [EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts
-[**list_cleardown_module_rules**](ChartOfAccountsApi.md#list_cleardown_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules
-[**list_cleardown_modules**](ChartOfAccountsApi.md#list_cleardown_modules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EXPERIMENTAL] ListCleardownModules: List Cleardown Modules
-[**list_general_ledger_profiles**](ChartOfAccountsApi.md#list_general_ledger_profiles) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.
-[**list_posting_module_rules**](ChartOfAccountsApi.md#list_posting_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules
-[**list_posting_modules**](ChartOfAccountsApi.md#list_posting_modules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules | [EXPERIMENTAL] ListPostingModules: List Posting Modules
-[**patch_chart_of_accounts**](ChartOfAccountsApi.md#patch_chart_of_accounts) | **PATCH** /api/chartofaccounts/{scope}/{code} | [EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.
-[**patch_cleardown_module**](ChartOfAccountsApi.md#patch_cleardown_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module
-[**patch_posting_module**](ChartOfAccountsApi.md#patch_posting_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] PatchPostingModule: Patch a Posting Module
-[**set_cleardown_module_details**](ChartOfAccountsApi.md#set_cleardown_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module
-[**set_cleardown_module_rules**](ChartOfAccountsApi.md#set_cleardown_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module
-[**set_general_ledger_profile_mappings**](ChartOfAccountsApi.md#set_general_ledger_profile_mappings) | **PUT** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode}/mappings | [EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
-[**set_posting_module_details**](ChartOfAccountsApi.md#set_posting_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module
-[**set_posting_module_rules**](ChartOfAccountsApi.md#set_posting_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module
-[**upsert_account_properties**](ChartOfAccountsApi.md#upsert_account_properties) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties/$upsert | [EXPERIMENTAL] UpsertAccountProperties: Upsert account properties
-[**upsert_accounts**](ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EXPERIMENTAL] UpsertAccounts: Upsert Accounts
-[**upsert_chart_of_accounts_properties**](ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
+[**create_chart_of_accounts**](ChartOfAccountsApi.md#create_chart_of_accounts) | **POST** /api/chartofaccounts/{scope} | [EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts
+[**create_cleardown_module**](ChartOfAccountsApi.md#create_cleardown_module) | **POST** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module
+[**create_general_ledger_profile**](ChartOfAccountsApi.md#create_general_ledger_profile) | **POST** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.
+[**create_posting_module**](ChartOfAccountsApi.md#create_posting_module) | **POST** /api/chartofaccounts/{scope}/{code}/postingmodules | [EARLY ACCESS] CreatePostingModule: Create a Posting Module
+[**delete_accounts**](ChartOfAccountsApi.md#delete_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/$delete | [EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts
+[**delete_chart_of_accounts**](ChartOfAccountsApi.md#delete_chart_of_accounts) | **DELETE** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts
+[**delete_cleardown_module**](ChartOfAccountsApi.md#delete_cleardown_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.
+[**delete_general_ledger_profile**](ChartOfAccountsApi.md#delete_general_ledger_profile) | **DELETE** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
+[**delete_posting_module**](ChartOfAccountsApi.md#delete_posting_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] DeletePostingModule: Delete a Posting Module.
+[**get_account**](ChartOfAccountsApi.md#get_account) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode} | [EARLY ACCESS] GetAccount: Get Account
+[**get_account_properties**](ChartOfAccountsApi.md#get_account_properties) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties | [EARLY ACCESS] GetAccountProperties: Get Account properties
+[**get_chart_of_accounts**](ChartOfAccountsApi.md#get_chart_of_accounts) | **GET** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts
+[**get_chart_of_accounts_properties**](ChartOfAccountsApi.md#get_chart_of_accounts_properties) | **GET** /api/chartofaccounts/{scope}/{code}/properties | [EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties
+[**get_cleardown_module**](ChartOfAccountsApi.md#get_cleardown_module) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] GetCleardownModule: Get a Cleardown Module
+[**get_general_ledger_profile**](ChartOfAccountsApi.md#get_general_ledger_profile) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.
+[**get_posting_module**](ChartOfAccountsApi.md#get_posting_module) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] GetPostingModule: Get a Posting Module
+[**list_accounts**](ChartOfAccountsApi.md#list_accounts) | **GET** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] ListAccounts: List Accounts
+[**list_charts_of_accounts**](ChartOfAccountsApi.md#list_charts_of_accounts) | **GET** /api/chartofaccounts | [EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts
+[**list_cleardown_module_rules**](ChartOfAccountsApi.md#list_cleardown_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules
+[**list_cleardown_modules**](ChartOfAccountsApi.md#list_cleardown_modules) | **GET** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EARLY ACCESS] ListCleardownModules: List Cleardown Modules
+[**list_general_ledger_profiles**](ChartOfAccountsApi.md#list_general_ledger_profiles) | **GET** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.
+[**list_posting_module_rules**](ChartOfAccountsApi.md#list_posting_module_rules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
+[**list_posting_modules**](ChartOfAccountsApi.md#list_posting_modules) | **GET** /api/chartofaccounts/{scope}/{code}/postingmodules | [EARLY ACCESS] ListPostingModules: List Posting Modules
+[**patch_chart_of_accounts**](ChartOfAccountsApi.md#patch_chart_of_accounts) | **PATCH** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.
+[**patch_cleardown_module**](ChartOfAccountsApi.md#patch_cleardown_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module
+[**patch_posting_module**](ChartOfAccountsApi.md#patch_posting_module) | **PATCH** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] PatchPostingModule: Patch a Posting Module
+[**set_cleardown_module_details**](ChartOfAccountsApi.md#set_cleardown_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module
+[**set_cleardown_module_rules**](ChartOfAccountsApi.md#set_cleardown_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode}/cleardownrules | [EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module
+[**set_general_ledger_profile_mappings**](ChartOfAccountsApi.md#set_general_ledger_profile_mappings) | **PUT** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode}/mappings | [EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
+[**set_posting_module_details**](ChartOfAccountsApi.md#set_posting_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module
+[**set_posting_module_rules**](ChartOfAccountsApi.md#set_posting_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module
+[**upsert_account_properties**](ChartOfAccountsApi.md#upsert_account_properties) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties/$upsert | [EARLY ACCESS] UpsertAccountProperties: Upsert account properties
+[**upsert_accounts**](ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] UpsertAccounts: Upsert Accounts
+[**upsert_chart_of_accounts_properties**](ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
 
 
 # **create_chart_of_accounts**
 > ChartOfAccounts create_chart_of_accounts(scope, chart_of_accounts_request)
 
-[EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts
+[EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts
 
 Create the given Chart of Accounts.
 
@@ -104,7 +104,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_chart_of_accounts(scope, chart_of_accounts_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateChartOfAccounts: Create a Chart of Accounts
+        # [EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts
         api_response = api_instance.create_chart_of_accounts(scope, chart_of_accounts_request)
         pprint(api_response)
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 # **create_cleardown_module**
 > CleardownModuleResponse create_cleardown_module(scope, code, cleardown_module_request)
 
-[EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module
+[EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module
 
 Create the given Cleardown Module.
 
@@ -204,7 +204,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_cleardown_module(scope, code, cleardown_module_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateCleardownModule: Create a Cleardown Module
+        # [EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module
         api_response = api_instance.create_cleardown_module(scope, code, cleardown_module_request)
         pprint(api_response)
 
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 # **create_general_ledger_profile**
 > GeneralLedgerProfileResponse create_general_ledger_profile(scope, code, general_ledger_profile_request)
 
-[EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.
+[EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.
 
 Create the given General Ledger profile.
 
@@ -305,7 +305,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_general_ledger_profile(scope, code, general_ledger_profile_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateGeneralLedgerProfile: Create a General Ledger Profile.
+        # [EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.
         api_response = api_instance.create_general_ledger_profile(scope, code, general_ledger_profile_request)
         pprint(api_response)
 
@@ -344,7 +344,7 @@ Name | Type | Description  | Notes
 # **create_posting_module**
 > PostingModuleResponse create_posting_module(scope, code, posting_module_request)
 
-[EXPERIMENTAL] CreatePostingModule: Create a Posting Module
+[EARLY ACCESS] CreatePostingModule: Create a Posting Module
 
 Create the given Posting Module.
 
@@ -406,7 +406,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_posting_module(scope, code, posting_module_request, opts=opts)
 
-        # [EXPERIMENTAL] CreatePostingModule: Create a Posting Module
+        # [EARLY ACCESS] CreatePostingModule: Create a Posting Module
         api_response = api_instance.create_posting_module(scope, code, posting_module_request)
         pprint(api_response)
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 # **delete_accounts**
 > DeleteAccountsResponse delete_accounts(scope, code, request_body, delete_mode=delete_mode)
 
-[EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts
+[EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts
 
 Delete one or more account from the Chart of Accounts. Soft deletion marks the account as inactive  While the Hard deletion is deleting the account.  The maximum number of accounts that this method can delete per request is 2,000.
 
@@ -503,7 +503,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_accounts(scope, code, request_body, delete_mode=delete_mode, opts=opts)
 
-        # [EXPERIMENTAL] DeleteAccounts: Soft or hard delete multiple accounts
+        # [EARLY ACCESS] DeleteAccounts: Soft or hard delete multiple accounts
         api_response = api_instance.delete_accounts(scope, code, request_body, delete_mode=delete_mode)
         pprint(api_response)
 
@@ -543,7 +543,7 @@ Name | Type | Description  | Notes
 # **delete_chart_of_accounts**
 > DeletedEntityResponse delete_chart_of_accounts(scope, code)
 
-[EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts
+[EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts
 
 Delete the given Chart of Accounts.
 
@@ -599,7 +599,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_chart_of_accounts(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteChartOfAccounts: Delete a Chart of Accounts
+        # [EARLY ACCESS] DeleteChartOfAccounts: Delete a Chart of Accounts
         api_response = api_instance.delete_chart_of_accounts(scope, code)
         pprint(api_response)
 
@@ -637,7 +637,7 @@ Name | Type | Description  | Notes
 # **delete_cleardown_module**
 > DeletedEntityResponse delete_cleardown_module(scope, code, cleardown_module_code)
 
-[EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.
+[EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.
 
 Delete the given Cleardown Module.
 
@@ -694,7 +694,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_cleardown_module(scope, code, cleardown_module_code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteCleardownModule: Delete a Cleardown Module.
+        # [EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.
         api_response = api_instance.delete_cleardown_module(scope, code, cleardown_module_code)
         pprint(api_response)
 
@@ -733,7 +733,7 @@ Name | Type | Description  | Notes
 # **delete_general_ledger_profile**
 > DeletedEntityResponse delete_general_ledger_profile(scope, code, general_ledger_profile_code)
 
-[EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
+[EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
 
 Delete the given General Ledger Profile.
 
@@ -790,7 +790,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_general_ledger_profile(scope, code, general_ledger_profile_code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
+        # [EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
         api_response = api_instance.delete_general_ledger_profile(scope, code, general_ledger_profile_code)
         pprint(api_response)
 
@@ -829,7 +829,7 @@ Name | Type | Description  | Notes
 # **delete_posting_module**
 > DeletedEntityResponse delete_posting_module(scope, code, posting_module_code)
 
-[EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.
+[EARLY ACCESS] DeletePostingModule: Delete a Posting Module.
 
 Delete the given Posting Module.
 
@@ -886,7 +886,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_posting_module(scope, code, posting_module_code, opts=opts)
 
-        # [EXPERIMENTAL] DeletePostingModule: Delete a Posting Module.
+        # [EARLY ACCESS] DeletePostingModule: Delete a Posting Module.
         api_response = api_instance.delete_posting_module(scope, code, posting_module_code)
         pprint(api_response)
 
@@ -925,7 +925,7 @@ Name | Type | Description  | Notes
 # **get_account**
 > Account get_account(scope, code, account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetAccount: Get Account
+[EARLY ACCESS] GetAccount: Get Account
 
 Retrieve the definition of a particular Account which is part of a Chart of Accounts.
 
@@ -985,7 +985,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_account(scope, code, account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetAccount: Get Account
+        # [EARLY ACCESS] GetAccount: Get Account
         api_response = api_instance.get_account(scope, code, account_code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -1027,7 +1027,7 @@ Name | Type | Description  | Notes
 # **get_account_properties**
 > AccountProperties get_account_properties(scope, code, account_code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAccountProperties: Get Account properties
+[EARLY ACCESS] GetAccountProperties: Get Account properties
 
 Get all the properties of a single account.
 
@@ -1086,7 +1086,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_account_properties(scope, code, account_code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAccountProperties: Get Account properties
+        # [EARLY ACCESS] GetAccountProperties: Get Account properties
         api_response = api_instance.get_account_properties(scope, code, account_code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -1127,7 +1127,7 @@ Name | Type | Description  | Notes
 # **get_chart_of_accounts**
 > ChartOfAccounts get_chart_of_accounts(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts
+[EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts
 
 Retrieve the definition of a particular Chart of Accounts.
 
@@ -1186,7 +1186,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_chart_of_accounts(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetChartOfAccounts: Get ChartOfAccounts
+        # [EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts
         api_response = api_instance.get_chart_of_accounts(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -1227,7 +1227,7 @@ Name | Type | Description  | Notes
 # **get_chart_of_accounts_properties**
 > ChartOfAccountsProperties get_chart_of_accounts_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties
+[EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties
 
 Get all the properties of a single chart of accounts.
 
@@ -1285,7 +1285,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_chart_of_accounts_properties(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetChartOfAccountsProperties: Get chart of accounts properties
+        # [EARLY ACCESS] GetChartOfAccountsProperties: Get chart of accounts properties
         api_response = api_instance.get_chart_of_accounts_properties(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -1325,7 +1325,7 @@ Name | Type | Description  | Notes
 # **get_cleardown_module**
 > CleardownModuleResponse get_cleardown_module(scope, code, cleardown_module_code, as_at=as_at)
 
-[EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module
+[EARLY ACCESS] GetCleardownModule: Get a Cleardown Module
 
 Retrieve the definition of a Cleardown Module complete with its rules.
 
@@ -1383,7 +1383,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_cleardown_module(scope, code, cleardown_module_code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetCleardownModule: Get a Cleardown Module
+        # [EARLY ACCESS] GetCleardownModule: Get a Cleardown Module
         api_response = api_instance.get_cleardown_module(scope, code, cleardown_module_code, as_at=as_at)
         pprint(api_response)
 
@@ -1423,7 +1423,7 @@ Name | Type | Description  | Notes
 # **get_general_ledger_profile**
 > GeneralLedgerProfileResponse get_general_ledger_profile(scope, code, general_ledger_profile_code, as_at=as_at)
 
-[EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.
+[EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.
 
 Get the given General Ledger Profile.
 
@@ -1481,7 +1481,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_general_ledger_profile(scope, code, general_ledger_profile_code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetGeneralLedgerProfile: Get a General Ledger Profile.
+        # [EARLY ACCESS] GetGeneralLedgerProfile: Get a General Ledger Profile.
         api_response = api_instance.get_general_ledger_profile(scope, code, general_ledger_profile_code, as_at=as_at)
         pprint(api_response)
 
@@ -1521,7 +1521,7 @@ Name | Type | Description  | Notes
 # **get_posting_module**
 > PostingModuleResponse get_posting_module(scope, code, posting_module_code, as_at=as_at)
 
-[EXPERIMENTAL] GetPostingModule: Get a Posting Module
+[EARLY ACCESS] GetPostingModule: Get a Posting Module
 
 Retrieve the definition of a Posting Module complete with its rules.
 
@@ -1579,7 +1579,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_posting_module(scope, code, posting_module_code, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetPostingModule: Get a Posting Module
+        # [EARLY ACCESS] GetPostingModule: Get a Posting Module
         api_response = api_instance.get_posting_module(scope, code, posting_module_code, as_at=as_at)
         pprint(api_response)
 
@@ -1619,7 +1619,7 @@ Name | Type | Description  | Notes
 # **list_accounts**
 > PagedResourceListOfAccount list_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
 
-[EXPERIMENTAL] ListAccounts: List Accounts
+[EARLY ACCESS] ListAccounts: List Accounts
 
 List the accounts in a Chart of Accounts
 
@@ -1681,7 +1681,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListAccounts: List Accounts
+        # [EARLY ACCESS] ListAccounts: List Accounts
         api_response = api_instance.list_accounts(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
 
@@ -1725,7 +1725,7 @@ Name | Type | Description  | Notes
 # **list_charts_of_accounts**
 > PagedResourceListOfChartOfAccounts list_charts_of_accounts(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts
+[EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts
 
 List all the Charts of Accounts matching particular criteria.
 
@@ -1786,7 +1786,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_charts_of_accounts(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListChartsOfAccounts: List Charts of Accounts
+        # [EARLY ACCESS] ListChartsOfAccounts: List Charts of Accounts
         api_response = api_instance.list_charts_of_accounts(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -1829,7 +1829,7 @@ Name | Type | Description  | Notes
 # **list_cleardown_module_rules**
 > PagedResourceListOfCleardownModuleRule list_cleardown_module_rules(scope, code, cleardown_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
 
-[EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules
+[EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules
 
 List the Rules in a Cleardown Module
 
@@ -1890,7 +1890,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_cleardown_module_rules(scope, code, cleardown_module_code, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
 
-        # [EXPERIMENTAL] ListCleardownModuleRules: List Cleardown Module Rules
+        # [EARLY ACCESS] ListCleardownModuleRules: List Cleardown Module Rules
         api_response = api_instance.list_cleardown_module_rules(scope, code, cleardown_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -1933,7 +1933,7 @@ Name | Type | Description  | Notes
 # **list_cleardown_modules**
 > PagedResourceListOfCleardownModuleResponse list_cleardown_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListCleardownModules: List Cleardown Modules
+[EARLY ACCESS] ListCleardownModules: List Cleardown Modules
 
 List all the Cleardown Modules matching particular criteria.
 
@@ -1994,7 +1994,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_cleardown_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListCleardownModules: List Cleardown Modules
+        # [EARLY ACCESS] ListCleardownModules: List Cleardown Modules
         api_response = api_instance.list_cleardown_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -2037,7 +2037,7 @@ Name | Type | Description  | Notes
 # **list_general_ledger_profiles**
 > PagedResourceListOfGeneralLedgerProfileResponse list_general_ledger_profiles(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.
+[EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.
 
 List all the General Ledger profiles matching particular criteria.
 
@@ -2098,7 +2098,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_general_ledger_profiles(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListGeneralLedgerProfiles: List General Ledger Profiles.
+        # [EARLY ACCESS] ListGeneralLedgerProfiles: List General Ledger Profiles.
         api_response = api_instance.list_general_ledger_profiles(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -2141,7 +2141,7 @@ Name | Type | Description  | Notes
 # **list_posting_module_rules**
 > PagedResourceListOfPostingModuleRule list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
 
-[EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules
+[EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
 
 List the Rules in a Posting Module
 
@@ -2202,7 +2202,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
 
-        # [EXPERIMENTAL] ListPostingModuleRules: List Posting Module Rules
+        # [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
         api_response = api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
         pprint(api_response)
 
@@ -2245,7 +2245,7 @@ Name | Type | Description  | Notes
 # **list_posting_modules**
 > PagedResourceListOfPostingModuleResponse list_posting_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListPostingModules: List Posting Modules
+[EARLY ACCESS] ListPostingModules: List Posting Modules
 
 List all the Posting Modules matching particular criteria.
 
@@ -2306,7 +2306,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_posting_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListPostingModules: List Posting Modules
+        # [EARLY ACCESS] ListPostingModules: List Posting Modules
         api_response = api_instance.list_posting_modules(scope, code, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -2349,7 +2349,7 @@ Name | Type | Description  | Notes
 # **patch_chart_of_accounts**
 > ChartOfAccounts patch_chart_of_accounts(scope, code, operation)
 
-[EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.
+[EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.
 
 Update fields on a Chart of Accounts.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description.
 
@@ -2406,7 +2406,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_chart_of_accounts(scope, code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchChartOfAccounts: Patch a Chart of Accounts.
+        # [EARLY ACCESS] PatchChartOfAccounts: Patch a Chart of Accounts.
         api_response = api_instance.patch_chart_of_accounts(scope, code, operation)
         pprint(api_response)
 
@@ -2445,7 +2445,7 @@ Name | Type | Description  | Notes
 # **patch_cleardown_module**
 > CleardownModuleResponse patch_cleardown_module(scope, code, cleardown_module_code, operation)
 
-[EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module
+[EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module
 
 Update fields on a Cleardown Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.
 
@@ -2503,7 +2503,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_cleardown_module(scope, code, cleardown_module_code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchCleardownModule: Patch a Cleardown Module
+        # [EARLY ACCESS] PatchCleardownModule: Patch a Cleardown Module
         api_response = api_instance.patch_cleardown_module(scope, code, cleardown_module_code, operation)
         pprint(api_response)
 
@@ -2543,7 +2543,7 @@ Name | Type | Description  | Notes
 # **patch_posting_module**
 > PostingModuleResponse patch_posting_module(scope, code, posting_module_code, operation)
 
-[EXPERIMENTAL] PatchPostingModule: Patch a Posting Module
+[EARLY ACCESS] PatchPostingModule: Patch a Posting Module
 
 Update fields on a Posting Module.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, Rules.
 
@@ -2601,7 +2601,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_posting_module(scope, code, posting_module_code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchPostingModule: Patch a Posting Module
+        # [EARLY ACCESS] PatchPostingModule: Patch a Posting Module
         api_response = api_instance.patch_posting_module(scope, code, posting_module_code, operation)
         pprint(api_response)
 
@@ -2641,7 +2641,7 @@ Name | Type | Description  | Notes
 # **set_cleardown_module_details**
 > CleardownModuleResponse set_cleardown_module_details(scope, code, cleardown_module_code, cleardown_module_details)
 
-[EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module
+[EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module
 
 Update the given Cleardown Module details.
 
@@ -2704,7 +2704,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_cleardown_module_details(scope, code, cleardown_module_code, cleardown_module_details, opts=opts)
 
-        # [EXPERIMENTAL] SetCleardownModuleDetails: Set the details of a Cleardown Module
+        # [EARLY ACCESS] SetCleardownModuleDetails: Set the details of a Cleardown Module
         api_response = api_instance.set_cleardown_module_details(scope, code, cleardown_module_code, cleardown_module_details)
         pprint(api_response)
 
@@ -2744,7 +2744,7 @@ Name | Type | Description  | Notes
 # **set_cleardown_module_rules**
 > CleardownModuleRulesUpdatedResponse set_cleardown_module_rules(scope, code, cleardown_module_code, cleardown_module_rule)
 
-[EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module
+[EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module
 
 Set the given Cleardown Modules rules, this will replace the existing set of rules for the cleardown module.
 
@@ -2802,7 +2802,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_cleardown_module_rules(scope, code, cleardown_module_code, cleardown_module_rule, opts=opts)
 
-        # [EXPERIMENTAL] SetCleardownModuleRules: Set the rules of a Cleardown Module
+        # [EARLY ACCESS] SetCleardownModuleRules: Set the rules of a Cleardown Module
         api_response = api_instance.set_cleardown_module_rules(scope, code, cleardown_module_code, cleardown_module_rule)
         pprint(api_response)
 
@@ -2842,7 +2842,7 @@ Name | Type | Description  | Notes
 # **set_general_ledger_profile_mappings**
 > GeneralLedgerProfileResponse set_general_ledger_profile_mappings(scope, code, general_ledger_profile_code, general_ledger_profile_mapping)
 
-[EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
+[EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
 
 Update the given General Ledger profile Mappings.
 
@@ -2900,7 +2900,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_general_ledger_profile_mappings(scope, code, general_ledger_profile_code, general_ledger_profile_mapping, opts=opts)
 
-        # [EXPERIMENTAL] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
+        # [EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
         api_response = api_instance.set_general_ledger_profile_mappings(scope, code, general_ledger_profile_code, general_ledger_profile_mapping)
         pprint(api_response)
 
@@ -2940,7 +2940,7 @@ Name | Type | Description  | Notes
 # **set_posting_module_details**
 > PostingModuleResponse set_posting_module_details(scope, code, posting_module_code, posting_module_details)
 
-[EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module
+[EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module
 
 Update the given Posting Module details.
 
@@ -3003,7 +3003,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_posting_module_details(scope, code, posting_module_code, posting_module_details, opts=opts)
 
-        # [EXPERIMENTAL] SetPostingModuleDetails: Set the details of a Posting Module
+        # [EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module
         api_response = api_instance.set_posting_module_details(scope, code, posting_module_code, posting_module_details)
         pprint(api_response)
 
@@ -3043,7 +3043,7 @@ Name | Type | Description  | Notes
 # **set_posting_module_rules**
 > PostingModuleRulesUpdatedResponse set_posting_module_rules(scope, code, posting_module_code, posting_module_rule)
 
-[EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module
+[EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module
 
 Set the given Posting Modules rules, this will replace the existing set of rules for the posting module.
 
@@ -3101,7 +3101,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.set_posting_module_rules(scope, code, posting_module_code, posting_module_rule, opts=opts)
 
-        # [EXPERIMENTAL] SetPostingModuleRules: Set the rules of a Posting Module
+        # [EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module
         api_response = api_instance.set_posting_module_rules(scope, code, posting_module_code, posting_module_rule)
         pprint(api_response)
 
@@ -3141,7 +3141,7 @@ Name | Type | Description  | Notes
 # **upsert_account_properties**
 > AccountProperties upsert_account_properties(scope, code, account_code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertAccountProperties: Upsert account properties
+[EARLY ACCESS] UpsertAccountProperties: Upsert account properties
 
 Update or insert one or more properties onto a single account. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Account'.                Upserting a property that exists for an account, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -3199,7 +3199,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_account_properties(scope, code, account_code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAccountProperties: Upsert account properties
+        # [EARLY ACCESS] UpsertAccountProperties: Upsert account properties
         api_response = api_instance.upsert_account_properties(scope, code, account_code, request_body=request_body)
         pprint(api_response)
 
@@ -3239,7 +3239,7 @@ Name | Type | Description  | Notes
 # **upsert_accounts**
 > AccountsUpsertResponse upsert_accounts(scope, code, account)
 
-[EXPERIMENTAL] UpsertAccounts: Upsert Accounts
+[EARLY ACCESS] UpsertAccounts: Upsert Accounts
 
 Create or update accounts in the Chart of Accounts. An account will be updated  if it already exists and created if it does not.  The maximum number of accounts that this method can upsert per request is 2,000.
 
@@ -3296,7 +3296,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_accounts(scope, code, account, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAccounts: Upsert Accounts
+        # [EARLY ACCESS] UpsertAccounts: Upsert Accounts
         api_response = api_instance.upsert_accounts(scope, code, account)
         pprint(api_response)
 
@@ -3335,7 +3335,7 @@ Name | Type | Description  | Notes
 # **upsert_chart_of_accounts_properties**
 > ChartOfAccountsProperties upsert_chart_of_accounts_properties(scope, code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
+[EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
 
 Update or insert one or more properties onto a single Chart of Accounts. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'ChartOfAccounts'.                Upserting a property that exists for a Chart of Accounts, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -3392,7 +3392,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_chart_of_accounts_properties(scope, code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
+        # [EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
         api_response = api_instance.upsert_chart_of_accounts_properties(scope, code, request_body=request_body)
         pprint(api_response)
 

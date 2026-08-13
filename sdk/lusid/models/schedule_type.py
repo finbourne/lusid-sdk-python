@@ -41,6 +41,7 @@ class ScheduleType(str, Enum):
     BONDCONVERSIONSCHEDULE = 'BondConversionSchedule'
     PIKSCHEDULE = 'PikSchedule'
     INVALID = 'Invalid'
+    CANCELSCHEDULE = 'CancelSchedule'
 
     @classmethod
     def from_json(cls, json_str: str) -> ScheduleType:

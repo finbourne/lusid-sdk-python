@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **leader_nav_type_code** | **str** | The code of the Nav Type that this Nav Type will follow when set. | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 ## Example
 
 ```python
@@ -49,7 +50,8 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Version
 href: Optional[StrictStr] = "example_href"
 leader_nav_type_code: Optional[StrictStr] = "example_leader_nav_type_code"
-fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code)
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+fund_calendar_entry_instance = FundCalendarEntry(code=code, variant=variant, display_name=display_name, description=description, nav_type_code=nav_type_code, timeline_id=timeline_id, previous_entry=previous_entry, effective_at=effective_at, as_at=as_at, entry_type=entry_type, status=status, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, version=version, href=href, leader_nav_type_code=leader_nav_type_code, staged_modifications=staged_modifications)
 
 ```
 

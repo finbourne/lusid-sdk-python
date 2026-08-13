@@ -260,7 +260,7 @@ class InstrumentEventsApi:
     def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfCashFlowDetail, Awaitable[ResourceListOfCashFlowDetail]]:  # noqa: E501
         """QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.  # noqa: E501
 
-        Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.  # noqa: E501
+        Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of 'Transaction'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -291,7 +291,7 @@ class InstrumentEventsApi:
     def query_bucket_cash_flow_drill_down_with_http_info(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.  # noqa: E501
 
-        Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.  # noqa: E501
+        Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of 'Transaction'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

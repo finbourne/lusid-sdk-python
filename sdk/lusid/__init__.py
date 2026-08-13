@@ -157,7 +157,9 @@ from lusid.models.adjust_global_commitment_event import AdjustGlobalCommitmentEv
 from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
+from lusid.models.aggregate_rule_values import AggregateRuleValues
 from lusid.models.aggregate_spec import AggregateSpec
+from lusid.models.aggregate_tolerance_base import AggregateToleranceBase
 from lusid.models.aggregated_return import AggregatedReturn
 from lusid.models.aggregated_returns_dispersion_request import AggregatedReturnsDispersionRequest
 from lusid.models.aggregated_returns_entity_id import AggregatedReturnsEntityId
@@ -212,6 +214,11 @@ from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsRespo
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
 from lusid.models.batch_amend_transaction_settlement_instruction_response import BatchAmendTransactionSettlementInstructionResponse
 from lusid.models.batch_delete_relational_data_response import BatchDeleteRelationalDataResponse
+from lusid.models.batch_manage_comment_request import BatchManageCommentRequest
+from lusid.models.batch_manage_comment_response import BatchManageCommentResponse
+from lusid.models.batch_review_rec_result_item_result import BatchReviewRecResultItemResult
+from lusid.models.batch_review_rec_result_request import BatchReviewRecResultRequest
+from lusid.models.batch_review_rec_result_response import BatchReviewRecResultResponse
 from lusid.models.batch_update_user_review_for_comparison_result_request import BatchUpdateUserReviewForComparisonResultRequest
 from lusid.models.batch_update_user_review_for_comparison_result_response import BatchUpdateUserReviewForComparisonResultResponse
 from lusid.models.batch_upsert_dates_for_calendar_response import BatchUpsertDatesForCalendarResponse
@@ -236,6 +243,7 @@ from lusid.models.bond_conversion_entry import BondConversionEntry
 from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
+from lusid.models.bond_option import BondOption
 from lusid.models.bond_principal_event import BondPrincipalEvent
 from lusid.models.bonus_issue_event import BonusIssueEvent
 from lusid.models.book_transactions_request import BookTransactionsRequest
@@ -268,6 +276,7 @@ from lusid.models.cancel_orders_and_move_remaining_request import CancelOrdersAn
 from lusid.models.cancel_orders_and_move_remaining_response import CancelOrdersAndMoveRemainingResponse
 from lusid.models.cancel_orders_response import CancelOrdersResponse
 from lusid.models.cancel_placements_response import CancelPlacementsResponse
+from lusid.models.cancel_schedule import CancelSchedule
 from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
@@ -327,6 +336,7 @@ from lusid.models.closed_period import ClosedPeriod
 from lusid.models.collateral import Collateral
 from lusid.models.collateral_instrument import CollateralInstrument
 from lusid.models.commodity_forward import CommodityForward
+from lusid.models.commodity_forward_cash_settlement_event import CommodityForwardCashSettlementEvent
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
@@ -381,6 +391,8 @@ from lusid.models.contract_for_difference import ContractForDifference
 from lusid.models.contract_initialisation_event import ContractInitialisationEvent
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.conversion_event import ConversionEvent
+from lusid.models.core_rule_values import CoreRuleValues
+from lusid.models.core_tolerance_base import CoreToleranceBase
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
 from lusid.models.corporate_action_transition import CorporateActionTransition
@@ -877,6 +889,7 @@ from lusid.models.nav_type import NavType
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.next_value_in_sequence_response import NextValueInSequenceResponse
+from lusid.models.notice_convention import NoticeConvention
 from lusid.models.numeric_comparison_type import NumericComparisonType
 from lusid.models.opaque_dependency import OpaqueDependency
 from lusid.models.opaque_market_data import OpaqueMarketData
@@ -992,6 +1005,7 @@ from lusid.models.paged_resource_list_of_posting_module_rule import PagedResourc
 from lusid.models.paged_resource_list_of_property_definition import PagedResourceListOfPropertyDefinition
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
 from lusid.models.paged_resource_list_of_rec_instance import PagedResourceListOfRecInstance
+from lusid.models.paged_resource_list_of_rec_result import PagedResourceListOfRecResult
 from lusid.models.paged_resource_list_of_rec_result_set import PagedResourceListOfRecResultSet
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
@@ -1169,14 +1183,23 @@ from lusid.models.rec_match_counts import RecMatchCounts
 from lusid.models.rec_open_exception_counts import RecOpenExceptionCounts
 from lusid.models.rec_requested_result_revision import RecRequestedResultRevision
 from lusid.models.rec_required_approval import RecRequiredApproval
+from lusid.models.rec_result import RecResult
+from lusid.models.rec_result_assignment_update import RecResultAssignmentUpdate
 from lusid.models.rec_result_count_by_review_status import RecResultCountByReviewStatus
 from lusid.models.rec_result_counts import RecResultCounts
+from lusid.models.rec_result_decision_group import RecResultDecisionGroup
+from lusid.models.rec_result_decision_update import RecResultDecisionUpdate
+from lusid.models.rec_result_exception import RecResultException
+from lusid.models.rec_result_item import RecResultItem
+from lusid.models.rec_result_item_details import RecResultItemDetails
+from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
 from lusid.models.rec_review import RecReview
 from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
+from lusid.models.rec_user_comment import RecUserComment
 from lusid.models.rec_workflow_task import RecWorkflowTask
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
@@ -1228,6 +1251,7 @@ from lusid.models.repo_partial_closure_event import RepoPartialClosureEvent
 from lusid.models.repurchase_offer_event import RepurchaseOfferEvent
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
+from lusid.models.reset_schedule import ResetSchedule
 from lusid.models.resolve_tenors_request import ResolveTenorsRequest
 from lusid.models.resolve_tenors_response import ResolveTenorsResponse
 from lusid.models.resolved_custodian_account import ResolvedCustodianAccount
@@ -1428,6 +1452,7 @@ from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
 from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSetReviewRequest
 from lusid.models.subscribe_election import SubscribeElection
 from lusid.models.subscription_definition import SubscriptionDefinition
+from lusid.models.supplemental_attribute_values import SupplementalAttributeValues
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
@@ -1823,7 +1848,9 @@ __all__ = [
     "AdjustHolding",
     "AdjustHoldingForDateRequest",
     "AdjustHoldingRequest",
+    "AggregateRuleValues",
     "AggregateSpec",
+    "AggregateToleranceBase",
     "AggregatedReturn",
     "AggregatedReturnsDispersionRequest",
     "AggregatedReturnsEntityId",
@@ -1878,6 +1905,11 @@ __all__ = [
     "BatchAmendCustomDataModelMembershipResponse",
     "BatchAmendTransactionSettlementInstructionResponse",
     "BatchDeleteRelationalDataResponse",
+    "BatchManageCommentRequest",
+    "BatchManageCommentResponse",
+    "BatchReviewRecResultItemResult",
+    "BatchReviewRecResultRequest",
+    "BatchReviewRecResultResponse",
     "BatchUpdateUserReviewForComparisonResultRequest",
     "BatchUpdateUserReviewForComparisonResultResponse",
     "BatchUpsertDatesForCalendarResponse",
@@ -1902,6 +1934,7 @@ __all__ = [
     "BondConversionSchedule",
     "BondCouponEvent",
     "BondDefaultEvent",
+    "BondOption",
     "BondPrincipalEvent",
     "BonusIssueEvent",
     "BookTransactionsRequest",
@@ -1934,6 +1967,7 @@ __all__ = [
     "CancelOrdersAndMoveRemainingResponse",
     "CancelOrdersResponse",
     "CancelPlacementsResponse",
+    "CancelSchedule",
     "CancelSingleHoldingAdjustmentRequest",
     "CancelledOrderResult",
     "CancelledPlacementResult",
@@ -1993,6 +2027,7 @@ __all__ = [
     "Collateral",
     "CollateralInstrument",
     "CommodityForward",
+    "CommodityForwardCashSettlementEvent",
     "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",
@@ -2047,6 +2082,8 @@ __all__ = [
     "ContractInitialisationEvent",
     "ContributionToNonPassingRuleDetail",
     "ConversionEvent",
+    "CoreRuleValues",
+    "CoreToleranceBase",
     "CorporateAction",
     "CorporateActionSource",
     "CorporateActionTransition",
@@ -2543,6 +2580,7 @@ __all__ = [
     "NavTypeDefinition",
     "NewInstrument",
     "NextValueInSequenceResponse",
+    "NoticeConvention",
     "NumericComparisonType",
     "OpaqueDependency",
     "OpaqueMarketData",
@@ -2658,6 +2696,7 @@ __all__ = [
     "PagedResourceListOfPropertyDefinition",
     "PagedResourceListOfPropertyDefinitionSearchResult",
     "PagedResourceListOfRecInstance",
+    "PagedResourceListOfRecResult",
     "PagedResourceListOfRecResultSet",
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
@@ -2835,14 +2874,23 @@ __all__ = [
     "RecOpenExceptionCounts",
     "RecRequestedResultRevision",
     "RecRequiredApproval",
+    "RecResult",
+    "RecResultAssignmentUpdate",
     "RecResultCountByReviewStatus",
     "RecResultCounts",
+    "RecResultDecisionGroup",
+    "RecResultDecisionUpdate",
+    "RecResultException",
+    "RecResultItem",
+    "RecResultItemDetails",
+    "RecResultReview",
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",
     "RecReview",
     "RecRunLogEntry",
     "RecSubmission",
     "RecSupersededRun",
+    "RecUserComment",
     "RecWorkflowTask",
     "RecipeBlock",
     "RecipeComposer",
@@ -2894,6 +2942,7 @@ __all__ = [
     "RepurchaseOfferEvent",
     "RequestedChanges",
     "ResetEvent",
+    "ResetSchedule",
     "ResolveTenorsRequest",
     "ResolveTenorsResponse",
     "ResolvedCustodianAccount",
@@ -3094,6 +3143,7 @@ __all__ = [
     "SubmitRecResultSetReviewRequest",
     "SubscribeElection",
     "SubscriptionDefinition",
+    "SupplementalAttributeValues",
     "SwapCashFlowEvent",
     "SwapPrincipalEvent",
     "SweepBlocksRequest",

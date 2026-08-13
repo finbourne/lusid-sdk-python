@@ -66,7 +66,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def create_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFeeType: Create a FeeType.  # noqa: E501
+        """[EARLY ACCESS] CreateFeeType: Create a FeeType.  # noqa: E501
 
         Create a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -99,7 +99,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def create_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], fee_type_request : Annotated[FeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFeeType: Create a FeeType.  # noqa: E501
+        """[EARLY ACCESS] CreateFeeType: Create a FeeType.  # noqa: E501
 
         Create a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -233,7 +233,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def delete_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFeeType: Delete a FeeType.  # noqa: E501
+        """[EARLY ACCESS] DeleteFeeType: Delete a FeeType.  # noqa: E501
 
         Delete a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -266,7 +266,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def delete_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFeeType: Delete a FeeType.  # noqa: E501
+        """[EARLY ACCESS] DeleteFeeType: Delete a FeeType.  # noqa: E501
 
         Delete a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -393,7 +393,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def get_fee_template_specifications(self, async_req: Optional[bool]=None, **kwargs) -> Union[FeeTransactionTemplateSpecification, Awaitable[FeeTransactionTemplateSpecification]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
+        """[EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
 
         Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -422,7 +422,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def get_fee_template_specifications_with_http_info(self, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
+        """[EARLY ACCESS] GetFeeTemplateSpecifications: Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
 
         Get FeeTemplateSpecifications used in the FeeType.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -536,7 +536,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def get_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType")], code : Annotated[StrictStr, Field(..., description="The code of the FeeType")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the FeeType. Defaults to returning the latest version of the FeeType, if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeType: Get a FeeType  # noqa: E501
+        """[EARLY ACCESS] GetFeeType: Get a FeeType  # noqa: E501
 
         Get a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -571,7 +571,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def get_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType")], code : Annotated[StrictStr, Field(..., description="The code of the FeeType")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the FeeType. Defaults to returning the latest version of the FeeType, if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeType: Get a FeeType  # noqa: E501
+        """[EARLY ACCESS] GetFeeType: Get a FeeType  # noqa: E501
 
         Get a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -707,7 +707,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def list_fee_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFeeType, Awaitable[PagedResourceListOfFeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFeeTypes: List FeeTypes  # noqa: E501
+        """[EARLY ACCESS] ListFeeTypes: List FeeTypes  # noqa: E501
 
         List FeeTypes that contain templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -746,7 +746,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def list_fee_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the FeeTypes. Defaults to returning the latest version of each FeeType if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing FeeTypes; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Code of the FeeType type, specify \"id.Code eq 'FeeType1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFeeTypes: List FeeTypes  # noqa: E501
+        """[EARLY ACCESS] ListFeeTypes: List FeeTypes  # noqa: E501
 
         List FeeTypes that contain templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -895,7 +895,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def update_fee_type(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], async_req: Optional[bool]=None, **kwargs) -> Union[FeeType, Awaitable[FeeType]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateFeeType: Update a FeeType.  # noqa: E501
+        """[EARLY ACCESS] UpdateFeeType: Update a FeeType.  # noqa: E501
 
         Update a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -930,7 +930,7 @@ class FeeTypesApi:
 
     @validate_arguments
     def update_fee_type_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the FeeType.")], code : Annotated[StrictStr, Field(..., description="The code of the fee type")], update_fee_type_request : Annotated[UpdateFeeTypeRequest, Field(description="The contents of the FeeType.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateFeeType: Update a FeeType.  # noqa: E501
+        """[EARLY ACCESS] UpdateFeeType: Update a FeeType.  # noqa: E501
 
         Update a FeeType that contains templates used to create fee transactions.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

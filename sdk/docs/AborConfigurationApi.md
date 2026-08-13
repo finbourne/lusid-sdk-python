@@ -4,19 +4,19 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_abor_configuration**](AborConfigurationApi.md#create_abor_configuration) | **POST** /api/aborconfiguration/{scope} | [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
-[**delete_abor_configuration**](AborConfigurationApi.md#delete_abor_configuration) | **DELETE** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
-[**get_abor_configuration**](AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
-[**get_abor_configuration_properties**](AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
-[**list_abor_configurations**](AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
-[**patch_abor_configuration**](AborConfigurationApi.md#patch_abor_configuration) | **PATCH** /api/aborconfiguration/{scope}/{code} | [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
-[**upsert_abor_configuration_properties**](AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+[**create_abor_configuration**](AborConfigurationApi.md#create_abor_configuration) | **POST** /api/aborconfiguration/{scope} | [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
+[**delete_abor_configuration**](AborConfigurationApi.md#delete_abor_configuration) | **DELETE** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
+[**get_abor_configuration**](AborConfigurationApi.md#get_abor_configuration) | **GET** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
+[**get_abor_configuration_properties**](AborConfigurationApi.md#get_abor_configuration_properties) | **GET** /api/aborconfiguration/{scope}/{code}/properties | [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
+[**list_abor_configurations**](AborConfigurationApi.md#list_abor_configurations) | **GET** /api/aborconfiguration | [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
+[**patch_abor_configuration**](AborConfigurationApi.md#patch_abor_configuration) | **PATCH** /api/aborconfiguration/{scope}/{code} | [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
+[**upsert_abor_configuration_properties**](AborConfigurationApi.md#upsert_abor_configuration_properties) | **POST** /api/aborconfiguration/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 
 
 # **create_abor_configuration**
 > AborConfiguration create_abor_configuration(scope, abor_configuration_request)
 
-[EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+[EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
 
 Create the given AborConfiguration.
 
@@ -77,7 +77,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_abor_configuration(scope, abor_configuration_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateAborConfiguration: Create an AborConfiguration.
+        # [EARLY ACCESS] CreateAborConfiguration: Create an AborConfiguration.
         api_response = api_instance.create_abor_configuration(scope, abor_configuration_request)
         pprint(api_response)
 
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 # **delete_abor_configuration**
 > DeletedEntityResponse delete_abor_configuration(scope, code)
 
-[EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+[EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
 
 Delete the given AborConfiguration.
 
@@ -171,7 +171,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_abor_configuration(scope, code, opts=opts)
 
-        # [EXPERIMENTAL] DeleteAborConfiguration: Delete an AborConfiguration.
+        # [EARLY ACCESS] DeleteAborConfiguration: Delete an AborConfiguration.
         api_response = api_instance.delete_abor_configuration(scope, code)
         pprint(api_response)
 
@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 # **get_abor_configuration**
 > AborConfiguration get_abor_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+[EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
 
 Retrieve the definition of a particular AborConfiguration.
 
@@ -268,7 +268,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_abor_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetAborConfiguration: Get AborConfiguration.
+        # [EARLY ACCESS] GetAborConfiguration: Get AborConfiguration.
         api_response = api_instance.get_abor_configuration(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 # **get_abor_configuration_properties**
 > AborConfigurationProperties get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+[EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
 
 Get all the properties of a single abor Configuration.
 
@@ -367,7 +367,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAborConfigurationProperties: Get Abor Configuration properties
+        # [EARLY ACCESS] GetAborConfigurationProperties: Get Abor Configuration properties
         api_response = api_instance.get_abor_configuration_properties(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 # **list_abor_configurations**
 > PagedResourceListOfAborConfiguration list_abor_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+[EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
 
 List all the AborConfiguration matching particular criteria.
 
@@ -468,7 +468,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_abor_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListAborConfigurations: List AborConfiguration.
+        # [EARLY ACCESS] ListAborConfigurations: List AborConfiguration.
         api_response = api_instance.list_abor_configurations(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 # **patch_abor_configuration**
 > AborConfiguration patch_abor_configuration(scope, code, operation)
 
-[EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+[EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
 
 Create or update certain fields for a particular AborConfiguration.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, PostingModuleCodes, CleardownModuleCodes.
 
@@ -568,7 +568,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.patch_abor_configuration(scope, code, operation, opts=opts)
 
-        # [EXPERIMENTAL] PatchAborConfiguration: Patch Abor Configuration.
+        # [EARLY ACCESS] PatchAborConfiguration: Patch Abor Configuration.
         api_response = api_instance.patch_abor_configuration(scope, code, operation)
         pprint(api_response)
 
@@ -607,7 +607,7 @@ Name | Type | Description  | Notes
 # **upsert_abor_configuration_properties**
 > AborConfigurationProperties upsert_abor_configuration_properties(scope, code, request_body=request_body)
 
-[EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+[EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
 
 Update or insert one or more properties onto a single AborConfiguration. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'AborConfiguration'.                Upserting a property that exists for an AborConfiguration, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.
 
@@ -664,7 +664,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_abor_configuration_properties(scope, code, request_body=request_body, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
+        # [EARLY ACCESS] UpsertAborConfigurationProperties: Upsert AborConfiguration properties
         api_response = api_instance.upsert_abor_configuration_properties(scope, code, request_body=request_body)
         pprint(api_response)
 

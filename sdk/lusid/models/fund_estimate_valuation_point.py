@@ -105,7 +105,9 @@ class FundEstimateValuationPoint(FundCalendarEntries):
                                     'YearRegularity',
                                     'LusidEntityDataQualityCheck',
                                     'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse']:
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
            return value
         
         # Only validate the 'type' property of the class
@@ -176,7 +178,9 @@ class FundEstimateValuationPoint(FundCalendarEntries):
                                     'YearRegularity',
                                     'LusidEntityDataQualityCheck',
                                     'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse']:
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
            return value
         
         # Only validate the 'type' property of the class

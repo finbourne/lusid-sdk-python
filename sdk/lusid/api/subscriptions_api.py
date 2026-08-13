@@ -197,7 +197,7 @@ class SubscriptionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/subscriptions/holdings/{scope}/{code}', 'DELETE',
+            '/api/subscriptions/{scope}/{code}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -368,7 +368,7 @@ class SubscriptionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/subscriptions/holdings/{scope}/{code}', 'GET',
+            '/api/subscriptions/{scope}/{code}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -555,7 +555,7 @@ class SubscriptionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/subscriptions/holdings/{scope}', 'GET',
+            '/api/subscriptions/{scope}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -714,7 +714,7 @@ class SubscriptionsApi:
         }
 
         return self.api_client.call_api(
-            '/api/subscriptions/holdings', 'POST',
+            '/api/subscriptions', 'POST',
             _path_params,
             _query_params,
             _header_params,

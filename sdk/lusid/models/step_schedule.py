@@ -32,7 +32,7 @@ class StepSchedule(Schedule):
     level_type:  StrictStr = Field(...,alias="levelType", description="The type of shift or adjustment that the quantity represents.    Supported string (enumeration) values are: [Absolute, AbsoluteShift, Percentage, AbsolutePercentage].") 
     step_schedule_type:  StrictStr = Field(...,alias="stepScheduleType", description="The type of step that this schedule is for.  Supported string (enumeration) values are: [Coupon, Notional, Spread].") 
     steps: List[LevelStep] = Field(description="The level steps which are applied.")
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "levelType", "stepScheduleType", "steps"]
 
@@ -96,15 +96,17 @@ class StepSchedule(Schedule):
                                     'YearRegularity',
                                     'LusidEntityDataQualityCheck',
                                     'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse']:
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
            return value
         
         # Only validate the 'type' property of the class
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule')")
         return value
 
     class Config:

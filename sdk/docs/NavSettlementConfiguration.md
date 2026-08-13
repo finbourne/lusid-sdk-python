@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cash_settlement** | [**NavSettlementConfigurationCategory**](NavSettlementConfigurationCategory.md) |  | [optional] 
-**deferred_cash_receipt** | [**NavSettlementConfigurationCategory**](NavSettlementConfigurationCategory.md) |  | [optional] 
+**cash_settlement** | [**NavSettlementConfigurationCategory**](NavSettlementConfigurationCategory.md) |  | 
+**deferred_cash_receipt** | [**NavSettlementConfigurationCategory**](NavSettlementConfigurationCategory.md) |  | 
 ## Example
 
 ```python
@@ -14,8 +14,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-cash_settlement: Optional[NavSettlementConfigurationCategory] = # Replace with your value
-deferred_cash_receipt: Optional[NavSettlementConfigurationCategory] = # Replace with your value
+cash_settlement: NavSettlementConfigurationCategory = # Replace with your value
+deferred_cash_receipt: NavSettlementConfigurationCategory = # Replace with your value
 nav_settlement_configuration_instance = NavSettlementConfiguration(cash_settlement=cash_settlement, deferred_cash_receipt=deferred_cash_receipt)
 
 ```

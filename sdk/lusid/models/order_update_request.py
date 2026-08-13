@@ -32,6 +32,7 @@ class OrderUpdateRequest(BaseModel):
     """
     id: ResourceId
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of the given instrument ordered.")
+    amount: Optional[CurrencyAndAmount] = None
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this order.")
     price: Optional[CurrencyAndAmount] = None
@@ -39,7 +40,7 @@ class OrderUpdateRequest(BaseModel):
     stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
     var_date: Optional[datetime] = Field(default=None, description="The date on which the order was made", alias="date")
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
-    __properties = ["id", "quantity", "portfolioId", "properties", "price", "limitPrice", "stopPrice", "date", "side"]
+    __properties = ["id", "quantity", "amount", "portfolioId", "properties", "price", "limitPrice", "stopPrice", "date", "side"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +77,9 @@ class OrderUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
@@ -129,6 +133,7 @@ class OrderUpdateRequest(BaseModel):
         _obj = OrderUpdateRequest.parse_obj({
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "quantity": obj.get("quantity"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "properties": dict(
                 (_k, PerpetualProperty.from_dict(_v))

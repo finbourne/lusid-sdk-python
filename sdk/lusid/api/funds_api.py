@@ -111,7 +111,7 @@ class FundsApi:
 
     @validate_arguments
     def accept_estimate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, accepts the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AcceptEstimateValuationPointResponse, Awaitable[AcceptEstimateValuationPointResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -148,7 +148,7 @@ class FundsApi:
 
     @validate_arguments
     def accept_estimate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The valuationPointDataRequest which contains the Diary Entry code for the Estimate Valuation Point to move to Candidate or Final state.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, accepts the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.  # noqa: E501
 
         Accepts the specified estimate Valuation Point.  Should the Valuation Point differ since the Valuation Point was last run, both Valuation Points will be returned and status will be marked as 'Candidate',  otherwise it will be marked as 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -294,7 +294,7 @@ class FundsApi:
 
     @validate_arguments
     def add_allocation_groups(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], allocation_group_definition : Annotated[List[AllocationGroupDefinition], Field(description="The definitions of the Allocation Groups to add to the Fund.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.  # noqa: E501
+        """[EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.  # noqa: E501
 
         Add the given Allocation Group definitions to the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -329,7 +329,7 @@ class FundsApi:
 
     @validate_arguments
     def add_allocation_groups_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], allocation_group_definition : Annotated[List[AllocationGroupDefinition], Field(description="The definitions of the Allocation Groups to add to the Fund.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AddAllocationGroups: Add Allocation Groups to a Fund.  # noqa: E501
+        """[EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.  # noqa: E501
 
         Add the given Allocation Group definitions to the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -469,7 +469,7 @@ class FundsApi:
 
     @validate_arguments
     def add_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], series_definition_request : Annotated[List[SeriesDefinitionRequest], Field(description="The definitions of the Series to add.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] AddSeries: Add Series to a Fund.  # noqa: E501
+        """[EARLY ACCESS] AddSeries: Add Series to a Fund.  # noqa: E501
 
         Add the given Series definitions to the specified Share Classes of the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -504,7 +504,7 @@ class FundsApi:
 
     @validate_arguments
     def add_series_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], series_definition_request : Annotated[List[SeriesDefinitionRequest], Field(description="The definitions of the Series to add.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AddSeries: Add Series to a Fund.  # noqa: E501
+        """[EARLY ACCESS] AddSeries: Add Series to a Fund.  # noqa: E501
 
         Add the given Series definitions to the specified Share Classes of the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -644,7 +644,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, creates the Fee against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
+        """[EARLY ACCESS] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -681,7 +681,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_request : Annotated[FeeRequest, Field(description="The Fee to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, creates the Fee against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFee: Create a Fee.  # noqa: E501
+        """[EARLY ACCESS] CreateFee: Create a Fee.  # noqa: E501
 
         Create the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -827,7 +827,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_request : Annotated[FundRequest, Field(description="The definition of the Fund.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFund: Create a Fund.  # noqa: E501
+        """[EARLY ACCESS] CreateFund: Create a Fund.  # noqa: E501
 
         Create the given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -860,7 +860,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_request : Annotated[FundRequest, Field(description="The definition of the Fund.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFund: Create a Fund.  # noqa: E501
+        """[EARLY ACCESS] CreateFund: Create a Fund.  # noqa: E501
 
         Create the given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -994,7 +994,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fund_v2(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(description="The definition of the Fund.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
+        """[EARLY ACCESS] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
 
         Create the given V2 Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1027,7 +1027,7 @@ class FundsApi:
 
     @validate_arguments
     def create_fund_v2_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], fund_definition_request : Annotated[FundDefinitionRequest, Field(description="The definition of the Fund.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
+        """[EARLY ACCESS] CreateFundV2: Create a Fund V2 (Preview).  # noqa: E501
 
         Create the given V2 Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1161,7 +1161,7 @@ class FundsApi:
 
     @validate_arguments
     def create_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], create_valuation_point_request : Annotated[CreateValuationPointRequest, Field(description="The Valuation Point Estimate definition to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, creates the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPoint, Awaitable[ValuationPoint]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateValuationPoint: Create a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] CreateValuationPoint: Create a Valuation Point.  # noqa: E501
 
         Insert the estimate Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1198,7 +1198,7 @@ class FundsApi:
 
     @validate_arguments
     def create_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], create_valuation_point_request : Annotated[CreateValuationPointRequest, Field(description="The Valuation Point Estimate definition to create.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, creates the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateValuationPoint: Create a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] CreateValuationPoint: Create a Valuation Point.  # noqa: E501
 
         Insert the estimate Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1344,7 +1344,7 @@ class FundsApi:
 
     @validate_arguments
     def deactivate_nav_types(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the nav types to be deactivated.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] DeactivateNavTypes: Deactivate NAV types on a Fund.  # noqa: E501
+        """[EARLY ACCESS] DeactivateNavTypes: Deactivate NAV types on a Fund.  # noqa: E501
 
         Deactivate the given NAV types on the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1381,7 +1381,7 @@ class FundsApi:
 
     @validate_arguments
     def deactivate_nav_types_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], request_body : Annotated[List[StrictStr], Field(description="The codes of the nav types to be deactivated.")], delete_mode : Annotated[Optional[StrictStr], Field( description="The delete mode to use. Default value: Soft. Available values: Soft, Hard.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeactivateNavTypes: Deactivate NAV types on a Fund.  # noqa: E501
+        """[EARLY ACCESS] DeactivateNavTypes: Deactivate NAV types on a Fund.  # noqa: E501
 
         Deactivate the given NAV types on the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1527,7 +1527,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_bookmark(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], bookmark_code : Annotated[StrictStr, Field(..., description="The bookmark code for the bookmark to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, deletes the Bookmark against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteBookmark: Delete a Bookmark.  # noqa: E501
+        """[EARLY ACCESS] DeleteBookmark: Delete a Bookmark.  # noqa: E501
 
         Deletes the given Bookmark.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1564,7 +1564,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_bookmark_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], bookmark_code : Annotated[StrictStr, Field(..., description="The bookmark code for the bookmark to be deleted.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, deletes the Bookmark against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteBookmark: Delete a Bookmark.  # noqa: E501
+        """[EARLY ACCESS] DeleteBookmark: Delete a Bookmark.  # noqa: E501
 
         Deletes the given Bookmark.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1703,7 +1703,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFee: Delete a Fee.  # noqa: E501
+        """[EARLY ACCESS] DeleteFee: Delete a Fee.  # noqa: E501
 
         Delete the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1738,7 +1738,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFee: Delete a Fee.  # noqa: E501
+        """[EARLY ACCESS] DeleteFee: Delete a Fee.  # noqa: E501
 
         Delete the given Fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1871,7 +1871,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund to be deleted. Together with the scope this uniquely identifies the Fund.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFund: Delete a Fund.  # noqa: E501
+        """[EARLY ACCESS] DeleteFund: Delete a Fund.  # noqa: E501
 
         Delete the given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1904,7 +1904,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund to be deleted. Together with the scope this uniquely identifies the Fund.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFund: Delete a Fund.  # noqa: E501
+        """[EARLY ACCESS] DeleteFund: Delete a Fund.  # noqa: E501
 
         Delete the given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2031,7 +2031,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
+        """[EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
 
         Delete Nav activity adjustments on a Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2072,7 +2072,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to delete the adjustment from")], nav_activity_adjustment_response : Annotated[List[NavActivityAdjustmentResponse], Field(description="The request describing the Nav activity adjustments to delete from a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
+        """[EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.  # noqa: E501
 
         Delete Nav activity adjustments on a Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2230,7 +2230,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], diary_entry_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. This is working only for the Estimates.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
 
         Deletes the given Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2269,7 +2269,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], diary_entry_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. This is working only for the Estimates.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.  # noqa: E501
 
         Deletes the given Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2414,7 +2414,7 @@ class FundsApi:
 
     @validate_arguments
     def finalise_candidate_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The details of the Valuation Point to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, finalises the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.  # noqa: E501
 
         Moves a 'Candidate' status Valuation Point to status 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2451,7 +2451,7 @@ class FundsApi:
 
     @validate_arguments
     def finalise_candidate_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_request : Annotated[ValuationPointDataRequest, Field(description="The details of the Valuation Point to mark as final.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, finalises the Valuation Point of the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.  # noqa: E501
 
         Moves a 'Candidate' status Valuation Point to status 'Final'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2597,7 +2597,7 @@ class FundsApi:
 
     @validate_arguments
     def get_a2_b_data_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the A2B data. This includes start and end dates.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" domain to decorate onto              the A2B data. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfFundA2BDataRecord, Awaitable[VersionedResourceListOfFundA2BDataRecord]]:  # noqa: E501
-        """[EXPERIMENTAL] GetA2BDataForFund: Get A2B data for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.  # noqa: E501
 
         Get the A2B data for transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2640,7 +2640,7 @@ class FundsApi:
 
     @validate_arguments
     def get_a2_b_data_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the A2B data. This includes start and end dates.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" domain to decorate onto              the A2B data. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetA2BDataForFund: Get A2B data for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.  # noqa: E501
 
         Get the A2B data for transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2808,7 +2808,7 @@ class FundsApi:
 
     @validate_arguments
     def get_a2_b_movements_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the A2B movements. This includes start and end dates.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" domain to decorate onto              the A2B movements. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfFundA2BMovementRecord, Awaitable[VersionedResourceListOfFundA2BMovementRecord]]:  # noqa: E501
-        """[EXPERIMENTAL] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.  # noqa: E501
 
         Get the A2B movement records of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2851,7 +2851,7 @@ class FundsApi:
 
     @validate_arguments
     def get_a2_b_movements_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the A2B movements. This includes start and end dates.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" domain to decorate onto              the A2B movements. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.  # noqa: E501
 
         Get the A2B movement records of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3019,7 +3019,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFee: Get a Fee for a specified Fund.  # noqa: E501
 
         Retrieve a fee for a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3060,7 +3060,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fee properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fee. Defaults to returning the latest version of the Fee if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fee' domain to decorate onto the Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFee: Get a Fee for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFee: Get a Fee for a specified Fund.  # noqa: E501
 
         Retrieve a fee for a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3215,7 +3215,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fee_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to get the properties for.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fee's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fee's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FeeProperties, Awaitable[FeeProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeProperties: Get Fee properties.  # noqa: E501
+        """[EARLY ACCESS] GetFeeProperties: Get Fee properties.  # noqa: E501
 
         Get all the properties of a single fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3254,7 +3254,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fee_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to get the properties for.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fee's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fee's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFeeProperties: Get Fee properties.  # noqa: E501
+        """[EARLY ACCESS] GetFeeProperties: Get Fee properties.  # noqa: E501
 
         Get all the properties of a single fee.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3402,7 +3402,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFund: Get a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFund: Get a Fund.  # noqa: E501
 
         Retrieve the definition of a particular Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3441,7 +3441,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fund' domain to decorate onto the Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFund: Get a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFund: Get a Fund.  # noqa: E501
 
         Retrieve the definition of a particular Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3590,7 +3590,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fund_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund to list the properties for. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fund's properties. Defaults to return the latest version of each property if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundProperties, Awaitable[FundProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFundProperties: Get Fund properties.  # noqa: E501
+        """[EARLY ACCESS] GetFundProperties: Get Fund properties.  # noqa: E501
 
         Get all the properties of a single fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3627,7 +3627,7 @@ class FundsApi:
 
     @validate_arguments
     def get_fund_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund to list the properties for. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fund's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFundProperties: Get Fund properties.  # noqa: E501
+        """[EARLY ACCESS] GetFundProperties: Get Fund properties.  # noqa: E501
 
         Get all the properties of a single fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3769,7 +3769,7 @@ class FundsApi:
 
     @validate_arguments
     def get_holding_contributors_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfHoldingContributor, Awaitable[VersionedResourceListOfHoldingContributor]]:  # noqa: E501
-        """[EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
 
         Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3820,7 +3820,7 @@ class FundsApi:
 
     @validate_arguments
     def get_holding_contributors_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictInt, Field(description="The unique holding identifier")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the holdings.This can be a date, valuationPoint or a bookmark.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, include_historic : Annotated[Optional[StrictBool], Field(description="If true, transactions from previously closed holdings are returned.              If false, only transactions from last time position is opened.")] = None, tax_lot_id : Annotated[Optional[StrictStr], Field( description="Constrains the Holding Contributors to those which contributed to the specified tax lot.")] = None, include_unsettled_movements : Annotated[Optional[StrictBool], Field(description="If true, contributing transaction which have not settled yet will also be returned. False by default")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to build the transactions. Defaults to return the latest              version of each transaction if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetHoldingContributors.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.  # noqa: E501
 
         Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4011,7 +4011,7 @@ class FundsApi:
 
     @validate_arguments
     def get_holdings_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\",\"CustodianAccount\" or \"LegalEntity\" domain to decorate onto domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListOfPortfolioHolding, Awaitable[VersionedResourceListOfPortfolioHolding]]:  # noqa: E501
-        """[EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
 
         Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4058,7 +4058,7 @@ class FundsApi:
 
     @validate_arguments
     def get_holdings_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the holdings.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the holdings of transaction portfolios in the Fund. Defaults              to return the latest version of the holdings if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\", \"Holding\" or \"Portfolio\",\"CustodianAccount\" or \"LegalEntity\" domain to decorate onto domain to decorate onto              the holdings. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/Cost\".")] = None, by_taxlots : Annotated[Optional[StrictBool], Field(description="Whether to expand the holdings to return the underlying tax-lots. Defaults to False.")] = None, include_settlement_events_after_days : Annotated[Optional[StrictInt], Field(description="Number of days ahead to bring back settlements from, in relation to the specified effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.  # noqa: E501
 
         Get the holdings of transaction portfolios in a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4238,7 +4238,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, fund_valuation_request : Annotated[Optional[FundValuationRequest], Field(description="The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ListAggregationResponse, Awaitable[ListAggregationResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.  # noqa: E501
 
         Perform valuation on a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4275,7 +4275,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, fund_valuation_request : Annotated[Optional[FundValuationRequest], Field(description="The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationForFund: Perform valuation for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.  # noqa: E501
 
         Perform valuation on a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4421,7 +4421,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the Valuation Point data.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
 
         Retrieves the Valuation Point data between given dates or Valuation Point codes.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the Fund's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' ValuationPoint and EndDate will be as provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4460,7 +4460,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the Valuation Point data.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund definition. Defaults to returning the latest version of the Fund definition if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.  # noqa: E501
 
         Retrieves the Valuation Point data between given dates or Valuation Point codes.  The endpoint will internally extract all 'Assets' and 'Liabilities' from the Fund's Trial balance to produce a GAV.  Start date will be assumed from the last 'official' ValuationPoint and EndDate will be as provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4615,7 +4615,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_journal_entry_lines(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the Journal Entry Lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry Lines. Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry Lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the Journal Entry Lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfFundJournalEntryLine, Awaitable[ValuationPointResourceListOfFundJournalEntryLine]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.  # noqa: E501
 
         Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4664,7 +4664,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_journal_entry_lines_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the Journal Entry Lines.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve Journal Entry Lines. Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Journal Entry Lines from a previous call to GetValuationPointJournalEntryLines.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the Journal Entry Lines.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.  # noqa: E501
 
         Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4850,7 +4850,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_pnl_summary(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for generating the PnL summary.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfPnlJournalEntryLine, Awaitable[ValuationPointResourceListOfPnlJournalEntryLine]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
 
         Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4897,7 +4897,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_pnl_summary_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for generating the PnL summary.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="\"Expression to filter the result set.\"")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.  # noqa: E501
 
         Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5076,7 +5076,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_quotes(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the quotes.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve quotes. Defaults to returning the latest version              of each quote if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing quotes from a previous call to GetValuationPointQuotes.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfAccountedQuote, Awaitable[ValuationPointResourceListOfAccountedQuote]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.  # noqa: E501
 
         Gets all quotes within the effective date range of the specified Valuation Point for a Fund,  including any quotes added via a Complex Close (Post-Close Activity).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5119,7 +5119,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_quotes_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the quotes.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve quotes. Defaults to returning the latest version              of each quote if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing quotes from a previous call to GetValuationPointQuotes.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointQuotes: Get the Quotes for the given Fund and Valuation Point.  # noqa: E501
 
         Gets all quotes within the effective date range of the specified Valuation Point for a Fund,  including any quotes added via a Complex Close (Post-Close Activity).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5286,7 +5286,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified.")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfAccountedTransaction, Awaitable[ValuationPointResourceListOfAccountedTransaction]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
 
         Gets the Transactions for the given Valuation Point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5341,7 +5341,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, show_cancelled_transactions : Annotated[Optional[StrictBool], Field(description="Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified.")] = None, membership_type : Annotated[Optional[StrictStr], Field( description="The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.  # noqa: E501
 
         Gets the Transactions for the given Valuation Point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5545,9 +5545,9 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_trial_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for generating the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the TrialBalance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, exclude_cleardown_module : Annotated[Optional[StrictBool], Field(description="If this is set to true, no Cleardown Module will be applied to the Trial Balance. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfTrialBalance, Awaitable[ValuationPointResourceListOfTrialBalance]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
 
-        Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).  # noqa: E501
+        Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -5596,9 +5596,9 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_trial_balance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for generating the Trial Balance.")], general_ledger_profile_code : Annotated[Optional[StrictStr], Field( description="The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Trial Balance.               Defaults to returning the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.               For more information about filtering results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this number.               Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Trial Balances.               This token is returned from the previous call.               If a pagination token is provided, the filter, effectiveAt and asAt fields               must not have changed since the original request.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the TrialBalance.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, exclude_cleardown_module : Annotated[Optional[StrictBool], Field(description="If this is set to true, no Cleardown Module will be applied to the Trial Balance. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.  # noqa: E501
 
-        Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).  # noqa: E501
+        Gets the Trial Balance for the given Valuation Point for a Fund.                The Trial Balance has been generated from transactions, translated via Posting Rules  and aggregated based on a General Ledger Profile (where specified).                Supplying the X-LUSID-SuppressImbalanceValidation header suppresses the imbalance check.  Any caller with access to this endpoint may use it; it is not role-restricted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -5788,7 +5788,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfUnsettledTransaction, Awaitable[ValuationPointResourceListOfUnsettledTransaction]]:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
         Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5833,7 +5833,7 @@ class FundsApi:
 
     @validate_arguments
     def get_valuation_point_unsettled_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
+        """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
         Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6007,7 +6007,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fees(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFee, Awaitable[PagedResourceListOfFee]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFees: List Fees for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] ListFees: List Fees for a specified Fund.  # noqa: E501
 
         List all the Fees matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6054,7 +6054,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fees_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Fees. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fees. Defaults to returning the latest version of each Fee if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFees: List Fees for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] ListFees: List Fees for a specified Fund.  # noqa: E501
 
         List all the Fees matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6228,7 +6228,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fund_calendar(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ClosedPeriod' domain to decorate onto each item.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundCalendarEntry, Awaitable[PagedResourceListOfFundCalendarEntry]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFundCalendar: List Fund Calendar.  # noqa: E501
+        """[EARLY ACCESS] ListFundCalendar: List Fund Calendar.  # noqa: E501
 
         List all the Calendar Entries associated with the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6273,7 +6273,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fund_calendar_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'ClosedPeriod' domain to decorate onto each item.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFundCalendar: List Fund Calendar.  # noqa: E501
+        """[EARLY ACCESS] ListFundCalendar: List Fund Calendar.  # noqa: E501
 
         List all the Calendar Entries associated with the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6441,7 +6441,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fund_calendar_entries(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each item.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundCalendarEntries, Awaitable[PagedResourceListOfFundCalendarEntries]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.  # noqa: E501
+        """[EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.  # noqa: E501
 
         List all the Calendar Entries associated with the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6486,7 +6486,7 @@ class FundsApi:
 
     @validate_arguments
     def list_fund_calendar_entries_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Calendar. Defaults to returning the latest version of each Calendar Entry if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Calendar Entries; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each item.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFundCalendarEntries: List Fund Calendar Entries.  # noqa: E501
+        """[EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.  # noqa: E501
 
         List all the Calendar Entries associated with the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6654,7 +6654,7 @@ class FundsApi:
 
     @validate_arguments
     def list_funds(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Fund code, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFund, Awaitable[PagedResourceListOfFund]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFunds: List Funds.  # noqa: E501
+        """[EARLY ACCESS] ListFunds: List Funds.  # noqa: E501
 
         List all the Funds matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6697,7 +6697,7 @@ class FundsApi:
 
     @validate_arguments
     def list_funds_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Funds. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Funds. Defaults to returning the latest version of each Fund if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Funds; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Fund code, specify \"id.Code eq 'Fund1'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Fund' domain to decorate onto each Fund.              These must take the format {domain}/{scope}/{code}, for example 'Fund/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFunds: List Funds.  # noqa: E501
+        """[EARLY ACCESS] ListFunds: List Funds.  # noqa: E501
 
         List all the Funds matching particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6859,7 +6859,7 @@ class FundsApi:
 
     @validate_arguments
     def list_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfNavActivityAdjustmentResponse, Awaitable[ResourceListOfNavActivityAdjustmentResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
+        """[EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
 
         Lists the NAV adjustment activities applied to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -6906,7 +6906,7 @@ class FundsApi:
 
     @validate_arguments
     def list_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all NAV adjustment activities for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Nav activity adjustments. Defaults to returning the latest version of each adjustment if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Nav activity adjustments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
+        """[EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point  # noqa: E501
 
         Lists the NAV adjustment activities applied to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7078,7 +7078,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the complex market data.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfAccountedComplexMarketData, Awaitable[ValuationPointResourceListOfAccountedComplexMarketData]]:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.  # noqa: E501
 
         Lists all complex market data within the effective date range of the specified Valuation Point for a Fund,  including any items added via a Complex Close (Post-Close Activity).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7121,7 +7121,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_complex_market_data_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the complex market data.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.  # noqa: E501
 
         Lists all complex market data within the effective date range of the specified Valuation Point for a Fund,  including any items added via a Complex Close (Post-Close Activity).  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7288,7 +7288,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_instruments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all instruments for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the instruments. Defaults to returning the latest version of each instrument if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instruments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, instrument_property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfValuationPointInstrument, Awaitable[PagedResourceListOfValuationPointInstrument]]:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointInstruments: List Instruments inside a valuation point  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point  # noqa: E501
 
         Lists the Instruments linked to Transactions within a Valuation Point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7339,7 +7339,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_instruments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="Fetch all instruments for this valuation point.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the instruments. Defaults to returning the latest version of each instrument if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instruments; this              value is returned from the previous call. If a pagination token is provided, the filter,              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, instrument_property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument' domain to decorate onto              instruments, or from any domain that supports relationships to decorate onto related entities.              These must have the format {domain}/{scope}/{code}, for example 'Instrument/system/Name'.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointInstruments: List Instruments inside a valuation point  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point  # noqa: E501
 
         Lists the Instruments linked to Transactions within a Valuation Point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7525,7 +7525,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_overview(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Valuation Points. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Valuation Points. Defaults to returning the latest version of each Valuation Point if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfValuationPointOverview, Awaitable[PagedResourceListOfValuationPointOverview]]:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
 
         List the overview of all the Valuation Points that match the given criteria for a given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7572,7 +7572,7 @@ class FundsApi:
 
     @validate_arguments
     def list_valuation_point_overview_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties for the Valuation Points. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Valuation Points. Defaults to returning the latest version of each Valuation Point if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Valuation Points; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results by.              For example, to filter on the NAV, specify \"NAV gt 300\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'DiaryEntry' domain to decorate onto each ValuationPoint.              These must take the format {domain}/{scope}/{code}, for example 'DiaryEntry/ValuationPoint/Id'.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
+        """[EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.  # noqa: E501
 
         List the overview of all the Valuation Points that match the given criteria for a given Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7745,7 +7745,7 @@ class FundsApi:
 
     @validate_arguments
     def patch_fee(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fee, Awaitable[Fee]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchFee: Patch Fee.  # noqa: E501
+        """[EARLY ACCESS] PatchFee: Patch Fee.  # noqa: E501
 
         Create or update certain fields for a particular Fee.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: EndDate, ShareClasses.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7782,7 +7782,7 @@ class FundsApi:
 
     @validate_arguments
     def patch_fee_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchFee: Patch Fee.  # noqa: E501
+        """[EARLY ACCESS] PatchFee: Patch Fee.  # noqa: E501
 
         Create or update certain fields for a particular Fee.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: EndDate, ShareClasses.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7928,7 +7928,7 @@ class FundsApi:
 
     @validate_arguments
     def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] PatchFund: Patch a Fund.  # noqa: E501
+        """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
         Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7963,7 +7963,7 @@ class FundsApi:
 
     @validate_arguments
     def patch_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] PatchFund: Patch a Fund.  # noqa: E501
+        """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
         Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8330,7 +8330,7 @@ class FundsApi:
 
     @validate_arguments
     def query_cash_statement_local_currency(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], query_fund_cash_statement_parameters : Annotated[QueryFundCashStatementParameters, Field(description="The query parameters specifying the diary entry period and display mode.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to get the next page of results.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys to decorate onto the cash statement rows.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The code of the NAV type to use. Defaults to the primary NAV type if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfFundCashStatementLocalCurrency, Awaitable[ValuationPointResourceListOfFundCashStatementLocalCurrency]]:  # noqa: E501
-        """[EXPERIMENTAL] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.  # noqa: E501
+        """[EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.  # noqa: E501
 
         Returns settled cash movements with a running balance in local currency for the specified Fund  valuation point period. The cash statement is derived from Journal Entry Lines filtered to  settled cash (HoldType='B', SourceType=LusidTransaction). Use the DisplayMode parameter on the  request body to choose between ShowReversal (full reversal/TrueUp detail) and Consolidated  (collapses system-generated zero-net reversal/TrueUp pairs into SystemCorrection rows). Base  currency columns are out of scope for this variant and are not returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8377,7 +8377,7 @@ class FundsApi:
 
     @validate_arguments
     def query_cash_statement_local_currency_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], query_fund_cash_statement_parameters : Annotated[QueryFundCashStatementParameters, Field(description="The query parameters specifying the diary entry period and display mode.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the cash statement. Defaults to the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to get the next page of results.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys to decorate onto the cash statement rows.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The code of the NAV type to use. Defaults to the primary NAV type if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.  # noqa: E501
+        """[EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.  # noqa: E501
 
         Returns settled cash movements with a running balance in local currency for the specified Fund  valuation point period. The cash statement is derived from Journal Entry Lines filtered to  settled cash (HoldType='B', SourceType=LusidTransaction). Use the DisplayMode parameter on the  request body to choose between ShowReversal (full reversal/TrueUp detail) and Consolidated  (collapses system-generated zero-net reversal/TrueUp pairs into SystemCorrection rows). Base  currency columns are out of scope for this variant and are not returned.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8557,7 +8557,7 @@ class FundsApi:
 
     @validate_arguments
     def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
+        """[EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
         Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8594,7 +8594,7 @@ class FundsApi:
 
     @validate_arguments
     def revert_valuation_point_to_estimate_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
+        """[EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
         Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8740,7 +8740,7 @@ class FundsApi:
 
     @validate_arguments
     def set_share_class_instruments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], set_share_class_instruments_request : Annotated[SetShareClassInstrumentsRequest, Field(description="The scopes and instrument identifiers for the instruments to be set.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
-        """[EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.  # noqa: E501
+        """[EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.  # noqa: E501
 
         Update the ShareClass Instruments on an existing Fund with the set of instruments provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8775,7 +8775,7 @@ class FundsApi:
 
     @validate_arguments
     def set_share_class_instruments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], set_share_class_instruments_request : Annotated[SetShareClassInstrumentsRequest, Field(description="The scopes and instrument identifiers for the instruments to be set.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.  # noqa: E501
+        """[EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.  # noqa: E501
 
         Update the ShareClass Instruments on an existing Fund with the set of instruments provided.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8915,7 +8915,7 @@ class FundsApi:
 
     @validate_arguments
     def update_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPoint, Awaitable[ValuationPoint]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
 
         Updates an existing Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8952,7 +8952,7 @@ class FundsApi:
 
     @validate_arguments
     def update_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
 
         Updates an existing Valuation Point.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9099,7 +9099,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_bookmark(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_fund_bookmark_request : Annotated[UpsertFundBookmarkRequest, Field(description="The bookmark definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundCalendarEntry, Awaitable[FundCalendarEntry]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.  # noqa: E501
+        """[EARLY ACCESS] UpsertBookmark: Upsert a bookmark.  # noqa: E501
 
         This method will update or upsert a Bookmark for the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9136,7 +9136,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_bookmark_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_fund_bookmark_request : Annotated[UpsertFundBookmarkRequest, Field(description="The bookmark definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertBookmark: Upsert a bookmark.  # noqa: E501
+        """[EARLY ACCESS] UpsertBookmark: Upsert a bookmark.  # noqa: E501
 
         This method will update or upsert a Bookmark for the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9282,7 +9282,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_diary_entry_type_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DiaryEntry, Awaitable[DiaryEntry]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
         Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9319,7 +9319,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_diary_entry_type_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], upsert_valuation_point_request : Annotated[UpsertValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
+        """[EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.  # noqa: E501
 
         Insert the estimate Valuation Point.                If the Valuation Point does not exist, this method will create it in estimate state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9465,7 +9465,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_fee_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FeeProperties, Awaitable[FeeProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.  # noqa: E501
+        """[EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.  # noqa: E501
 
         Update or insert one or more properties onto a single Fee. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fee'.                Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9502,7 +9502,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_fee_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], fee_code : Annotated[StrictStr, Field(..., description="The code of the Fee to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fee. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fee/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFeeProperties: Upsert Fee properties.  # noqa: E501
+        """[EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.  # noqa: E501
 
         Update or insert one or more properties onto a single Fee. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fee'.                Upserting a property that exists for an Fee, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9648,7 +9648,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_fund_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundProperties, Awaitable[FundProperties]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.  # noqa: E501
+        """[EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.  # noqa: E501
 
         Update or insert one or more properties onto a single Fund. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fund'.                Upserting a property that exists for an Fund, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9683,7 +9683,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_fund_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Fund. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code} e.g. \"Fund/Manager/Id\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundProperties: Upsert Fund properties.  # noqa: E501
+        """[EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.  # noqa: E501
 
         Update or insert one or more properties onto a single Fund. A property will be updated if it  already exists and inserted if it does not. All properties must be of the domain 'Fund'.                Upserting a property that exists for an Fund, with a null value, will delete the instance of the property for that group.                Properties have an <i>effectiveFrom</i> datetime for which the property is valid, and an <i>effectiveUntil</i>  datetime until which the property is valid. Not supplying an <i>effectiveUntil</i> datetime results in the property being  valid indefinitely, or until the next <i>effectiveFrom</i> datetime of the property.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9823,7 +9823,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_nav_activity_adjustments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to apply the adjustment to")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to apply to a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[datetime, Awaitable[datetime]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point  # noqa: E501
+        """[EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point  # noqa: E501
 
         Upserts the NAV adjustment activities to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -9864,7 +9864,7 @@ class FundsApi:
 
     @validate_arguments
     def upsert_nav_activity_adjustments_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope is the unique identifier for the given Fund.")], valuation_point_code : Annotated[StrictStr, Field(..., description="The valuation point Code to apply the adjustment to")], nav_activity_adjustment : Annotated[List[NavActivityAdjustment], Field(description="The request describing the Nav activity adjustments to apply to a specific valuation point and nav type")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, valuation_point_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point  # noqa: E501
+        """[EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point  # noqa: E501
 
         Upserts the NAV adjustment activities to the specified valuation point for a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
