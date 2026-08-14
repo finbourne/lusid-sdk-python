@@ -1037,6 +1037,7 @@ from lusid.models.payment_details_applicable_entity import PaymentDetailsApplica
 from lusid.models.payment_details_reference import PaymentDetailsReference
 from lusid.models.payment_details_reference_response import PaymentDetailsReferenceResponse
 from lusid.models.payment_details_series_identifiers import PaymentDetailsSeriesIdentifiers
+from lusid.models.payment_in_kind_event import PaymentInKindEvent
 from lusid.models.payment_instruction import PaymentInstruction
 from lusid.models.payment_instruction_request import PaymentInstructionRequest
 from lusid.models.payment_instruction_status import PaymentInstructionStatus
@@ -2728,6 +2729,7 @@ __all__ = [
     "PaymentDetailsReference",
     "PaymentDetailsReferenceResponse",
     "PaymentDetailsSeriesIdentifiers",
+    "PaymentInKindEvent",
     "PaymentInstruction",
     "PaymentInstructionRequest",
     "PaymentInstructionStatus",

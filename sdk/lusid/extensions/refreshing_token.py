@@ -5,6 +5,7 @@ import time
 
 from datetime import datetime
 from datetime import timedelta
+from datetime import timezone
 from collections import UserString
 from urllib.parse import quote
 import logging
@@ -68,7 +69,7 @@ class RefreshingToken(UserString):
         delta = timedelta(
             seconds=id_provider_json.get("expires_in", 3600) - self.expiry_offset
         )
-        self.token_data["expires"] = datetime.utcnow() + delta
+        self.token_data["expires"] = datetime.now(timezone.utc) + delta
         self.token_data["refresh_token"] = id_provider_json["refresh_token"]
 
     def get_access_token(self):
@@ -144,7 +145,7 @@ class RefreshingToken(UserString):
             return self.get_access_token()
 
         # check if the token has expired and refresh if needed
-        if self.token_data["expires"] <= datetime.utcnow():
+        if self.token_data["expires"] <= datetime.now(timezone.utc):
             encoded_client = base64.b64encode(
                 bytes(f"{self.client_id}:{self.client_secret}", "utf-8")
             )
@@ -223,8 +224,8 @@ class RefreshingToken(UserString):
                 wait_time = int(
                     datetime.strptime(
                         retry_value, "%a, %d %b %Y %H:%M:%S GMT"
-                    ).timestamp()
-                    - datetime.utcnow().timestamp()
+                    ).replace(tzinfo=timezone.utc).timestamp()
+                    - datetime.now(timezone.utc).timestamp()
                 )
                 if wait_time <= 0:  # Won't wait for a negative period
                     return
