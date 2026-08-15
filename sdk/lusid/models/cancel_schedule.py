@@ -32,7 +32,7 @@ class CancelSchedule(Schedule):
     cancel_dates: List[datetime] = Field(description="The dates on which cancellation may be elected.", alias="cancelDates")
     cancel_type:  StrictStr = Field(...,alias="cancelType", description="The type of cancellation option: European (single cancel date) or Bermudan (two or more).                Supported string (enumeration) values are: [European, Bermudan]. Available values: European, Bermudan.") 
     notice_convention: NoticeConvention = Field(alias="noticeConvention")
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "cancelDates", "cancelType", "noticeConvention"]
 
@@ -105,8 +105,8 @@ class CancelSchedule(Schedule):
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule')")
         return value
 
     class Config:

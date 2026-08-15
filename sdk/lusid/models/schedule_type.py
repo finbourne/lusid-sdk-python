@@ -40,6 +40,7 @@ class ScheduleType(str, Enum):
     FXLINKEDNOTIONALSCHEDULE = 'FxLinkedNotionalSchedule'
     BONDCONVERSIONSCHEDULE = 'BondConversionSchedule'
     PIKSCHEDULE = 'PikSchedule'
+    COMMODITYCALENDARSCHEDULE = 'CommodityCalendarSchedule'
     INVALID = 'Invalid'
     CANCELSCHEDULE = 'CancelSchedule'
 

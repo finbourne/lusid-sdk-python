@@ -51,7 +51,7 @@ class FloatSchedule(Schedule):
     cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum floating rate which a cashflow can accrue.", alias="capRate")
     floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The minimum floating rate which a cashflow can accrue.", alias="floorRate")
     schedule_id:  Optional[StrictStr] = Field(None,alias="scheduleId", description="Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.") 
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate", "scheduleId"]
 
@@ -124,8 +124,8 @@ class FloatSchedule(Schedule):
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule')")
         return value
 
     class Config:

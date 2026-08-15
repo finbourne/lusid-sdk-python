@@ -14,7 +14,12 @@ Name | Type | Description | Notes
 **delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying.                Defaults to 0. | [optional] 
 **business_day_convention** | **str** | Business day convention for option exercise date to settlement date calculation.  Default value: F. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid. | [optional] 
 **settlement_calendars** | **List[str]** | Holiday calendars for option exercise date to settlement date calculation. | [optional] 
-**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption. | 
+**dom_ccy** | **str** | The currency the option settles in.                If not specified, the currency of the underlying swap is used. When specified it must be one of  the currencies of the underlying swap. | [optional] 
+**exercise_date** | **datetime** | The date the option expires, and for European exercise the date it is exercised.                If not specified, the start date of the underlying swap is used. | [optional] 
+**exercise_type** | **str** | Type of optionality that is present; European, American.                Supported string (enumeration) values are: [European, American].  Defaults to \&quot;European\&quot; if not set.                A European option is exercised on its exercise date, so its exercise event is generated with  that date already set. An American option may be exercised at any point in its life, so it  carries no scheduled date and the exercise date is supplied on the exercise event instead.                The swap delivered on exercise keeps the start date it was defined with, so exercising early  or late leaves it aged or forward-starting relative to the exercise. Keeping that swap  correct for the intended exercise is the responsibility of whoever defines it. | [optional] 
+**strike** | **float** | The rate the option strikes against.                May only be specified when the underlying swap has no single fixed leg, as otherwise that leg&#39;s  fixed rate is the strike. It must be specified when the underlying swap has two fixed legs, as  there is then no single rate to strike against. | [optional] 
+**trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap. | 
 ## Example
 
 ```python
@@ -35,8 +40,13 @@ delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
 settlement_calendars: Optional[List[StrictStr]] = # Replace with your value
+dom_ccy: Optional[StrictStr] = "example_dom_ccy"
+exercise_date: Optional[datetime] = # Replace with your value
+exercise_type: Optional[StrictStr] = "example_exercise_type"
+strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, time_zone_conventions=time_zone_conventions, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, instrument_type=instrument_type)
+interest_rate_swaption_instance = InterestRateSwaption(start_date=start_date, pay_or_receive_fixed=pay_or_receive_fixed, premium=premium, delivery_method=delivery_method, swap=swap, time_zone_conventions=time_zone_conventions, underlying=underlying, delivery_days=delivery_days, business_day_convention=business_day_convention, settlement_calendars=settlement_calendars, dom_ccy=dom_ccy, exercise_date=exercise_date, exercise_type=exercise_type, strike=strike, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
 ```
 

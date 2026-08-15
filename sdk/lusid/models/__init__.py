@@ -203,6 +203,7 @@ from lusid.models.cds_credit_event import CdsCreditEvent
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_index import CdsIndex
 from lusid.models.cds_model_options import CdsModelOptions
+from lusid.models.cds_option import CdsOption
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
@@ -233,8 +234,11 @@ from lusid.models.close_period_diary_entry_request import ClosePeriodDiaryEntryR
 from lusid.models.closed_period import ClosedPeriod
 from lusid.models.collateral import Collateral
 from lusid.models.collateral_instrument import CollateralInstrument
+from lusid.models.commodity_calendar_schedule import CommodityCalendarSchedule
+from lusid.models.commodity_calendar_swap import CommodityCalendarSwap
 from lusid.models.commodity_forward import CommodityForward
 from lusid.models.commodity_forward_cash_settlement_event import CommodityForwardCashSettlementEvent
+from lusid.models.commodity_forward_physical_settlement_event import CommodityForwardPhysicalSettlementEvent
 from lusid.models.comparison_attribute_value_pair import ComparisonAttributeValuePair
 from lusid.models.complete_portfolio import CompletePortfolio
 from lusid.models.complete_relation import CompleteRelation
@@ -1794,6 +1798,7 @@ __all__ = [
     "CdsFlowConventions",
     "CdsIndex",
     "CdsModelOptions",
+    "CdsOption",
     "CdsProtectionDetailSpecification",
     "CdxCreditEvent",
     "Change",
@@ -1824,8 +1829,11 @@ __all__ = [
     "ClosedPeriod",
     "Collateral",
     "CollateralInstrument",
+    "CommodityCalendarSchedule",
+    "CommodityCalendarSwap",
     "CommodityForward",
     "CommodityForwardCashSettlementEvent",
+    "CommodityForwardPhysicalSettlementEvent",
     "ComparisonAttributeValuePair",
     "CompletePortfolio",
     "CompleteRelation",

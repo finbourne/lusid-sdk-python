@@ -28,7 +28,7 @@ class Schedule(BaseModel):
     """
     Base class for representing schedules in LUSID.  This base class should not be directly instantiated; each supported ScheduleType has a corresponding inherited class.  # noqa: E501
     """
-    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule.") 
+    schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.") 
     __properties = ["scheduleType"]
 
     @validator('schedule_type')
@@ -100,8 +100,8 @@ class Schedule(BaseModel):
         if "schedule_type" != "type":
             return value
 
-        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule']:
-            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'Invalid', 'CancelSchedule')")
+        if value not in ['FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule']:
+            raise ValueError("must be one of enum values ('FixedSchedule', 'FloatSchedule', 'OptionalitySchedule', 'StepSchedule', 'Exercise', 'FxRateSchedule', 'FxLinkedNotionalSchedule', 'BondConversionSchedule', 'PikSchedule', 'CommodityCalendarSchedule', 'Invalid', 'CancelSchedule')")
         return value
 
     class Config:
@@ -116,6 +116,7 @@ class Schedule(BaseModel):
     __discriminator_value_class_map = {
         'BondConversionSchedule': 'BondConversionSchedule',
         'CancelSchedule': 'CancelSchedule',
+        'CommodityCalendarSchedule': 'CommodityCalendarSchedule',
         'FixedSchedule': 'FixedSchedule',
         'FloatSchedule': 'FloatSchedule',
         'FxLinkedNotionalSchedule': 'FxLinkedNotionalSchedule',
@@ -151,7 +152,7 @@ class Schedule(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(BondConversionSchedule, CancelSchedule, FixedSchedule, FloatSchedule, FxLinkedNotionalSchedule, FxRateSchedule, OptionalitySchedule, PikSchedule, StepSchedule):
+    def from_json(cls, json_str: str) -> Union(BondConversionSchedule, CancelSchedule, CommodityCalendarSchedule, FixedSchedule, FloatSchedule, FxLinkedNotionalSchedule, FxRateSchedule, OptionalitySchedule, PikSchedule, StepSchedule):
         """Create an instance of Schedule from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -164,7 +165,7 @@ class Schedule(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(BondConversionSchedule, CancelSchedule, FixedSchedule, FloatSchedule, FxLinkedNotionalSchedule, FxRateSchedule, OptionalitySchedule, PikSchedule, StepSchedule):
+    def from_dict(cls, obj: dict) -> Union(BondConversionSchedule, CancelSchedule, CommodityCalendarSchedule, FixedSchedule, FloatSchedule, FxLinkedNotionalSchedule, FxRateSchedule, OptionalitySchedule, PikSchedule, StepSchedule):
         """Create an instance of Schedule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

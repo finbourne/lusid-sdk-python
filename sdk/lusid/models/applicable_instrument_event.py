@@ -48,7 +48,9 @@ class ApplicableInstrumentEvent(BaseModel):
     transaction_diagnostics: Optional[TransactionDiagnostics] = Field(default=None, alias="transactionDiagnostics")
     applied_instrument_event_instruction: Optional[InstrumentEventInstruction] = Field(default=None, alias="appliedInstrumentEventInstruction")
     eligible_balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="eligibleBalance")
-    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics", "appliedInstrumentEventInstruction", "eligibleBalance"]
+    instrument_event_status:  Optional[StrictStr] = Field(None,alias="instrumentEventStatus", description="Available values: Active, ActiveReversal, ActiveTrueUp.") 
+    accounting_date: Optional[datetime] = Field(default=None, alias="accountingDate")
+    __properties = ["portfolioId", "holdingId", "lusidInstrumentId", "instrumentScope", "instrumentType", "instrumentEventType", "instrumentEventId", "generatedEvent", "generatedEventDiagnostics", "loadedEvent", "appliedInstrumentEventInstructionId", "transactions", "transactionDiagnostics", "appliedInstrumentEventInstruction", "eligibleBalance", "instrumentEventStatus", "accountingDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -122,6 +124,16 @@ class ApplicableInstrumentEvent(BaseModel):
         if self.eligible_balance is None and "eligible_balance" in self.__fields_set__:
             _dict['eligibleBalance'] = None
 
+        # set to None if instrument_event_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_event_status is None and "instrument_event_status" in self.__fields_set__:
+            _dict['instrumentEventStatus'] = None
+
+        # set to None if accounting_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accounting_date is None and "accounting_date" in self.__fields_set__:
+            _dict['accountingDate'] = None
+
         return _dict
 
     @classmethod
@@ -148,7 +160,9 @@ class ApplicableInstrumentEvent(BaseModel):
             "transactions": [Transaction.from_dict(_item) for _item in obj.get("transactions")] if obj.get("transactions") is not None else None,
             "transaction_diagnostics": TransactionDiagnostics.from_dict(obj.get("transactionDiagnostics")) if obj.get("transactionDiagnostics") is not None else None,
             "applied_instrument_event_instruction": InstrumentEventInstruction.from_dict(obj.get("appliedInstrumentEventInstruction")) if obj.get("appliedInstrumentEventInstruction") is not None else None,
-            "eligible_balance": obj.get("eligibleBalance")
+            "eligible_balance": obj.get("eligibleBalance"),
+            "instrument_event_status": obj.get("instrumentEventStatus"),
+            "accounting_date": obj.get("accountingDate")
         })
         return _obj
 

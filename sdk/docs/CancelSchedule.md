@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **cancel_dates** | **List[datetime]** | The dates on which cancellation may be elected. | 
 **cancel_type** | **str** | The type of cancellation option: European (single cancel date) or Bermudan (two or more).                Supported string (enumeration) values are: [European, Bermudan]. Available values: European, Bermudan. | 
 **notice_convention** | [**NoticeConvention**](NoticeConvention.md) |  | 
-**schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, Invalid, CancelSchedule. | 
+**schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule. | 
 ## Example
 
 ```python

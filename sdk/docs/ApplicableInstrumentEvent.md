@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **transaction_diagnostics** | [**TransactionDiagnostics**](TransactionDiagnostics.md) |  | [optional] 
 **applied_instrument_event_instruction** | [**InstrumentEventInstruction**](InstrumentEventInstruction.md) |  | [optional] 
 **eligible_balance** | **float** |  | [optional] 
+**instrument_event_status** | **str** | Available values: Active, ActiveReversal, ActiveTrueUp. | [optional] 
+**accounting_date** | **datetime** |  | [optional] 
 ## Example
 
 ```python
@@ -43,7 +45,9 @@ transactions: Optional[List[Transaction]] = None
 transaction_diagnostics: Optional[TransactionDiagnostics] = # Replace with your value
 applied_instrument_event_instruction: Optional[InstrumentEventInstruction] = # Replace with your value
 eligible_balance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-applicable_instrument_event_instance = ApplicableInstrumentEvent(portfolio_id=portfolio_id, holding_id=holding_id, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, instrument_type=instrument_type, instrument_event_type=instrument_event_type, instrument_event_id=instrument_event_id, generated_event=generated_event, generated_event_diagnostics=generated_event_diagnostics, loaded_event=loaded_event, applied_instrument_event_instruction_id=applied_instrument_event_instruction_id, transactions=transactions, transaction_diagnostics=transaction_diagnostics, applied_instrument_event_instruction=applied_instrument_event_instruction, eligible_balance=eligible_balance)
+instrument_event_status: Optional[StrictStr] = "example_instrument_event_status"
+accounting_date: Optional[datetime] = # Replace with your value
+applicable_instrument_event_instance = ApplicableInstrumentEvent(portfolio_id=portfolio_id, holding_id=holding_id, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, instrument_type=instrument_type, instrument_event_type=instrument_event_type, instrument_event_id=instrument_event_id, generated_event=generated_event, generated_event_diagnostics=generated_event_diagnostics, loaded_event=loaded_event, applied_instrument_event_instruction_id=applied_instrument_event_instruction_id, transactions=transactions, transaction_diagnostics=transaction_diagnostics, applied_instrument_event_instruction=applied_instrument_event_instruction, eligible_balance=eligible_balance, instrument_event_status=instrument_event_status, accounting_date=accounting_date)
 
 ```
 
