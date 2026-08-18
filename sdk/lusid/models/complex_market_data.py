@@ -28,7 +28,7 @@ class ComplexMarketData(BaseModel):
     """
     Base class for representing complex market data in LUSID.  Generally speaking, market data is complex when it cannot be represented as a single quote.  Examples include discounting curves, projection curves, and volatility surfaces, which are used to compute instrument analytics.  This base class should not be directly instantiated; each supported MarketDataType has a corresponding inherited class.  # noqa: E501
     """
-    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface.") 
+    market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.") 
     __properties = ["marketDataType"]
 
     @validator('market_data_type')
@@ -100,8 +100,8 @@ class ComplexMarketData(BaseModel):
         if "market_data_type" != "type":
             return value
 
-        if value not in ['DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface']:
-            raise ValueError("must be one of enum values ('DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface')")
+        if value not in ['DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface', 'InflationCurveData']:
+            raise ValueError("must be one of enum values ('DiscountFactorCurveData', 'EquityVolSurfaceData', 'FxVolSurfaceData', 'IrVolCubeData', 'OpaqueMarketData', 'YieldCurveData', 'FxForwardCurveData', 'FxForwardPipsCurveData', 'FxForwardTenorCurveData', 'FxForwardTenorPipsCurveData', 'FxForwardCurveByQuoteReference', 'CreditSpreadCurveData', 'EquityCurveByPricesData', 'ConstantVolatilitySurface', 'InflationCurveData')")
         return value
 
     class Config:
@@ -125,6 +125,7 @@ class ComplexMarketData(BaseModel):
         'FxForwardTenorCurveData': 'FxForwardTenorCurveData',
         'FxForwardTenorPipsCurveData': 'FxForwardTenorPipsCurveData',
         'FxVolSurfaceData': 'FxVolSurfaceData',
+        'InflationCurveData': 'InflationCurveData',
         'IrVolCubeData': 'IrVolCubeData',
         'OpaqueMarketData': 'OpaqueMarketData',
         'YieldCurveData': 'YieldCurveData'
@@ -156,7 +157,7 @@ class ComplexMarketData(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(ConstantVolatilitySurface, CreditSpreadCurveData, DiscountFactorCurveData, EquityCurveByPricesData, EquityVolSurfaceData, FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData):
+    def from_json(cls, json_str: str) -> Union(ConstantVolatilitySurface, CreditSpreadCurveData, DiscountFactorCurveData, EquityCurveByPricesData, EquityVolSurfaceData, FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxVolSurfaceData, InflationCurveData, IrVolCubeData, OpaqueMarketData, YieldCurveData):
         """Create an instance of ComplexMarketData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -169,7 +170,7 @@ class ComplexMarketData(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(ConstantVolatilitySurface, CreditSpreadCurveData, DiscountFactorCurveData, EquityCurveByPricesData, EquityVolSurfaceData, FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData):
+    def from_dict(cls, obj: dict) -> Union(ConstantVolatilitySurface, CreditSpreadCurveData, DiscountFactorCurveData, EquityCurveByPricesData, EquityVolSurfaceData, FxForwardCurveByQuoteReference, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxVolSurfaceData, InflationCurveData, IrVolCubeData, OpaqueMarketData, YieldCurveData):
         """Create an instance of ComplexMarketData from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

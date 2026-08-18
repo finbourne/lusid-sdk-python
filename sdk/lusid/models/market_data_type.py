@@ -45,6 +45,7 @@ class MarketDataType(str, Enum):
     CREDITSPREADCURVEDATA = 'CreditSpreadCurveData'
     EQUITYCURVEBYPRICESDATA = 'EquityCurveByPricesData'
     CONSTANTVOLATILITYSURFACE = 'ConstantVolatilitySurface'
+    INFLATIONCURVEDATA = 'InflationCurveData'
 
     @classmethod
     def from_json(cls, json_str: str) -> MarketDataType:

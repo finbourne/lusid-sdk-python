@@ -1404,6 +1404,7 @@ Class | Method | HTTP request | Description
  - [IndexModelOptions](docs/IndexModelOptions.md)
  - [IndexProjectionDependency](docs/IndexProjectionDependency.md)
  - [IndustryClassifier](docs/IndustryClassifier.md)
+ - [InflationCurveData](docs/InflationCurveData.md)
  - [InflationFixingDependency](docs/InflationFixingDependency.md)
  - [InflationIndexConventions](docs/InflationIndexConventions.md)
  - [InflationLeg](docs/InflationLeg.md)

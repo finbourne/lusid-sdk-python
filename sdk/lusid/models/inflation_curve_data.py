@@ -23,24 +23,26 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.complex_market_data import ComplexMarketData
+from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.market_data_options import MarketDataOptions
+from lusid.models.market_quote import MarketQuote
 from lusid.models.version import Version
 
-class FxForwardPipsCurveData(ComplexMarketData):
+class InflationCurveData(ComplexMarketData):
     """
-    Contains data (i.e. dates and pips + metadata) for building fx forward curves (when combined with a spot rate to build on)  # noqa: E501
+    Market data for an inflation curve, represented by a list of zero-coupon inflation swap  instruments and corresponding market quotes.  # noqa: E501
     """
-    base_date: datetime = Field(description="EffectiveAt date of the quoted pip rates", alias="baseDate")
-    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
-    fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
-    dates: List[datetime] = Field(description="Dates for which the forward rates apply")
-    pip_rates: List[Union[StrictFloat, StrictInt]] = Field(description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips", alias="pipRates")
+    build_date: datetime = Field(description="Build date of the curve - this is the reference date for resolution of the swap constituents.", alias="buildDate")
+    instruments: List[LusidInstrument] = Field(description="The set of instruments that define the curve.  The only supported instrument type is: [InflationSwap].")
+    quotes: List[MarketQuote] = Field(description="The market quotes corresponding to the the instruments used to define the curve")
+    seasonal_factors: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="Optional multiplicative seasonal adjustment factors, one per calendar month starting from January.  If provided there must be exactly 12 factors.", alias="seasonalFactors")
+    output_type:  Optional[StrictStr] = Field(None,alias="outputType", description="What the values of the built curve represent.  Supported string (enumeration) values are: [Level, Ratio].  Defaults to \"Level\" if not provided.") 
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "dates", "pipRates", "lineage", "marketDataOptions", "version"]
+    __properties = ["marketDataType", "buildDate", "instruments", "quotes", "seasonalFactors", "outputType", "lineage", "marketDataOptions", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -53,7 +55,7 @@ class FxForwardPipsCurveData(ComplexMarketData):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'FxForwardPipsCurveData' not in [ 
+        if 'InflationCurveData' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -137,8 +139,8 @@ class FxForwardPipsCurveData(ComplexMarketData):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FxForwardPipsCurveData:
-        """Create an instance of FxForwardPipsCurveData from a JSON string"""
+    def from_json(cls, json_str: str) -> InflationCurveData:
+        """Create an instance of InflationCurveData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -148,6 +150,20 @@ class FxForwardPipsCurveData(ComplexMarketData):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in instruments (list)
+        _items = []
+        if self.instruments:
+            for _item in self.instruments:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['instruments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in quotes (list)
+        _items = []
+        if self.quotes:
+            for _item in self.quotes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['quotes'] = _items
         # override the default output from pydantic by calling `to_dict()` of market_data_options
         if self.market_data_options:
             _dict['marketDataOptions'] = self.market_data_options.to_dict()
@@ -159,6 +175,16 @@ class FxForwardPipsCurveData(ComplexMarketData):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if seasonal_factors (nullable) is None
+        # and __fields_set__ contains the field
+        if self.seasonal_factors is None and "seasonal_factors" in self.__fields_set__:
+            _dict['seasonalFactors'] = None
+
+        # set to None if output_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.output_type is None and "output_type" in self.__fields_set__:
+            _dict['outputType'] = None
+
         # set to None if lineage (nullable) is None
         # and __fields_set__ contains the field
         if self.lineage is None and "lineage" in self.__fields_set__:
@@ -167,21 +193,21 @@ class FxForwardPipsCurveData(ComplexMarketData):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FxForwardPipsCurveData:
-        """Create an instance of FxForwardPipsCurveData from a dict"""
+    def from_dict(cls, obj: dict) -> InflationCurveData:
+        """Create an instance of InflationCurveData from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FxForwardPipsCurveData.parse_obj(obj)
+            return InflationCurveData.parse_obj(obj)
 
-        _obj = FxForwardPipsCurveData.parse_obj({
+        _obj = InflationCurveData.parse_obj({
             "market_data_type": obj.get("marketDataType"),
-            "base_date": obj.get("baseDate"),
-            "dom_ccy": obj.get("domCcy"),
-            "fgn_ccy": obj.get("fgnCcy"),
-            "dates": obj.get("dates"),
-            "pip_rates": obj.get("pipRates"),
+            "build_date": obj.get("buildDate"),
+            "instruments": [LusidInstrument.from_dict(_item) for _item in obj.get("instruments")] if obj.get("instruments") is not None else None,
+            "quotes": [MarketQuote.from_dict(_item) for _item in obj.get("quotes")] if obj.get("quotes") is not None else None,
+            "seasonal_factors": obj.get("seasonalFactors"),
+            "output_type": obj.get("outputType"),
             "lineage": obj.get("lineage"),
             "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
@@ -193,4 +219,4 @@ class FxForwardPipsCurveData(ComplexMarketData):
 
         return _obj
 
-FxForwardPipsCurveData.update_forward_refs()
+InflationCurveData.update_forward_refs()

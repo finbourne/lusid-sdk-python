@@ -750,6 +750,7 @@ from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
 from lusid.models.index_projection_dependency import IndexProjectionDependency
 from lusid.models.industry_classifier import IndustryClassifier
+from lusid.models.inflation_curve_data import InflationCurveData
 from lusid.models.inflation_fixing_dependency import InflationFixingDependency
 from lusid.models.inflation_index_conventions import InflationIndexConventions
 from lusid.models.inflation_leg import InflationLeg
@@ -2448,6 +2449,7 @@ __all__ = [
     "IndexModelOptions",
     "IndexProjectionDependency",
     "IndustryClassifier",
+    "InflationCurveData",
     "InflationFixingDependency",
     "InflationIndexConventions",
     "InflationLeg",
