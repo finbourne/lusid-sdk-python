@@ -5779,30 +5779,28 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
+    async def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, var_date : Annotated[Optional[StrictStr], Field( description="The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.")] = None, diary_entry : Annotated[Optional[StrictStr], Field( description="The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.")] = None, valuation_point_data_query_parameters : Annotated[Optional[ValuationPointDataQueryParameters], Field(description="The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.")] = None, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
+    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, var_date : Annotated[Optional[StrictStr], Field( description="The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.")] = None, diary_entry : Annotated[Optional[StrictStr], Field( description="The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.")] = None, valuation_point_data_query_parameters : Annotated[Optional[ValuationPointDataQueryParameters], Field(description="The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfUnsettledTransaction, Awaitable[ValuationPointResourceListOfUnsettledTransaction]]:  # noqa: E501
+    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, var_date : Annotated[Optional[StrictStr], Field( description="The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.")] = None, diary_entry : Annotated[Optional[StrictStr], Field( description="The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.")] = None, valuation_point_data_query_parameters : Annotated[Optional[ValuationPointDataQueryParameters], Field(description="The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfUnsettledTransaction, Awaitable[ValuationPointResourceListOfUnsettledTransaction]]:  # noqa: E501
         """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
-        Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
+        Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the 'End' parameter in the  request body; when both are supplied the query parameters are used.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_unsettled_transactions(scope, code, valuation_point_data_query_parameters, as_at, limit, page, property_keys, nav_type_code, async_req=True)
+        >>> thread = api.get_valuation_point_unsettled_transactions(scope, code, as_at, limit, page, property_keys, nav_type_code, var_date, diary_entry, valuation_point_data_query_parameters, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_query_parameters: The arguments to use for querying the unsettled transactions. (required)
-        :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param as_at: The asAt datetime at which to retrieve the report. Defaults to latest.
         :type as_at: datetime
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
@@ -5813,6 +5811,12 @@ class FundsApi:
         :type property_keys: List[str]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
+        :param var_date: The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.
+        :type var_date: str
+        :param diary_entry: The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.
+        :type diary_entry: str
+        :param valuation_point_data_query_parameters: The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.
+        :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -5829,25 +5833,23 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_unsettled_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, limit, page, property_keys, nav_type_code, **kwargs)  # noqa: E501
+        return self.get_valuation_point_unsettled_transactions_with_http_info(scope, code, as_at, limit, page, property_keys, nav_type_code, var_date, diary_entry, valuation_point_data_query_parameters, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_unsettled_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_unsettled_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, var_date : Annotated[Optional[StrictStr], Field( description="The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.")] = None, diary_entry : Annotated[Optional[StrictStr], Field( description="The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.")] = None, valuation_point_data_query_parameters : Annotated[Optional[ValuationPointDataQueryParameters], Field(description="The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
-        Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
+        Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the 'End' parameter in the  request body; when both are supplied the query parameters are used.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_unsettled_transactions_with_http_info(scope, code, valuation_point_data_query_parameters, as_at, limit, page, property_keys, nav_type_code, async_req=True)
+        >>> thread = api.get_valuation_point_unsettled_transactions_with_http_info(scope, code, as_at, limit, page, property_keys, nav_type_code, var_date, diary_entry, valuation_point_data_query_parameters, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
         :type scope: str
         :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
         :type code: str
-        :param valuation_point_data_query_parameters: The arguments to use for querying the unsettled transactions. (required)
-        :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param as_at: The asAt datetime at which to retrieve the report. Defaults to latest.
         :type as_at: datetime
         :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
@@ -5858,6 +5860,12 @@ class FundsApi:
         :type property_keys: List[str]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
+        :param var_date: The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry.
+        :type var_date: str
+        :param diary_entry: The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date.
+        :type diary_entry: str
+        :param valuation_point_data_query_parameters: The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters.
+        :type valuation_point_data_query_parameters: ValuationPointDataQueryParameters
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -5887,12 +5895,14 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'valuation_point_data_query_parameters',
             'as_at',
             'limit',
             'page',
             'property_keys',
-            'nav_type_code'
+            'nav_type_code',
+            'var_date',
+            'diary_entry',
+            'valuation_point_data_query_parameters'
         ]
         _all_params.extend(
             [
@@ -5948,6 +5958,12 @@ class FundsApi:
 
         if _params.get('nav_type_code') is not None:  # noqa: E501
             _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('var_date') is not None:  # noqa: E501
+            _query_params.append(('date', _params['var_date']))
+
+        if _params.get('diary_entry') is not None:  # noqa: E501
+            _query_params.append(('diaryEntry', _params['diary_entry']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

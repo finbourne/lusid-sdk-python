@@ -142,6 +142,7 @@ from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_option import BondOption
+from lusid.models.bond_option_termination_event import BondOptionTerminationEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
 from lusid.models.bonus_issue_event import BonusIssueEvent
 from lusid.models.book_transactions_request import BookTransactionsRequest
@@ -176,6 +177,7 @@ from lusid.models.cancel_orders_response import CancelOrdersResponse
 from lusid.models.cancel_placements_response import CancelPlacementsResponse
 from lusid.models.cancel_schedule import CancelSchedule
 from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
+from lusid.models.cancel_swap_event import CancelSwapEvent
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
@@ -1737,6 +1739,7 @@ __all__ = [
     "BondCouponEvent",
     "BondDefaultEvent",
     "BondOption",
+    "BondOptionTerminationEvent",
     "BondPrincipalEvent",
     "BonusIssueEvent",
     "BookTransactionsRequest",
@@ -1771,6 +1774,7 @@ __all__ = [
     "CancelPlacementsResponse",
     "CancelSchedule",
     "CancelSingleHoldingAdjustmentRequest",
+    "CancelSwapEvent",
     "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",

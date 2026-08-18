@@ -3078,11 +3078,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_unsettled_transactions**
-> ValuationPointResourceListOfUnsettledTransaction get_valuation_point_unsettled_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+> ValuationPointResourceListOfUnsettledTransaction get_valuation_point_unsettled_transactions(scope, code, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, var_date=var_date, diary_entry=diary_entry, valuation_point_data_query_parameters=valuation_point_data_query_parameters)
 
 [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
 
-Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  The Valuation Point must be identified either by the date or diaryEntry query parameters or by the 'End' parameter in the  request body; when both are supplied the query parameters are used.
 
 ### Example
 
@@ -3131,24 +3131,26 @@ def main():
     api_instance = api_client_factory.build(FundsApi)
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing from a previous call. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    var_date = 'var_date_example' # str | The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. (optional)
+    diary_entry = 'diary_entry_example' # str | The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. (optional)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
-    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing from a previous call. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions. (optional)
-    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_unsettled_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.get_valuation_point_unsettled_transactions(scope, code, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, var_date=var_date, diary_entry=diary_entry, valuation_point_data_query_parameters=valuation_point_data_query_parameters, opts=opts)
 
         # [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-        api_response = api_instance.get_valuation_point_unsettled_transactions(scope, code, valuation_point_data_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+        api_response = api_instance.get_valuation_point_unsettled_transactions(scope, code, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, var_date=var_date, diary_entry=diary_entry, valuation_point_data_query_parameters=valuation_point_data_query_parameters)
         pprint(api_response)
 
     except ApiException as e:
@@ -3163,12 +3165,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
- **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the unsettled transactions. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the report. Defaults to latest. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing from a previous call. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **var_date** | **str**| The optional date of the Valuation Point to report against, as an alternative to supplying              it in the request body. Must not be supplied together with diaryEntry. | [optional] 
+ **diary_entry** | **str**| The optional diary entry code of the Valuation Point to report against, as an              alternative to supplying it in the request body. Must not be supplied together with date. | [optional] 
+ **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The optional arguments to use for querying the unsettled transactions. Can be              omitted when the Valuation Point is identified by the date or diaryEntry query parameters. | [optional] 
 
 ### Return type
 

@@ -23,19 +23,18 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.subscribe_election import SubscribeElection
 
-class PaymentInKindEvent(InstrumentEvent):
+class CancelSwapEvent(InstrumentEvent):
     """
-    A Payment in Kind (PINK) event recording that a ComplexBond has paid a coupon in kind. Mandatory and  purely informational: it carries no entitlement and generates no cash flow, movements or transactions,  and leaves Units, current face, PV and accrual untouched. The accretion itself stays with the intrinsic  chain driven by the bond's PikSchedule.  # noqa: E501
+    A cancel opportunity on a cancellable InterestRateSwap, generated once per date in the swap's cancel  schedule. The holder submits the SubscribeElection by the NoticeDueDate to cancel  the swap, and the opportunity lapses if no election is made. When the swap is cancelled, the current  period's coupon still settles and the position then closes at zero cost and proceeds.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(default=None, description="The first business day on which the in-kind coupon is not owed to the buying party. Anchors the  lifecycle; must be on or before PaymentDate.", alias="exDate")
-    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the in-kind coupon this marker records.", alias="paymentDate")
-    announcement_date: Optional[datetime] = Field(default=None, description="Date on which the issuer announced the payment in kind. Optional and informational.", alias="announcementDate")
-    record_date: Optional[datetime] = Field(default=None, description="Date on which the holder of record is struck. Optional and informational; when supplied it must fall  on or between ExDate and PaymentDate.", alias="recordDate")
-    currency:  Optional[StrictStr] = Field(None,alias="currency", description="Currency of the coupon that was paid in kind. Optional and informational.") 
+    cancel_date: Optional[datetime] = Field(default=None, description="The date on which the swap terminates if cancellation is elected. Always a date from the swap's cancel  schedule.", alias="cancelDate")
+    notice_due_date: Optional[datetime] = Field(default=None, description="The date by which the election must be made, else the cancel opportunity lapses. Derived from the  CancelDate and the swap's notice convention. Must be <= CancelDate.", alias="noticeDueDate")
+    subscribe_elections: Optional[List[SubscribeElection]] = Field(default=None, description="The elections available on this cancel opportunity: exactly one SubscribeElection, keyed 'Cancel'.  A chosen election cancels the swap. No chosen election means the opportunity lapsed and the swap  continues unchanged.", alias="subscribeElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "announcementDate", "recordDate", "currency"]
+    __properties = ["instrumentEventType", "cancelDate", "noticeDueDate", "subscribeElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -48,7 +47,7 @@ class PaymentInKindEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PaymentInKindEvent' not in [ 
+        if 'CancelSwapEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -132,8 +131,8 @@ class PaymentInKindEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PaymentInKindEvent:
-        """Create an instance of PaymentInKindEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> CancelSwapEvent:
+        """Create an instance of CancelSwapEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -143,44 +142,39 @@ class PaymentInKindEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in subscribe_elections (list)
+        _items = []
+        if self.subscribe_elections:
+            for _item in self.subscribe_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['subscribeElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if announcement_date (nullable) is None
+        # set to None if subscribe_elections (nullable) is None
         # and __fields_set__ contains the field
-        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
-            _dict['announcementDate'] = None
-
-        # set to None if record_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.record_date is None and "record_date" in self.__fields_set__:
-            _dict['recordDate'] = None
-
-        # set to None if currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.currency is None and "currency" in self.__fields_set__:
-            _dict['currency'] = None
+        if self.subscribe_elections is None and "subscribe_elections" in self.__fields_set__:
+            _dict['subscribeElections'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PaymentInKindEvent:
-        """Create an instance of PaymentInKindEvent from a dict"""
+    def from_dict(cls, obj: dict) -> CancelSwapEvent:
+        """Create an instance of CancelSwapEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PaymentInKindEvent.parse_obj(obj)
+            return CancelSwapEvent.parse_obj(obj)
 
-        _obj = PaymentInKindEvent.parse_obj({
+        _obj = CancelSwapEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
-            "announcement_date": obj.get("announcementDate"),
-            "record_date": obj.get("recordDate"),
-            "currency": obj.get("currency")
+            "cancel_date": obj.get("cancelDate"),
+            "notice_due_date": obj.get("noticeDueDate"),
+            "subscribe_elections": [SubscribeElection.from_dict(_item) for _item in obj.get("subscribeElections")] if obj.get("subscribeElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -189,4 +183,4 @@ class PaymentInKindEvent(InstrumentEvent):
 
         return _obj
 
-PaymentInKindEvent.update_forward_refs()
+CancelSwapEvent.update_forward_refs()

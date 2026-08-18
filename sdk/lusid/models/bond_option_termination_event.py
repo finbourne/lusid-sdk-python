@@ -24,18 +24,18 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class PaymentInKindEvent(InstrumentEvent):
+class BondOptionTerminationEvent(InstrumentEvent):
     """
-    A Payment in Kind (PINK) event recording that a ComplexBond has paid a coupon in kind. Mandatory and  purely informational: it carries no entitlement and generates no cash flow, movements or transactions,  and leaves Units, current face, PV and accrual untouched. The accretion itself stays with the intrinsic  chain driven by the bond's PikSchedule.  # noqa: E501
+    Bond option termination — the underlying bond of a BondOption was redeemed early (called), which  terminates the option and settles its residual intrinsic value against the price the underlying was  actually called at. Posted against the option's own instrument by the feed or orchestration layer:  LUSID does not derive it from the underlying's own EarlyRedemptionEvent, because the corporate action  dependency graph is self-keyed by LUID.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(default=None, description="The first business day on which the in-kind coupon is not owed to the buying party. Anchors the  lifecycle; must be on or before PaymentDate.", alias="exDate")
-    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the in-kind coupon this marker records.", alias="paymentDate")
-    announcement_date: Optional[datetime] = Field(default=None, description="Date on which the issuer announced the payment in kind. Optional and informational.", alias="announcementDate")
-    record_date: Optional[datetime] = Field(default=None, description="Date on which the holder of record is struck. Optional and informational; when supplied it must fall  on or between ExDate and PaymentDate.", alias="recordDate")
-    currency:  Optional[StrictStr] = Field(None,alias="currency", description="Currency of the coupon that was paid in kind. Optional and informational.") 
+    termination_date: Optional[datetime] = Field(default=None, description="The date the option terminates, being the effective date of the underlying bond's early redemption.", alias="terminationDate")
+    call_price: Union[StrictFloat, StrictInt] = Field(description="The price the underlying bond was actually redeemed at, as a percentage of par. Must be supplied:  it comes from the underlying's own redemption and cannot be inferred from the option.", alias="callPrice")
+    settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="The currency the residual settlement is paid in, being the option's domestic currency.") 
+    dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the option.") 
+    settlement_amount_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The residual intrinsic value settled per contract. Computed by LUSID from the call price and the  option's strike and contract size, so it is not supplied on the request; zero is a legitimate value  when the option terminates worthless.", alias="settlementAmountPerUnit")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "announcementDate", "recordDate", "currency"]
+    __properties = ["instrumentEventType", "terminationDate", "callPrice", "settlementCurrency", "domCcy", "settlementAmountPerUnit"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -48,7 +48,7 @@ class PaymentInKindEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PaymentInKindEvent' not in [ 
+        if 'BondOptionTerminationEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -132,8 +132,8 @@ class PaymentInKindEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PaymentInKindEvent:
-        """Create an instance of PaymentInKindEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> BondOptionTerminationEvent:
+        """Create an instance of BondOptionTerminationEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -148,39 +148,29 @@ class PaymentInKindEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if announcement_date (nullable) is None
+        # set to None if settlement_amount_per_unit (nullable) is None
         # and __fields_set__ contains the field
-        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
-            _dict['announcementDate'] = None
-
-        # set to None if record_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.record_date is None and "record_date" in self.__fields_set__:
-            _dict['recordDate'] = None
-
-        # set to None if currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.currency is None and "currency" in self.__fields_set__:
-            _dict['currency'] = None
+        if self.settlement_amount_per_unit is None and "settlement_amount_per_unit" in self.__fields_set__:
+            _dict['settlementAmountPerUnit'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PaymentInKindEvent:
-        """Create an instance of PaymentInKindEvent from a dict"""
+    def from_dict(cls, obj: dict) -> BondOptionTerminationEvent:
+        """Create an instance of BondOptionTerminationEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PaymentInKindEvent.parse_obj(obj)
+            return BondOptionTerminationEvent.parse_obj(obj)
 
-        _obj = PaymentInKindEvent.parse_obj({
+        _obj = BondOptionTerminationEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
-            "announcement_date": obj.get("announcementDate"),
-            "record_date": obj.get("recordDate"),
-            "currency": obj.get("currency")
+            "termination_date": obj.get("terminationDate"),
+            "call_price": obj.get("callPrice"),
+            "settlement_currency": obj.get("settlementCurrency"),
+            "dom_ccy": obj.get("domCcy"),
+            "settlement_amount_per_unit": obj.get("settlementAmountPerUnit")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -189,4 +179,4 @@ class PaymentInKindEvent(InstrumentEvent):
 
         return _obj
 
-PaymentInKindEvent.update_forward_refs()
+BondOptionTerminationEvent.update_forward_refs()
