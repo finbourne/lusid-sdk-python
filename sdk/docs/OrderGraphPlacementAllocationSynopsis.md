@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units allocated. | 
+**amount** | **float** | Total monetary value allocated, derived from the quantity and price of each allocation, in the placement&#39;s amount currency. Null where the placement has no amount, or where an allocation cannot be expressed in that currency. | [optional] 
 **details** | [**List[OrderGraphPlacementAllocationDetail]**](OrderGraphPlacementAllocationDetail.md) | Identifiers for each allocation in this placement. | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 details: List[OrderGraphPlacementAllocationDetail] = # Replace with your value
-order_graph_placement_allocation_synopsis_instance = OrderGraphPlacementAllocationSynopsis(quantity=quantity, details=details)
+order_graph_placement_allocation_synopsis_instance = OrderGraphPlacementAllocationSynopsis(quantity=quantity, amount=amount, details=details)
 
 ```
 

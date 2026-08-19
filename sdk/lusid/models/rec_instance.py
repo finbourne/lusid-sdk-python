@@ -27,7 +27,6 @@ from lusid.models.rec_closed_periods import RecClosedPeriods
 from lusid.models.rec_dates_reconciled import RecDatesReconciled
 from lusid.models.rec_instance_id import RecInstanceId
 from lusid.models.rec_run_log_entry import RecRunLogEntry
-from lusid.models.rec_workflow_task import RecWorkflowTask
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -38,7 +37,6 @@ class RecInstance(BaseModel):
     id: RecInstanceId
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
     as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")
-    workflow_task_instantiated: Optional[RecWorkflowTask] = Field(default=None, alias="workflowTaskInstantiated")
     status:  StrictStr = Field(...,alias="status", description="The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked.") 
     as_at_locked: Optional[datetime] = Field(default=None, description="The wall-clock time the lock action was performed. Null when the instance has not been locked.", alias="asAtLocked")
     dates_locked: Optional[RecDatesReconciled] = Field(default=None, alias="datesLocked")
@@ -47,7 +45,7 @@ class RecInstance(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "recDefinitionId", "asAtInstantiated", "workflowTaskInstantiated", "status", "asAtLocked", "datesLocked", "closedPeriods", "runLog", "href", "version", "links"]
+    __properties = ["id", "recDefinitionId", "asAtInstantiated", "status", "asAtLocked", "datesLocked", "closedPeriods", "runLog", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,9 +85,6 @@ class RecInstance(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of rec_definition_id
         if self.rec_definition_id:
             _dict['recDefinitionId'] = self.rec_definition_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workflow_task_instantiated
-        if self.workflow_task_instantiated:
-            _dict['workflowTaskInstantiated'] = self.workflow_task_instantiated.to_dict()
         # override the default output from pydantic by calling `to_dict()` of dates_locked
         if self.dates_locked:
             _dict['datesLocked'] = self.dates_locked.to_dict()
@@ -143,7 +138,6 @@ class RecInstance(BaseModel):
             "id": RecInstanceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,
             "as_at_instantiated": obj.get("asAtInstantiated"),
-            "workflow_task_instantiated": RecWorkflowTask.from_dict(obj.get("workflowTaskInstantiated")) if obj.get("workflowTaskInstantiated") is not None else None,
             "status": obj.get("status"),
             "as_at_locked": obj.get("asAtLocked"),
             "dates_locked": RecDatesReconciled.from_dict(obj.get("datesLocked")) if obj.get("datesLocked") is not None else None,

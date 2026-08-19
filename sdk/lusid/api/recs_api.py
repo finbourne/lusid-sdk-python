@@ -27,16 +27,25 @@ from lusid.models.batch_manage_comment_request import BatchManageCommentRequest
 from lusid.models.batch_manage_comment_response import BatchManageCommentResponse
 from lusid.models.batch_review_rec_result_request import BatchReviewRecResultRequest
 from lusid.models.batch_review_rec_result_response import BatchReviewRecResultResponse
+from lusid.models.create_matching_ruleset_request import CreateMatchingRulesetRequest
+from lusid.models.create_rec_definition_request import CreateRecDefinitionRequest
+from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.instantiate_rec_request import InstantiateRecRequest
+from lusid.models.matching_ruleset import MatchingRuleset
+from lusid.models.paged_resource_list_of_matching_ruleset import PagedResourceListOfMatchingRuleset
+from lusid.models.paged_resource_list_of_rec_definition import PagedResourceListOfRecDefinition
 from lusid.models.paged_resource_list_of_rec_instance import PagedResourceListOfRecInstance
 from lusid.models.paged_resource_list_of_rec_result import PagedResourceListOfRecResult
 from lusid.models.paged_resource_list_of_rec_result_set import PagedResourceListOfRecResultSet
+from lusid.models.rec_definition import RecDefinition
 from lusid.models.rec_instance import RecInstance
 from lusid.models.rec_result import RecResult
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
 from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSetReviewRequest
 from lusid.models.transition_rec_instance_request import TransitionRecInstanceRequest
+from lusid.models.update_matching_ruleset_request import UpdateMatchingRulesetRequest
+from lusid.models.update_rec_definition_request import UpdateRecDefinitionRequest
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -548,6 +557,986 @@ class RecsApi:
 
         return self.api_client.call_api(
             '/api/recs/results/$batchReview', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def create_matching_ruleset(self, create_matching_ruleset_request : Annotated[CreateMatchingRulesetRequest, Field(description="The matching ruleset to create.")], **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def create_matching_ruleset(self, create_matching_ruleset_request : Annotated[CreateMatchingRulesetRequest, Field(description="The matching ruleset to create.")], async_req: Optional[bool]=True, **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_matching_ruleset(self, create_matching_ruleset_request : Annotated[CreateMatchingRulesetRequest, Field(description="The matching ruleset to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[MatchingRuleset, Awaitable[MatchingRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset  # noqa: E501
+
+        Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation's two sides.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_matching_ruleset(create_matching_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_matching_ruleset_request: The matching ruleset to create. (required)
+        :type create_matching_ruleset_request: CreateMatchingRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: MatchingRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_matching_ruleset_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_matching_ruleset_with_http_info(create_matching_ruleset_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_matching_ruleset_with_http_info(self, create_matching_ruleset_request : Annotated[CreateMatchingRulesetRequest, Field(description="The matching ruleset to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset  # noqa: E501
+
+        Create a matching ruleset, describing the core and aggregate rules used to match a reconciliation's two sides.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_matching_ruleset_with_http_info(create_matching_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_matching_ruleset_request: The matching ruleset to create. (required)
+        :type create_matching_ruleset_request: CreateMatchingRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(MatchingRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'create_matching_ruleset_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_matching_ruleset" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_matching_ruleset_request'] is not None:
+            _body_params = _params['create_matching_ruleset_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "MatchingRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/matchingrulesets', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def create_rec_definition(self, create_rec_definition_request : Annotated[CreateRecDefinitionRequest, Field(description="The rec definition to create.")], **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def create_rec_definition(self, create_rec_definition_request : Annotated[CreateRecDefinitionRequest, Field(description="The rec definition to create.")], async_req: Optional[bool]=True, **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def create_rec_definition(self, create_rec_definition_request : Annotated[CreateRecDefinitionRequest, Field(description="The rec definition to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition  # noqa: E501
+
+        Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_rec_definition(create_rec_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_rec_definition_request: The rec definition to create. (required)
+        :type create_rec_definition_request: CreateRecDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: RecDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the create_rec_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.create_rec_definition_with_http_info(create_rec_definition_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def create_rec_definition_with_http_info(self, create_rec_definition_request : Annotated[CreateRecDefinitionRequest, Field(description="The rec definition to create.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition  # noqa: E501
+
+        Create a rec definition, describing the two sides to reconcile and the rules to reconcile them with.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.create_rec_definition_with_http_info(create_rec_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param create_rec_definition_request: The rec definition to create. (required)
+        :type create_rec_definition_request: CreateRecDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(RecDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'create_rec_definition_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_rec_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_rec_definition_request'] is not None:
+            _body_params = _params['create_rec_definition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '201': "RecDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def delete_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset  # noqa: E501
+
+        Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_matching_ruleset(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_matching_ruleset_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_matching_ruleset_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_matching_ruleset_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset  # noqa: E501
+
+        Delete a matching ruleset identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the matching ruleset will no longer exist at any asAt datetime after the asAt datetime of deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_matching_ruleset_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_matching_ruleset" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/matchingrulesets/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def delete_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition  # noqa: E501
+
+        Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_rec_definition(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_rec_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_rec_definition_with_http_info(scope, code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition  # noqa: E501
+
+        Delete a rec definition identified by scope and code. The deletion takes effect from the deletion datetime,  i.e. the rec definition will no longer exist at any asAt datetime after the asAt datetime of deletion.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_rec_definition_with_http_info(scope, code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_rec_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.")] = None, **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def get_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[MatchingRuleset, Awaitable[MatchingRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset  # noqa: E501
+
+        Retrieve a single matching ruleset by scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_matching_ruleset(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: MatchingRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_matching_ruleset_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_matching_ruleset_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_matching_ruleset_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset  # noqa: E501
+
+        Retrieve a single matching ruleset by scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_matching_ruleset_with_http_info(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the matching ruleset. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(MatchingRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_matching_ruleset" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "MatchingRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/matchingrulesets/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] GetRecDefinition: GetRecDefinition  # noqa: E501
+
+        Retrieve a single rec definition by scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_rec_definition(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: RecDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_rec_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_rec_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetRecDefinition: GetRecDefinition  # noqa: E501
+
+        Retrieve a single rec definition by scope and code.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_rec_definition_with_http_info(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(RecDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_rec_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "RecDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions/{scope}/{code}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -1221,6 +2210,382 @@ class RecsApi:
 
         return self.api_client.call_api(
             '/api/recs/instances', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_matching_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfMatchingRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def list_matching_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMatchingRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_matching_rulesets(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMatchingRuleset, Awaitable[PagedResourceListOfMatchingRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets  # noqa: E501
+
+        List matching rulesets, optionally filtered and sorted. Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_matching_rulesets(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfMatchingRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_matching_rulesets_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_matching_rulesets_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_matching_rulesets_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets  # noqa: E501
+
+        List matching rulesets, optionally filtered and sorted. Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_matching_rulesets_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the matching rulesets. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing matching rulesets from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfMatchingRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'page',
+            'sort_by',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_matching_rulesets" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfMatchingRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/matchingrulesets', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRecDefinition, Awaitable[PagedResourceListOfRecDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions  # noqa: E501
+
+        List rec definitions, optionally filtered and sorted. Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_rec_definitions(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfRecDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_rec_definitions_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_rec_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions  # noqa: E501
+
+        List rec definitions, optionally filtered and sorted. Supports pagination.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> result = thread.get()
+
+        :param as_at: The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.
+        :type page: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param limit: When paginating, limit the number of returned results to this many per page.
+        :type limit: int
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfRecDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'as_at',
+            'page',
+            'sort_by',
+            'limit',
+            'filter'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_rec_definitions" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfRecDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -2144,6 +3509,356 @@ class RecsApi:
 
         return self.api_client.call_api(
             '/api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def update_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], update_matching_ruleset_request : Annotated[UpdateMatchingRulesetRequest, Field(description="The updated matching ruleset values.")], **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @overload
+    def update_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], update_matching_ruleset_request : Annotated[UpdateMatchingRulesetRequest, Field(description="The updated matching ruleset values.")], async_req: Optional[bool]=True, **kwargs) -> MatchingRuleset:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_matching_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], update_matching_ruleset_request : Annotated[UpdateMatchingRulesetRequest, Field(description="The updated matching ruleset values.")], async_req: Optional[bool]=None, **kwargs) -> Union[MatchingRuleset, Awaitable[MatchingRuleset]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset  # noqa: E501
+
+        Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_matching_ruleset(scope, code, update_matching_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param update_matching_ruleset_request: The updated matching ruleset values. (required)
+        :type update_matching_ruleset_request: UpdateMatchingRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: MatchingRuleset
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_matching_ruleset_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_matching_ruleset_with_http_info(scope, code, update_matching_ruleset_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_matching_ruleset_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the matching ruleset.")], code : Annotated[StrictStr, Field(..., description="The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset.")], update_matching_ruleset_request : Annotated[UpdateMatchingRulesetRequest, Field(description="The updated matching ruleset values.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset  # noqa: E501
+
+        Overwrite an existing matching ruleset identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_matching_ruleset_with_http_info(scope, code, update_matching_ruleset_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the matching ruleset. (required)
+        :type scope: str
+        :param code: The code of the matching ruleset. Together with the scope this uniquely identifies the matching ruleset. (required)
+        :type code: str
+        :param update_matching_ruleset_request: The updated matching ruleset values. (required)
+        :type update_matching_ruleset_request: UpdateMatchingRulesetRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(MatchingRuleset, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_matching_ruleset_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_matching_ruleset" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_matching_ruleset_request'] is not None:
+            _body_params = _params['update_matching_ruleset_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "MatchingRuleset",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/matchingrulesets/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def update_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @overload
+    def update_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], async_req: Optional[bool]=True, **kwargs) -> RecDefinition:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def update_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
+        """[EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition  # noqa: E501
+
+        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_rec_definition(scope, code, update_rec_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param update_rec_definition_request: The updated rec definition values. (required)
+        :type update_rec_definition_request: UpdateRecDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: RecDefinition
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the update_rec_definition_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.update_rec_definition_with_http_info(scope, code, update_rec_definition_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def update_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition  # noqa: E501
+
+        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.update_rec_definition_with_http_info(scope, code, update_rec_definition_request, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition. (required)
+        :type scope: str
+        :param code: The code of the rec definition. Together with the scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param update_rec_definition_request: The updated rec definition values. (required)
+        :type update_rec_definition_request: UpdateRecDefinitionRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(RecDefinition, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'update_rec_definition_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_rec_definition" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_rec_definition_request'] is not None:
+            _body_params = _params['update_rec_definition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "RecDefinition",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions/{scope}/{code}', 'PUT',
             _path_params,
             _query_params,
             _header_params,

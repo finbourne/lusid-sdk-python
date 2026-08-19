@@ -29,8 +29,9 @@ class OrderGraphPlacementExecutionSynopsis(BaseModel):
     OrderGraphPlacementExecutionSynopsis
     """
     quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units executed.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total monetary value executed, derived from the quantity and price of each execution, in the placement's amount currency. Null where the placement has no amount, or where an execution cannot be expressed in that currency.")
     details: List[OrderGraphPlacementExecutionDetail] = Field(description="Identifiers info for each execution against this placement.")
-    __properties = ["quantity", "details"]
+    __properties = ["quantity", "amount", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +72,11 @@ class OrderGraphPlacementExecutionSynopsis(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['details'] = _items
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
@@ -84,6 +90,7 @@ class OrderGraphPlacementExecutionSynopsis(BaseModel):
 
         _obj = OrderGraphPlacementExecutionSynopsis.parse_obj({
             "quantity": obj.get("quantity"),
+            "amount": obj.get("amount"),
             "details": [OrderGraphPlacementExecutionDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj

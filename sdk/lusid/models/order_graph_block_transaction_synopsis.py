@@ -29,8 +29,9 @@ class OrderGraphBlockTransactionSynopsis(BaseModel):
     OrderGraphBlockTransactionSynopsis
     """
     quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units booked.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total consideration booked, in the block currency.")
     details: List[OrderGraphBlockTransactionDetail] = Field(description="Identifiers for each transaction in this block.")
-    __properties = ["quantity", "details"]
+    __properties = ["quantity", "amount", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +72,11 @@ class OrderGraphBlockTransactionSynopsis(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['details'] = _items
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
@@ -84,6 +90,7 @@ class OrderGraphBlockTransactionSynopsis(BaseModel):
 
         _obj = OrderGraphBlockTransactionSynopsis.parse_obj({
             "quantity": obj.get("quantity"),
+            "amount": obj.get("amount"),
             "details": [OrderGraphBlockTransactionDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj

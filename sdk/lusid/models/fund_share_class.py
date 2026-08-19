@@ -32,16 +32,18 @@ class FundShareClass(LusidInstrument):
     LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund.   A ShareClass can represent a differing investment approach by either Fees,   Income, Currency Risk and Investor type.  # noqa: E501
     """
     short_code:  StrictStr = Field(...,alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".") 
-    fund_share_class_type:  StrictStr = Field(...,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation.") 
-    distribution_payment_type:  StrictStr = Field(...,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax). Available values: Invalid, Gross, Net.") 
-    hedging:  StrictStr = Field(...,alias="hedging", description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of its investment strategy. Available values: Invalid, None, ApplyHedging.") 
+    fund_share_class_type:  Optional[StrictStr] = Field(None,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation.") 
+    distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax). Available values: Invalid, Gross, Net.") 
+    distribution_type:  Optional[StrictStr] = Field(None,alias="distributionType", description="The type of distribution calculated for the ShareClass. Can be either 'Income' or 'Accumulation'. Available values: Income, Accumulation.") 
+    hedging:  Optional[StrictStr] = Field(None,alias="hedging", description="A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of its investment strategy. Available values: Invalid, None, ApplyHedging.") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
     rounding_conventions: Optional[List[SimpleRoundingConvention]] = Field(default=None, description="Rounding Convention used for the FundShareClass quotes", alias="roundingConventions")
+    rounding_convention_units: Optional[List[SimpleRoundingConvention]] = Field(default=None, description="Rounding Conventions used for the FundShareClass units", alias="roundingConventionUnits")
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "shortCode", "fundShareClassType", "distributionPaymentType", "hedging", "domCcy", "roundingConventions", "tradingConventions", "timeZoneConventions"]
+    __properties = ["instrumentType", "shortCode", "fundShareClassType", "distributionPaymentType", "distributionType", "hedging", "domCcy", "roundingConventions", "roundingConventionUnits", "tradingConventions", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -156,6 +158,13 @@ class FundShareClass(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['roundingConventions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in rounding_convention_units (list)
+        _items = []
+        if self.rounding_convention_units:
+            for _item in self.rounding_convention_units:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['roundingConventionUnits'] = _items
         # override the default output from pydantic by calling `to_dict()` of trading_conventions
         if self.trading_conventions:
             _dict['tradingConventions'] = self.trading_conventions.to_dict()
@@ -167,10 +176,35 @@ class FundShareClass(LusidInstrument):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if fund_share_class_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fund_share_class_type is None and "fund_share_class_type" in self.__fields_set__:
+            _dict['fundShareClassType'] = None
+
+        # set to None if distribution_payment_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.distribution_payment_type is None and "distribution_payment_type" in self.__fields_set__:
+            _dict['distributionPaymentType'] = None
+
+        # set to None if distribution_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.distribution_type is None and "distribution_type" in self.__fields_set__:
+            _dict['distributionType'] = None
+
+        # set to None if hedging (nullable) is None
+        # and __fields_set__ contains the field
+        if self.hedging is None and "hedging" in self.__fields_set__:
+            _dict['hedging'] = None
+
         # set to None if rounding_conventions (nullable) is None
         # and __fields_set__ contains the field
         if self.rounding_conventions is None and "rounding_conventions" in self.__fields_set__:
             _dict['roundingConventions'] = None
+
+        # set to None if rounding_convention_units (nullable) is None
+        # and __fields_set__ contains the field
+        if self.rounding_convention_units is None and "rounding_convention_units" in self.__fields_set__:
+            _dict['roundingConventionUnits'] = None
 
         return _dict
 
@@ -188,9 +222,11 @@ class FundShareClass(LusidInstrument):
             "short_code": obj.get("shortCode"),
             "fund_share_class_type": obj.get("fundShareClassType"),
             "distribution_payment_type": obj.get("distributionPaymentType"),
+            "distribution_type": obj.get("distributionType"),
             "hedging": obj.get("hedging"),
             "dom_ccy": obj.get("domCcy"),
             "rounding_conventions": [SimpleRoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
+            "rounding_convention_units": [SimpleRoundingConvention.from_dict(_item) for _item in obj.get("roundingConventionUnits")] if obj.get("roundingConventionUnits") is not None else None,
             "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })

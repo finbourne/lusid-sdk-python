@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units booked. | 
+**amount** | **float** | Total consideration booked, in the block currency. | [optional] 
 **details** | [**List[OrderGraphBlockTransactionDetail]**](OrderGraphBlockTransactionDetail.md) | Identifiers for each transaction in this block. | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 details: List[OrderGraphBlockTransactionDetail] = # Replace with your value
-order_graph_block_transaction_synopsis_instance = OrderGraphBlockTransactionSynopsis(quantity=quantity, details=details)
+order_graph_block_transaction_synopsis_instance = OrderGraphBlockTransactionSynopsis(quantity=quantity, amount=amount, details=details)
 
 ```
 

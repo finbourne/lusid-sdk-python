@@ -555,15 +555,25 @@ Class | Method | HTTP request | Description
 *RecsApi* | [**add_rec_result_set_approval_decision**](docs/RecsApi.md#add_rec_result_set_approval_decision) | **POST** /api/recs/resultsets/{entityUniqueId}/$decide | [EXPERIMENTAL] AddRecResultSetApprovalDecision: AddRecResultSetApprovalDecision
 *RecsApi* | [**batch_manage_rec_result_comments**](docs/RecsApi.md#batch_manage_rec_result_comments) | **POST** /api/recs/results/$batchManageComments | [EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments
 *RecsApi* | [**batch_review_rec_results**](docs/RecsApi.md#batch_review_rec_results) | **POST** /api/recs/results/$batchReview | [EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults
+*RecsApi* | [**create_matching_ruleset**](docs/RecsApi.md#create_matching_ruleset) | **POST** /api/recs/matchingrulesets | [EXPERIMENTAL] CreateMatchingRuleset: CreateMatchingRuleset
+*RecsApi* | [**create_rec_definition**](docs/RecsApi.md#create_rec_definition) | **POST** /api/recs/definitions | [EXPERIMENTAL] CreateRecDefinition: CreateRecDefinition
+*RecsApi* | [**delete_matching_ruleset**](docs/RecsApi.md#delete_matching_ruleset) | **DELETE** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] DeleteMatchingRuleset: DeleteMatchingRuleset
+*RecsApi* | [**delete_rec_definition**](docs/RecsApi.md#delete_rec_definition) | **DELETE** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] DeleteRecDefinition: DeleteRecDefinition
+*RecsApi* | [**get_matching_ruleset**](docs/RecsApi.md#get_matching_ruleset) | **GET** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
+*RecsApi* | [**get_rec_definition**](docs/RecsApi.md#get_rec_definition) | **GET** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
 *RecsApi* | [**get_rec_instance**](docs/RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
 *RecsApi* | [**get_rec_result**](docs/RecsApi.md#get_rec_result) | **GET** /api/recs/results/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 *RecsApi* | [**get_rec_result_set**](docs/RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
 *RecsApi* | [**instantiate_rec**](docs/RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
+*RecsApi* | [**list_matching_rulesets**](docs/RecsApi.md#list_matching_rulesets) | **GET** /api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
+*RecsApi* | [**list_rec_definitions**](docs/RecsApi.md#list_rec_definitions) | **GET** /api/recs/definitions | [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
 *RecsApi* | [**list_rec_instances**](docs/RecsApi.md#list_rec_instances) | **GET** /api/recs/instances | [EXPERIMENTAL] ListRecInstances: ListRecInstances
 *RecsApi* | [**list_rec_result_sets**](docs/RecsApi.md#list_rec_result_sets) | **GET** /api/recs/resultsets | [EXPERIMENTAL] ListRecResultSets: ListRecResultSets
 *RecsApi* | [**list_rec_results**](docs/RecsApi.md#list_rec_results) | **GET** /api/recs/results | [EXPERIMENTAL] ListRecResults: ListRecResults
 *RecsApi* | [**submit_rec_result_set_review**](docs/RecsApi.md#submit_rec_result_set_review) | **POST** /api/recs/resultsets/{entityUniqueId}/$submit | [EXPERIMENTAL] SubmitRecResultSetReview: Submit a rec result set review for approval, or resubmit after addressing requested revisions.
 *RecsApi* | [**transition_rec_instance**](docs/RecsApi.md#transition_rec_instance) | **POST** /api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
+*RecsApi* | [**update_matching_ruleset**](docs/RecsApi.md#update_matching_ruleset) | **PUT** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
+*RecsApi* | [**update_rec_definition**](docs/RecsApi.md#update_rec_definition) | **PUT** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
 *ReferenceListsApi* | [**delete_reference_list**](docs/ReferenceListsApi.md#delete_reference_list) | **DELETE** /api/referencelists/{scope}/{code} | [EARLY ACCESS] DeleteReferenceList: Delete Reference List
 *ReferenceListsApi* | [**get_reference_list**](docs/ReferenceListsApi.md#get_reference_list) | **GET** /api/referencelists/{scope}/{code} | GetReferenceList: Get Reference List
 *ReferenceListsApi* | [**list_reference_lists**](docs/ReferenceListsApi.md#list_reference_lists) | **GET** /api/referencelists | [EARLY ACCESS] ListReferenceLists: List Reference Lists
@@ -811,9 +821,9 @@ Class | Method | HTTP request | Description
  - [AdjustHolding](docs/AdjustHolding.md)
  - [AdjustHoldingForDateRequest](docs/AdjustHoldingForDateRequest.md)
  - [AdjustHoldingRequest](docs/AdjustHoldingRequest.md)
+ - [AggregateMatchingRule](docs/AggregateMatchingRule.md)
  - [AggregateRuleValues](docs/AggregateRuleValues.md)
  - [AggregateSpec](docs/AggregateSpec.md)
- - [AggregateToleranceBase](docs/AggregateToleranceBase.md)
  - [AggregatedReturn](docs/AggregatedReturn.md)
  - [AggregatedReturnsDispersionRequest](docs/AggregatedReturnsDispersionRequest.md)
  - [AggregatedReturnsEntityId](docs/AggregatedReturnsEntityId.md)
@@ -1051,8 +1061,8 @@ Class | Method | HTTP request | Description
  - [ContractInitialisationEvent](docs/ContractInitialisationEvent.md)
  - [ContributionToNonPassingRuleDetail](docs/ContributionToNonPassingRuleDetail.md)
  - [ConversionEvent](docs/ConversionEvent.md)
+ - [CoreMatchingRule](docs/CoreMatchingRule.md)
  - [CoreRuleValues](docs/CoreRuleValues.md)
- - [CoreToleranceBase](docs/CoreToleranceBase.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)
@@ -1080,9 +1090,11 @@ Class | Method | HTTP request | Description
  - [CreateGroupReconciliationComparisonRulesetRequest](docs/CreateGroupReconciliationComparisonRulesetRequest.md)
  - [CreateGroupReconciliationDefinitionRequest](docs/CreateGroupReconciliationDefinitionRequest.md)
  - [CreateIdentifierDefinitionRequest](docs/CreateIdentifierDefinitionRequest.md)
+ - [CreateMatchingRulesetRequest](docs/CreateMatchingRulesetRequest.md)
  - [CreatePortfolioDetails](docs/CreatePortfolioDetails.md)
  - [CreatePortfolioGroupRequest](docs/CreatePortfolioGroupRequest.md)
  - [CreatePropertyDefinitionRequest](docs/CreatePropertyDefinitionRequest.md)
+ - [CreateRecDefinitionRequest](docs/CreateRecDefinitionRequest.md)
  - [CreateRecipeRequest](docs/CreateRecipeRequest.md)
  - [CreateReconciliationRequest](docs/CreateReconciliationRequest.md)
  - [CreateReferencePortfolioRequest](docs/CreateReferencePortfolioRequest.md)
@@ -1512,6 +1524,7 @@ Class | Method | HTTP request | Description
  - [MarketQuote](docs/MarketQuote.md)
  - [MasteredInstrument](docs/MasteredInstrument.md)
  - [MatchCriterion](docs/MatchCriterion.md)
+ - [MatchingRuleset](docs/MatchingRuleset.md)
  - [MaturityEvent](docs/MaturityEvent.md)
  - [MbsCouponEvent](docs/MbsCouponEvent.md)
  - [MbsInterestDeferralEvent](docs/MbsInterestDeferralEvent.md)
@@ -1649,6 +1662,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfInstrumentEventInstruction](docs/PagedResourceListOfInstrumentEventInstruction.md)
  - [PagedResourceListOfItemAndWorkspace](docs/PagedResourceListOfItemAndWorkspace.md)
  - [PagedResourceListOfLegalEntity](docs/PagedResourceListOfLegalEntity.md)
+ - [PagedResourceListOfMatchingRuleset](docs/PagedResourceListOfMatchingRuleset.md)
  - [PagedResourceListOfOrder](docs/PagedResourceListOfOrder.md)
  - [PagedResourceListOfOrderBreachHistory](docs/PagedResourceListOfOrderBreachHistory.md)
  - [PagedResourceListOfOrderGraphBlock](docs/PagedResourceListOfOrderGraphBlock.md)
@@ -1665,6 +1679,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfPostingModuleRule](docs/PagedResourceListOfPostingModuleRule.md)
  - [PagedResourceListOfPropertyDefinition](docs/PagedResourceListOfPropertyDefinition.md)
  - [PagedResourceListOfPropertyDefinitionSearchResult](docs/PagedResourceListOfPropertyDefinitionSearchResult.md)
+ - [PagedResourceListOfRecDefinition](docs/PagedResourceListOfRecDefinition.md)
  - [PagedResourceListOfRecInstance](docs/PagedResourceListOfRecInstance.md)
  - [PagedResourceListOfRecResult](docs/PagedResourceListOfRecResult.md)
  - [PagedResourceListOfRecResultSet](docs/PagedResourceListOfRecResultSet.md)
@@ -1833,7 +1848,15 @@ Class | Method | HTTP request | Description
  - [RecClosedExceptionCounts](docs/RecClosedExceptionCounts.md)
  - [RecClosedPeriodReference](docs/RecClosedPeriodReference.md)
  - [RecClosedPeriods](docs/RecClosedPeriods.md)
+ - [RecDatasetSchema](docs/RecDatasetSchema.md)
+ - [RecDatasetSchemas](docs/RecDatasetSchemas.md)
  - [RecDatesReconciled](docs/RecDatesReconciled.md)
+ - [RecDefCurrencies](docs/RecDefCurrencies.md)
+ - [RecDefRecipeIds](docs/RecDefRecipeIds.md)
+ - [RecDefRuleset](docs/RecDefRuleset.md)
+ - [RecDefSideNames](docs/RecDefSideNames.md)
+ - [RecDefSource](docs/RecDefSource.md)
+ - [RecDefinition](docs/RecDefinition.md)
  - [RecExceptionCountByClosureType](docs/RecExceptionCountByClosureType.md)
  - [RecExceptionCountByResultType](docs/RecExceptionCountByResultType.md)
  - [RecExecution](docs/RecExecution.md)
@@ -2114,6 +2137,7 @@ Class | Method | HTTP request | Description
  - [SubmitRecResultSetReviewRequest](docs/SubmitRecResultSetReviewRequest.md)
  - [SubscribeElection](docs/SubscribeElection.md)
  - [SubscriptionDefinition](docs/SubscriptionDefinition.md)
+ - [SupplementalAttribute](docs/SupplementalAttribute.md)
  - [SupplementalAttributeValues](docs/SupplementalAttributeValues.md)
  - [SwapCashFlowEvent](docs/SwapCashFlowEvent.md)
  - [SwapPrincipalEvent](docs/SwapPrincipalEvent.md)
@@ -2133,6 +2157,7 @@ Class | Method | HTTP request | Description
  - [Timeline](docs/Timeline.md)
  - [ToBeAnnounced](docs/ToBeAnnounced.md)
  - [ToBeAnnouncedOption](docs/ToBeAnnouncedOption.md)
+ - [ToleranceBase](docs/ToleranceBase.md)
  - [TotalReturnSwap](docs/TotalReturnSwap.md)
  - [Touch](docs/Touch.md)
  - [TradeTicket](docs/TradeTicket.md)
@@ -2227,11 +2252,13 @@ Class | Method | HTTP request | Description
  - [UpdateIdentifierDefinitionRequest](docs/UpdateIdentifierDefinitionRequest.md)
  - [UpdateInstrumentIdentifierRequest](docs/UpdateInstrumentIdentifierRequest.md)
  - [UpdateMarketDataFieldConfigurationRequest](docs/UpdateMarketDataFieldConfigurationRequest.md)
+ - [UpdateMatchingRulesetRequest](docs/UpdateMatchingRulesetRequest.md)
  - [UpdateOrdersResponse](docs/UpdateOrdersResponse.md)
  - [UpdatePlacementsResponse](docs/UpdatePlacementsResponse.md)
  - [UpdatePortfolioGroupRequest](docs/UpdatePortfolioGroupRequest.md)
  - [UpdatePortfolioRequest](docs/UpdatePortfolioRequest.md)
  - [UpdatePropertyDefinitionRequest](docs/UpdatePropertyDefinitionRequest.md)
+ - [UpdateRecDefinitionRequest](docs/UpdateRecDefinitionRequest.md)
  - [UpdateReconciliationRequest](docs/UpdateReconciliationRequest.md)
  - [UpdateReferenceDataRequest](docs/UpdateReferenceDataRequest.md)
  - [UpdateRelationalDatasetDefinitionRequest](docs/UpdateRelationalDatasetDefinitionRequest.md)

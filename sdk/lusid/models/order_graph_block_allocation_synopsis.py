@@ -29,8 +29,9 @@ class OrderGraphBlockAllocationSynopsis(BaseModel):
     OrderGraphBlockAllocationSynopsis
     """
     quantity: Union[StrictFloat, StrictInt] = Field(description="Total number of units allocated.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total monetary value allocated, derived from the quantity and price of each allocation.")
     details: List[OrderGraphBlockAllocationDetail] = Field(description="Identifiers for each allocation in this block.")
-    __properties = ["quantity", "details"]
+    __properties = ["quantity", "amount", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +72,11 @@ class OrderGraphBlockAllocationSynopsis(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['details'] = _items
+        # set to None if amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amount is None and "amount" in self.__fields_set__:
+            _dict['amount'] = None
+
         return _dict
 
     @classmethod
@@ -84,6 +90,7 @@ class OrderGraphBlockAllocationSynopsis(BaseModel):
 
         _obj = OrderGraphBlockAllocationSynopsis.parse_obj({
             "quantity": obj.get("quantity"),
+            "amount": obj.get("amount"),
             "details": [OrderGraphBlockAllocationDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj

@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units allocated. | 
+**amount** | **float** | Total monetary value allocated, derived from the quantity and price of each allocation. | [optional] 
 **details** | [**List[OrderGraphBlockAllocationDetail]**](OrderGraphBlockAllocationDetail.md) | Identifiers for each allocation in this block. | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 details: List[OrderGraphBlockAllocationDetail] = # Replace with your value
-order_graph_block_allocation_synopsis_instance = OrderGraphBlockAllocationSynopsis(quantity=quantity, details=details)
+order_graph_block_allocation_synopsis_instance = OrderGraphBlockAllocationSynopsis(quantity=quantity, amount=amount, details=details)
 
 ```
 

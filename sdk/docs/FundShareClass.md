@@ -5,11 +5,13 @@ LUSID representation of a FundShareClass.  A ShareClass represents a pool of sha
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **short_code** | **str** | A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \&quot;A Accumulation Euro Hedged Class\&quot; could become \&quot;A Acc H EUR\&quot;. | 
-**fund_share_class_type** | **str** | The type of distribution that the ShareClass will calculate. Can be either &#39;Income&#39; or &#39;Accumulation&#39; - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation. | 
-**distribution_payment_type** | **str** | The tax treatment applied to any distributions calculated within the ShareClass. Can be either &#39;Net&#39; (Distribution Calculated net of tax) or &#39;Gross&#39; (Distribution calculated gross of tax). Available values: Invalid, Gross, Net. | 
-**hedging** | **str** | A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of its investment strategy. Available values: Invalid, None, ApplyHedging. | 
+**fund_share_class_type** | **str** | The type of distribution that the ShareClass will calculate. Can be either &#39;Income&#39; or &#39;Accumulation&#39; - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation. | [optional] 
+**distribution_payment_type** | **str** | The tax treatment applied to any distributions calculated within the ShareClass. Can be either &#39;Net&#39; (Distribution Calculated net of tax) or &#39;Gross&#39; (Distribution calculated gross of tax). Available values: Invalid, Gross, Net. | [optional] 
+**distribution_type** | **str** | The type of distribution calculated for the ShareClass. Can be either &#39;Income&#39; or &#39;Accumulation&#39;. Available values: Income, Accumulation. | [optional] 
+**hedging** | **str** | A flag to indicate the ShareClass is operating currency hedging as a means to limit currency risk as part of its investment strategy. Available values: Invalid, None, ApplyHedging. | [optional] 
 **dom_ccy** | **str** | The domestic currency of the instrument. | 
 **rounding_conventions** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding Convention used for the FundShareClass quotes | [optional] 
+**rounding_convention_units** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding Conventions used for the FundShareClass units | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap. | 
@@ -23,15 +25,17 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 short_code: StrictStr = "example_short_code"
-fund_share_class_type: StrictStr = "example_fund_share_class_type"
-distribution_payment_type: StrictStr = "example_distribution_payment_type"
-hedging: StrictStr = "example_hedging"
+fund_share_class_type: Optional[StrictStr] = "example_fund_share_class_type"
+distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
+distribution_type: Optional[StrictStr] = "example_distribution_type"
+hedging: Optional[StrictStr] = "example_hedging"
 dom_ccy: StrictStr = "example_dom_ccy"
 rounding_conventions: Optional[List[SimpleRoundingConvention]] = # Replace with your value
+rounding_convention_units: Optional[List[SimpleRoundingConvention]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-fund_share_class_instance = FundShareClass(short_code=short_code, fund_share_class_type=fund_share_class_type, distribution_payment_type=distribution_payment_type, hedging=hedging, dom_ccy=dom_ccy, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+fund_share_class_instance = FundShareClass(short_code=short_code, fund_share_class_type=fund_share_class_type, distribution_payment_type=distribution_payment_type, distribution_type=distribution_type, hedging=hedging, dom_ccy=dom_ccy, rounding_conventions=rounding_conventions, rounding_convention_units=rounding_convention_units, trading_conventions=trading_conventions, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

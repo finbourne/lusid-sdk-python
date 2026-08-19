@@ -23,13 +23,14 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class CoreToleranceBase(BaseModel):
+class SupplementalAttribute(BaseModel):
     """
-    Abstract base for tolerances that apply to core matching rules. Distinguishes core tolerances from  aggregate tolerances at the type level (both share a common tolerance base).  # noqa: E501
+    SupplementalAttribute
     """
-    tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
-    rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
-    __properties = ["toleranceType", "ruleName"]
+    attribute_name:  StrictStr = Field(...,alias="attributeName", description="The reference name of the supplemental attribute.") 
+    left_formula:  StrictStr = Field(...,alias="leftFormula", description="Derivation formula evaluated against the left side of the reconciliation.") 
+    right_formula:  StrictStr = Field(...,alias="rightFormula", description="Derivation formula evaluated against the right side of the reconciliation.") 
+    __properties = ["attributeName", "leftFormula", "rightFormula"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +54,8 @@ class CoreToleranceBase(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CoreToleranceBase:
-        """Create an instance of CoreToleranceBase from a JSON string"""
+    def from_json(cls, json_str: str) -> SupplementalAttribute:
+        """Create an instance of SupplementalAttribute from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,18 +67,19 @@ class CoreToleranceBase(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CoreToleranceBase:
-        """Create an instance of CoreToleranceBase from a dict"""
+    def from_dict(cls, obj: dict) -> SupplementalAttribute:
+        """Create an instance of SupplementalAttribute from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CoreToleranceBase.parse_obj(obj)
+            return SupplementalAttribute.parse_obj(obj)
 
-        _obj = CoreToleranceBase.parse_obj({
-            "tolerance_type": obj.get("toleranceType"),
-            "rule_name": obj.get("ruleName")
+        _obj = SupplementalAttribute.parse_obj({
+            "attribute_name": obj.get("attributeName"),
+            "left_formula": obj.get("leftFormula"),
+            "right_formula": obj.get("rightFormula")
         })
         return _obj
 
-CoreToleranceBase.update_forward_refs()
+SupplementalAttribute.update_forward_refs()

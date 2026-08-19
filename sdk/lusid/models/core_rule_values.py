@@ -22,7 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.core_tolerance_base import CoreToleranceBase
+from lusid.models.tolerance_base import ToleranceBase
 
 class CoreRuleValues(BaseModel):
     """
@@ -31,7 +31,7 @@ class CoreRuleValues(BaseModel):
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The name of the rule.") 
     left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value.") 
     right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value.") 
-    applied_tolerance: Optional[CoreToleranceBase] = Field(default=None, alias="appliedTolerance")
+    applied_tolerance: Optional[ToleranceBase] = Field(default=None, alias="appliedTolerance")
     __properties = ["ruleName", "leftValue", "rightValue", "appliedTolerance"]
 
     class Config:
@@ -94,7 +94,7 @@ class CoreRuleValues(BaseModel):
             "rule_name": obj.get("ruleName"),
             "left_value": obj.get("leftValue"),
             "right_value": obj.get("rightValue"),
-            "applied_tolerance": CoreToleranceBase.from_dict(obj.get("appliedTolerance")) if obj.get("appliedTolerance") is not None else None
+            "applied_tolerance": ToleranceBase.from_dict(obj.get("appliedTolerance")) if obj.get("appliedTolerance") is not None else None
         })
         return _obj
 

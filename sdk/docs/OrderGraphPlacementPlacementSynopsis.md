@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **details** | [**List[OrderGraphPlacementChildPlacementDetail]**](OrderGraphPlacementChildPlacementDetail.md) | Identifiers for each child placement for this placement. | 
-**quantity** | **float** | Total number of units placed. | [optional] 
-**amount** | **float** | Total monetary value placed, in the block currency. | [optional] 
+**quantity** | **float** | Total number of units placed. Null where the placement is sized by amount. | [optional] 
+**amount** | **float** | Total monetary value placed, in the block currency. Null where the placement has no amount. | [optional] 
 ## Example
 
 ```python

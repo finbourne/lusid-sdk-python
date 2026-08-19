@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **allocated_order_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **quantity** | **float** | The quantity of this allocation, with direction relative to the containing block. | 
+**amount** | **float** | The amount of this allocation, derived from the quantity and price of the allocation. | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ from datetime import datetime
 id: ResourceId
 allocated_order_id: Optional[ResourceId] = # Replace with your value
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
-order_graph_block_allocation_detail_instance = OrderGraphBlockAllocationDetail(id=id, allocated_order_id=allocated_order_id, quantity=quantity)
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+order_graph_block_allocation_detail_instance = OrderGraphBlockAllocationDetail(id=id, allocated_order_id=allocated_order_id, quantity=quantity, amount=amount)
 
 ```
 

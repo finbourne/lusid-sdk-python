@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units executed. | 
+**amount** | **float** | Total monetary value executed, derived from the quantity and price of each execution. | [optional] 
 **details** | [**List[OrderGraphBlockExecutionDetail]**](OrderGraphBlockExecutionDetail.md) | Identifiers for each execution in this block. | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 details: List[OrderGraphBlockExecutionDetail] = # Replace with your value
-order_graph_block_execution_synopsis_instance = OrderGraphBlockExecutionSynopsis(quantity=quantity, details=details)
+order_graph_block_execution_synopsis_instance = OrderGraphBlockExecutionSynopsis(quantity=quantity, amount=amount, details=details)
 
 ```
 

@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quantity** | **float** | Total number of units executed. | 
+**amount** | **float** | Total monetary value executed, derived from the quantity and price of each execution, in the placement&#39;s amount currency. Null where the placement has no amount, or where an execution cannot be expressed in that currency. | [optional] 
 **details** | [**List[OrderGraphPlacementExecutionDetail]**](OrderGraphPlacementExecutionDetail.md) | Identifiers info for each execution against this placement. | 
 ## Example
 
@@ -15,8 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 quantity: Union[StrictFloat, StrictInt] = # Replace with your value
+amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 details: List[OrderGraphPlacementExecutionDetail] = # Replace with your value
-order_graph_placement_execution_synopsis_instance = OrderGraphPlacementExecutionSynopsis(quantity=quantity, details=details)
+order_graph_placement_execution_synopsis_instance = OrderGraphPlacementExecutionSynopsis(quantity=quantity, amount=amount, details=details)
 
 ```
 

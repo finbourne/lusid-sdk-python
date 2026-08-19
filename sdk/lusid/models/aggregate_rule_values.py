@@ -22,7 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.aggregate_tolerance_base import AggregateToleranceBase
+from lusid.models.tolerance_base import ToleranceBase
 
 class AggregateRuleValues(BaseModel):
     """
@@ -32,7 +32,7 @@ class AggregateRuleValues(BaseModel):
     left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value.") 
     right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value.") 
     difference:  StrictStr = Field(...,alias="difference", description="The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)).") 
-    applied_tolerance: Optional[AggregateToleranceBase] = Field(default=None, alias="appliedTolerance")
+    applied_tolerance: Optional[ToleranceBase] = Field(default=None, alias="appliedTolerance")
     __properties = ["ruleName", "leftValue", "rightValue", "difference", "appliedTolerance"]
 
     class Config:
@@ -96,7 +96,7 @@ class AggregateRuleValues(BaseModel):
             "left_value": obj.get("leftValue"),
             "right_value": obj.get("rightValue"),
             "difference": obj.get("difference"),
-            "applied_tolerance": AggregateToleranceBase.from_dict(obj.get("appliedTolerance")) if obj.get("appliedTolerance") is not None else None
+            "applied_tolerance": ToleranceBase.from_dict(obj.get("appliedTolerance")) if obj.get("appliedTolerance") is not None else None
         })
         return _obj
 

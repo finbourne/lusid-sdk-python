@@ -22,14 +22,15 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 
-class AggregateToleranceBase(BaseModel):
+class RecDefSource(BaseModel):
     """
-    Abstract base for tolerances that apply to aggregate matching rules. Distinguishes aggregate  tolerances from core tolerances at the type level (both share a common tolerance base).  # noqa: E501
+    RecDefSource
     """
-    tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
-    rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
-    __properties = ["toleranceType", "ruleName"]
+    source_type:  StrictStr = Field(...,alias="sourceType", description="The type of entity that this source refers to. One of: Portfolio, PortfolioGroup, Fund. Available values: Portfolio, PortfolioGroup, Fund.") 
+    id: ResourceId
+    __properties = ["sourceType", "id"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +54,8 @@ class AggregateToleranceBase(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> AggregateToleranceBase:
-        """Create an instance of AggregateToleranceBase from a JSON string"""
+    def from_json(cls, json_str: str) -> RecDefSource:
+        """Create an instance of RecDefSource from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -63,21 +64,24 @@ class AggregateToleranceBase(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> AggregateToleranceBase:
-        """Create an instance of AggregateToleranceBase from a dict"""
+    def from_dict(cls, obj: dict) -> RecDefSource:
+        """Create an instance of RecDefSource from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return AggregateToleranceBase.parse_obj(obj)
+            return RecDefSource.parse_obj(obj)
 
-        _obj = AggregateToleranceBase.parse_obj({
-            "tolerance_type": obj.get("toleranceType"),
-            "rule_name": obj.get("ruleName")
+        _obj = RecDefSource.parse_obj({
+            "source_type": obj.get("sourceType"),
+            "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None
         })
         return _obj
 
-AggregateToleranceBase.update_forward_refs()
+RecDefSource.update_forward_refs()

@@ -29,8 +29,8 @@ class OrderGraphPlacementPlacementSynopsis(BaseModel):
     OrderGraphPlacementPlacementSynopsis
     """
     details: List[OrderGraphPlacementChildPlacementDetail] = Field(description="Identifiers for each child placement for this placement.")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total number of units placed.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total monetary value placed, in the block currency.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total number of units placed. Null where the placement is sized by amount.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Total monetary value placed, in the block currency. Null where the placement has no amount.")
     __properties = ["details", "quantity", "amount"]
 
     class Config:

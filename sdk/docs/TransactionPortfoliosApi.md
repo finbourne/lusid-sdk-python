@@ -2350,7 +2350,7 @@ def main():
     custodian_account_code = 'custodian_account_code_example' # str | The code of the Custodian Account.
     effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Custodian Account properties. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Custodian Account definition. Defaults to returning the latest version of the Custodian Account definition if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example 'CustodianAccount/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'.              If no property keys are specified, it will return 'IsDefault' and 'RelatedAccounts' properties, if they exist. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -2376,7 +2376,7 @@ Name | Type | Description  | Notes
  **custodian_account_code** | **str**| The code of the Custodian Account. | 
  **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Custodian Account properties. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Custodian Account definition. Defaults to returning the latest version of the Custodian Account definition if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must take the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/system/Name&#39;.              If no property keys are specified, it will return &#39;IsDefault&#39; and &#39;RelatedAccounts&#39; properties, if they exist. | [optional] 
 
 ### Return type
 
@@ -3884,7 +3884,7 @@ def main():
     page = 'page_example' # str | The pagination token to use to continue listing custodian accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the Custodian Account type, specify \"code eq '001'\". For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'.              If no property keys are specified, it will return 'IsDefault' and 'RelatedAccounts' properties, if they exist. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -3911,7 +3911,7 @@ Name | Type | Description  | Notes
  **page** | **str**| The pagination token to use to continue listing custodian accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the Custodian Account type, specify \&quot;code eq &#39;001&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/knowledgebase/article/KA-01914. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/system/Name&#39;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;CustodianAccount&#39; domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example &#39;CustodianAccount/system/Name&#39;.              If no property keys are specified, it will return &#39;IsDefault&#39; and &#39;RelatedAccounts&#39; properties, if they exist. | [optional] 
 
 ### Return type
 

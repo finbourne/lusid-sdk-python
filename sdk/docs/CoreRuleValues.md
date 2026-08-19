@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **rule_name** | **str** | The name of the rule. | 
 **left_value** | **str** | The left-side value. | [optional] 
 **right_value** | **str** | The right-side value. | [optional] 
-**applied_tolerance** | [**CoreToleranceBase**](CoreToleranceBase.md) |  | [optional] 
+**applied_tolerance** | [**ToleranceBase**](ToleranceBase.md) |  | [optional] 
 ## Example
 
 ```python
@@ -20,7 +20,7 @@ from datetime import datetime
 rule_name: StrictStr = "example_rule_name"
 left_value: Optional[StrictStr] = "example_left_value"
 right_value: Optional[StrictStr] = "example_right_value"
-applied_tolerance: Optional[CoreToleranceBase] = # Replace with your value
+applied_tolerance: Optional[ToleranceBase] = # Replace with your value
 core_rule_values_instance = CoreRuleValues(rule_name=rule_name, left_value=left_value, right_value=right_value, applied_tolerance=applied_tolerance)
 
 ```
