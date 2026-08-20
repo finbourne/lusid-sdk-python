@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **basket** | [**Basket**](Basket.md) |  | [optional] 
 **convention_name** | [**FlowConventionName**](FlowConventionName.md) |  | [optional] 
 **notional** | **float** | The notional quantity that applies to both the premium and protection legs. | 
+**is_non_standard** | **bool** | By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard&#x3D;true, the premium schedule uses the stated start and maturity dates and any payment  frequency is accepted. The payment dates roll back from the maturity, so a term that is not a whole  number of payment periods has a short first period. | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap. | 
@@ -32,10 +33,12 @@ identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 basket: Optional[Basket] = None
 convention_name: Optional[FlowConventionName] = # Replace with your value
 notional: Union[StrictFloat, StrictInt] = # Replace with your value
+is_non_standard: Optional[StrictBool] = # Replace with your value
+is_non_standard:Optional[StrictBool] = None
 additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, is_non_standard=is_non_standard, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

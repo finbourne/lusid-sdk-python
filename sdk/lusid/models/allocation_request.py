@@ -47,7 +47,8 @@ class AllocationRequest(BaseModel):
     settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The settlement currency to allocation currency FX rate.", alias="settlementCurrencyFxRate")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="The counterparty for this allocation.") 
     execution_ids: Optional[List[ResourceId]] = Field(default=None, description="The executions associated with this allocation", alias="executionIds")
-    __properties = ["properties", "instrumentIdentifiers", "quantity", "portfolioId", "allocatedOrderId", "id", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds"]
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    __properties = ["properties", "instrumentIdentifiers", "quantity", "portfolioId", "allocatedOrderId", "id", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -114,6 +115,9 @@ class AllocationRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['executionIds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -197,7 +201,8 @@ class AllocationRequest(BaseModel):
             "settlement_currency": obj.get("settlementCurrency"),
             "settlement_currency_fx_rate": obj.get("settlementCurrencyFxRate"),
             "counterparty": obj.get("counterparty"),
-            "execution_ids": [ResourceId.from_dict(_item) for _item in obj.get("executionIds")] if obj.get("executionIds") is not None else None
+            "execution_ids": [ResourceId.from_dict(_item) for _item in obj.get("executionIds")] if obj.get("executionIds") is not None else None,
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
 

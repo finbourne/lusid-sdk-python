@@ -40,12 +40,13 @@ class CreditDefaultSwap(LusidInstrument):
     coupon_rate: Union[StrictFloat, StrictInt] = Field(description="The coupon rate paid on each payment date of the premium leg as a fraction of 100 percent, e.g. \"0.05\" meaning 500 basis points or 5%.  For a standard corporate CDS (North American) this must be either 100bps or 500bps.", alias="couponRate")
     convention_name: Optional[FlowConventionName] = Field(default=None, alias="conventionName")
     notional: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The notional protected by the Credit Default Swap")
+    is_non_standard: Optional[StrictBool] = Field(default=None, description="By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard=true, the premium schedule uses the stated start and maturity dates and any payment  frequency is accepted. The payment dates roll back from the maturity, so a term that is not a whole  number of payment periods has a short first period.", alias="isNonStandard")
     protection_detail_specification: Optional[CdsProtectionDetailSpecification] = Field(default=None, alias="protectionDetailSpecification")
     additional_payments: Optional[List[AdditionalPayment]] = Field(default=None, description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.", alias="additionalPayments")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "ticker", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "notional", "protectionDetailSpecification", "additionalPayments", "timeZoneConventions"]
+    __properties = ["instrumentType", "ticker", "startDate", "maturityDate", "flowConventions", "couponRate", "conventionName", "notional", "isNonStandard", "protectionDetailSpecification", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -212,6 +213,7 @@ class CreditDefaultSwap(LusidInstrument):
             "coupon_rate": obj.get("couponRate"),
             "convention_name": FlowConventionName.from_dict(obj.get("conventionName")) if obj.get("conventionName") is not None else None,
             "notional": obj.get("notional"),
+            "is_non_standard": obj.get("isNonStandard"),
             "protection_detail_specification": CdsProtectionDetailSpecification.from_dict(obj.get("protectionDetailSpecification")) if obj.get("protectionDetailSpecification") is not None else None,
             "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None

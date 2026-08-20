@@ -22,18 +22,20 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.result_axis_definition import ResultAxisDefinition
 
 class AddressDefinition(BaseModel):
     """
     AddressDefinition
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the address key.") 
-    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Json.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for this result.") 
     life_cycle_status:  Optional[StrictStr] = Field(None,alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.") 
     removal_date: Optional[datetime] = Field(default=None, description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.", alias="removalDate")
     documentation_link:  Optional[StrictStr] = Field(None,alias="documentationLink", description="Contains a link to the documentation for this AddressDefinition in KnowledgeBase.") 
-    __properties = ["displayName", "type", "description", "lifeCycleStatus", "removalDate", "documentationLink"]
+    axes: Optional[List[ResultAxisDefinition]] = Field(default=None, description="For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described.")
+    __properties = ["displayName", "type", "description", "lifeCycleStatus", "removalDate", "documentationLink", "axes"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -107,8 +109,8 @@ class AddressDefinition(BaseModel):
         if value is None:
             return value
 
-        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Json']:
-            raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Json')")
+        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json']:
+            raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json')")
         return value
 
     class Config:
@@ -143,6 +145,13 @@ class AddressDefinition(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in axes (list)
+        _items = []
+        if self.axes:
+            for _item in self.axes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['axes'] = _items
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
@@ -168,6 +177,11 @@ class AddressDefinition(BaseModel):
         if self.documentation_link is None and "documentation_link" in self.__fields_set__:
             _dict['documentationLink'] = None
 
+        # set to None if axes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.axes is None and "axes" in self.__fields_set__:
+            _dict['axes'] = None
+
         return _dict
 
     @classmethod
@@ -185,7 +199,8 @@ class AddressDefinition(BaseModel):
             "description": obj.get("description"),
             "life_cycle_status": obj.get("lifeCycleStatus"),
             "removal_date": obj.get("removalDate"),
-            "documentation_link": obj.get("documentationLink")
+            "documentation_link": obj.get("documentationLink"),
+            "axes": [ResultAxisDefinition.from_dict(_item) for _item in obj.get("axes")] if obj.get("axes") is not None else None
         })
         return _obj
 

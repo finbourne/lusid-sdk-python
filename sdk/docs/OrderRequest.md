@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **package** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -49,7 +50,8 @@ order_instruction: Optional[ResourceId] = # Replace with your value
 package: Optional[ResourceId] = None
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 amount: Optional[CurrencyAndAmount] = None
-order_request_instance = OrderRequest(properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction=order_instruction, package=package, weight=weight, amount=amount)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+order_request_instance = OrderRequest(properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction=order_instruction, package=package, weight=weight, amount=amount, custodian_account_id=custodian_account_id)
 
 ```
 

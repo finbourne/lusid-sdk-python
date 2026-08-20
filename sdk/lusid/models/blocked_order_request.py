@@ -42,7 +42,8 @@ class BlockedOrderRequest(BaseModel):
     order_instruction: Optional[ResourceId] = Field(default=None, alias="orderInstruction")
     package: Optional[ResourceId] = None
     side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the order's side (buy, sell, short, etc)") 
-    __properties = ["properties", "quantity", "amount", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side"]
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    __properties = ["properties", "quantity", "amount", "orderBookId", "portfolioId", "id", "state", "date", "price", "orderInstruction", "package", "side", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -104,6 +105,9 @@ class BlockedOrderRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of package
         if self.package:
             _dict['package'] = self.package.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -152,7 +156,8 @@ class BlockedOrderRequest(BaseModel):
             "price": CurrencyAndAmount.from_dict(obj.get("price")) if obj.get("price") is not None else None,
             "order_instruction": ResourceId.from_dict(obj.get("orderInstruction")) if obj.get("orderInstruction") is not None else None,
             "package": ResourceId.from_dict(obj.get("package")) if obj.get("package") is not None else None,
-            "side": obj.get("side")
+            "side": obj.get("side"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
 

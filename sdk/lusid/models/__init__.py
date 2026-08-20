@@ -1255,6 +1255,7 @@ from lusid.models.resource_list_of_value_type import ResourceListOfValueType
 from lusid.models.resource_list_with_post_bodies_of_settlement_activity_to_settlement_activity_query import ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery
 from lusid.models.resource_record import ResourceRecord
 from lusid.models.response_meta_data import ResponseMetaData
+from lusid.models.result_axis_definition import ResultAxisDefinition
 from lusid.models.result_data_key_rule import ResultDataKeyRule
 from lusid.models.result_data_schema import ResultDataSchema
 from lusid.models.result_key_rule import ResultKeyRule
@@ -1387,6 +1388,7 @@ from lusid.models.tender_offer_election import TenderOfferElection
 from lusid.models.term_deposit import TermDeposit
 from lusid.models.term_deposit_interest_event import TermDepositInterestEvent
 from lusid.models.term_deposit_principal_event import TermDepositPrincipalEvent
+from lusid.models.termination_event import TerminationEvent
 from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.timeline import Timeline
 from lusid.models.to_be_announced import ToBeAnnounced
@@ -2870,6 +2872,7 @@ __all__ = [
     "ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery",
     "ResourceRecord",
     "ResponseMetaData",
+    "ResultAxisDefinition",
     "ResultDataKeyRule",
     "ResultDataSchema",
     "ResultKeyRule",
@@ -3002,6 +3005,7 @@ __all__ = [
     "TermDeposit",
     "TermDepositInterestEvent",
     "TermDepositPrincipalEvent",
+    "TerminationEvent",
     "TimeZoneConventions",
     "Timeline",
     "ToBeAnnounced",

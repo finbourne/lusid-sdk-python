@@ -53,9 +53,10 @@ class Allocation(BaseModel):
     settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The settlement currency to allocation currency FX rate.", alias="settlementCurrencyFxRate")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="The counterparty for this allocation.") 
     execution_ids: Optional[List[ResourceId]] = Field(default=None, description="The executions associated with this allocation", alias="executionIds")
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
     links: Optional[List[Link]] = None
-    __properties = ["id", "allocatedOrderId", "portfolioId", "quantity", "instrumentIdentifiers", "version", "properties", "instrumentScope", "lusidInstrumentId", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds", "dataModelMembership", "links"]
+    __properties = ["id", "allocatedOrderId", "portfolioId", "quantity", "instrumentIdentifiers", "version", "properties", "instrumentScope", "lusidInstrumentId", "placementIds", "state", "side", "type", "settlementDate", "date", "price", "settlementCurrency", "settlementCurrencyFxRate", "counterparty", "executionIds", "custodianAccountId", "dataModelMembership", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -125,6 +126,9 @@ class Allocation(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['executionIds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of data_model_membership
         if self.data_model_membership:
             _dict['dataModelMembership'] = self.data_model_membership.to_dict()
@@ -232,6 +236,7 @@ class Allocation(BaseModel):
             "settlement_currency_fx_rate": obj.get("settlementCurrencyFxRate"),
             "counterparty": obj.get("counterparty"),
             "execution_ids": [ResourceId.from_dict(_item) for _item in obj.get("executionIds")] if obj.get("executionIds") is not None else None,
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

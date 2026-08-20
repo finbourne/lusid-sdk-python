@@ -498,7 +498,7 @@ Class | Method | HTTP request | Description
 *PortfoliosApi* | [**get_portfolio_commands**](docs/PortfoliosApi.md#get_portfolio_commands) | **GET** /api/portfolios/{scope}/{code}/commands | GetPortfolioCommands: Get portfolio commands
 *PortfoliosApi* | [**get_portfolio_metadata**](docs/PortfoliosApi.md#get_portfolio_metadata) | **GET** /api/portfolios/{scope}/{code}/metadata | GetPortfolioMetadata: Get access metadata rules for a portfolio
 *PortfoliosApi* | [**get_portfolio_properties**](docs/PortfoliosApi.md#get_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties | GetPortfolioProperties: Get portfolio properties
-*PortfoliosApi* | [**get_portfolio_properties_time_series**](docs/PortfoliosApi.md#get_portfolio_properties_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series/batch | [BETA] GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
+*PortfoliosApi* | [**get_portfolio_properties_time_series**](docs/PortfoliosApi.md#get_portfolio_properties_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series/batch | GetPortfolioPropertiesTimeSeries: Get portfolio properties time series
 *PortfoliosApi* | [**get_portfolio_property_time_series**](docs/PortfoliosApi.md#get_portfolio_property_time_series) | **GET** /api/portfolios/{scope}/{code}/properties/time-series | GetPortfolioPropertyTimeSeries: Get portfolio property time series
 *PortfoliosApi* | [**get_portfolio_relations**](docs/PortfoliosApi.md#get_portfolio_relations) | **GET** /api/portfolios/{scope}/{code}/relations | [EXPERIMENTAL] GetPortfolioRelations: Get portfolio relations
 *PortfoliosApi* | [**get_portfolio_relationships**](docs/PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships
@@ -2021,6 +2021,7 @@ Class | Method | HTTP request | Description
  - [ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery](docs/ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery.md)
  - [ResourceRecord](docs/ResourceRecord.md)
  - [ResponseMetaData](docs/ResponseMetaData.md)
+ - [ResultAxisDefinition](docs/ResultAxisDefinition.md)
  - [ResultDataKeyRule](docs/ResultDataKeyRule.md)
  - [ResultDataSchema](docs/ResultDataSchema.md)
  - [ResultKeyRule](docs/ResultKeyRule.md)
@@ -2153,6 +2154,7 @@ Class | Method | HTTP request | Description
  - [TermDeposit](docs/TermDeposit.md)
  - [TermDepositInterestEvent](docs/TermDepositInterestEvent.md)
  - [TermDepositPrincipalEvent](docs/TermDepositPrincipalEvent.md)
+ - [TerminationEvent](docs/TerminationEvent.md)
  - [TimeZoneConventions](docs/TimeZoneConventions.md)
  - [Timeline](docs/Timeline.md)
  - [ToBeAnnounced](docs/ToBeAnnounced.md)

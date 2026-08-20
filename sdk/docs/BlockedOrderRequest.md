@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **order_instruction** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **package** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **side** | **str** | The client&#39;s representation of the order&#39;s side (buy, sell, short, etc) | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -36,7 +37,8 @@ price: Optional[CurrencyAndAmount] = None
 order_instruction: Optional[ResourceId] = # Replace with your value
 package: Optional[ResourceId] = None
 side: Optional[StrictStr] = "example_side"
-blocked_order_request_instance = BlockedOrderRequest(properties=properties, quantity=quantity, amount=amount, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, var_date=var_date, price=price, order_instruction=order_instruction, package=package, side=side)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+blocked_order_request_instance = BlockedOrderRequest(properties=properties, quantity=quantity, amount=amount, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, state=state, var_date=var_date, price=price, order_instruction=order_instruction, package=package, side=side, custodian_account_id=custodian_account_id)
 
 ```
 

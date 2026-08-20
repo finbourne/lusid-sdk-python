@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **settlement_currency_fx_rate** | **float** | The settlement currency to allocation currency FX rate. | [optional] 
 **counterparty** | **str** | The counterparty for this allocation. | [optional] 
 **execution_ids** | [**List[ResourceId]**](ResourceId.md) | The executions associated with this allocation | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -47,7 +48,8 @@ settlement_currency: Optional[StrictStr] = "example_settlement_currency"
 settlement_currency_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 counterparty: Optional[StrictStr] = "example_counterparty"
 execution_ids: Optional[List[ResourceId]] = # Replace with your value
-allocation_request_instance = AllocationRequest(properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, portfolio_id=portfolio_id, allocated_order_id=allocated_order_id, id=id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+allocation_request_instance = AllocationRequest(properties=properties, instrument_identifiers=instrument_identifiers, quantity=quantity, portfolio_id=portfolio_id, allocated_order_id=allocated_order_id, id=id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids, custodian_account_id=custodian_account_id)
 
 ```
 

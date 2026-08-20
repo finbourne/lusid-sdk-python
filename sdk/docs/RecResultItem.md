@@ -5,7 +5,6 @@ An individual item that makes up (one side of) a rec result. Polymorphic by rec 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **item_type** | **str** | The polymorphic item-type discriminator (e.g. SettlementActivity, Holding, Transaction). Available values: SettlementActivity, Holding, Transaction. | 
-**portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
 **rule_and_attribute_values** | **Dict[str, Optional[str]]** | The core rule, aggregate rule and supplemental attribute values for the item, keyed by name. | [optional] [readonly] 
 ## Example
 
@@ -17,9 +16,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 item_type: StrictStr = "example_item_type"
-portfolio_id: ResourceId = # Replace with your value
 rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
-rec_result_item_instance = RecResultItem(item_type=item_type, portfolio_id=portfolio_id, rule_and_attribute_values=rule_and_attribute_values)
+rec_result_item_instance = RecResultItem(item_type=item_type, rule_and_attribute_values=rule_and_attribute_values)
 
 ```
 

@@ -41,11 +41,12 @@ class CdsIndex(LusidInstrument):
     basket: Optional[Basket] = None
     convention_name: Optional[FlowConventionName] = Field(default=None, alias="conventionName")
     notional: Union[StrictFloat, StrictInt] = Field(description="The notional quantity that applies to both the premium and protection legs.")
+    is_non_standard: Optional[StrictBool] = Field(default=None, description="By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard=true, the premium schedule uses the stated start and maturity dates and any payment  frequency is accepted. The payment dates roll back from the maturity, so a term that is not a whole  number of payment periods has a short first period.", alias="isNonStandard")
     additional_payments: Optional[List[AdditionalPayment]] = Field(default=None, description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.", alias="additionalPayments")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional", "additionalPayments", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional", "isNonStandard", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -203,6 +204,7 @@ class CdsIndex(LusidInstrument):
             "basket": Basket.from_dict(obj.get("basket")) if obj.get("basket") is not None else None,
             "convention_name": FlowConventionName.from_dict(obj.get("conventionName")) if obj.get("conventionName") is not None else None,
             "notional": obj.get("notional"),
+            "is_non_standard": obj.get("isNonStandard"),
             "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
