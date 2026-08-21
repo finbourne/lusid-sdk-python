@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**RecInstanceId**](RecInstanceId.md) |  | 
 **rec_definition_id** | [**ResourceId**](ResourceId.md) |  | 
+**rec_definition_display_name** | **str** | The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed. | 
 **as_at_instantiated** | **datetime** | The asAt datetime at which the instance was first created. | 
 **status** | **str** | The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked. | 
 **as_at_locked** | **datetime** | The wall-clock time the lock action was performed. Null when the instance has not been locked. | [optional] 
@@ -26,6 +27,7 @@ from datetime import datetime
 
 id: RecInstanceId
 rec_definition_id: ResourceId = # Replace with your value
+rec_definition_display_name: StrictStr = "example_rec_definition_display_name"
 as_at_instantiated: datetime = # Replace with your value
 status: StrictStr = "example_status"
 as_at_locked: Optional[datetime] = # Replace with your value
@@ -35,7 +37,7 @@ run_log: List[RecRunLogEntry] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_instance_instance = RecInstance(id=id, rec_definition_id=rec_definition_id, as_at_instantiated=as_at_instantiated, status=status, as_at_locked=as_at_locked, dates_locked=dates_locked, closed_periods=closed_periods, run_log=run_log, href=href, version=version, links=links)
+rec_instance_instance = RecInstance(id=id, rec_definition_id=rec_definition_id, rec_definition_display_name=rec_definition_display_name, as_at_instantiated=as_at_instantiated, status=status, as_at_locked=as_at_locked, dates_locked=dates_locked, closed_periods=closed_periods, run_log=run_log, href=href, version=version, links=links)
 
 ```
 
