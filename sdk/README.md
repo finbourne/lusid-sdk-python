@@ -1885,7 +1885,6 @@ Class | Method | HTTP request | Description
  - [RecSubmission](docs/RecSubmission.md)
  - [RecSupersededRun](docs/RecSupersededRun.md)
  - [RecUserComment](docs/RecUserComment.md)
- - [RecWorkflowTask](docs/RecWorkflowTask.md)
  - [RecipeBlock](docs/RecipeBlock.md)
  - [RecipeComposer](docs/RecipeComposer.md)
  - [RecipeValue](docs/RecipeValue.md)

@@ -28,9 +28,9 @@ class PaymentDetailsApplicableEntity(BaseModel):
     Identifies the LUSID entity that holds the payment details (e.g. an InvestorRecord or Portfolio).  # noqa: E501
     """
     entity_type:  StrictStr = Field(...,alias="entityType", description="The type of the LUSID entity holding the payment details. e.g. \"InvestorRecord\", \"InvestmentAccount\", \"Portfolio\".") 
-    entity_scope:  Optional[StrictStr] = Field(None,alias="entityScope", description="The scope of the entity. Optional — required depends on the entity type.") 
+    entity_scope:  Optional[StrictStr] = Field(None,alias="entityScope", description="The scope of the entity. Optional, and narrows the match when supplied. Required for a Portfolio.") 
     identifier_type:  StrictStr = Field(...,alias="identifierType", description="The identifier type used to identify the entity. e.g. \"lusidInvestmentAccountId\".") 
-    identifier_scope:  Optional[StrictStr] = Field(None,alias="identifierScope", description="The scope of the identifier used to identify the entity. Optional — null for native LUSID identifiers such as code.") 
+    identifier_scope:  Optional[StrictStr] = Field(None,alias="identifierScope", description="The scope of the identifier used to identify the entity. Optional, and narrows the match when supplied.") 
     identifier_value:  StrictStr = Field(...,alias="identifierValue", description="The identifier value for the entity. e.g. \"LUID_00003DNL\".") 
     __properties = ["entityType", "entityScope", "identifierType", "identifierScope", "identifierValue"]
 

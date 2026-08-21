@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **id** | [**RecInstanceId**](RecInstanceId.md) |  | 
 **rec_definition_id** | [**ResourceId**](ResourceId.md) |  | 
 **as_at_instantiated** | **datetime** | The asAt datetime at which the instance was first created. | 
-**workflow_task_instantiated** | [**RecWorkflowTask**](RecWorkflowTask.md) |  | [optional] 
 **status** | **str** | The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked. | 
 **as_at_locked** | **datetime** | The wall-clock time the lock action was performed. Null when the instance has not been locked. | [optional] 
 ## Example
@@ -22,10 +21,9 @@ from datetime import datetime
 id: RecInstanceId
 rec_definition_id: ResourceId = # Replace with your value
 as_at_instantiated: datetime = # Replace with your value
-workflow_task_instantiated: Optional[RecWorkflowTask] = # Replace with your value
 status: StrictStr = "example_status"
 as_at_locked: Optional[datetime] = # Replace with your value
-rec_instance_summary_instance = RecInstanceSummary(id=id, rec_definition_id=rec_definition_id, as_at_instantiated=as_at_instantiated, workflow_task_instantiated=workflow_task_instantiated, status=status, as_at_locked=as_at_locked)
+rec_instance_summary_instance = RecInstanceSummary(id=id, rec_definition_id=rec_definition_id, as_at_instantiated=as_at_instantiated, status=status, as_at_locked=as_at_locked)
 
 ```
 

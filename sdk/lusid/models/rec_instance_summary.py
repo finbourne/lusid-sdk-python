@@ -23,7 +23,6 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.rec_instance_id import RecInstanceId
-from lusid.models.rec_workflow_task import RecWorkflowTask
 from lusid.models.resource_id import ResourceId
 
 class RecInstanceSummary(BaseModel):
@@ -33,10 +32,9 @@ class RecInstanceSummary(BaseModel):
     id: RecInstanceId
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
     as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")
-    workflow_task_instantiated: Optional[RecWorkflowTask] = Field(default=None, alias="workflowTaskInstantiated")
     status:  StrictStr = Field(...,alias="status", description="The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked.") 
     as_at_locked: Optional[datetime] = Field(default=None, description="The wall-clock time the lock action was performed. Null when the instance has not been locked.", alias="asAtLocked")
-    __properties = ["id", "recDefinitionId", "asAtInstantiated", "workflowTaskInstantiated", "status", "asAtLocked"]
+    __properties = ["id", "recDefinitionId", "asAtInstantiated", "status", "asAtLocked"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,9 +74,6 @@ class RecInstanceSummary(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of rec_definition_id
         if self.rec_definition_id:
             _dict['recDefinitionId'] = self.rec_definition_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workflow_task_instantiated
-        if self.workflow_task_instantiated:
-            _dict['workflowTaskInstantiated'] = self.workflow_task_instantiated.to_dict()
         # set to None if as_at_locked (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at_locked is None and "as_at_locked" in self.__fields_set__:
@@ -99,7 +94,6 @@ class RecInstanceSummary(BaseModel):
             "id": RecInstanceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,
             "as_at_instantiated": obj.get("asAtInstantiated"),
-            "workflow_task_instantiated": RecWorkflowTask.from_dict(obj.get("workflowTaskInstantiated")) if obj.get("workflowTaskInstantiated") is not None else None,
             "status": obj.get("status"),
             "as_at_locked": obj.get("asAtLocked")
         })

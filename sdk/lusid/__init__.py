@@ -1221,7 +1221,6 @@ from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
 from lusid.models.rec_user_comment import RecUserComment
-from lusid.models.rec_workflow_task import RecWorkflowTask
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
 from lusid.models.recipe_value import RecipeValue
@@ -2939,7 +2938,6 @@ __all__ = [
     "RecSubmission",
     "RecSupersededRun",
     "RecUserComment",
-    "RecWorkflowTask",
     "RecipeBlock",
     "RecipeComposer",
     "RecipeValue",

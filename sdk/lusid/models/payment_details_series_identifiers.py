@@ -27,7 +27,7 @@ class PaymentDetailsSeriesIdentifiers(BaseModel):
     """
     The two hardcoded series identifier keys that uniquely identify a Payment Details data series.  The currency value must match the top-level currency field on the Payment Instruction.  # noqa: E501
     """
-    payment_type:  StrictStr = Field(...,alias="paymentType", description="The type of payment series. One of \"Dividend\", \"Fee\", \"Rebate\", \"Redemption\", \"Subscription\".") 
+    payment_type:  StrictStr = Field(...,alias="paymentType", description="The type of payment series.") 
     currency:  StrictStr = Field(...,alias="currency", description="ISO 4217 currency code identifying the currency-specific series row. Must match the top-level currency field.") 
     custodian_account_scope:  Optional[StrictStr] = Field(None,alias="custodianAccountScope", description="Optional. The scope of the custodian account on the portfolio. Only permitted when the applicable entity is a Portfolio.") 
     custodian_account_code:  Optional[StrictStr] = Field(None,alias="custodianAccountCode", description="Optional. The code of the custodian account on the portfolio. Only permitted when the applicable entity is a Portfolio.") 

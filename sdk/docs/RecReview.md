@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **count_reviewed** | **int** | The number of results with review status Reviewed. | 
 **count_required** | **int** | The number of results with review status Required. | 
 **count_not_required** | **int** | The number of results with review status Not Required. | 
-**completion_ratio** | **float** | Reviewed / (Reviewed + Required). Is 1.0 when the denominator is zero, and null when execution failed. | 
+**completion_ratio** | **float** | Reviewed / (Reviewed + Required). Is 1.0 when the denominator is zero, and null when execution failed. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +23,7 @@ count_required: StrictInt = # Replace with your value
 count_required: StrictInt = 42
 count_not_required: StrictInt = # Replace with your value
 count_not_required: StrictInt = 42
-completion_ratio: Union[StrictFloat, StrictInt] = # Replace with your value
+completion_ratio: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 rec_review_instance = RecReview(count_reviewed=count_reviewed, count_required=count_required, count_not_required=count_not_required, completion_ratio=completion_ratio)
 
 ```

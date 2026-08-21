@@ -30,7 +30,7 @@ class RecReview(BaseModel):
     count_reviewed: StrictInt = Field(description="The number of results with review status Reviewed.", alias="countReviewed")
     count_required: StrictInt = Field(description="The number of results with review status Required.", alias="countRequired")
     count_not_required: StrictInt = Field(description="The number of results with review status Not Required.", alias="countNotRequired")
-    completion_ratio: Union[StrictFloat, StrictInt] = Field(description="Reviewed / (Reviewed + Required). Is 1.0 when the denominator is zero, and null when execution failed.", alias="completionRatio")
+    completion_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Reviewed / (Reviewed + Required). Is 1.0 when the denominator is zero, and null when execution failed.", alias="completionRatio")
     __properties = ["countReviewed", "countRequired", "countNotRequired", "completionRatio"]
 
     class Config:
@@ -65,6 +65,11 @@ class RecReview(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if completion_ratio (nullable) is None
+        # and __fields_set__ contains the field
+        if self.completion_ratio is None and "completion_ratio" in self.__fields_set__:
+            _dict['completionRatio'] = None
+
         return _dict
 
     @classmethod
