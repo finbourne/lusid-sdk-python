@@ -69,6 +69,7 @@ class PropertyDomain(str, Enum):
     ABORCONFIGURATION = 'AborConfiguration'
     FUND = 'Fund'
     FUNDCONFIGURATION = 'FundConfiguration'
+    FUNDSTRUCTURE = 'FundStructure'
     FEE = 'Fee'
     RECONCILIATION = 'Reconciliation'
     PROPERTYDEFINITION = 'PropertyDefinition'

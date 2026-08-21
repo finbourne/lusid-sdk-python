@@ -1550,6 +1550,7 @@ Class | Method | HTTP request | Description
  - [ModelSelection](docs/ModelSelection.md)
  - [MoveOrdersToDifferentBlocksRequest](docs/MoveOrdersToDifferentBlocksRequest.md)
  - [MovedOrderToDifferentBlockResponse](docs/MovedOrderToDifferentBlockResponse.md)
+ - [MovementConditionMatch](docs/MovementConditionMatch.md)
  - [MovementSettlementSummary](docs/MovementSettlementSummary.md)
  - [MovementType](docs/MovementType.md)
  - [MultiCurrencyAmounts](docs/MultiCurrencyAmounts.md)

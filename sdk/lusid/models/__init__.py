@@ -784,6 +784,7 @@ from lusid.models.model_schema import ModelSchema
 from lusid.models.model_selection import ModelSelection
 from lusid.models.move_orders_to_different_blocks_request import MoveOrdersToDifferentBlocksRequest
 from lusid.models.moved_order_to_different_block_response import MovedOrderToDifferentBlockResponse
+from lusid.models.movement_condition_match import MovementConditionMatch
 from lusid.models.movement_settlement_summary import MovementSettlementSummary
 from lusid.models.movement_type import MovementType
 from lusid.models.multi_currency_amounts import MultiCurrencyAmounts
@@ -2400,6 +2401,7 @@ __all__ = [
     "ModelSelection",
     "MoveOrdersToDifferentBlocksRequest",
     "MovedOrderToDifferentBlockResponse",
+    "MovementConditionMatch",
     "MovementSettlementSummary",
     "MovementType",
     "MultiCurrencyAmounts",

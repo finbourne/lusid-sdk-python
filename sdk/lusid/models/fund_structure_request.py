@@ -26,6 +26,7 @@ from lusid.models.allocation_group import AllocationGroup
 from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_structure_edge import FundStructureEdge
 from lusid.models.fund_structure_node import FundStructureNode
+from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 
 class FundStructureRequest(BaseModel):
@@ -40,7 +41,8 @@ class FundStructureRequest(BaseModel):
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.", alias="allocationGroups")
     nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.")
     edges: List[FundStructureEdge] = Field(description="The list of edges that define the relationships between feeder and master nodes in the structure.")
-    __properties = ["code", "name", "description", "existingFunds", "newFunds", "allocationGroups", "nodes", "edges"]
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Fund Structure.")
+    __properties = ["code", "name", "description", "existingFunds", "newFunds", "allocationGroups", "nodes", "edges", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -109,6 +111,13 @@ class FundStructureRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['edges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -129,6 +138,11 @@ class FundStructureRequest(BaseModel):
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
             _dict['allocationGroups'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         return _dict
 
     @classmethod
@@ -148,7 +162,13 @@ class FundStructureRequest(BaseModel):
             "new_funds": [FundDefinitionRequest.from_dict(_item) for _item in obj.get("newFunds")] if obj.get("newFunds") is not None else None,
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "nodes": [FundStructureNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
-            "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None
+            "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None,
+            "properties": dict(
+                (_k, ModelProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj
 
