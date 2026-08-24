@@ -42,7 +42,11 @@ class FuturesContractDetails(BaseModel):
     unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value in the currency of a 1 unit change in the contract price.", alias="unitValue")
     calendars: Optional[List[StrictStr]] = Field(default=None, description="Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures).")
     delivery_type:  Optional[StrictStr] = Field(None,alias="deliveryType", description="Delivery type to be used on settling the contract.  Default value: Physical. Available values: Cash, Physical.") 
-    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType"]
+    deliverable_min_maturity_years: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For physically-delivered bond futures: the minimum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no lower bound is applied when matching eligible bonds.", alias="deliverableMinMaturityYears")
+    deliverable_max_maturity_years: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds.", alias="deliverableMaxMaturityYears")
+    exclude_callable_bonds: Optional[StrictBool] = Field(default=None, description="For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded).", alias="excludeCallableBonds")
+    deliverable_min_amount_outstanding: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds.", alias="deliverableMinAmountOutstanding")
+    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType", "deliverableMinMaturityYears", "deliverableMaxMaturityYears", "excludeCallableBonds", "deliverableMinAmountOutstanding"]
 
     class Config:
         """Pydantic configuration"""
@@ -121,6 +125,21 @@ class FuturesContractDetails(BaseModel):
         if self.delivery_type is None and "delivery_type" in self.__fields_set__:
             _dict['deliveryType'] = None
 
+        # set to None if deliverable_min_maturity_years (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deliverable_min_maturity_years is None and "deliverable_min_maturity_years" in self.__fields_set__:
+            _dict['deliverableMinMaturityYears'] = None
+
+        # set to None if deliverable_max_maturity_years (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deliverable_max_maturity_years is None and "deliverable_max_maturity_years" in self.__fields_set__:
+            _dict['deliverableMaxMaturityYears'] = None
+
+        # set to None if deliverable_min_amount_outstanding (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deliverable_min_amount_outstanding is None and "deliverable_min_amount_outstanding" in self.__fields_set__:
+            _dict['deliverableMinAmountOutstanding'] = None
+
         return _dict
 
     @classmethod
@@ -147,7 +166,11 @@ class FuturesContractDetails(BaseModel):
             "ticker_step": obj.get("tickerStep"),
             "unit_value": obj.get("unitValue"),
             "calendars": obj.get("calendars"),
-            "delivery_type": obj.get("deliveryType")
+            "delivery_type": obj.get("deliveryType"),
+            "deliverable_min_maturity_years": obj.get("deliverableMinMaturityYears"),
+            "deliverable_max_maturity_years": obj.get("deliverableMaxMaturityYears"),
+            "exclude_callable_bonds": obj.get("excludeCallableBonds"),
+            "deliverable_min_amount_outstanding": obj.get("deliverableMinAmountOutstanding")
         })
         return _obj
 

@@ -1092,6 +1092,8 @@ from lusid.models.portfolio_group_id_list_compliance_parameter import PortfolioG
 from lusid.models.portfolio_group_properties import PortfolioGroupProperties
 from lusid.models.portfolio_group_search_result import PortfolioGroupSearchResult
 from lusid.models.portfolio_holding import PortfolioHolding
+from lusid.models.portfolio_holding_dataset import PortfolioHoldingDataset
+from lusid.models.portfolio_holding_result import PortfolioHoldingResult
 from lusid.models.portfolio_id import PortfolioId
 from lusid.models.portfolio_id_compliance_parameter import PortfolioIdComplianceParameter
 from lusid.models.portfolio_id_list import PortfolioIdList
@@ -2810,6 +2812,8 @@ __all__ = [
     "PortfolioGroupProperties",
     "PortfolioGroupSearchResult",
     "PortfolioHolding",
+    "PortfolioHoldingDataset",
+    "PortfolioHoldingResult",
     "PortfolioId",
     "PortfolioIdComplianceParameter",
     "PortfolioIdList",

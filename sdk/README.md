@@ -1756,6 +1756,8 @@ Class | Method | HTTP request | Description
  - [PortfolioGroupProperties](docs/PortfolioGroupProperties.md)
  - [PortfolioGroupSearchResult](docs/PortfolioGroupSearchResult.md)
  - [PortfolioHolding](docs/PortfolioHolding.md)
+ - [PortfolioHoldingDataset](docs/PortfolioHoldingDataset.md)
+ - [PortfolioHoldingResult](docs/PortfolioHoldingResult.md)
  - [PortfolioId](docs/PortfolioId.md)
  - [PortfolioIdComplianceParameter](docs/PortfolioIdComplianceParameter.md)
  - [PortfolioIdList](docs/PortfolioIdList.md)

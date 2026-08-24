@@ -19,7 +19,8 @@ Name | Type | Description | Notes
 **lusid_entity** | [**LusidEntityResult**](LusidEntityResult.md) |  | [optional] 
 **count_rule_breaches** | **int** | The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit) | [optional] 
 **error_detail** | **str** | Error details (for RulesetInvalid, RuleInvalid) | [optional] 
-**result_id** | **str** | Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}} | [optional] 
+**result_id** | **str** | Unique identifier for the result in format: {{GUID of Check Definition}}-{{resultType}}-{{rulesetKey}}-{{ruleKey}}-{{entity GUID}}.  For holdings the trailing segment is {{source portfolio GUID}}-{{subEntityId}}, since a holding id only  identifies a holding within its own portfolio. | [optional] 
+**portfolio_holding** | [**PortfolioHoldingResult**](PortfolioHoldingResult.md) |  | [optional] 
 ## Example
 
 ```python
@@ -47,7 +48,8 @@ count_rule_breaches: Optional[StrictInt] = # Replace with your value
 count_rule_breaches: Optional[StrictInt] = None
 error_detail: Optional[StrictStr] = "example_error_detail"
 result_id: Optional[StrictStr] = "example_result_id"
-data_quality_check_result_instance = DataQualityCheckResult(check_definition_scope=check_definition_scope, check_definition_code=check_definition_code, check_definition_display_name=check_definition_display_name, check_run_as_at=check_run_as_at, result_type=result_type, rule_set_key=rule_set_key, rule_set_display_name=rule_set_display_name, rule_key=rule_key, rule_display_name=rule_display_name, rule_description=rule_description, rule_formula=rule_formula, severity=severity, lusid_entity=lusid_entity, count_rule_breaches=count_rule_breaches, error_detail=error_detail, result_id=result_id)
+portfolio_holding: Optional[PortfolioHoldingResult] = # Replace with your value
+data_quality_check_result_instance = DataQualityCheckResult(check_definition_scope=check_definition_scope, check_definition_code=check_definition_code, check_definition_display_name=check_definition_display_name, check_run_as_at=check_run_as_at, result_type=result_type, rule_set_key=rule_set_key, rule_set_display_name=rule_set_display_name, rule_key=rule_key, rule_display_name=rule_display_name, rule_description=rule_description, rule_formula=rule_formula, severity=severity, lusid_entity=lusid_entity, count_rule_breaches=count_rule_breaches, error_detail=error_detail, result_id=result_id, portfolio_holding=portfolio_holding)
 
 ```
 

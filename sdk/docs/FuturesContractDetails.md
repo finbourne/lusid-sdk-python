@@ -19,6 +19,10 @@ Name | Type | Description | Notes
 **unit_value** | **float** | The value in the currency of a 1 unit change in the contract price. | [optional] 
 **calendars** | **List[str]** | Holiday calendars that apply to yield-to-price conversions (i.e. for BRL futures). | [optional] 
 **delivery_type** | **str** | Delivery type to be used on settling the contract.  Default value: Physical. Available values: Cash, Physical. | [optional] 
+**deliverable_min_maturity_years** | **float** | For physically-delivered bond futures: the minimum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no lower bound is applied when matching eligible bonds. | [optional] 
+**deliverable_max_maturity_years** | **float** | For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds. | [optional] 
+**exclude_callable_bonds** | **bool** | For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded). | [optional] 
+**deliverable_min_amount_outstanding** | **float** | For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds. | [optional] 
 ## Example
 
 ```python
@@ -43,7 +47,12 @@ ticker_step: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 calendars: Optional[List[StrictStr]] = # Replace with your value
 delivery_type: Optional[StrictStr] = "example_delivery_type"
-futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type)
+deliverable_min_maturity_years: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+deliverable_max_maturity_years: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+exclude_callable_bonds: Optional[StrictBool] = # Replace with your value
+exclude_callable_bonds:Optional[StrictBool] = None
+deliverable_min_amount_outstanding: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type, deliverable_min_maturity_years=deliverable_min_maturity_years, deliverable_max_maturity_years=deliverable_max_maturity_years, exclude_callable_bonds=exclude_callable_bonds, deliverable_min_amount_outstanding=deliverable_min_amount_outstanding)
 
 ```
 
