@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **unsettled_units** | **float** | The number of unsettled units for the holding. | [optional] 
 **overdue_units** | **float** | The number of unsettled units for the holding that are beyond their contractual settlement date. | [optional] 
+**custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
 **resolved_custodian_account** | [**ResolvedCustodianAccount**](ResolvedCustodianAccount.md) |  | [optional] 
 ## Example
 
@@ -60,8 +61,9 @@ current_face: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 unsettled_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 overdue_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+custodian_account: Optional[CustodianAccount] = # Replace with your value
 resolved_custodian_account: Optional[ResolvedCustodianAccount] = # Replace with your value
-portfolio_holding_instance = PortfolioHolding(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, holding_type=holding_type, units=units, settled_units=settled_units, cost=cost, cost_portfolio_ccy=cost_portfolio_ccy, transaction=transaction, currency=currency, holding_type_name=holding_type_name, holding_id=holding_id, notional_cost=notional_cost, amortised_cost=amortised_cost, amortised_cost_portfolio_ccy=amortised_cost_portfolio_ccy, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, settlement_schedule=settlement_schedule, current_face=current_face, custodian_account_id=custodian_account_id, unsettled_units=unsettled_units, overdue_units=overdue_units, resolved_custodian_account=resolved_custodian_account)
+portfolio_holding_instance = PortfolioHolding(instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, properties=properties, holding_type=holding_type, units=units, settled_units=settled_units, cost=cost, cost_portfolio_ccy=cost_portfolio_ccy, transaction=transaction, currency=currency, holding_type_name=holding_type_name, holding_id=holding_id, notional_cost=notional_cost, amortised_cost=amortised_cost, amortised_cost_portfolio_ccy=amortised_cost_portfolio_ccy, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, settlement_schedule=settlement_schedule, current_face=current_face, custodian_account_id=custodian_account_id, unsettled_units=unsettled_units, overdue_units=overdue_units, custodian_account=custodian_account, resolved_custodian_account=resolved_custodian_account)
 
 ```
 
