@@ -61,8 +61,10 @@ class JournalEntryLine(BaseModel):
     holding_sign:  Optional[StrictStr] = Field(None,alias="holdingSign", description="Indicates if the Journal Entry Line is operating against a Long or Short holding. Available values: NA, Long, Short.") 
     ledger_column:  Optional[StrictStr] = Field(None,alias="ledgerColumn", description="Indicates if the Journal Entry Line is credit or debit. Available values: Debit, Credit.") 
     journal_entry_line_type:  Optional[StrictStr] = Field(None,alias="journalEntryLineType", description="Indicates the Journal Entry Line type. Available values: Default, Reversal, TrueUp.") 
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    custodian_account_type:  Optional[StrictStr] = Field(None,alias="custodianAccountType", description="Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.") 
     links: Optional[List[Link]] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "custodianAccountId", "custodianAccountType", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -119,6 +121,9 @@ class JournalEntryLine(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -196,6 +201,11 @@ class JournalEntryLine(BaseModel):
         if self.journal_entry_line_type is None and "journal_entry_line_type" in self.__fields_set__:
             _dict['journalEntryLineType'] = None
 
+        # set to None if custodian_account_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custodian_account_type is None and "custodian_account_type" in self.__fields_set__:
+            _dict['custodianAccountType'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -252,6 +262,8 @@ class JournalEntryLine(BaseModel):
             "holding_sign": obj.get("holdingSign"),
             "ledger_column": obj.get("ledgerColumn"),
             "journal_entry_line_type": obj.get("journalEntryLineType"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
+            "custodian_account_type": obj.get("custodianAccountType"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
