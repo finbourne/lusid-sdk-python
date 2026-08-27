@@ -238,6 +238,7 @@ from lusid.models.collateral import Collateral
 from lusid.models.collateral_instrument import CollateralInstrument
 from lusid.models.commodity_calendar_schedule import CommodityCalendarSchedule
 from lusid.models.commodity_calendar_swap import CommodityCalendarSwap
+from lusid.models.commodity_calendar_swap_cash_flow_event import CommodityCalendarSwapCashFlowEvent
 from lusid.models.commodity_forward import CommodityForward
 from lusid.models.commodity_forward_cash_settlement_event import CommodityForwardCashSettlementEvent
 from lusid.models.commodity_forward_physical_settlement_event import CommodityForwardPhysicalSettlementEvent
@@ -1857,6 +1858,7 @@ __all__ = [
     "CollateralInstrument",
     "CommodityCalendarSchedule",
     "CommodityCalendarSwap",
+    "CommodityCalendarSwapCashFlowEvent",
     "CommodityForward",
     "CommodityForwardCashSettlementEvent",
     "CommodityForwardPhysicalSettlementEvent",

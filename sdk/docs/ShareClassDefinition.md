@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **launch_date** | **datetime** | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] 
 **fund_share_class_type** | **str** | The Type of Share Class. Available values: Unitised, Inactive, Series, PrivateEquity, Partnership. | 
-**distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | 
+**distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [optional] 
 **dom_ccy** | **str** | The domestic currency of the ShareClass instrument. | 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **units_precision** | **int** | Decimal places for the share class units. | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **rounding_conventions_units** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass units. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **distribution_payment_type** | **str** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] 
-**hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | 
+**hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | [optional] 
 ## Example
 
 ```python
@@ -38,7 +38,7 @@ launch_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 launch_date: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 fund_share_class_type: StrictStr = "example_fund_share_class_type"
-distribution_type: StrictStr = "example_distribution_type"
+distribution_type: Optional[StrictStr] = "example_distribution_type"
 dom_ccy: StrictStr = "example_dom_ccy"
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 units_precision: Optional[StrictInt] = # Replace with your value
@@ -49,7 +49,7 @@ rounding_conventions: Optional[List[SimpleRoundingConvention]] = # Replace with 
 rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
-hedging: StrictStr = "example_hedging"
+hedging: Optional[StrictStr] = "example_hedging"
 share_class_definition_instance = ShareClassDefinition(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, fund_share_class_type=fund_share_class_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, units_precision=units_precision, price_precision=price_precision, rounding_conventions=rounding_conventions, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
 
 ```

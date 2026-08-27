@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **previous_entry_time** | **datetime** | The entry time of the previous diary entry. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -38,8 +39,9 @@ query_as_at: Optional[datetime] = # Replace with your value
 previous_entry_time: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 links: Optional[List[Link]] = None
-diary_entry_instance = DiaryEntry(href=href, abor_id=abor_id, diary_entry_code=diary_entry_code, type=type, name=name, status=status, apply_clear_down=apply_clear_down, effective_at=effective_at, query_as_at=query_as_at, previous_entry_time=previous_entry_time, properties=properties, version=version, links=links)
+diary_entry_instance = DiaryEntry(href=href, abor_id=abor_id, diary_entry_code=diary_entry_code, type=type, name=name, status=status, apply_clear_down=apply_clear_down, effective_at=effective_at, query_as_at=query_as_at, previous_entry_time=previous_entry_time, properties=properties, version=version, staged_modifications=staged_modifications, links=links)
 
 ```
 

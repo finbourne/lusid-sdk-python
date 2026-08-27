@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **package_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**basis** | **str** | The measure in which the order was instructed. Expected values are &#39;Quantity&#39;, &#39;Amount&#39; or &#39;Weight&#39;; null when the order carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount, then weight. | [optional] [readonly] 
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
 **derived_compliance_state** | **str** | The compliance state of the order, derived from pre-trade compliance runs. | [optional] 
@@ -60,12 +61,13 @@ order_instruction_id: Optional[ResourceId] = # Replace with your value
 package_id: Optional[ResourceId] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 amount: Optional[CurrencyAndAmount] = None
+basis: Optional[StrictStr] = "example_basis"
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 derived_compliance_state: Optional[StrictStr] = "example_derived_compliance_state"
 derived_approval_state: Optional[StrictStr] = "example_derived_approval_state"
 links: Optional[List[Link]] = None
-order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, weight=weight, amount=amount, custodian_account_id=custodian_account_id, data_model_membership=data_model_membership, derived_compliance_state=derived_compliance_state, derived_approval_state=derived_approval_state, links=links)
+order_instance = Order(properties=properties, version=version, instrument_identifiers=instrument_identifiers, quantity=quantity, side=side, order_book_id=order_book_id, portfolio_id=portfolio_id, id=id, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, state=state, type=type, time_in_force=time_in_force, var_date=var_date, price=price, limit_price=limit_price, stop_price=stop_price, order_instruction_id=order_instruction_id, package_id=package_id, weight=weight, amount=amount, basis=basis, custodian_account_id=custodian_account_id, data_model_membership=data_model_membership, derived_compliance_state=derived_compliance_state, derived_approval_state=derived_approval_state, links=links)
 
 ```
 

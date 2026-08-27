@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument placement. | 
 **quantity** | **float** | The quantity of given instrument ordered. | [optional] 
 **amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**basis** | **str** | The measure in which the placement was instructed. Expected values are &#39;Quantity&#39; or &#39;Amount&#39;; null when the placement carries no size measure. Read-only; derived from the populated size measures, taking quantity first, then amount. | [optional] [readonly] 
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
 **time_in_force** | **str** | The time in force applicable to this placement (GTC, FOK, Day, etc) | 
@@ -42,6 +43,7 @@ instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your val
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 amount: Optional[CurrencyAndAmount] = None
+basis: Optional[StrictStr] = "example_basis"
 state: StrictStr = "example_state"
 side: StrictStr = "example_side"
 time_in_force: StrictStr = "example_time_in_force"
@@ -55,7 +57,7 @@ entry_type: Optional[StrictStr] = "example_entry_type"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
 links: Optional[List[Link]] = None
-placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
+placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, basis=basis, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
 
 ```
 

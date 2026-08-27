@@ -24,14 +24,21 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class MaturityEvent(InstrumentEvent):
+class CommodityCalendarSwapCashFlowEvent(InstrumentEvent):
     """
-    Definition of a Maturity Event  This is an event that describes the maturity of the instrument.  # noqa: E501
+    Cash settlement of one calendar-average period of a CommodityCalendarSwap. One event fires per period  end date defined by the swap's schedule, including the final period; PeriodNumber identifies which.  The cash flow per unit is the pre-netted settlement price (the calendar average of the observed  commodity price minus the strike) supplied externally via the quote store — LUSID computes neither the  average nor the netting. A negative value is valid and means the period settled out of the money.  # noqa: E501
     """
-    maturity_date: Optional[datetime] = Field(default=None, description="Maturity date of the instrument", alias="maturityDate")
+    period_end_date: Optional[datetime] = Field(default=None, description="The end date of the settling period, derived from the swap's schedule. The period settles against  the calendar average of the observed commodity price up to this date. Required, and the effective  date of the event.", alias="periodEndDate")
+    payment_date: Optional[datetime] = Field(default=None, description="The settlement date of the period, already adjusted for the schedule's business day convention,  payment calendars and coupon lag. Required. This is when the cash moves; the event itself is  effective at PeriodEndDate.", alias="paymentDate")
+    currency:  StrictStr = Field(...,alias="currency", description="The currency the period settles in, taken from the schedule's payment currency. Required.") 
+    period_number: StrictInt = Field(description="The sequential number of the settling period, with the first period being 1 and the final period  being the total number of periods in the schedule. Required.", alias="periodNumber")
+    quantity_per_period: Union[StrictFloat, StrictInt] = Field(description="The notional commodity quantity referenced by the period, and the number of units by which the  holding is reduced when the period settles. Required.", alias="quantityPerPeriod")
+    ex_date: Optional[datetime] = Field(default=None, description="The ex-dividend date of the cash flow. Always equal to PeriodEndDate, since entitlement is  determined by the holding on the period end date. Required.", alias="exDate")
+    cash_flow_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The pre-netted settlement amount per unit for the period (the calendar average of the observed  commodity price minus the strike), supplied externally via the quote store. Optional — absent until  the settlement price has been resolved. Negative when the period settled out of the money.", alias="cashFlowPerUnit")
+    cash_flow_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The settlement amount for the period, calculated as CashFlowPerUnit multiplied by  QuantityPerPeriod. Optional — absent until the settlement price has been resolved. Carries the  sign of CashFlowPerUnit.", alias="cashFlowAmount")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "maturityDate"]
+    __properties = ["instrumentEventType", "periodEndDate", "paymentDate", "currency", "periodNumber", "quantityPerPeriod", "exDate", "cashFlowPerUnit", "cashFlowAmount"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -44,7 +51,7 @@ class MaturityEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'MaturityEvent' not in [ 
+        if 'CommodityCalendarSwapCashFlowEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -128,8 +135,8 @@ class MaturityEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> MaturityEvent:
-        """Create an instance of MaturityEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> CommodityCalendarSwapCashFlowEvent:
+        """Create an instance of CommodityCalendarSwapCashFlowEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -144,20 +151,37 @@ class MaturityEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if cash_flow_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_flow_per_unit is None and "cash_flow_per_unit" in self.__fields_set__:
+            _dict['cashFlowPerUnit'] = None
+
+        # set to None if cash_flow_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_flow_amount is None and "cash_flow_amount" in self.__fields_set__:
+            _dict['cashFlowAmount'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> MaturityEvent:
-        """Create an instance of MaturityEvent from a dict"""
+    def from_dict(cls, obj: dict) -> CommodityCalendarSwapCashFlowEvent:
+        """Create an instance of CommodityCalendarSwapCashFlowEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return MaturityEvent.parse_obj(obj)
+            return CommodityCalendarSwapCashFlowEvent.parse_obj(obj)
 
-        _obj = MaturityEvent.parse_obj({
+        _obj = CommodityCalendarSwapCashFlowEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "maturity_date": obj.get("maturityDate")
+            "period_end_date": obj.get("periodEndDate"),
+            "payment_date": obj.get("paymentDate"),
+            "currency": obj.get("currency"),
+            "period_number": obj.get("periodNumber"),
+            "quantity_per_period": obj.get("quantityPerPeriod"),
+            "ex_date": obj.get("exDate"),
+            "cash_flow_per_unit": obj.get("cashFlowPerUnit"),
+            "cash_flow_amount": obj.get("cashFlowAmount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -166,4 +190,4 @@ class MaturityEvent(InstrumentEvent):
 
         return _obj
 
-MaturityEvent.update_forward_refs()
+CommodityCalendarSwapCashFlowEvent.update_forward_refs()

@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class DiaryEntry(BaseModel):
@@ -43,8 +44,9 @@ class DiaryEntry(BaseModel):
     previous_entry_time: Optional[datetime] = Field(default=None, description="The entry time of the previous diary entry.", alias="previousEntryTime")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the diary entry.")
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["href", "aborId", "diaryEntryCode", "type", "name", "status", "applyClearDown", "effectiveAt", "queryAsAt", "previousEntryTime", "properties", "version", "links"]
+    __properties = ["href", "aborId", "diaryEntryCode", "type", "name", "status", "applyClearDown", "effectiveAt", "queryAsAt", "previousEntryTime", "properties", "version", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +93,9 @@ class DiaryEntry(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -152,6 +157,7 @@ class DiaryEntry(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
