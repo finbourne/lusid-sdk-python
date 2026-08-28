@@ -88,6 +88,7 @@ from lusid.api.transaction_fee_types_api import TransactionFeeTypesApi
 from lusid.api.transaction_fees_api import TransactionFeesApi
 from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
 from lusid.api.transfer_agency_api import TransferAgencyApi
+from lusid.api.transfers_api import TransfersApi
 from lusid.api.translation_api import TranslationApi
 from lusid.api.workspace_api import WorkspaceApi
 
@@ -180,6 +181,7 @@ __all__ = [
     "TransactionFeesApi",
     "TransactionPortfoliosApi",
     "TransferAgencyApi",
+    "TransfersApi",
     "TranslationApi",
     "WorkspaceApi"
 ]

@@ -615,7 +615,8 @@ Class | Method | HTTP request | Description
 *ScenariosApi* | [**delete_scenario**](docs/ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 *ScenariosApi* | [**get_scenario**](docs/ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
 *ScenariosApi* | [**list_scenario_versions**](docs/ScenariosApi.md#list_scenario_versions) | **GET** /api/scenarios/{scope}/{code}/versions | [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
-*ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenarios: List the set of Scenario definitions
+*ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios | [EARLY ACCESS] ListScenarios: List Scenarios
+*ScenariosApi* | [**list_scenarios_for_scope**](docs/ScenariosApi.md#list_scenarios_for_scope) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
 *ScenariosApi* | [**preview_scenario**](docs/ScenariosApi.md#preview_scenario) | **POST** /api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario
 *ScenariosApi* | [**upsert_scenario**](docs/ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
@@ -687,7 +688,7 @@ Class | Method | HTTP request | Description
 *TimelinesApi* | [**list_closed_periods**](docs/TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
 *TimelinesApi* | [**list_timelines**](docs/TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
 *TimelinesApi* | [**set_post_close_activity**](docs/TimelinesApi.md#set_post_close_activity) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity | [EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.
-*TimelinesApi* | [**unconfirm_closed_period**](docs/TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
+*TimelinesApi* | [**unconfirm_closed_period**](docs/TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity
 *TimelinesApi* | [**update_timeline**](docs/TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 *TransactionConfigurationApi* | [**delete_side_definition**](docs/TransactionConfigurationApi.md#delete_side_definition) | **DELETE** /api/transactionconfiguration/sides/{side}/$delete | DeleteSideDefinition: Delete the given side definition
 *TransactionConfigurationApi* | [**delete_transaction_type**](docs/TransactionConfigurationApi.md#delete_transaction_type) | **DELETE** /api/transactionconfiguration/types/{source}/{type} | DeleteTransactionType: Delete a transaction type
@@ -761,7 +762,9 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**upsert_transactions**](docs/TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
 *TransactionPortfoliosApi* | [**upsert_virtual_transaction_override**](docs/TransactionPortfoliosApi.md#upsert_virtual_transaction_override) | **POST** /api/transactionportfolios/{scope}/{code}/overridevirtualtransactions | [EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert a virtual transaction override
 *TransferAgencyApi* | [**calculate_order_dates**](docs/TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
+*TransferAgencyApi* | [**delete_transfer_agency_orders**](docs/TransferAgencyApi.md#delete_transfer_agency_orders) | **POST** /api/transferagency/orders/$delete | [EXPERIMENTAL] DeleteTransferAgencyOrders: Delete transfer agency orders
 *TransferAgencyApi* | [**upsert_transfer_agency_orders**](docs/TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
+*TransfersApi* | [**create_transfer**](docs/TransfersApi.md#create_transfer) | **POST** /api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer.
 *TranslationApi* | [**translate_instrument_definitions**](docs/TranslationApi.md#translate_instrument_definitions) | **POST** /api/translation/instrumentdefinitions | [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 *TranslationApi* | [**translate_trade_tickets**](docs/TranslationApi.md#translate_trade_tickets) | **POST** /api/translation/tradetickets | [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
 *WorkspaceApi* | [**create_item**](docs/WorkspaceApi.md#create_item) | **POST** /api/workspaces/{visibility}/{workspaceName}/items | [EXPERIMENTAL] CreateItem: Create a new item in a workspace.
@@ -907,6 +910,7 @@ Class | Method | HTTP request | Description
  - [BondConversionSchedule](docs/BondConversionSchedule.md)
  - [BondCouponEvent](docs/BondCouponEvent.md)
  - [BondDefaultEvent](docs/BondDefaultEvent.md)
+ - [BondDefaultSuppressionDetails](docs/BondDefaultSuppressionDetails.md)
  - [BondOption](docs/BondOption.md)
  - [BondOptionTerminationEvent](docs/BondOptionTerminationEvent.md)
  - [BondPrincipalEvent](docs/BondPrincipalEvent.md)
@@ -1114,6 +1118,8 @@ Class | Method | HTTP request | Description
  - [CreateTradeTicketsResponse](docs/CreateTradeTicketsResponse.md)
  - [CreateTransactionFeeTypeRequest](docs/CreateTransactionFeeTypeRequest.md)
  - [CreateTransactionPortfolioRequest](docs/CreateTransactionPortfolioRequest.md)
+ - [CreateTransferRequest](docs/CreateTransferRequest.md)
+ - [CreateTransferResponse](docs/CreateTransferResponse.md)
  - [CreateUnitDefinition](docs/CreateUnitDefinition.md)
  - [CreateValuationPointRequest](docs/CreateValuationPointRequest.md)
  - [CreditDefaultSwap](docs/CreditDefaultSwap.md)
@@ -1183,6 +1189,9 @@ Class | Method | HTTP request | Description
  - [DeleteRelationRequest](docs/DeleteRelationRequest.md)
  - [DeleteRelationalDataPointRequest](docs/DeleteRelationalDataPointRequest.md)
  - [DeleteRelationshipRequest](docs/DeleteRelationshipRequest.md)
+ - [DeleteTransferAgencyOrderRequest](docs/DeleteTransferAgencyOrderRequest.md)
+ - [DeleteTransferAgencyOrderResult](docs/DeleteTransferAgencyOrderResult.md)
+ - [DeleteTransferAgencyOrdersResponse](docs/DeleteTransferAgencyOrdersResponse.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
  - [DelistingEvent](docs/DelistingEvent.md)
  - [DependencySourceFilter](docs/DependencySourceFilter.md)
@@ -1299,6 +1308,7 @@ Class | Method | HTTP request | Description
  - [FundDetails](docs/FundDetails.md)
  - [FundEstimateValuationPoint](docs/FundEstimateValuationPoint.md)
  - [FundIdList](docs/FundIdList.md)
+ - [FundInstrument](docs/FundInstrument.md)
  - [FundJournalEntryLine](docs/FundJournalEntryLine.md)
  - [FundPnlBreakdown](docs/FundPnlBreakdown.md)
  - [FundPreviousNAV](docs/FundPreviousNAV.md)
@@ -2234,6 +2244,7 @@ Class | Method | HTTP request | Description
  - [TrialBalanceQueryParameters](docs/TrialBalanceQueryParameters.md)
  - [TriggerEvent](docs/TriggerEvent.md)
  - [TypedResourceId](docs/TypedResourceId.md)
+ - [UnconfirmClosedPeriodRequest](docs/UnconfirmClosedPeriodRequest.md)
  - [UnitSchema](docs/UnitSchema.md)
  - [UnitisationData](docs/UnitisationData.md)
  - [UnitsRatio](docs/UnitsRatio.md)

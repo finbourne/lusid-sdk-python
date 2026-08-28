@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.bond_default_suppression_details import BondDefaultSuppressionDetails
 from lusid.models.instrument_event import InstrumentEvent
 
 class BondDefaultEvent(InstrumentEvent):
@@ -29,9 +30,12 @@ class BondDefaultEvent(InstrumentEvent):
     Indicates when an issuer has defaulted on an obligation due to technical default, missed payments, or bankruptcy filing.  # noqa: E501
     """
     effective_date: Optional[datetime] = Field(default=None, description="The date the bond default occurred.", alias="effectiveDate")
+    default_reason:  Optional[StrictStr] = Field(None,alias="defaultReason", description="Why the issuer defaulted, in the client's own words. Free text, with no effect on any calculation.  This field is optional.") 
+    suppression_details: Optional[BondDefaultSuppressionDetails] = Field(default=None, alias="suppressionDetails")
+    suppression_details_specified: Optional[StrictBool] = Field(default=None, description="Whether SuppressionDetails was supplied at all, which an absent section and an empty one cannot  otherwise be told apart by when the percentages are read as separate columns. An absent section  suppresses coupons and principal outright; an empty one suppresses nothing.  Setting this to false while also supplying a percentage is contradictory. The percentages win and  the section is treated as present, because honouring the false would silently discard values the  caller explicitly sent.", alias="suppressionDetailsSpecified")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate"]
+    __properties = ["instrumentEventType", "effectiveDate", "defaultReason", "suppressionDetails", "suppressionDetailsSpecified"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -139,10 +143,23 @@ class BondDefaultEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of suppression_details
+        if self.suppression_details:
+            _dict['suppressionDetails'] = self.suppression_details.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if default_reason (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_reason is None and "default_reason" in self.__fields_set__:
+            _dict['defaultReason'] = None
+
+        # set to None if suppression_details_specified (nullable) is None
+        # and __fields_set__ contains the field
+        if self.suppression_details_specified is None and "suppression_details_specified" in self.__fields_set__:
+            _dict['suppressionDetailsSpecified'] = None
 
         return _dict
 
@@ -157,7 +174,10 @@ class BondDefaultEvent(InstrumentEvent):
 
         _obj = BondDefaultEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "effective_date": obj.get("effectiveDate")
+            "effective_date": obj.get("effectiveDate"),
+            "default_reason": obj.get("defaultReason"),
+            "suppression_details": BondDefaultSuppressionDetails.from_dict(obj.get("suppressionDetails")) if obj.get("suppressionDetails") is not None else None,
+            "suppression_details_specified": obj.get("suppressionDetailsSpecified")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

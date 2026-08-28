@@ -26,14 +26,18 @@ from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
 
 class BucketSetNode(BaseModel):
     """
-    One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio is set only on share class nodes.  # noqa: E501
+    One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio, the unit counts and the per-unit values are set only on share class nodes.  # noqa: E501
     """
     node_type:  StrictStr = Field(...,alias="nodeType", description="The kind of node: the fund aggregate or a single share class. Available values: Fund, Class.") 
     share_class_short_code:  Optional[StrictStr] = Field(None,alias="shareClassShortCode", description="The short code of the share class this node is for, or null for the fund node.") 
     nav: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net asset value at this node, in the fund currency, or null where it does not apply to the node type.")
     capital_ratio: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's capital ratio (its share of the fund NAV), set only on share class nodes.", alias="capitalRatio")
     buckets: List[BucketSetResultBucket] = Field(description="The buckets on this node, each with its period movement and cumulative values.")
-    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets"]
+    per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's NAV per unit in issue, in the fund currency, rounded to the share class's PricePrecision (left unrounded where the share class declares none). Reported only for a share class that is unitised and has units in issue to divide by. The dealing price - in the share class currency, with its instrument's rounding convention applied - is on the share class breakdown's unitisation data.", alias="perUnitValue")
+    shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the end of the period. Reported only for a share class that is unitised.", alias="sharesInIssue")
+    previous_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's NAV per unit at the previous valuation point, on the same basis as PerUnitValue.", alias="previousPerUnitValue")
+    previous_shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the start of the period. Reported only for a share class that is unitised.", alias="previousSharesInIssue")
+    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets", "perUnitValue", "sharesInIssue", "previousPerUnitValue", "previousSharesInIssue"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +93,26 @@ class BucketSetNode(BaseModel):
         if self.capital_ratio is None and "capital_ratio" in self.__fields_set__:
             _dict['capitalRatio'] = None
 
+        # set to None if per_unit_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.per_unit_value is None and "per_unit_value" in self.__fields_set__:
+            _dict['perUnitValue'] = None
+
+        # set to None if shares_in_issue (nullable) is None
+        # and __fields_set__ contains the field
+        if self.shares_in_issue is None and "shares_in_issue" in self.__fields_set__:
+            _dict['sharesInIssue'] = None
+
+        # set to None if previous_per_unit_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_per_unit_value is None and "previous_per_unit_value" in self.__fields_set__:
+            _dict['previousPerUnitValue'] = None
+
+        # set to None if previous_shares_in_issue (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_shares_in_issue is None and "previous_shares_in_issue" in self.__fields_set__:
+            _dict['previousSharesInIssue'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +129,11 @@ class BucketSetNode(BaseModel):
             "share_class_short_code": obj.get("shareClassShortCode"),
             "nav": obj.get("nav"),
             "capital_ratio": obj.get("capitalRatio"),
-            "buckets": [BucketSetResultBucket.from_dict(_item) for _item in obj.get("buckets")] if obj.get("buckets") is not None else None
+            "buckets": [BucketSetResultBucket.from_dict(_item) for _item in obj.get("buckets")] if obj.get("buckets") is not None else None,
+            "per_unit_value": obj.get("perUnitValue"),
+            "shares_in_issue": obj.get("sharesInIssue"),
+            "previous_per_unit_value": obj.get("previousPerUnitValue"),
+            "previous_shares_in_issue": obj.get("previousSharesInIssue")
         })
         return _obj
 

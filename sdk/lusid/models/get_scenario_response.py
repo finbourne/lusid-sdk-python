@@ -22,21 +22,19 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 from lusid.models.scenario_definition import ScenarioDefinition
 from lusid.models.version import Version
 
 class GetScenarioResponse(BaseModel):
     """
-    GetScenarioResponse
+    The response to a singular scenario read. There is deliberately no failure block on this  type: every route returning it is a singular (or list-of-singular) read, never a batch keyed  lookup, so there is no per-key error to report - an invalid entity is rejected at upsert and  a failed read fails the whole request. The IGetResponse batch members below throw for the  same reason; do not reintroduce a Failed property when copying this shape.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
     value: Optional[ScenarioDefinition] = None
     version: Optional[Version] = None
-    failed: Optional[ErrorDetail] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "value", "version", "failed", "links"]
+    __properties = ["href", "value", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,9 +74,6 @@ class GetScenarioResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of failed
-        if self.failed:
-            _dict['failed'] = self.failed.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -111,7 +106,6 @@ class GetScenarioResponse(BaseModel):
             "href": obj.get("href"),
             "value": ScenarioDefinition.from_dict(obj.get("value")) if obj.get("value") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "failed": ErrorDetail.from_dict(obj.get("failed")) if obj.get("failed") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

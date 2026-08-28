@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **create_instrument** | **bool** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] 
 **allocation_groups** | [**List[AllocationGroup]**](AllocationGroup.md) | An optional list of Allocation Group definitions for the Fund. | [optional] 
 **share_classes** | [**List[ShareClass]**](ShareClass.md) | An optional list of Share Class definitions for the Fund. | [optional] 
+**fund_instrument** | [**FundInstrument**](FundInstrument.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
@@ -57,9 +58,10 @@ create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
 allocation_groups: Optional[List[AllocationGroup]] = # Replace with your value
 share_classes: Optional[List[ShareClass]] = # Replace with your value
+fund_instrument: Optional[FundInstrument] = # Replace with your value
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, allocation_groups=allocation_groups, share_classes=share_classes, version=version, links=links)
+fund_instance = Fund(href=href, id=id, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, allocation_groups=allocation_groups, share_classes=share_classes, fund_instrument=fund_instrument, version=version, links=links)
 
 ```
 

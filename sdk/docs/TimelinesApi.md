@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**list_closed_periods**](TimelinesApi.md#list_closed_periods) | **GET** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] ListClosedPeriods: List ClosedPeriods for a specified Timeline.
 [**list_timelines**](TimelinesApi.md#list_timelines) | **GET** /api/timelines | [EXPERIMENTAL] ListTimelines: List Timelines
 [**set_post_close_activity**](TimelinesApi.md#set_post_close_activity) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/postcloseactivity | [EXPERIMENTAL] SetPostCloseActivity: Sets post-close activities to a Closed Period.
-[**unconfirm_closed_period**](TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
+[**unconfirm_closed_period**](TimelinesApi.md#unconfirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$unconfirm | [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity
 [**update_timeline**](TimelinesApi.md#update_timeline) | **PUT** /api/timelines/{scope}/{code} | [EXPERIMENTAL] UpdateTimeline: Update Timeline defined by scope and code
 
 
@@ -1023,11 +1023,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **unconfirm_closed_period**
-> ClosedPeriod unconfirm_closed_period(scope, code, closed_period_id, body=body)
+> ClosedPeriod unconfirm_closed_period(scope, code, closed_period_id, unconfirm_closed_period_request=unconfirm_closed_period_request)
 
-[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
+[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity
 
-Unconfirm the last confirmed Closed Period against a Timeline Entity
+Unconfirm a confirmed Closed Period against a Timeline Entity. By default only the latest confirmed  Closed Period may be unconfirmed. Setting deleteSubsequentPeriods on the request body allows any  confirmed Closed Period to be unconfirmed, deleting every Closed Period after it on the Timeline.
 
 ### Example
 
@@ -1076,15 +1076,20 @@ def main():
     api_instance = api_client_factory.build(TimelinesApi)
     scope = 'scope_example' # str | The scope of the specified Timeline.
     code = 'code_example' # str | The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.
-    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.
-    body = {} # object | Not in use at the moment (optional)
+    closed_period_id = 'closed_period_id_example' # str | The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # unconfirm_closed_period_request = UnconfirmClosedPeriodRequest.from_json("")
+    # unconfirm_closed_period_request = UnconfirmClosedPeriodRequest.from_dict({})
+    unconfirm_closed_period_request = UnconfirmClosedPeriodRequest()
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.unconfirm_closed_period(scope, code, closed_period_id, body=body, opts=opts)
+        # api_response =  api_instance.unconfirm_closed_period(scope, code, closed_period_id, unconfirm_closed_period_request=unconfirm_closed_period_request, opts=opts)
 
-        # [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity
-        api_response = api_instance.unconfirm_closed_period(scope, code, closed_period_id, body=body)
+        # [EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity
+        api_response = api_instance.unconfirm_closed_period(scope, code, closed_period_id, unconfirm_closed_period_request=unconfirm_closed_period_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -1099,8 +1104,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the specified Timeline. | 
  **code** | **str**| The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. | 
- **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. | 
- **body** | **object**| Not in use at the moment | [optional] 
+ **closed_period_id** | **str**| The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body. | 
+ **unconfirm_closed_period_request** | [**UnconfirmClosedPeriodRequest**](UnconfirmClosedPeriodRequest.md)| Controls whether a non-latest confirmed Closed Period may be unconfirmed. | [optional] 
 
 ### Return type
 

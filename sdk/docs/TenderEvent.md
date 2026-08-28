@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | List of possible SecurityOfferElections for this event. | [optional] 
 **cash_and_security_offer_elections** | [**List[CashAndSecurityOfferElection]**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this event. | [optional] 
 **cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | List of possible CashOfferElections for this event. | [optional] 
+**mixed_lot_constituents_elections** | [**List[MixedLotConstituentsElection]**](MixedLotConstituentsElection.md) | List of possible mixed lot offers for this tender event, if any. Each election replaces the tendered  position with one or more distinct new securities and/or cash legs of its own, taking the place of the  single event-level NewInstrument that the other security-bearing elections resolve to.    A tender may carry more than one of these, describing mutually exclusive multi-destination options. | [optional] 
 **offer_type** | **str** | Informational ISO 20022 OfferTp indicator (e.g. \&quot;ACPR\&quot;). Optional. No calculation impact. | [optional] 
 **accrued_interest_per_unit** | **float** | Optional per-unit accrued interest on the tendered face, from the last coupon date up to  (but excluding) PaymentDate. Bond instrument types only. If left empty, analytics-core  resolves it at event time from the bond&#39;s coupon schedule and market data. | [optional] 
 **min_piece_size** | **float** | Bond-specific minimum instructable face amount. Optional. Must be strictly positive when set. | [optional] 
@@ -47,6 +48,7 @@ fractional_units_decimal_places: Optional[StrictInt] = None
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = # Replace with your value
 cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
+mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = # Replace with your value
 offer_type: Optional[StrictStr] = "example_offer_type"
 accrued_interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 min_piece_size: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -56,7 +58,7 @@ response_deadline_date: Optional[datetime] = # Replace with your value
 market_deadline_date: Optional[datetime] = # Replace with your value
 early_response_deadline: Optional[datetime] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-tender_event_instance = TenderEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, new_instrument=new_instrument, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, offer_type=offer_type, accrued_interest_per_unit=accrued_interest_per_unit, min_piece_size=min_piece_size, min_increment=min_increment, proration_rate=proration_rate, response_deadline_date=response_deadline_date, market_deadline_date=market_deadline_date, early_response_deadline=early_response_deadline, instrument_event_type=instrument_event_type)
+tender_event_instance = TenderEvent(announcement_date=announcement_date, ex_date=ex_date, record_date=record_date, payment_date=payment_date, new_instrument=new_instrument, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, mixed_lot_constituents_elections=mixed_lot_constituents_elections, offer_type=offer_type, accrued_interest_per_unit=accrued_interest_per_unit, min_piece_size=min_piece_size, min_increment=min_increment, proration_rate=proration_rate, response_deadline_date=response_deadline_date, market_deadline_date=market_deadline_date, early_response_deadline=early_response_deadline, instrument_event_type=instrument_event_type)
 
 ```
 

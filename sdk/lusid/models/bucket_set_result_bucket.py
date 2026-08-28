@@ -25,14 +25,19 @@ from datetime import datetime
 
 class BucketSetResultBucket(BaseModel):
     """
-    One bucket's values within a bucket set node: the movement in the period plus the cumulative values before  and after it (CumulativeValue = Value + PreviousCumulativeValue).  # noqa: E501
+    One bucket's values within a bucket set node: the movement in the period plus the cumulative values before  and after it (CumulativeValue = Value + PreviousCumulativeValue), and - on share class nodes - the breakdown  of the movement by the source that contributed it and the same values restated per unit in issue.  # noqa: E501
     """
     bucket_id:  StrictStr = Field(...,alias="bucketId", description="The identifier of the bucket.") 
     bucket_type:  StrictStr = Field(...,alias="bucketType", description="The type of the bucket (for example Dealing or PnL).") 
     value: Union[StrictFloat, StrictInt] = Field(description="The movement in the bucket over the valuation point's period.")
     previous_cumulative_value: Union[StrictFloat, StrictInt] = Field(description="The cumulative value of the bucket up to the start of the period.", alias="previousCumulativeValue")
     cumulative_value: Union[StrictFloat, StrictInt] = Field(description="The cumulative value of the bucket up to the end of the period (Value + PreviousCumulativeValue).", alias="cumulativeValue")
-    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue"]
+    source_breakdown: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="The bucket's movement broken down by the source that contributed it, which always sums to Value. Set on share class nodes only. The keys are 'classSpecific' for amounts booked directly to the share class, 'nonClassSpecific' for fund-level amounts apportioned to it, and an allocation group's code for amounts allocated to that group and apportioned to the share class. Sources contributing nothing to the bucket are omitted.", alias="sourceBreakdown")
+    per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's movement over the period per unit in issue (Value divided by UnitsInIssue), in the fund currency, rounded to the share class's PricePrecision. Reported only where both the share class and the bucket are unitised and there are units in issue to divide by.", alias="perUnitValue")
+    units_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the end of the period. Reported only where both the share class and the bucket are unitised.", alias="unitsInIssue")
+    previous_cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the start of the period, per unit in issue at that point - so it reads as it did at the previous valuation point rather than being restated at this period's unit count.", alias="previousCumulativePerUnitValue")
+    cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the end of the period per unit in issue (CumulativeValue divided by UnitsInIssue). Reported only where both the share class and the bucket are unitised and there are units in issue to divide by.", alias="cumulativePerUnitValue")
+    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue", "sourceBreakdown", "perUnitValue", "unitsInIssue", "previousCumulativePerUnitValue", "cumulativePerUnitValue"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +71,31 @@ class BucketSetResultBucket(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if source_breakdown (nullable) is None
+        # and __fields_set__ contains the field
+        if self.source_breakdown is None and "source_breakdown" in self.__fields_set__:
+            _dict['sourceBreakdown'] = None
+
+        # set to None if per_unit_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.per_unit_value is None and "per_unit_value" in self.__fields_set__:
+            _dict['perUnitValue'] = None
+
+        # set to None if units_in_issue (nullable) is None
+        # and __fields_set__ contains the field
+        if self.units_in_issue is None and "units_in_issue" in self.__fields_set__:
+            _dict['unitsInIssue'] = None
+
+        # set to None if previous_cumulative_per_unit_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_cumulative_per_unit_value is None and "previous_cumulative_per_unit_value" in self.__fields_set__:
+            _dict['previousCumulativePerUnitValue'] = None
+
+        # set to None if cumulative_per_unit_value (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cumulative_per_unit_value is None and "cumulative_per_unit_value" in self.__fields_set__:
+            _dict['cumulativePerUnitValue'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +112,12 @@ class BucketSetResultBucket(BaseModel):
             "bucket_type": obj.get("bucketType"),
             "value": obj.get("value"),
             "previous_cumulative_value": obj.get("previousCumulativeValue"),
-            "cumulative_value": obj.get("cumulativeValue")
+            "cumulative_value": obj.get("cumulativeValue"),
+            "source_breakdown": obj.get("sourceBreakdown"),
+            "per_unit_value": obj.get("perUnitValue"),
+            "units_in_issue": obj.get("unitsInIssue"),
+            "previous_cumulative_per_unit_value": obj.get("previousCumulativePerUnitValue"),
+            "cumulative_per_unit_value": obj.get("cumulativePerUnitValue")
         })
         return _obj
 

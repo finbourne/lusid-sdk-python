@@ -31,6 +31,7 @@ from lusid.models.paged_resource_list_of_closed_period import PagedResourceListO
 from lusid.models.paged_resource_list_of_timeline import PagedResourceListOfTimeline
 from lusid.models.post_close_activities_request import PostCloseActivitiesRequest
 from lusid.models.timeline import Timeline
+from lusid.models.unconfirm_closed_period_request import UnconfirmClosedPeriodRequest
 from lusid.models.update_timeline_request import UpdateTimelineRequest
 
 from lusid.api_client import ApiClient
@@ -1889,32 +1890,32 @@ class TimelinesApi:
 
 
     @overload
-    async def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
+    async def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body.")], unconfirm_closed_period_request : Annotated[Optional[UnconfirmClosedPeriodRequest], Field(description="Controls whether a non-latest confirmed Closed Period may be unconfirmed.")] = None, **kwargs) -> ClosedPeriod:  # noqa: E501
         ...
 
     @overload
-    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
+    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body.")], unconfirm_closed_period_request : Annotated[Optional[UnconfirmClosedPeriodRequest], Field(description="Controls whether a non-latest confirmed Closed Period may be unconfirmed.")] = None, async_req: Optional[bool]=True, **kwargs) -> ClosedPeriod:  # noqa: E501
         ...
 
     @validate_arguments
-    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
-        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+    def unconfirm_closed_period(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body.")], unconfirm_closed_period_request : Annotated[Optional[UnconfirmClosedPeriodRequest], Field(description="Controls whether a non-latest confirmed Closed Period may be unconfirmed.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ClosedPeriod, Awaitable[ClosedPeriod]]:  # noqa: E501
+        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity  # noqa: E501
 
-        Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+        Unconfirm a confirmed Closed Period against a Timeline Entity. By default only the latest confirmed  Closed Period may be unconfirmed. Setting deleteSubsequentPeriods on the request body allows any  confirmed Closed Period to be unconfirmed, deleting every Closed Period after it on the Timeline.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.unconfirm_closed_period(scope, code, closed_period_id, body, async_req=True)
+        >>> thread = api.unconfirm_closed_period(scope, code, closed_period_id, unconfirm_closed_period_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the specified Timeline. (required)
         :type scope: str
         :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
         :type code: str
-        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. (required)
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body. (required)
         :type closed_period_id: str
-        :param body: Not in use at the moment
-        :type body: object
+        :param unconfirm_closed_period_request: Controls whether a non-latest confirmed Closed Period may be unconfirmed.
+        :type unconfirm_closed_period_request: UnconfirmClosedPeriodRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1931,27 +1932,27 @@ class TimelinesApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, body, **kwargs)  # noqa: E501
+        return self.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, unconfirm_closed_period_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def unconfirm_closed_period_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline.")], body : Annotated[Optional[Dict[str, Any]], Field(description="Not in use at the moment")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+    def unconfirm_closed_period_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the specified Timeline.")], code : Annotated[StrictStr, Field(..., description="The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline.")], closed_period_id : Annotated[StrictStr, Field(..., description="The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body.")], unconfirm_closed_period_request : Annotated[Optional[UnconfirmClosedPeriodRequest], Field(description="Controls whether a non-latest confirmed Closed Period may be unconfirmed.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UnconfirmClosedPeriod: Unconfirm a confirmed Closed Period against a Timeline Entity  # noqa: E501
 
-        Unconfirm the last confirmed Closed Period against a Timeline Entity  # noqa: E501
+        Unconfirm a confirmed Closed Period against a Timeline Entity. By default only the latest confirmed  Closed Period may be unconfirmed. Setting deleteSubsequentPeriods on the request body allows any  confirmed Closed Period to be unconfirmed, deleting every Closed Period after it on the Timeline.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, body, async_req=True)
+        >>> thread = api.unconfirm_closed_period_with_http_info(scope, code, closed_period_id, unconfirm_closed_period_request, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the specified Timeline. (required)
         :type scope: str
         :param code: The code of the specified Timeline. Together with the scope this uniquely identifies the Timeline. (required)
         :type code: str
-        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. The closed period must be the last closed period on the Timeline. (required)
+        :param closed_period_id: The id of the Closed Period. Together with the scope and code of the Timeline,              this uniquely identifies the ClosedPeriod. Must be the latest confirmed Closed Period unless              deleteSubsequentPeriods is set on the request body. (required)
         :type closed_period_id: str
-        :param body: Not in use at the moment
-        :type body: object
+        :param unconfirm_closed_period_request: Controls whether a non-latest confirmed Closed Period may be unconfirmed.
+        :type unconfirm_closed_period_request: UnconfirmClosedPeriodRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1982,7 +1983,7 @@ class TimelinesApi:
             'scope',
             'code',
             'closed_period_id',
-            'body'
+            'unconfirm_closed_period_request'
         ]
         _all_params.extend(
             [
@@ -2030,8 +2031,8 @@ class TimelinesApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['body'] is not None:
-            _body_params = _params['body']
+        if _params['unconfirm_closed_period_request'] is not None:
+            _body_params = _params['unconfirm_closed_period_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(

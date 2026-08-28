@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.security_offer_election import SecurityOfferElection
 
@@ -35,6 +36,7 @@ class MergerEvent(InstrumentEvent):
     announcement_date: Optional[datetime] = Field(default=None, description="The date the merger is announced.", alias="announcementDate")
     cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = Field(default=None, description="List of possible CashAndSecurityOfferElections for this merger event", alias="cashAndSecurityOfferElections")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="List of possible CashOfferElections for this merger event", alias="cashOfferElections")
+    mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = Field(default=None, description="List of possible mixed lot offers for this merger event, if any. Each election replaces the parent position  with one or more distinct new securities and/or cash legs of its own, taking the place of the single  event-level NewInstrument that the other security-bearing elections resolve to.    A merger may carry more than one of these, describing mutually exclusive multi-destination options.", alias="mixedLotConstituentsElections")
     ex_date: Optional[datetime] = Field(default=None, description="The first date on which the holder of record of the original shares has entitled ownership of the new shares.", alias="exDate")
     fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="Optional. Used in calculating cash-in-lieu of fractional shares.") 
     fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. Used in calculating cash-in-lieu of fractional shares.", alias="fractionalUnitsCashPrice")
@@ -46,7 +48,7 @@ class MergerEvent(InstrumentEvent):
     security_offer_elections: Optional[List[SecurityOfferElection]] = Field(default=None, description="List of possible SecurityOfferElections for this merger event", alias="securityOfferElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashOfferElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "newInstrument", "paymentDate", "recordDate", "securityOfferElections"]
+    __properties = ["instrumentEventType", "announcementDate", "cashAndSecurityOfferElections", "cashOfferElections", "mixedLotConstituentsElections", "exDate", "fractionalUnitsCashCurrency", "fractionalUnitsCashPrice", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "newInstrument", "paymentDate", "recordDate", "securityOfferElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -168,6 +170,13 @@ class MergerEvent(InstrumentEvent):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['cashOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in mixed_lot_constituents_elections (list)
+        _items = []
+        if self.mixed_lot_constituents_elections:
+            for _item in self.mixed_lot_constituents_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['mixedLotConstituentsElections'] = _items
         # override the default output from pydantic by calling `to_dict()` of new_instrument
         if self.new_instrument:
             _dict['newInstrument'] = self.new_instrument.to_dict()
@@ -197,6 +206,11 @@ class MergerEvent(InstrumentEvent):
         # and __fields_set__ contains the field
         if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
             _dict['cashOfferElections'] = None
+
+        # set to None if mixed_lot_constituents_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mixed_lot_constituents_elections is None and "mixed_lot_constituents_elections" in self.__fields_set__:
+            _dict['mixedLotConstituentsElections'] = None
 
         # set to None if fractional_units_cash_currency (nullable) is None
         # and __fields_set__ contains the field
@@ -244,6 +258,7 @@ class MergerEvent(InstrumentEvent):
             "announcement_date": obj.get("announcementDate"),
             "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
             "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
+            "mixed_lot_constituents_elections": [MixedLotConstituentsElection.from_dict(_item) for _item in obj.get("mixedLotConstituentsElections")] if obj.get("mixedLotConstituentsElections") is not None else None,
             "ex_date": obj.get("exDate"),
             "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
             "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),

@@ -1,6 +1,6 @@
 # BucketSetNode
 
-One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio is set only on share class nodes.
+One node within a bucket set result: the fund aggregate or a single share class. Both carry NAV and buckets; the  capital ratio, the unit counts and the per-unit values are set only on share class nodes.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +9,10 @@ Name | Type | Description | Notes
 **nav** | **float** | The net asset value at this node, in the fund currency, or null where it does not apply to the node type. | [optional] 
 **capital_ratio** | **float** | The share class&#39;s capital ratio (its share of the fund NAV), set only on share class nodes. | [optional] 
 **buckets** | [**List[BucketSetResultBucket]**](BucketSetResultBucket.md) | The buckets on this node, each with its period movement and cumulative values. | 
+**per_unit_value** | **float** | The share class&#39;s NAV per unit in issue, in the fund currency, rounded to the share class&#39;s PricePrecision (left unrounded where the share class declares none). Reported only for a share class that is unitised and has units in issue to divide by. The dealing price - in the share class currency, with its instrument&#39;s rounding convention applied - is on the share class breakdown&#39;s unitisation data. | [optional] 
+**shares_in_issue** | **float** | The share class&#39;s units in issue at the end of the period. Reported only for a share class that is unitised. | [optional] 
+**previous_per_unit_value** | **float** | The share class&#39;s NAV per unit at the previous valuation point, on the same basis as PerUnitValue. | [optional] 
+**previous_shares_in_issue** | **float** | The share class&#39;s units in issue at the start of the period. Reported only for a share class that is unitised. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +27,11 @@ share_class_short_code: Optional[StrictStr] = "example_share_class_short_code"
 nav: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 capital_ratio: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 buckets: List[BucketSetResultBucket] = # Replace with your value
-bucket_set_node_instance = BucketSetNode(node_type=node_type, share_class_short_code=share_class_short_code, nav=nav, capital_ratio=capital_ratio, buckets=buckets)
+per_unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+previous_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+previous_shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+bucket_set_node_instance = BucketSetNode(node_type=node_type, share_class_short_code=share_class_short_code, nav=nav, capital_ratio=capital_ratio, buckets=buckets, per_unit_value=per_unit_value, shares_in_issue=shares_in_issue, previous_per_unit_value=previous_per_unit_value, previous_shares_in_issue=previous_shares_in_issue)
 
 ```
 

@@ -141,6 +141,7 @@ from lusid.models.bond_conversion_entry import BondConversionEntry
 from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
+from lusid.models.bond_default_suppression_details import BondDefaultSuppressionDetails
 from lusid.models.bond_option import BondOption
 from lusid.models.bond_option_termination_event import BondOptionTerminationEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
@@ -348,6 +349,8 @@ from lusid.models.create_timeline_request import CreateTimelineRequest
 from lusid.models.create_trade_tickets_response import CreateTradeTicketsResponse
 from lusid.models.create_transaction_fee_type_request import CreateTransactionFeeTypeRequest
 from lusid.models.create_transaction_portfolio_request import CreateTransactionPortfolioRequest
+from lusid.models.create_transfer_request import CreateTransferRequest
+from lusid.models.create_transfer_response import CreateTransferResponse
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.create_valuation_point_request import CreateValuationPointRequest
 from lusid.models.credit_default_swap import CreditDefaultSwap
@@ -417,6 +420,9 @@ from lusid.models.delete_modes import DeleteModes
 from lusid.models.delete_relation_request import DeleteRelationRequest
 from lusid.models.delete_relational_data_point_request import DeleteRelationalDataPointRequest
 from lusid.models.delete_relationship_request import DeleteRelationshipRequest
+from lusid.models.delete_transfer_agency_order_request import DeleteTransferAgencyOrderRequest
+from lusid.models.delete_transfer_agency_order_result import DeleteTransferAgencyOrderResult
+from lusid.models.delete_transfer_agency_orders_response import DeleteTransferAgencyOrdersResponse
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.delisting_event import DelistingEvent
 from lusid.models.dependency_source_filter import DependencySourceFilter
@@ -533,6 +539,7 @@ from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoint
 from lusid.models.fund_id_list import FundIdList
+from lusid.models.fund_instrument import FundInstrument
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
@@ -1468,6 +1475,7 @@ from lusid.models.trial_balance import TrialBalance
 from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParameters
 from lusid.models.trigger_event import TriggerEvent
 from lusid.models.typed_resource_id import TypedResourceId
+from lusid.models.unconfirm_closed_period_request import UnconfirmClosedPeriodRequest
 from lusid.models.unit_schema import UnitSchema
 from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
@@ -1761,6 +1769,7 @@ __all__ = [
     "BondConversionSchedule",
     "BondCouponEvent",
     "BondDefaultEvent",
+    "BondDefaultSuppressionDetails",
     "BondOption",
     "BondOptionTerminationEvent",
     "BondPrincipalEvent",
@@ -1968,6 +1977,8 @@ __all__ = [
     "CreateTradeTicketsResponse",
     "CreateTransactionFeeTypeRequest",
     "CreateTransactionPortfolioRequest",
+    "CreateTransferRequest",
+    "CreateTransferResponse",
     "CreateUnitDefinition",
     "CreateValuationPointRequest",
     "CreditDefaultSwap",
@@ -2037,6 +2048,9 @@ __all__ = [
     "DeleteRelationRequest",
     "DeleteRelationalDataPointRequest",
     "DeleteRelationshipRequest",
+    "DeleteTransferAgencyOrderRequest",
+    "DeleteTransferAgencyOrderResult",
+    "DeleteTransferAgencyOrdersResponse",
     "DeletedEntityResponse",
     "DelistingEvent",
     "DependencySourceFilter",
@@ -2153,6 +2167,7 @@ __all__ = [
     "FundDetails",
     "FundEstimateValuationPoint",
     "FundIdList",
+    "FundInstrument",
     "FundJournalEntryLine",
     "FundPnlBreakdown",
     "FundPreviousNAV",
@@ -3088,6 +3103,7 @@ __all__ = [
     "TrialBalanceQueryParameters",
     "TriggerEvent",
     "TypedResourceId",
+    "UnconfirmClosedPeriodRequest",
     "UnitSchema",
     "UnitisationData",
     "UnitsRatio",

@@ -23,18 +23,16 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.address_key_alias import AddressKeyAlias
-from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
 
 class GetAddressKeyAliasResponse(BaseModel):
     """
-    GetAddressKeyAliasResponse
+    The response to a singular address key alias read. There is deliberately no failure block on this  type: every route returning it is a singular (or list-of-singular) read, never a batch keyed  lookup, so there is no per-key error to report - an invalid entity is rejected at upsert and  a failed read fails the whole request. The IGetResponse batch members below throw for the  same reason; do not reintroduce a Failed property when copying this shape.  # noqa: E501
     """
     href:  Optional[StrictStr] = Field(None,alias="href") 
     value: Optional[AddressKeyAlias] = None
-    failed: Optional[ErrorDetail] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "value", "failed", "links"]
+    __properties = ["href", "value", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,9 +69,6 @@ class GetAddressKeyAliasResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of value
         if self.value:
             _dict['value'] = self.value.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of failed
-        if self.failed:
-            _dict['failed'] = self.failed.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -105,7 +100,6 @@ class GetAddressKeyAliasResponse(BaseModel):
         _obj = GetAddressKeyAliasResponse.parse_obj({
             "href": obj.get("href"),
             "value": AddressKeyAlias.from_dict(obj.get("value")) if obj.get("value") is not None else None,
-            "failed": ErrorDetail.from_dict(obj.get("failed")) if obj.get("failed") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

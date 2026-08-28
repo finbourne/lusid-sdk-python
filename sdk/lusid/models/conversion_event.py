@@ -27,6 +27,7 @@ from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.lapse_election import LapseElection
+from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 from lusid.models.new_instrument import NewInstrument
 from lusid.models.security_offer_election import SecurityOfferElection
 
@@ -49,10 +50,11 @@ class ConversionEvent(InstrumentEvent):
     cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = Field(default=None, description="List of possible cash and security offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list <b> must be null or empty</b>.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashOfferElections  has at least one election. None of these elections have to be chosen or default.", alias="cashAndSecurityOfferElections")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="List of possible cash offers for this conversion event. There must be at most one election of this type.    If the ParticipationType is Mandatory:    This list <b> must be null or empty</b>.    If the ParticipationType is Voluntary:    This list can be empty,  so long as SecurityOfferElections or CashAndSecurityOfferElections  has at least one election. None of these elections have to be chosen or default.", alias="cashOfferElections")
     lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="List of possible lapse elections for this conversion event. There must be at most one election of this type.    If provided, the holder is not entitled to receive anything for the conversion.", alias="lapseElections")
+    mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = Field(default=None, description="List of possible mixed lot offers for this conversion event, if any. Each election converts the parent position  into one or more distinct new securities and/or cash legs, taking the place of the single event-level  NewInstrument that the other security-bearing elections resolve to.    A conversion may carry more than one of these, describing mutually exclusive multi-destination options.  Only supported when ConversionType is Regular.", alias="mixedLotConstituentsElections")
     conversion_type:  Optional[StrictStr] = Field(None,alias="conversionType", description="The type of conversion. Regular for standard conversions; Exchange144A for SEC Rule 144A exchanges.                Supported string (enumeration) values are: [Regular, Exchange144A]. Available values: Regular, Exchange144A.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "responseDeadlineDate", "marketDeadlineDate", "effectiveDate", "periodOfAction", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections", "lapseElections", "conversionType"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "responseDeadlineDate", "marketDeadlineDate", "effectiveDate", "periodOfAction", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces", "securityOfferElections", "cashAndSecurityOfferElections", "cashOfferElections", "lapseElections", "mixedLotConstituentsElections", "conversionType"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -194,6 +196,13 @@ class ConversionEvent(InstrumentEvent):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['lapseElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in mixed_lot_constituents_elections (list)
+        _items = []
+        if self.mixed_lot_constituents_elections:
+            for _item in self.mixed_lot_constituents_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['mixedLotConstituentsElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -254,6 +263,11 @@ class ConversionEvent(InstrumentEvent):
         if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
             _dict['lapseElections'] = None
 
+        # set to None if mixed_lot_constituents_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mixed_lot_constituents_elections is None and "mixed_lot_constituents_elections" in self.__fields_set__:
+            _dict['mixedLotConstituentsElections'] = None
+
         # set to None if conversion_type (nullable) is None
         # and __fields_set__ contains the field
         if self.conversion_type is None and "conversion_type" in self.__fields_set__:
@@ -287,6 +301,7 @@ class ConversionEvent(InstrumentEvent):
             "cash_and_security_offer_elections": [CashAndSecurityOfferElection.from_dict(_item) for _item in obj.get("cashAndSecurityOfferElections")] if obj.get("cashAndSecurityOfferElections") is not None else None,
             "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
             "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None,
+            "mixed_lot_constituents_elections": [MixedLotConstituentsElection.from_dict(_item) for _item in obj.get("mixedLotConstituentsElections")] if obj.get("mixedLotConstituentsElections") is not None else None,
             "conversion_type": obj.get("conversionType")
         })
         # store additional fields in additional_properties

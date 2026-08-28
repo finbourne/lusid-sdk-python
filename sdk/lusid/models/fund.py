@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.allocation_group import AllocationGroup
 from lusid.models.day_month import DayMonth
+from lusid.models.fund_instrument import FundInstrument
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
@@ -57,9 +58,10 @@ class Fund(BaseModel):
     create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create instruments for the Fund's share classes, series, or partner classes upon creation. Defaults to false.", alias="createInstrument")
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Group definitions for the Fund.", alias="allocationGroups")
     share_classes: Optional[List[ShareClass]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
+    fund_instrument: Optional[FundInstrument] = Field(default=None, alias="fundInstrument")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -150,6 +152,9 @@ class Fund(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shareClasses'] = _items
+        # override the default output from pydantic by calling `to_dict()` of fund_instrument
+        if self.fund_instrument:
+            _dict['fundInstrument'] = self.fund_instrument.to_dict()
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -262,6 +267,7 @@ class Fund(BaseModel):
             "create_instrument": obj.get("createInstrument"),
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "share_classes": [ShareClass.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None,
+            "fund_instrument": FundInstrument.from_dict(obj.get("fundInstrument")) if obj.get("fundInstrument") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

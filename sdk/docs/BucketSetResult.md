@@ -4,6 +4,7 @@ A valuation point's results for one bucket set: whether the set is the apportion
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**bucket_set_code** | **str** | The code of the fund configuration&#39;s bucket set definition these results were produced from. Empty for a fund valued from component filters, which has no bucket set definition to name. | 
 **is_apportionment** | **bool** | Whether this bucket set is the apportionment set (apportioning non-class-specific P&amp;L across share classes). | 
 **nodes** | [**List[BucketSetNode]**](BucketSetNode.md) | The nodes making up the bucket set: the fund aggregate and one per share class. | 
 ## Example
@@ -15,10 +16,11 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
+bucket_set_code: StrictStr = "example_bucket_set_code"
 is_apportionment: StrictBool = # Replace with your value
 is_apportionment:StrictBool = True
 nodes: List[BucketSetNode] = # Replace with your value
-bucket_set_result_instance = BucketSetResult(is_apportionment=is_apportionment, nodes=nodes)
+bucket_set_result_instance = BucketSetResult(bucket_set_code=bucket_set_code, is_apportionment=is_apportionment, nodes=nodes)
 
 ```
 

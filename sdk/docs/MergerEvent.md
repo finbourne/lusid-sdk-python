@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **announcement_date** | **datetime** | The date the merger is announced. | [optional] 
 **cash_and_security_offer_elections** | [**List[CashAndSecurityOfferElection]**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this merger event | [optional] 
 **cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | List of possible CashOfferElections for this merger event | [optional] 
+**mixed_lot_constituents_elections** | [**List[MixedLotConstituentsElection]**](MixedLotConstituentsElection.md) | List of possible mixed lot offers for this merger event, if any. Each election replaces the parent position  with one or more distinct new securities and/or cash legs of its own, taking the place of the single  event-level NewInstrument that the other security-bearing elections resolve to.    A merger may carry more than one of these, describing mutually exclusive multi-destination options. | [optional] 
 **ex_date** | **datetime** | The first date on which the holder of record of the original shares has entitled ownership of the new shares. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
 **fractional_units_cash_price** | **float** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 
@@ -29,6 +30,7 @@ from datetime import datetime
 announcement_date: Optional[datetime] = # Replace with your value
 cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = # Replace with your value
 cash_offer_elections: Optional[List[CashOfferElection]] = # Replace with your value
+mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
 fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -40,7 +42,7 @@ payment_date: Optional[datetime] = # Replace with your value
 record_date: Optional[datetime] = # Replace with your value
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-merger_event_instance = MergerEvent(announcement_date=announcement_date, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, ex_date=ex_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, new_instrument=new_instrument, payment_date=payment_date, record_date=record_date, security_offer_elections=security_offer_elections, instrument_event_type=instrument_event_type)
+merger_event_instance = MergerEvent(announcement_date=announcement_date, cash_and_security_offer_elections=cash_and_security_offer_elections, cash_offer_elections=cash_offer_elections, mixed_lot_constituents_elections=mixed_lot_constituents_elections, ex_date=ex_date, fractional_units_cash_currency=fractional_units_cash_currency, fractional_units_cash_price=fractional_units_cash_price, fractional_units_rounding_convention=fractional_units_rounding_convention, fractional_units_decimal_places=fractional_units_decimal_places, new_instrument=new_instrument, payment_date=payment_date, record_date=record_date, security_offer_elections=security_offer_elections, instrument_event_type=instrument_event_type)
 
 ```
 

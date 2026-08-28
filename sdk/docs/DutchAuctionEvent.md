@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **security_offer_elections** | [**List[SecurityOfferElection]**](SecurityOfferElection.md) | List of possible SecurityOfferElections for this event. Populated on the SECU path (Count &#x3D;&#x3D; 1);  empty on the CASH and CASE paths. | [optional] 
 **cash_and_security_offer_elections** | [**List[CashAndSecurityOfferElection]**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this event. Populated on the CASE path  (Count &#x3D;&#x3D; 1); empty on the CASH and SECU paths. | [optional] 
 **lapse_elections** | [**List[LapseElection]**](LapseElection.md) | List of possible LapseElections for this event. Required on all three paths (Count &#x3D;&#x3D; 1).  Allows the holder to opt out of the offer (NOAC). | [optional] 
+**mixed_lot_constituents_elections** | [**List[MixedLotConstituentsElection]**](MixedLotConstituentsElection.md) | List of possible MixedLotConstituentsElections for this event, if any. Each election settles into one or more  distinct new securities and/or cash legs of its own, in place of the single event-level NewInstrument the  SecurityOffer and CashAndSecurityOffer paths resolve to.    Several may be present: a Dutch Auction commonly offers a number of mutually exclusive destinations, and each  is described by its own election. Not applicable to the CASH path, which has no security leg to multiply. | [optional] 
 **response_deadline_date** | **datetime** | Account-servicer response deadline. Defaults to MarketDeadlineDate when not supplied.  When provided, must be on or before MarketDeadlineDate. | [optional] 
 **early_response_deadline** | **datetime** | Early-participation deadline. When provided, must be on or before ResponseDeadlineDate. | [optional] 
 **ex_date** | **datetime** | The ex date of the event. Optional; carried for cross-event consistency. | [optional] 
@@ -39,6 +40,7 @@ tender_offer_elections: Optional[List[TenderOfferElection]] = # Replace with you
 security_offer_elections: Optional[List[SecurityOfferElection]] = # Replace with your value
 cash_and_security_offer_elections: Optional[List[CashAndSecurityOfferElection]] = # Replace with your value
 lapse_elections: Optional[List[LapseElection]] = # Replace with your value
+mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = # Replace with your value
 response_deadline_date: Optional[datetime] = # Replace with your value
 early_response_deadline: Optional[datetime] = # Replace with your value
 ex_date: Optional[datetime] = # Replace with your value
@@ -51,7 +53,7 @@ fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = # Replace
 fractional_units_cash_currency: Optional[StrictStr] = "example_fractional_units_cash_currency"
 bid_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-dutch_auction_event_instance = DutchAuctionEvent(payment_date=payment_date, market_deadline_date=market_deadline_date, currency=currency, tender_offer_elections=tender_offer_elections, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, lapse_elections=lapse_elections, response_deadline_date=response_deadline_date, early_response_deadline=early_response_deadline, ex_date=ex_date, record_date=record_date, announcement_date=announcement_date, target_quantity=target_quantity, proration_rate=proration_rate, new_instrument=new_instrument, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, bid_price=bid_price, instrument_event_type=instrument_event_type)
+dutch_auction_event_instance = DutchAuctionEvent(payment_date=payment_date, market_deadline_date=market_deadline_date, currency=currency, tender_offer_elections=tender_offer_elections, security_offer_elections=security_offer_elections, cash_and_security_offer_elections=cash_and_security_offer_elections, lapse_elections=lapse_elections, mixed_lot_constituents_elections=mixed_lot_constituents_elections, response_deadline_date=response_deadline_date, early_response_deadline=early_response_deadline, ex_date=ex_date, record_date=record_date, announcement_date=announcement_date, target_quantity=target_quantity, proration_rate=proration_rate, new_instrument=new_instrument, fractional_units_cash_price=fractional_units_cash_price, fractional_units_cash_currency=fractional_units_cash_currency, bid_price=bid_price, instrument_event_type=instrument_event_type)
 
 ```
 
