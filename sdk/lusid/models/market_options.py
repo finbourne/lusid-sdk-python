@@ -31,9 +31,10 @@ class MarketOptions(BaseModel):
     default_instrument_code_type:  Optional[StrictStr] = Field(None,alias="defaultInstrumentCodeType", description="When instrument quotes are searched for, what identifier should be used by default") 
     default_scope:  Optional[StrictStr] = Field(None,alias="defaultScope", description="The scope in which to search for data when applying default rules. This is optional: if omitted, no default rules  are created and market data is resolved only via the explicitly specified market data key rules.") 
     attempt_to_infer_missing_fx: Optional[StrictBool] = Field(default=None, description="if true will calculate a missing Fx pair (e.g. THBJPY) from the inverse JPYTHB or from standardised pairs against USD, e.g. THBUSD and JPYUSD", alias="attemptToInferMissingFx")
+    attempt_to_infer_missing_fx_on_fixings: Optional[StrictBool] = Field(default=None, description="If true, applies the same inference as AttemptToInferMissingFx to FX fixings (resets), e.g. the fixing of a  non-deliverable FX forward: a fixing quoted only in the reverse direction, or derivable by triangulation  through a standard base currency at the fixing date, is inferred rather than reported missing. This is a  separate, explicit opt-in because a fixing is a contractual historical print: with this off (the default),  a fixing must be present as the exact oriented currency pair to be used.", alias="attemptToInferMissingFxOnFixings")
     calendar_scope:  Optional[StrictStr] = Field(None,alias="calendarScope", description="The scope in which holiday calendars stored") 
     convention_scope:  Optional[StrictStr] = Field(None,alias="conventionScope", description="The scope in which conventions stored") 
-    __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "calendarScope", "conventionScope"]
+    __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "attemptToInferMissingFxOnFixings", "calendarScope", "conventionScope"]
 
     class Config:
         """Pydantic configuration"""
@@ -108,6 +109,7 @@ class MarketOptions(BaseModel):
             "default_instrument_code_type": obj.get("defaultInstrumentCodeType"),
             "default_scope": obj.get("defaultScope"),
             "attempt_to_infer_missing_fx": obj.get("attemptToInferMissingFx"),
+            "attempt_to_infer_missing_fx_on_fixings": obj.get("attemptToInferMissingFxOnFixings"),
             "calendar_scope": obj.get("calendarScope"),
             "convention_scope": obj.get("conventionScope")
         })

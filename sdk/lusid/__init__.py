@@ -214,6 +214,7 @@ from lusid.models.basket_identifier import BasketIdentifier
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
 from lusid.models.batch_amend_transaction_settlement_instruction_response import BatchAmendTransactionSettlementInstructionResponse
+from lusid.models.batch_create_closed_periods_request import BatchCreateClosedPeriodsRequest
 from lusid.models.batch_delete_relational_data_response import BatchDeleteRelationalDataResponse
 from lusid.models.batch_manage_comment_request import BatchManageCommentRequest
 from lusid.models.batch_manage_comment_response import BatchManageCommentResponse
@@ -245,6 +246,7 @@ from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_default_suppression_details import BondDefaultSuppressionDetails
+from lusid.models.bond_lookup_model_options import BondLookupModelOptions
 from lusid.models.bond_option import BondOption
 from lusid.models.bond_option_termination_event import BondOptionTerminationEvent
 from lusid.models.bond_principal_event import BondPrincipalEvent
@@ -753,6 +755,7 @@ from lusid.models.holding_ids_request import HoldingIdsRequest
 from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
+from lusid.models.hull_white_model_options import HullWhiteModelOptions
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.id_selector_definition import IdSelectorDefinition
 from lusid.models.identifier_definition import IdentifierDefinition
@@ -1303,6 +1306,7 @@ from lusid.models.resource_list_of_change import ResourceListOfChange
 from lusid.models.resource_list_of_change_history import ResourceListOfChangeHistory
 from lusid.models.resource_list_of_change_interval import ResourceListOfChangeInterval
 from lusid.models.resource_list_of_change_interval_with_order_management_detail import ResourceListOfChangeIntervalWithOrderManagementDetail
+from lusid.models.resource_list_of_closed_period import ResourceListOfClosedPeriod
 from lusid.models.resource_list_of_compliance_breached_order_info import ResourceListOfComplianceBreachedOrderInfo
 from lusid.models.resource_list_of_compliance_rule import ResourceListOfComplianceRule
 from lusid.models.resource_list_of_compliance_rule_result import ResourceListOfComplianceRuleResult
@@ -1522,6 +1526,7 @@ from lusid.models.transaction_currency_and_amount import TransactionCurrencyAndA
 from lusid.models.transaction_date_windows import TransactionDateWindows
 from lusid.models.transaction_diagnostics import TransactionDiagnostics
 from lusid.models.transaction_entity import TransactionEntity
+from lusid.models.transaction_entity_link import TransactionEntityLink
 from lusid.models.transaction_fee_capitalisation import TransactionFeeCapitalisation
 from lusid.models.transaction_fee_type import TransactionFeeType
 from lusid.models.transaction_field_map import TransactionFieldMap
@@ -1944,6 +1949,7 @@ __all__ = [
     "BatchAdjustHoldingsResponse",
     "BatchAmendCustomDataModelMembershipResponse",
     "BatchAmendTransactionSettlementInstructionResponse",
+    "BatchCreateClosedPeriodsRequest",
     "BatchDeleteRelationalDataResponse",
     "BatchManageCommentRequest",
     "BatchManageCommentResponse",
@@ -1975,6 +1981,7 @@ __all__ = [
     "BondCouponEvent",
     "BondDefaultEvent",
     "BondDefaultSuppressionDetails",
+    "BondLookupModelOptions",
     "BondOption",
     "BondOptionTerminationEvent",
     "BondPrincipalEvent",
@@ -2483,6 +2490,7 @@ __all__ = [
     "HoldingPricingInfo",
     "HoldingsAdjustment",
     "HoldingsAdjustmentHeader",
+    "HullWhiteModelOptions",
     "IUnitDefinitionDto",
     "IdSelectorDefinition",
     "IdentifierDefinition",
@@ -3033,6 +3041,7 @@ __all__ = [
     "ResourceListOfChangeHistory",
     "ResourceListOfChangeInterval",
     "ResourceListOfChangeIntervalWithOrderManagementDetail",
+    "ResourceListOfClosedPeriod",
     "ResourceListOfComplianceBreachedOrderInfo",
     "ResourceListOfComplianceRule",
     "ResourceListOfComplianceRuleResult",
@@ -3252,6 +3261,7 @@ __all__ = [
     "TransactionDateWindows",
     "TransactionDiagnostics",
     "TransactionEntity",
+    "TransactionEntityLink",
     "TransactionFeeCapitalisation",
     "TransactionFeeType",
     "TransactionFieldMap",

@@ -678,6 +678,8 @@ Class | Method | HTTP request | Description
 *TaxRuleSetsApi* | [**get_tax_rule_set**](docs/TaxRuleSetsApi.md#get_tax_rule_set) | **GET** /api/tax/rulesets/{scope}/{code} | [EXPERIMENTAL] GetTaxRuleSet: Retrieve the definition of single tax rule set.
 *TaxRuleSetsApi* | [**list_tax_rule_sets**](docs/TaxRuleSetsApi.md#list_tax_rule_sets) | **GET** /api/tax/rulesets | [EXPERIMENTAL] ListTaxRuleSets: List tax rule sets.
 *TaxRuleSetsApi* | [**update_tax_rule_set**](docs/TaxRuleSetsApi.md#update_tax_rule_set) | **PUT** /api/tax/rulesets/{scope}/{code} | [EXPERIMENTAL] UpdateTaxRuleSet: Update a tax rule set.
+*TimelinesApi* | [**batch_create_closed_period_candidates**](docs/TimelinesApi.md#batch_create_closed_period_candidates) | **POST** /api/timelines/{scope}/{code}/closedperiods/candidate/$batchCreate | [EXPERIMENTAL] BatchCreateClosedPeriodCandidates: Atomically create an ordered series of confirmed closed period candidates against a timeline entity
+*TimelinesApi* | [**batch_create_closed_periods**](docs/TimelinesApi.md#batch_create_closed_periods) | **POST** /api/timelines/{scope}/{code}/closedperiods/$batchCreate | [EXPERIMENTAL] BatchCreateClosedPeriods: Atomically create an ordered series of confirmed closed periods against a timeline entity
 *TimelinesApi* | [**confirm_closed_period**](docs/TimelinesApi.md#confirm_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods/{closedPeriodId}/$confirm | [EXPERIMENTAL] ConfirmClosedPeriod: Confirm a Closed Period against a Timeline Entity
 *TimelinesApi* | [**create_closed_period**](docs/TimelinesApi.md#create_closed_period) | **POST** /api/timelines/{scope}/{code}/closedperiods | [EXPERIMENTAL] CreateClosedPeriod: Create a new closed period against a timeline entity
 *TimelinesApi* | [**create_closed_period_candidate**](docs/TimelinesApi.md#create_closed_period_candidate) | **POST** /api/timelines/{scope}/{code}/closedperiods/candidate | [EXPERIMENTAL] CreateClosedPeriodCandidate: Create a new closed period candidate against a timeline entity
@@ -880,6 +882,7 @@ Class | Method | HTTP request | Description
  - [BatchAdjustHoldingsResponse](docs/BatchAdjustHoldingsResponse.md)
  - [BatchAmendCustomDataModelMembershipResponse](docs/BatchAmendCustomDataModelMembershipResponse.md)
  - [BatchAmendTransactionSettlementInstructionResponse](docs/BatchAmendTransactionSettlementInstructionResponse.md)
+ - [BatchCreateClosedPeriodsRequest](docs/BatchCreateClosedPeriodsRequest.md)
  - [BatchDeleteRelationalDataResponse](docs/BatchDeleteRelationalDataResponse.md)
  - [BatchManageCommentRequest](docs/BatchManageCommentRequest.md)
  - [BatchManageCommentResponse](docs/BatchManageCommentResponse.md)
@@ -911,6 +914,7 @@ Class | Method | HTTP request | Description
  - [BondCouponEvent](docs/BondCouponEvent.md)
  - [BondDefaultEvent](docs/BondDefaultEvent.md)
  - [BondDefaultSuppressionDetails](docs/BondDefaultSuppressionDetails.md)
+ - [BondLookupModelOptions](docs/BondLookupModelOptions.md)
  - [BondOption](docs/BondOption.md)
  - [BondOptionTerminationEvent](docs/BondOptionTerminationEvent.md)
  - [BondPrincipalEvent](docs/BondPrincipalEvent.md)
@@ -1419,6 +1423,7 @@ Class | Method | HTTP request | Description
  - [HoldingPricingInfo](docs/HoldingPricingInfo.md)
  - [HoldingsAdjustment](docs/HoldingsAdjustment.md)
  - [HoldingsAdjustmentHeader](docs/HoldingsAdjustmentHeader.md)
+ - [HullWhiteModelOptions](docs/HullWhiteModelOptions.md)
  - [IUnitDefinitionDto](docs/IUnitDefinitionDto.md)
  - [IdSelectorDefinition](docs/IdSelectorDefinition.md)
  - [IdentifierDefinition](docs/IdentifierDefinition.md)
@@ -1969,6 +1974,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfChangeHistory](docs/ResourceListOfChangeHistory.md)
  - [ResourceListOfChangeInterval](docs/ResourceListOfChangeInterval.md)
  - [ResourceListOfChangeIntervalWithOrderManagementDetail](docs/ResourceListOfChangeIntervalWithOrderManagementDetail.md)
+ - [ResourceListOfClosedPeriod](docs/ResourceListOfClosedPeriod.md)
  - [ResourceListOfComplianceBreachedOrderInfo](docs/ResourceListOfComplianceBreachedOrderInfo.md)
  - [ResourceListOfComplianceRule](docs/ResourceListOfComplianceRule.md)
  - [ResourceListOfComplianceRuleResult](docs/ResourceListOfComplianceRuleResult.md)
@@ -2188,6 +2194,7 @@ Class | Method | HTTP request | Description
  - [TransactionDateWindows](docs/TransactionDateWindows.md)
  - [TransactionDiagnostics](docs/TransactionDiagnostics.md)
  - [TransactionEntity](docs/TransactionEntity.md)
+ - [TransactionEntityLink](docs/TransactionEntityLink.md)
  - [TransactionFeeCapitalisation](docs/TransactionFeeCapitalisation.md)
  - [TransactionFeeType](docs/TransactionFeeType.md)
  - [TransactionFieldMap](docs/TransactionFieldMap.md)

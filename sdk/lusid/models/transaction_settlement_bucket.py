@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_settlement_instruction import TransactionSettlementInstruction
 from lusid.models.transaction_settlement_movement import TransactionSettlementMovement
 
@@ -41,7 +42,8 @@ class TransactionSettlementBucket(BaseModel):
     status:  StrictStr = Field(...,alias="status", description="The Status of the settlement bucket - 'Settled', 'Part Settled' or 'Unsettled'. Available values: Unsettled, PartSettled, Settled, None.") 
     settlement_instructions: Optional[List[TransactionSettlementInstruction]] = Field(default=None, description="The settlement instructions received for this settlement bucket.", alias="settlementInstructions")
     movements: Optional[List[TransactionSettlementMovement]] = Field(default=None, description="The movements for the settlement bucket.")
-    __properties = ["settlementCategory", "lusidInstrumentId", "instrumentScope", "contractualSettlementDate", "contractedUnits", "settledUnits", "unsettledUnits", "overdueUnits", "configuredSettlement", "status", "settlementInstructions", "movements"]
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    __properties = ["settlementCategory", "lusidInstrumentId", "instrumentScope", "contractualSettlementDate", "contractedUnits", "settledUnits", "unsettledUnits", "overdueUnits", "configuredSettlement", "status", "settlementInstructions", "movements", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +91,9 @@ class TransactionSettlementBucket(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['movements'] = _items
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if contractual_settlement_date (nullable) is None
         # and __fields_set__ contains the field
         if self.contractual_settlement_date is None and "contractual_settlement_date" in self.__fields_set__:
@@ -132,7 +137,8 @@ class TransactionSettlementBucket(BaseModel):
             "configured_settlement": obj.get("configuredSettlement"),
             "status": obj.get("status"),
             "settlement_instructions": [TransactionSettlementInstruction.from_dict(_item) for _item in obj.get("settlementInstructions")] if obj.get("settlementInstructions") is not None else None,
-            "movements": [TransactionSettlementMovement.from_dict(_item) for _item in obj.get("movements")] if obj.get("movements") is not None else None
+            "movements": [TransactionSettlementMovement.from_dict(_item) for _item in obj.get("movements")] if obj.get("movements") is not None else None,
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
 

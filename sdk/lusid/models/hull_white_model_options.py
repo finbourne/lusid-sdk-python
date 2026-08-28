@@ -24,14 +24,18 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.model_options import ModelOptions
 
-class FundingLegOptions(ModelOptions):
+class HullWhiteModelOptions(ModelOptions):
     """
-    FundingLegOptions
+    Model options for the Hull-White one-factor lattice pricer.  # noqa: E501
     """
-    expected_funding_leg_notional:  StrictStr = Field(...,alias="expectedFundingLegNotional", description="Assumption made on future expected notional of the funding leg.") 
+    mean_reversion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The mean reversion speed of the short rate. Must be strictly positive. Defaults to 0.03.", alias="meanReversion")
+    volatility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Defaults to 0.008.")
+    lattice_steps: Optional[StrictInt] = Field(default=None, description="The number of uniform time steps in the lattice. More steps give a finer discretisation  of the short-rate process at greater computational cost. Defaults to 200.", alias="latticeSteps")
+    mean_reversion_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion.", alias="meanReversionByCurrency")
+    volatility_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure.", alias="volatilityByCurrency")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "expectedFundingLegNotional"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "meanReversionByCurrency", "volatilityByCurrency"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -44,7 +48,7 @@ class FundingLegOptions(ModelOptions):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'FundingLegOptions' not in [ 
+        if 'HullWhiteModelOptions' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -128,8 +132,8 @@ class FundingLegOptions(ModelOptions):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundingLegOptions:
-        """Create an instance of FundingLegOptions from a JSON string"""
+    def from_json(cls, json_str: str) -> HullWhiteModelOptions:
+        """Create an instance of HullWhiteModelOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -144,20 +148,34 @@ class FundingLegOptions(ModelOptions):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if mean_reversion_by_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mean_reversion_by_currency is None and "mean_reversion_by_currency" in self.__fields_set__:
+            _dict['meanReversionByCurrency'] = None
+
+        # set to None if volatility_by_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.volatility_by_currency is None and "volatility_by_currency" in self.__fields_set__:
+            _dict['volatilityByCurrency'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundingLegOptions:
-        """Create an instance of FundingLegOptions from a dict"""
+    def from_dict(cls, obj: dict) -> HullWhiteModelOptions:
+        """Create an instance of HullWhiteModelOptions from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundingLegOptions.parse_obj(obj)
+            return HullWhiteModelOptions.parse_obj(obj)
 
-        _obj = FundingLegOptions.parse_obj({
+        _obj = HullWhiteModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "expected_funding_leg_notional": obj.get("expectedFundingLegNotional")
+            "mean_reversion": obj.get("meanReversion"),
+            "volatility": obj.get("volatility"),
+            "lattice_steps": obj.get("latticeSteps"),
+            "mean_reversion_by_currency": obj.get("meanReversionByCurrency"),
+            "volatility_by_currency": obj.get("volatilityByCurrency")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -166,4 +184,4 @@ class FundingLegOptions(ModelOptions):
 
         return _obj
 
-FundingLegOptions.update_forward_refs()
+HullWhiteModelOptions.update_forward_refs()

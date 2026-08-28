@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **status** | **str** | The Status of the settlement bucket - &#39;Settled&#39;, &#39;Part Settled&#39; or &#39;Unsettled&#39;. Available values: Unsettled, PartSettled, Settled, None. | 
 **settlement_instructions** | [**List[TransactionSettlementInstruction]**](TransactionSettlementInstruction.md) | The settlement instructions received for this settlement bucket. | [optional] 
 **movements** | [**List[TransactionSettlementMovement]**](TransactionSettlementMovement.md) | The movements for the settlement bucket. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -36,7 +37,8 @@ configured_settlement: Optional[StrictStr] = "example_configured_settlement"
 status: StrictStr = "example_status"
 settlement_instructions: Optional[List[TransactionSettlementInstruction]] = # Replace with your value
 movements: Optional[List[TransactionSettlementMovement]] = # Replace with your value
-transaction_settlement_bucket_instance = TransactionSettlementBucket(settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, contractual_settlement_date=contractual_settlement_date, contracted_units=contracted_units, settled_units=settled_units, unsettled_units=unsettled_units, overdue_units=overdue_units, configured_settlement=configured_settlement, status=status, settlement_instructions=settlement_instructions, movements=movements)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+transaction_settlement_bucket_instance = TransactionSettlementBucket(settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, contractual_settlement_date=contractual_settlement_date, contracted_units=contracted_units, settled_units=settled_units, unsettled_units=unsettled_units, overdue_units=overdue_units, configured_settlement=configured_settlement, status=status, settlement_instructions=settlement_instructions, movements=movements, custodian_account_id=custodian_account_id)
 
 ```
 

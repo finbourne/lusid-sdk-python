@@ -122,6 +122,7 @@ class PropertyDomain(str, Enum):
     SUBSCRIPTION = 'Subscription'
     SCENARIODEFINITION = 'ScenarioDefinition'
     PAYMENTINSTRUCTION = 'PaymentInstruction'
+    TRANSFER = 'Transfer'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:

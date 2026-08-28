@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **default_instrument_code_type** | **str** | When instrument quotes are searched for, what identifier should be used by default | [optional] 
 **default_scope** | **str** | The scope in which to search for data when applying default rules. This is optional: if omitted, no default rules  are created and market data is resolved only via the explicitly specified market data key rules. | [optional] 
 **attempt_to_infer_missing_fx** | **bool** | if true will calculate a missing Fx pair (e.g. THBJPY) from the inverse JPYTHB or from standardised pairs against USD, e.g. THBUSD and JPYUSD | [optional] 
+**attempt_to_infer_missing_fx_on_fixings** | **bool** | If true, applies the same inference as AttemptToInferMissingFx to FX fixings (resets), e.g. the fixing of a  non-deliverable FX forward: a fixing quoted only in the reverse direction, or derivable by triangulation  through a standard base currency at the fixing date, is inferred rather than reported missing. This is a  separate, explicit opt-in because a fixing is a contractual historical print: with this off (the default),  a fixing must be present as the exact oriented currency pair to be used. | [optional] 
 **calendar_scope** | **str** | The scope in which holiday calendars stored | [optional] 
 **convention_scope** | **str** | The scope in which conventions stored | [optional] 
 ## Example
@@ -24,9 +25,11 @@ default_instrument_code_type: Optional[StrictStr] = "example_default_instrument_
 default_scope: Optional[StrictStr] = "example_default_scope"
 attempt_to_infer_missing_fx: Optional[StrictBool] = # Replace with your value
 attempt_to_infer_missing_fx:Optional[StrictBool] = None
+attempt_to_infer_missing_fx_on_fixings: Optional[StrictBool] = # Replace with your value
+attempt_to_infer_missing_fx_on_fixings:Optional[StrictBool] = None
 calendar_scope: Optional[StrictStr] = "example_calendar_scope"
 convention_scope: Optional[StrictStr] = "example_convention_scope"
-market_options_instance = MarketOptions(default_supplier=default_supplier, default_instrument_code_type=default_instrument_code_type, default_scope=default_scope, attempt_to_infer_missing_fx=attempt_to_infer_missing_fx, calendar_scope=calendar_scope, convention_scope=convention_scope)
+market_options_instance = MarketOptions(default_supplier=default_supplier, default_instrument_code_type=default_instrument_code_type, default_scope=default_scope, attempt_to_infer_missing_fx=attempt_to_infer_missing_fx, attempt_to_infer_missing_fx_on_fixings=attempt_to_infer_missing_fx_on_fixings, calendar_scope=calendar_scope, convention_scope=convention_scope)
 
 ```
 

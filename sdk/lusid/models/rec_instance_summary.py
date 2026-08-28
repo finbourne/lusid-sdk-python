@@ -31,10 +31,11 @@ class RecInstanceSummary(BaseModel):
     """
     id: RecInstanceId
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
+    rec_definition_display_name:  StrictStr = Field(...,alias="recDefinitionDisplayName", description="The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed.") 
     as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")
     status:  StrictStr = Field(...,alias="status", description="The instance-level lifecycle rollup. Available values: Running, Failures, ReviewAndApproval, AllApproved, Locked.") 
     as_at_locked: Optional[datetime] = Field(default=None, description="The wall-clock time the lock action was performed. Null when the instance has not been locked.", alias="asAtLocked")
-    __properties = ["id", "recDefinitionId", "asAtInstantiated", "status", "asAtLocked"]
+    __properties = ["id", "recDefinitionId", "recDefinitionDisplayName", "asAtInstantiated", "status", "asAtLocked"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +94,7 @@ class RecInstanceSummary(BaseModel):
         _obj = RecInstanceSummary.parse_obj({
             "id": RecInstanceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,
+            "rec_definition_display_name": obj.get("recDefinitionDisplayName"),
             "as_at_instantiated": obj.get("asAtInstantiated"),
             "status": obj.get("status"),
             "as_at_locked": obj.get("asAtLocked")
