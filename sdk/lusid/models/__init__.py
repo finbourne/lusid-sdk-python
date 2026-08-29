@@ -431,6 +431,7 @@ from lusid.models.dependency_source_filter import DependencySourceFilter
 from lusid.models.deposit_close_event import DepositCloseEvent
 from lusid.models.deposit_interest_payment_event import DepositInterestPaymentEvent
 from lusid.models.deposit_roll_event import DepositRollEvent
+from lusid.models.deposit_sweep_event import DepositSweepEvent
 from lusid.models.derivation_formula_explain_request import DerivationFormulaExplainRequest
 from lusid.models.derived_property_component import DerivedPropertyComponent
 from lusid.models.described_address_key import DescribedAddressKey
@@ -2064,6 +2065,7 @@ __all__ = [
     "DepositCloseEvent",
     "DepositInterestPaymentEvent",
     "DepositRollEvent",
+    "DepositSweepEvent",
     "DerivationFormulaExplainRequest",
     "DerivedPropertyComponent",
     "DescribedAddressKey",

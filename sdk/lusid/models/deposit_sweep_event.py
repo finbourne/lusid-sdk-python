@@ -24,17 +24,15 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class RepoCashFlowEvent(InstrumentEvent):
+class DepositSweepEvent(InstrumentEvent):
     """
-    Event representing a repurchase agreement cashflow.   For example, cashflow for a partial closure of the   repurchase agreement.  # noqa: E501
+    Sweeps the portfolio's eligible cash for a currency into a STIF FlexibleDeposit. Carries no amount of  its own, because it is resolved at processing time.  # noqa: E501
     """
-    entitlement_date: Optional[datetime] = Field(default=None, description="The date on which the counterparties become entitled   to exchange cash as part of a partial closure of the   repurchase agreement. The date must be before or on   the settlement date, and on or before the maturity   date of the repo. This is a required field.", alias="entitlementDate")
-    settlement_date: Optional[datetime] = Field(default=None, description="The date on which the exchange of cash is settled.   The date must be on or after the entitlement date,  and on or before the maturity date of the repo.   This is a required field.", alias="settlementDate")
-    cash_flow_per_unit: Union[StrictFloat, StrictInt] = Field(description="The amount of cash to be exchanged for each unit   of the instrument held on the entitlement date.", alias="cashFlowPerUnit")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the cashflow is paid.") 
+    sweep_date: Optional[datetime] = Field(default=None, description="Date the sweep is effective, and whose cash balance is swept.", alias="sweepDate")
+    currency:  StrictStr = Field(...,alias="currency", description="Currency of the swept cash balance.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "entitlementDate", "settlementDate", "cashFlowPerUnit", "currency"]
+    __properties = ["instrumentEventType", "sweepDate", "currency"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -47,7 +45,7 @@ class RepoCashFlowEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'RepoCashFlowEvent' not in [ 
+        if 'DepositSweepEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -131,8 +129,8 @@ class RepoCashFlowEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RepoCashFlowEvent:
-        """Create an instance of RepoCashFlowEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DepositSweepEvent:
+        """Create an instance of DepositSweepEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -150,19 +148,17 @@ class RepoCashFlowEvent(InstrumentEvent):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RepoCashFlowEvent:
-        """Create an instance of RepoCashFlowEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DepositSweepEvent:
+        """Create an instance of DepositSweepEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RepoCashFlowEvent.parse_obj(obj)
+            return DepositSweepEvent.parse_obj(obj)
 
-        _obj = RepoCashFlowEvent.parse_obj({
+        _obj = DepositSweepEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "entitlement_date": obj.get("entitlementDate"),
-            "settlement_date": obj.get("settlementDate"),
-            "cash_flow_per_unit": obj.get("cashFlowPerUnit"),
+            "sweep_date": obj.get("sweepDate"),
             "currency": obj.get("currency")
         })
         # store additional fields in additional_properties
@@ -172,4 +168,4 @@ class RepoCashFlowEvent(InstrumentEvent):
 
         return _obj
 
-RepoCashFlowEvent.update_forward_refs()
+DepositSweepEvent.update_forward_refs()

@@ -1202,6 +1202,7 @@ Class | Method | HTTP request | Description
  - [DepositCloseEvent](docs/DepositCloseEvent.md)
  - [DepositInterestPaymentEvent](docs/DepositInterestPaymentEvent.md)
  - [DepositRollEvent](docs/DepositRollEvent.md)
+ - [DepositSweepEvent](docs/DepositSweepEvent.md)
  - [DerivationFormulaExplainRequest](docs/DerivationFormulaExplainRequest.md)
  - [DerivedPropertyComponent](docs/DerivedPropertyComponent.md)
  - [DescribedAddressKey](docs/DescribedAddressKey.md)

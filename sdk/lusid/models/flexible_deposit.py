@@ -34,12 +34,13 @@ class FlexibleDeposit(LusidInstrument):
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
+    is_stif_sweep: Optional[StrictBool] = Field(default=None, description="Indicates this FlexibleDeposit represents a Short Term Investment Fund (STIF) sweep vehicle.  Its balance is derived daily from the portfolio's eligible cash rather than loaded via manual  events.", alias="isStifSweep")
     schedules: List[Schedule] = Field(description="Repayment schedules for the deposit instrument.")
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "schedules", "tradingConventions", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "isStifSweep", "schedules", "tradingConventions", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -165,6 +166,11 @@ class FlexibleDeposit(LusidInstrument):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if is_stif_sweep (nullable) is None
+        # and __fields_set__ contains the field
+        if self.is_stif_sweep is None and "is_stif_sweep" in self.__fields_set__:
+            _dict['isStifSweep'] = None
+
         return _dict
 
     @classmethod
@@ -181,6 +187,7 @@ class FlexibleDeposit(LusidInstrument):
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "dom_ccy": obj.get("domCcy"),
+            "is_stif_sweep": obj.get("isStifSweep"),
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
             "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
