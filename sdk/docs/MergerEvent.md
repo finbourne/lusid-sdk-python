@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | The date the merger is announced. | [optional] 
 **cash_and_security_offer_elections** | [**List[CashAndSecurityOfferElection]**](CashAndSecurityOfferElection.md) | List of possible CashAndSecurityOfferElections for this merger event | [optional] 
-**cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | List of possible CashOfferElections for this merger event | [optional] 
+**cash_offer_elections** | [**List[CashOfferElection]**](CashOfferElection.md) | List of possible CashOfferElections for this merger event. Under ParticipationType.Mandatory  a single CashOfferElection may be the event&#39;s only election — a cash-only merger — in which  case no NewInstrument is required. Under ParticipationType.MandatoryWithChoices cash offers  are provided alongside the other elections on the event. | [optional] 
 **mixed_lot_constituents_elections** | [**List[MixedLotConstituentsElection]**](MixedLotConstituentsElection.md) | List of possible mixed lot offers for this merger event, if any. Each election replaces the parent position  with one or more distinct new securities and/or cash legs of its own, taking the place of the single  event-level NewInstrument that the other security-bearing elections resolve to.    A merger may carry more than one of these, describing mutually exclusive multi-destination options. | [optional] 
 **ex_date** | **datetime** | The first date on which the holder of record of the original shares has entitled ownership of the new shares. | [optional] 
 **fractional_units_cash_currency** | **str** | Optional. Used in calculating cash-in-lieu of fractional shares. | [optional] 

@@ -47,7 +47,8 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
     settlement_configuration: Optional[PortfolioSettlementConfiguration] = Field(default=None, alias="settlementConfiguration")
     transaction_exclusion_filter:  Optional[StrictStr] = Field(None,alias="transactionExclusionFilter", description="A filter expression that identifies transactions to exclude when building the transaction portfolio's transactions and holdings. Transactions matching this filter are flagged as excluded.") 
-    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "enablementDate", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "instrumentEventConfiguration", "settlementConfiguration", "transactionExclusionFilter"]
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost.") 
+    __properties = ["displayName", "description", "code", "parentPortfolioId", "created", "enablementDate", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "instrumentEventConfiguration", "settlementConfiguration", "transactionExclusionFilter", "taxLotSelectionCostBasis"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -217,6 +218,11 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
         if self.transaction_exclusion_filter is None and "transaction_exclusion_filter" in self.__fields_set__:
             _dict['transactionExclusionFilter'] = None
 
+        # set to None if tax_lot_selection_cost_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_selection_cost_basis is None and "tax_lot_selection_cost_basis" in self.__fields_set__:
+            _dict['taxLotSelectionCostBasis'] = None
+
         return _dict
 
     @classmethod
@@ -245,7 +251,8 @@ class CreateDerivedTransactionPortfolioRequest(BaseModel):
             "amortisation_rule_set_id": ResourceId.from_dict(obj.get("amortisationRuleSetId")) if obj.get("amortisationRuleSetId") is not None else None,
             "instrument_event_configuration": InstrumentEventConfiguration.from_dict(obj.get("instrumentEventConfiguration")) if obj.get("instrumentEventConfiguration") is not None else None,
             "settlement_configuration": PortfolioSettlementConfiguration.from_dict(obj.get("settlementConfiguration")) if obj.get("settlementConfiguration") is not None else None,
-            "transaction_exclusion_filter": obj.get("transactionExclusionFilter")
+            "transaction_exclusion_filter": obj.get("transactionExclusionFilter"),
+            "tax_lot_selection_cost_basis": obj.get("taxLotSelectionCostBasis")
         })
         return _obj
 

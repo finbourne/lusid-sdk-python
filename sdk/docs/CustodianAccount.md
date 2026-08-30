@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
 **account_type** | **str** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] 
+**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Cost, AmortisedCost. | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,8 @@ currency: StrictStr = "example_currency"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 custodian: LegalEntity
 account_type: Optional[StrictStr] = "example_account_type"
-custodian_account_instance = CustodianAccount(custodian_account_id=custodian_account_id, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian=custodian, account_type=account_type)
+tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_cost_basis"
+custodian_account_instance = CustodianAccount(custodian_account_id=custodian_account_id, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian=custodian, account_type=account_type, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis)
 
 ```
 

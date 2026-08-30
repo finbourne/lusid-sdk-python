@@ -29,7 +29,8 @@ class CreatePortfolioDetails(BaseModel):
     CreatePortfolioDetails
     """
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
-    __properties = ["corporateActionSourceId"]
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. Available values: Cost, AmortisedCost.") 
+    __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class CreatePortfolioDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
         if self.corporate_action_source_id:
             _dict['corporateActionSourceId'] = self.corporate_action_source_id.to_dict()
+        # set to None if tax_lot_selection_cost_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_selection_cost_basis is None and "tax_lot_selection_cost_basis" in self.__fields_set__:
+            _dict['taxLotSelectionCostBasis'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +84,8 @@ class CreatePortfolioDetails(BaseModel):
             return CreatePortfolioDetails.parse_obj(obj)
 
         _obj = CreatePortfolioDetails.parse_obj({
-            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
+            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
+            "tax_lot_selection_cost_basis": obj.get("taxLotSelectionCostBasis")
         })
         return _obj
 

@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated. Default value: SettlementDate. Available values: Default, SettlementDate, TransactionDate. | [optional] 
 **instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
 **amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost. | [optional] 
 ## Example
 
 ```python
@@ -44,7 +45,8 @@ transaction_type_scope: Optional[StrictStr] = "example_transaction_type_scope"
 cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
 instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
 amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
-create_simple_position_portfolio_request_instance = CreateSimplePositionPortfolioRequest(display_name=display_name, description=description, code=code, created=created, enablement_date=enablement_date, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id)
+tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_cost_basis"
+create_simple_position_portfolio_request_instance = CreateSimplePositionPortfolioRequest(display_name=display_name, description=description, code=code, created=created, enablement_date=enablement_date, base_currency=base_currency, corporate_action_source_id=corporate_action_source_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, instrument_scopes=instrument_scopes, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis)
 
 ```
 

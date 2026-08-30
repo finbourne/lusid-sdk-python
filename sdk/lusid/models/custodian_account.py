@@ -39,7 +39,8 @@ class CustodianAccount(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian: LegalEntity
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.") 
-    __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType"]
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio's default. Available values: Cost, AmortisedCost.") 
+    __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType", "taxLotSelectionCostBasis"]
 
     class Config:
         """Pydantic configuration"""
@@ -96,6 +97,11 @@ class CustodianAccount(BaseModel):
         if self.account_type is None and "account_type" in self.__fields_set__:
             _dict['accountType'] = None
 
+        # set to None if tax_lot_selection_cost_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_selection_cost_basis is None and "tax_lot_selection_cost_basis" in self.__fields_set__:
+            _dict['taxLotSelectionCostBasis'] = None
+
         return _dict
 
     @classmethod
@@ -121,7 +127,8 @@ class CustodianAccount(BaseModel):
             if obj.get("properties") is not None
             else None,
             "custodian": LegalEntity.from_dict(obj.get("custodian")) if obj.get("custodian") is not None else None,
-            "account_type": obj.get("accountType")
+            "account_type": obj.get("accountType"),
+            "tax_lot_selection_cost_basis": obj.get("taxLotSelectionCostBasis")
         })
         return _obj
 
