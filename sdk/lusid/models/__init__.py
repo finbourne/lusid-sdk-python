@@ -143,6 +143,9 @@ from lusid.models.bond_conversion_schedule import BondConversionSchedule
 from lusid.models.bond_coupon_event import BondCouponEvent
 from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_default_suppression_details import BondDefaultSuppressionDetails
+from lusid.models.bond_forward import BondForward
+from lusid.models.bond_forward_cash_settlement_event import BondForwardCashSettlementEvent
+from lusid.models.bond_forward_termination_event import BondForwardTerminationEvent
 from lusid.models.bond_lookup_model_options import BondLookupModelOptions
 from lusid.models.bond_option import BondOption
 from lusid.models.bond_option_termination_event import BondOptionTerminationEvent
@@ -1777,6 +1780,9 @@ __all__ = [
     "BondCouponEvent",
     "BondDefaultEvent",
     "BondDefaultSuppressionDetails",
+    "BondForward",
+    "BondForwardCashSettlementEvent",
+    "BondForwardTerminationEvent",
     "BondLookupModelOptions",
     "BondOption",
     "BondOptionTerminationEvent",
