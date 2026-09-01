@@ -31,11 +31,12 @@ class HullWhiteModelOptions(ModelOptions):
     mean_reversion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The mean reversion speed of the short rate. Must be strictly positive. Defaults to 0.03.", alias="meanReversion")
     volatility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Defaults to 0.008.")
     lattice_steps: Optional[StrictInt] = Field(default=None, description="The number of uniform time steps in the lattice. More steps give a finer discretisation  of the short-rate process at greater computational cost. Defaults to 200.", alias="latticeSteps")
+    effective_rate_bump_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The parallel curve shift, as an absolute rate, used for the central-difference effective  duration and convexity, e.g. 0.0001 for a 1bp bump. Must be strictly positive.  Defaults to 0.0025 (25bp, the market convention for option-adjusted risk) when not supplied.", alias="effectiveRateBumpSize")
     mean_reversion_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion.", alias="meanReversionByCurrency")
     volatility_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure.", alias="volatilityByCurrency")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "meanReversionByCurrency", "volatilityByCurrency"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -148,6 +149,11 @@ class HullWhiteModelOptions(ModelOptions):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if effective_rate_bump_size (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_rate_bump_size is None and "effective_rate_bump_size" in self.__fields_set__:
+            _dict['effectiveRateBumpSize'] = None
+
         # set to None if mean_reversion_by_currency (nullable) is None
         # and __fields_set__ contains the field
         if self.mean_reversion_by_currency is None and "mean_reversion_by_currency" in self.__fields_set__:
@@ -174,6 +180,7 @@ class HullWhiteModelOptions(ModelOptions):
             "mean_reversion": obj.get("meanReversion"),
             "volatility": obj.get("volatility"),
             "lattice_steps": obj.get("latticeSteps"),
+            "effective_rate_bump_size": obj.get("effectiveRateBumpSize"),
             "mean_reversion_by_currency": obj.get("meanReversionByCurrency"),
             "volatility_by_currency": obj.get("volatilityByCurrency")
         })

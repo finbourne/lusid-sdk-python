@@ -33,12 +33,12 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
     start_tenor:  Optional[StrictStr] = Field(None,alias="startTenor") 
     end_tenor:  Optional[StrictStr] = Field(None,alias="endTenor") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist, Tent.") 
-    pivot_tenor:  Optional[StrictStr] = Field(None,alias="pivotTenor", description="The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape, whose  asymmetry matters because key-rate buckets are rarely evenly spaced. Only valid with  ShiftType Tent; omitted, a Tent peaks at the midpoint of the window.") 
     scale:  Optional[StrictStr] = Field(None,alias="scale", description="Available values: Bps, Percentage.") 
     apply_to:  Optional[StrictStr] = Field(None,alias="applyTo", description="A LUSID filter expression over the instrument entity scoping which instruments this shift is  for, e.g. \"properties[Instrument/default/CountryOfIssue] eq 'Italy'\". The shifted market data  is used by the whole valuation run, but when the scenario is requested as a result column the  column is only populated for matching instruments. Only usable when the scenario is applied as  a per-metric column. Note that with a scope set, the base and scenario columns cover different  instrument populations: an aggregate (e.g. Sum) of the scenario column totals only the matching  instruments, so it is not directly comparable to the same aggregate of the base column.") 
+    pivot_tenor:  Optional[StrictStr] = Field(None,alias="pivotTenor", description="The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape, whose  asymmetry matters because key-rate buckets are rarely evenly spaced. Only valid with  ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. Declared last on  purpose: generated SDKs emit their positional constructor in property-declaration order,  and this property must not shift the parameters of the ones before it.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType", "pivotTenor", "scale", "applyTo"]
+    __properties = ["scenarioShiftType", "ccy", "amount", "startTenor", "endTenor", "shiftType", "scale", "applyTo", "pivotTenor"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -315,15 +315,15 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
         if self.end_tenor is None and "end_tenor" in self.__fields_set__:
             _dict['endTenor'] = None
 
-        # set to None if pivot_tenor (nullable) is None
-        # and __fields_set__ contains the field
-        if self.pivot_tenor is None and "pivot_tenor" in self.__fields_set__:
-            _dict['pivotTenor'] = None
-
         # set to None if apply_to (nullable) is None
         # and __fields_set__ contains the field
         if self.apply_to is None and "apply_to" in self.__fields_set__:
             _dict['applyTo'] = None
+
+        # set to None if pivot_tenor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pivot_tenor is None and "pivot_tenor" in self.__fields_set__:
+            _dict['pivotTenor'] = None
 
         return _dict
 
@@ -343,9 +343,9 @@ class RateCurveShiftDefinition(ScenarioShiftDefinition):
             "start_tenor": obj.get("startTenor"),
             "end_tenor": obj.get("endTenor"),
             "shift_type": obj.get("shiftType"),
-            "pivot_tenor": obj.get("pivotTenor"),
             "scale": obj.get("scale"),
-            "apply_to": obj.get("applyTo")
+            "apply_to": obj.get("applyTo"),
+            "pivot_tenor": obj.get("pivotTenor")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

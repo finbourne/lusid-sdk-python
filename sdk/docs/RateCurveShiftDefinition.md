@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **start_tenor** | **str** |  | [optional] 
 **end_tenor** | **str** |  | [optional] 
 **shift_type** | **str** | Available values: Parallel, Steepen, Flatten, Twist, Tent. | 
-**pivot_tenor** | **str** | The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape, whose  asymmetry matters because key-rate buckets are rarely evenly spaced. Only valid with  ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. | [optional] 
 **scale** | **str** | Available values: Bps, Percentage. | [optional] 
 **apply_to** | **str** | A LUSID filter expression over the instrument entity scoping which instruments this shift is  for, e.g. \&quot;properties[Instrument/default/CountryOfIssue] eq &#39;Italy&#39;\&quot;. The shifted market data  is used by the whole valuation run, but when the scenario is requested as a result column the  column is only populated for matching instruments. Only usable when the scenario is applied as  a per-metric column. Note that with a scope set, the base and scenario columns cover different  instrument populations: an aggregate (e.g. Sum) of the scenario column totals only the matching  instruments, so it is not directly comparable to the same aggregate of the base column. | [optional] 
+**pivot_tenor** | **str** | The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape, whose  asymmetry matters because key-rate buckets are rarely evenly spaced. Only valid with  ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. Declared last on  purpose: generated SDKs emit their positional constructor in property-declaration order,  and this property must not shift the parameters of the ones before it. | [optional] 
 **scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | 
 ## Example
 
@@ -26,11 +26,11 @@ amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 start_tenor: Optional[StrictStr] = "example_start_tenor"
 end_tenor: Optional[StrictStr] = "example_end_tenor"
 shift_type: StrictStr = "example_shift_type"
-pivot_tenor: Optional[StrictStr] = "example_pivot_tenor"
 scale: Optional[StrictStr] = "example_scale"
 apply_to: Optional[StrictStr] = "example_apply_to"
+pivot_tenor: Optional[StrictStr] = "example_pivot_tenor"
 scenario_shift_type: StrictStr = "example_scenario_shift_type"
-rate_curve_shift_definition_instance = RateCurveShiftDefinition(ccy=ccy, amount=amount, start_tenor=start_tenor, end_tenor=end_tenor, shift_type=shift_type, pivot_tenor=pivot_tenor, scale=scale, apply_to=apply_to, scenario_shift_type=scenario_shift_type)
+rate_curve_shift_definition_instance = RateCurveShiftDefinition(ccy=ccy, amount=amount, start_tenor=start_tenor, end_tenor=end_tenor, shift_type=shift_type, scale=scale, apply_to=apply_to, pivot_tenor=pivot_tenor, scenario_shift_type=scenario_shift_type)
 
 ```
 
