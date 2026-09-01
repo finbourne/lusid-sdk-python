@@ -24,18 +24,20 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 
-class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
+class InflationCurveShiftDefinition(ScenarioShiftDefinition):
     """
-    VolSurfaceShiftDefinition
+    A shift of an inflation curve, targeted by inflation index name. The shift applies to the  zero-coupon inflation swap quotes the curve was solved from and the curve re-solves with  the same seasonal factors and resolved fixings, so seasonality and the historic index path  survive the shift. Shift shapes, tenor windows, scales and the Tent pivot behave exactly  as they do on a rate curve shift.  # noqa: E501
     """
-    instrument:  StrictStr = Field(...,alias="instrument") 
-    amount: Optional[Union[StrictFloat, StrictInt]] = None
-    strike: Optional[Union[StrictFloat, StrictInt]] = None
-    expiry:  Optional[StrictStr] = Field(None,alias="expiry") 
-    shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative.") 
+    index:  StrictStr = Field(...,alias="index", description="The inflation index name the curve is keyed by, e.g. UKRPI or EUHICPXT.") 
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The size of the shift, in the units given by Scale: basis points on the zero-coupon  rates by default (50 means +50bps), or a percentage of each rate when Scale is  Percentage (1 means rates scaled by 1.01).")
+    start_tenor:  Optional[StrictStr] = Field(None,alias="startTenor") 
+    end_tenor:  Optional[StrictStr] = Field(None,alias="endTenor") 
+    shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist, Tent.") 
+    scale:  Optional[StrictStr] = Field(None,alias="scale", description="Available values: Bps, Percentage.") 
+    pivot_tenor:  Optional[StrictStr] = Field(None,alias="pivotTenor", description="The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape. Only  valid with ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. Declared  last on purpose: generated SDKs emit their positional constructor in property-declaration  order, and this property must not shift the parameters of the ones before it.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "instrument", "amount", "strike", "expiry", "shiftType"]
+    __properties = ["scenarioShiftType", "index", "amount", "startTenor", "endTenor", "shiftType", "scale", "pivotTenor"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -48,7 +50,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'VolSurfaceShiftDefinition' not in [ 
+        if 'InflationCurveShiftDefinition' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -106,8 +108,84 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
         if "shift_type" != "type":
             return value
 
-        if value not in ['Absolute', 'Relative']:
-            raise ValueError("must be one of enum values ('Absolute', 'Relative')")
+        if value not in ['Parallel', 'Steepen', 'Flatten', 'Twist', 'Tent']:
+            raise ValueError("must be one of enum values ('Parallel', 'Steepen', 'Flatten', 'Twist', 'Tent')")
+        return value
+
+    @validator('scale')
+    def scale_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'InflationCurveShiftDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "scale" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ['Bps', 'Percentage']:
+            raise ValueError("must be one of enum values ('Bps', 'Percentage')")
         return value
 
     @validator('scenario_shift_type')
@@ -121,7 +199,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'VolSurfaceShiftDefinition' not in [ 
+        if 'InflationCurveShiftDefinition' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -205,8 +283,8 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> VolSurfaceShiftDefinition:
-        """Create an instance of VolSurfaceShiftDefinition from a JSON string"""
+    def from_json(cls, json_str: str) -> InflationCurveShiftDefinition:
+        """Create an instance of InflationCurveShiftDefinition from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -226,34 +304,41 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
         if self.amount is None and "amount" in self.__fields_set__:
             _dict['amount'] = None
 
-        # set to None if strike (nullable) is None
+        # set to None if start_tenor (nullable) is None
         # and __fields_set__ contains the field
-        if self.strike is None and "strike" in self.__fields_set__:
-            _dict['strike'] = None
+        if self.start_tenor is None and "start_tenor" in self.__fields_set__:
+            _dict['startTenor'] = None
 
-        # set to None if expiry (nullable) is None
+        # set to None if end_tenor (nullable) is None
         # and __fields_set__ contains the field
-        if self.expiry is None and "expiry" in self.__fields_set__:
-            _dict['expiry'] = None
+        if self.end_tenor is None and "end_tenor" in self.__fields_set__:
+            _dict['endTenor'] = None
+
+        # set to None if pivot_tenor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pivot_tenor is None and "pivot_tenor" in self.__fields_set__:
+            _dict['pivotTenor'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> VolSurfaceShiftDefinition:
-        """Create an instance of VolSurfaceShiftDefinition from a dict"""
+    def from_dict(cls, obj: dict) -> InflationCurveShiftDefinition:
+        """Create an instance of InflationCurveShiftDefinition from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return VolSurfaceShiftDefinition.parse_obj(obj)
+            return InflationCurveShiftDefinition.parse_obj(obj)
 
-        _obj = VolSurfaceShiftDefinition.parse_obj({
+        _obj = InflationCurveShiftDefinition.parse_obj({
             "scenario_shift_type": obj.get("scenarioShiftType"),
-            "instrument": obj.get("instrument"),
+            "index": obj.get("index"),
             "amount": obj.get("amount"),
-            "strike": obj.get("strike"),
-            "expiry": obj.get("expiry"),
-            "shift_type": obj.get("shiftType")
+            "start_tenor": obj.get("startTenor"),
+            "end_tenor": obj.get("endTenor"),
+            "shift_type": obj.get("shiftType"),
+            "scale": obj.get("scale"),
+            "pivot_tenor": obj.get("pivotTenor")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -262,4 +347,4 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
 
         return _obj
 
-VolSurfaceShiftDefinition.update_forward_refs()
+InflationCurveShiftDefinition.update_forward_refs()

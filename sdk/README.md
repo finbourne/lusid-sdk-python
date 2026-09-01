@@ -1437,6 +1437,7 @@ Class | Method | HTTP request | Description
  - [IndexProjectionDependency](docs/IndexProjectionDependency.md)
  - [IndustryClassifier](docs/IndustryClassifier.md)
  - [InflationCurveData](docs/InflationCurveData.md)
+ - [InflationCurveShiftDefinition](docs/InflationCurveShiftDefinition.md)
  - [InflationFixingDependency](docs/InflationFixingDependency.md)
  - [InflationIndexConventions](docs/InflationIndexConventions.md)
  - [InflationLeg](docs/InflationLeg.md)

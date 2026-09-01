@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **currency_pair** | **str** |  | 
 **amount** | **float** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative, Percentage. | 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition. | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition. | 
 ## Example
 
 ```python
