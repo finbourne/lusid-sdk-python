@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
 **account_type** | **str** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] 
-**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Cost, AmortisedCost. | [optional] 
+**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified or reset with Default, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Default, Cost, AmortisedCost. | [optional] 
 ## Example
 
 ```python

@@ -4,11 +4,11 @@ Request to create a scenario from a pre-built parameterised template. The templa
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**template** | **str** | The template to build the scenario from. Available templates: RatesUp, RatesDown, CurveSteepener,  CurveFlattener, VolSpike, EquityCrash, FxShock, RiskOff. | 
+**template** | **str** | The template to build the scenario from. Use ListScenarioTemplates to discover the available  templates and the parameters each accepts. | 
 **code** | **str** | The code of the scenario to create. | 
 **display_name** | **str** | The display name of the created scenario. Defaults to a name derived from the template. | [optional] 
 **description** | **str** | The description of the created scenario. Defaults to a description derived from the template. | [optional] 
-**parameters** | **Dict[str, Optional[str]]** | Template parameters. Which parameters are required depends on the template: &#39;ccy&#39; for rate curve  templates, &#39;instrument&#39; for equity and vol templates, &#39;currencyPair&#39; for FX templates; RiskOff  requires &#39;ccy&#39; and &#39;instrument&#39;. All templates accept an optional &#39;amount&#39; override of the  template&#39;s default shift size. | [optional] 
+**parameters** | **Dict[str, Optional[str]]** | Template parameters. Which parameters each template requires and accepts - with defaults and  units for the numeric ones - is listed by ListScenarioTemplates. A parameter the template does  not read is rejected rather than ignored, and parameter names are case-sensitive. | [optional] 
 ## Example
 
 ```python

@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **day_count_convention** | **str** | Day count convention of the curve. Default value: Act360. Available values: Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM, Invalid. | [optional] 
 **front_extrapolation_type** | **str** | What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \&quot;front\&quot; direction is the closest point on the curve onward.    example: 0D tenor to past  Default value: Flat. Available values: None, Flat, Linear. | [optional] 
 **back_extrapolation_type** | **str** | What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \&quot;back\&quot; direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Default value: Flat. Available values: None, Flat, Linear. | [optional] 
+**interpolation_type** | **str** | What type of interpolation is used to build the curve. Default value: LinearOnRates. Available values: LinearOnRates, LinearOnLogOfRates, LinearOnDiscountFactors, LinearOnLogDiscountFactors, PiecewiseLinearForward, MonotoneConvex, LinearOnLogProbability. | [optional] 
+**origin_anchor** | **str** | How the curve builder anchors the origin of a bootstrapped curve, i.e. the value the curve  carries in front of its shortest calibration instrument. Default value: ZeroRate, the  historical anchor, under which existing curves are unchanged. Available values: ZeroRate, FirstInstrumentRate. | [optional] 
 **market_data_options_type** | **str** | Available values: CurveOptions. Available values: CurveOptions. | 
 ## Example
 
@@ -20,8 +22,10 @@ from datetime import datetime
 day_count_convention: Optional[StrictStr] = "example_day_count_convention"
 front_extrapolation_type: Optional[StrictStr] = "example_front_extrapolation_type"
 back_extrapolation_type: Optional[StrictStr] = "example_back_extrapolation_type"
+interpolation_type: Optional[StrictStr] = "example_interpolation_type"
+origin_anchor: Optional[StrictStr] = "example_origin_anchor"
 market_data_options_type: StrictStr = "example_market_data_options_type"
-curve_options_instance = CurveOptions(day_count_convention=day_count_convention, front_extrapolation_type=front_extrapolation_type, back_extrapolation_type=back_extrapolation_type, market_data_options_type=market_data_options_type)
+curve_options_instance = CurveOptions(day_count_convention=day_count_convention, front_extrapolation_type=front_extrapolation_type, back_extrapolation_type=back_extrapolation_type, interpolation_type=interpolation_type, origin_anchor=origin_anchor, market_data_options_type=market_data_options_type)
 
 ```
 

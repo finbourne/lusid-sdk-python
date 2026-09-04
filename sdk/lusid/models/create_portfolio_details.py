@@ -29,7 +29,7 @@ class CreatePortfolioDetails(BaseModel):
     CreatePortfolioDetails
     """
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
-    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. Available values: Cost, AmortisedCost.") 
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. A reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost.") 
     __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis"]
 
     class Config:

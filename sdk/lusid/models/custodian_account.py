@@ -39,7 +39,7 @@ class CustodianAccount(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian: LegalEntity
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.") 
-    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified, resolution falls through to the transaction type and then the portfolio's default. Available values: Cost, AmortisedCost.") 
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified or reset with Default, resolution falls through to the transaction type and then the portfolio's default. Available values: Default, Cost, AmortisedCost.") 
     __properties = ["custodianAccountId", "status", "accountNumber", "accountName", "accountingMethod", "currency", "properties", "custodian", "accountType", "taxLotSelectionCostBasis"]
 
     class Config:

@@ -51,11 +51,12 @@ class InflationLinkedBond(LusidInstrument):
     rounding_conventions: Optional[List[RoundingConvention]] = Field(default=None, description="Rounding conventions for analytics, if any.", alias="roundingConventions")
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
     original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.", alias="originalIssuePrice")
+    par_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example InflationForward, includes the scaled  coupons in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price.", alias="parPerUnit")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     amortisation_schedule: Optional[StepSchedule] = Field(default=None, alias="amortisationSchedule")
-    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward.") 
+    instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions", "tradingConventions", "originalIssuePrice", "timeZoneConventions", "amortisationSchedule"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "inflationIndexConventions", "couponRate", "identifiers", "baseCPI", "baseCPIDate", "calculationType", "exDividendDays", "indexPrecision", "principal", "principalProtection", "stubType", "roundingConventions", "tradingConventions", "originalIssuePrice", "parPerUnit", "timeZoneConventions", "amortisationSchedule"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -126,8 +127,8 @@ class InflationLinkedBond(LusidInstrument):
         if "instrument_type" != "type":
             return value
 
-        if value not in ['QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo', 'ToBeAnnounced', 'VolatilitySwap', 'ToBeAnnouncedOption', 'CommodityForward', 'BondOption', 'CdsOption', 'CommodityCalendarSwap', 'BondForward']:
-            raise ValueError("must be one of enum values ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo', 'ToBeAnnounced', 'VolatilitySwap', 'ToBeAnnouncedOption', 'CommodityForward', 'BondOption', 'CdsOption', 'CommodityCalendarSwap', 'BondForward')")
+        if value not in ['QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo', 'ToBeAnnounced', 'VolatilitySwap', 'ToBeAnnouncedOption', 'CommodityForward', 'BondOption', 'CdsOption', 'CommodityCalendarSwap', 'BondForward', 'PreferredShare']:
+            raise ValueError("must be one of enum values ('QuotedSecurity', 'InterestRateSwap', 'FxForward', 'Future', 'ExoticInstrument', 'FxOption', 'CreditDefaultSwap', 'InterestRateSwaption', 'Bond', 'EquityOption', 'FixedLeg', 'FloatingLeg', 'BespokeCashFlowsLeg', 'Unknown', 'TermDeposit', 'ContractForDifference', 'EquitySwap', 'CashPerpetual', 'CapFloor', 'CashSettled', 'CdsIndex', 'Basket', 'FundingLeg', 'FxSwap', 'ForwardRateAgreement', 'SimpleInstrument', 'Repo', 'Equity', 'ExchangeTradedOption', 'ReferenceInstrument', 'ComplexBond', 'InflationLinkedBond', 'InflationSwap', 'SimpleCashFlowLoan', 'TotalReturnSwap', 'InflationLeg', 'FundShareClass', 'FlexibleLoan', 'UnsettledCash', 'Cash', 'MasteredInstrument', 'LoanFacility', 'FlexibleDeposit', 'FlexibleRepo', 'ToBeAnnounced', 'VolatilitySwap', 'ToBeAnnouncedOption', 'CommodityForward', 'BondOption', 'CdsOption', 'CommodityCalendarSwap', 'BondForward', 'PreferredShare')")
         return value
 
     class Config:
@@ -230,6 +231,11 @@ class InflationLinkedBond(LusidInstrument):
         if self.original_issue_price is None and "original_issue_price" in self.__fields_set__:
             _dict['originalIssuePrice'] = None
 
+        # set to None if par_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.par_per_unit is None and "par_per_unit" in self.__fields_set__:
+            _dict['parPerUnit'] = None
+
         return _dict
 
     @classmethod
@@ -260,6 +266,7 @@ class InflationLinkedBond(LusidInstrument):
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
             "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
             "original_issue_price": obj.get("originalIssuePrice"),
+            "par_per_unit": obj.get("parPerUnit"),
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
             "amortisation_schedule": StepSchedule.from_dict(obj.get("amortisationSchedule")) if obj.get("amortisationSchedule") is not None else None
         })

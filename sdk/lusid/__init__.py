@@ -248,6 +248,7 @@ from lusid.models.bond_default_event import BondDefaultEvent
 from lusid.models.bond_default_suppression_details import BondDefaultSuppressionDetails
 from lusid.models.bond_forward import BondForward
 from lusid.models.bond_forward_cash_settlement_event import BondForwardCashSettlementEvent
+from lusid.models.bond_forward_model_options import BondForwardModelOptions
 from lusid.models.bond_forward_termination_event import BondForwardTerminationEvent
 from lusid.models.bond_lookup_model_options import BondLookupModelOptions
 from lusid.models.bond_option import BondOption
@@ -465,10 +466,12 @@ from lusid.models.credit_default_swap import CreditDefaultSwap
 from lusid.models.credit_premium_cash_flow_event import CreditPremiumCashFlowEvent
 from lusid.models.credit_rating import CreditRating
 from lusid.models.credit_spread_curve_data import CreditSpreadCurveData
+from lusid.models.credit_spread_shift_definition import CreditSpreadShiftDefinition
 from lusid.models.credit_support_annex import CreditSupportAnnex
 from lusid.models.criterion_type import CriterionType
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.curve_options import CurveOptions
+from lusid.models.curve_shift_window_bounds import CurveShiftWindowBounds
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.custodian_account_properties import CustodianAccountProperties
 from lusid.models.custodian_account_request import CustodianAccountRequest
@@ -664,7 +667,7 @@ from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.fund_valuation_request import FundValuationRequest
 from lusid.models.fund_valuation_schedule import FundValuationSchedule
 from lusid.models.funding_leg import FundingLeg
-from lusid.models.funding_leg_options import FundingLegOptions
+from lusid.models.funding_leg_model_options import FundingLegModelOptions
 from lusid.models.future import Future
 from lusid.models.future_expiry_event import FutureExpiryEvent
 from lusid.models.future_mark_to_market_event import FutureMarkToMarketEvent
@@ -896,6 +899,8 @@ from lusid.models.metadata_fields_to_remove import MetadataFieldsToRemove
 from lusid.models.metadata_fields_to_update import MetadataFieldsToUpdate
 from lusid.models.metric_value import MetricValue
 from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
+from lusid.models.model_option_shift_definition import ModelOptionShiftDefinition
+from lusid.models.model_option_shift_mode import ModelOptionShiftMode
 from lusid.models.model_options import ModelOptions
 from lusid.models.model_options_type import ModelOptionsType
 from lusid.models.model_property import ModelProperty
@@ -1138,6 +1143,8 @@ from lusid.models.posting_module_response import PostingModuleResponse
 from lusid.models.posting_module_rule import PostingModuleRule
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
 from lusid.models.pre_trade_configuration import PreTradeConfiguration
+from lusid.models.preferred_share import PreferredShare
+from lusid.models.preferred_share_all_of_identifiers import PreferredShareAllOfIdentifiers
 from lusid.models.premium import Premium
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
@@ -1237,6 +1244,10 @@ from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
 from lusid.models.rec_review import RecReview
+from lusid.models.rec_review_configuration import RecReviewConfiguration
+from lusid.models.rec_review_required_approval import RecReviewRequiredApproval
+from lusid.models.rec_review_requirement_rule import RecReviewRequirementRule
+from lusid.models.rec_review_submission import RecReviewSubmission
 from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
@@ -1365,6 +1376,7 @@ from lusid.models.resource_list_of_reconciliation_break import ResourceListOfRec
 from lusid.models.resource_list_of_relation import ResourceListOfRelation
 from lusid.models.resource_list_of_relationship import ResourceListOfRelationship
 from lusid.models.resource_list_of_returns_entity import ResourceListOfReturnsEntity
+from lusid.models.resource_list_of_scenario_template_definition import ResourceListOfScenarioTemplateDefinition
 from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDefinition
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.resource_list_of_string import ResourceListOfString
@@ -1397,6 +1409,7 @@ from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
+from lusid.models.risk_bump_options import RiskBumpOptions
 from lusid.models.roll_interest_updates import RollInterestUpdates
 from lusid.models.roll_principal_updates import RollPrincipalUpdates
 from lusid.models.rollover_constituent import RolloverConstituent
@@ -1415,6 +1428,8 @@ from lusid.models.scenario_preview_response import ScenarioPreviewResponse
 from lusid.models.scenario_reference import ScenarioReference
 from lusid.models.scenario_shift_definition import ScenarioShiftDefinition
 from lusid.models.scenario_shift_type import ScenarioShiftType
+from lusid.models.scenario_template_definition import ScenarioTemplateDefinition
+from lusid.models.scenario_template_parameter import ScenarioTemplateParameter
 from lusid.models.schedule import Schedule
 from lusid.models.schedule_type import ScheduleType
 from lusid.models.scope_definition import ScopeDefinition
@@ -1455,6 +1470,7 @@ from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdow
 from lusid.models.share_class_definition import ShareClassDefinition
 from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
+from lusid.models.shift_value_condition import ShiftValueCondition
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
 from lusid.models.side_definition import SideDefinition
@@ -1988,6 +2004,7 @@ __all__ = [
     "BondDefaultSuppressionDetails",
     "BondForward",
     "BondForwardCashSettlementEvent",
+    "BondForwardModelOptions",
     "BondForwardTerminationEvent",
     "BondLookupModelOptions",
     "BondOption",
@@ -2205,10 +2222,12 @@ __all__ = [
     "CreditPremiumCashFlowEvent",
     "CreditRating",
     "CreditSpreadCurveData",
+    "CreditSpreadShiftDefinition",
     "CreditSupportAnnex",
     "CriterionType",
     "CurrencyAndAmount",
     "CurveOptions",
+    "CurveShiftWindowBounds",
     "CustodianAccount",
     "CustodianAccountProperties",
     "CustodianAccountRequest",
@@ -2404,7 +2423,7 @@ __all__ = [
     "FundValuationRequest",
     "FundValuationSchedule",
     "FundingLeg",
-    "FundingLegOptions",
+    "FundingLegModelOptions",
     "Future",
     "FutureExpiryEvent",
     "FutureMarkToMarketEvent",
@@ -2636,6 +2655,8 @@ __all__ = [
     "MetadataFieldsToUpdate",
     "MetricValue",
     "MixedLotConstituentsElection",
+    "ModelOptionShiftDefinition",
+    "ModelOptionShiftMode",
     "ModelOptions",
     "ModelOptionsType",
     "ModelProperty",
@@ -2878,6 +2899,8 @@ __all__ = [
     "PostingModuleRule",
     "PostingModuleRulesUpdatedResponse",
     "PreTradeConfiguration",
+    "PreferredShare",
+    "PreferredShareAllOfIdentifiers",
     "Premium",
     "PreviousFundCalendarEntry",
     "PreviousFundValuationPointData",
@@ -2977,6 +3000,10 @@ __all__ = [
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",
     "RecReview",
+    "RecReviewConfiguration",
+    "RecReviewRequiredApproval",
+    "RecReviewRequirementRule",
+    "RecReviewSubmission",
     "RecRunLogEntry",
     "RecSubmission",
     "RecSupersededRun",
@@ -3105,6 +3132,7 @@ __all__ = [
     "ResourceListOfRelation",
     "ResourceListOfRelationship",
     "ResourceListOfReturnsEntity",
+    "ResourceListOfScenarioTemplateDefinition",
     "ResourceListOfScopeDefinition",
     "ResourceListOfSideDefinition",
     "ResourceListOfString",
@@ -3137,6 +3165,7 @@ __all__ = [
     "ReturnsMetric",
     "ReverseStockSplitEvent",
     "RevertValuationPointDataRequest",
+    "RiskBumpOptions",
     "RollInterestUpdates",
     "RollPrincipalUpdates",
     "RolloverConstituent",
@@ -3155,6 +3184,8 @@ __all__ = [
     "ScenarioReference",
     "ScenarioShiftDefinition",
     "ScenarioShiftType",
+    "ScenarioTemplateDefinition",
+    "ScenarioTemplateParameter",
     "Schedule",
     "ScheduleType",
     "ScopeDefinition",
@@ -3195,6 +3226,7 @@ __all__ = [
     "ShareClassDefinition",
     "ShareClassDetails",
     "ShareClassPnlBreakdown",
+    "ShiftValueCondition",
     "SideConfigurationData",
     "SideConfigurationDataRequest",
     "SideDefinition",

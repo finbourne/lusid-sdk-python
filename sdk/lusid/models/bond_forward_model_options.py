@@ -24,14 +24,14 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.model_options import ModelOptions
 
-class FundingLegOptions(ModelOptions):
+class BondForwardModelOptions(ModelOptions):
     """
-    FundingLegOptions
+    Model options for bond forward pricing.  # noqa: E501
     """
-    expected_funding_leg_notional:  StrictStr = Field(...,alias="expectedFundingLegNotional", description="Assumption made on future expected notional of the funding leg.") 
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
+    bond_forward_projection_type:  Optional[StrictStr] = Field(None,alias="bondForwardProjectionType", description="Determines how the forward price of the deliverable bond is projected to the settlement date.                Supported string (enumeration) values are: [QuotedContractPrice, ForwardProjectedFromFundingCurve].  Defaults to QuotedContractPrice - the original quote-driven behaviour - when not supplied, so  options persisted before this property existed keep the behaviour they were saved under.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "expectedFundingLegNotional"]
+    __properties = ["modelOptionsType", "bondForwardProjectionType"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -44,7 +44,7 @@ class FundingLegOptions(ModelOptions):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'FundingLegOptions' not in [ 
+        if 'BondForwardModelOptions' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -102,8 +102,8 @@ class FundingLegOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions')")
         return value
 
     class Config:
@@ -128,8 +128,8 @@ class FundingLegOptions(ModelOptions):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundingLegOptions:
-        """Create an instance of FundingLegOptions from a JSON string"""
+    def from_json(cls, json_str: str) -> BondForwardModelOptions:
+        """Create an instance of BondForwardModelOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -144,20 +144,25 @@ class FundingLegOptions(ModelOptions):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if bond_forward_projection_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bond_forward_projection_type is None and "bond_forward_projection_type" in self.__fields_set__:
+            _dict['bondForwardProjectionType'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundingLegOptions:
-        """Create an instance of FundingLegOptions from a dict"""
+    def from_dict(cls, obj: dict) -> BondForwardModelOptions:
+        """Create an instance of BondForwardModelOptions from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundingLegOptions.parse_obj(obj)
+            return BondForwardModelOptions.parse_obj(obj)
 
-        _obj = FundingLegOptions.parse_obj({
+        _obj = BondForwardModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "expected_funding_leg_notional": obj.get("expectedFundingLegNotional")
+            "bond_forward_projection_type": obj.get("bondForwardProjectionType")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -166,4 +171,4 @@ class FundingLegOptions(ModelOptions):
 
         return _obj
 
-FundingLegOptions.update_forward_refs()
+BondForwardModelOptions.update_forward_refs()

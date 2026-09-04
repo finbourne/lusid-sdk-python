@@ -35,9 +35,12 @@ class InflationCurveShiftDefinition(ScenarioShiftDefinition):
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Parallel, Steepen, Flatten, Twist, Tent.") 
     scale:  Optional[StrictStr] = Field(None,alias="scale", description="Available values: Bps, Percentage.") 
     pivot_tenor:  Optional[StrictStr] = Field(None,alias="pivotTenor", description="The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape. Only  valid with ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. Declared  last on purpose: generated SDKs emit their positional constructor in property-declaration  order, and this property must not shift the parameters of the ones before it.") 
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition.") 
+    window_bounds:  Optional[StrictStr] = Field(None,alias="windowBounds", description="Available values: Inclusive, StartExclusive, EndExclusive, Exclusive.") 
+    minimum_amount_bps: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The smallest magnitude, in basis points, of the shift finally applied at each curve point,  evaluated per point AFTER the shape weight, in the direction the shift acts there. Exactly  the rate curve shift's MinimumAmountBps - see that field for the full semantics; the two  curve shifts keep one vocabulary. Omitted, no floor applies - today's behaviour.  Declared after PivotTenor on purpose, for the constructor-ordering reason given there.", alias="minimumAmountBps")
+    apply_when_value:  Optional[StrictStr] = Field(None,alias="applyWhenValue", description="Available values: Any, Positive, Negative.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scenarioShiftType", "index", "amount", "startTenor", "endTenor", "shiftType", "scale", "pivotTenor"]
+    __properties = ["scenarioShiftType", "index", "amount", "startTenor", "endTenor", "shiftType", "scale", "pivotTenor", "windowBounds", "minimumAmountBps", "applyWhenValue"]
 
     @validator('shift_type')
     def shift_type_validate_enum(cls, value):
@@ -188,6 +191,158 @@ class InflationCurveShiftDefinition(ScenarioShiftDefinition):
             raise ValueError("must be one of enum values ('Bps', 'Percentage')")
         return value
 
+    @validator('window_bounds')
+    def window_bounds_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'InflationCurveShiftDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "window_bounds" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ['Inclusive', 'StartExclusive', 'EndExclusive', 'Exclusive']:
+            raise ValueError("must be one of enum values ('Inclusive', 'StartExclusive', 'EndExclusive', 'Exclusive')")
+        return value
+
+    @validator('apply_when_value')
+    def apply_when_value_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne have removed enum validation on all models, except for this use case:
+        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
+        # During instantiation, the value of 'type' is checked against the enum values, 
+        
+
+        # check it's a class that uses the 'type' property as a discriminator
+        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
+        if 'InflationCurveShiftDefinition' not in [ 
+                                    # For notification application classes
+                                    'AmazonSqsNotificationType',
+                                    'AmazonSqsNotificationTypeResponse',
+                                    'AmazonSqsPrincipalAuthNotificationType',
+                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
+                                    'AzureServiceBusTypeResponse',
+                                    'AzureServiceBusNotificationType',
+                                    'EmailNotificationType',
+                                    'EmailNotificationTypeResponse',
+                                    'SmsNotificationType',
+                                    'SmsNotificationTypeResponse',
+                                    'WebhookNotificationType',
+                                    'WebhookNotificationTypeResponse',
+                        
+                                    # For workflow application classes
+                                    'CreateChildTasksAction', 
+                                    'RunWorkerAction', 
+                                    'TriggerParentTaskAction',
+                                    'CreateChildTasksActionResponse', 
+                                    'RunWorkerActionResponse',
+                                    'TriggerChildTasksAction',
+                                    'TriggerChildTasksActionResponse',
+                                    'TriggerParentTaskActionResponse',
+                                    'CreateNewTaskActivity',
+                                    'UpdateMatchingTasksActivity',
+                                    'CreateNewTaskActivityResponse', 
+                                    'UpdateMatchingTasksActivityResponse',
+                                    'Fail', 
+                                    'GroupReconciliation', 
+                                    'HealthCheck', 
+                                    'LuminesceView', 
+                                    'SchedulerJob', 
+                                    'Sleep',
+                                    'FailResponse', 
+                                    'GroupReconciliationResponse', 
+                                    'HealthCheckResponse', 
+                                    'LuminesceViewResponse', 
+                                    'SchedulerJobResponse', 
+                                    'SleepResponse',
+                                    'Library',
+                                    'LibraryResponse',
+                                    'DayRegularity',
+                                    'RelativeMonthRegularity',
+                                    'SpecificMonthRegularity',
+                                    'WeekRegularity',
+                                    'YearRegularity',
+                                    'LusidEntityDataQualityCheck',
+                                    'LusidEntityDataQualityCheckResponse',
+                                    'TriggerChildTasksActionResponse',
+                                    'HorizonIntegration',
+                                    'HorizonIntegrationResponse']:
+           return value
+        
+        # Only validate the 'type' property of the class
+        if "apply_when_value" != "type":
+            return value
+
+        if value is None:
+            return value
+
+        if value not in ['Any', 'Positive', 'Negative']:
+            raise ValueError("must be one of enum values ('Any', 'Positive', 'Negative')")
+        return value
+
     @validator('scenario_shift_type')
     def scenario_shift_type_validate_enum(cls, value):
         """Validates the enum"""
@@ -257,8 +412,8 @@ class InflationCurveShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition')")
         return value
 
     class Config:
@@ -319,6 +474,11 @@ class InflationCurveShiftDefinition(ScenarioShiftDefinition):
         if self.pivot_tenor is None and "pivot_tenor" in self.__fields_set__:
             _dict['pivotTenor'] = None
 
+        # set to None if minimum_amount_bps (nullable) is None
+        # and __fields_set__ contains the field
+        if self.minimum_amount_bps is None and "minimum_amount_bps" in self.__fields_set__:
+            _dict['minimumAmountBps'] = None
+
         return _dict
 
     @classmethod
@@ -338,7 +498,10 @@ class InflationCurveShiftDefinition(ScenarioShiftDefinition):
             "end_tenor": obj.get("endTenor"),
             "shift_type": obj.get("shiftType"),
             "scale": obj.get("scale"),
-            "pivot_tenor": obj.get("pivotTenor")
+            "pivot_tenor": obj.get("pivotTenor"),
+            "window_bounds": obj.get("windowBounds"),
+            "minimum_amount_bps": obj.get("minimumAmountBps"),
+            "apply_when_value": obj.get("applyWhenValue")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

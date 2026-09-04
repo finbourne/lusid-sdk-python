@@ -83,6 +83,7 @@ class InstrumentType(str, Enum):
     CDSOPTION = 'CdsOption'
     COMMODITYCALENDARSWAP = 'CommodityCalendarSwap'
     BONDFORWARD = 'BondForward'
+    PREFERREDSHARE = 'PreferredShare'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentType:

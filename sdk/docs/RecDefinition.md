@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **valuation_recipes** | [**RecDefRecipeIds**](RecDefRecipeIds.md) |  | [optional] 
 **currencies** | [**RecDefCurrencies**](RecDefCurrencies.md) |  | [optional] 
 **rulesets** | [**List[RecDefRuleset]**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | 
+**review_configuration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -35,10 +36,11 @@ right_portfolio_sources: List[RecDefSource] = # Replace with your value
 valuation_recipes: Optional[RecDefRecipeIds] = # Replace with your value
 currencies: Optional[RecDefCurrencies] = None
 rulesets: List[RecDefRuleset] = # Replace with your value
+review_configuration: RecReviewConfiguration = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_definition_instance = RecDefinition(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, href=href, version=version, links=links)
+rec_definition_instance = RecDefinition(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, review_configuration=review_configuration, href=href, version=version, links=links)
 
 ```
 

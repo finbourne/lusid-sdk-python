@@ -46,7 +46,7 @@ class CreateSimplePositionPortfolioRequest(BaseModel):
     cash_gain_loss_calculation_date:  Optional[StrictStr] = Field(None,alias="cashGainLossCalculationDate", description="The option when the Cash Gain Loss to be calulated. Default value: SettlementDate. Available values: Default, SettlementDate, TransactionDate.") 
     instrument_event_configuration: Optional[InstrumentEventConfiguration] = Field(default=None, alias="instrumentEventConfiguration")
     amortisation_rule_set_id: Optional[ResourceId] = Field(default=None, alias="amortisationRuleSetId")
-    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Available values: Cost, AmortisedCost.") 
+    tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Supply Default to explicitly reset it; a reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost.") 
     __properties = ["displayName", "description", "code", "created", "enablementDate", "baseCurrency", "corporateActionSourceId", "accountingMethod", "subHoldingKeys", "properties", "instrumentScopes", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxLotSelectionCostBasis"]
 
     @validator('accounting_method')

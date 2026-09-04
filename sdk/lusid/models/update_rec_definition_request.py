@@ -27,6 +27,7 @@ from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
 from lusid.models.rec_def_ruleset import RecDefRuleset
 from lusid.models.rec_def_side_names import RecDefSideNames
 from lusid.models.rec_def_source import RecDefSource
+from lusid.models.rec_review_configuration import RecReviewConfiguration
 
 class UpdateRecDefinitionRequest(BaseModel):
     """
@@ -41,7 +42,8 @@ class UpdateRecDefinitionRequest(BaseModel):
     valuation_recipes: Optional[RecDefRecipeIds] = Field(default=None, alias="valuationRecipes")
     currencies: Optional[RecDefCurrencies] = None
     rulesets: List[RecDefRuleset] = Field(description="The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.")
-    __properties = ["displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets"]
+    review_configuration: Optional[RecReviewConfiguration] = Field(default=None, alias="reviewConfiguration")
+    __properties = ["displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration"]
 
     class Config:
         """Pydantic configuration"""
@@ -105,6 +107,9 @@ class UpdateRecDefinitionRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['rulesets'] = _items
+        # override the default output from pydantic by calling `to_dict()` of review_configuration
+        if self.review_configuration:
+            _dict['reviewConfiguration'] = self.review_configuration.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -140,7 +145,8 @@ class UpdateRecDefinitionRequest(BaseModel):
             "right_portfolio_sources": [RecDefSource.from_dict(_item) for _item in obj.get("rightPortfolioSources")] if obj.get("rightPortfolioSources") is not None else None,
             "valuation_recipes": RecDefRecipeIds.from_dict(obj.get("valuationRecipes")) if obj.get("valuationRecipes") is not None else None,
             "currencies": RecDefCurrencies.from_dict(obj.get("currencies")) if obj.get("currencies") is not None else None,
-            "rulesets": [RecDefRuleset.from_dict(_item) for _item in obj.get("rulesets")] if obj.get("rulesets") is not None else None
+            "rulesets": [RecDefRuleset.from_dict(_item) for _item in obj.get("rulesets")] if obj.get("rulesets") is not None else None,
+            "review_configuration": RecReviewConfiguration.from_dict(obj.get("reviewConfiguration")) if obj.get("reviewConfiguration") is not None else None
         })
         return _obj
 

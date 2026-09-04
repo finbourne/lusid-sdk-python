@@ -38,9 +38,10 @@ class ChangeEvent(InstrumentEvent):
     term_target:  Optional[StrictStr] = Field(None,alias="termTarget", description="The target of a terms change — one of \"InstrumentDefinitionField\" or  \"InstrumentProperty\". Only applicable when ChangeType is \"Terms\". Available values: InstrumentDefinitionField, InstrumentProperty.") 
     term_target_identifier:  Optional[StrictStr] = Field(None,alias="termTargetIdentifier", description="The identifier of the term target being changed. Must be paired with TermTarget.") 
     additional_information:  Optional[StrictStr] = Field(None,alias="additionalInformation", description="Free-text additional information describing the change.") 
+    carry_relationships:  Optional[StrictStr] = Field(None,alias="carryRelationships", description="Whether, and in which direction, the old instrument's Relationships are carried onto the new  instrument. One of \"None\", \"Outward\" or \"Both\"; defaults to \"Outward\" when omitted.                Relationships resolve to the instrument entity, so nothing pointing at the old instrument  applies to the new one. This is a caller choice because relationship meaning is client-authored:  an index-to-constituent link should usually follow a rename, a historical order-to-instrument  link should not. Available values: None, Outward, Both.") 
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "unitsRatio", "changeType", "termTarget", "termTargetIdentifier", "additionalInformation"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "newInstrument", "unitsRatio", "changeType", "termTarget", "termTargetIdentifier", "additionalInformation", "carryRelationships"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -174,6 +175,11 @@ class ChangeEvent(InstrumentEvent):
         if self.additional_information is None and "additional_information" in self.__fields_set__:
             _dict['additionalInformation'] = None
 
+        # set to None if carry_relationships (nullable) is None
+        # and __fields_set__ contains the field
+        if self.carry_relationships is None and "carry_relationships" in self.__fields_set__:
+            _dict['carryRelationships'] = None
+
         return _dict
 
     @classmethod
@@ -194,7 +200,8 @@ class ChangeEvent(InstrumentEvent):
             "change_type": obj.get("changeType"),
             "term_target": obj.get("termTarget"),
             "term_target_identifier": obj.get("termTargetIdentifier"),
-            "additional_information": obj.get("additionalInformation")
+            "additional_information": obj.get("additionalInformation"),
+            "carry_relationships": obj.get("carryRelationships")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

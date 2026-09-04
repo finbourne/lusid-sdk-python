@@ -29,7 +29,7 @@ class OpaqueModelOptions(ModelOptions):
     OpaqueModelOptions
     """
     data: Dict[str, Any]
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "data"]
 
@@ -102,8 +102,8 @@ class OpaqueModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions')")
         return value
 
     class Config:

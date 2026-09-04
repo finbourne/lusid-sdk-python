@@ -5,7 +5,7 @@ Model options for credit default instrument.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **use_factors_for_current_notional** | **bool** | Determines if calculations that use current notional apply use a constituent weight factor from a quote representing a default. | 
-**model_options_type** | **str** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions. | 
+**model_options_type** | **str** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions. | 
 ## Example
 
 ```python

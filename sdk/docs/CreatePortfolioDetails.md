@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. Available values: Cost, AmortisedCost. | [optional] 
+**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost. | [optional] 
 ## Example
 
 ```python

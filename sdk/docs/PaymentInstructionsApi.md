@@ -4,14 +4,109 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_payment_instruction**](PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
-[**upsert_payment_instructions**](PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+[**delete_payment_instruction**](PaymentInstructionsApi.md#delete_payment_instruction) | **DELETE** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+[**get_payment_instruction**](PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
+[**upsert_payment_instructions**](PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
 
+
+# **delete_payment_instruction**
+> DeletedEntityResponse delete_payment_instruction(scope, code)
+
+[EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+
+Delete a Payment Instruction. Deletion will be valid from the payment instruction's creation datetime.  This means that the payment instruction will no longer exist at any effective datetime from the asAt datetime  of deletion. Any payment records the instruction owns are released and become available to another instruction.  A payment instruction that has been released, instructed, sent, cancelled or failed cannot be deleted.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PaymentInstructionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PaymentInstructionsApi)
+    scope = 'scope_example' # str | The scope of the payment instruction.
+    code = 'code_example' # str | The code of the payment instruction.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_payment_instruction(scope, code, opts=opts)
+
+        # [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
+        api_response = api_instance.delete_payment_instruction(scope, code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PaymentInstructionsApi->delete_payment_instruction: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the payment instruction. | 
+ **code** | **str**| The code of the payment instruction. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The response from deleting the payment instruction |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_payment_instruction**
 > PaymentInstruction get_payment_instruction(scope, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
 
-[EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+[EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
 
 Retrieve a single Payment Instruction.
 
@@ -70,7 +165,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_payment_instruction(scope, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EARLY ACCESS] GetPaymentInstruction: Get Payment Instruction
+        # [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
         api_response = api_instance.get_payment_instruction(scope, code, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -111,7 +206,7 @@ Name | Type | Description  | Notes
 # **upsert_payment_instructions**
 > PaymentInstructionsResponse upsert_payment_instructions(request_body)
 
-[EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+[EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
 
 Create or update a collection of Payment Instructions.
 
@@ -166,7 +261,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_payment_instructions(request_body, opts=opts)
 
-        # [EARLY ACCESS] UpsertPaymentInstructions: Upsert Payment Instructions
+        # [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
         api_response = api_instance.upsert_payment_instructions(request_body)
         pprint(api_response)
 

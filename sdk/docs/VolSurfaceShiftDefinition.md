@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **strike** | **float** |  | [optional] 
 **expiry** | **str** |  | [optional] 
 **shift_type** | **str** | Available values: Absolute, Relative. | 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition. | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition. | 
 ## Example
 
 ```python

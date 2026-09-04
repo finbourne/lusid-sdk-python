@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_scenario_from_template**](ScenariosApi.md#create_scenario_from_template) | **POST** /api/scenarios/{scope}/$fromTemplate | [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 [**delete_scenario**](ScenariosApi.md#delete_scenario) | **DELETE** /api/scenarios/{scope}/{code} | [EARLY ACCESS] DeleteScenario: Delete a Scenario, assuming that it is present.
 [**get_scenario**](ScenariosApi.md#get_scenario) | **GET** /api/scenarios/{scope}/{code} | [EARLY ACCESS] GetScenario: Get Scenario
+[**list_scenario_templates**](ScenariosApi.md#list_scenario_templates) | **GET** /api/scenarios/$templates | [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
 [**list_scenario_versions**](ScenariosApi.md#list_scenario_versions) | **GET** /api/scenarios/{scope}/{code}/versions | [EARLY ACCESS] ListScenarioVersions: List the versions of a Scenario
 [**list_scenarios**](ScenariosApi.md#list_scenarios) | **GET** /api/scenarios | [EARLY ACCESS] ListScenarios: List Scenarios
 [**list_scenarios_for_scope**](ScenariosApi.md#list_scenarios_for_scope) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
@@ -19,7 +20,7 @@ Method | HTTP request | Description
 
 [EARLY ACCESS] CreateScenarioFromTemplate: [EARLY ACCESS] CreateScenarioFromTemplate: Create a Scenario from a pre-built template.
 
-Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario's shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Available templates: RatesUp, RatesDown, CurveSteepener, CurveFlattener, VolSpike, EquityCrash,  FxShock, RiskOff.
+Creates and stores a scenario built from a pre-defined parameterised template, for example a  parallel rates shift or an equity crash. The template determines the scenario's shifts; the  parameters supply the targets (e.g. currency or instrument) and optionally override the default  shift size. The created scenario is stored in the given scope and behaves exactly like a  hand-built scenario.                Use ListScenarioTemplates to discover the available templates and, for each, the parameters it  accepts, their defaults and their units. A parameter the template does not read is rejected  rather than ignored, and parameter names are case-sensitive.
 
 ### Example
 
@@ -299,6 +300,93 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | The successfully retrieved Scenario |  -  |
 **400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_scenario_templates**
+> ResourceListOfScenarioTemplateDefinition list_scenario_templates()
+
+[EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+
+Lists every template CreateScenarioFromTemplate accepts, with each template's parameters: the  parameter's name (case-sensitive), whether it is required, what it means, the default used when  it is omitted and the unit a numeric value is read in. The units differ between templates -  basis points, percentage points or a fraction - so read them per template rather than assuming  one convention. The list is static application metadata: it does not vary by tenant, scope or  date, so the endpoint takes no parameters.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ScenariosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ScenariosApi)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_scenario_templates(opts=opts)
+
+        # [EARLY ACCESS] ListScenarioTemplates: [EARLY ACCESS] ListScenarioTemplates: List the pre-built scenario templates.
+        api_response = api_instance.list_scenario_templates()
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ScenariosApi->list_scenario_templates: %s\n" % e)
+
+main()
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**ResourceListOfScenarioTemplateDefinition**](ResourceListOfScenarioTemplateDefinition.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The available scenario templates |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.model_selection import ModelSelection
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
+from lusid.models.risk_bump_options import RiskBumpOptions
 
 class PricingOptions(BaseModel):
     """
@@ -49,7 +50,9 @@ class PricingOptions(BaseModel):
     enable_leg_level_inference_for_custom_srs_columns: Optional[StrictBool] = Field(default=None, description="When enabled, allows inference between leg-level and  instrument-level data during portfolio valuation. If  data is missing at one level, it may be inferred from  the other level. For example, missing leg-level data   may be inferred from existing leg-level and instrument-  level data when ProduceSeparateResultForLinearOtcLegs  is enabled, and vice versa. Explicitly provided data  always takes precedence.", alias="enableLegLevelInferenceForCustomSrsColumns")
     use_instrument_scale_factor_as_default: Optional[StrictBool] = Field(default=None, description="When enabled, priceScaleFactor defined at the instrument level will  be used in the absence of quote scaleFactor when resolving quotes.", alias="useInstrumentScaleFactorAsDefault")
     scale_instrument_accrued_override_by_contract_size: Optional[StrictBool] = Field(default=None, description="When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV = CleanPv + Accrued consistent.", alias="scaleInstrumentAccruedOverrideByContractSize")
-    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize"]
+    risk_bump_options: Optional[RiskBumpOptions] = Field(default=None, alias="riskBumpOptions")
+    funding_curve_by_currency: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Names the funding curve each currency discounts on, keyed by ISO 4217 currency code  (e.g. \"GBP\" -> \"GBPOIS-USDCOLL\"). Keys are case-insensitive. A currency absent from  the map keeps the default funding curve, {CCY}OIS, so an absent or empty map leaves  every valuation unchanged.", alias="fundingCurveByCurrency")
+    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +92,9 @@ class PricingOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of return_zero_pv
         if self.return_zero_pv:
             _dict['returnZeroPv'] = self.return_zero_pv.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of risk_bump_options
+        if self.risk_bump_options:
+            _dict['riskBumpOptions'] = self.risk_bump_options.to_dict()
         # set to None if risk_engine (nullable) is None
         # and __fields_set__ contains the field
         if self.risk_engine is None and "risk_engine" in self.__fields_set__:
@@ -103,6 +109,11 @@ class PricingOptions(BaseModel):
         # and __fields_set__ contains the field
         if self.conserved_quantity_for_lookthrough_expansion is None and "conserved_quantity_for_lookthrough_expansion" in self.__fields_set__:
             _dict['conservedQuantityForLookthroughExpansion'] = None
+
+        # set to None if funding_curve_by_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.funding_curve_by_currency is None and "funding_curve_by_currency" in self.__fields_set__:
+            _dict['fundingCurveByCurrency'] = None
 
         return _dict
 
@@ -135,7 +146,9 @@ class PricingOptions(BaseModel):
             "return_zero_pv": ReturnZeroPvOptions.from_dict(obj.get("returnZeroPv")) if obj.get("returnZeroPv") is not None else None,
             "enable_leg_level_inference_for_custom_srs_columns": obj.get("enableLegLevelInferenceForCustomSrsColumns"),
             "use_instrument_scale_factor_as_default": obj.get("useInstrumentScaleFactorAsDefault"),
-            "scale_instrument_accrued_override_by_contract_size": obj.get("scaleInstrumentAccruedOverrideByContractSize")
+            "scale_instrument_accrued_override_by_contract_size": obj.get("scaleInstrumentAccruedOverrideByContractSize"),
+            "risk_bump_options": RiskBumpOptions.from_dict(obj.get("riskBumpOptions")) if obj.get("riskBumpOptions") is not None else None,
+            "funding_curve_by_currency": obj.get("fundingCurveByCurrency")
         })
         return _obj
 

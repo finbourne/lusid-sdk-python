@@ -27,7 +27,7 @@ class PaymentInstructionStatus(BaseModel):
     """
     The current status of a Payment Instruction. Managed exclusively via the dedicated  status transition API — not accepted on upsert.  # noqa: E501
     """
-    current_value:  StrictStr = Field(...,alias="currentValue", description="The current status value. One of: Created, Staged, Released, Instructed, Sent, Cancelled.") 
+    current_value:  StrictStr = Field(...,alias="currentValue", description="The current status value. One of: Created, Staged, Released, Instructed, Sent, Cancelled, Failed.") 
     as_at_last_transition: datetime = Field(description="The as-at timestamp of the most recent status transition.", alias="asAtLastTransition")
     user_id_last_transition:  StrictStr = Field(...,alias="userIdLastTransition", description="The ID of the user who made the most recent status transition.") 
     __properties = ["currentValue", "asAtLastTransition", "userIdLastTransition"]

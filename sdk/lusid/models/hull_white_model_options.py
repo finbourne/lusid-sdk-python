@@ -29,14 +29,15 @@ class HullWhiteModelOptions(ModelOptions):
     Model options for the Hull-White one-factor lattice pricer.  # noqa: E501
     """
     mean_reversion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The mean reversion speed of the short rate. Must be strictly positive. Defaults to 0.03.", alias="meanReversion")
-    volatility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Defaults to 0.008.")
+    volatility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Must not  be negative; zero is allowed and prices with a deterministic short rate. Defaults to 0.008.")
     lattice_steps: Optional[StrictInt] = Field(default=None, description="The number of uniform time steps in the lattice. More steps give a finer discretisation  of the short-rate process at greater computational cost. Defaults to 200.", alias="latticeSteps")
     effective_rate_bump_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The parallel curve shift, as an absolute rate, used for the central-difference effective  duration and convexity, e.g. 0.0001 for a 1bp bump. Must be strictly positive.  Defaults to 0.0025 (25bp, the market convention for option-adjusted risk) when not supplied.", alias="effectiveRateBumpSize")
     mean_reversion_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion.", alias="meanReversionByCurrency")
     volatility_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure.", alias="volatilityByCurrency")
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
+    volatility_multiplier: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied.", alias="volatilityMultiplier")
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -107,8 +108,8 @@ class HullWhiteModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions')")
         return value
 
     class Config:
@@ -164,6 +165,11 @@ class HullWhiteModelOptions(ModelOptions):
         if self.volatility_by_currency is None and "volatility_by_currency" in self.__fields_set__:
             _dict['volatilityByCurrency'] = None
 
+        # set to None if volatility_multiplier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.volatility_multiplier is None and "volatility_multiplier" in self.__fields_set__:
+            _dict['volatilityMultiplier'] = None
+
         return _dict
 
     @classmethod
@@ -182,7 +188,8 @@ class HullWhiteModelOptions(ModelOptions):
             "lattice_steps": obj.get("latticeSteps"),
             "effective_rate_bump_size": obj.get("effectiveRateBumpSize"),
             "mean_reversion_by_currency": obj.get("meanReversionByCurrency"),
-            "volatility_by_currency": obj.get("volatilityByCurrency")
+            "volatility_by_currency": obj.get("volatilityByCurrency"),
+            "volatility_multiplier": obj.get("volatilityMultiplier")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

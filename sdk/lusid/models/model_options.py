@@ -28,7 +28,7 @@ class ModelOptions(BaseModel):
     """
     Base class for representing model options in LUSID, which provide config for instrument analytics.  This base class should not be directly instantiated; each supported ModelOptionsType has a corresponding inherited class.  # noqa: E501
     """
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.") 
     __properties = ["modelOptionsType"]
 
     @validator('model_options_type')
@@ -100,8 +100,8 @@ class ModelOptions(BaseModel):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions')")
         return value
 
     class Config:
@@ -114,12 +114,13 @@ class ModelOptions(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map = {
+        'BondForwardModelOptions': 'BondForwardModelOptions',
         'BondLookupModelOptions': 'BondLookupModelOptions',
         'CdsModelOptions': 'CdsModelOptions',
         'EmptyModelOptions': 'EmptyModelOptions',
         'EquityModelOptions': 'EquityModelOptions',
         'FlexibleLoanPricerOptions': 'FlexibleLoanPricerOptions',
-        'FundingLegOptions': 'FundingLegOptions',
+        'FundingLegModelOptions': 'FundingLegModelOptions',
         'FxForwardModelOptions': 'FxForwardModelOptions',
         'HullWhiteModelOptions': 'HullWhiteModelOptions',
         'IndexModelOptions': 'IndexModelOptions',
@@ -152,7 +153,7 @@ class ModelOptions(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(BondLookupModelOptions, CdsModelOptions, EmptyModelOptions, EquityModelOptions, FlexibleLoanPricerOptions, FundingLegOptions, FxForwardModelOptions, HullWhiteModelOptions, IndexModelOptions, OpaqueModelOptions):
+    def from_json(cls, json_str: str) -> Union(BondForwardModelOptions, BondLookupModelOptions, CdsModelOptions, EmptyModelOptions, EquityModelOptions, FlexibleLoanPricerOptions, FundingLegModelOptions, FxForwardModelOptions, HullWhiteModelOptions, IndexModelOptions, OpaqueModelOptions):
         """Create an instance of ModelOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -165,7 +166,7 @@ class ModelOptions(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(BondLookupModelOptions, CdsModelOptions, EmptyModelOptions, EquityModelOptions, FlexibleLoanPricerOptions, FundingLegOptions, FxForwardModelOptions, HullWhiteModelOptions, IndexModelOptions, OpaqueModelOptions):
+    def from_dict(cls, obj: dict) -> Union(BondForwardModelOptions, BondLookupModelOptions, CdsModelOptions, EmptyModelOptions, EquityModelOptions, FlexibleLoanPricerOptions, FundingLegModelOptions, FxForwardModelOptions, HullWhiteModelOptions, IndexModelOptions, OpaqueModelOptions):
         """Create an instance of ModelOptions from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

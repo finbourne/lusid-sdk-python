@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **valuation_recipes** | [**RecDefRecipeIds**](RecDefRecipeIds.md) |  | [optional] 
 **currencies** | [**RecDefCurrencies**](RecDefCurrencies.md) |  | [optional] 
 **rulesets** | [**List[RecDefRuleset]**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | 
+**review_configuration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | [optional] 
 ## Example
 
 ```python
@@ -32,7 +33,8 @@ right_portfolio_sources: Optional[List[RecDefSource]] = # Replace with your valu
 valuation_recipes: Optional[RecDefRecipeIds] = # Replace with your value
 currencies: Optional[RecDefCurrencies] = None
 rulesets: List[RecDefRuleset] = # Replace with your value
-create_rec_definition_request_instance = CreateRecDefinitionRequest(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets)
+review_configuration: Optional[RecReviewConfiguration] = # Replace with your value
+create_rec_definition_request_instance = CreateRecDefinitionRequest(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, review_configuration=review_configuration)
 
 ```
 

@@ -33,7 +33,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
     strike: Optional[Union[StrictFloat, StrictInt]] = None
     expiry:  Optional[StrictStr] = Field(None,alias="expiry") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative.") 
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scenarioShiftType", "instrument", "amount", "strike", "expiry", "shiftType"]
 
@@ -179,8 +179,8 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition')")
         return value
 
     class Config:

@@ -38,9 +38,10 @@ class YieldCurveData(ComplexMarketData):
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     version: Optional[Version] = None
+    funding_curve_name:  Optional[StrictStr] = Field(None,alias="fundingCurveName", description="Optional name of the funding curve under which the calibration instruments are discounted,  for projection curves that are bootstrapped under a separate discount curve. This is the  funding identifier of the rates dependency for the calibration instruments' domestic currency,  so a value of 'EUROIS' names the discounting dependency Rates/EUR/EUROIS. When omitted the  calibration instruments are discounted on the curve being built, which is the classic  single-curve bootstrap.") 
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "marketDataOptions", "version"]
+    __properties = ["marketDataType", "baseDate", "instruments", "quotes", "lineage", "marketDataOptions", "version", "fundingCurveName"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -178,6 +179,11 @@ class YieldCurveData(ComplexMarketData):
         if self.lineage is None and "lineage" in self.__fields_set__:
             _dict['lineage'] = None
 
+        # set to None if funding_curve_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.funding_curve_name is None and "funding_curve_name" in self.__fields_set__:
+            _dict['fundingCurveName'] = None
+
         return _dict
 
     @classmethod
@@ -196,7 +202,8 @@ class YieldCurveData(ComplexMarketData):
             "quotes": [MarketQuote.from_dict(_item) for _item in obj.get("quotes")] if obj.get("quotes") is not None else None,
             "lineage": obj.get("lineage"),
             "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "funding_curve_name": obj.get("fundingCurveName")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

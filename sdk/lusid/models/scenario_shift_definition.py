@@ -28,7 +28,7 @@ class ScenarioShiftDefinition(BaseModel):
     """
     ScenarioShiftDefinition
     """
-    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition.") 
+    scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.") 
     __properties = ["scenarioShiftType"]
 
     @validator('scenario_shift_type')
@@ -100,8 +100,8 @@ class ScenarioShiftDefinition(BaseModel):
         if "scenario_shift_type" != "type":
             return value
 
-        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition']:
-            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition')")
+        if value not in ['RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition']:
+            raise ValueError("must be one of enum values ('RateCurveShiftDefinition', 'FxShiftDefinition', 'PriceShiftDefinition', 'VolSurfaceShiftDefinition', 'MdkrGroupShiftDefinition', 'InflationCurveShiftDefinition', 'CreditSpreadShiftDefinition', 'ModelOptionShiftDefinition')")
         return value
 
     class Config:
@@ -114,9 +114,11 @@ class ScenarioShiftDefinition(BaseModel):
 
     # discriminator mappings
     __discriminator_value_class_map = {
+        'CreditSpreadShiftDefinition': 'CreditSpreadShiftDefinition',
         'FxShiftDefinition': 'FxShiftDefinition',
         'InflationCurveShiftDefinition': 'InflationCurveShiftDefinition',
         'MdkrGroupShiftDefinition': 'MdkrGroupShiftDefinition',
+        'ModelOptionShiftDefinition': 'ModelOptionShiftDefinition',
         'PriceShiftDefinition': 'PriceShiftDefinition',
         'RateCurveShiftDefinition': 'RateCurveShiftDefinition',
         'VolSurfaceShiftDefinition': 'VolSurfaceShiftDefinition'
@@ -148,7 +150,7 @@ class ScenarioShiftDefinition(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(FxShiftDefinition, InflationCurveShiftDefinition, MdkrGroupShiftDefinition, PriceShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
+    def from_json(cls, json_str: str) -> Union(CreditSpreadShiftDefinition, FxShiftDefinition, InflationCurveShiftDefinition, MdkrGroupShiftDefinition, ModelOptionShiftDefinition, PriceShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
         """Create an instance of ScenarioShiftDefinition from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -161,7 +163,7 @@ class ScenarioShiftDefinition(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(FxShiftDefinition, InflationCurveShiftDefinition, MdkrGroupShiftDefinition, PriceShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
+    def from_dict(cls, obj: dict) -> Union(CreditSpreadShiftDefinition, FxShiftDefinition, InflationCurveShiftDefinition, MdkrGroupShiftDefinition, ModelOptionShiftDefinition, PriceShiftDefinition, RateCurveShiftDefinition, VolSurfaceShiftDefinition):
         """Create an instance of ScenarioShiftDefinition from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

@@ -11,7 +11,10 @@ Name | Type | Description | Notes
 **shift_type** | **str** | Available values: Parallel, Steepen, Flatten, Twist, Tent. | 
 **scale** | **str** | Available values: Bps, Percentage. | [optional] 
 **pivot_tenor** | **str** | The tenor the Tent shift peaks at. The shift applies with the full Amount at this tenor,  falling linearly to zero at StartTenor and EndTenor - the key-rate triangle shape. Only  valid with ShiftType Tent; omitted, a Tent peaks at the midpoint of the window. Declared  last on purpose: generated SDKs emit their positional constructor in property-declaration  order, and this property must not shift the parameters of the ones before it. | [optional] 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition. | 
+**window_bounds** | **str** | Available values: Inclusive, StartExclusive, EndExclusive, Exclusive. | [optional] 
+**minimum_amount_bps** | **float** | The smallest magnitude, in basis points, of the shift finally applied at each curve point,  evaluated per point AFTER the shape weight, in the direction the shift acts there. Exactly  the rate curve shift&#39;s MinimumAmountBps - see that field for the full semantics; the two  curve shifts keep one vocabulary. Omitted, no floor applies - today&#39;s behaviour.  Declared after PivotTenor on purpose, for the constructor-ordering reason given there. | [optional] 
+**apply_when_value** | **str** | Available values: Any, Positive, Negative. | [optional] 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition. | 
 ## Example
 
 ```python
@@ -28,8 +31,11 @@ end_tenor: Optional[StrictStr] = "example_end_tenor"
 shift_type: StrictStr = "example_shift_type"
 scale: Optional[StrictStr] = "example_scale"
 pivot_tenor: Optional[StrictStr] = "example_pivot_tenor"
+window_bounds: Optional[StrictStr] = "example_window_bounds"
+minimum_amount_bps: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+apply_when_value: Optional[StrictStr] = "example_apply_when_value"
 scenario_shift_type: StrictStr = "example_scenario_shift_type"
-inflation_curve_shift_definition_instance = InflationCurveShiftDefinition(index=index, amount=amount, start_tenor=start_tenor, end_tenor=end_tenor, shift_type=shift_type, scale=scale, pivot_tenor=pivot_tenor, scenario_shift_type=scenario_shift_type)
+inflation_curve_shift_definition_instance = InflationCurveShiftDefinition(index=index, amount=amount, start_tenor=start_tenor, end_tenor=end_tenor, shift_type=shift_type, scale=scale, pivot_tenor=pivot_tenor, window_bounds=window_bounds, minimum_amount_bps=minimum_amount_bps, apply_when_value=apply_when_value, scenario_shift_type=scenario_shift_type)
 
 ```
 

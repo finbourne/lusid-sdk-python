@@ -5,7 +5,7 @@ A group of keyed market data key rules (e.g. bid/mid/ask). When the scenario is 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rules** | [**List[KeyedMarketDataKeyRule]**](KeyedMarketDataKeyRule.md) | The keyed rules of the group. Keys must be unique within the group; each key produces one  result column. | 
-**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition. | 
+**scenario_shift_type** | **str** | Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition. | 
 ## Example
 
 ```python

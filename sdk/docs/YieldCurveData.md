@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**funding_curve_name** | **str** | Optional name of the funding curve under which the calibration instruments are discounted,  for projection curves that are bootstrapped under a separate discount curve. This is the  funding identifier of the rates dependency for the calibration instruments&#39; domestic currency,  so a value of &#39;EUROIS&#39; names the discounting dependency Rates/EUR/EUROIS. When omitted the  calibration instruments are discounted on the curve being built, which is the classic  single-curve bootstrap. | [optional] 
 **market_data_type** | **str** | Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData. | 
 ## Example
 
@@ -26,8 +27,9 @@ quotes: List[MarketQuote] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 version: Optional[Version] = None
+funding_curve_name: Optional[StrictStr] = "example_funding_curve_name"
 market_data_type: StrictStr = "example_market_data_type"
-yield_curve_data_instance = YieldCurveData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
+yield_curve_data_instance = YieldCurveData(base_date=base_date, instruments=instruments, quotes=quotes, lineage=lineage, market_data_options=market_data_options, version=version, funding_curve_name=funding_curve_name, market_data_type=market_data_type)
 
 ```
 

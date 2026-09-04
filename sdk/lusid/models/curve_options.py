@@ -31,9 +31,11 @@ class CurveOptions(MarketDataOptions):
     day_count_convention:  Optional[StrictStr] = Field(None,alias="dayCountConvention", description="Day count convention of the curve. Default value: Act360. Available values: Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM, Invalid.") 
     front_extrapolation_type:  Optional[StrictStr] = Field(None,alias="frontExtrapolationType", description="What type of extrapolation is used to build the curve  Imagine that the curve is facing the observer(you), then the \"front\" direction is the closest point on the curve onward.    example: 0D tenor to past  Default value: Flat. Available values: None, Flat, Linear.") 
     back_extrapolation_type:  Optional[StrictStr] = Field(None,alias="backExtrapolationType", description="What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \"back\" direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Default value: Flat. Available values: None, Flat, Linear.") 
+    interpolation_type:  Optional[StrictStr] = Field(None,alias="interpolationType", description="What type of interpolation is used to build the curve. Default value: LinearOnRates. Available values: LinearOnRates, LinearOnLogOfRates, LinearOnDiscountFactors, LinearOnLogDiscountFactors, PiecewiseLinearForward, MonotoneConvex, LinearOnLogProbability.") 
+    origin_anchor:  Optional[StrictStr] = Field(None,alias="originAnchor", description="How the curve builder anchors the origin of a bootstrapped curve, i.e. the value the curve  carries in front of its shortest calibration instrument. Default value: ZeroRate, the  historical anchor, under which existing curves are unchanged. Available values: ZeroRate, FirstInstrumentRate.") 
     market_data_options_type:  StrictStr = Field(...,alias="marketDataOptionsType", description="Available values: CurveOptions. Available values: CurveOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataOptionsType", "dayCountConvention", "frontExtrapolationType", "backExtrapolationType"]
+    __properties = ["marketDataOptionsType", "dayCountConvention", "frontExtrapolationType", "backExtrapolationType", "interpolationType", "originAnchor"]
 
     @validator('market_data_options_type')
     def market_data_options_type_validate_enum(cls, value):
@@ -161,6 +163,16 @@ class CurveOptions(MarketDataOptions):
         if self.back_extrapolation_type is None and "back_extrapolation_type" in self.__fields_set__:
             _dict['backExtrapolationType'] = None
 
+        # set to None if interpolation_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.interpolation_type is None and "interpolation_type" in self.__fields_set__:
+            _dict['interpolationType'] = None
+
+        # set to None if origin_anchor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.origin_anchor is None and "origin_anchor" in self.__fields_set__:
+            _dict['originAnchor'] = None
+
         return _dict
 
     @classmethod
@@ -176,7 +188,9 @@ class CurveOptions(MarketDataOptions):
             "market_data_options_type": obj.get("marketDataOptionsType"),
             "day_count_convention": obj.get("dayCountConvention"),
             "front_extrapolation_type": obj.get("frontExtrapolationType"),
-            "back_extrapolation_type": obj.get("backExtrapolationType")
+            "back_extrapolation_type": obj.get("backExtrapolationType"),
+            "interpolation_type": obj.get("interpolationType"),
+            "origin_anchor": obj.get("originAnchor")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
