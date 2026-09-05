@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **calculate_trade_date_to_settlement_fx_pn_l** | **bool** | Configures whether Trade To Settlement Date Realised Gain Loss should be calculated. This overrides the value set at the Portfolio level.If null, then the Portfolio Settlement Configuration TradeToSettlementDateRealisedFxPnl setting will be used.If false, then no TradeToSettlementDateRealisedFxPnl will apply for this movement and if true, then TradeToSettlementDateRealisedFxPnlwill be calculated for this movement. | [optional] 
 **custodian_account_type** | **str** | The type of custodian account this movement targets, e.g. Cash or Margin. Free text, optional. | [optional] 
 **account_selector** | **str** | An optional selector expression used to identify the specific account this movement targets. Available values: From, To. | [optional] 
+**holding_property_deltas** | [**List[HoldingPropertyDelta]**](HoldingPropertyDelta.md) | An optional list of running balances on the holding that this movement adjusts, for example the committed, funded and unfunded capital balances maintained by the private equity transaction types. Each delta names the balance to adjust, the transaction field that sources the adjustment amount, and the direction in which to apply it. | [optional] 
 ## Example
 
 ```python
@@ -40,7 +41,8 @@ calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = # Replace wit
 calculate_trade_date_to_settlement_fx_pn_l:Optional[StrictBool] = None
 custodian_account_type: Optional[StrictStr] = "example_custodian_account_type"
 account_selector: Optional[StrictStr] = "example_account_selector"
-transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition, settlement_mode=settlement_mode, calculate_trade_date_to_settlement_fx_pn_l=calculate_trade_date_to_settlement_fx_pn_l, custodian_account_type=custodian_account_type, account_selector=account_selector)
+holding_property_deltas: Optional[List[HoldingPropertyDelta]] = # Replace with your value
+transaction_type_movement_instance = TransactionTypeMovement(movement_types=movement_types, side=side, direction=direction, properties=properties, mappings=mappings, name=name, movement_options=movement_options, settlement_date_override=settlement_date_override, condition=condition, settlement_mode=settlement_mode, calculate_trade_date_to_settlement_fx_pn_l=calculate_trade_date_to_settlement_fx_pn_l, custodian_account_type=custodian_account_type, account_selector=account_selector, holding_property_deltas=holding_property_deltas)
 
 ```
 

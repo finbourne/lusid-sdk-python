@@ -2613,7 +2613,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_holdings**
-> VersionedResourceListOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, aggregate_cash_commitments=aggregate_cash_commitments)
+> VersionedResourceListWithWarningsOfPortfolioHolding get_holdings(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, by_taxlots=by_taxlots, include_settlement_events_after_days=include_settlement_events_after_days, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, aggregate_cash_commitments=aggregate_cash_commitments)
 
 GetHoldings: Get holdings
 
@@ -2710,7 +2710,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**VersionedResourceListOfPortfolioHolding**](VersionedResourceListOfPortfolioHolding.md)
+[**VersionedResourceListWithWarningsOfPortfolioHolding**](VersionedResourceListWithWarningsOfPortfolioHolding.md)
 
 ### HTTP request headers
 

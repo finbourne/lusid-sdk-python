@@ -26,6 +26,8 @@ from lusid.models.calculate_order_dates_request import CalculateOrderDatesReques
 from lusid.models.calculate_order_dates_response import CalculateOrderDatesResponse
 from lusid.models.delete_transfer_agency_order_request import DeleteTransferAgencyOrderRequest
 from lusid.models.delete_transfer_agency_orders_response import DeleteTransferAgencyOrdersResponse
+from lusid.models.estimate_transfer_agency_order_request import EstimateTransferAgencyOrderRequest
+from lusid.models.estimate_transfer_agency_orders_response import EstimateTransferAgencyOrdersResponse
 from lusid.models.transfer_agency_orders_response import TransferAgencyOrdersResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
 
@@ -356,6 +358,165 @@ class TransferAgencyApi:
 
         return self.api_client.call_api(
             '/api/transferagency/orders/$delete', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def estimate_transfer_agency_orders(self, request_body : Annotated[Dict[str, EstimateTransferAgencyOrderRequest], Field(description="The transfer agency orders to estimate, keyed by a unique request identifier.")], **kwargs) -> EstimateTransferAgencyOrdersResponse:  # noqa: E501
+        ...
+
+    @overload
+    def estimate_transfer_agency_orders(self, request_body : Annotated[Dict[str, EstimateTransferAgencyOrderRequest], Field(description="The transfer agency orders to estimate, keyed by a unique request identifier.")], async_req: Optional[bool]=True, **kwargs) -> EstimateTransferAgencyOrdersResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def estimate_transfer_agency_orders(self, request_body : Annotated[Dict[str, EstimateTransferAgencyOrderRequest], Field(description="The transfer agency orders to estimate, keyed by a unique request identifier.")], async_req: Optional[bool]=None, **kwargs) -> Union[EstimateTransferAgencyOrdersResponse, Awaitable[EstimateTransferAgencyOrdersResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders  # noqa: E501
+
+        Estimates the units and the cash each order supplied would move, from the share class's most recent price.  Nothing is written.                An order may be named by its identifier, to estimate it as it stands, or supplied whole, to estimate values  that have not been saved yet. Both forms may appear in the same request. Where an order is supplied whole,  those values are estimated in place of the saved order's.                A switch or a transfer is two orders, and each leg is estimated independently.                The price is reported in the currency the share class is quoted in, which is not necessarily the order's  currency, so it is returned alongside that currency and the rate used.                The response contains both the successful estimates and any failures, each in the form of a dictionary  keyed by the request's keys. A share class with no price available fails only its own orders. It is  important to check the failed set for unsuccessful results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.estimate_transfer_agency_orders(request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param request_body: The transfer agency orders to estimate, keyed by a unique request identifier. (required)
+        :type request_body: Dict[str, EstimateTransferAgencyOrderRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: EstimateTransferAgencyOrdersResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the estimate_transfer_agency_orders_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.estimate_transfer_agency_orders_with_http_info(request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def estimate_transfer_agency_orders_with_http_info(self, request_body : Annotated[Dict[str, EstimateTransferAgencyOrderRequest], Field(description="The transfer agency orders to estimate, keyed by a unique request identifier.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders  # noqa: E501
+
+        Estimates the units and the cash each order supplied would move, from the share class's most recent price.  Nothing is written.                An order may be named by its identifier, to estimate it as it stands, or supplied whole, to estimate values  that have not been saved yet. Both forms may appear in the same request. Where an order is supplied whole,  those values are estimated in place of the saved order's.                A switch or a transfer is two orders, and each leg is estimated independently.                The price is reported in the currency the share class is quoted in, which is not necessarily the order's  currency, so it is returned alongside that currency and the rate used.                The response contains both the successful estimates and any failures, each in the form of a dictionary  keyed by the request's keys. A share class with no price available fails only its own orders. It is  important to check the failed set for unsuccessful results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.estimate_transfer_agency_orders_with_http_info(request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param request_body: The transfer agency orders to estimate, keyed by a unique request identifier. (required)
+        :type request_body: Dict[str, EstimateTransferAgencyOrderRequest]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(EstimateTransferAgencyOrdersResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method estimate_transfer_agency_orders" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "EstimateTransferAgencyOrdersResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transferagency/orders/$estimate', 'POST',
             _path_params,
             _query_params,
             _header_params,

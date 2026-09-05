@@ -32,7 +32,7 @@ class PriceShiftDefinition(ScenarioShiftDefinition):
     filter:  Optional[StrictStr] = Field(None,alias="filter", description="A LUSID filter expression over the instrument entity - fields and properties - selecting which  instruments' quotes the shift applies to, e.g.  \"assetClass eq 'Bond' and properties[Instrument/Issuer/Name] eq 'X'\".  Exactly one of Instrument and Filter must be supplied.") 
     amount: Optional[Union[StrictFloat, StrictInt]] = None
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative, Percentage.") 
-    quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor.") 
+    quote_type:  Optional[StrictStr] = Field(None,alias="quoteType", description="Available values: Price, Spread, Rate, LogNormalVol, NormalVol, ParSpread, IsdaSpread, Upfront, Index, Ratio, Delta, PoolFactor, InflationAssumption, DirtyPrice, PrincipalWriteOff, InterestDeferred, InterestShortfall, ConstituentWeightFactor, ForwardPrice, DiscountFactor.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["scenarioShiftType", "instrument", "filter", "amount", "shiftType", "quoteType"]
@@ -182,8 +182,8 @@ class PriceShiftDefinition(ScenarioShiftDefinition):
         if value is None:
             return value
 
-        if value not in ['Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor']:
-            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor')")
+        if value not in ['Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor', 'ForwardPrice', 'DiscountFactor']:
+            raise ValueError("must be one of enum values ('Price', 'Spread', 'Rate', 'LogNormalVol', 'NormalVol', 'ParSpread', 'IsdaSpread', 'Upfront', 'Index', 'Ratio', 'Delta', 'PoolFactor', 'InflationAssumption', 'DirtyPrice', 'PrincipalWriteOff', 'InterestDeferred', 'InterestShortfall', 'ConstituentWeightFactor', 'ForwardPrice', 'DiscountFactor')")
         return value
 
     @validator('scenario_shift_type')

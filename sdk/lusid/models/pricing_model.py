@@ -56,6 +56,7 @@ class PricingModel(str, Enum):
     FLEXIBLEREPOSIMPLEPRICER = 'FlexibleRepoSimplePricer'
     INFLATIONFORWARD = 'InflationForward'
     HULLWHITE1F = 'HullWhite1F'
+    CAPITALINTERESTPRICER = 'CapitalInterestPricer'
 
     @classmethod
     def from_json(cls, json_str: str) -> PricingModel:

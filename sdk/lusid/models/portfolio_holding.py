@@ -60,7 +60,8 @@ class PortfolioHolding(BaseModel):
     overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of unsettled units for the holding that are beyond their contractual settlement date.", alias="overdueUnits")
     custodian_account: Optional[CustodianAccount] = Field(default=None, alias="custodianAccount")
     resolved_custodian_account: Optional[ResolvedCustodianAccount] = Field(default=None, alias="resolvedCustodianAccount")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits", "custodianAccount", "resolvedCustodianAccount"]
+    holding_property_balances: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="The latest running balance of each holding property maintained on the holding by transaction type holding property deltas, keyed by holding property key, for example 'CommittedCapital'. Only populated when the holding has at least one balance.", alias="holdingPropertyBalances")
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits", "custodianAccount", "resolvedCustodianAccount", "holdingPropertyBalances"]
 
     class Config:
         """Pydantic configuration"""
@@ -188,6 +189,11 @@ class PortfolioHolding(BaseModel):
         if self.current_face is None and "current_face" in self.__fields_set__:
             _dict['currentFace'] = None
 
+        # set to None if holding_property_balances (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_property_balances is None and "holding_property_balances" in self.__fields_set__:
+            _dict['holdingPropertyBalances'] = None
+
         return _dict
 
     @classmethod
@@ -234,7 +240,8 @@ class PortfolioHolding(BaseModel):
             "unsettled_units": obj.get("unsettledUnits"),
             "overdue_units": obj.get("overdueUnits"),
             "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
-            "resolved_custodian_account": ResolvedCustodianAccount.from_dict(obj.get("resolvedCustodianAccount")) if obj.get("resolvedCustodianAccount") is not None else None
+            "resolved_custodian_account": ResolvedCustodianAccount.from_dict(obj.get("resolvedCustodianAccount")) if obj.get("resolvedCustodianAccount") is not None else None,
+            "holding_property_balances": obj.get("holdingPropertyBalances")
         })
         return _obj
 

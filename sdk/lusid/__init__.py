@@ -183,6 +183,7 @@ from lusid.models.allocation_group_definition import AllocationGroupDefinition
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
+from lusid.models.amend_commitment_event import AmendCommitmentEvent
 from lusid.models.amortisation_event import AmortisationEvent
 from lusid.models.amortisation_rule import AmortisationRule
 from lusid.models.amortisation_rule_set import AmortisationRuleSet
@@ -291,8 +292,10 @@ from lusid.models.cancel_swap_event import CancelSwapEvent
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
+from lusid.models.capital_call_event import CapitalCallEvent
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
 from lusid.models.capital_gains_distribution_event import CapitalGainsDistributionEvent
+from lusid.models.capital_interest import CapitalInterest
 from lusid.models.caplet_floorlet_cash_flow_event import CapletFloorletCashFlowEvent
 from lusid.models.cash import Cash
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
@@ -580,6 +583,8 @@ from lusid.models.equity_swap import EquitySwap
 from lusid.models.equity_vol_dependency import EquityVolDependency
 from lusid.models.equity_vol_surface_data import EquityVolSurfaceData
 from lusid.models.error_detail import ErrorDetail
+from lusid.models.estimate_transfer_agency_order_request import EstimateTransferAgencyOrderRequest
+from lusid.models.estimate_transfer_agency_orders_response import EstimateTransferAgencyOrdersResponse
 from lusid.models.estimate_variant import EstimateVariant
 from lusid.models.event_date_range import EventDateRange
 from lusid.models.event_inheritance import EventInheritance
@@ -649,6 +654,7 @@ from lusid.models.fund_configuration_properties import FundConfigurationProperti
 from lusid.models.fund_configuration_request import FundConfigurationRequest
 from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
+from lusid.models.fund_distribution_event import FundDistributionEvent
 from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoint
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_instrument import FundInstrument
@@ -760,6 +766,7 @@ from lusid.models.holding_context import HoldingContext
 from lusid.models.holding_contributor import HoldingContributor
 from lusid.models.holding_ids_request import HoldingIdsRequest
 from lusid.models.holding_pricing_info import HoldingPricingInfo
+from lusid.models.holding_property_delta import HoldingPropertyDelta
 from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.holdings_adjustment_header import HoldingsAdjustmentHeader
 from lusid.models.hull_white_model_options import HullWhiteModelOptions
@@ -916,6 +923,7 @@ from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
 from lusid.models.nav_activity_adjustment_response_type import NavActivityAdjustmentResponseType
 from lusid.models.nav_activity_adjustment_type import NavActivityAdjustmentType
+from lusid.models.nav_report_event import NavReportEvent
 from lusid.models.nav_settlement_configuration import NavSettlementConfiguration
 from lusid.models.nav_settlement_configuration_category import NavSettlementConfigurationCategory
 from lusid.models.nav_type import NavType
@@ -1584,7 +1592,9 @@ from lusid.models.transaction_type_property_mapping import TransactionTypeProper
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from lusid.models.transactions_reconciliations_response import TransactionsReconciliationsResponse
 from lusid.models.transfer_agency_dates import TransferAgencyDates
+from lusid.models.transfer_agency_order_estimate_result import TransferAgencyOrderEstimateResult
 from lusid.models.transfer_agency_order_result import TransferAgencyOrderResult
+from lusid.models.transfer_agency_order_to_estimate import TransferAgencyOrderToEstimate
 from lusid.models.transfer_agency_orders_response import TransferAgencyOrdersResponse
 from lusid.models.transition_event import TransitionEvent
 from lusid.models.transition_rec_instance_request import TransitionRecInstanceRequest
@@ -1939,6 +1949,7 @@ __all__ = [
     "AllocationRequest",
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
+    "AmendCommitmentEvent",
     "AmortisationEvent",
     "AmortisationRule",
     "AmortisationRuleSet",
@@ -2047,8 +2058,10 @@ __all__ = [
     "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",
+    "CapitalCallEvent",
     "CapitalDistributionEvent",
     "CapitalGainsDistributionEvent",
+    "CapitalInterest",
     "CapletFloorletCashFlowEvent",
     "Cash",
     "CashAndSecurityOfferElection",
@@ -2336,6 +2349,8 @@ __all__ = [
     "EquityVolDependency",
     "EquityVolSurfaceData",
     "ErrorDetail",
+    "EstimateTransferAgencyOrderRequest",
+    "EstimateTransferAgencyOrdersResponse",
     "EstimateVariant",
     "EventDateRange",
     "EventInheritance",
@@ -2405,6 +2420,7 @@ __all__ = [
     "FundConfigurationRequest",
     "FundDefinitionRequest",
     "FundDetails",
+    "FundDistributionEvent",
     "FundEstimateValuationPoint",
     "FundIdList",
     "FundInstrument",
@@ -2516,6 +2532,7 @@ __all__ = [
     "HoldingContributor",
     "HoldingIdsRequest",
     "HoldingPricingInfo",
+    "HoldingPropertyDelta",
     "HoldingsAdjustment",
     "HoldingsAdjustmentHeader",
     "HullWhiteModelOptions",
@@ -2672,6 +2689,7 @@ __all__ = [
     "NavActivityAdjustmentResponse",
     "NavActivityAdjustmentResponseType",
     "NavActivityAdjustmentType",
+    "NavReportEvent",
     "NavSettlementConfiguration",
     "NavSettlementConfigurationCategory",
     "NavType",
@@ -3340,7 +3358,9 @@ __all__ = [
     "TransactionTypeRequest",
     "TransactionsReconciliationsResponse",
     "TransferAgencyDates",
+    "TransferAgencyOrderEstimateResult",
     "TransferAgencyOrderResult",
+    "TransferAgencyOrderToEstimate",
     "TransferAgencyOrdersResponse",
     "TransitionEvent",
     "TransitionRecInstanceRequest",

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.holding_property_delta import HoldingPropertyDelta
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.transaction_type_property_mapping import TransactionTypePropertyMapping
 
@@ -42,7 +43,8 @@ class TransactionTypeMovement(BaseModel):
     calculate_trade_date_to_settlement_fx_pn_l: Optional[StrictBool] = Field(default=None, description="Configures whether Trade To Settlement Date Realised Gain Loss should be calculated. This overrides the value set at the Portfolio level.If null, then the Portfolio Settlement Configuration TradeToSettlementDateRealisedFxPnl setting will be used.If false, then no TradeToSettlementDateRealisedFxPnl will apply for this movement and if true, then TradeToSettlementDateRealisedFxPnlwill be calculated for this movement.", alias="calculateTradeDateToSettlementFxPnL")
     custodian_account_type:  Optional[StrictStr] = Field(None,alias="custodianAccountType", description="The type of custodian account this movement targets, e.g. Cash or Margin. Free text, optional.") 
     account_selector:  Optional[StrictStr] = Field(None,alias="accountSelector", description="An optional selector expression used to identify the specific account this movement targets. Available values: From, To.") 
-    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride", "condition", "settlementMode", "calculateTradeDateToSettlementFxPnL", "custodianAccountType", "accountSelector"]
+    holding_property_deltas: Optional[List[HoldingPropertyDelta]] = Field(default=None, description="An optional list of running balances on the holding that this movement adjusts, for example the committed, funded and unfunded capital balances maintained by the private equity transaction types. Each delta names the balance to adjust, the transaction field that sources the adjustment amount, and the direction in which to apply it.", alias="holdingPropertyDeltas")
+    __properties = ["movementTypes", "side", "direction", "properties", "mappings", "name", "movementOptions", "settlementDateOverride", "condition", "settlementMode", "calculateTradeDateToSettlementFxPnL", "custodianAccountType", "accountSelector", "holdingPropertyDeltas"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +92,13 @@ class TransactionTypeMovement(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['mappings'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in holding_property_deltas (list)
+        _items = []
+        if self.holding_property_deltas:
+            for _item in self.holding_property_deltas:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['holdingPropertyDeltas'] = _items
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -140,6 +149,11 @@ class TransactionTypeMovement(BaseModel):
         if self.account_selector is None and "account_selector" in self.__fields_set__:
             _dict['accountSelector'] = None
 
+        # set to None if holding_property_deltas (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_property_deltas is None and "holding_property_deltas" in self.__fields_set__:
+            _dict['holdingPropertyDeltas'] = None
+
         return _dict
 
     @classmethod
@@ -169,7 +183,8 @@ class TransactionTypeMovement(BaseModel):
             "settlement_mode": obj.get("settlementMode"),
             "calculate_trade_date_to_settlement_fx_pn_l": obj.get("calculateTradeDateToSettlementFxPnL"),
             "custodian_account_type": obj.get("custodianAccountType"),
-            "account_selector": obj.get("accountSelector")
+            "account_selector": obj.get("accountSelector"),
+            "holding_property_deltas": [HoldingPropertyDelta.from_dict(_item) for _item in obj.get("holdingPropertyDeltas")] if obj.get("holdingPropertyDeltas") is not None else None
         })
         return _obj
 
