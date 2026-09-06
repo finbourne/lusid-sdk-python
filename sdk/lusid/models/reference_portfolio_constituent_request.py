@@ -31,7 +31,7 @@ class ReferencePortfolioConstituentRequest(BaseModel):
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="Unique instrument identifiers", alias="instrumentIdentifiers")
     properties: Optional[Dict[str, PerpetualProperty]] = None
     weight: Union[StrictFloat, StrictInt]
-    currency:  Optional[StrictStr] = Field(None,alias="currency", description="") 
+    currency:  StrictStr = Field(...,alias="currency", description="") 
     __properties = ["instrumentIdentifiers", "properties", "weight", "currency"]
 
     class Config:
@@ -77,11 +77,6 @@ class ReferencePortfolioConstituentRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
-
-        # set to None if currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.currency is None and "currency" in self.__fields_set__:
-            _dict['currency'] = None
 
         return _dict
 

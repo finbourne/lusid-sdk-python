@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **weight** | **float** |  | 
-**currency** | **str** |  | [optional] 
+**currency** | **str** |  | 
 ## Example
 
 ```python
@@ -19,7 +19,7 @@ from datetime import datetime
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = None
 weight: Union[StrictFloat, StrictInt]
-currency: Optional[StrictStr] = "example_currency"
+currency: StrictStr = "example_currency"
 reference_portfolio_constituent_request_instance = ReferencePortfolioConstituentRequest(instrument_identifiers=instrument_identifiers, properties=properties, weight=weight, currency=currency)
 
 ```

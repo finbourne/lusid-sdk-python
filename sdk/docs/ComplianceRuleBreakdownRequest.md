@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **group_status** | **str** |  | 
 **results_used** | **Dict[str, float]** |  | 
+**formula_values** | **Dict[str, float]** |  | [optional] 
 **properties_used** | **Dict[str, Optional[List[ModelProperty]]]** |  | 
 **missing_data_information** | **List[str]** |  | 
 **lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
@@ -19,10 +20,11 @@ from datetime import datetime
 
 group_status: StrictStr = "example_group_status"
 results_used: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
+formula_values: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = # Replace with your value
 properties_used: Dict[str, Optional[List[ModelProperty]]] = # Replace with your value
 missing_data_information: List[StrictStr] = # Replace with your value
 lineage: List[LineageMember]
-compliance_rule_breakdown_request_instance = ComplianceRuleBreakdownRequest(group_status=group_status, results_used=results_used, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
+compliance_rule_breakdown_request_instance = ComplianceRuleBreakdownRequest(group_status=group_status, results_used=results_used, formula_values=formula_values, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
 
 ```
 

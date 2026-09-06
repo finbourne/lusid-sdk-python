@@ -31,10 +31,11 @@ class ComplianceRuleBreakdownRequest(BaseModel):
     """
     group_status:  StrictStr = Field(...,alias="groupStatus") 
     results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(alias="resultsUsed")
+    formula_values: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, alias="formulaValues")
     properties_used: Dict[str, Optional[List[ModelProperty]]] = Field(alias="propertiesUsed")
     missing_data_information: List[StrictStr] = Field(alias="missingDataInformation")
     lineage: List[LineageMember]
-    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation", "lineage"]
+    __properties = ["groupStatus", "resultsUsed", "formulaValues", "propertiesUsed", "missingDataInformation", "lineage"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,11 @@ class ComplianceRuleBreakdownRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['lineage'] = _items
+        # set to None if formula_values (nullable) is None
+        # and __fields_set__ contains the field
+        if self.formula_values is None and "formula_values" in self.__fields_set__:
+            _dict['formulaValues'] = None
+
         return _dict
 
     @classmethod
@@ -98,6 +104,7 @@ class ComplianceRuleBreakdownRequest(BaseModel):
         _obj = ComplianceRuleBreakdownRequest.parse_obj({
             "group_status": obj.get("groupStatus"),
             "results_used": obj.get("resultsUsed"),
+            "formula_values": obj.get("formulaValues"),
             "properties_used": dict(
                 (_k,
                         [ModelProperty.from_dict(_item) for _item in _v]

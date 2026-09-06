@@ -4,7 +4,7 @@ Common Trading details for exchange traded instruments like Futures and Bonds
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**price_scale_factor** | **float** | The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions. Note this factor does not yet impact Valuation, PV, exposure,  all of which use the scale factor attached to the price quotes in the QuoteStore.  Must be positive and defaults to 1 if not set. | [optional] 
+**price_scale_factor** | **float** | The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions, and in Valuation, PV and exposure when the recipe&#39;s  UseInstrumentScaleFactorAsDefault pricing option is set: a lookup-priced instrument whose price  quote declares no scale factor of its own is then scaled by this factor. When that option is not  set, only the scale factor attached to the price quotes in the QuoteStore is used.  Must be positive and defaults to 1 if not set. | [optional] 
 **minimum_order_size** | **float** | The Minimum Order Size  Must be non-negative and defaults to 0 if not set. | [optional] 
 **minimum_order_increment** | **float** | The Minimum Order Increment  Must be non-negative and defaults to 0 if not set. | [optional] 
 ## Example

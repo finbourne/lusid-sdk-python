@@ -31,10 +31,11 @@ class ComplianceRuleBreakdown(BaseModel):
     """
     group_status:  StrictStr = Field(...,alias="groupStatus", description="The status of this subset of results.") 
     results_used: Dict[str, Union[StrictFloat, StrictInt]] = Field(description="Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule.", alias="resultsUsed")
+    formula_values: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="The value each formula within the check criterion evaluated to for this group. Empty where the criterion  compares a single value or is not numerical, since the operand values already recorded describe those.", alias="formulaValues")
     properties_used: Dict[str, Optional[List[ModelProperty]]] = Field(description="Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule", alias="propertiesUsed")
     missing_data_information: List[StrictStr] = Field(description="List of string information detailing data that was missing from contributions processed in this rule", alias="missingDataInformation")
     lineage: List[LineageMember]
-    __properties = ["groupStatus", "resultsUsed", "propertiesUsed", "missingDataInformation", "lineage"]
+    __properties = ["groupStatus", "resultsUsed", "formulaValues", "propertiesUsed", "missingDataInformation", "lineage"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,11 @@ class ComplianceRuleBreakdown(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['lineage'] = _items
+        # set to None if formula_values (nullable) is None
+        # and __fields_set__ contains the field
+        if self.formula_values is None and "formula_values" in self.__fields_set__:
+            _dict['formulaValues'] = None
+
         return _dict
 
     @classmethod
@@ -98,6 +104,7 @@ class ComplianceRuleBreakdown(BaseModel):
         _obj = ComplianceRuleBreakdown.parse_obj({
             "group_status": obj.get("groupStatus"),
             "results_used": obj.get("resultsUsed"),
+            "formula_values": obj.get("formulaValues"),
             "properties_used": dict(
                 (_k,
                         [ModelProperty.from_dict(_item) for _item in _v]

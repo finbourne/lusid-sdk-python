@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **group_status** | **str** | The status of this subset of results. | 
 **results_used** | **Dict[str, float]** | Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule. | 
+**formula_values** | **Dict[str, float]** | The value each formula within the check criterion evaluated to for this group. Empty where the criterion  compares a single value or is not numerical, since the operand values already recorded describe those. | [optional] 
 **properties_used** | **Dict[str, Optional[List[ModelProperty]]]** | Dictionary of PropertyKey (as string) and their corresponding Properties, that were used in this rule | 
 **missing_data_information** | **List[str]** | List of string information detailing data that was missing from contributions processed in this rule | 
 **lineage** | [**List[LineageMember]**](LineageMember.md) |  | 
@@ -19,10 +20,11 @@ from datetime import datetime
 
 group_status: StrictStr = "example_group_status"
 results_used: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
+formula_values: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = # Replace with your value
 properties_used: Dict[str, Optional[List[ModelProperty]]] = # Replace with your value
 missing_data_information: List[StrictStr] = # Replace with your value
 lineage: List[LineageMember]
-compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_status=group_status, results_used=results_used, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
+compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_status=group_status, results_used=results_used, formula_values=formula_values, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
 
 ```
 
