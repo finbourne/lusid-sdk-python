@@ -31,7 +31,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
     instrument:  StrictStr = Field(...,alias="instrument", description="The market-data descriptor of the surfaces to shift, not an instrument identifier such as a LUID.  For an equity vol surface this is the underlier code the surface was mastered against (e.g. 'TSLA'  for market asset 'TSLA/USD/LN'); for an interest rate vol surface it is the currency (e.g. 'USD');  for an FX vol surface it is the currency pair (e.g. 'GBP/USD'). The wildcard 'EquityVol.*' widens  the shift to every equity vol surface in the valuation; interest rate and FX vol surfaces cannot  be widened, since neither a currency nor a currency pair names a set of instruments.") 
     amount: Optional[Union[StrictFloat, StrictInt]] = None
     strike: Optional[Union[StrictFloat, StrictInt]] = None
-    expiry:  Optional[StrictStr] = Field(None,alias="expiry") 
+    expiry:  Optional[StrictStr] = Field(None,alias="expiry", description="The expiry of the surface points the shift applies to, resolved against the valuation  date. A whole number of units, in any case: BD (business day), D, W, M, Q or Qtr, SA  (semi-annual), Y or A - for example \"1BD\", \"3m\", \"6M\", \"1Qtr\", \"5y\". Omitted, every  expiry on the surface is shifted.") 
     shift_type:  StrictStr = Field(...,alias="shiftType", description="Available values: Absolute, Relative.") 
     scenario_shift_type:  StrictStr = Field(...,alias="scenarioShiftType", description="Available values: RateCurveShiftDefinition, FxShiftDefinition, PriceShiftDefinition, VolSurfaceShiftDefinition, MdkrGroupShiftDefinition, InflationCurveShiftDefinition, CreditSpreadShiftDefinition, ModelOptionShiftDefinition.") 
     additional_properties: Dict[str, Any] = {}

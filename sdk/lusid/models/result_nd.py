@@ -26,13 +26,13 @@ from lusid.models.unit_dimension import UnitDimension
 
 class ResultND(BaseModel):
     """
-    A single result-value shape whose structure is derived from `dimension`, replacing one  hand-maintained type per rank (Result0D/Result1D/Result2D). Additive and opt-in: existing  consumers of those types see no change to their response bytes.  # noqa: E501
+    A single result-value shape whose structure is derived from `dimension`, replacing one  hand-maintained type per rank (Result0D/Result1D/Result2D). Risk measures of dimension 1, 2  or 3 - the ladders, the surfaces and the IR vol cubes - now report this shape rather than  Result1D/Result2D, so their response bytes change: the values arrive nested and dense here  (see `values`), where the legacy types carried a flat \"(row,column)\"-keyed map that  elided unquoted coordinates, and the units arrive as one flat list rather than the doubled  `{ units: { units: [] } }` wrapper. Dimension 0 measures are untouched and stay on the  legacy shapes.  # noqa: E501
     """
     result_value_type:  Optional[StrictStr] = Field(None,alias="resultValueType", description="The discriminator for this result shape. Always \"ResultND\".") 
     dimension: Optional[StrictInt] = Field(default=None, description="The rank of the result, 0..N. Determines which of `value` / `values` is populated  and how deeply `values` is nested.")
     labels: Optional[List[List[StrictStr]]] = Field(default=None, description="One ordered array of labels per axis, index to label, in the same axis order as  `AddressDefinition.Axes`. Length equals `dimension`; empty for a scalar.")
     value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The scalar value. Present if and only if `dimension` is 0.")
-    values: Optional[List[Union[StrictFloat, StrictInt]]] = Field(default=None, description="The values, flattened row-major with axis 0 outermost and dense - a coordinate the legacy  format would have elided is materialised as 0. The shape is read off `labels`: position  (i0, i1, ..., ik) is at offset i0 * len(labels[1]) * ... * len(labels[k]) + i1 * ... + ik.  Present if and only if `dimension` is at least 1.")
+    values: Optional[Any] = Field(default=None, description="The values, nested exactly `dimension` deep (axis 0 outermost) and dense - a coordinate  the legacy format would have elided is null, never a fabricated number. Present if and only  if `dimension` is at least 1.")
     has_annotation: Optional[StrictBool] = Field(default=None, description="Unchanged from Result0D/1D/2D.", alias="hasAnnotation")
     units: Optional[List[UnitDimension]] = Field(default=None, description="A flat list of dimensional-analysis units, replacing the doubled  `{ units: { units: [] } }` wrapper on the legacy types. The count reflects the order of  the derivative (e.g. two entries for a ratio such as a rates delta), not the result's axes.")
     __properties = ["resultValueType", "dimension", "labels", "value", "values", "hasAnnotation", "units"]
