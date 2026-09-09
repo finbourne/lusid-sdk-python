@@ -30,7 +30,8 @@ class AggregateSpec(BaseModel):
     key:  StrictStr = Field(...,alias="key", description="The key that uniquely identifies a queryable address in Lusid.") 
     op:  StrictStr = Field(...,alias="op", description="Available values: Sum, DefaultSum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
     options: Optional[Dict[str, Any]] = Field(default=None, description="Additional options to apply when performing computations. Options that do not apply to the Key will be  ignored. Option values can be boolean, numeric, string or date-time.")
-    __properties = ["key", "op", "options"]
+    return_as:  Optional[StrictStr] = Field(None,alias="returnAs", description="Optional client-chosen name for this metric. When supplied, the corresponding column in the returned  data is keyed by this name instead of the serialised address key (with options), letting callers  associate each requested metric with its result without reconstructing the key serialisation.  Names must be unique within a request, start with a letter and contain only letters, digits,  underscores or hyphens. When omitted, the column is keyed by the serialised address key as before.") 
+    __properties = ["key", "op", "options", "returnAs"]
 
     @validator('op')
     def op_validate_enum(cls, value):
@@ -142,6 +143,11 @@ class AggregateSpec(BaseModel):
         if self.options is None and "options" in self.__fields_set__:
             _dict['options'] = None
 
+        # set to None if return_as (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_as is None and "return_as" in self.__fields_set__:
+            _dict['returnAs'] = None
+
         return _dict
 
     @classmethod
@@ -156,7 +162,8 @@ class AggregateSpec(BaseModel):
         _obj = AggregateSpec.parse_obj({
             "key": obj.get("key"),
             "op": obj.get("op"),
-            "options": obj.get("options")
+            "options": obj.get("options"),
+            "return_as": obj.get("returnAs")
         })
         return _obj
 
