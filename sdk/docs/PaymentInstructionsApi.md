@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_payment_instruction**](PaymentInstructionsApi.md#delete_payment_instruction) | **DELETE** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
 [**get_payment_instruction**](PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
+[**get_payment_instructions_by_payment_record_ids**](PaymentInstructionsApi.md#get_payment_instructions_by_payment_record_ids) | **POST** /api/paymentinstructions/$getByPaymentRecordIds | [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
 [**upsert_payment_instructions**](PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
 
 
@@ -198,6 +199,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested payment instruction |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_payment_instructions_by_payment_record_ids**
+> GetPaymentInstructionsResponse get_payment_instructions_by_payment_record_ids(request_body, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
+
+[EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
+
+Retrieve the Payment Instructions that reference the given Payment Records. Payment record ids are unique  across the system scope, so no scope or identifier type is required. The response contains the payment  instructions that could be found, keyed by the payment record id used to retrieve them, along with the  nature of any failures.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PaymentInstructionsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PaymentInstructionsApi)
+    request_body = ["payment-record-id-1","payment-record-id-2"] # List[str] | A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored.
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"PaymentInstruction\" domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \"PaymentInstruction/myScope/myProperty\". (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_payment_instructions_by_payment_record_ids(request_body, property_keys=property_keys, effective_at=effective_at, as_at=as_at, opts=opts)
+
+        # [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
+        api_response = api_instance.get_payment_instructions_by_payment_record_ids(request_body, property_keys=property_keys, effective_at=effective_at, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PaymentInstructionsApi->get_payment_instructions_by_payment_record_ids: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**List[str]**](str.md)| A collection of payment record ids to retrieve payment instructions for.              Duplicate ids are ignored. | 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;PaymentInstruction\&quot; domain to decorate onto each              payment instruction. These take the format {domain}/{scope}/{code} e.g. \&quot;PaymentInstruction/myScope/myProperty\&quot;. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the payment instructions.              Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the payment instructions. Defaults to return the latest              version of each payment instruction if not specified. | [optional] 
+
+### Return type
+
+[**GetPaymentInstructionsResponse**](GetPaymentInstructionsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The payment instructions that could be found for the supplied payment record ids, along with any failures |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

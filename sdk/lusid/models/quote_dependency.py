@@ -31,9 +31,10 @@ class QuoteDependency(EconomicDependency):
     market_identifier:  StrictStr = Field(...,alias="marketIdentifier", description="Type of the code identifying the asset, e.g. ISIN or CUSIP") 
     code:  StrictStr = Field(...,alias="code", description="The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN") 
     var_date: datetime = Field(description="The effectiveAt of the quote for the identified entity.", alias="date")
+    descriptor: Optional[List[StrictStr]] = Field(default=None, description="Optional additional description of the quote being depended upon, e.g. the model or lineage that produced it.  When matching a dependency against supplied market data overrides, the descriptor must match as well as the identifier and code.  If omitted, the dependency has no descriptor.")
     dependency_type:  StrictStr = Field(...,alias="dependencyType", description="Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["dependencyType", "marketIdentifier", "code", "date"]
+    __properties = ["dependencyType", "marketIdentifier", "code", "date", "descriptor"]
 
     @validator('dependency_type')
     def dependency_type_validate_enum(cls, value):
@@ -146,6 +147,11 @@ class QuoteDependency(EconomicDependency):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if descriptor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.descriptor is None and "descriptor" in self.__fields_set__:
+            _dict['descriptor'] = None
+
         return _dict
 
     @classmethod
@@ -161,7 +167,8 @@ class QuoteDependency(EconomicDependency):
             "dependency_type": obj.get("dependencyType"),
             "market_identifier": obj.get("marketIdentifier"),
             "code": obj.get("code"),
-            "var_date": obj.get("date")
+            "var_date": obj.get("date"),
+            "descriptor": obj.get("descriptor")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

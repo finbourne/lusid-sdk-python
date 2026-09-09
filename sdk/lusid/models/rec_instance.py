@@ -26,13 +26,13 @@ from lusid.models.link import Link
 from lusid.models.rec_closed_periods import RecClosedPeriods
 from lusid.models.rec_dates_reconciled import RecDatesReconciled
 from lusid.models.rec_instance_id import RecInstanceId
-from lusid.models.rec_run_log_entry import RecRunLogEntry
+from lusid.models.rec_run_log import RecRunLog
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
 class RecInstance(BaseModel):
     """
-    The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and the time-series of runs in the run log.  # noqa: E501
+    The expanded view of a rec instance: its identity, lifecycle status, lock state, closed periods  (for Closed Period windows) and, per rec type, the time-series of runs in that rec type's run log.  # noqa: E501
     """
     id: RecInstanceId
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
@@ -42,11 +42,11 @@ class RecInstance(BaseModel):
     as_at_locked: Optional[datetime] = Field(default=None, description="The wall-clock time the lock action was performed. Null when the instance has not been locked.", alias="asAtLocked")
     dates_locked: Optional[RecDatesReconciled] = Field(default=None, alias="datesLocked")
     closed_periods: Optional[RecClosedPeriods] = Field(default=None, alias="closedPeriods")
-    run_log: List[RecRunLogEntry] = Field(description="A chronologically ordered list of all runs on the instance. Always contains at least one entry.", alias="runLog")
+    run_logs: Dict[str, RecRunLog] = Field(description="The instance's run history, keyed by rec type. Contains an entry for each rec type that has produced a result set, so a run appears only once it has completed or failed. Empty while the instance's first run is still in flight.", alias="runLogs")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "recDefinitionId", "recDefinitionDisplayName", "asAtInstantiated", "status", "asAtLocked", "datesLocked", "closedPeriods", "runLog", "href", "version", "links"]
+    __properties = ["id", "recDefinitionId", "recDefinitionDisplayName", "asAtInstantiated", "status", "asAtLocked", "datesLocked", "closedPeriods", "runLogs", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,13 +92,13 @@ class RecInstance(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of closed_periods
         if self.closed_periods:
             _dict['closedPeriods'] = self.closed_periods.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in run_log (list)
-        _items = []
-        if self.run_log:
-            for _item in self.run_log:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['runLog'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each value in run_logs (dict)
+        _field_dict = {}
+        if self.run_logs:
+            for _key in self.run_logs:
+                if self.run_logs[_key]:
+                    _field_dict[_key] = self.run_logs[_key].to_dict()
+            _dict['runLogs'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -144,7 +144,12 @@ class RecInstance(BaseModel):
             "as_at_locked": obj.get("asAtLocked"),
             "dates_locked": RecDatesReconciled.from_dict(obj.get("datesLocked")) if obj.get("datesLocked") is not None else None,
             "closed_periods": RecClosedPeriods.from_dict(obj.get("closedPeriods")) if obj.get("closedPeriods") is not None else None,
-            "run_log": [RecRunLogEntry.from_dict(_item) for _item in obj.get("runLog")] if obj.get("runLog") is not None else None,
+            "run_logs": dict(
+                (_k, RecRunLog.from_dict(_v))
+                for _k, _v in obj.get("runLogs").items()
+            )
+            if obj.get("runLogs") is not None
+            else None,
             "href": obj.get("href"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

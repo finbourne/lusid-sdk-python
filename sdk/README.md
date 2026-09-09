@@ -179,6 +179,10 @@ Class | Method | HTTP request | Description
 *CounterpartiesApi* | [**list_credit_support_annexes**](docs/CounterpartiesApi.md#list_credit_support_annexes) | **GET** /api/counterparties/creditsupportannexes | [EARLY ACCESS] ListCreditSupportAnnexes: List the set of Credit Support Annexes
 *CounterpartiesApi* | [**upsert_counterparty_agreement**](docs/CounterpartiesApi.md#upsert_counterparty_agreement) | **POST** /api/counterparties/counterpartyagreements | [EARLY ACCESS] UpsertCounterpartyAgreement: Upsert Counterparty Agreement
 *CounterpartiesApi* | [**upsert_credit_support_annex**](docs/CounterpartiesApi.md#upsert_credit_support_annex) | **POST** /api/counterparties/creditsupportannexes | [EARLY ACCESS] UpsertCreditSupportAnnex: Upsert Credit Support Annex
+*CurrencyGroupsApi* | [**delete_currency_group**](docs/CurrencyGroupsApi.md#delete_currency_group) | **DELETE** /api/currencies/groups/{code} | [EXPERIMENTAL] DeleteCurrencyGroup: Delete a currency group.
+*CurrencyGroupsApi* | [**get_currency_group**](docs/CurrencyGroupsApi.md#get_currency_group) | **GET** /api/currencies/groups/{code} | [EXPERIMENTAL] GetCurrencyGroup: Get a currency group.
+*CurrencyGroupsApi* | [**list_currency_groups**](docs/CurrencyGroupsApi.md#list_currency_groups) | **GET** /api/currencies/groups | [EXPERIMENTAL] ListCurrencyGroups: List currency groups.
+*CurrencyGroupsApi* | [**upsert_currency_group**](docs/CurrencyGroupsApi.md#upsert_currency_group) | **POST** /api/currencies/groups | [EXPERIMENTAL] UpsertCurrencyGroup: Upsert a currency group.
 *CustomEntitiesApi* | [**delete_custom_entity**](docs/CustomEntitiesApi.md#delete_custom_entity) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue} | DeleteCustomEntity: Delete a Custom Entity instance.
 *CustomEntitiesApi* | [**delete_custom_entity_access_metadata**](docs/CustomEntitiesApi.md#delete_custom_entity_access_metadata) | **DELETE** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata/{metadataKey} | [EARLY ACCESS] DeleteCustomEntityAccessMetadata: Delete a Custom Entity Access Metadata entry
 *CustomEntitiesApi* | [**get_all_custom_entity_access_metadata**](docs/CustomEntitiesApi.md#get_all_custom_entity_access_metadata) | **GET** /api/customentities/{entityType}/{identifierType}/{identifierValue}/metadata | [EARLY ACCESS] GetAllCustomEntityAccessMetadata: Get all the Access Metadata rules for a Custom Entity
@@ -434,6 +438,7 @@ Class | Method | HTTP request | Description
 *ParticipationsApi* | [**upsert_participations**](docs/ParticipationsApi.md#upsert_participations) | **POST** /api/participations | [EARLY ACCESS] UpsertParticipations: Upsert Participation
 *PaymentInstructionsApi* | [**delete_payment_instruction**](docs/PaymentInstructionsApi.md#delete_payment_instruction) | **DELETE** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] DeletePaymentInstruction: Delete Payment Instruction
 *PaymentInstructionsApi* | [**get_payment_instruction**](docs/PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
+*PaymentInstructionsApi* | [**get_payment_instructions_by_payment_record_ids**](docs/PaymentInstructionsApi.md#get_payment_instructions_by_payment_record_ids) | **POST** /api/paymentinstructions/$getByPaymentRecordIds | [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
 *PaymentInstructionsApi* | [**upsert_payment_instructions**](docs/PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
 *PersonsApi* | [**delete_person**](docs/PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | DeletePerson: Delete person
 *PersonsApi* | [**delete_person_access_metadata**](docs/PersonsApi.md#delete_person_access_metadata) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
@@ -1144,6 +1149,8 @@ Class | Method | HTTP request | Description
  - [CreditSupportAnnex](docs/CreditSupportAnnex.md)
  - [CriterionType](docs/CriterionType.md)
  - [CurrencyAndAmount](docs/CurrencyAndAmount.md)
+ - [CurrencyGroupMinorUnit](docs/CurrencyGroupMinorUnit.md)
+ - [CurrencyGroupResponse](docs/CurrencyGroupResponse.md)
  - [CurveOptions](docs/CurveOptions.md)
  - [CurveShiftWindowBounds](docs/CurveShiftWindowBounds.md)
  - [CustodianAccount](docs/CustodianAccount.md)
@@ -1382,6 +1389,7 @@ Class | Method | HTTP request | Description
  - [GetFlowConventionsResponse](docs/GetFlowConventionsResponse.md)
  - [GetIndexConventionResponse](docs/GetIndexConventionResponse.md)
  - [GetInstrumentsResponse](docs/GetInstrumentsResponse.md)
+ - [GetPaymentInstructionsResponse](docs/GetPaymentInstructionsResponse.md)
  - [GetQuotesResponse](docs/GetQuotesResponse.md)
  - [GetRecipeComposerResponse](docs/GetRecipeComposerResponse.md)
  - [GetRecipeResponse](docs/GetRecipeResponse.md)
@@ -1671,6 +1679,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfComplianceRunInfoV2](docs/PagedResourceListOfComplianceRunInfoV2.md)
  - [PagedResourceListOfComplianceTemplate](docs/PagedResourceListOfComplianceTemplate.md)
  - [PagedResourceListOfCorporateActionSource](docs/PagedResourceListOfCorporateActionSource.md)
+ - [PagedResourceListOfCurrencyGroupResponse](docs/PagedResourceListOfCurrencyGroupResponse.md)
  - [PagedResourceListOfCustodianAccount](docs/PagedResourceListOfCustodianAccount.md)
  - [PagedResourceListOfCustomEntityDefinition](docs/PagedResourceListOfCustomEntityDefinition.md)
  - [PagedResourceListOfCustomEntityResponse](docs/PagedResourceListOfCustomEntityResponse.md)
@@ -1927,6 +1936,7 @@ Class | Method | HTTP request | Description
  - [RecReviewRequiredApproval](docs/RecReviewRequiredApproval.md)
  - [RecReviewRequirementRule](docs/RecReviewRequirementRule.md)
  - [RecReviewSubmission](docs/RecReviewSubmission.md)
+ - [RecRunLog](docs/RecRunLog.md)
  - [RecRunLogEntry](docs/RecRunLogEntry.md)
  - [RecSubmission](docs/RecSubmission.md)
  - [RecSupersededRun](docs/RecSupersededRun.md)
@@ -2073,6 +2083,7 @@ Class | Method | HTTP request | Description
  - [ResultDataSchema](docs/ResultDataSchema.md)
  - [ResultKeyRule](docs/ResultKeyRule.md)
  - [ResultKeyRuleType](docs/ResultKeyRuleType.md)
+ - [ResultND](docs/ResultND.md)
  - [ResultValue](docs/ResultValue.md)
  - [ResultValue0D](docs/ResultValue0D.md)
  - [ResultValueBool](docs/ResultValueBool.md)
@@ -2263,6 +2274,7 @@ Class | Method | HTTP request | Description
  - [TransactionTypeRequest](docs/TransactionTypeRequest.md)
  - [TransactionsReconciliationsResponse](docs/TransactionsReconciliationsResponse.md)
  - [TransferAgencyDates](docs/TransferAgencyDates.md)
+ - [TransferAgencyExcludedOrder](docs/TransferAgencyExcludedOrder.md)
  - [TransferAgencyOrderEstimateResult](docs/TransferAgencyOrderEstimateResult.md)
  - [TransferAgencyOrderResult](docs/TransferAgencyOrderResult.md)
  - [TransferAgencyOrderToEstimate](docs/TransferAgencyOrderToEstimate.md)
@@ -2286,6 +2298,7 @@ Class | Method | HTTP request | Description
  - [TriggerEvent](docs/TriggerEvent.md)
  - [TypedResourceId](docs/TypedResourceId.md)
  - [UnconfirmClosedPeriodRequest](docs/UnconfirmClosedPeriodRequest.md)
+ - [UnitDimension](docs/UnitDimension.md)
  - [UnitSchema](docs/UnitSchema.md)
  - [UnitisationData](docs/UnitisationData.md)
  - [UnitsRatio](docs/UnitsRatio.md)
@@ -2339,6 +2352,7 @@ Class | Method | HTTP request | Description
  - [UpsertCorporateActionsResponse](docs/UpsertCorporateActionsResponse.md)
  - [UpsertCounterpartyAgreementRequest](docs/UpsertCounterpartyAgreementRequest.md)
  - [UpsertCreditSupportAnnexRequest](docs/UpsertCreditSupportAnnexRequest.md)
+ - [UpsertCurrencyGroupRequest](docs/UpsertCurrencyGroupRequest.md)
  - [UpsertCustomEntitiesResponse](docs/UpsertCustomEntitiesResponse.md)
  - [UpsertCustomEntityAccessMetadataRequest](docs/UpsertCustomEntityAccessMetadataRequest.md)
  - [UpsertDataQualityRule](docs/UpsertDataQualityRule.md)

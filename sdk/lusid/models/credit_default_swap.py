@@ -31,7 +31,7 @@ from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class CreditDefaultSwap(LusidInstrument):
     """
-    LUSID representation of a Credit Default Swap (CDS).                This instrument has multiple legs, to see how legs are used in LUSID see [knowledge base article KA-02252](https://support.lusid.com/knowledgebase/article/KA-02252).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Cash flows occurring in the case of default. |  | 2 | PremiumLeg | The premium payments made by the protection buyer. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
+    LUSID representation of a Credit Default Swap (CDS).                This instrument has multiple legs, to see how legs are used in LUSID see [How does LUSID handle instrument legs?](https://support.lusid.com/docs/how-does-lusid-handle-instrument-legs).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | ProtectionLeg | Cash flows occurring in the case of default. |  | 2 | PremiumLeg | The premium payments made by the protection buyer. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
     """
     ticker:  Optional[StrictStr] = Field(None,alias="ticker", description="A ticker to uniquely specify the entity against which the CDS is written. Defaults to \"DefaultCDSTicker\".") 
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")

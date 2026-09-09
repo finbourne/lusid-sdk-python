@@ -29,12 +29,12 @@ class AddressDefinition(BaseModel):
     AddressDefinition
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the address key.") 
-    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: String, Int, Decimal, DateTime, Boolean, ResultValue, Result0D, Result1D, Result2D, Json, ResultND.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description for this result.") 
     life_cycle_status:  Optional[StrictStr] = Field(None,alias="lifeCycleStatus", description="What is the status of the address path. If it is not Production then it might be removed at some point in the future.  See the removal date for the likely timing of that if any.") 
     removal_date: Optional[datetime] = Field(default=None, description="If the life-cycle status of the address is Deprecated then this is the date at which support of the address will be suspended.  After that date it will be removed at the earliest possible point subject to any specific contractual support and development constraints.", alias="removalDate")
     documentation_link:  Optional[StrictStr] = Field(None,alias="documentationLink", description="Contains a link to the documentation for this AddressDefinition in KnowledgeBase.") 
-    axes: Optional[List[ResultAxisDefinition]] = Field(default=None, description="For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described.")
+    axes: Optional[List[ResultAxisDefinition]] = Field(default=None, description="For keys whose type is a labelled vector or matrix (Result1D/Result2D), describes what the  labels on each axis mean. Null for scalar results and for shaped results whose axes have  not been described. Note the constructor below collapses an empty axes list to null, so a  described-but-empty axis set is indistinguishable from an undescribed one.")
     __properties = ["displayName", "type", "description", "lifeCycleStatus", "removalDate", "documentationLink", "axes"]
 
     @validator('type')
@@ -109,8 +109,8 @@ class AddressDefinition(BaseModel):
         if value is None:
             return value
 
-        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json']:
-            raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json')")
+        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json', 'ResultND']:
+            raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'ResultValue', 'Result0D', 'Result1D', 'Result2D', 'Json', 'ResultND')")
         return value
 
     class Config:

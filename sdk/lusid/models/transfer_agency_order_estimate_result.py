@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.resource_id import ResourceId
+from lusid.models.transfer_agency_excluded_order import TransferAgencyExcludedOrder
 
 class TransferAgencyOrderEstimateResult(BaseModel):
     """
@@ -36,7 +37,8 @@ class TransferAgencyOrderEstimateResult(BaseModel):
     estimated_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="estimatedAmount")
     estimated_amount_currency:  Optional[StrictStr] = Field(None,alias="estimatedAmountCurrency") 
     fx_rate_used: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="fxRateUsed")
-    __properties = ["orderId", "mostRecentValuationDate", "pricePerShare", "priceCurrency", "estimatedUnits", "estimatedAmount", "estimatedAmountCurrency", "fxRateUsed"]
+    excluded_orders: Optional[List[TransferAgencyExcludedOrder]] = Field(default=None, alias="excludedOrders")
+    __properties = ["orderId", "mostRecentValuationDate", "pricePerShare", "priceCurrency", "estimatedUnits", "estimatedAmount", "estimatedAmountCurrency", "fxRateUsed", "excludedOrders"]
 
     class Config:
         """Pydantic configuration"""
@@ -73,6 +75,13 @@ class TransferAgencyOrderEstimateResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order_id
         if self.order_id:
             _dict['orderId'] = self.order_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in excluded_orders (list)
+        _items = []
+        if self.excluded_orders:
+            for _item in self.excluded_orders:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['excludedOrders'] = _items
         # set to None if price_currency (nullable) is None
         # and __fields_set__ contains the field
         if self.price_currency is None and "price_currency" in self.__fields_set__:
@@ -82,6 +91,11 @@ class TransferAgencyOrderEstimateResult(BaseModel):
         # and __fields_set__ contains the field
         if self.estimated_amount_currency is None and "estimated_amount_currency" in self.__fields_set__:
             _dict['estimatedAmountCurrency'] = None
+
+        # set to None if excluded_orders (nullable) is None
+        # and __fields_set__ contains the field
+        if self.excluded_orders is None and "excluded_orders" in self.__fields_set__:
+            _dict['excludedOrders'] = None
 
         return _dict
 
@@ -102,7 +116,8 @@ class TransferAgencyOrderEstimateResult(BaseModel):
             "estimated_units": obj.get("estimatedUnits"),
             "estimated_amount": obj.get("estimatedAmount"),
             "estimated_amount_currency": obj.get("estimatedAmountCurrency"),
-            "fx_rate_used": obj.get("fxRateUsed")
+            "fx_rate_used": obj.get("fxRateUsed"),
+            "excluded_orders": [TransferAgencyExcludedOrder.from_dict(_item) for _item in obj.get("excludedOrders")] if obj.get("excludedOrders") is not None else None
         })
         return _obj
 

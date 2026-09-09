@@ -29,7 +29,7 @@ class CleardownModuleRule(BaseModel):
     """
     rule_id:  StrictStr = Field(...,alias="ruleId", description="The identifier for the Cleardown Rule.") 
     general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The account to post the residual P&L to.") 
-    rule_filter:  StrictStr = Field(...,alias="ruleFilter", description="The filter syntax for the Cleardown Rule. See https://support.lusid.com/knowledgebase/article/KA-02140 for more information on filter syntax.") 
+    rule_filter:  StrictStr = Field(...,alias="ruleFilter", description="The filter syntax for the Cleardown Rule. See https://support.lusid.com/docs/assigning-economic-activity-to-general-ledger-accounts-using-posting-rules for more information on filter syntax.") 
     __properties = ["ruleId", "generalLedgerAccountCode", "ruleFilter"]
 
     class Config:

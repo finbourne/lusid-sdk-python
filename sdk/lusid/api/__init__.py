@@ -20,6 +20,7 @@ from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
 from lusid.api.conventions_api import ConventionsApi
 from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.counterparties_api import CounterpartiesApi
+from lusid.api.currency_groups_api import CurrencyGroupsApi
 from lusid.api.custom_entities_api import CustomEntitiesApi
 from lusid.api.custom_entity_definitions_api import CustomEntityDefinitionsApi
 from lusid.api.custom_data_models_api import CustomDataModelsApi
@@ -113,6 +114,7 @@ __all__ = [
     "ConventionsApi",
     "CorporateActionSourcesApi",
     "CounterpartiesApi",
+    "CurrencyGroupsApi",
     "CustomEntitiesApi",
     "CustomEntityDefinitionsApi",
     "CustomDataModelsApi",

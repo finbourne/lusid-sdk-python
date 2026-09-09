@@ -34,7 +34,7 @@ class FxForwardTenorCurveData(ComplexMarketData):
     base_date: datetime = Field(description="EffectiveAt date of the quoted rates", alias="baseDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
-    tenors: List[StrictStr] = Field(description="Tenors for which the forward rates apply.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
+    tenors: List[StrictStr] = Field(description="Tenors for which the forward rates apply.  For more information on tenors, see [Specifying tenors in LUSID](https://support.lusid.com/docs/specifying-tenors-in-lusid)")
     rates: List[Union[StrictFloat, StrictInt]] = Field(description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy)")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")

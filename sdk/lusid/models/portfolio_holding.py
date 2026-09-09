@@ -26,7 +26,6 @@ from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.custodian_account import CustodianAccount
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
-from lusid.models.resolved_custodian_account import ResolvedCustodianAccount
 from lusid.models.resource_id import ResourceId
 from lusid.models.settlement_schedule import SettlementSchedule
 from lusid.models.transaction import Transaction
@@ -59,9 +58,7 @@ class PortfolioHolding(BaseModel):
     unsettled_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of unsettled units for the holding.", alias="unsettledUnits")
     overdue_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The number of unsettled units for the holding that are beyond their contractual settlement date.", alias="overdueUnits")
     custodian_account: Optional[CustodianAccount] = Field(default=None, alias="custodianAccount")
-    resolved_custodian_account: Optional[ResolvedCustodianAccount] = Field(default=None, alias="resolvedCustodianAccount")
-    holding_property_balances: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="The latest running balance of each holding property maintained on the holding by transaction type holding property deltas, keyed by holding property key, for example 'CommittedCapital'. Only populated when the holding has at least one balance.", alias="holdingPropertyBalances")
-    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits", "custodianAccount", "resolvedCustodianAccount", "holdingPropertyBalances"]
+    __properties = ["instrumentScope", "instrumentUid", "subHoldingKeys", "properties", "holdingType", "units", "settledUnits", "cost", "costPortfolioCcy", "transaction", "currency", "holdingTypeName", "holdingId", "notionalCost", "amortisedCost", "amortisedCostPortfolioCcy", "variationMargin", "variationMarginPortfolioCcy", "settlementSchedule", "currentFace", "custodianAccountId", "unsettledUnits", "overdueUnits", "custodianAccount"]
 
     class Config:
         """Pydantic configuration"""
@@ -146,9 +143,6 @@ class PortfolioHolding(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of custodian_account
         if self.custodian_account:
             _dict['custodianAccount'] = self.custodian_account.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of resolved_custodian_account
-        if self.resolved_custodian_account:
-            _dict['resolvedCustodianAccount'] = self.resolved_custodian_account.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -188,11 +182,6 @@ class PortfolioHolding(BaseModel):
         # and __fields_set__ contains the field
         if self.current_face is None and "current_face" in self.__fields_set__:
             _dict['currentFace'] = None
-
-        # set to None if holding_property_balances (nullable) is None
-        # and __fields_set__ contains the field
-        if self.holding_property_balances is None and "holding_property_balances" in self.__fields_set__:
-            _dict['holdingPropertyBalances'] = None
 
         return _dict
 
@@ -239,9 +228,7 @@ class PortfolioHolding(BaseModel):
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
             "unsettled_units": obj.get("unsettledUnits"),
             "overdue_units": obj.get("overdueUnits"),
-            "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None,
-            "resolved_custodian_account": ResolvedCustodianAccount.from_dict(obj.get("resolvedCustodianAccount")) if obj.get("resolvedCustodianAccount") is not None else None,
-            "holding_property_balances": obj.get("holdingPropertyBalances")
+            "custodian_account": CustodianAccount.from_dict(obj.get("custodianAccount")) if obj.get("custodianAccount") is not None else None
         })
         return _obj
 

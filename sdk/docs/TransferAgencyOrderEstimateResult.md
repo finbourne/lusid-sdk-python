@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **estimated_amount** | **float** |  | [optional] 
 **estimated_amount_currency** | **str** |  | [optional] 
 **fx_rate_used** | **float** |  | [optional] 
+**excluded_orders** | [**List[TransferAgencyExcludedOrder]**](TransferAgencyExcludedOrder.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ estimated_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your v
 estimated_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 estimated_amount_currency: Optional[StrictStr] = "example_estimated_amount_currency"
 fx_rate_used: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-transfer_agency_order_estimate_result_instance = TransferAgencyOrderEstimateResult(order_id=order_id, most_recent_valuation_date=most_recent_valuation_date, price_per_share=price_per_share, price_currency=price_currency, estimated_units=estimated_units, estimated_amount=estimated_amount, estimated_amount_currency=estimated_amount_currency, fx_rate_used=fx_rate_used)
+excluded_orders: Optional[List[TransferAgencyExcludedOrder]] = # Replace with your value
+transfer_agency_order_estimate_result_instance = TransferAgencyOrderEstimateResult(order_id=order_id, most_recent_valuation_date=most_recent_valuation_date, price_per_share=price_per_share, price_currency=price_currency, estimated_units=estimated_units, estimated_amount=estimated_amount, estimated_amount_currency=estimated_amount_currency, fx_rate_used=fx_rate_used, excluded_orders=excluded_orders)
 
 ```
 

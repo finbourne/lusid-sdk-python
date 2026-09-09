@@ -548,7 +548,11 @@ class SyncApiClient:
             if isinstance(v, bool):
                 v = str(v).lower()
             if isinstance(v, dict):
-                v = json.dumps(v)
+                # A dict is flattened to one pair per entry, keyed by the entry key rather than
+                # the parameter name, because that is the form the API binds. Json-encoding it
+                # under the parameter name instead produces a value the API ignores.
+                new_params.extend((str(_k), quote(str(_v))) for _k, _v in v.items())
+                continue
 
             if k in collection_formats:
                 collection_format = collection_formats[k]

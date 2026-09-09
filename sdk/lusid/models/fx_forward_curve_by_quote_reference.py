@@ -33,7 +33,7 @@ class FxForwardCurveByQuoteReference(ComplexMarketData):
     """
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="Domestic currency of the fx forward") 
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
-    tenors: List[StrictStr] = Field(description="Tenors for which the forward rates apply.  For more information on tenors, see [knowledge base article KA-02097](https://support.lusid.com/knowledgebase/article/KA-02097)")
+    tenors: List[StrictStr] = Field(description="Tenors for which the forward rates apply.  For more information on tenors, see [Specifying tenors in LUSID](https://support.lusid.com/docs/specifying-tenors-in-lusid)")
     quote_references: List[Dict[str, StrictStr]] = Field(description="For each tenor, a collection of identifiers. These will be looked up in the LUSID Quote Store to resolve the actual rates.  Accepts an array of Dictionary<string, string>. The keys of each dictionary must be chosen from the following enumeration:  [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].  For example:    \"quoteReferences\": [{\"ClientInternal\": \"SomeIdentifierForFirstTenor\"},{\"ClientInternal\": \"SomeIdentifierForSecondTenor\"}", alias="quoteReferences")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")

@@ -36,7 +36,8 @@ class TransactionQueryParameters(BaseModel):
     include_economics: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Economics data would be populated in the response.", alias="includeEconomics")
     include_settlement_status: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Settlement Status data would be populated in the response.", alias="includeSettlementStatus")
     settlement_status_date:  Optional[StrictStr] = Field(None,alias="settlementStatusDate", description="Optional date used to specify end of an extended window for settlement information. When provided, transactions will be returned between start and end date, but settlement information between start date and this date will be included. When provided, the value must be greater than or equal to end date.") 
-    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus", "settlementStatusDate"]
+    return_excluded_transactions: Optional[StrictBool] = Field(default=None, description="Option to specify whether or not to include transactions that are marked as excluded by the portfolio's transaction exclusion filter. Excluded transactions do not affect holdings. Defaults to false if not specified.", alias="returnExcludedTransactions")
+    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus", "settlementStatusDate", "returnExcludedTransactions"]
 
     @validator('query_mode')
     def query_mode_validate_enum(cls, value):
@@ -181,7 +182,8 @@ class TransactionQueryParameters(BaseModel):
             "timeline_code": obj.get("timelineCode"),
             "include_economics": obj.get("includeEconomics"),
             "include_settlement_status": obj.get("includeSettlementStatus"),
-            "settlement_status_date": obj.get("settlementStatusDate")
+            "settlement_status_date": obj.get("settlementStatusDate"),
+            "return_excluded_transactions": obj.get("returnExcludedTransactions")
         })
         return _obj
 

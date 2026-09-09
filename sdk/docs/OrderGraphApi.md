@@ -61,12 +61,12 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(OrderGraphApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-    limit = 56 # int | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-    filter = '' # str | See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional) (default to '')
-    property_keys = ['property_keys_example'] # List[str] | Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+    limit = 56 # int | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+    filter = '' # str | See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional) (default to '')
+    property_keys = ['property_keys_example'] # List[str] | Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
     use_compliance_v2 = False # bool | Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional) (default to False)
 
     try:
@@ -87,12 +87,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] 
- **pagination_token** | **str**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
+ **as_at** | **datetime**| See https://support.lusid.com/docs/what-is-the-asat-timestamp | [optional] 
+ **pagination_token** | **str**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **limit** | **int**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
- **filter** | **str**| See https://support.lusid.com/knowledgebase/article/KA-01914/ | [optional] [default to &#39;&#39;]
- **property_keys** | [**List[str]**](str.md)| Must be block-level properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] 
+ **limit** | **int**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
+ **filter** | **str**| See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid | [optional] [default to &#39;&#39;]
+ **property_keys** | [**List[str]**](str.md)| Must be block-level properties. See https://support.lusid.com/docs/properties | [optional] 
  **use_compliance_v2** | **bool**| Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) | [optional] [default to False]
 
 ### Return type
@@ -167,11 +167,11 @@ def main():
     api_instance = api_client_factory.build(OrderGraphApi)
     scope = 'scope_example' # str | The parent placement's scope
     code = 'code_example' # str | The parent placement's code
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
     sort_by = ['sort_by_example'] # List[str] | Order the results by these fields. Use use the '-' sign to denote descending order e.g. -MyFieldName. (optional)
-    limit = 56 # int | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-    property_keys = ['property_keys_example'] # List[str] | Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+    limit = 56 # int | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+    property_keys = ['property_keys_example'] # List[str] | Must be placement properties. See https://support.lusid.com/docs/properties (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -193,11 +193,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The parent placement&#39;s scope | 
  **code** | **str**| The parent placement&#39;s code | 
- **as_at** | **datetime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] 
- **pagination_token** | **str**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
+ **as_at** | **datetime**| See https://support.lusid.com/docs/what-is-the-asat-timestamp | [optional] 
+ **pagination_token** | **str**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
  **sort_by** | [**List[str]**](str.md)| Order the results by these fields. Use use the &#39;-&#39; sign to denote descending order e.g. -MyFieldName. | [optional] 
- **limit** | **int**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
- **property_keys** | [**List[str]**](str.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] 
+ **limit** | **int**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
+ **property_keys** | [**List[str]**](str.md)| Must be placement properties. See https://support.lusid.com/docs/properties | [optional] 
 
 ### Return type
 
@@ -269,12 +269,12 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(OrderGraphApi)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/knowledgebase/article/KA-01832/ (optional)
-    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | See https://support.lusid.com/docs/what-is-the-asat-timestamp (optional)
+    pagination_token = 'pagination_token_example' # str | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
-    limit = 56 # int | See https://support.lusid.com/knowledgebase/article/KA-01915/ (optional)
-    filter = '' # str | See https://support.lusid.com/knowledgebase/article/KA-01914/ (optional) (default to '')
-    property_keys = ['property_keys_example'] # List[str] | Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ (optional)
+    limit = 56 # int | See https://support.lusid.com/docs/paging-and-limiting-an-api-request (optional)
+    filter = '' # str | See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional) (default to '')
+    property_keys = ['property_keys_example'] # List[str] | Must be placement properties. See https://support.lusid.com/docs/properties (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -294,12 +294,12 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **as_at** | **datetime**| See https://support.lusid.com/knowledgebase/article/KA-01832/ | [optional] 
- **pagination_token** | **str**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
+ **as_at** | **datetime**| See https://support.lusid.com/docs/what-is-the-asat-timestamp | [optional] 
+ **pagination_token** | **str**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **limit** | **int**| See https://support.lusid.com/knowledgebase/article/KA-01915/ | [optional] 
- **filter** | **str**| See https://support.lusid.com/knowledgebase/article/KA-01914/ | [optional] [default to &#39;&#39;]
- **property_keys** | [**List[str]**](str.md)| Must be placement properties. See https://support.lusid.com/knowledgebase/article/KA-01855/ | [optional] 
+ **limit** | **int**| See https://support.lusid.com/docs/paging-and-limiting-an-api-request | [optional] 
+ **filter** | **str**| See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid | [optional] [default to &#39;&#39;]
+ **property_keys** | [**List[str]**](str.md)| Must be placement properties. See https://support.lusid.com/docs/properties | [optional] 
 
 ### Return type
 

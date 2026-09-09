@@ -227,7 +227,7 @@ class SystemConfigurationApi:
     def create_side_definition(self, side_configuration_data_request : Annotated[Optional[SideConfigurationDataRequest], Field(description="The definition of the side.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EXPERIMENTAL] CreateSideDefinition: Create side definition  # noqa: E501
 
-        Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -258,7 +258,7 @@ class SystemConfigurationApi:
     def create_side_definition_with_http_info(self, side_configuration_data_request : Annotated[Optional[SideConfigurationDataRequest], Field(description="The definition of the side.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] CreateSideDefinition: Create side definition  # noqa: E501
 
-        Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Create a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -701,7 +701,7 @@ class SystemConfigurationApi:
     def list_configuration_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TransactionSetConfigurationData, Awaitable[TransactionSetConfigurationData]]:  # noqa: E501
         """[EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -732,7 +732,7 @@ class SystemConfigurationApi:
     def list_configuration_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListConfigurationTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

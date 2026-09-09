@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **market_identifier** | **str** | Type of the code identifying the asset, e.g. ISIN or CUSIP | 
 **code** | **str** | The code identifying the corresponding equity, e.g. US0378331005 if the MarketIdentifier was set to ISIN | 
 **var_date** | **datetime** | The effectiveAt of the quote for the identified entity. | 
+**descriptor** | **List[str]** | Optional additional description of the quote being depended upon, e.g. the model or lineage that produced it.  When matching a dependency against supplied market data overrides, the descriptor must match as well as the identifier and code.  If omitted, the dependency has no descriptor. | [optional] 
 **dependency_type** | **str** | Available values: OpaqueDependency, CashDependency, DiscountingDependency, EquityCurveDependency, EquityVolDependency, FxDependency, FxForwardsDependency, FxVolDependency, IndexProjectionDependency, IrVolDependency, QuoteDependency, Vendor, CalendarDependency, InflationFixingDependency. | 
 ## Example
 
@@ -20,8 +21,9 @@ from datetime import datetime
 market_identifier: StrictStr = "example_market_identifier"
 code: StrictStr = "example_code"
 var_date: datetime = # Replace with your value
+descriptor: Optional[List[StrictStr]] = # Replace with your value
 dependency_type: StrictStr = "example_dependency_type"
-quote_dependency_instance = QuoteDependency(market_identifier=market_identifier, code=code, var_date=var_date, dependency_type=dependency_type)
+quote_dependency_instance = QuoteDependency(market_identifier=market_identifier, code=code, var_date=var_date, descriptor=descriptor, dependency_type=dependency_type)
 
 ```
 

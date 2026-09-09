@@ -1071,7 +1071,7 @@ class TransactionConfigurationApi:
     def list_transaction_types(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Dict[str, List[TransactionType]], Awaitable[Dict[str, List[TransactionType]]]]:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1104,7 +1104,7 @@ class TransactionConfigurationApi:
     def list_transaction_types_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified.")] = None, scope : Annotated[Optional[StrictStr], Field( description="The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionTypes: List transaction types  # noqa: E501
 
-        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/knowledgebase/article/KA-01873/.  # noqa: E501
+        Get the list of current transaction types. For information on the default transaction types provided with  LUSID, see https://support.lusid.com/docs/what-built-in-transaction-types-and-sides-are-provided-with-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1234,7 +1234,7 @@ class TransactionConfigurationApi:
     def set_side_definition(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[SideDefinition, Awaitable[SideDefinition]]:  # noqa: E501
         """SetSideDefinition: Set a side definition  # noqa: E501
 
-        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1269,7 +1269,7 @@ class TransactionConfigurationApi:
     def set_side_definition_with_http_info(self, side : Annotated[StrictStr, Field(..., description="The label to uniquely identify the side.")], side_definition_request : Annotated[SideDefinitionRequest, Field(description="The side definition to create or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetSideDefinition: Set a side definition  # noqa: E501
 
-        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1409,7 +1409,7 @@ class TransactionConfigurationApi:
     def set_side_definitions(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSideDefinition, Awaitable[ResourceListOfSideDefinition]]:  # noqa: E501
         """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
-        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1442,7 +1442,7 @@ class TransactionConfigurationApi:
     def set_side_definitions_with_http_info(self, sides_definition_request : Annotated[List[SidesDefinitionRequest], Field(description="The list of side definitions to create, or replace.")], scope : Annotated[Optional[StrictStr], Field( description="The scope in which the side exists. When not supplied the scope is 'default'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """SetSideDefinitions: Set the given side definitions  # noqa: E501
 
-        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/knowledgebase/article/KA-01875.  # noqa: E501
+        Set a new side definition for use in a transaction type. For more information, see https://support.lusid.com/docs/what-is-a-side.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -28,7 +28,7 @@ class VolSurfaceShiftDefinition(ScenarioShiftDefinition):
     """
     VolSurfaceShiftDefinition
     """
-    instrument:  StrictStr = Field(...,alias="instrument") 
+    instrument:  StrictStr = Field(...,alias="instrument", description="The market-data descriptor of the surfaces to shift, not an instrument identifier such as a LUID.  For an equity vol surface this is the underlier code the surface was mastered against (e.g. 'TSLA'  for market asset 'TSLA/USD/LN'); for an interest rate vol surface it is the currency (e.g. 'USD');  for an FX vol surface it is the currency pair (e.g. 'GBP/USD'). The wildcard 'EquityVol.*' widens  the shift to every equity vol surface in the valuation; interest rate and FX vol surfaces cannot  be widened, since neither a currency nor a currency pair names a set of instruments.") 
     amount: Optional[Union[StrictFloat, StrictInt]] = None
     strike: Optional[Union[StrictFloat, StrictInt]] = None
     expiry:  Optional[StrictStr] = Field(None,alias="expiry") 

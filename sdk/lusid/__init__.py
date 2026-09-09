@@ -36,6 +36,7 @@ from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
 from lusid.api.conventions_api import ConventionsApi
 from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
 from lusid.api.counterparties_api import CounterpartiesApi
+from lusid.api.currency_groups_api import CurrencyGroupsApi
 from lusid.api.custom_entities_api import CustomEntitiesApi
 from lusid.api.custom_entity_definitions_api import CustomEntityDefinitionsApi
 from lusid.api.custom_data_models_api import CustomDataModelsApi
@@ -473,6 +474,8 @@ from lusid.models.credit_spread_shift_definition import CreditSpreadShiftDefinit
 from lusid.models.credit_support_annex import CreditSupportAnnex
 from lusid.models.criterion_type import CriterionType
 from lusid.models.currency_and_amount import CurrencyAndAmount
+from lusid.models.currency_group_minor_unit import CurrencyGroupMinorUnit
+from lusid.models.currency_group_response import CurrencyGroupResponse
 from lusid.models.curve_options import CurveOptions
 from lusid.models.curve_shift_window_bounds import CurveShiftWindowBounds
 from lusid.models.custodian_account import CustodianAccount
@@ -711,6 +714,7 @@ from lusid.models.get_data_map_response import GetDataMapResponse
 from lusid.models.get_flow_conventions_response import GetFlowConventionsResponse
 from lusid.models.get_index_convention_response import GetIndexConventionResponse
 from lusid.models.get_instruments_response import GetInstrumentsResponse
+from lusid.models.get_payment_instructions_response import GetPaymentInstructionsResponse
 from lusid.models.get_quotes_response import GetQuotesResponse
 from lusid.models.get_recipe_composer_response import GetRecipeComposerResponse
 from lusid.models.get_recipe_response import GetRecipeResponse
@@ -1000,6 +1004,7 @@ from lusid.models.paged_resource_list_of_compliance_rule_response import PagedRe
 from lusid.models.paged_resource_list_of_compliance_run_info_v2 import PagedResourceListOfComplianceRunInfoV2
 from lusid.models.paged_resource_list_of_compliance_template import PagedResourceListOfComplianceTemplate
 from lusid.models.paged_resource_list_of_corporate_action_source import PagedResourceListOfCorporateActionSource
+from lusid.models.paged_resource_list_of_currency_group_response import PagedResourceListOfCurrencyGroupResponse
 from lusid.models.paged_resource_list_of_custodian_account import PagedResourceListOfCustodianAccount
 from lusid.models.paged_resource_list_of_custom_entity_definition import PagedResourceListOfCustomEntityDefinition
 from lusid.models.paged_resource_list_of_custom_entity_response import PagedResourceListOfCustomEntityResponse
@@ -1256,6 +1261,7 @@ from lusid.models.rec_review_configuration import RecReviewConfiguration
 from lusid.models.rec_review_required_approval import RecReviewRequiredApproval
 from lusid.models.rec_review_requirement_rule import RecReviewRequirementRule
 from lusid.models.rec_review_submission import RecReviewSubmission
+from lusid.models.rec_run_log import RecRunLog
 from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
@@ -1402,6 +1408,7 @@ from lusid.models.result_data_key_rule import ResultDataKeyRule
 from lusid.models.result_data_schema import ResultDataSchema
 from lusid.models.result_key_rule import ResultKeyRule
 from lusid.models.result_key_rule_type import ResultKeyRuleType
+from lusid.models.result_nd import ResultND
 from lusid.models.result_value import ResultValue
 from lusid.models.result_value0_d import ResultValue0D
 from lusid.models.result_value_bool import ResultValueBool
@@ -1592,6 +1599,7 @@ from lusid.models.transaction_type_property_mapping import TransactionTypeProper
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from lusid.models.transactions_reconciliations_response import TransactionsReconciliationsResponse
 from lusid.models.transfer_agency_dates import TransferAgencyDates
+from lusid.models.transfer_agency_excluded_order import TransferAgencyExcludedOrder
 from lusid.models.transfer_agency_order_estimate_result import TransferAgencyOrderEstimateResult
 from lusid.models.transfer_agency_order_result import TransferAgencyOrderResult
 from lusid.models.transfer_agency_order_to_estimate import TransferAgencyOrderToEstimate
@@ -1615,6 +1623,7 @@ from lusid.models.trial_balance_query_parameters import TrialBalanceQueryParamet
 from lusid.models.trigger_event import TriggerEvent
 from lusid.models.typed_resource_id import TypedResourceId
 from lusid.models.unconfirm_closed_period_request import UnconfirmClosedPeriodRequest
+from lusid.models.unit_dimension import UnitDimension
 from lusid.models.unit_schema import UnitSchema
 from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
@@ -1668,6 +1677,7 @@ from lusid.models.upsert_corporate_action_request import UpsertCorporateActionRe
 from lusid.models.upsert_corporate_actions_response import UpsertCorporateActionsResponse
 from lusid.models.upsert_counterparty_agreement_request import UpsertCounterpartyAgreementRequest
 from lusid.models.upsert_credit_support_annex_request import UpsertCreditSupportAnnexRequest
+from lusid.models.upsert_currency_group_request import UpsertCurrencyGroupRequest
 from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesResponse
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
 from lusid.models.upsert_data_quality_rule import UpsertDataQualityRule
@@ -1812,6 +1822,7 @@ __all__ = [
     "ConventionsApi",
     "CorporateActionSourcesApi",
     "CounterpartiesApi",
+    "CurrencyGroupsApi",
     "CustomEntitiesApi",
     "CustomEntityDefinitionsApi",
     "CustomDataModelsApi",
@@ -2239,6 +2250,8 @@ __all__ = [
     "CreditSupportAnnex",
     "CriterionType",
     "CurrencyAndAmount",
+    "CurrencyGroupMinorUnit",
+    "CurrencyGroupResponse",
     "CurveOptions",
     "CurveShiftWindowBounds",
     "CustodianAccount",
@@ -2477,6 +2490,7 @@ __all__ = [
     "GetFlowConventionsResponse",
     "GetIndexConventionResponse",
     "GetInstrumentsResponse",
+    "GetPaymentInstructionsResponse",
     "GetQuotesResponse",
     "GetRecipeComposerResponse",
     "GetRecipeResponse",
@@ -2766,6 +2780,7 @@ __all__ = [
     "PagedResourceListOfComplianceRunInfoV2",
     "PagedResourceListOfComplianceTemplate",
     "PagedResourceListOfCorporateActionSource",
+    "PagedResourceListOfCurrencyGroupResponse",
     "PagedResourceListOfCustodianAccount",
     "PagedResourceListOfCustomEntityDefinition",
     "PagedResourceListOfCustomEntityResponse",
@@ -3022,6 +3037,7 @@ __all__ = [
     "RecReviewRequiredApproval",
     "RecReviewRequirementRule",
     "RecReviewSubmission",
+    "RecRunLog",
     "RecRunLogEntry",
     "RecSubmission",
     "RecSupersededRun",
@@ -3168,6 +3184,7 @@ __all__ = [
     "ResultDataSchema",
     "ResultKeyRule",
     "ResultKeyRuleType",
+    "ResultND",
     "ResultValue",
     "ResultValue0D",
     "ResultValueBool",
@@ -3358,6 +3375,7 @@ __all__ = [
     "TransactionTypeRequest",
     "TransactionsReconciliationsResponse",
     "TransferAgencyDates",
+    "TransferAgencyExcludedOrder",
     "TransferAgencyOrderEstimateResult",
     "TransferAgencyOrderResult",
     "TransferAgencyOrderToEstimate",
@@ -3381,6 +3399,7 @@ __all__ = [
     "TriggerEvent",
     "TypedResourceId",
     "UnconfirmClosedPeriodRequest",
+    "UnitDimension",
     "UnitSchema",
     "UnitisationData",
     "UnitsRatio",
@@ -3434,6 +3453,7 @@ __all__ = [
     "UpsertCorporateActionsResponse",
     "UpsertCounterpartyAgreementRequest",
     "UpsertCreditSupportAnnexRequest",
+    "UpsertCurrencyGroupRequest",
     "UpsertCustomEntitiesResponse",
     "UpsertCustomEntityAccessMetadataRequest",
     "UpsertDataQualityRule",

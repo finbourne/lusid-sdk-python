@@ -52,7 +52,8 @@ class PricingOptions(BaseModel):
     scale_instrument_accrued_override_by_contract_size: Optional[StrictBool] = Field(default=None, description="When enabled, an SRS InstrumentAccrued override is multiplied by the instrument contractSize (legacy behaviour).  By default this is disabled, and the override is treated as the accrued for a single unit, keeping the  holding-level identity PV = CleanPv + Accrued consistent.", alias="scaleInstrumentAccruedOverrideByContractSize")
     risk_bump_options: Optional[RiskBumpOptions] = Field(default=None, alias="riskBumpOptions")
     funding_curve_by_currency: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Names the funding curve each currency discounts on, keyed by ISO 4217 currency code  (e.g. \"GBP\" -> \"GBPOIS-USDCOLL\"). Keys are case-insensitive. A currency absent from  the map keeps the default funding curve, {CCY}OIS, so an absent or empty map leaves  every valuation unchanged.", alias="fundingCurveByCurrency")
-    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency"]
+    default_pool_factors_to_unity: Optional[StrictBool] = Field(default=None, description="When true, an asset-backed instrument with no pool-factor history defaults the pool  factor to 1.0 (the full original face) instead of 0. When false (default), the factor  defaults to 0 as before, preserving current behaviour.", alias="defaultPoolFactorsToUnity")
+    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency", "defaultPoolFactorsToUnity"]
 
     class Config:
         """Pydantic configuration"""
@@ -148,7 +149,8 @@ class PricingOptions(BaseModel):
             "use_instrument_scale_factor_as_default": obj.get("useInstrumentScaleFactorAsDefault"),
             "scale_instrument_accrued_override_by_contract_size": obj.get("scaleInstrumentAccruedOverrideByContractSize"),
             "risk_bump_options": RiskBumpOptions.from_dict(obj.get("riskBumpOptions")) if obj.get("riskBumpOptions") is not None else None,
-            "funding_curve_by_currency": obj.get("fundingCurveByCurrency")
+            "funding_curve_by_currency": obj.get("fundingCurveByCurrency"),
+            "default_pool_factors_to_unity": obj.get("defaultPoolFactorsToUnity")
         })
         return _obj
 

@@ -29,7 +29,7 @@ class QueryRelationalDatasetRequest(BaseModel):
     QueryRelationalDatasetRequest
     """
     query_method:  Optional[StrictStr] = Field(None,alias="queryMethod", description="The method used to query data points. Can be either 'Latest' or 'TimeSeries'.") 
-    filter:  Optional[StrictStr] = Field(None,alias="filter", description="Expression to filter the result set. For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.") 
+    filter:  Optional[StrictStr] = Field(None,alias="filter", description="Expression to filter the result set. For more information about filtering LUSID results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.") 
     custom_sort_by: Optional[List[CustomSortBy]] = Field(default=None, description="A list of fields and values to sort the results by.", alias="customSortBy")
     __properties = ["queryMethod", "filter", "customSortBy"]
 

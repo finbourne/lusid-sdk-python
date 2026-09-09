@@ -600,7 +600,7 @@ class TransactionFeesApi:
     def list_transaction_fee_rules(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfFeeRule, Awaitable[ResourceListOfFeeRule]]:  # noqa: E501
         """ListTransactionFeeRules: List fee rules, with optional filtering.  # noqa: E501
 
-        For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.  # noqa: E501
+        For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -639,7 +639,7 @@ class TransactionFeesApi:
     def list_transaction_fee_rules_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the rule definitions. Defaults to the current LUSID  system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rule definitions. Defaults to returning the latest version if not  specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entities; this value is returned from the previous call. If  a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the  original request.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListTransactionFeeRules: List fee rules, with optional filtering.  # noqa: E501
 
-        For more information about filtering results,  see https://support.lusid.com/knowledgebase/article/KA-01914.  # noqa: E501
+        For more information about filtering results,  see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

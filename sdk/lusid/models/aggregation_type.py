@@ -41,6 +41,7 @@ class AggregationType(str, Enum):
     RESULT1D = 'Result1D'
     RESULT2D = 'Result2D'
     JSON = 'Json'
+    RESULTND = 'ResultND'
 
     @classmethod
     def from_json(cls, json_str: str) -> AggregationType:
