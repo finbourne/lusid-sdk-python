@@ -456,6 +456,7 @@ from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
+from lusid.models.dividend_suspension_event import DividendSuspensionEvent
 from lusid.models.drawdown_event import DrawdownEvent
 from lusid.models.drawing_event import DrawingEvent
 from lusid.models.dutch_auction_event import DutchAuctionEvent
@@ -2129,6 +2130,7 @@ __all__ = [
     "DiscountingMethod",
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
+    "DividendSuspensionEvent",
     "DrawdownEvent",
     "DrawingEvent",
     "DutchAuctionEvent",

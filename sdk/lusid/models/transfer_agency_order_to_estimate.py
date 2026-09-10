@@ -37,9 +37,8 @@ class TransferAgencyOrderToEstimate(BaseModel):
     quantity: Optional[Union[StrictFloat, StrictInt]] = None
     amount: Optional[Union[StrictFloat, StrictInt]] = None
     weight: Optional[Union[StrictFloat, StrictInt]] = None
-    transaction_date: Optional[datetime] = Field(default=None, alias="transactionDate")
     exchange_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="exchangeRate")
-    __properties = ["portfolioId", "instrumentIdentifierType", "instrumentIdentifier", "instrumentScope", "transactionCategory", "currency", "quantity", "amount", "weight", "transactionDate", "exchangeRate"]
+    __properties = ["portfolioId", "instrumentIdentifierType", "instrumentIdentifier", "instrumentScope", "transactionCategory", "currency", "quantity", "amount", "weight", "exchangeRate"]
 
     class Config:
         """Pydantic configuration"""
@@ -101,11 +100,6 @@ class TransferAgencyOrderToEstimate(BaseModel):
         if self.weight is None and "weight" in self.__fields_set__:
             _dict['weight'] = None
 
-        # set to None if transaction_date (nullable) is None
-        # and __fields_set__ contains the field
-        if self.transaction_date is None and "transaction_date" in self.__fields_set__:
-            _dict['transactionDate'] = None
-
         # set to None if exchange_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.exchange_rate is None and "exchange_rate" in self.__fields_set__:
@@ -132,7 +126,6 @@ class TransferAgencyOrderToEstimate(BaseModel):
             "quantity": obj.get("quantity"),
             "amount": obj.get("amount"),
             "weight": obj.get("weight"),
-            "transaction_date": obj.get("transactionDate"),
             "exchange_rate": obj.get("exchangeRate")
         })
         return _obj

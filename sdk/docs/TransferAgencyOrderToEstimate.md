@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **quantity** | **float** |  | [optional] 
 **amount** | **float** |  | [optional] 
 **weight** | **float** |  | [optional] 
-**transaction_date** | **datetime** |  | [optional] 
 **exchange_rate** | **float** |  | [optional] 
 ## Example
 
@@ -33,9 +32,8 @@ currency: StrictStr = "example_currency"
 quantity: Optional[Union[StrictFloat, StrictInt]] = None
 amount: Optional[Union[StrictFloat, StrictInt]] = None
 weight: Optional[Union[StrictFloat, StrictInt]] = None
-transaction_date: Optional[datetime] = # Replace with your value
 exchange_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-transfer_agency_order_to_estimate_instance = TransferAgencyOrderToEstimate(portfolio_id=portfolio_id, instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, instrument_scope=instrument_scope, transaction_category=transaction_category, currency=currency, quantity=quantity, amount=amount, weight=weight, transaction_date=transaction_date, exchange_rate=exchange_rate)
+transfer_agency_order_to_estimate_instance = TransferAgencyOrderToEstimate(portfolio_id=portfolio_id, instrument_identifier_type=instrument_identifier_type, instrument_identifier=instrument_identifier, instrument_scope=instrument_scope, transaction_category=transaction_category, currency=currency, quantity=quantity, amount=amount, weight=weight, exchange_rate=exchange_rate)
 
 ```
 

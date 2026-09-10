@@ -246,7 +246,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(TransferAgencyApi)
-    request_body = {"Order1":{"orderId":{"scope":"example-scope","code":"order-1"}},"Order2":{"orderId":{"scope":"example-scope","code":"order-2"},"order":{"portfolioId":{"scope":"example-scope","code":"investor-1"},"instrumentIdentifierType":"LusidInstrumentId","instrumentIdentifier":"LUID_00000000","transactionCategory":"Subscription","currency":"GBP","amount":10000,"transactionDate":"2026-08-26T00:00:00.0000000+00:00"}}} # Dict[str, EstimateTransferAgencyOrderRequest] | The transfer agency orders to estimate, keyed by a unique request identifier.
+    request_body = {"Order1":{"orderId":{"scope":"example-scope","code":"order-1"}},"Order2":{"orderId":{"scope":"example-scope","code":"order-2"},"order":{"portfolioId":{"scope":"example-scope","code":"investor-1"},"instrumentIdentifierType":"LusidInstrumentId","instrumentIdentifier":"LUID_00000000","instrumentScope":"default","transactionCategory":"Subscription","currency":"GBP","amount":10000}}} # Dict[str, EstimateTransferAgencyOrderRequest] | The transfer agency orders to estimate, keyed by a unique request identifier.
 
     try:
         # uncomment the below to set overrides at the request level

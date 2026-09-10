@@ -31,7 +31,8 @@ class EstimateTransferAgencyOrderRequest(BaseModel):
     """
     order_id: ResourceId = Field(alias="orderId")
     order: Optional[TransferAgencyOrderToEstimate] = None
-    __properties = ["orderId", "order"]
+    price_date: Optional[datetime] = Field(default=None, alias="priceDate")
+    __properties = ["orderId", "order", "priceDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +72,11 @@ class EstimateTransferAgencyOrderRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order
         if self.order:
             _dict['order'] = self.order.to_dict()
+        # set to None if price_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_date is None and "price_date" in self.__fields_set__:
+            _dict['priceDate'] = None
+
         return _dict
 
     @classmethod
@@ -84,7 +90,8 @@ class EstimateTransferAgencyOrderRequest(BaseModel):
 
         _obj = EstimateTransferAgencyOrderRequest.parse_obj({
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
-            "order": TransferAgencyOrderToEstimate.from_dict(obj.get("order")) if obj.get("order") is not None else None
+            "order": TransferAgencyOrderToEstimate.from_dict(obj.get("order")) if obj.get("order") is not None else None,
+            "price_date": obj.get("priceDate")
         })
         return _obj
 

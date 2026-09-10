@@ -1,33 +1,25 @@
-# CdxCreditEvent
+# DividendSuspensionEvent
 
-Definition of a credit event for credit default swap index (CDX) instruments.
+An issuer's decision to skip one scheduled preferred dividend without defaulting. Suppresses the  intrinsic dividend for the targeted payment date only; the schedule and every other payment continue.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**effective_date** | **datetime** | The date of the credit default - i.e. date on which the debt issuer defaulted on its repayment obligation. | [optional] 
-**auction_date** | **datetime** | The date of the credit event auction - i.e. date on which the defaulted debt is sold via auction, and a recovery rate determined. | [optional] 
-**recovery_rate** | **float** | The fraction of the defaulted debt that can be recovered. | [optional] 
-**constituent_weight** | **float** | The relative weight of the CDX constituent. | 
-**constituent_reference** | **str** | Reference value used to identify the CDX constituent. | [optional] 
-**payment_date** | **datetime** | The date of the credit event auction settlement. | [optional] 
+**target_payment_date** | **datetime** | The intrinsically-scheduled dividend payment date this event suppresses. A date the instrument&#39;s  own schedule does not pay on leaves the event with no observable effect. | [optional] 
+**announcement_date** | **datetime** | The date the issuer disclosed the suspension. Optional — null when not recorded. When populated,  must be &lt;&#x3D; TargetPaymentDate. | [optional] 
 **instrument_event_type** | **str** | The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent. | 
 ## Example
 
 ```python
-from lusid.models.cdx_credit_event import CdxCreditEvent
+from lusid.models.dividend_suspension_event import DividendSuspensionEvent
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-effective_date: Optional[datetime] = # Replace with your value
-auction_date: Optional[datetime] = # Replace with your value
-recovery_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-constituent_weight: Union[StrictFloat, StrictInt] = # Replace with your value
-constituent_reference: Optional[StrictStr] = "example_constituent_reference"
-payment_date: Optional[datetime] = # Replace with your value
+target_payment_date: Optional[datetime] = # Replace with your value
+announcement_date: Optional[datetime] = # Replace with your value
 instrument_event_type: StrictStr = "example_instrument_event_type"
-cdx_credit_event_instance = CdxCreditEvent(effective_date=effective_date, auction_date=auction_date, recovery_rate=recovery_rate, constituent_weight=constituent_weight, constituent_reference=constituent_reference, payment_date=payment_date, instrument_event_type=instrument_event_type)
+dividend_suspension_event_instance = DividendSuspensionEvent(target_payment_date=target_payment_date, announcement_date=announcement_date, instrument_event_type=instrument_event_type)
 
 ```
 

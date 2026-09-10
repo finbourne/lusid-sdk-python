@@ -1235,6 +1235,7 @@ Class | Method | HTTP request | Description
  - [DiscountingMethod](docs/DiscountingMethod.md)
  - [DividendOptionEvent](docs/DividendOptionEvent.md)
  - [DividendReinvestmentEvent](docs/DividendReinvestmentEvent.md)
+ - [DividendSuspensionEvent](docs/DividendSuspensionEvent.md)
  - [DrawdownEvent](docs/DrawdownEvent.md)
  - [DrawingEvent](docs/DrawingEvent.md)
  - [DutchAuctionEvent](docs/DutchAuctionEvent.md)

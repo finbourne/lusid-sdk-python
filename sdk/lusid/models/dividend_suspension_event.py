@@ -24,17 +24,15 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
 
-class MbsInterestDeferralEvent(InstrumentEvent):
+class DividendSuspensionEvent(InstrumentEvent):
     """
-    Definition of an MBS Interest Deferral Event  This is an event that describes the occurence of a cashflow due to unpaid interest that was deferred and  capitalised into the outstanding principal balance of a mortgage-backed security.  # noqa: E501
+    An issuer's decision to skip one scheduled preferred dividend without defaulting. Suppresses the  intrinsic dividend for the targeted payment date only; the schedule and every other payment continue.  # noqa: E501
     """
-    ex_date: Optional[datetime] = Field(default=None, description="The ex date (entitlement date) of the interest payment, usually several weeks prior to the payment date", alias="exDate")
-    payment_date: Optional[datetime] = Field(default=None, description="The payment date of the interest that is deferred and capitalised", alias="paymentDate")
-    currency:  StrictStr = Field(...,alias="currency", description="The currency in which the interest amount is notated") 
-    interest_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The interest amount to be deferred and capitalised for each unit of the instrument held on the ex date", alias="interestPerUnit")
+    target_payment_date: Optional[datetime] = Field(default=None, description="The intrinsically-scheduled dividend payment date this event suppresses. A date the instrument's  own schedule does not pay on leaves the event with no observable effect.", alias="targetPaymentDate")
+    announcement_date: Optional[datetime] = Field(default=None, description="The date the issuer disclosed the suspension. Optional — null when not recorded. When populated,  must be <= TargetPaymentDate.", alias="announcementDate")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "interestPerUnit"]
+    __properties = ["instrumentEventType", "targetPaymentDate", "announcementDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -47,7 +45,7 @@ class MbsInterestDeferralEvent(InstrumentEvent):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'MbsInterestDeferralEvent' not in [ 
+        if 'DividendSuspensionEvent' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -131,8 +129,8 @@ class MbsInterestDeferralEvent(InstrumentEvent):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> MbsInterestDeferralEvent:
-        """Create an instance of MbsInterestDeferralEvent from a JSON string"""
+    def from_json(cls, json_str: str) -> DividendSuspensionEvent:
+        """Create an instance of DividendSuspensionEvent from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -147,28 +145,26 @@ class MbsInterestDeferralEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if interest_per_unit (nullable) is None
+        # set to None if announcement_date (nullable) is None
         # and __fields_set__ contains the field
-        if self.interest_per_unit is None and "interest_per_unit" in self.__fields_set__:
-            _dict['interestPerUnit'] = None
+        if self.announcement_date is None and "announcement_date" in self.__fields_set__:
+            _dict['announcementDate'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> MbsInterestDeferralEvent:
-        """Create an instance of MbsInterestDeferralEvent from a dict"""
+    def from_dict(cls, obj: dict) -> DividendSuspensionEvent:
+        """Create an instance of DividendSuspensionEvent from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return MbsInterestDeferralEvent.parse_obj(obj)
+            return DividendSuspensionEvent.parse_obj(obj)
 
-        _obj = MbsInterestDeferralEvent.parse_obj({
+        _obj = DividendSuspensionEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
-            "ex_date": obj.get("exDate"),
-            "payment_date": obj.get("paymentDate"),
-            "currency": obj.get("currency"),
-            "interest_per_unit": obj.get("interestPerUnit")
+            "target_payment_date": obj.get("targetPaymentDate"),
+            "announcement_date": obj.get("announcementDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -177,4 +173,4 @@ class MbsInterestDeferralEvent(InstrumentEvent):
 
         return _obj
 
-MbsInterestDeferralEvent.update_forward_refs()
+DividendSuspensionEvent.update_forward_refs()

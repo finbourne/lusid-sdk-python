@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **order_id** | [**ResourceId**](ResourceId.md) |  | 
 **order** | [**TransferAgencyOrderToEstimate**](TransferAgencyOrderToEstimate.md) |  | [optional] 
+**price_date** | **datetime** |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 order_id: ResourceId = # Replace with your value
 order: Optional[TransferAgencyOrderToEstimate] = None
-estimate_transfer_agency_order_request_instance = EstimateTransferAgencyOrderRequest(order_id=order_id, order=order)
+price_date: Optional[datetime] = # Replace with your value
+estimate_transfer_agency_order_request_instance = EstimateTransferAgencyOrderRequest(order_id=order_id, order=order, price_date=price_date)
 
 ```
 
