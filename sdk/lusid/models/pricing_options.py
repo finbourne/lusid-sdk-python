@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.inflation_convexity_options import InflationConvexityOptions
 from lusid.models.model_selection import ModelSelection
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.risk_bump_options import RiskBumpOptions
@@ -54,7 +55,8 @@ class PricingOptions(BaseModel):
     funding_curve_by_currency: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Names the funding curve each currency discounts on, keyed by ISO 4217 currency code  (e.g. \"GBP\" -> \"GBPOIS-USDCOLL\"). Keys are case-insensitive. A currency absent from  the map keeps the default funding curve, {CCY}OIS, so an absent or empty map leaves  every valuation unchanged.", alias="fundingCurveByCurrency")
     default_pool_factors_to_unity: Optional[StrictBool] = Field(default=None, description="When true, an asset-backed instrument with no pool-factor history defaults the pool  factor to 1.0 (the full original face) instead of 0. When false (default), the factor  defaults to 0 as before, preserving current behaviour.", alias="defaultPoolFactorsToUnity")
     find_or_calculate_write_through: Optional[StrictBool] = Field(default=None, description="When true, and FindOrCalculate is Enabled, results that had to be calculated because no  verified stored value existed are written back into the structured result store, so a  later identical request can serve them without recomputing. The write targets the  document selected by the same result data key rules the lookup reads. When false  (default), calculated results are never persisted.  Results are stored at unit level (per unit of holding), so a value served from the store  is rescaled by the holding's units and may differ from a freshly calculated value in the  least significant digits.", alias="findOrCalculateWriteThrough")
-    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency", "defaultPoolFactorsToUnity", "findOrCalculateWriteThrough"]
+    inflation_convexity: Optional[InflationConvexityOptions] = Field(default=None, alias="inflationConvexity")
+    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency", "defaultPoolFactorsToUnity", "findOrCalculateWriteThrough", "inflationConvexity"]
 
     class Config:
         """Pydantic configuration"""
@@ -97,6 +99,9 @@ class PricingOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of risk_bump_options
         if self.risk_bump_options:
             _dict['riskBumpOptions'] = self.risk_bump_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of inflation_convexity
+        if self.inflation_convexity:
+            _dict['inflationConvexity'] = self.inflation_convexity.to_dict()
         # set to None if risk_engine (nullable) is None
         # and __fields_set__ contains the field
         if self.risk_engine is None and "risk_engine" in self.__fields_set__:
@@ -152,7 +157,8 @@ class PricingOptions(BaseModel):
             "risk_bump_options": RiskBumpOptions.from_dict(obj.get("riskBumpOptions")) if obj.get("riskBumpOptions") is not None else None,
             "funding_curve_by_currency": obj.get("fundingCurveByCurrency"),
             "default_pool_factors_to_unity": obj.get("defaultPoolFactorsToUnity"),
-            "find_or_calculate_write_through": obj.get("findOrCalculateWriteThrough")
+            "find_or_calculate_write_through": obj.get("findOrCalculateWriteThrough"),
+            "inflation_convexity": InflationConvexityOptions.from_dict(obj.get("inflationConvexity")) if obj.get("inflationConvexity") is not None else None
         })
         return _obj
 

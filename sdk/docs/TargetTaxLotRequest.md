@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **notional_cost** | **float** | The notional cost of the tax-lot&#39;s opening transaction. | [optional] 
 **variation_margin** | **float** | The variation margin of the tax-lot&#39;s opening transaction. | [optional] 
 **variation_margin_portfolio_ccy** | **float** | The variation margin in portfolio currency of the tax-lot&#39;s opening transaction. | [optional] 
+**amortised_cost** | **float** | The amortised cost of the tax-lot in the settlement currency, for example a supplied amortised cost at migration. If supplied, this value seeds the tax-lot&#39;s amortised cost at the adjustment date and amortisation continues forward from it; if not supplied, the amortised cost defaults to the cost of the tax-lot. | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,8 @@ settlement_date: Optional[datetime] = # Replace with your value
 notional_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 variation_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-target_tax_lot_request_instance = TargetTaxLotRequest(units=units, cost=cost, portfolio_cost=portfolio_cost, price=price, purchase_date=purchase_date, settlement_date=settlement_date, notional_cost=notional_cost, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy)
+amortised_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+target_tax_lot_request_instance = TargetTaxLotRequest(units=units, cost=cost, portfolio_cost=portfolio_cost, price=price, purchase_date=purchase_date, settlement_date=settlement_date, notional_cost=notional_cost, variation_margin=variation_margin, variation_margin_portfolio_ccy=variation_margin_portfolio_ccy, amortised_cost=amortised_cost)
 
 ```
 

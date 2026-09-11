@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**election_type** | **str** | Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection, MixedLotConstituentsElection, SubscribeElection. | 
+**election_type** | **str** | Available values: CashElection, CashAndSecurityOfferElection, CashOfferElection, EarlyRedemptionElection, LapseElection, OptionExerciseElection, SecurityElection, SecurityOfferElection, TenderOfferElection, MixedLotConstituentsElection, SubscribeElection, ConsentGrantedElection, ConsentDeniedElection, AbstainElection, ConsentAndTenderElection, ConsentAndExchangeElection, RetainElection, OversubscribeElection, SellEntitlementElection, UnknownProceedsElection. | 
 **cardinality** | **Dict[str, Optional[str]]** |  | 
 **referenced_as** | **List[str]** |  | 
 ## Example

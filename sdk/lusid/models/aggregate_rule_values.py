@@ -31,7 +31,7 @@ class AggregateRuleValues(BaseModel):
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The name of the rule.") 
     left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value.") 
     right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value.") 
-    difference:  StrictStr = Field(...,alias="difference", description="The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)).") 
+    difference:  Optional[StrictStr] = Field(None,alias="difference", description="The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)).") 
     applied_tolerance: Optional[ToleranceBase] = Field(default=None, alias="appliedTolerance")
     __properties = ["ruleName", "leftValue", "rightValue", "difference", "appliedTolerance"]
 
@@ -79,6 +79,11 @@ class AggregateRuleValues(BaseModel):
         # and __fields_set__ contains the field
         if self.right_value is None and "right_value" in self.__fields_set__:
             _dict['rightValue'] = None
+
+        # set to None if difference (nullable) is None
+        # and __fields_set__ contains the field
+        if self.difference is None and "difference" in self.__fields_set__:
+            _dict['difference'] = None
 
         return _dict
 

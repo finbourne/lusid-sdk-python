@@ -4,21 +4,21 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_quote_access_metadata_rule**](QuotesApi.md#delete_quote_access_metadata_rule) | **DELETE** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+[**delete_quote_access_metadata_rule**](QuotesApi.md#delete_quote_access_metadata_rule) | **DELETE** /api/metadata/quotes/rules/{scope} | DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
 [**delete_quotes**](QuotesApi.md#delete_quotes) | **POST** /api/quotes/{scope}/$delete | DeleteQuotes: Delete quotes
 [**get_quotes**](QuotesApi.md#get_quotes) | **POST** /api/quotes/{scope}/$get | GetQuotes: Get quotes
-[**get_quotes_access_metadata_rule**](QuotesApi.md#get_quotes_access_metadata_rule) | **GET** /api/metadata/quotes/rules | [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+[**get_quotes_access_metadata_rule**](QuotesApi.md#get_quotes_access_metadata_rule) | **GET** /api/metadata/quotes/rules | GetQuotesAccessMetadataRule: Get a quote access metadata rule
 [**list_quotes**](QuotesApi.md#list_quotes) | **GET** /api/quotes/{scope}/$deprecated | [DEPRECATED] ListQuotes: List quotes
-[**list_quotes_access_metadata_rules**](QuotesApi.md#list_quotes_access_metadata_rules) | **GET** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+[**list_quotes_access_metadata_rules**](QuotesApi.md#list_quotes_access_metadata_rules) | **GET** /api/metadata/quotes/rules/{scope} | ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
 [**list_quotes_for_scope**](QuotesApi.md#list_quotes_for_scope) | **GET** /api/quotes/{scope} | ListQuotesForScope: List quotes for scope
-[**upsert_quote_access_metadata_rule**](QuotesApi.md#upsert_quote_access_metadata_rule) | **POST** /api/metadata/quotes/rules/{scope} | [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+[**upsert_quote_access_metadata_rule**](QuotesApi.md#upsert_quote_access_metadata_rule) | **POST** /api/metadata/quotes/rules/{scope} | UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
 [**upsert_quotes**](QuotesApi.md#upsert_quotes) | **POST** /api/quotes/{scope} | UpsertQuotes: Upsert quotes
 
 
 # **delete_quote_access_metadata_rule**
 > QuoteAccessMetadataRule delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at)
 
-[EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
 
 Delete the Quote Access Metadata Rule that exactly matches the provided identifier parts
 
@@ -80,7 +80,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
+        # DeleteQuoteAccessMetadataRule: Delete a Quote Access Metadata Rule
         api_response = api_instance.delete_quote_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at)
         pprint(api_response)
 
@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 # **get_quotes_access_metadata_rule**
 > QuoteAccessMetadataRule get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+GetQuotesAccessMetadataRule: Get a quote access metadata rule
 
 Get a specific quote access metadata rule by specifying the corresponding identifier parts                No matching will be performed through this endpoint. To retrieve a rule, it is necessary to specify, exactly, the identifier of the rule
 
@@ -381,7 +381,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetQuotesAccessMetadataRule: Get a quote access metadata rule
+        # GetQuotesAccessMetadataRule: Get a quote access metadata rule
         api_response = api_instance.get_quotes_access_metadata_rule(scope, provider=provider, price_source=price_source, instrument_id_type=instrument_id_type, instrument_id=instrument_id, quote_type=quote_type, field=field, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 # **list_quotes_access_metadata_rules**
 > ResourceListOfQuoteAccessMetadataRule list_quotes_access_metadata_rules(scope, as_at=as_at)
 
-[EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
 
 Get all the quote access metadata rules in the specified scope
 
@@ -582,7 +582,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_quotes_access_metadata_rules(scope, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
+        # ListQuotesAccessMetadataRules: List all quote access metadata rules in a scope
         api_response = api_instance.list_quotes_access_metadata_rules(scope, as_at=as_at)
         pprint(api_response)
 
@@ -720,7 +720,7 @@ Name | Type | Description  | Notes
 # **upsert_quote_access_metadata_rule**
 > QuoteAccessMetadataRule upsert_quote_access_metadata_rule(scope, upsert_quote_access_metadata_rule_request, effective_at=effective_at, effective_until=effective_until)
 
-[EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
 
 Update or insert one Quote Access Metadata Rule in a single scope. An item will be updated if it already exists  and inserted if it does not.    The response will return the successfully updated or inserted Quote Access Metadata Rule or failure message if unsuccessful    It is important to always check to verify success (or failure).                Multiple rules for a key can exists with different effective at dates, when resources are accessed the rule that is active for the current time will be fetched
 
@@ -783,7 +783,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_quote_access_metadata_rule(scope, upsert_quote_access_metadata_rule_request, effective_at=effective_at, effective_until=effective_until, opts=opts)
 
-        # [EXPERIMENTAL] UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
+        # UpsertQuoteAccessMetadataRule: Upsert a Quote Access Metadata Rule. This creates or updates the data in LUSID.
         api_response = api_instance.upsert_quote_access_metadata_rule(scope, upsert_quote_access_metadata_rule_request, effective_at=effective_at, effective_until=effective_until)
         pprint(api_response)
 

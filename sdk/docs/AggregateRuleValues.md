@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **rule_name** | **str** | The name of the rule. | 
 **left_value** | **str** | The left-side value. | [optional] 
 **right_value** | **str** | The right-side value. | [optional] 
-**difference** | **str** | The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)). | 
+**difference** | **str** | The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)). | [optional] 
 **applied_tolerance** | [**ToleranceBase**](ToleranceBase.md) |  | [optional] 
 ## Example
 
@@ -21,7 +21,7 @@ from datetime import datetime
 rule_name: StrictStr = "example_rule_name"
 left_value: Optional[StrictStr] = "example_left_value"
 right_value: Optional[StrictStr] = "example_right_value"
-difference: StrictStr = "example_difference"
+difference: Optional[StrictStr] = "example_difference"
 applied_tolerance: Optional[ToleranceBase] = # Replace with your value
 aggregate_rule_values_instance = AggregateRuleValues(rule_name=rule_name, left_value=left_value, right_value=right_value, difference=difference, applied_tolerance=applied_tolerance)
 

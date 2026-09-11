@@ -128,6 +128,7 @@ from lusid.models.abor_configuration_properties import AborConfigurationProperti
 from lusid.models.abor_configuration_request import AborConfigurationRequest
 from lusid.models.abor_properties import AborProperties
 from lusid.models.abor_request import AborRequest
+from lusid.models.abstain_election import AbstainElection
 from lusid.models.accept_estimate_valuation_point_response import AcceptEstimateValuationPointResponse
 from lusid.models.access_controlled_action import AccessControlledAction
 from lusid.models.access_controlled_resource import AccessControlledResource
@@ -402,7 +403,11 @@ from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
+from lusid.models.consent_and_exchange_election import ConsentAndExchangeElection
+from lusid.models.consent_and_tender_election import ConsentAndTenderElection
+from lusid.models.consent_denied_election import ConsentDeniedElection
 from lusid.models.consent_event import ConsentEvent
+from lusid.models.consent_granted_election import ConsentGrantedElection
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
 from lusid.models.contract_details import ContractDetails
@@ -783,6 +788,7 @@ from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
 from lusid.models.index_projection_dependency import IndexProjectionDependency
 from lusid.models.industry_classifier import IndustryClassifier
+from lusid.models.inflation_convexity_options import InflationConvexityOptions
 from lusid.models.inflation_curve_data import InflationCurveData
 from lusid.models.inflation_curve_shift_definition import InflationCurveShiftDefinition
 from lusid.models.inflation_fixing_dependency import InflationFixingDependency
@@ -863,6 +869,7 @@ from lusid.models.list_complex_market_data_with_meta_data_response import ListCo
 from lusid.models.loan_facility import LoanFacility
 from lusid.models.loan_facility_contract_rollover_event import LoanFacilityContractRolloverEvent
 from lusid.models.loan_facility_delayed_compensation_payment_event import LoanFacilityDelayedCompensationPaymentEvent
+from lusid.models.loan_interest_capitalisation_event import LoanInterestCapitalisationEvent
 from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
@@ -985,6 +992,7 @@ from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.output_transition import OutputTransition
 from lusid.models.override_virtual_transactions_response import OverrideVirtualTransactionsResponse
+from lusid.models.oversubscribe_election import OversubscribeElection
 from lusid.models.package import Package
 from lusid.models.package_request import PackageRequest
 from lusid.models.package_set_request import PackageSetRequest
@@ -1420,6 +1428,7 @@ from lusid.models.result_value_dictionary import ResultValueDictionary
 from lusid.models.result_value_int import ResultValueInt
 from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
+from lusid.models.retain_election import RetainElection
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
@@ -1455,6 +1464,7 @@ from lusid.models.security_election import SecurityElection
 from lusid.models.security_offer_constituent import SecurityOfferConstituent
 from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.security_write_off_event import SecurityWriteOffEvent
+from lusid.models.sell_entitlement_election import SellEntitlementElection
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.series_definition import SeriesDefinition
 from lusid.models.series_definition_request import SeriesDefinitionRequest
@@ -1628,6 +1638,7 @@ from lusid.models.unit_dimension import UnitDimension
 from lusid.models.unit_schema import UnitSchema
 from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
+from lusid.models.unknown_proceeds_election import UnknownProceedsElection
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.unsettled_transaction import UnsettledTransaction
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
@@ -1905,6 +1916,7 @@ __all__ = [
     "AborConfigurationRequest",
     "AborProperties",
     "AborRequest",
+    "AbstainElection",
     "AcceptEstimateValuationPointResponse",
     "AccessControlledAction",
     "AccessControlledResource",
@@ -2179,7 +2191,11 @@ __all__ = [
     "CompositeDispersionResponse",
     "Compounding",
     "ConfigurationRecipe",
+    "ConsentAndExchangeElection",
+    "ConsentAndTenderElection",
+    "ConsentDeniedElection",
     "ConsentEvent",
+    "ConsentGrantedElection",
     "ConstantVolatilitySurface",
     "ConstituentsAdjustmentHeader",
     "ContractDetails",
@@ -2560,6 +2576,7 @@ __all__ = [
     "IndexModelOptions",
     "IndexProjectionDependency",
     "IndustryClassifier",
+    "InflationConvexityOptions",
     "InflationCurveData",
     "InflationCurveShiftDefinition",
     "InflationFixingDependency",
@@ -2640,6 +2657,7 @@ __all__ = [
     "LoanFacility",
     "LoanFacilityContractRolloverEvent",
     "LoanFacilityDelayedCompensationPaymentEvent",
+    "LoanInterestCapitalisationEvent",
     "LoanInterestRepaymentEvent",
     "LoanPeriod",
     "LoanPrincipalRepaymentEvent",
@@ -2762,6 +2780,7 @@ __all__ = [
     "OutputTransaction",
     "OutputTransition",
     "OverrideVirtualTransactionsResponse",
+    "OversubscribeElection",
     "Package",
     "PackageRequest",
     "PackageSetRequest",
@@ -3197,6 +3216,7 @@ __all__ = [
     "ResultValueInt",
     "ResultValueString",
     "ResultValueType",
+    "RetainElection",
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReturnsMetric",
@@ -3232,6 +3252,7 @@ __all__ = [
     "SecurityOfferConstituent",
     "SecurityOfferElection",
     "SecurityWriteOffEvent",
+    "SellEntitlementElection",
     "SequenceDefinition",
     "SeriesDefinition",
     "SeriesDefinitionRequest",
@@ -3405,6 +3426,7 @@ __all__ = [
     "UnitSchema",
     "UnitisationData",
     "UnitsRatio",
+    "UnknownProceedsElection",
     "UnmatchedHoldingMethod",
     "UnsettledTransaction",
     "UpdateAmortisationRuleSetDetailsRequest",

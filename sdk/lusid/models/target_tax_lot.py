@@ -37,7 +37,8 @@ class TargetTaxLot(BaseModel):
     notional_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The notional cost of the tax-lot's opening transaction.", alias="notionalCost")
     variation_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The variation margin of the tax-lot's opening transaction.", alias="variationMargin")
     variation_margin_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The variation margin in portfolio currency of the tax-lot's opening transaction.", alias="variationMarginPortfolioCcy")
-    __properties = ["units", "cost", "portfolioCost", "price", "purchaseDate", "settlementDate", "notionalCost", "variationMargin", "variationMarginPortfolioCcy"]
+    amortised_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amortised cost of the tax-lot in the settlement currency, for example a supplied amortised cost at migration. If supplied, this value seeds the tax-lot's amortised cost at the adjustment date and amortisation continues forward from it; if not supplied, the amortised cost defaults to the cost of the tax-lot.", alias="amortisedCost")
+    __properties = ["units", "cost", "portfolioCost", "price", "purchaseDate", "settlementDate", "notionalCost", "variationMargin", "variationMarginPortfolioCcy", "amortisedCost"]
 
     class Config:
         """Pydantic configuration"""
@@ -109,6 +110,11 @@ class TargetTaxLot(BaseModel):
         if self.variation_margin_portfolio_ccy is None and "variation_margin_portfolio_ccy" in self.__fields_set__:
             _dict['variationMarginPortfolioCcy'] = None
 
+        # set to None if amortised_cost (nullable) is None
+        # and __fields_set__ contains the field
+        if self.amortised_cost is None and "amortised_cost" in self.__fields_set__:
+            _dict['amortisedCost'] = None
+
         return _dict
 
     @classmethod
@@ -129,7 +135,8 @@ class TargetTaxLot(BaseModel):
             "settlement_date": obj.get("settlementDate"),
             "notional_cost": obj.get("notionalCost"),
             "variation_margin": obj.get("variationMargin"),
-            "variation_margin_portfolio_ccy": obj.get("variationMarginPortfolioCcy")
+            "variation_margin_portfolio_ccy": obj.get("variationMarginPortfolioCcy"),
+            "amortised_cost": obj.get("amortisedCost")
         })
         return _obj
 

@@ -1,6 +1,6 @@
 # PikSchedule
 
-A PikSchedule represents Payment-in-Kind features for a ComplexBond.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
+A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan or a LoanFacility.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **pik_payment_type** | **str** | The type of PIK payment to be used for the duration of this schedule.  InterestCapitalisation adds the paid-in-kind portion to the bond&#39;s current face;  AdditionalSecurities settles it by delivering units of another instrument, named on each  period&#39;s PikBondInterestEvent; Electable leaves the choice to a per-period election.                Supported string (enumeration) values are: [Electable, InterestCapitalisation, AdditionalSecurities]. | [optional] 
 **pik_rate** | **float** | The PIK interest rate. Must be greater than or equal to zero.  null indicates no override PIK interest rate. | [optional] 
 **pik_spread** | **float** | The PIK spread to be added to the base rate for the final PIK rate.  null indicates no spread on base rate. | [optional] 
+**pik_travels_free** | **bool** | Whether the in-kind entitlement travels with the traded position for the whole period, the way bond  interest does, rather than being earned from settlement the way loan cash interest is. When true, a  holder who buys before the period end takes the full-period in-kind amount on the amount bought even  if the trade settles after the ex-date. When false, the in-kind amount is day-weighted on the settled  balance path and the settled holder keeps it. Defaults to true. Bank debt only: a ComplexBond&#39;s  in-kind entitlement already follows the record date.                Nullable in the constructor and initialised here, unlike the generated shape: Newtonsoft passes  default(bool) for a value-type constructor parameter the payload omits, so a plain  &#x60;bool pikTravelsFree &#x3D; true&#x60; would come back false for every client that did not state it. | [optional] 
+**pik_interest_basis** | **str** | Whether the in-kind leg stands in place of the cash leg or is paid on top of it.                Alternative, the default, is the toggling structure: one period&#39;s interest settled partly in cash  and partly in kind, so the cash leg settles the complement of PikFraction and the period&#39;s  interest is the weighted sum of the two accruals, lying between them. Additional makes the two  separate legs of one loan, each settled in full, so the period&#39;s interest is their sum and  PikFraction weights only the in-kind leg.                The two accruals cannot be told apart without this: 500 accrued in cash against 600 in kind is  560 of interest on one reading and 1,100 on the other. A PikMargin schedule is Additional  whichever is stated, because the margin is already carved out of the coupon.                Defaulted here as well as in the constructor for the reason PikTravelsFree is. | [optional] 
 **schedule_type** | **str** | Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule. | 
 ## Example
 
@@ -31,8 +33,11 @@ pik_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 pik_payment_type: Optional[StrictStr] = "example_pik_payment_type"
 pik_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 pik_spread: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+pik_travels_free: Optional[StrictBool] = # Replace with your value
+pik_travels_free:Optional[StrictBool] = None
+pik_interest_basis: Optional[StrictStr] = "example_pik_interest_basis"
 schedule_type: StrictStr = "example_schedule_type"
-pik_schedule_instance = PikSchedule(start_date=start_date, maturity_date=maturity_date, is_pik_fraction_electable=is_pik_fraction_electable, pik_fraction=pik_fraction, pik_margin=pik_margin, pik_payment_type=pik_payment_type, pik_rate=pik_rate, pik_spread=pik_spread, schedule_type=schedule_type)
+pik_schedule_instance = PikSchedule(start_date=start_date, maturity_date=maturity_date, is_pik_fraction_electable=is_pik_fraction_electable, pik_fraction=pik_fraction, pik_margin=pik_margin, pik_payment_type=pik_payment_type, pik_rate=pik_rate, pik_spread=pik_spread, pik_travels_free=pik_travels_free, pik_interest_basis=pik_interest_basis, schedule_type=schedule_type)
 
 ```
 

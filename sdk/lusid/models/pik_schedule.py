@@ -26,7 +26,7 @@ from lusid.models.schedule import Schedule
 
 class PikSchedule(Schedule):
     """
-    A PikSchedule represents Payment-in-Kind features for a ComplexBond.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.  # noqa: E501
+    A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan or a LoanFacility.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the PIK schedule period.", alias="startDate")
     maturity_date: datetime = Field(description="The end date of the PIK schedule period.", alias="maturityDate")
@@ -36,9 +36,11 @@ class PikSchedule(Schedule):
     pik_payment_type:  Optional[StrictStr] = Field(None,alias="pikPaymentType", description="The type of PIK payment to be used for the duration of this schedule.  InterestCapitalisation adds the paid-in-kind portion to the bond's current face;  AdditionalSecurities settles it by delivering units of another instrument, named on each  period's PikBondInterestEvent; Electable leaves the choice to a per-period election.                Supported string (enumeration) values are: [Electable, InterestCapitalisation, AdditionalSecurities].") 
     pik_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The PIK interest rate. Must be greater than or equal to zero.  null indicates no override PIK interest rate.", alias="pikRate")
     pik_spread: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The PIK spread to be added to the base rate for the final PIK rate.  null indicates no spread on base rate.", alias="pikSpread")
+    pik_travels_free: Optional[StrictBool] = Field(default=None, description="Whether the in-kind entitlement travels with the traded position for the whole period, the way bond  interest does, rather than being earned from settlement the way loan cash interest is. When true, a  holder who buys before the period end takes the full-period in-kind amount on the amount bought even  if the trade settles after the ex-date. When false, the in-kind amount is day-weighted on the settled  balance path and the settled holder keeps it. Defaults to true. Bank debt only: a ComplexBond's  in-kind entitlement already follows the record date.                Nullable in the constructor and initialised here, unlike the generated shape: Newtonsoft passes  default(bool) for a value-type constructor parameter the payload omits, so a plain  `bool pikTravelsFree = true` would come back false for every client that did not state it.", alias="pikTravelsFree")
+    pik_interest_basis:  Optional[StrictStr] = Field(None,alias="pikInterestBasis", description="Whether the in-kind leg stands in place of the cash leg or is paid on top of it.                Alternative, the default, is the toggling structure: one period's interest settled partly in cash  and partly in kind, so the cash leg settles the complement of PikFraction and the period's  interest is the weighted sum of the two accruals, lying between them. Additional makes the two  separate legs of one loan, each settled in full, so the period's interest is their sum and  PikFraction weights only the in-kind leg.                The two accruals cannot be told apart without this: 500 accrued in cash against 600 in kind is  560 of interest on one reading and 1,100 on the other. A PikMargin schedule is Additional  whichever is stated, because the margin is already carved out of the coupon.                Defaulted here as well as in the constructor for the reason PikTravelsFree is.") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "isPikFractionElectable", "pikFraction", "pikMargin", "pikPaymentType", "pikRate", "pikSpread"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "isPikFractionElectable", "pikFraction", "pikMargin", "pikPaymentType", "pikRate", "pikSpread", "pikTravelsFree", "pikInterestBasis"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -176,6 +178,11 @@ class PikSchedule(Schedule):
         if self.pik_spread is None and "pik_spread" in self.__fields_set__:
             _dict['pikSpread'] = None
 
+        # set to None if pik_interest_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pik_interest_basis is None and "pik_interest_basis" in self.__fields_set__:
+            _dict['pikInterestBasis'] = None
+
         return _dict
 
     @classmethod
@@ -196,7 +203,9 @@ class PikSchedule(Schedule):
             "pik_margin": obj.get("pikMargin"),
             "pik_payment_type": obj.get("pikPaymentType"),
             "pik_rate": obj.get("pikRate"),
-            "pik_spread": obj.get("pikSpread")
+            "pik_spread": obj.get("pikSpread"),
+            "pik_travels_free": obj.get("pikTravelsFree"),
+            "pik_interest_basis": obj.get("pikInterestBasis")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
