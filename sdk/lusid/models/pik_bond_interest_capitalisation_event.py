@@ -31,10 +31,12 @@ class PikBondInterestCapitalisationEvent(InstrumentEvent):
     ex_date: Optional[datetime] = Field(default=None, description="The ex date (entitlement date) of the coupon", alias="exDate")
     payment_date: Optional[datetime] = Field(default=None, description="The payment date of the coupon", alias="paymentDate")
     currency:  StrictStr = Field(...,alias="currency", description="The currency in which the coupon is denominated") 
-    coupon_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The capitalised coupon amount per unit of the held bond's current face", alias="couponPerUnit")
+    coupon_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The capitalised coupon amount per unit of the held bond's current face. Never rounded.", alias="couponPerUnit")
+    face_rounding_convention:  Optional[StrictStr] = Field(None,alias="faceRoundingConvention", description="How the face credited to a holding is rounded once CouponPerUnit has been scaled by the holding's  current face. Defaults to null, which leaves it unrounded. Carried from the bond's PikSchedule; the  per-unit coupon itself is never rounded. BuyUp is one of the available values but is rejected for  this event: a capitalisation has no cash leg to fund the next whole unit from. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    face_rounding_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places the credited face is rounded to. Required when  FaceRoundingConvention is RoundToDecimalPlaces and not permitted otherwise.", alias="faceRoundingDecimalPlaces")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "couponPerUnit"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "couponPerUnit", "faceRoundingConvention", "faceRoundingDecimalPlaces"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -152,6 +154,16 @@ class PikBondInterestCapitalisationEvent(InstrumentEvent):
         if self.coupon_per_unit is None and "coupon_per_unit" in self.__fields_set__:
             _dict['couponPerUnit'] = None
 
+        # set to None if face_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.face_rounding_convention is None and "face_rounding_convention" in self.__fields_set__:
+            _dict['faceRoundingConvention'] = None
+
+        # set to None if face_rounding_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.face_rounding_decimal_places is None and "face_rounding_decimal_places" in self.__fields_set__:
+            _dict['faceRoundingDecimalPlaces'] = None
+
         return _dict
 
     @classmethod
@@ -168,7 +180,9 @@ class PikBondInterestCapitalisationEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "currency": obj.get("currency"),
-            "coupon_per_unit": obj.get("couponPerUnit")
+            "coupon_per_unit": obj.get("couponPerUnit"),
+            "face_rounding_convention": obj.get("faceRoundingConvention"),
+            "face_rounding_decimal_places": obj.get("faceRoundingDecimalPlaces")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

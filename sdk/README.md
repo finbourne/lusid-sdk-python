@@ -944,6 +944,7 @@ Class | Method | HTTP request | Description
  - [Bucket](docs/Bucket.md)
  - [BucketBorderConfiguration](docs/BucketBorderConfiguration.md)
  - [BucketDefinition](docs/BucketDefinition.md)
+ - [BucketMembership](docs/BucketMembership.md)
  - [BucketSetDefinition](docs/BucketSetDefinition.md)
  - [BucketSetNode](docs/BucketSetNode.md)
  - [BucketSetResult](docs/BucketSetResult.md)

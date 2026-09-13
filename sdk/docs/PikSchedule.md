@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the PIK schedule period. | 
 **maturity_date** | **datetime** | The end date of the PIK schedule period. | 
+**face_rounding_convention** | **str** | How the face credited by an interest capitalisation is rounded. A PIK indenture typically increases  the note&#39;s principal by the interest payable rounded to a whole currency unit, and which way it  rounds varies by issuer. Defaults to null, which leaves the credited face unrounded. BuyUp is one  of the available values but is rejected: a capitalisation has no cash leg to fund the next whole  unit from. The per-unit coupon itself is never rounded. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding. | [optional] 
+**face_rounding_decimal_places** | **int** | The number of decimal places the credited face is rounded to. Required when  FaceRoundingConvention is RoundToDecimalPlaces and not permitted otherwise. | [optional] 
 **is_pik_fraction_electable** | **bool** | If true, the PIK fraction is electable at each payment date.  Defaults to false. | [optional] 
 **pik_fraction** | **float** | The fraction of the coupon that is paid in kind, where 0 means fully cash and 1 means fully PIK.  Required if IsPikFractionElectable is false or null. Must satisfy 0 &lt;&#x3D; pikFraction &lt;&#x3D; 1. | [optional] 
 **pik_margin** | **float** | The portion of the coupon that is paid in kind, stated in the leg&#39;s own rate units (an annualised  rate on the notional) rather than as a fraction of the coupon. The in-kind leg accrues at this flat  rate and the cash leg accrues the remainder of the coupon, so on a floating leg the in-kind portion  stays constant across fixings — the shape of a loan quoted as \&quot;index + 700bp, of which 250bp paid  in kind\&quot;. On a fixed leg it is equivalent to pikFraction &#x3D; pikMargin / couponRate. Should the  period&#39;s whole coupon fall below the margin, the in-kind portion is capped at the whole  (non-negative) coupon and the cash leg floors at zero.  Mutually exclusive with pikFraction, pikRate, pikSpread and isPikFractionElectable.  Must be greater than or equal to zero. null indicates the split is stated by pikFraction instead. | [optional] 
@@ -26,6 +28,9 @@ from datetime import datetime
 
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
+face_rounding_convention: Optional[StrictStr] = "example_face_rounding_convention"
+face_rounding_decimal_places: Optional[StrictInt] = # Replace with your value
+face_rounding_decimal_places: Optional[StrictInt] = None
 is_pik_fraction_electable: Optional[StrictBool] = # Replace with your value
 is_pik_fraction_electable:Optional[StrictBool] = None
 pik_fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -37,7 +42,7 @@ pik_travels_free: Optional[StrictBool] = # Replace with your value
 pik_travels_free:Optional[StrictBool] = None
 pik_interest_basis: Optional[StrictStr] = "example_pik_interest_basis"
 schedule_type: StrictStr = "example_schedule_type"
-pik_schedule_instance = PikSchedule(start_date=start_date, maturity_date=maturity_date, is_pik_fraction_electable=is_pik_fraction_electable, pik_fraction=pik_fraction, pik_margin=pik_margin, pik_payment_type=pik_payment_type, pik_rate=pik_rate, pik_spread=pik_spread, pik_travels_free=pik_travels_free, pik_interest_basis=pik_interest_basis, schedule_type=schedule_type)
+pik_schedule_instance = PikSchedule(start_date=start_date, maturity_date=maturity_date, face_rounding_convention=face_rounding_convention, face_rounding_decimal_places=face_rounding_decimal_places, is_pik_fraction_electable=is_pik_fraction_electable, pik_fraction=pik_fraction, pik_margin=pik_margin, pik_payment_type=pik_payment_type, pik_rate=pik_rate, pik_spread=pik_spread, pik_travels_free=pik_travels_free, pik_interest_basis=pik_interest_basis, schedule_type=schedule_type)
 
 ```
 

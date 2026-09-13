@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **share_class_breakdowns** | [**List[JournalEntryLineShareClassBreakdown]**](JournalEntryLineShareClassBreakdown.md) | Share Class breakdown data for this Journal Entry Line. | [optional] 
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **custodian_account_type** | **str** | Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line. | [optional] 
+**bucket_memberships** | [**List[BucketMembership]**](BucketMembership.md) | The bucket this Journal Entry Line is assigned to in each of the Fund Configuration&#39;s bucket sets that covers the NAV type, in bucket set definition order. Each bucket set classifies the line independently, so a line normally carries one entry per bucket set. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -78,8 +79,9 @@ journal_entry_line_type: Optional[StrictStr] = "example_journal_entry_line_type"
 share_class_breakdowns: Optional[List[JournalEntryLineShareClassBreakdown]] = # Replace with your value
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 custodian_account_type: Optional[StrictStr] = "example_custodian_account_type"
+bucket_memberships: Optional[List[BucketMembership]] = # Replace with your value
 links: Optional[List[Link]] = None
-fund_journal_entry_line_instance = FundJournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, share_class_breakdowns=share_class_breakdowns, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, links=links)
+fund_journal_entry_line_instance = FundJournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, share_class_breakdowns=share_class_breakdowns, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, bucket_memberships=bucket_memberships, links=links)
 
 ```
 

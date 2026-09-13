@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.bucket_membership import BucketMembership
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.journal_entry_line_share_class_breakdown import JournalEntryLineShareClassBreakdown
 from lusid.models.link import Link
@@ -65,8 +66,9 @@ class FundJournalEntryLine(BaseModel):
     share_class_breakdowns: Optional[List[JournalEntryLineShareClassBreakdown]] = Field(default=None, description="Share Class breakdown data for this Journal Entry Line.", alias="shareClassBreakdowns")
     custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     custodian_account_type:  Optional[StrictStr] = Field(None,alias="custodianAccountType", description="Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.") 
+    bucket_memberships: Optional[List[BucketMembership]] = Field(default=None, description="The bucket this Journal Entry Line is assigned to in each of the Fund Configuration's bucket sets that covers the NAV type, in bucket set definition order. Each bucket set classifies the line independently, so a line normally carries one entry per bucket set.", alias="bucketMemberships")
     links: Optional[List[Link]] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "bucketMemberships", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -133,6 +135,13 @@ class FundJournalEntryLine(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of custodian_account_id
         if self.custodian_account_id:
             _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in bucket_memberships (list)
+        _items = []
+        if self.bucket_memberships:
+            for _item in self.bucket_memberships:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['bucketMemberships'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -220,6 +229,11 @@ class FundJournalEntryLine(BaseModel):
         if self.custodian_account_type is None and "custodian_account_type" in self.__fields_set__:
             _dict['custodianAccountType'] = None
 
+        # set to None if bucket_memberships (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bucket_memberships is None and "bucket_memberships" in self.__fields_set__:
+            _dict['bucketMemberships'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -279,6 +293,7 @@ class FundJournalEntryLine(BaseModel):
             "share_class_breakdowns": [JournalEntryLineShareClassBreakdown.from_dict(_item) for _item in obj.get("shareClassBreakdowns")] if obj.get("shareClassBreakdowns") is not None else None,
             "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
             "custodian_account_type": obj.get("custodianAccountType"),
+            "bucket_memberships": [BucketMembership.from_dict(_item) for _item in obj.get("bucketMemberships")] if obj.get("bucketMemberships") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

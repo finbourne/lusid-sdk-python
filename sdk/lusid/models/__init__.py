@@ -165,6 +165,7 @@ from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucket import Bucket
 from lusid.models.bucket_border_configuration import BucketBorderConfiguration
 from lusid.models.bucket_definition import BucketDefinition
+from lusid.models.bucket_membership import BucketMembership
 from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.bucket_set_node import BucketSetNode
 from lusid.models.bucket_set_result import BucketSetResult
@@ -1850,6 +1851,7 @@ __all__ = [
     "Bucket",
     "BucketBorderConfiguration",
     "BucketDefinition",
+    "BucketMembership",
     "BucketSetDefinition",
     "BucketSetNode",
     "BucketSetResult",
