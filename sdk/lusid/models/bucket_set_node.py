@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
+from lusid.models.bucket_set_share_class_details import BucketSetShareClassDetails
 
 class BucketSetNode(BaseModel):
     """
@@ -37,7 +38,11 @@ class BucketSetNode(BaseModel):
     shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the end of the period. Reported only for a share class that is unitised.", alias="sharesInIssue")
     previous_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's NAV per unit at the previous valuation point, on the same basis as PerUnitValue.", alias="previousPerUnitValue")
     previous_shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the start of the period. Reported only for a share class that is unitised.", alias="previousSharesInIssue")
-    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets", "perUnitValue", "sharesInIssue", "previousPerUnitValue", "previousSharesInIssue"]
+    label:  Optional[StrictStr] = Field(None,alias="label", description="A display label for the node: the fund's display name on the fund node, the share class's name on a share class node.") 
+    previous_nav: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net asset value this node carried at the previous valuation point, in the fund currency. Zero at the fund's first valuation point.", alias="previousNav")
+    net_dealing_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net units dealt for the share class over the period, so that the shares in issue are the previous shares in issue plus this. Set only on share class nodes, and only where the bucket set is unitised.", alias="netDealingUnits")
+    share_class_details: Optional[BucketSetShareClassDetails] = Field(default=None, alias="shareClassDetails")
+    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets", "perUnitValue", "sharesInIssue", "previousPerUnitValue", "previousSharesInIssue", "label", "previousNav", "netDealingUnits", "shareClassDetails"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +83,9 @@ class BucketSetNode(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['buckets'] = _items
+        # override the default output from pydantic by calling `to_dict()` of share_class_details
+        if self.share_class_details:
+            _dict['shareClassDetails'] = self.share_class_details.to_dict()
         # set to None if share_class_short_code (nullable) is None
         # and __fields_set__ contains the field
         if self.share_class_short_code is None and "share_class_short_code" in self.__fields_set__:
@@ -113,6 +121,21 @@ class BucketSetNode(BaseModel):
         if self.previous_shares_in_issue is None and "previous_shares_in_issue" in self.__fields_set__:
             _dict['previousSharesInIssue'] = None
 
+        # set to None if label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.label is None and "label" in self.__fields_set__:
+            _dict['label'] = None
+
+        # set to None if previous_nav (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_nav is None and "previous_nav" in self.__fields_set__:
+            _dict['previousNav'] = None
+
+        # set to None if net_dealing_units (nullable) is None
+        # and __fields_set__ contains the field
+        if self.net_dealing_units is None and "net_dealing_units" in self.__fields_set__:
+            _dict['netDealingUnits'] = None
+
         return _dict
 
     @classmethod
@@ -133,7 +156,11 @@ class BucketSetNode(BaseModel):
             "per_unit_value": obj.get("perUnitValue"),
             "shares_in_issue": obj.get("sharesInIssue"),
             "previous_per_unit_value": obj.get("previousPerUnitValue"),
-            "previous_shares_in_issue": obj.get("previousSharesInIssue")
+            "previous_shares_in_issue": obj.get("previousSharesInIssue"),
+            "label": obj.get("label"),
+            "previous_nav": obj.get("previousNav"),
+            "net_dealing_units": obj.get("netDealingUnits"),
+            "share_class_details": BucketSetShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None
         })
         return _obj
 

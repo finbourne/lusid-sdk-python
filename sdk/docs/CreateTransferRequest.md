@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **custodian_account_id_in** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **source** | **str** |  | 
 **accounting_method** | **str** | Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] 
-**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
+**properties_out** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **properties_in** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 ## Example
 
@@ -65,9 +65,9 @@ custodian_account_id_out: Optional[ResourceId] = # Replace with your value
 custodian_account_id_in: Optional[ResourceId] = # Replace with your value
 source: StrictStr = "example_source"
 accounting_method: Optional[StrictStr] = "example_accounting_method"
-properties: Optional[Dict[str, PerpetualProperty]] = None
+properties_out: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 properties_in: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-create_transfer_request_instance = CreateTransferRequest(transfer_id=transfer_id, portfolio_id_out=portfolio_id_out, portfolio_id_in=portfolio_id_in, instrument_identifier_out=instrument_identifier_out, instrument_identifier_in=instrument_identifier_in, pricing_method=pricing_method, tax_lot_structure=tax_lot_structure, units_out=units_out, units_in=units_in, amount_out=amount_out, weight_out=weight_out, trade_date_out=trade_date_out, trade_date_in=trade_date_in, settlement_date_out=settlement_date_out, settlement_date_in=settlement_date_in, exchange_rate_out=exchange_rate_out, exchange_rate_in=exchange_rate_in, transaction_price_out=transaction_price_out, transaction_price_in=transaction_price_in, counterparty_id_out=counterparty_id_out, counterparty_id_in=counterparty_id_in, custodian_account_id_out=custodian_account_id_out, custodian_account_id_in=custodian_account_id_in, source=source, accounting_method=accounting_method, properties=properties, properties_in=properties_in)
+create_transfer_request_instance = CreateTransferRequest(transfer_id=transfer_id, portfolio_id_out=portfolio_id_out, portfolio_id_in=portfolio_id_in, instrument_identifier_out=instrument_identifier_out, instrument_identifier_in=instrument_identifier_in, pricing_method=pricing_method, tax_lot_structure=tax_lot_structure, units_out=units_out, units_in=units_in, amount_out=amount_out, weight_out=weight_out, trade_date_out=trade_date_out, trade_date_in=trade_date_in, settlement_date_out=settlement_date_out, settlement_date_in=settlement_date_in, exchange_rate_out=exchange_rate_out, exchange_rate_in=exchange_rate_in, transaction_price_out=transaction_price_out, transaction_price_in=transaction_price_in, counterparty_id_out=counterparty_id_out, counterparty_id_in=counterparty_id_in, custodian_account_id_out=custodian_account_id_out, custodian_account_id_in=custodian_account_id_in, source=source, accounting_method=accounting_method, properties_out=properties_out, properties_in=properties_in)
 
 ```
 

@@ -37,7 +37,8 @@ class BucketSetResultBucket(BaseModel):
     units_in_issue: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The share class's units in issue at the end of the period. Reported only where both the share class and the bucket are unitised.", alias="unitsInIssue")
     previous_cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the start of the period, per unit in issue at that point - so it reads as it did at the previous valuation point rather than being restated at this period's unit count.", alias="previousCumulativePerUnitValue")
     cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the end of the period per unit in issue (CumulativeValue divided by UnitsInIssue). Reported only where both the share class and the bucket are unitised and there are units in issue to divide by.", alias="cumulativePerUnitValue")
-    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue", "sourceBreakdown", "perUnitValue", "unitsInIssue", "previousCumulativePerUnitValue", "cumulativePerUnitValue"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the bucket, as configured on the fund configuration.") 
+    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue", "sourceBreakdown", "perUnitValue", "unitsInIssue", "previousCumulativePerUnitValue", "cumulativePerUnitValue", "displayName"]
 
     class Config:
         """Pydantic configuration"""
@@ -96,6 +97,11 @@ class BucketSetResultBucket(BaseModel):
         if self.cumulative_per_unit_value is None and "cumulative_per_unit_value" in self.__fields_set__:
             _dict['cumulativePerUnitValue'] = None
 
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         return _dict
 
     @classmethod
@@ -117,7 +123,8 @@ class BucketSetResultBucket(BaseModel):
             "per_unit_value": obj.get("perUnitValue"),
             "units_in_issue": obj.get("unitsInIssue"),
             "previous_cumulative_per_unit_value": obj.get("previousCumulativePerUnitValue"),
-            "cumulative_per_unit_value": obj.get("cumulativePerUnitValue")
+            "cumulative_per_unit_value": obj.get("cumulativePerUnitValue"),
+            "display_name": obj.get("displayName")
         })
         return _obj
 

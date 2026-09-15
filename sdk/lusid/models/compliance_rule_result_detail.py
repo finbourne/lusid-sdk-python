@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
+from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleResultDetail(BaseModel):
@@ -39,7 +40,8 @@ class ComplianceRuleResultDetail(BaseModel):
     rule_name:  StrictStr = Field(...,alias="ruleName") 
     rule_description:  StrictStr = Field(...,alias="ruleDescription") 
     outcome:  StrictStr = Field(...,alias="outcome") 
-    __properties = ["ruleId", "affectedPortfoliosDetails", "affectedOrders", "templateId", "templateDescription", "templateVariation", "status", "ruleName", "ruleDescription", "outcome"]
+    properties: Optional[Dict[str, PerpetualProperty]] = None
+    __properties = ["ruleId", "affectedPortfoliosDetails", "affectedOrders", "templateId", "templateDescription", "templateVariation", "status", "ruleName", "ruleDescription", "outcome", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +95,18 @@ class ComplianceRuleResultDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of template_id
         if self.template_id:
             _dict['templateId'] = self.template_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         return _dict
 
     @classmethod
@@ -114,7 +128,13 @@ class ComplianceRuleResultDetail(BaseModel):
             "status": obj.get("status"),
             "rule_name": obj.get("ruleName"),
             "rule_description": obj.get("ruleDescription"),
-            "outcome": obj.get("outcome")
+            "outcome": obj.get("outcome"),
+            "properties": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj
 

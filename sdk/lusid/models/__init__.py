@@ -170,6 +170,7 @@ from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.bucket_set_node import BucketSetNode
 from lusid.models.bucket_set_result import BucketSetResult
 from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
+from lusid.models.bucket_set_share_class_details import BucketSetShareClassDetails
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.bucketing_schedule import BucketingSchedule
@@ -625,6 +626,8 @@ from lusid.models.get_reference_portfolio_constituents_response import GetRefere
 from lusid.models.get_scenario_response import GetScenarioResponse
 from lusid.models.get_structured_result_data_response import GetStructuredResultDataResponse
 from lusid.models.get_subscription_response import GetSubscriptionResponse
+from lusid.models.get_transfer_request import GetTransferRequest
+from lusid.models.get_transfer_response import GetTransferResponse
 from lusid.models.get_virtual_document_response import GetVirtualDocumentResponse
 from lusid.models.group_by_selector_compliance_parameter import GroupBySelectorComplianceParameter
 from lusid.models.group_by_step import GroupByStep
@@ -1856,6 +1859,7 @@ __all__ = [
     "BucketSetNode",
     "BucketSetResult",
     "BucketSetResultBucket",
+    "BucketSetShareClassDetails",
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
     "BucketingSchedule",
@@ -2311,6 +2315,8 @@ __all__ = [
     "GetScenarioResponse",
     "GetStructuredResultDataResponse",
     "GetSubscriptionResponse",
+    "GetTransferRequest",
+    "GetTransferResponse",
     "GetVirtualDocumentResponse",
     "GroupBySelectorComplianceParameter",
     "GroupByStep",

@@ -31,7 +31,8 @@ class BucketSetResult(BaseModel):
     bucket_set_code:  StrictStr = Field(...,alias="bucketSetCode", description="The code of the fund configuration's bucket set definition these results were produced from. Empty for a fund valued from component filters, which has no bucket set definition to name.") 
     is_apportionment: StrictBool = Field(description="Whether this bucket set is the apportionment set (apportioning non-class-specific P&L across share classes).", alias="isApportionment")
     nodes: List[BucketSetNode] = Field(description="The nodes making up the bucket set: the fund aggregate and one per share class.")
-    __properties = ["bucketSetCode", "isApportionment", "nodes"]
+    display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the bucket set, as configured on the fund configuration.") 
+    __properties = ["bucketSetCode", "isApportionment", "nodes", "displayName"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +73,11 @@ class BucketSetResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['nodes'] = _items
+        # set to None if display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.display_name is None and "display_name" in self.__fields_set__:
+            _dict['displayName'] = None
+
         return _dict
 
     @classmethod
@@ -86,7 +92,8 @@ class BucketSetResult(BaseModel):
         _obj = BucketSetResult.parse_obj({
             "bucket_set_code": obj.get("bucketSetCode"),
             "is_apportionment": obj.get("isApportionment"),
-            "nodes": [BucketSetNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None
+            "nodes": [BucketSetNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
+            "display_name": obj.get("displayName")
         })
         return _obj
 

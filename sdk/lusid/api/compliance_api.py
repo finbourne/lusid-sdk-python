@@ -1082,28 +1082,30 @@ class ComplianceApi:
 
 
     @overload
-    async def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], **kwargs) -> DecoratedComplianceRunSummary:  # noqa: E501
+    async def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.")] = None, **kwargs) -> DecoratedComplianceRunSummary:  # noqa: E501
         ...
 
     @overload
-    def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], async_req: Optional[bool]=True, **kwargs) -> DecoratedComplianceRunSummary:  # noqa: E501
+    def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.")] = None, async_req: Optional[bool]=True, **kwargs) -> DecoratedComplianceRunSummary:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], async_req: Optional[bool]=None, **kwargs) -> Union[DecoratedComplianceRunSummary, Awaitable[DecoratedComplianceRunSummary]]:  # noqa: E501
+    def get_decorated_compliance_run_summary(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DecoratedComplianceRunSummary, Awaitable[DecoratedComplianceRunSummary]]:  # noqa: E501
         """[EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.  # noqa: E501
 
         Specify a run scope and code from a previously run compliance check to get an overview of result details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_decorated_compliance_run_summary(scope, code, async_req=True)
+        >>> thread = api.get_decorated_compliance_run_summary(scope, code, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: Required: Run Scope. (required)
         :type scope: str
         :param code: Required: Run Code. (required)
         :type code: str
+        :param property_keys: A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1120,23 +1122,25 @@ class ComplianceApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_decorated_compliance_run_summary_with_http_info(scope, code, **kwargs)  # noqa: E501
+        return self.get_decorated_compliance_run_summary_with_http_info(scope, code, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_decorated_compliance_run_summary_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_decorated_compliance_run_summary_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.  # noqa: E501
 
         Specify a run scope and code from a previously run compliance check to get an overview of result details.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_decorated_compliance_run_summary_with_http_info(scope, code, async_req=True)
+        >>> thread = api.get_decorated_compliance_run_summary_with_http_info(scope, code, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: Required: Run Scope. (required)
         :type scope: str
         :param code: Required: Run Code. (required)
         :type code: str
+        :param property_keys: A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1165,7 +1169,8 @@ class ComplianceApi:
 
         _all_params = [
             'scope',
-            'code'
+            'code',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -1203,6 +1208,10 @@ class ComplianceApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

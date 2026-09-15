@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **rule_name** | **str** |  | 
 **rule_description** | **str** |  | 
 **outcome** | **str** |  | 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 ## Example
 
 ```python
@@ -32,7 +33,8 @@ status: StrictStr = "example_status"
 rule_name: StrictStr = "example_rule_name"
 rule_description: StrictStr = "example_rule_description"
 outcome: StrictStr = "example_outcome"
-compliance_rule_result_detail_instance = ComplianceRuleResultDetail(rule_id=rule_id, affected_portfolios_details=affected_portfolios_details, affected_orders=affected_orders, template_id=template_id, template_description=template_description, template_variation=template_variation, status=status, rule_name=rule_name, rule_description=rule_description, outcome=outcome)
+properties: Optional[Dict[str, PerpetualProperty]] = None
+compliance_rule_result_detail_instance = ComplianceRuleResultDetail(rule_id=rule_id, affected_portfolios_details=affected_portfolios_details, affected_orders=affected_orders, template_id=template_id, template_description=template_description, template_variation=template_variation, status=status, rule_name=rule_name, rule_description=rule_description, outcome=outcome, properties=properties)
 
 ```
 

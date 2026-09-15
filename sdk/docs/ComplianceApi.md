@@ -602,7 +602,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_decorated_compliance_run_summary**
-> DecoratedComplianceRunSummary get_decorated_compliance_run_summary(scope, code)
+> DecoratedComplianceRunSummary get_decorated_compliance_run_summary(scope, code, property_keys=property_keys)
 
 [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
 
@@ -655,13 +655,14 @@ def main():
     api_instance = api_client_factory.build(ComplianceApi)
     scope = 'scope_example' # str | Required: Run Scope.
     code = 'code_example' # str | Required: Run Code.
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Compliance' domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example 'Compliance/live/UCITS'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_decorated_compliance_run_summary(scope, code, opts=opts)
+        # api_response =  api_instance.get_decorated_compliance_run_summary(scope, code, property_keys=property_keys, opts=opts)
 
         # [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
-        api_response = api_instance.get_decorated_compliance_run_summary(scope, code)
+        api_response = api_instance.get_decorated_compliance_run_summary(scope, code, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -676,6 +677,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| Required: Run Scope. | 
  **code** | **str**| Required: Run Code. | 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Compliance&#39; domain to decorate onto each rule result.              These must take the format {domain}/{scope}/{code}, for example &#39;Compliance/live/UCITS&#39;. | [optional] 
 
 ### Return type
 

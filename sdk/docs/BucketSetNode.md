@@ -13,6 +13,10 @@ Name | Type | Description | Notes
 **shares_in_issue** | **float** | The share class&#39;s units in issue at the end of the period. Reported only for a share class that is unitised. | [optional] 
 **previous_per_unit_value** | **float** | The share class&#39;s NAV per unit at the previous valuation point, on the same basis as PerUnitValue. | [optional] 
 **previous_shares_in_issue** | **float** | The share class&#39;s units in issue at the start of the period. Reported only for a share class that is unitised. | [optional] 
+**label** | **str** | A display label for the node: the fund&#39;s display name on the fund node, the share class&#39;s name on a share class node. | [optional] 
+**previous_nav** | **float** | The net asset value this node carried at the previous valuation point, in the fund currency. Zero at the fund&#39;s first valuation point. | [optional] 
+**net_dealing_units** | **float** | The net units dealt for the share class over the period, so that the shares in issue are the previous shares in issue plus this. Set only on share class nodes, and only where the bucket set is unitised. | [optional] 
+**share_class_details** | [**BucketSetShareClassDetails**](BucketSetShareClassDetails.md) |  | [optional] 
 ## Example
 
 ```python
@@ -31,7 +35,11 @@ per_unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your va
 shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_shares_in_issue: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-bucket_set_node_instance = BucketSetNode(node_type=node_type, share_class_short_code=share_class_short_code, nav=nav, capital_ratio=capital_ratio, buckets=buckets, per_unit_value=per_unit_value, shares_in_issue=shares_in_issue, previous_per_unit_value=previous_per_unit_value, previous_shares_in_issue=previous_shares_in_issue)
+label: Optional[StrictStr] = "example_label"
+previous_nav: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+net_dealing_units: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+share_class_details: Optional[BucketSetShareClassDetails] = # Replace with your value
+bucket_set_node_instance = BucketSetNode(node_type=node_type, share_class_short_code=share_class_short_code, nav=nav, capital_ratio=capital_ratio, buckets=buckets, per_unit_value=per_unit_value, shares_in_issue=shares_in_issue, previous_per_unit_value=previous_per_unit_value, previous_shares_in_issue=previous_shares_in_issue, label=label, previous_nav=previous_nav, net_dealing_units=net_dealing_units, share_class_details=share_class_details)
 
 ```
 

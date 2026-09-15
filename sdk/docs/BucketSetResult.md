@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **bucket_set_code** | **str** | The code of the fund configuration&#39;s bucket set definition these results were produced from. Empty for a fund valued from component filters, which has no bucket set definition to name. | 
 **is_apportionment** | **bool** | Whether this bucket set is the apportionment set (apportioning non-class-specific P&amp;L across share classes). | 
 **nodes** | [**List[BucketSetNode]**](BucketSetNode.md) | The nodes making up the bucket set: the fund aggregate and one per share class. | 
+**display_name** | **str** | The display name of the bucket set, as configured on the fund configuration. | [optional] 
 ## Example
 
 ```python
@@ -20,7 +21,8 @@ bucket_set_code: StrictStr = "example_bucket_set_code"
 is_apportionment: StrictBool = # Replace with your value
 is_apportionment:StrictBool = True
 nodes: List[BucketSetNode] = # Replace with your value
-bucket_set_result_instance = BucketSetResult(bucket_set_code=bucket_set_code, is_apportionment=is_apportionment, nodes=nodes)
+display_name: Optional[StrictStr] = "example_display_name"
+bucket_set_result_instance = BucketSetResult(bucket_set_code=bucket_set_code, is_apportionment=is_apportionment, nodes=nodes, display_name=display_name)
 
 ```
 
