@@ -26,6 +26,7 @@ from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class ComplianceRuleResponse(BaseModel):
@@ -42,8 +43,9 @@ class ComplianceRuleResponse(BaseModel):
     parameters: Optional[Dict[str, ComplianceParameter]] = None
     properties: Optional[Dict[str, PerpetualProperty]] = None
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["id", "name", "description", "active", "templateId", "variation", "portfolioGroupId", "parameters", "properties", "version", "links"]
+    __properties = ["id", "name", "description", "active", "templateId", "variation", "portfolioGroupId", "parameters", "properties", "version", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -103,6 +105,9 @@ class ComplianceRuleResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -172,6 +177,7 @@ class ComplianceRuleResponse(BaseModel):
             if obj.get("properties") is not None
             else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

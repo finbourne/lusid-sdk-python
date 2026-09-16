@@ -229,6 +229,7 @@ Class | Method | HTTP request | Description
 *DerivedTransactionPortfoliosApi* | [**create_derived_portfolio**](docs/DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | CreateDerivedPortfolio: Create derived portfolio
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 *EntitiesApi* | [**get_bookmark_by_entity_unique_id**](docs/EntitiesApi.md#get_bookmark_by_entity_unique_id) | **GET** /api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId
+*EntitiesApi* | [**get_compliance_rule_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_by_entity_unique_id) | **GET** /api/entities/compliancerules/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleByEntityUniqueId: Get compliance rule by EntityUniqueId
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
@@ -625,6 +626,7 @@ Class | Method | HTTP request | Description
 *ScenariosApi* | [**list_scenarios**](docs/ScenariosApi.md#list_scenarios) | **GET** /api/scenarios | [EARLY ACCESS] ListScenarios: List Scenarios
 *ScenariosApi* | [**list_scenarios_for_scope**](docs/ScenariosApi.md#list_scenarios_for_scope) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
 *ScenariosApi* | [**preview_scenario**](docs/ScenariosApi.md#preview_scenario) | **POST** /api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario
+*ScenariosApi* | [**solve_reverse_stress**](docs/ScenariosApi.md#solve_reverse_stress) | **POST** /api/scenarios/$reversestress | [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
 *ScenariosApi* | [**upsert_scenario**](docs/ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 *SchemasApi* | [**get_entity_schema**](docs/SchemasApi.md#get_entity_schema) | **GET** /api/schemas/entities/{entity} | [EARLY ACCESS] GetEntitySchema: Get schema
 *SchemasApi* | [**get_property_schema**](docs/SchemasApi.md#get_property_schema) | **GET** /api/schemas/properties | [EARLY ACCESS] GetPropertySchema: Get property schema
@@ -882,6 +884,7 @@ Class | Method | HTTP request | Description
  - [ApplicableInstrumentEvent](docs/ApplicableInstrumentEvent.md)
  - [AppliedScenarioShift](docs/AppliedScenarioShift.md)
  - [ApportionmentBreakdown](docs/ApportionmentBreakdown.md)
+ - [ApportionmentInput](docs/ApportionmentInput.md)
  - [ApportionmentMemberFactor](docs/ApportionmentMemberFactor.md)
  - [ApportionmentMethodProperty](docs/ApportionmentMethodProperty.md)
  - [AssetClass](docs/AssetClass.md)
@@ -1050,6 +1053,7 @@ Class | Method | HTTP request | Description
  - [ComplianceRule](docs/ComplianceRule.md)
  - [ComplianceRuleBreakdown](docs/ComplianceRuleBreakdown.md)
  - [ComplianceRuleBreakdownRequest](docs/ComplianceRuleBreakdownRequest.md)
+ - [ComplianceRuleEntity](docs/ComplianceRuleEntity.md)
  - [ComplianceRuleResponse](docs/ComplianceRuleResponse.md)
  - [ComplianceRuleResult](docs/ComplianceRuleResult.md)
  - [ComplianceRuleResultDetail](docs/ComplianceRuleResultDetail.md)
@@ -2113,6 +2117,9 @@ Class | Method | HTTP request | Description
  - [ReturnsEntity](docs/ReturnsEntity.md)
  - [ReturnsMetric](docs/ReturnsMetric.md)
  - [ReverseStockSplitEvent](docs/ReverseStockSplitEvent.md)
+ - [ReverseStressRequest](docs/ReverseStressRequest.md)
+ - [ReverseStressResponse](docs/ReverseStressResponse.md)
+ - [ReverseStressRung](docs/ReverseStressRung.md)
  - [RevertValuationPointDataRequest](docs/RevertValuationPointDataRequest.md)
  - [RiskBumpOptions](docs/RiskBumpOptions.md)
  - [RollInterestUpdates](docs/RollInterestUpdates.md)

@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**list_scenarios**](ScenariosApi.md#list_scenarios) | **GET** /api/scenarios | [EARLY ACCESS] ListScenarios: List Scenarios
 [**list_scenarios_for_scope**](ScenariosApi.md#list_scenarios_for_scope) | **GET** /api/scenarios/{scope} | [EARLY ACCESS] ListScenariosForScope: List Scenarios for a scope
 [**preview_scenario**](ScenariosApi.md#preview_scenario) | **POST** /api/scenarios/$preview | [EARLY ACCESS] PreviewScenario: Preview a Scenario
+[**solve_reverse_stress**](ScenariosApi.md#solve_reverse_stress) | **POST** /api/scenarios/$reversestress | [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
 [**upsert_scenario**](ScenariosApi.md#upsert_scenario) | **POST** /api/scenarios | [EARLY ACCESS] UpsertScenario: Upsert a Scenario. This creates or updates the scenario definition in LUSID.
 
 
@@ -781,6 +782,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The preview of the scenario&#39;s effect on the portfolio&#39;s market data, or any failure |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **solve_reverse_stress**
+> ReverseStressResponse solve_reverse_stress(reverse_stress_request)
+
+[EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
+
+Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ScenariosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ScenariosApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # reverse_stress_request = ReverseStressRequest.from_json("")
+    # reverse_stress_request = ReverseStressRequest.from_dict({})
+    reverse_stress_request = ReverseStressRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.solve_reverse_stress(reverse_stress_request, opts=opts)
+
+        # [EARLY ACCESS] SolveReverseStress: Solve a reverse stress test
+        api_response = api_instance.solve_reverse_stress(reverse_stress_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ScenariosApi->solve_reverse_stress: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reverse_stress_request** | [**ReverseStressRequest**](ReverseStressRequest.md)| The recipe, portfolios, effective date, scenario direction and target change in value | 
+
+### Return type
+
+[**ReverseStressResponse**](ReverseStressResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The solved scale with the evaluated ladder, or any failure |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

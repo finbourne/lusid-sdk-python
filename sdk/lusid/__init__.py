@@ -206,6 +206,7 @@ from lusid.models.applicable_entity_types import ApplicableEntityTypes
 from lusid.models.applicable_instrument_event import ApplicableInstrumentEvent
 from lusid.models.applied_scenario_shift import AppliedScenarioShift
 from lusid.models.apportionment_breakdown import ApportionmentBreakdown
+from lusid.models.apportionment_input import ApportionmentInput
 from lusid.models.apportionment_member_factor import ApportionmentMemberFactor
 from lusid.models.apportionment_method_property import ApportionmentMethodProperty
 from lusid.models.asset_class import AssetClass
@@ -374,6 +375,7 @@ from lusid.models.compliance_parameter_type import ComplianceParameterType
 from lusid.models.compliance_rule import ComplianceRule
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
 from lusid.models.compliance_rule_breakdown_request import ComplianceRuleBreakdownRequest
+from lusid.models.compliance_rule_entity import ComplianceRuleEntity
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.compliance_rule_result import ComplianceRuleResult
 from lusid.models.compliance_rule_result_detail import ComplianceRuleResultDetail
@@ -1437,6 +1439,9 @@ from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
+from lusid.models.reverse_stress_request import ReverseStressRequest
+from lusid.models.reverse_stress_response import ReverseStressResponse
+from lusid.models.reverse_stress_rung import ReverseStressRung
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.risk_bump_options import RiskBumpOptions
 from lusid.models.roll_interest_updates import RollInterestUpdates
@@ -1998,6 +2003,7 @@ __all__ = [
     "ApplicableInstrumentEvent",
     "AppliedScenarioShift",
     "ApportionmentBreakdown",
+    "ApportionmentInput",
     "ApportionmentMemberFactor",
     "ApportionmentMethodProperty",
     "AssetClass",
@@ -2166,6 +2172,7 @@ __all__ = [
     "ComplianceRule",
     "ComplianceRuleBreakdown",
     "ComplianceRuleBreakdownRequest",
+    "ComplianceRuleEntity",
     "ComplianceRuleResponse",
     "ComplianceRuleResult",
     "ComplianceRuleResultDetail",
@@ -3229,6 +3236,9 @@ __all__ = [
     "ReturnsEntity",
     "ReturnsMetric",
     "ReverseStockSplitEvent",
+    "ReverseStressRequest",
+    "ReverseStressResponse",
+    "ReverseStressRung",
     "RevertValuationPointDataRequest",
     "RiskBumpOptions",
     "RollInterestUpdates",

@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **parameters** | [**Dict[str, ComplianceParameter]**](ComplianceParameter.md) |  | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -34,8 +35,9 @@ portfolio_group_id: Optional[ResourceId] = # Replace with your value
 parameters: Optional[Dict[str, ComplianceParameter]] = None
 properties: Optional[Dict[str, PerpetualProperty]] = None
 version: Optional[Version] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 links: Optional[List[Link]] = None
-compliance_rule_response_instance = ComplianceRuleResponse(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties, version=version, links=links)
+compliance_rule_response_instance = ComplianceRuleResponse(id=id, name=name, description=description, active=active, template_id=template_id, variation=variation, portfolio_group_id=portfolio_group_id, parameters=parameters, properties=properties, version=version, staged_modifications=staged_modifications, links=links)
 
 ```
 

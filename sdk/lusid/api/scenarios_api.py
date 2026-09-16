@@ -29,6 +29,8 @@ from lusid.models.get_scenario_response import GetScenarioResponse
 from lusid.models.paged_resource_list_of_get_scenario_response import PagedResourceListOfGetScenarioResponse
 from lusid.models.paged_resource_list_of_version import PagedResourceListOfVersion
 from lusid.models.resource_list_of_scenario_template_definition import ResourceListOfScenarioTemplateDefinition
+from lusid.models.reverse_stress_request import ReverseStressRequest
+from lusid.models.reverse_stress_response import ReverseStressResponse
 from lusid.models.scenario_preview_request import ScenarioPreviewRequest
 from lusid.models.scenario_preview_response import ScenarioPreviewResponse
 from lusid.models.upsert_scenario_request import UpsertScenarioRequest
@@ -1396,6 +1398,165 @@ class ScenariosApi:
 
         return self.api_client.call_api(
             '/api/scenarios/$preview', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def solve_reverse_stress(self, reverse_stress_request : Annotated[ReverseStressRequest, Field(description="The recipe, portfolios, effective date, scenario direction and target change in value")], **kwargs) -> ReverseStressResponse:  # noqa: E501
+        ...
+
+    @overload
+    def solve_reverse_stress(self, reverse_stress_request : Annotated[ReverseStressRequest, Field(description="The recipe, portfolios, effective date, scenario direction and target change in value")], async_req: Optional[bool]=True, **kwargs) -> ReverseStressResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def solve_reverse_stress(self, reverse_stress_request : Annotated[ReverseStressRequest, Field(description="The recipe, portfolios, effective date, scenario direction and target change in value")], async_req: Optional[bool]=None, **kwargs) -> Union[ReverseStressResponse, Awaitable[ReverseStressResponse]]:  # noqa: E501
+        """[EARLY ACCESS] SolveReverseStress: Solve a reverse stress test  # noqa: E501
+
+        Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.solve_reverse_stress(reverse_stress_request, async_req=True)
+        >>> result = thread.get()
+
+        :param reverse_stress_request: The recipe, portfolios, effective date, scenario direction and target change in value (required)
+        :type reverse_stress_request: ReverseStressRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ReverseStressResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the solve_reverse_stress_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.solve_reverse_stress_with_http_info(reverse_stress_request, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def solve_reverse_stress_with_http_info(self, reverse_stress_request : Annotated[ReverseStressRequest, Field(description="The recipe, portfolios, effective date, scenario direction and target change in value")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] SolveReverseStress: Solve a reverse stress test  # noqa: E501
+
+        Solve for how far the market has to move to produce a given change in portfolio value.                A scenario supplies the direction the market moves in: which risk factors move, and in what  proportion to each other. The solve is over a single factor its shifts are multiplied by, so the  answer is a multiple of the scenario rather than a set of shifts in its own right - a factor of  two means twice every shift the scenario states.                A ladder of factors is valued first, all in one valuation so the rungs share market data  resolution, then the bracketing pair is interpolated and the interpolated factor valued again to  confirm it. The whole ladder is returned: a reverse stress is only meaningful where the change in  value moves in one direction with the factor, and the ladder is what shows whether it does.                The solve is refused rather than approximated where it cannot be trusted: a scenario carrying a  shift with no size to scale (a model option, or a market data routing override), a measure that  cannot be computed under a scenario, or a valuation that could not price every holding.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.solve_reverse_stress_with_http_info(reverse_stress_request, async_req=True)
+        >>> result = thread.get()
+
+        :param reverse_stress_request: The recipe, portfolios, effective date, scenario direction and target change in value (required)
+        :type reverse_stress_request: ReverseStressRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ReverseStressResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'reverse_stress_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method solve_reverse_stress" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['reverse_stress_request'] is not None:
+            _body_params = _params['reverse_stress_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ReverseStressResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/scenarios/$reversestress', 'POST',
             _path_params,
             _query_params,
             _header_params,

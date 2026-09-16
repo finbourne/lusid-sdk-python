@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **fund_code** | **str** | The code of the fund the member share class belongs to. | [optional] 
 **base_value** | **float** | The base value the method produced for the member, or null for the SetFactor method. | [optional] 
 **apportionment_factor** | **float** | The member&#39;s apportionment factor: its base value over the total across the group or fund. | 
+**inputs** | [**List[ApportionmentInput]**](ApportionmentInput.md) | The named amounts the apportionment method summed to reach the base value, always summing to it. Absent where the method defines no such breakdown. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ fund_scope: Optional[StrictStr] = "example_fund_scope"
 fund_code: Optional[StrictStr] = "example_fund_code"
 base_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 apportionment_factor: Union[StrictFloat, StrictInt] = # Replace with your value
-apportionment_member_factor_instance = ApportionmentMemberFactor(member_identifier=member_identifier, fund_scope=fund_scope, fund_code=fund_code, base_value=base_value, apportionment_factor=apportionment_factor)
+inputs: Optional[List[ApportionmentInput]] = # Replace with your value
+apportionment_member_factor_instance = ApportionmentMemberFactor(member_identifier=member_identifier, fund_scope=fund_scope, fund_code=fund_code, base_value=base_value, apportionment_factor=apportionment_factor, inputs=inputs)
 
 ```
 
