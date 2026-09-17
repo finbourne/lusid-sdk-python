@@ -28,6 +28,7 @@ from lusid.models.fund_details import FundDetails
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
 from lusid.models.share_class_data import ShareClassData
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class ValuationPointDataResponse(BaseModel):
     """
@@ -43,8 +44,9 @@ class ValuationPointDataResponse(BaseModel):
     previous_valuation_point_code:  Optional[StrictStr] = Field(None,alias="previousValuationPointCode", description="The code of the previous valuation point.") 
     apportionment_results: Optional[List[ApportionmentBreakdown]] = Field(default=None, description="The apportionment results for the valuation point: one fund-level entry plus one entry per allocation group.", alias="apportionmentResults")
     bucket_set_results: Optional[List[BucketSetResult]] = Field(default=None, description="The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV.", alias="bucketSetResults")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "apportionmentResults", "bucketSetResults", "links"]
+    __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "apportionmentResults", "bucketSetResults", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -105,6 +107,9 @@ class ValuationPointDataResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['bucketSetResults'] = _items
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -164,6 +169,7 @@ class ValuationPointDataResponse(BaseModel):
             "previous_valuation_point_code": obj.get("previousValuationPointCode"),
             "apportionment_results": [ApportionmentBreakdown.from_dict(_item) for _item in obj.get("apportionmentResults")] if obj.get("apportionmentResults") is not None else None,
             "bucket_set_results": [BucketSetResult.from_dict(_item) for _item in obj.get("bucketSetResults")] if obj.get("bucketSetResults") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.rec_date_policy import RecDatePolicy
 from lusid.models.rec_def_currencies import RecDefCurrencies
 from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
 from lusid.models.rec_def_ruleset import RecDefRuleset
@@ -43,7 +44,8 @@ class UpdateRecDefinitionRequest(BaseModel):
     currencies: Optional[RecDefCurrencies] = None
     rulesets: List[RecDefRuleset] = Field(description="The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.")
     review_configuration: Optional[RecReviewConfiguration] = Field(default=None, alias="reviewConfiguration")
-    __properties = ["displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration"]
+    date_policy: Optional[RecDatePolicy] = Field(default=None, alias="datePolicy")
+    __properties = ["displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration", "datePolicy"]
 
     class Config:
         """Pydantic configuration"""
@@ -110,6 +112,9 @@ class UpdateRecDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of review_configuration
         if self.review_configuration:
             _dict['reviewConfiguration'] = self.review_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of date_policy
+        if self.date_policy:
+            _dict['datePolicy'] = self.date_policy.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -146,7 +151,8 @@ class UpdateRecDefinitionRequest(BaseModel):
             "valuation_recipes": RecDefRecipeIds.from_dict(obj.get("valuationRecipes")) if obj.get("valuationRecipes") is not None else None,
             "currencies": RecDefCurrencies.from_dict(obj.get("currencies")) if obj.get("currencies") is not None else None,
             "rulesets": [RecDefRuleset.from_dict(_item) for _item in obj.get("rulesets")] if obj.get("rulesets") is not None else None,
-            "review_configuration": RecReviewConfiguration.from_dict(obj.get("reviewConfiguration")) if obj.get("reviewConfiguration") is not None else None
+            "review_configuration": RecReviewConfiguration.from_dict(obj.get("reviewConfiguration")) if obj.get("reviewConfiguration") is not None else None,
+            "date_policy": RecDatePolicy.from_dict(obj.get("datePolicy")) if obj.get("datePolicy") is not None else None
         })
         return _obj
 

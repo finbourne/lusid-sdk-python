@@ -47,7 +47,7 @@ from lusid.models.holdings_adjustment import HoldingsAdjustment
 from lusid.models.lusid_trade_ticket import LusidTradeTicket
 from lusid.models.model_property import ModelProperty
 from lusid.models.operation import Operation
-from lusid.models.override_virtual_transactions_response import OverrideVirtualTransactionsResponse
+from lusid.models.override_virtual_transactions_request import OverrideVirtualTransactionsRequest
 from lusid.models.paged_resource_list_of_custodian_account import PagedResourceListOfCustodianAccount
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.portfolio import Portfolio
@@ -61,6 +61,7 @@ from lusid.models.resource_list_of_portfolio_cash_flow import ResourceListOfPort
 from lusid.models.resource_list_of_portfolio_cash_ladder import ResourceListOfPortfolioCashLadder
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
+from lusid.models.resource_list_of_virtual_transaction_override_record import ResourceListOfVirtualTransactionOverrideRecord
 from lusid.models.settlement_instruction_amend_request import SettlementInstructionAmendRequest
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
 from lusid.models.settlement_instruction_request import SettlementInstructionRequest
@@ -69,6 +70,7 @@ from lusid.models.transaction_request import TransactionRequest
 from lusid.models.transaction_settlement_status import TransactionSettlementStatus
 from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioTransactionsResponse
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
+from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
 from lusid.models.versioned_resource_list_of_a2_b_data_record import VersionedResourceListOfA2BDataRecord
 from lusid.models.versioned_resource_list_of_a2_b_movement_record import VersionedResourceListOfA2BMovementRecord
 from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
@@ -77,6 +79,7 @@ from lusid.models.versioned_resource_list_of_transaction import VersionedResourc
 from lusid.models.versioned_resource_list_of_transaction_settlement_instruction import VersionedResourceListOfTransactionSettlementInstruction
 from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
+from lusid.models.virtual_transaction_overrides_response import VirtualTransactionOverridesResponse
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -7434,6 +7437,193 @@ class TransactionPortfoliosApi:
 
 
     @overload
+    async def get_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose overrides and suppressions should be returned.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> VirtualTransactionOverridesResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose overrides and suppressions should be returned.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> VirtualTransactionOverridesResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose overrides and suppressions should be returned.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VirtualTransactionOverridesResponse, Awaitable[VirtualTransactionOverridesResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetVirtualTransactionOverride: [EARLY ACCESS] Get virtual transaction overrides and suppressions for an instrument event  # noqa: E501
+
+        Returns the overrides and suppressions affecting this portfolio for the specified instrument event,  each entry's status, and the virtual transaction ids the event currently generates that none of them  target. A derived portfolio is affected by its own record and by every record held by an ancestor, so  one record is returned per holding portfolio, nearest first, each carrying the portfolio that holds  it. An entry's map key is the virtual transaction id as it appears in the portfolio holding the  record, which is the id to override or suppress against that portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_virtual_transaction_override(scope, code, instrument_event_id, portfolio_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. (required)
+        :type code: str
+        :param instrument_event_id: The ID of the instrument event whose overrides and suppressions should be returned. (required)
+        :type instrument_event_id: str
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VirtualTransactionOverridesResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_virtual_transaction_override_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, portfolio_effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_virtual_transaction_override_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose overrides and suppressions should be returned.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetVirtualTransactionOverride: [EARLY ACCESS] Get virtual transaction overrides and suppressions for an instrument event  # noqa: E501
+
+        Returns the overrides and suppressions affecting this portfolio for the specified instrument event,  each entry's status, and the virtual transaction ids the event currently generates that none of them  target. A derived portfolio is affected by its own record and by every record held by an ancestor, so  one record is returned per holding portfolio, nearest first, each carrying the portfolio that holds  it. An entry's map key is the virtual transaction id as it appears in the portfolio holding the  record, which is the id to override or suppress against that portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, portfolio_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. (required)
+        :type code: str
+        :param instrument_event_id: The ID of the instrument event whose overrides and suppressions should be returned. (required)
+        :type instrument_event_id: str
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VirtualTransactionOverridesResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'instrument_event_id',
+            'portfolio_effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_virtual_transaction_override" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('instrument_event_id') is not None:  # noqa: E501
+            _query_params.append(('instrumentEventId', _params['instrument_event_id']))
+
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VirtualTransactionOverridesResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/overridevirtualtransactions', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def list_custodian_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Transaction Portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the Transaction Portfolio. Together with the scope this uniquely identifies              the Transaction Portfolios.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the TimeVariant properties decorated on Custodian Accounts. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing custodian accounts; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the Custodian Account type, specify \"code eq '001'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'CustodianAccount' domain to decorate onto the Custodian Account.              These must have the format {domain}/{scope}/{code}, for example 'CustodianAccount/system/Name'.              If no property keys are specified, it will return 'IsDefault' and 'RelatedAccounts' properties, if they exist.")] = None, **kwargs) -> PagedResourceListOfCustodianAccount:  # noqa: E501
         ...
 
@@ -8067,6 +8257,203 @@ class TransactionPortfoliosApi:
 
         return self.api_client.call_api(
             '/api/transactionportfolios/{scope}/{code}/settlementinstructions', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_virtual_transaction_overrides(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, override_match_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.")] = None, override_application_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.")] = None, **kwargs) -> ResourceListOfVirtualTransactionOverrideRecord:  # noqa: E501
+        ...
+
+    @overload
+    def list_virtual_transaction_overrides(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, override_match_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.")] = None, override_application_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfVirtualTransactionOverrideRecord:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_virtual_transaction_overrides(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, override_match_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.")] = None, override_application_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfVirtualTransactionOverrideRecord, Awaitable[ResourceListOfVirtualTransactionOverrideRecord]]:  # noqa: E501
+        """[EARLY ACCESS] ListVirtualTransactionOverrides: [EARLY ACCESS] List virtual transaction overrides and suppressions  # noqa: E501
+
+        Returns every override and suppression record affecting this portfolio, across every instrument  event, optionally restricted to the given match and application statuses. Filtering to the orphaned  and partially-applied statuses gives a reconciliation worklist of records whose targets no longer  generate. A derived portfolio is affected by its own records and by every record held by an ancestor,  so each returned record carries the portfolio that holds it.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_virtual_transaction_overrides(scope, code, portfolio_effective_at, as_at, override_match_status, override_application_status, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. (required)
+        :type code: str
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param override_match_status: Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.
+        :type override_match_status: List[str]
+        :param override_application_status: Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.
+        :type override_application_status: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfVirtualTransactionOverrideRecord
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_virtual_transaction_overrides_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_virtual_transaction_overrides_with_http_info(scope, code, portfolio_effective_at, as_at, override_match_status, override_application_status, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_virtual_transaction_overrides_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.")] = None, override_match_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.")] = None, override_application_status : Annotated[Optional[List[StrictStr]], Field(description="Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ListVirtualTransactionOverrides: [EARLY ACCESS] List virtual transaction overrides and suppressions  # noqa: E501
+
+        Returns every override and suppression record affecting this portfolio, across every instrument  event, optionally restricted to the given match and application statuses. Filtering to the orphaned  and partially-applied statuses gives a reconciliation worklist of records whose targets no longer  generate. A derived portfolio is affected by its own records and by every record held by an ancestor,  so each returned record carries the portfolio that holds it.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_virtual_transaction_overrides_with_http_info(scope, code, portfolio_effective_at, as_at, override_match_status, override_application_status, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the transaction portfolio. (required)
+        :type scope: str
+        :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies the transaction portfolio. (required)
+        :type code: str
+        :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the overrides and suppressions. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param override_match_status: Restrict the records returned to those with one of these match statuses. May be specified more than once. Available values: Matched, Orphaned.
+        :type override_match_status: List[str]
+        :param override_application_status: Restrict the records returned to those with one of these application statuses. May be specified more than once. Available values: Full, Partial, Orphaned.
+        :type override_application_status: List[str]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfVirtualTransactionOverrideRecord, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'portfolio_effective_at',
+            'as_at',
+            'override_match_status',
+            'override_application_status'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_virtual_transaction_overrides" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('override_match_status') is not None:  # noqa: E501
+            _query_params.append(('overrideMatchStatus', _params['override_match_status']))
+            _collection_formats['overrideMatchStatus'] = 'multi'
+
+        if _params.get('override_application_status') is not None:  # noqa: E501
+            _query_params.append(('overrideApplicationStatus', _params['override_application_status']))
+            _collection_formats['overrideApplicationStatus'] = 'multi'
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfVirtualTransactionOverrideRecord",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transactionportfolios/{scope}/{code}/overridevirtualtransactions/$list', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -10005,40 +10392,36 @@ class TransactionPortfoliosApi:
 
 
     @overload
-    async def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden.")], transaction_request : Annotated[List[TransactionRequest], Field(description="A list of transactions to replace the virtual transactions generated by the instrument event.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> OverrideVirtualTransactionsResponse:  # noqa: E501
+    async def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden or suppressed.")], override_virtual_transactions_request : Annotated[OverrideVirtualTransactionsRequest, Field(description="The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, **kwargs) -> UpsertVirtualTransactionOverrideResponse:  # noqa: E501
         ...
 
     @overload
-    def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden.")], transaction_request : Annotated[List[TransactionRequest], Field(description="A list of transactions to replace the virtual transactions generated by the instrument event.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=True, **kwargs) -> OverrideVirtualTransactionsResponse:  # noqa: E501
+    def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden or suppressed.")], override_virtual_transactions_request : Annotated[OverrideVirtualTransactionsRequest, Field(description="The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertVirtualTransactionOverrideResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden.")], transaction_request : Annotated[List[TransactionRequest], Field(description="A list of transactions to replace the virtual transactions generated by the instrument event.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[OverrideVirtualTransactionsResponse, Awaitable[OverrideVirtualTransactionsResponse]]:  # noqa: E501
-        """[EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert a virtual transaction override  # noqa: E501
+    def upsert_virtual_transaction_override(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden or suppressed.")], override_virtual_transactions_request : Annotated[OverrideVirtualTransactionsRequest, Field(description="The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertVirtualTransactionOverrideResponse, Awaitable[UpsertVirtualTransactionOverrideResponse]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert virtual transaction overrides and suppressions  # noqa: E501
 
-        Creates or updates virtual transaction overrides for an instrument event with manually provided input transactions.  This will cancel the specified instrument event and upsert the provided transactions as replacements.  The replacement transactions will have the OverrideOfInstrumentEvent system property set and a source type of OverriddenVirtualTransaction.  Calling this endpoint again with the same transaction IDs will update the existing overrides in place.  # noqa: E501
+        Creates or updates overrides and suppressions of virtual transactions generated by a single instrument  event. Overrides and suppressions are each keyed by the virtual transaction id they target. This is a  full replace of the previously stored overrides and suppressions for the targeted instrument event -  any previously stored entry not present in this request is removed.  Calling this endpoint again with the same virtual transaction id will replace the existing override or  suppression in place.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_virtual_transaction_override(scope, code, instrument_event_id, transaction_request, portfolio_effective_at, preserve_properties, data_model_scope, data_model_code, async_req=True)
+        >>> thread = api.upsert_virtual_transaction_override(scope, code, instrument_event_id, override_virtual_transactions_request, portfolio_effective_at, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
         :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
         :type code: str
-        :param instrument_event_id: The ID of the instrument event whose virtual transactions should be overridden. (required)
+        :param instrument_event_id: The ID of the instrument event whose virtual transactions should be overridden or suppressed. (required)
         :type instrument_event_id: str
-        :param transaction_request: A list of transactions to replace the virtual transactions generated by the instrument event. (required)
-        :type transaction_request: List[TransactionRequest]
+        :param override_virtual_transactions_request: The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed. (required)
+        :type override_virtual_transactions_request: OverrideVirtualTransactionsRequest
         :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
         :type portfolio_effective_at: str
-        :param preserve_properties: If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
+        :param preserve_properties: If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
         :type preserve_properties: bool
-        :param data_model_scope: The optional scope of a Custom Data Model to use
-        :type data_model_scope: str
-        :param data_model_code: The optional code of a Custom Data Model to use
-        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -10047,7 +10430,7 @@ class TransactionPortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: OverrideVirtualTransactionsResponse
+        :rtype: UpsertVirtualTransactionOverrideResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -10055,35 +10438,31 @@ class TransactionPortfoliosApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, transaction_request, portfolio_effective_at, preserve_properties, data_model_scope, data_model_code, **kwargs)  # noqa: E501
+        return self.upsert_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, override_virtual_transactions_request, portfolio_effective_at, preserve_properties, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_virtual_transaction_override_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden.")], transaction_request : Annotated[List[TransactionRequest], Field(description="A list of transactions to replace the virtual transactions generated by the instrument event.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, data_model_scope : Annotated[Optional[StrictStr], Field( description="The optional scope of a Custom Data Model to use")] = None, data_model_code : Annotated[Optional[StrictStr], Field( description="The optional code of a Custom Data Model to use")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert a virtual transaction override  # noqa: E501
+    def upsert_virtual_transaction_override_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the transaction portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.")], instrument_event_id : Annotated[StrictStr, Field(..., description="The ID of the instrument event whose virtual transactions should be overridden or suppressed.")], override_virtual_transactions_request : Annotated[OverrideVirtualTransactionsRequest, Field(description="The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.")] = None, preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert virtual transaction overrides and suppressions  # noqa: E501
 
-        Creates or updates virtual transaction overrides for an instrument event with manually provided input transactions.  This will cancel the specified instrument event and upsert the provided transactions as replacements.  The replacement transactions will have the OverrideOfInstrumentEvent system property set and a source type of OverriddenVirtualTransaction.  Calling this endpoint again with the same transaction IDs will update the existing overrides in place.  # noqa: E501
+        Creates or updates overrides and suppressions of virtual transactions generated by a single instrument  event. Overrides and suppressions are each keyed by the virtual transaction id they target. This is a  full replace of the previously stored overrides and suppressions for the targeted instrument event -  any previously stored entry not present in this request is removed.  Calling this endpoint again with the same virtual transaction id will replace the existing override or  suppression in place.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, transaction_request, portfolio_effective_at, preserve_properties, data_model_scope, data_model_code, async_req=True)
+        >>> thread = api.upsert_virtual_transaction_override_with_http_info(scope, code, instrument_event_id, override_virtual_transactions_request, portfolio_effective_at, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the transaction portfolio. (required)
         :type scope: str
         :param code: The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. (required)
         :type code: str
-        :param instrument_event_id: The ID of the instrument event whose virtual transactions should be overridden. (required)
+        :param instrument_event_id: The ID of the instrument event whose virtual transactions should be overridden or suppressed. (required)
         :type instrument_event_id: str
-        :param transaction_request: A list of transactions to replace the virtual transactions generated by the instrument event. (required)
-        :type transaction_request: List[TransactionRequest]
+        :param override_virtual_transactions_request: The overrides and suppressions to upsert, keyed by the virtual transaction id being overridden or suppressed. (required)
+        :type override_virtual_transactions_request: OverrideVirtualTransactionsRequest
         :param portfolio_effective_at: The effective datetime used to resolve the portfolio. Defaults to the current LUSID system datetime if not specified.
         :type portfolio_effective_at: str
-        :param preserve_properties: If set to false, the entire property set will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
+        :param preserve_properties: If set to false, the entire property set of an updated override entry will be overwritten by the provided properties. If not specified or set to true, only the properties provided will be updated.
         :type preserve_properties: bool
-        :param data_model_scope: The optional scope of a Custom Data Model to use
-        :type data_model_scope: str
-        :param data_model_code: The optional code of a Custom Data Model to use
-        :type data_model_code: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -10105,7 +10484,7 @@ class TransactionPortfoliosApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(OverrideVirtualTransactionsResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(UpsertVirtualTransactionOverrideResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -10114,11 +10493,9 @@ class TransactionPortfoliosApi:
             'scope',
             'code',
             'instrument_event_id',
-            'transaction_request',
+            'override_virtual_transactions_request',
             'portfolio_effective_at',
-            'preserve_properties',
-            'data_model_scope',
-            'data_model_code'
+            'preserve_properties'
         ]
         _all_params.extend(
             [
@@ -10165,12 +10542,6 @@ class TransactionPortfoliosApi:
         if _params.get('preserve_properties') is not None:  # noqa: E501
             _query_params.append(('preserveProperties', _params['preserve_properties']))
 
-        if _params.get('data_model_scope') is not None:  # noqa: E501
-            _query_params.append(('dataModelScope', _params['data_model_scope']))
-
-        if _params.get('data_model_code') is not None:  # noqa: E501
-            _query_params.append(('dataModelCode', _params['data_model_code']))
-
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -10178,8 +10549,8 @@ class TransactionPortfoliosApi:
         _files = {}
         # process the body parameter
         _body_params = None
-        if _params['transaction_request'] is not None:
-            _body_params = _params['transaction_request']
+        if _params['override_virtual_transactions_request'] is not None:
+            _body_params = _params['override_virtual_transactions_request']
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.api_client.select_header_accept(
@@ -10196,7 +10567,7 @@ class TransactionPortfoliosApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "OverrideVirtualTransactionsResponse",
+            '200': "UpsertVirtualTransactionOverrideResponse",
             '400': "LusidValidationProblemDetails",
         }
 

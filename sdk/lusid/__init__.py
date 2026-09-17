@@ -997,7 +997,10 @@ from lusid.models.order_update_request import OrderUpdateRequest
 from lusid.models.otc_confirmation import OtcConfirmation
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.output_transition import OutputTransition
-from lusid.models.override_virtual_transactions_response import OverrideVirtualTransactionsResponse
+from lusid.models.override_definition_request import OverrideDefinitionRequest
+from lusid.models.override_definition_response import OverrideDefinitionResponse
+from lusid.models.override_entry_response import OverrideEntryResponse
+from lusid.models.override_virtual_transactions_request import OverrideVirtualTransactionsRequest
 from lusid.models.oversubscribe_election import OversubscribeElection
 from lusid.models.package import Package
 from lusid.models.package_request import PackageRequest
@@ -1235,12 +1238,15 @@ from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.rec_activity_window import RecActivityWindow
 from lusid.models.rec_approval_decision import RecApprovalDecision
+from lusid.models.rec_as_at_policy import RecAsAtPolicy
 from lusid.models.rec_closed_exception_counts import RecClosedExceptionCounts
 from lusid.models.rec_closed_period_reference import RecClosedPeriodReference
 from lusid.models.rec_closed_periods import RecClosedPeriods
 from lusid.models.rec_dataset_schema import RecDatasetSchema
 from lusid.models.rec_dataset_schemas import RecDatasetSchemas
+from lusid.models.rec_date_policy import RecDatePolicy
 from lusid.models.rec_dates_reconciled import RecDatesReconciled
 from lusid.models.rec_def_currencies import RecDefCurrencies
 from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
@@ -1415,6 +1421,7 @@ from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTra
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
+from lusid.models.resource_list_of_virtual_transaction_override_record import ResourceListOfVirtualTransactionOverrideRecord
 from lusid.models.resource_list_with_post_bodies_of_settlement_activity_to_settlement_activity_query import ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery
 from lusid.models.resource_record import ResourceRecord
 from lusid.models.response_meta_data import ResponseMetaData
@@ -1534,6 +1541,7 @@ from lusid.models.staging_rule_set import StagingRuleSet
 from lusid.models.step_schedule import StepSchedule
 from lusid.models.stock_dividend_event import StockDividendEvent
 from lusid.models.stock_split_event import StockSplitEvent
+from lusid.models.stored_override_definition import StoredOverrideDefinition
 from lusid.models.strategy import Strategy
 from lusid.models.string_comparison_type import StringComparisonType
 from lusid.models.string_compliance_parameter import StringComplianceParameter
@@ -1547,6 +1555,7 @@ from lusid.models.subscribe_election import SubscribeElection
 from lusid.models.subscription_definition import SubscriptionDefinition
 from lusid.models.supplemental_attribute import SupplementalAttribute
 from lusid.models.supplemental_attribute_values import SupplementalAttributeValues
+from lusid.models.suppression_entry_response import SuppressionEntryResponse
 from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
@@ -1746,6 +1755,7 @@ from lusid.models.upsert_transaction_properties_response import UpsertTransactio
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
+from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
 from lusid.models.user import User
 from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
@@ -1788,6 +1798,8 @@ from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding imp
 from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
+from lusid.models.virtual_transaction_override_record import VirtualTransactionOverrideRecord
+from lusid.models.virtual_transaction_overrides_response import VirtualTransactionOverridesResponse
 from lusid.models.vol_surface_shift_definition import VolSurfaceShiftDefinition
 from lusid.models.vol_surface_shift_mode import VolSurfaceShiftMode
 from lusid.models.volatility_swap import VolatilitySwap
@@ -2794,7 +2806,10 @@ __all__ = [
     "OtcConfirmation",
     "OutputTransaction",
     "OutputTransition",
-    "OverrideVirtualTransactionsResponse",
+    "OverrideDefinitionRequest",
+    "OverrideDefinitionResponse",
+    "OverrideEntryResponse",
+    "OverrideVirtualTransactionsRequest",
     "OversubscribeElection",
     "Package",
     "PackageRequest",
@@ -3032,12 +3047,15 @@ __all__ = [
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
+    "RecActivityWindow",
     "RecApprovalDecision",
+    "RecAsAtPolicy",
     "RecClosedExceptionCounts",
     "RecClosedPeriodReference",
     "RecClosedPeriods",
     "RecDatasetSchema",
     "RecDatasetSchemas",
+    "RecDatePolicy",
     "RecDatesReconciled",
     "RecDefCurrencies",
     "RecDefRecipeIds",
@@ -3212,6 +3230,7 @@ __all__ = [
     "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
     "ResourceListOfValueType",
+    "ResourceListOfVirtualTransactionOverrideRecord",
     "ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery",
     "ResourceRecord",
     "ResponseMetaData",
@@ -3331,6 +3350,7 @@ __all__ = [
     "StepSchedule",
     "StockDividendEvent",
     "StockSplitEvent",
+    "StoredOverrideDefinition",
     "Strategy",
     "StringComparisonType",
     "StringComplianceParameter",
@@ -3344,6 +3364,7 @@ __all__ = [
     "SubscriptionDefinition",
     "SupplementalAttribute",
     "SupplementalAttributeValues",
+    "SuppressionEntryResponse",
     "SwapCashFlowEvent",
     "SwapPrincipalEvent",
     "SweepBlocksRequest",
@@ -3543,6 +3564,7 @@ __all__ = [
     "UpsertTransferAgencyOrderRequest",
     "UpsertTranslationScriptRequest",
     "UpsertValuationPointRequest",
+    "UpsertVirtualTransactionOverrideResponse",
     "User",
     "ValuationPoint",
     "ValuationPointDataQueryParameters",
@@ -3585,6 +3607,8 @@ __all__ = [
     "VirtualDocument",
     "VirtualDocumentRow",
     "VirtualRow",
+    "VirtualTransactionOverrideRecord",
+    "VirtualTransactionOverridesResponse",
     "VolSurfaceShiftDefinition",
     "VolSurfaceShiftMode",
     "VolatilitySwap",

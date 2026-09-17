@@ -26,7 +26,7 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class TerminationEvent(InstrumentEvent):
     """
-    Termination of a derivative at fair settlement value before or at its own maturity, triggered by the  economic life of a referenced underlying ending first (redemption, tender, repurchase offer, spin-off,  conversion, exchange offer), or by the derivative maturing while the underlying still has remaining  value. Synthesised by the instrument itself; the settlement amounts are painted on by post-processing  and the resulting transaction closes the holding and settles the net amount.  # noqa: E501
+    Termination of a derivative at fair settlement value before or at its own maturity, triggered by the  economic life of a referenced underlying ending first (a bond's redemption, tender, repurchase offer or  conversion; an equity's merger, spin-off or exchange offer), or by the derivative maturing while the  underlying still has remaining value. Synthesised by the instrument itself; the settlement amounts are  painted on by post-processing and the resulting transaction closes the holding and settles the net amount.  # noqa: E501
     """
     effective_date: Optional[datetime] = Field(default=None, description="The date the termination takes effect: the triggering event's own effective/exchange date, or the  instrument's own maturity date for a maturity-triggered termination. Required.", alias="effectiveDate")
     settlement_date: Optional[datetime] = Field(default=None, description="The date the net termination amount settles. Required.", alias="settlementDate")
@@ -37,9 +37,10 @@ class TerminationEvent(InstrumentEvent):
     asset_settlement_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The asset-side settlement value per the settlement method, unsigned by leg direction.  Optional — populated by post-processing from market data; absent until enriched.", alias="assetSettlementAmount")
     funding_accrued_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The funding leg's financing accrued to the effective date, signed by the funding leg's own  direction. Optional — populated by post-processing from market data; absent until enriched.", alias="fundingAccruedAmount")
     termination_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net amount settled on termination: the asset settlement amount signed by the asset leg's  direction, netted with the funding accrued. Optional — populated by post-processing; absent  until enriched.", alias="terminationAmount")
+    termination_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The per-unit price of the underlying the asset side settled at, for a price-return termination:  the triggering event's chosen cash-offer price when it has one, otherwise the underlying's last  available quote on or before the effective date. Optional — absent for formula-based settlements  and until enriched by post-processing.", alias="terminationPrice")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "settlementDate", "settlementCurrency", "triggeringEventType", "triggeringEventId", "settlementMethod", "assetSettlementAmount", "fundingAccruedAmount", "terminationAmount"]
+    __properties = ["instrumentEventType", "effectiveDate", "settlementDate", "settlementCurrency", "triggeringEventType", "triggeringEventId", "settlementMethod", "assetSettlementAmount", "fundingAccruedAmount", "terminationAmount", "terminationPrice"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -172,6 +173,11 @@ class TerminationEvent(InstrumentEvent):
         if self.termination_amount is None and "termination_amount" in self.__fields_set__:
             _dict['terminationAmount'] = None
 
+        # set to None if termination_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.termination_price is None and "termination_price" in self.__fields_set__:
+            _dict['terminationPrice'] = None
+
         return _dict
 
     @classmethod
@@ -193,7 +199,8 @@ class TerminationEvent(InstrumentEvent):
             "settlement_method": obj.get("settlementMethod"),
             "asset_settlement_amount": obj.get("assetSettlementAmount"),
             "funding_accrued_amount": obj.get("fundingAccruedAmount"),
-            "termination_amount": obj.get("terminationAmount")
+            "termination_amount": obj.get("terminationAmount"),
+            "termination_price": obj.get("terminationPrice")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

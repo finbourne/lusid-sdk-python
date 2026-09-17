@@ -23,20 +23,20 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
-from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.version import Version
+from lusid.models.virtual_transaction_override_record import VirtualTransactionOverrideRecord
 
-class OverrideVirtualTransactionsResponse(BaseModel):
+class VirtualTransactionOverridesResponse(BaseModel):
     """
-    OverrideVirtualTransactionsResponse
+    The overrides and suppressions affecting a single instrument event in the requested portfolio. A derived  portfolio is affected by its own record and by every record held by an ancestor, so one record per  holding portfolio is returned, nearest first.  # noqa: E501
     """
     version: Version
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    metadata: Optional[Dict[str, Optional[List[ResponseMetaData]]]] = Field(default=None, description="Contains warnings related to unresolved instruments or non-existent transaction types for the override transactions.")
-    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The identifier of the instrument event that was overridden.") 
-    cancel_instruction_id:  StrictStr = Field(...,alias="cancelInstructionId", description="The identifier of the cancel instruction that was created for the overridden instrument event.") 
+    instrument_event_id:  StrictStr = Field(...,alias="instrumentEventId", description="The identifier of the instrument event whose overrides and suppressions are returned.") 
+    records: Optional[List[VirtualTransactionOverrideRecord]] = Field(default=None, description="The override and suppression records affecting the requested portfolio for this instrument event, nearest first. A derived portfolio is affected by its own record and by every record held by an ancestor.")
+    live: Optional[List[StrictStr]] = Field(default=None, description="The virtual transaction ids the event currently generates in the requested portfolio that no returned record targets, and so keep generating unmodified.")
     links: Optional[List[Link]] = None
-    __properties = ["version", "href", "metadata", "instrumentEventId", "cancelInstructionId", "links"]
+    __properties = ["version", "href", "instrumentEventId", "records", "live", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,8 +60,8 @@ class OverrideVirtualTransactionsResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> OverrideVirtualTransactionsResponse:
-        """Create an instance of OverrideVirtualTransactionsResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> VirtualTransactionOverridesResponse:
+        """Create an instance of VirtualTransactionOverridesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -73,15 +73,13 @@ class OverrideVirtualTransactionsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
-        _field_dict_of_array = {}
-        if self.metadata:
-            for _key in self.metadata:
-                if self.metadata[_key]:
-                    _field_dict_of_array[_key] = [
-                        _item.to_dict() for _item in self.metadata[_key]
-                    ]
-            _dict['metadata'] = _field_dict_of_array
+        # override the default output from pydantic by calling `to_dict()` of each item in records (list)
+        _items = []
+        if self.records:
+            for _item in self.records:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['records'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -94,10 +92,15 @@ class OverrideVirtualTransactionsResponse(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
-        # set to None if metadata (nullable) is None
+        # set to None if records (nullable) is None
         # and __fields_set__ contains the field
-        if self.metadata is None and "metadata" in self.__fields_set__:
-            _dict['metadata'] = None
+        if self.records is None and "records" in self.__fields_set__:
+            _dict['records'] = None
+
+        # set to None if live (nullable) is None
+        # and __fields_set__ contains the field
+        if self.live is None and "live" in self.__fields_set__:
+            _dict['live'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -107,31 +110,22 @@ class OverrideVirtualTransactionsResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> OverrideVirtualTransactionsResponse:
-        """Create an instance of OverrideVirtualTransactionsResponse from a dict"""
+    def from_dict(cls, obj: dict) -> VirtualTransactionOverridesResponse:
+        """Create an instance of VirtualTransactionOverridesResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return OverrideVirtualTransactionsResponse.parse_obj(obj)
+            return VirtualTransactionOverridesResponse.parse_obj(obj)
 
-        _obj = OverrideVirtualTransactionsResponse.parse_obj({
+        _obj = VirtualTransactionOverridesResponse.parse_obj({
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
-            "metadata": dict(
-                (_k,
-                        [ResponseMetaData.from_dict(_item) for _item in _v]
-                        if _v is not None
-                        else None
-                )
-                for _k, _v in obj.get("metadata").items()
-            )
-            if obj.get("metadata") is not None
-            else None,
             "instrument_event_id": obj.get("instrumentEventId"),
-            "cancel_instruction_id": obj.get("cancelInstructionId"),
+            "records": [VirtualTransactionOverrideRecord.from_dict(_item) for _item in obj.get("records")] if obj.get("records") is not None else None,
+            "live": obj.get("live"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-OverrideVirtualTransactionsResponse.update_forward_refs()
+VirtualTransactionOverridesResponse.update_forward_refs()
