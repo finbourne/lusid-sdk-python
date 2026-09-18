@@ -27,7 +27,7 @@ class CurrencyGroupMinorUnit(BaseModel):
     """
     A minor unit currency within a currency group.  # noqa: E501
     """
-    currency:  StrictStr = Field(...,alias="currency", description="The three-letter, case-sensitive currency code of the minor unit, e.g. GBX.") 
+    currency:  StrictStr = Field(...,alias="currency", description="The three to five letter, case-sensitive currency code of the minor unit, e.g. GBX.") 
     fraction_of_major: Union[Annotated[float, Field(strict=True)], Annotated[int, Field(strict=True)]] = Field(description="The fraction of the major unit that one minor unit is worth, greater than zero and no more than one, e.g. 0.01 for GBX against GBP.", alias="fractionOfMajor")
     __properties = ["currency", "fractionOfMajor"]
 

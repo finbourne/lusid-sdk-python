@@ -1162,6 +1162,8 @@ from lusid.models.portfolio_settlement_instruction_adjustment import PortfolioSe
 from lusid.models.portfolio_trade_ticket import PortfolioTradeTicket
 from lusid.models.portfolio_transaction import PortfolioTransaction
 from lusid.models.portfolio_transaction_adjustment import PortfolioTransactionAdjustment
+from lusid.models.portfolio_transaction_dataset import PortfolioTransactionDataset
+from lusid.models.portfolio_transaction_result import PortfolioTransactionResult
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_weight import PortfolioWeight
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
@@ -2971,6 +2973,8 @@ __all__ = [
     "PortfolioTradeTicket",
     "PortfolioTransaction",
     "PortfolioTransactionAdjustment",
+    "PortfolioTransactionDataset",
+    "PortfolioTransactionResult",
     "PortfolioType",
     "PortfolioWeight",
     "PortfolioWithoutHref",

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **code** | **str** | The code of the currency group. This uniquely identifies the currency group within the tenant. | [optional] 
 **display_name** | **str** | The name of the currency group. | [optional] 
 **description** | **str** | A description for the currency group. | [optional] 
-**major_unit_currency** | **str** | The three-letter, case-sensitive currency code of the group&#39;s major unit, e.g. GBP for the sterling group. | [optional] 
+**major_unit_currency** | **str** | The three to five letter, case-sensitive currency code of the group&#39;s major unit, e.g. GBP for the sterling group. | [optional] 
 **circulation_domain** | **str** | The domain in which the group&#39;s currencies circulate, e.g. an ISO 3166 country code. | [optional] 
 **minor_units** | [**List[CurrencyGroupMinorUnit]**](CurrencyGroupMinorUnit.md) | The minor unit currencies belonging to this currency group. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 

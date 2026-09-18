@@ -28,19 +28,20 @@ from lusid.models.resource_id import ResourceId
 
 class PlacementUpdateRequest(BaseModel):
     """
-    A request to create or update a Placement.  # noqa: E501
+    A request to update a Placement.  # noqa: E501
     """
     id: ResourceId
     quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
     amount: Optional[CurrencyAndAmount] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this placement.")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of this placement (Market, Limit, etc).") 
-    limit_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="limitPrice")
-    stop_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The optional price, as currency and amount, associated with this placement.", alias="stopPrice")
+    type:  Optional[StrictStr] = Field(None,alias="type", description="Optionally changes the type of this placement (Market, Limit, Stop, StopLimit). A type may only be tightened: a Market placement may become Limit, Stop or StopLimit, and any placement may become StopLimit. A placement may be relaxed to Market only when the associated block is of type 'Market'. Changing to a priced type requires a currency and the price(s) that type carries; a price the new type does not carry is cleared. Changing to Market clears both prices and may not be combined with a price update. A change to or from any other type is not subject to these rules, leaves both prices as they are, and is permitted only when the associated block is of type 'Market'.") 
+    limit_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optionally updates the limit price of this placement, in the placement's limit price currency unless a currency is also specified. A currency is required if the placement has no limit price currency.", alias="limitPrice")
+    stop_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optionally updates the stop price of this placement, in the placement's stop price currency unless a currency is also specified. A currency is required if the placement has no stop price currency.", alias="stopPrice")
     counterparty:  Optional[StrictStr] = Field(None,alias="counterparty", description="Optionally specifies the market entity this placement is placed with.") 
     execution_system:  Optional[StrictStr] = Field(None,alias="executionSystem", description="Optionally specifies the execution system in use.") 
     entry_type:  Optional[StrictStr] = Field(None,alias="entryType", description="Optionally specifies the entry type of this placement. Available values: Undecided, Manual, Direct, Ems, External.") 
-    __properties = ["id", "quantity", "amount", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType"]
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The ISO currency code of the stop and/or limit price carried by the placement's type. Required when the type is changed to Stop, Limit or StopLimit, or when a price is set that the placement has no currency for; not permitted for a Market placement. For a value placement it must match the currency of the amount exactly, whether that amount is on the placement or in the update.") 
+    __properties = ["id", "quantity", "amount", "properties", "type", "limitPrice", "stopPrice", "counterparty", "executionSystem", "entryType", "currency"]
 
     class Config:
         """Pydantic configuration"""
@@ -127,6 +128,11 @@ class PlacementUpdateRequest(BaseModel):
         if self.entry_type is None and "entry_type" in self.__fields_set__:
             _dict['entryType'] = None
 
+        # set to None if currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.currency is None and "currency" in self.__fields_set__:
+            _dict['currency'] = None
+
         return _dict
 
     @classmethod
@@ -153,7 +159,8 @@ class PlacementUpdateRequest(BaseModel):
             "stop_price": obj.get("stopPrice"),
             "counterparty": obj.get("counterparty"),
             "execution_system": obj.get("executionSystem"),
-            "entry_type": obj.get("entryType")
+            "entry_type": obj.get("entryType"),
+            "currency": obj.get("currency")
         })
         return _obj
 

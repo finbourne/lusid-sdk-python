@@ -4,6 +4,7 @@ Counts of results broken down by the structural categories that align with the r
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**total** | **int** | The total number of results in this result set, across all categories. | 
 **open_exceptions** | [**RecOpenExceptionCounts**](RecOpenExceptionCounts.md) |  | 
 **closed_exceptions** | [**RecClosedExceptionCounts**](RecClosedExceptionCounts.md) |  | 
 **matches** | [**RecMatchCounts**](RecMatchCounts.md) |  | 
@@ -16,10 +17,12 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
+total: StrictInt = # Replace with your value
+total: StrictInt = 42
 open_exceptions: RecOpenExceptionCounts = # Replace with your value
 closed_exceptions: RecClosedExceptionCounts = # Replace with your value
 matches: RecMatchCounts
-rec_result_counts_instance = RecResultCounts(open_exceptions=open_exceptions, closed_exceptions=closed_exceptions, matches=matches)
+rec_result_counts_instance = RecResultCounts(total=total, open_exceptions=open_exceptions, closed_exceptions=closed_exceptions, matches=matches)
 
 ```
 

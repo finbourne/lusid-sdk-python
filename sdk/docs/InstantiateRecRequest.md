@@ -5,10 +5,10 @@ The request to instantiate a new rec instance from a rec definition and start it
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rec_definition_id** | [**ResourceId**](ResourceId.md) |  | 
-**left_effective_at** | **str** | The left effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. | [optional] 
-**left_as_at** | **str** | The left asAt datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. | [optional] 
-**right_effective_at** | **str** | The right effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. | [optional] 
-**right_as_at** | **str** | The right asAt datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. | [optional] 
+**left_effective_at** | **str** | The left effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. When the definition&#39;s datePolicy.effectiveAtProgression is Series, must be strictly after the previous instance&#39;s leftEffectiveAt. | [optional] 
+**left_as_at** | **str** | The left asAt datetime, as a date-time or a LUSID cut label. Must be omitted when the definition&#39;s datePolicy.asAtPolicy.left is Latest, as the system reconciles at the latest knowledge on every run. When it is Explicit, defaults to the current date-time and is pinned on the instance. | [optional] 
+**right_effective_at** | **str** | The right effective datetime, as a date-time or a LUSID cut label. Defaults to the current date-time. When the definition&#39;s datePolicy.effectiveAtProgression is Series, must be strictly after the previous instance&#39;s rightEffectiveAt. | [optional] 
+**right_as_at** | **str** | The right asAt datetime, as a date-time or a LUSID cut label. Must be omitted when the definition&#39;s datePolicy.asAtPolicy.right is Latest, as the system reconciles at the latest knowledge on every run. When it is Explicit, defaults to the current date-time and is pinned on the instance. | [optional] 
 ## Example
 
 ```python

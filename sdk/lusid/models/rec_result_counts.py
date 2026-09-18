@@ -30,10 +30,11 @@ class RecResultCounts(BaseModel):
     """
     Counts of results broken down by the structural categories that align with the review configuration.  # noqa: E501
     """
+    total: StrictInt = Field(description="The total number of results in this result set, across all categories.")
     open_exceptions: RecOpenExceptionCounts = Field(alias="openExceptions")
     closed_exceptions: RecClosedExceptionCounts = Field(alias="closedExceptions")
     matches: RecMatchCounts
-    __properties = ["openExceptions", "closedExceptions", "matches"]
+    __properties = ["total", "openExceptions", "closedExceptions", "matches"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,6 +89,7 @@ class RecResultCounts(BaseModel):
             return RecResultCounts.parse_obj(obj)
 
         _obj = RecResultCounts.parse_obj({
+            "total": obj.get("total"),
             "open_exceptions": RecOpenExceptionCounts.from_dict(obj.get("openExceptions")) if obj.get("openExceptions") is not None else None,
             "closed_exceptions": RecClosedExceptionCounts.from_dict(obj.get("closedExceptions")) if obj.get("closedExceptions") is not None else None,
             "matches": RecMatchCounts.from_dict(obj.get("matches")) if obj.get("matches") is not None else None

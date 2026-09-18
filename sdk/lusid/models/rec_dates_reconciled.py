@@ -25,13 +25,15 @@ from datetime import datetime
 
 class RecDatesReconciled(BaseModel):
     """
-    The left and right effective and asAt dates of the data reconciled in a run.  # noqa: E501
+    The left and right effective and asAt dates of the data reconciled in a run, plus the exclusive lower bound of each side's activity window on activity-based rec types.  # noqa: E501
     """
     left_effective_at: datetime = Field(description="The effective datetime of the data reconciled on the left side.", alias="leftEffectiveAt")
     left_as_at: datetime = Field(description="The asAt datetime of the data reconciled on the left side.", alias="leftAsAt")
     right_effective_at: datetime = Field(description="The effective datetime of the data reconciled on the right side.", alias="rightEffectiveAt")
     right_as_at: datetime = Field(description="The asAt datetime of the data reconciled on the right side.", alias="rightAsAt")
-    __properties = ["leftEffectiveAt", "leftAsAt", "rightEffectiveAt", "rightAsAt"]
+    left_activity_since_effective_at: Optional[datetime] = Field(default=None, description="The exclusive lower bound of the left side's activity window, so the window is (leftActivitySinceEffectiveAt, leftEffectiveAt]. Populated only on activity-based rec types; null on point-in-time rec types and when the definition has no activity window.", alias="leftActivitySinceEffectiveAt")
+    right_activity_since_effective_at: Optional[datetime] = Field(default=None, description="The exclusive lower bound of the right side's activity window, so the window is (rightActivitySinceEffectiveAt, rightEffectiveAt]. Populated only on activity-based rec types; null on point-in-time rec types and when the definition has no activity window.", alias="rightActivitySinceEffectiveAt")
+    __properties = ["leftEffectiveAt", "leftAsAt", "rightEffectiveAt", "rightAsAt", "leftActivitySinceEffectiveAt", "rightActivitySinceEffectiveAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,16 @@ class RecDatesReconciled(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if left_activity_since_effective_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.left_activity_since_effective_at is None and "left_activity_since_effective_at" in self.__fields_set__:
+            _dict['leftActivitySinceEffectiveAt'] = None
+
+        # set to None if right_activity_since_effective_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.right_activity_since_effective_at is None and "right_activity_since_effective_at" in self.__fields_set__:
+            _dict['rightActivitySinceEffectiveAt'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +92,9 @@ class RecDatesReconciled(BaseModel):
             "left_effective_at": obj.get("leftEffectiveAt"),
             "left_as_at": obj.get("leftAsAt"),
             "right_effective_at": obj.get("rightEffectiveAt"),
-            "right_as_at": obj.get("rightAsAt")
+            "right_as_at": obj.get("rightAsAt"),
+            "left_activity_since_effective_at": obj.get("leftActivitySinceEffectiveAt"),
+            "right_activity_since_effective_at": obj.get("rightActivitySinceEffectiveAt")
         })
         return _obj
 

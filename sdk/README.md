@@ -586,6 +586,7 @@ Class | Method | HTTP request | Description
 *ReferenceListsApi* | [**list_reference_lists**](docs/ReferenceListsApi.md#list_reference_lists) | **GET** /api/referencelists | [EARLY ACCESS] ListReferenceLists: List Reference Lists
 *ReferenceListsApi* | [**upsert_reference_list**](docs/ReferenceListsApi.md#upsert_reference_list) | **POST** /api/referencelists | [EARLY ACCESS] UpsertReferenceList: Upsert Reference List
 *ReferencePortfolioApi* | [**create_reference_portfolio**](docs/ReferencePortfolioApi.md#create_reference_portfolio) | **POST** /api/referenceportfolios/{scope} | CreateReferencePortfolio: Create reference portfolio
+*ReferencePortfolioApi* | [**delete_reference_portfolio_constituent_adjustment**](docs/ReferencePortfolioApi.md#delete_reference_portfolio_constituent_adjustment) | **DELETE** /api/referenceportfolios/{scope}/{code}/constituentsadjustment | DeleteReferencePortfolioConstituentAdjustment: Delete constituents adjustment
 *ReferencePortfolioApi* | [**get_reference_portfolio_constituents**](docs/ReferencePortfolioApi.md#get_reference_portfolio_constituents) | **GET** /api/referenceportfolios/{scope}/{code}/constituents | GetReferencePortfolioConstituents: Get reference portfolio constituents
 *ReferencePortfolioApi* | [**list_constituents_adjustments**](docs/ReferencePortfolioApi.md#list_constituents_adjustments) | **GET** /api/referenceportfolios/{scope}/{code}/constituentsadjustments | ListConstituentsAdjustments: List constituents adjustments
 *ReferencePortfolioApi* | [**upsert_reference_portfolio_constituent_properties**](docs/ReferencePortfolioApi.md#upsert_reference_portfolio_constituent_properties) | **POST** /api/referenceportfolios/{scope}/{code}/constituents/properties | [EARLY ACCESS] UpsertReferencePortfolioConstituentProperties: Upsert constituent properties
@@ -1842,6 +1843,8 @@ Class | Method | HTTP request | Description
  - [PortfolioTradeTicket](docs/PortfolioTradeTicket.md)
  - [PortfolioTransaction](docs/PortfolioTransaction.md)
  - [PortfolioTransactionAdjustment](docs/PortfolioTransactionAdjustment.md)
+ - [PortfolioTransactionDataset](docs/PortfolioTransactionDataset.md)
+ - [PortfolioTransactionResult](docs/PortfolioTransactionResult.md)
  - [PortfolioType](docs/PortfolioType.md)
  - [PortfolioWeight](docs/PortfolioWeight.md)
  - [PortfolioWithoutHref](docs/PortfolioWithoutHref.md)

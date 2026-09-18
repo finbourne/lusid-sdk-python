@@ -4,7 +4,7 @@ A minor unit currency within a currency group.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**currency** | **str** | The three-letter, case-sensitive currency code of the minor unit, e.g. GBX. | 
+**currency** | **str** | The three to five letter, case-sensitive currency code of the minor unit, e.g. GBX. | 
 **fraction_of_major** | **float** | The fraction of the major unit that one minor unit is worth, greater than zero and no more than one, e.g. 0.01 for GBX against GBP. | 
 ## Example
 
