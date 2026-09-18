@@ -382,6 +382,7 @@ from lusid.models.compliance_rule_result_detail import ComplianceRuleResultDetai
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
+from lusid.models.compliance_rule_template_entity import ComplianceRuleTemplateEntity
 from lusid.models.compliance_rule_upsert_request import ComplianceRuleUpsertRequest
 from lusid.models.compliance_rule_upsert_response import ComplianceRuleUpsertResponse
 from lusid.models.compliance_run_configuration import ComplianceRunConfiguration
@@ -2193,6 +2194,7 @@ __all__ = [
     "ComplianceRuleResultPortfolioDetail",
     "ComplianceRuleResultV2",
     "ComplianceRuleTemplate",
+    "ComplianceRuleTemplateEntity",
     "ComplianceRuleUpsertRequest",
     "ComplianceRuleUpsertResponse",
     "ComplianceRunConfiguration",

@@ -230,6 +230,7 @@ Class | Method | HTTP request | Description
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
 *EntitiesApi* | [**get_bookmark_by_entity_unique_id**](docs/EntitiesApi.md#get_bookmark_by_entity_unique_id) | **GET** /api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId
 *EntitiesApi* | [**get_compliance_rule_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_by_entity_unique_id) | **GET** /api/entities/compliancerules/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleByEntityUniqueId: Get compliance rule by EntityUniqueId
+*EntitiesApi* | [**get_compliance_rule_template_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_template_by_entity_unique_id) | **GET** /api/entities/complianceruletemplates/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
@@ -1063,6 +1064,7 @@ Class | Method | HTTP request | Description
  - [ComplianceRuleResultPortfolioDetail](docs/ComplianceRuleResultPortfolioDetail.md)
  - [ComplianceRuleResultV2](docs/ComplianceRuleResultV2.md)
  - [ComplianceRuleTemplate](docs/ComplianceRuleTemplate.md)
+ - [ComplianceRuleTemplateEntity](docs/ComplianceRuleTemplateEntity.md)
  - [ComplianceRuleUpsertRequest](docs/ComplianceRuleUpsertRequest.md)
  - [ComplianceRuleUpsertResponse](docs/ComplianceRuleUpsertResponse.md)
  - [ComplianceRunConfiguration](docs/ComplianceRunConfiguration.md)

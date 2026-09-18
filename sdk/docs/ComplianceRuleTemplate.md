@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **variations** | [**List[ComplianceTemplateVariationDto]**](ComplianceTemplateVariationDto.md) | Variation details of a Compliance Template | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -25,8 +26,9 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 variations: Optional[List[ComplianceTemplateVariationDto]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 links: Optional[List[Link]] = None
-compliance_rule_template_instance = ComplianceRuleTemplate(id=id, description=description, properties=properties, variations=variations, href=href, version=version, links=links)
+compliance_rule_template_instance = ComplianceRuleTemplate(id=id, description=description, properties=properties, variations=variations, href=href, version=version, staged_modifications=staged_modifications, links=links)
 
 ```
 

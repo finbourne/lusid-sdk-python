@@ -26,6 +26,7 @@ from lusid.models.compliance_template_variation_dto import ComplianceTemplateVar
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class ComplianceRuleTemplate(BaseModel):
@@ -38,8 +39,9 @@ class ComplianceRuleTemplate(BaseModel):
     variations: Optional[List[ComplianceTemplateVariationDto]] = Field(default=None, description="Variation details of a Compliance Template")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     version: Optional[Version] = None
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["id", "description", "properties", "variations", "href", "version", "links"]
+    __properties = ["id", "description", "properties", "variations", "href", "version", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +95,9 @@ class ComplianceRuleTemplate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -148,6 +153,7 @@ class ComplianceRuleTemplate(BaseModel):
             "variations": [ComplianceTemplateVariationDto.from_dict(_item) for _item in obj.get("variations")] if obj.get("variations") is not None else None,
             "href": obj.get("href"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
