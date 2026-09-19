@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **aggregate_rules** | [**List[AggregateRuleValues]**](AggregateRuleValues.md) | The aggregate matching rules and their measured values. | 
 **supplemental_attributes** | [**List[SupplementalAttributeValues]**](SupplementalAttributeValues.md) | Additional attribute values carried on the result for context. Do not contribute to matching or the result id. | 
 **items** | [**RecResultItemDetails**](RecResultItemDetails.md) |  | 
+**linked_results** | [**List[RecLinkedResult]**](RecLinkedResult.md) | Results of other rec types in the same rec instance run whose items share an identifier with this result&#39;s items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then. | 
 **comments** | [**List[RecUserComment]**](RecUserComment.md) | User-authored comments attached to the result. Carried forward across runs. | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecResult domain. Filterable and sortable. | [optional] 
 **assigned_user** | **str** | The LUSID user id assigned to the result. | [optional] 
@@ -53,6 +54,7 @@ core_rules: List[CoreRuleValues] = # Replace with your value
 aggregate_rules: List[AggregateRuleValues] = # Replace with your value
 supplemental_attributes: List[SupplementalAttributeValues] = # Replace with your value
 items: RecResultItemDetails
+linked_results: List[RecLinkedResult] = # Replace with your value
 comments: List[RecUserComment] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 assigned_user: Optional[StrictStr] = "example_assigned_user"
@@ -60,7 +62,7 @@ assigned_role: Optional[StrictStr] = "example_assigned_role"
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_result_instance = RecResult(id=id, rec_type=rec_type, instance_id=instance_id, rec_definition_id=rec_definition_id, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, comments=comments, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
+rec_result_instance = RecResult(id=id, rec_type=rec_type, instance_id=instance_id, rec_definition_id=rec_definition_id, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, linked_results=linked_results, comments=comments, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
 
 ```
 

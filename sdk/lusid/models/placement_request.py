@@ -40,7 +40,7 @@ class PlacementRequest(BaseModel):
     state:  Optional[StrictStr] = Field(None,alias="state", description="The state of this placement (typically a FIX state; Open, Filled, etc).") 
     side:  StrictStr = Field(...,alias="side", description="The side (Buy, Sell, ...) of this placement.") 
     time_in_force:  StrictStr = Field(...,alias="timeInForce", description="The time in force applicable to this placement (GTC, FOK, Day, etc)") 
-    type:  StrictStr = Field(...,alias="type", description="The type of this placement (Market, Limit, Stop, StopLimit, etc). A Limit placement must specify a limit price, a Stop placement a stop price, and a StopLimit placement both.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of this placement (Market, Limit, etc).") 
     created_date: datetime = Field(description="The active date of this placement.", alias="createdDate")
     limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")

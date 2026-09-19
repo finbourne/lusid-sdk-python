@@ -547,6 +547,7 @@ from lusid.models.floating_leg import FloatingLeg
 from lusid.models.flow_convention_name import FlowConventionName
 from lusid.models.flow_conventions import FlowConventions
 from lusid.models.forward_rate_agreement import ForwardRateAgreement
+from lusid.models.fractional_units_true_up_configuration import FractionalUnitsTrueUpConfiguration
 from lusid.models.from_recipe import FromRecipe
 from lusid.models.fund import Fund
 from lusid.models.fund_a2_b_data_record import FundA2BDataRecord
@@ -1159,6 +1160,9 @@ from lusid.models.rec_execution import RecExecution
 from lusid.models.rec_instance import RecInstance
 from lusid.models.rec_instance_id import RecInstanceId
 from lusid.models.rec_instance_summary import RecInstanceSummary
+from lusid.models.rec_link_key import RecLinkKey
+from lusid.models.rec_linked_by import RecLinkedBy
+from lusid.models.rec_linked_result import RecLinkedResult
 from lusid.models.rec_match_count_by_result_type import RecMatchCountByResultType
 from lusid.models.rec_match_counts import RecMatchCounts
 from lusid.models.rec_open_exception_counts import RecOpenExceptionCounts
@@ -2256,6 +2260,7 @@ __all__ = [
     "FlowConventionName",
     "FlowConventions",
     "ForwardRateAgreement",
+    "FractionalUnitsTrueUpConfiguration",
     "FromRecipe",
     "Fund",
     "FundA2BDataRecord",
@@ -2868,6 +2873,9 @@ __all__ = [
     "RecInstance",
     "RecInstanceId",
     "RecInstanceSummary",
+    "RecLinkKey",
+    "RecLinkedBy",
+    "RecLinkedResult",
     "RecMatchCountByResultType",
     "RecMatchCounts",
     "RecOpenExceptionCounts",

@@ -28,6 +28,7 @@ from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.rec_dates_reconciled import RecDatesReconciled
 from lusid.models.rec_instance_id import RecInstanceId
+from lusid.models.rec_linked_result import RecLinkedResult
 from lusid.models.rec_result_exception import RecResultException
 from lusid.models.rec_result_item_details import RecResultItemDetails
 from lusid.models.rec_result_review import RecResultReview
@@ -56,6 +57,7 @@ class RecResult(BaseModel):
     aggregate_rules: List[AggregateRuleValues] = Field(description="The aggregate matching rules and their measured values.", alias="aggregateRules")
     supplemental_attributes: List[SupplementalAttributeValues] = Field(description="Additional attribute values carried on the result for context. Do not contribute to matching or the result id.", alias="supplementalAttributes")
     items: RecResultItemDetails
+    linked_results: List[RecLinkedResult] = Field(description="Results of other rec types in the same rec instance run whose items share an identifier with this result's items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then.", alias="linkedResults")
     comments: List[RecUserComment] = Field(description="User-authored comments attached to the result. Carried forward across runs.")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable.")
     assigned_user:  Optional[StrictStr] = Field(None,alias="assignedUser", description="The LUSID user id assigned to the result.") 
@@ -63,7 +65,7 @@ class RecResult(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "recType", "instanceId", "recDefinitionId", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
+    __properties = ["id", "recType", "instanceId", "recDefinitionId", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -136,6 +138,13 @@ class RecResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of items
         if self.items:
             _dict['items'] = self.items.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in linked_results (list)
+        _items = []
+        if self.linked_results:
+            for _item in self.linked_results:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['linkedResults'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in comments (list)
         _items = []
         if self.comments:
@@ -213,6 +222,7 @@ class RecResult(BaseModel):
             "aggregate_rules": [AggregateRuleValues.from_dict(_item) for _item in obj.get("aggregateRules")] if obj.get("aggregateRules") is not None else None,
             "supplemental_attributes": [SupplementalAttributeValues.from_dict(_item) for _item in obj.get("supplementalAttributes")] if obj.get("supplementalAttributes") is not None else None,
             "items": RecResultItemDetails.from_dict(obj.get("items")) if obj.get("items") is not None else None,
+            "linked_results": [RecLinkedResult.from_dict(_item) for _item in obj.get("linkedResults")] if obj.get("linkedResults") is not None else None,
             "comments": [RecUserComment.from_dict(_item) for _item in obj.get("comments")] if obj.get("comments") is not None else None,
             "properties": dict(
                 (_k, PerpetualProperty.from_dict(_v))

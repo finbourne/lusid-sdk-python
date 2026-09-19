@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **state** | **str** | The state of this placement (typically a FIX state; Open, Filled, etc). | [optional] 
 **side** | **str** | The side (Buy, Sell, ...) of this placement. | 
 **time_in_force** | **str** | The time in force applicable to this placement (GTC, FOK, Day, etc) | 
-**type** | **str** | The type of this placement (Market, Limit, Stop, StopLimit, etc). A Limit placement must specify a limit price, a Stop placement a stop price, and a StopLimit placement both. | 
+**type** | **str** | The type of this placement (Market, Limit, etc). | 
 **created_date** | **datetime** | The active date of this placement. | 
 **limit_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **stop_price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 

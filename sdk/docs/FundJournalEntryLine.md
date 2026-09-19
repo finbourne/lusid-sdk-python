@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **source_id** | **str** | For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Abor. | [optional] 
 **movement_name** | **str** | If the JE Line is generated from a transaction, the name of the side in the transaction type&#39;s movement. If from a valuation, this is &#39;MarkToMarket&#39;. | [optional] 
+**txn_type** | **str** | If the JE Line is generated from a transaction, the type of that transaction. Null where the line is not linked to a transaction, such as a valuation line. | [optional] 
 **holding_type** | **str** | One of the LUSID holding types such as &#39;P&#39; for position or &#39;B&#39; for settled cash balance. | 
 **economic_bucket** | **str** | LUSID automatically categorises a JE Line into a broad economic bucket such as &#39;NA_Cost&#39; or &#39;PL_RealPriceGL&#39;. | 
 **economic_bucket_component** | **str** | Sub bucket of the economic bucket. Available values: Undefined, Premium, OID, MarketDiscount, AcquisitionPremium, CoreMarket, CrossGainLoss, TradedInterest, Income, Expense. | [optional] 
@@ -66,6 +67,7 @@ source_type: StrictStr = "example_source_type"
 source_id: StrictStr = "example_source_id"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 movement_name: Optional[StrictStr] = "example_movement_name"
+txn_type: Optional[StrictStr] = "example_txn_type"
 holding_type: StrictStr = "example_holding_type"
 economic_bucket: StrictStr = "example_economic_bucket"
 economic_bucket_component: Optional[StrictStr] = "example_economic_bucket_component"
@@ -81,7 +83,7 @@ custodian_account_id: Optional[ResourceId] = # Replace with your value
 custodian_account_type: Optional[StrictStr] = "example_custodian_account_type"
 bucket_memberships: Optional[List[BucketMembership]] = # Replace with your value
 links: Optional[List[Link]] = None
-fund_journal_entry_line_instance = FundJournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, share_class_breakdowns=share_class_breakdowns, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, bucket_memberships=bucket_memberships, links=links)
+fund_journal_entry_line_instance = FundJournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, txn_type=txn_type, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, share_class_breakdowns=share_class_breakdowns, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, bucket_memberships=bucket_memberships, links=links)
 
 ```
 

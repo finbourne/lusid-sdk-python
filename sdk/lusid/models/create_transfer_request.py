@@ -56,7 +56,8 @@ class CreateTransferRequest(BaseModel):
     accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
     properties_out: Optional[Dict[str, PerpetualProperty]] = Field(default=None, alias="propertiesOut")
     properties_in: Optional[Dict[str, PerpetualProperty]] = Field(default=None, alias="propertiesIn")
-    __properties = ["transferId", "portfolioIdOut", "portfolioIdIn", "instrumentIdentifierOut", "instrumentIdentifierIn", "pricingMethod", "taxLotStructure", "unitsOut", "unitsIn", "amountOut", "weightOut", "tradeDateOut", "tradeDateIn", "settlementDateOut", "settlementDateIn", "exchangeRateOut", "exchangeRateIn", "transactionPriceOut", "transactionPriceIn", "counterpartyIdOut", "counterpartyIdIn", "custodianAccountIdOut", "custodianAccountIdIn", "source", "accountingMethod", "propertiesOut", "propertiesIn"]
+    properties: Optional[Dict[str, PerpetualProperty]] = None
+    __properties = ["transferId", "portfolioIdOut", "portfolioIdIn", "instrumentIdentifierOut", "instrumentIdentifierIn", "pricingMethod", "taxLotStructure", "unitsOut", "unitsIn", "amountOut", "weightOut", "tradeDateOut", "tradeDateIn", "settlementDateOut", "settlementDateIn", "exchangeRateOut", "exchangeRateIn", "transactionPriceOut", "transactionPriceIn", "counterpartyIdOut", "counterpartyIdIn", "custodianAccountIdOut", "custodianAccountIdIn", "source", "accountingMethod", "propertiesOut", "propertiesIn", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -119,6 +120,13 @@ class CreateTransferRequest(BaseModel):
                 if self.properties_in[_key]:
                     _field_dict[_key] = self.properties_in[_key].to_dict()
             _dict['propertiesIn'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if tax_lot_structure (nullable) is None
         # and __fields_set__ contains the field
         if self.tax_lot_structure is None and "tax_lot_structure" in self.__fields_set__:
@@ -184,6 +192,11 @@ class CreateTransferRequest(BaseModel):
         if self.properties_in is None and "properties_in" in self.__fields_set__:
             _dict['propertiesIn'] = None
 
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
+
         return _dict
 
     @classmethod
@@ -232,6 +245,12 @@ class CreateTransferRequest(BaseModel):
                 for _k, _v in obj.get("propertiesIn").items()
             )
             if obj.get("propertiesIn") is not None
+            else None,
+            "properties": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
             else None
         })
         return _obj

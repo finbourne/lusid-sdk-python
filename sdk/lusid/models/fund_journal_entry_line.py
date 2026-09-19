@@ -53,6 +53,7 @@ class FundJournalEntryLine(BaseModel):
     source_id:  StrictStr = Field(...,alias="sourceId", description="For the Lusid Source Type this will be the txn Id. For the rest will be what the user populates.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Abor.")
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="If the JE Line is generated from a transaction, the name of the side in the transaction type's movement. If from a valuation, this is 'MarkToMarket'.") 
+    txn_type:  Optional[StrictStr] = Field(None,alias="txnType", description="If the JE Line is generated from a transaction, the type of that transaction. Null where the line is not linked to a transaction, such as a valuation line.") 
     holding_type:  StrictStr = Field(...,alias="holdingType", description="One of the LUSID holding types such as 'P' for position or 'B' for settled cash balance.") 
     economic_bucket:  StrictStr = Field(...,alias="economicBucket", description="LUSID automatically categorises a JE Line into a broad economic bucket such as 'NA_Cost' or 'PL_RealPriceGL'.") 
     economic_bucket_component:  Optional[StrictStr] = Field(None,alias="economicBucketComponent", description="Sub bucket of the economic bucket. Available values: Undefined, Premium, OID, MarketDiscount, AcquisitionPremium, CoreMarket, CrossGainLoss, TradedInterest, Income, Expense.") 
@@ -68,7 +69,7 @@ class FundJournalEntryLine(BaseModel):
     custodian_account_type:  Optional[StrictStr] = Field(None,alias="custodianAccountType", description="Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.") 
     bucket_memberships: Optional[List[BucketMembership]] = Field(default=None, description="The bucket this Journal Entry Line is assigned to in each of the Fund Configuration's bucket sets that covers the NAV type, in bucket set definition order. Each bucket set classifies the line independently, so a line normally carries one entry per bucket set.", alias="bucketMemberships")
     links: Optional[List[Link]] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "bucketMemberships", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "txnType", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "bucketMemberships", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -179,6 +180,11 @@ class FundJournalEntryLine(BaseModel):
         if self.movement_name is None and "movement_name" in self.__fields_set__:
             _dict['movementName'] = None
 
+        # set to None if txn_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.txn_type is None and "txn_type" in self.__fields_set__:
+            _dict['txnType'] = None
+
         # set to None if economic_bucket_component (nullable) is None
         # and __fields_set__ contains the field
         if self.economic_bucket_component is None and "economic_bucket_component" in self.__fields_set__:
@@ -280,6 +286,7 @@ class FundJournalEntryLine(BaseModel):
             if obj.get("properties") is not None
             else None,
             "movement_name": obj.get("movementName"),
+            "txn_type": obj.get("txnType"),
             "holding_type": obj.get("holdingType"),
             "economic_bucket": obj.get("economicBucket"),
             "economic_bucket_component": obj.get("economicBucketComponent"),
