@@ -32,7 +32,8 @@ class CreatePortfolioDetails(BaseModel):
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
     tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. A reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost.") 
     fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = Field(default=None, alias="fractionalUnitsTrueUpConfiguration")
-    __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration"]
+    holdings_fungibility:  Optional[StrictStr] = Field(None,alias="holdingsFungibility", description="Whether the portfolio's holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. A reset or never-configured flag reads back as absent. Available values: Default, Enabled.") 
+    __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +78,11 @@ class CreatePortfolioDetails(BaseModel):
         if self.tax_lot_selection_cost_basis is None and "tax_lot_selection_cost_basis" in self.__fields_set__:
             _dict['taxLotSelectionCostBasis'] = None
 
+        # set to None if holdings_fungibility (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holdings_fungibility is None and "holdings_fungibility" in self.__fields_set__:
+            _dict['holdingsFungibility'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +97,8 @@ class CreatePortfolioDetails(BaseModel):
         _obj = CreatePortfolioDetails.parse_obj({
             "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
             "tax_lot_selection_cost_basis": obj.get("taxLotSelectionCostBasis"),
-            "fractional_units_true_up_configuration": FractionalUnitsTrueUpConfiguration.from_dict(obj.get("fractionalUnitsTrueUpConfiguration")) if obj.get("fractionalUnitsTrueUpConfiguration") is not None else None
+            "fractional_units_true_up_configuration": FractionalUnitsTrueUpConfiguration.from_dict(obj.get("fractionalUnitsTrueUpConfiguration")) if obj.get("fractionalUnitsTrueUpConfiguration") is not None else None,
+            "holdings_fungibility": obj.get("holdingsFungibility")
         })
         return _obj
 

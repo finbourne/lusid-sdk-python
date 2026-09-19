@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost. | [optional] 
 **fractional_units_true_up_configuration** | [**FractionalUnitsTrueUpConfiguration**](FractionalUnitsTrueUpConfiguration.md) |  | [optional] 
+**holdings_fungibility** | **str** | Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured flag reads back as absent. Available values: Default, Enabled. | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ from datetime import datetime
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_cost_basis"
 fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = # Replace with your value
-create_portfolio_details_instance = CreatePortfolioDetails(corporate_action_source_id=corporate_action_source_id, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration)
+holdings_fungibility: Optional[StrictStr] = "example_holdings_fungibility"
+create_portfolio_details_instance = CreatePortfolioDetails(corporate_action_source_id=corporate_action_source_id, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility)
 
 ```
 
