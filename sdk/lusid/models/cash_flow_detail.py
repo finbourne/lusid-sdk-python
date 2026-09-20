@@ -34,9 +34,11 @@ class CashFlowDetail(BaseModel):
     currency:  StrictStr = Field(...,alias="currency", description="The payment currency of the cashflow.") 
     source_type:  StrictStr = Field(...,alias="sourceType", description="The source that produced the cashflow in the cash flow waterfall. One of 'Instrument' (produced by the valuation engine), 'Transaction' (produced from a booked transaction or movement) or 'SRS' (sourced from the structured results store).") 
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The LUSID instrument identifier of the instrument that produced the cashflow.") 
+    instrument_display_name:  Optional[StrictStr] = Field(None,alias="instrumentDisplayName", description="The display name of the instrument that produced the cashflow. Not present when the instrument cannot be resolved (e.g. deleted, no permission).") 
     transaction_id:  Optional[StrictStr] = Field(None,alias="transactionId", description="The identifier of the transaction from which the cashflow originates, where known.") 
     portfolio_id: ResourceId = Field(alias="portfolioId")
     flow_type:  Optional[StrictStr] = Field(None,alias="flowType", description="The type of the cashflow, e.g. Coupon, Principal or Premium.") 
+    movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="The name of the movement that produced the cashflow (e.g. Coupon, Side1), falling back to the flow type when the movement is unnamed. Not present when the cashflow could not be valued.") 
     pay_receive:  Optional[StrictStr] = Field(None,alias="payReceive", description="Indicates whether the cashflow is paid or received.") 
     gross_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow before any haircut was applied. Only populated when haircut rules were supplied on the request.", alias="grossAmount")
     haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request.", alias="haircutFraction")
@@ -44,7 +46,7 @@ class CashFlowDetail(BaseModel):
     haircut_rule_applied:  Optional[StrictStr] = Field(None,alias="haircutRuleApplied", description="The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request.") 
     error:  Optional[StrictStr] = Field(None,alias="error", description="Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero.") 
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "transactionId", "portfolioId", "flowType", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "links"]
+    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +95,11 @@ class CashFlowDetail(BaseModel):
         if self.amount is None and "amount" in self.__fields_set__:
             _dict['amount'] = None
 
+        # set to None if instrument_display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_display_name is None and "instrument_display_name" in self.__fields_set__:
+            _dict['instrumentDisplayName'] = None
+
         # set to None if transaction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_id is None and "transaction_id" in self.__fields_set__:
@@ -102,6 +109,11 @@ class CashFlowDetail(BaseModel):
         # and __fields_set__ contains the field
         if self.flow_type is None and "flow_type" in self.__fields_set__:
             _dict['flowType'] = None
+
+        # set to None if movement_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.movement_name is None and "movement_name" in self.__fields_set__:
+            _dict['movementName'] = None
 
         # set to None if pay_receive (nullable) is None
         # and __fields_set__ contains the field
@@ -155,9 +167,11 @@ class CashFlowDetail(BaseModel):
             "currency": obj.get("currency"),
             "source_type": obj.get("sourceType"),
             "instrument_id": obj.get("instrumentId"),
+            "instrument_display_name": obj.get("instrumentDisplayName"),
             "transaction_id": obj.get("transactionId"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "flow_type": obj.get("flowType"),
+            "movement_name": obj.get("movementName"),
             "pay_receive": obj.get("payReceive"),
             "gross_amount": obj.get("grossAmount"),
             "haircut_fraction": obj.get("haircutFraction"),

@@ -34,7 +34,7 @@ class CurrencyGroupResponse(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the currency group.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the currency group.") 
     major_unit_currency:  Optional[StrictStr] = Field(None,alias="majorUnitCurrency", description="The three to five letter, case-sensitive currency code of the group's major unit, e.g. GBP for the sterling group.") 
-    circulation_domain:  Optional[StrictStr] = Field(None,alias="circulationDomain", description="The domain in which the group's currencies circulate, e.g. an ISO 3166 country code.") 
+    circulation_domain: Optional[List[StrictStr]] = Field(default=None, description="The domains in which the group's currencies circulate, e.g. ISO 3166 country codes or the ISO 4217 entity names of the countries using the major unit.", alias="circulationDomain")
     minor_units: Optional[List[CurrencyGroupMinorUnit]] = Field(default=None, description="The minor unit currencies belonging to this currency group.", alias="minorUnits")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource.") 

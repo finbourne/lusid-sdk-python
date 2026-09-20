@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the currency group. | [optional] 
 **description** | **str** | A description for the currency group. | [optional] 
 **major_unit_currency** | **str** | The three to five letter, case-sensitive currency code of the group&#39;s major unit, e.g. GBP for the sterling group. | [optional] 
-**circulation_domain** | **str** | The domain in which the group&#39;s currencies circulate, e.g. an ISO 3166 country code. | [optional] 
+**circulation_domain** | **List[str]** | The domains in which the group&#39;s currencies circulate, e.g. ISO 3166 country codes or the ISO 4217 entity names of the countries using the major unit. | [optional] 
 **minor_units** | [**List[CurrencyGroupMinorUnit]**](CurrencyGroupMinorUnit.md) | The minor unit currencies belonging to this currency group. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource. | [optional] 
@@ -26,7 +26,7 @@ code: Optional[StrictStr] = "example_code"
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 major_unit_currency: Optional[StrictStr] = "example_major_unit_currency"
-circulation_domain: Optional[StrictStr] = "example_circulation_domain"
+circulation_domain: Optional[List[StrictStr]] = # Replace with your value
 minor_units: Optional[List[CurrencyGroupMinorUnit]] = # Replace with your value
 version: Optional[Version] = None
 href: Optional[StrictStr] = "example_href"
