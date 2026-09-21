@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **price_scale_factor** | **float** | The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions, and in Valuation, PV and exposure when the recipe&#39;s  UseInstrumentScaleFactorAsDefault pricing option is set: a lookup-priced instrument whose price  quote declares no scale factor of its own is then scaled by this factor. When that option is not  set, only the scale factor attached to the price quotes in the QuoteStore is used.  Must be positive and defaults to 1 if not set. | [optional] 
 **minimum_order_size** | **float** | The Minimum Order Size  Must be non-negative and defaults to 0 if not set. | [optional] 
 **minimum_order_increment** | **float** | The Minimum Order Increment  Must be non-negative and defaults to 0 if not set. | [optional] 
+**price_quotation_type** | **str** | Conventional price quotation type of the instrument.  Whether its quoted price excludes accrued interest (Clean) or includes it (Dirty).  Defaults to Clean if not set.                Supported string (enumeration) values are: [Clean, Dirty]. Available values: Clean, Dirty. | [optional] 
 ## Example
 
 ```python
@@ -19,7 +20,8 @@ from datetime import datetime
 price_scale_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-trading_conventions_instance = TradingConventions(price_scale_factor=price_scale_factor, minimum_order_size=minimum_order_size, minimum_order_increment=minimum_order_increment)
+price_quotation_type: Optional[StrictStr] = "example_price_quotation_type"
+trading_conventions_instance = TradingConventions(price_scale_factor=price_scale_factor, minimum_order_size=minimum_order_size, minimum_order_increment=minimum_order_increment, price_quotation_type=price_quotation_type)
 
 ```
 

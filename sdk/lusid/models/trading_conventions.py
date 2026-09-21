@@ -30,7 +30,8 @@ class TradingConventions(BaseModel):
     price_scale_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The factor used to scale prices for the instrument. Currently used by LUSID when calculating cost  and notional amounts on transactions, and in Valuation, PV and exposure when the recipe's  UseInstrumentScaleFactorAsDefault pricing option is set: a lookup-priced instrument whose price  quote declares no scale factor of its own is then scaled by this factor. When that option is not  set, only the scale factor attached to the price quotes in the QuoteStore is used.  Must be positive and defaults to 1 if not set.", alias="priceScaleFactor")
     minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Size  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderSize")
     minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Increment  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderIncrement")
-    __properties = ["priceScaleFactor", "minimumOrderSize", "minimumOrderIncrement"]
+    price_quotation_type:  Optional[StrictStr] = Field(None,alias="priceQuotationType", description="Conventional price quotation type of the instrument.  Whether its quoted price excludes accrued interest (Clean) or includes it (Dirty).  Defaults to Clean if not set.                Supported string (enumeration) values are: [Clean, Dirty]. Available values: Clean, Dirty.") 
+    __properties = ["priceScaleFactor", "minimumOrderSize", "minimumOrderIncrement", "priceQuotationType"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +65,11 @@ class TradingConventions(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if price_quotation_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_quotation_type is None and "price_quotation_type" in self.__fields_set__:
+            _dict['priceQuotationType'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +84,8 @@ class TradingConventions(BaseModel):
         _obj = TradingConventions.parse_obj({
             "price_scale_factor": obj.get("priceScaleFactor"),
             "minimum_order_size": obj.get("minimumOrderSize"),
-            "minimum_order_increment": obj.get("minimumOrderIncrement")
+            "minimum_order_increment": obj.get("minimumOrderIncrement"),
+            "price_quotation_type": obj.get("priceQuotationType")
         })
         return _obj
 
