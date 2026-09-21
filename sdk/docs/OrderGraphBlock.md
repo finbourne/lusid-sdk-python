@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **derived_state** | **str** | A simple description of the overall state of a block. | 
 **derived_compliance_state** | **str** | The overall compliance state of a block, derived from the block&#39;s orders. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning. | 
 **derived_approval_state** | **str** | The overall approval state of a block, derived from approval of the block&#39;s orders. Available values: Pending, Rejected, Approved, Placed. | 
+**derived_direction** | **int** | The overall direction of a block, derived from its orders&#39; transaction types: 1 the block increases the position (longer), -1 it decreases it (shorter), 0 its orders net flat, null when no direction could be resolved (including unsolicited blocks). | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,9 @@ booked: OrderGraphBlockTransactionSynopsis
 derived_state: StrictStr = "example_derived_state"
 derived_compliance_state: StrictStr = "example_derived_compliance_state"
 derived_approval_state: StrictStr = "example_derived_approval_state"
-order_graph_block_instance = OrderGraphBlock(block=block, ordered=ordered, placed=placed, executed=executed, allocated=allocated, booked=booked, derived_state=derived_state, derived_compliance_state=derived_compliance_state, derived_approval_state=derived_approval_state)
+derived_direction: Optional[StrictInt] = # Replace with your value
+derived_direction: Optional[StrictInt] = None
+order_graph_block_instance = OrderGraphBlock(block=block, ordered=ordered, placed=placed, executed=executed, allocated=allocated, booked=booked, derived_state=derived_state, derived_compliance_state=derived_compliance_state, derived_approval_state=derived_approval_state, derived_direction=derived_direction)
 
 ```
 

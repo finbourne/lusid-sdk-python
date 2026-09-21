@@ -13,71 +13,175 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.aggregate_numeric_tolerance import AggregateNumericTolerance
+from lusid.models.core_attribute_optionality_tolerance import CoreAttributeOptionalityTolerance
+from lusid.models.core_date_tolerance import CoreDateTolerance
+from lusid.models.core_string_cross_tolerance import CoreStringCrossTolerance
+
+
+TOLERANCEBASE_ONE_OF_SCHEMAS = ["AggregateNumericTolerance", "CoreAttributeOptionalityTolerance", "CoreDateTolerance", "CoreStringCrossTolerance"]
 
 class ToleranceBase(BaseModel):
     """
-    Base class for the tolerances that relax how strictly a matching rule compares its two sides. Polymorphic  by ToleranceType; each supported type has a corresponding inherited class.  # noqa: E501
+    Base class for the tolerances that relax how strictly a matching rule compares its two sides. Polymorphic  by ToleranceType; each supported type has a corresponding inherited class.
     """
-    tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
-    rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
-    __properties = ["toleranceType", "ruleName"]
+    # data type: AggregateNumericTolerance
+    oneof_schema_1_validator: Optional[AggregateNumericTolerance] = None
+    # data type: CoreAttributeOptionalityTolerance
+    oneof_schema_2_validator: Optional[CoreAttributeOptionalityTolerance] = None
+    # data type: CoreDateTolerance
+    oneof_schema_3_validator: Optional[CoreDateTolerance] = None
+    # data type: CoreStringCrossTolerance
+    oneof_schema_4_validator: Optional[CoreStringCrossTolerance] = None
+    if TYPE_CHECKING:
+        actual_instance: Union[AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance]
+    else:
+        actual_instance: Any
+    one_of_schemas: List[str] = Field(TOLERANCEBASE_ONE_OF_SCHEMAS, const=True)
 
     class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
         validate_assignment = True
 
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
 
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
-
-    @classmethod
-    def from_json(cls, json_str: str) -> ToleranceBase:
-        """Create an instance of ToleranceBase from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
-        return _dict
+    @validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = ToleranceBase.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        # validate data type: AggregateNumericTolerance
+        if not isinstance(v, AggregateNumericTolerance):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AggregateNumericTolerance`")
+        else:
+            match += 1
+            matchclass = matchclass + " AggregateNumericTolerance"
+        # validate data type: CoreAttributeOptionalityTolerance
+        if not isinstance(v, CoreAttributeOptionalityTolerance):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CoreAttributeOptionalityTolerance`")
+        else:
+            match += 1
+            matchclass = matchclass + " CoreAttributeOptionalityTolerance"
+        # validate data type: CoreDateTolerance
+        if not isinstance(v, CoreDateTolerance):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CoreDateTolerance`")
+        else:
+            match += 1
+            matchclass = matchclass + " CoreDateTolerance"
+        # validate data type: CoreStringCrossTolerance
+        if not isinstance(v, CoreStringCrossTolerance):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CoreStringCrossTolerance`")
+        else:
+            match += 1
+            matchclass = matchclass + " CoreStringCrossTolerance"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: Matched classes " + matchclass)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
+        else:
+            return v
 
     @classmethod
     def from_dict(cls, obj: dict) -> ToleranceBase:
-        """Create an instance of ToleranceBase from a dict"""
-        if obj is None:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> ToleranceBase:
+        """Returns the object represented by the json string"""
+        instance = ToleranceBase.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        
+
+        # deserialize data into AggregateNumericTolerance
+        try:
+            instance.actual_instance = AggregateNumericTolerance.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " AggregateNumericTolerance"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into CoreAttributeOptionalityTolerance
+        try:
+            instance.actual_instance = CoreAttributeOptionalityTolerance.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " CoreAttributeOptionalityTolerance"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into CoreDateTolerance
+        try:
+            instance.actual_instance = CoreDateTolerance.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " CoreDateTolerance"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into CoreStringCrossTolerance
+        try:
+            instance.actual_instance = CoreStringCrossTolerance.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " CoreStringCrossTolerance"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
+        else:
+            return instance
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
+
+        to_json = getattr(self.actual_instance, "to_json", None)
+        if callable(to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
+
+    def to_dict(self) -> dict:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return ToleranceBase.parse_obj(obj)
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = ToleranceBase.parse_obj({
-            "tolerance_type": obj.get("toleranceType"),
-            "rule_name": obj.get("ruleName")
-        })
-        return _obj
-
-ToleranceBase.update_forward_refs()
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))

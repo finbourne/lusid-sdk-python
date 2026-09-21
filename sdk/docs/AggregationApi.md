@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**generate_configuration_recipe**](AggregationApi.md#generate_configuration_recipe) | **POST** /api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
 [**get_queryable_keys**](AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | GetQueryableKeys: Query the set of supported \&quot;addresses\&quot; that can be queried from the aggregation endpoint.
+[**get_queryable_keys_for_metrics**](AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
 [**get_valuation**](AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 [**get_valuation_of_weighted_instruments**](AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 
@@ -196,6 +197,103 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_queryable_keys_for_metrics**
+> QueryableKeysForMetricsResponse get_queryable_keys_for_metrics(queryable_keys_for_metrics_request=queryable_keys_for_metrics_request)
+
+[EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+
+Describes what a valuation would return for each of the supplied metrics, so that a caller can  prepare for the response, and render it, without having to ask for the valuation first. The  metrics are given exactly as they would be supplied to the metrics of a valuation request.                Each metric is reported on individually, keyed by its normalised address key: those that resolve  appear under metrics with their queryable key definition, and the rest appear under failed with the  reason. A metric that does not exist, or that you are not entitled to read, is reported as failed;  the two cases are not distinguished from one another.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AggregationApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AggregationApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # queryable_keys_for_metrics_request = QueryableKeysForMetricsRequest.from_json("")
+    # queryable_keys_for_metrics_request = QueryableKeysForMetricsRequest.from_dict({})
+    queryable_keys_for_metrics_request = QueryableKeysForMetricsRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_queryable_keys_for_metrics(queryable_keys_for_metrics_request=queryable_keys_for_metrics_request, opts=opts)
+
+        # [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+        api_response = api_instance.get_queryable_keys_for_metrics(queryable_keys_for_metrics_request=queryable_keys_for_metrics_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AggregationApi->get_queryable_keys_for_metrics: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **queryable_keys_for_metrics_request** | [**QueryableKeysForMetricsRequest**](QueryableKeysForMetricsRequest.md)| The set of metrics whose queryable keys are to be described | [optional] 
+
+### Return type
+
+[**QueryableKeysForMetricsResponse**](QueryableKeysForMetricsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 ### HTTP response details

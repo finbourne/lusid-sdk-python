@@ -41,6 +41,7 @@ Class | Method | HTTP request | Description
 *AggregatedReturnsApi* | [**upsert_returns_entity**](docs/AggregatedReturnsApi.md#upsert_returns_entity) | **POST** /api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.
 *AggregationApi* | [**generate_configuration_recipe**](docs/AggregationApi.md#generate_configuration_recipe) | **POST** /api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
 *AggregationApi* | [**get_queryable_keys**](docs/AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
+*AggregationApi* | [**get_queryable_keys_for_metrics**](docs/AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
 *AggregationApi* | [**get_valuation**](docs/AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 *AggregationApi* | [**get_valuation_of_weighted_instruments**](docs/AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 *AllocationsApi* | [**delete_allocation**](docs/AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] DeleteAllocation: Delete allocation
@@ -843,6 +844,7 @@ Class | Method | HTTP request | Description
  - [AdjustHoldingForDateRequest](docs/AdjustHoldingForDateRequest.md)
  - [AdjustHoldingRequest](docs/AdjustHoldingRequest.md)
  - [AggregateMatchingRule](docs/AggregateMatchingRule.md)
+ - [AggregateNumericTolerance](docs/AggregateNumericTolerance.md)
  - [AggregateRuleValues](docs/AggregateRuleValues.md)
  - [AggregateSpec](docs/AggregateSpec.md)
  - [AggregatedReturn](docs/AggregatedReturn.md)
@@ -1097,13 +1099,17 @@ Class | Method | HTTP request | Description
  - [ConsentGrantedElection](docs/ConsentGrantedElection.md)
  - [ConstantVolatilitySurface](docs/ConstantVolatilitySurface.md)
  - [ConstituentsAdjustmentHeader](docs/ConstituentsAdjustmentHeader.md)
+ - [ContiguousActivityWindow](docs/ContiguousActivityWindow.md)
  - [ContractDetails](docs/ContractDetails.md)
  - [ContractForDifference](docs/ContractForDifference.md)
  - [ContractInitialisationEvent](docs/ContractInitialisationEvent.md)
  - [ContributionToNonPassingRuleDetail](docs/ContributionToNonPassingRuleDetail.md)
  - [ConversionEvent](docs/ConversionEvent.md)
+ - [CoreAttributeOptionalityTolerance](docs/CoreAttributeOptionalityTolerance.md)
+ - [CoreDateTolerance](docs/CoreDateTolerance.md)
  - [CoreMatchingRule](docs/CoreMatchingRule.md)
  - [CoreRuleValues](docs/CoreRuleValues.md)
+ - [CoreStringCrossTolerance](docs/CoreStringCrossTolerance.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)
@@ -1907,6 +1913,8 @@ Class | Method | HTTP request | Description
  - [QueryRelationalDatasetRequest](docs/QueryRelationalDatasetRequest.md)
  - [QueryTradeTicketsRequest](docs/QueryTradeTicketsRequest.md)
  - [QueryableKey](docs/QueryableKey.md)
+ - [QueryableKeysForMetricsRequest](docs/QueryableKeysForMetricsRequest.md)
+ - [QueryableKeysForMetricsResponse](docs/QueryableKeysForMetricsResponse.md)
  - [Quote](docs/Quote.md)
  - [QuoteAccessMetadataRule](docs/QuoteAccessMetadataRule.md)
  - [QuoteAccessMetadataRuleId](docs/QuoteAccessMetadataRuleId.md)
@@ -1924,6 +1932,7 @@ Class | Method | HTTP request | Description
  - [RawVendorEvent](docs/RawVendorEvent.md)
  - [ReOpenPeriodDiaryEntryRequest](docs/ReOpenPeriodDiaryEntryRequest.md)
  - [RealisedGainLoss](docs/RealisedGainLoss.md)
+ - [RecActivitySinceEffectiveAt](docs/RecActivitySinceEffectiveAt.md)
  - [RecActivityWindow](docs/RecActivityWindow.md)
  - [RecApprovalDecision](docs/RecApprovalDecision.md)
  - [RecAsAtPolicy](docs/RecAsAtPolicy.md)

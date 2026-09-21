@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **execution_ids** | [**List[ResourceId]**](ResourceId.md) | The executions associated with this allocation | [optional] 
 **custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
+**direction** | **int** | The direction of the allocation&#39;s side, derived from its transaction type at write time: 1 the side increases the position (longer), -1 it decreases it (shorter), null when no direction could be resolved. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -58,8 +59,10 @@ counterparty: Optional[StrictStr] = "example_counterparty"
 execution_ids: Optional[List[ResourceId]] = # Replace with your value
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
+direction: Optional[StrictInt] = # Replace with your value
+direction: Optional[StrictInt] = None
 links: Optional[List[Link]] = None
-allocation_instance = Allocation(id=id, allocated_order_id=allocated_order_id, portfolio_id=portfolio_id, quantity=quantity, instrument_identifiers=instrument_identifiers, version=version, properties=properties, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids, custodian_account_id=custodian_account_id, data_model_membership=data_model_membership, links=links)
+allocation_instance = Allocation(id=id, allocated_order_id=allocated_order_id, portfolio_id=portfolio_id, quantity=quantity, instrument_identifiers=instrument_identifiers, version=version, properties=properties, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, placement_ids=placement_ids, state=state, side=side, type=type, settlement_date=settlement_date, var_date=var_date, price=price, settlement_currency=settlement_currency, settlement_currency_fx_rate=settlement_currency_fx_rate, counterparty=counterparty, execution_ids=execution_ids, custodian_account_id=custodian_account_id, data_model_membership=data_model_membership, direction=direction, links=links)
 
 ```
 

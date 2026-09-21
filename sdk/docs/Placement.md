@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **entry_type** | **str** | Optionally specifies the entry type of this placement. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
+**direction** | **int** | The direction of the placement&#39;s side, inherited at creation from its block&#39;s orders: 1 the side increases the position (longer), -1 it decreases it (shorter), 0 the block&#39;s orders net flat, null when no direction could be resolved. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -56,8 +57,10 @@ execution_system: Optional[StrictStr] = "example_execution_system"
 entry_type: Optional[StrictStr] = "example_entry_type"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
+direction: Optional[StrictInt] = # Replace with your value
+direction: Optional[StrictInt] = None
 links: Optional[List[Link]] = None
-placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, basis=basis, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, links=links)
+placement_instance = Placement(id=id, parent_placement_id=parent_placement_id, block_ids=block_ids, properties=properties, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, quantity=quantity, amount=amount, basis=basis, state=state, side=side, time_in_force=time_in_force, type=type, created_date=created_date, limit_price=limit_price, stop_price=stop_price, counterparty=counterparty, execution_system=execution_system, entry_type=entry_type, version=version, data_model_membership=data_model_membership, direction=direction, links=links)
 
 ```
 

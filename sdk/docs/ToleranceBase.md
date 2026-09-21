@@ -1,11 +1,6 @@
 # ToleranceBase
 
 Base class for the tolerances that relax how strictly a matching rule compares its two sides. Polymorphic  by ToleranceType; each supported type has a corresponding inherited class.
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**tolerance_type** | **str** | Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. | 
-**rule_name** | **str** | The reference name of the rule that this tolerance relaxes. | 
 ## Example
 
 ```python
@@ -15,11 +10,28 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-tolerance_type: StrictStr = "example_tolerance_type"
-rule_name: StrictStr = "example_rule_name"
-tolerance_base_instance = ToleranceBase(tolerance_type=tolerance_type, rule_name=rule_name)
+# Example with ToleranceBase 
+
+aggregate_numeric_tolerance_instance = lusid.models.aggregate_numeric_tolerance.AggregateNumericTolerance(
+                        reference_side = '', 
+                        absolute_threshold = 1.337, 
+                        relative_threshold = 1.337, 
+                        threshold_priority = '', 
+                        offset = '', 
+                        tolerance_type = '', 
+                        rule_name = '', )
+
+tolerance_base_instance = ToleranceBase(aggregate_numeric_tolerance_instance)
 
 ```
+See all compatible oneOf types with ToleranceBase
+
+
+ * [CoreAttributeOptionalityTolerance](./CoreAttributeOptionalityTolerance.md)
+
+ * [CoreDateTolerance](./CoreDateTolerance.md)
+
+ * [CoreStringCrossTolerance](./CoreStringCrossTolerance.md)
 
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

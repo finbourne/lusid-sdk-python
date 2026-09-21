@@ -161,6 +161,7 @@ from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
 from lusid.models.aggregate_matching_rule import AggregateMatchingRule
+from lusid.models.aggregate_numeric_tolerance import AggregateNumericTolerance
 from lusid.models.aggregate_rule_values import AggregateRuleValues
 from lusid.models.aggregate_spec import AggregateSpec
 from lusid.models.aggregated_return import AggregatedReturn
@@ -415,13 +416,17 @@ from lusid.models.consent_event import ConsentEvent
 from lusid.models.consent_granted_election import ConsentGrantedElection
 from lusid.models.constant_volatility_surface import ConstantVolatilitySurface
 from lusid.models.constituents_adjustment_header import ConstituentsAdjustmentHeader
+from lusid.models.contiguous_activity_window import ContiguousActivityWindow
 from lusid.models.contract_details import ContractDetails
 from lusid.models.contract_for_difference import ContractForDifference
 from lusid.models.contract_initialisation_event import ContractInitialisationEvent
 from lusid.models.contribution_to_non_passing_rule_detail import ContributionToNonPassingRuleDetail
 from lusid.models.conversion_event import ConversionEvent
+from lusid.models.core_attribute_optionality_tolerance import CoreAttributeOptionalityTolerance
+from lusid.models.core_date_tolerance import CoreDateTolerance
 from lusid.models.core_matching_rule import CoreMatchingRule
 from lusid.models.core_rule_values import CoreRuleValues
+from lusid.models.core_string_cross_tolerance import CoreStringCrossTolerance
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
 from lusid.models.corporate_action_transition import CorporateActionTransition
@@ -1225,6 +1230,8 @@ from lusid.models.query_instrument_events_request import QueryInstrumentEventsRe
 from lusid.models.query_relational_dataset_request import QueryRelationalDatasetRequest
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
 from lusid.models.queryable_key import QueryableKey
+from lusid.models.queryable_keys_for_metrics_request import QueryableKeysForMetricsRequest
+from lusid.models.queryable_keys_for_metrics_response import QueryableKeysForMetricsResponse
 from lusid.models.quote import Quote
 from lusid.models.quote_access_metadata_rule import QuoteAccessMetadataRule
 from lusid.models.quote_access_metadata_rule_id import QuoteAccessMetadataRuleId
@@ -1242,6 +1249,7 @@ from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.rec_activity_since_effective_at import RecActivitySinceEffectiveAt
 from lusid.models.rec_activity_window import RecActivityWindow
 from lusid.models.rec_approval_decision import RecApprovalDecision
 from lusid.models.rec_as_at_policy import RecAsAtPolicy
@@ -1977,6 +1985,7 @@ __all__ = [
     "AdjustHoldingForDateRequest",
     "AdjustHoldingRequest",
     "AggregateMatchingRule",
+    "AggregateNumericTolerance",
     "AggregateRuleValues",
     "AggregateSpec",
     "AggregatedReturn",
@@ -2231,13 +2240,17 @@ __all__ = [
     "ConsentGrantedElection",
     "ConstantVolatilitySurface",
     "ConstituentsAdjustmentHeader",
+    "ContiguousActivityWindow",
     "ContractDetails",
     "ContractForDifference",
     "ContractInitialisationEvent",
     "ContributionToNonPassingRuleDetail",
     "ConversionEvent",
+    "CoreAttributeOptionalityTolerance",
+    "CoreDateTolerance",
     "CoreMatchingRule",
     "CoreRuleValues",
+    "CoreStringCrossTolerance",
     "CorporateAction",
     "CorporateActionSource",
     "CorporateActionTransition",
@@ -3041,6 +3054,8 @@ __all__ = [
     "QueryRelationalDatasetRequest",
     "QueryTradeTicketsRequest",
     "QueryableKey",
+    "QueryableKeysForMetricsRequest",
+    "QueryableKeysForMetricsResponse",
     "Quote",
     "QuoteAccessMetadataRule",
     "QuoteAccessMetadataRuleId",
@@ -3058,6 +3073,7 @@ __all__ = [
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
+    "RecActivitySinceEffectiveAt",
     "RecActivityWindow",
     "RecApprovalDecision",
     "RecAsAtPolicy",

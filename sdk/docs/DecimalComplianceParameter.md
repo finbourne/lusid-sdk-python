@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **float** |  | 
+**inclusive_bounds** | **bool** | Whether the bound is inclusive of the value; when true a candidate landing exactly on the bound satisfies it. Defaults to false (exclusive). | [optional] 
 **compliance_parameter_type** | **str** | The parameter type. Available values: BoolComplianceParameter, StringComplianceParameter, DecimalComplianceParameter, DateTimeComplianceParameter, PropertyKeyComplianceParameter, AddressKeyComplianceParameter, PortfolioIdComplianceParameter, PortfolioGroupIdComplianceParameter, StringListComplianceParameter, BoolListComplianceParameter, DateTimeListComplianceParameter, DecimalListComplianceParameter, PropertyKeyListComplianceParameter, AddressKeyListComplianceParameter, PortfolioIdListComplianceParameter, PortfolioGroupIdListComplianceParameter, InstrumentListComplianceParameter, FilterPredicateComplianceParameter, GroupFilterPredicateComplianceParameter, GroupBySelectorComplianceParameter, PropertyListComplianceParameter, GroupCalculationComplianceParameter. | 
 ## Example
 
@@ -15,8 +16,10 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 value: Union[StrictFloat, StrictInt]
+inclusive_bounds: Optional[StrictBool] = # Replace with your value
+inclusive_bounds:Optional[StrictBool] = None
 compliance_parameter_type: StrictStr = "example_compliance_parameter_type"
-decimal_compliance_parameter_instance = DecimalComplianceParameter(value=value, compliance_parameter_type=compliance_parameter_type)
+decimal_compliance_parameter_instance = DecimalComplianceParameter(value=value, inclusive_bounds=inclusive_bounds, compliance_parameter_type=compliance_parameter_type)
 
 ```
 

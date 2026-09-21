@@ -13,69 +13,127 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.contiguous_activity_window import ContiguousActivityWindow
+
+
+RECACTIVITYWINDOW_ONE_OF_SCHEMAS = ["ContiguousActivityWindow"]
 
 class RecActivityWindow(BaseModel):
     """
-    Base class for the activity windows that give the date range a rec definition's activity-based  reconciliations cover. Polymorphic by windowType; each supported type has a corresponding inherited class.  # noqa: E501
+    Base class for the activity windows that give the date range a rec definition's activity-based  reconciliations cover. Polymorphic by windowType; each supported type has a corresponding inherited class.
     """
-    window_type:  StrictStr = Field(...,alias="windowType", description="Polymorphic discriminator. Supported types: Contiguous. Contiguous requires effectiveAtProgression Series. Available values: Contiguous, FixedLookback, Explicit, ClosedPeriod, ContiguousAsAt.") 
-    __properties = ["windowType"]
+    # data type: ContiguousActivityWindow
+    oneof_schema_1_validator: Optional[ContiguousActivityWindow] = None
+    if TYPE_CHECKING:
+        actual_instance: Union[ContiguousActivityWindow]
+    else:
+        actual_instance: Any
+    one_of_schemas: List[str] = Field(RECACTIVITYWINDOW_ONE_OF_SCHEMAS, const=True)
 
     class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
         validate_assignment = True
 
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
 
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
-
-    @classmethod
-    def from_json(cls, json_str: str) -> RecActivityWindow:
-        """Create an instance of RecActivityWindow from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
-        return _dict
+    @validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = RecActivityWindow.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        # validate data type: ContiguousActivityWindow
+        if not isinstance(v, ContiguousActivityWindow):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ContiguousActivityWindow`")
+        else:
+            match += 1
+            matchclass = matchclass + " ContiguousActivityWindow"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow. Details: Matched classes " + matchclass)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow. Details: " + ", ".join(error_messages))
+        else:
+            return v
 
     @classmethod
     def from_dict(cls, obj: dict) -> RecActivityWindow:
-        """Create an instance of RecActivityWindow from a dict"""
-        if obj is None:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> RecActivityWindow:
+        """Returns the object represented by the json string"""
+        instance = RecActivityWindow.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        
+
+        # deserialize data into ContiguousActivityWindow
+        try:
+            instance.actual_instance = ContiguousActivityWindow.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " ContiguousActivityWindow"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow. Details: " + ", ".join(error_messages))
+        else:
+            return instance
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
+
+        to_json = getattr(self.actual_instance, "to_json", None)
+        if callable(to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
+
+    def to_dict(self) -> dict:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return RecActivityWindow.parse_obj(obj)
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = RecActivityWindow.parse_obj({
-            "window_type": obj.get("windowType")
-        })
-        return _obj
-
-RecActivityWindow.update_forward_refs()
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))
