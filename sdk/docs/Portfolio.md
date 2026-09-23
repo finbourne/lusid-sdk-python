@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The name of the portfolio. | 
 **description** | **str** | The long form description of the portfolio. | [optional] 
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | 
-**enablement_date** | **datetime** | The effective datetime from which transactions or holdings booked to the portfolio begin contributing to holdings, valuations and other computed results. Data with an earlier effective date is still accepted and stored, but does not affect any computed results until this date. Defaults to the portfolio&#39;s creation date when not explicitly set. | [optional] 
+**enablement_date** | **datetime** | The effective datetime from which instrument events and corporate actions are generated and applied to the portfolio. Transactions and holdings booked to the portfolio contribute to holdings, valuations and other computed results from its creation date whatever the enablement date. Defaults to the portfolio&#39;s creation date when not explicitly set. | [optional] 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 

@@ -91,6 +91,7 @@ from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
 from lusid.api.transfer_agency_api import TransferAgencyApi
 from lusid.api.transfers_api import TransfersApi
 from lusid.api.translation_api import TranslationApi
+from lusid.api.withholding_tax_api import WithholdingTaxApi
 from lusid.api.workspace_api import WorkspaceApi
 
 
@@ -185,5 +186,6 @@ __all__ = [
     "TransferAgencyApi",
     "TransfersApi",
     "TranslationApi",
+    "WithholdingTaxApi",
     "WorkspaceApi"
 ]

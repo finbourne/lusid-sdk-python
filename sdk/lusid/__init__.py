@@ -107,6 +107,7 @@ from lusid.api.transaction_portfolios_api import TransactionPortfoliosApi
 from lusid.api.transfer_agency_api import TransferAgencyApi
 from lusid.api.transfers_api import TransfersApi
 from lusid.api.translation_api import TranslationApi
+from lusid.api.withholding_tax_api import WithholdingTaxApi
 from lusid.api.workspace_api import WorkspaceApi
 
 # import ApiClient
@@ -481,6 +482,8 @@ from lusid.models.create_transfer_request import CreateTransferRequest
 from lusid.models.create_transfer_response import CreateTransferResponse
 from lusid.models.create_unit_definition import CreateUnitDefinition
 from lusid.models.create_valuation_point_request import CreateValuationPointRequest
+from lusid.models.create_withholding_tax_dataset import CreateWithholdingTaxDataset
+from lusid.models.create_withholding_tax_dataset_definitions_request import CreateWithholdingTaxDatasetDefinitionsRequest
 from lusid.models.credit_default_swap import CreditDefaultSwap
 from lusid.models.credit_premium_cash_flow_event import CreditPremiumCashFlowEvent
 from lusid.models.credit_rating import CreditRating
@@ -1067,6 +1070,7 @@ from lusid.models.paged_resource_list_of_order_graph_placement import PagedResou
 from lusid.models.paged_resource_list_of_order_instruction import PagedResourceListOfOrderInstruction
 from lusid.models.paged_resource_list_of_package import PagedResourceListOfPackage
 from lusid.models.paged_resource_list_of_participation import PagedResourceListOfParticipation
+from lusid.models.paged_resource_list_of_payment_instruction import PagedResourceListOfPaymentInstruction
 from lusid.models.paged_resource_list_of_person import PagedResourceListOfPerson
 from lusid.models.paged_resource_list_of_placement import PagedResourceListOfPlacement
 from lusid.models.paged_resource_list_of_portfolio_group import PagedResourceListOfPortfolioGroup
@@ -1098,6 +1102,8 @@ from lusid.models.paged_resource_list_of_valuation_point_instrument import Paged
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.paged_resource_list_of_version import PagedResourceListOfVersion
 from lusid.models.paged_resource_list_of_virtual_row import PagedResourceListOfVirtualRow
+from lusid.models.paged_resource_list_of_withholding_tax_configuration import PagedResourceListOfWithholdingTaxConfiguration
+from lusid.models.paged_resource_list_of_withholding_tax_dataset import PagedResourceListOfWithholdingTaxDataset
 from lusid.models.paged_resource_list_of_workspace import PagedResourceListOfWorkspace
 from lusid.models.paged_resource_list_of_workspace_item import PagedResourceListOfWorkspaceItem
 from lusid.models.pari_passu_event import PariPassuEvent
@@ -1499,6 +1505,7 @@ from lusid.models.sell_entitlement_election import SellEntitlementElection
 from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.series_definition import SeriesDefinition
 from lusid.models.series_definition_request import SeriesDefinitionRequest
+from lusid.models.series_identifier_field import SeriesIdentifierField
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
@@ -1592,6 +1599,7 @@ from lusid.models.to_be_announced import ToBeAnnounced
 from lusid.models.to_be_announced_option import ToBeAnnouncedOption
 from lusid.models.tolerance_base import ToleranceBase
 from lusid.models.total_return_swap import TotalReturnSwap
+from lusid.models.total_return_swap_cash_flow_event import TotalReturnSwapCashFlowEvent
 from lusid.models.touch import Touch
 from lusid.models.trade_ticket import TradeTicket
 from lusid.models.trade_ticket_type import TradeTicketType
@@ -1771,6 +1779,7 @@ from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgen
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
+from lusid.models.upsert_withholding_tax_configuration_request import UpsertWithholdingTaxConfigurationRequest
 from lusid.models.user import User
 from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
@@ -1825,6 +1834,10 @@ from lusid.models.weighted_allocation_service_run_request import WeightedAllocat
 from lusid.models.weighted_instrument import WeightedInstrument
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 from lusid.models.weighted_instruments import WeightedInstruments
+from lusid.models.withholding_tax_configuration import WithholdingTaxConfiguration
+from lusid.models.withholding_tax_dataset import WithholdingTaxDataset
+from lusid.models.withholding_tax_dataset_definitions import WithholdingTaxDatasetDefinitions
+from lusid.models.withholding_tax_value_source import WithholdingTaxValueSource
 from lusid.models.workspace import Workspace
 from lusid.models.workspace_creation_request import WorkspaceCreationRequest
 from lusid.models.workspace_item import WorkspaceItem
@@ -1941,6 +1954,7 @@ __all__ = [
     "TransferAgencyApi",
     "TransfersApi",
     "TranslationApi",
+    "WithholdingTaxApi",
     "WorkspaceApi",
     "A2BBreakdown",
     "A2BCategory",
@@ -2305,6 +2319,8 @@ __all__ = [
     "CreateTransferResponse",
     "CreateUnitDefinition",
     "CreateValuationPointRequest",
+    "CreateWithholdingTaxDataset",
+    "CreateWithholdingTaxDatasetDefinitionsRequest",
     "CreditDefaultSwap",
     "CreditPremiumCashFlowEvent",
     "CreditRating",
@@ -2891,6 +2907,7 @@ __all__ = [
     "PagedResourceListOfOrderInstruction",
     "PagedResourceListOfPackage",
     "PagedResourceListOfParticipation",
+    "PagedResourceListOfPaymentInstruction",
     "PagedResourceListOfPerson",
     "PagedResourceListOfPlacement",
     "PagedResourceListOfPortfolioGroup",
@@ -2922,6 +2939,8 @@ __all__ = [
     "PagedResourceListOfValuationPointOverview",
     "PagedResourceListOfVersion",
     "PagedResourceListOfVirtualRow",
+    "PagedResourceListOfWithholdingTaxConfiguration",
+    "PagedResourceListOfWithholdingTaxDataset",
     "PagedResourceListOfWorkspace",
     "PagedResourceListOfWorkspaceItem",
     "PariPassuEvent",
@@ -3323,6 +3342,7 @@ __all__ = [
     "SequenceDefinition",
     "SeriesDefinition",
     "SeriesDefinitionRequest",
+    "SeriesIdentifierField",
     "SetAmortisationRulesRequest",
     "SetLegalEntityIdentifiersRequest",
     "SetLegalEntityPropertiesRequest",
@@ -3416,6 +3436,7 @@ __all__ = [
     "ToBeAnnouncedOption",
     "ToleranceBase",
     "TotalReturnSwap",
+    "TotalReturnSwapCashFlowEvent",
     "Touch",
     "TradeTicket",
     "TradeTicketType",
@@ -3595,6 +3616,7 @@ __all__ = [
     "UpsertTranslationScriptRequest",
     "UpsertValuationPointRequest",
     "UpsertVirtualTransactionOverrideResponse",
+    "UpsertWithholdingTaxConfigurationRequest",
     "User",
     "ValuationPoint",
     "ValuationPointDataQueryParameters",
@@ -3649,6 +3671,10 @@ __all__ = [
     "WeightedInstrument",
     "WeightedInstrumentInLineLookupIdentifiers",
     "WeightedInstruments",
+    "WithholdingTaxConfiguration",
+    "WithholdingTaxDataset",
+    "WithholdingTaxDatasetDefinitions",
+    "WithholdingTaxValueSource",
     "Workspace",
     "WorkspaceCreationRequest",
     "WorkspaceItem",

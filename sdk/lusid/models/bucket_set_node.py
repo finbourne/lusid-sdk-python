@@ -42,7 +42,10 @@ class BucketSetNode(BaseModel):
     previous_nav: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net asset value this node carried at the previous valuation point, in the fund currency. Zero at the fund's first valuation point.", alias="previousNav")
     net_dealing_units: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net units dealt for the share class over the period, so that the shares in issue are the previous shares in issue plus this. Omitted on the fund node and where the bucket set is not unitised.", alias="netDealingUnits")
     share_class_details: Optional[BucketSetShareClassDetails] = Field(default=None, alias="shareClassDetails")
-    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets", "perUnitValue", "sharesInIssue", "previousPerUnitValue", "previousSharesInIssue", "label", "previousNav", "netDealingUnits", "shareClassDetails"]
+    nav_share_class_currency: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The node's net asset value restated in the share class' own currency, at the rate this node publishes. Set only on share class nodes.", alias="navShareClassCurrency")
+    share_class_to_fund_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fx rate from the share class currency to the fund currency at this valuation point. Nav and the bucket values are in the fund currency, so divide by this rate to restate them in the share class currency. Set only on share class nodes.", alias="shareClassToFundFxRate")
+    previous_nav_share_class_currency: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net asset value in the share class' currency at the previous valuation point, as that point published it, at the rate that point struck. Zero at the fund's first valuation point. Absent (rather than zero) if the previous valuation point predates this field.", alias="previousNavShareClassCurrency")
+    __properties = ["nodeType", "shareClassShortCode", "nav", "capitalRatio", "buckets", "perUnitValue", "sharesInIssue", "previousPerUnitValue", "previousSharesInIssue", "label", "previousNav", "netDealingUnits", "shareClassDetails", "navShareClassCurrency", "shareClassToFundFxRate", "previousNavShareClassCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -136,6 +139,21 @@ class BucketSetNode(BaseModel):
         if self.net_dealing_units is None and "net_dealing_units" in self.__fields_set__:
             _dict['netDealingUnits'] = None
 
+        # set to None if nav_share_class_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nav_share_class_currency is None and "nav_share_class_currency" in self.__fields_set__:
+            _dict['navShareClassCurrency'] = None
+
+        # set to None if share_class_to_fund_fx_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.share_class_to_fund_fx_rate is None and "share_class_to_fund_fx_rate" in self.__fields_set__:
+            _dict['shareClassToFundFxRate'] = None
+
+        # set to None if previous_nav_share_class_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_nav_share_class_currency is None and "previous_nav_share_class_currency" in self.__fields_set__:
+            _dict['previousNavShareClassCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -160,7 +178,10 @@ class BucketSetNode(BaseModel):
             "label": obj.get("label"),
             "previous_nav": obj.get("previousNav"),
             "net_dealing_units": obj.get("netDealingUnits"),
-            "share_class_details": BucketSetShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None
+            "share_class_details": BucketSetShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None,
+            "nav_share_class_currency": obj.get("navShareClassCurrency"),
+            "share_class_to_fund_fx_rate": obj.get("shareClassToFundFxRate"),
+            "previous_nav_share_class_currency": obj.get("previousNavShareClassCurrency")
         })
         return _obj
 
