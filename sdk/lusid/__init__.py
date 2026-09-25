@@ -45,6 +45,7 @@ from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.entities_api import EntitiesApi
+from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
@@ -377,12 +378,15 @@ from lusid.models.compliance_parameter_type import ComplianceParameterType
 from lusid.models.compliance_rule import ComplianceRule
 from lusid.models.compliance_rule_breakdown import ComplianceRuleBreakdown
 from lusid.models.compliance_rule_breakdown_request import ComplianceRuleBreakdownRequest
+from lusid.models.compliance_rule_breakdown_with_contributions import ComplianceRuleBreakdownWithContributions
+from lusid.models.compliance_rule_contribution import ComplianceRuleContribution
 from lusid.models.compliance_rule_entity import ComplianceRuleEntity
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.compliance_rule_result import ComplianceRuleResult
 from lusid.models.compliance_rule_result_detail import ComplianceRuleResultDetail
 from lusid.models.compliance_rule_result_portfolio_detail import ComplianceRuleResultPortfolioDetail
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
+from lusid.models.compliance_rule_result_v2_with_contributions import ComplianceRuleResultV2WithContributions
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
 from lusid.models.compliance_rule_template_entity import ComplianceRuleTemplateEntity
 from lusid.models.compliance_rule_upsert_request import ComplianceRuleUpsertRequest
@@ -396,6 +400,7 @@ from lusid.models.compliance_step_type import ComplianceStepType
 from lusid.models.compliance_step_type_request import ComplianceStepTypeRequest
 from lusid.models.compliance_summary_rule_result import ComplianceSummaryRuleResult
 from lusid.models.compliance_summary_rule_result_request import ComplianceSummaryRuleResultRequest
+from lusid.models.compliance_summary_rule_result_with_contributions import ComplianceSummaryRuleResultWithContributions
 from lusid.models.compliance_template import ComplianceTemplate
 from lusid.models.compliance_template_parameter import ComplianceTemplateParameter
 from lusid.models.compliance_template_variation import ComplianceTemplateVariation
@@ -452,6 +457,7 @@ from lusid.models.create_data_type_request import CreateDataTypeRequest
 from lusid.models.create_date_request import CreateDateRequest
 from lusid.models.create_derived_property_definition_request import CreateDerivedPropertyDefinitionRequest
 from lusid.models.create_derived_transaction_portfolio_request import CreateDerivedTransactionPortfolioRequest
+from lusid.models.create_entity_resolver_request import CreateEntityResolverRequest
 from lusid.models.create_group_reconciliation_comparison_ruleset_request import CreateGroupReconciliationComparisonRulesetRequest
 from lusid.models.create_group_reconciliation_definition_request import CreateGroupReconciliationDefinitionRequest
 from lusid.models.create_identifier_definition_request import CreateIdentifierDefinitionRequest
@@ -595,6 +601,7 @@ from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.empty_model_options import EmptyModelOptions
 from lusid.models.entity_identifier import EntityIdentifier
+from lusid.models.entity_resolver import EntityResolver
 from lusid.models.equity import Equity
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
 from lusid.models.equity_curve_by_prices_data import EquityCurveByPricesData
@@ -799,6 +806,7 @@ from lusid.models.hull_white_model_options import HullWhiteModelOptions
 from lusid.models.i_unit_definition_dto import IUnitDefinitionDto
 from lusid.models.id_selector_definition import IdSelectorDefinition
 from lusid.models.identifier_definition import IdentifierDefinition
+from lusid.models.identifier_for_resolution import IdentifierForResolution
 from lusid.models.identifier_part_schema import IdentifierPartSchema
 from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
@@ -1266,6 +1274,7 @@ from lusid.models.rec_dataset_schema import RecDatasetSchema
 from lusid.models.rec_dataset_schemas import RecDatasetSchemas
 from lusid.models.rec_date_policy import RecDatePolicy
 from lusid.models.rec_dates_reconciled import RecDatesReconciled
+from lusid.models.rec_def_by_tax_lots import RecDefByTaxLots
 from lusid.models.rec_def_currencies import RecDefCurrencies
 from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
 from lusid.models.rec_def_ruleset import RecDefRuleset
@@ -1278,7 +1287,6 @@ from lusid.models.rec_execution import RecExecution
 from lusid.models.rec_instance import RecInstance
 from lusid.models.rec_instance_id import RecInstanceId
 from lusid.models.rec_instance_summary import RecInstanceSummary
-from lusid.models.rec_link_key import RecLinkKey
 from lusid.models.rec_linked_by import RecLinkedBy
 from lusid.models.rec_linked_result import RecLinkedResult
 from lusid.models.rec_match_count_by_result_type import RecMatchCountByResultType
@@ -1293,11 +1301,16 @@ from lusid.models.rec_result_counts import RecResultCounts
 from lusid.models.rec_result_decision_group import RecResultDecisionGroup
 from lusid.models.rec_result_decision_update import RecResultDecisionUpdate
 from lusid.models.rec_result_exception import RecResultException
+from lusid.models.rec_result_holding_impact import RecResultHoldingImpact
+from lusid.models.rec_result_holding_item import RecResultHoldingItem
 from lusid.models.rec_result_item import RecResultItem
 from lusid.models.rec_result_item_details import RecResultItemDetails
+from lusid.models.rec_result_link_key import RecResultLinkKey
 from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
+from lusid.models.rec_result_settlement_activity_item import RecResultSettlementActivityItem
+from lusid.models.rec_result_transaction_item import RecResultTransactionItem
 from lusid.models.rec_review import RecReview
 from lusid.models.rec_review_configuration import RecReviewConfiguration
 from lusid.models.rec_review_required_approval import RecReviewRequiredApproval
@@ -1735,6 +1748,7 @@ from lusid.models.upsert_custom_entities_response import UpsertCustomEntitiesRes
 from lusid.models.upsert_custom_entity_access_metadata_request import UpsertCustomEntityAccessMetadataRequest
 from lusid.models.upsert_data_quality_rule import UpsertDataQualityRule
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
+from lusid.models.upsert_entity_resolver_request import UpsertEntityResolverRequest
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
@@ -1892,6 +1906,7 @@ __all__ = [
     "DataTypesApi",
     "DerivedTransactionPortfoliosApi",
     "EntitiesApi",
+    "EntityResolversApi",
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",
@@ -2214,12 +2229,15 @@ __all__ = [
     "ComplianceRule",
     "ComplianceRuleBreakdown",
     "ComplianceRuleBreakdownRequest",
+    "ComplianceRuleBreakdownWithContributions",
+    "ComplianceRuleContribution",
     "ComplianceRuleEntity",
     "ComplianceRuleResponse",
     "ComplianceRuleResult",
     "ComplianceRuleResultDetail",
     "ComplianceRuleResultPortfolioDetail",
     "ComplianceRuleResultV2",
+    "ComplianceRuleResultV2WithContributions",
     "ComplianceRuleTemplate",
     "ComplianceRuleTemplateEntity",
     "ComplianceRuleUpsertRequest",
@@ -2233,6 +2251,7 @@ __all__ = [
     "ComplianceStepTypeRequest",
     "ComplianceSummaryRuleResult",
     "ComplianceSummaryRuleResultRequest",
+    "ComplianceSummaryRuleResultWithContributions",
     "ComplianceTemplate",
     "ComplianceTemplateParameter",
     "ComplianceTemplateVariation",
@@ -2289,6 +2308,7 @@ __all__ = [
     "CreateDateRequest",
     "CreateDerivedPropertyDefinitionRequest",
     "CreateDerivedTransactionPortfolioRequest",
+    "CreateEntityResolverRequest",
     "CreateGroupReconciliationComparisonRulesetRequest",
     "CreateGroupReconciliationDefinitionRequest",
     "CreateIdentifierDefinitionRequest",
@@ -2432,6 +2452,7 @@ __all__ = [
     "EligibilityCalculation",
     "EmptyModelOptions",
     "EntityIdentifier",
+    "EntityResolver",
     "Equity",
     "EquityAllOfIdentifiers",
     "EquityCurveByPricesData",
@@ -2636,6 +2657,7 @@ __all__ = [
     "IUnitDefinitionDto",
     "IdSelectorDefinition",
     "IdentifierDefinition",
+    "IdentifierForResolution",
     "IdentifierPartSchema",
     "IndexConvention",
     "IndexModelOptions",
@@ -3103,6 +3125,7 @@ __all__ = [
     "RecDatasetSchemas",
     "RecDatePolicy",
     "RecDatesReconciled",
+    "RecDefByTaxLots",
     "RecDefCurrencies",
     "RecDefRecipeIds",
     "RecDefRuleset",
@@ -3115,7 +3138,6 @@ __all__ = [
     "RecInstance",
     "RecInstanceId",
     "RecInstanceSummary",
-    "RecLinkKey",
     "RecLinkedBy",
     "RecLinkedResult",
     "RecMatchCountByResultType",
@@ -3130,11 +3152,16 @@ __all__ = [
     "RecResultDecisionGroup",
     "RecResultDecisionUpdate",
     "RecResultException",
+    "RecResultHoldingImpact",
+    "RecResultHoldingItem",
     "RecResultItem",
     "RecResultItemDetails",
+    "RecResultLinkKey",
     "RecResultReview",
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",
+    "RecResultSettlementActivityItem",
+    "RecResultTransactionItem",
     "RecReview",
     "RecReviewConfiguration",
     "RecReviewRequiredApproval",
@@ -3572,6 +3599,7 @@ __all__ = [
     "UpsertCustomEntityAccessMetadataRequest",
     "UpsertDataQualityRule",
     "UpsertDialectRequest",
+    "UpsertEntityResolverRequest",
     "UpsertFlowConventionsRequest",
     "UpsertFundBookmarkRequest",
     "UpsertIndexConventionRequest",

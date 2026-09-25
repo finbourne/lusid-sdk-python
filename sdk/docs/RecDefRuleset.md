@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **rec_type** | **str** | The type of reconciliation this entry configures. Must be valid for the definitionType, and must match the reconciliationType of the referenced matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
 **matching_ruleset_id** | [**ResourceId**](ResourceId.md) |  | 
 **relational_data_filter** | **str** | Selects the slice of the relational dataset this definition draws from, e.g. \&quot;custodian eq &#39;NT&#39;\&quot;. Only permitted when the referenced ruleset declares a relational side, and combined with AND at run time with that ruleset&#39;s own filter for the side. | [optional] 
+**by_tax_lots** | [**RecDefByTaxLots**](RecDefByTaxLots.md) |  | [optional] 
 ## Example
 
 ```python
@@ -18,7 +19,8 @@ from datetime import datetime
 rec_type: StrictStr = "example_rec_type"
 matching_ruleset_id: ResourceId = # Replace with your value
 relational_data_filter: Optional[StrictStr] = "example_relational_data_filter"
-rec_def_ruleset_instance = RecDefRuleset(rec_type=rec_type, matching_ruleset_id=matching_ruleset_id, relational_data_filter=relational_data_filter)
+by_tax_lots: Optional[RecDefByTaxLots] = # Replace with your value
+rec_def_ruleset_instance = RecDefRuleset(rec_type=rec_type, matching_ruleset_id=matching_ruleset_id, relational_data_filter=relational_data_filter, by_tax_lots=by_tax_lots)
 
 ```
 

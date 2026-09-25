@@ -25,6 +25,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.compliance_rule_response import ComplianceRuleResponse
 from lusid.models.compliance_rule_result_v2 import ComplianceRuleResultV2
+from lusid.models.compliance_rule_result_v2_with_contributions import ComplianceRuleResultV2WithContributions
 from lusid.models.compliance_rule_template import ComplianceRuleTemplate
 from lusid.models.compliance_run_configuration import ComplianceRunConfiguration
 from lusid.models.compliance_run_info_v2 import ComplianceRunInfoV2
@@ -717,6 +718,182 @@ class ComplianceApi:
 
         return self.api_client.call_api(
             '/api/compliance/rules/{scope}/{code}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_compliance_rule_breakdown(self, run_scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], run_code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], rule_scope : Annotated[StrictStr, Field(..., description="Required: Rule Scope.")], rule_code : Annotated[StrictStr, Field(..., description="Required: Rule Code.")], **kwargs) -> ComplianceRuleResultV2WithContributions:  # noqa: E501
+        ...
+
+    @overload
+    def get_compliance_rule_breakdown(self, run_scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], run_code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], rule_scope : Annotated[StrictStr, Field(..., description="Required: Rule Scope.")], rule_code : Annotated[StrictStr, Field(..., description="Required: Rule Code.")], async_req: Optional[bool]=True, **kwargs) -> ComplianceRuleResultV2WithContributions:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_compliance_rule_breakdown(self, run_scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], run_code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], rule_scope : Annotated[StrictStr, Field(..., description="Required: Rule Scope.")], rule_code : Annotated[StrictStr, Field(..., description="Required: Rule Code.")], async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRuleResultV2WithContributions, Awaitable[ComplianceRuleResultV2WithContributions]]:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRuleBreakdown: Get the position-level breakdown for a single rule of a compliance run.  # noqa: E501
+
+        Specify a run scope and code from a previously run compliance check, and the scope and code of a rule within that run, to get the per-position contributions behind that rule's breakdown groups.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_compliance_rule_breakdown(run_scope, run_code, rule_scope, rule_code, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param rule_scope: Required: Rule Scope. (required)
+        :type rule_scope: str
+        :param rule_code: Required: Rule Code. (required)
+        :type rule_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ComplianceRuleResultV2WithContributions
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_compliance_rule_breakdown_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_compliance_rule_breakdown_with_http_info(run_scope, run_code, rule_scope, rule_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_compliance_rule_breakdown_with_http_info(self, run_scope : Annotated[StrictStr, Field(..., description="Required: Run Scope.")], run_code : Annotated[StrictStr, Field(..., description="Required: Run Code.")], rule_scope : Annotated[StrictStr, Field(..., description="Required: Rule Scope.")], rule_code : Annotated[StrictStr, Field(..., description="Required: Rule Code.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetComplianceRuleBreakdown: Get the position-level breakdown for a single rule of a compliance run.  # noqa: E501
+
+        Specify a run scope and code from a previously run compliance check, and the scope and code of a rule within that run, to get the per-position contributions behind that rule's breakdown groups.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_compliance_rule_breakdown_with_http_info(run_scope, run_code, rule_scope, rule_code, async_req=True)
+        >>> result = thread.get()
+
+        :param run_scope: Required: Run Scope. (required)
+        :type run_scope: str
+        :param run_code: Required: Run Code. (required)
+        :type run_code: str
+        :param rule_scope: Required: Rule Scope. (required)
+        :type rule_scope: str
+        :param rule_code: Required: Rule Code. (required)
+        :type rule_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ComplianceRuleResultV2WithContributions, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'run_scope',
+            'run_code',
+            'rule_scope',
+            'rule_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_compliance_rule_breakdown" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['run_scope']:
+            _path_params['runScope'] = _params['run_scope']
+
+        if _params['run_code']:
+            _path_params['runCode'] = _params['run_code']
+
+        if _params['rule_scope']:
+            _path_params['ruleScope'] = _params['rule_scope']
+
+        if _params['rule_code']:
+            _path_params['ruleCode'] = _params['rule_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ComplianceRuleResultV2WithContributions",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/compliance/runs/breakdown/{runScope}/{runCode}/{ruleScope}/{ruleCode}', 'GET',
             _path_params,
             _query_params,
             _header_params,

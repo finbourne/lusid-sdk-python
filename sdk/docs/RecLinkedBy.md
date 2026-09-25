@@ -1,11 +1,11 @@
 # RecLinkedBy
 
-The item keys a link between two rec results was established on, per side.
+The item pairings a link between two rec results was established on, per side.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | [**List[RecLinkKey]**](RecLinkKey.md) | The keys shared by the two results&#39; left-side items. May be empty. | 
-**right** | [**List[RecLinkKey]**](RecLinkKey.md) | The keys shared by the two results&#39; right-side items. May be empty. | 
+**left** | [**List[RecResultLinkKey]**](RecResultLinkKey.md) | The pairings between the two results&#39; left-side items, one entry per pairing. May be empty. | 
+**right** | [**List[RecResultLinkKey]**](RecResultLinkKey.md) | The pairings between the two results&#39; right-side items, one entry per pairing. May be empty. | 
 ## Example
 
 ```python
@@ -15,8 +15,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-left: List[RecLinkKey] = # Replace with your value
-right: List[RecLinkKey] = # Replace with your value
+left: List[RecResultLinkKey] = # Replace with your value
+right: List[RecResultLinkKey] = # Replace with your value
 rec_linked_by_instance = RecLinkedBy(left=left, right=right)
 
 ```

@@ -23,13 +23,13 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class RecLinkKey(BaseModel):
+class RecResultHoldingImpact(BaseModel):
     """
-    One item key that established a link between two rec results: the key name and the identifier value both  results' items carried for it.  # noqa: E501
+    One holding, and where known the tax lot within it, that a transaction or settlement activity item impacted.  # noqa: E501
     """
-    key:  StrictStr = Field(...,alias="key", description="The key name: holdingId or transactionId.") 
-    value:  StrictStr = Field(...,alias="value", description="The identifier value both results' items carried under the key.") 
-    __properties = ["key", "value"]
+    holding_id:  StrictStr = Field(...,alias="holdingId", description="The impacted holding, at holding level: the id a holding item over it carries.") 
+    tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="The impacted tax lot within the holding, where the source states one; null when the impact is known at holding level only. Opaque: compare it whole, do not parse it.") 
+    __properties = ["holdingId", "taxLotId"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +53,8 @@ class RecLinkKey(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RecLinkKey:
-        """Create an instance of RecLinkKey from a JSON string"""
+    def from_json(cls, json_str: str) -> RecResultHoldingImpact:
+        """Create an instance of RecResultHoldingImpact from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -63,21 +63,26 @@ class RecLinkKey(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if tax_lot_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
+            _dict['taxLotId'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RecLinkKey:
-        """Create an instance of RecLinkKey from a dict"""
+    def from_dict(cls, obj: dict) -> RecResultHoldingImpact:
+        """Create an instance of RecResultHoldingImpact from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RecLinkKey.parse_obj(obj)
+            return RecResultHoldingImpact.parse_obj(obj)
 
-        _obj = RecLinkKey.parse_obj({
-            "key": obj.get("key"),
-            "value": obj.get("value")
+        _obj = RecResultHoldingImpact.parse_obj({
+            "holding_id": obj.get("holdingId"),
+            "tax_lot_id": obj.get("taxLotId")
         })
         return _obj
 
-RecLinkKey.update_forward_refs()
+RecResultHoldingImpact.update_forward_refs()

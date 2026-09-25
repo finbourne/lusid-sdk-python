@@ -22,19 +22,24 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.lapse_election import LapseElection
 
 class BankruptcyEvent(InstrumentEvent):
     """
-    A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. Pure informational marker — generates no transactions and has no position impact.  # noqa: E501
+    A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. With no elections it is a pure informational marker, generating no transactions and  having no position impact. It may also carry a ballot: one CashOfferElection per option that pays  cash and one LapseElection per option that pays nothing.  # noqa: E501
     """
     effective_date: Optional[datetime] = Field(default=None, description="Date of the bankruptcy filing or court ruling.", alias="effectiveDate")
     notification_type:  StrictStr = Field(...,alias="notificationType", description="Notification type: NEWM (new announcement), REPL (replacement/correction), or CANC (proceedings dismissed). Available values: NEWM, REPL, CANC.") 
     claim_filing_deadline: Optional[datetime] = Field(default=None, description="Date by which creditors must file a proof of claim. Optional — null when not applicable.  If provided, overrides EffectiveDate as the settle date of the resulting virtual transactions.", alias="claimFilingDeadline")
     narrative:  Optional[StrictStr] = Field(None,alias="narrative", description="Free-text detail: court, jurisdiction, trustee, plan reference. Optional.") 
+    payment_date: Optional[datetime] = Field(default=None, description="Settlement date of the cash leg. Required when a CashOfferElection is offered, and accepted  but unused otherwise — inbound ballot notifications populate a pay date on pure votes that  settle no cash.", alias="paymentDate")
+    cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="One election per ballot option that pays cash, keyed \"{OptionNumber}-{OptionCode}\", for  example \"1-CASH\". Each election's CashOfferPrice is per eligible unit, not per 1000 of face.  Defaults to an empty list.", alias="cashOfferElections")
+    lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="One election per ballot option that pays nothing — consent granted with no fee, consent  denied, abstain, or no action — keyed \"{OptionNumber}-{OptionCode}\", for example \"6-NOAC\".  Keys are free-form because a real ballot carries CONY twice and CONN twice. Defaults to an  empty list.", alias="lapseElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "notificationType", "claimFilingDeadline", "narrative"]
+    __properties = ["instrumentEventType", "effectiveDate", "notificationType", "claimFilingDeadline", "narrative", "paymentDate", "cashOfferElections", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -142,6 +147,20 @@ class BankruptcyEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in cash_offer_elections (list)
+        _items = []
+        if self.cash_offer_elections:
+            for _item in self.cash_offer_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['cashOfferElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in lapse_elections (list)
+        _items = []
+        if self.lapse_elections:
+            for _item in self.lapse_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lapseElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -156,6 +175,21 @@ class BankruptcyEvent(InstrumentEvent):
         # and __fields_set__ contains the field
         if self.narrative is None and "narrative" in self.__fields_set__:
             _dict['narrative'] = None
+
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
+        # set to None if cash_offer_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_offer_elections is None and "cash_offer_elections" in self.__fields_set__:
+            _dict['cashOfferElections'] = None
+
+        # set to None if lapse_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
+            _dict['lapseElections'] = None
 
         return _dict
 
@@ -173,7 +207,10 @@ class BankruptcyEvent(InstrumentEvent):
             "effective_date": obj.get("effectiveDate"),
             "notification_type": obj.get("notificationType"),
             "claim_filing_deadline": obj.get("claimFilingDeadline"),
-            "narrative": obj.get("narrative")
+            "narrative": obj.get("narrative"),
+            "payment_date": obj.get("paymentDate"),
+            "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

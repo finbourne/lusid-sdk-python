@@ -252,7 +252,7 @@ class RecsApi:
     def batch_manage_rec_result_comments(self, request_body : Annotated[Dict[str, BatchManageCommentRequest], Field(description="The batch of comment operations, keyed by a client-supplied correlation key.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchManageCommentResponse, Awaitable[BatchManageCommentResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments  # noqa: E501
 
-        Add, edit or delete comments on rec results in a batch.  # noqa: E501
+        Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -285,7 +285,7 @@ class RecsApi:
     def batch_manage_rec_result_comments_with_http_info(self, request_body : Annotated[Dict[str, BatchManageCommentRequest], Field(description="The batch of comment operations, keyed by a client-supplied correlation key.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BatchManageRecResultComments: BatchManageRecResultComments  # noqa: E501
 
-        Add, edit or delete comments on rec results in a batch.  # noqa: E501
+        Add, edit or delete comments on rec results in a batch.  The batch limit per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -419,7 +419,7 @@ class RecsApi:
     def batch_review_rec_results(self, request_body : Annotated[Dict[str, BatchReviewRecResultRequest], Field(description="The batch of review items, keyed by a client-supplied correlation key.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchReviewRecResultResponse, Awaitable[BatchReviewRecResultResponse]]:  # noqa: E501
         """[EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults  # noqa: E501
 
-        Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  # noqa: E501
+        Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -452,7 +452,7 @@ class RecsApi:
     def batch_review_rec_results_with_http_info(self, request_body : Annotated[Dict[str, BatchReviewRecResultRequest], Field(description="The batch of review items, keyed by a client-supplied correlation key.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BatchReviewRecResults: BatchReviewRecResults  # noqa: E501
 
-        Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  # noqa: E501
+        Apply a batch of review actions (decisions, assignments, comments, properties) to rec results.  The batch limit per request is 2,000.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

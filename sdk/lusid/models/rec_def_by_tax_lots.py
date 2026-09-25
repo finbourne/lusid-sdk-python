@@ -22,14 +22,13 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.rec_result_link_key import RecResultLinkKey
 
-class RecLinkedBy(BaseModel):
+class RecDefByTaxLots(BaseModel):
     """
-    The item pairings a link between two rec results was established on, per side.  # noqa: E501
+    Per-side tax-lot granularity for a Holding entry of a rec definition's rulesets.  # noqa: E501
     """
-    left: List[RecResultLinkKey] = Field(description="The pairings between the two results' left-side items, one entry per pairing. May be empty.")
-    right: List[RecResultLinkKey] = Field(description="The pairings between the two results' right-side items, one entry per pairing. May be empty.")
+    left: Optional[StrictBool] = Field(default=None, description="Whether the left side splits holdings by tax lot. Must be omitted when the left side is relational, and reads as null there.")
+    right: Optional[StrictBool] = Field(default=None, description="Whether the right side splits holdings by tax lot. Must be omitted when the right side is relational, and reads as null there.")
     __properties = ["left", "right"]
 
     class Config:
@@ -54,8 +53,8 @@ class RecLinkedBy(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> RecLinkedBy:
-        """Create an instance of RecLinkedBy from a JSON string"""
+    def from_json(cls, json_str: str) -> RecDefByTaxLots:
+        """Create an instance of RecDefByTaxLots from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,35 +63,31 @@ class RecLinkedBy(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in left (list)
-        _items = []
-        if self.left:
-            for _item in self.left:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['left'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in right (list)
-        _items = []
-        if self.right:
-            for _item in self.right:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['right'] = _items
+        # set to None if left (nullable) is None
+        # and __fields_set__ contains the field
+        if self.left is None and "left" in self.__fields_set__:
+            _dict['left'] = None
+
+        # set to None if right (nullable) is None
+        # and __fields_set__ contains the field
+        if self.right is None and "right" in self.__fields_set__:
+            _dict['right'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> RecLinkedBy:
-        """Create an instance of RecLinkedBy from a dict"""
+    def from_dict(cls, obj: dict) -> RecDefByTaxLots:
+        """Create an instance of RecDefByTaxLots from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return RecLinkedBy.parse_obj(obj)
+            return RecDefByTaxLots.parse_obj(obj)
 
-        _obj = RecLinkedBy.parse_obj({
-            "left": [RecResultLinkKey.from_dict(_item) for _item in obj.get("left")] if obj.get("left") is not None else None,
-            "right": [RecResultLinkKey.from_dict(_item) for _item in obj.get("right")] if obj.get("right") is not None else None
+        _obj = RecDefByTaxLots.parse_obj({
+            "left": obj.get("left"),
+            "right": obj.get("right")
         })
         return _obj
 
-RecLinkedBy.update_forward_refs()
+RecDefByTaxLots.update_forward_refs()

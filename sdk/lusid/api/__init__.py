@@ -29,6 +29,7 @@ from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.entities_api import EntitiesApi
+from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
@@ -124,6 +125,7 @@ __all__ = [
     "DataTypesApi",
     "DerivedTransactionPortfoliosApi",
     "EntitiesApi",
+    "EntityResolversApi",
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",

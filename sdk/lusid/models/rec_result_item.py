@@ -13,77 +13,159 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
-
 
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.rec_result_holding_item import RecResultHoldingItem
+from lusid.models.rec_result_settlement_activity_item import RecResultSettlementActivityItem
+from lusid.models.rec_result_transaction_item import RecResultTransactionItem
+
+
+RECRESULTITEM_ONE_OF_SCHEMAS = ["RecResultHoldingItem", "RecResultSettlementActivityItem", "RecResultTransactionItem"]
 
 class RecResultItem(BaseModel):
     """
-    An individual item that makes up (one side of) a rec result. Polymorphic by rec type / item type.  # noqa: E501
+    An individual item that makes up (one side of) a rec result. Polymorphic by itemType; each value has a  corresponding inherited class.
     """
-    item_type:  StrictStr = Field(...,alias="itemType", description="The polymorphic item-type discriminator (e.g. SettlementActivity, Holding, Transaction). Available values: SettlementActivity, Holding, Transaction.") 
-    rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The core rule, aggregate rule and supplemental attribute values for the item, keyed by name.", alias="ruleAndAttributeValues")
-    __properties = ["itemType", "ruleAndAttributeValues"]
+    # data type: RecResultHoldingItem
+    oneof_schema_1_validator: Optional[RecResultHoldingItem] = None
+    # data type: RecResultSettlementActivityItem
+    oneof_schema_2_validator: Optional[RecResultSettlementActivityItem] = None
+    # data type: RecResultTransactionItem
+    oneof_schema_3_validator: Optional[RecResultTransactionItem] = None
+    if TYPE_CHECKING:
+        actual_instance: Union[RecResultHoldingItem, RecResultSettlementActivityItem, RecResultTransactionItem]
+    else:
+        actual_instance: Any
+    one_of_schemas: List[str] = Field(RECRESULTITEM_ONE_OF_SCHEMAS, const=True)
 
     class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
         validate_assignment = True
 
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
 
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
-
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
-
-    @classmethod
-    def from_json(cls, json_str: str) -> RecResultItem:
-        """Create an instance of RecResultItem from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                            "rule_and_attribute_values",
-                          },
-                          exclude_none=True)
-        # set to None if rule_and_attribute_values (nullable) is None
-        # and __fields_set__ contains the field
-        if self.rule_and_attribute_values is None and "rule_and_attribute_values" in self.__fields_set__:
-            _dict['ruleAndAttributeValues'] = None
-
-        return _dict
+    @validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = RecResultItem.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        # validate data type: RecResultHoldingItem
+        if not isinstance(v, RecResultHoldingItem):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `RecResultHoldingItem`")
+        else:
+            match += 1
+            matchclass = matchclass + " RecResultHoldingItem"
+        # validate data type: RecResultSettlementActivityItem
+        if not isinstance(v, RecResultSettlementActivityItem):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `RecResultSettlementActivityItem`")
+        else:
+            match += 1
+            matchclass = matchclass + " RecResultSettlementActivityItem"
+        # validate data type: RecResultTransactionItem
+        if not isinstance(v, RecResultTransactionItem):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `RecResultTransactionItem`")
+        else:
+            match += 1
+            matchclass = matchclass + " RecResultTransactionItem"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in RecResultItem with oneOf schemas: RecResultHoldingItem, RecResultSettlementActivityItem, RecResultTransactionItem. Details: Matched classes " + matchclass)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in RecResultItem with oneOf schemas: RecResultHoldingItem, RecResultSettlementActivityItem, RecResultTransactionItem. Details: " + ", ".join(error_messages))
+        else:
+            return v
 
     @classmethod
     def from_dict(cls, obj: dict) -> RecResultItem:
-        """Create an instance of RecResultItem from a dict"""
-        if obj is None:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> RecResultItem:
+        """Returns the object represented by the json string"""
+        instance = RecResultItem.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        
+
+        # deserialize data into RecResultHoldingItem
+        try:
+            instance.actual_instance = RecResultHoldingItem.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " RecResultHoldingItem"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into RecResultSettlementActivityItem
+        try:
+            instance.actual_instance = RecResultSettlementActivityItem.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " RecResultSettlementActivityItem"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into RecResultTransactionItem
+        try:
+            instance.actual_instance = RecResultTransactionItem.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " RecResultTransactionItem"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into RecResultItem with oneOf schemas: RecResultHoldingItem, RecResultSettlementActivityItem, RecResultTransactionItem. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into RecResultItem with oneOf schemas: RecResultHoldingItem, RecResultSettlementActivityItem, RecResultTransactionItem. Details: " + ", ".join(error_messages))
+        else:
+            return instance
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
+
+        to_json = getattr(self.actual_instance, "to_json", None)
+        if callable(to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
+
+    def to_dict(self) -> dict:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return RecResultItem.parse_obj(obj)
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = RecResultItem.parse_obj({
-            "item_type": obj.get("itemType"),
-            "rule_and_attribute_values": obj.get("ruleAndAttributeValues")
-        })
-        return _obj
-
-RecResultItem.update_forward_refs()
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))

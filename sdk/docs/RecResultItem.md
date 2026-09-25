@@ -1,11 +1,6 @@
 # RecResultItem
 
-An individual item that makes up (one side of) a rec result. Polymorphic by rec type / item type.
-## Properties
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**item_type** | **str** | The polymorphic item-type discriminator (e.g. SettlementActivity, Holding, Transaction). Available values: SettlementActivity, Holding, Transaction. | 
-**rule_and_attribute_values** | **Dict[str, Optional[str]]** | The core rule, aggregate rule and supplemental attribute values for the item, keyed by name. | [optional] [readonly] 
+An individual item that makes up (one side of) a rec result. Polymorphic by itemType; each value has a  corresponding inherited class.
 ## Example
 
 ```python
@@ -15,11 +10,28 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-item_type: StrictStr = "example_item_type"
-rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
-rec_result_item_instance = RecResultItem(item_type=item_type, rule_and_attribute_values=rule_and_attribute_values)
+# Example with RecResultItem 
+
+rec_result_holding_item_instance = lusid.models.rec_result_holding_item.RecResultHoldingItem(
+                        portfolio_id = lusid.models.resource_id.ResourceId(
+                            scope = '', 
+                            code = '', ), 
+                        holding_id = '', 
+                        tax_lot_id = '', 
+                        item_type = '', 
+                        rule_and_attribute_values = {
+                            'key' : ''
+                            }, )
+
+rec_result_item_instance = RecResultItem(rec_result_holding_item_instance)
 
 ```
+See all compatible oneOf types with RecResultItem
+
+
+ * [RecResultSettlementActivityItem](./RecResultSettlementActivityItem.md)
+
+ * [RecResultTransactionItem](./RecResultTransactionItem.md)
 
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

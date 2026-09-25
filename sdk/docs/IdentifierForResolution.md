@@ -1,23 +1,20 @@
-# RecLinkKey
+# IdentifierForResolution
 
-One item key that established a link between two rec results: the key name and the identifier value both  results' items carried for it.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | The key name: holdingId or transactionId. | 
-**value** | **str** | The identifier value both results&#39; items carried under the key. | 
+**identifier_key** | **str** | Identifier key in the format &#39;{domain}/{scope}/{code}&#39;. | 
 ## Example
 
 ```python
-from lusid.models.rec_link_key import RecLinkKey
+from lusid.models.identifier_for_resolution import IdentifierForResolution
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-key: StrictStr = "example_key"
-value: StrictStr = "example_value"
-rec_link_key_instance = RecLinkKey(key=key, value=value)
+identifier_key: StrictStr = "example_identifier_key"
+identifier_for_resolution_instance = IdentifierForResolution(identifier_key=identifier_key)
 
 ```
 

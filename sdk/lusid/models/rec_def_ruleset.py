@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.rec_def_by_tax_lots import RecDefByTaxLots
 from lusid.models.resource_id import ResourceId
 
 class RecDefRuleset(BaseModel):
@@ -31,7 +32,8 @@ class RecDefRuleset(BaseModel):
     rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation this entry configures. Must be valid for the definitionType, and must match the reconciliationType of the referenced matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
     matching_ruleset_id: ResourceId = Field(alias="matchingRulesetId")
     relational_data_filter:  Optional[StrictStr] = Field(None,alias="relationalDataFilter", description="Selects the slice of the relational dataset this definition draws from, e.g. \"custodian eq 'NT'\". Only permitted when the referenced ruleset declares a relational side, and combined with AND at run time with that ruleset's own filter for the side.") 
-    __properties = ["recType", "matchingRulesetId", "relationalDataFilter"]
+    by_tax_lots: Optional[RecDefByTaxLots] = Field(default=None, alias="byTaxLots")
+    __properties = ["recType", "matchingRulesetId", "relationalDataFilter", "byTaxLots"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +70,9 @@ class RecDefRuleset(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of matching_ruleset_id
         if self.matching_ruleset_id:
             _dict['matchingRulesetId'] = self.matching_ruleset_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of by_tax_lots
+        if self.by_tax_lots:
+            _dict['byTaxLots'] = self.by_tax_lots.to_dict()
         # set to None if relational_data_filter (nullable) is None
         # and __fields_set__ contains the field
         if self.relational_data_filter is None and "relational_data_filter" in self.__fields_set__:
@@ -87,7 +92,8 @@ class RecDefRuleset(BaseModel):
         _obj = RecDefRuleset.parse_obj({
             "rec_type": obj.get("recType"),
             "matching_ruleset_id": ResourceId.from_dict(obj.get("matchingRulesetId")) if obj.get("matchingRulesetId") is not None else None,
-            "relational_data_filter": obj.get("relationalDataFilter")
+            "relational_data_filter": obj.get("relationalDataFilter"),
+            "by_tax_lots": RecDefByTaxLots.from_dict(obj.get("byTaxLots")) if obj.get("byTaxLots") is not None else None
         })
         return _obj
 
