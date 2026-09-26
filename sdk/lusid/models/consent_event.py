@@ -33,7 +33,7 @@ class ConsentEvent(InstrumentEvent):
     """
     Consent Event (CONS) — a voluntary corporate action where an issuer seeks approval  from security holders to amend the terms of an outstanding instrument.  # noqa: E501
     """
-    consent_type:  StrictStr = Field(...,alias="consentType", description="The type of consent solicitation.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable]. Available values: ChangeInTerms, DueAndPayable.") 
+    consent_type:  Optional[StrictStr] = Field(None,alias="consentType", description="The type of consent solicitation. Optional; omitting it records Unknown.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable, Unknown]. Available values: ChangeInTerms, DueAndPayable, Unknown.") 
     record_date: Optional[datetime] = Field(default=None, description="The entitlement determination date.", alias="recordDate")
     response_deadline: Optional[datetime] = Field(default=None, description="The last date to submit instructions.", alias="responseDeadline")
     market_deadline: Optional[datetime] = Field(default=None, description="The issuer-set outer deadline. Must be greater than or equal to ResponseDeadline.", alias="marketDeadline")
@@ -193,6 +193,11 @@ class ConsentEvent(InstrumentEvent):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if consent_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.consent_type is None and "consent_type" in self.__fields_set__:
+            _dict['consentType'] = None
 
         # set to None if early_response_deadline (nullable) is None
         # and __fields_set__ contains the field

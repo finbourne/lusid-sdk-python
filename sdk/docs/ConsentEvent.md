@@ -4,7 +4,7 @@ Consent Event (CONS) — a voluntary corporate action where an issuer seeks appr
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**consent_type** | **str** | The type of consent solicitation.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable]. Available values: ChangeInTerms, DueAndPayable. | 
+**consent_type** | **str** | The type of consent solicitation. Optional; omitting it records Unknown.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable, Unknown]. Available values: ChangeInTerms, DueAndPayable, Unknown. | [optional] 
 **record_date** | **datetime** | The entitlement determination date. | [optional] 
 **response_deadline** | **datetime** | The last date to submit instructions. | [optional] 
 **market_deadline** | **datetime** | The issuer-set outer deadline. Must be greater than or equal to ResponseDeadline. | [optional] 
@@ -25,7 +25,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-consent_type: StrictStr = "example_consent_type"
+consent_type: Optional[StrictStr] = "example_consent_type"
 record_date: Optional[datetime] = # Replace with your value
 response_deadline: Optional[datetime] = # Replace with your value
 market_deadline: Optional[datetime] = # Replace with your value

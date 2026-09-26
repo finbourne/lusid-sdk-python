@@ -24,20 +24,15 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.model_options import ModelOptions
 
-class HullWhiteModelOptions(ModelOptions):
+class SimpleModelOptions(ModelOptions):
     """
-    Model options for the Hull-White one-factor lattice pricer.  # noqa: E501
+    Model options for a minimal pricer, allowing accrued interest calculation to be disabled and  the price quote to be interpreted as an offset from par.  # noqa: E501
     """
-    mean_reversion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The mean reversion speed of the short rate. Must be strictly positive. Defaults to 0.03.", alias="meanReversion")
-    volatility: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The normal (absolute) volatility of the short rate, e.g. 0.008 for 80bp per year. Must not  be negative; zero is allowed and prices with a deterministic short rate. Defaults to 0.008.")
-    lattice_steps: Optional[StrictInt] = Field(default=None, description="The number of uniform time steps in the lattice. More steps give a finer discretisation  of the short-rate process at greater computational cost. Defaults to 200.", alias="latticeSteps")
-    effective_rate_bump_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The parallel curve shift, as an absolute rate, used for the central-difference effective  duration and convexity, e.g. 0.0001 for a 1bp bump. Must be strictly positive.  Defaults to 0.0025 (25bp, the market convention for option-adjusted risk) when not supplied.", alias="effectiveRateBumpSize")
-    mean_reversion_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion.", alias="meanReversionByCurrency")
-    volatility_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure.", alias="volatilityByCurrency")
-    volatility_multiplier: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied.", alias="volatilityMultiplier")
+    assume_accrued_is_zero: Optional[StrictBool] = Field(default=None, description="Disable calculation for accrued interest  The simple static pricer will attempt to calculate accrued interest where an instrument is present  and the accrued is requested. This may no be what is desired. If the user is sure they just want lookup  pricing then they can disable the accrued interest calculation attempt.  If set, the override accrued will be used if given but the calculation for accrued will just return zero.  This will also disable requesting any required instrument dependencies (e.g. resets) that might be required  to calculate accrued.", alias="assumeAccruedIsZero")
+    price_is_par_offset: Optional[StrictBool] = Field(default=None, description="Interpret the instrument's price quote as an offset from par rather than as a currency value for  one unit of notional. The unit value becomes (price - basis) / basis, so a quote at par gives a  unit value of zero. The basis is taken from the quote's own scale factor, or 100 when the quote carries none.  This is not the treatment a bond price receives: a bond price is a proportion of par and scales  its value, whereas here only the distance from par carries value.  Supported for an interest rate swap only; setting it for any other instrument type fails the  valuation.  Quotes provided must have a quote type of either Price or DirtyPrice. The resulting unit  value is then the clean PV for a Price quote and the dirty PV for a DirtyPrice quote,  with accrued giving the other.  The quote must describe the swap as it is defined. The legs' pay and receive directions do not  sign the value taken from the quote, so a swap booked the other way round is expected to be  quoted the other side of par.", alias="priceIsParOffset")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier"]
+    __properties = ["modelOptionsType", "assumeAccruedIsZero", "priceIsParOffset"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -50,7 +45,7 @@ class HullWhiteModelOptions(ModelOptions):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'HullWhiteModelOptions' not in [ 
+        if 'SimpleModelOptions' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -134,8 +129,8 @@ class HullWhiteModelOptions(ModelOptions):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> HullWhiteModelOptions:
-        """Create an instance of HullWhiteModelOptions from a JSON string"""
+    def from_json(cls, json_str: str) -> SimpleModelOptions:
+        """Create an instance of SimpleModelOptions from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -150,46 +145,21 @@ class HullWhiteModelOptions(ModelOptions):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if effective_rate_bump_size (nullable) is None
-        # and __fields_set__ contains the field
-        if self.effective_rate_bump_size is None and "effective_rate_bump_size" in self.__fields_set__:
-            _dict['effectiveRateBumpSize'] = None
-
-        # set to None if mean_reversion_by_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.mean_reversion_by_currency is None and "mean_reversion_by_currency" in self.__fields_set__:
-            _dict['meanReversionByCurrency'] = None
-
-        # set to None if volatility_by_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.volatility_by_currency is None and "volatility_by_currency" in self.__fields_set__:
-            _dict['volatilityByCurrency'] = None
-
-        # set to None if volatility_multiplier (nullable) is None
-        # and __fields_set__ contains the field
-        if self.volatility_multiplier is None and "volatility_multiplier" in self.__fields_set__:
-            _dict['volatilityMultiplier'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> HullWhiteModelOptions:
-        """Create an instance of HullWhiteModelOptions from a dict"""
+    def from_dict(cls, obj: dict) -> SimpleModelOptions:
+        """Create an instance of SimpleModelOptions from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return HullWhiteModelOptions.parse_obj(obj)
+            return SimpleModelOptions.parse_obj(obj)
 
-        _obj = HullWhiteModelOptions.parse_obj({
+        _obj = SimpleModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "mean_reversion": obj.get("meanReversion"),
-            "volatility": obj.get("volatility"),
-            "lattice_steps": obj.get("latticeSteps"),
-            "effective_rate_bump_size": obj.get("effectiveRateBumpSize"),
-            "mean_reversion_by_currency": obj.get("meanReversionByCurrency"),
-            "volatility_by_currency": obj.get("volatilityByCurrency"),
-            "volatility_multiplier": obj.get("volatilityMultiplier")
+            "assume_accrued_is_zero": obj.get("assumeAccruedIsZero"),
+            "price_is_par_offset": obj.get("priceIsParOffset")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
@@ -198,4 +168,4 @@ class HullWhiteModelOptions(ModelOptions):
 
         return _obj
 
-HullWhiteModelOptions.update_forward_refs()
+SimpleModelOptions.update_forward_refs()

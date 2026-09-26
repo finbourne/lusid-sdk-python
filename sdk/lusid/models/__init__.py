@@ -1421,6 +1421,8 @@ from lusid.models.set_person_properties_request import SetPersonPropertiesReques
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.set_transaction_configuration_alias import SetTransactionConfigurationAlias
 from lusid.models.set_transaction_configuration_source_request import SetTransactionConfigurationSourceRequest
+from lusid.models.settle_expected_activity_rule_names import SettleExpectedActivityRuleNames
+from lusid.models.settle_expected_activity_writeback_configuration import SettleExpectedActivityWritebackConfiguration
 from lusid.models.settlement_activity import SettlementActivity
 from lusid.models.settlement_activity_query import SettlementActivityQuery
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
@@ -1449,6 +1451,7 @@ from lusid.models.side_definition_request import SideDefinitionRequest
 from lusid.models.sides_definition_request import SidesDefinitionRequest
 from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
+from lusid.models.simple_model_options import SimpleModelOptions
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.sort_order import SortOrder
@@ -1755,6 +1758,8 @@ from lusid.models.workspace_permitted_item_actions import WorkspacePermittedItem
 from lusid.models.workspace_update_request import WorkspaceUpdateRequest
 from lusid.models.workspace_visibility import WorkspaceVisibility
 from lusid.models.worthless_event import WorthlessEvent
+from lusid.models.writeback_configuration import WritebackConfiguration
+from lusid.models.writeback_result_pattern import WritebackResultPattern
 from lusid.models.year_month_day import YearMonthDay
 from lusid.models.yield_curve_data import YieldCurveData
 
@@ -3167,6 +3172,8 @@ __all__ = [
     "SetShareClassInstrumentsRequest",
     "SetTransactionConfigurationAlias",
     "SetTransactionConfigurationSourceRequest",
+    "SettleExpectedActivityRuleNames",
+    "SettleExpectedActivityWritebackConfiguration",
     "SettlementActivity",
     "SettlementActivityQuery",
     "SettlementConfigurationCategory",
@@ -3195,6 +3202,7 @@ __all__ = [
     "SidesDefinitionRequest",
     "SimpleCashFlowLoan",
     "SimpleInstrument",
+    "SimpleModelOptions",
     "SimpleRoundingConvention",
     "SingleValuationPointQueryParameters",
     "SortOrder",
@@ -3501,6 +3509,8 @@ __all__ = [
     "WorkspaceUpdateRequest",
     "WorkspaceVisibility",
     "WorthlessEvent",
+    "WritebackConfiguration",
+    "WritebackResultPattern",
     "YearMonthDay",
     "YieldCurveData"
 ]

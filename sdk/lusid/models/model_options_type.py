@@ -43,6 +43,7 @@ class ModelOptionsType(str, Enum):
     HULLWHITEMODELOPTIONS = 'HullWhiteModelOptions'
     BONDLOOKUPMODELOPTIONS = 'BondLookupModelOptions'
     BONDFORWARDMODELOPTIONS = 'BondForwardModelOptions'
+    SIMPLEMODELOPTIONS = 'SimpleModelOptions'
 
     @classmethod
     def from_json(cls, json_str: str) -> ModelOptionsType:

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **aggregate_tolerances** | [**List[ToleranceBase]**](ToleranceBase.md) | Tolerance configurations applied to aggregate rule matching. | [optional] 
 **allow_partial_matching** | **bool** | Whether to permit partial matches when applying rules. | [optional] 
 **supplemental_attributes** | [**List[SupplementalAttribute]**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. | [optional] 
+**writeback_configurations** | [**List[WritebackConfiguration]**](WritebackConfiguration.md) | The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty. | [optional] 
 ## Example
 
 ```python
@@ -35,7 +36,8 @@ aggregate_tolerances: Optional[List[ToleranceBase]] = # Replace with your value
 allow_partial_matching: Optional[StrictBool] = # Replace with your value
 allow_partial_matching:Optional[StrictBool] = None
 supplemental_attributes: Optional[List[SupplementalAttribute]] = # Replace with your value
-create_matching_ruleset_request_instance = CreateMatchingRulesetRequest(id=id, display_name=display_name, rec_type=rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes)
+writeback_configurations: Optional[List[WritebackConfiguration]] = # Replace with your value
+create_matching_ruleset_request_instance = CreateMatchingRulesetRequest(id=id, display_name=display_name, rec_type=rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes, writeback_configurations=writeback_configurations)
 
 ```
 

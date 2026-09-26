@@ -31,7 +31,7 @@ class IndexModelOptions(ModelOptions):
     """
     portfolio_scaling:  StrictStr = Field(...,alias="portfolioScaling", description="Available values: Sum, AbsoluteSum, Unity.") 
     lookthrough_portfolio_relationship_id: Optional[ResourceId] = Field(default=None, alias="lookthroughPortfolioRelationshipId")
-    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions.") 
+    model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["modelOptionsType", "portfolioScaling", "lookthroughPortfolioRelationshipId"]
 
@@ -177,8 +177,8 @@ class IndexModelOptions(ModelOptions):
         if "model_options_type" != "type":
             return value
 
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions')")
+        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions']:
+            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions')")
         return value
 
     class Config:

@@ -31,6 +31,7 @@ from lusid.models.resource_id import ResourceId
 from lusid.models.supplemental_attribute import SupplementalAttribute
 from lusid.models.tolerance_base import ToleranceBase
 from lusid.models.version import Version
+from lusid.models.writeback_configuration import WritebackConfiguration
 
 class MatchingRuleset(BaseModel):
     """
@@ -47,10 +48,11 @@ class MatchingRuleset(BaseModel):
     aggregate_tolerances: Optional[List[ToleranceBase]] = Field(default=None, description="Tolerance configurations applied to aggregate rule matching.", alias="aggregateTolerances")
     allow_partial_matching: Optional[StrictBool] = Field(default=None, description="Whether to permit partial matches when applying rules.", alias="allowPartialMatching")
     supplemental_attributes: Optional[List[SupplementalAttribute]] = Field(default=None, description="Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself.", alias="supplementalAttributes")
+    writeback_configurations: Optional[List[WritebackConfiguration]] = Field(default=None, description="The writeback suggestions generated against this ruleset's results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty.", alias="writebackConfigurations")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "displayName", "recType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "href", "version", "links"]
+    __properties = ["id", "displayName", "recType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "writebackConfigurations", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -128,6 +130,13 @@ class MatchingRuleset(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['supplementalAttributes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in writeback_configurations (list)
+        _items = []
+        if self.writeback_configurations:
+            for _item in self.writeback_configurations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['writebackConfigurations'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -152,6 +161,11 @@ class MatchingRuleset(BaseModel):
         # and __fields_set__ contains the field
         if self.supplemental_attributes is None and "supplemental_attributes" in self.__fields_set__:
             _dict['supplementalAttributes'] = None
+
+        # set to None if writeback_configurations (nullable) is None
+        # and __fields_set__ contains the field
+        if self.writeback_configurations is None and "writeback_configurations" in self.__fields_set__:
+            _dict['writebackConfigurations'] = None
 
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
@@ -186,6 +200,7 @@ class MatchingRuleset(BaseModel):
             "aggregate_tolerances": [ToleranceBase.from_dict(_item) for _item in obj.get("aggregateTolerances")] if obj.get("aggregateTolerances") is not None else None,
             "allow_partial_matching": obj.get("allowPartialMatching"),
             "supplemental_attributes": [SupplementalAttribute.from_dict(_item) for _item in obj.get("supplementalAttributes")] if obj.get("supplementalAttributes") is not None else None,
+            "writeback_configurations": [WritebackConfiguration.from_dict(_item) for _item in obj.get("writebackConfigurations")] if obj.get("writebackConfigurations") is not None else None,
             "href": obj.get("href"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
