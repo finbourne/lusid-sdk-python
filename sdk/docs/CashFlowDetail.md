@@ -19,7 +19,9 @@ Name | Type | Description | Notes
 **haircut_fraction** | **float** | The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request. | [optional] 
 **net_amount** | **float** | The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request. | [optional] 
 **haircut_rule_applied** | **str** | The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request. | [optional] 
-**error** | **str** | Only present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. When set, the amount is null rather than zero. | [optional] 
+**error** | **str** | Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the portfolio-currency FX lookup failed (see AmountInPortfolioCcy), in which case the base Amount remains populated and only AmountInPortfolioCcy and TradeToPortfolioRate are null. | [optional] 
+**amount_in_portfolio_ccy** | **float** | The signed amount of the cashflow (see Amount), converted into the portfolio&#39;s base currency. Not present when the FX rate used to convert into the portfolio currency could not be resolved; see Error. | [optional] 
+**trade_to_portfolio_rate** | **float** | The FX rate used to convert the cashflow amount into the portfolio&#39;s base currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -46,8 +48,10 @@ haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your 
 net_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 haircut_rule_applied: Optional[StrictStr] = "example_haircut_rule_applied"
 error: Optional[StrictStr] = "example_error"
+amount_in_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+trade_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 links: Optional[List[Link]] = None
-cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, currency=currency, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, pay_receive=pay_receive, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, links=links)
+cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, currency=currency, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, pay_receive=pay_receive, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, amount_in_portfolio_ccy=amount_in_portfolio_ccy, trade_to_portfolio_rate=trade_to_portfolio_rate, links=links)
 
 ```
 

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **hierarchy_level** | **str** | Optional metadata associated with the identifier definition. | [optional] 
 **display_name** | **str** | A display name for the identifier. E.g. Figi. | [optional] 
 **description** | **str** | An optional description for the identifier. | [optional] 
+**hierarchy_usage** | **str** | Optional. When supplied, relaxes the identifier definition from MasterIdentifier (unique) to ParentIdentifier (non-unique).  Tightening from ParentIdentifier back to MasterIdentifier is refused.  Omit to leave the HierarchyUsage unchanged. Available values: MasterIdentifier, ParentIdentifier. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the identifier definition. | [optional] 
 ## Example
 
@@ -19,8 +20,9 @@ from datetime import datetime
 hierarchy_level: Optional[StrictStr] = "example_hierarchy_level"
 display_name: Optional[StrictStr] = "example_display_name"
 description: Optional[StrictStr] = "example_description"
+hierarchy_usage: Optional[StrictStr] = "example_hierarchy_usage"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-update_identifier_definition_request_instance = UpdateIdentifierDefinitionRequest(hierarchy_level=hierarchy_level, display_name=display_name, description=description, properties=properties)
+update_identifier_definition_request_instance = UpdateIdentifierDefinitionRequest(hierarchy_level=hierarchy_level, display_name=display_name, description=description, hierarchy_usage=hierarchy_usage, properties=properties)
 
 ```
 

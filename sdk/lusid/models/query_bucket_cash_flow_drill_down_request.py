@@ -41,7 +41,8 @@ class QueryBucketCashFlowDrillDownRequest(BaseModel):
     report_currency:  StrictStr = Field(...,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.") 
     exclude_unsettled_trades: Optional[StrictBool] = Field(default=None, description="If set to true, unsettled trades are excluded from the result set. Set this to match the value used on the bucketed cash flow query being drilled into, so the individual cash flows reconcile with the bucket. Note that the drill-down returns the complete resolved stream including transaction-sourced cashflows; if the bucketed query used the (default) InstrumentCashFlow representation, also exclude rows with a sourceType of 'Transaction' when reconciling.", alias="excludeUnsettledTrades")
     haircut_rules: Optional[List[CashFlowHaircutRule]] = Field(default=None, description="Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, each returned cashflow carries its gross amount, haircut fraction, net amount and the rule that was applied; with no rules those fields are omitted and the results are unchanged.", alias="haircutRules")
-    __properties = ["asAt", "bucketStart", "bucketEnd", "startInclusive", "endInclusive", "portfolioEntityIds", "effectiveAt", "recipeId", "reportCurrency", "excludeUnsettledTrades", "haircutRules"]
+    cash_type:  Optional[StrictStr] = Field(None,alias="cashType", description="Which date basis buckets cash flows: TradeDate uses each cash flow's transaction date, SettleDate (default) uses its payment date. The response's CashFlowDetail.PaymentDate reflects whichever basis was used. Available values: TradeDate, SettleDate.") 
+    __properties = ["asAt", "bucketStart", "bucketEnd", "startInclusive", "endInclusive", "portfolioEntityIds", "effectiveAt", "recipeId", "reportCurrency", "excludeUnsettledTrades", "haircutRules", "cashType"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +103,11 @@ class QueryBucketCashFlowDrillDownRequest(BaseModel):
         if self.haircut_rules is None and "haircut_rules" in self.__fields_set__:
             _dict['haircutRules'] = None
 
+        # set to None if cash_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_type is None and "cash_type" in self.__fields_set__:
+            _dict['cashType'] = None
+
         return _dict
 
     @classmethod
@@ -124,7 +130,8 @@ class QueryBucketCashFlowDrillDownRequest(BaseModel):
             "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None,
             "report_currency": obj.get("reportCurrency"),
             "exclude_unsettled_trades": obj.get("excludeUnsettledTrades"),
-            "haircut_rules": [CashFlowHaircutRule.from_dict(_item) for _item in obj.get("haircutRules")] if obj.get("haircutRules") is not None else None
+            "haircut_rules": [CashFlowHaircutRule.from_dict(_item) for _item in obj.get("haircutRules")] if obj.get("haircutRules") is not None else None,
+            "cash_type": obj.get("cashType")
         })
         return _obj
 
