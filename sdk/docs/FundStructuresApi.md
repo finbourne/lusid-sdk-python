@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_fund_structure**](FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+[**delete_fund_structure**](FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
 [**get_fund_structure**](FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
 [**list_fund_structures**](FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
 
@@ -108,12 +109,108 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **delete_fund_structure**
+> DeletedEntityResponse delete_fund_structure(scope, code, effective_at=effective_at)
+
+[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+
+Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundStructuresApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundStructuresApi)
+    scope = 'scope_example' # str | The scope of the Fund Structure to be deleted.
+    code = 'code_example' # str | The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_fund_structure(scope, code, effective_at=effective_at, opts=opts)
+
+        # [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+        api_response = api_instance.delete_fund_structure(scope, code, effective_at=effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundStructuresApi->delete_fund_structure: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund Structure to be deleted. | 
+ **code** | **str**| The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. | 
+ **effective_at** | **str**| The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified. | [optional] 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the Fund Structure was deleted. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_fund_structure**
-> FundStructure get_fund_structure(scope, code, as_at=as_at, property_keys=property_keys)
+> FundStructure get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
 [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
 
-Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.
+Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
 
 ### Example
 
@@ -162,15 +259,16 @@ def main():
     api_instance = api_client_factory.build(FundStructuresApi)
     scope = 'scope_example' # str | The scope of the Fund Structure.
     code = 'code_example' # str | The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_fund_structure(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-        api_response = api_instance.get_fund_structure(scope, code, as_at=as_at, property_keys=property_keys)
+        api_response = api_instance.get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -185,6 +283,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Fund Structure. | 
  **code** | **str**| The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;FundStructure&#39; domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example &#39;FundStructure/Manager/Id&#39;. If no properties are specified, then no properties will be returned. | [optional] 
 
@@ -207,7 +306,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_fund_structures**
-> PagedResourceListOfFundStructure list_fund_structures(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+> PagedResourceListOfFundStructure list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
 [EXPERIMENTAL] ListFundStructures: List Fund Structures.
 
@@ -258,6 +357,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(FundStructuresApi)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. (optional)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
@@ -267,10 +367,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_fund_structures(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
         # [EXPERIMENTAL] ListFundStructures: List Fund Structures.
-        api_response = api_instance.list_fund_structures(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+        api_response = api_instance.list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -283,6 +383,7 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified. | [optional] 
  **as_at** | **datetime**| The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 

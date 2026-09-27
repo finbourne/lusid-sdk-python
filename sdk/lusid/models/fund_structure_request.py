@@ -39,8 +39,9 @@ class FundStructureRequest(BaseModel):
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.", alias="allocationGroups")
     nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.")
     edges: List[FundStructureEdge] = Field(description="The list of edges that define the relationships between feeder and master nodes in the structure.")
+    effective_at: Optional[datetime] = Field(default=None, description="The effective datetime from which the Fund Structure applies. Defaults to the beginning of time if not specified, so that the structure is visible at every effective datetime.", alias="effectiveAt")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Fund Structure.")
-    __properties = ["code", "name", "description", "existingFunds", "allocationGroups", "nodes", "edges", "properties"]
+    __properties = ["code", "name", "description", "existingFunds", "allocationGroups", "nodes", "edges", "effectiveAt", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -124,6 +125,11 @@ class FundStructureRequest(BaseModel):
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
             _dict['allocationGroups'] = None
 
+        # set to None if effective_at (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_at is None and "effective_at" in self.__fields_set__:
+            _dict['effectiveAt'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -148,6 +154,7 @@ class FundStructureRequest(BaseModel):
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "nodes": [FundStructureNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
             "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None,
+            "effective_at": obj.get("effectiveAt"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

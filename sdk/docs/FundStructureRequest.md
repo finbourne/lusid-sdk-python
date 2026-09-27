@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **allocation_groups** | [**List[AllocationGroup]**](AllocationGroup.md) | An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed. | [optional] 
 **nodes** | [**List[FundStructureNode]**](FundStructureNode.md) | The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role. | 
 **edges** | [**List[FundStructureEdge]**](FundStructureEdge.md) | The list of edges that define the relationships between feeder and master nodes in the structure. | 
+**effective_at** | **datetime** | The effective datetime from which the Fund Structure applies. Defaults to the beginning of time if not specified, so that the structure is visible at every effective datetime. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties to decorate onto the Fund Structure. | [optional] 
 ## Example
 
@@ -28,8 +29,9 @@ existing_funds: Optional[List[ResourceId]] = # Replace with your value
 allocation_groups: Optional[List[AllocationGroup]] = # Replace with your value
 nodes: List[FundStructureNode] = # Replace with your value
 edges: List[FundStructureEdge] = # Replace with your value
+effective_at: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-fund_structure_request_instance = FundStructureRequest(code=code, name=name, description=description, existing_funds=existing_funds, allocation_groups=allocation_groups, nodes=nodes, edges=edges, properties=properties)
+fund_structure_request_instance = FundStructureRequest(code=code, name=name, description=description, existing_funds=existing_funds, allocation_groups=allocation_groups, nodes=nodes, edges=edges, effective_at=effective_at, properties=properties)
 
 ```
 

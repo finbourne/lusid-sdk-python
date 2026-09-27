@@ -23,6 +23,7 @@ from datetime import datetime
 from pydantic.v1 import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.fund_structure import FundStructure
 from lusid.models.fund_structure_request import FundStructureRequest
 from lusid.models.paged_resource_list_of_fund_structure import PagedResourceListOfFundStructure
@@ -221,28 +222,198 @@ class FundStructuresApi:
 
 
     @overload
-    async def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> FundStructure:  # noqa: E501
+    async def delete_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=True, **kwargs) -> FundStructure:  # noqa: E501
+    def delete_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.  # noqa: E501
+    def delete_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
 
-        Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.  # noqa: E501
+        Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_fund_structure(scope, code, as_at, property_keys, async_req=True)
+        >>> thread = api.delete_fund_structure(scope, code, effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund Structure to be deleted. (required)
+        :type scope: str
+        :param code: The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_fund_structure_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_fund_structure_with_http_info(scope, code, effective_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
+
+        Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_fund_structure_with_http_info(scope, code, effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund Structure to be deleted. (required)
+        :type scope: str
+        :param code: The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_fund_structure" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/fundstructures/{scope}/{code}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> FundStructure:  # noqa: E501
+        ...
+
+    @overload
+    def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=True, **kwargs) -> FundStructure:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
+        """[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.  # noqa: E501
+
+        Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_fund_structure(scope, code, effective_at, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund Structure. (required)
         :type scope: str
         :param code: The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
         :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.
         :type as_at: datetime
         :param property_keys: A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.
@@ -263,23 +434,25 @@ class FundStructuresApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_fund_structure_with_http_info(scope, code, as_at, property_keys, **kwargs)  # noqa: E501
+        return self.get_fund_structure_with_http_info(scope, code, effective_at, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.  # noqa: E501
 
-        Retrieve the definition of a particular Fund Structure, including its nodes, edges, and any inline fund definitions.  # noqa: E501
+        Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_fund_structure_with_http_info(scope, code, as_at, property_keys, async_req=True)
+        >>> thread = api.get_fund_structure_with_http_info(scope, code, effective_at, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund Structure. (required)
         :type scope: str
         :param code: The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. (required)
         :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
         :param as_at: The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.
         :type as_at: datetime
         :param property_keys: A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.
@@ -313,6 +486,7 @@ class FundStructuresApi:
         _all_params = [
             'scope',
             'code',
+            'effective_at',
             'as_at',
             'property_keys'
         ]
@@ -352,6 +526,9 @@ class FundStructuresApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
         if _params.get('as_at') is not None:  # noqa: E501
             if isinstance(_params['as_at'], datetime):
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
@@ -401,24 +578,26 @@ class FundStructuresApi:
 
 
     @overload
-    async def list_fund_structures(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, **kwargs) -> PagedResourceListOfFundStructure:  # noqa: E501
+    async def list_fund_structures(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, **kwargs) -> PagedResourceListOfFundStructure:  # noqa: E501
         ...
 
     @overload
-    def list_fund_structures(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFundStructure:  # noqa: E501
+    def list_fund_structures(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfFundStructure:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_fund_structures(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundStructure, Awaitable[PagedResourceListOfFundStructure]]:  # noqa: E501
+    def list_fund_structures(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundStructure, Awaitable[PagedResourceListOfFundStructure]]:  # noqa: E501
         """[EXPERIMENTAL] ListFundStructures: List Fund Structures.  # noqa: E501
 
         List all the Fund Structures matching the given criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_fund_structures(as_at, page, limit, filter, sort_by, property_keys, async_req=True)
+        >>> thread = api.list_fund_structures(effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
         >>> result = thread.get()
 
+        :param effective_at: The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
         :param as_at: The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.
         :type as_at: datetime
         :param page: The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.
@@ -447,19 +626,21 @@ class FundStructuresApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_fund_structures_with_http_info(as_at, page, limit, filter, sort_by, property_keys, **kwargs)  # noqa: E501
+        return self.list_fund_structures_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_fund_structures_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_fund_structures_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListFundStructures: List Fund Structures.  # noqa: E501
 
         List all the Fund Structures matching the given criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_fund_structures_with_http_info(as_at, page, limit, filter, sort_by, property_keys, async_req=True)
+        >>> thread = api.list_fund_structures_with_http_info(effective_at, as_at, page, limit, filter, sort_by, property_keys, async_req=True)
         >>> result = thread.get()
 
+        :param effective_at: The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
         :param as_at: The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.
         :type as_at: datetime
         :param page: The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.
@@ -499,6 +680,7 @@ class FundStructuresApi:
         _params = locals()
 
         _all_params = [
+            'effective_at',
             'as_at',
             'page',
             'limit',
@@ -536,6 +718,9 @@ class FundStructuresApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
         if _params.get('as_at') is not None:  # noqa: E501
             if isinstance(_params['as_at'], datetime):
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
