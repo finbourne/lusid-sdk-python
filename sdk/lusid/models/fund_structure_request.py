@@ -23,7 +23,6 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_group import AllocationGroup
-from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_structure_edge import FundStructureEdge
 from lusid.models.fund_structure_node import FundStructureNode
 from lusid.models.model_property import ModelProperty
@@ -37,12 +36,11 @@ class FundStructureRequest(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The display name of the Fund Structure.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Fund Structure.") 
     existing_funds: Optional[List[ResourceId]] = Field(default=None, description="An optional list of existing funds to be incorporated as part of the structure.", alias="existingFunds")
-    new_funds: Optional[List[FundDefinitionRequest]] = Field(default=None, description="An optional list of Fund definitions to be created inline as part of the structure.", alias="newFunds")
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.", alias="allocationGroups")
     nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.")
     edges: List[FundStructureEdge] = Field(description="The list of edges that define the relationships between feeder and master nodes in the structure.")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Fund Structure.")
-    __properties = ["code", "name", "description", "existingFunds", "newFunds", "allocationGroups", "nodes", "edges", "properties"]
+    __properties = ["code", "name", "description", "existingFunds", "allocationGroups", "nodes", "edges", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,13 +81,6 @@ class FundStructureRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['existingFunds'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in new_funds (list)
-        _items = []
-        if self.new_funds:
-            for _item in self.new_funds:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['newFunds'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in allocation_groups (list)
         _items = []
         if self.allocation_groups:
@@ -128,11 +119,6 @@ class FundStructureRequest(BaseModel):
         if self.existing_funds is None and "existing_funds" in self.__fields_set__:
             _dict['existingFunds'] = None
 
-        # set to None if new_funds (nullable) is None
-        # and __fields_set__ contains the field
-        if self.new_funds is None and "new_funds" in self.__fields_set__:
-            _dict['newFunds'] = None
-
         # set to None if allocation_groups (nullable) is None
         # and __fields_set__ contains the field
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
@@ -159,7 +145,6 @@ class FundStructureRequest(BaseModel):
             "name": obj.get("name"),
             "description": obj.get("description"),
             "existing_funds": [ResourceId.from_dict(_item) for _item in obj.get("existingFunds")] if obj.get("existingFunds") is not None else None,
-            "new_funds": [FundDefinitionRequest.from_dict(_item) for _item in obj.get("newFunds")] if obj.get("newFunds") is not None else None,
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "nodes": [FundStructureNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
             "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None,
