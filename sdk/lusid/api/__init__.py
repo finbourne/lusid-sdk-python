@@ -7,6 +7,8 @@ from lusid.api.address_key_definition_api import AddressKeyDefinitionApi
 from lusid.api.address_key_alias_api import AddressKeyAliasApi
 from lusid.api.aggregated_returns_api import AggregatedReturnsApi
 from lusid.api.aggregation_api import AggregationApi
+from lusid.api.allocation_events_api import AllocationEventsApi
+from lusid.api.allocation_maps_api import AllocationMapsApi
 from lusid.api.allocations_api import AllocationsApi
 from lusid.api.amortisation_rule_sets_api import AmortisationRuleSetsApi
 from lusid.api.application_metadata_api import ApplicationMetadataApi
@@ -103,6 +105,8 @@ __all__ = [
     "AddressKeyAliasApi",
     "AggregatedReturnsApi",
     "AggregationApi",
+    "AllocationEventsApi",
+    "AllocationMapsApi",
     "AllocationsApi",
     "AmortisationRuleSetsApi",
     "ApplicationMetadataApi",

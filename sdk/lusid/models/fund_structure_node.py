@@ -22,6 +22,8 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.fund_structure_allocation_basis import FundStructureAllocationBasis
+from lusid.models.resource_id import ResourceId
 
 class FundStructureNode(BaseModel):
     """
@@ -30,8 +32,11 @@ class FundStructureNode(BaseModel):
     node_code:  StrictStr = Field(...,alias="nodeCode", description="A unique identifier for this node within the Fund Structure.") 
     fund_scope:  StrictStr = Field(...,alias="fundScope", description="The scope of the Fund referenced by this node.") 
     fund_code:  StrictStr = Field(...,alias="fundCode", description="The code of the Fund referenced by this node.") 
-    role:  StrictStr = Field(...,alias="role", description="The role of this node within the structure. Available values: Master, Feeder.") 
-    __properties = ["nodeCode", "fundScope", "fundCode", "role"]
+    role:  StrictStr = Field(...,alias="role", description="The role of this node within the structure. Must be one of the acceptable values of the structure's role data type.") 
+    allocation_basis: Optional[FundStructureAllocationBasis] = Field(default=None, alias="allocationBasis")
+    pnl_flow_mode:  Optional[StrictStr] = Field(None,alias="pnlFlowMode", description="How profit and loss reaches this member from the members it holds. EquityPickup (the default) revalues the position in each held member; BucketFlowThrough receives one line per economic bucket, tagged with its origin; TransactionFlowThrough receives every line, tagged with its origin and path. Available values: EquityPickup, BucketFlowThrough, TransactionFlowThrough.") 
+    allocation_map_id: Optional[ResourceId] = Field(default=None, alias="allocationMapId")
+    __properties = ["nodeCode", "fundScope", "fundCode", "role", "allocationBasis", "pnlFlowMode", "allocationMapId"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +70,17 @@ class FundStructureNode(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of allocation_basis
+        if self.allocation_basis:
+            _dict['allocationBasis'] = self.allocation_basis.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of allocation_map_id
+        if self.allocation_map_id:
+            _dict['allocationMapId'] = self.allocation_map_id.to_dict()
+        # set to None if pnl_flow_mode (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pnl_flow_mode is None and "pnl_flow_mode" in self.__fields_set__:
+            _dict['pnlFlowMode'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +96,10 @@ class FundStructureNode(BaseModel):
             "node_code": obj.get("nodeCode"),
             "fund_scope": obj.get("fundScope"),
             "fund_code": obj.get("fundCode"),
-            "role": obj.get("role")
+            "role": obj.get("role"),
+            "allocation_basis": FundStructureAllocationBasis.from_dict(obj.get("allocationBasis")) if obj.get("allocationBasis") is not None else None,
+            "pnl_flow_mode": obj.get("pnlFlowMode"),
+            "allocation_map_id": ResourceId.from_dict(obj.get("allocationMapId")) if obj.get("allocationMapId") is not None else None
         })
         return _obj
 

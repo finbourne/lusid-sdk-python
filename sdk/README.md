@@ -44,6 +44,21 @@ Class | Method | HTTP request | Description
 *AggregationApi* | [**get_queryable_keys_for_metrics**](docs/AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
 *AggregationApi* | [**get_valuation**](docs/AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 *AggregationApi* | [**get_valuation_of_weighted_instruments**](docs/AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
+*AllocationEventsApi* | [**book_allocation_event**](docs/AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+*AllocationEventsApi* | [**create_allocation_event**](docs/AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+*AllocationEventsApi* | [**delete_allocation_event**](docs/AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+*AllocationEventsApi* | [**get_allocation_event**](docs/AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+*AllocationEventsApi* | [**list_allocation_events**](docs/AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+*AllocationEventsApi* | [**reallocate_allocation_event**](docs/AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+*AllocationEventsApi* | [**upsert_allocation_event**](docs/AllocationEventsApi.md#upsert_allocation_event) | **PUT** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+*AllocationMapsApi* | [**add_allocation_map_exception**](docs/AllocationMapsApi.md#add_allocation_map_exception) | **POST** /api/allocationmaps/{scope}/{code}/exceptions | [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+*AllocationMapsApi* | [**create_allocation_map**](docs/AllocationMapsApi.md#create_allocation_map) | **POST** /api/allocationmaps/{scope} | [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+*AllocationMapsApi* | [**delete_allocation_map**](docs/AllocationMapsApi.md#delete_allocation_map) | **DELETE** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+*AllocationMapsApi* | [**get_allocation_map**](docs/AllocationMapsApi.md#get_allocation_map) | **GET** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+*AllocationMapsApi* | [**list_allocation_maps**](docs/AllocationMapsApi.md#list_allocation_maps) | **GET** /api/allocationmaps | [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+*AllocationMapsApi* | [**remove_allocation_map_exception**](docs/AllocationMapsApi.md#remove_allocation_map_exception) | **DELETE** /api/allocationmaps/{scope}/{code}/exceptions/{investorRecordId} | [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+*AllocationMapsApi* | [**resolve_allocation_map**](docs/AllocationMapsApi.md#resolve_allocation_map) | **POST** /api/allocationmaps/{scope}/{code}/resolve | [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+*AllocationMapsApi* | [**upsert_allocation_map**](docs/AllocationMapsApi.md#upsert_allocation_map) | **PUT** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
 *AllocationsApi* | [**delete_allocation**](docs/AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] DeleteAllocation: Delete allocation
 *AllocationsApi* | [**get_allocation**](docs/AllocationsApi.md#get_allocation) | **GET** /api/allocations/{scope}/{code} | [EARLY ACCESS] GetAllocation: Get Allocation
 *AllocationsApi* | [**list_allocations**](docs/AllocationsApi.md#list_allocations) | **GET** /api/allocations | ListAllocations: List Allocations
@@ -262,10 +277,13 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
+*FundStructuresApi* | [**add_fund_structure_member**](docs/FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
 *FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
 *FundStructuresApi* | [**delete_fund_structure**](docs/FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
 *FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
 *FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+*FundStructuresApi* | [**remove_fund_structure_member**](docs/FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+*FundStructuresApi* | [**upsert_fund_structure**](docs/FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 *FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
@@ -878,10 +896,25 @@ Class | Method | HTTP request | Description
  - [AggregationType](docs/AggregationType.md)
  - [Alias](docs/Alias.md)
  - [Allocation](docs/Allocation.md)
+ - [AllocationEvent](docs/AllocationEvent.md)
+ - [AllocationEventBookRequest](docs/AllocationEventBookRequest.md)
+ - [AllocationEventReallocateRequest](docs/AllocationEventReallocateRequest.md)
+ - [AllocationEventRequest](docs/AllocationEventRequest.md)
  - [AllocationGroup](docs/AllocationGroup.md)
  - [AllocationGroupClass](docs/AllocationGroupClass.md)
  - [AllocationGroupClassDefinition](docs/AllocationGroupClassDefinition.md)
  - [AllocationGroupDefinition](docs/AllocationGroupDefinition.md)
+ - [AllocationMap](docs/AllocationMap.md)
+ - [AllocationMapAllocation](docs/AllocationMapAllocation.md)
+ - [AllocationMapBasis](docs/AllocationMapBasis.md)
+ - [AllocationMapBasisValue](docs/AllocationMapBasisValue.md)
+ - [AllocationMapEventBasis](docs/AllocationMapEventBasis.md)
+ - [AllocationMapException](docs/AllocationMapException.md)
+ - [AllocationMapFixedFactor](docs/AllocationMapFixedFactor.md)
+ - [AllocationMapParticipants](docs/AllocationMapParticipants.md)
+ - [AllocationMapRequest](docs/AllocationMapRequest.md)
+ - [AllocationMapResolution](docs/AllocationMapResolution.md)
+ - [AllocationMapResolveRequest](docs/AllocationMapResolveRequest.md)
  - [AllocationRequest](docs/AllocationRequest.md)
  - [AllocationServiceRunResponse](docs/AllocationServiceRunResponse.md)
  - [AllocationSetRequest](docs/AllocationSetRequest.md)
@@ -1392,8 +1425,10 @@ Class | Method | HTTP request | Description
  - [FundRequest](docs/FundRequest.md)
  - [FundShareClass](docs/FundShareClass.md)
  - [FundStructure](docs/FundStructure.md)
+ - [FundStructureAllocationBasis](docs/FundStructureAllocationBasis.md)
  - [FundStructureEdge](docs/FundStructureEdge.md)
  - [FundStructureEdgeTarget](docs/FundStructureEdgeTarget.md)
+ - [FundStructureMemberRequest](docs/FundStructureMemberRequest.md)
  - [FundStructureNode](docs/FundStructureNode.md)
  - [FundStructureRequest](docs/FundStructureRequest.md)
  - [FundValuationPointData](docs/FundValuationPointData.md)
@@ -1725,6 +1760,8 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfAccount](docs/PagedResourceListOfAccount.md)
  - [PagedResourceListOfAddressKeyDefinition](docs/PagedResourceListOfAddressKeyDefinition.md)
  - [PagedResourceListOfAllocation](docs/PagedResourceListOfAllocation.md)
+ - [PagedResourceListOfAllocationEvent](docs/PagedResourceListOfAllocationEvent.md)
+ - [PagedResourceListOfAllocationMap](docs/PagedResourceListOfAllocationMap.md)
  - [PagedResourceListOfAmortisationRuleSet](docs/PagedResourceListOfAmortisationRuleSet.md)
  - [PagedResourceListOfBlock](docs/PagedResourceListOfBlock.md)
  - [PagedResourceListOfCalendar](docs/PagedResourceListOfCalendar.md)

@@ -46,9 +46,10 @@ class Fund(BaseModel):
     investor_structure:  StrictStr = Field(...,alias="investorStructure", description="The Investor structure to be used by the Fund. Available values: NonUnitised, Classes.") 
     portfolio_ids: Optional[List[PortfolioEntityIdWithDetails]] = Field(default=None, description="A list of the portfolios on the fund, which are part of the Fund. Note: These must all have the same base currency, which must also match the Fund Base Currency.", alias="portfolioIds")
     fund_configuration_id: Optional[ResourceId] = Field(default=None, alias="fundConfigurationId")
+    short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional.") 
     abor_id: Optional[ResourceId] = Field(default=None, alias="aborId")
     share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund. Available values: Standalone, Master, Feeder.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.") 
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     year_end_date: Optional[DayMonth] = Field(default=None, alias="yearEndDate")
@@ -61,7 +62,7 @@ class Fund(BaseModel):
     fund_instrument: Optional[FundInstrument] = Field(default=None, alias="fundInstrument")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -190,6 +191,11 @@ class Fund(BaseModel):
         if self.portfolio_ids is None and "portfolio_ids" in self.__fields_set__:
             _dict['portfolioIds'] = None
 
+        # set to None if short_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.short_code is None and "short_code" in self.__fields_set__:
+            _dict['shortCode'] = None
+
         # set to None if share_class_instruments (nullable) is None
         # and __fields_set__ contains the field
         if self.share_class_instruments is None and "share_class_instruments" in self.__fields_set__:
@@ -250,6 +256,7 @@ class Fund(BaseModel):
             "investor_structure": obj.get("investorStructure"),
             "portfolio_ids": [PortfolioEntityIdWithDetails.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
             "fund_configuration_id": ResourceId.from_dict(obj.get("fundConfigurationId")) if obj.get("fundConfigurationId") is not None else None,
+            "short_code": obj.get("shortCode"),
             "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None,
             "type": obj.get("type"),

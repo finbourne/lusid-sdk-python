@@ -5,6 +5,7 @@ The request used to create a Fund.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | **str** | The code given for the Fund. | 
+**short_code** | **str** | A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional. | [optional] 
 **display_name** | **str** | The name of the Fund. | 
 **description** | **str** | A description for the Fund. | [optional] 
 **base_currency** | **str** | The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency. | 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 **fund_configuration_id** | [**ResourceId**](ResourceId.md) |  | 
 **share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie, currently limited to one. | [optional] 
 **share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures. | [optional] 
-**type** | **str** | The type of fund. Available values: Standalone, Master, Feeder. | [optional] 
+**type** | **str** | The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA. | [optional] 
 **inception_date** | **datetime** | Inception date of the Fund | 
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
 **primary_nav_type** | [**NavTypeDefinition**](NavTypeDefinition.md) |  | 
@@ -31,6 +32,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 code: StrictStr = "example_code"
+short_code: Optional[StrictStr] = "example_short_code"
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
 base_currency: StrictStr = "example_base_currency"
@@ -49,7 +51,7 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
 share_classes: Optional[List[ShareClassDefinition]] = # Replace with your value
-fund_definition_request_instance = FundDefinitionRequest(code=code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
+fund_definition_request_instance = FundDefinitionRequest(code=code, short_code=short_code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
 
 ```
 

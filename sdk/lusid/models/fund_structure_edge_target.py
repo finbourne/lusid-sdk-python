@@ -25,10 +25,10 @@ from datetime import datetime
 
 class FundStructureEdgeTarget(BaseModel):
     """
-    The target of a Fund Structure edge, identifying the master node and share class the feeder invests into.  # noqa: E501
+    The member a link points at, and for a dedicated share class link the share class on that member.  # noqa: E501
     """
-    node:  StrictStr = Field(...,alias="node", description="The node code of the master node that is the target of this relationship.") 
-    share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="The short code of the share class on the master fund that the feeder invests into.") 
+    node:  StrictStr = Field(...,alias="node", description="The node code of the member the link points at.") 
+    share_class_short_code:  Optional[StrictStr] = Field(None,alias="shareClassShortCode", description="The short code of the share class on the target member that the source invests into. Required for a DedicatedShareClass link and not allowed on any other.") 
     __properties = ["node", "shareClassShortCode"]
 
     class Config:
@@ -63,6 +63,11 @@ class FundStructureEdgeTarget(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if share_class_short_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.share_class_short_code is None and "share_class_short_code" in self.__fields_set__:
+            _dict['shareClassShortCode'] = None
+
         return _dict
 
     @classmethod

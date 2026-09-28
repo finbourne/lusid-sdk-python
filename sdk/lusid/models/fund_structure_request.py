@@ -36,12 +36,14 @@ class FundStructureRequest(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The display name of the Fund Structure.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Fund Structure.") 
     existing_funds: Optional[List[ResourceId]] = Field(default=None, description="An optional list of existing funds to be incorporated as part of the structure.", alias="existingFunds")
-    allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.", alias="allocationGroups")
-    nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.")
-    edges: List[FundStructureEdge] = Field(description="The list of edges that define the relationships between feeder and master nodes in the structure.")
+    allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. A group may span the share classes of a member and the members that invest into it through dedicated share class links.", alias="allocationGroups")
+    nodes: Optional[List[FundStructureNode]] = Field(default=None, description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role. May be empty on create, with members added later through the members endpoint.")
+    edges: Optional[List[FundStructureEdge]] = Field(default=None, description="The list of edges that define how the members of the structure are linked: a member investing into a dedicated share class of another, or holding an equity, GP, LP or carry interest in another through an instrument.")
     effective_at: Optional[datetime] = Field(default=None, description="The effective datetime from which the Fund Structure applies. Defaults to the beginning of time if not specified, so that the structure is visible at every effective datetime.", alias="effectiveAt")
+    role_data_type_id: Optional[ResourceId] = Field(default=None, alias="roleDataTypeId")
+    nav_type_codes: List[StrictStr] = Field(description="The NAV types every member of the structure produces, by code. Declaring them once here gives the structure a shared Timeline. At least one is required, and every member fund must define a NAV type with each of these codes.", alias="navTypeCodes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Fund Structure.")
-    __properties = ["code", "name", "description", "existingFunds", "allocationGroups", "nodes", "edges", "effectiveAt", "properties"]
+    __properties = ["code", "name", "description", "existingFunds", "allocationGroups", "nodes", "edges", "effectiveAt", "roleDataTypeId", "navTypeCodes", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -103,6 +105,9 @@ class FundStructureRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['edges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of role_data_type_id
+        if self.role_data_type_id:
+            _dict['roleDataTypeId'] = self.role_data_type_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -124,6 +129,16 @@ class FundStructureRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
             _dict['allocationGroups'] = None
+
+        # set to None if nodes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nodes is None and "nodes" in self.__fields_set__:
+            _dict['nodes'] = None
+
+        # set to None if edges (nullable) is None
+        # and __fields_set__ contains the field
+        if self.edges is None and "edges" in self.__fields_set__:
+            _dict['edges'] = None
 
         # set to None if effective_at (nullable) is None
         # and __fields_set__ contains the field
@@ -155,6 +170,8 @@ class FundStructureRequest(BaseModel):
             "nodes": [FundStructureNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
             "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None,
             "effective_at": obj.get("effectiveAt"),
+            "role_data_type_id": ResourceId.from_dict(obj.get("roleDataTypeId")) if obj.get("roleDataTypeId") is not None else None,
+            "nav_type_codes": obj.get("navTypeCodes"),
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

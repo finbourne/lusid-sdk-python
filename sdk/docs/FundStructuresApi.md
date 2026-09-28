@@ -4,11 +4,117 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_fund_structure_member**](FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
 [**create_fund_structure**](FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
 [**delete_fund_structure**](FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
 [**get_fund_structure**](FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
 [**list_fund_structures**](FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+[**remove_fund_structure_member**](FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+[**upsert_fund_structure**](FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
 
+
+# **add_fund_structure_member**
+> FundStructure add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at)
+
+[EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+
+Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundStructuresApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundStructuresApi)
+    scope = 'scope_example' # str | The scope of the Fund Structure.
+    code = 'code_example' # str | The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # fund_structure_member_request = FundStructureMemberRequest.from_json("")
+    # fund_structure_member_request = FundStructureMemberRequest.from_dict({})
+    fund_structure_member_request = FundStructureMemberRequest()
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at, opts=opts)
+
+        # [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+        api_response = api_instance.add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundStructuresApi->add_fund_structure_member: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund Structure. | 
+ **code** | **str**| The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. | 
+ **fund_structure_member_request** | [**FundStructureMemberRequest**](FundStructureMemberRequest.md)| The node to add and the links joining it to existing members. | 
+ **effective_at** | **str**| The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified. | [optional] 
+
+### Return type
+
+[**FundStructure**](FundStructure.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Fund Structure with the member added. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_fund_structure**
 > FundStructure create_fund_structure(scope, fund_structure_request)
@@ -404,6 +510,205 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested Fund Structures. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **remove_fund_structure_member**
+> FundStructure remove_fund_structure_member(scope, code, node_code, effective_at=effective_at)
+
+[EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+
+Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundStructuresApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundStructuresApi)
+    scope = 'scope_example' # str | The scope of the Fund Structure.
+    code = 'code_example' # str | The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.
+    node_code = 'node_code_example' # str | The node code of the member to remove.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.remove_fund_structure_member(scope, code, node_code, effective_at=effective_at, opts=opts)
+
+        # [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+        api_response = api_instance.remove_fund_structure_member(scope, code, node_code, effective_at=effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundStructuresApi->remove_fund_structure_member: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund Structure. | 
+ **code** | **str**| The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. | 
+ **node_code** | **str**| The node code of the member to remove. | 
+ **effective_at** | **str**| The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified. | [optional] 
+
+### Return type
+
+[**FundStructure**](FundStructure.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Fund Structure with the member removed. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_fund_structure**
+> FundStructure upsert_fund_structure(scope, code, fund_structure_request)
+
+[EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+
+Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundStructuresApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundStructuresApi)
+    scope = 'scope_example' # str | The scope of the Fund Structure.
+    code = 'code_example' # str | The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # fund_structure_request = FundStructureRequest.from_json("")
+    # fund_structure_request = FundStructureRequest.from_dict({})
+    fund_structure_request = FundStructureRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_fund_structure(scope, code, fund_structure_request, opts=opts)
+
+        # [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+        api_response = api_instance.upsert_fund_structure(scope, code, fund_structure_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundStructuresApi->upsert_fund_structure: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund Structure. | 
+ **code** | **str**| The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body. | 
+ **fund_structure_request** | [**FundStructureRequest**](FundStructureRequest.md)| The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified. | 
+
+### Return type
+
+[**FundStructure**](FundStructure.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Fund Structure as it stands from the effective datetime. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

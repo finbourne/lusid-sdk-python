@@ -1,11 +1,13 @@
 # FundStructureEdge
 
-A directed edge in a Fund Structure, defining a relationship from a feeder node to a master node share class.
+A link from one member of a Fund Structure to another, and how that link is held.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_from** | **str** | The node code of the feeder node that is the source of this relationship. | 
+**var_from** | **str** | The node code of the member that holds the link: the investor or the owner. | 
 **to** | [**FundStructureEdgeTarget**](FundStructureEdgeTarget.md) |  | 
+**linkage_type** | **str** | How the link is held. DedicatedShareClass (the default) means the source invests into a share class of the target; DirectEquityInstrument, GPInterest, LPInterest and CarryInterest mean the source holds that interest in the target through the instrument in viaInstrumentId. Available values: DedicatedShareClass, DirectEquityInstrument, GPInterest, LPInterest, CarryInterest. | [optional] 
+**via_instrument_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +19,9 @@ from datetime import datetime
 
 var_from: StrictStr = "example_var_from"
 to: FundStructureEdgeTarget
-fund_structure_edge_instance = FundStructureEdge(var_from=var_from, to=to)
+linkage_type: Optional[StrictStr] = "example_linkage_type"
+via_instrument_id: Optional[ResourceId] = # Replace with your value
+fund_structure_edge_instance = FundStructureEdge(var_from=var_from, to=to, linkage_type=linkage_type, via_instrument_id=via_instrument_id)
 
 ```
 

@@ -23,14 +23,17 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
+from lusid.models.resource_id import ResourceId
 
 class FundStructureEdge(BaseModel):
     """
-    A directed edge in a Fund Structure, defining a relationship from a feeder node to a master node share class.  # noqa: E501
+    A link from one member of a Fund Structure to another, and how that link is held.  # noqa: E501
     """
-    var_from:  StrictStr = Field(...,alias="from", description="The node code of the feeder node that is the source of this relationship.") 
+    var_from:  StrictStr = Field(...,alias="from", description="The node code of the member that holds the link: the investor or the owner.") 
     to: FundStructureEdgeTarget
-    __properties = ["from", "to"]
+    linkage_type:  Optional[StrictStr] = Field(None,alias="linkageType", description="How the link is held. DedicatedShareClass (the default) means the source invests into a share class of the target; DirectEquityInstrument, GPInterest, LPInterest and CarryInterest mean the source holds that interest in the target through the instrument in viaInstrumentId. Available values: DedicatedShareClass, DirectEquityInstrument, GPInterest, LPInterest, CarryInterest.") 
+    via_instrument_id: Optional[ResourceId] = Field(default=None, alias="viaInstrumentId")
+    __properties = ["from", "to", "linkageType", "viaInstrumentId"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +70,14 @@ class FundStructureEdge(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of to
         if self.to:
             _dict['to'] = self.to.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of via_instrument_id
+        if self.via_instrument_id:
+            _dict['viaInstrumentId'] = self.via_instrument_id.to_dict()
+        # set to None if linkage_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.linkage_type is None and "linkage_type" in self.__fields_set__:
+            _dict['linkageType'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +91,9 @@ class FundStructureEdge(BaseModel):
 
         _obj = FundStructureEdge.parse_obj({
             "var_from": obj.get("from"),
-            "to": FundStructureEdgeTarget.from_dict(obj.get("to")) if obj.get("to") is not None else None
+            "to": FundStructureEdgeTarget.from_dict(obj.get("to")) if obj.get("to") is not None else None,
+            "linkage_type": obj.get("linkageType"),
+            "via_instrument_id": ResourceId.from_dict(obj.get("viaInstrumentId")) if obj.get("viaInstrumentId") is not None else None
         })
         return _obj
 

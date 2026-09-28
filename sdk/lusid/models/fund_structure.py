@@ -40,13 +40,15 @@ class FundStructure(BaseModel):
     name:  StrictStr = Field(...,alias="name", description="The display name of the Fund Structure.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Fund Structure.") 
     funds: Optional[List[Fund]] = Field(default=None, description="An optional list of existing funds to be incorporated as part of the structure.")
-    allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. Only classes and feeder funds linked to the master fund specified are allowed.", alias="allocationGroups")
-    nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role.")
-    edges: List[FundStructureEdge] = Field(description="The list of edges that define the relationships between feeder and master nodes in the structure.")
+    allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Groups that can apply across a Fund Structure. A group may span the share classes of a member and the members that invest into it through dedicated share class links.", alias="allocationGroups")
+    nodes: List[FundStructureNode] = Field(description="The list of nodes that make up the Fund Structure, each referencing a Fund and defining its role. May be empty on create, with members added later through the members endpoint.")
+    edges: List[FundStructureEdge] = Field(description="The list of edges that define how the members of the structure are linked: a member investing into a dedicated share class of another, or holding an equity, GP, LP or carry interest in another through an instrument.")
+    role_data_type_id: Optional[ResourceId] = Field(default=None, alias="roleDataTypeId")
+    nav_type_codes: Optional[List[StrictStr]] = Field(default=None, description="The NAV types every member of the structure produces, by code. Declaring them once here gives the structure a shared Timeline. At least one is required, and every member fund must define a NAV type with each of these codes.", alias="navTypeCodes")
     version: Optional[Version] = None
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Fund Structure.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "name", "description", "funds", "allocationGroups", "nodes", "edges", "version", "properties", "links"]
+    __properties = ["href", "id", "name", "description", "funds", "allocationGroups", "nodes", "edges", "roleDataTypeId", "navTypeCodes", "version", "properties", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +113,9 @@ class FundStructure(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['edges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of role_data_type_id
+        if self.role_data_type_id:
+            _dict['roleDataTypeId'] = self.role_data_type_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -148,6 +153,11 @@ class FundStructure(BaseModel):
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
             _dict['allocationGroups'] = None
 
+        # set to None if nav_type_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nav_type_codes is None and "nav_type_codes" in self.__fields_set__:
+            _dict['navTypeCodes'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -178,6 +188,8 @@ class FundStructure(BaseModel):
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "nodes": [FundStructureNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
             "edges": [FundStructureEdge.from_dict(_item) for _item in obj.get("edges")] if obj.get("edges") is not None else None,
+            "role_data_type_id": ResourceId.from_dict(obj.get("roleDataTypeId")) if obj.get("roleDataTypeId") is not None else None,
+            "nav_type_codes": obj.get("navTypeCodes"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "properties": dict(
                 (_k, ModelProperty.from_dict(_v))

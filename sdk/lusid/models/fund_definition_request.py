@@ -34,6 +34,7 @@ class FundDefinitionRequest(BaseModel):
     The request used to create a Fund.  # noqa: E501
     """
     code:  StrictStr = Field(...,alias="code", description="The code given for the Fund.") 
+    short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Fund.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Fund.") 
     base_currency:  StrictStr = Field(...,alias="baseCurrency", description="The base currency of the Fund in ISO 4217 currency code format. All portfolios must be of a matching base currency.") 
@@ -42,7 +43,7 @@ class FundDefinitionRequest(BaseModel):
     fund_configuration_id: ResourceId = Field(alias="fundConfigurationId")
     share_class_instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The scopes in which the instruments lie, currently limited to one.", alias="shareClassInstrumentScopes")
     share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of fund. Available values: Standalone, Master, Feeder.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.") 
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     primary_nav_type: NavTypeDefinition = Field(alias="primaryNavType")
@@ -50,7 +51,7 @@ class FundDefinitionRequest(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create instruments for the Fund's share classes, series, or partner classes upon creation. Defaults to false.", alias="createInstrument")
     share_classes: Optional[List[ShareClassDefinition]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
-    __properties = ["code", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "shareClasses"]
+    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "shareClasses"]
 
     class Config:
         """Pydantic configuration"""
@@ -125,6 +126,11 @@ class FundDefinitionRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shareClasses'] = _items
+        # set to None if short_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.short_code is None and "short_code" in self.__fields_set__:
+            _dict['shortCode'] = None
+
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -183,6 +189,7 @@ class FundDefinitionRequest(BaseModel):
 
         _obj = FundDefinitionRequest.parse_obj({
             "code": obj.get("code"),
+            "short_code": obj.get("shortCode"),
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
             "base_currency": obj.get("baseCurrency"),

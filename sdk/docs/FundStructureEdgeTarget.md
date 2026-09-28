@@ -1,11 +1,11 @@
 # FundStructureEdgeTarget
 
-The target of a Fund Structure edge, identifying the master node and share class the feeder invests into.
+The member a link points at, and for a dedicated share class link the share class on that member.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**node** | **str** | The node code of the master node that is the target of this relationship. | 
-**share_class_short_code** | **str** | The short code of the share class on the master fund that the feeder invests into. | 
+**node** | **str** | The node code of the member the link points at. | 
+**share_class_short_code** | **str** | The short code of the share class on the target member that the source invests into. Required for a DedicatedShareClass link and not allowed on any other. | [optional] 
 ## Example
 
 ```python
@@ -16,7 +16,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 node: StrictStr = "example_node"
-share_class_short_code: StrictStr = "example_share_class_short_code"
+share_class_short_code: Optional[StrictStr] = "example_share_class_short_code"
 fund_structure_edge_target_instance = FundStructureEdgeTarget(node=node, share_class_short_code=share_class_short_code)
 
 ```

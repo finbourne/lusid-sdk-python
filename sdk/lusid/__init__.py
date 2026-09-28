@@ -23,6 +23,8 @@ from lusid.api.address_key_definition_api import AddressKeyDefinitionApi
 from lusid.api.address_key_alias_api import AddressKeyAliasApi
 from lusid.api.aggregated_returns_api import AggregatedReturnsApi
 from lusid.api.aggregation_api import AggregationApi
+from lusid.api.allocation_events_api import AllocationEventsApi
+from lusid.api.allocation_maps_api import AllocationMapsApi
 from lusid.api.allocations_api import AllocationsApi
 from lusid.api.amortisation_rule_sets_api import AmortisationRuleSetsApi
 from lusid.api.application_metadata_api import ApplicationMetadataApi
@@ -181,10 +183,25 @@ from lusid.models.aggregation_query import AggregationQuery
 from lusid.models.aggregation_type import AggregationType
 from lusid.models.alias import Alias
 from lusid.models.allocation import Allocation
+from lusid.models.allocation_event import AllocationEvent
+from lusid.models.allocation_event_book_request import AllocationEventBookRequest
+from lusid.models.allocation_event_reallocate_request import AllocationEventReallocateRequest
+from lusid.models.allocation_event_request import AllocationEventRequest
 from lusid.models.allocation_group import AllocationGroup
 from lusid.models.allocation_group_class import AllocationGroupClass
 from lusid.models.allocation_group_class_definition import AllocationGroupClassDefinition
 from lusid.models.allocation_group_definition import AllocationGroupDefinition
+from lusid.models.allocation_map import AllocationMap
+from lusid.models.allocation_map_allocation import AllocationMapAllocation
+from lusid.models.allocation_map_basis import AllocationMapBasis
+from lusid.models.allocation_map_basis_value import AllocationMapBasisValue
+from lusid.models.allocation_map_event_basis import AllocationMapEventBasis
+from lusid.models.allocation_map_exception import AllocationMapException
+from lusid.models.allocation_map_fixed_factor import AllocationMapFixedFactor
+from lusid.models.allocation_map_participants import AllocationMapParticipants
+from lusid.models.allocation_map_request import AllocationMapRequest
+from lusid.models.allocation_map_resolution import AllocationMapResolution
+from lusid.models.allocation_map_resolve_request import AllocationMapResolveRequest
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
@@ -695,8 +712,10 @@ from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_share_class import FundShareClass
 from lusid.models.fund_structure import FundStructure
+from lusid.models.fund_structure_allocation_basis import FundStructureAllocationBasis
 from lusid.models.fund_structure_edge import FundStructureEdge
 from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
+from lusid.models.fund_structure_member_request import FundStructureMemberRequest
 from lusid.models.fund_structure_node import FundStructureNode
 from lusid.models.fund_structure_request import FundStructureRequest
 from lusid.models.fund_valuation_point_data import FundValuationPointData
@@ -1028,6 +1047,8 @@ from lusid.models.paged_resource_list_of_abor_configuration import PagedResource
 from lusid.models.paged_resource_list_of_account import PagedResourceListOfAccount
 from lusid.models.paged_resource_list_of_address_key_definition import PagedResourceListOfAddressKeyDefinition
 from lusid.models.paged_resource_list_of_allocation import PagedResourceListOfAllocation
+from lusid.models.paged_resource_list_of_allocation_event import PagedResourceListOfAllocationEvent
+from lusid.models.paged_resource_list_of_allocation_map import PagedResourceListOfAllocationMap
 from lusid.models.paged_resource_list_of_amortisation_rule_set import PagedResourceListOfAmortisationRuleSet
 from lusid.models.paged_resource_list_of_block import PagedResourceListOfBlock
 from lusid.models.paged_resource_list_of_calendar import PagedResourceListOfCalendar
@@ -1889,6 +1910,8 @@ __all__ = [
     "AddressKeyAliasApi",
     "AggregatedReturnsApi",
     "AggregationApi",
+    "AllocationEventsApi",
+    "AllocationMapsApi",
     "AllocationsApi",
     "AmortisationRuleSetsApi",
     "ApplicationMetadataApi",
@@ -2037,10 +2060,25 @@ __all__ = [
     "AggregationType",
     "Alias",
     "Allocation",
+    "AllocationEvent",
+    "AllocationEventBookRequest",
+    "AllocationEventReallocateRequest",
+    "AllocationEventRequest",
     "AllocationGroup",
     "AllocationGroupClass",
     "AllocationGroupClassDefinition",
     "AllocationGroupDefinition",
+    "AllocationMap",
+    "AllocationMapAllocation",
+    "AllocationMapBasis",
+    "AllocationMapBasisValue",
+    "AllocationMapEventBasis",
+    "AllocationMapException",
+    "AllocationMapFixedFactor",
+    "AllocationMapParticipants",
+    "AllocationMapRequest",
+    "AllocationMapResolution",
+    "AllocationMapResolveRequest",
     "AllocationRequest",
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
@@ -2551,8 +2589,10 @@ __all__ = [
     "FundRequest",
     "FundShareClass",
     "FundStructure",
+    "FundStructureAllocationBasis",
     "FundStructureEdge",
     "FundStructureEdgeTarget",
+    "FundStructureMemberRequest",
     "FundStructureNode",
     "FundStructureRequest",
     "FundValuationPointData",
@@ -2884,6 +2924,8 @@ __all__ = [
     "PagedResourceListOfAccount",
     "PagedResourceListOfAddressKeyDefinition",
     "PagedResourceListOfAllocation",
+    "PagedResourceListOfAllocationEvent",
+    "PagedResourceListOfAllocationMap",
     "PagedResourceListOfAmortisationRuleSet",
     "PagedResourceListOfBlock",
     "PagedResourceListOfCalendar",
