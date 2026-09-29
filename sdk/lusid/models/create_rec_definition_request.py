@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.rec_date_policy import RecDatePolicy
 from lusid.models.rec_def_currencies import RecDefCurrencies
 from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
@@ -38,7 +39,7 @@ class CreateRecDefinitionRequest(BaseModel):
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the rec definition.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the rec definition.") 
-    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, naming the kind of dataset that must be present on at least one side. One of: PortfolioContents, LusidEntity, RelationalData. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.") 
+    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.") 
     side_names: Optional[RecDefSideNames] = Field(default=None, alias="sideNames")
     left_portfolio_sources: Optional[List[RecDefSource]] = Field(default=None, description="The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.", alias="leftPortfolioSources")
     right_portfolio_sources: Optional[List[RecDefSource]] = Field(default=None, description="The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.", alias="rightPortfolioSources")
@@ -47,7 +48,8 @@ class CreateRecDefinitionRequest(BaseModel):
     rulesets: List[RecDefRuleset] = Field(description="The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.")
     review_configuration: Optional[RecReviewConfiguration] = Field(default=None, alias="reviewConfiguration")
     date_policy: Optional[RecDatePolicy] = Field(default=None, alias="datePolicy")
-    __properties = ["id", "displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration", "datePolicy"]
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable.")
+    __properties = ["id", "displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration", "datePolicy", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -120,6 +122,13 @@ class CreateRecDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of date_policy
         if self.date_policy:
             _dict['datePolicy'] = self.date_policy.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
+        if self.properties:
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -134,6 +143,11 @@ class CreateRecDefinitionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.right_portfolio_sources is None and "right_portfolio_sources" in self.__fields_set__:
             _dict['rightPortfolioSources'] = None
+
+        # set to None if properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.properties is None and "properties" in self.__fields_set__:
+            _dict['properties'] = None
 
         return _dict
 
@@ -158,7 +172,13 @@ class CreateRecDefinitionRequest(BaseModel):
             "currencies": RecDefCurrencies.from_dict(obj.get("currencies")) if obj.get("currencies") is not None else None,
             "rulesets": [RecDefRuleset.from_dict(_item) for _item in obj.get("rulesets")] if obj.get("rulesets") is not None else None,
             "review_configuration": RecReviewConfiguration.from_dict(obj.get("reviewConfiguration")) if obj.get("reviewConfiguration") is not None else None,
-            "date_policy": RecDatePolicy.from_dict(obj.get("datePolicy")) if obj.get("datePolicy") is not None else None
+            "date_policy": RecDatePolicy.from_dict(obj.get("datePolicy")) if obj.get("datePolicy") is not None else None,
+            "properties": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("properties").items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj
 

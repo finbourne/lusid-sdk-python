@@ -29,7 +29,7 @@ class CoreStringCrossTolerance(BaseModel):
     """
     reference_value:  StrictStr = Field(...,alias="referenceValue", description="The value for the reference side.") 
     cross_value:  StrictStr = Field(...,alias="crossValue", description="The value for the side other than the reference one.") 
-    reference_side:  Optional[StrictStr] = Field(None,alias="referenceSide", description="Reference side (source of truth). One of: Left, Right. Available values: Left, Right, Either.") 
+    reference_side:  Optional[StrictStr] = Field(None,alias="referenceSide", description="Reference side (source of truth). Available values: Left, Right, Either.") 
     tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
     __properties = ["referenceValue", "crossValue", "referenceSide", "toleranceType", "ruleName"]

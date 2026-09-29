@@ -4,7 +4,7 @@ What the results of one structural category need by way of review: the requireme
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**review_requirement** | **str** | Whether this category&#39;s results need reviewing. One of: Required, NotRequired. Available values: Required, NotRequired. | 
+**review_requirement** | **str** | Whether this category&#39;s results need reviewing. Available values: Required, NotRequired. | 
 **override_condition** | **str** | A boolean expression over a rec result, e.g. \&quot;resultType eq &#39;Cross&#39;\&quot;. Where it holds for a result, that result is treated as the opposite of the category&#39;s reviewRequirement. Null means the requirement applies to every result in the category. | [optional] 
 ## Example
 

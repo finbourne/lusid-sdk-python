@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reference_side** | **str** | Reference side (source of truth). One of: Left, Right. Available values: Left, Right. | 
+**reference_side** | **str** | Reference side (source of truth). Available values: Left, Right. | 
 **absolute_threshold** | **float** | Numeric tolerance absolute value (allowable diff compared to the reference side value). | [optional] 
 **relative_threshold** | **float** | Numeric tolerance value as a relative % of the reference value. | [optional] 
-**threshold_priority** | **str** | Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. One of: GreaterOf, LesserOf. Available values: GreaterOf, LesserOf. | 
-**offset** | **str** | How the threshold should be applied to the reference side value. One of: Above, Below, Either. Defaults to Either. Available values: Above, Below, Either. | [optional] 
+**threshold_priority** | **str** | Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. Required when both thresholds are provided; must be omitted when only one is. Available values: GreaterOf, LesserOf. | [optional] 
+**offset** | **str** | How the threshold should be applied to the reference side value. Defaults to Either. Available values: Above, Below, Either. | [optional] 
 **tolerance_type** | **str** | Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. | 
 **rule_name** | **str** | The reference name of the rule that this tolerance relaxes. | 
 ## Example
@@ -22,7 +22,7 @@ from datetime import datetime
 reference_side: StrictStr = "example_reference_side"
 absolute_threshold: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 relative_threshold: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-threshold_priority: StrictStr = "example_threshold_priority"
+threshold_priority: Optional[StrictStr] = "example_threshold_priority"
 offset: Optional[StrictStr] = "example_offset"
 tolerance_type: StrictStr = "example_tolerance_type"
 rule_name: StrictStr = "example_rule_name"

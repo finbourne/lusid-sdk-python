@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **fgn_ccy** | **str** | Foreign currency of the fx forward | 
 **dates** | **List[datetime]** | Dates for which the forward rates apply | 
 **pip_rates** | **List[float]** | Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips | 
+**pip_multiplier** | **float** | Optional. The scaling factor applied to the pip rates to convert them into a forward rate adjustment,  so that forwardRate &#x3D; spotRate + pipRate * pipMultiplier. Must be strictly positive when supplied.  When omitted, the market convention for the currency pair is used:  0.01 when the foreign (quote) currency is JPY, and 0.0001 (the four-decimal-place convention of the major pairs) otherwise. | [optional] 
 **lineage** | **str** | Description of the complex market data&#39;s lineage e.g. &#39;FundAccountant_GreenQuality&#39;. | [optional] 
 **market_data_options** | [**MarketDataOptions**](MarketDataOptions.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
@@ -27,11 +28,12 @@ dom_ccy: StrictStr = "example_dom_ccy"
 fgn_ccy: StrictStr = "example_fgn_ccy"
 dates: List[datetime] = # Replace with your value
 pip_rates: List[Union[StrictFloat, StrictInt]] = # Replace with your value
+pip_multiplier: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 lineage: Optional[StrictStr] = "example_lineage"
 market_data_options: Optional[MarketDataOptions] = # Replace with your value
 version: Optional[Version] = None
 market_data_type: StrictStr = "example_market_data_type"
-fx_forward_pips_curve_data_instance = FxForwardPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, dates=dates, pip_rates=pip_rates, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
+fx_forward_pips_curve_data_instance = FxForwardPipsCurveData(base_date=base_date, dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, dates=dates, pip_rates=pip_rates, pip_multiplier=pip_multiplier, lineage=lineage, market_data_options=market_data_options, version=version, market_data_type=market_data_type)
 
 ```
 

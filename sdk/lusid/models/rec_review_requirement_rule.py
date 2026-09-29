@@ -27,7 +27,7 @@ class RecReviewRequirementRule(BaseModel):
     """
     What the results of one structural category need by way of review: the requirement they carry by default,  and an optional condition that flips it for the results it selects.  # noqa: E501
     """
-    review_requirement:  StrictStr = Field(...,alias="reviewRequirement", description="Whether this category's results need reviewing. One of: Required, NotRequired. Available values: Required, NotRequired.") 
+    review_requirement:  StrictStr = Field(...,alias="reviewRequirement", description="Whether this category's results need reviewing. Available values: Required, NotRequired.") 
     override_condition:  Optional[StrictStr] = Field(None,alias="overrideCondition", description="A boolean expression over a rec result, e.g. \"resultType eq 'Cross'\". Where it holds for a result, that result is treated as the opposite of the category's reviewRequirement. Null means the requirement applies to every result in the category.") 
     __properties = ["reviewRequirement", "overrideCondition"]
 

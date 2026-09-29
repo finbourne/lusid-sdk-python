@@ -32,7 +32,7 @@ class SettleExpectedActivityWritebackConfiguration(BaseModel):
     mandatory_rule_names: SettleExpectedActivityRuleNames = Field(alias="mandatoryRuleNames")
     result_patterns: List[WritebackResultPattern] = Field(description="The combinations of units difference and result cardinality for which writeback is suggested. A combination that is not present never produces a suggestion. Each combination may appear once, and the collection is returned in a canonical order regardless of the order supplied.", alias="resultPatterns")
     writeback_type:  StrictStr = Field(...,alias="writebackType", description="Polymorphic discriminator, naming the change the writeback makes to LUSID. Supported types: SettleExpectedActivity, which is only valid when recType is SettlementActivity. Available values: SettleExpectedActivity.") 
-    target_side:  StrictStr = Field(...,alias="targetSide", description="The side the writeback changes, the other being the source of truth. One of: Left, Right. As the writeback changes LUSID, this side must draw on a native LUSID dataset rather than relational data. Available values: Left, Right.") 
+    target_side:  StrictStr = Field(...,alias="targetSide", description="The side the writeback changes, the other being the source of truth. As the writeback changes LUSID, this side must draw on a native LUSID dataset rather than relational data. Available values: Left, Right.") 
     __properties = ["mandatoryRuleNames", "resultPatterns", "writebackType", "targetSide"]
 
     class Config:

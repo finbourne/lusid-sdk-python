@@ -452,6 +452,7 @@ from lusid.models.core_rule_values import CoreRuleValues
 from lusid.models.core_string_cross_tolerance import CoreStringCrossTolerance
 from lusid.models.corporate_action import CorporateAction
 from lusid.models.corporate_action_source import CorporateActionSource
+from lusid.models.corporate_action_source_entity import CorporateActionSourceEntity
 from lusid.models.corporate_action_transition import CorporateActionTransition
 from lusid.models.corporate_action_transition_component import CorporateActionTransitionComponent
 from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
@@ -2329,6 +2330,7 @@ __all__ = [
     "CoreStringCrossTolerance",
     "CorporateAction",
     "CorporateActionSource",
+    "CorporateActionSourceEntity",
     "CorporateActionTransition",
     "CorporateActionTransitionComponent",
     "CorporateActionTransitionComponentRequest",

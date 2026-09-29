@@ -1384,22 +1384,22 @@ class RecsApi:
 
 
     @overload
-    async def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, **kwargs) -> RecDefinition:  # noqa: E501
+    async def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.")] = None, **kwargs) -> RecDefinition:  # noqa: E501
         ...
 
     @overload
-    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecDefinition:  # noqa: E501
+    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
+    def get_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] GetRecDefinition: GetRecDefinition  # noqa: E501
 
         Retrieve a single rec definition by scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_rec_definition(scope, code, as_at, async_req=True)
+        >>> thread = api.get_rec_definition(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the rec definition. (required)
@@ -1408,6 +1408,8 @@ class RecsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1424,17 +1426,17 @@ class RecsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_rec_definition_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_rec_definition_with_http_info(scope, code, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetRecDefinition: GetRecDefinition  # noqa: E501
 
         Retrieve a single rec definition by scope and code.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_rec_definition_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_rec_definition_with_http_info(scope, code, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the rec definition. (required)
@@ -1443,6 +1445,8 @@ class RecsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified.
         :type as_at: datetime
+        :param property_keys: A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1472,7 +1476,8 @@ class RecsApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -1515,6 +1520,10 @@ class RecsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -2416,22 +2425,22 @@ class RecsApi:
 
 
     @overload
-    async def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
+    async def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.")] = None, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
         ...
 
     @overload
-    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
+    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfRecDefinition:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRecDefinition, Awaitable[PagedResourceListOfRecDefinition]]:  # noqa: E501
+    def list_rec_definitions(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRecDefinition, Awaitable[PagedResourceListOfRecDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions  # noqa: E501
 
         List rec definitions, optionally filtered and sorted. Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_rec_definitions(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_rec_definitions(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.
@@ -2444,6 +2453,8 @@ class RecsApi:
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param property_keys: A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -2460,17 +2471,17 @@ class RecsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, **kwargs)  # noqa: E501
+        return self.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_rec_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_rec_definitions_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing rec definitions from a previous call. This value is              returned from the previous call. If a pagination token is provided the sortBy, filter and asAt fields must not have              changed since the original request.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many per page.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions  # noqa: E501
 
         List rec definitions, optionally filtered and sorted. Supports pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, async_req=True)
+        >>> thread = api.list_rec_definitions_with_http_info(as_at, page, sort_by, limit, filter, property_keys, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the rec definitions. Defaults to latest if not specified.
@@ -2483,6 +2494,8 @@ class RecsApi:
         :type limit: int
         :param filter: Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param property_keys: A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page.
+        :type property_keys: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -2514,7 +2527,8 @@ class RecsApi:
             'page',
             'sort_by',
             'limit',
-            'filter'
+            'filter',
+            'property_keys'
         ]
         _all_params.extend(
             [
@@ -2564,6 +2578,10 @@ class RecsApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -3713,7 +3731,7 @@ class RecsApi:
     def update_rec_definition(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], async_req: Optional[bool]=None, **kwargs) -> Union[RecDefinition, Awaitable[RecDefinition]]:  # noqa: E501
         """[EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition  # noqa: E501
 
-        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  Properties are merged rather than overwritten - each property supplied is set, a property supplied with a null  value is deleted, and any property not supplied is left unchanged.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -3748,7 +3766,7 @@ class RecsApi:
     def update_rec_definition_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition. Together with the scope this uniquely identifies the rec definition.")], update_rec_definition_request : Annotated[UpdateRecDefinitionRequest, Field(description="The updated rec definition values.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition  # noqa: E501
 
-        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  # noqa: E501
+        Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  Properties are merged rather than overwritten - each property supplied is set, a property supplied with a null  value is deleted, and any property not supplied is left unchanged.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **mandatory_rule_names** | [**SettleExpectedActivityRuleNames**](SettleExpectedActivityRuleNames.md) |  | 
 **result_patterns** | [**List[WritebackResultPattern]**](WritebackResultPattern.md) | The combinations of units difference and result cardinality for which writeback is suggested. A combination that is not present never produces a suggestion. Each combination may appear once, and the collection is returned in a canonical order regardless of the order supplied. | 
 **writeback_type** | **str** | Polymorphic discriminator, naming the change the writeback makes to LUSID. Supported types: SettleExpectedActivity, which is only valid when recType is SettlementActivity. Available values: SettleExpectedActivity. | 
-**target_side** | **str** | The side the writeback changes, the other being the source of truth. One of: Left, Right. As the writeback changes LUSID, this side must draw on a native LUSID dataset rather than relational data. Available values: Left, Right. | 
+**target_side** | **str** | The side the writeback changes, the other being the source of truth. As the writeback changes LUSID, this side must draw on a native LUSID dataset rather than relational data. Available values: Left, Right. | 
 ## Example
 
 ```python

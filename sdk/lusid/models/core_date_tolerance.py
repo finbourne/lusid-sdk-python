@@ -27,9 +27,9 @@ class CoreDateTolerance(BaseModel):
     """
     CoreDateTolerance
     """
-    reference_side:  StrictStr = Field(...,alias="referenceSide", description="Reference side (source of truth). One of: Left, Right. Available values: Left, Right.") 
+    reference_side:  StrictStr = Field(...,alias="referenceSide", description="Reference side (source of truth). Available values: Left, Right.") 
     interval:  StrictStr = Field(...,alias="interval", description="The allowed tolerance for date time core rule values, defined as an ISO Period.") 
-    offset:  Optional[StrictStr] = Field(None,alias="offset", description="How the interval should be applied to the reference side value. One of: Earlier, Later, Either. Defaults to Either. Available values: Earlier, Later, Either.") 
+    offset:  Optional[StrictStr] = Field(None,alias="offset", description="How the interval should be applied to the reference side value. Defaults to Either. Available values: Earlier, Later, Either.") 
     tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
     __properties = ["referenceSide", "interval", "offset", "toleranceType", "ruleName"]

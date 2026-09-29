@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**source_type** | **str** | The type of entity that this source refers to. One of: Portfolio, PortfolioGroup, Fund. Available values: Portfolio, PortfolioGroup, Fund. | 
+**source_type** | **str** | The type of entity that this source refers to. Available values: Portfolio, PortfolioGroup, Fund. | 
 **id** | [**ResourceId**](ResourceId.md) |  | 
 ## Example
 

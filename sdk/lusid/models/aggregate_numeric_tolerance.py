@@ -27,11 +27,11 @@ class AggregateNumericTolerance(BaseModel):
     """
     AggregateNumericTolerance
     """
-    reference_side:  StrictStr = Field(...,alias="referenceSide", description="Reference side (source of truth). One of: Left, Right. Available values: Left, Right.") 
+    reference_side:  StrictStr = Field(...,alias="referenceSide", description="Reference side (source of truth). Available values: Left, Right.") 
     absolute_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Numeric tolerance absolute value (allowable diff compared to the reference side value).", alias="absoluteThreshold")
     relative_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Numeric tolerance value as a relative % of the reference value.", alias="relativeThreshold")
-    threshold_priority:  StrictStr = Field(...,alias="thresholdPriority", description="Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. One of: GreaterOf, LesserOf. Available values: GreaterOf, LesserOf.") 
-    offset:  Optional[StrictStr] = Field(None,alias="offset", description="How the threshold should be applied to the reference side value. One of: Above, Below, Either. Defaults to Either. Available values: Above, Below, Either.") 
+    threshold_priority:  Optional[StrictStr] = Field(None,alias="thresholdPriority", description="Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. Required when both thresholds are provided; must be omitted when only one is. Available values: GreaterOf, LesserOf.") 
+    offset:  Optional[StrictStr] = Field(None,alias="offset", description="How the threshold should be applied to the reference side value. Defaults to Either. Available values: Above, Below, Either.") 
     tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
     __properties = ["referenceSide", "absoluteThreshold", "relativeThreshold", "thresholdPriority", "offset", "toleranceType", "ruleName"]
@@ -77,6 +77,11 @@ class AggregateNumericTolerance(BaseModel):
         # and __fields_set__ contains the field
         if self.relative_threshold is None and "relative_threshold" in self.__fields_set__:
             _dict['relativeThreshold'] = None
+
+        # set to None if threshold_priority (nullable) is None
+        # and __fields_set__ contains the field
+        if self.threshold_priority is None and "threshold_priority" in self.__fields_set__:
+            _dict['thresholdPriority'] = None
 
         # set to None if offset (nullable) is None
         # and __fields_set__ contains the field

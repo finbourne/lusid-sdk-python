@@ -36,6 +36,7 @@ class FxForwardTenorPipsCurveData(ComplexMarketData):
     fgn_ccy:  StrictStr = Field(...,alias="fgnCcy", description="Foreign currency of the fx forward") 
     tenors: List[StrictStr] = Field(description="Tenors for which the forward rates apply.  For more information on tenors, see [Specifying tenors in LUSID](https://support.lusid.com/docs/specifying-tenors-in-lusid)")
     pip_rates: List[Union[StrictFloat, StrictInt]] = Field(description="Rates provided for the fx forward (price in FgnCcy per unit of DomCcy), expressed in pips", alias="pipRates")
+    pip_multiplier: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The scaling factor applied to the pip rates to convert them into a forward rate adjustment,  so that forwardRate = spotRate + pipRate * pipMultiplier. Must be strictly positive when supplied.  When omitted, the market convention for the currency pair is used:  0.01 when the foreign (quote) currency is JPY, and 0.0001 (the four-decimal-place convention of the major pairs) otherwise.", alias="pipMultiplier")
     lineage:  Optional[StrictStr] = Field(None,alias="lineage", description="Description of the complex market data's lineage e.g. 'FundAccountant_GreenQuality'.") 
     market_data_options: Optional[MarketDataOptions] = Field(default=None, alias="marketDataOptions")
     calendars: Optional[List[FxTenorConvention]] = Field(default=None, description="The list of conventions that should be used when interpreting tenors as dates.")
@@ -43,7 +44,7 @@ class FxForwardTenorPipsCurveData(ComplexMarketData):
     version: Optional[Version] = None
     market_data_type:  StrictStr = Field(...,alias="marketDataType", description="Available values: DiscountFactorCurveData, EquityVolSurfaceData, FxVolSurfaceData, IrVolCubeData, OpaqueMarketData, YieldCurveData, FxForwardCurveData, FxForwardPipsCurveData, FxForwardTenorCurveData, FxForwardTenorPipsCurveData, FxForwardCurveByQuoteReference, CreditSpreadCurveData, EquityCurveByPricesData, ConstantVolatilitySurface, InflationCurveData.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "tenors", "pipRates", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType", "version"]
+    __properties = ["marketDataType", "baseDate", "domCcy", "fgnCcy", "tenors", "pipRates", "pipMultiplier", "lineage", "marketDataOptions", "calendars", "spotDaysCalculationType", "version"]
 
     @validator('market_data_type')
     def market_data_type_validate_enum(cls, value):
@@ -169,6 +170,11 @@ class FxForwardTenorPipsCurveData(ComplexMarketData):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if pip_multiplier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pip_multiplier is None and "pip_multiplier" in self.__fields_set__:
+            _dict['pipMultiplier'] = None
+
         # set to None if lineage (nullable) is None
         # and __fields_set__ contains the field
         if self.lineage is None and "lineage" in self.__fields_set__:
@@ -202,6 +208,7 @@ class FxForwardTenorPipsCurveData(ComplexMarketData):
             "fgn_ccy": obj.get("fgnCcy"),
             "tenors": obj.get("tenors"),
             "pip_rates": obj.get("pipRates"),
+            "pip_multiplier": obj.get("pipMultiplier"),
             "lineage": obj.get("lineage"),
             "market_data_options": MarketDataOptions.from_dict(obj.get("marketDataOptions")) if obj.get("marketDataOptions") is not None else None,
             "calendars": [FxTenorConvention.from_dict(_item) for _item in obj.get("calendars")] if obj.get("calendars") is not None else None,

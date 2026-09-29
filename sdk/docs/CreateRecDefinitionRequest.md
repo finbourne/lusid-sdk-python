@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the rec definition. | 
 **description** | **str** | A description of the rec definition. | [optional] 
-**definition_type** | **str** | What this definition reconciles, naming the kind of dataset that must be present on at least one side. One of: PortfolioContents, LusidEntity, RelationalData. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData. | 
+**definition_type** | **str** | What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData. | 
 **side_names** | [**RecDefSideNames**](RecDefSideNames.md) |  | [optional] 
 **left_portfolio_sources** | [**List[RecDefSource]**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | [optional] 
 **right_portfolio_sources** | [**List[RecDefSource]**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | [optional] 
@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **rulesets** | [**List[RecDefRuleset]**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | 
 **review_configuration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | [optional] 
 **date_policy** | [**RecDatePolicy**](RecDatePolicy.md) |  | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable. | [optional] 
 ## Example
 
 ```python
@@ -36,7 +37,8 @@ currencies: Optional[RecDefCurrencies] = None
 rulesets: List[RecDefRuleset] = # Replace with your value
 review_configuration: Optional[RecReviewConfiguration] = # Replace with your value
 date_policy: Optional[RecDatePolicy] = # Replace with your value
-create_rec_definition_request_instance = CreateRecDefinitionRequest(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, review_configuration=review_configuration, date_policy=date_policy)
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+create_rec_definition_request_instance = CreateRecDefinitionRequest(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, review_configuration=review_configuration, date_policy=date_policy, properties=properties)
 
 ```
 

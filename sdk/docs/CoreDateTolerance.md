@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**reference_side** | **str** | Reference side (source of truth). One of: Left, Right. Available values: Left, Right. | 
+**reference_side** | **str** | Reference side (source of truth). Available values: Left, Right. | 
 **interval** | **str** | The allowed tolerance for date time core rule values, defined as an ISO Period. | 
-**offset** | **str** | How the interval should be applied to the reference side value. One of: Earlier, Later, Either. Defaults to Either. Available values: Earlier, Later, Either. | [optional] 
+**offset** | **str** | How the interval should be applied to the reference side value. Defaults to Either. Available values: Earlier, Later, Either. | [optional] 
 **tolerance_type** | **str** | Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. | 
 **rule_name** | **str** | The reference name of the rule that this tolerance relaxes. | 
 ## Example

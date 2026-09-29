@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.event_inheritance import EventInheritance
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class CorporateActionSource(BaseModel):
@@ -38,8 +39,9 @@ class CorporateActionSource(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the corporate action source") 
     instrument_scopes: Optional[List[StrictStr]] = Field(default=None, description="The list of instrument scopes used as the scope resolution strategy when resolving instruments of upserted corporate actions.", alias="instrumentScopes")
     event_inheritance: Optional[EventInheritance] = Field(default=None, alias="eventInheritance")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "version", "displayName", "description", "instrumentScopes", "eventInheritance", "links"]
+    __properties = ["href", "id", "version", "displayName", "description", "instrumentScopes", "eventInheritance", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +84,9 @@ class CorporateActionSource(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of event_inheritance
         if self.event_inheritance:
             _dict['eventInheritance'] = self.event_inheritance.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -133,6 +138,7 @@ class CorporateActionSource(BaseModel):
             "description": obj.get("description"),
             "instrument_scopes": obj.get("instrumentScopes"),
             "event_inheritance": EventInheritance.from_dict(obj.get("eventInheritance")) if obj.get("eventInheritance") is not None else None,
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

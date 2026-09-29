@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **reference_value** | **str** | The value for the reference side. | 
 **cross_value** | **str** | The value for the side other than the reference one. | 
-**reference_side** | **str** | Reference side (source of truth). One of: Left, Right. Available values: Left, Right, Either. | [optional] 
+**reference_side** | **str** | Reference side (source of truth). Available values: Left, Right, Either. | [optional] 
 **tolerance_type** | **str** | Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. | 
 **rule_name** | **str** | The reference name of the rule that this tolerance relaxes. | 
 ## Example

@@ -27,7 +27,7 @@ class CoreAttributeOptionalityTolerance(BaseModel):
     """
     CoreAttributeOptionalityTolerance
     """
-    optional_side:  Optional[StrictStr] = Field(None,alias="optionalSide", description="Which side is allowed to have no value while still attempting to match. One of: Left, Right, Either. Defaults to Either. Available values: Left, Right, Either.") 
+    optional_side:  Optional[StrictStr] = Field(None,alias="optionalSide", description="Which side is allowed to have no value while still attempting to match. Defaults to Either. Available values: Left, Right, Either.") 
     tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule that this tolerance relaxes.") 
     __properties = ["optionalSide", "toleranceType", "ruleName"]

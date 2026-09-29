@@ -28,7 +28,7 @@ class RecDatasetSchema(BaseModel):
     """
     RecDatasetSchema
     """
-    type:  StrictStr = Field(...,alias="type", description="The kind of dataset this side draws on. One of: PortfolioContents, LusidEntity, RelationalData. At most one side may be RelationalData. Available values: PortfolioContents, LusidEntity, RelationalData.") 
+    type:  StrictStr = Field(...,alias="type", description="The kind of dataset this side draws on. At most one side may be RelationalData. Available values: PortfolioContents, LusidEntity, RelationalData.") 
     entity_type:  Optional[StrictStr] = Field(None,alias="entityType", description="The entity within the dataset. Required when type is PortfolioContents, in which case it is one of: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity. Must be omitted when type is RelationalData. Available values: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity.") 
     relational_dataset_definition_id: Optional[ResourceId] = Field(default=None, alias="relationalDatasetDefinitionId")
     __properties = ["type", "entityType", "relationalDatasetDefinitionId"]

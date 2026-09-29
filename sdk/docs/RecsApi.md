@@ -794,7 +794,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_rec_definition**
-> RecDefinition get_rec_definition(scope, code, as_at=as_at)
+> RecDefinition get_rec_definition(scope, code, as_at=as_at, property_keys=property_keys)
 
 [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
 
@@ -848,13 +848,14 @@ def main():
     scope = 'scope_example' # str | The scope of the rec definition.
     code = 'code_example' # str | The code of the rec definition. Together with the scope this uniquely identifies the rec definition.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_rec_definition(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_rec_definition(scope, code, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
-        api_response = api_instance.get_rec_definition(scope, code, as_at=as_at)
+        api_response = api_instance.get_rec_definition(scope, code, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -870,6 +871,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the rec definition. | 
  **code** | **str**| The code of the rec definition. Together with the scope this uniquely identifies the rec definition. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the rec definition. Defaults to latest if not specified. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;RecDefinition&#39; domain to decorate onto the rec              definition. These must have the format {domain}/{scope}/{code}, for example              &#39;RecDefinition/Workflow/WorkflowId&#39;. | [optional] 
 
 ### Return type
 
@@ -1375,7 +1377,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_rec_definitions**
-> PagedResourceListOfRecDefinition list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+> PagedResourceListOfRecDefinition list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
 
 [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
 
@@ -1431,13 +1433,14 @@ def main():
     sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many per page. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'RecDefinition' domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              'RecDefinition/Workflow/WorkflowId'. They are not carried in the pagination token, so must be supplied again              with each page. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, opts=opts)
+        # api_response =  api_instance.list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys, opts=opts)
 
         # [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
-        api_response = api_instance.list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter)
+        api_response = api_instance.list_rec_definitions(as_at=as_at, page=page, sort_by=sort_by, limit=limit, filter=filter, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -1455,6 +1458,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many per page. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;RecDefinition&#39; domain to decorate onto the rec              definitions. These must have the format {domain}/{scope}/{code}, for example              &#39;RecDefinition/Workflow/WorkflowId&#39;. They are not carried in the pagination token, so must be supplied again              with each page. | [optional] 
 
 ### Return type
 
@@ -2084,7 +2088,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
 
-Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.
+Overwrite an existing rec definition identified by scope and code.  The update request has the same required fields as create, apart from the identifier.  Properties are merged rather than overwritten - each property supplied is set, a property supplied with a null  value is deleted, and any property not supplied is left unchanged.
 
 ### Example
 

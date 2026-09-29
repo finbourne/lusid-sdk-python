@@ -44,11 +44,11 @@ class CashFlowDetail(BaseModel):
     haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request.", alias="haircutFraction")
     net_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request.", alias="netAmount")
     haircut_rule_applied:  Optional[StrictStr] = Field(None,alias="haircutRuleApplied", description="The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request.") 
-    error:  Optional[StrictStr] = Field(None,alias="error", description="Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the portfolio-currency FX lookup failed (see AmountInPortfolioCcy), in which case the base Amount remains populated and only AmountInPortfolioCcy and TradeToPortfolioRate are null.") 
-    amount_in_portfolio_ccy: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow (see Amount), converted into the portfolio's base currency. Not present when the FX rate used to convert into the portfolio currency could not be resolved; see Error.", alias="amountInPortfolioCcy")
-    trade_to_portfolio_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount into the portfolio's base currency, resolved at the cashflow's transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error.", alias="tradeToPortfolioRate")
+    error:  Optional[StrictStr] = Field(None,alias="error", description="Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see AmountInReportCurrency), in which case the base Amount remains populated and only AmountInReportCurrency and TradeToReportCurrencyRate are null.") 
+    amount_in_report_currency: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow (see Amount), converted into the request's report currency (see QueryBucketCashFlowDrillDownRequest.ReportCurrency). Not present when the FX rate used to convert into the report currency could not be resolved; see Error.", alias="amountInReportCurrency")
+    trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount into the request's report currency, resolved at the cashflow's transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error.", alias="tradeToReportCurrencyRate")
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "amountInPortfolioCcy", "tradeToPortfolioRate", "links"]
+    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "amountInReportCurrency", "tradeToReportCurrencyRate", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -147,15 +147,15 @@ class CashFlowDetail(BaseModel):
         if self.error is None and "error" in self.__fields_set__:
             _dict['error'] = None
 
-        # set to None if amount_in_portfolio_ccy (nullable) is None
+        # set to None if amount_in_report_currency (nullable) is None
         # and __fields_set__ contains the field
-        if self.amount_in_portfolio_ccy is None and "amount_in_portfolio_ccy" in self.__fields_set__:
-            _dict['amountInPortfolioCcy'] = None
+        if self.amount_in_report_currency is None and "amount_in_report_currency" in self.__fields_set__:
+            _dict['amountInReportCurrency'] = None
 
-        # set to None if trade_to_portfolio_rate (nullable) is None
+        # set to None if trade_to_report_currency_rate (nullable) is None
         # and __fields_set__ contains the field
-        if self.trade_to_portfolio_rate is None and "trade_to_portfolio_rate" in self.__fields_set__:
-            _dict['tradeToPortfolioRate'] = None
+        if self.trade_to_report_currency_rate is None and "trade_to_report_currency_rate" in self.__fields_set__:
+            _dict['tradeToReportCurrencyRate'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -190,8 +190,8 @@ class CashFlowDetail(BaseModel):
             "net_amount": obj.get("netAmount"),
             "haircut_rule_applied": obj.get("haircutRuleApplied"),
             "error": obj.get("error"),
-            "amount_in_portfolio_ccy": obj.get("amountInPortfolioCcy"),
-            "trade_to_portfolio_rate": obj.get("tradeToPortfolioRate"),
+            "amount_in_report_currency": obj.get("amountInReportCurrency"),
+            "trade_to_report_currency_rate": obj.get("tradeToReportCurrencyRate"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

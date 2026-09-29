@@ -248,6 +248,7 @@ Class | Method | HTTP request | Description
 *EntitiesApi* | [**get_bookmark_by_entity_unique_id**](docs/EntitiesApi.md#get_bookmark_by_entity_unique_id) | **GET** /api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId
 *EntitiesApi* | [**get_compliance_rule_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_by_entity_unique_id) | **GET** /api/entities/compliancerules/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleByEntityUniqueId: Get compliance rule by EntityUniqueId
 *EntitiesApi* | [**get_compliance_rule_template_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_template_by_entity_unique_id) | **GET** /api/entities/complianceruletemplates/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
+*EntitiesApi* | [**get_corporate_action_source_by_entity_unique_id**](docs/EntitiesApi.md#get_corporate_action_source_by_entity_unique_id) | **GET** /api/entities/corporateactionsources/{entityUniqueId} | [EARLY ACCESS] GetCorporateActionSourceByEntityUniqueId: Get corporate action source by EntityUniqueId
 *EntitiesApi* | [**get_custom_entity_by_entity_unique_id**](docs/EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
@@ -1165,6 +1166,7 @@ Class | Method | HTTP request | Description
  - [CoreStringCrossTolerance](docs/CoreStringCrossTolerance.md)
  - [CorporateAction](docs/CorporateAction.md)
  - [CorporateActionSource](docs/CorporateActionSource.md)
+ - [CorporateActionSourceEntity](docs/CorporateActionSourceEntity.md)
  - [CorporateActionTransition](docs/CorporateActionTransition.md)
  - [CorporateActionTransitionComponent](docs/CorporateActionTransitionComponent.md)
  - [CorporateActionTransitionComponentRequest](docs/CorporateActionTransitionComponentRequest.md)
