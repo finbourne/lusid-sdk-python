@@ -44,6 +44,10 @@ class FloatSchedule(Schedule):
     payment_currency:  StrictStr = Field(...,alias="paymentCurrency", description="Payment currency. This does not have to be the same as the nominal bond or observation/reset currency.") 
     spread: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Spread over floating rate given as a fraction.")
     stub_type:  Optional[StrictStr] = Field(None,alias="stubType", description="When a payment schedule doesn't have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None = this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront = this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack = this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both = this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set.") 
+    first_coupon_pay_date: Optional[datetime] = Field(default=None, description="Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate.", alias="firstCouponPayDate")
+    second_period_start_date: Optional[datetime] = Field(default=None, description="Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date.", alias="secondPeriodStartDate")
+    penultimate_coupon_pay_date: Optional[datetime] = Field(default=None, description="Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate.", alias="penultimateCouponPayDate")
+    last_period_start_date: Optional[datetime] = Field(default=None, description="Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date.", alias="lastPeriodStartDate")
     ex_dividend_configuration: Optional[ExDividendConfiguration] = Field(default=None, alias="exDividendConfiguration")
     compounding: Optional[Compounding] = None
     reset_convention:  Optional[StrictStr] = Field(None,alias="resetConvention", description="Control how resets are generated relative to payment convention(s).    Default value: InAdvance. Available values: InAdvance, InArrears.") 
@@ -53,7 +57,7 @@ class FloatSchedule(Schedule):
     schedule_id:  Optional[StrictStr] = Field(None,alias="scheduleId", description="Optional: identifier for the Schedule. This is only used for Schedules on FlexibleDeposit instruments where the list of Schedules  on the instrument definition can be modified by upsert of a DepositRollEvent.") 
     schedule_type:  StrictStr = Field(...,alias="scheduleType", description="Available values: FixedSchedule, FloatSchedule, OptionalitySchedule, StepSchedule, Exercise, FxRateSchedule, FxLinkedNotionalSchedule, BondConversionSchedule, PikSchedule, CommodityCalendarSchedule, Invalid, CancelSchedule.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate", "scheduleId"]
+    __properties = ["scheduleType", "startDate", "maturityDate", "flowConventions", "conventionName", "exDividendDays", "indexConventionName", "indexConventions", "notional", "paymentCurrency", "spread", "stubType", "firstCouponPayDate", "secondPeriodStartDate", "penultimateCouponPayDate", "lastPeriodStartDate", "exDividendConfiguration", "compounding", "resetConvention", "useAnnualisedDirectRates", "capRate", "floorRate", "scheduleId"]
 
     @validator('schedule_type')
     def schedule_type_validate_enum(cls, value):
@@ -194,6 +198,26 @@ class FloatSchedule(Schedule):
         if self.stub_type is None and "stub_type" in self.__fields_set__:
             _dict['stubType'] = None
 
+        # set to None if first_coupon_pay_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.first_coupon_pay_date is None and "first_coupon_pay_date" in self.__fields_set__:
+            _dict['firstCouponPayDate'] = None
+
+        # set to None if second_period_start_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.second_period_start_date is None and "second_period_start_date" in self.__fields_set__:
+            _dict['secondPeriodStartDate'] = None
+
+        # set to None if penultimate_coupon_pay_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.penultimate_coupon_pay_date is None and "penultimate_coupon_pay_date" in self.__fields_set__:
+            _dict['penultimateCouponPayDate'] = None
+
+        # set to None if last_period_start_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.last_period_start_date is None and "last_period_start_date" in self.__fields_set__:
+            _dict['lastPeriodStartDate'] = None
+
         # set to None if reset_convention (nullable) is None
         # and __fields_set__ contains the field
         if self.reset_convention is None and "reset_convention" in self.__fields_set__:
@@ -238,6 +262,10 @@ class FloatSchedule(Schedule):
             "payment_currency": obj.get("paymentCurrency"),
             "spread": obj.get("spread"),
             "stub_type": obj.get("stubType"),
+            "first_coupon_pay_date": obj.get("firstCouponPayDate"),
+            "second_period_start_date": obj.get("secondPeriodStartDate"),
+            "penultimate_coupon_pay_date": obj.get("penultimateCouponPayDate"),
+            "last_period_start_date": obj.get("lastPeriodStartDate"),
             "ex_dividend_configuration": ExDividendConfiguration.from_dict(obj.get("exDividendConfiguration")) if obj.get("exDividendConfiguration") is not None else None,
             "compounding": Compounding.from_dict(obj.get("compounding")) if obj.get("compounding") is not None else None,
             "reset_convention": obj.get("resetConvention"),

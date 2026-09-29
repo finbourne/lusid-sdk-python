@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **is_apportionment** | **bool** | Whether this bucket set is the apportionment set (apportioning non-class-specific P&amp;L across share classes). | 
 **nodes** | [**List[BucketSetNode]**](BucketSetNode.md) | The nodes making up the bucket set: the fund aggregate and one per share class. | 
 **display_name** | **str** | The display name of the bucket set, as configured on the fund configuration. | [optional] 
+**is_backfilled** | **bool** | Set to True if this bucket set was backfilled from fund inception at this valuation point, because the previous valuation point has no results for it. Its values then hold the whole history, and its previous cumulative values are zero. False otherwise. | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,9 @@ is_apportionment: StrictBool = # Replace with your value
 is_apportionment:StrictBool = True
 nodes: List[BucketSetNode] = # Replace with your value
 display_name: Optional[StrictStr] = "example_display_name"
-bucket_set_result_instance = BucketSetResult(bucket_set_code=bucket_set_code, is_apportionment=is_apportionment, nodes=nodes, display_name=display_name)
+is_backfilled: Optional[StrictBool] = # Replace with your value
+is_backfilled:Optional[StrictBool] = None
+bucket_set_result_instance = BucketSetResult(bucket_set_code=bucket_set_code, is_apportionment=is_apportionment, nodes=nodes, display_name=display_name, is_backfilled=is_backfilled)
 
 ```
 

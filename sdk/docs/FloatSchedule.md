@@ -15,6 +15,10 @@ Name | Type | Description | Notes
 **payment_currency** | **str** | Payment currency. This does not have to be the same as the nominal bond or observation/reset currency. | 
 **spread** | **float** | Spread over floating rate given as a fraction. | [optional] 
 **stub_type** | **str** | When a payment schedule doesn&#39;t have regular payment intervals just because of the  first and/or last coupons of the schedule, we call those irregular coupons stubs.  This configuration specifies what type of stub is used when building the schedule  Supported values are:  None &#x3D; this is a regular payment schedule with no stubs. DO NOT use it with irregular schedules or you will get incorrect and unexpected behaviour.  ShortFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is shorter than the regular payment period.  ShortBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is shorter than the regular payment period.  LongFront &#x3D; this is an irregular payment schedule where only the first coupon is irregular, and covers a payment period that is longer than the regular payment period.  LongBack &#x3D; this is an irregular payment schedule where only the last coupon is irregular, and covers a payment period that is longer than the regular payment period.  Both &#x3D; this is an irregular payment schedule where both the first and the last coupons are irregular, and the length of these periods is calculated based on the first coupon payment date that should have been explicitly set. | [optional] 
+**first_coupon_pay_date** | **datetime** | Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate. | [optional] 
+**second_period_start_date** | **datetime** | Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date. | [optional] 
+**penultimate_coupon_pay_date** | **datetime** | Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate. | [optional] 
+**last_period_start_date** | **datetime** | Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date. | [optional] 
 **ex_dividend_configuration** | [**ExDividendConfiguration**](ExDividendConfiguration.md) |  | [optional] 
 **compounding** | [**Compounding**](Compounding.md) |  | [optional] 
 **reset_convention** | **str** | Control how resets are generated relative to payment convention(s).    Default value: InAdvance. Available values: InAdvance, InArrears. | [optional] 
@@ -44,6 +48,10 @@ notional: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 payment_currency: StrictStr = "example_payment_currency"
 spread: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 stub_type: Optional[StrictStr] = "example_stub_type"
+first_coupon_pay_date: Optional[datetime] = # Replace with your value
+second_period_start_date: Optional[datetime] = # Replace with your value
+penultimate_coupon_pay_date: Optional[datetime] = # Replace with your value
+last_period_start_date: Optional[datetime] = # Replace with your value
 ex_dividend_configuration: Optional[ExDividendConfiguration] = # Replace with your value
 compounding: Optional[Compounding] = None
 reset_convention: Optional[StrictStr] = "example_reset_convention"
@@ -53,7 +61,7 @@ cap_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 floor_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 schedule_id: Optional[StrictStr] = "example_schedule_id"
 schedule_type: StrictStr = "example_schedule_type"
-float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, cap_rate=cap_rate, floor_rate=floor_rate, schedule_id=schedule_id, schedule_type=schedule_type)
+float_schedule_instance = FloatSchedule(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, convention_name=convention_name, ex_dividend_days=ex_dividend_days, index_convention_name=index_convention_name, index_conventions=index_conventions, notional=notional, payment_currency=payment_currency, spread=spread, stub_type=stub_type, first_coupon_pay_date=first_coupon_pay_date, second_period_start_date=second_period_start_date, penultimate_coupon_pay_date=penultimate_coupon_pay_date, last_period_start_date=last_period_start_date, ex_dividend_configuration=ex_dividend_configuration, compounding=compounding, reset_convention=reset_convention, use_annualised_direct_rates=use_annualised_direct_rates, cap_rate=cap_rate, floor_rate=floor_rate, schedule_id=schedule_id, schedule_type=schedule_type)
 
 ```
 

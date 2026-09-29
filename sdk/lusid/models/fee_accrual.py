@@ -31,7 +31,7 @@ class FeeAccrual(BaseModel):
     effective_at: datetime = Field(description="The effective date for which the fee accrual has been calculated.", alias="effectiveAt")
     code:  StrictStr = Field(...,alias="code", description="The code of the fee for which the accrual has been calculated.") 
     name:  StrictStr = Field(...,alias="name", description="The name of the fee for which the accrual has been calculated.") 
-    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The result of the evaluating the fee's calculation base expression.", alias="calculationBase")
+    calculation_base: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The basis the annual accrual derives from: the result of evaluating the fee's calculation base expression, or the configured annual amount for a fixed-amount fee.", alias="calculationBase")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The result of applying the fee to the calculation base, and scaled down to a day.")
     previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousAccrual")
     previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousTotalAccrual")

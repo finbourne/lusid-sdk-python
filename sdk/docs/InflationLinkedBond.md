@@ -18,6 +18,10 @@ Name | Type | Description | Notes
 **principal** | **float** | The face-value or principal for the bond at outset. | 
 **principal_protection** | **bool** | If true then the principal is protected in that the redemption amount will be at least the face value (Principal).  This is typically set to true for inflation linked bonds issued by the United States and France (for example).  This is typically set to false for inflation linked bonds issued by the United Kingdom (post 2005).  For other sovereigns this can vary from issue to issue.  If not set this property defaults to true.  This is sometimes referred to as Deflation protection or an inflation floor of 0%. | [optional] 
 **stub_type** | **str** | StubType. Most Inflation linked bonds have a ShortFront stub type so this is the default, however in some cases  with a long front stub LongFront should be selected.  StubType Both is not supported for InflationLinkedBonds.    Supported string (enumeration) values are: [ShortFront, ShortBack, LongBack, LongFront, Both]. | [optional] 
+**first_coupon_pay_date** | **datetime** | Optional. The date on which the first coupon is paid. Set this date for an irregular first coupon period.  If this date is an adjusted date, also set SecondPeriodStartDate. | [optional] 
+**second_period_start_date** | **datetime** | Optional. The date on which the second coupon period starts. This is also the accrual end date of the first coupon period.  Set this date together with FirstCouponPayDate when the first coupon pay date is an adjusted date. | [optional] 
+**penultimate_coupon_pay_date** | **datetime** | Optional. The date on which the penultimate coupon is paid. Set this date for an irregular last coupon period.  If this date is an adjusted date, also set LastPeriodStartDate. | [optional] 
+**last_period_start_date** | **datetime** | Optional. The date on which the last coupon period starts. This is also the accrual end date of the penultimate coupon period.  Set this date together with PenultimateCouponPayDate when the penultimate coupon pay date is an adjusted date. | [optional] 
 **rounding_conventions** | [**List[RoundingConvention]**](RoundingConvention.md) | Rounding conventions for analytics, if any. | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **original_issue_price** | **float** | The price the bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
@@ -51,6 +55,10 @@ principal: Union[StrictFloat, StrictInt] = # Replace with your value
 principal_protection: Optional[StrictBool] = # Replace with your value
 principal_protection:Optional[StrictBool] = None
 stub_type: Optional[StrictStr] = "example_stub_type"
+first_coupon_pay_date: Optional[datetime] = # Replace with your value
+second_period_start_date: Optional[datetime] = # Replace with your value
+penultimate_coupon_pay_date: Optional[datetime] = # Replace with your value
+last_period_start_date: Optional[datetime] = # Replace with your value
 rounding_conventions: Optional[List[RoundingConvention]] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
 original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
@@ -58,7 +66,7 @@ par_per_unit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 amortisation_schedule: Optional[StepSchedule] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-inflation_linked_bond_instance = InflationLinkedBond(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, inflation_index_conventions=inflation_index_conventions, coupon_rate=coupon_rate, identifiers=identifiers, base_cpi=base_cpi, base_cpi_date=base_cpi_date, calculation_type=calculation_type, ex_dividend_days=ex_dividend_days, index_precision=index_precision, principal=principal, principal_protection=principal_protection, stub_type=stub_type, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, par_per_unit=par_per_unit, time_zone_conventions=time_zone_conventions, amortisation_schedule=amortisation_schedule, instrument_type=instrument_type)
+inflation_linked_bond_instance = InflationLinkedBond(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, inflation_index_conventions=inflation_index_conventions, coupon_rate=coupon_rate, identifiers=identifiers, base_cpi=base_cpi, base_cpi_date=base_cpi_date, calculation_type=calculation_type, ex_dividend_days=ex_dividend_days, index_precision=index_precision, principal=principal, principal_protection=principal_protection, stub_type=stub_type, first_coupon_pay_date=first_coupon_pay_date, second_period_start_date=second_period_start_date, penultimate_coupon_pay_date=penultimate_coupon_pay_date, last_period_start_date=last_period_start_date, rounding_conventions=rounding_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, par_per_unit=par_per_unit, time_zone_conventions=time_zone_conventions, amortisation_schedule=amortisation_schedule, instrument_type=instrument_type)
 
 ```
 

@@ -147,6 +147,7 @@ Class | Method | HTTP request | Description
 *ComplianceApi* | [**get_compliance_rule_result**](docs/ComplianceApi.md#get_compliance_rule_result) | **GET** /api/compliance/runs/summary/{runScope}/{runCode}/{ruleScope}/{ruleCode} | [EARLY ACCESS] GetComplianceRuleResult: Get detailed results for a specific rule within a compliance run.
 *ComplianceApi* | [**get_compliance_template**](docs/ComplianceApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
 *ComplianceApi* | [**get_decorated_compliance_run_summary**](docs/ComplianceApi.md#get_decorated_compliance_run_summary) | **GET** /api/compliance/runs/summary/{scope}/{code}/$decorate | [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
+*ComplianceApi* | [**get_filtered_decorated_compliance_run_summary**](docs/ComplianceApi.md#get_filtered_decorated_compliance_run_summary) | **POST** /api/compliance/runs/summary/$decorate | [EARLY ACCESS] GetFilteredDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run, optionally restricted to a set of portfolios or portfolio groups.
 *ComplianceApi* | [**list_compliance_rules**](docs/ComplianceApi.md#list_compliance_rules) | **GET** /api/compliance/rules | [EARLY ACCESS] ListComplianceRules: List compliance rules.
 *ComplianceApi* | [**list_compliance_runs**](docs/ComplianceApi.md#list_compliance_runs) | **GET** /api/compliance/runs | [EARLY ACCESS] ListComplianceRuns: List historical compliance run identifiers.
 *ComplianceApi* | [**list_compliance_templates**](docs/ComplianceApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: List compliance templates.
@@ -808,6 +809,7 @@ Class | Method | HTTP request | Description
 *TransferAgencyApi* | [**estimate_transfer_agency_orders**](docs/TransferAgencyApi.md#estimate_transfer_agency_orders) | **POST** /api/transferagency/orders/$estimate | [EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders
 *TransferAgencyApi* | [**upsert_transfer_agency_orders**](docs/TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
 *TransfersApi* | [**create_transfer**](docs/TransfersApi.md#create_transfer) | **POST** /api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer.
+*TransfersApi* | [**delete_transfer**](docs/TransfersApi.md#delete_transfer) | **DELETE** /api/transfers/{scope}/{code} | [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
 *TransfersApi* | [**get_transfer**](docs/TransfersApi.md#get_transfer) | **POST** /api/transfers/$get | [EXPERIMENTAL] GetTransfer: Get a transfer
 *TranslationApi* | [**translate_instrument_definitions**](docs/TranslationApi.md#translate_instrument_definitions) | **POST** /api/translation/instrumentdefinitions | [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 *TranslationApi* | [**translate_trade_tickets**](docs/TranslationApi.md#translate_trade_tickets) | **POST** /api/translation/tradetickets | [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
@@ -1283,6 +1285,7 @@ Class | Method | HTTP request | Description
  - [DecimalList](docs/DecimalList.md)
  - [DecimalListComplianceParameter](docs/DecimalListComplianceParameter.md)
  - [DecoratedComplianceRunSummary](docs/DecoratedComplianceRunSummary.md)
+ - [DecoratedComplianceRunSummaryRequest](docs/DecoratedComplianceRunSummaryRequest.md)
  - [DeleteAccountsResponse](docs/DeleteAccountsResponse.md)
  - [DeleteCustodianAccountsResponse](docs/DeleteCustodianAccountsResponse.md)
  - [DeleteDataQualityRule](docs/DeleteDataQualityRule.md)
@@ -2265,6 +2268,7 @@ Class | Method | HTTP request | Description
  - [SetTransactionConfigurationSourceRequest](docs/SetTransactionConfigurationSourceRequest.md)
  - [SettleExpectedActivityRuleNames](docs/SettleExpectedActivityRuleNames.md)
  - [SettleExpectedActivityWritebackConfiguration](docs/SettleExpectedActivityWritebackConfiguration.md)
+ - [SettleExpectedActivityWritebackSuggestion](docs/SettleExpectedActivityWritebackSuggestion.md)
  - [SettlementActivity](docs/SettlementActivity.md)
  - [SettlementActivityQuery](docs/SettlementActivityQuery.md)
  - [SettlementConfigurationCategory](docs/SettlementConfigurationCategory.md)
@@ -2602,6 +2606,7 @@ Class | Method | HTTP request | Description
  - [WorthlessEvent](docs/WorthlessEvent.md)
  - [WritebackConfiguration](docs/WritebackConfiguration.md)
  - [WritebackResultPattern](docs/WritebackResultPattern.md)
+ - [WritebackSuggestion](docs/WritebackSuggestion.md)
  - [YearMonthDay](docs/YearMonthDay.md)
  - [YieldCurveData](docs/YieldCurveData.md)
 

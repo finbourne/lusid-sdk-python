@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.rec_result_holding_impact import RecResultHoldingImpact
 from lusid.models.resource_id import ResourceId
+from lusid.models.writeback_suggestion import WritebackSuggestion
 
 class RecResultTransactionItem(BaseModel):
     """
@@ -34,7 +35,8 @@ class RecResultTransactionItem(BaseModel):
     holding_impacts: List[RecResultHoldingImpact] = Field(description="The holdings, and where the source states them the tax lots, the item impacted. A distinct set ordered by holdingId then taxLotId; may be empty. An input transaction has not run the movements engine and impacts nothing yet.", alias="holdingImpacts")
     item_type:  StrictStr = Field(...,alias="itemType", description="The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction or SettlementActivity. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, and both transaction rec types produce Transaction items. Available values: SettlementActivity, Holding, Transaction, ValuedHolding.") 
     rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The core rule, aggregate rule and supplemental attribute values for the item, keyed by name.", alias="ruleAndAttributeValues")
-    __properties = ["portfolioId", "transactionId", "holdingImpacts", "itemType", "ruleAndAttributeValues"]
+    writeback_suggestions: List[WritebackSuggestion] = Field(description="The writebacks suggested against this item, as configured by the matching ruleset's writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty.", alias="writebackSuggestions")
+    __properties = ["portfolioId", "transactionId", "holdingImpacts", "itemType", "ruleAndAttributeValues", "writebackSuggestions"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +68,7 @@ class RecResultTransactionItem(BaseModel):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
+                            "writeback_suggestions",
                           },
                           exclude_none=True)
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
@@ -78,6 +81,13 @@ class RecResultTransactionItem(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['holdingImpacts'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in writeback_suggestions (list)
+        _items = []
+        if self.writeback_suggestions:
+            for _item in self.writeback_suggestions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['writebackSuggestions'] = _items
         # set to None if transaction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_id is None and "transaction_id" in self.__fields_set__:
@@ -104,7 +114,8 @@ class RecResultTransactionItem(BaseModel):
             "transaction_id": obj.get("transactionId"),
             "holding_impacts": [RecResultHoldingImpact.from_dict(_item) for _item in obj.get("holdingImpacts")] if obj.get("holdingImpacts") is not None else None,
             "item_type": obj.get("itemType"),
-            "rule_and_attribute_values": obj.get("ruleAndAttributeValues")
+            "rule_and_attribute_values": obj.get("ruleAndAttributeValues"),
+            "writeback_suggestions": [WritebackSuggestion.from_dict(_item) for _item in obj.get("writebackSuggestions")] if obj.get("writebackSuggestions") is not None else None
         })
         return _obj
 

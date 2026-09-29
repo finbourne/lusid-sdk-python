@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **tax_lot_id** | **str** | The tax lot the item is, where the source row was a single lot: a lot of a position read by tax lot, or a cash commitment. Null for an aggregated position and for a cash balance. Opaque: compare it whole, do not parse it. | [optional] 
 **item_type** | **str** | The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction or SettlementActivity. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, and both transaction rec types produce Transaction items. Available values: SettlementActivity, Holding, Transaction, ValuedHolding. | 
 **rule_and_attribute_values** | **Dict[str, Optional[str]]** | The core rule, aggregate rule and supplemental attribute values for the item, keyed by name. | [optional] 
+**writeback_suggestions** | [**List[WritebackSuggestion]**](WritebackSuggestion.md) | The writebacks suggested against this item, as configured by the matching ruleset&#39;s writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty. | [readonly] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ holding_id: Optional[StrictStr] = "example_holding_id"
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
 item_type: StrictStr = "example_item_type"
 rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
-rec_result_holding_item_instance = RecResultHoldingItem(portfolio_id=portfolio_id, holding_id=holding_id, tax_lot_id=tax_lot_id, item_type=item_type, rule_and_attribute_values=rule_and_attribute_values)
+writeback_suggestions: List[WritebackSuggestion] = # Replace with your value
+rec_result_holding_item_instance = RecResultHoldingItem(portfolio_id=portfolio_id, holding_id=holding_id, tax_lot_id=tax_lot_id, item_type=item_type, rule_and_attribute_values=rule_and_attribute_values, writeback_suggestions=writeback_suggestions)
 
 ```
 

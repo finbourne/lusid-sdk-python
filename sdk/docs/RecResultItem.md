@@ -21,7 +21,11 @@ rec_result_holding_item_instance = lusid.models.rec_result_holding_item.RecResul
                         item_type = '', 
                         rule_and_attribute_values = {
                             'key' : ''
-                            }, )
+                            }, 
+                        writeback_suggestions = [
+                            lusid.models.writeback_suggestion.WritebackSuggestion(
+                                writeback_type = '', )
+                            ], )
 
 rec_result_item_instance = RecResultItem(rec_result_holding_item_instance)
 

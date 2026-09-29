@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **apportionment_results** | [**List[ApportionmentBreakdown]**](ApportionmentBreakdown.md) | The apportionment results for the valuation point: one fund-level entry plus one entry per allocation group. | [optional] 
 **bucket_set_results** | [**List[BucketSetResult]**](BucketSetResult.md) | The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV. | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
+**is_backfilled** | **bool** | Set to True if the Valuation Point has backfilled bucket set results, False otherwise. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -36,8 +37,10 @@ previous_valuation_point_code: Optional[StrictStr] = "example_previous_valuation
 apportionment_results: Optional[List[ApportionmentBreakdown]] = # Replace with your value
 bucket_set_results: Optional[List[BucketSetResult]] = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+is_backfilled: Optional[StrictBool] = # Replace with your value
+is_backfilled:Optional[StrictBool] = None
 links: Optional[List[Link]] = None
-valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, bucket_set_results=bucket_set_results, staged_modifications=staged_modifications, links=links)
+valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, bucket_set_results=bucket_set_results, staged_modifications=staged_modifications, is_backfilled=is_backfilled, links=links)
 
 ```
 
