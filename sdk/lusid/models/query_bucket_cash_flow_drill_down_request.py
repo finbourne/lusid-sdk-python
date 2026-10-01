@@ -38,7 +38,7 @@ class QueryBucketCashFlowDrillDownRequest(BaseModel):
     portfolio_entity_ids: List[PortfolioEntityId] = Field(description="The set of portfolios and portfolio groups to which the cashflows must belong.", alias="portfolioEntityIds")
     effective_at: datetime = Field(description="The valuation (pricing) effective datetime or cut label (inclusive) at which to evaluate the cashflows.  This determines whether cashflows are evaluated in a historic or forward looking context and will, for certain models, affect where data is looked up.", alias="effectiveAt")
     recipe_id: ResourceId = Field(alias="recipeId")
-    report_currency:  StrictStr = Field(...,alias="reportCurrency", description="Three letter ISO currency string indicating what currency to report in for ReportCurrency denominated queries.") 
+    report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="Optional three letter ISO currency string to convert cashflow amounts into. When supplied, each returned cashflow additionally carries ReportCurrencyAmount and TradeToReportCurrencyRate, converted from its own payment (instrument) currency. When omitted, those two fields are not present on any cashflow: Amount (always in the cashflow's own payment currency) are unaffected either way.") 
     exclude_unsettled_trades: Optional[StrictBool] = Field(default=None, description="If set to true, unsettled trades are excluded from the result set. Set this to match the value used on the bucketed cash flow query being drilled into, so the individual cash flows reconcile with the bucket. Note that the drill-down returns the complete resolved stream including transaction-sourced cashflows; if the bucketed query used the (default) InstrumentCashFlow representation, also exclude rows with a sourceType of 'Transaction' when reconciling.", alias="excludeUnsettledTrades")
     haircut_rules: Optional[List[CashFlowHaircutRule]] = Field(default=None, description="Optional ordered haircut rules applied to cashflow inflows; the first matching rule wins and a rule with no criteria acts as a catch-all. When supplied, each returned cashflow carries its gross amount, haircut fraction, net amount and the rule that was applied; with no rules those fields are omitted and the results are unchanged.", alias="haircutRules")
     cash_type:  Optional[StrictStr] = Field(None,alias="cashType", description="Which date basis buckets cash flows: TradeDate uses each cash flow's transaction date, SettleDate (default) uses its payment date. The response's CashFlowDetail.PaymentDate reflects whichever basis was used. Available values: TradeDate, SettleDate.") 
@@ -97,6 +97,11 @@ class QueryBucketCashFlowDrillDownRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
             _dict['asAt'] = None
+
+        # set to None if report_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.report_currency is None and "report_currency" in self.__fields_set__:
+            _dict['reportCurrency'] = None
 
         # set to None if haircut_rules (nullable) is None
         # and __fields_set__ contains the field

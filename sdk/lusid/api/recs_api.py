@@ -37,6 +37,7 @@ from lusid.models.paged_resource_list_of_rec_definition import PagedResourceList
 from lusid.models.paged_resource_list_of_rec_instance import PagedResourceListOfRecInstance
 from lusid.models.paged_resource_list_of_rec_result import PagedResourceListOfRecResult
 from lusid.models.paged_resource_list_of_rec_result_set import PagedResourceListOfRecResultSet
+from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.rec_definition import RecDefinition
 from lusid.models.rec_instance import RecInstance
 from lusid.models.rec_result import RecResult
@@ -46,6 +47,7 @@ from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSet
 from lusid.models.transition_rec_instance_request import TransitionRecInstanceRequest
 from lusid.models.update_matching_ruleset_request import UpdateMatchingRulesetRequest
 from lusid.models.update_rec_definition_request import UpdateRecDefinitionRequest
+from lusid.models.upsert_rec_definition_properties_response import UpsertRecDefinitionPropertiesResponse
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -3877,6 +3879,181 @@ class RecsApi:
 
         return self.api_client.call_api(
             '/api/recs/definitions/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_rec_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.")], **kwargs) -> UpsertRecDefinitionPropertiesResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_rec_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.")], async_req: Optional[bool]=True, **kwargs) -> UpsertRecDefinitionPropertiesResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_rec_definition_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertRecDefinitionPropertiesResponse, Awaitable[UpsertRecDefinitionPropertiesResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties  # noqa: E501
+
+        Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain 'RecDefinition', and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_rec_definition_properties(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition to update or insert the properties onto. (required)
+        :type scope: str
+        :param code: The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param request_body: The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'. (required)
+        :type request_body: Dict[str, PerpetualProperty]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: UpsertRecDefinitionPropertiesResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_rec_definition_properties_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_rec_definition_properties_with_http_info(scope, code, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_rec_definition_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the rec definition to update or insert the properties onto.")], code : Annotated[StrictStr, Field(..., description="The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.")], request_body : Annotated[Dict[str, PerpetualProperty], Field(description="The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties  # noqa: E501
+
+        Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain 'RecDefinition', and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_rec_definition_properties_with_http_info(scope, code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the rec definition to update or insert the properties onto. (required)
+        :type scope: str
+        :param code: The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. (required)
+        :type code: str
+        :param request_body: The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'. (required)
+        :type request_body: Dict[str, PerpetualProperty]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpsertRecDefinitionPropertiesResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_rec_definition_properties" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpsertRecDefinitionPropertiesResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/recs/definitions/{scope}/{code}/properties/$upsert', 'POST',
             _path_params,
             _query_params,
             _header_params,

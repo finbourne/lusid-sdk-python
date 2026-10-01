@@ -1800,6 +1800,7 @@ from lusid.models.upsert_portfolio_transactions_response import UpsertPortfolioT
 from lusid.models.upsert_quote_access_metadata_rule_request import UpsertQuoteAccessMetadataRuleRequest
 from lusid.models.upsert_quote_request import UpsertQuoteRequest
 from lusid.models.upsert_quotes_response import UpsertQuotesResponse
+from lusid.models.upsert_rec_definition_properties_response import UpsertRecDefinitionPropertiesResponse
 from lusid.models.upsert_recipe_composer_request import UpsertRecipeComposerRequest
 from lusid.models.upsert_recipe_request import UpsertRecipeRequest
 from lusid.models.upsert_reference_portfolio_constituent_properties_request import UpsertReferencePortfolioConstituentPropertiesRequest
@@ -1875,6 +1876,7 @@ from lusid.models.weighted_allocation_service_run_request import WeightedAllocat
 from lusid.models.weighted_instrument import WeightedInstrument
 from lusid.models.weighted_instrument_in_line_lookup_identifiers import WeightedInstrumentInLineLookupIdentifiers
 from lusid.models.weighted_instruments import WeightedInstruments
+from lusid.models.whole_loan_facility import WholeLoanFacility
 from lusid.models.withholding_tax_configuration import WithholdingTaxConfiguration
 from lusid.models.withholding_tax_dataset import WithholdingTaxDataset
 from lusid.models.withholding_tax_dataset_definitions import WithholdingTaxDatasetDefinitions
@@ -3681,6 +3683,7 @@ __all__ = [
     "UpsertQuoteAccessMetadataRuleRequest",
     "UpsertQuoteRequest",
     "UpsertQuotesResponse",
+    "UpsertRecDefinitionPropertiesResponse",
     "UpsertRecipeComposerRequest",
     "UpsertRecipeRequest",
     "UpsertReferencePortfolioConstituentPropertiesRequest",
@@ -3756,6 +3759,7 @@ __all__ = [
     "WeightedInstrument",
     "WeightedInstrumentInLineLookupIdentifiers",
     "WeightedInstruments",
+    "WholeLoanFacility",
     "WithholdingTaxConfiguration",
     "WithholdingTaxDataset",
     "WithholdingTaxDatasetDefinitions",

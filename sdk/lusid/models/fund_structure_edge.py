@@ -33,7 +33,8 @@ class FundStructureEdge(BaseModel):
     to: FundStructureEdgeTarget
     linkage_type:  Optional[StrictStr] = Field(None,alias="linkageType", description="How the link is held. DedicatedShareClass (the default) means the source invests into a share class of the target; DirectEquityInstrument, GPInterest, LPInterest and CarryInterest mean the source holds that interest in the target through the instrument in viaInstrumentId. Available values: DedicatedShareClass, DirectEquityInstrument, GPInterest, LPInterest, CarryInterest.") 
     via_instrument_id: Optional[ResourceId] = Field(default=None, alias="viaInstrumentId")
-    __properties = ["from", "to", "linkageType", "viaInstrumentId"]
+    sharing_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holder's ILPA sharing percentage in the target member, adjusted for transfers and equalisation but not reduced by ordinary distributions. Between 0 and 1 inclusive; the percentages declared into any one member must sum to no more than 1. Defaults to 1 (sole ownership) when not supplied. A value of 0 records a full exit: keep the edge and set it to 0 from the date the interest ended, so that the change in percentage from one version of the structure to the next tells the P&L flow what was disposed of. Each disposal or acquisition trade of the holder's needs its own version of the structure, effective on that trade's date: proceeds received on a date with no change in percentage are taken as a distribution on the retained interest, not a disposal. A change in percentage with no trade of the holder's on its date takes effect at the holder's next transaction on the member or period close, whichever comes first.", alias="sharingPercentage")
+    __properties = ["from", "to", "linkageType", "viaInstrumentId", "sharingPercentage"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,6 +79,11 @@ class FundStructureEdge(BaseModel):
         if self.linkage_type is None and "linkage_type" in self.__fields_set__:
             _dict['linkageType'] = None
 
+        # set to None if sharing_percentage (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sharing_percentage is None and "sharing_percentage" in self.__fields_set__:
+            _dict['sharingPercentage'] = None
+
         return _dict
 
     @classmethod
@@ -93,7 +99,8 @@ class FundStructureEdge(BaseModel):
             "var_from": obj.get("from"),
             "to": FundStructureEdgeTarget.from_dict(obj.get("to")) if obj.get("to") is not None else None,
             "linkage_type": obj.get("linkageType"),
-            "via_instrument_id": ResourceId.from_dict(obj.get("viaInstrumentId")) if obj.get("viaInstrumentId") is not None else None
+            "via_instrument_id": ResourceId.from_dict(obj.get("viaInstrumentId")) if obj.get("viaInstrumentId") is not None else None,
+            "sharing_percentage": obj.get("sharingPercentage")
         })
         return _obj
 

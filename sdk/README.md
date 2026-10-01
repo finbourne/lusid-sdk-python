@@ -610,6 +610,7 @@ Class | Method | HTTP request | Description
 *RecsApi* | [**transition_rec_instance**](docs/RecsApi.md#transition_rec_instance) | **POST** /api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
 *RecsApi* | [**update_matching_ruleset**](docs/RecsApi.md#update_matching_ruleset) | **PUT** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
 *RecsApi* | [**update_rec_definition**](docs/RecsApi.md#update_rec_definition) | **PUT** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
+*RecsApi* | [**upsert_rec_definition_properties**](docs/RecsApi.md#upsert_rec_definition_properties) | **POST** /api/recs/definitions/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
 *ReferenceListsApi* | [**delete_reference_list**](docs/ReferenceListsApi.md#delete_reference_list) | **DELETE** /api/referencelists/{scope}/{code} | [EARLY ACCESS] DeleteReferenceList: Delete Reference List
 *ReferenceListsApi* | [**get_reference_list**](docs/ReferenceListsApi.md#get_reference_list) | **GET** /api/referencelists/{scope}/{code} | GetReferenceList: Get Reference List
 *ReferenceListsApi* | [**list_reference_lists**](docs/ReferenceListsApi.md#list_reference_lists) | **GET** /api/referencelists | [EARLY ACCESS] ListReferenceLists: List Reference Lists
@@ -2516,6 +2517,7 @@ Class | Method | HTTP request | Description
  - [UpsertQuoteAccessMetadataRuleRequest](docs/UpsertQuoteAccessMetadataRuleRequest.md)
  - [UpsertQuoteRequest](docs/UpsertQuoteRequest.md)
  - [UpsertQuotesResponse](docs/UpsertQuotesResponse.md)
+ - [UpsertRecDefinitionPropertiesResponse](docs/UpsertRecDefinitionPropertiesResponse.md)
  - [UpsertRecipeComposerRequest](docs/UpsertRecipeComposerRequest.md)
  - [UpsertRecipeRequest](docs/UpsertRecipeRequest.md)
  - [UpsertReferencePortfolioConstituentPropertiesRequest](docs/UpsertReferencePortfolioConstituentPropertiesRequest.md)
@@ -2591,6 +2593,7 @@ Class | Method | HTTP request | Description
  - [WeightedInstrument](docs/WeightedInstrument.md)
  - [WeightedInstrumentInLineLookupIdentifiers](docs/WeightedInstrumentInLineLookupIdentifiers.md)
  - [WeightedInstruments](docs/WeightedInstruments.md)
+ - [WholeLoanFacility](docs/WholeLoanFacility.md)
  - [WithholdingTaxConfiguration](docs/WithholdingTaxConfiguration.md)
  - [WithholdingTaxDataset](docs/WithholdingTaxDataset.md)
  - [WithholdingTaxDatasetDefinitions](docs/WithholdingTaxDatasetDefinitions.md)

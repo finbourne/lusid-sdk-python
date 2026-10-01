@@ -26,6 +26,7 @@ Method | HTTP request | Description
 [**transition_rec_instance**](RecsApi.md#transition_rec_instance) | **POST** /api/recs/instances/{instanceIdType}/{instanceIdValue}/$transition | [EXPERIMENTAL] TransitionRecInstance: TransitionRecInstance
 [**update_matching_ruleset**](RecsApi.md#update_matching_ruleset) | **PUT** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] UpdateMatchingRuleset: UpdateMatchingRuleset
 [**update_rec_definition**](RecsApi.md#update_rec_definition) | **PUT** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] UpdateRecDefinition: UpdateRecDefinition
+[**upsert_rec_definition_properties**](RecsApi.md#upsert_rec_definition_properties) | **POST** /api/recs/definitions/{scope}/{code}/properties/$upsert | [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
 
 
 # **add_rec_result_set_approval_decision**
@@ -2179,6 +2180,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated rec definition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_rec_definition_properties**
+> UpsertRecDefinitionPropertiesResponse upsert_rec_definition_properties(scope, code, request_body)
+
+[EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+
+Update or insert one or more properties onto a single rec definition. A property will be updated if it already  exists and inserted if it does not. All properties must be of the domain 'RecDefinition', and are perpetual.                Upserting a property that exists for a rec definition, with a null value, will delete the instance of the  property for that rec definition. Properties not supplied are left unchanged, as is every other field of the  rec definition.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    scope = 'scope_example' # str | The scope of the rec definition to update or insert the properties onto.
+    code = 'code_example' # str | The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition.
+    request_body = {"RecDefinition/Workflow/WorkflowId":{"key":"RecDefinition/Workflow/WorkflowId","value":{"labelValue":"CustodyReviewWorkflow"}}} # Dict[str, PerpetualProperty] | The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               'RecDefinition/Workflow/WorkflowId'.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_rec_definition_properties(scope, code, request_body, opts=opts)
+
+        # [EXPERIMENTAL] UpsertRecDefinitionProperties: UpsertRecDefinitionProperties
+        api_response = api_instance.upsert_rec_definition_properties(scope, code, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->upsert_rec_definition_properties: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the rec definition to update or insert the properties onto. | 
+ **code** | **str**| The code of the rec definition to update or insert the properties onto. Together with the               scope this uniquely identifies the rec definition. | 
+ **request_body** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md)| The properties to be updated or inserted onto the rec definition. Each property in               the request must be keyed by its unique property key. This has the format {domain}/{scope}/{code}, for example               &#39;RecDefinition/Workflow/WorkflowId&#39;. | 
+
+### Return type
+
+[**UpsertRecDefinitionPropertiesResponse**](UpsertRecDefinitionPropertiesResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated or inserted properties. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

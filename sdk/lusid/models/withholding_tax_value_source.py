@@ -28,7 +28,7 @@ class WithholdingTaxValueSource(BaseModel):
     WithholdingTaxValueSource
     """
     dimension:  StrictStr = Field(...,alias="dimension", description="The name of the matching dimension this declaration populates, as it appears in the dataset field schema. A declaration naming a dimension neither dataset has is rejected.") 
-    source:  StrictStr = Field(...,alias="source", description="The LUSID field the engine reads the dimension's value from, addressed in the same syntax used to filter results: a property key in the form Properties[{domain}/{scope}/{code}], such as Properties[Instrument/WithholdingTax/AssetClass] or Properties[Transaction/WithholdingTax/Custodian]; or the name of a field on the entity itself, such as Transaction.SettlementCurrency.") 
+    source:  Optional[StrictStr] = Field(None,alias="source", description="Optional. The LUSID field the engine reads the dimension's value from, addressed in the same syntax used to filter results: a property key in the form Properties[{domain}/{scope}/{code}], such as Properties[Instrument/WithholdingTax/AssetClass] or Properties[Transaction/WithholdingTax/Custodian]; or the name of a field on the entity itself, such as Transaction.SettlementCurrency. Omit it to declare that the dimension is keyed on but not resolved, so only rows leaving that dimension blank match.") 
     __properties = ["dimension", "source"]
 
     class Config:
@@ -63,6 +63,11 @@ class WithholdingTaxValueSource(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if source (nullable) is None
+        # and __fields_set__ contains the field
+        if self.source is None and "source" in self.__fields_set__:
+            _dict['source'] = None
+
         return _dict
 
     @classmethod

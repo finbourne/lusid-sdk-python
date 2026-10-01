@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.resource_id import ResourceId
 
@@ -30,8 +31,7 @@ class CashFlowDetail(BaseModel):
     An individual cashflow inside a cashflow bucket, annotated with the source that produced it  in the cash flow waterfall (SRS > Transaction > Instrument).  # noqa: E501
     """
     payment_date: datetime = Field(description="The date on which the cashflow is paid.", alias="paymentDate")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow. A positive amount indicates money is received, a negative amount indicates money is paid. The amount is always the gross (pre-haircut) signed amount; when haircut rules are supplied the haircut and net amounts are reported separately.")
-    currency:  StrictStr = Field(...,alias="currency", description="The payment currency of the cashflow.") 
+    amount: Optional[CurrencyAndAmount] = None
     source_type:  StrictStr = Field(...,alias="sourceType", description="The source that produced the cashflow in the cash flow waterfall. One of 'Instrument' (produced by the valuation engine), 'Transaction' (produced from a booked transaction or movement) or 'SRS' (sourced from the structured results store).") 
     instrument_id:  StrictStr = Field(...,alias="instrumentId", description="The LUSID instrument identifier of the instrument that produced the cashflow.") 
     instrument_display_name:  Optional[StrictStr] = Field(None,alias="instrumentDisplayName", description="The display name of the instrument that produced the cashflow. Not present when the instrument cannot be resolved (e.g. deleted, no permission).") 
@@ -40,15 +40,15 @@ class CashFlowDetail(BaseModel):
     flow_type:  Optional[StrictStr] = Field(None,alias="flowType", description="The type of the cashflow, e.g. Coupon, Principal or Premium.") 
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="The name of the movement that produced the cashflow (e.g. Coupon, Side1), falling back to the flow type when the movement is unnamed. Not present when the cashflow could not be valued.") 
     pay_receive:  Optional[StrictStr] = Field(None,alias="payReceive", description="Indicates whether the cashflow is paid or received.") 
-    gross_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow before any haircut was applied. Only populated when haircut rules were supplied on the request.", alias="grossAmount")
+    gross_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="grossAmount")
     haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request.", alias="haircutFraction")
-    net_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow net of the haircut. Only populated when haircut rules were supplied on the request.", alias="netAmount")
+    net_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="netAmount")
     haircut_rule_applied:  Optional[StrictStr] = Field(None,alias="haircutRuleApplied", description="The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request.") 
-    error:  Optional[StrictStr] = Field(None,alias="error", description="Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see AmountInReportCurrency), in which case the base Amount remains populated and only AmountInReportCurrency and TradeToReportCurrencyRate are null.") 
-    amount_in_report_currency: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The signed amount of the cashflow (see Amount), converted into the request's report currency (see QueryBucketCashFlowDrillDownRequest.ReportCurrency). Not present when the FX rate used to convert into the report currency could not be resolved; see Error.", alias="amountInReportCurrency")
-    trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount into the request's report currency, resolved at the cashflow's transaction (trade) date, not its payment date. Not present when the rate could not be resolved; see Error.", alias="tradeToReportCurrencyRate")
+    error:  Optional[StrictStr] = Field(None,alias="error", description="Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see ReportCurrencyAmount), in which case the base Amount remains populated and only ReportCurrencyAmount and TradeToReportCurrencyRate are null.") 
+    report_currency_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="reportCurrencyAmount")
+    trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request's report currency, resolved at the cashflow's transaction (trade) date, not its payment date. Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).", alias="tradeToReportCurrencyRate")
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "currency", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "amountInReportCurrency", "tradeToReportCurrencyRate", "links"]
+    __properties = ["paymentDate", "amount", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "reportCurrencyAmount", "tradeToReportCurrencyRate", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,9 +82,21 @@ class CashFlowDetail(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of gross_amount
+        if self.gross_amount:
+            _dict['grossAmount'] = self.gross_amount.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of net_amount
+        if self.net_amount:
+            _dict['netAmount'] = self.net_amount.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of report_currency_amount
+        if self.report_currency_amount:
+            _dict['reportCurrencyAmount'] = self.report_currency_amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -92,11 +104,6 @@ class CashFlowDetail(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if amount (nullable) is None
-        # and __fields_set__ contains the field
-        if self.amount is None and "amount" in self.__fields_set__:
-            _dict['amount'] = None
-
         # set to None if instrument_display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_display_name is None and "instrument_display_name" in self.__fields_set__:
@@ -122,20 +129,10 @@ class CashFlowDetail(BaseModel):
         if self.pay_receive is None and "pay_receive" in self.__fields_set__:
             _dict['payReceive'] = None
 
-        # set to None if gross_amount (nullable) is None
-        # and __fields_set__ contains the field
-        if self.gross_amount is None and "gross_amount" in self.__fields_set__:
-            _dict['grossAmount'] = None
-
         # set to None if haircut_fraction (nullable) is None
         # and __fields_set__ contains the field
         if self.haircut_fraction is None and "haircut_fraction" in self.__fields_set__:
             _dict['haircutFraction'] = None
-
-        # set to None if net_amount (nullable) is None
-        # and __fields_set__ contains the field
-        if self.net_amount is None and "net_amount" in self.__fields_set__:
-            _dict['netAmount'] = None
 
         # set to None if haircut_rule_applied (nullable) is None
         # and __fields_set__ contains the field
@@ -146,11 +143,6 @@ class CashFlowDetail(BaseModel):
         # and __fields_set__ contains the field
         if self.error is None and "error" in self.__fields_set__:
             _dict['error'] = None
-
-        # set to None if amount_in_report_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.amount_in_report_currency is None and "amount_in_report_currency" in self.__fields_set__:
-            _dict['amountInReportCurrency'] = None
 
         # set to None if trade_to_report_currency_rate (nullable) is None
         # and __fields_set__ contains the field
@@ -175,8 +167,7 @@ class CashFlowDetail(BaseModel):
 
         _obj = CashFlowDetail.parse_obj({
             "payment_date": obj.get("paymentDate"),
-            "amount": obj.get("amount"),
-            "currency": obj.get("currency"),
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
             "source_type": obj.get("sourceType"),
             "instrument_id": obj.get("instrumentId"),
             "instrument_display_name": obj.get("instrumentDisplayName"),
@@ -185,12 +176,12 @@ class CashFlowDetail(BaseModel):
             "flow_type": obj.get("flowType"),
             "movement_name": obj.get("movementName"),
             "pay_receive": obj.get("payReceive"),
-            "gross_amount": obj.get("grossAmount"),
+            "gross_amount": CurrencyAndAmount.from_dict(obj.get("grossAmount")) if obj.get("grossAmount") is not None else None,
             "haircut_fraction": obj.get("haircutFraction"),
-            "net_amount": obj.get("netAmount"),
+            "net_amount": CurrencyAndAmount.from_dict(obj.get("netAmount")) if obj.get("netAmount") is not None else None,
             "haircut_rule_applied": obj.get("haircutRuleApplied"),
             "error": obj.get("error"),
-            "amount_in_report_currency": obj.get("amountInReportCurrency"),
+            "report_currency_amount": CurrencyAndAmount.from_dict(obj.get("reportCurrencyAmount")) if obj.get("reportCurrencyAmount") is not None else None,
             "trade_to_report_currency_rate": obj.get("tradeToReportCurrencyRate"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

@@ -26,20 +26,20 @@ from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.schedule import Schedule
 from lusid.models.time_zone_conventions import TimeZoneConventions
 
-class FlexibleLoan(LusidInstrument):
+class WholeLoanFacility(LusidInstrument):
     """
-    LUSID flexible loan instrument. Represents the basic building block of a more complex loan structure that  can handle deferred interest payments.  # noqa: E501
+    Whole Loan Facility. A loan facility wholly funded by a single lender: it shares the contractual terms of a  LoanFacility, but ownership is not shared pro-rata across investors. Like a LoanFacility, this is a lightweight  instrument; the state of the facility is carried by the holding rather than by the instrument itself.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the instrument.") 
-    parent_facility:  Optional[StrictStr] = Field(None,alias="parentFacility", description="The parent loan facility of this loan if this loan is a contract on a facility.  This resolves to the facility's LusidInstrumentId, falling back to its ClientInternal identifier,  and is null when the loan is not a contract on a facility.") 
-    parent_facility_details: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The details of the parent loan facility of this loan if this loan is a contract on a facility.", alias="parentFacilityDetails")
-    schedules: List[Schedule] = Field(description="Repayment schedules for the loan.")
+    initial_commitment: Union[StrictFloat, StrictInt] = Field(description="The initial commitment for the whole loan facility.", alias="initialCommitment")
+    loan_type:  StrictStr = Field(...,alias="loanType", description="LoanType for this facility. The facility can either be a revolving or a  term loan. Available values: Revolver, TermLoan.") 
+    schedules: List[Schedule] = Field(description="Repayment schedules for the facility.")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "parentFacility", "parentFacilityDetails", "schedules", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "initialCommitment", "loanType", "schedules", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -52,7 +52,7 @@ class FlexibleLoan(LusidInstrument):
 
         # check it's a class that uses the 'type' property as a discriminator
         # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'FlexibleLoan' not in [ 
+        if 'WholeLoanFacility' not in [ 
                                     # For notification application classes
                                     'AmazonSqsNotificationType',
                                     'AmazonSqsNotificationTypeResponse',
@@ -136,16 +136,14 @@ class FlexibleLoan(LusidInstrument):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FlexibleLoan:
-        """Create an instance of FlexibleLoan from a JSON string"""
+    def from_json(cls, json_str: str) -> WholeLoanFacility:
+        """Create an instance of WholeLoanFacility from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True,
                           exclude={
-                            "parent_facility",
-                            "parent_facility_details",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -164,34 +162,24 @@ class FlexibleLoan(LusidInstrument):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
-        # set to None if parent_facility (nullable) is None
-        # and __fields_set__ contains the field
-        if self.parent_facility is None and "parent_facility" in self.__fields_set__:
-            _dict['parentFacility'] = None
-
-        # set to None if parent_facility_details (nullable) is None
-        # and __fields_set__ contains the field
-        if self.parent_facility_details is None and "parent_facility_details" in self.__fields_set__:
-            _dict['parentFacilityDetails'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FlexibleLoan:
-        """Create an instance of FlexibleLoan from a dict"""
+    def from_dict(cls, obj: dict) -> WholeLoanFacility:
+        """Create an instance of WholeLoanFacility from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FlexibleLoan.parse_obj(obj)
+            return WholeLoanFacility.parse_obj(obj)
 
-        _obj = FlexibleLoan.parse_obj({
+        _obj = WholeLoanFacility.parse_obj({
             "instrument_type": obj.get("instrumentType"),
             "start_date": obj.get("startDate"),
             "maturity_date": obj.get("maturityDate"),
             "dom_ccy": obj.get("domCcy"),
-            "parent_facility": obj.get("parentFacility"),
-            "parent_facility_details": obj.get("parentFacilityDetails"),
+            "initial_commitment": obj.get("initialCommitment"),
+            "loan_type": obj.get("loanType"),
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
@@ -202,4 +190,4 @@ class FlexibleLoan(LusidInstrument):
 
         return _obj
 
-FlexibleLoan.update_forward_refs()
+WholeLoanFacility.update_forward_refs()

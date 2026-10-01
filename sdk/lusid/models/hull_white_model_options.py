@@ -35,9 +35,11 @@ class HullWhiteModelOptions(ModelOptions):
     mean_reversion_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency mean-reversion overrides, keyed by ISO currency code.  A currency absent from this map uses MeanReversion.", alias="meanReversionByCurrency")
     volatility_by_currency: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = Field(default=None, description="Per-currency short-rate volatility overrides, keyed by ISO currency code.  A currency absent from this map uses Volatility. Short-rate volatility is a per-currency  quantity in practice, so a book spanning several currencies can calibrate each currency  separately instead of sharing a single global figure.", alias="volatilityByCurrency")
     volatility_multiplier: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied.", alias="volatilityMultiplier")
+    effective_cs01_bump_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The TOTAL width, as an absolute spread, of the central-difference stencil used for the  option-adjusted Analytic/EffectiveCS01: the two reprice points sit at the solved OAS plus  and minus half of this. The reported figure is normalised to a one-basis-point move  whatever width is configured. Must be strictly positive. Defaults to 0.0001 (1bp, the  market convention for a credit sensitivity) when not supplied.", alias="effectiveCs01BumpWidth")
+    effective_key_rate_buckets: Optional[List[StrictStr]] = Field(default=None, description="The maturity buckets of the Analytic/EffectiveKeyRateDuration ladder, as tenor strings  such as \"1Y\" or \"6M\", in strictly increasing order. Each bucket is repriced under a  tent-shaped curve shift centred on its own tenor, so the ladder sums to the parallel  effective duration to first order. Buckets past an instrument's maturity report zero, so  one grid can serve a whole book. Defaults to the 1Y, 2Y, 3Y, 5Y, 7Y, 10Y, 20Y, 30Y grid  when not supplied; an empty list is rejected.", alias="effectiveKeyRateBuckets")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -170,6 +172,16 @@ class HullWhiteModelOptions(ModelOptions):
         if self.volatility_multiplier is None and "volatility_multiplier" in self.__fields_set__:
             _dict['volatilityMultiplier'] = None
 
+        # set to None if effective_cs01_bump_width (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_cs01_bump_width is None and "effective_cs01_bump_width" in self.__fields_set__:
+            _dict['effectiveCs01BumpWidth'] = None
+
+        # set to None if effective_key_rate_buckets (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_key_rate_buckets is None and "effective_key_rate_buckets" in self.__fields_set__:
+            _dict['effectiveKeyRateBuckets'] = None
+
         return _dict
 
     @classmethod
@@ -189,7 +201,9 @@ class HullWhiteModelOptions(ModelOptions):
             "effective_rate_bump_size": obj.get("effectiveRateBumpSize"),
             "mean_reversion_by_currency": obj.get("meanReversionByCurrency"),
             "volatility_by_currency": obj.get("volatilityByCurrency"),
-            "volatility_multiplier": obj.get("volatilityMultiplier")
+            "volatility_multiplier": obj.get("volatilityMultiplier"),
+            "effective_cs01_bump_width": obj.get("effectiveCs01BumpWidth"),
+            "effective_key_rate_buckets": obj.get("effectiveKeyRateBuckets")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
