@@ -29,11 +29,11 @@ class CreateTransferResponse(BaseModel):
     The transfer that was created, and the transaction legs it booked.  # noqa: E501
     """
     transfer_id: Optional[ResourceId] = Field(default=None, alias="transferId")
-    transfer_type:  Optional[StrictStr] = Field(None,alias="transferType") 
+    transfer_type:  Optional[StrictStr] = Field(None,alias="transferType", description="The derived type of the transfer: 'Transfer' when the position moves between portfolios, 'Switch' when one instrument is exchanged for another within a portfolio, and 'Twitch' when the position moves between portfolios and changes instrument at the same time.") 
     portfolio_id_out: Optional[ResourceId] = Field(default=None, alias="portfolioIdOut")
     portfolio_id_in: Optional[ResourceId] = Field(default=None, alias="portfolioIdIn")
-    transaction_id_out:  Optional[StrictStr] = Field(None,alias="transactionIdOut") 
-    transaction_id_in:  Optional[StrictStr] = Field(None,alias="transactionIdIn") 
+    transaction_id_out:  Optional[StrictStr] = Field(None,alias="transactionIdOut", description="The transaction id of the created outgoing leg.") 
+    transaction_id_in:  Optional[StrictStr] = Field(None,alias="transactionIdIn", description="The transaction id of the created incoming leg.") 
     __properties = ["transferId", "transferType", "portfolioIdOut", "portfolioIdIn", "transactionIdOut", "transactionIdIn"]
 
     class Config:

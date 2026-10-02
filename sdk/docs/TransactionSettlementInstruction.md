@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **is_active** | **bool** | Indicates whether the settlement instruction is active. When false, the instruction has no impact on settlement positions, but remains visible. Defaults to true. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The properties which have been requested to be decorated onto the settlement instruction. These will be from the &#39;SettlementInstruction&#39;, &#39;Portfolio&#39;, or &#39;Instrument&#39; domains. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**problem_code** | **str** | Why the settlement instruction was not applied. Set only when the status is Invalid, Orphan or Rejected. | [optional] 
 ## Example
 
 ```python
@@ -47,7 +48,8 @@ is_active: Optional[StrictBool] = # Replace with your value
 is_active:Optional[StrictBool] = None
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 version: Optional[Version] = None
-transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu, is_active=is_active, properties=properties, version=version)
+problem_code: Optional[StrictStr] = "example_problem_code"
+transaction_settlement_instruction_instance = TransactionSettlementInstruction(settlement_instruction_id=settlement_instruction_id, instruction_type=instruction_type, actual_settlement_date=actual_settlement_date, units=units, transaction_id=transaction_id, settlement_category=settlement_category, lusid_instrument_id=lusid_instrument_id, contractual_settlement_date=contractual_settlement_date, sub_holding_key_overrides=sub_holding_key_overrides, custodian_account_override=custodian_account_override, instrument_identifiers=instrument_identifiers, status=status, instruction_to_portfolio_rate=instruction_to_portfolio_rate, settlement_in_lieu=settlement_in_lieu, is_active=is_active, properties=properties, version=version, problem_code=problem_code)
 
 ```
 

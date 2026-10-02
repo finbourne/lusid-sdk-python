@@ -31,7 +31,7 @@ class GetTransferRequest(BaseModel):
     transfer_id: ResourceId = Field(alias="transferId")
     portfolio_id_out: ResourceId = Field(alias="portfolioIdOut")
     portfolio_id_in: ResourceId = Field(alias="portfolioIdIn")
-    property_keys: Optional[List[StrictStr]] = Field(default=None, alias="propertyKeys")
+    property_keys: Optional[List[StrictStr]] = Field(default=None, description="A list of property keys from the Transfer domain to decorate onto the transfer. These must have the format {domain}/{scope}/{code}.", alias="propertyKeys")
     __properties = ["transferId", "portfolioIdOut", "portfolioIdIn", "propertyKeys"]
 
     class Config:

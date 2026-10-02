@@ -28,7 +28,7 @@ from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class WholeLoanFacility(LusidInstrument):
     """
-    Whole Loan Facility. A loan facility wholly funded by a single lender: it shares the contractual terms of a  LoanFacility, but ownership is not shared pro-rata across investors. Like a LoanFacility, this is a lightweight  instrument; the state of the facility is carried by the holding rather than by the instrument itself.  # noqa: E501
+    Whole Loan Facility. A loan facility wholly funded by a single lender: it shares the contractual terms, schedules  and instrument events of a LoanFacility, but ownership is not shared pro-rata across investors, and it is valued  at par rather than from a price quote. Like a LoanFacility, this is a lightweight instrument which acts as a  placeholder for the state that is built from the instrument events, with its contracts modelled via FlexibleLoan  instruments in LUSID.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")

@@ -5,11 +5,11 @@ The transfer that was created, and the transaction legs it booked.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **transfer_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**transfer_type** | **str** |  | [optional] 
+**transfer_type** | **str** | The derived type of the transfer: &#39;Transfer&#39; when the position moves between portfolios, &#39;Switch&#39; when one instrument is exchanged for another within a portfolio, and &#39;Twitch&#39; when the position moves between portfolios and changes instrument at the same time. | [optional] 
 **portfolio_id_out** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **portfolio_id_in** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**transaction_id_out** | **str** |  | [optional] 
-**transaction_id_in** | **str** |  | [optional] 
+**transaction_id_out** | **str** | The transaction id of the created outgoing leg. | [optional] 
+**transaction_id_in** | **str** | The transaction id of the created incoming leg. | [optional] 
 ## Example
 
 ```python

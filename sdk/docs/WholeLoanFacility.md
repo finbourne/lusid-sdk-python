@@ -1,6 +1,6 @@
 # WholeLoanFacility
 
-Whole Loan Facility. A loan facility wholly funded by a single lender: it shares the contractual terms of a  LoanFacility, but ownership is not shared pro-rata across investors. Like a LoanFacility, this is a lightweight  instrument; the state of the facility is carried by the holding rather than by the instrument itself.
+Whole Loan Facility. A loan facility wholly funded by a single lender: it shares the contractual terms, schedules  and instrument events of a LoanFacility, but ownership is not shared pro-rata across investors, and it is valued  at par rather than from a price quote. Like a LoanFacility, this is a lightweight instrument which acts as a  placeholder for the state that is built from the instrument events, with its contracts modelled via FlexibleLoan  instruments in LUSID.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**create_transfer**](TransfersApi.md#create_transfer) | **POST** /api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer.
 [**delete_transfer**](TransfersApi.md#delete_transfer) | **DELETE** /api/transfers/{scope}/{code} | [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
 [**get_transfer**](TransfersApi.md#get_transfer) | **POST** /api/transfers/$get | [EXPERIMENTAL] GetTransfer: Get a transfer
+[**list_transfers**](TransfersApi.md#list_transfers) | **GET** /api/transfers | [EXPERIMENTAL] ListTransfers: List transfers
 
 
 # **create_transfer**
@@ -210,7 +211,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_transfer**
-> GetTransferResponse get_transfer(get_transfer_request, as_at=as_at)
+> Transfer get_transfer(get_transfer_request, as_at=as_at)
 
 [EXPERIMENTAL] GetTransfer: Get a transfer
 
@@ -292,7 +293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetTransferResponse**](GetTransferResponse.md)
+[**Transfer**](Transfer.md)
 
 ### HTTP request headers
 
@@ -305,6 +306,108 @@ Name | Type | Description  | Notes
 **200** | The requested transfer and both of its transactions. |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | No transfer exists with the requested scope, code and portfolios. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_transfers**
+> ResourceListOfTransfer list_transfers(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+
+[EXPERIMENTAL] ListTransfers: List transfers
+
+List transfers matching the specified criteria, decorated with the requested properties.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransfersApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransfersApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing transfers from a previous call. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    property_keys = ['property_keys_example'] # List[str] | The collection of `PropertyKey`s to decorate onto each transfer. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_transfers(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] ListTransfers: List transfers
+        api_response = api_instance.list_transfers(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransfersApi->list_transfers: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the transfers. Defaults to latest              version if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing transfers from a previous call. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. | [optional] 
+ **filter** | **str**| Expression to filter the result set. NOTE: Filtering on nested transaction out/in fields is not supported. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The collection of &#x60;PropertyKey&#x60;s to decorate onto each transfer. | [optional] 
+
+### Return type
+
+[**ResourceListOfTransfer**](ResourceListOfTransfer.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A collection of transfers matching the specified criteria. |  -  |
+**400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

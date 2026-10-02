@@ -771,7 +771,6 @@ from lusid.models.get_scenario_response import GetScenarioResponse
 from lusid.models.get_structured_result_data_response import GetStructuredResultDataResponse
 from lusid.models.get_subscription_response import GetSubscriptionResponse
 from lusid.models.get_transfer_request import GetTransferRequest
-from lusid.models.get_transfer_response import GetTransferResponse
 from lusid.models.get_virtual_document_response import GetVirtualDocumentResponse
 from lusid.models.group_by_selector_compliance_parameter import GroupBySelectorComplianceParameter
 from lusid.models.group_by_step import GroupByStep
@@ -1477,6 +1476,7 @@ from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTransactionFeeType
 from lusid.models.resource_list_of_transaction_settlement_instruction import ResourceListOfTransactionSettlementInstruction
 from lusid.models.resource_list_of_transaction_type import ResourceListOfTransactionType
+from lusid.models.resource_list_of_transfer import ResourceListOfTransfer
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
 from lusid.models.resource_list_of_virtual_transaction_override_record import ResourceListOfVirtualTransactionOverrideRecord
 from lusid.models.resource_list_with_post_bodies_of_settlement_activity_to_settlement_activity_query import ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery
@@ -1690,6 +1690,7 @@ from lusid.models.transaction_type_movement import TransactionTypeMovement
 from lusid.models.transaction_type_property_mapping import TransactionTypePropertyMapping
 from lusid.models.transaction_type_request import TransactionTypeRequest
 from lusid.models.transactions_reconciliations_response import TransactionsReconciliationsResponse
+from lusid.models.transfer import Transfer
 from lusid.models.transfer_agency_dates import TransferAgencyDates
 from lusid.models.transfer_agency_excluded_order import TransferAgencyExcludedOrder
 from lusid.models.transfer_agency_order_estimate_result import TransferAgencyOrderEstimateResult
@@ -2654,7 +2655,6 @@ __all__ = [
     "GetStructuredResultDataResponse",
     "GetSubscriptionResponse",
     "GetTransferRequest",
-    "GetTransferResponse",
     "GetVirtualDocumentResponse",
     "GroupBySelectorComplianceParameter",
     "GroupByStep",
@@ -3360,6 +3360,7 @@ __all__ = [
     "ResourceListOfTransactionFeeType",
     "ResourceListOfTransactionSettlementInstruction",
     "ResourceListOfTransactionType",
+    "ResourceListOfTransfer",
     "ResourceListOfValueType",
     "ResourceListOfVirtualTransactionOverrideRecord",
     "ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery",
@@ -3573,6 +3574,7 @@ __all__ = [
     "TransactionTypePropertyMapping",
     "TransactionTypeRequest",
     "TransactionsReconciliationsResponse",
+    "Transfer",
     "TransferAgencyDates",
     "TransferAgencyExcludedOrder",
     "TransferAgencyOrderEstimateResult",

@@ -48,7 +48,8 @@ class TransactionSettlementInstruction(BaseModel):
     is_active: Optional[StrictBool] = Field(default=None, description="Indicates whether the settlement instruction is active. When false, the instruction has no impact on settlement positions, but remains visible. Defaults to true.", alias="isActive")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the settlement instruction. These will be from the 'SettlementInstruction', 'Portfolio', or 'Instrument' domains.")
     version: Optional[Version] = None
-    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "isActive", "properties", "version"]
+    problem_code:  Optional[StrictStr] = Field(None,alias="problemCode", description="Why the settlement instruction was not applied. Set only when the status is Invalid, Orphan or Rejected.") 
+    __properties = ["settlementInstructionId", "instructionType", "actualSettlementDate", "units", "transactionId", "settlementCategory", "lusidInstrumentId", "contractualSettlementDate", "subHoldingKeyOverrides", "custodianAccountOverride", "instrumentIdentifiers", "status", "instructionToPortfolioRate", "settlementInLieu", "isActive", "properties", "version", "problemCode"]
 
     class Config:
         """Pydantic configuration"""
@@ -130,6 +131,11 @@ class TransactionSettlementInstruction(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if problem_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.problem_code is None and "problem_code" in self.__fields_set__:
+            _dict['problemCode'] = None
+
         return _dict
 
     @classmethod
@@ -168,7 +174,8 @@ class TransactionSettlementInstruction(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "problem_code": obj.get("problemCode")
         })
         return _obj
 

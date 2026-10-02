@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **transfer_id** | [**ResourceId**](ResourceId.md) |  | 
 **portfolio_id_out** | [**ResourceId**](ResourceId.md) |  | 
 **portfolio_id_in** | [**ResourceId**](ResourceId.md) |  | 
-**property_keys** | **List[str]** |  | [optional] 
+**property_keys** | **List[str]** | A list of property keys from the Transfer domain to decorate onto the transfer. These must have the format {domain}/{scope}/{code}. | [optional] 
 ## Example
 
 ```python

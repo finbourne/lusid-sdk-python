@@ -39,9 +39,10 @@ class HullWhiteModelOptions(ModelOptions):
     effective_key_rate_buckets: Optional[List[StrictStr]] = Field(default=None, description="The maturity buckets of the Analytic/EffectiveKeyRateDuration ladder, as tenor strings  such as \"1Y\" or \"6M\", in strictly increasing order. Each bucket is repriced under a  tent-shaped curve shift centred on its own tenor, so the ladder sums to the parallel  effective duration to first order. Buckets past an instrument's maturity report zero, so  one grid can serve a whole book. Defaults to the 1Y, 2Y, 3Y, 5Y, 7Y, 10Y, 20Y, 30Y grid  when not supplied; an empty list is rejected.", alias="effectiveKeyRateBuckets")
     price_to_first_reset: Optional[StrictBool] = Field(default=None, description="Value a fixed-to-float callable bond only to its first reset. The bond must be a  ComplexBond with one fixed schedule, one floating schedule starting on the fixed schedule's  maturity, and a call exercisable on that date; it is then valued as if called there, redeemed  at the call strike on the principal outstanding, with the fixed coupon paid on that date kept  and no floating coupon projected. Any call before that date stays live on the lattice. Bonds  of any other shape are refused by name rather than valued over their full life. Rows priced  this way carry the reset date in the Diagnostics/Model/PricingHorizon valuation key. Defaults  to false, which values the bond over its full life.", alias="priceToFirstReset")
     lattice_steps_per_year: Optional[StrictInt] = Field(default=None, description="The lattice time-step density as steps per year. When supplied, the lattice uses  ceil(horizon in years x this value) steps, raised if necessary so that one step is no longer  than the shortest gap between consecutive cashflows, so the fixed LatticeSteps is ignored and  the \"lattice coarser than coupon spacing\" refusal cannot fire. Must be at least 1 when  supplied. Absent, the fixed LatticeSteps count applies.", alias="latticeStepsPerYear")
+    max_lattice_nodes: Optional[StrictInt] = Field(default=None, description="A ceiling on the lattice size, counted as (steps + 1) x rate levels, that the pricer may  build for one instrument. An instrument whose lattice would exceed it is declined by the  model before any allocation, so the cost of a long-dated or finely-stepped row can be  bounded. Must be at least 1 when supplied. Absent, no ceiling applies.", alias="maxLatticeNodes")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets", "priceToFirstReset", "latticeStepsPerYear"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets", "priceToFirstReset", "latticeStepsPerYear", "maxLatticeNodes"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -194,6 +195,11 @@ class HullWhiteModelOptions(ModelOptions):
         if self.lattice_steps_per_year is None and "lattice_steps_per_year" in self.__fields_set__:
             _dict['latticeStepsPerYear'] = None
 
+        # set to None if max_lattice_nodes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.max_lattice_nodes is None and "max_lattice_nodes" in self.__fields_set__:
+            _dict['maxLatticeNodes'] = None
+
         return _dict
 
     @classmethod
@@ -217,7 +223,8 @@ class HullWhiteModelOptions(ModelOptions):
             "effective_cs01_bump_width": obj.get("effectiveCs01BumpWidth"),
             "effective_key_rate_buckets": obj.get("effectiveKeyRateBuckets"),
             "price_to_first_reset": obj.get("priceToFirstReset"),
-            "lattice_steps_per_year": obj.get("latticeStepsPerYear")
+            "lattice_steps_per_year": obj.get("latticeStepsPerYear"),
+            "max_lattice_nodes": obj.get("maxLatticeNodes")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

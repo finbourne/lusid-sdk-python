@@ -22,22 +22,27 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
 from lusid.models.transaction import Transaction
+from lusid.models.version import Version
 
-class GetTransferResponse(BaseModel):
+class Transfer(BaseModel):
     """
     A transfer and both of the transactions it booked.  # noqa: E501
     """
     transfer_id: Optional[ResourceId] = Field(default=None, alias="transferId")
-    transfer_type:  Optional[StrictStr] = Field(None,alias="transferType") 
+    transfer_type:  Optional[StrictStr] = Field(None,alias="transferType", description="The derived type of the transfer: 'Transfer' when the position moves between portfolios, 'Switch' when one instrument is exchanged for another within a portfolio, and 'Twitch' when the position moves between portfolios and changes instrument at the same time.") 
     portfolio_id_out: Optional[ResourceId] = Field(default=None, alias="portfolioIdOut")
     portfolio_id_in: Optional[ResourceId] = Field(default=None, alias="portfolioIdIn")
     transaction_out: Optional[Transaction] = Field(default=None, alias="transactionOut")
     transaction_in: Optional[Transaction] = Field(default=None, alias="transactionIn")
-    properties: Optional[Dict[str, ModelProperty]] = None
-    __properties = ["transferId", "transferType", "portfolioIdOut", "portfolioIdIn", "transactionOut", "transactionIn", "properties"]
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties of the transfer, for the requested PropertyKeys.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
+    version: Optional[Version] = None
+    links: Optional[List[Link]] = None
+    __properties = ["transferId", "transferType", "portfolioIdOut", "portfolioIdIn", "transactionOut", "transactionIn", "properties", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -61,8 +66,8 @@ class GetTransferResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> GetTransferResponse:
-        """Create an instance of GetTransferResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> Transfer:
+        """Create an instance of Transfer from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -93,6 +98,16 @@ class GetTransferResponse(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of version
+        if self.version:
+            _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in links (list)
+        _items = []
+        if self.links:
+            for _item in self.links:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['links'] = _items
         # set to None if transfer_type (nullable) is None
         # and __fields_set__ contains the field
         if self.transfer_type is None and "transfer_type" in self.__fields_set__:
@@ -103,18 +118,28 @@ class GetTransferResponse(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if href (nullable) is None
+        # and __fields_set__ contains the field
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
+
+        # set to None if links (nullable) is None
+        # and __fields_set__ contains the field
+        if self.links is None and "links" in self.__fields_set__:
+            _dict['links'] = None
+
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> GetTransferResponse:
-        """Create an instance of GetTransferResponse from a dict"""
+    def from_dict(cls, obj: dict) -> Transfer:
+        """Create an instance of Transfer from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return GetTransferResponse.parse_obj(obj)
+            return Transfer.parse_obj(obj)
 
-        _obj = GetTransferResponse.parse_obj({
+        _obj = Transfer.parse_obj({
             "transfer_id": ResourceId.from_dict(obj.get("transferId")) if obj.get("transferId") is not None else None,
             "transfer_type": obj.get("transferType"),
             "portfolio_id_out": ResourceId.from_dict(obj.get("portfolioIdOut")) if obj.get("portfolioIdOut") is not None else None,
@@ -126,8 +151,11 @@ class GetTransferResponse(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "href": obj.get("href"),
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-GetTransferResponse.update_forward_refs()
+Transfer.update_forward_refs()
