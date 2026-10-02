@@ -27,7 +27,7 @@ class RecRequestedResultRevision(BaseModel):
     """
     A result flagged for re-review as part of a Request Revisions decision.  # noqa: E501
     """
-    rec_result_id:  StrictStr = Field(...,alias="recResultId", description="The identifier of the result to flag for re-review.") 
+    rec_result_id:  StrictStr = Field(...,alias="recResultId", description="The id of the result to flag for re-review, as carried on the result itself, e.g. 'break-3'. Resolved within the run this result set is for.") 
     comment_text:  Optional[StrictStr] = Field(None,alias="commentText", description="An optional per-result comment added to the result's user comments.") 
     __properties = ["recResultId", "commentText"]
 

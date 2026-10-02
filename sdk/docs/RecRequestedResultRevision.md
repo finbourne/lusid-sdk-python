@@ -4,7 +4,7 @@ A result flagged for re-review as part of a Request Revisions decision.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rec_result_id** | **str** | The identifier of the result to flag for re-review. | 
+**rec_result_id** | **str** | The id of the result to flag for re-review, as carried on the result itself, e.g. &#39;break-3&#39;. Resolved within the run this result set is for. | 
 **comment_text** | **str** | An optional per-result comment added to the result&#39;s user comments. | [optional] 
 ## Example
 

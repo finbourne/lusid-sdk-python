@@ -4,8 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entity_type** | **str** | Available values: Transaction, Portfolio, Holding, ReferenceHolding, TransactionConfiguration, Instrument, PortfolioGroup, Person, Order, Allocation, Calendar, LegalEntity, InvestorRecord, InvestmentAccount, Placement, Execution, Block, Participation, Package, OrderInstruction, CustomEntity, InstrumentEvent, Account, ChartOfAccounts, CustodianAccount, CheckDefinition, Abor, AborConfiguration, Fund, FundConfiguration, FundStructure, Fee, Reconciliation, PropertyDefinition, Compliance, DiaryEntry, Leg, DerivedValuation, Timeline, ClosedPeriod, TaskDefinition, Workflow, IdentifierDefinition, SettlementInstruction, TransactionFeeType, PaymentInstruction, Transfer, RecDefinition, RecResult, JournalEntry. | 
-**entity_id_name** | **str** |  | 
-**entity_id_value** | **str** |  | 
+**entity_id** | **Dict[str, Optional[str]]** |  | 
 **restrict_editing** | **bool** |  | 
 ## Example
 
@@ -17,11 +16,10 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 entity_type: StrictStr = "example_entity_type"
-entity_id_name: StrictStr = "example_entity_id_name"
-entity_id_value: StrictStr = "example_entity_id_value"
+entity_id: Dict[str, Optional[StrictStr]] = # Replace with your value
 restrict_editing: StrictBool = # Replace with your value
 restrict_editing:StrictBool = True
-transaction_entity_link_instance = TransactionEntityLink(entity_type=entity_type, entity_id_name=entity_id_name, entity_id_value=entity_id_value, restrict_editing=restrict_editing)
+transaction_entity_link_instance = TransactionEntityLink(entity_type=entity_type, entity_id=entity_id, restrict_editing=restrict_editing)
 
 ```
 

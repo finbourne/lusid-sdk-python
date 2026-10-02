@@ -1737,25 +1737,33 @@ class RecsApi:
 
 
     @overload
-    async def get_rec_result(self, id : Annotated[StrictStr, Field(..., description="The system-generated id of the rec result.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> RecResult:  # noqa: E501
+    async def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> RecResult:  # noqa: E501
         ...
 
     @overload
-    def get_rec_result(self, id : Annotated[StrictStr, Field(..., description="The system-generated id of the rec result.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecResult:  # noqa: E501
+    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_rec_result(self, id : Annotated[StrictStr, Field(..., description="The system-generated id of the rec result.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecResult, Awaitable[RecResult]]:  # noqa: E501
+    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecResult, Awaitable[RecResult]]:  # noqa: E501
         """[EXPERIMENTAL] GetRecResult: GetRecResult  # noqa: E501
 
-        Retrieve a single rec result by its id.  # noqa: E501
+        Retrieve a single rec result by the run it belongs to and its id within that run.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_rec_result(id, as_at, property_keys, async_req=True)
+        >>> thread = api.get_rec_result(instance_id_type, instance_id_value, rec_type, run_number, id, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param id: The system-generated id of the rec result. (required)
+        :param instance_id_type: How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual. (required)
+        :type instance_id_type: str
+        :param instance_id_value: The unique identifier of the rec instance. (required)
+        :type instance_id_value: str
+        :param rec_type: The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+        :type rec_type: str
+        :param run_number: The run of the instance the result belongs to. (required)
+        :type run_number: int
+        :param id: The id of the rec result within the run, e.g. \"break-3\". (required)
         :type id: str
         :param as_at: The asAt datetime at which to retrieve the result. Defaults to latest if not specified.
         :type as_at: datetime
@@ -1777,20 +1785,28 @@ class RecsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_rec_result_with_http_info(id, as_at, property_keys, **kwargs)  # noqa: E501
+        return self.get_rec_result_with_http_info(instance_id_type, instance_id_value, rec_type, run_number, id, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_rec_result_with_http_info(self, id : Annotated[StrictStr, Field(..., description="The system-generated id of the rec result.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_rec_result_with_http_info(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetRecResult: GetRecResult  # noqa: E501
 
-        Retrieve a single rec result by its id.  # noqa: E501
+        Retrieve a single rec result by the run it belongs to and its id within that run.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_rec_result_with_http_info(id, as_at, property_keys, async_req=True)
+        >>> thread = api.get_rec_result_with_http_info(instance_id_type, instance_id_value, rec_type, run_number, id, as_at, property_keys, async_req=True)
         >>> result = thread.get()
 
-        :param id: The system-generated id of the rec result. (required)
+        :param instance_id_type: How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual. (required)
+        :type instance_id_type: str
+        :param instance_id_value: The unique identifier of the rec instance. (required)
+        :type instance_id_value: str
+        :param rec_type: The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
+        :type rec_type: str
+        :param run_number: The run of the instance the result belongs to. (required)
+        :type run_number: int
+        :param id: The id of the rec result within the run, e.g. \"break-3\". (required)
         :type id: str
         :param as_at: The asAt datetime at which to retrieve the result. Defaults to latest if not specified.
         :type as_at: datetime
@@ -1823,6 +1839,10 @@ class RecsApi:
         _params = locals()
 
         _all_params = [
+            'instance_id_type',
+            'instance_id_value',
+            'rec_type',
+            'run_number',
             'id',
             'as_at',
             'property_keys'
@@ -1854,6 +1874,18 @@ class RecsApi:
 
         # process the path parameters
         _path_params = {}
+        if _params['instance_id_type']:
+            _path_params['instanceIdType'] = _params['instance_id_type']
+
+        if _params['instance_id_value']:
+            _path_params['instanceIdValue'] = _params['instance_id_value']
+
+        if _params['rec_type']:
+            _path_params['recType'] = _params['rec_type']
+
+        if _params['run_number']:
+            _path_params['runNumber'] = _params['run_number']
+
         if _params['id']:
             _path_params['id'] = _params['id']
 
@@ -1890,7 +1922,7 @@ class RecsApi:
         }
 
         return self.api_client.call_api(
-            '/api/recs/results/{id}', 'GET',
+            '/api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id}', 'GET',
             _path_params,
             _query_params,
             _header_params,

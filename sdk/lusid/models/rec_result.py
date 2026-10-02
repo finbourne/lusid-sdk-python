@@ -41,7 +41,9 @@ class RecResult(BaseModel):
     """
     An individual reconciliation result — the aggregate result for a set of core rule values within a  rec type, with its type/status, review and exception axes, rule values and item-level detail.  # noqa: E501
     """
-    id:  StrictStr = Field(...,alias="id", description="The system-generated identifier for the rec result. Comprises the rec definition id, the instance id, the rec type and the core rule values.") 
+    id:  StrictStr = Field(...,alias="id", description="The id of the result within its run: its result type and result number, e.g. 'break-3'. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type.") 
+    result_number: StrictInt = Field(description="The result's number within its result type. Kept across runs while the result keeps its type; never reused once assigned.", alias="resultNumber")
+    first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
     rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
@@ -65,7 +67,7 @@ class RecResult(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "recType", "instanceId", "recDefinitionId", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
+    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "instanceId", "recDefinitionId", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -207,6 +209,8 @@ class RecResult(BaseModel):
 
         _obj = RecResult.parse_obj({
             "id": obj.get("id"),
+            "result_number": obj.get("resultNumber"),
+            "first_run_seen": obj.get("firstRunSeen"),
             "rec_type": obj.get("recType"),
             "instance_id": RecInstanceId.from_dict(obj.get("instanceId")) if obj.get("instanceId") is not None else None,
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,

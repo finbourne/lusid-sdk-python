@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**get_matching_ruleset**](RecsApi.md#get_matching_ruleset) | **GET** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
 [**get_rec_definition**](RecsApi.md#get_rec_definition) | **GET** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
 [**get_rec_instance**](RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
-[**get_rec_result**](RecsApi.md#get_rec_result) | **GET** /api/recs/results/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
+[**get_rec_result**](RecsApi.md#get_rec_result) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 [**get_rec_result_set**](RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
 [**instantiate_rec**](RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 [**list_matching_rulesets**](RecsApi.md#list_matching_rulesets) | **GET** /api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
@@ -180,7 +180,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RecsApi)
-    request_body = {"add-a-comment":{"recResultId":"rec-result-1","commentText":"Investigating this break."},"delete-a-comment":{"recResultId":"rec-result-1","commentId":"00000000-0000-0000-0000-000000000009"}} # Dict[str, BatchManageCommentRequest] | The batch of comment operations, keyed by a client-supplied correlation key.
+    request_body = {"add-a-comment":{"instanceId":{"instanceIdType":"Manual","instanceIdValue":"00000000-0000-0000-0000-000000000001"},"recType":"Holding","runNumber":1,"recResultId":"break-1","commentText":"Investigating this break."},"delete-a-comment":{"instanceId":{"instanceIdType":"Manual","instanceIdValue":"00000000-0000-0000-0000-000000000001"},"recType":"Holding","runNumber":1,"recResultId":"break-1","commentId":"00000000-0000-0000-0000-000000000009"}} # Dict[str, BatchManageCommentRequest] | The batch of comment operations, keyed by a client-supplied correlation key.
     success_mode = 'Partial' # str | Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional) (default to 'Partial')
 
     try:
@@ -274,7 +274,7 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RecsApi)
-    request_body = {"accept-a-break":{"recResultIds":["rec-result-1"],"decision":{"value":"Accept","affirm":false}},"force-match-two":{"recResultIds":["rec-result-2","rec-result-3"],"decision":{"value":"ForceMatch","affirm":false,"coreRulesExcused":["Broker Name"]}}} # Dict[str, BatchReviewRecResultRequest] | The batch of review items, keyed by a client-supplied correlation key.
+    request_body = {"accept-a-break":{"instanceId":{"instanceIdType":"Manual","instanceIdValue":"00000000-0000-0000-0000-000000000001"},"recType":"Holding","runNumber":1,"recResultIds":["break-1"],"decision":{"value":"Accept","affirm":false}},"force-match-two":{"instanceId":{"instanceIdType":"Manual","instanceIdValue":"00000000-0000-0000-0000-000000000001"},"recType":"Holding","runNumber":1,"recResultIds":["break-2","break-3"],"decision":{"value":"ForceMatch","affirm":false,"coreRulesExcused":["Broker Name"]}}} # Dict[str, BatchReviewRecResultRequest] | The batch of review items, keyed by a client-supplied correlation key.
     success_mode = 'Partial' # str | Whether the batch fails Atomically or in a Partial fashion. Allowed values: Atomic, Partial. (optional) (default to 'Partial')
 
     try:
@@ -989,11 +989,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_rec_result**
-> RecResult get_rec_result(id, as_at=as_at, property_keys=property_keys)
+> RecResult get_rec_result(instance_id_type, instance_id_value, rec_type, run_number, id, as_at=as_at, property_keys=property_keys)
 
 [EXPERIMENTAL] GetRecResult: GetRecResult
 
-Retrieve a single rec result by its id.
+Retrieve a single rec result by the run it belongs to and its id within that run.
 
 ### Example
 
@@ -1040,16 +1040,20 @@ def main():
     
     # Create an instance of the API class
     api_instance = api_client_factory.build(RecsApi)
-    id = 'id_example' # str | The system-generated id of the rec result.
+    instance_id_type = 'instance_id_type_example' # str | How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.
+    instance_id_value = 'instance_id_value_example' # str | The unique identifier of the rec instance.
+    rec_type = 'rec_type_example' # str | The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+    run_number = 56 # int | The run of the instance the result belongs to.
+    id = 'id_example' # str | The id of the rec result within the run, e.g. \"break-3\".
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
     property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto the result. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_rec_result(id, as_at=as_at, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_rec_result(instance_id_type, instance_id_value, rec_type, run_number, id, as_at=as_at, property_keys=property_keys, opts=opts)
 
         # [EXPERIMENTAL] GetRecResult: GetRecResult
-        api_response = api_instance.get_rec_result(id, as_at=as_at, property_keys=property_keys)
+        api_response = api_instance.get_rec_result(instance_id_type, instance_id_value, rec_type, run_number, id, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
     except ApiException as e:
@@ -1062,7 +1066,11 @@ main()
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| The system-generated id of the rec result. | 
+ **instance_id_type** | **str**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | 
+ **instance_id_value** | **str**| The unique identifier of the rec instance. | 
+ **rec_type** | **str**| The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
+ **run_number** | **int**| The run of the instance the result belongs to. | 
+ **id** | **str**| The id of the rec result within the run, e.g. \&quot;break-3\&quot;. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] 
  **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto the result. | [optional] 
 

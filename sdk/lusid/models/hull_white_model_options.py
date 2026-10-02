@@ -37,9 +37,11 @@ class HullWhiteModelOptions(ModelOptions):
     volatility_multiplier: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A multiplicative scaling applied to the resolved short-rate volatility - the scalar  Volatility or its per-currency override, whichever applies - at the point of use, e.g. 1.1  prices with the configured volatility raised by ten percent. A single multiplier scales  every per-currency calibration coherently, so a shocked set of options can differ from its  base by this one field rather than a hand-rebuilt volatility (or map of volatilities).  Must not be negative; zero is allowed and prices with a deterministic short rate.  Defaults to 1, which reproduces the configured volatility exactly, when not supplied.", alias="volatilityMultiplier")
     effective_cs01_bump_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The TOTAL width, as an absolute spread, of the central-difference stencil used for the  option-adjusted Analytic/EffectiveCS01: the two reprice points sit at the solved OAS plus  and minus half of this. The reported figure is normalised to a one-basis-point move  whatever width is configured. Must be strictly positive. Defaults to 0.0001 (1bp, the  market convention for a credit sensitivity) when not supplied.", alias="effectiveCs01BumpWidth")
     effective_key_rate_buckets: Optional[List[StrictStr]] = Field(default=None, description="The maturity buckets of the Analytic/EffectiveKeyRateDuration ladder, as tenor strings  such as \"1Y\" or \"6M\", in strictly increasing order. Each bucket is repriced under a  tent-shaped curve shift centred on its own tenor, so the ladder sums to the parallel  effective duration to first order. Buckets past an instrument's maturity report zero, so  one grid can serve a whole book. Defaults to the 1Y, 2Y, 3Y, 5Y, 7Y, 10Y, 20Y, 30Y grid  when not supplied; an empty list is rejected.", alias="effectiveKeyRateBuckets")
+    price_to_first_reset: Optional[StrictBool] = Field(default=None, description="Value a fixed-to-float callable bond only to its first reset. The bond must be a  ComplexBond with one fixed schedule, one floating schedule starting on the fixed schedule's  maturity, and a call exercisable on that date; it is then valued as if called there, redeemed  at the call strike on the principal outstanding, with the fixed coupon paid on that date kept  and no floating coupon projected. Any call before that date stays live on the lattice. Bonds  of any other shape are refused by name rather than valued over their full life. Rows priced  this way carry the reset date in the Diagnostics/Model/PricingHorizon valuation key. Defaults  to false, which values the bond over its full life.", alias="priceToFirstReset")
+    lattice_steps_per_year: Optional[StrictInt] = Field(default=None, description="The lattice time-step density as steps per year. When supplied, the lattice uses  ceil(horizon in years x this value) steps, raised if necessary so that one step is no longer  than the shortest gap between consecutive cashflows, so the fixed LatticeSteps is ignored and  the \"lattice coarser than coupon spacing\" refusal cannot fire. Must be at least 1 when  supplied. Absent, the fixed LatticeSteps count applies.", alias="latticeStepsPerYear")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets", "priceToFirstReset", "latticeStepsPerYear"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -182,6 +184,16 @@ class HullWhiteModelOptions(ModelOptions):
         if self.effective_key_rate_buckets is None and "effective_key_rate_buckets" in self.__fields_set__:
             _dict['effectiveKeyRateBuckets'] = None
 
+        # set to None if price_to_first_reset (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_to_first_reset is None and "price_to_first_reset" in self.__fields_set__:
+            _dict['priceToFirstReset'] = None
+
+        # set to None if lattice_steps_per_year (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lattice_steps_per_year is None and "lattice_steps_per_year" in self.__fields_set__:
+            _dict['latticeStepsPerYear'] = None
+
         return _dict
 
     @classmethod
@@ -203,7 +215,9 @@ class HullWhiteModelOptions(ModelOptions):
             "volatility_by_currency": obj.get("volatilityByCurrency"),
             "volatility_multiplier": obj.get("volatilityMultiplier"),
             "effective_cs01_bump_width": obj.get("effectiveCs01BumpWidth"),
-            "effective_key_rate_buckets": obj.get("effectiveKeyRateBuckets")
+            "effective_key_rate_buckets": obj.get("effectiveKeyRateBuckets"),
+            "price_to_first_reset": obj.get("priceToFirstReset"),
+            "lattice_steps_per_year": obj.get("latticeStepsPerYear")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
