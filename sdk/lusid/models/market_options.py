@@ -34,7 +34,8 @@ class MarketOptions(BaseModel):
     attempt_to_infer_missing_fx_on_fixings: Optional[StrictBool] = Field(default=None, description="If true, applies the same inference as AttemptToInferMissingFx to FX fixings (resets), e.g. the fixing of a  non-deliverable FX forward: a fixing quoted only in the reverse direction, or derivable by triangulation  through a standard base currency at the fixing date, is inferred rather than reported missing. This is a  separate, explicit opt-in because a fixing is a contractual historical print: with this off (the default),  a fixing must be present as the exact oriented currency pair to be used.", alias="attemptToInferMissingFxOnFixings")
     calendar_scope:  Optional[StrictStr] = Field(None,alias="calendarScope", description="The scope in which holiday calendars stored") 
     convention_scope:  Optional[StrictStr] = Field(None,alias="conventionScope", description="The scope in which conventions stored") 
-    __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "attemptToInferMissingFxOnFixings", "calendarScope", "conventionScope"]
+    pricing_basis:  Optional[StrictStr] = Field(None,alias="pricingBasis", description="The side of the instrument price quote the recipe values on: Mid (the default), Bid or Ask. This is a  property of the pricing methodology, not of any one column: with Bid or Ask, every instrument price rule  in the market data waterfall reads that quote field, so the same rules, scopes and fallbacks produce a  bid- or ask-struck valuation (for example a swing-priced NAV). Mid leaves each rule reading the field it  was written with (mid where none is given), which is the historical behaviour. FX, curve, spread, rate  and volatility rules are never affected. Available values: Mid, Bid, Ask.") 
+    __properties = ["defaultSupplier", "defaultInstrumentCodeType", "defaultScope", "attemptToInferMissingFx", "attemptToInferMissingFxOnFixings", "calendarScope", "conventionScope", "pricingBasis"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +94,11 @@ class MarketOptions(BaseModel):
         if self.convention_scope is None and "convention_scope" in self.__fields_set__:
             _dict['conventionScope'] = None
 
+        # set to None if pricing_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pricing_basis is None and "pricing_basis" in self.__fields_set__:
+            _dict['pricingBasis'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +117,8 @@ class MarketOptions(BaseModel):
             "attempt_to_infer_missing_fx": obj.get("attemptToInferMissingFx"),
             "attempt_to_infer_missing_fx_on_fixings": obj.get("attemptToInferMissingFxOnFixings"),
             "calendar_scope": obj.get("calendarScope"),
-            "convention_scope": obj.get("conventionScope")
+            "convention_scope": obj.get("conventionScope"),
+            "pricing_basis": obj.get("pricingBasis")
         })
         return _obj
 

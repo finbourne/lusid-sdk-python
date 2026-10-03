@@ -1622,6 +1622,8 @@ from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
 from lusid.models.sweep_blocks_response import SweepBlocksResponse
+from lusid.models.swing_pricing_decision import SwingPricingDecision
+from lusid.models.swing_pricing_rule import SwingPricingRule
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
@@ -3506,6 +3508,8 @@ __all__ = [
     "SwapPrincipalEvent",
     "SweepBlocksRequest",
     "SweepBlocksResponse",
+    "SwingPricingDecision",
+    "SwingPricingRule",
     "TargetTaxLot",
     "TargetTaxLotRequest",
     "TaxRule",

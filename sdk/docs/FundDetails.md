@@ -5,6 +5,8 @@ The details of a Fund.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency** | **str** | The currency of the fund which is the same as the base currency of all the portfolios of the fund&#39;s Abor. | [optional] 
+**pricing_basis** | **str** | The side of the quote the NAV type valued the fund on: Mid, Bid or Ask. Absent when the NAV type defers to the valuation recipe&#39;s own pricing basis. When the NAV type has a swing pricing rule this is the basis the rule applied. | [optional] 
+**swing_pricing** | [**SwingPricingDecision**](SwingPricingDecision.md) |  | [optional] 
 ## Example
 
 ```python
@@ -15,7 +17,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 currency: Optional[StrictStr] = "example_currency"
-fund_details_instance = FundDetails(currency=currency)
+pricing_basis: Optional[StrictStr] = "example_pricing_basis"
+swing_pricing: Optional[SwingPricingDecision] = # Replace with your value
+fund_details_instance = FundDetails(currency=currency, pricing_basis=pricing_basis, swing_pricing=swing_pricing)
 
 ```
 

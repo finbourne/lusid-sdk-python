@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **attempt_to_infer_missing_fx_on_fixings** | **bool** | If true, applies the same inference as AttemptToInferMissingFx to FX fixings (resets), e.g. the fixing of a  non-deliverable FX forward: a fixing quoted only in the reverse direction, or derivable by triangulation  through a standard base currency at the fixing date, is inferred rather than reported missing. This is a  separate, explicit opt-in because a fixing is a contractual historical print: with this off (the default),  a fixing must be present as the exact oriented currency pair to be used. | [optional] 
 **calendar_scope** | **str** | The scope in which holiday calendars stored | [optional] 
 **convention_scope** | **str** | The scope in which conventions stored | [optional] 
+**pricing_basis** | **str** | The side of the instrument price quote the recipe values on: Mid (the default), Bid or Ask. This is a  property of the pricing methodology, not of any one column: with Bid or Ask, every instrument price rule  in the market data waterfall reads that quote field, so the same rules, scopes and fallbacks produce a  bid- or ask-struck valuation (for example a swing-priced NAV). Mid leaves each rule reading the field it  was written with (mid where none is given), which is the historical behaviour. FX, curve, spread, rate  and volatility rules are never affected. Available values: Mid, Bid, Ask. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ attempt_to_infer_missing_fx_on_fixings: Optional[StrictBool] = # Replace with yo
 attempt_to_infer_missing_fx_on_fixings:Optional[StrictBool] = None
 calendar_scope: Optional[StrictStr] = "example_calendar_scope"
 convention_scope: Optional[StrictStr] = "example_convention_scope"
-market_options_instance = MarketOptions(default_supplier=default_supplier, default_instrument_code_type=default_instrument_code_type, default_scope=default_scope, attempt_to_infer_missing_fx=attempt_to_infer_missing_fx, attempt_to_infer_missing_fx_on_fixings=attempt_to_infer_missing_fx_on_fixings, calendar_scope=calendar_scope, convention_scope=convention_scope)
+pricing_basis: Optional[StrictStr] = "example_pricing_basis"
+market_options_instance = MarketOptions(default_supplier=default_supplier, default_instrument_code_type=default_instrument_code_type, default_scope=default_scope, attempt_to_infer_missing_fx=attempt_to_infer_missing_fx, attempt_to_infer_missing_fx_on_fixings=attempt_to_infer_missing_fx_on_fixings, calendar_scope=calendar_scope, convention_scope=convention_scope, pricing_basis=pricing_basis)
 
 ```
 

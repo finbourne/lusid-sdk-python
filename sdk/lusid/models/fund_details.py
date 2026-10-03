@@ -22,13 +22,16 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.swing_pricing_decision import SwingPricingDecision
 
 class FundDetails(BaseModel):
     """
     The details of a Fund.  # noqa: E501
     """
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency of the fund which is the same as the base currency of all the portfolios of the fund's Abor.") 
-    __properties = ["currency"]
+    pricing_basis:  Optional[StrictStr] = Field(None,alias="pricingBasis", description="The side of the quote the NAV type valued the fund on: Mid, Bid or Ask. Absent when the NAV type defers to the valuation recipe's own pricing basis. When the NAV type has a swing pricing rule this is the basis the rule applied.") 
+    swing_pricing: Optional[SwingPricingDecision] = Field(default=None, alias="swingPricing")
+    __properties = ["currency", "pricingBasis", "swingPricing"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,10 +65,18 @@ class FundDetails(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of swing_pricing
+        if self.swing_pricing:
+            _dict['swingPricing'] = self.swing_pricing.to_dict()
         # set to None if currency (nullable) is None
         # and __fields_set__ contains the field
         if self.currency is None and "currency" in self.__fields_set__:
             _dict['currency'] = None
+
+        # set to None if pricing_basis (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pricing_basis is None and "pricing_basis" in self.__fields_set__:
+            _dict['pricingBasis'] = None
 
         return _dict
 
@@ -79,7 +90,9 @@ class FundDetails(BaseModel):
             return FundDetails.parse_obj(obj)
 
         _obj = FundDetails.parse_obj({
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "pricing_basis": obj.get("pricingBasis"),
+            "swing_pricing": SwingPricingDecision.from_dict(obj.get("swingPricing")) if obj.get("swingPricing") is not None else None
         })
         return _obj
 
