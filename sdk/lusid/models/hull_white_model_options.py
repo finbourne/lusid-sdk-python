@@ -40,81 +40,27 @@ class HullWhiteModelOptions(ModelOptions):
     price_to_first_reset: Optional[StrictBool] = Field(default=None, description="Value a fixed-to-float callable bond only to its first reset. The bond must be a  ComplexBond with one fixed schedule, one floating schedule starting on the fixed schedule's  maturity, and a call exercisable on that date; it is then valued as if called there, redeemed  at the call strike on the principal outstanding, with the fixed coupon paid on that date kept  and no floating coupon projected. Any call before that date stays live on the lattice. Bonds  of any other shape are refused by name rather than valued over their full life. Rows priced  this way carry the reset date in the Diagnostics/Model/PricingHorizon valuation key. Defaults  to false, which values the bond over its full life.", alias="priceToFirstReset")
     lattice_steps_per_year: Optional[StrictInt] = Field(default=None, description="The lattice time-step density as steps per year. When supplied, the lattice uses  ceil(horizon in years x this value) steps, raised if necessary so that one step is no longer  than the shortest gap between consecutive cashflows, so the fixed LatticeSteps is ignored and  the \"lattice coarser than coupon spacing\" refusal cannot fire. Must be at least 1 when  supplied. Absent, the fixed LatticeSteps count applies.", alias="latticeStepsPerYear")
     max_lattice_nodes: Optional[StrictInt] = Field(default=None, description="A ceiling on the lattice size, counted as (steps + 1) x rate levels, that the pricer may  build for one instrument. An instrument whose lattice would exceed it is declined by the  model before any allocation, so the cost of a long-dated or finely-stepped row can be  bounded. Must be at least 1 when supplied. Absent, no ceiling applies.", alias="maxLatticeNodes")
+    price_at_quote_implied_oas: Optional[StrictBool] = Field(default=None, description="Price at the option-adjusted spread implied by the instrument's quoted price instead of at zero  spread, so the present value reproduces the quote and curve risk is measured with the spread  held. The spread is taken from an OAS quote served for the instrument (a quote with descriptor  [\"OAS\"] keyed by its identifiers, from a Rate-typed market data rule or a market data override)  when there is one, and is then held across every bumped valuation; otherwise it is solved  against the quote in the valuation's own market. A request for a Risk measure requires the OAS  quote, since a spread re-solved under each bump would leave the measure at zero. Also prices  compounded-in-arrears floating coupons, exercises inside an unfixed floating period and  asset-backed bonds, which are otherwise refused. For an asset-backed bond the pool is held at  its latest factor to legal final with no prepayment, so EffectiveDuration and Pv01 on those  rows are legal-final durations that ignore prepayment. A constant prepayment rate served for the  pool is not read, so the lattice, the cash flows and WeightedAverageLife all run the pool to  legal final. Rows carry the source of the spread in the Diagnostics/Model/PricingSpreadSource  valuation key. Defaults to false.", alias="priceAtQuoteImpliedOas")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets", "priceToFirstReset", "latticeStepsPerYear", "maxLatticeNodes"]
+    __properties = ["modelOptionsType", "meanReversion", "volatility", "latticeSteps", "effectiveRateBumpSize", "meanReversionByCurrency", "volatilityByCurrency", "volatilityMultiplier", "effectiveCs01BumpWidth", "effectiveKeyRateBuckets", "priceToFirstReset", "latticeStepsPerYear", "maxLatticeNodes", "priceAtQuoteImpliedOas"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'HullWhiteModelOptions' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "model_options_type" != "type":
+        _allowed = ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions']
+        if len(_allowed) != 1:
             return value
-
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions')")
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     class Config:
@@ -200,6 +146,11 @@ class HullWhiteModelOptions(ModelOptions):
         if self.max_lattice_nodes is None and "max_lattice_nodes" in self.__fields_set__:
             _dict['maxLatticeNodes'] = None
 
+        # set to None if price_at_quote_implied_oas (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_at_quote_implied_oas is None and "price_at_quote_implied_oas" in self.__fields_set__:
+            _dict['priceAtQuoteImpliedOas'] = None
+
         return _dict
 
     @classmethod
@@ -224,7 +175,8 @@ class HullWhiteModelOptions(ModelOptions):
             "effective_key_rate_buckets": obj.get("effectiveKeyRateBuckets"),
             "price_to_first_reset": obj.get("priceToFirstReset"),
             "lattice_steps_per_year": obj.get("latticeStepsPerYear"),
-            "max_lattice_nodes": obj.get("maxLatticeNodes")
+            "max_lattice_nodes": obj.get("maxLatticeNodes"),
+            "price_at_quote_implied_oas": obj.get("priceAtQuoteImpliedOas")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

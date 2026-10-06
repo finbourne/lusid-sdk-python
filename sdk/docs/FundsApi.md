@@ -3082,7 +3082,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_point_unsettled_transactions**
-> ValuationPointResourceListOfUnsettledTransaction get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+> ValuationPointResourceListOfUnsettledTransaction get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, filter=filter)
 
 [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
 
@@ -3146,13 +3146,14 @@ def main():
     page = 'page_example' # str | The pagination token to use to continue listing from a previous call. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions. (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, filter=filter, opts=opts)
 
         # [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-        api_response = api_instance.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code)
+        api_response = api_instance.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at=as_at, limit=limit, page=page, property_keys=property_keys, nav_type_code=nav_type_code, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -3173,6 +3174,7 @@ Name | Type | Description  | Notes
  **page** | **str**| The pagination token to use to continue listing from a previous call. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **filter** | **str**| Expression to filter the result set. | [optional] 
 
 ### Return type
 
@@ -4474,11 +4476,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **revert_valuation_point_to_estimate**
-> ValuationPointDataResponse revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code)
+> RevertValuationPointResponse revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code)
 
 [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 
-Moves a 'Final' status Valuation Point to status 'Estimate'.
+Moves a 'Final' status Valuation Point to status 'Estimate'.  Returns the reverted Valuation Point alongside every variant that  finalising it had rejected.
 
 ### Example
 
@@ -4560,7 +4562,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ValuationPointDataResponse**](ValuationPointDataResponse.md)
+[**RevertValuationPointResponse**](RevertValuationPointResponse.md)
 
 ### HTTP request headers
 
@@ -4570,7 +4572,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The updated Valuation Point response as a result of it be marked as Estimate. |  -  |
+**200** | The reverted Estimate Valuation Point, with every variant resurrected by the revert |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

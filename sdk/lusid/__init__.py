@@ -256,6 +256,7 @@ from lusid.models.batch_upsert_portfolio_transactions_response import BatchUpser
 from lusid.models.batch_upsert_property_definition_properties_response import BatchUpsertPropertyDefinitionPropertiesResponse
 from lusid.models.batch_upsert_relational_datasets_response import BatchUpsertRelationalDatasetsResponse
 from lusid.models.batch_upsert_transaction_settlement_instruction_response import BatchUpsertTransactionSettlementInstructionResponse
+from lusid.models.batch_upsert_withholding_tax_rates_response import BatchUpsertWithholdingTaxRatesResponse
 from lusid.models.block import Block
 from lusid.models.block_and_order_id_request import BlockAndOrderIdRequest
 from lusid.models.block_and_orders import BlockAndOrders
@@ -583,6 +584,7 @@ from lusid.models.delete_relationship_request import DeleteRelationshipRequest
 from lusid.models.delete_transfer_agency_order_request import DeleteTransferAgencyOrderRequest
 from lusid.models.delete_transfer_agency_order_result import DeleteTransferAgencyOrderResult
 from lusid.models.delete_transfer_agency_orders_response import DeleteTransferAgencyOrdersResponse
+from lusid.models.delete_withholding_tax_rate_request import DeleteWithholdingTaxRateRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.delisting_event import DelistingEvent
 from lusid.models.dependency_source_filter import DependencySourceFilter
@@ -1256,6 +1258,8 @@ from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
 from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
 from lusid.models.put_redemption_event import PutRedemptionEvent
+from lusid.models.qualifier_definition import QualifierDefinition
+from lusid.models.qualifier_definition_request import QualifierDefinitionRequest
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucket_cash_flow_drill_down_request import QueryBucketCashFlowDrillDownRequest
@@ -1507,6 +1511,7 @@ from lusid.models.reverse_stress_request import ReverseStressRequest
 from lusid.models.reverse_stress_response import ReverseStressResponse
 from lusid.models.reverse_stress_rung import ReverseStressRung
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
+from lusid.models.revert_valuation_point_response import RevertValuationPointResponse
 from lusid.models.risk_bump_options import RiskBumpOptions
 from lusid.models.roll_interest_updates import RollInterestUpdates
 from lusid.models.roll_principal_updates import RollPrincipalUpdates
@@ -1825,6 +1830,7 @@ from lusid.models.upsert_translation_script_request import UpsertTranslationScri
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
 from lusid.models.upsert_withholding_tax_configuration_request import UpsertWithholdingTaxConfigurationRequest
+from lusid.models.upsert_withholding_tax_rate_request import UpsertWithholdingTaxRateRequest
 from lusid.models.user import User
 from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
@@ -1883,6 +1889,7 @@ from lusid.models.whole_loan_facility import WholeLoanFacility
 from lusid.models.withholding_tax_configuration import WithholdingTaxConfiguration
 from lusid.models.withholding_tax_dataset import WithholdingTaxDataset
 from lusid.models.withholding_tax_dataset_definitions import WithholdingTaxDatasetDefinitions
+from lusid.models.withholding_tax_rate_response import WithholdingTaxRateResponse
 from lusid.models.withholding_tax_value_source import WithholdingTaxValueSource
 from lusid.models.workspace import Workspace
 from lusid.models.workspace_creation_request import WorkspaceCreationRequest
@@ -2142,6 +2149,7 @@ __all__ = [
     "BatchUpsertPropertyDefinitionPropertiesResponse",
     "BatchUpsertRelationalDatasetsResponse",
     "BatchUpsertTransactionSettlementInstructionResponse",
+    "BatchUpsertWithholdingTaxRatesResponse",
     "Block",
     "BlockAndOrderIdRequest",
     "BlockAndOrders",
@@ -2469,6 +2477,7 @@ __all__ = [
     "DeleteTransferAgencyOrderRequest",
     "DeleteTransferAgencyOrderResult",
     "DeleteTransferAgencyOrdersResponse",
+    "DeleteWithholdingTaxRateRequest",
     "DeletedEntityResponse",
     "DelistingEvent",
     "DependencySourceFilter",
@@ -3142,6 +3151,8 @@ __all__ = [
     "PropertyValueIn",
     "ProtectionPayoutCashFlowEvent",
     "PutRedemptionEvent",
+    "QualifierDefinition",
+    "QualifierDefinitionRequest",
     "QuantityInstructed",
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketCashFlowDrillDownRequest",
@@ -3393,6 +3404,7 @@ __all__ = [
     "ReverseStressResponse",
     "ReverseStressRung",
     "RevertValuationPointDataRequest",
+    "RevertValuationPointResponse",
     "RiskBumpOptions",
     "RollInterestUpdates",
     "RollPrincipalUpdates",
@@ -3711,6 +3723,7 @@ __all__ = [
     "UpsertValuationPointRequest",
     "UpsertVirtualTransactionOverrideResponse",
     "UpsertWithholdingTaxConfigurationRequest",
+    "UpsertWithholdingTaxRateRequest",
     "User",
     "ValuationPoint",
     "ValuationPointDataQueryParameters",
@@ -3769,6 +3782,7 @@ __all__ = [
     "WithholdingTaxConfiguration",
     "WithholdingTaxDataset",
     "WithholdingTaxDatasetDefinitions",
+    "WithholdingTaxRateResponse",
     "WithholdingTaxValueSource",
     "Workspace",
     "WorkspaceCreationRequest",

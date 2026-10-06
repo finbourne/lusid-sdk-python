@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
 
-Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.
+Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.
 
 ### Example
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **property_description** | **str** | Describes the property | [optional] 
 **custom_entity_types** | **List[str]** | The custom entity types that properties relating to this property definition can be applied to. | [optional] 
 **value_format** | **str** | The format in which values for this property definition should be represented. Available values: Text, Html. | [optional] 
+**qualifier_definitions** | [**List[QualifierDefinitionRequest]**](QualifierDefinitionRequest.md) | The qualifiers declared against this property definition. Omit this field, or supply it as null, to leave the declared qualifiers unchanged. Otherwise the supplied array replaces the stored array in full, so a qualifier omitted from it is no longer declared and can no longer be set, and an empty array clears every declaration. Stored qualifier values are retained in every case and become readable again if the same keys are re-declared with the same data types. | [optional] 
 ## Example
 
 ```python
@@ -20,7 +21,8 @@ display_name: StrictStr = "example_display_name"
 property_description: Optional[StrictStr] = "example_property_description"
 custom_entity_types: Optional[List[StrictStr]] = # Replace with your value
 value_format: Optional[StrictStr] = "example_value_format"
-update_property_definition_request_instance = UpdatePropertyDefinitionRequest(display_name=display_name, property_description=property_description, custom_entity_types=custom_entity_types, value_format=value_format)
+qualifier_definitions: Optional[List[QualifierDefinitionRequest]] = # Replace with your value
+update_property_definition_request_instance = UpdatePropertyDefinitionRequest(display_name=display_name, property_description=property_description, custom_entity_types=custom_entity_types, value_format=value_format, qualifier_definitions=qualifier_definitions)
 
 ```
 

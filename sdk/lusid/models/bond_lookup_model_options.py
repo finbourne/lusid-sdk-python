@@ -30,81 +30,28 @@ class BondLookupModelOptions(ModelOptions):
     """
     spread_anchored_risk: StrictBool = Field(description="Price the bond by discounting its own cashflows over its discounting curve at a constant  spread, instead of marking it to its quoted price. Marking to a quote declares no curve  dependency, so a lookup-priced bond reports no curve delta at all. In this mode the pricer  declares both the discounting curve and a ZSpread quote for the instrument and prices off  them, so holding the spread fixed while the curve is perturbed produces the curve's delta.  The anchor may also be served as a per-instrument CreditSpreadCurve complex market data  document (rule key Credit.CreditSpreadCurve[.IdentifierType], market asset  CreditSpreadCurve/<identifier>), which takes precedence over the quote when present.  Only the spread at the bond's maturity is read off it; the document's recoveryRate is not  used by this pricer.  Off by default, as the mode changes both the declared dependencies and where the price  comes from.", alias="spreadAnchoredRisk")
     cs01_bump_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The TOTAL width of the central-difference stencil behind the CS01/Central measure: the  instrument's own z-spread is repriced at spread ± width/2, so a width of 0.0001 means  ±0.5bp reprice points. The width is the whole distance between the two reprice points,  NOT the half-shift. The reported measure is always per one basis point of widening  whatever width is configured. Must be strictly positive.  Defaults to 0.0001 (1bp, repriced at ±0.5bp) when not supplied.", alias="cs01BumpWidth")
+    spread_anchor_source:  Optional[StrictStr] = Field(None,alias="spreadAnchorSource", description="Where the spread anchor comes from when no CreditSpreadCurve is served for the instrument. Only  read when SpreadAnchoredRisk is true.                Supported string (enumeration) values are: [MarketData, SolvedFromPrice].  Defaults to MarketData - the original behaviour, where a ZSpread quote must be served from the  quote store or as a market data override - when not supplied.                SolvedFromPrice: a served CreditSpreadCurve or ZSpread quote still wins. When neither is served,  the bond is valued exactly as the plain lookup values it, and the anchor is the z-spread its  looked-up price implies over the discounting curve (the value Analytic/ZSpread returns). Risk  measures, carry and scenario columns solve that anchor against the unperturbed market and hold it,  so no spread has to be stored or sent.") 
+    spread_term_structure: Optional[StrictBool] = Field(default=None, description="In spread-anchored mode with a credit-spread curve (a served CreditSpreadCurve, or the curve the  risk engine builds from the ZSpread quote), discount each cash flow at the curve's level on its own  payment date instead of discounting every flow at the level at maturity. Pointwise and bucketed  Risk/Credit ladders then split CS01 by cash flow, and the curve built from a quote carries one pillar  per remaining payment date. The price is unchanged on a flat curve (and so on any curve built from a  quote) but not on a sloped served curve.  Defaults to false - the level at maturity - when not supplied.", alias="spreadTermStructure")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "spreadAnchoredRisk", "cs01BumpWidth"]
+    __properties = ["modelOptionsType", "spreadAnchoredRisk", "cs01BumpWidth", "spreadAnchorSource", "spreadTermStructure"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'BondLookupModelOptions' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "model_options_type" != "type":
+        _allowed = ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions']
+        if len(_allowed) != 1:
             return value
-
-        if value not in ['Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions']:
-            raise ValueError("must be one of enum values ('Invalid', 'OpaqueModelOptions', 'EmptyModelOptions', 'IndexModelOptions', 'FxForwardModelOptions', 'FundingLegModelOptions', 'EquityModelOptions', 'CdsModelOptions', 'FlexibleLoanPricerOptions', 'HullWhiteModelOptions', 'BondLookupModelOptions', 'BondForwardModelOptions', 'SimpleModelOptions')")
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     class Config:
@@ -150,6 +97,16 @@ class BondLookupModelOptions(ModelOptions):
         if self.cs01_bump_width is None and "cs01_bump_width" in self.__fields_set__:
             _dict['cs01BumpWidth'] = None
 
+        # set to None if spread_anchor_source (nullable) is None
+        # and __fields_set__ contains the field
+        if self.spread_anchor_source is None and "spread_anchor_source" in self.__fields_set__:
+            _dict['spreadAnchorSource'] = None
+
+        # set to None if spread_term_structure (nullable) is None
+        # and __fields_set__ contains the field
+        if self.spread_term_structure is None and "spread_term_structure" in self.__fields_set__:
+            _dict['spreadTermStructure'] = None
+
         return _dict
 
     @classmethod
@@ -164,7 +121,9 @@ class BondLookupModelOptions(ModelOptions):
         _obj = BondLookupModelOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
             "spread_anchored_risk": obj.get("spreadAnchoredRisk"),
-            "cs01_bump_width": obj.get("cs01BumpWidth")
+            "cs01_bump_width": obj.get("cs01BumpWidth"),
+            "spread_anchor_source": obj.get("spreadAnchorSource"),
+            "spread_term_structure": obj.get("spreadTermStructure")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

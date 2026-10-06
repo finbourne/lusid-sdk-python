@@ -815,6 +815,8 @@ Class | Method | HTTP request | Description
 *TransfersApi* | [**list_transfers**](docs/TransfersApi.md#list_transfers) | **GET** /api/transfers | [EXPERIMENTAL] ListTransfers: List transfers
 *TranslationApi* | [**translate_instrument_definitions**](docs/TranslationApi.md#translate_instrument_definitions) | **POST** /api/translation/instrumentdefinitions | [EXPERIMENTAL] TranslateInstrumentDefinitions: Translate instruments
 *TranslationApi* | [**translate_trade_tickets**](docs/TranslationApi.md#translate_trade_tickets) | **POST** /api/translation/tradetickets | [EXPERIMENTAL] TranslateTradeTickets: Translate trade ticket
+*WithholdingTaxApi* | [**batch_delete_withholding_tax_rates**](docs/WithholdingTaxApi.md#batch_delete_withholding_tax_rates) | **POST** /api/withholdingtax/rates/{scope}/{code}/$batchDelete | [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+*WithholdingTaxApi* | [**batch_upsert_withholding_tax_rates**](docs/WithholdingTaxApi.md#batch_upsert_withholding_tax_rates) | **POST** /api/withholdingtax/rates/{scope}/{code}/$batchUpsert | [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
 *WithholdingTaxApi* | [**create_withholding_tax_dataset_definitions**](docs/WithholdingTaxApi.md#create_withholding_tax_dataset_definitions) | **POST** /api/withholdingtax/datasetdefinitions | [EARLY ACCESS] CreateWithholdingTaxDatasetDefinitions: Create the Withholding Tax dataset definitions.
 *WithholdingTaxApi* | [**delete_withholding_tax_configuration**](docs/WithholdingTaxApi.md#delete_withholding_tax_configuration) | **DELETE** /api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxConfiguration: Delete a Withholding Tax Configuration.
 *WithholdingTaxApi* | [**delete_withholding_tax_dataset_definition**](docs/WithholdingTaxApi.md#delete_withholding_tax_dataset_definition) | **DELETE** /api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxDatasetDefinition: Delete a Withholding Tax dataset definition.
@@ -974,6 +976,7 @@ Class | Method | HTTP request | Description
  - [BatchUpsertPropertyDefinitionPropertiesResponse](docs/BatchUpsertPropertyDefinitionPropertiesResponse.md)
  - [BatchUpsertRelationalDatasetsResponse](docs/BatchUpsertRelationalDatasetsResponse.md)
  - [BatchUpsertTransactionSettlementInstructionResponse](docs/BatchUpsertTransactionSettlementInstructionResponse.md)
+ - [BatchUpsertWithholdingTaxRatesResponse](docs/BatchUpsertWithholdingTaxRatesResponse.md)
  - [Block](docs/Block.md)
  - [BlockAndOrderIdRequest](docs/BlockAndOrderIdRequest.md)
  - [BlockAndOrders](docs/BlockAndOrders.md)
@@ -1301,6 +1304,7 @@ Class | Method | HTTP request | Description
  - [DeleteTransferAgencyOrderRequest](docs/DeleteTransferAgencyOrderRequest.md)
  - [DeleteTransferAgencyOrderResult](docs/DeleteTransferAgencyOrderResult.md)
  - [DeleteTransferAgencyOrdersResponse](docs/DeleteTransferAgencyOrdersResponse.md)
+ - [DeleteWithholdingTaxRateRequest](docs/DeleteWithholdingTaxRateRequest.md)
  - [DeletedEntityResponse](docs/DeletedEntityResponse.md)
  - [DelistingEvent](docs/DelistingEvent.md)
  - [DependencySourceFilter](docs/DependencySourceFilter.md)
@@ -1974,6 +1978,8 @@ Class | Method | HTTP request | Description
  - [PropertyValueIn](docs/PropertyValueIn.md)
  - [ProtectionPayoutCashFlowEvent](docs/ProtectionPayoutCashFlowEvent.md)
  - [PutRedemptionEvent](docs/PutRedemptionEvent.md)
+ - [QualifierDefinition](docs/QualifierDefinition.md)
+ - [QualifierDefinitionRequest](docs/QualifierDefinitionRequest.md)
  - [QuantityInstructed](docs/QuantityInstructed.md)
  - [QueryApplicableInstrumentEventsRequest](docs/QueryApplicableInstrumentEventsRequest.md)
  - [QueryBucketCashFlowDrillDownRequest](docs/QueryBucketCashFlowDrillDownRequest.md)
@@ -2225,6 +2231,7 @@ Class | Method | HTTP request | Description
  - [ReverseStressResponse](docs/ReverseStressResponse.md)
  - [ReverseStressRung](docs/ReverseStressRung.md)
  - [RevertValuationPointDataRequest](docs/RevertValuationPointDataRequest.md)
+ - [RevertValuationPointResponse](docs/RevertValuationPointResponse.md)
  - [RiskBumpOptions](docs/RiskBumpOptions.md)
  - [RollInterestUpdates](docs/RollInterestUpdates.md)
  - [RollPrincipalUpdates](docs/RollPrincipalUpdates.md)
@@ -2543,6 +2550,7 @@ Class | Method | HTTP request | Description
  - [UpsertValuationPointRequest](docs/UpsertValuationPointRequest.md)
  - [UpsertVirtualTransactionOverrideResponse](docs/UpsertVirtualTransactionOverrideResponse.md)
  - [UpsertWithholdingTaxConfigurationRequest](docs/UpsertWithholdingTaxConfigurationRequest.md)
+ - [UpsertWithholdingTaxRateRequest](docs/UpsertWithholdingTaxRateRequest.md)
  - [User](docs/User.md)
  - [ValuationPoint](docs/ValuationPoint.md)
  - [ValuationPointDataQueryParameters](docs/ValuationPointDataQueryParameters.md)
@@ -2601,6 +2609,7 @@ Class | Method | HTTP request | Description
  - [WithholdingTaxConfiguration](docs/WithholdingTaxConfiguration.md)
  - [WithholdingTaxDataset](docs/WithholdingTaxDataset.md)
  - [WithholdingTaxDatasetDefinitions](docs/WithholdingTaxDatasetDefinitions.md)
+ - [WithholdingTaxRateResponse](docs/WithholdingTaxRateResponse.md)
  - [WithholdingTaxValueSource](docs/WithholdingTaxValueSource.md)
  - [Workspace](docs/Workspace.md)
  - [WorkspaceCreationRequest](docs/WorkspaceCreationRequest.md)

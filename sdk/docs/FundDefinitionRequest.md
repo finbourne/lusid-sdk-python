@@ -14,7 +14,8 @@ Name | Type | Description | Notes
 **fund_configuration_id** | [**ResourceId**](ResourceId.md) |  | 
 **share_class_instrument_scopes** | **List[str]** | The scopes in which the instruments lie, currently limited to one. | [optional] 
 **share_class_instruments** | [**List[InstrumentResolutionDetail]**](InstrumentResolutionDetail.md) | Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures. | [optional] 
-**type** | **str** | The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA. | [optional] 
+**type** | **str** | The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Master and Feeder are deprecated: the structural role of a fund now lives on its fund structure node, and a fund with either type cannot be a member of a fund structure. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA. | [optional] 
+**tax_transparency** | **str** | Whether the Fund is looked through for tax: Transparent passes its income and gains to its holders as their own, Opaque is taxed in its own right. Optional; if not set, a TaxBlocker is Opaque and a CarryVehicle or GPInterestHolder is Transparent. A fund structure requires it on every SPV and AIV member. Available values: Transparent, Opaque. | [optional] 
 **inception_date** | **datetime** | Inception date of the Fund | 
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
 **primary_nav_type** | [**NavTypeDefinition**](NavTypeDefinition.md) |  | 
@@ -42,6 +43,7 @@ fund_configuration_id: ResourceId = # Replace with your value
 share_class_instrument_scopes: Optional[List[StrictStr]] = # Replace with your value
 share_class_instruments: Optional[List[InstrumentResolutionDetail]] = # Replace with your value
 type: Optional[StrictStr] = "example_type"
+tax_transparency: Optional[StrictStr] = "example_tax_transparency"
 inception_date: datetime = # Replace with your value
 decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
@@ -51,7 +53,7 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
 share_classes: Optional[List[ShareClassDefinition]] = # Replace with your value
-fund_definition_request_instance = FundDefinitionRequest(code=code, short_code=short_code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
+fund_definition_request_instance = FundDefinitionRequest(code=code, short_code=short_code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, tax_transparency=tax_transparency, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
 
 ```
 

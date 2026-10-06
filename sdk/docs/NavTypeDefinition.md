@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **transaction_exclusion_filter** | **str** | Optional filter expression to exclude specific transactions from this NavType&#39;s derived portfolios. The filter can reference Transaction, Portfolio, or Instrument fields and properties. | [optional] 
 **pricing_basis** | **str** | The side of the quote this Nav Type values the fund on: Mid, Bid or Ask. Overrides the pricing basis of the valuation recipe&#39;s market options for this Nav Type only, so a bid NAV and an ask NAV can share one recipe. Omit it to value on the recipe&#39;s own pricing basis. Available values: Mid, Bid, Ask. | [optional] 
 **swing_pricing** | [**SwingPricingRule**](SwingPricingRule.md) |  | [optional] 
+**notional_dealing_cost_table_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -52,7 +53,8 @@ transaction_template_scope: StrictStr = "example_transaction_template_scope"
 transaction_exclusion_filter: Optional[StrictStr] = "example_transaction_exclusion_filter"
 pricing_basis: Optional[StrictStr] = "example_pricing_basis"
 swing_pricing: Optional[SwingPricingRule] = # Replace with your value
-nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope, transaction_exclusion_filter=transaction_exclusion_filter, pricing_basis=pricing_basis, swing_pricing=swing_pricing)
+notional_dealing_cost_table_id: Optional[ResourceId] = # Replace with your value
+nav_type_definition_instance = NavTypeDefinition(code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope, transaction_exclusion_filter=transaction_exclusion_filter, pricing_basis=pricing_basis, swing_pricing=swing_pricing, notional_dealing_cost_table_id=notional_dealing_cost_table_id)
 
 ```
 

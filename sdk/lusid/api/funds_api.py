@@ -51,6 +51,7 @@ from lusid.models.paged_resource_list_of_valuation_point_overview import PagedRe
 from lusid.models.query_fund_cash_statement_parameters import QueryFundCashStatementParameters
 from lusid.models.resource_list_of_nav_activity_adjustment_response import ResourceListOfNavActivityAdjustmentResponse
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
+from lusid.models.revert_valuation_point_response import RevertValuationPointResponse
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
@@ -5795,22 +5796,22 @@ class FundsApi:
 
 
     @overload
-    async def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
+    async def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
         ...
 
     @overload
-    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
+    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointResourceListOfUnsettledTransaction:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfUnsettledTransaction, Awaitable[ValuationPointResourceListOfUnsettledTransaction]]:  # noqa: E501
+    def get_valuation_point_unsettled_transactions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointResourceListOfUnsettledTransaction, Awaitable[ValuationPointResourceListOfUnsettledTransaction]]:  # noqa: E501
         """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
         Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, async_req=True)
+        >>> thread = api.get_valuation_point_unsettled_transactions(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -5829,6 +5830,8 @@ class FundsApi:
         :type property_keys: List[str]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
+        :param filter: Expression to filter the result set.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -5845,17 +5848,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_valuation_point_unsettled_transactions_with_http_info(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, **kwargs)  # noqa: E501
+        return self.get_valuation_point_unsettled_transactions_with_http_info(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_valuation_point_unsettled_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_valuation_point_unsettled_transactions_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], single_valuation_point_query_parameters : Annotated[SingleValuationPointQueryParameters, Field(description="The arguments to use for querying the unsettled transactions.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the report. Defaults to latest.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing from a previous call.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.  # noqa: E501
 
         Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_valuation_point_unsettled_transactions_with_http_info(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, async_req=True)
+        >>> thread = api.get_valuation_point_unsettled_transactions_with_http_info(scope, code, single_valuation_point_query_parameters, as_at, limit, page, property_keys, nav_type_code, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -5874,6 +5877,8 @@ class FundsApi:
         :type property_keys: List[str]
         :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
         :type nav_type_code: str
+        :param filter: Expression to filter the result set.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -5908,7 +5913,8 @@ class FundsApi:
             'limit',
             'page',
             'property_keys',
-            'nav_type_code'
+            'nav_type_code',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -5964,6 +5970,9 @@ class FundsApi:
 
         if _params.get('nav_type_code') is not None:  # noqa: E501
             _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -8564,18 +8573,18 @@ class FundsApi:
 
 
     @overload
-    async def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    async def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> RevertValuationPointResponse:  # noqa: E501
         ...
 
     @overload
-    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> ValuationPointDataResponse:  # noqa: E501
+    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> RevertValuationPointResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPointDataResponse, Awaitable[ValuationPointDataResponse]]:  # noqa: E501
+    def revert_valuation_point_to_estimate(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RevertValuationPointResponse, Awaitable[RevertValuationPointResponse]]:  # noqa: E501
         """[EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
-        Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
+        Moves a 'Final' status Valuation Point to status 'Estimate'.  Returns the reverted Valuation Point alongside every variant that  finalising it had rejected.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8598,7 +8607,7 @@ class FundsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ValuationPointDataResponse
+        :rtype: RevertValuationPointResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -8612,7 +8621,7 @@ class FundsApi:
     def revert_valuation_point_to_estimate_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], revert_valuation_point_data_request : Annotated[RevertValuationPointDataRequest, Field(description="The revertValuationPointRequest which contains the Diary Entry code for the Final Valuation Point to move to Estimate status.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, sets the status of the Valuation Point of the specified NAV Type to be Estimate.              Otherwise, the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.  # noqa: E501
 
-        Moves a 'Final' status Valuation Point to status 'Estimate'.  # noqa: E501
+        Moves a 'Final' status Valuation Point to status 'Estimate'.  Returns the reverted Valuation Point alongside every variant that  finalising it had rejected.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8648,7 +8657,7 @@ class FundsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ValuationPointDataResponse, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(RevertValuationPointResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -8723,7 +8732,7 @@ class FundsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ValuationPointDataResponse",
+            '200': "RevertValuationPointResponse",
             '400': "LusidValidationProblemDetails",
         }
 

@@ -53,456 +53,126 @@ class PropertyDefinitionSearchResult(BaseModel):
     def value_type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "value_type" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText']:
-            raise ValueError("must be one of enum values ('String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText')")
+        _allowed = ['String', 'Int', 'Decimal', 'DateTime', 'Boolean', 'Map', 'List', 'PropertyArray', 'Percentage', 'Code', 'Id', 'Uri', 'CurrencyAndAmount', 'TradePrice', 'Currency', 'MetricValue', 'ResourceId', 'ResultValue', 'CutLocalTime', 'DateOrCutLabel', 'UnindexedText']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     @validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "type" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['Label', 'Metric', 'Information']:
-            raise ValueError("must be one of enum values ('Label', 'Metric', 'Information')")
+        _allowed = ['Label', 'Metric', 'Information']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     @validator('unit_schema')
     def unit_schema_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "unit_schema" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['NoUnits', 'Basic', 'Iso4217Currency']:
-            raise ValueError("must be one of enum values ('NoUnits', 'Basic', 'Iso4217Currency')")
+        _allowed = ['NoUnits', 'Basic', 'Iso4217Currency']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     @validator('domain')
     def domain_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "domain" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'InvestorRecord', 'InvestmentAccount', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'CheckDefinition', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'FundStructure', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'Workflow', 'StagingRuleSet', 'IdentifierDefinition', 'SettlementInstruction', 'TransactionFeeType', 'AllocationMethod', 'TransactionFee', 'Subscription', 'ScenarioDefinition', 'PaymentInstruction', 'Transfer', 'CurrencyGroup', 'RecDefinition', 'RecResult', 'JournalEntry']:
-            raise ValueError("must be one of enum values ('NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'InvestorRecord', 'InvestmentAccount', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'CheckDefinition', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'FundStructure', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'Workflow', 'StagingRuleSet', 'IdentifierDefinition', 'SettlementInstruction', 'TransactionFeeType', 'AllocationMethod', 'TransactionFee', 'Subscription', 'ScenarioDefinition', 'PaymentInstruction', 'Transfer', 'CurrencyGroup', 'RecDefinition', 'RecResult', 'JournalEntry')")
+        _allowed = ['NotDefined', 'Transaction', 'Portfolio', 'Holding', 'ReferenceHolding', 'TransactionConfiguration', 'Instrument', 'CutLabelDefinition', 'Analytic', 'PortfolioGroup', 'Person', 'AccessMetadata', 'Order', 'UnitResult', 'MarketData', 'ConfigurationRecipe', 'Allocation', 'Calendar', 'LegalEntity', 'InvestorRecord', 'InvestmentAccount', 'Placement', 'Execution', 'Block', 'Participation', 'Package', 'OrderInstruction', 'NextBestAction', 'CustomEntity', 'InstrumentEvent', 'Account', 'ChartOfAccounts', 'CustodianAccount', 'CheckDefinition', 'Abor', 'AborConfiguration', 'Fund', 'FundConfiguration', 'FundStructure', 'Fee', 'Reconciliation', 'PropertyDefinition', 'Compliance', 'DiaryEntry', 'Leg', 'DerivedValuation', 'Timeline', 'ClosedPeriod', 'AddressKeyDefinition', 'AmortisationRuleSet', 'AnalyticsSetInventory', 'AtomUnitResult', 'CleardownModule', 'ComplexMarketData', 'ComplianceRunSummary', 'ComplianceRule', 'ComplianceRunInfo', 'CorporateActionSource', 'CounterpartyAgreement', 'CustomEntityDefinition', 'DataType', 'Dialect', 'EventHandler', 'GeneralLedgerProfile', 'PostingModule', 'Quote', 'RecipeComposer', 'ReconciliationRunBreak', 'ReferenceList', 'RelationDefinition', 'ReturnBlockIndex', 'SRSDocument', 'SRSIndex', 'TransactionTemplate', 'TransactionTemplateScope', 'TransactionType', 'TransactionTypeConfig', 'TranslationScript', 'TaskDefinition', 'TaskInstance', 'Worker', 'Workflow', 'StagingRuleSet', 'IdentifierDefinition', 'SettlementInstruction', 'TransactionFeeType', 'AllocationMethod', 'TransactionFee', 'Subscription', 'ScenarioDefinition', 'PaymentInstruction', 'Transfer', 'CurrencyGroup', 'RecDefinition', 'RecResult', 'JournalEntry']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     @validator('life_time')
     def life_time_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "life_time" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['Perpetual', 'TimeVariant']:
-            raise ValueError("must be one of enum values ('Perpetual', 'TimeVariant')")
+        _allowed = ['Perpetual', 'TimeVariant']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     @validator('property_definition_type')
     def property_definition_type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
-
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'PropertyDefinitionSearchResult' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "property_definition_type" != "type":
-            return value
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
         if value is None:
             return value
 
-        if value not in ['ValueProperty', 'DerivedDefinition']:
-            raise ValueError("must be one of enum values ('ValueProperty', 'DerivedDefinition')")
+        _allowed = ['ValueProperty', 'DerivedDefinition']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     class Config:

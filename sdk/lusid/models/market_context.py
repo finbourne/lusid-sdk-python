@@ -37,7 +37,9 @@ class MarketContext(BaseModel):
     options: Optional[MarketOptions] = None
     specific_rules: Optional[List[MarketDataSpecificRule]] = Field(default=None, description="Extends market data key rules to be able to catch dependencies depending on where the dependency comes from, as opposed to what the dependency is asking for.  Using two specific rules, one could instruct rates curves requested by bonds to be retrieved from a different scope than rates curves requested by swaps.  WARNING: The use of specific rules impacts performance. Where possible, one should use MarketDataKeyRules only.", alias="specificRules")
     grouped_market_rules: Optional[List[GroupOfMarketDataKeyRules]] = Field(default=None, description="The list of groups of rules that will be used in market data resolution.  Rules given within a group will, if the group is being used to resolve data,  all be applied with the results of those individual resolution attempts combined into a single result.  The method for combining results is determined by the operation detailed in the GroupOfMarketDataKeyRules.                Notes:  - When resolving MarketData, MarketRules will be applied first followed by GroupedMarketRules  if data could not be found using only the MarketRules provided.  - GroupedMarketRules can only be used for resolving data from the QuoteStore.                Caution: As every rule in a given group will be applied in resolution if the group is applied,  groups are computationally expensive for market data resolution.  Therefore, heuristically, rule groups should be kept as small as possible.", alias="groupedMarketRules")
-    __properties = ["marketRules", "suppliers", "options", "specificRules", "groupedMarketRules"]
+    bid_market_rules: Optional[List[MarketDataKeyRule]] = Field(default=None, description="An optional, separate set of market data key rules for the bid side of a valuation, used when a bid  result is requested (a Valuation/PV address key with the PricingBasis option set to Bid) or the recipe's  pricing basis (MarketOptions.PricingBasis) is Bid. When supplied,  instrument prices (Price, DirtyPrice and ForwardPrice quotes) are resolved from these rules only, and are  reported as missing if none of them finds the price; rates curves and volatility surfaces are taken from  these rules where one of them matches, and from the market rules otherwise; FX rates, fixings and resets  always come from the market rules. Each rule reads the quote field it is written with. When omitted, the  bid side re-targets the instrument price rules in MarketRules onto the bid field, as before.", alias="bidMarketRules")
+    offer_market_rules: Optional[List[MarketDataKeyRule]] = Field(default=None, description="An optional, separate set of market data key rules for the offer (ask) side of a valuation, used when an  ask result is requested (a Valuation/PV address key with the PricingBasis option set to Ask) or the recipe's  pricing basis (MarketOptions.PricingBasis) is Ask. Resolved in the  same way as BidMarketRules. When omitted, the offer side re-targets the instrument price rules in  MarketRules onto the ask field, as before.", alias="offerMarketRules")
+    __properties = ["marketRules", "suppliers", "options", "specificRules", "groupedMarketRules", "bidMarketRules", "offerMarketRules"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,6 +100,20 @@ class MarketContext(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['groupedMarketRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in bid_market_rules (list)
+        _items = []
+        if self.bid_market_rules:
+            for _item in self.bid_market_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['bidMarketRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in offer_market_rules (list)
+        _items = []
+        if self.offer_market_rules:
+            for _item in self.offer_market_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['offerMarketRules'] = _items
         # set to None if market_rules (nullable) is None
         # and __fields_set__ contains the field
         if self.market_rules is None and "market_rules" in self.__fields_set__:
@@ -118,6 +134,16 @@ class MarketContext(BaseModel):
         if self.grouped_market_rules is None and "grouped_market_rules" in self.__fields_set__:
             _dict['groupedMarketRules'] = None
 
+        # set to None if bid_market_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bid_market_rules is None and "bid_market_rules" in self.__fields_set__:
+            _dict['bidMarketRules'] = None
+
+        # set to None if offer_market_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.offer_market_rules is None and "offer_market_rules" in self.__fields_set__:
+            _dict['offerMarketRules'] = None
+
         return _dict
 
     @classmethod
@@ -134,7 +160,9 @@ class MarketContext(BaseModel):
             "suppliers": MarketContextSuppliers.from_dict(obj.get("suppliers")) if obj.get("suppliers") is not None else None,
             "options": MarketOptions.from_dict(obj.get("options")) if obj.get("options") is not None else None,
             "specific_rules": [MarketDataSpecificRule.from_dict(_item) for _item in obj.get("specificRules")] if obj.get("specificRules") is not None else None,
-            "grouped_market_rules": [GroupOfMarketDataKeyRules.from_dict(_item) for _item in obj.get("groupedMarketRules")] if obj.get("groupedMarketRules") is not None else None
+            "grouped_market_rules": [GroupOfMarketDataKeyRules.from_dict(_item) for _item in obj.get("groupedMarketRules")] if obj.get("groupedMarketRules") is not None else None,
+            "bid_market_rules": [MarketDataKeyRule.from_dict(_item) for _item in obj.get("bidMarketRules")] if obj.get("bidMarketRules") is not None else None,
+            "offer_market_rules": [MarketDataKeyRule.from_dict(_item) for _item in obj.get("offerMarketRules")] if obj.get("offerMarketRules") is not None else None
         })
         return _obj
 

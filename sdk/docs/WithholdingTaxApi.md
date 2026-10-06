@@ -4,6 +4,8 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_delete_withholding_tax_rates**](WithholdingTaxApi.md#batch_delete_withholding_tax_rates) | **POST** /api/withholdingtax/rates/{scope}/{code}/$batchDelete | [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+[**batch_upsert_withholding_tax_rates**](WithholdingTaxApi.md#batch_upsert_withholding_tax_rates) | **POST** /api/withholdingtax/rates/{scope}/{code}/$batchUpsert | [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
 [**create_withholding_tax_dataset_definitions**](WithholdingTaxApi.md#create_withholding_tax_dataset_definitions) | **POST** /api/withholdingtax/datasetdefinitions | [EARLY ACCESS] CreateWithholdingTaxDatasetDefinitions: Create the Withholding Tax dataset definitions.
 [**delete_withholding_tax_configuration**](WithholdingTaxApi.md#delete_withholding_tax_configuration) | **DELETE** /api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxConfiguration: Delete a Withholding Tax Configuration.
 [**delete_withholding_tax_dataset_definition**](WithholdingTaxApi.md#delete_withholding_tax_dataset_definition) | **DELETE** /api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] DeleteWithholdingTaxDatasetDefinition: Delete a Withholding Tax dataset definition.
@@ -14,6 +16,202 @@ Method | HTTP request | Description
 [**patch_withholding_tax_dataset_definition**](WithholdingTaxApi.md#patch_withholding_tax_dataset_definition) | **PATCH** /api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
 [**upsert_withholding_tax_configuration**](WithholdingTaxApi.md#upsert_withholding_tax_configuration) | **POST** /api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] UpsertWithholdingTaxConfiguration: Upsert a Withholding Tax Configuration.
 
+
+# **batch_delete_withholding_tax_rates**
+> BatchDeleteRelationalDataResponse batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+
+[EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+
+Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    WithholdingTaxApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WithholdingTaxApi)
+    scope = 'scope_example' # str | The Scope of the rate dataset's relational dataset definition.
+    code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
+    request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00"}} # Dict[str, DeleteWithholdingTaxRateRequest] | The rate rows to delete, keyed by a correlation id echoed back in the response.
+    success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional) (default to 'Atomic')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
+        api_response = api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling WithholdingTaxApi->batch_delete_withholding_tax_rates: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The Scope of the rate dataset&#39;s relational dataset definition. | 
+ **code** | **str**| The Code of the rate dataset&#39;s relational dataset definition. | 
+ **request_body** | [**Dict[str, DeleteWithholdingTaxRateRequest]**](DeleteWithholdingTaxRateRequest.md)| The rate rows to delete, keyed by a correlation id echoed back in the response. | 
+ **success_mode** | **str**| Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. | [optional] [default to &#39;Atomic&#39;]
+
+### Return type
+
+[**BatchDeleteRelationalDataResponse**](BatchDeleteRelationalDataResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The deleted rate row metadata. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **batch_upsert_withholding_tax_rates**
+> BatchUpsertWithholdingTaxRatesResponse batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+
+[EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+
+Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    WithholdingTaxApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WithholdingTaxApi)
+    scope = 'scope_example' # str | The Scope of the rate dataset's relational dataset definition.
+    code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
+    request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.3,"treatyRate":0.15,"treatyRAS":true}},"gb-treaty-fr":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"FR"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.25,"treatyRate":0.15,"treatyRAS":false}}} # Dict[str, UpsertWithholdingTaxRateRequest] | The rate rows to upsert, keyed by a correlation id echoed back in the response.
+    success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional) (default to 'Atomic')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, opts=opts)
+
+        # [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
+        api_response = api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling WithholdingTaxApi->batch_upsert_withholding_tax_rates: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The Scope of the rate dataset&#39;s relational dataset definition. | 
+ **code** | **str**| The Code of the rate dataset&#39;s relational dataset definition. | 
+ **request_body** | [**Dict[str, UpsertWithholdingTaxRateRequest]**](UpsertWithholdingTaxRateRequest.md)| The rate rows to upsert, keyed by a correlation id echoed back in the response. | 
+ **success_mode** | **str**| Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. | [optional] [default to &#39;Atomic&#39;]
+
+### Return type
+
+[**BatchUpsertWithholdingTaxRatesResponse**](BatchUpsertWithholdingTaxRatesResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Withholding Tax rate rows that were upserted. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_withholding_tax_dataset_definitions**
 > WithholdingTaxDatasetDefinitions create_withholding_tax_dataset_definitions(create_withholding_tax_dataset_definitions_request)

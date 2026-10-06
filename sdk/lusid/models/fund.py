@@ -49,7 +49,8 @@ class Fund(BaseModel):
     short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="A short code for the Fund. A fund structure tags journal entry lines with the short code of the member they originated from, so it should be unique across the funds of one structure. Optional.") 
     abor_id: Optional[ResourceId] = Field(default=None, alias="aborId")
     share_class_instruments: Optional[List[InstrumentResolutionDetail]] = Field(default=None, description="Details the user-provided instrument identifiers and the instrument resolved from them. These would be decommissioned in favour of the new AllocationGroups and ShareClasses structures.", alias="shareClassInstruments")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Standalone, Master and Feeder are retained for compatibility; the structural role of a fund now lives on its fund structure node. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The kind of vehicle the fund is, one of the values of the system/fundVehicleType data type. Master and Feeder are deprecated: the structural role of a fund now lives on its fund structure node, and a fund with either type cannot be a member of a fund structure. Available values: Standalone, Master, Feeder, SPV, AIV, TaxBlocker, CarryVehicle, SponsorCommitmentVehicle, CoInvestVehicle, GPInterestHolder, SMA, CTA.") 
+    tax_transparency:  Optional[StrictStr] = Field(None,alias="taxTransparency", description="Whether the Fund is looked through for tax: Transparent passes its income and gains to its holders as their own, Opaque is taxed in its own right. Optional; if not set, a TaxBlocker is Opaque and a CarryVehicle or GPInterestHolder is Transparent. A fund structure requires it on every SPV and AIV member. Available values: Transparent, Opaque.") 
     inception_date: datetime = Field(description="Inception date of the Fund", alias="inceptionDate")
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     year_end_date: Optional[DayMonth] = Field(default=None, alias="yearEndDate")
@@ -62,7 +63,7 @@ class Fund(BaseModel):
     fund_instrument: Optional[FundInstrument] = Field(default=None, alias="fundInstrument")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -206,6 +207,11 @@ class Fund(BaseModel):
         if self.type is None and "type" in self.__fields_set__:
             _dict['type'] = None
 
+        # set to None if tax_transparency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_transparency is None and "tax_transparency" in self.__fields_set__:
+            _dict['taxTransparency'] = None
+
         # set to None if decimal_places (nullable) is None
         # and __fields_set__ contains the field
         if self.decimal_places is None and "decimal_places" in self.__fields_set__:
@@ -260,6 +266,7 @@ class Fund(BaseModel):
             "abor_id": ResourceId.from_dict(obj.get("aborId")) if obj.get("aborId") is not None else None,
             "share_class_instruments": [InstrumentResolutionDetail.from_dict(_item) for _item in obj.get("shareClassInstruments")] if obj.get("shareClassInstruments") is not None else None,
             "type": obj.get("type"),
+            "tax_transparency": obj.get("taxTransparency"),
             "inception_date": obj.get("inceptionDate"),
             "decimal_places": obj.get("decimalPlaces"),
             "year_end_date": DayMonth.from_dict(obj.get("yearEndDate")) if obj.get("yearEndDate") is not None else None,

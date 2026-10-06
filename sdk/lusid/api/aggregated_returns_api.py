@@ -227,7 +227,7 @@ class AggregatedReturnsApi:
     def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], async_req: Optional[bool]=None, **kwargs) -> Union[AggregatedReturnsResponse, Awaitable[AggregatedReturnsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.  # noqa: E501
 
-        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.  # noqa: E501
+        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -258,7 +258,7 @@ class AggregatedReturnsApi:
     def get_aggregated_returns_with_http_info(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.  # noqa: E501
 
-        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied scope/code; the request fails if no such entity exists.  # noqa: E501
+        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

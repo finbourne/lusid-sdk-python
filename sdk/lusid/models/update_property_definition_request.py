@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.qualifier_definition_request import QualifierDefinitionRequest
 
 class UpdatePropertyDefinitionRequest(BaseModel):
     """
@@ -31,7 +32,8 @@ class UpdatePropertyDefinitionRequest(BaseModel):
     property_description:  Optional[StrictStr] = Field(None,alias="propertyDescription", description="Describes the property") 
     custom_entity_types: Optional[List[StrictStr]] = Field(default=None, description="The custom entity types that properties relating to this property definition can be applied to.", alias="customEntityTypes")
     value_format:  Optional[StrictStr] = Field(None,alias="valueFormat", description="The format in which values for this property definition should be represented. Available values: Text, Html.") 
-    __properties = ["displayName", "propertyDescription", "customEntityTypes", "valueFormat"]
+    qualifier_definitions: Optional[List[QualifierDefinitionRequest]] = Field(default=None, description="The qualifiers declared against this property definition. Omit this field, or supply it as null, to leave the declared qualifiers unchanged. Otherwise the supplied array replaces the stored array in full, so a qualifier omitted from it is no longer declared and can no longer be set, and an empty array clears every declaration. Stored qualifier values are retained in every case and become readable again if the same keys are re-declared with the same data types.", alias="qualifierDefinitions")
+    __properties = ["displayName", "propertyDescription", "customEntityTypes", "valueFormat", "qualifierDefinitions"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,13 @@ class UpdatePropertyDefinitionRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in qualifier_definitions (list)
+        _items = []
+        if self.qualifier_definitions:
+            for _item in self.qualifier_definitions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['qualifierDefinitions'] = _items
         # set to None if property_description (nullable) is None
         # and __fields_set__ contains the field
         if self.property_description is None and "property_description" in self.__fields_set__:
@@ -79,6 +88,11 @@ class UpdatePropertyDefinitionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.value_format is None and "value_format" in self.__fields_set__:
             _dict['valueFormat'] = None
+
+        # set to None if qualifier_definitions (nullable) is None
+        # and __fields_set__ contains the field
+        if self.qualifier_definitions is None and "qualifier_definitions" in self.__fields_set__:
+            _dict['qualifierDefinitions'] = None
 
         return _dict
 
@@ -95,7 +109,8 @@ class UpdatePropertyDefinitionRequest(BaseModel):
             "display_name": obj.get("displayName"),
             "property_description": obj.get("propertyDescription"),
             "custom_entity_types": obj.get("customEntityTypes"),
-            "value_format": obj.get("valueFormat")
+            "value_format": obj.get("valueFormat"),
+            "qualifier_definitions": [QualifierDefinitionRequest.from_dict(_item) for _item in obj.get("qualifierDefinitions")] if obj.get("qualifierDefinitions") is not None else None
         })
         return _obj
 

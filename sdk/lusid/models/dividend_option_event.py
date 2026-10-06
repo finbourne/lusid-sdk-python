@@ -45,73 +45,18 @@ class DividendOptionEvent(InstrumentEvent):
     def instrument_event_type_validate_enum(cls, value):
         """Validates the enum"""
 
-        # Finbourne have removed enum validation on all models, except for this use case:
-        # Workflow and notification application SDK use the property name 'type' as the discriminator on a number of classes.
-        # During instantiation, the value of 'type' is checked against the enum values, 
-        
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
 
-        # check it's a class that uses the 'type' property as a discriminator
-        # list of classes can be found by searching for 'actual_instance: Union[' in the generated code
-        if 'DividendOptionEvent' not in [ 
-                                    # For notification application classes
-                                    'AmazonSqsNotificationType',
-                                    'AmazonSqsNotificationTypeResponse',
-                                    'AmazonSqsPrincipalAuthNotificationType',
-                                    'AmazonSqsPrincipalAuthNotificationTypeResponse',
-                                    'AzureServiceBusTypeResponse',
-                                    'AzureServiceBusNotificationType',
-                                    'EmailNotificationType',
-                                    'EmailNotificationTypeResponse',
-                                    'SmsNotificationType',
-                                    'SmsNotificationTypeResponse',
-                                    'WebhookNotificationType',
-                                    'WebhookNotificationTypeResponse',
-                        
-                                    # For workflow application classes
-                                    'CreateChildTasksAction', 
-                                    'RunWorkerAction', 
-                                    'TriggerParentTaskAction',
-                                    'CreateChildTasksActionResponse', 
-                                    'RunWorkerActionResponse',
-                                    'TriggerChildTasksAction',
-                                    'TriggerChildTasksActionResponse',
-                                    'TriggerParentTaskActionResponse',
-                                    'CreateNewTaskActivity',
-                                    'UpdateMatchingTasksActivity',
-                                    'CreateNewTaskActivityResponse', 
-                                    'UpdateMatchingTasksActivityResponse',
-                                    'Fail', 
-                                    'GroupReconciliation', 
-                                    'HealthCheck', 
-                                    'LuminesceView', 
-                                    'SchedulerJob', 
-                                    'Sleep',
-                                    'FailResponse', 
-                                    'GroupReconciliationResponse', 
-                                    'HealthCheckResponse', 
-                                    'LuminesceViewResponse', 
-                                    'SchedulerJobResponse', 
-                                    'SleepResponse',
-                                    'Library',
-                                    'LibraryResponse',
-                                    'DayRegularity',
-                                    'RelativeMonthRegularity',
-                                    'SpecificMonthRegularity',
-                                    'WeekRegularity',
-                                    'YearRegularity',
-                                    'LusidEntityDataQualityCheck',
-                                    'LusidEntityDataQualityCheckResponse',
-                                    'TriggerChildTasksActionResponse',
-                                    'HorizonIntegration',
-                                    'HorizonIntegrationResponse']:
-           return value
-        
-        # Only validate the 'type' property of the class
-        if "instrument_event_type" != "type":
+        _allowed = ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent']
+        if len(_allowed) != 1:
             return value
-
-        if value not in ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent']:
-            raise ValueError("must be one of enum values ('TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent')")
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
         return value
 
     class Config:
