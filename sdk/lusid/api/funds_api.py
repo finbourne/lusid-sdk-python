@@ -7944,22 +7944,22 @@ class FundsApi:
 
 
     @overload
-    async def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> Fund:  # noqa: E501
+    async def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, **kwargs) -> Fund:  # noqa: E501
         ...
 
     @overload
-    def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=True, **kwargs) -> Fund:  # noqa: E501
+    def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> Fund:  # noqa: E501
         ...
 
     @validate_arguments
-    def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
+    def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
         Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.patch_fund(scope, code, operation, async_req=True)
+        >>> thread = api.patch_fund(scope, code, operation, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -7968,6 +7968,8 @@ class FundsApi:
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]
+        :param effective_at: The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -7984,17 +7986,17 @@ class FundsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.patch_fund_with_http_info(scope, code, operation, **kwargs)  # noqa: E501
+        return self.patch_fund_with_http_info(scope, code, operation, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def patch_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def patch_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
         Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.patch_fund_with_http_info(scope, code, operation, async_req=True)
+        >>> thread = api.patch_fund_with_http_info(scope, code, operation, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Fund. (required)
@@ -8003,6 +8005,8 @@ class FundsApi:
         :type code: str
         :param operation: The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. (required)
         :type operation: List[Operation]
+        :param effective_at: The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -8032,7 +8036,8 @@ class FundsApi:
         _all_params = [
             'scope',
             'code',
-            'operation'
+            'operation',
+            'effective_at'
         ]
         _all_params.extend(
             [
@@ -8070,6 +8075,9 @@ class FundsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

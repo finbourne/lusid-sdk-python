@@ -57,7 +57,9 @@ class CreateTransferRequest(BaseModel):
     properties_out: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Transaction Properties to set on the outgoing transaction leg, and on the incoming transaction leg when PropertiesIn is absent. Supplying an empty collection for PropertiesIn leaves the incoming leg with no properties.", alias="propertiesOut")
     properties_in: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Transaction Properties to set on the incoming transaction leg, replacing rather than adding to PropertiesOut.", alias="propertiesIn")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties to set on the transfer itself, in the Transfer domain. These are separate from PropertiesOut and PropertiesIn, which are Transaction domain and land on the legs.")
-    __properties = ["transferId", "portfolioIdOut", "portfolioIdIn", "instrumentIdentifierOut", "instrumentIdentifierIn", "pricingMethod", "taxLotStructure", "unitsOut", "unitsIn", "amountOut", "weightOut", "tradeDateOut", "tradeDateIn", "settlementDateOut", "settlementDateIn", "exchangeRateOut", "exchangeRateIn", "transactionPriceOut", "transactionPriceIn", "counterpartyIdOut", "counterpartyIdIn", "custodianAccountIdOut", "custodianAccountIdIn", "source", "accountingMethod", "propertiesOut", "propertiesIn", "properties"]
+    transaction_to_portfolio_rate_out: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate from the outgoing leg's trade currency to the outgoing portfolio's base currency, applied whenever supplied.", alias="transactionToPortfolioRateOut")
+    transaction_to_portfolio_rate_in: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate from the incoming leg's trade currency to the incoming portfolio's base currency. Required when the two portfolios have different base currencies, and applied whenever supplied.", alias="transactionToPortfolioRateIn")
+    __properties = ["transferId", "portfolioIdOut", "portfolioIdIn", "instrumentIdentifierOut", "instrumentIdentifierIn", "pricingMethod", "taxLotStructure", "unitsOut", "unitsIn", "amountOut", "weightOut", "tradeDateOut", "tradeDateIn", "settlementDateOut", "settlementDateIn", "exchangeRateOut", "exchangeRateIn", "transactionPriceOut", "transactionPriceIn", "counterpartyIdOut", "counterpartyIdIn", "custodianAccountIdOut", "custodianAccountIdIn", "source", "accountingMethod", "propertiesOut", "propertiesIn", "properties", "transactionToPortfolioRateOut", "transactionToPortfolioRateIn"]
 
     class Config:
         """Pydantic configuration"""
@@ -197,6 +199,16 @@ class CreateTransferRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if transaction_to_portfolio_rate_out (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_to_portfolio_rate_out is None and "transaction_to_portfolio_rate_out" in self.__fields_set__:
+            _dict['transactionToPortfolioRateOut'] = None
+
+        # set to None if transaction_to_portfolio_rate_in (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transaction_to_portfolio_rate_in is None and "transaction_to_portfolio_rate_in" in self.__fields_set__:
+            _dict['transactionToPortfolioRateIn'] = None
+
         return _dict
 
     @classmethod
@@ -251,7 +263,9 @@ class CreateTransferRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "transaction_to_portfolio_rate_out": obj.get("transactionToPortfolioRateOut"),
+            "transaction_to_portfolio_rate_in": obj.get("transactionToPortfolioRateIn")
         })
         return _obj
 

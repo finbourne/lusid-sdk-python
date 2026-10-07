@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.lusid_entity_dataset import LusidEntityDataset
 from lusid.models.portfolio_holding_dataset import PortfolioHoldingDataset
 from lusid.models.portfolio_transaction_dataset import PortfolioTransactionDataset
+from lusid.models.structured_result_dataset import StructuredResultDataset
 
 class RunCheckRequest(BaseModel):
     """
@@ -34,7 +35,8 @@ class RunCheckRequest(BaseModel):
     limit_individual_breaches_per_rule: Optional[StrictInt] = Field(default=None, description="The maximum number of individual breaches to return per rule. Defaults to 100 if not specified.", alias="limitIndividualBreachesPerRule")
     portfolio_holding_dataset: Optional[PortfolioHoldingDataset] = Field(default=None, alias="portfolioHoldingDataset")
     portfolio_transaction_dataset: Optional[PortfolioTransactionDataset] = Field(default=None, alias="portfolioTransactionDataset")
-    __properties = ["lusidEntityDataset", "limitIndividualBreachesPerRule", "portfolioHoldingDataset", "portfolioTransactionDataset"]
+    structured_result_dataset: Optional[StructuredResultDataset] = Field(default=None, alias="structuredResultDataset")
+    __properties = ["lusidEntityDataset", "limitIndividualBreachesPerRule", "portfolioHoldingDataset", "portfolioTransactionDataset", "structuredResultDataset"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,9 @@ class RunCheckRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_transaction_dataset
         if self.portfolio_transaction_dataset:
             _dict['portfolioTransactionDataset'] = self.portfolio_transaction_dataset.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of structured_result_dataset
+        if self.structured_result_dataset:
+            _dict['structuredResultDataset'] = self.structured_result_dataset.to_dict()
         return _dict
 
     @classmethod
@@ -92,7 +97,8 @@ class RunCheckRequest(BaseModel):
             "lusid_entity_dataset": LusidEntityDataset.from_dict(obj.get("lusidEntityDataset")) if obj.get("lusidEntityDataset") is not None else None,
             "limit_individual_breaches_per_rule": obj.get("limitIndividualBreachesPerRule"),
             "portfolio_holding_dataset": PortfolioHoldingDataset.from_dict(obj.get("portfolioHoldingDataset")) if obj.get("portfolioHoldingDataset") is not None else None,
-            "portfolio_transaction_dataset": PortfolioTransactionDataset.from_dict(obj.get("portfolioTransactionDataset")) if obj.get("portfolioTransactionDataset") is not None else None
+            "portfolio_transaction_dataset": PortfolioTransactionDataset.from_dict(obj.get("portfolioTransactionDataset")) if obj.get("portfolioTransactionDataset") is not None else None,
+            "structured_result_dataset": StructuredResultDataset.from_dict(obj.get("structuredResultDataset")) if obj.get("structuredResultDataset") is not None else None
         })
         return _obj
 

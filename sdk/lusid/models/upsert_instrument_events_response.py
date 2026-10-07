@@ -31,10 +31,11 @@ class UpsertInstrumentEventsResponse(BaseModel):
     UpsertInstrumentEventsResponse
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
-    values: Optional[Dict[str, InstrumentEventHolder]] = Field(default=None, description="The corporate actions which have been successfully updated or inserted.")
-    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The corporate actions that could not be updated or inserted along with a reason for their failure.")
+    values: Optional[Dict[str, InstrumentEventHolder]] = Field(default=None, description="The instrument events which have been successfully updated or inserted.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The instrument events that could not be updated or inserted along with a reason for their failure.")
+    staged: Optional[Dict[str, InstrumentEventHolder]] = Field(default=None, description="The instrument events that have been staged pending approval.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "values", "failed", "links"]
+    __properties = ["href", "values", "failed", "staged", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +83,13 @@ class UpsertInstrumentEventsResponse(BaseModel):
                 if self.failed[_key]:
                     _field_dict[_key] = self.failed[_key].to_dict()
             _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
+        _field_dict = {}
+        if self.staged:
+            for _key in self.staged:
+                if self.staged[_key]:
+                    _field_dict[_key] = self.staged[_key].to_dict()
+            _dict['staged'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -103,6 +111,11 @@ class UpsertInstrumentEventsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.failed is None and "failed" in self.__fields_set__:
             _dict['failed'] = None
+
+        # set to None if staged (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged is None and "staged" in self.__fields_set__:
+            _dict['staged'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -133,6 +146,12 @@ class UpsertInstrumentEventsResponse(BaseModel):
                 for _k, _v in obj.get("failed").items()
             )
             if obj.get("failed") is not None
+            else None,
+            "staged": dict(
+                (_k, InstrumentEventHolder.from_dict(_v))
+                for _k, _v in obj.get("staged").items()
+            )
+            if obj.get("staged") is not None
             else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

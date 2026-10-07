@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **limit_individual_breaches_per_rule** | **int** | The maximum number of individual breaches to return per rule. Defaults to 100 if not specified. | [optional] 
 **portfolio_holding_dataset** | [**PortfolioHoldingDataset**](PortfolioHoldingDataset.md) |  | [optional] 
 **portfolio_transaction_dataset** | [**PortfolioTransactionDataset**](PortfolioTransactionDataset.md) |  | [optional] 
+**structured_result_dataset** | [**StructuredResultDataset**](StructuredResultDataset.md) |  | [optional] 
 ## Example
 
 ```python
@@ -22,7 +23,8 @@ limit_individual_breaches_per_rule: Optional[StrictInt] = # Replace with your va
 limit_individual_breaches_per_rule: Optional[StrictInt] = None
 portfolio_holding_dataset: Optional[PortfolioHoldingDataset] = # Replace with your value
 portfolio_transaction_dataset: Optional[PortfolioTransactionDataset] = # Replace with your value
-run_check_request_instance = RunCheckRequest(lusid_entity_dataset=lusid_entity_dataset, limit_individual_breaches_per_rule=limit_individual_breaches_per_rule, portfolio_holding_dataset=portfolio_holding_dataset, portfolio_transaction_dataset=portfolio_transaction_dataset)
+structured_result_dataset: Optional[StructuredResultDataset] = # Replace with your value
+run_check_request_instance = RunCheckRequest(lusid_entity_dataset=lusid_entity_dataset, limit_individual_breaches_per_rule=limit_individual_breaches_per_rule, portfolio_holding_dataset=portfolio_holding_dataset, portfolio_transaction_dataset=portfolio_transaction_dataset, structured_result_dataset=structured_result_dataset)
 
 ```
 

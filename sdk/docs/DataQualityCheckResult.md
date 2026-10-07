@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **result_id** | **str** | Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType. | [optional] 
 **portfolio_holding** | [**PortfolioHoldingResult**](PortfolioHoldingResult.md) |  | [optional] 
 **portfolio_transaction** | [**PortfolioTransactionResult**](PortfolioTransactionResult.md) |  | [optional] 
+**structured_result_data** | [**StructuredResultDataResult**](StructuredResultDataResult.md) |  | [optional] 
 ## Example
 
 ```python
@@ -51,7 +52,8 @@ error_detail: Optional[StrictStr] = "example_error_detail"
 result_id: Optional[StrictStr] = "example_result_id"
 portfolio_holding: Optional[PortfolioHoldingResult] = # Replace with your value
 portfolio_transaction: Optional[PortfolioTransactionResult] = # Replace with your value
-data_quality_check_result_instance = DataQualityCheckResult(check_definition_scope=check_definition_scope, check_definition_code=check_definition_code, check_definition_display_name=check_definition_display_name, check_run_as_at=check_run_as_at, result_type=result_type, rule_set_key=rule_set_key, rule_set_display_name=rule_set_display_name, rule_key=rule_key, rule_display_name=rule_display_name, rule_description=rule_description, rule_formula=rule_formula, severity=severity, lusid_entity=lusid_entity, count_rule_breaches=count_rule_breaches, error_detail=error_detail, result_id=result_id, portfolio_holding=portfolio_holding, portfolio_transaction=portfolio_transaction)
+structured_result_data: Optional[StructuredResultDataResult] = # Replace with your value
+data_quality_check_result_instance = DataQualityCheckResult(check_definition_scope=check_definition_scope, check_definition_code=check_definition_code, check_definition_display_name=check_definition_display_name, check_run_as_at=check_run_as_at, result_type=result_type, rule_set_key=rule_set_key, rule_set_display_name=rule_set_display_name, rule_key=rule_key, rule_display_name=rule_display_name, rule_description=rule_description, rule_formula=rule_formula, severity=severity, lusid_entity=lusid_entity, count_rule_breaches=count_rule_breaches, error_detail=error_detail, result_id=result_id, portfolio_holding=portfolio_holding, portfolio_transaction=portfolio_transaction, structured_result_data=structured_result_data)
 
 ```
 

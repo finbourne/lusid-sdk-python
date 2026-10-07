@@ -26,6 +26,7 @@ from lusid.models.event_date_range import EventDateRange
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 
 class InstrumentEventHolder(BaseModel):
     """
@@ -45,7 +46,8 @@ class InstrumentEventHolder(BaseModel):
     participation_type:  Optional[StrictStr] = Field(None,alias="participationType", description="Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary.") 
     as_at: Optional[datetime] = Field(default=None, description="The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert.", alias="asAt")
     group_code:  Optional[StrictStr] = Field(None,alias="groupCode", description="The group code that determines the processing order of instrument events with the same effective datetime. Available values: Tier1, Tier2, Tier3, Legacy.") 
-    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType", "asAt", "groupCode"]
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
+    __properties = ["instrumentEventId", "corporateActionSourceId", "instrumentIdentifiers", "lusidInstrumentId", "instrumentScope", "description", "eventDateRange", "completeness", "instrumentEvent", "properties", "sequenceNumber", "participationType", "asAt", "groupCode", "stagedModifications"]
 
     class Config:
         """Pydantic configuration"""
@@ -97,6 +99,9 @@ class InstrumentEventHolder(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['properties'] = _items
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # set to None if completeness (nullable) is None
         # and __fields_set__ contains the field
         if self.completeness is None and "completeness" in self.__fields_set__:
@@ -147,7 +152,8 @@ class InstrumentEventHolder(BaseModel):
             "sequence_number": obj.get("sequenceNumber"),
             "participation_type": obj.get("participationType") if obj.get("participationType") is not None else 'Mandatory',
             "as_at": obj.get("asAt"),
-            "group_code": obj.get("groupCode")
+            "group_code": obj.get("groupCode"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None
         })
         return _obj
 

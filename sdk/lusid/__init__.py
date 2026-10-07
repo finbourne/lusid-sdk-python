@@ -213,6 +213,7 @@ from lusid.models.amount import Amount
 from lusid.models.annul_quotes_response import AnnulQuotesResponse
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.annul_structured_data_response import AnnulStructuredDataResponse
+from lusid.models.api_endpoint import ApiEndpoint
 from lusid.models.append_complex_market_data_request import AppendComplexMarketDataRequest
 from lusid.models.append_fx_forward_curve_by_quote_reference import AppendFxForwardCurveByQuoteReference
 from lusid.models.append_fx_forward_curve_data import AppendFxForwardCurveData
@@ -1554,6 +1555,7 @@ from lusid.models.sequence_definition import SequenceDefinition
 from lusid.models.series_definition import SeriesDefinition
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.series_identifier_field import SeriesIdentifierField
+from lusid.models.service_api_endpoints import ServiceApiEndpoints
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.set_legal_entity_identifiers_request import SetLegalEntityIdentifiersRequest
 from lusid.models.set_legal_entity_properties_request import SetLegalEntityPropertiesRequest
@@ -1623,6 +1625,8 @@ from lusid.models.string_list import StringList
 from lusid.models.string_list_compliance_parameter import StringListComplianceParameter
 from lusid.models.structured_result_data import StructuredResultData
 from lusid.models.structured_result_data_id import StructuredResultDataId
+from lusid.models.structured_result_data_result import StructuredResultDataResult
+from lusid.models.structured_result_dataset import StructuredResultDataset
 from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
 from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSetReviewRequest
 from lusid.models.subscribe_election import SubscribeElection
@@ -2114,6 +2118,7 @@ __all__ = [
     "AnnulQuotesResponse",
     "AnnulSingleStructuredDataResponse",
     "AnnulStructuredDataResponse",
+    "ApiEndpoint",
     "AppendComplexMarketDataRequest",
     "AppendFxForwardCurveByQuoteReference",
     "AppendFxForwardCurveData",
@@ -3455,6 +3460,7 @@ __all__ = [
     "SeriesDefinition",
     "SeriesDefinitionRequest",
     "SeriesIdentifierField",
+    "ServiceApiEndpoints",
     "SetAmortisationRulesRequest",
     "SetLegalEntityIdentifiersRequest",
     "SetLegalEntityPropertiesRequest",
@@ -3524,6 +3530,8 @@ __all__ = [
     "StringListComplianceParameter",
     "StructuredResultData",
     "StructuredResultDataId",
+    "StructuredResultDataResult",
+    "StructuredResultDataset",
     "SubHoldingKeyValueEquals",
     "SubmitRecResultSetReviewRequest",
     "SubscribeElection",

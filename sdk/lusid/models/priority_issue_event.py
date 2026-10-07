@@ -38,7 +38,7 @@ class PriorityIssueEvent(InstrumentEvent):
     market_deadline: Optional[datetime] = Field(default=None, description="The issuer-agent deadline.", alias="marketDeadline")
     payment_date: Optional[datetime] = Field(default=None, description="Date on which cash is debited and the new securities are credited.", alias="paymentDate")
     security_settlement_date: Optional[datetime] = Field(default=None, description="Date the security leg settles when it differs from the cash leg. Optional.  When not supplied, transaction-template generation falls back to PaymentDate", alias="securitySettlementDate")
-    subscription_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero.", alias="subscriptionPrice")
+    subscription_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero. For Bond and ComplexBond it is per unit of face, e.g. 0.97 for 97% of par.", alias="subscriptionPrice")
     subscription_currency:  Optional[StrictStr] = Field(None,alias="subscriptionCurrency", description="Currency of the SubscriptionPrice.") 
     new_instrument: Optional[NewInstrument] = Field(default=None, alias="newInstrument")
     proration_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proration rate applied to OVER subscriptions when the offer is oversubscribed.  Treated as 1 (full allocation) when not supplied. Must be greater than 0 and less than  or equal to 1. SECU basic entitlement is never prorated.", alias="prorationRate")

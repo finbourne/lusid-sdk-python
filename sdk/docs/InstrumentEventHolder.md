@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **participation_type** | **str** | Indicates the type of participation in this event. Default value: Mandatory. Available values: Mandatory, MandatoryWithChoices, Voluntary. | [optional] [default to 'Mandatory']
 **as_at** | **datetime** | The AsAt time of the instrument event, if available. This is a readonly field and should not be provided on upsert. | [optional] [readonly] 
 **group_code** | **str** | The group code that determines the processing order of instrument events with the same effective datetime. Available values: Tier1, Tier2, Tier3, Legacy. | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 ## Example
 
 ```python
@@ -42,7 +43,8 @@ sequence_number: Optional[StrictInt] = None
 participation_type: Optional[StrictStr] = "example_participation_type"
 as_at: Optional[datetime] = # Replace with your value
 group_code: Optional[StrictStr] = "example_group_code"
-instrument_event_holder_instance = InstrumentEventHolder(instrument_event_id=instrument_event_id, corporate_action_source_id=corporate_action_source_id, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, description=description, event_date_range=event_date_range, completeness=completeness, instrument_event=instrument_event, properties=properties, sequence_number=sequence_number, participation_type=participation_type, as_at=as_at, group_code=group_code)
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+instrument_event_holder_instance = InstrumentEventHolder(instrument_event_id=instrument_event_id, corporate_action_source_id=corporate_action_source_id, instrument_identifiers=instrument_identifiers, lusid_instrument_id=lusid_instrument_id, instrument_scope=instrument_scope, description=description, event_date_range=event_date_range, completeness=completeness, instrument_event=instrument_event, properties=properties, sequence_number=sequence_number, participation_type=participation_type, as_at=as_at, group_code=group_code, staged_modifications=staged_modifications)
 
 ```
 

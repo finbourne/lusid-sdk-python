@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.lusid_entity_result import LusidEntityResult
 from lusid.models.portfolio_holding_result import PortfolioHoldingResult
 from lusid.models.portfolio_transaction_result import PortfolioTransactionResult
+from lusid.models.structured_result_data_result import StructuredResultDataResult
 
 class DataQualityCheckResult(BaseModel):
     """
@@ -48,7 +49,8 @@ class DataQualityCheckResult(BaseModel):
     result_id:  Optional[StrictStr] = Field(None,alias="resultId", description="Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType.") 
     portfolio_holding: Optional[PortfolioHoldingResult] = Field(default=None, alias="portfolioHolding")
     portfolio_transaction: Optional[PortfolioTransactionResult] = Field(default=None, alias="portfolioTransaction")
-    __properties = ["checkDefinitionScope", "checkDefinitionCode", "checkDefinitionDisplayName", "checkRunAsAt", "resultType", "ruleSetKey", "ruleSetDisplayName", "ruleKey", "ruleDisplayName", "ruleDescription", "ruleFormula", "severity", "lusidEntity", "countRuleBreaches", "errorDetail", "resultId", "portfolioHolding", "portfolioTransaction"]
+    structured_result_data: Optional[StructuredResultDataResult] = Field(default=None, alias="structuredResultData")
+    __properties = ["checkDefinitionScope", "checkDefinitionCode", "checkDefinitionDisplayName", "checkRunAsAt", "resultType", "ruleSetKey", "ruleSetDisplayName", "ruleKey", "ruleDisplayName", "ruleDescription", "ruleFormula", "severity", "lusidEntity", "countRuleBreaches", "errorDetail", "resultId", "portfolioHolding", "portfolioTransaction", "structuredResultData"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +93,9 @@ class DataQualityCheckResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_transaction
         if self.portfolio_transaction:
             _dict['portfolioTransaction'] = self.portfolio_transaction.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of structured_result_data
+        if self.structured_result_data:
+            _dict['structuredResultData'] = self.structured_result_data.to_dict()
         # set to None if check_definition_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.check_definition_scope is None and "check_definition_scope" in self.__fields_set__:
@@ -190,7 +195,8 @@ class DataQualityCheckResult(BaseModel):
             "error_detail": obj.get("errorDetail"),
             "result_id": obj.get("resultId"),
             "portfolio_holding": PortfolioHoldingResult.from_dict(obj.get("portfolioHolding")) if obj.get("portfolioHolding") is not None else None,
-            "portfolio_transaction": PortfolioTransactionResult.from_dict(obj.get("portfolioTransaction")) if obj.get("portfolioTransaction") is not None else None
+            "portfolio_transaction": PortfolioTransactionResult.from_dict(obj.get("portfolioTransaction")) if obj.get("portfolioTransaction") is not None else None,
+            "structured_result_data": StructuredResultDataResult.from_dict(obj.get("structuredResultData")) if obj.get("structuredResultData") is not None else None
         })
         return _obj
 

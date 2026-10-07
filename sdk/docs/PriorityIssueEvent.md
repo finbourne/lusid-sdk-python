@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **market_deadline** | **datetime** | The issuer-agent deadline. | [optional] 
 **payment_date** | **datetime** | Date on which cash is debited and the new securities are credited. | [optional] 
 **security_settlement_date** | **datetime** | Date the security leg settles when it differs from the cash leg. Optional.  When not supplied, transaction-template generation falls back to PaymentDate | [optional] 
-**subscription_price** | **float** | The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero. | [optional] 
+**subscription_price** | **float** | The subscription price per new unit. Applies to both SECU and OVER subscriptions.  Must be greater than zero. For Bond and ComplexBond it is per unit of face, e.g. 0.97 for 97% of par. | [optional] 
 **subscription_currency** | **str** | Currency of the SubscriptionPrice. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | [optional] 
 **proration_rate** | **float** | The proration rate applied to OVER subscriptions when the offer is oversubscribed.  Treated as 1 (full allocation) when not supplied. Must be greater than 0 and less than  or equal to 1. SECU basic entitlement is never prorated. | [optional] 

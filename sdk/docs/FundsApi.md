@@ -4154,7 +4154,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **patch_fund**
-> Fund patch_fund(scope, code, operation)
+> Fund patch_fund(scope, code, operation, effective_at=effective_at)
 
 [EARLY ACCESS] PatchFund: Patch a Fund.
 
@@ -4208,13 +4208,14 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     operation = [{"value":"UpdatedFundName","path":"/displayName","op":"add"},{"path":"/description","op":"remove"},{"value":{"scope":"myFundConfigScope","code":"myFundConfigCode"},"path":"/fundConfigurationId","op":"add"},{"value":{"scope":"myAborScope","code":"myAborCode"},"path":"/aborId","op":"add"},{"value":["shareClassScope"],"path":"/shareClassInstrumentScopes","op":"add"},{"value":{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"shareClass526"},"launchPrice":2.5,"launchDate":"2024-02-01T00:00:00.0000000+00:00"},"path":"/shareClassInstruments/-","op":"add"},{"value":"Standalone","path":"/type","op":"add"},{"value":"2024-01-01","path":"/inceptionDate","op":"add"},{"value":2,"path":"/decimalPlaces","op":"add"},{"value":{"day":24,"month":12},"path":"/yearEndDate","op":"add"}] # List[Operation] | The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.patch_fund(scope, code, operation, opts=opts)
+        # api_response =  api_instance.patch_fund(scope, code, operation, effective_at=effective_at, opts=opts)
 
         # [EARLY ACCESS] PatchFund: Patch a Fund.
-        api_response = api_instance.patch_fund(scope, code, operation)
+        api_response = api_instance.patch_fund(scope, code, operation, effective_at=effective_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -4230,6 +4231,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **operation** | [**List[Operation]**](Operation.md)| The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902. | 
+ **effective_at** | **str**| The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt. | [optional] 
 
 ### Return type
 
