@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.inflation_convexity_options import InflationConvexityOptions
 from lusid.models.model_selection import ModelSelection
+from lusid.models.named_price import NamedPrice
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.risk_bump_options import RiskBumpOptions
 
@@ -58,7 +59,8 @@ class PricingOptions(BaseModel):
     find_or_calculate_write_through: Optional[StrictBool] = Field(default=None, description="When true, and FindOrCalculate is Enabled, results that had to be calculated because no  verified stored value existed are written back into the structured result store, so a  later identical request can serve them without recomputing. The write targets the  document selected by the same result data key rules the lookup reads. When false  (default), calculated results are never persisted.  Results are stored at unit level (per unit of holding), so a value served from the store  is rescaled by the holding's units and may differ from a freshly calculated value in the  least significant digits.", alias="findOrCalculateWriteThrough")
     inflation_convexity: Optional[InflationConvexityOptions] = Field(default=None, alias="inflationConvexity")
     allow_fallback_on_model_decline: Optional[StrictBool] = Field(default=None, description="When true, a model that refuses an instrument outright - because the instrument is outside  what that model can represent, not because data was missing - hands the instrument to the  next model this recipe's rules offer for it, and to the default model for its type after  those. The row is then priced by the first model that accepts it, and carries a diagnostic  naming the model that stood down, its objection, and the model that served it. The caller  must be entitled to the model that serves the row; where none of the alternatives is both  licensed and willing, the row keeps the original refusal.  When false (default), a refusal ends the row however many other models the recipe offers.  A failure that is not a refusal - a missing curve, an unresolved fixing, a malformed model  option - always ends the row, whatever this is set to, because another model's number would  hide the gap rather than close it.", alias="allowFallbackOnModelDecline")
-    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "fixedIncomeValuationsUsingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency", "defaultPoolFactorsToUnity", "findOrCalculateWriteThrough", "inflationConvexity", "allowFallbackOnModelDecline"]
+    named_prices: Optional[List[NamedPrice]] = Field(default=None, description="Names a valuation request can use to ask for a pricing side and a notional dealing cost  treatment in one column, as Valuation/PV(NamedPrice=name) (and likewise PvInReportCcy and  PvInPortfolioCcy). For example a fund might define \"creation\" as the offer side plus the  buy-side dealing cost, \"cancellation\" as the bid side less the sell-side cost, and  \"perfRef\" as the plain mid. Each name must start with a letter, contain only letters and  digits, and be unique within the recipe ignoring case; a request must spell the name exactly as  defined. Absent or empty defines no names.", alias="namedPrices")
+    __properties = ["modelSelection", "useInstrumentTypeToDeterminePricer", "allowAnyInstrumentsWithSecUidToPriceOffLookup", "allowPartiallySuccessfulEvaluation", "riskEngine", "findOrCalculate", "produceSeparateResultForLinearOtcLegs", "fxForwardContractsAsUnitsInBothLegs", "enableUseOfCachedUnitResults", "windowValuationOnInstrumentStartEnd", "removeContingentCashflowsInPaymentDiary", "useChildSubHoldingKeysForPortfolioExpansion", "validateDomesticAndQuoteCurrenciesAreConsistent", "mbsValuationUsingHoldingCurrentFace", "fixedIncomeValuationsUsingCurrentFace", "convertSrsCashFlowsToPortfolioCurrency", "conservedQuantityForLookthroughExpansion", "returnZeroPv", "enableLegLevelInferenceForCustomSrsColumns", "useInstrumentScaleFactorAsDefault", "scaleInstrumentAccruedOverrideByContractSize", "riskBumpOptions", "fundingCurveByCurrency", "defaultPoolFactorsToUnity", "findOrCalculateWriteThrough", "inflationConvexity", "allowFallbackOnModelDecline", "namedPrices"]
 
     class Config:
         """Pydantic configuration"""
@@ -104,6 +106,13 @@ class PricingOptions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of inflation_convexity
         if self.inflation_convexity:
             _dict['inflationConvexity'] = self.inflation_convexity.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in named_prices (list)
+        _items = []
+        if self.named_prices:
+            for _item in self.named_prices:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['namedPrices'] = _items
         # set to None if risk_engine (nullable) is None
         # and __fields_set__ contains the field
         if self.risk_engine is None and "risk_engine" in self.__fields_set__:
@@ -123,6 +132,11 @@ class PricingOptions(BaseModel):
         # and __fields_set__ contains the field
         if self.funding_curve_by_currency is None and "funding_curve_by_currency" in self.__fields_set__:
             _dict['fundingCurveByCurrency'] = None
+
+        # set to None if named_prices (nullable) is None
+        # and __fields_set__ contains the field
+        if self.named_prices is None and "named_prices" in self.__fields_set__:
+            _dict['namedPrices'] = None
 
         return _dict
 
@@ -162,7 +176,8 @@ class PricingOptions(BaseModel):
             "default_pool_factors_to_unity": obj.get("defaultPoolFactorsToUnity"),
             "find_or_calculate_write_through": obj.get("findOrCalculateWriteThrough"),
             "inflation_convexity": InflationConvexityOptions.from_dict(obj.get("inflationConvexity")) if obj.get("inflationConvexity") is not None else None,
-            "allow_fallback_on_model_decline": obj.get("allowFallbackOnModelDecline")
+            "allow_fallback_on_model_decline": obj.get("allowFallbackOnModelDecline"),
+            "named_prices": [NamedPrice.from_dict(_item) for _item in obj.get("namedPrices")] if obj.get("namedPrices") is not None else None
         })
         return _obj
 

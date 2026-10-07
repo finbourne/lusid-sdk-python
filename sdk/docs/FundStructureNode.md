@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **allocation_basis** | [**FundStructureAllocationBasis**](FundStructureAllocationBasis.md) |  | [optional] 
 **pnl_flow_mode** | **str** | How profit and loss reaches this member from the members it holds. EquityPickup (the default) revalues the position in each held member; BucketFlowThrough receives one line per economic bucket, tagged with its origin; TransactionFlowThrough receives every line, tagged with its origin and path. Available values: EquityPickup, BucketFlowThrough, TransactionFlowThrough. | [optional] 
 **allocation_map_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**drift_materiality** | [**FundStructureDriftMateriality**](FundStructureDriftMateriality.md) |  | [optional] 
 ## Example
 
 ```python
@@ -27,7 +28,8 @@ role: StrictStr = "example_role"
 allocation_basis: Optional[FundStructureAllocationBasis] = # Replace with your value
 pnl_flow_mode: Optional[StrictStr] = "example_pnl_flow_mode"
 allocation_map_id: Optional[ResourceId] = # Replace with your value
-fund_structure_node_instance = FundStructureNode(node_code=node_code, fund_scope=fund_scope, fund_code=fund_code, role=role, allocation_basis=allocation_basis, pnl_flow_mode=pnl_flow_mode, allocation_map_id=allocation_map_id)
+drift_materiality: Optional[FundStructureDriftMateriality] = # Replace with your value
+fund_structure_node_instance = FundStructureNode(node_code=node_code, fund_scope=fund_scope, fund_code=fund_code, role=role, allocation_basis=allocation_basis, pnl_flow_mode=pnl_flow_mode, allocation_map_id=allocation_map_id, drift_materiality=drift_materiality)
 
 ```
 

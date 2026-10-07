@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **scenario** | [**ScenarioReference**](ScenarioReference.md) |  | [optional] 
+**notional_dealing_cost_table_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -45,7 +46,8 @@ valuation_schedule: ValuationSchedule = # Replace with your value
 market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 scenario: Optional[ScenarioReference] = None
-valuation_request_instance = ValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, include_order_flow=include_order_flow, portfolio_entity_ids=portfolio_entity_ids, valuation_schedule=valuation_schedule, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id, scenario=scenario)
+notional_dealing_cost_table_id: Optional[ResourceId] = # Replace with your value
+valuation_request_instance = ValuationRequest(recipe_id=recipe_id, as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, report_currency=report_currency, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, include_order_flow=include_order_flow, portfolio_entity_ids=portfolio_entity_ids, valuation_schedule=valuation_schedule, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id, scenario=scenario, notional_dealing_cost_table_id=notional_dealing_cost_table_id)
 
 ```
 

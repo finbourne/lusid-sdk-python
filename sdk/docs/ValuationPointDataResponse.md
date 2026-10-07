@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **bucket_set_results** | [**List[BucketSetResult]**](BucketSetResult.md) | The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV. | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_backfilled** | **bool** | Set to True if the Valuation Point has backfilled bucket set results, False otherwise. | [optional] 
+**apply_clear_down** | **bool** | Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it. | [optional] 
+**diagnostics** | [**List[ValuationPointDiagnostic]**](ValuationPointDiagnostic.md) | Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital. Absent when there are none. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -39,8 +41,11 @@ bucket_set_results: Optional[List[BucketSetResult]] = # Replace with your value
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 is_backfilled: Optional[StrictBool] = # Replace with your value
 is_backfilled:Optional[StrictBool] = None
+apply_clear_down: Optional[StrictBool] = # Replace with your value
+apply_clear_down:Optional[StrictBool] = None
+diagnostics: Optional[List[ValuationPointDiagnostic]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, bucket_set_results=bucket_set_results, staged_modifications=staged_modifications, is_backfilled=is_backfilled, links=links)
+valuation_point_data_response_instance = ValuationPointDataResponse(href=href, type=type, status=status, fund_details=fund_details, fund_valuation_point_data=fund_valuation_point_data, share_class_data=share_class_data, valuation_point_code=valuation_point_code, previous_valuation_point_code=previous_valuation_point_code, apportionment_results=apportionment_results, bucket_set_results=bucket_set_results, staged_modifications=staged_modifications, is_backfilled=is_backfilled, apply_clear_down=apply_clear_down, diagnostics=diagnostics, links=links)
 
 ```
 

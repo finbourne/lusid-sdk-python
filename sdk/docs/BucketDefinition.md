@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **filter_expression** | **str** |  | 
 **bucket_type** | **str** | Available values: Dealing, PnL, Fees, BalanceSheet, Misc. | 
 **unitised** | **bool** |  | [optional] 
+**cleardown_behaviour** | **str** | Available values: Clear, CarryForward. | [optional] 
+**clears_to** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -23,7 +25,9 @@ filter_expression: StrictStr = "example_filter_expression"
 bucket_type: StrictStr = "example_bucket_type"
 unitised: Optional[StrictBool] = None
 unitised:Optional[StrictBool] = None
-bucket_definition_instance = BucketDefinition(bucket_id=bucket_id, display_name=display_name, filter_expression=filter_expression, bucket_type=bucket_type, unitised=unitised)
+cleardown_behaviour: Optional[StrictStr] = "example_cleardown_behaviour"
+clears_to: Optional[StrictStr] = "example_clears_to"
+bucket_definition_instance = BucketDefinition(bucket_id=bucket_id, display_name=display_name, filter_expression=filter_expression, bucket_type=bucket_type, unitised=unitised, cleardown_behaviour=cleardown_behaviour, clears_to=clears_to)
 
 ```
 

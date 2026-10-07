@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.fund_structure_allocation_basis import FundStructureAllocationBasis
+from lusid.models.fund_structure_drift_materiality import FundStructureDriftMateriality
 from lusid.models.resource_id import ResourceId
 
 class FundStructureNode(BaseModel):
@@ -36,7 +37,8 @@ class FundStructureNode(BaseModel):
     allocation_basis: Optional[FundStructureAllocationBasis] = Field(default=None, alias="allocationBasis")
     pnl_flow_mode:  Optional[StrictStr] = Field(None,alias="pnlFlowMode", description="How profit and loss reaches this member from the members it holds. EquityPickup (the default) revalues the position in each held member; BucketFlowThrough receives one line per economic bucket, tagged with its origin; TransactionFlowThrough receives every line, tagged with its origin and path. Available values: EquityPickup, BucketFlowThrough, TransactionFlowThrough.") 
     allocation_map_id: Optional[ResourceId] = Field(default=None, alias="allocationMapId")
-    __properties = ["nodeCode", "fundScope", "fundCode", "role", "allocationBasis", "pnlFlowMode", "allocationMapId"]
+    drift_materiality: Optional[FundStructureDriftMateriality] = Field(default=None, alias="driftMateriality")
+    __properties = ["nodeCode", "fundScope", "fundCode", "role", "allocationBasis", "pnlFlowMode", "allocationMapId", "driftMateriality"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +78,9 @@ class FundStructureNode(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of allocation_map_id
         if self.allocation_map_id:
             _dict['allocationMapId'] = self.allocation_map_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of drift_materiality
+        if self.drift_materiality:
+            _dict['driftMateriality'] = self.drift_materiality.to_dict()
         # set to None if pnl_flow_mode (nullable) is None
         # and __fields_set__ contains the field
         if self.pnl_flow_mode is None and "pnl_flow_mode" in self.__fields_set__:
@@ -99,7 +104,8 @@ class FundStructureNode(BaseModel):
             "role": obj.get("role"),
             "allocation_basis": FundStructureAllocationBasis.from_dict(obj.get("allocationBasis")) if obj.get("allocationBasis") is not None else None,
             "pnl_flow_mode": obj.get("pnlFlowMode"),
-            "allocation_map_id": ResourceId.from_dict(obj.get("allocationMapId")) if obj.get("allocationMapId") is not None else None
+            "allocation_map_id": ResourceId.from_dict(obj.get("allocationMapId")) if obj.get("allocationMapId") is not None else None,
+            "drift_materiality": FundStructureDriftMateriality.from_dict(obj.get("driftMateriality")) if obj.get("driftMateriality") is not None else None
         })
         return _obj
 

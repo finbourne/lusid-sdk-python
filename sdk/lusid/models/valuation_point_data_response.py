@@ -29,6 +29,7 @@ from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.link import Link
 from lusid.models.share_class_data import ShareClassData
 from lusid.models.staged_modifications_info import StagedModificationsInfo
+from lusid.models.valuation_point_diagnostic import ValuationPointDiagnostic
 
 class ValuationPointDataResponse(BaseModel):
     """
@@ -46,8 +47,10 @@ class ValuationPointDataResponse(BaseModel):
     bucket_set_results: Optional[List[BucketSetResult]] = Field(default=None, description="The bucket set results for the valuation point: for each bucket set, the per-node (fund and share class) buckets and NAV.", alias="bucketSetResults")
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     is_backfilled: Optional[StrictBool] = Field(default=None, description="Set to True if the Valuation Point has backfilled bucket set results, False otherwise.", alias="isBackfilled")
+    apply_clear_down: Optional[StrictBool] = Field(default=None, description="Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it.", alias="applyClearDown")
+    diagnostics: Optional[List[ValuationPointDiagnostic]] = Field(default=None, description="Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member's capital. Absent when there are none.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "apportionmentResults", "bucketSetResults", "stagedModifications", "isBackfilled", "links"]
+    __properties = ["href", "type", "status", "fundDetails", "fundValuationPointData", "shareClassData", "valuationPointCode", "previousValuationPointCode", "apportionmentResults", "bucketSetResults", "stagedModifications", "isBackfilled", "applyClearDown", "diagnostics", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +114,13 @@ class ValuationPointDataResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of staged_modifications
         if self.staged_modifications:
             _dict['stagedModifications'] = self.staged_modifications.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in diagnostics (list)
+        _items = []
+        if self.diagnostics:
+            for _item in self.diagnostics:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['diagnostics'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -143,6 +153,11 @@ class ValuationPointDataResponse(BaseModel):
         if self.bucket_set_results is None and "bucket_set_results" in self.__fields_set__:
             _dict['bucketSetResults'] = None
 
+        # set to None if diagnostics (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diagnostics is None and "diagnostics" in self.__fields_set__:
+            _dict['diagnostics'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -172,6 +187,8 @@ class ValuationPointDataResponse(BaseModel):
             "bucket_set_results": [BucketSetResult.from_dict(_item) for _item in obj.get("bucketSetResults")] if obj.get("bucketSetResults") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "is_backfilled": obj.get("isBackfilled"),
+            "apply_clear_down": obj.get("applyClearDown"),
+            "diagnostics": [ValuationPointDiagnostic.from_dict(_item) for _item in obj.get("diagnostics")] if obj.get("diagnostics") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

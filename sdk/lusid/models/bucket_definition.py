@@ -32,7 +32,9 @@ class BucketDefinition(BaseModel):
     filter_expression:  StrictStr = Field(...,alias="filterExpression") 
     bucket_type:  StrictStr = Field(...,alias="bucketType", description="Available values: Dealing, PnL, Fees, BalanceSheet, Misc.") 
     unitised: Optional[StrictBool] = None
-    __properties = ["bucketId", "displayName", "filterExpression", "bucketType", "unitised"]
+    cleardown_behaviour:  Optional[StrictStr] = Field(None,alias="cleardownBehaviour", description="Available values: Clear, CarryForward.") 
+    clears_to:  Optional[StrictStr] = Field(None,alias="clearsTo") 
+    __properties = ["bucketId", "displayName", "filterExpression", "bucketType", "unitised", "cleardownBehaviour", "clearsTo"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,16 @@ class BucketDefinition(BaseModel):
         if self.unitised is None and "unitised" in self.__fields_set__:
             _dict['unitised'] = None
 
+        # set to None if cleardown_behaviour (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cleardown_behaviour is None and "cleardown_behaviour" in self.__fields_set__:
+            _dict['cleardownBehaviour'] = None
+
+        # set to None if clears_to (nullable) is None
+        # and __fields_set__ contains the field
+        if self.clears_to is None and "clears_to" in self.__fields_set__:
+            _dict['clearsTo'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +99,9 @@ class BucketDefinition(BaseModel):
             "display_name": obj.get("displayName"),
             "filter_expression": obj.get("filterExpression"),
             "bucket_type": obj.get("bucketType"),
-            "unitised": obj.get("unitised")
+            "unitised": obj.get("unitised"),
+            "cleardown_behaviour": obj.get("cleardownBehaviour"),
+            "clears_to": obj.get("clearsTo")
         })
         return _obj
 
