@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **share_class_breakdown** | [**ShareClassBreakdown**](ShareClassBreakdown.md) |  | 
 **share_class_details** | [**ShareClassDetails**](ShareClassDetails.md) |  | [optional] 
+**pricing_methodology** | [**PricingMethodologyResult**](PricingMethodologyResult.md) |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 share_class_breakdown: ShareClassBreakdown = # Replace with your value
 share_class_details: Optional[ShareClassDetails] = # Replace with your value
-share_class_data_instance = ShareClassData(share_class_breakdown=share_class_breakdown, share_class_details=share_class_details)
+pricing_methodology: Optional[PricingMethodologyResult] = # Replace with your value
+share_class_data_instance = ShareClassData(share_class_breakdown=share_class_breakdown, share_class_details=share_class_details, pricing_methodology=pricing_methodology)
 
 ```
 

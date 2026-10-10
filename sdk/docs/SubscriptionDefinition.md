@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **timeline_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **address_keys** | **List[str]** | The set of addresses the subscriber wishes to receive. | [optional] 
 **by_tax_lots** | **bool** |  | [optional] 
-**subscription_type** | **str** | The kind of data the subscription streams, defaulting to holdings: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding&#39;s  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions. | [optional] 
+**subscription_type** | **str** | Required. The kind of data the subscription streams: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding&#39;s  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions. | 
 **start_effective_at** | **datetime** |  | [optional] 
 **end_effective_at** | **datetime** | Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping. | [optional] 
 **effective_forward_days** | **int** | How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes. | [optional] 
@@ -33,7 +33,7 @@ timeline_id: Optional[ResourceId] = # Replace with your value
 address_keys: Optional[List[StrictStr]] = # Replace with your value
 by_tax_lots: Optional[StrictBool] = # Replace with your value
 by_tax_lots:Optional[StrictBool] = None
-subscription_type: Optional[StrictStr] = "example_subscription_type"
+subscription_type: StrictStr = "example_subscription_type"
 start_effective_at: Optional[datetime] = # Replace with your value
 end_effective_at: Optional[datetime] = # Replace with your value
 effective_forward_days: Optional[StrictInt] = # Replace with your value

@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **cancel_date_time** | **datetime** | If the transaction has been cancelled, the asAt datetime that the transaction was cancelled. | [optional] 
 **realised_gain_loss** | [**List[RealisedGainLoss]**](RealisedGainLoss.md) | The collection of realised gains or losses resulting from relevant transactions e.g. a sale transaction. The cost used in calculating the realised gain or loss is determined by the accounting method defined when the transaction portfolio is created. | [optional] 
 **holding_ids** | **List[int]** | The collection of single identifiers for the holding within the portfolio. The holdingId is constructed from the LusidInstrumentId, sub-holding keys and currrency and is unique within the portfolio. | [optional] 
-**source_type** | **str** | The type of source that the transaction originated from. Available values: Unknown, InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction. | [optional] 
+**source_type** | **str** | The type of source that the transaction originated from. Available values: Unknown, InputTransaction, InstrumentEvent, HoldingAdjustment, OverriddenVirtualTransaction, Reversal. | [optional] 
 **source_instrument_event_id** | **str** | The unique ID of the instrument event that the transaction is related to. | [optional] 
 **custodian_account** | [**CustodianAccount**](CustodianAccount.md) |  | [optional] 
 **transaction_group_id** | **str** | The identifier for grouping economic events across multiple transactions | [optional] 

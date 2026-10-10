@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **election_key** | **str** | Unique key associated to this election. | 
 **is_default** | **bool** | Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided. | [optional] 
 **is_chosen** | **bool** | Is this the election that has been explicitly chosen from multiple options. | [optional] 
-**consent_fee_price** | **float** | Optional. The consent fee paid per unit for granting consent. | [optional] 
+**consent_fee_price** | **float** | The consent fee, quoted per 1,000 of face for bonds (the current notional at the record date for amortising and inflation-linked bonds) and per unit otherwise. | [optional] 
 **consent_fee_currency** | **str** | Optional. Currency of the consent fee. Required if a consent fee price is provided. | [optional] 
 ## Example
 

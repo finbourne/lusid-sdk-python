@@ -1970,7 +1970,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_a2_b_movements**
-> VersionedResourceListOfA2BMovementRecord get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter)
+> VersionedResourceListOfA2BMovementRecord get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, split_held_and_trading_returns=split_held_and_trading_returns, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
 GetA2BMovements: Get an A2B report at the movement level for the given portfolio.
 
@@ -2030,13 +2030,17 @@ def main():
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeId (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\". (optional)
     filter = 'filter_example' # str | Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    split_held_and_trading_returns = False # bool | When true, P&L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). (optional) (default to False)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the timeline to use for loading data per closed period. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the timeline to use for loading data per closed period. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period's data is returned within that window. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, opts=opts)
+        # api_response =  api_instance.get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, split_held_and_trading_returns=split_held_and_trading_returns, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
 
         # GetA2BMovements: Get an A2B report at the movement level for the given portfolio.
-        api_response = api_instance.get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter)
+        api_response = api_instance.get_a2_b_movements(scope, code, from_effective_at, to_effective_at, as_at=as_at, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, filter=filter, split_held_and_trading_returns=split_held_and_trading_returns, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
         pprint(api_response)
 
     except ApiException as e:
@@ -2058,6 +2062,10 @@ Name | Type | Description  | Notes
  **recipe_id_code** | **str**| The code of the given recipeId | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; domain to decorate onto              the results. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot;. | [optional] 
  **filter** | **str**| Expression to filter the result set.              Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **split_held_and_trading_returns** | **bool**| When true, P&amp;L is split into separate Held and Trading returns: Held returns capture              market movement on the starting position, and Trading returns capture profit from buy/sell decisions made during the period.              When false (the default), the standard combined A2B report is returned. Cannot currently be combined with the timeline              parameters (timelineScope, timelineCode, closedPeriodId). | [optional] [default to False]
+ **timeline_scope** | **str**| The scope of the timeline to use for loading data per closed period. | [optional] 
+ **timeline_code** | **str**| The code of the timeline to use for loading data per closed period. | [optional] 
+ **closed_period_id** | **str**| The closed period ID. If specified, both timelineScope and timelineCode must also be specified.              When provided, the timeline A2B is filtered to only the matching closed period. The fromEffectiveAt and toEffectiveAt              parameters still define the overall query window; the closedPeriodId restricts which closed period&#39;s data is returned within that window. | [optional] 
 
 ### Return type
 
@@ -2082,7 +2090,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetA2BMovementsTradingVsHolding: Get an A2B report at the movement level for the given portfolio, with P&L split between holding and trading returns.
 
-Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a  synthetic holding rather than a flow, allowing P&L to be attributed to holding returns (market movement on  the starting position) versus trading returns (profit from buy/sell decisions).
+Get an A2B report at the movement level for the given portfolio. Each transaction in the period is treated as a synthetic holding rather than a flow, allowing P&L to be attributed to holding returns (market movement on the starting position) versus trading returns (profit from buy/sell decisions).    Prefer the standard GetA2BMovements endpoint with splitHeldAndTradingReturns=true, which offers the same capability (not currently combinable with the timeline parameters).
 
 ### Example
 

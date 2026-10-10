@@ -42,6 +42,9 @@ class WritebackConfiguration(BaseModel):
     class Config:
         validate_assignment = True
 
+    discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+    }
+
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
@@ -85,6 +88,21 @@ class WritebackConfiguration(BaseModel):
         match = 0
         matchclass = ""
         
+
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("writebackType")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `writebackType` in the input.")
+
+        # check if data type is `SettleExpectedActivityWritebackConfiguration`
+        if _data_type == "SettleExpectedActivity":
+            instance.actual_instance = SettleExpectedActivityWritebackConfiguration.from_json(json_str)
+            return instance
+
+        # check if data type is `SettleExpectedActivityWritebackConfiguration`
+        if _data_type == "SettleExpectedActivityWritebackConfiguration":
+            instance.actual_instance = SettleExpectedActivityWritebackConfiguration.from_json(json_str)
+            return instance
 
         # deserialize data into SettleExpectedActivityWritebackConfiguration
         try:

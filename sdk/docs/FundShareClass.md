@@ -4,7 +4,7 @@ LUSID representation of a FundShareClass.  A ShareClass represents a pool of sha
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**short_code** | **str** | A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \&quot;A Accumulation Euro Hedged Class\&quot; could become \&quot;A Acc H EUR\&quot;. | 
+**short_code** | **str** | A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \&quot;A Accumulation Euro Hedged Class\&quot; could become \&quot;A Acc H EUR\&quot;. | [optional] 
 **fund_share_class_type** | **str** | The type of distribution that the ShareClass will calculate. Can be either &#39;Income&#39; or &#39;Accumulation&#39; - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation. | [optional] 
 **distribution_payment_type** | **str** | The tax treatment applied to any distributions calculated within the ShareClass. Can be either &#39;Net&#39; (Distribution Calculated net of tax) or &#39;Gross&#39; (Distribution calculated gross of tax). Available values: Invalid, Gross, Net. | [optional] 
 **distribution_type** | **str** | The type of distribution calculated for the ShareClass. Can be either &#39;Income&#39; or &#39;Accumulation&#39;. Available values: Income, Accumulation. | [optional] 
@@ -24,7 +24,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-short_code: StrictStr = "example_short_code"
+short_code: Optional[StrictStr] = "example_short_code"
 fund_share_class_type: Optional[StrictStr] = "example_fund_share_class_type"
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
 distribution_type: Optional[StrictStr] = "example_distribution_type"

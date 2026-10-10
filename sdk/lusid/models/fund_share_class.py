@@ -31,7 +31,7 @@ class FundShareClass(LusidInstrument):
     """
     LUSID representation of a FundShareClass.  A ShareClass represents a pool of shares, held by investors, within a fund.   A ShareClass can represent a differing investment approach by either Fees,   Income, Currency Risk and Investor type.  # noqa: E501
     """
-    short_code:  StrictStr = Field(...,alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".") 
+    short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="A short identifier, unique across a single fund, usually made up of the ShareClass components. Eg \"A Accumulation Euro Hedged Class\" could become \"A Acc H EUR\".") 
     fund_share_class_type:  Optional[StrictStr] = Field(None,alias="fundShareClassType", description="The type of distribution that the ShareClass will calculate. Can be either 'Income' or 'Accumulation' - Income classes will pay out and Accumulation classes will retain their ShareClass attributable income. Available values: Income, Accumulation.") 
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to any distributions calculated within the ShareClass. Can be either 'Net' (Distribution Calculated net of tax) or 'Gross' (Distribution calculated gross of tax). Available values: Invalid, Gross, Net.") 
     distribution_type:  Optional[StrictStr] = Field(None,alias="distributionType", description="The type of distribution calculated for the ShareClass. Can be either 'Income' or 'Accumulation'. Available values: Income, Accumulation.") 
@@ -120,6 +120,11 @@ class FundShareClass(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if short_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.short_code is None and "short_code" in self.__fields_set__:
+            _dict['shortCode'] = None
 
         # set to None if fund_share_class_type (nullable) is None
         # and __fields_set__ contains the field

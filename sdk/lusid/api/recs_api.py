@@ -1737,18 +1737,18 @@ class RecsApi:
 
 
     @overload
-    async def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> RecResult:  # noqa: E501
+    async def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance whose view of the result is read.")], id : Annotated[StrictStr, Field(..., description="The display id of the rec result, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> RecResult:  # noqa: E501
         ...
 
     @overload
-    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecResult:  # noqa: E501
+    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance whose view of the result is read.")], id : Annotated[StrictStr, Field(..., description="The display id of the rec result, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=True, **kwargs) -> RecResult:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecResult, Awaitable[RecResult]]:  # noqa: E501
+    def get_rec_result(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance whose view of the result is read.")], id : Annotated[StrictStr, Field(..., description="The display id of the rec result, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[RecResult, Awaitable[RecResult]]:  # noqa: E501
         """[EXPERIMENTAL] GetRecResult: GetRecResult  # noqa: E501
 
-        Retrieve a single rec result by the run it belongs to and its id within that run.  # noqa: E501
+        Retrieve a single rec result by its display id, as it stood in the run named.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1761,9 +1761,9 @@ class RecsApi:
         :type instance_id_value: str
         :param rec_type: The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
         :type rec_type: str
-        :param run_number: The run of the instance the result belongs to. (required)
+        :param run_number: The run of the instance whose view of the result is read. (required)
         :type run_number: int
-        :param id: The id of the rec result within the run, e.g. \"break-3\". (required)
+        :param id: The display id of the rec result, e.g. \"break-3\". (required)
         :type id: str
         :param as_at: The asAt datetime at which to retrieve the result. Defaults to latest if not specified.
         :type as_at: datetime
@@ -1788,10 +1788,10 @@ class RecsApi:
         return self.get_rec_result_with_http_info(instance_id_type, instance_id_value, rec_type, run_number, id, as_at, property_keys, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_rec_result_with_http_info(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance the result belongs to.")], id : Annotated[StrictStr, Field(..., description="The id of the rec result within the run, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_rec_result_with_http_info(self, instance_id_type : Annotated[StrictStr, Field(..., description="How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.")], instance_id_value : Annotated[StrictStr, Field(..., description="The unique identifier of the rec instance.")], rec_type : Annotated[StrictStr, Field(..., description="The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.")], run_number : Annotated[StrictInt, Field(description="The run of the instance whose view of the result is read.")], id : Annotated[StrictStr, Field(..., description="The display id of the rec result, e.g. \"break-3\".")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the result. Defaults to latest if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto the result.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetRecResult: GetRecResult  # noqa: E501
 
-        Retrieve a single rec result by the run it belongs to and its id within that run.  # noqa: E501
+        Retrieve a single rec result by its display id, as it stood in the run named.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -1804,9 +1804,9 @@ class RecsApi:
         :type instance_id_value: str
         :param rec_type: The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. (required)
         :type rec_type: str
-        :param run_number: The run of the instance the result belongs to. (required)
+        :param run_number: The run of the instance whose view of the result is read. (required)
         :type run_number: int
-        :param id: The id of the rec result within the run, e.g. \"break-3\". (required)
+        :param id: The display id of the rec result, e.g. \"break-3\". (required)
         :type id: str
         :param as_at: The asAt datetime at which to retrieve the result. Defaults to latest if not specified.
         :type as_at: datetime
@@ -3051,7 +3051,7 @@ class RecsApi:
     def list_rec_results(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list results. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto each result.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfRecResult, Awaitable[PagedResourceListOfRecResult]]:  # noqa: E501
         """[EXPERIMENTAL] ListRecResults: ListRecResults  # noqa: E501
 
-        List rec results.  # noqa: E501
+        List rec results. A result's runNumber is the run that last wrote it; a run's results as they stood are read at that run's asAt.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -3092,7 +3092,7 @@ class RecsApi:
     def list_rec_results_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list results. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing results from a previous call. If a pagination token is provided the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="The property keys to decorate onto each result.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListRecResults: ListRecResults  # noqa: E501
 
-        List rec results.  # noqa: E501
+        List rec results. A result's runNumber is the run that last wrote it; a run's results as they stood are read at that run's asAt.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

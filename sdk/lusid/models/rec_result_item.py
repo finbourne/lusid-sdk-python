@@ -48,6 +48,9 @@ class RecResultItem(BaseModel):
     class Config:
         validate_assignment = True
 
+    discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+    }
+
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
@@ -103,6 +106,46 @@ class RecResultItem(BaseModel):
         match = 0
         matchclass = ""
         
+
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("itemType")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `itemType` in the input.")
+
+        # check if data type is `RecResultHoldingItem`
+        if _data_type == "Holding":
+            instance.actual_instance = RecResultHoldingItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultSettlementActivityItem`
+        if _data_type == "SettlementActivity":
+            instance.actual_instance = RecResultSettlementActivityItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultTransactionItem`
+        if _data_type == "Transaction":
+            instance.actual_instance = RecResultTransactionItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultHoldingItem`
+        if _data_type == "ValuedHolding":
+            instance.actual_instance = RecResultHoldingItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultHoldingItem`
+        if _data_type == "RecResultHoldingItem":
+            instance.actual_instance = RecResultHoldingItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultSettlementActivityItem`
+        if _data_type == "RecResultSettlementActivityItem":
+            instance.actual_instance = RecResultSettlementActivityItem.from_json(json_str)
+            return instance
+
+        # check if data type is `RecResultTransactionItem`
+        if _data_type == "RecResultTransactionItem":
+            instance.actual_instance = RecResultTransactionItem.from_json(json_str)
+            return instance
 
         # deserialize data into RecResultHoldingItem
         try:

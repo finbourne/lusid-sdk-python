@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the diary entry. | [optional] 
 **apply_clear_down** | **bool** | Defaults to null. Set to true if you want the closed period to have the clear down applied. | [optional] 
 **update_inclusion_date_nav_adjustments** | **bool** | Defaults to null. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] 
+**pricing_methodology_override** | [**PricingMethodologyOverrideRequest**](PricingMethodologyOverrideRequest.md) |  | [optional] 
 ## Example
 
 ```python
@@ -27,7 +28,8 @@ apply_clear_down: Optional[StrictBool] = # Replace with your value
 apply_clear_down:Optional[StrictBool] = None
 update_inclusion_date_nav_adjustments: Optional[StrictBool] = # Replace with your value
 update_inclusion_date_nav_adjustments:Optional[StrictBool] = None
-update_valuation_point_request_instance = UpdateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, properties=properties, apply_clear_down=apply_clear_down, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments)
+pricing_methodology_override: Optional[PricingMethodologyOverrideRequest] = # Replace with your value
+update_valuation_point_request_instance = UpdateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, properties=properties, apply_clear_down=apply_clear_down, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments, pricing_methodology_override=pricing_methodology_override)
 
 ```
 

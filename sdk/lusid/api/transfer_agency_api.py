@@ -19,8 +19,8 @@ import warnings
 from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
-from pydantic.v1 import Field
-from typing import Dict
+from pydantic.v1 import Field, StrictStr
+from typing import Dict, Optional
 from typing_extensions import Annotated
 from lusid.models.calculate_order_dates_request import CalculateOrderDatesRequest
 from lusid.models.calculate_order_dates_response import CalculateOrderDatesResponse
@@ -30,6 +30,8 @@ from lusid.models.estimate_transfer_agency_order_request import EstimateTransfer
 from lusid.models.estimate_transfer_agency_orders_response import EstimateTransferAgencyOrdersResponse
 from lusid.models.transfer_agency_orders_response import TransferAgencyOrdersResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
+from lusid.models.upsert_transfer_agency_transaction_from_order_request import UpsertTransferAgencyTransactionFromOrderRequest
+from lusid.models.upsert_transfer_agency_transactions_from_orders_response import UpsertTransferAgencyTransactionsFromOrdersResponse
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -546,7 +548,7 @@ class TransferAgencyApi:
     def upsert_transfer_agency_orders(self, request_body : Annotated[Dict[str, UpsertTransferAgencyOrderRequest], Field(description="The transfer agency orders to upsert, keyed by a unique request identifier.")], async_req: Optional[bool]=None, **kwargs) -> Union[TransferAgencyOrdersResponse, Awaitable[TransferAgencyOrdersResponse]]:  # noqa: E501
         """[EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders  # noqa: E501
 
-        Creates a transaction and updates the relevant order for each order supplied.  The response contains both successfully processed orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
+        Creates a cash transaction and updates the relevant order for each order supplied. An order must be in  'Pending' or 'New'. An order that already has a cash transaction has that transaction amended  to the order's current amount rather than a second one created.  The response contains both successfully processed orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -577,7 +579,7 @@ class TransferAgencyApi:
     def upsert_transfer_agency_orders_with_http_info(self, request_body : Annotated[Dict[str, UpsertTransferAgencyOrderRequest], Field(description="The transfer agency orders to upsert, keyed by a unique request identifier.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders  # noqa: E501
 
-        Creates a transaction and updates the relevant order for each order supplied.  The response contains both successfully processed orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
+        Creates a cash transaction and updates the relevant order for each order supplied. An order must be in  'Pending' or 'New'. An order that already has a cash transaction has that transaction amended  to the order's current amount rather than a second one created.  The response contains both successfully processed orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -676,6 +678,173 @@ class TransferAgencyApi:
 
         return self.api_client.call_api(
             '/api/transferagency/orders', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_transfer_agency_transactions_from_orders(self, request_body : Annotated[Dict[str, UpsertTransferAgencyTransactionFromOrderRequest], Field(description="The transfer agency orders to price, keyed by a unique request identifier.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, **kwargs) -> UpsertTransferAgencyTransactionsFromOrdersResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_transfer_agency_transactions_from_orders(self, request_body : Annotated[Dict[str, UpsertTransferAgencyTransactionFromOrderRequest], Field(description="The transfer agency orders to price, keyed by a unique request identifier.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, async_req: Optional[bool]=True, **kwargs) -> UpsertTransferAgencyTransactionsFromOrdersResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_transfer_agency_transactions_from_orders(self, request_body : Annotated[Dict[str, UpsertTransferAgencyTransactionFromOrderRequest], Field(description="The transfer agency orders to price, keyed by a unique request identifier.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[UpsertTransferAgencyTransactionsFromOrdersResponse, Awaitable[UpsertTransferAgencyTransactionsFromOrdersResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpsertTransferAgencyTransactionsFromOrders: Upsert transfer agency transactions from transfer agency orders  # noqa: E501
+
+        This endpoint derives transactions from existing transfer agency orders. It does not upsert  caller-supplied ones.  Prices each order supplied, booking the security transaction into the investor's portfolio, amending the  paired cash transaction to the final settlement amount, and moving the order to 'Priced'. Only an order in  'New' can be priced, and the supplied price date must match the price date calculated when the order was  created.  The response contains both successfully priced orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_transfer_agency_transactions_from_orders(request_body, success_mode, async_req=True)
+        >>> result = thread.get()
+
+        :param request_body: The transfer agency orders to price, keyed by a unique request identifier. (required)
+        :type request_body: Dict[str, UpsertTransferAgencyTransactionFromOrderRequest]
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
+        :type success_mode: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: UpsertTransferAgencyTransactionsFromOrdersResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_transfer_agency_transactions_from_orders_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_transfer_agency_transactions_from_orders_with_http_info(request_body, success_mode, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_transfer_agency_transactions_from_orders_with_http_info(self, request_body : Annotated[Dict[str, UpsertTransferAgencyTransactionFromOrderRequest], Field(description="The transfer agency orders to price, keyed by a unique request identifier.")], success_mode : Annotated[Optional[StrictStr], Field( description="Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpsertTransferAgencyTransactionsFromOrders: Upsert transfer agency transactions from transfer agency orders  # noqa: E501
+
+        This endpoint derives transactions from existing transfer agency orders. It does not upsert  caller-supplied ones.  Prices each order supplied, booking the security transaction into the investor's portfolio, amending the  paired cash transaction to the final settlement amount, and moving the order to 'Priced'. Only an order in  'New' can be priced, and the supplied price date must match the price date calculated when the order was  created.  The response contains both successfully priced orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_transfer_agency_transactions_from_orders_with_http_info(request_body, success_mode, async_req=True)
+        >>> result = thread.get()
+
+        :param request_body: The transfer agency orders to price, keyed by a unique request identifier. (required)
+        :type request_body: Dict[str, UpsertTransferAgencyTransactionFromOrderRequest]
+        :param success_mode: Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial
+        :type success_mode: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpsertTransferAgencyTransactionsFromOrdersResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'request_body',
+            'success_mode'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_transfer_agency_transactions_from_orders" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpsertTransferAgencyTransactionsFromOrdersResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/transferagency/transactions/$fromOrders', 'POST',
             _path_params,
             _query_params,
             _header_params,

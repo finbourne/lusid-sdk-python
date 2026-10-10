@@ -25,7 +25,7 @@ from datetime import datetime
 
 class SwingPricingRule(BaseModel):
     """
-    Moves a NAV type's pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point's NAV, exceeds the threshold the fund is valued on the inflow or outflow basis instead of  the NAV type's own basis.  # noqa: E501
+    Deprecated and ignored; use the Fund's pricing methodology.  Moved a NAV type's pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point's NAV, exceeded the threshold the fund was valued on the inflow or outflow basis instead of  the NAV type's own basis.  # noqa: E501
     """
     threshold_percentage_of_nav: Union[StrictFloat, StrictInt] = Field(description="The net dealing flow, as a percentage of the previous valuation point's NAV, above which the fund swings. Must be zero or more; zero swings on any non-zero flow.", alias="thresholdPercentageOfNav")
     inflow_basis:  Optional[StrictStr] = Field(None,alias="inflowBasis", description="The pricing basis the fund is valued on when net subscriptions exceed the threshold: Mid, Bid or Ask. Defaults to Ask. Available values: Mid, Bid, Ask.") 

@@ -993,7 +993,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] GetRecResult: GetRecResult
 
-Retrieve a single rec result by the run it belongs to and its id within that run.
+Retrieve a single rec result by its display id, as it stood in the run named.
 
 ### Example
 
@@ -1043,8 +1043,8 @@ def main():
     instance_id_type = 'instance_id_type_example' # str | How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.
     instance_id_value = 'instance_id_value_example' # str | The unique identifier of the rec instance.
     rec_type = 'rec_type_example' # str | The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
-    run_number = 56 # int | The run of the instance the result belongs to.
-    id = 'id_example' # str | The id of the rec result within the run, e.g. \"break-3\".
+    run_number = 56 # int | The run of the instance whose view of the result is read.
+    id = 'id_example' # str | The display id of the rec result, e.g. \"break-3\".
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
     property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto the result. (optional)
 
@@ -1069,8 +1069,8 @@ Name | Type | Description  | Notes
  **instance_id_type** | **str**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | 
  **instance_id_value** | **str**| The unique identifier of the rec instance. | 
  **rec_type** | **str**| The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
- **run_number** | **int**| The run of the instance the result belongs to. | 
- **id** | **str**| The id of the rec result within the run, e.g. \&quot;break-3\&quot;. | 
+ **run_number** | **int**| The run of the instance whose view of the result is read. | 
+ **id** | **str**| The display id of the rec result, e.g. \&quot;break-3\&quot;. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] 
  **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto the result. | [optional] 
 
@@ -1694,7 +1694,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListRecResults: ListRecResults
 
-List rec results.
+List rec results. A result's runNumber is the run that last wrote it; a run's results as they stood are read at that run's asAt.
 
 ### Example
 

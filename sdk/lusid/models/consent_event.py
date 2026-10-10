@@ -31,15 +31,15 @@ from lusid.models.lapse_election import LapseElection
 
 class ConsentEvent(InstrumentEvent):
     """
-    Consent Event (CONS) — a voluntary corporate action where an issuer seeks approval  from security holders to amend the terms of an outstanding instrument.  # noqa: E501
+    A consent solicitation (CONS) or a bondholder meeting's fee (BMET): voluntary when holders respond to it, mandatory when it pays a fee to every eligible holder without an instruction.  # noqa: E501
     """
     consent_type:  Optional[StrictStr] = Field(None,alias="consentType", description="The type of consent solicitation. Optional; omitting it records Unknown.                Supported string (enumeration) values are: [ChangeInTerms, DueAndPayable, Unknown]. Available values: ChangeInTerms, DueAndPayable, Unknown.") 
     record_date: Optional[datetime] = Field(default=None, description="The entitlement determination date.", alias="recordDate")
     response_deadline: Optional[datetime] = Field(default=None, description="The last date to submit instructions.", alias="responseDeadline")
     market_deadline: Optional[datetime] = Field(default=None, description="The issuer-set outer deadline. Must be greater than or equal to ResponseDeadline.", alias="marketDeadline")
-    early_response_deadline: Optional[datetime] = Field(default=None, description="Deadline for early consent. Required when a CONY-early CashOfferElection is offered.  Must be earlier than ResponseDeadline.", alias="earlyResponseDeadline")
-    payment_date: Optional[datetime] = Field(default=None, description="Date on which the consent fee is paid. Required when any CashOfferElection is offered.", alias="paymentDate")
-    cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="List of possible cash offer elections for this event. Each tier (CONY-standard, CONY-early)  is modelled as a separate entry; the election carries the per-unit fee rate and currency.", alias="cashOfferElections")
+    early_response_deadline: Optional[datetime] = Field(default=None, description="Deadline for instructions that qualify for an early fee. Optional. When set, must be earlier than ResponseDeadline. Must be null on a Mandatory event.", alias="earlyResponseDeadline")
+    payment_date: Optional[datetime] = Field(default=None, description="Date on which the fee is paid. Required when a CashOfferElection or a fee-bearing ConsentGrantedElection is offered; otherwise must be null.", alias="paymentDate")
+    cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="Options that pay a cash fee to the holder who chooses them, whatever the vote: for example a fee for voting against, for a split vote or for an ineligible-holder confirmation. Keys are free-form and unique across all election lists. The price is quoted per 1,000 of face for bonds (the current notional at the record date: amortised face for a ComplexBond, inflation-adjusted face for an InflationLinkedBond) and per unit for equities and simple instruments. On a Mandatory event, exactly one, both default and chosen.", alias="cashOfferElections")
     lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="List of possible lapse elections for this event (NOAC).", alias="lapseElections")
     consent_granted_elections: Optional[List[ConsentGrantedElection]] = Field(default=None, description="List of possible consent-granted elections for this event (CONY), each optionally carrying a consent fee.", alias="consentGrantedElections")
     consent_denied_elections: Optional[List[ConsentDeniedElection]] = Field(default=None, description="List of possible consent-denied elections for this event (CONN).", alias="consentDeniedElections")

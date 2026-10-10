@@ -36,7 +36,7 @@ class SubscriptionDefinition(BaseModel):
     timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
     address_keys: Optional[List[StrictStr]] = Field(default=None, description="The set of addresses the subscriber wishes to receive.", alias="addressKeys")
     by_tax_lots: Optional[StrictBool] = Field(default=None, alias="byTaxLots")
-    subscription_type:  Optional[StrictStr] = Field(None,alias="subscriptionType", description="The kind of data the subscription streams, defaulting to holdings: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding's  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions.") 
+    subscription_type:  StrictStr = Field(...,alias="subscriptionType", description="Required. The kind of data the subscription streams: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding's  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions.") 
     start_effective_at: Optional[datetime] = Field(default=None, alias="startEffectiveAt")
     end_effective_at: Optional[datetime] = Field(default=None, description="Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping.", alias="endEffectiveAt")
     effective_forward_days: Optional[StrictInt] = Field(default=None, description="How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes.", alias="effectiveForwardDays")
@@ -94,11 +94,6 @@ class SubscriptionDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.address_keys is None and "address_keys" in self.__fields_set__:
             _dict['addressKeys'] = None
-
-        # set to None if subscription_type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.subscription_type is None and "subscription_type" in self.__fields_set__:
-            _dict['subscriptionType'] = None
 
         # set to None if start_effective_at (nullable) is None
         # and __fields_set__ contains the field

@@ -30,7 +30,11 @@ class UnitisationData(BaseModel):
     shares_in_issue: Union[StrictFloat, StrictInt] = Field(description="The number of shares in issue at a valuation point.", alias="sharesInIssue")
     unit_price: Union[StrictFloat, StrictInt] = Field(description="The price of one unit of the share class at a valuation point.", alias="unitPrice")
     net_dealing_units: Union[StrictFloat, StrictInt] = Field(description="The net dealing in units for the share class at a valuation point. This could be the sum of negative redemptions (in units) and positive subscriptions (in units).", alias="netDealingUnits")
-    __properties = ["sharesInIssue", "unitPrice", "netDealingUnits"]
+    bid_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of one unit of the share class on the bid side at a valuation point: the class's NAV with the fund's holdings marked at their bid prices. Equal to the unit price when the fund is struck on the bid. Absent when a holding's bid could not be priced.", alias="bidPrice")
+    offer_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price of one unit of the share class on the offer side at a valuation point: the class's NAV with the fund's holdings marked at their ask prices. Equal to the unit price when the fund is struck on the ask. Absent when a holding's ask could not be priced.", alias="offerPrice")
+    bid_price_inc_ndc: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bid price of one unit of the share class less the class's share of the notional dealing costs of selling the fund's holdings, at a valuation point. Absent when the NAV type has no notional dealing cost table.", alias="bidPriceIncNdc")
+    offer_price_inc_ndc: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The offer price of one unit of the share class plus the class's share of the notional dealing costs of buying the fund's holdings, at a valuation point. Absent when the NAV type has no notional dealing cost table.", alias="offerPriceIncNdc")
+    __properties = ["sharesInIssue", "unitPrice", "netDealingUnits", "bidPrice", "offerPrice", "bidPriceIncNdc", "offerPriceIncNdc"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +68,26 @@ class UnitisationData(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if bid_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bid_price is None and "bid_price" in self.__fields_set__:
+            _dict['bidPrice'] = None
+
+        # set to None if offer_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.offer_price is None and "offer_price" in self.__fields_set__:
+            _dict['offerPrice'] = None
+
+        # set to None if bid_price_inc_ndc (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bid_price_inc_ndc is None and "bid_price_inc_ndc" in self.__fields_set__:
+            _dict['bidPriceIncNdc'] = None
+
+        # set to None if offer_price_inc_ndc (nullable) is None
+        # and __fields_set__ contains the field
+        if self.offer_price_inc_ndc is None and "offer_price_inc_ndc" in self.__fields_set__:
+            _dict['offerPriceIncNdc'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +102,11 @@ class UnitisationData(BaseModel):
         _obj = UnitisationData.parse_obj({
             "shares_in_issue": obj.get("sharesInIssue"),
             "unit_price": obj.get("unitPrice"),
-            "net_dealing_units": obj.get("netDealingUnits")
+            "net_dealing_units": obj.get("netDealingUnits"),
+            "bid_price": obj.get("bidPrice"),
+            "offer_price": obj.get("offerPrice"),
+            "bid_price_inc_ndc": obj.get("bidPriceIncNdc"),
+            "offer_price_inc_ndc": obj.get("offerPriceIncNdc")
         })
         return _obj
 

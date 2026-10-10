@@ -30,7 +30,7 @@ class ConsentGrantedElection(BaseModel):
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election.") 
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
     is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
-    consent_fee_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The consent fee paid per unit for granting consent.", alias="consentFeePrice")
+    consent_fee_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The consent fee, quoted per 1,000 of face for bonds (the current notional at the record date for amortising and inflation-linked bonds) and per unit otherwise.", alias="consentFeePrice")
     consent_fee_currency:  Optional[StrictStr] = Field(None,alias="consentFeeCurrency", description="Optional. Currency of the consent fee. Required if a consent fee price is provided.") 
     __properties = ["electionKey", "isDefault", "isChosen", "consentFeePrice", "consentFeeCurrency"]
 

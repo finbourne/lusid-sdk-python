@@ -567,6 +567,7 @@ from lusid.models.date_time_compliance_parameter import DateTimeComplianceParame
 from lusid.models.date_time_list_compliance_parameter import DateTimeListComplianceParameter
 from lusid.models.day_month import DayMonth
 from lusid.models.day_of_week import DayOfWeek
+from lusid.models.dealing_flow_summary import DealingFlowSummary
 from lusid.models.decimal_compliance_parameter import DecimalComplianceParameter
 from lusid.models.decimal_list import DecimalList
 from lusid.models.decimal_list_compliance_parameter import DecimalListComplianceParameter
@@ -601,6 +602,7 @@ from lusid.models.dialect_id import DialectId
 from lusid.models.dialect_schema import DialectSchema
 from lusid.models.diary_entry import DiaryEntry
 from lusid.models.diary_entry_request import DiaryEntryRequest
+from lusid.models.direction_spreads import DirectionSpreads
 from lusid.models.discount_factor_curve_data import DiscountFactorCurveData
 from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
@@ -609,6 +611,8 @@ from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.dividend_suspension_event import DividendSuspensionEvent
 from lusid.models.drawdown_event import DrawdownEvent
 from lusid.models.drawing_event import DrawingEvent
+from lusid.models.dual_price_dealing import DualPriceDealing
+from lusid.models.dual_price_derivation import DualPriceDerivation
 from lusid.models.dutch_auction_event import DutchAuctionEvent
 from lusid.models.early_close_out_event import EarlyCloseOutEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
@@ -1240,6 +1244,12 @@ from lusid.models.previous_valuation_point import PreviousValuationPoint
 from lusid.models.price_shift_definition import PriceShiftDefinition
 from lusid.models.price_shift_mode import PriceShiftMode
 from lusid.models.pricing_context import PricingContext
+from lusid.models.pricing_methodology import PricingMethodology
+from lusid.models.pricing_methodology_audit import PricingMethodologyAudit
+from lusid.models.pricing_methodology_engine_proposal import PricingMethodologyEngineProposal
+from lusid.models.pricing_methodology_override import PricingMethodologyOverride
+from lusid.models.pricing_methodology_override_request import PricingMethodologyOverrideRequest
+from lusid.models.pricing_methodology_result import PricingMethodologyResult
 from lusid.models.pricing_model import PricingModel
 from lusid.models.pricing_options import PricingOptions
 from lusid.models.primary_schedule import PrimarySchedule
@@ -1402,6 +1412,7 @@ from lusid.models.relative_date_offset import RelativeDateOffset
 from lusid.models.repo import Repo
 from lusid.models.repo_cash_flow_event import RepoCashFlowEvent
 from lusid.models.repo_partial_closure_event import RepoPartialClosureEvent
+from lusid.models.reporting_price import ReportingPrice
 from lusid.models.repurchase_offer_event import RepurchaseOfferEvent
 from lusid.models.requested_changes import RequestedChanges
 from lusid.models.reset_event import ResetEvent
@@ -1597,6 +1608,7 @@ from lusid.models.simple_cash_flow_loan import SimpleCashFlowLoan
 from lusid.models.simple_instrument import SimpleInstrument
 from lusid.models.simple_model_options import SimpleModelOptions
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
+from lusid.models.single_price_dealing import SinglePriceDealing
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.sort_order import SortOrder
 from lusid.models.specific_holding_pricing_info import SpecificHoldingPricingInfo
@@ -1638,8 +1650,16 @@ from lusid.models.swap_cash_flow_event import SwapCashFlowEvent
 from lusid.models.swap_principal_event import SwapPrincipalEvent
 from lusid.models.sweep_blocks_request import SweepBlocksRequest
 from lusid.models.sweep_blocks_response import SweepBlocksResponse
+from lusid.models.swing_baseline import SwingBaseline
+from lusid.models.swing_policy import SwingPolicy
 from lusid.models.swing_pricing_decision import SwingPricingDecision
 from lusid.models.swing_pricing_rule import SwingPricingRule
+from lusid.models.swing_spread_applied import SwingSpreadApplied
+from lusid.models.swing_spread_tier import SwingSpreadTier
+from lusid.models.swing_spread_tier_bounds import SwingSpreadTierBounds
+from lusid.models.swing_spreads import SwingSpreads
+from lusid.models.swing_trigger import SwingTrigger
+from lusid.models.swing_trigger_evaluation import SwingTriggerEvaluation
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
 from lusid.models.tax_rule import TaxRule
@@ -1715,6 +1735,7 @@ from lusid.models.transfer_agency_order_estimate_result import TransferAgencyOrd
 from lusid.models.transfer_agency_order_result import TransferAgencyOrderResult
 from lusid.models.transfer_agency_order_to_estimate import TransferAgencyOrderToEstimate
 from lusid.models.transfer_agency_orders_response import TransferAgencyOrdersResponse
+from lusid.models.transfer_agency_transaction_from_order_result import TransferAgencyTransactionFromOrderResult
 from lusid.models.transition_event import TransitionEvent
 from lusid.models.transition_rec_instance_request import TransitionRecInstanceRequest
 from lusid.models.translate_entities_inlined_request import TranslateEntitiesInlinedRequest
@@ -1837,6 +1858,8 @@ from lusid.models.upsert_structured_result_data_request import UpsertStructuredR
 from lusid.models.upsert_subscription_request import UpsertSubscriptionRequest
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
+from lusid.models.upsert_transfer_agency_transaction_from_order_request import UpsertTransferAgencyTransactionFromOrderRequest
+from lusid.models.upsert_transfer_agency_transactions_from_orders_response import UpsertTransferAgencyTransactionsFromOrdersResponse
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
@@ -2472,6 +2495,7 @@ __all__ = [
     "DateTimeListComplianceParameter",
     "DayMonth",
     "DayOfWeek",
+    "DealingFlowSummary",
     "DecimalComplianceParameter",
     "DecimalList",
     "DecimalListComplianceParameter",
@@ -2506,6 +2530,7 @@ __all__ = [
     "DialectSchema",
     "DiaryEntry",
     "DiaryEntryRequest",
+    "DirectionSpreads",
     "DiscountFactorCurveData",
     "DiscountingDependency",
     "DiscountingMethod",
@@ -2514,6 +2539,8 @@ __all__ = [
     "DividendSuspensionEvent",
     "DrawdownEvent",
     "DrawingEvent",
+    "DualPriceDealing",
+    "DualPriceDerivation",
     "DutchAuctionEvent",
     "EarlyCloseOutEvent",
     "EarlyRedemptionElection",
@@ -3145,6 +3172,12 @@ __all__ = [
     "PriceShiftDefinition",
     "PriceShiftMode",
     "PricingContext",
+    "PricingMethodology",
+    "PricingMethodologyAudit",
+    "PricingMethodologyEngineProposal",
+    "PricingMethodologyOverride",
+    "PricingMethodologyOverrideRequest",
+    "PricingMethodologyResult",
     "PricingModel",
     "PricingOptions",
     "PrimarySchedule",
@@ -3307,6 +3340,7 @@ __all__ = [
     "Repo",
     "RepoCashFlowEvent",
     "RepoPartialClosureEvent",
+    "ReportingPrice",
     "RepurchaseOfferEvent",
     "RequestedChanges",
     "ResetEvent",
@@ -3502,6 +3536,7 @@ __all__ = [
     "SimpleInstrument",
     "SimpleModelOptions",
     "SimpleRoundingConvention",
+    "SinglePriceDealing",
     "SingleValuationPointQueryParameters",
     "SortOrder",
     "SpecificHoldingPricingInfo",
@@ -3543,8 +3578,16 @@ __all__ = [
     "SwapPrincipalEvent",
     "SweepBlocksRequest",
     "SweepBlocksResponse",
+    "SwingBaseline",
+    "SwingPolicy",
     "SwingPricingDecision",
     "SwingPricingRule",
+    "SwingSpreadApplied",
+    "SwingSpreadTier",
+    "SwingSpreadTierBounds",
+    "SwingSpreads",
+    "SwingTrigger",
+    "SwingTriggerEvaluation",
     "TargetTaxLot",
     "TargetTaxLotRequest",
     "TaxRule",
@@ -3620,6 +3663,7 @@ __all__ = [
     "TransferAgencyOrderResult",
     "TransferAgencyOrderToEstimate",
     "TransferAgencyOrdersResponse",
+    "TransferAgencyTransactionFromOrderResult",
     "TransitionEvent",
     "TransitionRecInstanceRequest",
     "TranslateEntitiesInlinedRequest",
@@ -3742,6 +3786,8 @@ __all__ = [
     "UpsertSubscriptionRequest",
     "UpsertTransactionPropertiesResponse",
     "UpsertTransferAgencyOrderRequest",
+    "UpsertTransferAgencyTransactionFromOrderRequest",
+    "UpsertTransferAgencyTransactionsFromOrdersResponse",
     "UpsertTranslationScriptRequest",
     "UpsertValuationPointRequest",
     "UpsertVirtualTransactionOverrideResponse",

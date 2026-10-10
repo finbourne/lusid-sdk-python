@@ -1,6 +1,6 @@
 # SwingPricingRule
 
-Moves a NAV type's pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point's NAV, exceeds the threshold the fund is valued on the inflow or outflow basis instead of  the NAV type's own basis.
+Deprecated and ignored; use the Fund's pricing methodology.  Moved a NAV type's pricing basis with its net dealing flow. When the flow, as a percentage of the previous  valuation point's NAV, exceeded the threshold the fund was valued on the inflow or outflow basis instead of  the NAV type's own basis.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

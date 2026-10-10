@@ -25,7 +25,7 @@ from datetime import datetime
 
 class SwingPricingDecision(BaseModel):
     """
-    What the NAV type's swing pricing rule decided for a valuation point: the net dealing flow it measured, how  it compared with the threshold, and the pricing basis the point was valued on as a result.  # noqa: E501
+    Deprecated and no longer produced; see the share class's pricing methodology result.  What the NAV type's swing pricing rule decided for a valuation point: the net dealing flow it measured, how  it compared with the threshold, and the pricing basis the point was valued on as a result.  # noqa: E501
     """
     net_dealing_flow: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net dealing flow the rule measured for the valuation point, in the fund currency. Subscriptions are positive and redemptions negative.", alias="netDealingFlow")
     net_dealing_flow_percentage_of_nav: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The net dealing flow as a percentage of the previous valuation point's NAV. Zero when there is no previous NAV to measure against.", alias="netDealingFlowPercentageOfNav")

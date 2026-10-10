@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.pricing_methodology_result import PricingMethodologyResult
 from lusid.models.share_class_breakdown import ShareClassBreakdown
 from lusid.models.share_class_details import ShareClassDetails
 
@@ -31,7 +32,8 @@ class ShareClassData(BaseModel):
     """
     share_class_breakdown: ShareClassBreakdown = Field(alias="shareClassBreakdown")
     share_class_details: Optional[ShareClassDetails] = Field(default=None, alias="shareClassDetails")
-    __properties = ["shareClassBreakdown", "shareClassDetails"]
+    pricing_methodology: Optional[PricingMethodologyResult] = Field(default=None, alias="pricingMethodology")
+    __properties = ["shareClassBreakdown", "shareClassDetails", "pricingMethodology"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,9 @@ class ShareClassData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of share_class_details
         if self.share_class_details:
             _dict['shareClassDetails'] = self.share_class_details.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pricing_methodology
+        if self.pricing_methodology:
+            _dict['pricingMethodology'] = self.pricing_methodology.to_dict()
         return _dict
 
     @classmethod
@@ -84,7 +89,8 @@ class ShareClassData(BaseModel):
 
         _obj = ShareClassData.parse_obj({
             "share_class_breakdown": ShareClassBreakdown.from_dict(obj.get("shareClassBreakdown")) if obj.get("shareClassBreakdown") is not None else None,
-            "share_class_details": ShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None
+            "share_class_details": ShareClassDetails.from_dict(obj.get("shareClassDetails")) if obj.get("shareClassDetails") is not None else None,
+            "pricing_methodology": PricingMethodologyResult.from_dict(obj.get("pricingMethodology")) if obj.get("pricingMethodology") is not None else None
         })
         return _obj
 

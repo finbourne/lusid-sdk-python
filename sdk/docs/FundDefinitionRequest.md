@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
 **create_instrument** | **bool** | Whether to create instruments for the Fund&#39;s share classes, series, or partner classes upon creation. Defaults to false. | [optional] 
 **share_classes** | [**List[ShareClassDefinition]**](ShareClassDefinition.md) | An optional list of Share Class definitions for the Fund. | [optional] 
+**pricing_methodology** | [**PricingMethodology**](PricingMethodology.md) |  | [optional] 
+**reporting_prices** | [**List[ReportingPrice]**](ReportingPrice.md) | Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices. | [optional] 
 ## Example
 
 ```python
@@ -53,7 +55,9 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 create_instrument: Optional[StrictBool] = # Replace with your value
 create_instrument:Optional[StrictBool] = None
 share_classes: Optional[List[ShareClassDefinition]] = # Replace with your value
-fund_definition_request_instance = FundDefinitionRequest(code=code, short_code=short_code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, tax_transparency=tax_transparency, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes)
+pricing_methodology: Optional[PricingMethodology] = # Replace with your value
+reporting_prices: Optional[List[ReportingPrice]] = # Replace with your value
+fund_definition_request_instance = FundDefinitionRequest(code=code, short_code=short_code, display_name=display_name, description=description, base_currency=base_currency, investor_structure=investor_structure, portfolio_ids=portfolio_ids, fund_configuration_id=fund_configuration_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, tax_transparency=tax_transparency, inception_date=inception_date, decimal_places=decimal_places, primary_nav_type=primary_nav_type, additional_nav_types=additional_nav_types, properties=properties, create_instrument=create_instrument, share_classes=share_classes, pricing_methodology=pricing_methodology, reporting_prices=reporting_prices)
 
 ```
 

@@ -29,7 +29,8 @@ class AllocationMapBasisValue(BaseModel):
     """
     investor_record_id:  StrictStr = Field(...,alias="investorRecordId", description="The investor record the basis value belongs to.") 
     basis_value: Union[StrictFloat, StrictInt] = Field(description="The value the investor record is weighted by, for example its commitment.", alias="basisValue")
-    __properties = ["investorRecordId", "basisValue"]
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency the basis value is held in. Absent means the base currency of the map's member fund. When the basis values span more than one currency, each is translated into the fund's base currency at the spot rate on the event date, from the fund's ABOR recipe, before it weights the allocation. The rate on the event date is the latest quote at or before 00:00 UTC on that date.") 
+    __properties = ["investorRecordId", "basisValue", "currency"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +64,11 @@ class AllocationMapBasisValue(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.currency is None and "currency" in self.__fields_set__:
+            _dict['currency'] = None
+
         return _dict
 
     @classmethod
@@ -76,7 +82,8 @@ class AllocationMapBasisValue(BaseModel):
 
         _obj = AllocationMapBasisValue.parse_obj({
             "investor_record_id": obj.get("investorRecordId"),
-            "basis_value": obj.get("basisValue")
+            "basis_value": obj.get("basisValue"),
+            "currency": obj.get("currency")
         })
         return _obj
 
