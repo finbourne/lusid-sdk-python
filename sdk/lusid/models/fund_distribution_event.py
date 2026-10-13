@@ -26,14 +26,31 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class FundDistributionEvent(InstrumentEvent):
     """
-    A distribution from the fund to the holder of a CapitalInterest. A recallable distribution restores  unfunded capital (the fund may call it again); a non-recallable distribution permanently returns capital.  # noqa: E501
+    A distribution from the fund to the holder of a CapitalInterest. A recallable distribution restores  unfunded capital (the fund may call it again); a non-recallable distribution permanently returns capital.                The total amount may optionally be broken down into slots by character (returnOfCapital, realisedGain,  dividend, interest, otherIncome, carryPaid, withholding, returnOfExcess). When any slot amount is supplied  the slot amounts must sum to the total, one transaction is booked per populated slot, and the recallable  portion of each of the five capital/income characters is given by its matching Recallable amount.  Without slots a single legacy distribution transaction is booked for the total, recallable according  to isRecallable.  # noqa: E501
     """
     var_date: Optional[datetime] = Field(default=None, description="The date the distribution takes effect.", alias="date")
-    amount: Union[StrictFloat, StrictInt] = Field(description="The amount distributed. Must be positive.")
-    is_recallable: Optional[StrictBool] = Field(default=None, description="True when the fund may recall the distributed amount: the distribution restores unfunded capital  rather than permanently returning it. Defaults to false. This field is optional.", alias="isRecallable")
-    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent.") 
+    amount: Union[StrictFloat, StrictInt] = Field(description="The total amount distributed. Must be positive. When slot amounts are supplied they must sum to this total.")
+    is_recallable: Optional[StrictBool] = Field(default=None, description="Legacy flag, used only when no slot amount is supplied: true when the fund may recall the whole  distributed amount, so the distribution restores unfunded capital rather than permanently returning  it. Defaults to false. Must not be combined with slot amounts.", alias="isRecallable")
+    return_of_capital_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that returns capital. Optional slot; must not be negative.", alias="returnOfCapitalAmount")
+    realised_gain_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that is realised gain. Optional slot; must not be negative.", alias="realisedGainAmount")
+    dividend_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that is dividend income. Optional slot; must not be negative.", alias="dividendAmount")
+    interest_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that is interest income. Optional slot; must not be negative.", alias="interestAmount")
+    other_income_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that is other income. Optional slot; must not be negative.", alias="otherIncomeAmount")
+    return_of_capital_recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The recallable portion of returnOfCapitalAmount. Optional; must not exceed returnOfCapitalAmount.", alias="returnOfCapitalRecallableAmount")
+    realised_gain_recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The recallable portion of realisedGainAmount. Optional; must not exceed realisedGainAmount.", alias="realisedGainRecallableAmount")
+    dividend_recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The recallable portion of dividendAmount. Optional; must not exceed dividendAmount.", alias="dividendRecallableAmount")
+    interest_recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The recallable portion of interestAmount. Optional; must not exceed interestAmount.", alias="interestRecallableAmount")
+    other_income_recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The recallable portion of otherIncomeAmount. Optional; must not exceed otherIncomeAmount.", alias="otherIncomeRecallableAmount")
+    carry_paid_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that is carried interest paid to the general partner. Optional slot; must not be negative.", alias="carryPaidAmount")
+    withholding_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution withheld for tax (a deemed distribution). Optional slot; must not be negative.", alias="withholdingAmount")
+    return_of_excess_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the distribution that returns capital called in excess. Optional slot; must not be negative.", alias="returnOfExcessAmount")
+    recallable_until: Optional[datetime] = Field(default=None, description="The date until which the recallable portions may be recalled, if limited. Must not precede the distribution date.", alias="recallableUntil")
+    deal_id:  Optional[StrictStr] = Field(None,alias="dealId", description="The identifier of the deal the distribution relates to, if any.") 
+    allocation_event_id:  Optional[StrictStr] = Field(None,alias="allocationEventId", description="The identifier of the allocation event the distribution relates to, if any.") 
+    waterfall_tier:  Optional[StrictStr] = Field(None,alias="waterfallTier", description="The waterfall tier the distribution was paid under, if any.") 
+    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "date", "amount", "isRecallable"]
+    __properties = ["instrumentEventType", "date", "amount", "isRecallable", "returnOfCapitalAmount", "realisedGainAmount", "dividendAmount", "interestAmount", "otherIncomeAmount", "returnOfCapitalRecallableAmount", "realisedGainRecallableAmount", "dividendRecallableAmount", "interestRecallableAmount", "otherIncomeRecallableAmount", "carryPaidAmount", "withholdingAmount", "returnOfExcessAmount", "recallableUntil", "dealId", "allocationEventId", "waterfallTier"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -46,7 +63,7 @@ class FundDistributionEvent(InstrumentEvent):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent', 'GlobalLoanFacilityReinitialisationEvent', 'InvestorLoanFacilityReinitialisationEvent']
+        _allowed = ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent', 'GlobalLoanFacilityReinitialisationEvent', 'InvestorLoanFacilityReinitialisationEvent', 'CapitalCallReceiptEvent', 'RecallableCapitalExpiryEvent', 'CapitalInterestTransferEvent', 'FacilityDrawEvent', 'FacilityRepaymentEvent', 'FacilityInterestEvent', 'FacilityCommitmentFeeEvent']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -91,6 +108,91 @@ class FundDistributionEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if return_of_capital_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_of_capital_amount is None and "return_of_capital_amount" in self.__fields_set__:
+            _dict['returnOfCapitalAmount'] = None
+
+        # set to None if realised_gain_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.realised_gain_amount is None and "realised_gain_amount" in self.__fields_set__:
+            _dict['realisedGainAmount'] = None
+
+        # set to None if dividend_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dividend_amount is None and "dividend_amount" in self.__fields_set__:
+            _dict['dividendAmount'] = None
+
+        # set to None if interest_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.interest_amount is None and "interest_amount" in self.__fields_set__:
+            _dict['interestAmount'] = None
+
+        # set to None if other_income_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.other_income_amount is None and "other_income_amount" in self.__fields_set__:
+            _dict['otherIncomeAmount'] = None
+
+        # set to None if return_of_capital_recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_of_capital_recallable_amount is None and "return_of_capital_recallable_amount" in self.__fields_set__:
+            _dict['returnOfCapitalRecallableAmount'] = None
+
+        # set to None if realised_gain_recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.realised_gain_recallable_amount is None and "realised_gain_recallable_amount" in self.__fields_set__:
+            _dict['realisedGainRecallableAmount'] = None
+
+        # set to None if dividend_recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.dividend_recallable_amount is None and "dividend_recallable_amount" in self.__fields_set__:
+            _dict['dividendRecallableAmount'] = None
+
+        # set to None if interest_recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.interest_recallable_amount is None and "interest_recallable_amount" in self.__fields_set__:
+            _dict['interestRecallableAmount'] = None
+
+        # set to None if other_income_recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.other_income_recallable_amount is None and "other_income_recallable_amount" in self.__fields_set__:
+            _dict['otherIncomeRecallableAmount'] = None
+
+        # set to None if carry_paid_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.carry_paid_amount is None and "carry_paid_amount" in self.__fields_set__:
+            _dict['carryPaidAmount'] = None
+
+        # set to None if withholding_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.withholding_amount is None and "withholding_amount" in self.__fields_set__:
+            _dict['withholdingAmount'] = None
+
+        # set to None if return_of_excess_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_of_excess_amount is None and "return_of_excess_amount" in self.__fields_set__:
+            _dict['returnOfExcessAmount'] = None
+
+        # set to None if recallable_until (nullable) is None
+        # and __fields_set__ contains the field
+        if self.recallable_until is None and "recallable_until" in self.__fields_set__:
+            _dict['recallableUntil'] = None
+
+        # set to None if deal_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deal_id is None and "deal_id" in self.__fields_set__:
+            _dict['dealId'] = None
+
+        # set to None if allocation_event_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_event_id is None and "allocation_event_id" in self.__fields_set__:
+            _dict['allocationEventId'] = None
+
+        # set to None if waterfall_tier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.waterfall_tier is None and "waterfall_tier" in self.__fields_set__:
+            _dict['waterfallTier'] = None
+
         return _dict
 
     @classmethod
@@ -106,7 +208,24 @@ class FundDistributionEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "var_date": obj.get("date"),
             "amount": obj.get("amount"),
-            "is_recallable": obj.get("isRecallable")
+            "is_recallable": obj.get("isRecallable"),
+            "return_of_capital_amount": obj.get("returnOfCapitalAmount"),
+            "realised_gain_amount": obj.get("realisedGainAmount"),
+            "dividend_amount": obj.get("dividendAmount"),
+            "interest_amount": obj.get("interestAmount"),
+            "other_income_amount": obj.get("otherIncomeAmount"),
+            "return_of_capital_recallable_amount": obj.get("returnOfCapitalRecallableAmount"),
+            "realised_gain_recallable_amount": obj.get("realisedGainRecallableAmount"),
+            "dividend_recallable_amount": obj.get("dividendRecallableAmount"),
+            "interest_recallable_amount": obj.get("interestRecallableAmount"),
+            "other_income_recallable_amount": obj.get("otherIncomeRecallableAmount"),
+            "carry_paid_amount": obj.get("carryPaidAmount"),
+            "withholding_amount": obj.get("withholdingAmount"),
+            "return_of_excess_amount": obj.get("returnOfExcessAmount"),
+            "recallable_until": obj.get("recallableUntil"),
+            "deal_id": obj.get("dealId"),
+            "allocation_event_id": obj.get("allocationEventId"),
+            "waterfall_tier": obj.get("waterfallTier")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -28,7 +28,7 @@ class AllocationMapResolveRequest(BaseModel):
     """
     A dry run of an Allocation Map: the event to share, and the basis values to share it by.  # noqa: E501
     """
-    event_type:  StrictStr = Field(...,alias="eventType", description="The kind of allocation event to resolve: CapitalCall, Distribution, FeeExpense or ValuationMove. The map must define a basis for it. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.") 
+    event_type:  StrictStr = Field(...,alias="eventType", description="The kind of allocation event to resolve: CapitalCall, Distribution, FeeExpense or ValuationMove. The map must define a basis for it. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.") 
     amount: Union[StrictFloat, StrictInt] = Field(description="The amount of the event to share between the participants, in the event currency.")
     currency:  StrictStr = Field(...,alias="currency", description="The currency of the amount.") 
     basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="For a ValueWeighted or PropertyWeighted basis, the basis value of each participating investor record, supplied by the caller until investor records are read from LUSID. Under the AllCommittedToMembers rule these also name the committed investor records. Not needed for a FixedPercentage basis.", alias="basisValues")

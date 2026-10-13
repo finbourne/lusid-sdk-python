@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **investor_record_id** | **str** | The investor record the basis value belongs to. | 
 **basis_value** | **float** | The value the investor record is weighted by, for example its commitment. | 
 **currency** | **str** | The currency the basis value is held in. Absent means the base currency of the map&#39;s member fund. When the basis values span more than one currency, each is translated into the fund&#39;s base currency at the spot rate on the event date, from the fund&#39;s ABOR recipe, before it weights the allocation. The rate on the event date is the latest quote at or before 00:00 UTC on that date. | [optional] 
+**commitment_line_id** | **str** | For a Commitment event, the commitment line the amount is recorded against. The basis value is then the signed commitment amount itself: positive commits, negative releases. Not used for other event types. | [optional] 
+**portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -19,7 +21,9 @@ from datetime import datetime
 investor_record_id: StrictStr = "example_investor_record_id"
 basis_value: Union[StrictFloat, StrictInt] = # Replace with your value
 currency: Optional[StrictStr] = "example_currency"
-allocation_map_basis_value_instance = AllocationMapBasisValue(investor_record_id=investor_record_id, basis_value=basis_value, currency=currency)
+commitment_line_id: Optional[StrictStr] = "example_commitment_line_id"
+portfolio_id: Optional[ResourceId] = # Replace with your value
+allocation_map_basis_value_instance = AllocationMapBasisValue(investor_record_id=investor_record_id, basis_value=basis_value, currency=currency, commitment_line_id=commitment_line_id, portfolio_id=portfolio_id)
 
 ```
 

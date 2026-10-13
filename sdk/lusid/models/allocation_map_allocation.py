@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 
 class AllocationMapAllocation(BaseModel):
     """
@@ -32,7 +33,11 @@ class AllocationMapAllocation(BaseModel):
     weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the remainder the investor record receives, or the fixed fraction of the whole amount for a FixedPercentage exception.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount allocated to the investor record.")
     treatment:  Optional[StrictStr] = Field(None,alias="treatment", description="How the share was found. Derived means pro rata from the basis; FixedPercentage means off the top from an exception; Excluded means an exception removed the investor record and it receives nothing. Available values: Derived, FixedPercentage, Excluded.") 
-    __properties = ["investorRecordId", "basisValue", "weight", "amount", "treatment"]
+    commitment_line_id:  Optional[StrictStr] = Field(None,alias="commitmentLineId", description="For a Commitment event, the commitment line the share is recorded against. Absent for other event types.") 
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the event the share belongs to. Absent when the event was resolved whole.") 
+    origin_member_short_code:  Optional[StrictStr] = Field(None,alias="originMemberShortCode", description="The deal the share is for, when a capital call's use of proceeds split one component across deals. Absent when the component's own origin applies.") 
+    __properties = ["investorRecordId", "basisValue", "weight", "amount", "treatment", "commitmentLineId", "portfolioId", "component", "originMemberShortCode"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +71,9 @@ class AllocationMapAllocation(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
         # set to None if investor_record_id (nullable) is None
         # and __fields_set__ contains the field
         if self.investor_record_id is None and "investor_record_id" in self.__fields_set__:
@@ -80,6 +88,21 @@ class AllocationMapAllocation(BaseModel):
         # and __fields_set__ contains the field
         if self.treatment is None and "treatment" in self.__fields_set__:
             _dict['treatment'] = None
+
+        # set to None if commitment_line_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.commitment_line_id is None and "commitment_line_id" in self.__fields_set__:
+            _dict['commitmentLineId'] = None
+
+        # set to None if component (nullable) is None
+        # and __fields_set__ contains the field
+        if self.component is None and "component" in self.__fields_set__:
+            _dict['component'] = None
+
+        # set to None if origin_member_short_code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.origin_member_short_code is None and "origin_member_short_code" in self.__fields_set__:
+            _dict['originMemberShortCode'] = None
 
         return _dict
 
@@ -97,7 +120,11 @@ class AllocationMapAllocation(BaseModel):
             "basis_value": obj.get("basisValue"),
             "weight": obj.get("weight"),
             "amount": obj.get("amount"),
-            "treatment": obj.get("treatment")
+            "treatment": obj.get("treatment"),
+            "commitment_line_id": obj.get("commitmentLineId"),
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
+            "component": obj.get("component"),
+            "origin_member_short_code": obj.get("originMemberShortCode")
         })
         return _obj
 

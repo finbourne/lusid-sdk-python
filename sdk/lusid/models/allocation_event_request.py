@@ -22,6 +22,11 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.allocation_event_component import AllocationEventComponent
+from lusid.models.allocation_event_deal_funding import AllocationEventDealFunding
+from lusid.models.allocation_event_equalisation import AllocationEventEqualisation
+from lusid.models.allocation_event_transfer import AllocationEventTransfer
+from lusid.models.allocation_event_use_of_proceeds import AllocationEventUseOfProceeds
 from lusid.models.allocation_map_basis_value import AllocationMapBasisValue
 from lusid.models.resource_id import ResourceId
 
@@ -31,14 +36,23 @@ class AllocationEventRequest(BaseModel):
     """
     code:  StrictStr = Field(...,alias="code", description="The code of the Allocation Event. Together with the scope this uniquely identifies the event.") 
     allocation_map_id: ResourceId = Field(alias="allocationMapId")
-    event_type:  StrictStr = Field(...,alias="eventType", description="The type of the event: CapitalCall, Distribution, FeeExpense or ValuationMove. Selects the basis rule from the map. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.") 
+    event_type:  StrictStr = Field(...,alias="eventType", description="The type of the event: CapitalCall, Distribution, FeeExpense, ValuationMove, Equalisation, RecallExpiry, Transfer, Default, Commitment or DealFunding. Selects the basis rule from the map. A recall is a CapitalCall with a Recall component. A Commitment event is not shared from a basis: its basis values are the signed commitment amounts per commitment line, and they must sum to the amount. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.") 
     amount: Union[StrictFloat, StrictInt] = Field(description="The total amount to be shared across the participants.")
     currency:  StrictStr = Field(...,alias="currency", description="The ISO 4217 code of the currency of the amount. The amount may not be finer than the currency's minor unit: two decimal places for most currencies, none for JPY, three for KWD and BHD. A code with no defined minor unit, such as XAU or XAG, is taken to have two decimal places.") 
     event_date: datetime = Field(description="The date of the event: the point at which the map, its participants and their basis values are read.", alias="eventDate")
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the Allocation Event.") 
     basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="Optional basis values per investor record, used when the map's basis is not resolvable from stored data.", alias="basisValues")
+    components: Optional[List[AllocationEventComponent]] = Field(default=None, description="The parts the amount splits into, each shared on its own basis and booked to its own slot. The component amounts must sum to the event amount. Absent means the whole amount is one component: Investment for a CapitalCall, ROC for a Distribution.")
+    transfers: Optional[List[AllocationEventTransfer]] = Field(default=None, description="For a Transfer event, the legs to book: each moves a fraction of one capital interest line to another. Required for a Transfer event and not allowed on any other type. The fractions out of one line must sum to at most one; the amount of a Transfer event is zero.")
+    equalisation: Optional[AllocationEventEqualisation] = None
+    use_of_proceeds: Optional[List[AllocationEventUseOfProceeds]] = Field(default=None, description="For a CapitalCall, what the call pays for: rows of purpose, deal and amount that sum to the call amount. An Investment row names a deal the vehicle has funded and is shared under that deal's participation, with each investor's share recorded as paid in for that deal; when the deal was funded from a facility the row repays the draw. Not allowed with components or on any other event type.", alias="useOfProceeds")
+    deal_funding: Optional[AllocationEventDealFunding] = Field(default=None, alias="dealFunding")
     effective_at: Optional[datetime] = Field(default=None, description="The effective datetime at which the event is created or replaced. Defaults to the earliest effective time on create and the current LUSID system datetime on replace.", alias="effectiveAt")
-    __properties = ["code", "allocationMapId", "eventType", "amount", "currency", "eventDate", "description", "basisValues", "effectiveAt"]
+    replaces: Optional[ResourceId] = None
+    notice_date: Optional[datetime] = Field(default=None, description="The date the notice went to investors.", alias="noticeDate")
+    due_date: Optional[datetime] = Field(default=None, description="The date the investors' cash is due.", alias="dueDate")
+    settlement_date: Optional[datetime] = Field(default=None, description="The date the postings settle. Defaults to the event date.", alias="settlementDate")
+    __properties = ["code", "allocationMapId", "eventType", "amount", "currency", "eventDate", "description", "basisValues", "components", "transfers", "equalisation", "useOfProceeds", "dealFunding", "effectiveAt", "replaces", "noticeDate", "dueDate", "settlementDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -82,6 +96,36 @@ class AllocationEventRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['basisValues'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in components (list)
+        _items = []
+        if self.components:
+            for _item in self.components:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['components'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in transfers (list)
+        _items = []
+        if self.transfers:
+            for _item in self.transfers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transfers'] = _items
+        # override the default output from pydantic by calling `to_dict()` of equalisation
+        if self.equalisation:
+            _dict['equalisation'] = self.equalisation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in use_of_proceeds (list)
+        _items = []
+        if self.use_of_proceeds:
+            for _item in self.use_of_proceeds:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['useOfProceeds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of deal_funding
+        if self.deal_funding:
+            _dict['dealFunding'] = self.deal_funding.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of replaces
+        if self.replaces:
+            _dict['replaces'] = self.replaces.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -92,10 +136,40 @@ class AllocationEventRequest(BaseModel):
         if self.basis_values is None and "basis_values" in self.__fields_set__:
             _dict['basisValues'] = None
 
+        # set to None if components (nullable) is None
+        # and __fields_set__ contains the field
+        if self.components is None and "components" in self.__fields_set__:
+            _dict['components'] = None
+
+        # set to None if transfers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transfers is None and "transfers" in self.__fields_set__:
+            _dict['transfers'] = None
+
+        # set to None if use_of_proceeds (nullable) is None
+        # and __fields_set__ contains the field
+        if self.use_of_proceeds is None and "use_of_proceeds" in self.__fields_set__:
+            _dict['useOfProceeds'] = None
+
         # set to None if effective_at (nullable) is None
         # and __fields_set__ contains the field
         if self.effective_at is None and "effective_at" in self.__fields_set__:
             _dict['effectiveAt'] = None
+
+        # set to None if notice_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notice_date is None and "notice_date" in self.__fields_set__:
+            _dict['noticeDate'] = None
+
+        # set to None if due_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.due_date is None and "due_date" in self.__fields_set__:
+            _dict['dueDate'] = None
+
+        # set to None if settlement_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settlement_date is None and "settlement_date" in self.__fields_set__:
+            _dict['settlementDate'] = None
 
         return _dict
 
@@ -117,7 +191,16 @@ class AllocationEventRequest(BaseModel):
             "event_date": obj.get("eventDate"),
             "description": obj.get("description"),
             "basis_values": [AllocationMapBasisValue.from_dict(_item) for _item in obj.get("basisValues")] if obj.get("basisValues") is not None else None,
-            "effective_at": obj.get("effectiveAt")
+            "components": [AllocationEventComponent.from_dict(_item) for _item in obj.get("components")] if obj.get("components") is not None else None,
+            "transfers": [AllocationEventTransfer.from_dict(_item) for _item in obj.get("transfers")] if obj.get("transfers") is not None else None,
+            "equalisation": AllocationEventEqualisation.from_dict(obj.get("equalisation")) if obj.get("equalisation") is not None else None,
+            "use_of_proceeds": [AllocationEventUseOfProceeds.from_dict(_item) for _item in obj.get("useOfProceeds")] if obj.get("useOfProceeds") is not None else None,
+            "deal_funding": AllocationEventDealFunding.from_dict(obj.get("dealFunding")) if obj.get("dealFunding") is not None else None,
+            "effective_at": obj.get("effectiveAt"),
+            "replaces": ResourceId.from_dict(obj.get("replaces")) if obj.get("replaces") is not None else None,
+            "notice_date": obj.get("noticeDate"),
+            "due_date": obj.get("dueDate"),
+            "settlement_date": obj.get("settlementDate")
         })
         return _obj
 

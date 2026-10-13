@@ -76,9 +76,28 @@ from lusid.models.aggregation_type import AggregationType
 from lusid.models.alias import Alias
 from lusid.models.allocation import Allocation
 from lusid.models.allocation_event import AllocationEvent
+from lusid.models.allocation_event_basis_diagnostics import AllocationEventBasisDiagnostics
+from lusid.models.allocation_event_basis_warning import AllocationEventBasisWarning
 from lusid.models.allocation_event_book_request import AllocationEventBookRequest
+from lusid.models.allocation_event_booking_error import AllocationEventBookingError
+from lusid.models.allocation_event_booking_warning import AllocationEventBookingWarning
+from lusid.models.allocation_event_component import AllocationEventComponent
+from lusid.models.allocation_event_deal_funding import AllocationEventDealFunding
+from lusid.models.allocation_event_equalisation import AllocationEventEqualisation
+from lusid.models.allocation_event_equalisation_fee_catch_up import AllocationEventEqualisationFeeCatchUp
+from lusid.models.allocation_event_equalisation_mark import AllocationEventEqualisationMark
 from lusid.models.allocation_event_reallocate_request import AllocationEventReallocateRequest
+from lusid.models.allocation_event_receipt import AllocationEventReceipt
+from lusid.models.allocation_event_receipt_request import AllocationEventReceiptRequest
+from lusid.models.allocation_event_refund import AllocationEventRefund
 from lusid.models.allocation_event_request import AllocationEventRequest
+from lusid.models.allocation_event_reversal import AllocationEventReversal
+from lusid.models.allocation_event_reverse_request import AllocationEventReverseRequest
+from lusid.models.allocation_event_rounding_residual import AllocationEventRoundingResidual
+from lusid.models.allocation_event_transfer import AllocationEventTransfer
+from lusid.models.allocation_event_transfer_consideration import AllocationEventTransferConsideration
+from lusid.models.allocation_event_unbook_request import AllocationEventUnbookRequest
+from lusid.models.allocation_event_use_of_proceeds import AllocationEventUseOfProceeds
 from lusid.models.allocation_group import AllocationGroup
 from lusid.models.allocation_group_class import AllocationGroupClass
 from lusid.models.allocation_group_class_definition import AllocationGroupClassDefinition
@@ -90,10 +109,18 @@ from lusid.models.allocation_map_basis_value import AllocationMapBasisValue
 from lusid.models.allocation_map_event_basis import AllocationMapEventBasis
 from lusid.models.allocation_map_exception import AllocationMapException
 from lusid.models.allocation_map_fixed_factor import AllocationMapFixedFactor
+from lusid.models.allocation_map_ilpa_transaction_type import AllocationMapIlpaTransactionType
 from lusid.models.allocation_map_participants import AllocationMapParticipants
 from lusid.models.allocation_map_request import AllocationMapRequest
 from lusid.models.allocation_map_resolution import AllocationMapResolution
 from lusid.models.allocation_map_resolve_request import AllocationMapResolveRequest
+from lusid.models.allocation_posting_counts import AllocationPostingCounts
+from lusid.models.allocation_posting_fund_line import AllocationPostingFundLine
+from lusid.models.allocation_posting_lp_line import AllocationPostingLpLine
+from lusid.models.allocation_posting_plan import AllocationPostingPlan
+from lusid.models.allocation_posting_roll_up import AllocationPostingRollUp
+from lusid.models.allocation_receivable import AllocationReceivable
+from lusid.models.allocation_receivables_ageing import AllocationReceivablesAgeing
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_set_request import AllocationSetRequest
@@ -211,11 +238,15 @@ from lusid.models.cancel_swap_event import CancelSwapEvent
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
+from lusid.models.capability_override import CapabilityOverride
 from lusid.models.capital_call_event import CapitalCallEvent
+from lusid.models.capital_call_receipt_event import CapitalCallReceiptEvent
 from lusid.models.capital_distribution_event import CapitalDistributionEvent
 from lusid.models.capital_gains_distribution_event import CapitalGainsDistributionEvent
 from lusid.models.capital_interest import CapitalInterest
+from lusid.models.capital_interest_transfer_event import CapitalInterestTransferEvent
 from lusid.models.caplet_floorlet_cash_flow_event import CapletFloorletCashFlowEvent
+from lusid.models.carry_parameters import CarryParameters
 from lusid.models.cash import Cash
 from lusid.models.cash_and_security_offer_election import CashAndSecurityOfferElection
 from lusid.models.cash_dependency import CashDependency
@@ -520,6 +551,7 @@ from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.empty_model_options import EmptyModelOptions
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.entity_resolver import EntityResolver
+from lusid.models.equalisation_terms import EqualisationTerms
 from lusid.models.equity import Equity
 from lusid.models.equity_all_of_identifiers import EquityAllOfIdentifiers
 from lusid.models.equity_curve_by_prices_data import EquityCurveByPricesData
@@ -547,14 +579,23 @@ from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
+from lusid.models.facility import Facility
+from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEvent
+from lusid.models.facility_draw_event import FacilityDrawEvent
+from lusid.models.facility_interest_event import FacilityInterestEvent
+from lusid.models.facility_repayment_event import FacilityRepaymentEvent
+from lusid.models.facility_request import FacilityRequest
 from lusid.models.fee import Fee
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fee_calculation_request import FeeCalculationRequest
+from lusid.models.fee_definition import FeeDefinition
 from lusid.models.fee_properties import FeeProperties
 from lusid.models.fee_request import FeeRequest
 from lusid.models.fee_rule import FeeRule
 from lusid.models.fee_rule_upsert_request import FeeRuleUpsertRequest
 from lusid.models.fee_rule_upsert_response import FeeRuleUpsertResponse
+from lusid.models.fee_size_tier import FeeSizeTier
+from lusid.models.fee_step_down import FeeStepDown
 from lusid.models.fee_transaction_template_specification import FeeTransactionTemplateSpecification
 from lusid.models.fee_type import FeeType
 from lusid.models.fee_type_request import FeeTypeRequest
@@ -597,6 +638,7 @@ from lusid.models.fund_calendar_entry import FundCalendarEntry
 from lusid.models.fund_calendar_entry_type import FundCalendarEntryType
 from lusid.models.fund_cash_statement_local_currency import FundCashStatementLocalCurrency
 from lusid.models.fund_cash_statement_row import FundCashStatementRow
+from lusid.models.fund_closing import FundClosing
 from lusid.models.fund_configuration import FundConfiguration
 from lusid.models.fund_configuration_properties import FundConfigurationProperties
 from lusid.models.fund_configuration_request import FundConfigurationRequest
@@ -607,6 +649,11 @@ from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoin
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_instrument import FundInstrument
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
+from lusid.models.fund_partner import FundPartner
+from lusid.models.fund_partner_balances import FundPartnerBalances
+from lusid.models.fund_partner_unfunded_reconciliation import FundPartnerUnfundedReconciliation
+from lusid.models.fund_partner_unfunded_reconciliation_line import FundPartnerUnfundedReconciliationLine
+from lusid.models.fund_partners_totals import FundPartnersTotals
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
 from lusid.models.fund_properties import FundProperties
@@ -620,6 +667,8 @@ from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
 from lusid.models.fund_structure_member_request import FundStructureMemberRequest
 from lusid.models.fund_structure_node import FundStructureNode
 from lusid.models.fund_structure_request import FundStructureRequest
+from lusid.models.fund_terms import FundTerms
+from lusid.models.fund_terms_version import FundTermsVersion
 from lusid.models.fund_valuation_point_data import FundValuationPointData
 from lusid.models.fund_valuation_request import FundValuationRequest
 from lusid.models.fund_valuation_schedule import FundValuationSchedule
@@ -978,12 +1027,14 @@ from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceL
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from lusid.models.paged_resource_list_of_execution import PagedResourceListOfExecution
+from lusid.models.paged_resource_list_of_facility import PagedResourceListOfFacility
 from lusid.models.paged_resource_list_of_fee import PagedResourceListOfFee
 from lusid.models.paged_resource_list_of_fee_type import PagedResourceListOfFeeType
 from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResourceListOfFundCalendarEntries
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
+from lusid.models.paged_resource_list_of_fund_partner import PagedResourceListOfFundPartner
 from lusid.models.paged_resource_list_of_fund_structure import PagedResourceListOfFundStructure
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_get_address_key_alias_response import PagedResourceListOfGetAddressKeyAliasResponse
@@ -1048,6 +1099,7 @@ from lusid.models.partial_defeasance_event import PartialDefeasanceEvent
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
+from lusid.models.partnership_accounting_configuration import PartnershipAccountingConfiguration
 from lusid.models.payment_details_applicable_entity import PaymentDetailsApplicableEntity
 from lusid.models.payment_details_reference import PaymentDetailsReference
 from lusid.models.payment_details_reference_response import PaymentDetailsReferenceResponse
@@ -1257,6 +1309,7 @@ from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
 from lusid.models.rec_user_comment import RecUserComment
+from lusid.models.recallable_capital_expiry_event import RecallableCapitalExpiryEvent
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
 from lusid.models.recipe_value import RecipeValue
@@ -1278,6 +1331,7 @@ from lusid.models.reconciliation_rule import ReconciliationRule
 from lusid.models.reconciliation_rule_type import ReconciliationRuleType
 from lusid.models.reconciliation_side_configuration import ReconciliationSideConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions
+from lusid.models.recycling_terms import RecyclingTerms
 from lusid.models.reference_data import ReferenceData
 from lusid.models.reference_instrument import ReferenceInstrument
 from lusid.models.reference_list import ReferenceList
@@ -1455,6 +1509,7 @@ from lusid.models.security_offer_election import SecurityOfferElection
 from lusid.models.security_write_off_event import SecurityWriteOffEvent
 from lusid.models.sell_entitlement_election import SellEntitlementElection
 from lusid.models.sequence_definition import SequenceDefinition
+from lusid.models.series_configuration import SeriesConfiguration
 from lusid.models.series_definition import SeriesDefinition
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.series_identifier_field import SeriesIdentifierField
@@ -1897,9 +1952,28 @@ __all__ = [
     "Alias",
     "Allocation",
     "AllocationEvent",
+    "AllocationEventBasisDiagnostics",
+    "AllocationEventBasisWarning",
     "AllocationEventBookRequest",
+    "AllocationEventBookingError",
+    "AllocationEventBookingWarning",
+    "AllocationEventComponent",
+    "AllocationEventDealFunding",
+    "AllocationEventEqualisation",
+    "AllocationEventEqualisationFeeCatchUp",
+    "AllocationEventEqualisationMark",
     "AllocationEventReallocateRequest",
+    "AllocationEventReceipt",
+    "AllocationEventReceiptRequest",
+    "AllocationEventRefund",
     "AllocationEventRequest",
+    "AllocationEventReversal",
+    "AllocationEventReverseRequest",
+    "AllocationEventRoundingResidual",
+    "AllocationEventTransfer",
+    "AllocationEventTransferConsideration",
+    "AllocationEventUnbookRequest",
+    "AllocationEventUseOfProceeds",
     "AllocationGroup",
     "AllocationGroupClass",
     "AllocationGroupClassDefinition",
@@ -1911,10 +1985,18 @@ __all__ = [
     "AllocationMapEventBasis",
     "AllocationMapException",
     "AllocationMapFixedFactor",
+    "AllocationMapIlpaTransactionType",
     "AllocationMapParticipants",
     "AllocationMapRequest",
     "AllocationMapResolution",
     "AllocationMapResolveRequest",
+    "AllocationPostingCounts",
+    "AllocationPostingFundLine",
+    "AllocationPostingLpLine",
+    "AllocationPostingPlan",
+    "AllocationPostingRollUp",
+    "AllocationReceivable",
+    "AllocationReceivablesAgeing",
     "AllocationRequest",
     "AllocationServiceRunResponse",
     "AllocationSetRequest",
@@ -2032,11 +2114,15 @@ __all__ = [
     "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",
+    "CapabilityOverride",
     "CapitalCallEvent",
+    "CapitalCallReceiptEvent",
     "CapitalDistributionEvent",
     "CapitalGainsDistributionEvent",
     "CapitalInterest",
+    "CapitalInterestTransferEvent",
     "CapletFloorletCashFlowEvent",
+    "CarryParameters",
     "Cash",
     "CashAndSecurityOfferElection",
     "CashDependency",
@@ -2341,6 +2427,7 @@ __all__ = [
     "EmptyModelOptions",
     "EntityIdentifier",
     "EntityResolver",
+    "EqualisationTerms",
     "Equity",
     "EquityAllOfIdentifiers",
     "EquityCurveByPricesData",
@@ -2368,14 +2455,23 @@ __all__ = [
     "ExpandedGroup",
     "ExpiryEvent",
     "ExternalFeeComponentFilter",
+    "Facility",
+    "FacilityCommitmentFeeEvent",
+    "FacilityDrawEvent",
+    "FacilityInterestEvent",
+    "FacilityRepaymentEvent",
+    "FacilityRequest",
     "Fee",
     "FeeAccrual",
     "FeeCalculationRequest",
+    "FeeDefinition",
     "FeeProperties",
     "FeeRequest",
     "FeeRule",
     "FeeRuleUpsertRequest",
     "FeeRuleUpsertResponse",
+    "FeeSizeTier",
+    "FeeStepDown",
     "FeeTransactionTemplateSpecification",
     "FeeType",
     "FeeTypeRequest",
@@ -2418,6 +2514,7 @@ __all__ = [
     "FundCalendarEntryType",
     "FundCashStatementLocalCurrency",
     "FundCashStatementRow",
+    "FundClosing",
     "FundConfiguration",
     "FundConfigurationProperties",
     "FundConfigurationRequest",
@@ -2428,6 +2525,11 @@ __all__ = [
     "FundIdList",
     "FundInstrument",
     "FundJournalEntryLine",
+    "FundPartner",
+    "FundPartnerBalances",
+    "FundPartnerUnfundedReconciliation",
+    "FundPartnerUnfundedReconciliationLine",
+    "FundPartnersTotals",
     "FundPnlBreakdown",
     "FundPreviousNAV",
     "FundProperties",
@@ -2441,6 +2543,8 @@ __all__ = [
     "FundStructureMemberRequest",
     "FundStructureNode",
     "FundStructureRequest",
+    "FundTerms",
+    "FundTermsVersion",
     "FundValuationPointData",
     "FundValuationRequest",
     "FundValuationSchedule",
@@ -2799,12 +2903,14 @@ __all__ = [
     "PagedResourceListOfDialectId",
     "PagedResourceListOfDiaryEntry",
     "PagedResourceListOfExecution",
+    "PagedResourceListOfFacility",
     "PagedResourceListOfFee",
     "PagedResourceListOfFeeType",
     "PagedResourceListOfFund",
     "PagedResourceListOfFundCalendarEntries",
     "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
+    "PagedResourceListOfFundPartner",
     "PagedResourceListOfFundStructure",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfGetAddressKeyAliasResponse",
@@ -2869,6 +2975,7 @@ __all__ = [
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
+    "PartnershipAccountingConfiguration",
     "PaymentDetailsApplicableEntity",
     "PaymentDetailsReference",
     "PaymentDetailsReferenceResponse",
@@ -3078,6 +3185,7 @@ __all__ = [
     "RecSubmission",
     "RecSupersededRun",
     "RecUserComment",
+    "RecallableCapitalExpiryEvent",
     "RecipeBlock",
     "RecipeComposer",
     "RecipeValue",
@@ -3099,6 +3207,7 @@ __all__ = [
     "ReconciliationRuleType",
     "ReconciliationSideConfiguration",
     "ReconciliationTransactions",
+    "RecyclingTerms",
     "ReferenceData",
     "ReferenceInstrument",
     "ReferenceList",
@@ -3276,6 +3385,7 @@ __all__ = [
     "SecurityWriteOffEvent",
     "SellEntitlementElection",
     "SequenceDefinition",
+    "SeriesConfiguration",
     "SeriesDefinition",
     "SeriesDefinitionRequest",
     "SeriesIdentifierField",

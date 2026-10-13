@@ -127,6 +127,7 @@ class PropertyDomain(str, Enum):
     RECDEFINITION = 'RecDefinition'
     RECRESULT = 'RecResult'
     JOURNALENTRY = 'JournalEntry'
+    ELIGIBLECOLLATERALSCHEDULE = 'EligibleCollateralSchedule'
 
     @classmethod
     def from_json(cls, json_str: str) -> PropertyDomain:

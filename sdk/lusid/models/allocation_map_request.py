@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_map_event_basis import AllocationMapEventBasis
+from lusid.models.allocation_map_ilpa_transaction_type import AllocationMapIlpaTransactionType
 from lusid.models.allocation_map_participants import AllocationMapParticipants
 from lusid.models.resource_id import ResourceId
 
@@ -36,9 +37,11 @@ class AllocationMapRequest(BaseModel):
     structure_member_id: ResourceId = Field(alias="structureMemberId")
     inherits_from: Optional[ResourceId] = Field(default=None, alias="inheritsFrom")
     participants: Optional[AllocationMapParticipants] = None
-    basis_by_event_type: Optional[List[AllocationMapEventBasis]] = Field(default=None, description="The basis on which each kind of allocation event is shared between the participants. At most one entry per event type.", alias="basisByEventType")
+    basis_by_event_type: Optional[List[AllocationMapEventBasis]] = Field(default=None, description="The basis on which each kind of allocation event is shared between the participants. At most one entry per event type and component; an entry without a component is the default for the event type.", alias="basisByEventType")
+    rounding_partner_line:  Optional[StrictStr] = Field(None,alias="roundingPartnerLine", description="The investor record that takes every minor unit left over when the shares of an event are rounded. Absent means the leftover is spread one minor unit at a time over the largest remainders.") 
+    ilpa_transaction_types: Optional[List[AllocationMapIlpaTransactionType]] = Field(default=None, description="The ILPA transaction types the map reports particular kinds of allocation event under, where they differ from the default for the event type and component. At most one entry per event type and component; an entry without a component is the default for the event type. Every value must be one the system IlpaTransactionType data type lists.", alias="ilpaTransactionTypes")
     effective_at: Optional[datetime] = Field(default=None, description="The effective datetime from which the Allocation Map applies. Defaults to the beginning of time if not specified, so that the map is visible at every effective datetime.", alias="effectiveAt")
-    __properties = ["code", "name", "description", "structureMemberId", "inheritsFrom", "participants", "basisByEventType", "effectiveAt"]
+    __properties = ["code", "name", "description", "structureMemberId", "inheritsFrom", "participants", "basisByEventType", "roundingPartnerLine", "ilpaTransactionTypes", "effectiveAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,6 +91,13 @@ class AllocationMapRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['basisByEventType'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in ilpa_transaction_types (list)
+        _items = []
+        if self.ilpa_transaction_types:
+            for _item in self.ilpa_transaction_types:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['ilpaTransactionTypes'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -97,6 +107,16 @@ class AllocationMapRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.basis_by_event_type is None and "basis_by_event_type" in self.__fields_set__:
             _dict['basisByEventType'] = None
+
+        # set to None if rounding_partner_line (nullable) is None
+        # and __fields_set__ contains the field
+        if self.rounding_partner_line is None and "rounding_partner_line" in self.__fields_set__:
+            _dict['roundingPartnerLine'] = None
+
+        # set to None if ilpa_transaction_types (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ilpa_transaction_types is None and "ilpa_transaction_types" in self.__fields_set__:
+            _dict['ilpaTransactionTypes'] = None
 
         # set to None if effective_at (nullable) is None
         # and __fields_set__ contains the field
@@ -122,6 +142,8 @@ class AllocationMapRequest(BaseModel):
             "inherits_from": ResourceId.from_dict(obj.get("inheritsFrom")) if obj.get("inheritsFrom") is not None else None,
             "participants": AllocationMapParticipants.from_dict(obj.get("participants")) if obj.get("participants") is not None else None,
             "basis_by_event_type": [AllocationMapEventBasis.from_dict(_item) for _item in obj.get("basisByEventType")] if obj.get("basisByEventType") is not None else None,
+            "rounding_partner_line": obj.get("roundingPartnerLine"),
+            "ilpa_transaction_types": [AllocationMapIlpaTransactionType.from_dict(_item) for _item in obj.get("ilpaTransactionTypes")] if obj.get("ilpaTransactionTypes") is not None else None,
             "effective_at": obj.get("effectiveAt")
         })
         return _obj

@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **bucket_sets** | [**List[BucketSetDefinition]**](BucketSetDefinition.md) | The ordered set of component bucket set definitions for this fund configuration. Each bucket set defines how JE lines are grouped into buckets at VP finalisation. | [optional] 
 **apportionment_bucket_set** | **str** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] 
 **apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
+**partnership_accounting** | [**PartnershipAccountingConfiguration**](PartnershipAccountingConfiguration.md) |  | [optional] 
+**fund_terms** | [**FundTerms**](FundTerms.md) |  | [optional] 
+**closings** | [**List[FundClosing]**](FundClosing.md) | The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -39,8 +42,11 @@ version: Optional[Version] = None
 bucket_sets: Optional[List[BucketSetDefinition]] = # Replace with your value
 apportionment_bucket_set: Optional[StrictStr] = "example_apportionment_bucket_set"
 apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
+partnership_accounting: Optional[PartnershipAccountingConfiguration] = # Replace with your value
+fund_terms: Optional[FundTerms] = # Replace with your value
+closings: Optional[List[FundClosing]] = # Replace with your value
 links: Optional[List[Link]] = None
-fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, bucket_sets=bucket_sets, apportionment_bucket_set=apportionment_bucket_set, apportionment_method_property=apportionment_method_property, links=links)
+fund_configuration_instance = FundConfiguration(href=href, id=id, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, properties=properties, version=version, bucket_sets=bucket_sets, apportionment_bucket_set=apportionment_bucket_set, apportionment_method_property=apportionment_method_property, partnership_accounting=partnership_accounting, fund_terms=fund_terms, closings=closings, links=links)
 
 ```
 

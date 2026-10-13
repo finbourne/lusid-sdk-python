@@ -1,10 +1,11 @@
 # AllocationEventBookRequest
 
-The request used to book a computed Allocation Event: the reference under which its shares were posted.
+The request used to book a computed Allocation Event: the reference under which its shares are posted, and  whether to only show what would be posted.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **booking_reference** | **str** | The reference under which the computed shares were posted, for instance a journal entry code. | 
+**dry_run** | **bool** | Whether to only build and return the posting plan without writing anything. Defaults to false. | [optional] 
 ## Example
 
 ```python
@@ -15,7 +16,9 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 booking_reference: StrictStr = "example_booking_reference"
-allocation_event_book_request_instance = AllocationEventBookRequest(booking_reference=booking_reference)
+dry_run: Optional[StrictBool] = # Replace with your value
+dry_run:Optional[StrictBool] = None
+allocation_event_book_request_instance = AllocationEventBookRequest(booking_reference=booking_reference, dry_run=dry_run)
 
 ```
 

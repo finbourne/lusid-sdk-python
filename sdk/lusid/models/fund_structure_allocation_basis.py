@@ -28,7 +28,7 @@ class FundStructureAllocationBasis(BaseModel):
     """
     The default apportionment basis of a Fund Structure member.  # noqa: E501
     """
-    kind:  Optional[StrictStr] = Field(None,alias="kind", description="How the apportionment is weighted. ValueWeighted apportions pro rata to each investing member's value; PropertyWeighted apportions pro rata to the property named in 'property'; FixedPercentage defers to factors held on an allocation map. A ValueWeighted basis is rejected where a holder of this member also holds an unrelated member, because the member could not be finalised before that sibling is valued. Available values: ValueWeighted, PropertyWeighted, FixedPercentage.") 
+    kind:  Optional[StrictStr] = Field(None,alias="kind", description="How the apportionment is weighted. ValueWeighted apportions pro rata to each investing member's value; PropertyWeighted apportions pro rata to the property named in 'property'; FixedPercentage defers to factors held on an allocation map. A ValueWeighted basis is rejected where a holder of this member also holds an unrelated member, because the member could not be finalised before that sibling is valued. Available values: ValueWeighted, PropertyWeighted, FixedPercentage, Committed, CommittedExGP, UncalledCommitment, PaidIn, PaidInForDeal, Recallable, FeeWeightedCommitment, FixedAmount.") 
     var_property: Optional[ApportionmentMethodProperty] = Field(default=None, alias="property")
     scoped_to_member: Optional[StrictBool] = Field(default=None, description="Whether the basis is evaluated only over amounts booked against this member rather than fund-wide.", alias="scopedToMember")
     __properties = ["kind", "property", "scopedToMember"]

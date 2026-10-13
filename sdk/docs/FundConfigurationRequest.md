@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund Configuration. | [optional] 
 **apportionment_bucket_set** | **str** | The code of the bucket set definition within this fund configuration that is designated as the apportionment bucket set. Must reference a BucketSetDefinition code within the BucketSets collection. | [optional] 
 **apportionment_method_property** | [**ApportionmentMethodProperty**](ApportionmentMethodProperty.md) |  | [optional] 
+**partnership_accounting** | [**PartnershipAccountingConfiguration**](PartnershipAccountingConfiguration.md) |  | [optional] 
+**fund_terms** | [**FundTerms**](FundTerms.md) |  | [optional] 
+**closings** | [**List[FundClosing]**](FundClosing.md) | The register of fund closings (first close, subsequent closes, final close) for partnership funds using this configuration. | [optional] 
 ## Example
 
 ```python
@@ -34,7 +37,10 @@ bucket_sets: Optional[List[BucketSetDefinition]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 apportionment_bucket_set: Optional[StrictStr] = "example_apportionment_bucket_set"
 apportionment_method_property: Optional[ApportionmentMethodProperty] = # Replace with your value
-fund_configuration_request_instance = FundConfigurationRequest(code=code, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, bucket_sets=bucket_sets, properties=properties, apportionment_bucket_set=apportionment_bucket_set, apportionment_method_property=apportionment_method_property)
+partnership_accounting: Optional[PartnershipAccountingConfiguration] = # Replace with your value
+fund_terms: Optional[FundTerms] = # Replace with your value
+closings: Optional[List[FundClosing]] = # Replace with your value
+fund_configuration_request_instance = FundConfigurationRequest(code=code, display_name=display_name, description=description, dealing_filters=dealing_filters, pnl_filters=pnl_filters, back_out_filters=back_out_filters, external_fee_filters=external_fee_filters, bucket_sets=bucket_sets, properties=properties, apportionment_bucket_set=apportionment_bucket_set, apportionment_method_property=apportionment_method_property, partnership_accounting=partnership_accounting, fund_terms=fund_terms, closings=closings)
 
 ```
 

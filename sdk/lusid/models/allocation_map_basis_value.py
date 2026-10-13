@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 
 class AllocationMapBasisValue(BaseModel):
     """
@@ -30,7 +31,9 @@ class AllocationMapBasisValue(BaseModel):
     investor_record_id:  StrictStr = Field(...,alias="investorRecordId", description="The investor record the basis value belongs to.") 
     basis_value: Union[StrictFloat, StrictInt] = Field(description="The value the investor record is weighted by, for example its commitment.", alias="basisValue")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency the basis value is held in. Absent means the base currency of the map's member fund. When the basis values span more than one currency, each is translated into the fund's base currency at the spot rate on the event date, from the fund's ABOR recipe, before it weights the allocation. The rate on the event date is the latest quote at or before 00:00 UTC on that date.") 
-    __properties = ["investorRecordId", "basisValue", "currency"]
+    commitment_line_id:  Optional[StrictStr] = Field(None,alias="commitmentLineId", description="For a Commitment event, the commitment line the amount is recorded against. The basis value is then the signed commitment amount itself: positive commits, negative releases. Not used for other event types.") 
+    portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
+    __properties = ["investorRecordId", "basisValue", "currency", "commitmentLineId", "portfolioId"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,10 +67,18 @@ class AllocationMapBasisValue(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of portfolio_id
+        if self.portfolio_id:
+            _dict['portfolioId'] = self.portfolio_id.to_dict()
         # set to None if currency (nullable) is None
         # and __fields_set__ contains the field
         if self.currency is None and "currency" in self.__fields_set__:
             _dict['currency'] = None
+
+        # set to None if commitment_line_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.commitment_line_id is None and "commitment_line_id" in self.__fields_set__:
+            _dict['commitmentLineId'] = None
 
         return _dict
 
@@ -83,7 +94,9 @@ class AllocationMapBasisValue(BaseModel):
         _obj = AllocationMapBasisValue.parse_obj({
             "investor_record_id": obj.get("investorRecordId"),
             "basis_value": obj.get("basisValue"),
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "commitment_line_id": obj.get("commitmentLineId"),
+            "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None
         })
         return _obj
 

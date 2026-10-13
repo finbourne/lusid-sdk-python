@@ -28,10 +28,10 @@ class AllocationMapResolution(BaseModel):
     """
     The result of resolving an Allocation Map for one event: how much each investor record receives, and why.  # noqa: E501
     """
-    event_type:  Optional[StrictStr] = Field(None,alias="eventType", description="The kind of allocation event that was resolved. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.") 
+    event_type:  Optional[StrictStr] = Field(None,alias="eventType", description="The kind of allocation event that was resolved. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.") 
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount that was shared.")
     currency:  Optional[StrictStr] = Field(None,alias="currency", description="The currency of the amount.") 
-    basis_rule:  Optional[StrictStr] = Field(None,alias="basisRule", description="The basis the map applies to this event type. Available values: ValueWeighted, PropertyWeighted, FixedPercentage.") 
+    basis_rule:  Optional[StrictStr] = Field(None,alias="basisRule", description="The basis the map applies to this event type. Available values: ValueWeighted, PropertyWeighted, FixedPercentage, Committed, CommittedExGP, UncalledCommitment, PaidIn, PaidInForDeal, Recallable, FeeWeightedCommitment, FixedAmount.") 
     basis_pool: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The sum of the basis values over the participants that share the remainder pro rata.", alias="basisPool")
     fixed_total: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total taken off the top by FixedPercentage exceptions before the remainder is shared.", alias="fixedTotal")
     participant_count: Optional[StrictInt] = Field(default=None, description="The number of investor records that receive a share, whether fixed or pro rata.", alias="participantCount")

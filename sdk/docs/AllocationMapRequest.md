@@ -10,7 +10,9 @@ Name | Type | Description | Notes
 **structure_member_id** | [**ResourceId**](ResourceId.md) |  | 
 **inherits_from** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **participants** | [**AllocationMapParticipants**](AllocationMapParticipants.md) |  | [optional] 
-**basis_by_event_type** | [**List[AllocationMapEventBasis]**](AllocationMapEventBasis.md) | The basis on which each kind of allocation event is shared between the participants. At most one entry per event type. | [optional] 
+**basis_by_event_type** | [**List[AllocationMapEventBasis]**](AllocationMapEventBasis.md) | The basis on which each kind of allocation event is shared between the participants. At most one entry per event type and component; an entry without a component is the default for the event type. | [optional] 
+**rounding_partner_line** | **str** | The investor record that takes every minor unit left over when the shares of an event are rounded. Absent means the leftover is spread one minor unit at a time over the largest remainders. | [optional] 
+**ilpa_transaction_types** | [**List[AllocationMapIlpaTransactionType]**](AllocationMapIlpaTransactionType.md) | The ILPA transaction types the map reports particular kinds of allocation event under, where they differ from the default for the event type and component. At most one entry per event type and component; an entry without a component is the default for the event type. Every value must be one the system IlpaTransactionType data type lists. | [optional] 
 **effective_at** | **datetime** | The effective datetime from which the Allocation Map applies. Defaults to the beginning of time if not specified, so that the map is visible at every effective datetime. | [optional] 
 ## Example
 
@@ -28,8 +30,10 @@ structure_member_id: ResourceId = # Replace with your value
 inherits_from: Optional[ResourceId] = # Replace with your value
 participants: Optional[AllocationMapParticipants] = None
 basis_by_event_type: Optional[List[AllocationMapEventBasis]] = # Replace with your value
+rounding_partner_line: Optional[StrictStr] = "example_rounding_partner_line"
+ilpa_transaction_types: Optional[List[AllocationMapIlpaTransactionType]] = # Replace with your value
 effective_at: Optional[datetime] = # Replace with your value
-allocation_map_request_instance = AllocationMapRequest(code=code, name=name, description=description, structure_member_id=structure_member_id, inherits_from=inherits_from, participants=participants, basis_by_event_type=basis_by_event_type, effective_at=effective_at)
+allocation_map_request_instance = AllocationMapRequest(code=code, name=name, description=description, structure_member_id=structure_member_id, inherits_from=inherits_from, participants=participants, basis_by_event_type=basis_by_event_type, rounding_partner_line=rounding_partner_line, ilpa_transaction_types=ilpa_transaction_types, effective_at=effective_at)
 
 ```
 

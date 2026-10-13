@@ -32,9 +32,10 @@ class BondLookupModelOptions(ModelOptions):
     cs01_bump_width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The TOTAL width of the central-difference stencil behind the CS01/Central measure: the  instrument's own z-spread is repriced at spread ± width/2, so a width of 0.0001 means  ±0.5bp reprice points. The width is the whole distance between the two reprice points,  NOT the half-shift. The reported measure is always per one basis point of widening  whatever width is configured. Must be strictly positive.  Defaults to 0.0001 (1bp, repriced at ±0.5bp) when not supplied.", alias="cs01BumpWidth")
     spread_anchor_source:  Optional[StrictStr] = Field(None,alias="spreadAnchorSource", description="Where the spread anchor comes from when no CreditSpreadCurve is served for the instrument. Only  read when SpreadAnchoredRisk is true.                Supported string (enumeration) values are: [MarketData, SolvedFromPrice].  Defaults to MarketData - the original behaviour, where a ZSpread quote must be served from the  quote store or as a market data override - when not supplied.                SolvedFromPrice: a served CreditSpreadCurve or ZSpread quote still wins. When neither is served,  the bond is valued exactly as the plain lookup values it, and the anchor is the z-spread its  looked-up price implies over the discounting curve (the value Analytic/ZSpread returns). Risk  measures, carry and scenario columns solve that anchor against the unperturbed market and hold it,  so no spread has to be stored or sent.") 
     spread_term_structure: Optional[StrictBool] = Field(default=None, description="In spread-anchored mode with a credit-spread curve (a served CreditSpreadCurve, or the curve the  risk engine builds from the ZSpread quote), discount each cash flow at the curve's level on its own  payment date instead of discounting every flow at the level at maturity. Pointwise and bucketed  Risk/Credit ladders then split CS01 by cash flow, and the curve built from a quote carries one pillar  per remaining payment date. The price is unchanged on a flat curve (and so on any curve built from a  quote) but not on a sloped served curve.  Defaults to false - the level at maturity - when not supplied.", alias="spreadTermStructure")
+    workout:  Optional[StrictStr] = Field(None,alias="workout", description="The redemption date a callable ComplexBond is struck to.                Supported string (enumeration) values are: [Maturity, NextCall].  Defaults to Maturity - the bond's flows to final maturity - when not supplied.                NextCall: the spread-anchored valuation (and so every Risk/Rates and Risk/Credit bump of it), the  anchor solved from the price, and the z-spread family (Analytic/ZSpread, SpreadDuration, CS01,  CS01/Central) discount the flows the bond pays if redeemed at its next call: no flow after the call,  the principal outstanding on the call date repaid at the call strike. The looked-up PV is unchanged,  and Valuation/Diagnostics/Model/PricingHorizon reports the call date. A bond with no live call is  struck to maturity; a shape the workout truncation refuses fails by name.") 
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "spreadAnchoredRisk", "cs01BumpWidth", "spreadAnchorSource", "spreadTermStructure"]
+    __properties = ["modelOptionsType", "spreadAnchoredRisk", "cs01BumpWidth", "spreadAnchorSource", "spreadTermStructure", "workout"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -107,6 +108,11 @@ class BondLookupModelOptions(ModelOptions):
         if self.spread_term_structure is None and "spread_term_structure" in self.__fields_set__:
             _dict['spreadTermStructure'] = None
 
+        # set to None if workout (nullable) is None
+        # and __fields_set__ contains the field
+        if self.workout is None and "workout" in self.__fields_set__:
+            _dict['workout'] = None
+
         return _dict
 
     @classmethod
@@ -123,7 +129,8 @@ class BondLookupModelOptions(ModelOptions):
             "spread_anchored_risk": obj.get("spreadAnchoredRisk"),
             "cs01_bump_width": obj.get("cs01BumpWidth"),
             "spread_anchor_source": obj.get("spreadAnchorSource"),
-            "spread_term_structure": obj.get("spreadTermStructure")
+            "spread_term_structure": obj.get("spreadTermStructure"),
+            "workout": obj.get("workout")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

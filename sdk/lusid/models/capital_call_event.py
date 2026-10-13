@@ -26,13 +26,25 @@ from lusid.models.instrument_event import InstrumentEvent
 
 class CapitalCallEvent(InstrumentEvent):
     """
-    A call of committed capital on a CapitalInterest: the fund draws down the amount from the investor's  unfunded commitment, moving it to funded capital.  # noqa: E501
+    A call of committed capital on a CapitalInterest: the fund draws down the amount from the investor's  unfunded commitment, moving it to funded capital.                The total amount may optionally be broken down into slots (investment, managementFee, otherFee,  partnershipExpense, organisationalCost, recall, equalisationInterest, latePaymentInterest). When any  slot amount is supplied the slot amounts must sum to the total and one transaction is booked per  populated slot; otherwise a single legacy drawdown transaction is booked for the total.  # noqa: E501
     """
     var_date: Optional[datetime] = Field(default=None, description="The date the capital call takes effect.", alias="date")
-    amount: Union[StrictFloat, StrictInt] = Field(description="The amount of committed capital called. Must be positive.")
-    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent.") 
+    amount: Union[StrictFloat, StrictInt] = Field(description="The total amount of committed capital called. Must be positive. When slot amounts are  supplied they must sum to this total.")
+    investment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that funds investments. Optional slot; must not be negative.", alias="investmentAmount")
+    management_fee_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that pays management fees. Optional slot; must not be negative.", alias="managementFeeAmount")
+    other_fee_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that pays other fees. Optional slot; must not be negative.", alias="otherFeeAmount")
+    partnership_expense_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that pays partnership expenses. Optional slot; must not be negative.", alias="partnershipExpenseAmount")
+    organisational_cost_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that pays organisational costs. Optional slot; must not be negative.", alias="organisationalCostAmount")
+    recall_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that re-draws previously distributed recallable capital. Optional slot; must not be negative.", alias="recallAmount")
+    equalisation_interest_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that is equalisation interest. Optional slot; must not be negative.", alias="equalisationInterestAmount")
+    late_payment_interest_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the call that is late payment interest. Optional slot; must not be negative.", alias="latePaymentInterestAmount")
+    outside_commitment_slots: Optional[List[StrictStr]] = Field(default=None, description="The slots (names without the Amount suffix, e.g. \"managementFee\") called outside the commitment,  so that they do not reduce the uncalled commitment. When omitted, defaults to equalisationInterest  and latePaymentInterest.", alias="outsideCommitmentSlots")
+    deal_id:  Optional[StrictStr] = Field(None,alias="dealId", description="The identifier of the deal the call relates to, if any.") 
+    allocation_event_id:  Optional[StrictStr] = Field(None,alias="allocationEventId", description="The identifier of the allocation event the call relates to, if any.") 
+    notice_date: Optional[datetime] = Field(default=None, description="The date the call notice was issued, if known.", alias="noticeDate")
+    instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "date", "amount"]
+    __properties = ["instrumentEventType", "date", "amount", "investmentAmount", "managementFeeAmount", "otherFeeAmount", "partnershipExpenseAmount", "organisationalCostAmount", "recallAmount", "equalisationInterestAmount", "latePaymentInterestAmount", "outsideCommitmentSlots", "dealId", "allocationEventId", "noticeDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -45,7 +57,7 @@ class CapitalCallEvent(InstrumentEvent):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent', 'GlobalLoanFacilityReinitialisationEvent', 'InvestorLoanFacilityReinitialisationEvent']
+        _allowed = ['TransitionEvent', 'InformationalEvent', 'OpenEvent', 'CloseEvent', 'StockSplitEvent', 'BondDefaultEvent', 'CashDividendEvent', 'AmortisationEvent', 'CashFlowEvent', 'ExerciseEvent', 'ResetEvent', 'TriggerEvent', 'RawVendorEvent', 'InformationalErrorEvent', 'BondCouponEvent', 'DividendReinvestmentEvent', 'AccumulationEvent', 'BondPrincipalEvent', 'DividendOptionEvent', 'MaturityEvent', 'FxForwardSettlementEvent', 'ExpiryEvent', 'ScripDividendEvent', 'StockDividendEvent', 'ReverseStockSplitEvent', 'CapitalDistributionEvent', 'SpinOffEvent', 'MergerEvent', 'FutureExpiryEvent', 'SwapCashFlowEvent', 'SwapPrincipalEvent', 'CreditPremiumCashFlowEvent', 'CdsCreditEvent', 'CdxCreditEvent', 'MbsCouponEvent', 'MbsPrincipalEvent', 'BonusIssueEvent', 'MbsPrincipalWriteOffEvent', 'MbsInterestDeferralEvent', 'MbsInterestShortfallEvent', 'TenderEvent', 'CallOnIntermediateSecuritiesEvent', 'IntermediateSecuritiesDistributionEvent', 'OptionExercisePhysicalEvent', 'OptionExerciseCashEvent', 'ProtectionPayoutCashFlowEvent', 'TermDepositInterestEvent', 'TermDepositPrincipalEvent', 'EarlyRedemptionEvent', 'FutureMarkToMarketEvent', 'AdjustGlobalCommitmentEvent', 'ContractInitialisationEvent', 'DrawdownEvent', 'LoanInterestRepaymentEvent', 'UpdateDepositAmountEvent', 'LoanPrincipalRepaymentEvent', 'DepositInterestPaymentEvent', 'DepositCloseEvent', 'LoanFacilityContractRolloverEvent', 'RepurchaseOfferEvent', 'RepoPartialClosureEvent', 'RepoCashFlowEvent', 'FlexibleRepoInterestPaymentEvent', 'FlexibleRepoCashFlowEvent', 'FlexibleRepoCollateralEvent', 'ConversionEvent', 'FlexibleRepoPartialClosureEvent', 'FlexibleRepoFullClosureEvent', 'CapletFloorletCashFlowEvent', 'EarlyCloseOutEvent', 'DepositRollEvent', 'ConsentEvent', 'DrawingEvent', 'CapitalGainsDistributionEvent', 'ExchangeOfferEvent', 'DutchAuctionEvent', 'WorthlessEvent', 'PutRedemptionEvent', 'LoanFacilityDelayedCompensationPaymentEvent', 'InterestPaymentEvent', 'PriorityIssueEvent', 'ClassActionEvent', 'BankruptcyEvent', 'LiquidationPaymentEvent', 'PartialDefeasanceEvent', 'SecurityWriteOffEvent', 'WarrantsExerciseEvent', 'PariPassuEvent', 'ChangeEvent', 'PikBondCouponEvent', 'PikBondCashCouponEvent', 'PikBondInterestCapitalisationEvent', 'PikBondPrincipalEvent', 'DelistingEvent', 'PikBondInterestEvent', 'CommodityForwardCashSettlementEvent', 'PaymentInKindEvent', 'CommodityForwardPhysicalSettlementEvent', 'CancelSwapEvent', 'BondOptionTerminationEvent', 'TerminationEvent', 'CommodityCalendarSwapCashFlowEvent', 'DepositSweepEvent', 'BondForwardCashSettlementEvent', 'BondForwardTerminationEvent', 'AmendCommitmentEvent', 'CapitalCallEvent', 'FundDistributionEvent', 'NavReportEvent', 'DividendSuspensionEvent', 'LoanInterestCapitalisationEvent', 'TotalReturnSwapCashFlowEvent', 'GlobalLoanFacilityReinitialisationEvent', 'InvestorLoanFacilityReinitialisationEvent', 'CapitalCallReceiptEvent', 'RecallableCapitalExpiryEvent', 'CapitalInterestTransferEvent', 'FacilityDrawEvent', 'FacilityRepaymentEvent', 'FacilityInterestEvent', 'FacilityCommitmentFeeEvent']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -90,6 +102,66 @@ class CapitalCallEvent(InstrumentEvent):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if investment_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.investment_amount is None and "investment_amount" in self.__fields_set__:
+            _dict['investmentAmount'] = None
+
+        # set to None if management_fee_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.management_fee_amount is None and "management_fee_amount" in self.__fields_set__:
+            _dict['managementFeeAmount'] = None
+
+        # set to None if other_fee_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.other_fee_amount is None and "other_fee_amount" in self.__fields_set__:
+            _dict['otherFeeAmount'] = None
+
+        # set to None if partnership_expense_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.partnership_expense_amount is None and "partnership_expense_amount" in self.__fields_set__:
+            _dict['partnershipExpenseAmount'] = None
+
+        # set to None if organisational_cost_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.organisational_cost_amount is None and "organisational_cost_amount" in self.__fields_set__:
+            _dict['organisationalCostAmount'] = None
+
+        # set to None if recall_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.recall_amount is None and "recall_amount" in self.__fields_set__:
+            _dict['recallAmount'] = None
+
+        # set to None if equalisation_interest_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.equalisation_interest_amount is None and "equalisation_interest_amount" in self.__fields_set__:
+            _dict['equalisationInterestAmount'] = None
+
+        # set to None if late_payment_interest_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.late_payment_interest_amount is None and "late_payment_interest_amount" in self.__fields_set__:
+            _dict['latePaymentInterestAmount'] = None
+
+        # set to None if outside_commitment_slots (nullable) is None
+        # and __fields_set__ contains the field
+        if self.outside_commitment_slots is None and "outside_commitment_slots" in self.__fields_set__:
+            _dict['outsideCommitmentSlots'] = None
+
+        # set to None if deal_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deal_id is None and "deal_id" in self.__fields_set__:
+            _dict['dealId'] = None
+
+        # set to None if allocation_event_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_event_id is None and "allocation_event_id" in self.__fields_set__:
+            _dict['allocationEventId'] = None
+
+        # set to None if notice_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notice_date is None and "notice_date" in self.__fields_set__:
+            _dict['noticeDate'] = None
+
         return _dict
 
     @classmethod
@@ -104,7 +176,19 @@ class CapitalCallEvent(InstrumentEvent):
         _obj = CapitalCallEvent.parse_obj({
             "instrument_event_type": obj.get("instrumentEventType"),
             "var_date": obj.get("date"),
-            "amount": obj.get("amount")
+            "amount": obj.get("amount"),
+            "investment_amount": obj.get("investmentAmount"),
+            "management_fee_amount": obj.get("managementFeeAmount"),
+            "other_fee_amount": obj.get("otherFeeAmount"),
+            "partnership_expense_amount": obj.get("partnershipExpenseAmount"),
+            "organisational_cost_amount": obj.get("organisationalCostAmount"),
+            "recall_amount": obj.get("recallAmount"),
+            "equalisation_interest_amount": obj.get("equalisationInterestAmount"),
+            "late_payment_interest_amount": obj.get("latePaymentInterestAmount"),
+            "outside_commitment_slots": obj.get("outsideCommitmentSlots"),
+            "deal_id": obj.get("dealId"),
+            "allocation_event_id": obj.get("allocationEventId"),
+            "notice_date": obj.get("noticeDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

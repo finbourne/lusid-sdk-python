@@ -28,9 +28,10 @@ class AllocationMapEventBasis(BaseModel):
     """
     The basis an Allocation Map applies to one kind of allocation event.  # noqa: E501
     """
-    event_type:  StrictStr = Field(...,alias="eventType", description="The kind of allocation event the basis applies to: CapitalCall, Distribution, FeeExpense or ValuationMove. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove.") 
+    event_type:  StrictStr = Field(...,alias="eventType", description="The kind of allocation event the basis applies to: CapitalCall, Distribution, FeeExpense, ValuationMove, Equalisation, RecallExpiry, Transfer, Default, Commitment or DealFunding. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.") 
     basis: AllocationMapBasis
-    __properties = ["eventType", "basis"]
+    component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the event the basis applies to, for example MgmtFee or OrgCost. Absent means the entry is the default for every component of the event type without an entry of its own.") 
+    __properties = ["eventType", "basis", "component"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +68,11 @@ class AllocationMapEventBasis(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of basis
         if self.basis:
             _dict['basis'] = self.basis.to_dict()
+        # set to None if component (nullable) is None
+        # and __fields_set__ contains the field
+        if self.component is None and "component" in self.__fields_set__:
+            _dict['component'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +86,8 @@ class AllocationMapEventBasis(BaseModel):
 
         _obj = AllocationMapEventBasis.parse_obj({
             "event_type": obj.get("eventType"),
-            "basis": AllocationMapBasis.from_dict(obj.get("basis")) if obj.get("basis") is not None else None
+            "basis": AllocationMapBasis.from_dict(obj.get("basis")) if obj.get("basis") is not None else None,
+            "component": obj.get("component")
         })
         return _obj
 

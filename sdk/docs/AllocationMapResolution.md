@@ -4,10 +4,10 @@ The result of resolving an Allocation Map for one event: how much each investor 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**event_type** | **str** | The kind of allocation event that was resolved. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove. | [optional] 
+**event_type** | **str** | The kind of allocation event that was resolved. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding. | [optional] 
 **amount** | **float** | The amount that was shared. | [optional] 
 **currency** | **str** | The currency of the amount. | [optional] 
-**basis_rule** | **str** | The basis the map applies to this event type. Available values: ValueWeighted, PropertyWeighted, FixedPercentage. | [optional] 
+**basis_rule** | **str** | The basis the map applies to this event type. Available values: ValueWeighted, PropertyWeighted, FixedPercentage, Committed, CommittedExGP, UncalledCommitment, PaidIn, PaidInForDeal, Recallable, FeeWeightedCommitment, FixedAmount. | [optional] 
 **basis_pool** | **float** | The sum of the basis values over the participants that share the remainder pro rata. | [optional] 
 **fixed_total** | **float** | The total taken off the top by FixedPercentage exceptions before the remainder is shared. | [optional] 
 **participant_count** | **int** | The number of investor records that receive a share, whether fixed or pro rata. | [optional] 
