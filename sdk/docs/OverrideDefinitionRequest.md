@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | A list of unique transaction properties and associated values to store for the replacement transaction. Each property must be from the &#39;Transaction&#39; domain. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the replacement transaction. | [optional] 
 **source** | **str** | The source of the replacement transaction. This is used to look up the appropriate transaction group set in the transaction type configuration. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -39,7 +40,8 @@ trade_currency: Optional[StrictStr] = "example_trade_currency"
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 counterparty_id: Optional[StrictStr] = "example_counterparty_id"
 source: Optional[StrictStr] = "example_source"
-override_definition_request_instance = OverrideDefinitionRequest(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, trade_date=trade_date, settlement_date=settlement_date, units=units, trade_price=trade_price, total_consideration=total_consideration, exchange_rate=exchange_rate, trade_currency=trade_currency, properties=properties, counterparty_id=counterparty_id, source=source)
+custodian_account_id: Optional[ResourceId] = # Replace with your value
+override_definition_request_instance = OverrideDefinitionRequest(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, trade_date=trade_date, settlement_date=settlement_date, units=units, trade_price=trade_price, total_consideration=total_consideration, exchange_rate=exchange_rate, trade_currency=trade_currency, properties=properties, counterparty_id=counterparty_id, source=source, custodian_account_id=custodian_account_id)
 
 ```
 

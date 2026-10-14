@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_price import TransactionPrice
 
 class OverrideDefinitionResponse(BaseModel):
@@ -43,8 +44,9 @@ class OverrideDefinitionResponse(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The transaction properties stored for the replacement transaction.")
     counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the replacement transaction.") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the replacement transaction.") 
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
     precedes_event: Optional[StrictBool] = Field(default=None, description="True when this replacement's trade date is earlier than the target instrument event's current effective date, which orphans the entry it belongs to.", alias="precedesEvent")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "tradeDate", "settlementDate", "units", "tradePrice", "totalConsideration", "exchangeRate", "tradeCurrency", "properties", "counterpartyId", "source", "precedesEvent"]
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "tradeDate", "settlementDate", "units", "tradePrice", "totalConsideration", "exchangeRate", "tradeCurrency", "properties", "counterpartyId", "source", "custodianAccountId", "precedesEvent"]
 
     class Config:
         """Pydantic configuration"""
@@ -91,6 +93,9 @@ class OverrideDefinitionResponse(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if transaction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_id is None and "transaction_id" in self.__fields_set__:
@@ -176,6 +181,7 @@ class OverrideDefinitionResponse(BaseModel):
             else None,
             "counterparty_id": obj.get("counterpartyId"),
             "source": obj.get("source"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None,
             "precedes_event": obj.get("precedesEvent")
         })
         return _obj

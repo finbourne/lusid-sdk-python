@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.resource_id import ResourceId
 from lusid.models.transaction_price import TransactionPrice
 
 class StoredOverrideDefinition(BaseModel):
@@ -43,7 +44,8 @@ class StoredOverrideDefinition(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The transaction properties stored for the replacement transaction.")
     counterparty_id:  Optional[StrictStr] = Field(None,alias="counterpartyId", description="The identifier for the counterparty of the replacement transaction.") 
     source:  Optional[StrictStr] = Field(None,alias="source", description="The source of the replacement transaction.") 
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "tradeDate", "settlementDate", "units", "tradePrice", "totalConsideration", "exchangeRate", "tradeCurrency", "properties", "counterpartyId", "source"]
+    custodian_account_id: Optional[ResourceId] = Field(default=None, alias="custodianAccountId")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "tradeDate", "settlementDate", "units", "tradePrice", "totalConsideration", "exchangeRate", "tradeCurrency", "properties", "counterpartyId", "source", "custodianAccountId"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +92,9 @@ class StoredOverrideDefinition(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of custodian_account_id
+        if self.custodian_account_id:
+            _dict['custodianAccountId'] = self.custodian_account_id.to_dict()
         # set to None if transaction_id (nullable) is None
         # and __fields_set__ contains the field
         if self.transaction_id is None and "transaction_id" in self.__fields_set__:
@@ -169,7 +174,8 @@ class StoredOverrideDefinition(BaseModel):
             if obj.get("properties") is not None
             else None,
             "counterparty_id": obj.get("counterpartyId"),
-            "source": obj.get("source")
+            "source": obj.get("source"),
+            "custodian_account_id": ResourceId.from_dict(obj.get("custodianAccountId")) if obj.get("custodianAccountId") is not None else None
         })
         return _obj
 

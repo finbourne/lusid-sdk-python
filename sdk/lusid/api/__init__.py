@@ -16,6 +16,7 @@ from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
 from lusid.api.chart_of_accounts_api import ChartOfAccountsApi
 from lusid.api.check_definitions_api import CheckDefinitionsApi
+from lusid.api.collateral_agreements_api import CollateralAgreementsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.compliance_api import ComplianceApi
 from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
@@ -30,6 +31,7 @@ from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
+from lusid.api.eligible_collateral_schedules_api import EligibleCollateralSchedulesApi
 from lusid.api.entities_api import EntitiesApi
 from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
@@ -58,6 +60,7 @@ from lusid.api.persons_api import PersonsApi
 from lusid.api.placements_api import PlacementsApi
 from lusid.api.portfolio_groups_api import PortfolioGroupsApi
 from lusid.api.portfolios_api import PortfoliosApi
+from lusid.api.processing_group_api import ProcessingGroupApi
 from lusid.api.property_definitions_api import PropertyDefinitionsApi
 from lusid.api.queryable_keys_api import QueryableKeysApi
 from lusid.api.quotes_api import QuotesApi
@@ -114,6 +117,7 @@ __all__ = [
     "CalendarsApi",
     "ChartOfAccountsApi",
     "CheckDefinitionsApi",
+    "CollateralAgreementsApi",
     "ComplexMarketDataApi",
     "ComplianceApi",
     "ConfigurationRecipeApi",
@@ -128,6 +132,7 @@ __all__ = [
     "CutLabelDefinitionsApi",
     "DataTypesApi",
     "DerivedTransactionPortfoliosApi",
+    "EligibleCollateralSchedulesApi",
     "EntitiesApi",
     "EntityResolversApi",
     "ExecutionsApi",
@@ -156,6 +161,7 @@ __all__ = [
     "PlacementsApi",
     "PortfolioGroupsApi",
     "PortfoliosApi",
+    "ProcessingGroupApi",
     "PropertyDefinitionsApi",
     "QueryableKeysApi",
     "QuotesApi",

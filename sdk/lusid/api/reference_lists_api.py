@@ -215,22 +215,22 @@ class ReferenceListsApi:
 
 
     @overload
-    async def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, **kwargs) -> ReferenceListResponse:  # noqa: E501
+    async def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.")] = None, **kwargs) -> ReferenceListResponse:  # noqa: E501
         ...
 
     @overload
-    def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ReferenceListResponse:  # noqa: E501
+    def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ReferenceListResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReferenceListResponse, Awaitable[ReferenceListResponse]]:  # noqa: E501
+    def get_reference_list(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ReferenceListResponse, Awaitable[ReferenceListResponse]]:  # noqa: E501
         """GetReferenceList: Get Reference List  # noqa: E501
 
         Retrieve a Reference List instance at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_reference_list(scope, code, as_at, async_req=True)
+        >>> thread = api.get_reference_list(scope, code, as_at, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope to which the Reference List belongs. (required)
@@ -239,6 +239,8 @@ class ReferenceListsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -255,17 +257,17 @@ class ReferenceListsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.get_reference_list_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+        return self.get_reference_list_with_http_info(scope, code, as_at, filter, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_reference_list_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def get_reference_list_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope to which the Reference List belongs.")], code : Annotated[StrictStr, Field(..., description="The Reference List's unique identifier.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """GetReferenceList: Get Reference List  # noqa: E501
 
         Retrieve a Reference List instance at a point in AsAt time.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.get_reference_list_with_http_info(scope, code, as_at, async_req=True)
+        >>> thread = api.get_reference_list_with_http_info(scope, code, as_at, filter, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope to which the Reference List belongs. (required)
@@ -274,6 +276,8 @@ class ReferenceListsApi:
         :type code: str
         :param as_at: The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified.
         :type as_at: datetime
+        :param filter: Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified.
+        :type filter: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -303,7 +307,8 @@ class ReferenceListsApi:
         _all_params = [
             'scope',
             'code',
-            'as_at'
+            'as_at',
+            'filter'
         ]
         _all_params.extend(
             [
@@ -346,6 +351,9 @@ class ReferenceListsApi:
                 _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
             else:
                 _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

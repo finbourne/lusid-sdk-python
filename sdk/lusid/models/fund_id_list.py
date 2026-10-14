@@ -30,9 +30,10 @@ class FundIdList(ReferenceList):
     FundIdList
     """
     values: List[ResourceId]
+    nav_type_codes_hint: Optional[List[StrictStr]] = Field(default=None, description="The NAV type codes this list nominates, in priority order; entries may contain '*' wildcards.  For each fund the first matching code the fund defines is picked, falling back to the fund's  primary (official) NAV type when the list is empty or nothing matches. Optional.", alias="navTypeCodesHint")
     reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["referenceListType", "values"]
+    __properties = ["referenceListType", "values", "navTypeCodesHint"]
 
     @validator('reference_list_type')
     def reference_list_type_validate_enum(cls, value):
@@ -97,6 +98,11 @@ class FundIdList(ReferenceList):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if nav_type_codes_hint (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nav_type_codes_hint is None and "nav_type_codes_hint" in self.__fields_set__:
+            _dict['navTypeCodesHint'] = None
+
         return _dict
 
     @classmethod
@@ -110,7 +116,8 @@ class FundIdList(ReferenceList):
 
         _obj = FundIdList.parse_obj({
             "reference_list_type": obj.get("referenceListType"),
-            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
+            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+            "nav_type_codes_hint": obj.get("navTypeCodesHint")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

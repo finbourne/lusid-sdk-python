@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.aggregate_matching_rule import AggregateMatchingRule
 from lusid.models.core_matching_rule import CoreMatchingRule
+from lusid.models.external_rec_type import ExternalRecType
 from lusid.models.group_reconciliation_filters import GroupReconciliationFilters
 from lusid.models.link import Link
 from lusid.models.rec_dataset_schemas import RecDatasetSchemas
@@ -39,20 +40,21 @@ class MatchingRuleset(BaseModel):
     """
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the matching ruleset.") 
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
+    external_rec_type: Optional[ExternalRecType] = Field(default=None, alias="externalRecType")
     dataset_schemas: RecDatasetSchemas = Field(alias="datasetSchemas")
     filters: Optional[GroupReconciliationFilters] = None
     core_rules: List[CoreMatchingRule] = Field(description="The core comparison rules evaluated as derivation formulae against each side of the reconciliation.", alias="coreRules")
     aggregate_rules: List[AggregateMatchingRule] = Field(description="The aggregate comparison rules evaluated as derivation formulae against values on each side of the reconciliation and operation to aggregate those values.", alias="aggregateRules")
     core_tolerances: Optional[List[ToleranceBase]] = Field(default=None, description="Tolerance configurations applied to core rule matching, in the specified order.", alias="coreTolerances")
     aggregate_tolerances: Optional[List[ToleranceBase]] = Field(default=None, description="Tolerance configurations applied to aggregate rule matching.", alias="aggregateTolerances")
-    allow_partial_matching: Optional[StrictBool] = Field(default=None, description="Whether to permit partial matches when applying rules.", alias="allowPartialMatching")
+    allow_partial_matching: Optional[StrictBool] = Field(default=None, description="Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided.", alias="allowPartialMatching")
     supplemental_attributes: Optional[List[SupplementalAttribute]] = Field(default=None, description="Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself.", alias="supplementalAttributes")
     writeback_configurations: Optional[List[WritebackConfiguration]] = Field(default=None, description="The writeback suggestions generated against this ruleset's results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty.", alias="writebackConfigurations")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "displayName", "recType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "writebackConfigurations", "href", "version", "links"]
+    __properties = ["id", "displayName", "recType", "externalRecType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "writebackConfigurations", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +91,9 @@ class MatchingRuleset(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id
         if self.id:
             _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of external_rec_type
+        if self.external_rec_type:
+            _dict['externalRecType'] = self.external_rec_type.to_dict()
         # override the default output from pydantic by calling `to_dict()` of dataset_schemas
         if self.dataset_schemas:
             _dict['datasetSchemas'] = self.dataset_schemas.to_dict()
@@ -192,6 +197,7 @@ class MatchingRuleset(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "rec_type": obj.get("recType"),
+            "external_rec_type": ExternalRecType.from_dict(obj.get("externalRecType")) if obj.get("externalRecType") is not None else None,
             "dataset_schemas": RecDatasetSchemas.from_dict(obj.get("datasetSchemas")) if obj.get("datasetSchemas") is not None else None,
             "filters": GroupReconciliationFilters.from_dict(obj.get("filters")) if obj.get("filters") is not None else None,
             "core_rules": [CoreMatchingRule.from_dict(_item) for _item in obj.get("coreRules")] if obj.get("coreRules") is not None else None,

@@ -35,6 +35,7 @@ from lusid.models.reporting_price import ReportingPrice
 from lusid.models.resource_id import ResourceId
 from lusid.models.share_class import ShareClass
 from lusid.models.version import Version
+from lusid.models.wht_parameters import WhtParameters
 
 class Fund(BaseModel):
     """
@@ -66,8 +67,9 @@ class Fund(BaseModel):
     pricing_methodology: Optional[PricingMethodology] = Field(default=None, alias="pricingMethodology")
     reporting_prices: Optional[List[ReportingPrice]] = Field(default=None, description="Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.", alias="reportingPrices")
     version: Optional[Version] = None
+    wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -174,6 +176,9 @@ class Fund(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of wht_parameters
+        if self.wht_parameters:
+            _dict['whtParameters'] = self.wht_parameters.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -304,6 +309,7 @@ class Fund(BaseModel):
             "pricing_methodology": PricingMethodology.from_dict(obj.get("pricingMethodology")) if obj.get("pricingMethodology") is not None else None,
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

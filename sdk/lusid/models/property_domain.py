@@ -70,6 +70,7 @@ class PropertyDomain(str, Enum):
     FUND = 'Fund'
     FUNDCONFIGURATION = 'FundConfiguration'
     FUNDSTRUCTURE = 'FundStructure'
+    PROCESSINGGROUP = 'ProcessingGroup'
     FEE = 'Fee'
     RECONCILIATION = 'Reconciliation'
     PROPERTYDEFINITION = 'PropertyDefinition'
@@ -127,6 +128,7 @@ class PropertyDomain(str, Enum):
     RECDEFINITION = 'RecDefinition'
     RECRESULT = 'RecResult'
     JOURNALENTRY = 'JournalEntry'
+    COLLATERALAGREEMENT = 'CollateralAgreement'
     ELIGIBLECOLLATERALSCHEDULE = 'EligibleCollateralSchedule'
 
     @classmethod

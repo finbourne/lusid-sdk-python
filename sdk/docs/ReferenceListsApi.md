@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_reference_list**
-> ReferenceListResponse get_reference_list(scope, code, as_at=as_at)
+> ReferenceListResponse get_reference_list(scope, code, as_at=as_at, filter=filter)
 
 GetReferenceList: Get Reference List
 
@@ -159,13 +159,14 @@ def main():
     scope = 'scope_example' # str | The scope to which the Reference List belongs.
     code = 'code_example' # str | The Reference List's unique identifier.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \"id.Code eq 'FundCode'\"), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_reference_list(scope, code, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_reference_list(scope, code, as_at=as_at, filter=filter, opts=opts)
 
         # GetReferenceList: Get Reference List
-        api_response = api_instance.get_reference_list(scope, code, as_at=as_at)
+        api_response = api_instance.get_reference_list(scope, code, as_at=as_at, filter=filter)
         pprint(api_response)
 
     except ApiException as e:
@@ -181,6 +182,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope to which the Reference List belongs. | 
  **code** | **str**| The Reference List&#39;s unique identifier. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the Reference List. Defaults to return the latest version of the Reference List if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the values of the Reference List by its underlying type:              fund lists filter on the fund (for example \&quot;id.Code eq &#39;FundCode&#39;\&quot;), id lists on Scope and Code,              property lists on Key and Value, and scalar lists on Value. Defaults to returning all values if not specified. | [optional] 
 
 ### Return type
 

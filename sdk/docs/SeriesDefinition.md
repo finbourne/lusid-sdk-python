@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **launch_price_type** | **str** | The type of launch price for the Series. Available values: Manual, Calculated. | 
 **dom_ccy** | **str** | The denomination currency of the Series. | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties to associate with the Series. Only applied if createInstrument is set to true on the parent Fund. | [optional] 
+**launch_price** | **float** | The launch price of the Series. Required when LaunchPriceType is Manual; ignored when it is Calculated. | [optional] 
+**status** | **str** | The lifecycle status of the Series: Open, Closed or Rolled. Defaults to Open. Available values: Open, Closed, Rolled. | [optional] 
 ## Example
 
 ```python
@@ -24,7 +26,9 @@ launch_date: datetime = # Replace with your value
 launch_price_type: StrictStr = "example_launch_price_type"
 dom_ccy: StrictStr = "example_dom_ccy"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-series_definition_instance = SeriesDefinition(series_identifier=series_identifier, series_type=series_type, launch_date=launch_date, launch_price_type=launch_price_type, dom_ccy=dom_ccy, properties=properties)
+launch_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+status: Optional[StrictStr] = "example_status"
+series_definition_instance = SeriesDefinition(series_identifier=series_identifier, series_type=series_type, launch_date=launch_date, launch_price_type=launch_price_type, dom_ccy=dom_ccy, properties=properties, launch_price=launch_price, status=status)
 
 ```
 

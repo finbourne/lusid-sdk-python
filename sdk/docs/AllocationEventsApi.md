@@ -8,9 +8,12 @@ Method | HTTP request | Description
 [**create_allocation_event**](AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
 [**delete_allocation_event**](AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
 [**get_allocation_event**](AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+[**get_allocation_event_notices**](AllocationEventsApi.md#get_allocation_event_notices) | **GET** /api/allocationevents/{scope}/{code}/notices | [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
 [**get_allocation_event_receivables**](AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
 [**list_allocation_events**](AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+[**list_allocation_payment_holds**](AllocationEventsApi.md#list_allocation_payment_holds) | **GET** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds | [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
 [**plan_allocation_event_booking**](AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+[**put_allocation_payment_hold**](AllocationEventsApi.md#put_allocation_payment_hold) | **PUT** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold | [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
 [**reallocate_allocation_event**](AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
 [**receive_allocation_event**](AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
 [**reverse_allocation_event**](AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
@@ -414,6 +417,106 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_allocation_event_notices**
+> ResourceListOfAllocationEventNotice get_allocation_event_notices(scope, code, investor_record_id=investor_record_id, include_zero=include_zero, as_at=as_at)
+
+[EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
+
+One notice per partner allocation, listing the ILPA transaction lines, the net amount due, the partner's  unfunded commitment reconciliation across the event and their cumulative position alongside the general  partner's. Notices carry a DRAFT watermark until the event is booked.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AllocationEventsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AllocationEventsApi)
+    scope = 'scope_example' # str | The scope of the Allocation Event.
+    code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
+    investor_record_id = 'investor_record_id_example' # str | Restrict the notices to this partner's investor record. (optional)
+    include_zero = False # bool | Whether to include notices whose every line is zero. Defaults to false. (optional) (default to False)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_allocation_event_notices(scope, code, investor_record_id=investor_record_id, include_zero=include_zero, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
+        api_response = api_instance.get_allocation_event_notices(scope, code, investor_record_id=investor_record_id, include_zero=include_zero, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AllocationEventsApi->get_allocation_event_notices: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Allocation Event. | 
+ **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
+ **investor_record_id** | **str**| Restrict the notices to this partner&#39;s investor record. | [optional] 
+ **include_zero** | **bool**| Whether to include notices whose every line is zero. Defaults to false. | [optional] [default to False]
+ **as_at** | **datetime**| The asAt datetime at which to read the event. Defaults to returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfAllocationEventNotice**](ResourceListOfAllocationEventNotice.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The notices the allocation event issues. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_allocation_event_receivables**
 > AllocationReceivablesAgeing get_allocation_event_receivables(scope, code, effective_at=effective_at, as_at=as_at)
 
@@ -614,6 +717,102 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_allocation_payment_holds**
+> ResourceListOfAllocationPaymentHold list_allocation_payment_holds(scope, code, investor_record_id)
+
+[EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner's payment.
+
+Every hold placed on the partner's payment against the event, newest first, including released ones.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AllocationEventsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AllocationEventsApi)
+    scope = 'scope_example' # str | The scope of the Allocation Event.
+    code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
+    investor_record_id = 'investor_record_id_example' # str | The investor record of the partner whose holds are listed.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_allocation_payment_holds(scope, code, investor_record_id, opts=opts)
+
+        # [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner's payment.
+        api_response = api_instance.list_allocation_payment_holds(scope, code, investor_record_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AllocationEventsApi->list_allocation_payment_holds: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Allocation Event. | 
+ **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
+ **investor_record_id** | **str**| The investor record of the partner whose holds are listed. | 
+
+### Return type
+
+[**ResourceListOfAllocationPaymentHold**](ResourceListOfAllocationPaymentHold.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The holds placed on the partner&#39;s payment. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **plan_allocation_event_booking**
 > AllocationPostingPlan plan_allocation_event_booking(scope, code, allocation_event_book_request, effective_at=effective_at)
 
@@ -712,6 +911,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The postings the booking would write. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **put_allocation_payment_hold**
+> AllocationPaymentHold put_allocation_payment_hold(scope, code, investor_record_id, allocation_payment_hold_request)
+
+[EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner's payment.
+
+A Blocked or Escrow hold stops the partner's allocation being received against the event until it is  Released. A hold may only be released by a user other than the one who placed it.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AllocationEventsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AllocationEventsApi)
+    scope = 'scope_example' # str | The scope of the Allocation Event.
+    code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
+    investor_record_id = 'investor_record_id_example' # str | The investor record of the partner whose payment is held.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # allocation_payment_hold_request = AllocationPaymentHoldRequest.from_json("")
+    # allocation_payment_hold_request = AllocationPaymentHoldRequest.from_dict({})
+    allocation_payment_hold_request = AllocationPaymentHoldRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.put_allocation_payment_hold(scope, code, investor_record_id, allocation_payment_hold_request, opts=opts)
+
+        # [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner's payment.
+        api_response = api_instance.put_allocation_payment_hold(scope, code, investor_record_id, allocation_payment_hold_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AllocationEventsApi->put_allocation_payment_hold: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Allocation Event. | 
+ **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
+ **investor_record_id** | **str**| The investor record of the partner whose payment is held. | 
+ **allocation_payment_hold_request** | [**AllocationPaymentHoldRequest**](AllocationPaymentHoldRequest.md)| The hold to record: its status, and optionally a reason and an external reference. | 
+
+### Return type
+
+[**AllocationPaymentHold**](AllocationPaymentHold.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The hold as recorded. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -40,7 +40,7 @@ class ToBeAnnouncedOption(LusidInstrument):
     delivery_type:  StrictStr = Field(...,alias="deliveryType", description="Is the option cash settled or physical delivery of the underlying TBA.                Supported string (enumeration) values are: [Cash, Physical].") 
     underlying: MasteredInstrument
     exercise_type:  StrictStr = Field(...,alias="exerciseType", description="Type of optionality that is present; European only in this scope.                Supported string (enumeration) values are: [European].") 
-    premium: Premium
+    premium: Optional[Premium] = None
     delivery_days: Optional[StrictInt] = Field(default=None, description="Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set.", alias="deliveryDays")
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="Business day convention for option exercise date to settlement date calculation.  Default value: F. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid.") 
     settlement_calendars: Optional[List[StrictStr]] = Field(default=None, description="Holiday calendar for option exercise date to settlement date calculation.", alias="settlementCalendars")

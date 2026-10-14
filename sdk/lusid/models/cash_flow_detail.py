@@ -39,16 +39,16 @@ class CashFlowDetail(BaseModel):
     portfolio_id: ResourceId = Field(alias="portfolioId")
     flow_type:  Optional[StrictStr] = Field(None,alias="flowType", description="The type of the cashflow, e.g. Coupon, Principal or Premium.") 
     movement_name:  Optional[StrictStr] = Field(None,alias="movementName", description="The name of the movement that produced the cashflow (e.g. Coupon, Side1), falling back to the flow type when the movement is unnamed. Not present when the cashflow could not be valued.") 
-    pay_receive:  Optional[StrictStr] = Field(None,alias="payReceive", description="Indicates whether the cashflow is paid or received.") 
     gross_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="grossAmount")
     haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request.", alias="haircutFraction")
     net_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="netAmount")
     haircut_rule_applied:  Optional[StrictStr] = Field(None,alias="haircutRuleApplied", description="The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request.") 
     error:  Optional[StrictStr] = Field(None,alias="error", description="Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see ReportCurrencyAmount), in which case the base Amount remains populated and only ReportCurrencyAmount and TradeToReportCurrencyRate are null.") 
     report_currency_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="reportCurrencyAmount")
-    trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request's report currency, resolved at the cashflow's transaction (trade) date, not its payment date. Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).", alias="tradeToReportCurrencyRate")
+    trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request's report currency. For the default FxSpot rate type it is resolved at the cashflow's transaction (trade) date, not its payment date; for FxForward it is the forward rate for the payment date (see QueryBucketCashFlowDrillDownRequest.FxRateType and FxRateTypeApplied). Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).", alias="tradeToReportCurrencyRate")
+    fx_rate_type_applied:  Optional[StrictStr] = Field(None,alias="fxRateTypeApplied", description="Which rate type produced TradeToReportCurrencyRate: FxSpot or FxForward. Under the ForwardThenSpot request option this shows whether a cashflow received the forward rate or fell back to spot. Only present when the cashflow was converted into the ReportCurrency.") 
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "payReceive", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "reportCurrencyAmount", "tradeToReportCurrencyRate", "links"]
+    __properties = ["paymentDate", "amount", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "reportCurrencyAmount", "tradeToReportCurrencyRate", "fxRateTypeApplied", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -124,11 +124,6 @@ class CashFlowDetail(BaseModel):
         if self.movement_name is None and "movement_name" in self.__fields_set__:
             _dict['movementName'] = None
 
-        # set to None if pay_receive (nullable) is None
-        # and __fields_set__ contains the field
-        if self.pay_receive is None and "pay_receive" in self.__fields_set__:
-            _dict['payReceive'] = None
-
         # set to None if haircut_fraction (nullable) is None
         # and __fields_set__ contains the field
         if self.haircut_fraction is None and "haircut_fraction" in self.__fields_set__:
@@ -148,6 +143,11 @@ class CashFlowDetail(BaseModel):
         # and __fields_set__ contains the field
         if self.trade_to_report_currency_rate is None and "trade_to_report_currency_rate" in self.__fields_set__:
             _dict['tradeToReportCurrencyRate'] = None
+
+        # set to None if fx_rate_type_applied (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fx_rate_type_applied is None and "fx_rate_type_applied" in self.__fields_set__:
+            _dict['fxRateTypeApplied'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -175,7 +175,6 @@ class CashFlowDetail(BaseModel):
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "flow_type": obj.get("flowType"),
             "movement_name": obj.get("movementName"),
-            "pay_receive": obj.get("payReceive"),
             "gross_amount": CurrencyAndAmount.from_dict(obj.get("grossAmount")) if obj.get("grossAmount") is not None else None,
             "haircut_fraction": obj.get("haircutFraction"),
             "net_amount": CurrencyAndAmount.from_dict(obj.get("netAmount")) if obj.get("netAmount") is not None else None,
@@ -183,6 +182,7 @@ class CashFlowDetail(BaseModel):
             "error": obj.get("error"),
             "report_currency_amount": CurrencyAndAmount.from_dict(obj.get("reportCurrencyAmount")) if obj.get("reportCurrencyAmount") is not None else None,
             "trade_to_report_currency_rate": obj.get("tradeToReportCurrencyRate"),
+            "fx_rate_type_applied": obj.get("fxRateTypeApplied"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.previous_share_class_breakdown import PreviousShareClassBreakdown
+from lusid.models.series_breakdown import SeriesBreakdown
 from lusid.models.share_class_amount import ShareClassAmount
 from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdown
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
@@ -44,7 +45,8 @@ class ShareClassBreakdown(BaseModel):
     share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = Field(description="The fx rate from the Share Class currency to the fund currency at this valuation point.", alias="shareClassToFundFxRate")
     capital_ratio: Union[StrictFloat, StrictInt] = Field(description="The proportion of the fund's non-class-specific P&L apportioned to this share class. Sums to 1 across the fund's share classes.", alias="capitalRatio")
     previous_share_class_breakdown: PreviousShareClassBreakdown = Field(alias="previousShareClassBreakdown")
-    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "unitisation", "miscellaneous", "shareClassToFundFxRate", "capitalRatio", "previousShareClassBreakdown"]
+    series_breakdowns: Optional[List[SeriesBreakdown]] = Field(default=None, description="The share class NAV split across the series within the share class, one entry per series. Empty for a share class without series.", alias="seriesBreakdowns")
+    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "unitisation", "miscellaneous", "shareClassToFundFxRate", "capitalRatio", "previousShareClassBreakdown", "seriesBreakdowns"]
 
     class Config:
         """Pydantic configuration"""
@@ -117,10 +119,22 @@ class ShareClassBreakdown(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of previous_share_class_breakdown
         if self.previous_share_class_breakdown:
             _dict['previousShareClassBreakdown'] = self.previous_share_class_breakdown.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in series_breakdowns (list)
+        _items = []
+        if self.series_breakdowns:
+            for _item in self.series_breakdowns:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['seriesBreakdowns'] = _items
         # set to None if miscellaneous (nullable) is None
         # and __fields_set__ contains the field
         if self.miscellaneous is None and "miscellaneous" in self.__fields_set__:
             _dict['miscellaneous'] = None
+
+        # set to None if series_breakdowns (nullable) is None
+        # and __fields_set__ contains the field
+        if self.series_breakdowns is None and "series_breakdowns" in self.__fields_set__:
+            _dict['seriesBreakdowns'] = None
 
         return _dict
 
@@ -159,7 +173,8 @@ class ShareClassBreakdown(BaseModel):
             else None,
             "share_class_to_fund_fx_rate": obj.get("shareClassToFundFxRate"),
             "capital_ratio": obj.get("capitalRatio"),
-            "previous_share_class_breakdown": PreviousShareClassBreakdown.from_dict(obj.get("previousShareClassBreakdown")) if obj.get("previousShareClassBreakdown") is not None else None
+            "previous_share_class_breakdown": PreviousShareClassBreakdown.from_dict(obj.get("previousShareClassBreakdown")) if obj.get("previousShareClassBreakdown") is not None else None,
+            "series_breakdowns": [SeriesBreakdown.from_dict(_item) for _item in obj.get("seriesBreakdowns")] if obj.get("seriesBreakdowns") is not None else None
         })
         return _obj
 

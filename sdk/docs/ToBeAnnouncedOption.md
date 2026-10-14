@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **delivery_type** | **str** | Is the option cash settled or physical delivery of the underlying TBA.                Supported string (enumeration) values are: [Cash, Physical]. | 
 **underlying** | [**MasteredInstrument**](MasteredInstrument.md) |  | 
 **exercise_type** | **str** | Type of optionality that is present; European only in this scope.                Supported string (enumeration) values are: [European]. | 
-**premium** | [**Premium**](Premium.md) |  | 
+**premium** | [**Premium**](Premium.md) |  | [optional] 
 **delivery_days** | **int** | Number of business days between exercise date and settlement of the option payoff or underlying.  Defaults to 0 if not set. | [optional] 
 **business_day_convention** | **str** | Business day convention for option exercise date to settlement date calculation.  Default value: F. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid. | [optional] 
 **settlement_calendars** | **List[str]** | Holiday calendar for option exercise date to settlement date calculation. | [optional] 
@@ -36,7 +36,7 @@ strike: Union[StrictFloat, StrictInt] = # Replace with your value
 delivery_type: StrictStr = "example_delivery_type"
 underlying: MasteredInstrument
 exercise_type: StrictStr = "example_exercise_type"
-premium: Premium
+premium: Optional[Premium] = None
 delivery_days: Optional[StrictInt] = # Replace with your value
 delivery_days: Optional[StrictInt] = None
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"

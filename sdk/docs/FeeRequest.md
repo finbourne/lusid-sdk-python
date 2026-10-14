@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **accrual_currency** | **str** | The accrual currency. | 
 **treatment** | **str** | The accrual period of the Fee. Available values: Daily, Monthly. | 
 **total_annual_accrual_amount** | **float** | The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present) | [optional] 
-**fee_rate_percentage** | **float** | The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount) | [optional] 
+**fee_rate_percentage** | **float** | The annual rate applied to the CalculationBase for a &#39;FixedPercentage&#39; Fee, expressed as a multiplier rather than a percentage: 0.052 means 5.2% of the base per year. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount) | [optional] 
 **payable_frequency** | **str** | The payable frequency for the Fee. Available values: Annually, Quarterly, Monthly. | 
 **business_day_convention** | **str** | The business day convention to use for Fee calculations on weekends or holidays. Available values: None, P, Previous, F, Following. | 
 **start_date** | **datetime** | The start date of the Fee. | 
@@ -21,6 +21,13 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **share_classes** | **List[str]** | The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio. | [optional] 
+**fee_calculation_type** | **str** | How the Fee accrual amount is calculated. Supported values: &#39;FixedAnnual&#39; (a fixed annual amount, requires TotalAnnualAccrualAmount), &#39;FixedDaily&#39; (a fixed daily amount, requires DailyAccrualAmount), &#39;FixedPercentage&#39; (a fixed percentage of the CalculationBase, requires FeeRatePercentage), &#39;VariablePercentage&#39; (a percentage of the CalculationBase resolved from a rate source at each accrual date, requires VariablePercentageSource), &#39;Tiered&#39; (a single rate applied to the whole CalculationBase, chosen by the tier the base falls in, requires Tiers), &#39;Blended&#39; (each tier&#39;s rate applied to the portion of the CalculationBase within that tier, requires Tiers). Optional: when not provided it is inferred as &#39;FixedAnnual&#39; if TotalAnnualAccrualAmount is populated and &#39;FixedPercentage&#39; otherwise, so existing requests keep their behaviour; the new calculation types must be requested explicitly. Available values: FixedAnnual, FixedDaily, FixedPercentage, VariablePercentage, Tiered, Blended. | [optional] 
+**daily_accrual_amount** | **float** | The fixed daily accrued amount for a &#39;FixedDaily&#39; Fee, in the fund currency. The amount accrues for each day of the accrual period with no annualisation or day-count proration; Treatment does not affect it. | [optional] 
+**variable_percentage_source** | **str** | The source of the rate for a &#39;VariablePercentage&#39; Fee, in the form \&quot;scope/provider/instrumentIdType/instrumentId\&quot; identifying a Rate quote series in the quote store. At each accrual date the most recent rate at or before that date is used; if no rate can be found the valuation point calculation fails. The quote&#39;s normalised value (its value divided by any scale factor) is applied like FeeRatePercentage, as a multiplier of the CalculationBase: a rate of 5.2% must normalise to 0.052. | [optional] 
+**variable_percentage_source_offset** | **float** | An optional adjustment added to the rate resolved from the VariablePercentageSource, expressed as a factor like FeeRatePercentage (e.g. 0.0025 adds 25 basis points). | [optional] 
+**tiers** | [**List[FeeRateTier]**](FeeRateTier.md) | The rate tiers for a &#39;Tiered&#39; or &#39;Blended&#39; Fee: between 2 and 10 tiers over the CalculationBase. Every tier except the last must have a Threshold, and thresholds must be positive and strictly increasing; a base equal to a Threshold falls in that tier, and the final tier covers the balance above the last threshold. A &#39;Tiered&#39; Fee applies the rate of the tier the whole base falls in; a &#39;Blended&#39; Fee applies each tier&#39;s rate to the portion of the base within that tier. | [optional] 
+**fee_cap** | **float** | An optional annual cap on the accrued fee for &#39;FixedPercentage&#39;, &#39;VariablePercentage&#39;, &#39;Tiered&#39; and &#39;Blended&#39; Fees, in the fund currency and assessed period-to-date. Each day accrues only up to the amount left under the cap for the current fee year, which runs from one AnchorDate to the next; once the cap is reached nothing further accrues until the next AnchorDate. | [optional] 
+**fee_floor** | **float** | An optional annual floor on the calculated fee for &#39;FixedPercentage&#39;, &#39;VariablePercentage&#39;, &#39;Tiered&#39; and &#39;Blended&#39; Fees, in the fund currency. The annualised fee amount is raised to the floor before being prorated to each accrual day. | [optional] 
 ## Example
 
 ```python
@@ -48,7 +55,14 @@ anchor_date: Optional[DayMonth] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 portfolio_id: Optional[ResourceId] = # Replace with your value
 share_classes: Optional[List[StrictStr]] = # Replace with your value
-fee_request_instance = FeeRequest(code=code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, portfolio_id=portfolio_id, share_classes=share_classes)
+fee_calculation_type: Optional[StrictStr] = "example_fee_calculation_type"
+daily_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+variable_percentage_source: Optional[StrictStr] = "example_variable_percentage_source"
+variable_percentage_source_offset: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+tiers: Optional[List[FeeRateTier]] = # Replace with your value
+fee_cap: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fee_floor: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fee_request_instance = FeeRequest(code=code, fee_type_id=fee_type_id, display_name=display_name, description=description, origin=origin, calculation_base=calculation_base, accrual_currency=accrual_currency, treatment=treatment, total_annual_accrual_amount=total_annual_accrual_amount, fee_rate_percentage=fee_rate_percentage, payable_frequency=payable_frequency, business_day_convention=business_day_convention, start_date=start_date, end_date=end_date, anchor_date=anchor_date, properties=properties, portfolio_id=portfolio_id, share_classes=share_classes, fee_calculation_type=fee_calculation_type, daily_accrual_amount=daily_accrual_amount, variable_percentage_source=variable_percentage_source, variable_percentage_source_offset=variable_percentage_source_offset, tiers=tiers, fee_cap=fee_cap, fee_floor=fee_floor)
 
 ```
 

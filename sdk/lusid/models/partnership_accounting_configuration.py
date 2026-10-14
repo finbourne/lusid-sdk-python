@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.capability_override import CapabilityOverride
+from lusid.models.presentation_configuration import PresentationConfiguration
 from lusid.models.resource_id import ResourceId
 from lusid.models.series_configuration import SeriesConfiguration
 
@@ -32,13 +33,14 @@ class PartnershipAccountingConfiguration(BaseModel):
     """
     enabled: StrictBool
     config_pack: Optional[ResourceId] = Field(default=None, alias="configPack")
-    commitment_currency_policy:  Optional[StrictStr] = Field(None,alias="commitmentCurrencyPolicy", description="Available values: FundCurrencyOnly.") 
+    commitment_currency_policy:  Optional[StrictStr] = Field(None,alias="commitmentCurrencyPolicy", description="Available values: FundCurrencyOnly, AllowLineCurrency.") 
     register_portfolio_group: Optional[ResourceId] = Field(default=None, alias="registerPortfolioGroup")
     capital_model:  Optional[StrictStr] = Field(None,alias="capitalModel", description="Available values: PartnershipCapitalAccounts, SeriesUnitised.") 
     capability_overrides: Optional[List[CapabilityOverride]] = Field(default=None, alias="capabilityOverrides")
     series: Optional[SeriesConfiguration] = None
     effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Derived on the way out; ignored on the way in.", alias="effectiveCapabilities")
-    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities"]
+    presentation: Optional[PresentationConfiguration] = None
+    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities", "presentation"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,6 +90,9 @@ class PartnershipAccountingConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of series
         if self.series:
             _dict['series'] = self.series.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of presentation
+        if self.presentation:
+            _dict['presentation'] = self.presentation.to_dict()
         # set to None if commitment_currency_policy (nullable) is None
         # and __fields_set__ contains the field
         if self.commitment_currency_policy is None and "commitment_currency_policy" in self.__fields_set__:
@@ -127,7 +132,8 @@ class PartnershipAccountingConfiguration(BaseModel):
             "capital_model": obj.get("capitalModel"),
             "capability_overrides": [CapabilityOverride.from_dict(_item) for _item in obj.get("capabilityOverrides")] if obj.get("capabilityOverrides") is not None else None,
             "series": SeriesConfiguration.from_dict(obj.get("series")) if obj.get("series") is not None else None,
-            "effective_capabilities": obj.get("effectiveCapabilities")
+            "effective_capabilities": obj.get("effectiveCapabilities"),
+            "presentation": PresentationConfiguration.from_dict(obj.get("presentation")) if obj.get("presentation") is not None else None
         })
         return _obj
 

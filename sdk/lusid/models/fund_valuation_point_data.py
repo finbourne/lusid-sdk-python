@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fund_amount import FundAmount
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
+from lusid.models.partnership_accounting_valuation_point_data import PartnershipAccountingValuationPointData
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
 
 class FundValuationPointData(BaseModel):
@@ -39,7 +40,8 @@ class FundValuationPointData(BaseModel):
     nav: Union[StrictFloat, StrictInt] = Field(description="The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period.")
     miscellaneous: Optional[Dict[str, FundAmount]] = Field(default=None, description="Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations).")
     previous_valuation_point_data: Optional[PreviousFundValuationPointData] = Field(default=None, alias="previousValuationPointData")
-    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "miscellaneous", "previousValuationPointData"]
+    partnership_accounting: Optional[PartnershipAccountingValuationPointData] = Field(default=None, alias="partnershipAccounting")
+    __properties = ["backOut", "dealing", "pnL", "gav", "fees", "nav", "miscellaneous", "previousValuationPointData", "partnershipAccounting"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,6 +109,9 @@ class FundValuationPointData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of previous_valuation_point_data
         if self.previous_valuation_point_data:
             _dict['previousValuationPointData'] = self.previous_valuation_point_data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of partnership_accounting
+        if self.partnership_accounting:
+            _dict['partnershipAccounting'] = self.partnership_accounting.to_dict()
         # set to None if miscellaneous (nullable) is None
         # and __fields_set__ contains the field
         if self.miscellaneous is None and "miscellaneous" in self.__fields_set__:
@@ -151,7 +156,8 @@ class FundValuationPointData(BaseModel):
             )
             if obj.get("miscellaneous") is not None
             else None,
-            "previous_valuation_point_data": PreviousFundValuationPointData.from_dict(obj.get("previousValuationPointData")) if obj.get("previousValuationPointData") is not None else None
+            "previous_valuation_point_data": PreviousFundValuationPointData.from_dict(obj.get("previousValuationPointData")) if obj.get("previousValuationPointData") is not None else None,
+            "partnership_accounting": PartnershipAccountingValuationPointData.from_dict(obj.get("partnershipAccounting")) if obj.get("partnershipAccounting") is not None else None
         })
         return _obj
 

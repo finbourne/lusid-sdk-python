@@ -5,12 +5,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **enabled** | **bool** |  | 
 **config_pack** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**commitment_currency_policy** | **str** | Available values: FundCurrencyOnly. | [optional] 
+**commitment_currency_policy** | **str** | Available values: FundCurrencyOnly, AllowLineCurrency. | [optional] 
 **register_portfolio_group** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **capital_model** | **str** | Available values: PartnershipCapitalAccounts, SeriesUnitised. | [optional] 
 **capability_overrides** | [**List[CapabilityOverride]**](CapabilityOverride.md) |  | [optional] 
 **series** | [**SeriesConfiguration**](SeriesConfiguration.md) |  | [optional] 
 **effective_capabilities** | **Dict[str, Optional[str]]** | Derived on the way out; ignored on the way in. | [optional] 
+**presentation** | [**PresentationConfiguration**](PresentationConfiguration.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ capital_model: Optional[StrictStr] = "example_capital_model"
 capability_overrides: Optional[List[CapabilityOverride]] = # Replace with your value
 series: Optional[SeriesConfiguration] = None
 effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
-partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities)
+presentation: Optional[PresentationConfiguration] = None
+partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities, presentation=presentation)
 
 ```
 

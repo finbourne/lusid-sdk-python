@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **share_class_to_fund_fx_rate** | **float** | The fx rate from the Share Class currency to the fund currency at this valuation point. | 
 **capital_ratio** | **float** | The proportion of the fund&#39;s non-class-specific P&amp;L apportioned to this share class. Sums to 1 across the fund&#39;s share classes. | 
 **previous_share_class_breakdown** | [**PreviousShareClassBreakdown**](PreviousShareClassBreakdown.md) |  | 
+**series_breakdowns** | [**List[SeriesBreakdown]**](SeriesBreakdown.md) | The share class NAV split across the series within the share class, one entry per series. Empty for a share class without series. | [optional] 
 ## Example
 
 ```python
@@ -35,7 +36,8 @@ miscellaneous: Optional[Dict[str, ShareClassAmount]] = # Replace with your value
 share_class_to_fund_fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 capital_ratio: Union[StrictFloat, StrictInt] = # Replace with your value
 previous_share_class_breakdown: PreviousShareClassBreakdown = # Replace with your value
-share_class_breakdown_instance = ShareClassBreakdown(back_out=back_out, dealing=dealing, pn_l=pn_l, gav=gav, fees=fees, nav=nav, unitisation=unitisation, miscellaneous=miscellaneous, share_class_to_fund_fx_rate=share_class_to_fund_fx_rate, capital_ratio=capital_ratio, previous_share_class_breakdown=previous_share_class_breakdown)
+series_breakdowns: Optional[List[SeriesBreakdown]] = # Replace with your value
+share_class_breakdown_instance = ShareClassBreakdown(back_out=back_out, dealing=dealing, pn_l=pn_l, gav=gav, fees=fees, nav=nav, unitisation=unitisation, miscellaneous=miscellaneous, share_class_to_fund_fx_rate=share_class_to_fund_fx_rate, capital_ratio=capital_ratio, previous_share_class_breakdown=previous_share_class_breakdown, series_breakdowns=series_breakdowns)
 
 ```
 

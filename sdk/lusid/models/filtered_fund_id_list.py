@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.fund_nav_type_codes import FundNavTypeCodes
 from lusid.models.reference_list import ReferenceList
 from lusid.models.resource_id import ResourceId
 
@@ -31,9 +32,33 @@ class FilteredFundIdList(ReferenceList):
     """
     filter:  StrictStr = Field(...,alias="filter", description="") 
     values: Optional[List[ResourceId]] = None
+    nav_type_codes_hint: Optional[List[StrictStr]] = Field(default=None, alias="navTypeCodesHint")
+    nav_type_selection:  Optional[StrictStr] = Field(None,alias="navTypeSelection", description="Available values: First, All.") 
+    resolved_fund_nav_type_codes: Optional[List[FundNavTypeCodes]] = Field(default=None, alias="resolvedFundNavTypeCodes")
     reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["referenceListType", "filter", "values"]
+    __properties = ["referenceListType", "filter", "values", "navTypeCodesHint", "navTypeSelection", "resolvedFundNavTypeCodes"]
+
+    @validator('nav_type_selection')
+    def nav_type_selection_validate_enum(cls, value):
+        """Validates the enum"""
+
+        # Finbourne removed enum validation on all models except the
+        # oneOf-discriminator case: each oneOf variant declares a
+        # discriminator field (e.g. `type`, `launcherType`) whose enum has
+        # exactly one allowable value, which pydantic uses to route the
+        # union. We detect that shape here (single allowable value) — no
+        # manual class list, no hard-coded discriminator name.
+
+        if value is None:
+            return value
+
+        _allowed = ['First', 'All']
+        if len(_allowed) != 1:
+            return value
+        if value not in _allowed:
+            raise ValueError(f"must be one of enum values {_allowed}")
+        return value
 
     @validator('reference_list_type')
     def reference_list_type_validate_enum(cls, value):
@@ -84,6 +109,7 @@ class FilteredFundIdList(ReferenceList):
         _dict = self.dict(by_alias=True,
                           exclude={
                             "values",
+                            "resolved_fund_nav_type_codes",
                             "additional_properties"
                           },
                           exclude_none=True)
@@ -94,6 +120,13 @@ class FilteredFundIdList(ReferenceList):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['values'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in resolved_fund_nav_type_codes (list)
+        _items = []
+        if self.resolved_fund_nav_type_codes:
+            for _item in self.resolved_fund_nav_type_codes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['resolvedFundNavTypeCodes'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -103,6 +136,16 @@ class FilteredFundIdList(ReferenceList):
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
             _dict['values'] = None
+
+        # set to None if nav_type_codes_hint (nullable) is None
+        # and __fields_set__ contains the field
+        if self.nav_type_codes_hint is None and "nav_type_codes_hint" in self.__fields_set__:
+            _dict['navTypeCodesHint'] = None
+
+        # set to None if resolved_fund_nav_type_codes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.resolved_fund_nav_type_codes is None and "resolved_fund_nav_type_codes" in self.__fields_set__:
+            _dict['resolvedFundNavTypeCodes'] = None
 
         return _dict
 
@@ -118,7 +161,10 @@ class FilteredFundIdList(ReferenceList):
         _obj = FilteredFundIdList.parse_obj({
             "reference_list_type": obj.get("referenceListType"),
             "filter": obj.get("filter"),
-            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None
+            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+            "nav_type_codes_hint": obj.get("navTypeCodesHint"),
+            "nav_type_selection": obj.get("navTypeSelection"),
+            "resolved_fund_nav_type_codes": [FundNavTypeCodes.from_dict(_item) for _item in obj.get("resolvedFundNavTypeCodes")] if obj.get("resolvedFundNavTypeCodes") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

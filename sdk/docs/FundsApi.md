@@ -5,8 +5,10 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_estimate_valuation_point**](FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
+[**accrue_carry**](FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund&#39;s partners.
 [**add_allocation_groups**](FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 [**add_series**](FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+[**calculate_management_fees**](FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
 [**create_facility**](FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.
 [**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
 [**create_fund**](FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EARLY ACCESS] CreateFund: Create a Fund.
@@ -18,7 +20,9 @@ Method | HTTP request | Description
 [**delete_fee**](FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] DeleteFee: Delete a Fee.
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
 [**delete_nav_activity_adjustments**](FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
+[**delete_series**](FundsApi.md#delete_series) | **DELETE** /api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier} | [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
 [**delete_valuation_point**](FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.
+[**diff_partner_statement**](FundsApi.md#diff_partner_statement) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff | [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner&#39;s statements.
 [**finalise_candidate_valuation_point**](FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 [**get_a2_b_data_for_fund**](FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.
 [**get_a2_b_movements_for_fund**](FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
@@ -26,11 +30,16 @@ Method | HTTP request | Description
 [**get_fee**](FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] GetFee: Get a Fee for a specified Fund.
 [**get_fee_properties**](FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EARLY ACCESS] GetFeeProperties: Get Fee properties.
 [**get_fund**](FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund.
+[**get_fund_performance**](FundsApi.md#get_fund_performance) | **GET** /api/funds/{scope}/{code}/performance | [EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund&#39;s performance measures over all its partners.
 [**get_fund_properties**](FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EARLY ACCESS] GetFundProperties: Get Fund properties.
 [**get_holding_contributors_for_fund**](FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 [**get_holdings_for_fund**](FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
+[**get_partner_capital_account**](FundsApi.md#get_partner_capital_account) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner&#39;s capital account statement.
+[**get_partner_performance**](FundsApi.md#get_partner_performance) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/performance | [EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner&#39;s performance measures.
 [**get_partner_unfunded_reconciliation**](FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner&#39;s unfunded commitment statement.
 [**get_partners**](FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
+[**get_partnership_config_pack**](FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+[**get_series**](FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
 [**get_valuation_for_fund**](FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
 [**get_valuation_point_data**](FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.
 [**get_valuation_point_journal_entry_lines**](FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
@@ -45,14 +54,18 @@ Method | HTTP request | Description
 [**list_fund_calendar_entries**](FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.
 [**list_funds**](FundsApi.md#list_funds) | **GET** /api/funds | [EARLY ACCESS] ListFunds: List Funds.
 [**list_nav_activity_adjustments**](FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+[**list_partner_capital_accounts**](FundsApi.md#list_partner_capital_accounts) | **GET** /api/funds/{scope}/{code}/capitalaccounts | [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund&#39;s partners.
+[**list_partner_statements**](FundsApi.md#list_partner_statements) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
 [**list_valuation_point_complex_market_data**](FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
 [**list_valuation_point_instruments**](FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point
 [**list_valuation_point_overview**](FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 [**patch_fee**](FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] PatchFee: Patch Fee.
 [**patch_fund**](FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EARLY ACCESS] PatchFund: Patch a Fund.
+[**produce_partner_statement**](FundsApi.md#produce_partner_statement) | **POST** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner&#39;s capital statement for a period.
 [**query_cash_statement**](FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
 [**query_cash_statement_local_currency**](FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
 [**revert_valuation_point_to_estimate**](FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
+[**run_partner_allocations**](FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period&#39;s income to the Fund&#39;s partners.
 [**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 [**update_valuation_point**](FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 [**upsert_bookmark**](FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
@@ -160,6 +173,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Accepted Estimate point and status after being Accepted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **accrue_carry**
+> CarryAccrualResult accrue_carry(scope, code, carry_accrual_request, as_at=as_at)
+
+[EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.
+
+Take the carry each partner has earned to the period end, as the waterfall states it, and book the movement  against what is already accrued on the books.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # carry_accrual_request = CarryAccrualRequest.from_json("")
+    # carry_accrual_request = CarryAccrualRequest.from_dict({})
+    carry_accrual_request = CarryAccrualRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.accrue_carry(scope, code, carry_accrual_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.
+        api_response = api_instance.accrue_carry(scope, code, carry_accrual_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->accrue_carry: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **carry_accrual_request** | [**CarryAccrualRequest**](CarryAccrualRequest.md)| The carry to accrue. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**CarryAccrualResult**](CarryAccrualResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The carry accrual movement per partner. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -352,6 +468,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund with the added Series. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **calculate_management_fees**
+> ManagementFeeResult calculate_management_fees(scope, code, management_fee_request, as_at=as_at)
+
+[EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
+
+Charge the Fund's management fee on each partner's capital base for the period, net of any fee income offsets,  and book the net fee unless the request asks only for the calculation.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # management_fee_request = ManagementFeeRequest.from_json("")
+    # management_fee_request = ManagementFeeRequest.from_dict({})
+    management_fee_request = ManagementFeeRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.calculate_management_fees(scope, code, management_fee_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
+        api_response = api_instance.calculate_management_fees(scope, code, management_fee_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->calculate_management_fees: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **management_fee_request** | [**ManagementFeeRequest**](ManagementFeeRequest.md)| The fee period, basis and offsets. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**ManagementFeeResult**](ManagementFeeResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The management fee per partner. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1446,6 +1665,104 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **delete_series**
+> DeletedEntityResponse delete_series(scope, code, share_class_code, series_identifier)
+
+[EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
+
+Removes the Series from the Share Class. A Series that still has units in issue cannot be removed.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    share_class_code = 'share_class_code_example' # str | The short code of the Share Class the Series belongs to.
+    series_identifier = 'series_identifier_example' # str | The identifier of the Series to remove.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_series(scope, code, share_class_code, series_identifier, opts=opts)
+
+        # [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
+        api_response = api_instance.delete_series(scope, code, share_class_code, series_identifier)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->delete_series: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **share_class_code** | **str**| The short code of the Share Class the Series belongs to. | 
+ **series_identifier** | **str**| The identifier of the Series to remove. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the Series was removed. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **delete_valuation_point**
 > DeletedEntityResponse delete_valuation_point(scope, code, diary_entry_code, diary_entry_code_variant=diary_entry_code_variant, nav_type_code=nav_type_code)
 
@@ -1541,6 +1858,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the Valuation Point was deleted |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **diff_partner_statement**
+> PartnerStatementDiff diff_partner_statement(scope, code, investor_record_id, statement_id, against)
+
+[EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.
+
+Compare a partner's statement against another produced for the same partner, figure by figure.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    investor_record_id = 'investor_record_id_example' # str | The investor record the statements are for.
+    statement_id = 'statement_id_example' # str | The identifier of the statement to compare.
+    against = 'against_example' # str | The identifier of the statement to compare against.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.diff_partner_statement(scope, code, investor_record_id, statement_id, against, opts=opts)
+
+        # [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.
+        api_response = api_instance.diff_partner_statement(scope, code, investor_record_id, statement_id, against)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->diff_partner_statement: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **investor_record_id** | **str**| The investor record the statements are for. | 
+ **statement_id** | **str**| The identifier of the statement to compare. | 
+ **against** | **str**| The identifier of the statement to compare against. | 
+
+### Return type
+
+[**PartnerStatementDiff**](PartnerStatementDiff.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The figures that differ between the two statements. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2269,6 +2686,104 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_fund_performance**
+> PartnerPerformance get_fund_performance(scope, code, nav_type_code=nav_type_code, as_at=as_at)
+
+[EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.
+
+The fund's PIC, DPI, RVPI, TVPI and net IRR built from the capital activity of every partner on the  register, open or closed, with the same optional with- and without-facility views as the partner read.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    nav_type_code = 'nav_type_code_example' # str | The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_fund_performance(scope, code, nav_type_code=nav_type_code, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.
+        api_response = api_instance.get_fund_performance(scope, code, nav_type_code=nav_type_code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_fund_performance: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **nav_type_code** | **str**| The NAV type to read the register and ledger under. Defaults to the fund&#39;s primary NAV type. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnerPerformance**](PartnerPerformance.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The fund&#39;s performance measures over all its partners. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_fund_properties**
 > FundProperties get_fund_properties(scope, code, effective_at=effective_at, as_at=as_at)
 
@@ -2597,6 +3112,214 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_partner_capital_account**
+> PartnerCapitalAccount get_partner_capital_account(scope, code, ir_scope, ir_code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at)
+
+[EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.
+
+One partner's capital account over a period, rolled from beginning capital through contributions,  distributions, transfers, allocated income, fees, gains and carried interest to ending capital, with  quarter-, year- and inception-to-date columns. The memo block carries the commitment position. The  statement is an estimate until a final valuation point covers the period end.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    ir_scope = 'ir_scope_example' # str | The scope of the partner's investor record.
+    ir_code = 'ir_code_example' # str | The code of the partner's investor record.
+    period_start = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end. (optional)
+    period_end = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime the statement period closes at. Defaults to the current LUSID system datetime. (optional)
+    nav_type_code = 'nav_type_code_example' # str | The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_partner_capital_account(scope, code, ir_scope, ir_code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.
+        api_response = api_instance.get_partner_capital_account(scope, code, ir_scope, ir_code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_partner_capital_account: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **ir_scope** | **str**| The scope of the partner&#39;s investor record. | 
+ **ir_code** | **str**| The code of the partner&#39;s investor record. | 
+ **period_start** | **datetime**| The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end. | [optional] 
+ **period_end** | **datetime**| The effective datetime the statement period closes at. Defaults to the current LUSID system datetime. | [optional] 
+ **nav_type_code** | **str**| The NAV type to read the register and ledger under. Defaults to the fund&#39;s primary NAV type. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnerCapitalAccount**](PartnerCapitalAccount.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The partner&#39;s capital account statement over the period. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_partner_performance**
+> PartnerPerformance get_partner_performance(scope, code, ir_scope, ir_code, nav_type_code=nav_type_code, as_at=as_at)
+
+[EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.
+
+One partner's paid-in to committed (PIC), distributions to paid-in (DPI), residual value to paid-in (RVPI),  total value to paid-in (TVPI) and net IRR, together with the dated cash flows the IRR was solved from.  Where any of the partner's events were financed by a subscription facility, the measures are also given  with and without the facility, the latter re-dating facility-funded calls to the deal funding date.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    ir_scope = 'ir_scope_example' # str | The scope of the partner's investor record.
+    ir_code = 'ir_code_example' # str | The code of the partner's investor record.
+    nav_type_code = 'nav_type_code_example' # str | The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_partner_performance(scope, code, ir_scope, ir_code, nav_type_code=nav_type_code, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.
+        api_response = api_instance.get_partner_performance(scope, code, ir_scope, ir_code, nav_type_code=nav_type_code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_partner_performance: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **ir_scope** | **str**| The scope of the partner&#39;s investor record. | 
+ **ir_code** | **str**| The code of the partner&#39;s investor record. | 
+ **nav_type_code** | **str**| The NAV type to read the register and ledger under. Defaults to the fund&#39;s primary NAV type. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnerPerformance**](PartnerPerformance.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The partner&#39;s performance measures. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_partner_unfunded_reconciliation**
 > FundPartnerUnfundedReconciliation get_partner_unfunded_reconciliation(scope, code, investor_record_id, var_from, to=to, as_at=as_at)
 
@@ -2798,6 +3521,202 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The partners of the requested Fund. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_partnership_config_pack**
+> PartnershipConfigPack get_partnership_config_pack(scope, code, as_at=as_at)
+
+[EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+
+Resolve the partnership configuration pack the Fund's configuration names: the partnership transaction types,  the accounts partner capital is posted to and the rules that move each type between them.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_partnership_config_pack(scope, code, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+        api_response = api_instance.get_partnership_config_pack(scope, code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_partnership_config_pack: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnershipConfigPack**](PartnershipConfigPack.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The partnership configuration pack the Fund runs on. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_series**
+> ResourceListOfSeries get_series(scope, code, share_class_code=share_class_code, effective_at=effective_at, as_at=as_at)
+
+[EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
+
+Lists the Series defined on the Share Classes of the Fund, optionally restricted to a single Share Class.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    share_class_code = 'share_class_code_example' # str | Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_series(scope, code, share_class_code=share_class_code, effective_at=effective_at, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
+        api_response = api_instance.get_series(scope, code, share_class_code=share_class_code, effective_at=effective_at, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_series: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **share_class_code** | **str**| Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfSeries**](ResourceListOfSeries.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Series of the requested Fund. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -4341,6 +5260,208 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_partner_capital_accounts**
+> PagedResourceListOfPartnerCapitalAccount list_partner_capital_accounts(scope, code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, page=page, limit=limit)
+
+[EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.
+
+The capital account statement of every open partner on the fund's register over a period, paged in  register order.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    period_start = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end. (optional)
+    period_end = '2013-10-20T19:20:30+01:00' # datetime | The effective datetime the statement period closes at. Defaults to the current LUSID system datetime. (optional)
+    nav_type_code = 'nav_type_code_example' # str | The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_partner_capital_accounts(scope, code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, page=page, limit=limit, opts=opts)
+
+        # [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.
+        api_response = api_instance.list_partner_capital_accounts(scope, code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, page=page, limit=limit)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->list_partner_capital_accounts: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **period_start** | **datetime**| The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end. | [optional] 
+ **period_end** | **datetime**| The effective datetime the statement period closes at. Defaults to the current LUSID system datetime. | [optional] 
+ **nav_type_code** | **str**| The NAV type to read the register and ledger under. Defaults to the fund&#39;s primary NAV type. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfPartnerCapitalAccount**](PagedResourceListOfPartnerCapitalAccount.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The capital account statements of the fund&#39;s partners over the period. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_partner_statements**
+> ResourceListOfPartnerStatement list_partner_statements(scope, code, investor_record_id)
+
+[EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
+
+List every statement produced for the partner on this Fund, most recent first.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    investor_record_id = 'investor_record_id_example' # str | The investor record the statements are for.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_partner_statements(scope, code, investor_record_id, opts=opts)
+
+        # [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
+        api_response = api_instance.list_partner_statements(scope, code, investor_record_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->list_partner_statements: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **investor_record_id** | **str**| The investor record the statements are for. | 
+
+### Return type
+
+[**ResourceListOfPartnerStatement**](ResourceListOfPartnerStatement.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The statements produced for the partner. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_valuation_point_complex_market_data**
 > ValuationPointResourceListOfAccountedComplexMarketData list_valuation_point_complex_market_data(scope, code, valuation_point_data_query_parameters, as_at=as_at, limit=limit, page=page, nav_type_code=nav_type_code)
 
@@ -4773,7 +5894,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchFund: Patch a Fund.
 
-Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.
+Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices, WhtParameters, ShareClasses.
 
 ### Example
 
@@ -4861,6 +5982,111 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **produce_partner_statement**
+> PartnerStatement produce_partner_statement(scope, code, investor_record_id, partner_statement_request, as_at=as_at)
+
+[EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner's capital statement for a period.
+
+Produce the capital account statement of one partner for the period: opening capital, contributions,  distributions, allocated income, carry and fees, and closing capital. The statement is kept so later  statements for the same period can be compared against it.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    investor_record_id = 'investor_record_id_example' # str | The investor record the statement is for.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # partner_statement_request = PartnerStatementRequest.from_json("")
+    # partner_statement_request = PartnerStatementRequest.from_dict({})
+    partner_statement_request = PartnerStatementRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.produce_partner_statement(scope, code, investor_record_id, partner_statement_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner's capital statement for a period.
+        api_response = api_instance.produce_partner_statement(scope, code, investor_record_id, partner_statement_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->produce_partner_statement: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **investor_record_id** | **str**| The investor record the statement is for. | 
+ **partner_statement_request** | [**PartnerStatementRequest**](PartnerStatementRequest.md)| The statement period. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnerStatement**](PartnerStatement.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The partner&#39;s statement for the period. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -5190,6 +6416,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The reverted Estimate Valuation Point, with every variant resurrected by the revert |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **run_partner_allocations**
+> PartnerAllocationRunResult run_partner_allocations(scope, code, partner_allocation_run_request, as_at=as_at)
+
+[EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.
+
+Share the Fund's income, gains and expenses for the period across the partners on its register, pool by pool,  and book the allocation unless the run is a dry run.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # partner_allocation_run_request = PartnerAllocationRunRequest.from_json("")
+    # partner_allocation_run_request = PartnerAllocationRunRequest.from_dict({})
+    partner_allocation_run_request = PartnerAllocationRunRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.run_partner_allocations(scope, code, partner_allocation_run_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.
+        api_response = api_instance.run_partner_allocations(scope, code, partner_allocation_run_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->run_partner_allocations: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **partner_allocation_run_request** | [**PartnerAllocationRunRequest**](PartnerAllocationRunRequest.md)| The period to allocate and how. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**PartnerAllocationRunResult**](PartnerAllocationRunResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The allocation of the period to the partners. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -34,7 +34,9 @@ class SeriesDefinition(BaseModel):
     launch_price_type:  StrictStr = Field(...,alias="launchPriceType", description="The type of launch price for the Series. Available values: Manual, Calculated.") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The denomination currency of the Series.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to associate with the Series. Only applied if createInstrument is set to true on the parent Fund.")
-    __properties = ["seriesIdentifier", "seriesType", "launchDate", "launchPriceType", "domCcy", "properties"]
+    launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price of the Series. Required when LaunchPriceType is Manual; ignored when it is Calculated.", alias="launchPrice")
+    status:  Optional[StrictStr] = Field(None,alias="status", description="The lifecycle status of the Series: Open, Closed or Rolled. Defaults to Open. Available values: Open, Closed, Rolled.") 
+    __properties = ["seriesIdentifier", "seriesType", "launchDate", "launchPriceType", "domCcy", "properties", "launchPrice", "status"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +82,16 @@ class SeriesDefinition(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if launch_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.launch_price is None and "launch_price" in self.__fields_set__:
+            _dict['launchPrice'] = None
+
+        # set to None if status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.status is None and "status" in self.__fields_set__:
+            _dict['status'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +114,9 @@ class SeriesDefinition(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "launch_price": obj.get("launchPrice"),
+            "status": obj.get("status")
         })
         return _obj
 

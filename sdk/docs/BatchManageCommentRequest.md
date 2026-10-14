@@ -5,7 +5,7 @@ One item of a batch comment request. The operation (add/edit/delete) is inferred
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instance_id** | [**RecInstanceId**](RecInstanceId.md) |  | 
-**rec_type** | **str** | The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
+**rec_type** | **str** | The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
 **run_number** | **int** | The run of the instance whose results this item targets. | 
 **rec_result_id** | **str** | The rec result the comment operation targets. | 
 **comment_id** | **str** | The comment id. Null with text &#x3D; add; provided with text &#x3D; edit; provided with null text &#x3D; delete. | [optional] 

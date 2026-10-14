@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_amortisation_ruleset**](AmortisationRuleSetsApi.md#delete_amortisation_ruleset) | **DELETE** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.
 [**get_amortisation_rule_set**](AmortisationRuleSetsApi.md#get_amortisation_rule_set) | **GET** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set
 [**list_amortisation_rule_sets**](AmortisationRuleSetsApi.md#list_amortisation_rule_sets) | **GET** /api/amortisation/rulesets | [EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.
+[**list_amortisation_rules_intervals**](AmortisationRuleSetsApi.md#list_amortisation_rules_intervals) | **GET** /api/amortisation/rulesets/{scope}/{code}/rulesIntervals | ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.
 [**set_amortisation_rules**](AmortisationRuleSetsApi.md#set_amortisation_rules) | **PUT** /api/amortisation/rulesets/{scope}/{code}/rules | [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
 [**update_amortisation_rule_set_details**](AmortisationRuleSetsApi.md#update_amortisation_rule_set_details) | **PUT** /api/amortisation/rulesets/{scope}/{code}/details | [EXPERIMENTAL] UpdateAmortisationRuleSetDetails: Update an amortisation rule set.
 
@@ -400,6 +401,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | A list of rule sets available. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_amortisation_rules_intervals**
+> ResourceListOfRulesInterval list_amortisation_rules_intervals(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
+
+ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.
+
+Lists the rules intervals of the rule set, ordered by from date. Each interval applies from its from date  until the next interval starts. The last interval has no until date.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AmortisationRuleSetsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AmortisationRuleSetsApi)
+    scope = 'scope_example' # str | The rule set scope.
+    code = 'code_example' # str | The rule set code.
+    from_effective_at = 'from_effective_at_example' # str | Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified. (optional)
+    to_effective_at = 'to_effective_at_example' # str | Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_amortisation_rules_intervals(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, opts=opts)
+
+        # ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.
+        api_response = api_instance.list_amortisation_rules_intervals(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AmortisationRuleSetsApi->list_amortisation_rules_intervals: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The rule set scope. | 
+ **code** | **str**| The rule set code. | 
+ **from_effective_at** | **str**| Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified. | [optional] 
+ **to_effective_at** | **str**| Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified. | [optional] 
+
+### Return type
+
+[**ResourceListOfRulesInterval**](ResourceListOfRulesInterval.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The rules intervals of the rule set. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

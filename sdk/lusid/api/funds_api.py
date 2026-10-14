@@ -25,6 +25,8 @@ from typing import Dict, List, Optional
 from typing_extensions import Annotated
 from lusid.models.accept_estimate_valuation_point_response import AcceptEstimateValuationPointResponse
 from lusid.models.allocation_group_definition import AllocationGroupDefinition
+from lusid.models.carry_accrual_request import CarryAccrualRequest
+from lusid.models.carry_accrual_result import CarryAccrualResult
 from lusid.models.create_valuation_point_request import CreateValuationPointRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.diary_entry import DiaryEntry
@@ -41,6 +43,8 @@ from lusid.models.fund_properties import FundProperties
 from lusid.models.fund_request import FundRequest
 from lusid.models.fund_valuation_request import FundValuationRequest
 from lusid.models.list_aggregation_response import ListAggregationResponse
+from lusid.models.management_fee_request import ManagementFeeRequest
+from lusid.models.management_fee_result import ManagementFeeResult
 from lusid.models.model_property import ModelProperty
 from lusid.models.nav_activity_adjustment import NavActivityAdjustment
 from lusid.models.nav_activity_adjustment_response import NavActivityAdjustmentResponse
@@ -51,10 +55,21 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResourceListOfFundCalendarEntries
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_partner import PagedResourceListOfFundPartner
+from lusid.models.paged_resource_list_of_partner_capital_account import PagedResourceListOfPartnerCapitalAccount
 from lusid.models.paged_resource_list_of_valuation_point_instrument import PagedResourceListOfValuationPointInstrument
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
+from lusid.models.partner_allocation_run_request import PartnerAllocationRunRequest
+from lusid.models.partner_allocation_run_result import PartnerAllocationRunResult
+from lusid.models.partner_capital_account import PartnerCapitalAccount
+from lusid.models.partner_performance import PartnerPerformance
+from lusid.models.partner_statement import PartnerStatement
+from lusid.models.partner_statement_diff import PartnerStatementDiff
+from lusid.models.partner_statement_request import PartnerStatementRequest
+from lusid.models.partnership_config_pack import PartnershipConfigPack
 from lusid.models.query_fund_cash_statement_parameters import QueryFundCashStatementParameters
 from lusid.models.resource_list_of_nav_activity_adjustment_response import ResourceListOfNavActivityAdjustmentResponse
+from lusid.models.resource_list_of_partner_statement import ResourceListOfPartnerStatement
+from lusid.models.resource_list_of_series import ResourceListOfSeries
 from lusid.models.revert_valuation_point_data_request import RevertValuationPointDataRequest
 from lusid.models.revert_valuation_point_response import RevertValuationPointResponse
 from lusid.models.series_definition_request import SeriesDefinitionRequest
@@ -273,6 +288,192 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/valuationpoints/$acceptestimate', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def accrue_carry(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], carry_accrual_request : Annotated[CarryAccrualRequest, Field(description="The carry to accrue.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> CarryAccrualResult:  # noqa: E501
+        ...
+
+    @overload
+    def accrue_carry(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], carry_accrual_request : Annotated[CarryAccrualRequest, Field(description="The carry to accrue.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> CarryAccrualResult:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def accrue_carry(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], carry_accrual_request : Annotated[CarryAccrualRequest, Field(description="The carry to accrue.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[CarryAccrualResult, Awaitable[CarryAccrualResult]]:  # noqa: E501
+        """[EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.  # noqa: E501
+
+        Take the carry each partner has earned to the period end, as the waterfall states it, and book the movement  against what is already accrued on the books.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.accrue_carry(scope, code, carry_accrual_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param carry_accrual_request: The carry to accrue. (required)
+        :type carry_accrual_request: CarryAccrualRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: CarryAccrualResult
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the accrue_carry_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.accrue_carry_with_http_info(scope, code, carry_accrual_request, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def accrue_carry_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], carry_accrual_request : Annotated[CarryAccrualRequest, Field(description="The carry to accrue.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.  # noqa: E501
+
+        Take the carry each partner has earned to the period end, as the waterfall states it, and book the movement  against what is already accrued on the books.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.accrue_carry_with_http_info(scope, code, carry_accrual_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param carry_accrual_request: The carry to accrue. (required)
+        :type carry_accrual_request: CarryAccrualRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(CarryAccrualResult, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'carry_accrual_request',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method accrue_carry" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['carry_accrual_request'] is not None:
+            _body_params = _params['carry_accrual_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "CarryAccrualResult",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/carry/$accrue', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -623,6 +824,192 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/series', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def calculate_management_fees(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], management_fee_request : Annotated[ManagementFeeRequest, Field(description="The fee period, basis and offsets.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ManagementFeeResult:  # noqa: E501
+        ...
+
+    @overload
+    def calculate_management_fees(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], management_fee_request : Annotated[ManagementFeeRequest, Field(description="The fee period, basis and offsets.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ManagementFeeResult:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def calculate_management_fees(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], management_fee_request : Annotated[ManagementFeeRequest, Field(description="The fee period, basis and offsets.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ManagementFeeResult, Awaitable[ManagementFeeResult]]:  # noqa: E501
+        """[EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.  # noqa: E501
+
+        Charge the Fund's management fee on each partner's capital base for the period, net of any fee income offsets,  and book the net fee unless the request asks only for the calculation.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.calculate_management_fees(scope, code, management_fee_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param management_fee_request: The fee period, basis and offsets. (required)
+        :type management_fee_request: ManagementFeeRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ManagementFeeResult
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the calculate_management_fees_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.calculate_management_fees_with_http_info(scope, code, management_fee_request, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def calculate_management_fees_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], management_fee_request : Annotated[ManagementFeeRequest, Field(description="The fee period, basis and offsets.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.  # noqa: E501
+
+        Charge the Fund's management fee on each partner's capital base for the period, net of any fee income offsets,  and book the net fee unless the request asks only for the calculation.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.calculate_management_fees_with_http_info(scope, code, management_fee_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param management_fee_request: The fee period, basis and offsets. (required)
+        :type management_fee_request: ManagementFeeRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ManagementFeeResult, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'management_fee_request',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method calculate_management_fees" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['management_fee_request'] is not None:
+            _body_params = _params['management_fee_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ManagementFeeResult",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/fees/$calculate', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -2570,6 +2957,182 @@ class FundsApi:
 
 
     @overload
+    async def delete_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class the Series belongs to.")], series_identifier : Annotated[StrictStr, Field(..., description="The identifier of the Series to remove.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class the Series belongs to.")], series_identifier : Annotated[StrictStr, Field(..., description="The identifier of the Series to remove.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class the Series belongs to.")], series_identifier : Annotated[StrictStr, Field(..., description="The identifier of the Series to remove.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.  # noqa: E501
+
+        Removes the Series from the Share Class. A Series that still has units in issue cannot be removed.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_series(scope, code, share_class_code, series_identifier, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_code: The short code of the Share Class the Series belongs to. (required)
+        :type share_class_code: str
+        :param series_identifier: The identifier of the Series to remove. (required)
+        :type series_identifier: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_series_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_series_with_http_info(scope, code, share_class_code, series_identifier, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_series_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class the Series belongs to.")], series_identifier : Annotated[StrictStr, Field(..., description="The identifier of the Series to remove.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.  # noqa: E501
+
+        Removes the Series from the Share Class. A Series that still has units in issue cannot be removed.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_series_with_http_info(scope, code, share_class_code, series_identifier, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_code: The short code of the Share Class the Series belongs to. (required)
+        :type share_class_code: str
+        :param series_identifier: The identifier of the Series to remove. (required)
+        :type series_identifier: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'share_class_code',
+            'series_identifier'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_series" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['share_class_code']:
+            _path_params['shareClassCode'] = _params['share_class_code']
+
+        if _params['series_identifier']:
+            _path_params['seriesIdentifier'] = _params['series_identifier']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def delete_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The diary entry code for the valuation Point to be deleted.")], diary_entry_code_variant : Annotated[Optional[StrictStr], Field( description="The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. This is working only for the Estimates.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, deletes the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
@@ -2736,6 +3299,190 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def diff_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], statement_id : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare.")], against : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare against.")], **kwargs) -> PartnerStatementDiff:  # noqa: E501
+        ...
+
+    @overload
+    def diff_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], statement_id : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare.")], against : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare against.")], async_req: Optional[bool]=True, **kwargs) -> PartnerStatementDiff:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def diff_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], statement_id : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare.")], against : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare against.")], async_req: Optional[bool]=None, **kwargs) -> Union[PartnerStatementDiff, Awaitable[PartnerStatementDiff]]:  # noqa: E501
+        """[EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.  # noqa: E501
+
+        Compare a partner's statement against another produced for the same partner, figure by figure.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.diff_partner_statement(scope, code, investor_record_id, statement_id, against, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statements are for. (required)
+        :type investor_record_id: str
+        :param statement_id: The identifier of the statement to compare. (required)
+        :type statement_id: str
+        :param against: The identifier of the statement to compare against. (required)
+        :type against: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerStatementDiff
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the diff_partner_statement_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.diff_partner_statement_with_http_info(scope, code, investor_record_id, statement_id, against, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def diff_partner_statement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], statement_id : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare.")], against : Annotated[StrictStr, Field(..., description="The identifier of the statement to compare against.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.  # noqa: E501
+
+        Compare a partner's statement against another produced for the same partner, figure by figure.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.diff_partner_statement_with_http_info(scope, code, investor_record_id, statement_id, against, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statements are for. (required)
+        :type investor_record_id: str
+        :param statement_id: The identifier of the statement to compare. (required)
+        :type statement_id: str
+        :param against: The identifier of the statement to compare against. (required)
+        :type against: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerStatementDiff, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'investor_record_id',
+            'statement_id',
+            'against'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method diff_partner_statement" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['investor_record_id']:
+            _path_params['investorRecordId'] = _params['investor_record_id']
+
+        if _params['statement_id']:
+            _path_params['statementId'] = _params['statement_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('against') is not None:  # noqa: E501
+            _query_params.append(('against', _params['against']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerStatementDiff",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -4117,6 +4864,185 @@ class FundsApi:
 
 
     @overload
+    async def get_fund_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> PartnerPerformance:  # noqa: E501
+        ...
+
+    @overload
+    def get_fund_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnerPerformance:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_fund_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnerPerformance, Awaitable[PartnerPerformance]]:  # noqa: E501
+        """[EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.  # noqa: E501
+
+        The fund's PIC, DPI, RVPI, TVPI and net IRR built from the capital activity of every partner on the  register, open or closed, with the same optional with- and without-facility views as the partner read.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_fund_performance(scope, code, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerPerformance
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_fund_performance_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_fund_performance_with_http_info(scope, code, nav_type_code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_fund_performance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.  # noqa: E501
+
+        The fund's PIC, DPI, RVPI, TVPI and net IRR built from the capital activity of every partner on the  register, open or closed, with the same optional with- and without-facility views as the partner read.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_fund_performance_with_http_info(scope, code, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerPerformance, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'nav_type_code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_fund_performance" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerPerformance",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/performance', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def get_fund_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund to list the properties for.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund to list the properties for. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund's properties. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Fund's properties. Defaults to return the latest version of each property if not specified.")] = None, **kwargs) -> FundProperties:  # noqa: E501
         ...
 
@@ -4765,6 +5691,418 @@ class FundsApi:
 
 
     @overload
+    async def get_partner_capital_account(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> PartnerCapitalAccount:  # noqa: E501
+        ...
+
+    @overload
+    def get_partner_capital_account(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnerCapitalAccount:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_partner_capital_account(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnerCapitalAccount, Awaitable[PartnerCapitalAccount]]:  # noqa: E501
+        """[EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.  # noqa: E501
+
+        One partner's capital account over a period, rolled from beginning capital through contributions,  distributions, transfers, allocated income, fees, gains and carried interest to ending capital, with  quarter-, year- and inception-to-date columns. The memo block carries the commitment position. The  statement is an estimate until a final valuation point covers the period end.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partner_capital_account(scope, code, ir_scope, ir_code, period_start, period_end, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param ir_scope: The scope of the partner's investor record. (required)
+        :type ir_scope: str
+        :param ir_code: The code of the partner's investor record. (required)
+        :type ir_code: str
+        :param period_start: The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.
+        :type period_start: datetime
+        :param period_end: The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.
+        :type period_end: datetime
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerCapitalAccount
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_partner_capital_account_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_partner_capital_account_with_http_info(scope, code, ir_scope, ir_code, period_start, period_end, nav_type_code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_partner_capital_account_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.  # noqa: E501
+
+        One partner's capital account over a period, rolled from beginning capital through contributions,  distributions, transfers, allocated income, fees, gains and carried interest to ending capital, with  quarter-, year- and inception-to-date columns. The memo block carries the commitment position. The  statement is an estimate until a final valuation point covers the period end.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partner_capital_account_with_http_info(scope, code, ir_scope, ir_code, period_start, period_end, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param ir_scope: The scope of the partner's investor record. (required)
+        :type ir_scope: str
+        :param ir_code: The code of the partner's investor record. (required)
+        :type ir_code: str
+        :param period_start: The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.
+        :type period_start: datetime
+        :param period_end: The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.
+        :type period_end: datetime
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerCapitalAccount, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'ir_scope',
+            'ir_code',
+            'period_start',
+            'period_end',
+            'nav_type_code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_partner_capital_account" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['ir_scope']:
+            _path_params['irScope'] = _params['ir_scope']
+
+        if _params['ir_code']:
+            _path_params['irCode'] = _params['ir_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('period_start') is not None:  # noqa: E501
+            if isinstance(_params['period_start'], datetime):
+                _query_params.append(('periodStart', _params['period_start'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('periodStart', _params['period_start']))
+
+        if _params.get('period_end') is not None:  # noqa: E501
+            if isinstance(_params['period_end'], datetime):
+                _query_params.append(('periodEnd', _params['period_end'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('periodEnd', _params['period_end']))
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerCapitalAccount",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_partner_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> PartnerPerformance:  # noqa: E501
+        ...
+
+    @overload
+    def get_partner_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnerPerformance:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_partner_performance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnerPerformance, Awaitable[PartnerPerformance]]:  # noqa: E501
+        """[EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.  # noqa: E501
+
+        One partner's paid-in to committed (PIC), distributions to paid-in (DPI), residual value to paid-in (RVPI),  total value to paid-in (TVPI) and net IRR, together with the dated cash flows the IRR was solved from.  Where any of the partner's events were financed by a subscription facility, the measures are also given  with and without the facility, the latter re-dating facility-funded calls to the deal funding date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partner_performance(scope, code, ir_scope, ir_code, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param ir_scope: The scope of the partner's investor record. (required)
+        :type ir_scope: str
+        :param ir_code: The code of the partner's investor record. (required)
+        :type ir_code: str
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerPerformance
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_partner_performance_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_partner_performance_with_http_info(scope, code, ir_scope, ir_code, nav_type_code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_partner_performance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], ir_scope : Annotated[StrictStr, Field(..., description="The scope of the partner's investor record.")], ir_code : Annotated[StrictStr, Field(..., description="The code of the partner's investor record.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.  # noqa: E501
+
+        One partner's paid-in to committed (PIC), distributions to paid-in (DPI), residual value to paid-in (RVPI),  total value to paid-in (TVPI) and net IRR, together with the dated cash flows the IRR was solved from.  Where any of the partner's events were financed by a subscription facility, the measures are also given  with and without the facility, the latter re-dating facility-funded calls to the deal funding date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partner_performance_with_http_info(scope, code, ir_scope, ir_code, nav_type_code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param ir_scope: The scope of the partner's investor record. (required)
+        :type ir_scope: str
+        :param ir_code: The code of the partner's investor record. (required)
+        :type ir_code: str
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerPerformance, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'ir_scope',
+            'ir_code',
+            'nav_type_code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_partner_performance" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['ir_scope']:
+            _path_params['irScope'] = _params['ir_scope']
+
+        if _params['ir_code']:
+            _path_params['irCode'] = _params['ir_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerPerformance",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partners/{irScope}/{irCode}/performance', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def get_partner_unfunded_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record of the partner.")], var_from : Annotated[StrictStr, Field(..., description="The effective datetime or cut label the statement opens at.")], to : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label the statement closes at. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the register and the booked events. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> FundPartnerUnfundedReconciliation:  # noqa: E501
         ...
 
@@ -5145,6 +6483,364 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/partners', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_partnership_config_pack(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.")] = None, **kwargs) -> PartnershipConfigPack:  # noqa: E501
+        ...
+
+    @overload
+    def get_partnership_config_pack(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnershipConfigPack:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_partnership_config_pack(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnershipConfigPack, Awaitable[PartnershipConfigPack]]:  # noqa: E501
+        """[EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.  # noqa: E501
+
+        Resolve the partnership configuration pack the Fund's configuration names: the partnership transaction types,  the accounts partner capital is posted to and the rules that move each type between them.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partnership_config_pack(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnershipConfigPack
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_partnership_config_pack_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_partnership_config_pack_with_http_info(scope, code, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_partnership_config_pack_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.  # noqa: E501
+
+        Resolve the partnership configuration pack the Fund's configuration names: the partnership transaction types,  the accounts partner capital is posted to and the rules that move each type between them.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_partnership_config_pack_with_http_info(scope, code, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param as_at: The asAt datetime at which to retrieve the pack. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnershipConfigPack, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_partnership_config_pack" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnershipConfigPack",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partnershipaccounting/configpack', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[Optional[StrictStr], Field( description="Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ResourceListOfSeries:  # noqa: E501
+        ...
+
+    @overload
+    def get_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[Optional[StrictStr], Field( description="Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfSeries:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[Optional[StrictStr], Field( description="Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfSeries, Awaitable[ResourceListOfSeries]]:  # noqa: E501
+        """[EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.  # noqa: E501
+
+        Lists the Series defined on the Share Classes of the Fund, optionally restricted to a single Share Class.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_series(scope, code, share_class_code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_code: Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.
+        :type share_class_code: str
+        :param effective_at: The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfSeries
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_series_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_series_with_http_info(scope, code, share_class_code, effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_series_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[Optional[StrictStr], Field( description="Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.  # noqa: E501
+
+        Lists the Series defined on the Share Classes of the Fund, optionally restricted to a single Share Class.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_series_with_http_info(scope, code, share_class_code, effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_code: Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.
+        :type share_class_code: str
+        :param effective_at: The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfSeries, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'share_class_code',
+            'effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_series" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('share_class_code') is not None:  # noqa: E501
+            _query_params.append(('shareClassCode', _params['share_class_code']))
+
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfSeries",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/series', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -8239,6 +9935,391 @@ class FundsApi:
 
 
     @overload
+    async def list_partner_capital_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, **kwargs) -> PagedResourceListOfPartnerCapitalAccount:  # noqa: E501
+        ...
+
+    @overload
+    def list_partner_capital_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfPartnerCapitalAccount:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_partner_capital_accounts(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfPartnerCapitalAccount, Awaitable[PagedResourceListOfPartnerCapitalAccount]]:  # noqa: E501
+        """[EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.  # noqa: E501
+
+        The capital account statement of every open partner on the fund's register over a period, paged in  register order.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_partner_capital_accounts(scope, code, period_start, period_end, nav_type_code, as_at, page, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param period_start: The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.
+        :type period_start: datetime
+        :param period_end: The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.
+        :type period_end: datetime
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfPartnerCapitalAccount
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_partner_capital_accounts_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_partner_capital_accounts_with_http_info(scope, code, period_start, period_end, nav_type_code, as_at, page, limit, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_partner_capital_accounts_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], period_start : Annotated[Optional[datetime], Field(description="The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.")] = None, period_end : Annotated[Optional[datetime], Field(description="The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.  # noqa: E501
+
+        The capital account statement of every open partner on the fund's register over a period, paged in  register order.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_partner_capital_accounts_with_http_info(scope, code, period_start, period_end, nav_type_code, as_at, page, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param period_start: The effective datetime the statement period opens at. Defaults to the start of the quarter containing the period end.
+        :type period_start: datetime
+        :param period_end: The effective datetime the statement period closes at. Defaults to the current LUSID system datetime.
+        :type period_end: datetime
+        :param nav_type_code: The NAV type to read the register and ledger under. Defaults to the fund's primary NAV type.
+        :type nav_type_code: str
+        :param as_at: The asAt datetime at which to read the fund. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing statements from a previous call. This value is returned from the previous call.
+        :type page: str
+        :param limit: When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfPartnerCapitalAccount, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'period_start',
+            'period_end',
+            'nav_type_code',
+            'as_at',
+            'page',
+            'limit'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_partner_capital_accounts" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('period_start') is not None:  # noqa: E501
+            if isinstance(_params['period_start'], datetime):
+                _query_params.append(('periodStart', _params['period_start'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('periodStart', _params['period_start']))
+
+        if _params.get('period_end') is not None:  # noqa: E501
+            if isinstance(_params['period_end'], datetime):
+                _query_params.append(('periodEnd', _params['period_end'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('periodEnd', _params['period_end']))
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfPartnerCapitalAccount",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/capitalaccounts', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_partner_statements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], **kwargs) -> ResourceListOfPartnerStatement:  # noqa: E501
+        ...
+
+    @overload
+    def list_partner_statements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], async_req: Optional[bool]=True, **kwargs) -> ResourceListOfPartnerStatement:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_partner_statements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPartnerStatement, Awaitable[ResourceListOfPartnerStatement]]:  # noqa: E501
+        """[EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.  # noqa: E501
+
+        List every statement produced for the partner on this Fund, most recent first.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_partner_statements(scope, code, investor_record_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statements are for. (required)
+        :type investor_record_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfPartnerStatement
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_partner_statements_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_partner_statements_with_http_info(scope, code, investor_record_id, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_partner_statements_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statements are for.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.  # noqa: E501
+
+        List every statement produced for the partner on this Fund, most recent first.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_partner_statements_with_http_info(scope, code, investor_record_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statements are for. (required)
+        :type investor_record_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfPartnerStatement, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'investor_record_id'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_partner_statements" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['investor_record_id']:
+            _path_params['investorRecordId'] = _params['investor_record_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfPartnerStatement",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partners/{investorRecordId}/statements', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def list_valuation_point_complex_market_data(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], valuation_point_data_query_parameters : Annotated[ValuationPointDataQueryParameters, Field(description="The arguments to use for querying the complex market data.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 100 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ValuationPointResourceListOfAccountedComplexMarketData:  # noqa: E501
         ...
 
@@ -9100,7 +11181,7 @@ class FundsApi:
     def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
-        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.  # noqa: E501
+        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices, WhtParameters, ShareClasses.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -9137,7 +11218,7 @@ class FundsApi:
     def patch_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only DisplayName and Description can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
-        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices.  # noqa: E501
+        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, AborId, YearEndDate, PricingMethodology, ReportingPrices, WhtParameters, ShareClasses.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -9254,6 +11335,200 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def produce_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statement is for.")], partner_statement_request : Annotated[PartnerStatementRequest, Field(description="The statement period.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> PartnerStatement:  # noqa: E501
+        ...
+
+    @overload
+    def produce_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statement is for.")], partner_statement_request : Annotated[PartnerStatementRequest, Field(description="The statement period.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnerStatement:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def produce_partner_statement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statement is for.")], partner_statement_request : Annotated[PartnerStatementRequest, Field(description="The statement period.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnerStatement, Awaitable[PartnerStatement]]:  # noqa: E501
+        """[EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner's capital statement for a period.  # noqa: E501
+
+        Produce the capital account statement of one partner for the period: opening capital, contributions,  distributions, allocated income, carry and fees, and closing capital. The statement is kept so later  statements for the same period can be compared against it.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.produce_partner_statement(scope, code, investor_record_id, partner_statement_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statement is for. (required)
+        :type investor_record_id: str
+        :param partner_statement_request: The statement period. (required)
+        :type partner_statement_request: PartnerStatementRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerStatement
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the produce_partner_statement_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.produce_partner_statement_with_http_info(scope, code, investor_record_id, partner_statement_request, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def produce_partner_statement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record the statement is for.")], partner_statement_request : Annotated[PartnerStatementRequest, Field(description="The statement period.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner's capital statement for a period.  # noqa: E501
+
+        Produce the capital account statement of one partner for the period: opening capital, contributions,  distributions, allocated income, carry and fees, and closing capital. The statement is kept so later  statements for the same period can be compared against it.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.produce_partner_statement_with_http_info(scope, code, investor_record_id, partner_statement_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param investor_record_id: The investor record the statement is for. (required)
+        :type investor_record_id: str
+        :param partner_statement_request: The statement period. (required)
+        :type partner_statement_request: PartnerStatementRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerStatement, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'investor_record_id',
+            'partner_statement_request',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method produce_partner_statement" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['investor_record_id']:
+            _path_params['investorRecordId'] = _params['investor_record_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['partner_statement_request'] is not None:
+            _body_params = _params['partner_statement_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerStatement",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partners/{investorRecordId}/statements', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -9891,6 +12166,192 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/valuationpoints/$reverttoestimate', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def run_partner_allocations(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], partner_allocation_run_request : Annotated[PartnerAllocationRunRequest, Field(description="The period to allocate and how.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> PartnerAllocationRunResult:  # noqa: E501
+        ...
+
+    @overload
+    def run_partner_allocations(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], partner_allocation_run_request : Annotated[PartnerAllocationRunRequest, Field(description="The period to allocate and how.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PartnerAllocationRunResult:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def run_partner_allocations(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], partner_allocation_run_request : Annotated[PartnerAllocationRunRequest, Field(description="The period to allocate and how.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PartnerAllocationRunResult, Awaitable[PartnerAllocationRunResult]]:  # noqa: E501
+        """[EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.  # noqa: E501
+
+        Share the Fund's income, gains and expenses for the period across the partners on its register, pool by pool,  and book the allocation unless the run is a dry run.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.run_partner_allocations(scope, code, partner_allocation_run_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param partner_allocation_run_request: The period to allocate and how. (required)
+        :type partner_allocation_run_request: PartnerAllocationRunRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PartnerAllocationRunResult
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the run_partner_allocations_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.run_partner_allocations_with_http_info(scope, code, partner_allocation_run_request, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def run_partner_allocations_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], partner_allocation_run_request : Annotated[PartnerAllocationRunRequest, Field(description="The period to allocate and how.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.  # noqa: E501
+
+        Share the Fund's income, gains and expenses for the period across the partners on its register, pool by pool,  and book the allocation unless the run is a dry run.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.run_partner_allocations_with_http_info(scope, code, partner_allocation_run_request, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param partner_allocation_run_request: The period to allocate and how. (required)
+        :type partner_allocation_run_request: PartnerAllocationRunRequest
+        :param as_at: The asAt datetime at which to read the Fund. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PartnerAllocationRunResult, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'partner_allocation_run_request',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method run_partner_allocations" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['partner_allocation_run_request'] is not None:
+            _body_params = _params['partner_allocation_run_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PartnerAllocationRunResult",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/partnerallocations/$run', 'POST',
             _path_params,
             _query_params,
             _header_params,

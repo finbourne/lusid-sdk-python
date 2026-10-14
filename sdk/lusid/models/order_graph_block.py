@@ -43,7 +43,8 @@ class OrderGraphBlock(BaseModel):
     derived_compliance_state:  StrictStr = Field(...,alias="derivedComplianceState", description="The overall compliance state of a block, derived from the block's orders. Available values: Pending, Failed, Passed, ManuallyApproved, PartiallyOverridden, Warning.") 
     derived_approval_state:  StrictStr = Field(...,alias="derivedApprovalState", description="The overall approval state of a block, derived from approval of the block's orders. Available values: Pending, Rejected, Approved, Placed.") 
     derived_direction: Optional[StrictInt] = Field(default=None, description="The overall direction of a block, derived from its orders' transaction types: 1 the block increases the position (longer), -1 it decreases it (shorter), 0 its orders net flat, null when no direction could be resolved (including unsolicited blocks).", alias="derivedDirection")
-    __properties = ["block", "ordered", "placed", "executed", "allocated", "booked", "derivedState", "derivedComplianceState", "derivedApprovalState", "derivedDirection"]
+    latest_activity_date: Optional[datetime] = Field(default=None, description="The most recent AsAt at which the block, or any of its orders, placements, executions or allocations, was modified.", alias="latestActivityDate")
+    __properties = ["block", "ordered", "placed", "executed", "allocated", "booked", "derivedState", "derivedComplianceState", "derivedApprovalState", "derivedDirection", "latestActivityDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -121,7 +122,8 @@ class OrderGraphBlock(BaseModel):
             "derived_state": obj.get("derivedState"),
             "derived_compliance_state": obj.get("derivedComplianceState"),
             "derived_approval_state": obj.get("derivedApprovalState"),
-            "derived_direction": obj.get("derivedDirection")
+            "derived_direction": obj.get("derivedDirection"),
+            "latest_activity_date": obj.get("latestActivityDate")
         })
         return _obj
 

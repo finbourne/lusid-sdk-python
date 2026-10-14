@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **instrument_identifiers** | **Dict[str, Optional[str]]** | Unique instrument identifiers | [optional] 
+**series** | [**List[Series]**](Series.md) | The series that belong to this Share Class - only relevant if InvestorType is Series. | [optional] 
 **name** | **str** | The display name of the Share Class. | 
 **description** | **str** | An optional description for the Share Class. | [optional] 
 **share_class_short_code** | **str** | A short code that uniquely identifies the share class within the Fund. | 
@@ -19,6 +20,7 @@ Name | Type | Description | Notes
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **distribution_payment_type** | **str** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] 
 **hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | [optional] 
+**wht_parameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,6 +31,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
+series: Optional[List[Series]] = # Replace with your value
 name: StrictStr = "example_name"
 description: Optional[StrictStr] = "example_description"
 share_class_short_code: StrictStr = "example_share_class_short_code"
@@ -44,7 +47,8 @@ rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
 hedging: Optional[StrictStr] = "example_hedging"
-share_class_instance = ShareClass(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, investor_type=investor_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, rounding_conventions_price=rounding_conventions_price, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
+wht_parameters: Optional[WhtParameters] = # Replace with your value
+share_class_instance = ShareClass(instrument_identifiers=instrument_identifiers, series=series, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, investor_type=investor_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, rounding_conventions_price=rounding_conventions_price, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging, wht_parameters=wht_parameters)
 
 ```
 

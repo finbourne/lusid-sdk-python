@@ -23,15 +23,18 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.model_property import ModelProperty
+from lusid.models.series import Series
 from lusid.models.simple_rounding_convention import SimpleRoundingConvention
 from lusid.models.time_zone_conventions import TimeZoneConventions
 from lusid.models.trading_conventions import TradingConventions
+from lusid.models.wht_parameters import WhtParameters
 
 class ShareClass(BaseModel):
     """
     ShareClass
     """
     instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Unique instrument identifiers", alias="instrumentIdentifiers")
+    series: Optional[List[Series]] = Field(default=None, description="The series that belong to this Share Class - only relevant if InvestorType is Series.")
     name:  StrictStr = Field(...,alias="name", description="The display name of the Share Class.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="An optional description for the Share Class.") 
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund.") 
@@ -47,7 +50,8 @@ class ShareClass(BaseModel):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     distribution_payment_type:  Optional[StrictStr] = Field(None,alias="distributionPaymentType", description="The tax treatment applied to distributions. Available values: Invalid, Gross, Net.") 
     hedging:  Optional[StrictStr] = Field(None,alias="hedging", description="Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging.") 
-    __properties = ["instrumentIdentifiers", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "properties", "investorType", "distributionType", "domCcy", "tradingConventions", "roundingConventionsPrice", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging"]
+    wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
+    __properties = ["instrumentIdentifiers", "series", "name", "description", "shareClassShortCode", "launchPrice", "launchDate", "properties", "investorType", "distributionType", "domCcy", "tradingConventions", "roundingConventionsPrice", "roundingConventionsUnits", "timeZoneConventions", "distributionPaymentType", "hedging", "whtParameters"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +85,13 @@ class ShareClass(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in series (list)
+        _items = []
+        if self.series:
+            for _item in self.series:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['series'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -108,10 +119,18 @@ class ShareClass(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
         if self.time_zone_conventions:
             _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of wht_parameters
+        if self.wht_parameters:
+            _dict['whtParameters'] = self.wht_parameters.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
             _dict['instrumentIdentifiers'] = None
+
+        # set to None if series (nullable) is None
+        # and __fields_set__ contains the field
+        if self.series is None and "series" in self.__fields_set__:
+            _dict['series'] = None
 
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
@@ -171,6 +190,7 @@ class ShareClass(BaseModel):
 
         _obj = ShareClass.parse_obj({
             "instrument_identifiers": obj.get("instrumentIdentifiers"),
+            "series": [Series.from_dict(_item) for _item in obj.get("series")] if obj.get("series") is not None else None,
             "name": obj.get("name"),
             "description": obj.get("description"),
             "share_class_short_code": obj.get("shareClassShortCode"),
@@ -190,7 +210,8 @@ class ShareClass(BaseModel):
             "rounding_conventions_units": [SimpleRoundingConvention.from_dict(_item) for _item in obj.get("roundingConventionsUnits")] if obj.get("roundingConventionsUnits") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
             "distribution_payment_type": obj.get("distributionPaymentType"),
-            "hedging": obj.get("hedging")
+            "hedging": obj.get("hedging"),
+            "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None
         })
         return _obj
 

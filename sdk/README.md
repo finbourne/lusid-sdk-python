@@ -41,16 +41,19 @@ Class | Method | HTTP request | Description
 *AggregatedReturnsApi* | [**upsert_returns_entity**](docs/AggregatedReturnsApi.md#upsert_returns_entity) | **POST** /api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.
 *AggregationApi* | [**generate_configuration_recipe**](docs/AggregationApi.md#generate_configuration_recipe) | **POST** /api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
 *AggregationApi* | [**get_queryable_keys**](docs/AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
-*AggregationApi* | [**get_queryable_keys_for_metrics**](docs/AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EXPERIMENTAL] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
+*AggregationApi* | [**get_queryable_keys_for_metrics**](docs/AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
 *AggregationApi* | [**get_valuation**](docs/AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 *AggregationApi* | [**get_valuation_of_weighted_instruments**](docs/AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
 *AllocationEventsApi* | [**book_allocation_event**](docs/AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
 *AllocationEventsApi* | [**create_allocation_event**](docs/AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
 *AllocationEventsApi* | [**delete_allocation_event**](docs/AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
 *AllocationEventsApi* | [**get_allocation_event**](docs/AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+*AllocationEventsApi* | [**get_allocation_event_notices**](docs/AllocationEventsApi.md#get_allocation_event_notices) | **GET** /api/allocationevents/{scope}/{code}/notices | [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
 *AllocationEventsApi* | [**get_allocation_event_receivables**](docs/AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
 *AllocationEventsApi* | [**list_allocation_events**](docs/AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+*AllocationEventsApi* | [**list_allocation_payment_holds**](docs/AllocationEventsApi.md#list_allocation_payment_holds) | **GET** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds | [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner's payment.
 *AllocationEventsApi* | [**plan_allocation_event_booking**](docs/AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+*AllocationEventsApi* | [**put_allocation_payment_hold**](docs/AllocationEventsApi.md#put_allocation_payment_hold) | **PUT** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold | [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner's payment.
 *AllocationEventsApi* | [**reallocate_allocation_event**](docs/AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
 *AllocationEventsApi* | [**receive_allocation_event**](docs/AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
 *AllocationEventsApi* | [**reverse_allocation_event**](docs/AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
@@ -72,6 +75,7 @@ Class | Method | HTTP request | Description
 *AmortisationRuleSetsApi* | [**delete_amortisation_ruleset**](docs/AmortisationRuleSetsApi.md#delete_amortisation_ruleset) | **DELETE** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] DeleteAmortisationRuleset: Delete an amortisation rule set.
 *AmortisationRuleSetsApi* | [**get_amortisation_rule_set**](docs/AmortisationRuleSetsApi.md#get_amortisation_rule_set) | **GET** /api/amortisation/rulesets/{scope}/{code} | [EXPERIMENTAL] GetAmortisationRuleSet: Retrieve the definition of a single amortisation rule set
 *AmortisationRuleSetsApi* | [**list_amortisation_rule_sets**](docs/AmortisationRuleSetsApi.md#list_amortisation_rule_sets) | **GET** /api/amortisation/rulesets | [EXPERIMENTAL] ListAmortisationRuleSets: List amortisation rule sets.
+*AmortisationRuleSetsApi* | [**list_amortisation_rules_intervals**](docs/AmortisationRuleSetsApi.md#list_amortisation_rules_intervals) | **GET** /api/amortisation/rulesets/{scope}/{code}/rulesIntervals | ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.
 *AmortisationRuleSetsApi* | [**set_amortisation_rules**](docs/AmortisationRuleSetsApi.md#set_amortisation_rules) | **PUT** /api/amortisation/rulesets/{scope}/{code}/rules | [EXPERIMENTAL] SetAmortisationRules: Set Amortisation Rules on an existing Amortisation Rule Set.
 *AmortisationRuleSetsApi* | [**update_amortisation_rule_set_details**](docs/AmortisationRuleSetsApi.md#update_amortisation_rule_set_details) | **PUT** /api/amortisation/rulesets/{scope}/{code}/details | [EXPERIMENTAL] UpdateAmortisationRuleSetDetails: Update an amortisation rule set.
 *ApplicationMetadataApi* | [**get_excel_addin**](docs/ApplicationMetadataApi.md#get_excel_addin) | **GET** /api/metadata/downloads/exceladdin | GetExcelAddin: Download Excel Addin
@@ -140,6 +144,12 @@ Class | Method | HTTP request | Description
 *CheckDefinitionsApi* | [**run_check_definition**](docs/CheckDefinitionsApi.md#run_check_definition) | **POST** /api/dataquality/checkdefinitions/{scope}/{code}/$run | [EXPERIMENTAL] RunCheckDefinition: Runs a Check Definition against given dataset.
 *CheckDefinitionsApi* | [**update_check_definition**](docs/CheckDefinitionsApi.md#update_check_definition) | **PUT** /api/dataquality/checkdefinitions/{scope}/{code} | [EXPERIMENTAL] UpdateCheckDefinition: Update Check Definition defined by scope and code
 *CheckDefinitionsApi* | [**upsert_rules**](docs/CheckDefinitionsApi.md#upsert_rules) | **POST** /api/dataquality/checkdefinitions/{scope}/{code}/$upsertRules | [EXPERIMENTAL] UpsertRules: Upsert rules to a particular Check Definition
+*CollateralAgreementsApi* | [**create_collateral_agreement**](docs/CollateralAgreementsApi.md#create_collateral_agreement) | **POST** /api/collateralagreements/{scope} | [EXPERIMENTAL] CreateCollateralAgreement: Create a Collateral Agreement.
+*CollateralAgreementsApi* | [**delete_collateral_agreement**](docs/CollateralAgreementsApi.md#delete_collateral_agreement) | **DELETE** /api/collateralagreements/{scope}/{code} | [EXPERIMENTAL] DeleteCollateralAgreement: Delete a Collateral Agreement.
+*CollateralAgreementsApi* | [**get_collateral_agreement**](docs/CollateralAgreementsApi.md#get_collateral_agreement) | **GET** /api/collateralagreements/{scope}/{code} | [EXPERIMENTAL] GetCollateralAgreement: Get a Collateral Agreement.
+*CollateralAgreementsApi* | [**get_collateral_agreement_applicability**](docs/CollateralAgreementsApi.md#get_collateral_agreement_applicability) | **GET** /api/collateralagreements/{scope}/{code}/$applicability | [EXPERIMENTAL] GetCollateralAgreementApplicability: Preview the portfolios a Collateral Agreement covers.
+*CollateralAgreementsApi* | [**list_collateral_agreements**](docs/CollateralAgreementsApi.md#list_collateral_agreements) | **GET** /api/collateralagreements | [EXPERIMENTAL] ListCollateralAgreements: List Collateral Agreements.
+*CollateralAgreementsApi* | [**upsert_collateral_agreement**](docs/CollateralAgreementsApi.md#upsert_collateral_agreement) | **PUT** /api/collateralagreements/{scope}/{code} | [EXPERIMENTAL] UpsertCollateralAgreement: Upsert a Collateral Agreement.
 *ComplexMarketDataApi* | [**delete_complex_market_data**](docs/ComplexMarketDataApi.md#delete_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$delete | DeleteComplexMarketData: Delete one or more items of complex market data, assuming they are present.
 *ComplexMarketDataApi* | [**get_complex_market_data**](docs/ComplexMarketDataApi.md#get_complex_market_data) | **POST** /api/complexmarketdata/{scope}/$get | GetComplexMarketData: Get complex market data
 *ComplexMarketDataApi* | [**list_complex_market_data**](docs/ComplexMarketDataApi.md#list_complex_market_data) | **GET** /api/complexmarketdata | ListComplexMarketData: List the set of ComplexMarketData
@@ -252,6 +262,11 @@ Class | Method | HTTP request | Description
 *DataTypesApi* | [**update_reference_values**](docs/DataTypesApi.md#update_reference_values) | **PUT** /api/datatypes/{scope}/{code}/referencedatavalues | [EARLY ACCESS] UpdateReferenceValues: Update reference data on a data type
 *DerivedTransactionPortfoliosApi* | [**create_derived_portfolio**](docs/DerivedTransactionPortfoliosApi.md#create_derived_portfolio) | **POST** /api/derivedtransactionportfolios/{scope} | CreateDerivedPortfolio: Create derived portfolio
 *DerivedTransactionPortfoliosApi* | [**delete_derived_portfolio_details**](docs/DerivedTransactionPortfoliosApi.md#delete_derived_portfolio_details) | **DELETE** /api/derivedtransactionportfolios/{scope}/{code}/details | [EARLY ACCESS] DeleteDerivedPortfolioDetails: Delete derived portfolio details
+*EligibleCollateralSchedulesApi* | [**create_eligible_collateral_schedule**](docs/EligibleCollateralSchedulesApi.md#create_eligible_collateral_schedule) | **POST** /api/eligiblecollateralschedules/{scope} | [EXPERIMENTAL] CreateEligibleCollateralSchedule: Create an Eligible Collateral Schedule.
+*EligibleCollateralSchedulesApi* | [**delete_eligible_collateral_schedule**](docs/EligibleCollateralSchedulesApi.md#delete_eligible_collateral_schedule) | **DELETE** /api/eligiblecollateralschedules/{scope}/{code} | [EXPERIMENTAL] DeleteEligibleCollateralSchedule: Delete an Eligible Collateral Schedule.
+*EligibleCollateralSchedulesApi* | [**get_eligible_collateral_schedule**](docs/EligibleCollateralSchedulesApi.md#get_eligible_collateral_schedule) | **GET** /api/eligiblecollateralschedules/{scope}/{code} | [EXPERIMENTAL] GetEligibleCollateralSchedule: Get an Eligible Collateral Schedule.
+*EligibleCollateralSchedulesApi* | [**list_eligible_collateral_schedules**](docs/EligibleCollateralSchedulesApi.md#list_eligible_collateral_schedules) | **GET** /api/eligiblecollateralschedules | [EXPERIMENTAL] ListEligibleCollateralSchedules: List Eligible Collateral Schedules.
+*EligibleCollateralSchedulesApi* | [**upsert_eligible_collateral_schedule**](docs/EligibleCollateralSchedulesApi.md#upsert_eligible_collateral_schedule) | **PUT** /api/eligiblecollateralschedules/{scope}/{code} | [EXPERIMENTAL] UpsertEligibleCollateralSchedule: Upsert an Eligible Collateral Schedule.
 *EntitiesApi* | [**get_bookmark_by_entity_unique_id**](docs/EntitiesApi.md#get_bookmark_by_entity_unique_id) | **GET** /api/entities/bookmarks/{entityUniqueId} | GetBookmarkByEntityUniqueId: Get bookmark by EntityUniqueId
 *EntitiesApi* | [**get_compliance_rule_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_by_entity_unique_id) | **GET** /api/entities/compliancerules/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleByEntityUniqueId: Get compliance rule by EntityUniqueId
 *EntitiesApi* | [**get_compliance_rule_template_by_entity_unique_id**](docs/EntitiesApi.md#get_compliance_rule_template_by_entity_unique_id) | **GET** /api/entities/complianceruletemplates/{entityUniqueId} | [EARLY ACCESS] GetComplianceRuleTemplateByEntityUniqueId: Get compliance rule template by EntityUniqueId
@@ -260,6 +275,7 @@ Class | Method | HTTP request | Description
 *EntitiesApi* | [**get_data_type_by_entity_unique_id**](docs/EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
 *EntitiesApi* | [**get_instrument_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
+*EntitiesApi* | [**get_instrument_event_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_event_by_entity_unique_id) | **GET** /api/entities/instrumentevents/{entityUniqueId} | [EARLY ACCESS] GetInstrumentEventByEntityUniqueId: Get instrument event by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_by_entity_unique_id**](docs/EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_changes**](docs/EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
 *EntitiesApi* | [**get_property_definition_by_entity_unique_id**](docs/EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
@@ -286,6 +302,7 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
 *FundStructuresApi* | [**add_fund_structure_member**](docs/FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+*FundStructuresApi* | [**close_fund_structure**](docs/FundStructuresApi.md#close_fund_structure) | **POST** /api/fundstructures/{scope}/{code}/$close | [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
 *FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
 *FundStructuresApi* | [**delete_fund_structure**](docs/FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
 *FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
@@ -293,8 +310,10 @@ Class | Method | HTTP request | Description
 *FundStructuresApi* | [**remove_fund_structure_member**](docs/FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
 *FundStructuresApi* | [**upsert_fund_structure**](docs/FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
+*FundsApi* | [**accrue_carry**](docs/FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 *FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+*FundsApi* | [**calculate_management_fees**](docs/FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
 *FundsApi* | [**create_facility**](docs/FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EARLY ACCESS] CreateFund: Create a Fund.
@@ -306,7 +325,9 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**delete_fee**](docs/FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] DeleteFee: Delete a Fee.
 *FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
 *FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
+*FundsApi* | [**delete_series**](docs/FundsApi.md#delete_series) | **DELETE** /api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier} | [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
 *FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.
+*FundsApi* | [**diff_partner_statement**](docs/FundsApi.md#diff_partner_statement) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff | [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.
 *FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 *FundsApi* | [**get_a2_b_data_for_fund**](docs/FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.
 *FundsApi* | [**get_a2_b_movements_for_fund**](docs/FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
@@ -314,11 +335,16 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_fee**](docs/FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] GetFee: Get a Fee for a specified Fund.
 *FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EARLY ACCESS] GetFeeProperties: Get Fee properties.
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund.
+*FundsApi* | [**get_fund_performance**](docs/FundsApi.md#get_fund_performance) | **GET** /api/funds/{scope}/{code}/performance | [EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.
 *FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EARLY ACCESS] GetFundProperties: Get Fund properties.
 *FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 *FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
+*FundsApi* | [**get_partner_capital_account**](docs/FundsApi.md#get_partner_capital_account) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.
+*FundsApi* | [**get_partner_performance**](docs/FundsApi.md#get_partner_performance) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/performance | [EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.
 *FundsApi* | [**get_partner_unfunded_reconciliation**](docs/FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner's unfunded commitment statement.
 *FundsApi* | [**get_partners**](docs/FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
+*FundsApi* | [**get_partnership_config_pack**](docs/FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+*FundsApi* | [**get_series**](docs/FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
 *FundsApi* | [**get_valuation_for_fund**](docs/FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
 *FundsApi* | [**get_valuation_point_data**](docs/FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.
 *FundsApi* | [**get_valuation_point_journal_entry_lines**](docs/FundsApi.md#get_valuation_point_journal_entry_lines) | **POST** /api/funds/{scope}/{code}/valuationpoints/journalentrylines/$query | [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
@@ -333,14 +359,18 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.
 *FundsApi* | [**list_funds**](docs/FundsApi.md#list_funds) | **GET** /api/funds | [EARLY ACCESS] ListFunds: List Funds.
 *FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
+*FundsApi* | [**list_partner_capital_accounts**](docs/FundsApi.md#list_partner_capital_accounts) | **GET** /api/funds/{scope}/{code}/capitalaccounts | [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.
+*FundsApi* | [**list_partner_statements**](docs/FundsApi.md#list_partner_statements) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
 *FundsApi* | [**list_valuation_point_complex_market_data**](docs/FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
 *FundsApi* | [**list_valuation_point_instruments**](docs/FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point
 *FundsApi* | [**list_valuation_point_overview**](docs/FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
 *FundsApi* | [**patch_fee**](docs/FundsApi.md#patch_fee) | **PATCH** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] PatchFee: Patch Fee.
 *FundsApi* | [**patch_fund**](docs/FundsApi.md#patch_fund) | **PATCH** /api/funds/{scope}/{code} | [EARLY ACCESS] PatchFund: Patch a Fund.
+*FundsApi* | [**produce_partner_statement**](docs/FundsApi.md#produce_partner_statement) | **POST** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner's capital statement for a period.
 *FundsApi* | [**query_cash_statement**](docs/FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
 *FundsApi* | [**query_cash_statement_local_currency**](docs/FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
 *FundsApi* | [**revert_valuation_point_to_estimate**](docs/FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
+*FundsApi* | [**run_partner_allocations**](docs/FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.
 *FundsApi* | [**set_share_class_instruments**](docs/FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 *FundsApi* | [**update_valuation_point**](docs/FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 *FundsApi* | [**upsert_bookmark**](docs/FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
@@ -481,6 +511,7 @@ Class | Method | HTTP request | Description
 *PaymentInstructionsApi* | [**get_payment_instruction**](docs/PaymentInstructionsApi.md#get_payment_instruction) | **GET** /api/paymentinstructions/{scope}/{code} | [EXPERIMENTAL] GetPaymentInstruction: Get Payment Instruction
 *PaymentInstructionsApi* | [**get_payment_instructions_by_payment_record_ids**](docs/PaymentInstructionsApi.md#get_payment_instructions_by_payment_record_ids) | **POST** /api/paymentinstructions/$getByPaymentRecordIds | [EXPERIMENTAL] GetPaymentInstructionsByPaymentRecordIds: Get Payment Instructions by Payment Record Ids
 *PaymentInstructionsApi* | [**list_payment_instructions**](docs/PaymentInstructionsApi.md#list_payment_instructions) | **GET** /api/paymentinstructions | [EXPERIMENTAL] ListPaymentInstructions: List Payment Instructions
+*PaymentInstructionsApi* | [**transition_payment_instruction_statuses**](docs/PaymentInstructionsApi.md#transition_payment_instruction_statuses) | **POST** /api/paymentinstructions/$transitionStatuses | [EXPERIMENTAL] TransitionPaymentInstructionStatuses: Transition Payment Instruction Statuses
 *PaymentInstructionsApi* | [**upsert_payment_instructions**](docs/PaymentInstructionsApi.md#upsert_payment_instructions) | **POST** /api/paymentinstructions | [EXPERIMENTAL] UpsertPaymentInstructions: Upsert Payment Instructions
 *PersonsApi* | [**delete_person**](docs/PersonsApi.md#delete_person) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code} | DeletePerson: Delete person
 *PersonsApi* | [**delete_person_access_metadata**](docs/PersonsApi.md#delete_person_access_metadata) | **DELETE** /api/persons/{idTypeScope}/{idTypeCode}/{code}/metadata/{metadataKey} | [EARLY ACCESS] DeletePersonAccessMetadata: Delete a Person Access Metadata entry
@@ -563,6 +594,13 @@ Class | Method | HTTP request | Description
 *PortfoliosApi* | [**upsert_portfolio_access_metadata**](docs/PortfoliosApi.md#upsert_portfolio_access_metadata) | **PUT** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.
 *PortfoliosApi* | [**upsert_portfolio_properties**](docs/PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | UpsertPortfolioProperties: Upsert portfolio properties
 *PortfoliosApi* | [**upsert_portfolio_returns**](docs/PortfoliosApi.md#upsert_portfolio_returns) | **POST** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | UpsertPortfolioReturns: Upsert Returns
+*ProcessingGroupApi* | [**create_processing_group**](docs/ProcessingGroupApi.md#create_processing_group) | **POST** /api/processinggroups/{scope} | [EXPERIMENTAL] CreateProcessingGroup: Create a Processing Group.
+*ProcessingGroupApi* | [**delete_processing_group**](docs/ProcessingGroupApi.md#delete_processing_group) | **DELETE** /api/processinggroups/{scope}/{code} | [EXPERIMENTAL] DeleteProcessingGroup: Delete a Processing Group.
+*ProcessingGroupApi* | [**get_processing_group**](docs/ProcessingGroupApi.md#get_processing_group) | **GET** /api/processinggroups/{scope}/{code} | [EXPERIMENTAL] GetProcessingGroup: Get a Processing Group.
+*ProcessingGroupApi* | [**get_processing_group_next_scheduled_details**](docs/ProcessingGroupApi.md#get_processing_group_next_scheduled_details) | **GET** /api/processinggroups/{scope}/{code}/schedule/$next | [EXPERIMENTAL] GetProcessingGroupNextScheduledDetails: Get the next scheduled date of a Processing Group.
+*ProcessingGroupApi* | [**get_resolved_processing_group_schedule**](docs/ProcessingGroupApi.md#get_resolved_processing_group_schedule) | **GET** /api/processinggroups/{scope}/{code}/schedule/$dates | [EXPERIMENTAL] GetResolvedProcessingGroupSchedule: Get the resolved schedule of a Processing Group.
+*ProcessingGroupApi* | [**list_processing_groups**](docs/ProcessingGroupApi.md#list_processing_groups) | **GET** /api/processinggroups | [EXPERIMENTAL] ListProcessingGroups: List Processing Groups.
+*ProcessingGroupApi* | [**patch_processing_group**](docs/ProcessingGroupApi.md#patch_processing_group) | **PATCH** /api/processinggroups/{scope}/{code} | [EXPERIMENTAL] PatchProcessingGroup: Patch a Processing Group.
 *PropertyDefinitionsApi* | [**create_derived_property_definition**](docs/PropertyDefinitionsApi.md#create_derived_property_definition) | **POST** /api/propertydefinitions/derived | [EARLY ACCESS] CreateDerivedPropertyDefinition: Create derived property definition
 *PropertyDefinitionsApi* | [**create_property_definition**](docs/PropertyDefinitionsApi.md#create_property_definition) | **POST** /api/propertydefinitions | CreatePropertyDefinition: Create property definition
 *PropertyDefinitionsApi* | [**delete_property_definition**](docs/PropertyDefinitionsApi.md#delete_property_definition) | **DELETE** /api/propertydefinitions/{domain}/{scope}/{code} | DeletePropertyDefinition: Delete property definition
@@ -927,6 +965,13 @@ Class | Method | HTTP request | Description
  - [AllocationEventEqualisation](docs/AllocationEventEqualisation.md)
  - [AllocationEventEqualisationFeeCatchUp](docs/AllocationEventEqualisationFeeCatchUp.md)
  - [AllocationEventEqualisationMark](docs/AllocationEventEqualisationMark.md)
+ - [AllocationEventNotice](docs/AllocationEventNotice.md)
+ - [AllocationEventNoticeCumulative](docs/AllocationEventNoticeCumulative.md)
+ - [AllocationEventNoticeEvent](docs/AllocationEventNoticeEvent.md)
+ - [AllocationEventNoticeLine](docs/AllocationEventNoticeLine.md)
+ - [AllocationEventNoticePartner](docs/AllocationEventNoticePartner.md)
+ - [AllocationEventNoticeUnfundedReconciliation](docs/AllocationEventNoticeUnfundedReconciliation.md)
+ - [AllocationEventNoticeWire](docs/AllocationEventNoticeWire.md)
  - [AllocationEventReallocateRequest](docs/AllocationEventReallocateRequest.md)
  - [AllocationEventReceipt](docs/AllocationEventReceipt.md)
  - [AllocationEventReceiptRequest](docs/AllocationEventReceiptRequest.md)
@@ -955,6 +1000,8 @@ Class | Method | HTTP request | Description
  - [AllocationMapRequest](docs/AllocationMapRequest.md)
  - [AllocationMapResolution](docs/AllocationMapResolution.md)
  - [AllocationMapResolveRequest](docs/AllocationMapResolveRequest.md)
+ - [AllocationPaymentHold](docs/AllocationPaymentHold.md)
+ - [AllocationPaymentHoldRequest](docs/AllocationPaymentHoldRequest.md)
  - [AllocationPostingCounts](docs/AllocationPostingCounts.md)
  - [AllocationPostingFundLine](docs/AllocationPostingFundLine.md)
  - [AllocationPostingLpLine](docs/AllocationPostingLpLine.md)
@@ -1087,7 +1134,12 @@ Class | Method | HTTP request | Description
  - [CapitalInterest](docs/CapitalInterest.md)
  - [CapitalInterestTransferEvent](docs/CapitalInterestTransferEvent.md)
  - [CapletFloorletCashFlowEvent](docs/CapletFloorletCashFlowEvent.md)
+ - [CarryAccrualAmount](docs/CarryAccrualAmount.md)
+ - [CarryAccrualLine](docs/CarryAccrualLine.md)
+ - [CarryAccrualRequest](docs/CarryAccrualRequest.md)
+ - [CarryAccrualResult](docs/CarryAccrualResult.md)
  - [CarryParameters](docs/CarryParameters.md)
+ - [CarryTierAmount](docs/CarryTierAmount.md)
  - [Cash](docs/Cash.md)
  - [CashAndSecurityOfferElection](docs/CashAndSecurityOfferElection.md)
  - [CashDependency](docs/CashDependency.md)
@@ -1100,6 +1152,7 @@ Class | Method | HTTP request | Description
  - [CashFlowLineage](docs/CashFlowLineage.md)
  - [CashFlowValue](docs/CashFlowValue.md)
  - [CashFlowValueSet](docs/CashFlowValueSet.md)
+ - [CashInterest](docs/CashInterest.md)
  - [CashLadderRecord](docs/CashLadderRecord.md)
  - [CashOfferConstituent](docs/CashOfferConstituent.md)
  - [CashOfferElection](docs/CashOfferElection.md)
@@ -1139,6 +1192,9 @@ Class | Method | HTTP request | Description
  - [ClosePeriodDiaryEntryRequest](docs/ClosePeriodDiaryEntryRequest.md)
  - [ClosedPeriod](docs/ClosedPeriod.md)
  - [Collateral](docs/Collateral.md)
+ - [CollateralAgreement](docs/CollateralAgreement.md)
+ - [CollateralAgreementApplicability](docs/CollateralAgreementApplicability.md)
+ - [CollateralAgreementRequest](docs/CollateralAgreementRequest.md)
  - [CollateralInstrument](docs/CollateralInstrument.md)
  - [CommodityCalendarSchedule](docs/CommodityCalendarSchedule.md)
  - [CommodityCalendarSwap](docs/CommodityCalendarSwap.md)
@@ -1224,6 +1280,7 @@ Class | Method | HTTP request | Description
  - [CorporateActionTransitionComponentRequest](docs/CorporateActionTransitionComponentRequest.md)
  - [CorporateActionTransitionRequest](docs/CorporateActionTransitionRequest.md)
  - [CounterpartyAgreement](docs/CounterpartyAgreement.md)
+ - [CounterpartyIdentifier](docs/CounterpartyIdentifier.md)
  - [CounterpartyRiskInformation](docs/CounterpartyRiskInformation.md)
  - [CounterpartySignatory](docs/CounterpartySignatory.md)
  - [CreateAddressKeyDefinitionRequest](docs/CreateAddressKeyDefinitionRequest.md)
@@ -1389,6 +1446,13 @@ Class | Method | HTTP request | Description
  - [EffectiveRange](docs/EffectiveRange.md)
  - [ElectionSpecification](docs/ElectionSpecification.md)
  - [EligibilityCalculation](docs/EligibilityCalculation.md)
+ - [EligibleCollateralAssetSelector](docs/EligibleCollateralAssetSelector.md)
+ - [EligibleCollateralAssetSelectorRequest](docs/EligibleCollateralAssetSelectorRequest.md)
+ - [EligibleCollateralReferences](docs/EligibleCollateralReferences.md)
+ - [EligibleCollateralRow](docs/EligibleCollateralRow.md)
+ - [EligibleCollateralRowRequest](docs/EligibleCollateralRowRequest.md)
+ - [EligibleCollateralSchedule](docs/EligibleCollateralSchedule.md)
+ - [EligibleCollateralScheduleRequest](docs/EligibleCollateralScheduleRequest.md)
  - [EmptyModelOptions](docs/EmptyModelOptions.md)
  - [EntityIdentifier](docs/EntityIdentifier.md)
  - [EntityResolver](docs/EntityResolver.md)
@@ -1420,6 +1484,7 @@ Class | Method | HTTP request | Description
  - [ExpandedGroup](docs/ExpandedGroup.md)
  - [ExpiryEvent](docs/ExpiryEvent.md)
  - [ExternalFeeComponentFilter](docs/ExternalFeeComponentFilter.md)
+ - [ExternalRecType](docs/ExternalRecType.md)
  - [Facility](docs/Facility.md)
  - [FacilityCommitmentFeeEvent](docs/FacilityCommitmentFeeEvent.md)
  - [FacilityDrawEvent](docs/FacilityDrawEvent.md)
@@ -1431,6 +1496,7 @@ Class | Method | HTTP request | Description
  - [FeeCalculationRequest](docs/FeeCalculationRequest.md)
  - [FeeDefinition](docs/FeeDefinition.md)
  - [FeeProperties](docs/FeeProperties.md)
+ - [FeeRateTier](docs/FeeRateTier.md)
  - [FeeRequest](docs/FeeRequest.md)
  - [FeeRule](docs/FeeRule.md)
  - [FeeRuleUpsertRequest](docs/FeeRuleUpsertRequest.md)
@@ -1490,6 +1556,7 @@ Class | Method | HTTP request | Description
  - [FundIdList](docs/FundIdList.md)
  - [FundInstrument](docs/FundInstrument.md)
  - [FundJournalEntryLine](docs/FundJournalEntryLine.md)
+ - [FundNavTypeCodes](docs/FundNavTypeCodes.md)
  - [FundPartner](docs/FundPartner.md)
  - [FundPartnerBalances](docs/FundPartnerBalances.md)
  - [FundPartnerUnfundedReconciliation](docs/FundPartnerUnfundedReconciliation.md)
@@ -1502,6 +1569,9 @@ Class | Method | HTTP request | Description
  - [FundShareClass](docs/FundShareClass.md)
  - [FundStructure](docs/FundStructure.md)
  - [FundStructureAllocationBasis](docs/FundStructureAllocationBasis.md)
+ - [FundStructureCloseRequest](docs/FundStructureCloseRequest.md)
+ - [FundStructureCloseResult](docs/FundStructureCloseResult.md)
+ - [FundStructureCloseStep](docs/FundStructureCloseStep.md)
  - [FundStructureDriftMateriality](docs/FundStructureDriftMateriality.md)
  - [FundStructureEdge](docs/FundStructureEdge.md)
  - [FundStructureEdgeTarget](docs/FundStructureEdgeTarget.md)
@@ -1637,6 +1707,7 @@ Class | Method | HTTP request | Description
  - [InlineValuationRequest](docs/InlineValuationRequest.md)
  - [InlineValuationsReconciliationRequest](docs/InlineValuationsReconciliationRequest.md)
  - [InputTransition](docs/InputTransition.md)
+ - [InstalmentCallEvent](docs/InstalmentCallEvent.md)
  - [InstantiateRecRequest](docs/InstantiateRecRequest.md)
  - [Instrument](docs/Instrument.md)
  - [InstrumentActivity](docs/InstrumentActivity.md)
@@ -1649,6 +1720,7 @@ Class | Method | HTTP request | Description
  - [InstrumentEntity](docs/InstrumentEntity.md)
  - [InstrumentEvent](docs/InstrumentEvent.md)
  - [InstrumentEventConfiguration](docs/InstrumentEventConfiguration.md)
+ - [InstrumentEventEntity](docs/InstrumentEventEntity.md)
  - [InstrumentEventHolder](docs/InstrumentEventHolder.md)
  - [InstrumentEventInstruction](docs/InstrumentEventInstruction.md)
  - [InstrumentEventInstructionRequest](docs/InstrumentEventInstructionRequest.md)
@@ -1720,9 +1792,18 @@ Class | Method | HTTP request | Description
  - [LusidTradeTicket](docs/LusidTradeTicket.md)
  - [LusidUniqueId](docs/LusidUniqueId.md)
  - [LusidValidationProblemDetails](docs/LusidValidationProblemDetails.md)
+ - [ManagementFeeLine](docs/ManagementFeeLine.md)
+ - [ManagementFeeOffset](docs/ManagementFeeOffset.md)
+ - [ManagementFeeRequest](docs/ManagementFeeRequest.md)
+ - [ManagementFeeResult](docs/ManagementFeeResult.md)
+ - [ManagementFeeTotals](docs/ManagementFeeTotals.md)
  - [MappedString](docs/MappedString.md)
  - [Mapping](docs/Mapping.md)
  - [MappingRule](docs/MappingRule.md)
+ - [MarginCalculation](docs/MarginCalculation.md)
+ - [MarginItem](docs/MarginItem.md)
+ - [MarginRounding](docs/MarginRounding.md)
+ - [MarginSettlementLag](docs/MarginSettlementLag.md)
  - [MarkToMarketConventions](docs/MarkToMarketConventions.md)
  - [MarketContext](docs/MarketContext.md)
  - [MarketContextSuppliers](docs/MarketContextSuppliers.md)
@@ -1780,6 +1861,7 @@ Class | Method | HTTP request | Description
  - [NavSettlementConfigurationCategory](docs/NavSettlementConfigurationCategory.md)
  - [NavType](docs/NavType.md)
  - [NavTypeDefinition](docs/NavTypeDefinition.md)
+ - [NavTypeSelection](docs/NavTypeSelection.md)
  - [NewInstrument](docs/NewInstrument.md)
  - [NextValueInSequenceResponse](docs/NextValueInSequenceResponse.md)
  - [NoticeConvention](docs/NoticeConvention.md)
@@ -1836,6 +1918,9 @@ Class | Method | HTTP request | Description
  - [OverrideEntryResponse](docs/OverrideEntryResponse.md)
  - [OverrideVirtualTransactionsRequest](docs/OverrideVirtualTransactionsRequest.md)
  - [OversubscribeElection](docs/OversubscribeElection.md)
+ - [PackAccount](docs/PackAccount.md)
+ - [PackPostingRule](docs/PackPostingRule.md)
+ - [PackTransactionType](docs/PackTransactionType.md)
  - [Package](docs/Package.md)
  - [PackageRequest](docs/PackageRequest.md)
  - [PackageSetRequest](docs/PackageSetRequest.md)
@@ -1854,6 +1939,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfCleardownModuleResponse](docs/PagedResourceListOfCleardownModuleResponse.md)
  - [PagedResourceListOfCleardownModuleRule](docs/PagedResourceListOfCleardownModuleRule.md)
  - [PagedResourceListOfClosedPeriod](docs/PagedResourceListOfClosedPeriod.md)
+ - [PagedResourceListOfCollateralAgreement](docs/PagedResourceListOfCollateralAgreement.md)
  - [PagedResourceListOfComplianceRuleResponse](docs/PagedResourceListOfComplianceRuleResponse.md)
  - [PagedResourceListOfComplianceRunInfoV2](docs/PagedResourceListOfComplianceRunInfoV2.md)
  - [PagedResourceListOfComplianceTemplate](docs/PagedResourceListOfComplianceTemplate.md)
@@ -1867,6 +1953,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfDataTypeSummary](docs/PagedResourceListOfDataTypeSummary.md)
  - [PagedResourceListOfDialectId](docs/PagedResourceListOfDialectId.md)
  - [PagedResourceListOfDiaryEntry](docs/PagedResourceListOfDiaryEntry.md)
+ - [PagedResourceListOfEligibleCollateralSchedule](docs/PagedResourceListOfEligibleCollateralSchedule.md)
  - [PagedResourceListOfExecution](docs/PagedResourceListOfExecution.md)
  - [PagedResourceListOfFacility](docs/PagedResourceListOfFacility.md)
  - [PagedResourceListOfFee](docs/PagedResourceListOfFee.md)
@@ -1898,6 +1985,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfOrderInstruction](docs/PagedResourceListOfOrderInstruction.md)
  - [PagedResourceListOfPackage](docs/PagedResourceListOfPackage.md)
  - [PagedResourceListOfParticipation](docs/PagedResourceListOfParticipation.md)
+ - [PagedResourceListOfPartnerCapitalAccount](docs/PagedResourceListOfPartnerCapitalAccount.md)
  - [PagedResourceListOfPaymentInstruction](docs/PagedResourceListOfPaymentInstruction.md)
  - [PagedResourceListOfPerson](docs/PagedResourceListOfPerson.md)
  - [PagedResourceListOfPlacement](docs/PagedResourceListOfPlacement.md)
@@ -1906,6 +1994,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfPortfolioSearchResult](docs/PagedResourceListOfPortfolioSearchResult.md)
  - [PagedResourceListOfPostingModuleResponse](docs/PagedResourceListOfPostingModuleResponse.md)
  - [PagedResourceListOfPostingModuleRule](docs/PagedResourceListOfPostingModuleRule.md)
+ - [PagedResourceListOfProcessingGroup](docs/PagedResourceListOfProcessingGroup.md)
  - [PagedResourceListOfPropertyDefinition](docs/PagedResourceListOfPropertyDefinition.md)
  - [PagedResourceListOfPropertyDefinitionSearchResult](docs/PagedResourceListOfPropertyDefinitionSearchResult.md)
  - [PagedResourceListOfRecDefinition](docs/PagedResourceListOfRecDefinition.md)
@@ -1940,7 +2029,25 @@ Class | Method | HTTP request | Description
  - [Participation](docs/Participation.md)
  - [ParticipationRequest](docs/ParticipationRequest.md)
  - [ParticipationSetRequest](docs/ParticipationSetRequest.md)
+ - [PartnerAllocation](docs/PartnerAllocation.md)
+ - [PartnerAllocationPool](docs/PartnerAllocationPool.md)
+ - [PartnerAllocationRunRequest](docs/PartnerAllocationRunRequest.md)
+ - [PartnerAllocationRunResult](docs/PartnerAllocationRunResult.md)
+ - [PartnerCapitalAccount](docs/PartnerCapitalAccount.md)
+ - [PartnerCapitalAccountMemo](docs/PartnerCapitalAccountMemo.md)
+ - [PartnerCapitalAccountRow](docs/PartnerCapitalAccountRow.md)
+ - [PartnerPerformance](docs/PartnerPerformance.md)
+ - [PartnerPerformanceCashFlow](docs/PartnerPerformanceCashFlow.md)
+ - [PartnerPerformanceMeasures](docs/PartnerPerformanceMeasures.md)
+ - [PartnerStatement](docs/PartnerStatement.md)
+ - [PartnerStatementDiff](docs/PartnerStatementDiff.md)
+ - [PartnerStatementLine](docs/PartnerStatementLine.md)
+ - [PartnerStatementLineDifference](docs/PartnerStatementLineDifference.md)
+ - [PartnerStatementRequest](docs/PartnerStatementRequest.md)
  - [PartnershipAccountingConfiguration](docs/PartnershipAccountingConfiguration.md)
+ - [PartnershipAccountingValuationPointData](docs/PartnershipAccountingValuationPointData.md)
+ - [PartnershipConfigPack](docs/PartnershipConfigPack.md)
+ - [PartyTerms](docs/PartyTerms.md)
  - [PaymentDetailsApplicableEntity](docs/PaymentDetailsApplicableEntity.md)
  - [PaymentDetailsReference](docs/PaymentDetailsReference.md)
  - [PaymentDetailsReferenceResponse](docs/PaymentDetailsReferenceResponse.md)
@@ -1949,6 +2056,7 @@ Class | Method | HTTP request | Description
  - [PaymentInstruction](docs/PaymentInstruction.md)
  - [PaymentInstructionRequest](docs/PaymentInstructionRequest.md)
  - [PaymentInstructionStatus](docs/PaymentInstructionStatus.md)
+ - [PaymentInstructionStatusTransitionRequest](docs/PaymentInstructionStatusTransitionRequest.md)
  - [PaymentInstructionsResponse](docs/PaymentInstructionsResponse.md)
  - [PaymentRecordReference](docs/PaymentRecordReference.md)
  - [PercentCheckStep](docs/PercentCheckStep.md)
@@ -2021,6 +2129,7 @@ Class | Method | HTTP request | Description
  - [PreferredShare](docs/PreferredShare.md)
  - [PreferredShareAllOfIdentifiers](docs/PreferredShareAllOfIdentifiers.md)
  - [Premium](docs/Premium.md)
+ - [PresentationConfiguration](docs/PresentationConfiguration.md)
  - [PreviousFundCalendarEntry](docs/PreviousFundCalendarEntry.md)
  - [PreviousFundValuationPointData](docs/PreviousFundValuationPointData.md)
  - [PreviousNAV](docs/PreviousNAV.md)
@@ -2040,6 +2149,10 @@ Class | Method | HTTP request | Description
  - [PrimarySchedule](docs/PrimarySchedule.md)
  - [PriorityIssueEvent](docs/PriorityIssueEvent.md)
  - [ProcessedCommand](docs/ProcessedCommand.md)
+ - [ProcessingGroup](docs/ProcessingGroup.md)
+ - [ProcessingGroupNextScheduledDetails](docs/ProcessingGroupNextScheduledDetails.md)
+ - [ProcessingGroupRequest](docs/ProcessingGroupRequest.md)
+ - [ProcessingGroupSchedule](docs/ProcessingGroupSchedule.md)
  - [PropertyDefinition](docs/PropertyDefinition.md)
  - [PropertyDefinitionEntity](docs/PropertyDefinitionEntity.md)
  - [PropertyDefinitionSearchResult](docs/PropertyDefinitionSearchResult.md)
@@ -2214,6 +2327,8 @@ Class | Method | HTTP request | Description
  - [ResourceListOfAggregatedReturn](docs/ResourceListOfAggregatedReturn.md)
  - [ResourceListOfAggregationQuery](docs/ResourceListOfAggregationQuery.md)
  - [ResourceListOfAllocation](docs/ResourceListOfAllocation.md)
+ - [ResourceListOfAllocationEventNotice](docs/ResourceListOfAllocationEventNotice.md)
+ - [ResourceListOfAllocationPaymentHold](docs/ResourceListOfAllocationPaymentHold.md)
  - [ResourceListOfApplicableInstrumentEvent](docs/ResourceListOfApplicableInstrumentEvent.md)
  - [ResourceListOfBlock](docs/ResourceListOfBlock.md)
  - [ResourceListOfBlockAndOrders](docs/ResourceListOfBlockAndOrders.md)
@@ -2258,6 +2373,7 @@ Class | Method | HTTP request | Description
  - [ResourceListOfOutputTransaction](docs/ResourceListOfOutputTransaction.md)
  - [ResourceListOfPackage](docs/ResourceListOfPackage.md)
  - [ResourceListOfParticipation](docs/ResourceListOfParticipation.md)
+ - [ResourceListOfPartnerStatement](docs/ResourceListOfPartnerStatement.md)
  - [ResourceListOfPerformanceReturn](docs/ResourceListOfPerformanceReturn.md)
  - [ResourceListOfPerson](docs/ResourceListOfPerson.md)
  - [ResourceListOfPlacement](docs/ResourceListOfPlacement.md)
@@ -2277,8 +2393,10 @@ Class | Method | HTTP request | Description
  - [ResourceListOfRelation](docs/ResourceListOfRelation.md)
  - [ResourceListOfRelationship](docs/ResourceListOfRelationship.md)
  - [ResourceListOfReturnsEntity](docs/ResourceListOfReturnsEntity.md)
+ - [ResourceListOfRulesInterval](docs/ResourceListOfRulesInterval.md)
  - [ResourceListOfScenarioTemplateDefinition](docs/ResourceListOfScenarioTemplateDefinition.md)
  - [ResourceListOfScopeDefinition](docs/ResourceListOfScopeDefinition.md)
+ - [ResourceListOfSeries](docs/ResourceListOfSeries.md)
  - [ResourceListOfSideDefinition](docs/ResourceListOfSideDefinition.md)
  - [ResourceListOfString](docs/ResourceListOfString.md)
  - [ResourceListOfTaxRuleSet](docs/ResourceListOfTaxRuleSet.md)
@@ -2350,6 +2468,8 @@ Class | Method | HTTP request | Description
  - [SecurityWriteOffEvent](docs/SecurityWriteOffEvent.md)
  - [SellEntitlementElection](docs/SellEntitlementElection.md)
  - [SequenceDefinition](docs/SequenceDefinition.md)
+ - [Series](docs/Series.md)
+ - [SeriesBreakdown](docs/SeriesBreakdown.md)
  - [SeriesConfiguration](docs/SeriesConfiguration.md)
  - [SeriesDefinition](docs/SeriesDefinition.md)
  - [SeriesDefinitionRequest](docs/SeriesDefinitionRequest.md)
@@ -2459,6 +2579,7 @@ Class | Method | HTTP request | Description
  - [TermDepositInterestEvent](docs/TermDepositInterestEvent.md)
  - [TermDepositPrincipalEvent](docs/TermDepositPrincipalEvent.md)
  - [TerminationEvent](docs/TerminationEvent.md)
+ - [ThresholdAllocation](docs/ThresholdAllocation.md)
  - [TimeZoneConventions](docs/TimeZoneConventions.md)
  - [Timeline](docs/Timeline.md)
  - [ToBeAnnounced](docs/ToBeAnnounced.md)
@@ -2525,6 +2646,7 @@ Class | Method | HTTP request | Description
  - [TransferAgencyOrdersResponse](docs/TransferAgencyOrdersResponse.md)
  - [TransferAgencyTransactionFromOrderResult](docs/TransferAgencyTransactionFromOrderResult.md)
  - [TransitionEvent](docs/TransitionEvent.md)
+ - [TransitionPaymentInstructionsResponse](docs/TransitionPaymentInstructionsResponse.md)
  - [TransitionRecInstanceRequest](docs/TransitionRecInstanceRequest.md)
  - [TranslateEntitiesInlinedRequest](docs/TranslateEntitiesInlinedRequest.md)
  - [TranslateEntitiesRequest](docs/TranslateEntitiesRequest.md)
@@ -2542,6 +2664,7 @@ Class | Method | HTTP request | Description
  - [TrialBalanceQueryParameters](docs/TrialBalanceQueryParameters.md)
  - [TriggerEvent](docs/TriggerEvent.md)
  - [TypedResourceId](docs/TypedResourceId.md)
+ - [UnattributedAmount](docs/UnattributedAmount.md)
  - [UnconfirmClosedPeriodRequest](docs/UnconfirmClosedPeriodRequest.md)
  - [UnitDimension](docs/UnitDimension.md)
  - [UnitSchema](docs/UnitSchema.md)
@@ -2590,6 +2713,7 @@ Class | Method | HTTP request | Description
  - [UpdateValuationPointRequest](docs/UpdateValuationPointRequest.md)
  - [UpsertAddressKeyAliasRequest](docs/UpsertAddressKeyAliasRequest.md)
  - [UpsertCdsFlowConventionsRequest](docs/UpsertCdsFlowConventionsRequest.md)
+ - [UpsertCollateralAgreementRequest](docs/UpsertCollateralAgreementRequest.md)
  - [UpsertComplexMarketDataRequest](docs/UpsertComplexMarketDataRequest.md)
  - [UpsertComplianceRuleRequest](docs/UpsertComplianceRuleRequest.md)
  - [UpsertComplianceRunSummaryRequest](docs/UpsertComplianceRunSummaryRequest.md)
@@ -2603,6 +2727,7 @@ Class | Method | HTTP request | Description
  - [UpsertCustomEntityAccessMetadataRequest](docs/UpsertCustomEntityAccessMetadataRequest.md)
  - [UpsertDataQualityRule](docs/UpsertDataQualityRule.md)
  - [UpsertDialectRequest](docs/UpsertDialectRequest.md)
+ - [UpsertEligibleCollateralScheduleRequest](docs/UpsertEligibleCollateralScheduleRequest.md)
  - [UpsertEntityResolverRequest](docs/UpsertEntityResolverRequest.md)
  - [UpsertFlowConventionsRequest](docs/UpsertFlowConventionsRequest.md)
  - [UpsertFundBookmarkRequest](docs/UpsertFundBookmarkRequest.md)
@@ -2709,6 +2834,7 @@ Class | Method | HTTP request | Description
  - [WeightedInstrumentInLineLookupIdentifiers](docs/WeightedInstrumentInLineLookupIdentifiers.md)
  - [WeightedInstruments](docs/WeightedInstruments.md)
  - [WholeLoanFacility](docs/WholeLoanFacility.md)
+ - [WhtParameters](docs/WhtParameters.md)
  - [WithholdingTaxConfiguration](docs/WithholdingTaxConfiguration.md)
  - [WithholdingTaxDataset](docs/WithholdingTaxDataset.md)
  - [WithholdingTaxDatasetDefinitions](docs/WithholdingTaxDatasetDefinitions.md)

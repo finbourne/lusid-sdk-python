@@ -44,7 +44,7 @@ class RecResult(BaseModel):
     id:  StrictStr = Field(...,alias="id", description="The id of the result within its run: its result type and result number, e.g. 'break-3'. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type.") 
     result_number: StrictInt = Field(description="The result's number within its result type. Kept across runs while the result keeps its type; never reused once assigned.", alias="resultNumber")
     first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
     run_number: StrictInt = Field(description="The run number within the instance. Increments with each re-run.", alias="runNumber")

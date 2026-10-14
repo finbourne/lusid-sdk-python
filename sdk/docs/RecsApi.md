@@ -1042,7 +1042,7 @@ def main():
     api_instance = api_client_factory.build(RecsApi)
     instance_id_type = 'instance_id_type_example' # str | How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.
     instance_id_value = 'instance_id_value_example' # str | The unique identifier of the rec instance.
-    rec_type = 'rec_type_example' # str | The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.
+    rec_type = 'rec_type_example' # str | The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.
     run_number = 56 # int | The run of the instance whose view of the result is read.
     id = 'id_example' # str | The display id of the rec result, e.g. \"break-3\".
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
@@ -1068,7 +1068,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **instance_id_type** | **str**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | 
  **instance_id_value** | **str**| The unique identifier of the rec instance. | 
- **rec_type** | **str**| The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
+ **rec_type** | **str**| The rec type the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
  **run_number** | **int**| The run of the instance whose view of the result is read. | 
  **id** | **str**| The display id of the rec result, e.g. \&quot;break-3\&quot;. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] 

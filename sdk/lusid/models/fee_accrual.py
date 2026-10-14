@@ -36,8 +36,11 @@ class FeeAccrual(BaseModel):
     previous_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousAccrual")
     previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's total accrual.", alias="previousTotalAccrual")
     total_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The sum of the PreviousAccrual and Amount.", alias="totalAccrual")
+    cap_period_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount accrued so far in the current fee year (from the fee's AnchorDate), in the fund currency, against which an annual FeeCap is assessed.", alias="capPeriodAccrual")
+    fee_cap_applied: Optional[StrictBool] = Field(default=None, description="Whether the FeeCap reduced the amount accrued at this valuation point.", alias="feeCapApplied")
+    fee_floor_applied: Optional[StrictBool] = Field(default=None, description="Whether the FeeFloor raised the amount accrued at this valuation point.", alias="feeFloorApplied")
     links: Optional[List[Link]] = None
-    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "links"]
+    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "capPeriodAccrual", "feeCapApplied", "feeFloorApplied", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -103,6 +106,9 @@ class FeeAccrual(BaseModel):
             "previous_accrual": obj.get("previousAccrual"),
             "previous_total_accrual": obj.get("previousTotalAccrual"),
             "total_accrual": obj.get("totalAccrual"),
+            "cap_period_accrual": obj.get("capPeriodAccrual"),
+            "fee_cap_applied": obj.get("feeCapApplied"),
+            "fee_floor_applied": obj.get("feeFloorApplied"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_fund_structure_member**](FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+[**close_fund_structure**](FundStructuresApi.md#close_fund_structure) | **POST** /api/fundstructures/{scope}/{code}/$close | [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
 [**create_fund_structure**](FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
 [**delete_fund_structure**](FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
 [**get_fund_structure**](FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
@@ -111,6 +112,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The Fund Structure with the member added. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **close_fund_structure**
+> FundStructureCloseResult close_fund_structure(scope, code, fund_structure_close_request, as_at=as_at)
+
+[EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
+
+Finalise the named valuation point on every member fund of the structure, leaves first so that each fund's  investors see a final NAV before the fund holding them closes. A member that fails stops the funds that depend on  it; the members already finalised stand.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundStructuresApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundStructuresApi)
+    scope = 'scope_example' # str | The scope of the Fund Structure.
+    code = 'code_example' # str | The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # fund_structure_close_request = FundStructureCloseRequest.from_json("")
+    # fund_structure_close_request = FundStructureCloseRequest.from_dict({})
+    fund_structure_close_request = FundStructureCloseRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.close_fund_structure(scope, code, fund_structure_close_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
+        api_response = api_instance.close_fund_structure(scope, code, fund_structure_close_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundStructuresApi->close_fund_structure: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund Structure. | 
+ **code** | **str**| The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure. | 
+ **fund_structure_close_request** | [**FundStructureCloseRequest**](FundStructureCloseRequest.md)| The valuation point to finalise. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the structure. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**FundStructureCloseResult**](FundStructureCloseResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The finalisation of each member of the structure. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

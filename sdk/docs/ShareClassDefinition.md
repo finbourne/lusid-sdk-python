@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **distribution_payment_type** | **str** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] 
 **hedging** | **str** | Indicates whether the ShareClass applies currency hedging. Available values: Invalid, None, ApplyHedging. | [optional] 
+**wht_parameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] 
 ## Example
 
 ```python
@@ -44,7 +45,8 @@ rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"
 hedging: Optional[StrictStr] = "example_hedging"
-share_class_definition_instance = ShareClassDefinition(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, investor_type=investor_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, rounding_conventions_price=rounding_conventions_price, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging)
+wht_parameters: Optional[WhtParameters] = # Replace with your value
+share_class_definition_instance = ShareClassDefinition(instrument_identifiers=instrument_identifiers, name=name, description=description, share_class_short_code=share_class_short_code, launch_price=launch_price, launch_date=launch_date, properties=properties, investor_type=investor_type, distribution_type=distribution_type, dom_ccy=dom_ccy, trading_conventions=trading_conventions, rounding_conventions_price=rounding_conventions_price, rounding_conventions_units=rounding_conventions_units, time_zone_conventions=time_zone_conventions, distribution_payment_type=distribution_payment_type, hedging=hedging, wht_parameters=wht_parameters)
 
 ```
 

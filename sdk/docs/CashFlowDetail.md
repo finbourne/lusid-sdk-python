@@ -13,14 +13,14 @@ Name | Type | Description | Notes
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
 **flow_type** | **str** | The type of the cashflow, e.g. Coupon, Principal or Premium. | [optional] 
 **movement_name** | **str** | The name of the movement that produced the cashflow (e.g. Coupon, Side1), falling back to the flow type when the movement is unnamed. Not present when the cashflow could not be valued. | [optional] 
-**pay_receive** | **str** | Indicates whether the cashflow is paid or received. | [optional] 
 **gross_amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **haircut_fraction** | **float** | The fraction of the gross amount removed by the haircut, in the range [0, 1]. Zero for outflows and for cashflows no rule matched. Only populated when haircut rules were supplied on the request. | [optional] 
 **net_amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **haircut_rule_applied** | **str** | The identifier of the haircut rule that was applied to the cashflow, or not present when no rule matched or no haircut rules were supplied on the request. | [optional] 
 **error** | **str** | Present when the cashflow could not be valued, for example because of missing market data: the valuation error, matching the CashflowError diagnostic reported by the QueryCashFlows endpoint. In that case the amount is null rather than zero. Error may also be set when only the report-currency FX lookup failed (see ReportCurrencyAmount), in which case the base Amount remains populated and only ReportCurrencyAmount and TradeToReportCurrencyRate are null. | [optional] 
 **report_currency_amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
-**trade_to_report_currency_rate** | **float** | The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency, resolved at the cashflow&#39;s transaction (trade) date, not its payment date. Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error). | [optional] 
+**trade_to_report_currency_rate** | **float** | The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency. For the default FxSpot rate type it is resolved at the cashflow&#39;s transaction (trade) date, not its payment date; for FxForward it is the forward rate for the payment date (see QueryBucketCashFlowDrillDownRequest.FxRateType and FxRateTypeApplied). Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error). | [optional] 
+**fx_rate_type_applied** | **str** | Which rate type produced TradeToReportCurrencyRate: FxSpot or FxForward. Under the ForwardThenSpot request option this shows whether a cashflow received the forward rate or fell back to spot. Only present when the cashflow was converted into the ReportCurrency. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -40,7 +40,6 @@ transaction_id: Optional[StrictStr] = "example_transaction_id"
 portfolio_id: ResourceId = # Replace with your value
 flow_type: Optional[StrictStr] = "example_flow_type"
 movement_name: Optional[StrictStr] = "example_movement_name"
-pay_receive: Optional[StrictStr] = "example_pay_receive"
 gross_amount: Optional[CurrencyAndAmount] = # Replace with your value
 haircut_fraction: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 net_amount: Optional[CurrencyAndAmount] = # Replace with your value
@@ -48,8 +47,9 @@ haircut_rule_applied: Optional[StrictStr] = "example_haircut_rule_applied"
 error: Optional[StrictStr] = "example_error"
 report_currency_amount: Optional[CurrencyAndAmount] = # Replace with your value
 trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fx_rate_type_applied: Optional[StrictStr] = "example_fx_rate_type_applied"
 links: Optional[List[Link]] = None
-cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, pay_receive=pay_receive, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, report_currency_amount=report_currency_amount, trade_to_report_currency_rate=trade_to_report_currency_rate, links=links)
+cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, report_currency_amount=report_currency_amount, trade_to_report_currency_rate=trade_to_report_currency_rate, fx_rate_type_applied=fx_rate_type_applied, links=links)
 
 ```
 

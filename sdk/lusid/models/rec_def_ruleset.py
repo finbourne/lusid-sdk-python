@@ -29,7 +29,7 @@ class RecDefRuleset(BaseModel):
     """
     RecDefRuleset
     """
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation this entry configures. Must be valid for the definitionType, and must match the reconciliationType of the referenced matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation this entry configures. Must be valid for the definitionType, and must match the reconciliationType of the referenced matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
     matching_ruleset_id: ResourceId = Field(alias="matchingRulesetId")
     relational_data_filter:  Optional[StrictStr] = Field(None,alias="relationalDataFilter", description="Selects the slice of the relational dataset this definition draws from, e.g. \"custodian eq 'NT'\". Only permitted when the referenced ruleset declares a relational side, and combined with AND at run time with that ruleset's own filter for the side.") 
     by_tax_lots: Optional[RecDefByTaxLots] = Field(default=None, alias="byTaxLots")

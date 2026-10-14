@@ -5,14 +5,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the matching ruleset. | 
-**rec_type** | **str** | The type of reconciliation to perform. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity. | 
+**rec_type** | **str** | The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
+**external_rec_type** | [**ExternalRecType**](ExternalRecType.md) |  | [optional] 
 **dataset_schemas** | [**RecDatasetSchemas**](RecDatasetSchemas.md) |  | 
 **filters** | [**GroupReconciliationFilters**](GroupReconciliationFilters.md) |  | [optional] 
 **core_rules** | [**List[CoreMatchingRule]**](CoreMatchingRule.md) | The core comparison rules evaluated as derivation formulae against each side of the reconciliation. | 
 **aggregate_rules** | [**List[AggregateMatchingRule]**](AggregateMatchingRule.md) | The aggregate comparison rules evaluated as derivation formulae against values on each side of the reconciliation and operation to aggregate those values. | 
 **core_tolerances** | [**List[ToleranceBase]**](ToleranceBase.md) | Tolerance configurations applied to core rule matching, in the specified order. | [optional] 
 **aggregate_tolerances** | [**List[ToleranceBase]**](ToleranceBase.md) | Tolerance configurations applied to aggregate rule matching. | [optional] 
-**allow_partial_matching** | **bool** | Whether to permit partial matches when applying rules. | [optional] 
+**allow_partial_matching** | **bool** | Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided. | [optional] 
 **supplemental_attributes** | [**List[SupplementalAttribute]**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. | [optional] 
 **writeback_configurations** | [**List[WritebackConfiguration]**](WritebackConfiguration.md) | The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty. | [optional] 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
@@ -30,6 +31,7 @@ from datetime import datetime
 id: ResourceId
 display_name: StrictStr = "example_display_name"
 rec_type: StrictStr = "example_rec_type"
+external_rec_type: Optional[ExternalRecType] = # Replace with your value
 dataset_schemas: RecDatasetSchemas = # Replace with your value
 filters: Optional[GroupReconciliationFilters] = None
 core_rules: List[CoreMatchingRule] = # Replace with your value
@@ -43,7 +45,7 @@ writeback_configurations: Optional[List[WritebackConfiguration]] = # Replace wit
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-matching_ruleset_instance = MatchingRuleset(id=id, display_name=display_name, rec_type=rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes, writeback_configurations=writeback_configurations, href=href, version=version, links=links)
+matching_ruleset_instance = MatchingRuleset(id=id, display_name=display_name, rec_type=rec_type, external_rec_type=external_rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes, writeback_configurations=writeback_configurations, href=href, version=version, links=links)
 
 ```
 

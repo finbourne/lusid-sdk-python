@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_side_definition**
-> SideDefinition get_side_definition(side, scope=scope, as_at=as_at)
+> SideDefinition get_side_definition(side, scope=scope, as_at=as_at, include_system_types=include_system_types)
 
 GetSideDefinition: Get the side definition for a given side name( or label)
 
@@ -356,13 +356,14 @@ def main():
     side = 'side_example' # str | The label to uniquely identify the side.
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. (optional) (default to 'default')
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
+    include_system_types = False # bool | Whether the default definitions of the sides that LUSID's own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_side_definition(side, scope=scope, as_at=as_at, opts=opts)
+        # api_response =  api_instance.get_side_definition(side, scope=scope, as_at=as_at, include_system_types=include_system_types, opts=opts)
 
         # GetSideDefinition: Get the side definition for a given side name( or label)
-        api_response = api_instance.get_side_definition(side, scope=scope, as_at=as_at)
+        api_response = api_instance.get_side_definition(side, scope=scope, as_at=as_at, include_system_types=include_system_types)
         pprint(api_response)
 
     except ApiException as e:
@@ -378,6 +379,7 @@ Name | Type | Description  | Notes
  **side** | **str**| The label to uniquely identify the side. | 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. | [optional] 
+ **include_system_types** | **bool**| Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, may be returned. Defaults to false,              so a side is found only if the scope stored it itself. | [optional] [default to False]
 
 ### Return type
 
@@ -398,7 +400,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_transaction_type**
-> TransactionType get_transaction_type(source, type, as_at=as_at, scope=scope)
+> TransactionType get_transaction_type(source, type, as_at=as_at, scope=scope, include_system_types=include_system_types)
 
 GetTransactionType: Get a single transaction configuration type
 
@@ -453,13 +455,14 @@ def main():
     type = 'type_example' # str | One of the type's aliases
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified (optional)
     scope = 'default' # str | The scope in which the transaction types exists. When not supplied the scope is 'default'. (optional) (default to 'default')
+    include_system_types = False # bool | Whether the transaction types LUSID provides to every scope under the              'pa-system' source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, opts=opts)
+        # api_response =  api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, include_system_types=include_system_types, opts=opts)
 
         # GetTransactionType: Get a single transaction configuration type
-        api_response = api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope)
+        api_response = api_instance.get_transaction_type(source, type, as_at=as_at, scope=scope, include_system_types=include_system_types)
         pprint(api_response)
 
     except ApiException as e:
@@ -476,6 +479,7 @@ Name | Type | Description  | Notes
  **type** | **str**| One of the type&#39;s aliases | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction configuration.              Defaults to returning the latest version of the transaction configuration type if not specified | [optional] 
  **scope** | **str**| The scope in which the transaction types exists. When not supplied the scope is &#39;default&#39;. | [optional] [default to &#39;default&#39;]
+ **include_system_types** | **bool**| Whether the transaction types LUSID provides to every scope under the              &#39;pa-system&#39; source may be returned. Defaults to false, so a type in that source is found only if the scope              stored it there itself. | [optional] [default to False]
 
 ### Return type
 
@@ -496,7 +500,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_side_definitions**
-> ResourceListOfSideDefinition list_side_definitions(as_at=as_at, scope=scope)
+> ResourceListOfSideDefinition list_side_definitions(as_at=as_at, scope=scope, include_system_types=include_system_types)
 
 ListSideDefinitions: List the side definitions
 
@@ -549,13 +553,14 @@ def main():
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. (optional)
     scope = 'default' # str | The scope in which the side exists. When not supplied the scope is 'default'. Use '*' to list across all scopes. (optional) (default to 'default')
+    include_system_types = False # bool | Whether the default definitions of the sides that LUSID's own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_side_definitions(as_at=as_at, scope=scope, opts=opts)
+        # api_response =  api_instance.list_side_definitions(as_at=as_at, scope=scope, include_system_types=include_system_types, opts=opts)
 
         # ListSideDefinitions: List the side definitions
-        api_response = api_instance.list_side_definitions(as_at=as_at, scope=scope)
+        api_response = api_instance.list_side_definitions(as_at=as_at, scope=scope, include_system_types=include_system_types)
         pprint(api_response)
 
     except ApiException as e:
@@ -570,6 +575,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults to returning the latest versions if not specified. | [optional] 
  **scope** | **str**| The scope in which the side exists. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. | [optional] [default to &#39;default&#39;]
+ **include_system_types** | **bool**| Whether the default definitions of the sides that LUSID&#39;s own transaction              types reference, which LUSID provides to every scope that lacks them, are listed. Defaults to false, so              only the sides the scope stored itself are listed. | [optional] [default to False]
 
 ### Return type
 
@@ -590,7 +596,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_transaction_types**
-> Dict[str, List[TransactionType]] list_transaction_types(as_at=as_at, scope=scope)
+> Dict[str, List[TransactionType]] list_transaction_types(as_at=as_at, scope=scope, include_system_types=include_system_types)
 
 ListTransactionTypes: List transaction types
 
@@ -643,13 +649,14 @@ def main():
     api_instance = api_client_factory.build(TransactionConfigurationApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. (optional)
     scope = 'default' # str | The scope in which the transaction types exist. When not supplied the scope is 'default'. Use '*' to list across all scopes. (optional) (default to 'default')
+    include_system_types = False # bool | Whether to include the transaction types LUSID provides to every scope under              the 'pa-system' source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_transaction_types(as_at=as_at, scope=scope, opts=opts)
+        # api_response =  api_instance.list_transaction_types(as_at=as_at, scope=scope, include_system_types=include_system_types, opts=opts)
 
         # ListTransactionTypes: List transaction types
-        api_response = api_instance.list_transaction_types(as_at=as_at, scope=scope)
+        api_response = api_instance.list_transaction_types(as_at=as_at, scope=scope, include_system_types=include_system_types)
         pprint(api_response)
 
     except ApiException as e:
@@ -664,6 +671,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to retrieve the transaction types. Defaults              to returning the latest versions if not specified. | [optional] 
  **scope** | **str**| The scope in which the transaction types exist. When not supplied the scope is &#39;default&#39;. Use &#39;*&#39; to list across all scopes. | [optional] [default to &#39;default&#39;]
+ **include_system_types** | **bool**| Whether to include the transaction types LUSID provides to every scope under              the &#39;pa-system&#39; source, which portfolios in the scope can book with. Defaults to false, so that source shows              only what the scope stored there itself. | [optional] [default to False]
 
 ### Return type
 

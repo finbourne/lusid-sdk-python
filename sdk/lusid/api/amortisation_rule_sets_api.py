@@ -27,6 +27,7 @@ from lusid.models.amortisation_rule_set import AmortisationRuleSet
 from lusid.models.create_amortisation_rule_set_request import CreateAmortisationRuleSetRequest
 from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.paged_resource_list_of_amortisation_rule_set import PagedResourceListOfAmortisationRuleSet
+from lusid.models.resource_list_of_rules_interval import ResourceListOfRulesInterval
 from lusid.models.set_amortisation_rules_request import SetAmortisationRulesRequest
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 
@@ -741,6 +742,193 @@ class AmortisationRuleSetsApi:
 
         return self.api_client.call_api(
             '/api/amortisation/rulesets', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def list_amortisation_rules_intervals(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.")] = None, **kwargs) -> ResourceListOfRulesInterval:  # noqa: E501
+        ...
+
+    @overload
+    def list_amortisation_rules_intervals(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfRulesInterval:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_amortisation_rules_intervals(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfRulesInterval, Awaitable[ResourceListOfRulesInterval]]:  # noqa: E501
+        """ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.  # noqa: E501
+
+        Lists the rules intervals of the rule set, ordered by from date. Each interval applies from its from date  until the next interval starts. The last interval has no until date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_amortisation_rules_intervals(scope, code, from_effective_at, to_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The rule set scope. (required)
+        :type scope: str
+        :param code: The rule set code. (required)
+        :type code: str
+        :param from_effective_at: Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.
+        :type from_effective_at: str
+        :param to_effective_at: Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.
+        :type to_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfRulesInterval
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_amortisation_rules_intervals_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_amortisation_rules_intervals_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_amortisation_rules_intervals_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """ListAmortisationRulesIntervals: List the rules intervals of an amortisation rule set.  # noqa: E501
+
+        Lists the rules intervals of the rule set, ordered by from date. Each interval applies from its from date  until the next interval starts. The last interval has no until date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_amortisation_rules_intervals_with_http_info(scope, code, from_effective_at, to_effective_at, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The rule set scope. (required)
+        :type scope: str
+        :param code: The rule set code. (required)
+        :type code: str
+        :param from_effective_at: Return only the intervals that overlap the effective range starting at this datetime or cut label.  There is no lower bound if not specified.
+        :type from_effective_at: str
+        :param to_effective_at: Return only the intervals that overlap the effective range ending at this datetime or cut label.  There is no upper bound if not specified.
+        :type to_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the rules intervals. Defaults to returning the latest version if not  specified.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfRulesInterval, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'from_effective_at',
+            'to_effective_at',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_amortisation_rules_intervals" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('from_effective_at') is not None:  # noqa: E501
+            _query_params.append(('fromEffectiveAt', _params['from_effective_at']))
+
+        if _params.get('to_effective_at') is not None:  # noqa: E501
+            _query_params.append(('toEffectiveAt', _params['to_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfRulesInterval",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/amortisation/rulesets/{scope}/{code}/rulesIntervals', 'GET',
             _path_params,
             _query_params,
             _header_params,

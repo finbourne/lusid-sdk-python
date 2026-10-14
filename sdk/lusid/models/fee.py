@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.day_month import DayMonth
+from lusid.models.fee_rate_tier import FeeRateTier
 from lusid.models.link import Link
 from lusid.models.model_property import ModelProperty
 from lusid.models.resource_id import ResourceId
@@ -42,7 +43,7 @@ class Fee(BaseModel):
     accrual_currency:  StrictStr = Field(...,alias="accrualCurrency", description="The accrual currency.") 
     treatment:  StrictStr = Field(...,alias="treatment", description="The accrual period of the Fee. Available values: Daily, Monthly.") 
     total_annual_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total annual accrued amount for the Fee. (TotalAnnualAccrualAmount and CalculationBase cannot both be present)", alias="totalAnnualAccrualAmount")
-    fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fee rate percentage. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount)", alias="feeRatePercentage")
+    fee_rate_percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The annual rate applied to the CalculationBase for a 'FixedPercentage' Fee, expressed as a multiplier rather than a percentage: 0.052 means 5.2% of the base per year. (Required when CalculationBase is present and not compatible with TotalAnnualAccrualAmount)", alias="feeRatePercentage")
     payable_frequency:  StrictStr = Field(...,alias="payableFrequency", description="The payable frequency for the Fee. Available values: Annually, Quarterly, Monthly.") 
     business_day_convention:  StrictStr = Field(...,alias="businessDayConvention", description="The business day convention to use for Fee calculations on weekends or holidays. Available values: None, P, Previous, F, Following.") 
     start_date: datetime = Field(description="The start date of the Fee.", alias="startDate")
@@ -53,8 +54,15 @@ class Fee(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     share_classes: Optional[List[StrictStr]] = Field(default=None, description="The short codes of the ShareClasses that the Fee should be applied to. Optional: if this is null or empty, then the Fee will be divided between all the ShareClasses of the Fund according to the capital ratio.", alias="shareClasses")
     nav_type_code:  Optional[StrictStr] = Field(None,alias="navTypeCode", description="When provided runs against the specified NAV Type, otherwise the Primary NAV Type will be used.") 
+    fee_calculation_type:  Optional[StrictStr] = Field(None,alias="feeCalculationType", description="How the Fee accrual amount is calculated. Supported values: 'FixedAnnual' (a fixed annual amount, requires TotalAnnualAccrualAmount), 'FixedDaily' (a fixed daily amount, requires DailyAccrualAmount), 'FixedPercentage' (a fixed percentage of the CalculationBase, requires FeeRatePercentage), 'VariablePercentage' (a percentage of the CalculationBase resolved from a rate source at each accrual date, requires VariablePercentageSource), 'Tiered' (a single rate applied to the whole CalculationBase, chosen by the tier the base falls in, requires Tiers), 'Blended' (each tier's rate applied to the portion of the CalculationBase within that tier, requires Tiers). Optional: when not provided it is inferred as 'FixedAnnual' if TotalAnnualAccrualAmount is populated and 'FixedPercentage' otherwise, so existing requests keep their behaviour; the new calculation types must be requested explicitly. Available values: FixedAnnual, FixedDaily, FixedPercentage, VariablePercentage, Tiered, Blended.") 
+    daily_accrual_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fixed daily accrued amount for a 'FixedDaily' Fee, in the fund currency. The amount accrues for each day of the accrual period with no annualisation or day-count proration; Treatment does not affect it.", alias="dailyAccrualAmount")
+    variable_percentage_source:  Optional[StrictStr] = Field(None,alias="variablePercentageSource", description="The source of the rate for a 'VariablePercentage' Fee, in the form \"scope/provider/instrumentIdType/instrumentId\" identifying a Rate quote series in the quote store. At each accrual date the most recent rate at or before that date is used; if no rate can be found the valuation point calculation fails. The quote's normalised value (its value divided by any scale factor) is applied like FeeRatePercentage, as a multiplier of the CalculationBase: a rate of 5.2% must normalise to 0.052.") 
+    variable_percentage_source_offset: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="An optional adjustment added to the rate resolved from the VariablePercentageSource, expressed as a factor like FeeRatePercentage (e.g. 0.0025 adds 25 basis points).", alias="variablePercentageSourceOffset")
+    tiers: Optional[List[FeeRateTier]] = Field(default=None, description="The rate tiers for a 'Tiered' or 'Blended' Fee: between 2 and 10 tiers over the CalculationBase. Every tier except the last must have a Threshold, and thresholds must be positive and strictly increasing; a base equal to a Threshold falls in that tier, and the final tier covers the balance above the last threshold. A 'Tiered' Fee applies the rate of the tier the whole base falls in; a 'Blended' Fee applies each tier's rate to the portion of the base within that tier.")
+    fee_cap: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="An optional annual cap on the accrued fee for 'FixedPercentage', 'VariablePercentage', 'Tiered' and 'Blended' Fees, in the fund currency and assessed period-to-date. Each day accrues only up to the amount left under the cap for the current fee year, which runs from one AnchorDate to the next; once the cap is reached nothing further accrues until the next AnchorDate.", alias="feeCap")
+    fee_floor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="An optional annual floor on the calculated fee for 'FixedPercentage', 'VariablePercentage', 'Tiered' and 'Blended' Fees, in the fund currency. The annualised fee amount is raised to the floor before being prorated to each accrual day.", alias="feeFloor")
     links: Optional[List[Link]] = None
-    __properties = ["href", "feeCode", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "shareClasses", "navTypeCode", "links"]
+    __properties = ["href", "feeCode", "feeTypeId", "displayName", "description", "origin", "calculationBase", "accrualCurrency", "treatment", "totalAnnualAccrualAmount", "feeRatePercentage", "payableFrequency", "businessDayConvention", "startDate", "endDate", "anchorDate", "properties", "version", "portfolioId", "shareClasses", "navTypeCode", "feeCalculationType", "dailyAccrualAmount", "variablePercentageSource", "variablePercentageSourceOffset", "tiers", "feeCap", "feeFloor", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,6 +115,13 @@ class Fee(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in tiers (list)
+        _items = []
+        if self.tiers:
+            for _item in self.tiers:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['tiers'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -164,6 +179,41 @@ class Fee(BaseModel):
         if self.nav_type_code is None and "nav_type_code" in self.__fields_set__:
             _dict['navTypeCode'] = None
 
+        # set to None if fee_calculation_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fee_calculation_type is None and "fee_calculation_type" in self.__fields_set__:
+            _dict['feeCalculationType'] = None
+
+        # set to None if daily_accrual_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.daily_accrual_amount is None and "daily_accrual_amount" in self.__fields_set__:
+            _dict['dailyAccrualAmount'] = None
+
+        # set to None if variable_percentage_source (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variable_percentage_source is None and "variable_percentage_source" in self.__fields_set__:
+            _dict['variablePercentageSource'] = None
+
+        # set to None if variable_percentage_source_offset (nullable) is None
+        # and __fields_set__ contains the field
+        if self.variable_percentage_source_offset is None and "variable_percentage_source_offset" in self.__fields_set__:
+            _dict['variablePercentageSourceOffset'] = None
+
+        # set to None if tiers (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tiers is None and "tiers" in self.__fields_set__:
+            _dict['tiers'] = None
+
+        # set to None if fee_cap (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fee_cap is None and "fee_cap" in self.__fields_set__:
+            _dict['feeCap'] = None
+
+        # set to None if fee_floor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fee_floor is None and "fee_floor" in self.__fields_set__:
+            _dict['feeFloor'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -207,6 +257,13 @@ class Fee(BaseModel):
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "share_classes": obj.get("shareClasses"),
             "nav_type_code": obj.get("navTypeCode"),
+            "fee_calculation_type": obj.get("feeCalculationType"),
+            "daily_accrual_amount": obj.get("dailyAccrualAmount"),
+            "variable_percentage_source": obj.get("variablePercentageSource"),
+            "variable_percentage_source_offset": obj.get("variablePercentageSourceOffset"),
+            "tiers": [FeeRateTier.from_dict(_item) for _item in obj.get("tiers")] if obj.get("tiers") is not None else None,
+            "fee_cap": obj.get("feeCap"),
+            "fee_floor": obj.get("feeFloor"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The transaction properties stored for the replacement transaction. | [optional] 
 **counterparty_id** | **str** | The identifier for the counterparty of the replacement transaction. | [optional] 
 **source** | **str** | The source of the replacement transaction. | [optional] 
+**custodian_account_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **precedes_event** | **bool** | True when this replacement&#39;s trade date is earlier than the target instrument event&#39;s current effective date, which orphans the entry it belongs to. | [optional] 
 ## Example
 
@@ -40,9 +41,10 @@ trade_currency: Optional[StrictStr] = "example_trade_currency"
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 counterparty_id: Optional[StrictStr] = "example_counterparty_id"
 source: Optional[StrictStr] = "example_source"
+custodian_account_id: Optional[ResourceId] = # Replace with your value
 precedes_event: Optional[StrictBool] = # Replace with your value
 precedes_event:Optional[StrictBool] = None
-override_definition_response_instance = OverrideDefinitionResponse(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, trade_date=trade_date, settlement_date=settlement_date, units=units, trade_price=trade_price, total_consideration=total_consideration, exchange_rate=exchange_rate, trade_currency=trade_currency, properties=properties, counterparty_id=counterparty_id, source=source, precedes_event=precedes_event)
+override_definition_response_instance = OverrideDefinitionResponse(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, trade_date=trade_date, settlement_date=settlement_date, units=units, trade_price=trade_price, total_consideration=total_consideration, exchange_rate=exchange_rate, trade_currency=trade_currency, properties=properties, counterparty_id=counterparty_id, source=source, custodian_account_id=custodian_account_id, precedes_event=precedes_event)
 
 ```
 

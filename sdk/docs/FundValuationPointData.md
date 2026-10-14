@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **nav** | **float** | The Net Asset Value of the Fund or Share Class at the Valuation Point. This represents the GAV with any fees applied in the period. | 
 **miscellaneous** | [**Dict[str, FundAmount]**](FundAmount.md) | Not used directly by the LUSID engines but serves as a holding area for any custom derived data points that may be useful in, for example, fee calculations). | [optional] 
 **previous_valuation_point_data** | [**PreviousFundValuationPointData**](PreviousFundValuationPointData.md) |  | [optional] 
+**partnership_accounting** | [**PartnershipAccountingValuationPointData**](PartnershipAccountingValuationPointData.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ fees: Dict[str, FeeAccrual] = # Replace with your value
 nav: Union[StrictFloat, StrictInt] = # Replace with your value
 miscellaneous: Optional[Dict[str, FundAmount]] = # Replace with your value
 previous_valuation_point_data: Optional[PreviousFundValuationPointData] = # Replace with your value
-fund_valuation_point_data_instance = FundValuationPointData(back_out=back_out, dealing=dealing, pn_l=pn_l, gav=gav, fees=fees, nav=nav, miscellaneous=miscellaneous, previous_valuation_point_data=previous_valuation_point_data)
+partnership_accounting: Optional[PartnershipAccountingValuationPointData] = # Replace with your value
+fund_valuation_point_data_instance = FundValuationPointData(back_out=back_out, dealing=dealing, pn_l=pn_l, gav=gav, fees=fees, nav=nav, miscellaneous=miscellaneous, previous_valuation_point_data=previous_valuation_point_data, partnership_accounting=partnership_accounting)
 
 ```
 

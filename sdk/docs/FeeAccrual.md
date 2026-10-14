@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **previous_accrual** | **float** | The previous valuation point&#39;s total accrual. | [optional] 
 **previous_total_accrual** | **float** | The previous valuation point&#39;s total accrual. | [optional] 
 **total_accrual** | **float** | The sum of the PreviousAccrual and Amount. | [optional] 
+**cap_period_accrual** | **float** | The amount accrued so far in the current fee year (from the fee&#39;s AnchorDate), in the fund currency, against which an annual FeeCap is assessed. | [optional] 
+**fee_cap_applied** | **bool** | Whether the FeeCap reduced the amount accrued at this valuation point. | [optional] 
+**fee_floor_applied** | **bool** | Whether the FeeFloor raised the amount accrued at this valuation point. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -29,8 +32,13 @@ amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 previous_total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 total_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+cap_period_accrual: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fee_cap_applied: Optional[StrictBool] = # Replace with your value
+fee_cap_applied:Optional[StrictBool] = None
+fee_floor_applied: Optional[StrictBool] = # Replace with your value
+fee_floor_applied:Optional[StrictBool] = None
 links: Optional[List[Link]] = None
-fee_accrual_instance = FeeAccrual(effective_at=effective_at, code=code, name=name, calculation_base=calculation_base, amount=amount, previous_accrual=previous_accrual, previous_total_accrual=previous_total_accrual, total_accrual=total_accrual, links=links)
+fee_accrual_instance = FeeAccrual(effective_at=effective_at, code=code, name=name, calculation_base=calculation_base, amount=amount, previous_accrual=previous_accrual, previous_total_accrual=previous_total_accrual, total_accrual=total_accrual, cap_period_accrual=cap_period_accrual, fee_cap_applied=fee_cap_applied, fee_floor_applied=fee_floor_applied, links=links)
 
 ```
 
