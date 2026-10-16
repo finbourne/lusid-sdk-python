@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.eligible_collateral_references import EligibleCollateralReferences
+from lusid.models.margin_accounts import MarginAccounts
 from lusid.models.margin_calculation import MarginCalculation
 from lusid.models.party_terms import PartyTerms
 
@@ -38,7 +39,8 @@ class MarginItem(BaseModel):
     they_post: PartyTerms = Field(alias="theyPost")
     eligible_collateral: Optional[EligibleCollateralReferences] = Field(default=None, alias="eligibleCollateral")
     calculation: MarginCalculation
-    __properties = ["code", "tradeFilter", "settlement", "legalMechanism", "wePost", "theyPost", "eligibleCollateral", "calculation"]
+    margin_accounts: Optional[MarginAccounts] = Field(default=None, alias="marginAccounts")
+    __properties = ["code", "tradeFilter", "settlement", "legalMechanism", "wePost", "theyPost", "eligibleCollateral", "calculation", "marginAccounts"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +86,9 @@ class MarginItem(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of calculation
         if self.calculation:
             _dict['calculation'] = self.calculation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of margin_accounts
+        if self.margin_accounts:
+            _dict['marginAccounts'] = self.margin_accounts.to_dict()
         # set to None if trade_filter (nullable) is None
         # and __fields_set__ contains the field
         if self.trade_filter is None and "trade_filter" in self.__fields_set__:
@@ -118,7 +123,8 @@ class MarginItem(BaseModel):
             "we_post": PartyTerms.from_dict(obj.get("wePost")) if obj.get("wePost") is not None else None,
             "they_post": PartyTerms.from_dict(obj.get("theyPost")) if obj.get("theyPost") is not None else None,
             "eligible_collateral": EligibleCollateralReferences.from_dict(obj.get("eligibleCollateral")) if obj.get("eligibleCollateral") is not None else None,
-            "calculation": MarginCalculation.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None
+            "calculation": MarginCalculation.from_dict(obj.get("calculation")) if obj.get("calculation") is not None else None,
+            "margin_accounts": MarginAccounts.from_dict(obj.get("marginAccounts")) if obj.get("marginAccounts") is not None else None
         })
         return _obj
 

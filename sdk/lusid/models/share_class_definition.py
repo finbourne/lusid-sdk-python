@@ -38,7 +38,7 @@ class ShareClassDefinition(BaseModel):
     share_class_short_code:  StrictStr = Field(...,alias="shareClassShortCode", description="A short code that uniquely identifies the share class within the Fund.") 
     launch_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The launch price set when a shareclass is added to the fund. Defaults to 1.", alias="launchPrice")
     launch_date: Optional[datetime] = Field(default=None, description="The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date.", alias="launchDate")
-    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true.")
+    properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="An optional set of properties for the Share Class. These must be from the 'Instrument' domain.")
     investor_type:  StrictStr = Field(...,alias="investorType", description="The Type of Share Class. Available values: Unitised.") 
     distribution_type:  Optional[StrictStr] = Field(None,alias="distributionType", description="The type of distribution the ShareClass will calculate. Available values: Income, Accumulation.") 
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the ShareClass instrument.") 

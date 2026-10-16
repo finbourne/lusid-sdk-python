@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **source** | **str** | The waterfall or model the carry amounts came from. | 
 **lines** | [**List[CarryAccrualLine]**](CarryAccrualLine.md) | The accrual movement per partner. | 
 **booked_transaction_ids** | **List[str]** | The identifiers of the transactions booked, if any. | 
+**later_run_ids** | **List[str]** | The run identifiers of carry accruals already on the ledger with an effective date after this period end. Restating an earlier period moves the to-date balance those runs were accrued against; re-run them to roll the restatement forward. | 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ period_end: datetime = # Replace with your value
 source: StrictStr = "example_source"
 lines: List[CarryAccrualLine] = # Replace with your value
 booked_transaction_ids: List[StrictStr] = # Replace with your value
-carry_accrual_result_instance = CarryAccrualResult(fund_id=fund_id, period_end=period_end, source=source, lines=lines, booked_transaction_ids=booked_transaction_ids)
+later_run_ids: List[StrictStr] = # Replace with your value
+carry_accrual_result_instance = CarryAccrualResult(fund_id=fund_id, period_end=period_end, source=source, lines=lines, booked_transaction_ids=booked_transaction_ids, later_run_ids=later_run_ids)
 
 ```
 

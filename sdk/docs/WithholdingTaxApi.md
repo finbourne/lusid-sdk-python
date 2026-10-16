@@ -845,7 +845,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the dataset definitions. Defaults to returning the latest version of each definition if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing dataset definitions; this value is returned              from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed              since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the results. For example, to filter on the scope, specify              \"scope eq 'WithholdingTax'\", and to filter on the code, specify \"code eq 'wht-main-rates'\". For more              information about filtering results, see              https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For example, to filter on the scope, specify              \"scope eq 'WithholdingTax'\", to filter on the code, specify \"code eq 'wht-main-rates'\", and to filter on the              dataset type, specify \"datasetType eq 'Anomaly'\". For more information about filtering results, see              https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
@@ -869,7 +869,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to list the dataset definitions. Defaults to returning the latest version of each definition if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing dataset definitions; this value is returned              from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed              since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
- **filter** | **str**| Expression to filter the results. For example, to filter on the scope, specify              \&quot;scope eq &#39;WithholdingTax&#39;\&quot;, and to filter on the code, specify \&quot;code eq &#39;wht-main-rates&#39;\&quot;. For more              information about filtering results, see              https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+ **filter** | **str**| Expression to filter the results. For example, to filter on the scope, specify              \&quot;scope eq &#39;WithholdingTax&#39;\&quot;, to filter on the code, specify \&quot;code eq &#39;wht-main-rates&#39;\&quot;, and to filter on the              dataset type, specify \&quot;datasetType eq &#39;Anomaly&#39;\&quot;. For more information about filtering results, see              https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type

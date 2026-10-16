@@ -644,6 +644,7 @@ from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.delisting_event import DelistingEvent
 from lusid.models.dependency_source_filter import DependencySourceFilter
 from lusid.models.deposit_close_event import DepositCloseEvent
+from lusid.models.deposit_interest_capitalisation_event import DepositInterestCapitalisationEvent
 from lusid.models.deposit_interest_payment_event import DepositInterestPaymentEvent
 from lusid.models.deposit_roll_event import DepositRollEvent
 from lusid.models.deposit_sweep_event import DepositSweepEvent
@@ -1032,6 +1033,7 @@ from lusid.models.management_fee_totals import ManagementFeeTotals
 from lusid.models.mapped_string import MappedString
 from lusid.models.mapping import Mapping
 from lusid.models.mapping_rule import MappingRule
+from lusid.models.margin_accounts import MarginAccounts
 from lusid.models.margin_calculation import MarginCalculation
 from lusid.models.margin_item import MarginItem
 from lusid.models.margin_rounding import MarginRounding
@@ -2718,6 +2720,7 @@ __all__ = [
     "DelistingEvent",
     "DependencySourceFilter",
     "DepositCloseEvent",
+    "DepositInterestCapitalisationEvent",
     "DepositInterestPaymentEvent",
     "DepositRollEvent",
     "DepositSweepEvent",
@@ -3106,6 +3109,7 @@ __all__ = [
     "MappedString",
     "Mapping",
     "MappingRule",
+    "MarginAccounts",
     "MarginCalculation",
     "MarginItem",
     "MarginRounding",

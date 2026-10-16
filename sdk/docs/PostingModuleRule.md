@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **rule_id** | **str** | The identifier for the Posting Rule. | 
 **general_ledger_account_code** | **str** | The general ledger account to post the Activity credit or debit to. | 
 **rule_filter** | **str** | The filter syntax for the Posting Rule. See https://support.lusid.com/docs/assigning-economic-activity-to-general-ledger-accounts-using-posting-rules for more information on filter syntax. | 
+**effective_from** | **datetime** | The inclusive accounting date from which the Posting Rule applies. If not set, the rule applies from the beginning of time. | [optional] 
+**effective_until** | **datetime** | The exclusive accounting date until which the Posting Rule applies. If not set, the rule applies until the end of time. | [optional] 
 ## Example
 
 ```python
@@ -19,7 +21,9 @@ from datetime import datetime
 rule_id: StrictStr = "example_rule_id"
 general_ledger_account_code: StrictStr = "example_general_ledger_account_code"
 rule_filter: StrictStr = "example_rule_filter"
-posting_module_rule_instance = PostingModuleRule(rule_id=rule_id, general_ledger_account_code=general_ledger_account_code, rule_filter=rule_filter)
+effective_from: Optional[datetime] = # Replace with your value
+effective_until: Optional[datetime] = # Replace with your value
+posting_module_rule_instance = PostingModuleRule(rule_id=rule_id, general_ledger_account_code=general_ledger_account_code, rule_filter=rule_filter, effective_from=effective_from, effective_until=effective_until)
 
 ```
 

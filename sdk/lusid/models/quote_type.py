@@ -51,6 +51,7 @@ class QuoteType(str, Enum):
     CONSTITUENTWEIGHTFACTOR = 'ConstituentWeightFactor'
     FORWARDPRICE = 'ForwardPrice'
     DISCOUNTFACTOR = 'DiscountFactor'
+    PRINCIPALDISTRIBUTED = 'PrincipalDistributed'
 
     @classmethod
     def from_json(cls, json_str: str) -> QuoteType:

@@ -34,7 +34,8 @@ class CarryAccrualResult(BaseModel):
     source:  StrictStr = Field(...,alias="source", description="The waterfall or model the carry amounts came from.") 
     lines: List[CarryAccrualLine] = Field(description="The accrual movement per partner.")
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions booked, if any.", alias="bookedTransactionIds")
-    __properties = ["fundId", "periodEnd", "source", "lines", "bookedTransactionIds"]
+    later_run_ids: List[StrictStr] = Field(description="The run identifiers of carry accruals already on the ledger with an effective date after this period end. Restating an earlier period moves the to-date balance those runs were accrued against; re-run them to roll the restatement forward.", alias="laterRunIds")
+    __properties = ["fundId", "periodEnd", "source", "lines", "bookedTransactionIds", "laterRunIds"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,7 +95,8 @@ class CarryAccrualResult(BaseModel):
             "period_end": obj.get("periodEnd"),
             "source": obj.get("source"),
             "lines": [CarryAccrualLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None,
-            "booked_transaction_ids": obj.get("bookedTransactionIds")
+            "booked_transaction_ids": obj.get("bookedTransactionIds"),
+            "later_run_ids": obj.get("laterRunIds")
         })
         return _obj
 

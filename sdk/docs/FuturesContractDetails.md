@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **contract_code** | **str** | The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc. | 
 **contract_month** | **str** | Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].  Defaults to \&quot;Unknown\&quot; if not set. | [optional] 
 **contract_size** | **float** | Size of a single contract. | 
-**convention** | **str** | If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM]. | [optional] 
+**convention** | **str** | If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIcma, ActActIsma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM]. | [optional] 
 **country** | **str** | Country (code) for the exchange. | [optional] 
 **description** | **str** | Description of contract. | [optional] 
 **exchange_code** | **str** | Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code). | 
@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **deliverable_max_maturity_years** | **float** | For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds. | [optional] 
 **exclude_callable_bonds** | **bool** | For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded). | [optional] 
 **deliverable_min_amount_outstanding** | **float** | For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds. | [optional] 
+**deliverable_isins** | **List[str]** | ISINs of the bonds deliverable into this contract for its delivery month. When set, the deliverable  basket is these bonds only; when empty, every active bond in the portfolio&#39;s instrument scope is a candidate.  Bonds not yet issued on the valuation date are left out of the basket.  Update it when the exchange notifies a new deliverable; the list is not effective-dated. | [optional] 
 ## Example
 
 ```python
@@ -52,7 +53,8 @@ deliverable_max_maturity_years: Optional[Union[StrictFloat, StrictInt]] = # Repl
 exclude_callable_bonds: Optional[StrictBool] = # Replace with your value
 exclude_callable_bonds:Optional[StrictBool] = None
 deliverable_min_amount_outstanding: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type, deliverable_min_maturity_years=deliverable_min_maturity_years, deliverable_max_maturity_years=deliverable_max_maturity_years, exclude_callable_bonds=exclude_callable_bonds, deliverable_min_amount_outstanding=deliverable_min_amount_outstanding)
+deliverable_isins: Optional[List[StrictStr]] = # Replace with your value
+futures_contract_details_instance = FuturesContractDetails(dom_ccy=dom_ccy, fgn_ccy=fgn_ccy, asset_class=asset_class, contract_code=contract_code, contract_month=contract_month, contract_size=contract_size, convention=convention, country=country, description=description, exchange_code=exchange_code, exchange_name=exchange_name, ticker_step=ticker_step, unit_value=unit_value, calendars=calendars, delivery_type=delivery_type, deliverable_min_maturity_years=deliverable_min_maturity_years, deliverable_max_maturity_years=deliverable_max_maturity_years, exclude_callable_bonds=exclude_callable_bonds, deliverable_min_amount_outstanding=deliverable_min_amount_outstanding, deliverable_isins=deliverable_isins)
 
 ```
 

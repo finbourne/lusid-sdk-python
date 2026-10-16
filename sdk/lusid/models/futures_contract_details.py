@@ -33,7 +33,7 @@ class FuturesContractDetails(BaseModel):
     contract_code:  StrictStr = Field(...,alias="contractCode", description="The contract code used by the exchange, e.g. “CL” for Crude Oil, “ES” for E-mini SP 500, “FGBL” for Bund Futures, etc.") 
     contract_month:  Optional[StrictStr] = Field(None,alias="contractMonth", description="Which month does the contract trade for.    Supported string (enumeration) values are: [F, G, H, J, K, M, N, Q, U, V, X, Z].  Defaults to \"Unknown\" if not set.") 
     contract_size: Union[StrictFloat, StrictInt] = Field(description="Size of a single contract.", alias="contractSize")
-    convention:  Optional[StrictStr] = Field(None,alias="convention", description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIsma, ActActIcma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
+    convention:  Optional[StrictStr] = Field(None,alias="convention", description="If appropriate, the day count convention method used in pricing (rates futures).  For more information on day counts, see [Day count conventions supported by LUSID](https://support.lusid.com/docs/day-count-conventions-supported-by-lusid)                Supported string (enumeration) values are: [Actual360, Act360, MoneyMarket, Actual365, Act365, Thirty360, ThirtyU360, Bond, ThirtyE360, EuroBond, ActualActual, ActAct, ActActIsda, ActActIcma, ActActIsma, OneOne, Act364, Act365F, Act365L, Act365_25, Act252, Bus252, NL360, NL365, ActActAFB, Act365Cad, ThirtyActIsda, Thirty365Isda, ThirtyEActIsda, ThirtyE360Isda, ThirtyE365Isda, ThirtyU360EOM].") 
     country:  Optional[StrictStr] = Field(None,alias="country", description="Country (code) for the exchange.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="Description of contract.") 
     exchange_code:  StrictStr = Field(...,alias="exchangeCode", description="Exchange code for contract. This can be any string to uniquely identify the exchange (e.g. Exchange Name, MIC, BBG code).") 
@@ -46,7 +46,8 @@ class FuturesContractDetails(BaseModel):
     deliverable_max_maturity_years: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For physically-delivered bond futures: the maximum remaining maturity, in years, measured from the first  day of the delivery month, for a bond to be eligible for delivery against this contract.  Optional: if not set, no upper bound is applied when matching eligible bonds.", alias="deliverableMaxMaturityYears")
     exclude_callable_bonds: Optional[StrictBool] = Field(default=None, description="For physically-delivered bond futures: whether callable bonds are excluded from delivery against this  contract. Optional: defaults to false (callable bonds are not excluded).", alias="excludeCallableBonds")
     deliverable_min_amount_outstanding: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For physically-delivered bond futures: the minimum amount outstanding, in the domestic currency of the  contract, for a bond issue to be eligible for delivery against this contract.  Optional: if not set, no minimum is applied when matching eligible bonds.", alias="deliverableMinAmountOutstanding")
-    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType", "deliverableMinMaturityYears", "deliverableMaxMaturityYears", "excludeCallableBonds", "deliverableMinAmountOutstanding"]
+    deliverable_isins: Optional[List[StrictStr]] = Field(default=None, description="ISINs of the bonds deliverable into this contract for its delivery month. When set, the deliverable  basket is these bonds only; when empty, every active bond in the portfolio's instrument scope is a candidate.  Bonds not yet issued on the valuation date are left out of the basket.  Update it when the exchange notifies a new deliverable; the list is not effective-dated.", alias="deliverableIsins")
+    __properties = ["domCcy", "fgnCcy", "assetClass", "contractCode", "contractMonth", "contractSize", "convention", "country", "description", "exchangeCode", "exchangeName", "tickerStep", "unitValue", "calendars", "deliveryType", "deliverableMinMaturityYears", "deliverableMaxMaturityYears", "excludeCallableBonds", "deliverableMinAmountOutstanding", "deliverableIsins"]
 
     class Config:
         """Pydantic configuration"""
@@ -140,6 +141,11 @@ class FuturesContractDetails(BaseModel):
         if self.deliverable_min_amount_outstanding is None and "deliverable_min_amount_outstanding" in self.__fields_set__:
             _dict['deliverableMinAmountOutstanding'] = None
 
+        # set to None if deliverable_isins (nullable) is None
+        # and __fields_set__ contains the field
+        if self.deliverable_isins is None and "deliverable_isins" in self.__fields_set__:
+            _dict['deliverableIsins'] = None
+
         return _dict
 
     @classmethod
@@ -170,7 +176,8 @@ class FuturesContractDetails(BaseModel):
             "deliverable_min_maturity_years": obj.get("deliverableMinMaturityYears"),
             "deliverable_max_maturity_years": obj.get("deliverableMaxMaturityYears"),
             "exclude_callable_bonds": obj.get("excludeCallableBonds"),
-            "deliverable_min_amount_outstanding": obj.get("deliverableMinAmountOutstanding")
+            "deliverable_min_amount_outstanding": obj.get("deliverableMinAmountOutstanding"),
+            "deliverable_isins": obj.get("deliverableIsins")
         })
         return _obj
 

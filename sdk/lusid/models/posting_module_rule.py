@@ -30,7 +30,9 @@ class PostingModuleRule(BaseModel):
     rule_id:  StrictStr = Field(...,alias="ruleId", description="The identifier for the Posting Rule.") 
     general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The general ledger account to post the Activity credit or debit to.") 
     rule_filter:  StrictStr = Field(...,alias="ruleFilter", description="The filter syntax for the Posting Rule. See https://support.lusid.com/docs/assigning-economic-activity-to-general-ledger-accounts-using-posting-rules for more information on filter syntax.") 
-    __properties = ["ruleId", "generalLedgerAccountCode", "ruleFilter"]
+    effective_from: Optional[datetime] = Field(default=None, description="The inclusive accounting date from which the Posting Rule applies. If not set, the rule applies from the beginning of time.", alias="effectiveFrom")
+    effective_until: Optional[datetime] = Field(default=None, description="The exclusive accounting date until which the Posting Rule applies. If not set, the rule applies until the end of time.", alias="effectiveUntil")
+    __properties = ["ruleId", "generalLedgerAccountCode", "ruleFilter", "effectiveFrom", "effectiveUntil"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,16 @@ class PostingModuleRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if effective_from (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_from is None and "effective_from" in self.__fields_set__:
+            _dict['effectiveFrom'] = None
+
+        # set to None if effective_until (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_until is None and "effective_until" in self.__fields_set__:
+            _dict['effectiveUntil'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +90,9 @@ class PostingModuleRule(BaseModel):
         _obj = PostingModuleRule.parse_obj({
             "rule_id": obj.get("ruleId"),
             "general_ledger_account_code": obj.get("generalLedgerAccountCode"),
-            "rule_filter": obj.get("ruleFilter")
+            "rule_filter": obj.get("ruleFilter"),
+            "effective_from": obj.get("effectiveFrom"),
+            "effective_until": obj.get("effectiveUntil")
         })
         return _obj
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **they_post** | [**PartyTerms**](PartyTerms.md) |  | 
 **eligible_collateral** | [**EligibleCollateralReferences**](EligibleCollateralReferences.md) |  | [optional] 
 **calculation** | [**MarginCalculation**](MarginCalculation.md) |  | 
+**margin_accounts** | [**MarginAccounts**](MarginAccounts.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ we_post: PartyTerms = # Replace with your value
 they_post: PartyTerms = # Replace with your value
 eligible_collateral: Optional[EligibleCollateralReferences] = # Replace with your value
 calculation: MarginCalculation
-margin_item_instance = MarginItem(code=code, trade_filter=trade_filter, settlement=settlement, legal_mechanism=legal_mechanism, we_post=we_post, they_post=they_post, eligible_collateral=eligible_collateral, calculation=calculation)
+margin_accounts: Optional[MarginAccounts] = # Replace with your value
+margin_item_instance = MarginItem(code=code, trade_filter=trade_filter, settlement=settlement, legal_mechanism=legal_mechanism, we_post=we_post, they_post=they_post, eligible_collateral=eligible_collateral, calculation=calculation, margin_accounts=margin_accounts)
 
 ```
 

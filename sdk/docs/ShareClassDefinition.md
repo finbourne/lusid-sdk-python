@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **share_class_short_code** | **str** | A short code that uniquely identifies the share class within the Fund. | 
 **launch_price** | **float** | The launch price set when a shareclass is added to the fund. Defaults to 1. | [optional] 
 **launch_date** | **datetime** | The launch date set when a shareclass is added to the fund. Defaults to Fund Inception Date. | [optional] 
-**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties to attach to the auto-created Instrument. Only applied when createInstrument is true. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | An optional set of properties for the Share Class. These must be from the &#39;Instrument&#39; domain. | [optional] 
 **investor_type** | **str** | The Type of Share Class. Available values: Unitised. | 
 **distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [optional] 
 **dom_ccy** | **str** | The domestic currency of the ShareClass instrument. | 
