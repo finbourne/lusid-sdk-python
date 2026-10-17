@@ -34,13 +34,15 @@ class SubscriptionDefinition(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description") 
     portfolio_id: ResourceId = Field(alias="portfolioId")
     timeline_id: Optional[ResourceId] = Field(default=None, alias="timelineId")
+    timeline_property:  Optional[StrictStr] = Field(None,alias="timelineProperty", description="A portfolio property key (Portfolio/scope/code) naming a perpetual portfolio property whose value  (scope/code) identifies the timeline for each portfolio. Mutually exclusive with timelineId.  The property must be defined, with a data type of value type ResourceId or String.") 
+    portfolio_filter:  Optional[StrictStr] = Field(None,alias="portfolioFilter", description="A filter, in the syntax of the list portfolios filter, that narrows a wildcard portfolioId to the portfolios  of the scope that match it. Only valid when portfolioId.code is \"*\". It may use the portfolio's own fields and  its perpetual Portfolio properties; time-variant and derived properties and relationships are not supported.  A portfolio that starts or stops matching joins or leaves the subscription.") 
     address_keys: Optional[List[StrictStr]] = Field(default=None, description="The set of addresses the subscriber wishes to receive.", alias="addressKeys")
     by_tax_lots: Optional[StrictBool] = Field(default=None, alias="byTaxLots")
     subscription_type:  StrictStr = Field(...,alias="subscriptionType", description="Required. The kind of data the subscription streams: before/after effects per  holding (holdings), the transactions themselves (transactions), or each changed holding's  complete current state (positions). Address keys and byTaxLots are not valid for a  transactions subscription. Available values: Holdings, Transactions, Positions.") 
     start_effective_at: Optional[datetime] = Field(default=None, alias="startEffectiveAt")
     end_effective_at: Optional[datetime] = Field(default=None, description="Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping.", alias="endEffectiveAt")
     effective_forward_days: Optional[StrictInt] = Field(default=None, description="How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes.", alias="effectiveForwardDays")
-    __properties = ["scope", "code", "displayName", "description", "portfolioId", "timelineId", "addressKeys", "byTaxLots", "subscriptionType", "startEffectiveAt", "endEffectiveAt", "effectiveForwardDays"]
+    __properties = ["scope", "code", "displayName", "description", "portfolioId", "timelineId", "timelineProperty", "portfolioFilter", "addressKeys", "byTaxLots", "subscriptionType", "startEffectiveAt", "endEffectiveAt", "effectiveForwardDays"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +92,16 @@ class SubscriptionDefinition(BaseModel):
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
 
+        # set to None if timeline_property (nullable) is None
+        # and __fields_set__ contains the field
+        if self.timeline_property is None and "timeline_property" in self.__fields_set__:
+            _dict['timelineProperty'] = None
+
+        # set to None if portfolio_filter (nullable) is None
+        # and __fields_set__ contains the field
+        if self.portfolio_filter is None and "portfolio_filter" in self.__fields_set__:
+            _dict['portfolioFilter'] = None
+
         # set to None if address_keys (nullable) is None
         # and __fields_set__ contains the field
         if self.address_keys is None and "address_keys" in self.__fields_set__:
@@ -128,6 +140,8 @@ class SubscriptionDefinition(BaseModel):
             "description": obj.get("description"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "timeline_id": ResourceId.from_dict(obj.get("timelineId")) if obj.get("timelineId") is not None else None,
+            "timeline_property": obj.get("timelineProperty"),
+            "portfolio_filter": obj.get("portfolioFilter"),
             "address_keys": obj.get("addressKeys"),
             "by_tax_lots": obj.get("byTaxLots"),
             "subscription_type": obj.get("subscriptionType"),
