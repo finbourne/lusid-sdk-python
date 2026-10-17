@@ -6,13 +6,8 @@ Name | Type | Description | Notes
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the rec definition. | 
 **description** | **str** | A description of the rec definition. | [optional] 
-**definition_type** | **str** | What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData. | 
 **side_names** | [**RecDefSideNames**](RecDefSideNames.md) |  | [optional] 
-**left_portfolio_sources** | [**List[RecDefSource]**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | 
-**right_portfolio_sources** | [**List[RecDefSource]**](RecDefSource.md) | The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty. | 
-**valuation_recipes** | [**RecDefRecipeIds**](RecDefRecipeIds.md) |  | [optional] 
-**currencies** | [**RecDefCurrencies**](RecDefCurrencies.md) |  | [optional] 
-**rulesets** | [**List[RecDefRuleset]**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | 
+**details** | [**RecDefinitionDetails**](RecDefinitionDetails.md) |  | 
 **review_configuration** | [**RecReviewConfiguration**](RecReviewConfiguration.md) |  | 
 **date_policy** | [**RecDatePolicy**](RecDatePolicy.md) |  | 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable. | [optional] 
@@ -31,20 +26,15 @@ from datetime import datetime
 id: ResourceId
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-definition_type: StrictStr = "example_definition_type"
 side_names: Optional[RecDefSideNames] = # Replace with your value
-left_portfolio_sources: List[RecDefSource] = # Replace with your value
-right_portfolio_sources: List[RecDefSource] = # Replace with your value
-valuation_recipes: Optional[RecDefRecipeIds] = # Replace with your value
-currencies: Optional[RecDefCurrencies] = None
-rulesets: List[RecDefRuleset] = # Replace with your value
+details: RecDefinitionDetails
 review_configuration: RecReviewConfiguration = # Replace with your value
 date_policy: RecDatePolicy = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_definition_instance = RecDefinition(id=id, display_name=display_name, description=description, definition_type=definition_type, side_names=side_names, left_portfolio_sources=left_portfolio_sources, right_portfolio_sources=right_portfolio_sources, valuation_recipes=valuation_recipes, currencies=currencies, rulesets=rulesets, review_configuration=review_configuration, date_policy=date_policy, properties=properties, href=href, version=version, links=links)
+rec_definition_instance = RecDefinition(id=id, display_name=display_name, description=description, side_names=side_names, details=details, review_configuration=review_configuration, date_policy=date_policy, properties=properties, href=href, version=version, links=links)
 
 ```
 

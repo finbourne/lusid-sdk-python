@@ -606,6 +606,7 @@ from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
+from lusid.models.external_rec_definition_details import ExternalRecDefinitionDetails
 from lusid.models.external_rec_type import ExternalRecType
 from lusid.models.facility import Facility
 from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEvent
@@ -1207,6 +1208,7 @@ from lusid.models.pnl_journal_entry_line import PnlJournalEntryLine
 from lusid.models.portfolio import Portfolio
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
+from lusid.models.portfolio_contents_rec_definition_details import PortfolioContentsRecDefinitionDetails
 from lusid.models.portfolio_details import PortfolioDetails
 from lusid.models.portfolio_entity import PortfolioEntity
 from lusid.models.portfolio_entity_id import PortfolioEntityId
@@ -1346,6 +1348,7 @@ from lusid.models.rec_def_ruleset import RecDefRuleset
 from lusid.models.rec_def_side_names import RecDefSideNames
 from lusid.models.rec_def_source import RecDefSource
 from lusid.models.rec_definition import RecDefinition
+from lusid.models.rec_definition_details import RecDefinitionDetails
 from lusid.models.rec_exception_count_by_closure_type import RecExceptionCountByClosureType
 from lusid.models.rec_exception_count_by_result_type import RecExceptionCountByResultType
 from lusid.models.rec_execution import RecExecution
@@ -1371,6 +1374,7 @@ from lusid.models.rec_result_holding_item import RecResultHoldingItem
 from lusid.models.rec_result_item import RecResultItem
 from lusid.models.rec_result_item_details import RecResultItemDetails
 from lusid.models.rec_result_link_key import RecResultLinkKey
+from lusid.models.rec_result_relational_data_item import RecResultRelationalDataItem
 from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
@@ -2572,6 +2576,7 @@ __all__ = [
     "ExpandedGroup",
     "ExpiryEvent",
     "ExternalFeeComponentFilter",
+    "ExternalRecDefinitionDetails",
     "ExternalRecType",
     "Facility",
     "FacilityCommitmentFeeEvent",
@@ -3173,6 +3178,7 @@ __all__ = [
     "Portfolio",
     "PortfolioCashFlow",
     "PortfolioCashLadder",
+    "PortfolioContentsRecDefinitionDetails",
     "PortfolioDetails",
     "PortfolioEntity",
     "PortfolioEntityId",
@@ -3312,6 +3318,7 @@ __all__ = [
     "RecDefSideNames",
     "RecDefSource",
     "RecDefinition",
+    "RecDefinitionDetails",
     "RecExceptionCountByClosureType",
     "RecExceptionCountByResultType",
     "RecExecution",
@@ -3337,6 +3344,7 @@ __all__ = [
     "RecResultItem",
     "RecResultItemDetails",
     "RecResultLinkKey",
+    "RecResultRelationalDataItem",
     "RecResultReview",
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",

@@ -24,11 +24,8 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.rec_date_policy import RecDatePolicy
-from lusid.models.rec_def_currencies import RecDefCurrencies
-from lusid.models.rec_def_recipe_ids import RecDefRecipeIds
-from lusid.models.rec_def_ruleset import RecDefRuleset
 from lusid.models.rec_def_side_names import RecDefSideNames
-from lusid.models.rec_def_source import RecDefSource
+from lusid.models.rec_definition_details import RecDefinitionDetails
 from lusid.models.rec_review_configuration import RecReviewConfiguration
 from lusid.models.resource_id import ResourceId
 
@@ -39,17 +36,12 @@ class CreateRecDefinitionRequest(BaseModel):
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the rec definition.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the rec definition.") 
-    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, naming the kind of dataset that must be present on at least one side. Only PortfolioContents is currently supported. Available values: PortfolioContents, LusidEntity, RelationalData.") 
     side_names: Optional[RecDefSideNames] = Field(default=None, alias="sideNames")
-    left_portfolio_sources: Optional[List[RecDefSource]] = Field(default=None, description="The portfolios, portfolio groups and funds contributing to the left side. Empty when the left side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.", alias="leftPortfolioSources")
-    right_portfolio_sources: Optional[List[RecDefSource]] = Field(default=None, description="The portfolios, portfolio groups and funds contributing to the right side. Empty when the right side draws on relational data instead, which requires every ruleset to declare relational data for that side. Both sides cannot be empty.", alias="rightPortfolioSources")
-    valuation_recipes: Optional[RecDefRecipeIds] = Field(default=None, alias="valuationRecipes")
-    currencies: Optional[RecDefCurrencies] = None
-    rulesets: List[RecDefRuleset] = Field(description="The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.")
+    details: RecDefinitionDetails
     review_configuration: Optional[RecReviewConfiguration] = Field(default=None, alias="reviewConfiguration")
     date_policy: Optional[RecDatePolicy] = Field(default=None, alias="datePolicy")
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecDefinition domain. On update, a property with a null value is deleted and omitted properties are left unchanged. Filterable and sortable.")
-    __properties = ["id", "displayName", "description", "definitionType", "sideNames", "leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "reviewConfiguration", "datePolicy", "properties"]
+    __properties = ["id", "displayName", "description", "sideNames", "details", "reviewConfiguration", "datePolicy", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,33 +81,9 @@ class CreateRecDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of side_names
         if self.side_names:
             _dict['sideNames'] = self.side_names.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in left_portfolio_sources (list)
-        _items = []
-        if self.left_portfolio_sources:
-            for _item in self.left_portfolio_sources:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['leftPortfolioSources'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in right_portfolio_sources (list)
-        _items = []
-        if self.right_portfolio_sources:
-            for _item in self.right_portfolio_sources:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['rightPortfolioSources'] = _items
-        # override the default output from pydantic by calling `to_dict()` of valuation_recipes
-        if self.valuation_recipes:
-            _dict['valuationRecipes'] = self.valuation_recipes.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of currencies
-        if self.currencies:
-            _dict['currencies'] = self.currencies.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in rulesets (list)
-        _items = []
-        if self.rulesets:
-            for _item in self.rulesets:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['rulesets'] = _items
+        # override the default output from pydantic by calling `to_dict()` of details
+        if self.details:
+            _dict['details'] = self.details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of review_configuration
         if self.review_configuration:
             _dict['reviewConfiguration'] = self.review_configuration.to_dict()
@@ -133,16 +101,6 @@ class CreateRecDefinitionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
-
-        # set to None if left_portfolio_sources (nullable) is None
-        # and __fields_set__ contains the field
-        if self.left_portfolio_sources is None and "left_portfolio_sources" in self.__fields_set__:
-            _dict['leftPortfolioSources'] = None
-
-        # set to None if right_portfolio_sources (nullable) is None
-        # and __fields_set__ contains the field
-        if self.right_portfolio_sources is None and "right_portfolio_sources" in self.__fields_set__:
-            _dict['rightPortfolioSources'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -164,13 +122,8 @@ class CreateRecDefinitionRequest(BaseModel):
             "id": ResourceId.from_dict(obj.get("id")) if obj.get("id") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "definition_type": obj.get("definitionType"),
             "side_names": RecDefSideNames.from_dict(obj.get("sideNames")) if obj.get("sideNames") is not None else None,
-            "left_portfolio_sources": [RecDefSource.from_dict(_item) for _item in obj.get("leftPortfolioSources")] if obj.get("leftPortfolioSources") is not None else None,
-            "right_portfolio_sources": [RecDefSource.from_dict(_item) for _item in obj.get("rightPortfolioSources")] if obj.get("rightPortfolioSources") is not None else None,
-            "valuation_recipes": RecDefRecipeIds.from_dict(obj.get("valuationRecipes")) if obj.get("valuationRecipes") is not None else None,
-            "currencies": RecDefCurrencies.from_dict(obj.get("currencies")) if obj.get("currencies") is not None else None,
-            "rulesets": [RecDefRuleset.from_dict(_item) for _item in obj.get("rulesets")] if obj.get("rulesets") is not None else None,
+            "details": RecDefinitionDetails.from_dict(obj.get("details")) if obj.get("details") is not None else None,
             "review_configuration": RecReviewConfiguration.from_dict(obj.get("reviewConfiguration")) if obj.get("reviewConfiguration") is not None else None,
             "date_policy": RecDatePolicy.from_dict(obj.get("datePolicy")) if obj.get("datePolicy") is not None else None,
             "properties": dict(

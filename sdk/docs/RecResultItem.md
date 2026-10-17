@@ -33,6 +33,8 @@ rec_result_item_instance = RecResultItem(rec_result_holding_item_instance)
 See all compatible oneOf types with RecResultItem
 
 
+ * [RecResultRelationalDataItem](./RecResultRelationalDataItem.md)
+
  * [RecResultSettlementActivityItem](./RecResultSettlementActivityItem.md)
 
  * [RecResultTransactionItem](./RecResultTransactionItem.md)

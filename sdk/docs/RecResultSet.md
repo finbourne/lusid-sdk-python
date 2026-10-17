@@ -5,6 +5,7 @@ The collection of reconciliation results for a given rec type within a rec insta
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rec_type** | **str** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
+**external_rec_type_name** | **str** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] 
 **rec_instance** | [**RecInstanceSummary**](RecInstanceSummary.md) |  | 
 **run_number** | **int** | The run number within the instance. Increments with each re-run. | 
 **run_as_at** | **datetime** | The asAt datetime at which the run happened. | 
@@ -30,6 +31,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 rec_type: StrictStr = "example_rec_type"
+external_rec_type_name: Optional[StrictStr] = "example_external_rec_type_name"
 rec_instance: RecInstanceSummary = # Replace with your value
 run_number: StrictInt = # Replace with your value
 run_number: StrictInt = 42
@@ -46,7 +48,7 @@ previous_runs: List[RecSupersededRun] = # Replace with your value
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_result_set_instance = RecResultSet(rec_type=rec_type, rec_instance=rec_instance, run_number=run_number, run_as_at=run_as_at, execution=execution, dates_reconciled=dates_reconciled, result_counts=result_counts, review=review, approval_status=approval_status, required_approvals=required_approvals, submissions=submissions, decisions=decisions, previous_runs=previous_runs, href=href, version=version, links=links)
+rec_result_set_instance = RecResultSet(rec_type=rec_type, external_rec_type_name=external_rec_type_name, rec_instance=rec_instance, run_number=run_number, run_as_at=run_as_at, execution=execution, dates_reconciled=dates_reconciled, result_counts=result_counts, review=review, approval_status=approval_status, required_approvals=required_approvals, submissions=submissions, decisions=decisions, previous_runs=previous_runs, href=href, version=version, links=links)
 
 ```
 

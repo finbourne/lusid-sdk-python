@@ -39,6 +39,7 @@ class RecResultSet(BaseModel):
     The collection of reconciliation results for a given rec type within a rec instance. Identified by  its rec type and instance. The latest run's data is promoted to the root; prior runs are available  via previousRuns.  # noqa: E501
     """
     rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
+    external_rec_type_name:  Optional[StrictStr] = Field(None,alias="externalRecTypeName", description="The client's name for an External rec type, as stamped from the matching ruleset's externalRecType when the run executed. Null for native rec types. Filterable.") 
     rec_instance: RecInstanceSummary = Field(alias="recInstance")
     run_number: StrictInt = Field(description="The run number within the instance. Increments with each re-run.", alias="runNumber")
     run_as_at: datetime = Field(description="The asAt datetime at which the run happened.", alias="runAsAt")
@@ -54,7 +55,7 @@ class RecResultSet(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["recType", "recInstance", "runNumber", "runAsAt", "execution", "datesReconciled", "resultCounts", "review", "approvalStatus", "requiredApprovals", "submissions", "decisions", "previousRuns", "href", "version", "links"]
+    __properties = ["recType", "externalRecTypeName", "recInstance", "runNumber", "runAsAt", "execution", "datesReconciled", "resultCounts", "review", "approvalStatus", "requiredApprovals", "submissions", "decisions", "previousRuns", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -141,6 +142,11 @@ class RecResultSet(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if external_rec_type_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.external_rec_type_name is None and "external_rec_type_name" in self.__fields_set__:
+            _dict['externalRecTypeName'] = None
+
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -164,6 +170,7 @@ class RecResultSet(BaseModel):
 
         _obj = RecResultSet.parse_obj({
             "rec_type": obj.get("recType"),
+            "external_rec_type_name": obj.get("externalRecTypeName"),
             "rec_instance": RecInstanceSummary.from_dict(obj.get("recInstance")) if obj.get("recInstance") is not None else None,
             "run_number": obj.get("runNumber"),
             "run_as_at": obj.get("runAsAt"),
