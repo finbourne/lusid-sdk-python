@@ -16,6 +16,7 @@ from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
 from lusid.api.chart_of_accounts_api import ChartOfAccountsApi
 from lusid.api.check_definitions_api import CheckDefinitionsApi
+from lusid.api.collateral_api import CollateralApi
 from lusid.api.collateral_agreements_api import CollateralAgreementsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.compliance_api import ComplianceApi
@@ -117,6 +118,7 @@ __all__ = [
     "CalendarsApi",
     "ChartOfAccountsApi",
     "CheckDefinitionsApi",
+    "CollateralApi",
     "CollateralAgreementsApi",
     "ComplexMarketDataApi",
     "ComplianceApi",

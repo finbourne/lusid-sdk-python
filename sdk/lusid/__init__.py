@@ -32,6 +32,7 @@ from lusid.api.blocks_api import BlocksApi
 from lusid.api.calendars_api import CalendarsApi
 from lusid.api.chart_of_accounts_api import ChartOfAccountsApi
 from lusid.api.check_definitions_api import CheckDefinitionsApi
+from lusid.api.collateral_api import CollateralApi
 from lusid.api.collateral_agreements_api import CollateralAgreementsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.compliance_api import ComplianceApi
@@ -137,6 +138,7 @@ from lusid.models.abor_properties import AborProperties
 from lusid.models.abor_request import AborRequest
 from lusid.models.abstain_election import AbstainElection
 from lusid.models.accept_estimate_valuation_point_response import AcceptEstimateValuationPointResponse
+from lusid.models.accept_margin_call_request import AcceptMarginCallRequest
 from lusid.models.access_controlled_action import AccessControlledAction
 from lusid.models.access_controlled_resource import AccessControlledResource
 from lusid.models.access_metadata_operation import AccessMetadataOperation
@@ -275,6 +277,8 @@ from lusid.models.bankruptcy_event import BankruptcyEvent
 from lusid.models.barrier import Barrier
 from lusid.models.basket import Basket
 from lusid.models.basket_identifier import BasketIdentifier
+from lusid.models.batch_accept_margin_calls_request import BatchAcceptMarginCallsRequest
+from lusid.models.batch_accept_margin_calls_response import BatchAcceptMarginCallsResponse
 from lusid.models.batch_adjust_holdings_response import BatchAdjustHoldingsResponse
 from lusid.models.batch_amend_custom_data_model_membership_response import BatchAmendCustomDataModelMembershipResponse
 from lusid.models.batch_amend_transaction_settlement_instruction_response import BatchAmendTransactionSettlementInstructionResponse
@@ -660,6 +664,7 @@ from lusid.models.direction_spreads import DirectionSpreads
 from lusid.models.discount_factor_curve_data import DiscountFactorCurveData
 from lusid.models.discounting_dependency import DiscountingDependency
 from lusid.models.discounting_method import DiscountingMethod
+from lusid.models.dispute_margin_call_request import DisputeMarginCallRequest
 from lusid.models.dividend_option_event import DividendOptionEvent
 from lusid.models.dividend_reinvestment_event import DividendReinvestmentEvent
 from lusid.models.dividend_suspension_event import DividendSuspensionEvent
@@ -1036,8 +1041,16 @@ from lusid.models.mapping import Mapping
 from lusid.models.mapping_rule import MappingRule
 from lusid.models.margin_accounts import MarginAccounts
 from lusid.models.margin_calculation import MarginCalculation
+from lusid.models.margin_call import MarginCall
+from lusid.models.margin_call_key import MarginCallKey
+from lusid.models.margin_call_reference import MarginCallReference
 from lusid.models.margin_item import MarginItem
+from lusid.models.margin_line import MarginLine
 from lusid.models.margin_rounding import MarginRounding
+from lusid.models.margin_run import MarginRun
+from lusid.models.margin_run_issue import MarginRunIssue
+from lusid.models.margin_run_request import MarginRunRequest
+from lusid.models.margin_run_shard import MarginRunShard
 from lusid.models.margin_settlement_lag import MarginSettlementLag
 from lusid.models.mark_to_market_conventions import MarkToMarketConventions
 from lusid.models.market_context import MarketContext
@@ -1212,6 +1225,9 @@ from lusid.models.paged_resource_list_of_instrument_event_holder import PagedRes
 from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
 from lusid.models.paged_resource_list_of_item_and_workspace import PagedResourceListOfItemAndWorkspace
 from lusid.models.paged_resource_list_of_legal_entity import PagedResourceListOfLegalEntity
+from lusid.models.paged_resource_list_of_margin_call import PagedResourceListOfMarginCall
+from lusid.models.paged_resource_list_of_margin_line import PagedResourceListOfMarginLine
+from lusid.models.paged_resource_list_of_margin_run import PagedResourceListOfMarginRun
 from lusid.models.paged_resource_list_of_matching_ruleset import PagedResourceListOfMatchingRuleset
 from lusid.models.paged_resource_list_of_order import PagedResourceListOfOrder
 from lusid.models.paged_resource_list_of_order_breach_history import PagedResourceListOfOrderBreachHistory
@@ -1523,6 +1539,7 @@ from lusid.models.reconciliation_rule import ReconciliationRule
 from lusid.models.reconciliation_rule_type import ReconciliationRuleType
 from lusid.models.reconciliation_side_configuration import ReconciliationSideConfiguration
 from lusid.models.reconciliation_transactions import ReconciliationTransactions
+from lusid.models.record_counterparty_demand_request import RecordCounterpartyDemandRequest
 from lusid.models.recycling_terms import RecyclingTerms
 from lusid.models.reference_data import ReferenceData
 from lusid.models.reference_instrument import ReferenceInstrument
@@ -2122,6 +2139,7 @@ __all__ = [
     "CalendarsApi",
     "ChartOfAccountsApi",
     "CheckDefinitionsApi",
+    "CollateralApi",
     "CollateralAgreementsApi",
     "ComplexMarketDataApi",
     "ComplianceApi",
@@ -2217,6 +2235,7 @@ __all__ = [
     "AborRequest",
     "AbstainElection",
     "AcceptEstimateValuationPointResponse",
+    "AcceptMarginCallRequest",
     "AccessControlledAction",
     "AccessControlledResource",
     "AccessMetadataOperation",
@@ -2355,6 +2374,8 @@ __all__ = [
     "Barrier",
     "Basket",
     "BasketIdentifier",
+    "BatchAcceptMarginCallsRequest",
+    "BatchAcceptMarginCallsResponse",
     "BatchAdjustHoldingsResponse",
     "BatchAmendCustomDataModelMembershipResponse",
     "BatchAmendTransactionSettlementInstructionResponse",
@@ -2740,6 +2761,7 @@ __all__ = [
     "DiscountFactorCurveData",
     "DiscountingDependency",
     "DiscountingMethod",
+    "DisputeMarginCallRequest",
     "DividendOptionEvent",
     "DividendReinvestmentEvent",
     "DividendSuspensionEvent",
@@ -3116,8 +3138,16 @@ __all__ = [
     "MappingRule",
     "MarginAccounts",
     "MarginCalculation",
+    "MarginCall",
+    "MarginCallKey",
+    "MarginCallReference",
     "MarginItem",
+    "MarginLine",
     "MarginRounding",
+    "MarginRun",
+    "MarginRunIssue",
+    "MarginRunRequest",
+    "MarginRunShard",
     "MarginSettlementLag",
     "MarkToMarketConventions",
     "MarketContext",
@@ -3292,6 +3322,9 @@ __all__ = [
     "PagedResourceListOfInstrumentEventInstruction",
     "PagedResourceListOfItemAndWorkspace",
     "PagedResourceListOfLegalEntity",
+    "PagedResourceListOfMarginCall",
+    "PagedResourceListOfMarginLine",
+    "PagedResourceListOfMarginRun",
     "PagedResourceListOfMatchingRuleset",
     "PagedResourceListOfOrder",
     "PagedResourceListOfOrderBreachHistory",
@@ -3603,6 +3636,7 @@ __all__ = [
     "ReconciliationRuleType",
     "ReconciliationSideConfiguration",
     "ReconciliationTransactions",
+    "RecordCounterpartyDemandRequest",
     "RecyclingTerms",
     "ReferenceData",
     "ReferenceInstrument",
