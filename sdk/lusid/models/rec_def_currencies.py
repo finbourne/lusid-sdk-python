@@ -27,8 +27,8 @@ class RecDefCurrencies(BaseModel):
     """
     RecDefCurrencies
     """
-    left:  StrictStr = Field(...,alias="left", description="The currency used on the left side of the reconciliation.") 
-    right:  StrictStr = Field(...,alias="right", description="The currency used on the right side of the reconciliation.") 
+    left:  Optional[StrictStr] = Field(None,alias="left", description="The currency used on the left side of the reconciliation. Required when the left side has portfolio sources; must be null when it draws on relational data.") 
+    right:  Optional[StrictStr] = Field(None,alias="right", description="The currency used on the right side of the reconciliation. Required when the right side has portfolio sources; must be null when it draws on relational data.") 
     __properties = ["left", "right"]
 
     class Config:
@@ -63,6 +63,16 @@ class RecDefCurrencies(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if left (nullable) is None
+        # and __fields_set__ contains the field
+        if self.left is None and "left" in self.__fields_set__:
+            _dict['left'] = None
+
+        # set to None if right (nullable) is None
+        # and __fields_set__ contains the field
+        if self.right is None and "right" in self.__fields_set__:
+            _dict['right'] = None
+
         return _dict
 
     @classmethod

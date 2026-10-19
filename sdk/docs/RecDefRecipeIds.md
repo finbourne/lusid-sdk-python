@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | [**ResourceId**](ResourceId.md) |  | 
-**right** | [**ResourceId**](ResourceId.md) |  | 
+**left** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**right** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -14,8 +14,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-left: ResourceId
-right: ResourceId
+left: Optional[ResourceId] = None
+right: Optional[ResourceId] = None
 rec_def_recipe_ids_instance = RecDefRecipeIds(left=left, right=right)
 
 ```

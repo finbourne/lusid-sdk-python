@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**left** | **str** | The currency used on the left side of the reconciliation. | 
-**right** | **str** | The currency used on the right side of the reconciliation. | 
+**left** | **str** | The currency used on the left side of the reconciliation. Required when the left side has portfolio sources; must be null when it draws on relational data. | [optional] 
+**right** | **str** | The currency used on the right side of the reconciliation. Required when the right side has portfolio sources; must be null when it draws on relational data. | [optional] 
 ## Example
 
 ```python
@@ -14,8 +14,8 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-left: StrictStr = "example_left"
-right: StrictStr = "example_right"
+left: Optional[StrictStr] = "example_left"
+right: Optional[StrictStr] = "example_right"
 rec_def_currencies_instance = RecDefCurrencies(left=left, right=right)
 
 ```

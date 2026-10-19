@@ -28,8 +28,8 @@ class RecDefRecipeIds(BaseModel):
     """
     RecDefRecipeIds
     """
-    left: ResourceId
-    right: ResourceId
+    left: Optional[ResourceId] = None
+    right: Optional[ResourceId] = None
     __properties = ["left", "right"]
 
     class Config:
