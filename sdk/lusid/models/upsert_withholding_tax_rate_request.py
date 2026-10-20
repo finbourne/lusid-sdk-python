@@ -27,7 +27,7 @@ class UpsertWithholdingTaxRateRequest(BaseModel):
     """
     UpsertWithholdingTaxRateRequest
     """
-    series_identifiers: Optional[Dict[str, Any]] = Field(default=None, description="The identifiers that uniquely define this DataSeries, if any, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="seriesIdentifiers")
+    series_identifiers: Optional[Dict[str, Any]] = Field(default=None, description="The series identifiers that, with effectiveAt, identify the rate row: taxCountry, profileType and the dataset's own matching dimensions, structured according to its field schema. ruleSource is not accepted here: pass it as the ruleSource query parameter, which applies it to every row in the batch, and omit it for rows that apply at every source.", alias="seriesIdentifiers")
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The effectiveAt or cut-label datetime of the DataPoint.") 
     value_fields: Dict[str, Any] = Field(description="The values associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="valueFields")
     meta_data_fields: Optional[Dict[str, Any]] = Field(default=None, description="The metadata associated with the DataPoint, structured according to the FieldSchema of the parent RelationalDatasetDefinition.", alias="metaDataFields")

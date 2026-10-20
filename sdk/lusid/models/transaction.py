@@ -69,7 +69,7 @@ class Transaction(BaseModel):
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="A list of Custodian Entries associated with the transaction.", alias="custodianEntries")
-    entity_links: Optional[List[TransactionEntityLink]] = Field(default=None, description="Links to the entities related to this transaction.", alias="entityLinks")
+    entity_links: Optional[List[TransactionEntityLink]] = Field(default=None, description="Links to the entities that manage this transaction.", alias="entityLinks")
     __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership", "version", "stagedModifications", "custodianEntries", "entityLinks"]
 
     @validator('transaction_status')

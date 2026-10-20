@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 **version** | [**Version**](Version.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **custodian_entries** | [**List[CustodianEntry]**](CustodianEntry.md) | A list of Custodian Entries associated with the transaction. | [optional] 
-**entity_links** | [**List[TransactionEntityLink]**](TransactionEntityLink.md) | Links to the entities related to this transaction. | [optional] 
+**entity_links** | [**List[TransactionEntityLink]**](TransactionEntityLink.md) | Links to the entities that manage this transaction. | [optional] 
 ## Example
 
 ```python

@@ -32,7 +32,7 @@ class BatchReviewRecResultRequest(BaseModel):
     One item of a batch review request: applies review content to its targeted rec result(s). Exactly  one target, except FixAsGroup/ForceMatch which require two or more. A result id identifies a result only  within one run of one rec type of one instance, so every item names the run its targets belong to — which  also makes the same-result-set rule for group decisions structural.  # noqa: E501
     """
     instance_id: RecInstanceId = Field(alias="instanceId")
-    rec_type:  StrictStr = Field(...,alias="recType", description="The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.") 
     run_number: StrictInt = Field(description="The run of the instance whose results this item targets.", alias="runNumber")
     rec_result_ids: List[StrictStr] = Field(description="The rec results targeted by this batch item. Exactly one, except FixAsGroup/ForceMatch which require two or more.", alias="recResultIds")
     decision: Optional[RecResultDecisionUpdate] = None

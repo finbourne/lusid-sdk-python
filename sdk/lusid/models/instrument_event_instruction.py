@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.link import Link
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.resource_id import ResourceId
+from lusid.models.staged_modifications_info import StagedModificationsInfo
 from lusid.models.version import Version
 
 class InstrumentEventInstruction(BaseModel):
@@ -43,8 +44,9 @@ class InstrumentEventInstruction(BaseModel):
     quantity_instructed: Optional[QuantityInstructed] = Field(default=None, alias="quantityInstructed")
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply") 
     ignore_cost_impact: Optional[StrictBool] = Field(default=None, description="For loan facility holding instructions, set this flag to 'true' if you want the event to not impact cost. If you want to use this option, do not add multiple instructions to the same tax lot or you will get undefined behaviour.", alias="ignoreCostImpact")
+    staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     links: Optional[List[Link]] = None
-    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "ignoreCostImpact", "links"]
+    __properties = ["instrumentEventInstructionId", "portfolioId", "instrumentEventId", "instructionType", "electionKey", "holdingId", "version", "href", "entitlementDateInstructed", "quantityInstructed", "taxLotId", "ignoreCostImpact", "stagedModifications", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,6 +89,9 @@ class InstrumentEventInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of quantity_instructed
         if self.quantity_instructed:
             _dict['quantityInstructed'] = self.quantity_instructed.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of staged_modifications
+        if self.staged_modifications:
+            _dict['stagedModifications'] = self.staged_modifications.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -163,6 +168,7 @@ class InstrumentEventInstruction(BaseModel):
             "quantity_instructed": QuantityInstructed.from_dict(obj.get("quantityInstructed")) if obj.get("quantityInstructed") is not None else None,
             "tax_lot_id": obj.get("taxLotId"),
             "ignore_cost_impact": obj.get("ignoreCostImpact"),
+            "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

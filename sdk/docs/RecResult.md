@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **str** | The id of the result within its run: its result type and result number, e.g. &#39;break-3&#39;. Unique within one run of one rec type of an instance; the same id in another run of the instance names the same result, for as long as it keeps its result type. | 
 **result_number** | **int** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | 
 **first_run_seen** | **int** | The run in which the result was first assigned its id. | 
-**rec_type** | **str** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
+**rec_type** | **str** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. | 
 **external_rec_type_name** | **str** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] 
 **instance_id** | [**RecInstanceId**](RecInstanceId.md) |  | 
 **rec_definition_id** | [**ResourceId**](ResourceId.md) |  | 

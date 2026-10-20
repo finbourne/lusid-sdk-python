@@ -1220,6 +1220,7 @@ from lusid.models.placement_request import PlacementRequest
 from lusid.models.placement_set_request import PlacementSetRequest
 from lusid.models.placement_update_request import PlacementUpdateRequest
 from lusid.models.pnl_journal_entry_line import PnlJournalEntryLine
+from lusid.models.populate_result_property import PopulateResultProperty
 from lusid.models.portfolio import Portfolio
 from lusid.models.portfolio_cash_flow import PortfolioCashFlow
 from lusid.models.portfolio_cash_ladder import PortfolioCashLadder
@@ -3206,6 +3207,7 @@ __all__ = [
     "PlacementSetRequest",
     "PlacementUpdateRequest",
     "PnlJournalEntryLine",
+    "PopulateResultProperty",
     "Portfolio",
     "PortfolioCashFlow",
     "PortfolioCashLadder",

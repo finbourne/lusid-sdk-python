@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **business_day_convention** | **str** | When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.                If not set, defaults to the value of RollConvention. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid. | [optional] 
 **accrual_day_count_convention** | **str** | Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation. | [optional] 
 **coupon_payment_lag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
+**principal_payment_lag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
 **scope** | **str** | The scope used when updating or inserting the convention. | [optional] 
 **code** | **str** | The code of the convention. | [optional] 
 ## Example
@@ -44,9 +45,10 @@ accrual_date_adjustment: Optional[StrictStr] = "example_accrual_date_adjustment"
 business_day_convention: Optional[StrictStr] = "example_business_day_convention"
 accrual_day_count_convention: Optional[StrictStr] = "example_accrual_day_count_convention"
 coupon_payment_lag: Optional[RelativeDateOffset] = # Replace with your value
+principal_payment_lag: Optional[RelativeDateOffset] = # Replace with your value
 scope: Optional[StrictStr] = "example_scope"
 code: Optional[StrictStr] = "example_code"
-flow_conventions_instance = FlowConventions(currency=currency, payment_frequency=payment_frequency, day_count_convention=day_count_convention, roll_convention=roll_convention, payment_calendars=payment_calendars, reset_calendars=reset_calendars, settle_days=settle_days, reset_days=reset_days, leap_days_included=leap_days_included, accrual_date_adjustment=accrual_date_adjustment, business_day_convention=business_day_convention, accrual_day_count_convention=accrual_day_count_convention, coupon_payment_lag=coupon_payment_lag, scope=scope, code=code)
+flow_conventions_instance = FlowConventions(currency=currency, payment_frequency=payment_frequency, day_count_convention=day_count_convention, roll_convention=roll_convention, payment_calendars=payment_calendars, reset_calendars=reset_calendars, settle_days=settle_days, reset_days=reset_days, leap_days_included=leap_days_included, accrual_date_adjustment=accrual_date_adjustment, business_day_convention=business_day_convention, accrual_day_count_convention=accrual_day_count_convention, coupon_payment_lag=coupon_payment_lag, principal_payment_lag=principal_payment_lag, scope=scope, code=code)
 
 ```
 

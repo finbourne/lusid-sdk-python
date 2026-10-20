@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **batch_delete_withholding_tax_rates**
-> BatchDeleteRelationalDataResponse batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+> BatchDeleteRelationalDataResponse batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source)
 
 [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
 
@@ -73,13 +73,14 @@ def main():
     code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
     request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00"}} # Dict[str, DeleteWithholdingTaxRateRequest] | The rate rows to delete, keyed by a correlation id echoed back in the response.
     success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional) (default to 'Atomic')
+    rule_source = 'rule_source_example' # str | The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, opts=opts)
+        # api_response =  api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source, opts=opts)
 
         # [EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.
-        api_response = api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+        api_response = api_instance.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source)
         pprint(api_response)
 
     except ApiException as e:
@@ -96,6 +97,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The Code of the rate dataset&#39;s relational dataset definition. | 
  **request_body** | [**Dict[str, DeleteWithholdingTaxRateRequest]**](DeleteWithholdingTaxRateRequest.md)| The rate rows to delete, keyed by a correlation id echoed back in the response. | 
  **success_mode** | **str**| Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. | [optional] [default to &#39;Atomic&#39;]
+ **rule_source** | **str**| The source of the rows to delete, since it is part of each row&#39;s identity. Omit it              to delete rows that apply at every source; a source&#39;s rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. | [optional] 
 
 ### Return type
 
@@ -116,11 +118,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **batch_upsert_withholding_tax_rates**
-> BatchUpsertWithholdingTaxRatesResponse batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+> BatchUpsertWithholdingTaxRatesResponse batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source)
 
 [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
 
-Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.
+Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.
 
 ### Example
 
@@ -171,13 +173,14 @@ def main():
     code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
     request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.3,"treatyRate":0.15,"treatyRAS":true}},"gb-treaty-fr":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"FR"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.25,"treatyRate":0.15,"treatyRAS":false}}} # Dict[str, UpsertWithholdingTaxRateRequest] | The rate rows to upsert, keyed by a correlation id echoed back in the response.
     success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional) (default to 'Atomic')
+    rule_source = 'rule_source_example' # str | The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, opts=opts)
+        # api_response =  api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source, opts=opts)
 
         # [EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.
-        api_response = api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode)
+        api_response = api_instance.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode=success_mode, rule_source=rule_source)
         pprint(api_response)
 
     except ApiException as e:
@@ -194,6 +197,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The Code of the rate dataset&#39;s relational dataset definition. | 
  **request_body** | [**Dict[str, UpsertWithholdingTaxRateRequest]**](UpsertWithholdingTaxRateRequest.md)| The rate rows to upsert, keyed by a correlation id echoed back in the response. | 
  **success_mode** | **str**| Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. | [optional] [default to &#39;Atomic&#39;]
+ **rule_source** | **str**| The source every row in the batch is attributed to, compared against the              configuration&#39;s source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. | [optional] 
 
 ### Return type
 

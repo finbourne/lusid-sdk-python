@@ -27,11 +27,12 @@ from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 
 class InstrumentEventInstructionsResponse(BaseModel):
     """
-    The collection of successfully upserted instructions, and the collection of failures for those instructions that could not be upserted  # noqa: E501
+    The collection of successfully upserted instructions, the collection of those staged pending approval, and the collection of failures for those instructions that could not be upserted  # noqa: E501
     """
     values: Optional[Dict[str, InstrumentEventInstruction]] = Field(default=None, description="The collection of successfully upserted instructions")
     failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The collection of error information for instructions that could not be upserted")
-    __properties = ["values", "failed"]
+    staged: Optional[Dict[str, InstrumentEventInstruction]] = Field(default=None, description="The instructions that have been staged pending approval.")
+    __properties = ["values", "failed", "staged"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +80,13 @@ class InstrumentEventInstructionsResponse(BaseModel):
                 if self.failed[_key]:
                     _field_dict[_key] = self.failed[_key].to_dict()
             _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each value in staged (dict)
+        _field_dict = {}
+        if self.staged:
+            for _key in self.staged:
+                if self.staged[_key]:
+                    _field_dict[_key] = self.staged[_key].to_dict()
+            _dict['staged'] = _field_dict
         # set to None if values (nullable) is None
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
@@ -88,6 +96,11 @@ class InstrumentEventInstructionsResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.failed is None and "failed" in self.__fields_set__:
             _dict['failed'] = None
+
+        # set to None if staged (nullable) is None
+        # and __fields_set__ contains the field
+        if self.staged is None and "staged" in self.__fields_set__:
+            _dict['staged'] = None
 
         return _dict
 
@@ -112,6 +125,12 @@ class InstrumentEventInstructionsResponse(BaseModel):
                 for _k, _v in obj.get("failed").items()
             )
             if obj.get("failed") is not None
+            else None,
+            "staged": dict(
+                (_k, InstrumentEventInstruction.from_dict(_v))
+                for _k, _v in obj.get("staged").items()
+            )
+            if obj.get("staged") is not None
             else None
         })
         return _obj

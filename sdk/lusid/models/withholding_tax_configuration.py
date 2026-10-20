@@ -35,7 +35,7 @@ class WithholdingTaxConfiguration(BaseModel):
     id: ResourceId
     anomaly_dataset: ResourceId = Field(alias="anomalyDataset")
     main_dataset: ResourceId = Field(alias="mainDataset")
-    source_priority: Optional[List[StrictStr]] = Field(default=None, description="The rule sources in priority order, most preferred first. Optional: a single-source customer configures none and leaves ruleSource blank on every rate row, in which case no source filter is applied and specificity alone decides.", alias="sourcePriority")
+    source_priority: Optional[List[StrictStr]] = Field(default=None, description="The rule sources in priority order, most preferred first. Optional: a single-source customer configures none and loads its rate rows without a ruleSource, in which case no source filter is applied and specificity alone decides.", alias="sourcePriority")
     value_sources: Optional[List[WithholdingTaxValueSource]] = Field(default=None, description="One declaration per customer-defined matching dimension across both datasets, naming where the engine reads that dimension's value from. A dataset column name cannot imply a storage location, so a declaration is required for every customer dimension: an unmapped dimension is never supplied by the matching request, so no row ever matches on it and the customer silently gets a broader rate than they configured. No declaration is required for taxCountry or profileType, which the engine fills from the waterfall, nor for ruleSource, which is compared against SourcePriority.", alias="valueSources")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None

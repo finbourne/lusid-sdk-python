@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The name of the matching ruleset. | 
-**rec_type** | **str** | The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
+**rec_type** | **str** | The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. | 
 **external_rec_type** | [**ExternalRecType**](ExternalRecType.md) |  | [optional] 
 **dataset_schemas** | [**RecDatasetSchemas**](RecDatasetSchemas.md) |  | [optional] 
 **filters** | [**GroupReconciliationFilters**](GroupReconciliationFilters.md) |  | [optional] 
@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **allow_partial_matching** | **bool** | Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided. | [optional] 
 **supplemental_attributes** | [**List[SupplementalAttribute]**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. | [optional] 
 **writeback_configurations** | [**List[WritebackConfiguration]**](WritebackConfiguration.md) | The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty. | [optional] 
+**populate_result_properties** | [**List[PopulateResultProperty]**](PopulateResultProperty.md) | The RecResult properties to populate on this ruleset&#39;s results, each from a formula over the result. Optional, and may be empty; at most 20. | [optional] 
 ## Example
 
 ```python
@@ -37,7 +38,8 @@ allow_partial_matching: Optional[StrictBool] = # Replace with your value
 allow_partial_matching:Optional[StrictBool] = None
 supplemental_attributes: Optional[List[SupplementalAttribute]] = # Replace with your value
 writeback_configurations: Optional[List[WritebackConfiguration]] = # Replace with your value
-update_matching_ruleset_request_instance = UpdateMatchingRulesetRequest(display_name=display_name, rec_type=rec_type, external_rec_type=external_rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes, writeback_configurations=writeback_configurations)
+populate_result_properties: Optional[List[PopulateResultProperty]] = # Replace with your value
+update_matching_ruleset_request_instance = UpdateMatchingRulesetRequest(display_name=display_name, rec_type=rec_type, external_rec_type=external_rec_type, dataset_schemas=dataset_schemas, filters=filters, core_rules=core_rules, aggregate_rules=aggregate_rules, core_tolerances=core_tolerances, aggregate_tolerances=aggregate_tolerances, allow_partial_matching=allow_partial_matching, supplemental_attributes=supplemental_attributes, writeback_configurations=writeback_configurations, populate_result_properties=populate_result_properties)
 
 ```
 

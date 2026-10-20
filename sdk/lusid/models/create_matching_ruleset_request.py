@@ -26,6 +26,7 @@ from lusid.models.aggregate_matching_rule import AggregateMatchingRule
 from lusid.models.core_matching_rule import CoreMatchingRule
 from lusid.models.external_rec_type import ExternalRecType
 from lusid.models.group_reconciliation_filters import GroupReconciliationFilters
+from lusid.models.populate_result_property import PopulateResultProperty
 from lusid.models.rec_dataset_schemas import RecDatasetSchemas
 from lusid.models.resource_id import ResourceId
 from lusid.models.supplemental_attribute import SupplementalAttribute
@@ -38,7 +39,7 @@ class CreateMatchingRulesetRequest(BaseModel):
     """
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the matching ruleset.") 
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.") 
     external_rec_type: Optional[ExternalRecType] = Field(default=None, alias="externalRecType")
     dataset_schemas: Optional[RecDatasetSchemas] = Field(default=None, alias="datasetSchemas")
     filters: Optional[GroupReconciliationFilters] = None
@@ -49,7 +50,8 @@ class CreateMatchingRulesetRequest(BaseModel):
     allow_partial_matching: Optional[StrictBool] = Field(default=None, description="Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided.", alias="allowPartialMatching")
     supplemental_attributes: Optional[List[SupplementalAttribute]] = Field(default=None, description="Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself.", alias="supplementalAttributes")
     writeback_configurations: Optional[List[WritebackConfiguration]] = Field(default=None, description="The writeback suggestions generated against this ruleset's results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty.", alias="writebackConfigurations")
-    __properties = ["id", "displayName", "recType", "externalRecType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "writebackConfigurations"]
+    populate_result_properties: Optional[List[PopulateResultProperty]] = Field(default=None, description="The RecResult properties to populate on this ruleset's results, each from a formula over the result. Optional, and may be empty; at most 20.", alias="populateResultProperties")
+    __properties = ["id", "displayName", "recType", "externalRecType", "datasetSchemas", "filters", "coreRules", "aggregateRules", "coreTolerances", "aggregateTolerances", "allowPartialMatching", "supplementalAttributes", "writebackConfigurations", "populateResultProperties"]
 
     class Config:
         """Pydantic configuration"""
@@ -137,6 +139,13 @@ class CreateMatchingRulesetRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['writebackConfigurations'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in populate_result_properties (list)
+        _items = []
+        if self.populate_result_properties:
+            for _item in self.populate_result_properties:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['populateResultProperties'] = _items
         # set to None if core_tolerances (nullable) is None
         # and __fields_set__ contains the field
         if self.core_tolerances is None and "core_tolerances" in self.__fields_set__:
@@ -156,6 +165,11 @@ class CreateMatchingRulesetRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.writeback_configurations is None and "writeback_configurations" in self.__fields_set__:
             _dict['writebackConfigurations'] = None
+
+        # set to None if populate_result_properties (nullable) is None
+        # and __fields_set__ contains the field
+        if self.populate_result_properties is None and "populate_result_properties" in self.__fields_set__:
+            _dict['populateResultProperties'] = None
 
         return _dict
 
@@ -181,7 +195,8 @@ class CreateMatchingRulesetRequest(BaseModel):
             "aggregate_tolerances": [ToleranceBase.from_dict(_item) for _item in obj.get("aggregateTolerances")] if obj.get("aggregateTolerances") is not None else None,
             "allow_partial_matching": obj.get("allowPartialMatching"),
             "supplemental_attributes": [SupplementalAttribute.from_dict(_item) for _item in obj.get("supplementalAttributes")] if obj.get("supplementalAttributes") is not None else None,
-            "writeback_configurations": [WritebackConfiguration.from_dict(_item) for _item in obj.get("writebackConfigurations")] if obj.get("writebackConfigurations") is not None else None
+            "writeback_configurations": [WritebackConfiguration.from_dict(_item) for _item in obj.get("writebackConfigurations")] if obj.get("writebackConfigurations") is not None else None,
+            "populate_result_properties": [PopulateResultProperty.from_dict(_item) for _item in obj.get("populateResultProperties")] if obj.get("populateResultProperties") is not None else None
         })
         return _obj
 

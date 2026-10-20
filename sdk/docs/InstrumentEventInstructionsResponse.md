@@ -1,11 +1,12 @@
 # InstrumentEventInstructionsResponse
 
-The collection of successfully upserted instructions, and the collection of failures for those instructions that could not be upserted
+The collection of successfully upserted instructions, the collection of those staged pending approval, and the collection of failures for those instructions that could not be upserted
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **values** | [**Dict[str, InstrumentEventInstruction]**](InstrumentEventInstruction.md) | The collection of successfully upserted instructions | [optional] 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The collection of error information for instructions that could not be upserted | [optional] 
+**staged** | [**Dict[str, InstrumentEventInstruction]**](InstrumentEventInstruction.md) | The instructions that have been staged pending approval. | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 values: Optional[Dict[str, InstrumentEventInstruction]] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
-instrument_event_instructions_response_instance = InstrumentEventInstructionsResponse(values=values, failed=failed)
+staged: Optional[Dict[str, InstrumentEventInstruction]] = # Replace with your value
+instrument_event_instructions_response_instance = InstrumentEventInstructionsResponse(values=values, failed=failed, staged=staged)
 
 ```
 

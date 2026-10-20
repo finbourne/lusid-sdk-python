@@ -4,7 +4,7 @@ The collection of reconciliation results for a given rec type within a rec insta
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**rec_type** | **str** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External. | 
+**rec_type** | **str** | The type of rec that this result set belongs to (e.g. Holding). Together with the rec instance, this uniquely identifies the result set. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. | 
 **external_rec_type_name** | **str** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] 
 **rec_instance** | [**RecInstanceSummary**](RecInstanceSummary.md) |  | 
 **run_number** | **int** | The run number within the instance. Increments with each re-run. | 

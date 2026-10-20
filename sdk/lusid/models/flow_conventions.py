@@ -41,9 +41,10 @@ class FlowConventions(BaseModel):
     business_day_convention:  Optional[StrictStr] = Field(None,alias="businessDayConvention", description="When generating a set of dates, what convention should be used for adjusting dates that coincide with a non-business day.                If not set, defaults to the value of RollConvention. Available values: NoAdjustment, None, Previous, P, Following, F, ModifiedPrevious, MP, ModifiedFollowing, MF, HalfMonthModifiedFollowing, Nearest, Invalid.") 
     accrual_day_count_convention:  Optional[StrictStr] = Field(None,alias="accrualDayCountConvention", description="Optional, if not set the main DayCountConvention is used for all accrual calculations.  This only needs to be set when accrual uses a different day count to the coupon calculation.") 
     coupon_payment_lag: Optional[RelativeDateOffset] = Field(default=None, alias="couponPaymentLag")
+    principal_payment_lag: Optional[RelativeDateOffset] = Field(default=None, alias="principalPaymentLag")
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope used when updating or inserting the convention.") 
     code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the convention.") 
-    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "accrualDayCountConvention", "couponPaymentLag", "scope", "code"]
+    __properties = ["currency", "paymentFrequency", "dayCountConvention", "rollConvention", "paymentCalendars", "resetCalendars", "settleDays", "resetDays", "leapDaysIncluded", "accrualDateAdjustment", "businessDayConvention", "accrualDayCountConvention", "couponPaymentLag", "principalPaymentLag", "scope", "code"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +81,9 @@ class FlowConventions(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of coupon_payment_lag
         if self.coupon_payment_lag:
             _dict['couponPaymentLag'] = self.coupon_payment_lag.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of principal_payment_lag
+        if self.principal_payment_lag:
+            _dict['principalPaymentLag'] = self.principal_payment_lag.to_dict()
         # set to None if leap_days_included (nullable) is None
         # and __fields_set__ contains the field
         if self.leap_days_included is None and "leap_days_included" in self.__fields_set__:
@@ -135,6 +139,7 @@ class FlowConventions(BaseModel):
             "business_day_convention": obj.get("businessDayConvention"),
             "accrual_day_count_convention": obj.get("accrualDayCountConvention"),
             "coupon_payment_lag": RelativeDateOffset.from_dict(obj.get("couponPaymentLag")) if obj.get("couponPaymentLag") is not None else None,
+            "principal_payment_lag": RelativeDateOffset.from_dict(obj.get("principalPaymentLag")) if obj.get("principalPaymentLag") is not None else None,
             "scope": obj.get("scope"),
             "code": obj.get("code")
         })

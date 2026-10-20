@@ -64,22 +64,22 @@ class WithholdingTaxApi:
 
 
     @overload
-    async def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, **kwargs) -> BatchDeleteRelationalDataResponse:  # noqa: E501
+    async def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.")] = None, **kwargs) -> BatchDeleteRelationalDataResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchDeleteRelationalDataResponse:  # noqa: E501
+    def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchDeleteRelationalDataResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchDeleteRelationalDataResponse, Awaitable[BatchDeleteRelationalDataResponse]]:  # noqa: E501
+    def batch_delete_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchDeleteRelationalDataResponse, Awaitable[BatchDeleteRelationalDataResponse]]:  # noqa: E501
         """[EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.  # noqa: E501
 
         Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode, async_req=True)
+        >>> thread = api.batch_delete_withholding_tax_rates(scope, code, request_body, success_mode, rule_source, async_req=True)
         >>> result = thread.get()
 
         :param scope: The Scope of the rate dataset's relational dataset definition. (required)
@@ -90,6 +90,8 @@ class WithholdingTaxApi:
         :type request_body: Dict[str, DeleteWithholdingTaxRateRequest]
         :param success_mode: Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.
         :type success_mode: str
+        :param rule_source: The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.
+        :type rule_source: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -106,17 +108,17 @@ class WithholdingTaxApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_delete_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, **kwargs)  # noqa: E501
+        return self.batch_delete_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, rule_source, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_delete_withholding_tax_rates_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_delete_withholding_tax_rates_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, DeleteWithholdingTaxRateRequest], Field(description="The rate rows to delete, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] BatchDeleteWithholdingTaxRates: Batch delete Withholding Tax rate rows from a rate dataset.  # noqa: E501
 
         Also how a rate with no replacement is expired, there being no effectiveTo field. Deletes are  bitemporal, so rows stay readable at a prior asAt.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_delete_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, async_req=True)
+        >>> thread = api.batch_delete_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, rule_source, async_req=True)
         >>> result = thread.get()
 
         :param scope: The Scope of the rate dataset's relational dataset definition. (required)
@@ -127,6 +129,8 @@ class WithholdingTaxApi:
         :type request_body: Dict[str, DeleteWithholdingTaxRateRequest]
         :param success_mode: Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status.
         :type success_mode: str
+        :param rule_source: The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers.
+        :type rule_source: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -157,7 +161,8 @@ class WithholdingTaxApi:
             'scope',
             'code',
             'request_body',
-            'success_mode'
+            'success_mode',
+            'rule_source'
         ]
         _all_params.extend(
             [
@@ -197,6 +202,9 @@ class WithholdingTaxApi:
         _query_params = []
         if _params.get('success_mode') is not None:  # noqa: E501
             _query_params.append(('successMode', _params['success_mode']))
+
+        if _params.get('rule_source') is not None:  # noqa: E501
+            _query_params.append(('ruleSource', _params['rule_source']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -247,22 +255,22 @@ class WithholdingTaxApi:
 
 
     @overload
-    async def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, **kwargs) -> BatchUpsertWithholdingTaxRatesResponse:  # noqa: E501
+    async def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.")] = None, **kwargs) -> BatchUpsertWithholdingTaxRatesResponse:  # noqa: E501
         ...
 
     @overload
-    def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertWithholdingTaxRatesResponse:  # noqa: E501
+    def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.")] = None, async_req: Optional[bool]=True, **kwargs) -> BatchUpsertWithholdingTaxRatesResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertWithholdingTaxRatesResponse, Awaitable[BatchUpsertWithholdingTaxRatesResponse]]:  # noqa: E501
+    def batch_upsert_withholding_tax_rates(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BatchUpsertWithholdingTaxRatesResponse, Awaitable[BatchUpsertWithholdingTaxRatesResponse]]:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.  # noqa: E501
 
-        Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.  # noqa: E501
+        Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode, async_req=True)
+        >>> thread = api.batch_upsert_withholding_tax_rates(scope, code, request_body, success_mode, rule_source, async_req=True)
         >>> result = thread.get()
 
         :param scope: The Scope of the rate dataset's relational dataset definition. (required)
@@ -273,6 +281,8 @@ class WithholdingTaxApi:
         :type request_body: Dict[str, UpsertWithholdingTaxRateRequest]
         :param success_mode: Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.
         :type success_mode: str
+        :param rule_source: The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.
+        :type rule_source: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -289,17 +299,17 @@ class WithholdingTaxApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.batch_upsert_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, **kwargs)  # noqa: E501
+        return self.batch_upsert_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, rule_source, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def batch_upsert_withholding_tax_rates_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def batch_upsert_withholding_tax_rates_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The Scope of the rate dataset's relational dataset definition.")], code : Annotated[StrictStr, Field(..., description="The Code of the rate dataset's relational dataset definition.")], request_body : Annotated[Dict[str, UpsertWithholdingTaxRateRequest], Field(description="The rate rows to upsert, keyed by a correlation id echoed back in the response.")], success_mode : Annotated[Optional[StrictStr], Field( description="Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.")] = None, rule_source : Annotated[Optional[StrictStr], Field( description="The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] BatchUpsertWithholdingTaxRates: Batch upsert Withholding Tax rate rows, applying the write-time gates before any row lands.  # noqa: E501
 
-        Row identity is the matching dimensions plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same dimensions.  # noqa: E501
+        Row identity is the series identifiers plus effectiveAt; a rate is superseded by loading a row with a  later effectiveAt for the same series identifiers. One batch carries one rule source, so a feed mixing rows  from a source with rows that apply at every source is loaded in two calls.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.batch_upsert_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, async_req=True)
+        >>> thread = api.batch_upsert_withholding_tax_rates_with_http_info(scope, code, request_body, success_mode, rule_source, async_req=True)
         >>> result = thread.get()
 
         :param scope: The Scope of the rate dataset's relational dataset definition. (required)
@@ -310,6 +320,8 @@ class WithholdingTaxApi:
         :type request_body: Dict[str, UpsertWithholdingTaxRateRequest]
         :param success_mode: Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status.
         :type success_mode: str
+        :param rule_source: The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers.
+        :type rule_source: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -340,7 +352,8 @@ class WithholdingTaxApi:
             'scope',
             'code',
             'request_body',
-            'success_mode'
+            'success_mode',
+            'rule_source'
         ]
         _all_params.extend(
             [
@@ -380,6 +393,9 @@ class WithholdingTaxApi:
         _query_params = []
         if _params.get('success_mode') is not None:  # noqa: E501
             _query_params.append(('successMode', _params['success_mode']))
+
+        if _params.get('rule_source') is not None:  # noqa: E501
+            _query_params.append(('ruleSource', _params['rule_source']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

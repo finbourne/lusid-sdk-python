@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **quantity_instructed** | [**QuantityInstructed**](QuantityInstructed.md) |  | [optional] 
 **tax_lot_id** | **str** | For loan facility holding instructions, the tax lot id of the holding for which the instruction will apply | [optional] 
 **ignore_cost_impact** | **bool** | For loan facility holding instructions, set this flag to &#39;true&#39; if you want the event to not impact cost. If you want to use this option, do not add multiple instructions to the same tax lot or you will get undefined behaviour. | [optional] 
+**staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -39,8 +40,9 @@ quantity_instructed: Optional[QuantityInstructed] = # Replace with your value
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
 ignore_cost_impact: Optional[StrictBool] = # Replace with your value
 ignore_cost_impact:Optional[StrictBool] = None
+staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 links: Optional[List[Link]] = None
-instrument_event_instruction_instance = InstrumentEventInstruction(instrument_event_instruction_id=instrument_event_instruction_id, portfolio_id=portfolio_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, version=version, href=href, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id, ignore_cost_impact=ignore_cost_impact, links=links)
+instrument_event_instruction_instance = InstrumentEventInstruction(instrument_event_instruction_id=instrument_event_instruction_id, portfolio_id=portfolio_id, instrument_event_id=instrument_event_id, instruction_type=instruction_type, election_key=election_key, holding_id=holding_id, version=version, href=href, entitlement_date_instructed=entitlement_date_instructed, quantity_instructed=quantity_instructed, tax_lot_id=tax_lot_id, ignore_cost_impact=ignore_cost_impact, staged_modifications=staged_modifications, links=links)
 
 ```
 

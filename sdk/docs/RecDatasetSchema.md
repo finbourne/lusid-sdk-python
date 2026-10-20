@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **str** | The kind of dataset this side draws on. At most one side may be RelationalData. Available values: PortfolioContents, LusidEntity, RelationalData. | 
-**entity_type** | **str** | The entity within the dataset. Required when type is PortfolioContents, in which case it is one of: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity. Must be omitted when type is RelationalData. Available values: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity. | [optional] 
+**entity_type** | **str** | The entity within the dataset. Required when type is PortfolioContents, in which case it is one of: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity. Required when type is LusidEntity, in which case it is Instrument. Must be omitted when type is RelationalData. Available values: Holding, Valuation, Transaction, OutputTransaction, SettlementActivity, Instrument. | [optional] 
 **relational_dataset_definition_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
