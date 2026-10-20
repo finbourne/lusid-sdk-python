@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**list_withholding_tax_configurations**](WithholdingTaxApi.md#list_withholding_tax_configurations) | **GET** /api/withholdingtax/configurations | [EARLY ACCESS] ListWithholdingTaxConfigurations: List Withholding Tax Configurations.
 [**list_withholding_tax_dataset_definitions**](WithholdingTaxApi.md#list_withholding_tax_dataset_definitions) | **GET** /api/withholdingtax/datasetdefinitions | [EARLY ACCESS] ListWithholdingTaxDatasetDefinitions: List Withholding Tax dataset definitions.
 [**patch_withholding_tax_dataset_definition**](WithholdingTaxApi.md#patch_withholding_tax_dataset_definition) | **PATCH** /api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
+[**resolve_withholding_tax**](WithholdingTaxApi.md#resolve_withholding_tax) | **POST** /api/withholdingtax/$resolve | [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
 [**upsert_withholding_tax_configuration**](WithholdingTaxApi.md#upsert_withholding_tax_configuration) | **POST** /api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] UpsertWithholdingTaxConfiguration: Upsert a Withholding Tax Configuration.
 
 
@@ -985,6 +986,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The amended Withholding Tax dataset. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **resolve_withholding_tax**
+> WithholdingTaxResolution resolve_withholding_tax(resolve_withholding_tax_request, effective_at=effective_at, as_at=as_at, limit=limit)
+
+[EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+
+A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration's value sources read them from it, as booking reads a transaction's instrument.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    WithholdingTaxApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(WithholdingTaxApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # resolve_withholding_tax_request = ResolveWithholdingTaxRequest.from_json("")
+    # resolve_withholding_tax_request = ResolveWithholdingTaxRequest.from_dict({})
+    resolve_withholding_tax_request = ResolveWithholdingTaxRequest()
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. (optional)
+    limit = 100 # int | The most combinations of values that couldAlsoMatch tries, fewest values first. (optional) (default to 100)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.resolve_withholding_tax(resolve_withholding_tax_request, effective_at=effective_at, as_at=as_at, limit=limit, opts=opts)
+
+        # [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
+        api_response = api_instance.resolve_withholding_tax(resolve_withholding_tax_request, effective_at=effective_at, as_at=as_at, limit=limit)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling WithholdingTaxApi->resolve_withholding_tax: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **resolve_withholding_tax_request** | [**ResolveWithholdingTaxRequest**](ResolveWithholdingTaxRequest.md)| The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to resolve, in place of the transaction&#39;s trade              date. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified. | [optional] 
+ **limit** | **int**| The most combinations of values that couldAlsoMatch tries, fewest values first. | [optional] [default to 100]
+
+### Return type
+
+[**WithholdingTaxResolution**](WithholdingTaxResolution.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Withholding Tax rate that booking would apply. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

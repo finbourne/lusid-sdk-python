@@ -18,6 +18,8 @@ Name | Type | Description | Notes
 **tax_lot_id** | **str** | The identifier of the tax lot with which this gain or loss is associated. | [optional] 
 **realised_amortisation** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **trade_date_to_settlement_date_realised_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**transaction_type** | **str** | The transaction type resolved for the allocation slice that realised this record, which can differ from the output transaction&#39;s type when a slice resolves against the opposite side of the book (for example a Buy whose slice covers a short). | [optional] 
+**properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The sub-holding key properties of the holding this record was realised against, identifying the allocation slice it belongs to. | [optional] 
 ## Example
 
 ```python
@@ -42,7 +44,9 @@ realised_currency: Optional[CurrencyAndAmount] = # Replace with your value
 tax_lot_id: Optional[StrictStr] = "example_tax_lot_id"
 realised_amortisation: Optional[CurrencyAndAmount] = # Replace with your value
 trade_date_to_settlement_date_realised_currency: Optional[CurrencyAndAmount] = # Replace with your value
-realised_gain_loss_instance = RealisedGainLoss(instrument_scope=instrument_scope, instrument_uid=instrument_uid, units=units, purchase_trade_date=purchase_trade_date, purchase_settlement_date=purchase_settlement_date, purchase_price=purchase_price, cost_trade_ccy=cost_trade_ccy, cost_portfolio_ccy=cost_portfolio_ccy, realised_trade_ccy=realised_trade_ccy, realised_total=realised_total, realised_market=realised_market, realised_currency=realised_currency, tax_lot_id=tax_lot_id, realised_amortisation=realised_amortisation, trade_date_to_settlement_date_realised_currency=trade_date_to_settlement_date_realised_currency)
+transaction_type: Optional[StrictStr] = "example_transaction_type"
+properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
+realised_gain_loss_instance = RealisedGainLoss(instrument_scope=instrument_scope, instrument_uid=instrument_uid, units=units, purchase_trade_date=purchase_trade_date, purchase_settlement_date=purchase_settlement_date, purchase_price=purchase_price, cost_trade_ccy=cost_trade_ccy, cost_portfolio_ccy=cost_portfolio_ccy, realised_trade_ccy=realised_trade_ccy, realised_total=realised_total, realised_market=realised_market, realised_currency=realised_currency, tax_lot_id=tax_lot_id, realised_amortisation=realised_amortisation, trade_date_to_settlement_date_realised_currency=trade_date_to_settlement_date_realised_currency, transaction_type=transaction_type, properties=properties)
 
 ```
 

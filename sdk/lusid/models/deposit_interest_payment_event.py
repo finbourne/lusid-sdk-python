@@ -23,17 +23,20 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.lapse_election import LapseElection
 
 class DepositInterestPaymentEvent(InstrumentEvent):
     """
-    Event to signify the repayment of interest accrued against a deposit holding.  # noqa: E501
+    Event to signify the repayment of interest accrued against a deposit holding. Not applied when upserted  for a period the deposit settles partly or wholly in kind, as its scheduled events settle that period's interest.  # noqa: E501
     """
     payment_date: Optional[datetime] = Field(default=None, description="Date that the interest is due to be paid.", alias="paymentDate")
     ex_date: Optional[datetime] = Field(default=None, description="Date that the accrued interest is calculated up until.", alias="exDate")
     currency:  StrictStr = Field(...,alias="currency", description="Currency of the repayment.") 
+    fraction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Fraction of the accrued interest to be paid, between 0 and 1 inclusive. Defaults to 1 if not set.")
+    lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="Election for controlling whether the interest is paid. Stored but not yet acted on, so a chosen  lapse election does not stop the payment. Optional; if provided, exactly one.", alias="lapseElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "paymentDate", "exDate", "currency"]
+    __properties = ["instrumentEventType", "paymentDate", "exDate", "currency", "fraction", "lapseElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -86,10 +89,22 @@ class DepositInterestPaymentEvent(InstrumentEvent):
                             "additional_properties"
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in lapse_elections (list)
+        _items = []
+        if self.lapse_elections:
+            for _item in self.lapse_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lapseElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if lapse_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
+            _dict['lapseElections'] = None
 
         return _dict
 
@@ -106,7 +121,9 @@ class DepositInterestPaymentEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "payment_date": obj.get("paymentDate"),
             "ex_date": obj.get("exDate"),
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "fraction": obj.get("fraction"),
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

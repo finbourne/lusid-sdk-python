@@ -37,7 +37,8 @@ class TransactionQueryParameters(BaseModel):
     include_settlement_status: Optional[StrictBool] = Field(default=None, description="By default is false. When set to true the Settlement Status data would be populated in the response.", alias="includeSettlementStatus")
     settlement_status_date:  Optional[StrictStr] = Field(None,alias="settlementStatusDate", description="Optional date used to specify end of an extended window for settlement information. When provided, transactions will be returned between start and end date, but settlement information between start date and this date will be included. When provided, the value must be greater than or equal to end date.") 
     return_excluded_transactions: Optional[StrictBool] = Field(default=None, description="Option to specify whether or not to include transactions that are marked as excluded by the portfolio's transaction exclusion filter. Excluded transactions do not affect holdings. Defaults to false if not specified.", alias="returnExcludedTransactions")
-    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus", "settlementStatusDate", "returnExcludedTransactions"]
+    allocation_expansion:  Optional[StrictStr] = Field(None,alias="allocationExpansion", description="How an input transaction that was split into allocation slices (strategy tag allocations or a prorated allocation method) is presented. 'Expanded' (the default) returns one output transaction per slice. 'Combined' returns one output transaction per input transaction with units, consideration and realised gain/loss summed over the slices, with every realised gain/loss record of each slice, including zero-realised ones, listed with its own transaction type and sub-holding key properties. For a prorated type with no units side the combined units are the total position the slices were prorated over, not the input's units. Transaction filters apply per slice, so a filter on a slice-level property combines only the matching slices. Sequence numbers are assigned after combining. Holdings and tax lots are identical in both modes. Available values: Expanded, Combined.") 
+    __properties = ["startDate", "endDate", "queryMode", "showCancelledTransactions", "timelineScope", "timelineCode", "includeEconomics", "includeSettlementStatus", "settlementStatusDate", "returnExcludedTransactions", "allocationExpansion"]
 
     @validator('query_mode')
     def query_mode_validate_enum(cls, value):
@@ -107,6 +108,11 @@ class TransactionQueryParameters(BaseModel):
         if self.settlement_status_date is None and "settlement_status_date" in self.__fields_set__:
             _dict['settlementStatusDate'] = None
 
+        # set to None if allocation_expansion (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_expansion is None and "allocation_expansion" in self.__fields_set__:
+            _dict['allocationExpansion'] = None
+
         return _dict
 
     @classmethod
@@ -128,7 +134,8 @@ class TransactionQueryParameters(BaseModel):
             "include_economics": obj.get("includeEconomics"),
             "include_settlement_status": obj.get("includeSettlementStatus"),
             "settlement_status_date": obj.get("settlementStatusDate"),
-            "return_excluded_transactions": obj.get("returnExcludedTransactions")
+            "return_excluded_transactions": obj.get("returnExcludedTransactions"),
+            "allocation_expansion": obj.get("allocationExpansion")
         })
         return _obj
 

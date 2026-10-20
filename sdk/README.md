@@ -288,6 +288,7 @@ Class | Method | HTTP request | Description
 *EntitiesApi* | [**get_entity_history**](docs/EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity's history information
 *EntitiesApi* | [**get_instrument_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 *EntitiesApi* | [**get_instrument_event_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_event_by_entity_unique_id) | **GET** /api/entities/instrumentevents/{entityUniqueId} | [EARLY ACCESS] GetInstrumentEventByEntityUniqueId: Get instrument event by EntityUniqueId
+*EntitiesApi* | [**get_instrument_event_instruction_by_entity_unique_id**](docs/EntitiesApi.md#get_instrument_event_instruction_by_entity_unique_id) | **GET** /api/entities/instrumenteventinstructions/{entityUniqueId} | GetInstrumentEventInstructionByEntityUniqueId: Get instrument event instruction by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_by_entity_unique_id**](docs/EntitiesApi.md#get_portfolio_by_entity_unique_id) | **GET** /api/entities/portfolios/{entityUniqueId} | GetPortfolioByEntityUniqueId: Get portfolio by EntityUniqueId
 *EntitiesApi* | [**get_portfolio_changes**](docs/EntitiesApi.md#get_portfolio_changes) | **GET** /api/entities/changes/portfolios | GetPortfolioChanges: Get the next change to each portfolio in a scope.
 *EntitiesApi* | [**get_property_definition_by_entity_unique_id**](docs/EntitiesApi.md#get_property_definition_by_entity_unique_id) | **GET** /api/entities/propertydefinitions/{entityUniqueId} | GetPropertyDefinitionByEntityUniqueId: Get property definition by EntityUniqueId
@@ -888,6 +889,7 @@ Class | Method | HTTP request | Description
 *WithholdingTaxApi* | [**list_withholding_tax_configurations**](docs/WithholdingTaxApi.md#list_withholding_tax_configurations) | **GET** /api/withholdingtax/configurations | [EARLY ACCESS] ListWithholdingTaxConfigurations: List Withholding Tax Configurations.
 *WithholdingTaxApi* | [**list_withholding_tax_dataset_definitions**](docs/WithholdingTaxApi.md#list_withholding_tax_dataset_definitions) | **GET** /api/withholdingtax/datasetdefinitions | [EARLY ACCESS] ListWithholdingTaxDatasetDefinitions: List Withholding Tax dataset definitions.
 *WithholdingTaxApi* | [**patch_withholding_tax_dataset_definition**](docs/WithholdingTaxApi.md#patch_withholding_tax_dataset_definition) | **PATCH** /api/withholdingtax/datasetdefinitions/{scope}/{code} | [EARLY ACCESS] PatchWithholdingTaxDatasetDefinition: Patch a Withholding Tax dataset definition.
+*WithholdingTaxApi* | [**resolve_withholding_tax**](docs/WithholdingTaxApi.md#resolve_withholding_tax) | **POST** /api/withholdingtax/$resolve | [EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.
 *WithholdingTaxApi* | [**upsert_withholding_tax_configuration**](docs/WithholdingTaxApi.md#upsert_withholding_tax_configuration) | **POST** /api/withholdingtax/configurations/{scope}/{code} | [EARLY ACCESS] UpsertWithholdingTaxConfiguration: Upsert a Withholding Tax Configuration.
 *WorkspaceApi* | [**create_item**](docs/WorkspaceApi.md#create_item) | **POST** /api/workspaces/{visibility}/{workspaceName}/items | CreateItem: Create a new item in a workspace.
 *WorkspaceApi* | [**create_workspace**](docs/WorkspaceApi.md#create_workspace) | **POST** /api/workspaces/{visibility} | CreateWorkspace: Create a new workspace.
@@ -1741,6 +1743,7 @@ Class | Method | HTTP request | Description
  - [InstrumentEventEntity](docs/InstrumentEventEntity.md)
  - [InstrumentEventHolder](docs/InstrumentEventHolder.md)
  - [InstrumentEventInstruction](docs/InstrumentEventInstruction.md)
+ - [InstrumentEventInstructionEntity](docs/InstrumentEventInstructionEntity.md)
  - [InstrumentEventInstructionRequest](docs/InstrumentEventInstructionRequest.md)
  - [InstrumentEventInstructionsResponse](docs/InstrumentEventInstructionsResponse.md)
  - [InstrumentEventType](docs/InstrumentEventType.md)
@@ -2354,6 +2357,7 @@ Class | Method | HTTP request | Description
  - [ResetSchedule](docs/ResetSchedule.md)
  - [ResolveTenorsRequest](docs/ResolveTenorsRequest.md)
  - [ResolveTenorsResponse](docs/ResolveTenorsResponse.md)
+ - [ResolveWithholdingTaxRequest](docs/ResolveWithholdingTaxRequest.md)
  - [ResolvedCustodianAccount](docs/ResolvedCustodianAccount.md)
  - [ResourceId](docs/ResourceId.md)
  - [ResourceListOfAccessControlledResource](docs/ResourceListOfAccessControlledResource.md)
@@ -2870,10 +2874,18 @@ Class | Method | HTTP request | Description
  - [WeightedInstruments](docs/WeightedInstruments.md)
  - [WholeLoanFacility](docs/WholeLoanFacility.md)
  - [WhtParameters](docs/WhtParameters.md)
+ - [WithholdingTaxAlternativeMatch](docs/WithholdingTaxAlternativeMatch.md)
  - [WithholdingTaxConfiguration](docs/WithholdingTaxConfiguration.md)
  - [WithholdingTaxDataset](docs/WithholdingTaxDataset.md)
  - [WithholdingTaxDatasetDefinitions](docs/WithholdingTaxDatasetDefinitions.md)
+ - [WithholdingTaxMatchedRule](docs/WithholdingTaxMatchedRule.md)
  - [WithholdingTaxRateResponse](docs/WithholdingTaxRateResponse.md)
+ - [WithholdingTaxRateSplit](docs/WithholdingTaxRateSplit.md)
+ - [WithholdingTaxRateTiers](docs/WithholdingTaxRateTiers.md)
+ - [WithholdingTaxReliefAtSourceFlags](docs/WithholdingTaxReliefAtSourceFlags.md)
+ - [WithholdingTaxResolution](docs/WithholdingTaxResolution.md)
+ - [WithholdingTaxResolutionProvenance](docs/WithholdingTaxResolutionProvenance.md)
+ - [WithholdingTaxUnresolvedDimension](docs/WithholdingTaxUnresolvedDimension.md)
  - [WithholdingTaxValueSource](docs/WithholdingTaxValueSource.md)
  - [Workspace](docs/Workspace.md)
  - [WorkspaceCreationRequest](docs/WorkspaceCreationRequest.md)

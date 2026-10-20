@@ -27,7 +27,7 @@ from lusid.models.schedule import Schedule
 
 class PikSchedule(Schedule):
     """
-    A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan or a LoanFacility.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.  # noqa: E501
+    A PikSchedule represents Payment-in-Kind features for a ComplexBond, a FlexibleLoan, a LoanFacility or a FlexibleDeposit.  It works in conjunction with existing FixedSchedules or FloatSchedules to define  how interest is paid during duration of the schedule.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the PIK schedule period.", alias="startDate")
     maturity_date: datetime = Field(description="The end date of the PIK schedule period.", alias="maturityDate")

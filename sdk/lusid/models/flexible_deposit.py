@@ -29,7 +29,7 @@ from lusid.models.trading_conventions import TradingConventions
 
 class FlexibleDeposit(LusidInstrument):
     """
-    LUSID flexible deposit instrument. Represents the basic building block of a bank account  structure that can handle deferred interest payments.  # noqa: E501
+    LUSID flexible deposit instrument: the basic building block of a bank account structure that can handle deferred  interest payments. Its PV excludes interest accrued in kind until that interest is capitalised.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")

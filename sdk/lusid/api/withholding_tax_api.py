@@ -31,11 +31,13 @@ from lusid.models.deleted_entity_response import DeletedEntityResponse
 from lusid.models.operation import Operation
 from lusid.models.paged_resource_list_of_withholding_tax_configuration import PagedResourceListOfWithholdingTaxConfiguration
 from lusid.models.paged_resource_list_of_withholding_tax_dataset import PagedResourceListOfWithholdingTaxDataset
+from lusid.models.resolve_withholding_tax_request import ResolveWithholdingTaxRequest
 from lusid.models.upsert_withholding_tax_configuration_request import UpsertWithholdingTaxConfigurationRequest
 from lusid.models.upsert_withholding_tax_rate_request import UpsertWithholdingTaxRateRequest
 from lusid.models.withholding_tax_configuration import WithholdingTaxConfiguration
 from lusid.models.withholding_tax_dataset import WithholdingTaxDataset
 from lusid.models.withholding_tax_dataset_definitions import WithholdingTaxDatasetDefinitions
+from lusid.models.withholding_tax_resolution import WithholdingTaxResolution
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -1800,6 +1802,192 @@ class WithholdingTaxApi:
 
         return self.api_client.call_api(
             '/api/withholdingtax/datasetdefinitions/{scope}/{code}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def resolve_withholding_tax(self, resolve_withholding_tax_request : Annotated[ResolveWithholdingTaxRequest, Field(description="The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="The most combinations of values that couldAlsoMatch tries, fewest values first.")] = None, **kwargs) -> WithholdingTaxResolution:  # noqa: E501
+        ...
+
+    @overload
+    def resolve_withholding_tax(self, resolve_withholding_tax_request : Annotated[ResolveWithholdingTaxRequest, Field(description="The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="The most combinations of values that couldAlsoMatch tries, fewest values first.")] = None, async_req: Optional[bool]=True, **kwargs) -> WithholdingTaxResolution:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def resolve_withholding_tax(self, resolve_withholding_tax_request : Annotated[ResolveWithholdingTaxRequest, Field(description="The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="The most combinations of values that couldAlsoMatch tries, fewest values first.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[WithholdingTaxResolution, Awaitable[WithholdingTaxResolution]]:  # noqa: E501
+        """[EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.  # noqa: E501
+
+        A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration's value sources read them from it, as booking reads a transaction's instrument.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.resolve_withholding_tax(resolve_withholding_tax_request, effective_at, as_at, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param resolve_withholding_tax_request: The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+        :type resolve_withholding_tax_request: ResolveWithholdingTaxRequest
+        :param effective_at: The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.
+        :type as_at: datetime
+        :param limit: The most combinations of values that couldAlsoMatch tries, fewest values first.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: WithholdingTaxResolution
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the resolve_withholding_tax_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.resolve_withholding_tax_with_http_info(resolve_withholding_tax_request, effective_at, as_at, limit, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def resolve_withholding_tax_with_http_info(self, resolve_withholding_tax_request : Annotated[ResolveWithholdingTaxRequest, Field(description="The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.")] = None, limit : Annotated[Optional[StrictInt], Field(description="The most combinations of values that couldAlsoMatch tries, fewest values first.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ResolveWithholdingTax: Resolve the Withholding Tax rate that booking would apply.  # noqa: E501
+
+        A read-only lookup that runs the same resolution as booking, without a transaction: it works down the source  priority and, at each source, checks the anomaly dataset before the main dataset. Nothing is booked, and only  rates are returned. Supply a Withholding Tax Configuration to predict what booking will post; replace its  datasets or source priority to ask what would resolve instead. Supply the dimension values directly, or name an  instrument so that the configuration's value sources read them from it, as booking reads a transaction's instrument.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.resolve_withholding_tax_with_http_info(resolve_withholding_tax_request, effective_at, as_at, limit, async_req=True)
+        >>> result = thread.get()
+
+        :param resolve_withholding_tax_request: The tax identity, the dimension values or the instrument, and the configuration or datasets to resolve against. (required)
+        :type resolve_withholding_tax_request: ResolveWithholdingTaxRequest
+        :param effective_at: The effective datetime or cut label at which to resolve, in place of the transaction's trade              date. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the configuration and the rates. Defaults to the latest version              if not specified.
+        :type as_at: datetime
+        :param limit: The most combinations of values that couldAlsoMatch tries, fewest values first.
+        :type limit: int
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(WithholdingTaxResolution, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'resolve_withholding_tax_request',
+            'effective_at',
+            'as_at',
+            'limit'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method resolve_withholding_tax" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['resolve_withholding_tax_request'] is not None:
+            _body_params = _params['resolve_withholding_tax_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "WithholdingTaxResolution",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/withholdingtax/$resolve', 'POST',
             _path_params,
             _query_params,
             _header_params,

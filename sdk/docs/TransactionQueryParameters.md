@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **include_settlement_status** | **bool** | By default is false. When set to true the Settlement Status data would be populated in the response. | [optional] 
 **settlement_status_date** | **str** | Optional date used to specify end of an extended window for settlement information. When provided, transactions will be returned between start and end date, but settlement information between start date and this date will be included. When provided, the value must be greater than or equal to end date. | [optional] 
 **return_excluded_transactions** | **bool** | Option to specify whether or not to include transactions that are marked as excluded by the portfolio&#39;s transaction exclusion filter. Excluded transactions do not affect holdings. Defaults to false if not specified. | [optional] 
+**allocation_expansion** | **str** | How an input transaction that was split into allocation slices (strategy tag allocations or a prorated allocation method) is presented. &#39;Expanded&#39; (the default) returns one output transaction per slice. &#39;Combined&#39; returns one output transaction per input transaction with units, consideration and realised gain/loss summed over the slices, with every realised gain/loss record of each slice, including zero-realised ones, listed with its own transaction type and sub-holding key properties. For a prorated type with no units side the combined units are the total position the slices were prorated over, not the input&#39;s units. Transaction filters apply per slice, so a filter on a slice-level property combines only the matching slices. Sequence numbers are assigned after combining. Holdings and tax lots are identical in both modes. Available values: Expanded, Combined. | [optional] 
 ## Example
 
 ```python
@@ -36,7 +37,8 @@ include_settlement_status:Optional[StrictBool] = None
 settlement_status_date: Optional[StrictStr] = "example_settlement_status_date"
 return_excluded_transactions: Optional[StrictBool] = # Replace with your value
 return_excluded_transactions:Optional[StrictBool] = None
-transaction_query_parameters_instance = TransactionQueryParameters(start_date=start_date, end_date=end_date, query_mode=query_mode, show_cancelled_transactions=show_cancelled_transactions, timeline_scope=timeline_scope, timeline_code=timeline_code, include_economics=include_economics, include_settlement_status=include_settlement_status, settlement_status_date=settlement_status_date, return_excluded_transactions=return_excluded_transactions)
+allocation_expansion: Optional[StrictStr] = "example_allocation_expansion"
+transaction_query_parameters_instance = TransactionQueryParameters(start_date=start_date, end_date=end_date, query_mode=query_mode, show_cancelled_transactions=show_cancelled_transactions, timeline_scope=timeline_scope, timeline_code=timeline_code, include_economics=include_economics, include_settlement_status=include_settlement_status, settlement_status_date=settlement_status_date, return_excluded_transactions=return_excluded_transactions, allocation_expansion=allocation_expansion)
 
 ```
 

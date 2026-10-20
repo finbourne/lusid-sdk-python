@@ -850,6 +850,7 @@ from lusid.models.instrument_event_configuration import InstrumentEventConfigura
 from lusid.models.instrument_event_entity import InstrumentEventEntity
 from lusid.models.instrument_event_holder import InstrumentEventHolder
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
+from lusid.models.instrument_event_instruction_entity import InstrumentEventInstructionEntity
 from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
 from lusid.models.instrument_event_instructions_response import InstrumentEventInstructionsResponse
 from lusid.models.instrument_event_type import InstrumentEventType
@@ -1463,6 +1464,7 @@ from lusid.models.reset_event import ResetEvent
 from lusid.models.reset_schedule import ResetSchedule
 from lusid.models.resolve_tenors_request import ResolveTenorsRequest
 from lusid.models.resolve_tenors_response import ResolveTenorsResponse
+from lusid.models.resolve_withholding_tax_request import ResolveWithholdingTaxRequest
 from lusid.models.resolved_custodian_account import ResolvedCustodianAccount
 from lusid.models.resource_id import ResourceId
 from lusid.models.resource_list_of_access_controlled_resource import ResourceListOfAccessControlledResource
@@ -1979,10 +1981,18 @@ from lusid.models.weighted_instrument_in_line_lookup_identifiers import Weighted
 from lusid.models.weighted_instruments import WeightedInstruments
 from lusid.models.whole_loan_facility import WholeLoanFacility
 from lusid.models.wht_parameters import WhtParameters
+from lusid.models.withholding_tax_alternative_match import WithholdingTaxAlternativeMatch
 from lusid.models.withholding_tax_configuration import WithholdingTaxConfiguration
 from lusid.models.withholding_tax_dataset import WithholdingTaxDataset
 from lusid.models.withholding_tax_dataset_definitions import WithholdingTaxDatasetDefinitions
+from lusid.models.withholding_tax_matched_rule import WithholdingTaxMatchedRule
 from lusid.models.withholding_tax_rate_response import WithholdingTaxRateResponse
+from lusid.models.withholding_tax_rate_split import WithholdingTaxRateSplit
+from lusid.models.withholding_tax_rate_tiers import WithholdingTaxRateTiers
+from lusid.models.withholding_tax_relief_at_source_flags import WithholdingTaxReliefAtSourceFlags
+from lusid.models.withholding_tax_resolution import WithholdingTaxResolution
+from lusid.models.withholding_tax_resolution_provenance import WithholdingTaxResolutionProvenance
+from lusid.models.withholding_tax_unresolved_dimension import WithholdingTaxUnresolvedDimension
 from lusid.models.withholding_tax_value_source import WithholdingTaxValueSource
 from lusid.models.workspace import Workspace
 from lusid.models.workspace_creation_request import WorkspaceCreationRequest
@@ -2837,6 +2847,7 @@ __all__ = [
     "InstrumentEventEntity",
     "InstrumentEventHolder",
     "InstrumentEventInstruction",
+    "InstrumentEventInstructionEntity",
     "InstrumentEventInstructionRequest",
     "InstrumentEventInstructionsResponse",
     "InstrumentEventType",
@@ -3450,6 +3461,7 @@ __all__ = [
     "ResetSchedule",
     "ResolveTenorsRequest",
     "ResolveTenorsResponse",
+    "ResolveWithholdingTaxRequest",
     "ResolvedCustodianAccount",
     "ResourceId",
     "ResourceListOfAccessControlledResource",
@@ -3966,10 +3978,18 @@ __all__ = [
     "WeightedInstruments",
     "WholeLoanFacility",
     "WhtParameters",
+    "WithholdingTaxAlternativeMatch",
     "WithholdingTaxConfiguration",
     "WithholdingTaxDataset",
     "WithholdingTaxDatasetDefinitions",
+    "WithholdingTaxMatchedRule",
     "WithholdingTaxRateResponse",
+    "WithholdingTaxRateSplit",
+    "WithholdingTaxRateTiers",
+    "WithholdingTaxReliefAtSourceFlags",
+    "WithholdingTaxResolution",
+    "WithholdingTaxResolutionProvenance",
+    "WithholdingTaxUnresolvedDimension",
     "WithholdingTaxValueSource",
     "Workspace",
     "WorkspaceCreationRequest",

@@ -29,7 +29,7 @@ from lusid.models.schedule import Schedule
 
 class DepositRollEvent(InstrumentEvent):
     """
-    Event used to represent a roll on a FlexibleDeposit instrument.  # noqa: E501
+    Event used to represent a roll on a FlexibleDeposit instrument. Its interest updates are not applied in a period  the deposit settles partly or wholly in kind, as that period's interest is settled by its scheduled events.  # noqa: E501
     """
     entitlement_date: Optional[datetime] = Field(default=None, description="The entitlement date of the roll event.", alias="entitlementDate")
     settlement_date: Optional[datetime] = Field(default=None, description="The settlement date of the roll event.", alias="settlementDate")
