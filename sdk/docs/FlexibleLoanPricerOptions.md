@@ -5,6 +5,7 @@ Model options for instruments of type flexibleDeposit and flexibleLoan when used
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **set_clean_pvto_zero** | **bool** | If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual. | 
+**use_price_quote_for_clean_pv** | **bool** | If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor | [optional] 
 **model_options_type** | **str** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions. | 
 ## Example
 
@@ -17,8 +18,10 @@ from datetime import datetime
 
 set_clean_pvto_zero: StrictBool = # Replace with your value
 set_clean_pvto_zero:StrictBool = True
+use_price_quote_for_clean_pv: Optional[StrictBool] = # Replace with your value
+use_price_quote_for_clean_pv:Optional[StrictBool] = None
 model_options_type: StrictStr = "example_model_options_type"
-flexible_loan_pricer_options_instance = FlexibleLoanPricerOptions(set_clean_pvto_zero=set_clean_pvto_zero, model_options_type=model_options_type)
+flexible_loan_pricer_options_instance = FlexibleLoanPricerOptions(set_clean_pvto_zero=set_clean_pvto_zero, use_price_quote_for_clean_pv=use_price_quote_for_clean_pv, model_options_type=model_options_type)
 
 ```
 

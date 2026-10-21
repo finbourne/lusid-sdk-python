@@ -29,9 +29,10 @@ class FlexibleLoanPricerOptions(ModelOptions):
     Model options for instruments of type flexibleDeposit and flexibleLoan when used on a standalone basis.  # noqa: E501
     """
     set_clean_pvto_zero: StrictBool = Field(description="If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual.", alias="setCleanPVToZero")
+    use_price_quote_for_clean_pv: Optional[StrictBool] = Field(default=None, description="If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor", alias="usePriceQuoteForCleanPV")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "setCleanPVToZero"]
+    __properties = ["modelOptionsType", "setCleanPVToZero", "usePriceQuoteForCleanPV"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -89,6 +90,11 @@ class FlexibleLoanPricerOptions(ModelOptions):
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
 
+        # set to None if use_price_quote_for_clean_pv (nullable) is None
+        # and __fields_set__ contains the field
+        if self.use_price_quote_for_clean_pv is None and "use_price_quote_for_clean_pv" in self.__fields_set__:
+            _dict['usePriceQuoteForCleanPV'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class FlexibleLoanPricerOptions(ModelOptions):
 
         _obj = FlexibleLoanPricerOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
-            "set_clean_pvto_zero": obj.get("setCleanPVToZero")
+            "set_clean_pvto_zero": obj.get("setCleanPVToZero"),
+            "use_price_quote_for_clean_pv": obj.get("usePriceQuoteForCleanPV")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
