@@ -47,6 +47,7 @@ class FundJournalEntryLine(BaseModel):
     units: Union[StrictFloat, StrictInt] = Field(description="Units held for the Journal Entry Line.")
     posting_module_code:  Optional[StrictStr] = Field(None,alias="postingModuleCode", description="The code of the posting module where the posting rules derived the Journal Entry lines.") 
     posting_rule:  StrictStr = Field(...,alias="postingRule", description="The rule generating the Journal Entry Line.") 
+    posting_rule_version: Optional[StrictInt] = Field(default=None, description="The version of the rule generating the Journal Entry Line. Null where no rule matched the line.", alias="postingRuleVersion")
     as_at_date: datetime = Field(description="The corresponding input date and time of the Transaction generating the Journal Entry Line.", alias="asAtDate")
     activities_description:  Optional[StrictStr] = Field(None,alias="activitiesDescription", description="This would be the description of the business activities this Journal Entry Line is for.") 
     source_type:  StrictStr = Field(...,alias="sourceType", description="The type of source for the Journal Entry Line. Available values: LusidTransaction, LusidValuation, Manual, External.") 
@@ -69,7 +70,7 @@ class FundJournalEntryLine(BaseModel):
     custodian_account_type:  Optional[StrictStr] = Field(None,alias="custodianAccountType", description="Indicates the Account Type of the resolved Custodian Account for this Journal Entry Line.") 
     bucket_memberships: Optional[List[BucketMembership]] = Field(default=None, description="The bucket this Journal Entry Line is assigned to in each of the Fund Configuration's bucket sets that covers the NAV type, in bucket set definition order. Each bucket set classifies the line independently, so a line normally carries one entry per bucket set.", alias="bucketMemberships")
     links: Optional[List[Link]] = None
-    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "txnType", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "bucketMemberships", "links"]
+    __properties = ["accountingDate", "activityDate", "portfolioId", "instrumentId", "instrumentScope", "subHoldingKeys", "taxLotId", "generalLedgerAccountCode", "local", "base", "units", "postingModuleCode", "postingRule", "postingRuleVersion", "asAtDate", "activitiesDescription", "sourceType", "sourceId", "properties", "movementName", "txnType", "holdingType", "economicBucket", "economicBucketComponent", "economicBucketVariant", "levels", "sourceLevels", "movementSign", "holdingSign", "ledgerColumn", "journalEntryLineType", "shareClassBreakdowns", "custodianAccountId", "custodianAccountType", "bucketMemberships", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -164,6 +165,11 @@ class FundJournalEntryLine(BaseModel):
         # and __fields_set__ contains the field
         if self.posting_module_code is None and "posting_module_code" in self.__fields_set__:
             _dict['postingModuleCode'] = None
+
+        # set to None if posting_rule_version (nullable) is None
+        # and __fields_set__ contains the field
+        if self.posting_rule_version is None and "posting_rule_version" in self.__fields_set__:
+            _dict['postingRuleVersion'] = None
 
         # set to None if activities_description (nullable) is None
         # and __fields_set__ contains the field
@@ -275,6 +281,7 @@ class FundJournalEntryLine(BaseModel):
             "units": obj.get("units"),
             "posting_module_code": obj.get("postingModuleCode"),
             "posting_rule": obj.get("postingRule"),
+            "posting_rule_version": obj.get("postingRuleVersion"),
             "as_at_date": obj.get("asAtDate"),
             "activities_description": obj.get("activitiesDescription"),
             "source_type": obj.get("sourceType"),

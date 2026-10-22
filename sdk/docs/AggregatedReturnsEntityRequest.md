@@ -1,6 +1,6 @@
 # AggregatedReturnsEntityRequest
 
-The request body for the aggregated-returns (TWR) endpoint: the entity to calculate returns for, the  Returns entity that configures the calculation, the effective window, the metrics to calculate and the  period grid granularity. Supports a single `Portfolio` entity, the period `Return` metric and  a `Daily` grid.
+The request body for the aggregated-returns endpoint: the entity to report returns for, the returns id  under which upserted returns are stored and the Returns entity that configures a calculation, the  effective window, the metrics to report and the period grid granularity. Supports a single  `Portfolio` entity, the period `Return` metric and a `Daily` grid.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

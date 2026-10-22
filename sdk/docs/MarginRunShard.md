@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **status** | **str** | The status of the shard. One of Pending, Running, Completed or Failed. | 
 **call_count** | **int** | The number of margin calls the shard published. | 
 **line_count** | **int** | The number of margin lines the shard published. | 
-**detail** | **str** | Why the shard failed, when it did. | [optional] 
+**detail** | **str** | Why the shard failed, or which of its netting sets it completed without figures and why. | [optional] 
+**as_at** | **datetime** | When the shard was valued: the run&#39;s as-at, or the time of the retry that valued it. Null until the shard has finished. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ call_count: StrictInt = 42
 line_count: StrictInt = # Replace with your value
 line_count: StrictInt = 42
 detail: Optional[StrictStr] = "example_detail"
-margin_run_shard_instance = MarginRunShard(id=id, recipe_id=recipe_id, agreements=agreements, status=status, call_count=call_count, line_count=line_count, detail=detail)
+as_at: Optional[datetime] = # Replace with your value
+margin_run_shard_instance = MarginRunShard(id=id, recipe_id=recipe_id, agreements=agreements, status=status, call_count=call_count, line_count=line_count, detail=detail, as_at=as_at)
 
 ```
 

@@ -41,7 +41,7 @@ class MarginRun(BaseModel):
     shard_count: StrictInt = Field(description="The number of valuation shards the run was planned as.", alias="shardCount")
     completed_shards: StrictInt = Field(description="The number of shards that have completed.", alias="completedShards")
     failed_shards: StrictInt = Field(description="The number of shards that failed to value.", alias="failedShards")
-    issues: List[MarginRunIssue] = Field(description="Agreements the run could not value, or the caller may not calculate margin for, with the reason.")
+    issues: List[MarginRunIssue] = Field(description="Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason.")
     shards: List[MarginRunShard] = Field(description="The valuation shards the run is planned as, with their progress.")
     __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards"]
 

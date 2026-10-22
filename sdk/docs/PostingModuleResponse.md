@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **chart_of_accounts_id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the Posting Module. | 
 **description** | **str** | A description for the Posting Module. | [optional] 
-**rules** | [**List[PostingModuleRule]**](PostingModuleRule.md) | The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection. | [optional] 
+**rules** | [**List[PostingModuleRuleResponse]**](PostingModuleRuleResponse.md) | The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection. | [optional] 
 **status** | **str** | The Posting Module status. Default value: Active. Available values: Active, Inactive, Deleted. | 
 **version** | [**Version**](Version.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -27,7 +27,7 @@ posting_module_code: StrictStr = "example_posting_module_code"
 chart_of_accounts_id: ResourceId = # Replace with your value
 display_name: StrictStr = "example_display_name"
 description: Optional[StrictStr] = "example_description"
-rules: Optional[List[PostingModuleRule]] = # Replace with your value
+rules: Optional[List[PostingModuleRuleResponse]] = # Replace with your value
 status: StrictStr = "example_status"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **account_number** | **str** | The Custodian Account Number | 
 **account_name** | **str** | The identifiable name given to the Custodian Account | 
 **accounting_method** | **str** | The Accounting method to be used. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | 
-**currency** | **str** | The Currency for the Account | 
+**currency** | **str** | The Currency for the Account. Optional, with no default. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the &#39;CustodianAccount&#39; domain. | [optional] 
 **custodian_identifier** | [**TypedResourceId**](TypedResourceId.md) |  | 
 **account_type** | **str** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] 
@@ -29,7 +29,7 @@ status: Optional[StrictStr] = "example_status"
 account_number: StrictStr = "example_account_number"
 account_name: StrictStr = "example_account_name"
 accounting_method: StrictStr = "example_accounting_method"
-currency: StrictStr = "example_currency"
+currency: Optional[StrictStr] = "example_currency"
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 custodian_identifier: TypedResourceId = # Replace with your value
 account_type: Optional[StrictStr] = "example_account_type"

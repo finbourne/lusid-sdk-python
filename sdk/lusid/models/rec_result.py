@@ -62,7 +62,7 @@ class RecResult(BaseModel):
     items: RecResultItemDetails
     linked_results: List[RecLinkedResult] = Field(description="Results of other rec types in the same rec instance run whose items share an identifier with this result's items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then.", alias="linkedResults")
     comments: List[RecUserComment] = Field(description="User-authored comments attached to the result. Carried forward across runs.")
-    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable.")
+    properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet.")
     assigned_user:  Optional[StrictStr] = Field(None,alias="assignedUser", description="The LUSID user id assigned to the result.") 
     assigned_role:  Optional[StrictStr] = Field(None,alias="assignedRole", description="The LUSID IAM role id assigned to the result.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 

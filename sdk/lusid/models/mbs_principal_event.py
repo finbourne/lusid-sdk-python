@@ -32,9 +32,12 @@ class MbsPrincipalEvent(InstrumentEvent):
     payment_date: Optional[datetime] = Field(default=None, description="The payment date of the principal", alias="paymentDate")
     currency:  StrictStr = Field(...,alias="currency", description="The currency in which the principal is paid") 
     principal_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The principal amount received for each unit of the instrument held on the ex date", alias="principalPerUnit")
+    price_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Redemption price per unit (OFFR / 100) of principal repaid. Clean price convention: a value of 1 is par.  Optional; a null is read as 1, so an omitted price is par. Separates the cash paid from the principal extinguished.", alias="pricePerUnit")
+    previous_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The pool factor in force until the redemption (factor) date, as notified (AMI-SeCo Previous Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with nextFactor.", alias="previousFactor")
+    next_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The pool factor applicable after the redemption (factor) date, as notified (AMI-SeCo Next Factor).  Optional; recorded for reconciliation and not consumed by the transaction template. Must be supplied together with previousFactor.", alias="nextFactor")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "principalPerUnit"]
+    __properties = ["instrumentEventType", "exDate", "paymentDate", "currency", "principalPerUnit", "pricePerUnit", "previousFactor", "nextFactor"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -97,6 +100,21 @@ class MbsPrincipalEvent(InstrumentEvent):
         if self.principal_per_unit is None and "principal_per_unit" in self.__fields_set__:
             _dict['principalPerUnit'] = None
 
+        # set to None if price_per_unit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_per_unit is None and "price_per_unit" in self.__fields_set__:
+            _dict['pricePerUnit'] = None
+
+        # set to None if previous_factor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.previous_factor is None and "previous_factor" in self.__fields_set__:
+            _dict['previousFactor'] = None
+
+        # set to None if next_factor (nullable) is None
+        # and __fields_set__ contains the field
+        if self.next_factor is None and "next_factor" in self.__fields_set__:
+            _dict['nextFactor'] = None
+
         return _dict
 
     @classmethod
@@ -113,7 +131,10 @@ class MbsPrincipalEvent(InstrumentEvent):
             "ex_date": obj.get("exDate"),
             "payment_date": obj.get("paymentDate"),
             "currency": obj.get("currency"),
-            "principal_per_unit": obj.get("principalPerUnit")
+            "principal_per_unit": obj.get("principalPerUnit"),
+            "price_per_unit": obj.get("pricePerUnit"),
+            "previous_factor": obj.get("previousFactor"),
+            "next_factor": obj.get("nextFactor")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

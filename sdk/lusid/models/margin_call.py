@@ -52,7 +52,7 @@ class MarginCall(BaseModel):
     statement_reference:  Optional[StrictStr] = Field(None,alias="statementReference", description="A reference to the counterparty's statement, such as a Drive path.") 
     demand_note:  Optional[StrictStr] = Field(None,alias="demandNote", description="A note recorded with the counterparty's demand.") 
     agreed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount agreed to move, once the call is accepted or disputed.", alias="agreedAmount")
-    disputed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the counterparty's demand left in dispute.", alias="disputedAmount")
+    disputed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The part of the larger of our call and the counterparty's demand left in dispute.", alias="disputedAmount")
     dispute_reason:  Optional[StrictStr] = Field(None,alias="disputeReason", description="Why the call is disputed.") 
     dispute_owner:  Optional[StrictStr] = Field(None,alias="disputeOwner", description="Who owns the dispute.") 
     state:  StrictStr = Field(...,alias="state", description="Where the call is in its lifecycle. One of Calculated, Accepted or Disputed. Filterable.") 

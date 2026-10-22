@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **statement_reference** | **str** | A reference to the counterparty&#39;s statement, such as a Drive path. | [optional] 
 **demand_note** | **str** | A note recorded with the counterparty&#39;s demand. | [optional] 
 **agreed_amount** | **float** | The amount agreed to move, once the call is accepted or disputed. | [optional] 
-**disputed_amount** | **float** | The part of the counterparty&#39;s demand left in dispute. | [optional] 
+**disputed_amount** | **float** | The part of the larger of our call and the counterparty&#39;s demand left in dispute. | [optional] 
 **dispute_reason** | **str** | Why the call is disputed. | [optional] 
 **dispute_owner** | **str** | Who owns the dispute. | [optional] 
 **state** | **str** | Where the call is in its lifecycle. One of Calculated, Accepted or Disputed. Filterable. | 

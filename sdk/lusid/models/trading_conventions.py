@@ -31,7 +31,8 @@ class TradingConventions(BaseModel):
     minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Size  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderSize")
     minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Minimum Order Increment  Must be non-negative and defaults to 0 if not set.", alias="minimumOrderIncrement")
     price_quotation_type:  Optional[StrictStr] = Field(None,alias="priceQuotationType", description="Conventional price quotation type of the instrument.  Whether its quoted price excludes accrued interest (Clean) or includes it (Dirty).  Defaults to Clean if not set.                Supported string (enumeration) values are: [Clean, Dirty]. Available values: Clean, Dirty.") 
-    __properties = ["priceScaleFactor", "minimumOrderSize", "minimumOrderIncrement", "priceQuotationType"]
+    price_fraction_convention:  Optional[StrictStr] = Field(None,alias="priceFractionConvention", description="The fractional grid on which the market conventionally quotes the instrument's price, such as 32nds for  US Treasuries. Declarative only: prices are stored and valued as decimals regardless, and consumers use  this to convert between decimal and fractional notation at entry and display.  Defaults to Decimal if not set.                Supported string (enumeration) values are: [Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths]. Available values: Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths.") 
+    __properties = ["priceScaleFactor", "minimumOrderSize", "minimumOrderIncrement", "priceQuotationType", "priceFractionConvention"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,11 @@ class TradingConventions(BaseModel):
         if self.price_quotation_type is None and "price_quotation_type" in self.__fields_set__:
             _dict['priceQuotationType'] = None
 
+        # set to None if price_fraction_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.price_fraction_convention is None and "price_fraction_convention" in self.__fields_set__:
+            _dict['priceFractionConvention'] = None
+
         return _dict
 
     @classmethod
@@ -85,7 +91,8 @@ class TradingConventions(BaseModel):
             "price_scale_factor": obj.get("priceScaleFactor"),
             "minimum_order_size": obj.get("minimumOrderSize"),
             "minimum_order_increment": obj.get("minimumOrderIncrement"),
-            "price_quotation_type": obj.get("priceQuotationType")
+            "price_quotation_type": obj.get("priceQuotationType"),
+            "price_fraction_convention": obj.get("priceFractionConvention")
         })
         return _obj
 

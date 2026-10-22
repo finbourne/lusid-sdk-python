@@ -35,7 +35,7 @@ class CustodianAccountRequest(BaseModel):
     account_number:  StrictStr = Field(...,alias="accountNumber", description="The Custodian Account Number") 
     account_name:  StrictStr = Field(...,alias="accountName", description="The identifiable name given to the Custodian Account") 
     accounting_method:  StrictStr = Field(...,alias="accountingMethod", description="The Accounting method to be used. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency.") 
-    currency:  StrictStr = Field(...,alias="currency", description="The Currency for the Account") 
+    currency:  Optional[StrictStr] = Field(None,alias="currency", description="The Currency for the Account. Optional, with no default.") 
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="Set of unique Custodian Account properties and associated values to store with the Custodian Account. Each property must be from the 'CustodianAccount' domain.")
     custodian_identifier: TypedResourceId = Field(alias="custodianIdentifier")
     account_type:  Optional[StrictStr] = Field(None,alias="accountType", description="The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default.") 
@@ -93,6 +93,11 @@ class CustodianAccountRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.status is None and "status" in self.__fields_set__:
             _dict['status'] = None
+
+        # set to None if currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.currency is None and "currency" in self.__fields_set__:
+            _dict['currency'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field

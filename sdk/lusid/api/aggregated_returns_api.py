@@ -216,25 +216,25 @@ class AggregatedReturnsApi:
 
 
     @overload
-    async def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], **kwargs) -> AggregatedReturnsResponse:  # noqa: E501
+    async def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report.")], **kwargs) -> AggregatedReturnsResponse:  # noqa: E501
         ...
 
     @overload
-    def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], async_req: Optional[bool]=True, **kwargs) -> AggregatedReturnsResponse:  # noqa: E501
+    def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report.")], async_req: Optional[bool]=True, **kwargs) -> AggregatedReturnsResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], async_req: Optional[bool]=None, **kwargs) -> Union[AggregatedReturnsResponse, Awaitable[AggregatedReturnsResponse]]:  # noqa: E501
+    def get_aggregated_returns(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report.")], async_req: Optional[bool]=None, **kwargs) -> Union[AggregatedReturnsResponse, Awaitable[AggregatedReturnsResponse]]:  # noqa: E501
         """[EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.  # noqa: E501
 
-        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.  # noqa: E501
+        Report daily returns for the entity specified in the request body over the effective window.              Currently, supports a single entity of type Portfolio and a daily return grid. Returns upserted to the              Returns store under the supplied returns id take precedence: if any exist in the window they are              reported as-is and nothing is calculated. Otherwise time-weighted returns are calculated using the              recipe, fee handling and flow-discrepancy handling of the persisted Returns entity identified by the              returns id, and the request fails if no such entity exists. When a reporting currency is requested the              Returns entity is also required, as its recipe supplies the FX rates.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.get_aggregated_returns(aggregated_returns_entity_request, async_req=True)
         >>> result = thread.get()
 
-        :param aggregated_returns_entity_request: The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
+        :param aggregated_returns_entity_request: The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report. (required)
         :type aggregated_returns_entity_request: AggregatedReturnsEntityRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -255,17 +255,17 @@ class AggregatedReturnsApi:
         return self.get_aggregated_returns_with_http_info(aggregated_returns_entity_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def get_aggregated_returns_with_http_info(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def get_aggregated_returns_with_http_info(self, aggregated_returns_entity_request : Annotated[AggregatedReturnsEntityRequest, Field(description="The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.  # noqa: E501
 
-        Calculate time-weighted returns for the entity specified in the request body over the              effective window. Currently, supports a single entity of type Portfolio and calculates a daily              return grid. The recipe, fee handling, and flow-discrepancy handling are taken from the persisted              Returns entity identified by the supplied returns id; the request fails if no such entity exists.  # noqa: E501
+        Report daily returns for the entity specified in the request body over the effective window.              Currently, supports a single entity of type Portfolio and a daily return grid. Returns upserted to the              Returns store under the supplied returns id take precedence: if any exist in the window they are              reported as-is and nothing is calculated. Otherwise time-weighted returns are calculated using the              recipe, fee handling and flow-discrepancy handling of the persisted Returns entity identified by the              returns id, and the request fails if no such entity exists. When a reporting currency is requested the              Returns entity is also required, as its recipe supplies the FX rates.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.get_aggregated_returns_with_http_info(aggregated_returns_entity_request, async_req=True)
         >>> result = thread.get()
 
-        :param aggregated_returns_entity_request: The entity to calculate returns for, the Returns entity that configures the              calculation, the effective window and the metrics to calculate. (required)
+        :param aggregated_returns_entity_request: The entity to report returns for, the returns id under which upserted returns              are stored and the Returns entity that configures a calculation, the effective window and the metrics              to report. (required)
         :type aggregated_returns_entity_request: AggregatedReturnsEntityRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

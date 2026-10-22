@@ -1245,7 +1245,7 @@ from lusid.models.paged_resource_list_of_portfolio_group import PagedResourceLis
 from lusid.models.paged_resource_list_of_portfolio_group_search_result import PagedResourceListOfPortfolioGroupSearchResult
 from lusid.models.paged_resource_list_of_portfolio_search_result import PagedResourceListOfPortfolioSearchResult
 from lusid.models.paged_resource_list_of_posting_module_response import PagedResourceListOfPostingModuleResponse
-from lusid.models.paged_resource_list_of_posting_module_rule import PagedResourceListOfPostingModuleRule
+from lusid.models.paged_resource_list_of_posting_module_rule_response import PagedResourceListOfPostingModuleRuleResponse
 from lusid.models.paged_resource_list_of_processing_group import PagedResourceListOfProcessingGroup
 from lusid.models.paged_resource_list_of_property_definition import PagedResourceListOfPropertyDefinition
 from lusid.models.paged_resource_list_of_property_definition_search_result import PagedResourceListOfPropertyDefinitionSearchResult
@@ -1378,6 +1378,7 @@ from lusid.models.posting_module_details import PostingModuleDetails
 from lusid.models.posting_module_request import PostingModuleRequest
 from lusid.models.posting_module_response import PostingModuleResponse
 from lusid.models.posting_module_rule import PostingModuleRule
+from lusid.models.posting_module_rule_response import PostingModuleRuleResponse
 from lusid.models.posting_module_rules_updated_response import PostingModuleRulesUpdatedResponse
 from lusid.models.pre_trade_configuration import PreTradeConfiguration
 from lusid.models.preferred_share import PreferredShare
@@ -1809,6 +1810,7 @@ from lusid.models.sub_holding_key_value_equals import SubHoldingKeyValueEquals
 from lusid.models.submit_rec_result_set_review_request import SubmitRecResultSetReviewRequest
 from lusid.models.subscribe_election import SubscribeElection
 from lusid.models.subscription_definition import SubscriptionDefinition
+from lusid.models.supersede_posting_module_rule_request import SupersedePostingModuleRuleRequest
 from lusid.models.supplemental_attribute import SupplementalAttribute
 from lusid.models.supplemental_attribute_values import SupplementalAttributeValues
 from lusid.models.suppression_entry_response import SuppressionEntryResponse
@@ -3353,7 +3355,7 @@ __all__ = [
     "PagedResourceListOfPortfolioGroupSearchResult",
     "PagedResourceListOfPortfolioSearchResult",
     "PagedResourceListOfPostingModuleResponse",
-    "PagedResourceListOfPostingModuleRule",
+    "PagedResourceListOfPostingModuleRuleResponse",
     "PagedResourceListOfProcessingGroup",
     "PagedResourceListOfPropertyDefinition",
     "PagedResourceListOfPropertyDefinitionSearchResult",
@@ -3486,6 +3488,7 @@ __all__ = [
     "PostingModuleRequest",
     "PostingModuleResponse",
     "PostingModuleRule",
+    "PostingModuleRuleResponse",
     "PostingModuleRulesUpdatedResponse",
     "PreTradeConfiguration",
     "PreferredShare",
@@ -3917,6 +3920,7 @@ __all__ = [
     "SubmitRecResultSetReviewRequest",
     "SubscribeElection",
     "SubscriptionDefinition",
+    "SupersedePostingModuleRuleRequest",
     "SupplementalAttribute",
     "SupplementalAttributeValues",
     "SuppressionEntryResponse",

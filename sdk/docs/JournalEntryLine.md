@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **units** | **float** | Units held for the Journal Entry Line. | 
 **posting_module_code** | **str** | The code of the posting module where the posting rules derived the Journal Entry lines. | [optional] 
 **posting_rule** | **str** | The rule generating the Journal Entry Line. | 
+**posting_rule_version** | **int** | The version of the rule generating the Journal Entry Line. Null where no rule matched the line. | [optional] 
 **as_at_date** | **datetime** | The corresponding input date and time of the Transaction generating the Journal Entry Line. | 
 **activities_description** | **str** | This would be the description of the business activities this Journal Entry Line is for. | [optional] 
 **source_type** | **str** | The type of source for the Journal Entry Line. Available values: LusidTransaction, LusidValuation, Manual, External. | 
@@ -59,6 +60,8 @@ base: CurrencyAndAmount
 units: Union[StrictFloat, StrictInt] = # Replace with your value
 posting_module_code: Optional[StrictStr] = "example_posting_module_code"
 posting_rule: StrictStr = "example_posting_rule"
+posting_rule_version: Optional[StrictInt] = # Replace with your value
+posting_rule_version: Optional[StrictInt] = None
 as_at_date: datetime = # Replace with your value
 activities_description: Optional[StrictStr] = "example_activities_description"
 source_type: StrictStr = "example_source_type"
@@ -79,7 +82,7 @@ journal_entry_line_type: Optional[StrictStr] = "example_journal_entry_line_type"
 custodian_account_id: Optional[ResourceId] = # Replace with your value
 custodian_account_type: Optional[StrictStr] = "example_custodian_account_type"
 links: Optional[List[Link]] = None
-journal_entry_line_instance = JournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, txn_type=txn_type, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, links=links)
+journal_entry_line_instance = JournalEntryLine(accounting_date=accounting_date, activity_date=activity_date, portfolio_id=portfolio_id, instrument_id=instrument_id, instrument_scope=instrument_scope, sub_holding_keys=sub_holding_keys, tax_lot_id=tax_lot_id, general_ledger_account_code=general_ledger_account_code, local=local, base=base, units=units, posting_module_code=posting_module_code, posting_rule=posting_rule, posting_rule_version=posting_rule_version, as_at_date=as_at_date, activities_description=activities_description, source_type=source_type, source_id=source_id, properties=properties, movement_name=movement_name, txn_type=txn_type, holding_type=holding_type, economic_bucket=economic_bucket, economic_bucket_component=economic_bucket_component, economic_bucket_variant=economic_bucket_variant, levels=levels, source_levels=source_levels, movement_sign=movement_sign, holding_sign=holding_sign, ledger_column=ledger_column, journal_entry_line_type=journal_entry_line_type, custodian_account_id=custodian_account_id, custodian_account_type=custodian_account_type, links=links)
 
 ```
 

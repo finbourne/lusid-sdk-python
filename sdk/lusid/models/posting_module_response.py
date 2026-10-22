@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
-from lusid.models.posting_module_rule import PostingModuleRule
+from lusid.models.posting_module_rule_response import PostingModuleRuleResponse
 from lusid.models.resource_id import ResourceId
 from lusid.models.version import Version
 
@@ -36,7 +36,7 @@ class PostingModuleResponse(BaseModel):
     chart_of_accounts_id: ResourceId = Field(alias="chartOfAccountsId")
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the Posting Module.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Posting Module.") 
-    rules: Optional[List[PostingModuleRule]] = Field(default=None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
+    rules: Optional[List[PostingModuleRuleResponse]] = Field(default=None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
     status:  StrictStr = Field(...,alias="status", description="The Posting Module status. Default value: Active. Available values: Active, Inactive, Deleted.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
@@ -131,7 +131,7 @@ class PostingModuleResponse(BaseModel):
             "chart_of_accounts_id": ResourceId.from_dict(obj.get("chartOfAccountsId")) if obj.get("chartOfAccountsId") is not None else None,
             "display_name": obj.get("displayName"),
             "description": obj.get("description"),
-            "rules": [PostingModuleRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None,
+            "rules": [PostingModuleRuleResponse.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None,
             "status": obj.get("status"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

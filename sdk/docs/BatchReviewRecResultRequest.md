@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **assigned_user** | [**RecResultAssignmentUpdate**](RecResultAssignmentUpdate.md) |  | [optional] 
 **assigned_role** | [**RecResultAssignmentUpdate**](RecResultAssignmentUpdate.md) |  | [optional] 
 **add_comment_text** | **str** | Optional comment text to add to each targeted result. | [optional] 
-**properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecResult domain. Filterable and sortable. | [optional] 
+**properties** | [**List[PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet. | [optional] 
 ## Example
 
 ```python

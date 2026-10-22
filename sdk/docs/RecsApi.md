@@ -1046,7 +1046,7 @@ def main():
     run_number = 56 # int | The run of the instance whose view of the result is read.
     id = 'id_example' # str | The display id of the rec result, e.g. \"break-3\".
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the result. Defaults to latest if not specified. (optional)
-    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto the result. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1072,7 +1072,7 @@ Name | Type | Description  | Notes
  **run_number** | **int**| The run of the instance whose view of the result is read. | 
  **id** | **str**| The display id of the rec result, e.g. \&quot;break-3\&quot;. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the result. Defaults to latest if not specified. | [optional] 
- **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto the result. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto the result. The keys its matching ruleset populates always come back, so list only others here. | [optional] 
 
 ### Return type
 
@@ -1746,7 +1746,7 @@ def main():
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\". (optional)
-    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto each result. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1771,7 +1771,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
- **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto each result. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto each result. The keys its matching ruleset populates always come back, so list only others here. | [optional] 
 
 ### Return type
 

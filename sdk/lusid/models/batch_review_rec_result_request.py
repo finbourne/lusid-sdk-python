@@ -39,7 +39,7 @@ class BatchReviewRecResultRequest(BaseModel):
     assigned_user: Optional[RecResultAssignmentUpdate] = Field(default=None, alias="assignedUser")
     assigned_role: Optional[RecResultAssignmentUpdate] = Field(default=None, alias="assignedRole")
     add_comment_text:  Optional[StrictStr] = Field(None,alias="addCommentText", description="Optional comment text to add to each targeted result.") 
-    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable.")
+    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet.")
     __properties = ["instanceId", "recType", "runNumber", "recResultIds", "decision", "assignedUser", "assignedRole", "addCommentText", "properties"]
 
     class Config:

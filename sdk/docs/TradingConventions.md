@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **minimum_order_size** | **float** | The Minimum Order Size  Must be non-negative and defaults to 0 if not set. | [optional] 
 **minimum_order_increment** | **float** | The Minimum Order Increment  Must be non-negative and defaults to 0 if not set. | [optional] 
 **price_quotation_type** | **str** | Conventional price quotation type of the instrument.  Whether its quoted price excludes accrued interest (Clean) or includes it (Dirty).  Defaults to Clean if not set.                Supported string (enumeration) values are: [Clean, Dirty]. Available values: Clean, Dirty. | [optional] 
+**price_fraction_convention** | **str** | The fractional grid on which the market conventionally quotes the instrument&#39;s price, such as 32nds for  US Treasuries. Declarative only: prices are stored and valued as decimals regardless, and consumers use  this to convert between decimal and fractional notation at entry and display.  Defaults to Decimal if not set.                Supported string (enumeration) values are: [Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths]. Available values: Decimal, ThirtySeconds, SixtyFourths, OneHundredTwentyEighths, TwoHundredFiftySixths. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ price_scale_factor: Optional[Union[StrictFloat, StrictInt]] = # Replace with you
 minimum_order_size: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 minimum_order_increment: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 price_quotation_type: Optional[StrictStr] = "example_price_quotation_type"
-trading_conventions_instance = TradingConventions(price_scale_factor=price_scale_factor, minimum_order_size=minimum_order_size, minimum_order_increment=minimum_order_increment, price_quotation_type=price_quotation_type)
+price_fraction_convention: Optional[StrictStr] = "example_price_fraction_convention"
+trading_conventions_instance = TradingConventions(price_scale_factor=price_scale_factor, minimum_order_size=minimum_order_size, minimum_order_increment=minimum_order_increment, price_quotation_type=price_quotation_type, price_fraction_convention=price_fraction_convention)
 
 ```
 

@@ -23,14 +23,14 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
-from lusid.models.posting_module_rule import PostingModuleRule
+from lusid.models.posting_module_rule_response import PostingModuleRuleResponse
 from lusid.models.version import Version
 
 class PostingModuleRulesUpdatedResponse(BaseModel):
     """
     A Posting Module rules update response  # noqa: E501
     """
-    rules: Optional[List[PostingModuleRule]] = Field(default=None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
+    rules: Optional[List[PostingModuleRuleResponse]] = Field(default=None, description="The Posting Rules that apply for the Posting Module. Rules are evaluated in the order they occur in this collection.")
     version: Optional[Version] = None
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     links: Optional[List[Link]] = None
@@ -112,7 +112,7 @@ class PostingModuleRulesUpdatedResponse(BaseModel):
             return PostingModuleRulesUpdatedResponse.parse_obj(obj)
 
         _obj = PostingModuleRulesUpdatedResponse.parse_obj({
-            "rules": [PostingModuleRule.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None,
+            "rules": [PostingModuleRuleResponse.from_dict(_item) for _item in obj.get("rules")] if obj.get("rules") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

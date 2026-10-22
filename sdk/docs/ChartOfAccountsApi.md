@@ -35,6 +35,7 @@ Method | HTTP request | Description
 [**set_general_ledger_profile_mappings**](ChartOfAccountsApi.md#set_general_ledger_profile_mappings) | **PUT** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode}/mappings | [EARLY ACCESS] SetGeneralLedgerProfileMappings: Sets the General Ledger Profile Mappings.
 [**set_posting_module_details**](ChartOfAccountsApi.md#set_posting_module_details) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] SetPostingModuleDetails: Set the details of a Posting Module
 [**set_posting_module_rules**](ChartOfAccountsApi.md#set_posting_module_rules) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules | [EARLY ACCESS] SetPostingModuleRules: Set the rules of a Posting Module
+[**supersede_posting_module_rule**](ChartOfAccountsApi.md#supersede_posting_module_rule) | **POST** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules/{ruleId}/$supersede | [EARLY ACCESS] SupersedePostingModuleRule: Supersede a rule of a Posting Module
 [**upsert_account_properties**](ChartOfAccountsApi.md#upsert_account_properties) | **POST** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties/$upsert | [EARLY ACCESS] UpsertAccountProperties: Upsert account properties
 [**upsert_accounts**](ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] UpsertAccounts: Upsert Accounts
 [**upsert_chart_of_accounts_properties**](ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
@@ -2139,7 +2140,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_posting_module_rules**
-> PagedResourceListOfPostingModuleRule list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
+> PagedResourceListOfPostingModuleRuleResponse list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
 
 [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
 
@@ -2226,7 +2227,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PagedResourceListOfPostingModuleRule**](PagedResourceListOfPostingModuleRule.md)
+[**PagedResourceListOfPostingModuleRuleResponse**](PagedResourceListOfPostingModuleRuleResponse.md)
 
 ### HTTP request headers
 
@@ -3119,6 +3120,106 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. | 
  **posting_module_code** | **str**| The code of the Posting Module to be updated. | 
  **posting_module_rule** | [**List[PostingModuleRule]**](PostingModuleRule.md)| The new rule set for the Posting Module. | 
+
+### Return type
+
+[**PostingModuleRulesUpdatedResponse**](PostingModuleRulesUpdatedResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Posting Module with updated rules. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **supersede_posting_module_rule**
+> PostingModuleRulesUpdatedResponse supersede_posting_module_rule(scope, code, posting_module_code, rule_id, supersede_posting_module_rule_request)
+
+[EARLY ACCESS] SupersedePostingModuleRule: Supersede a rule of a Posting Module
+
+Supersede a Posting Rule by one or more rules in a single write. Every rule in the request records the superseded  ruleId as its originalRuleId. At most one of them may have the superseded ruleId: it becomes the rule's next  version, and the rule's latest version stops applying from its effectiveFrom, unless it already ends by then; it  is never extended. Any other rule is new and must not have the ruleId of an existing rule. The rules take the  latest version's place in the rule list, in the order given.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ChartOfAccountsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ChartOfAccountsApi)
+    scope = 'scope_example' # str | The scope of the Chart of Accounts.
+    code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
+    posting_module_code = 'posting_module_code_example' # str | The code of the Posting Module to be updated.
+    rule_id = 'rule_id_example' # str | The identifier of the Posting Rule to supersede. Its latest version is closed.
+    supersede_posting_module_rule_request = [{"ruleId":"income","effectiveFrom":"2026-02-01T00:00:00.0000000+00:00","generalLedgerAccountCode":"100002355","ruleFilter":"EconomicBucket eq 'NA_Income'"}] # List[SupersedePostingModuleRuleRequest] | The rules that take over from the superseded rule.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.supersede_posting_module_rule(scope, code, posting_module_code, rule_id, supersede_posting_module_rule_request, opts=opts)
+
+        # [EARLY ACCESS] SupersedePostingModuleRule: Supersede a rule of a Posting Module
+        api_response = api_instance.supersede_posting_module_rule(scope, code, posting_module_code, rule_id, supersede_posting_module_rule_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ChartOfAccountsApi->supersede_posting_module_rule: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Chart of Accounts. | 
+ **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. | 
+ **posting_module_code** | **str**| The code of the Posting Module to be updated. | 
+ **rule_id** | **str**| The identifier of the Posting Rule to supersede. Its latest version is closed. | 
+ **supersede_posting_module_rule_request** | [**List[SupersedePostingModuleRuleRequest]**](SupersedePostingModuleRuleRequest.md)| The rules that take over from the superseded rule. | 
 
 ### Return type
 

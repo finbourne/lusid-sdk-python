@@ -29,7 +29,7 @@ class CdsProtectionDetailSpecification(BaseModel):
     """
     seniority:  Optional[StrictStr] = Field(None,alias="seniority", description="The seniority level of the CDS. Default value: SUB. Available values: Unknown, SNR, SUB, JRSUBUT2, PREFT1, SECDOM, SNRFOR, SUBLT2.") 
     restructuring_type:  Optional[StrictStr] = Field(None,alias="restructuringType", description="The restructuring clause. Default value: MM. Available values: Unknown, CR, MR, MM, XR, XR14, CR14, MR14, MM14.") 
-    protect_start_day: Optional[StrictBool] = Field(default=True, description="Does the protection leg pay out in the case of default on the start date. Defaults to true if not set.", alias="protectStartDay")
+    protect_start_day: Optional[StrictBool] = Field(default=False, description="Does the protection leg pay out in the case of default on the start date. Defaults to false if not set.  If true, the trade date is not included in the accrued interest that a transaction pays or receives.", alias="protectStartDay")
     pay_accrued_interest_on_default: Optional[StrictBool] = Field(default=True, description="Should accrued interest on the premium leg be paid if a credit event occurs. Defaults to true if not set.", alias="payAccruedInterestOnDefault")
     __properties = ["seniority", "restructuringType", "protectStartDay", "payAccruedInterestOnDefault"]
 
@@ -89,7 +89,7 @@ class CdsProtectionDetailSpecification(BaseModel):
         _obj = CdsProtectionDetailSpecification.parse_obj({
             "seniority": obj.get("seniority") if obj.get("seniority") is not None else 'SUB',
             "restructuring_type": obj.get("restructuringType") if obj.get("restructuringType") is not None else 'MM',
-            "protect_start_day": obj.get("protectStartDay") if obj.get("protectStartDay") is not None else True,
+            "protect_start_day": obj.get("protectStartDay") if obj.get("protectStartDay") is not None else False,
             "pay_accrued_interest_on_default": obj.get("payAccruedInterestOnDefault") if obj.get("payAccruedInterestOnDefault") is not None else True
         })
         return _obj

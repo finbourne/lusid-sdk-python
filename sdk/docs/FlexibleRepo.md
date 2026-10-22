@@ -5,7 +5,7 @@ Lusid representation of a repurchase agreement, where one party sells some colla
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
-**maturity_date** | **datetime** | The maturity date of the instrument. This is the date at which the repurchase will occur for a TermRepo.  Optional for OpenRepo, but if not provided, defaults to the StartDate plus a long period (e.g. 2099-12-31). | [optional] 
+**maturity_date** | **datetime** | The maturity date of the instrument. This is the date at which the repurchase will occur for a TermRepo.  Optional for OpenRepo, but if not provided, defaults to 2100-01-01. | [optional] 
 **buyer_or_seller** | **str** | Is the user the Buyer or the Seller of this repo?  Every repo agreement has two sides, a buyer and a seller.  The Buyer pays the PurchasePrice to the Seller in exchange for legal ownership of the collateral.  At Maturity, the Buyer then receives the RepurchasePrice in exchange for returning legal ownership of the collateral.  Controls the direction of purchase and repurchase cashflows, as well as the recipient of cashflows from the collateral. Available values: Buyer, Seller. | 
 **repo_ccy** | **str** | Currency of the purchase and repurchase prices. May differ from the currencies on any collateral. | 
 **repo_type** | **str** | The type of the repurchase agreement, Open or Term.  If Term, the repurchase automatically takes place at Maturity.  If Open, the agreement is rolled by the given tenor, and an interest cashflow is paid out with each roll,  unless manually triggered by a FlexibleRepoFullClosureEvent. Available values: OpenRepo, TermRepo. | 
