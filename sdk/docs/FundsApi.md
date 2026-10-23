@@ -3427,7 +3427,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 
-Lists the register lines of a partnership-accounting fund with each partner's capital balances at the  requested effective date, together with totals across the whole register.
+Lists the register lines of a partnership-accounting fund with each partner's capital balances at the  requested effective date, together with totals across the whole register. Committed capital is totalled per  commitment currency, and each line's share of commitments is of the total in its own currency; amounts in  different currencies are never added together.
 
 ### Example
 

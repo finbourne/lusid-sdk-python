@@ -39,7 +39,7 @@ class FundPartner(BaseModel):
     partner_role:  StrictStr = Field(...,alias="partnerRole", description="The role of the register line. Available values: GPRegister, LPInvestment.") 
     commitment_currency:  StrictStr = Field(...,alias="commitmentCurrency", description="The currency of the partner's commitment.") 
     balances: FundPartnerBalances
-    share_of_commitments: Union[StrictFloat, StrictInt] = Field(description="The partner's committed capital as a decimal fraction of the fund's total commitments.", alias="shareOfCommitments")
+    share_of_commitments: Union[StrictFloat, StrictInt] = Field(description="The partner's committed capital as a decimal fraction of the fund's total commitments in the same commitment currency.", alias="shareOfCommitments")
     admitted_on: Optional[datetime] = Field(default=None, description="The date the partner was admitted, being the date of their first commitment.", alias="admittedOn")
     totals: FundPartnersTotals
     __properties = ["investorRecordId", "displayName", "commitmentLineId", "lusidInstrumentId", "portfolioId", "isVehicle", "partnerRole", "commitmentCurrency", "balances", "shareOfCommitments", "admittedOn", "totals"]

@@ -66,15 +66,15 @@ class AllocationEventsApi:
 
 
     @overload
-    async def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
+    async def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @overload
-    def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
+    def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
+    def book_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
         """[EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.  # noqa: E501
 
         Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.  # noqa: E501
@@ -90,7 +90,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_book_request: The booking reference to freeze the event under. (required)
         :type allocation_event_book_request: AllocationEventBookRequest
-        :param effective_at: The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -111,7 +111,7 @@ class AllocationEventsApi:
         return self.book_allocation_event_with_http_info(scope, code, allocation_event_book_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def book_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def book_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_book_request : Annotated[AllocationEventBookRequest, Field(description="The booking reference to freeze the event under.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.  # noqa: E501
 
         Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.  # noqa: E501
@@ -127,7 +127,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_book_request: The booking reference to freeze the event under. (required)
         :type allocation_event_book_request: AllocationEventBookRequest
-        :param effective_at: The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -416,18 +416,18 @@ class AllocationEventsApi:
 
 
     @overload
-    async def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    async def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @overload
-    def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+    def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+    def delete_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.  # noqa: E501
 
-        Delete an Allocation Event from an effective datetime. The Allocation Event remains retrievable at earlier  effective datetimes.  # noqa: E501
+        Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -438,7 +438,7 @@ class AllocationEventsApi:
         :type scope: str
         :param code: The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
         :type code: str
-        :param effective_at: The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -459,10 +459,10 @@ class AllocationEventsApi:
         return self.delete_allocation_event_with_http_info(scope, code, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def delete_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def delete_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.  # noqa: E501
 
-        Delete an Allocation Event from an effective datetime. The Allocation Event remains retrievable at earlier  effective datetimes.  # noqa: E501
+        Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -473,7 +473,7 @@ class AllocationEventsApi:
         :type scope: str
         :param code: The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. (required)
         :type code: str
-        :param effective_at: The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1859,15 +1859,15 @@ class AllocationEventsApi:
 
 
     @overload
-    async def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
+    async def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @overload
-    def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
+    def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
+    def reallocate_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
         """[EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.  # noqa: E501
 
         Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.  # noqa: E501
@@ -1883,7 +1883,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_reallocate_request: The reason for the reallocation and any basis values to use. (required)
         :type allocation_event_reallocate_request: AllocationEventReallocateRequest
-        :param effective_at: The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1904,7 +1904,7 @@ class AllocationEventsApi:
         return self.reallocate_allocation_event_with_http_info(scope, code, allocation_event_reallocate_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def reallocate_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def reallocate_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reallocate_request : Annotated[AllocationEventReallocateRequest, Field(description="The reason for the reallocation and any basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.  # noqa: E501
 
         Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.  # noqa: E501
@@ -1920,7 +1920,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_reallocate_request: The reason for the reallocation and any basis values to use. (required)
         :type allocation_event_reallocate_request: AllocationEventReallocateRequest
-        :param effective_at: The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2042,15 +2042,15 @@ class AllocationEventsApi:
 
 
     @overload
-    async def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
+    async def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @overload
-    def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
+    def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
+    def receive_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
         """[EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.  # noqa: E501
 
         Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map's policy says, and a receipt in  another currency is converted at the rate given.  # noqa: E501
@@ -2066,7 +2066,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_receipt_request: The investor, amount and date of the receipt. (required)
         :type allocation_event_receipt_request: AllocationEventReceiptRequest
-        :param effective_at: The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2087,7 +2087,7 @@ class AllocationEventsApi:
         return self.receive_allocation_event_with_http_info(scope, code, allocation_event_receipt_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def receive_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def receive_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_receipt_request : Annotated[AllocationEventReceiptRequest, Field(description="The investor, amount and date of the receipt.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.  # noqa: E501
 
         Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map's policy says, and a receipt in  another currency is converted at the rate given.  # noqa: E501
@@ -2103,7 +2103,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_receipt_request: The investor, amount and date of the receipt. (required)
         :type allocation_event_receipt_request: AllocationEventReceiptRequest
-        :param effective_at: The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2225,15 +2225,15 @@ class AllocationEventsApi:
 
 
     @overload
-    async def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
+    async def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @overload
-    def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
+    def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
+    def reverse_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
         """[EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.  # noqa: E501
 
         Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.  # noqa: E501
@@ -2249,7 +2249,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_reverse_request: The reason for the reversal and, optionally, when it should take effect. (required)
         :type allocation_event_reverse_request: AllocationEventReverseRequest
-        :param effective_at: The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2270,7 +2270,7 @@ class AllocationEventsApi:
         return self.reverse_allocation_event_with_http_info(scope, code, allocation_event_reverse_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def reverse_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def reverse_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_reverse_request : Annotated[AllocationEventReverseRequest, Field(description="The reason for the reversal and, optionally, when it should take effect.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.  # noqa: E501
 
         Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.  # noqa: E501
@@ -2286,7 +2286,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_reverse_request: The reason for the reversal and, optionally, when it should take effect. (required)
         :type allocation_event_reverse_request: AllocationEventReverseRequest
-        :param effective_at: The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2408,15 +2408,15 @@ class AllocationEventsApi:
 
 
     @overload
-    async def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
+    async def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @overload
-    def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
+    def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationEvent:  # noqa: E501
         ...
 
     @validate_arguments
-    def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
+    def unbook_allocation_event(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationEvent, Awaitable[AllocationEvent]]:  # noqa: E501
         """[EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.  # noqa: E501
 
         Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.  # noqa: E501
@@ -2432,7 +2432,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_unbook_request: The reason the booking is being taken back. (required)
         :type allocation_event_unbook_request: AllocationEventUnbookRequest
-        :param effective_at: The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2453,7 +2453,7 @@ class AllocationEventsApi:
         return self.unbook_allocation_event_with_http_info(scope, code, allocation_event_unbook_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def unbook_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def unbook_allocation_event_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Event.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.")], allocation_event_unbook_request : Annotated[AllocationEventUnbookRequest, Field(description="The reason the booking is being taken back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.  # noqa: E501
 
         Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.  # noqa: E501
@@ -2469,7 +2469,7 @@ class AllocationEventsApi:
         :type code: str
         :param allocation_event_unbook_request: The reason the booking is being taken back. (required)
         :type allocation_event_unbook_request: AllocationEventUnbookRequest
-        :param effective_at: The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified.
+        :param effective_at: The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified.
         :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional

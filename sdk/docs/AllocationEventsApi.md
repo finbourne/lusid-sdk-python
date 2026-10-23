@@ -81,7 +81,7 @@ def main():
     # allocation_event_book_request = AllocationEventBookRequest.from_json("")
     # allocation_event_book_request = AllocationEventBookRequest.from_dict({})
     allocation_event_book_request = AllocationEventBookRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
  **allocation_event_book_request** | [**AllocationEventBookRequest**](AllocationEventBookRequest.md)| The booking reference to freeze the event under. | 
- **effective_at** | **str**| The effective datetime or cut label from which the booking applies. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Allocation Event to book. The booking is recorded on the version in force at that time, from that version&#39;s own effective date. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
 
-Delete an Allocation Event from an effective datetime. The Allocation Event remains retrievable at earlier  effective datetimes.
+Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
 
 ### Example
 
@@ -277,7 +277,7 @@ def main():
     api_instance = api_client_factory.build(AllocationEventsApi)
     scope = 'scope_example' # str | The scope of the Allocation Event.
     code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
- **effective_at** | **str**| The effective datetime or cut label from which to delete the Allocation Event. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. | [optional] 
 
 ### Return type
 
@@ -1079,7 +1079,7 @@ def main():
     # allocation_event_reallocate_request = AllocationEventReallocateRequest.from_json("")
     # allocation_event_reallocate_request = AllocationEventReallocateRequest.from_dict({})
     allocation_event_reallocate_request = AllocationEventReallocateRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1102,7 +1102,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
  **allocation_event_reallocate_request** | [**AllocationEventReallocateRequest**](AllocationEventReallocateRequest.md)| The reason for the reallocation and any basis values to use. | 
- **effective_at** | **str**| The effective datetime or cut label from which the reallocation applies. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label from which the reallocation applies. If not specified, the version in force now is recomputed in place from its own effective date. | [optional] 
 
 ### Return type
 
@@ -1182,7 +1182,7 @@ def main():
     # allocation_event_receipt_request = AllocationEventReceiptRequest.from_json("")
     # allocation_event_receipt_request = AllocationEventReceiptRequest.from_dict({})
     allocation_event_receipt_request = AllocationEventReceiptRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version's own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1205,7 +1205,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
  **allocation_event_receipt_request** | [**AllocationEventReceiptRequest**](AllocationEventReceiptRequest.md)| The investor, amount and date of the receipt. | 
- **effective_at** | **str**| The effective datetime or cut label from which the receipt applies. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Allocation Event receiving cash. The receipt is recorded on the version in force at that time, from that version&#39;s own effective date; the receipt postings are dated by the request. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -1285,7 +1285,7 @@ def main():
     # allocation_event_reverse_request = AllocationEventReverseRequest.from_json("")
     # allocation_event_reverse_request = AllocationEventReverseRequest.from_dict({})
     allocation_event_reverse_request = AllocationEventReverseRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version's own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1308,7 +1308,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
  **allocation_event_reverse_request** | [**AllocationEventReverseRequest**](AllocationEventReverseRequest.md)| The reason for the reversal and, optionally, when it should take effect. | 
- **effective_at** | **str**| The effective datetime or cut label from which the reversal applies. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Allocation Event to reverse. The reversed status is recorded on the version in force at that time, from that version&#39;s own effective date; the mirror postings are dated by the request. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 
@@ -1388,7 +1388,7 @@ def main():
     # allocation_event_unbook_request = AllocationEventUnbookRequest.from_json("")
     # allocation_event_unbook_request = AllocationEventUnbookRequest.from_dict({})
     allocation_event_unbook_request = AllocationEventUnbookRequest()
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version's own effective date. Defaults to the current LUSID system datetime if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -1411,7 +1411,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
  **allocation_event_unbook_request** | [**AllocationEventUnbookRequest**](AllocationEventUnbookRequest.md)| The reason the booking is being taken back. | 
- **effective_at** | **str**| The effective datetime or cut label from which the unbooking applies. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Allocation Event to unbook. The unbooking is recorded on the version in force at that time, from that version&#39;s own effective date. Defaults to the current LUSID system datetime if not specified. | [optional] 
 
 ### Return type
 

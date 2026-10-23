@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **partner_role** | **str** | The role of the register line. Available values: GPRegister, LPInvestment. | 
 **commitment_currency** | **str** | The currency of the partner&#39;s commitment. | 
 **balances** | [**FundPartnerBalances**](FundPartnerBalances.md) |  | 
-**share_of_commitments** | **float** | The partner&#39;s committed capital as a decimal fraction of the fund&#39;s total commitments. | 
+**share_of_commitments** | **float** | The partner&#39;s committed capital as a decimal fraction of the fund&#39;s total commitments in the same commitment currency. | 
 **admitted_on** | **datetime** | The date the partner was admitted, being the date of their first commitment. | [optional] 
 **totals** | [**FundPartnersTotals**](FundPartnersTotals.md) |  | 
 ## Example

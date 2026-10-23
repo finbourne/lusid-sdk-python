@@ -25,11 +25,11 @@ from datetime import datetime
 
 class FundPartnersTotals(BaseModel):
     """
-    Totals across every register line of the fund, independent of paging.  # noqa: E501
+    Totals across every register line of the fund, independent of paging. Commitments are totalled per commitment  currency; amounts in different currencies are never added together.  # noqa: E501
     """
-    committed: Union[StrictFloat, StrictInt] = Field(description="The total committed capital across all partners.")
+    committed_by_currency: Dict[str, Union[StrictFloat, StrictInt]] = Field(description="The total committed capital across all partners, per commitment currency, keyed by currency code. Commitments in different currencies are not added together.", alias="committedByCurrency")
     partner_count: StrictInt = Field(description="The number of partners (register lines) in the fund.", alias="partnerCount")
-    __properties = ["committed", "partnerCount"]
+    __properties = ["committedByCurrency", "partnerCount"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,7 +75,7 @@ class FundPartnersTotals(BaseModel):
             return FundPartnersTotals.parse_obj(obj)
 
         _obj = FundPartnersTotals.parse_obj({
-            "committed": obj.get("committed"),
+            "committed_by_currency": obj.get("committedByCurrency"),
             "partner_count": obj.get("partnerCount")
         })
         return _obj
