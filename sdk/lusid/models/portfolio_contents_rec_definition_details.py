@@ -36,7 +36,7 @@ class PortfolioContentsRecDefinitionDetails(BaseModel):
     valuation_recipes: Optional[RecDefRecipeIds] = Field(default=None, alias="valuationRecipes")
     currencies: Optional[RecDefCurrencies] = None
     rulesets: List[RecDefRuleset] = Field(description="The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once.")
-    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, and so which shape of details it carries. PortfolioContents and External are supported; LusidEntity is not yet. Available values: PortfolioContents, LusidEntity, External.") 
+    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, and so which shape of details it carries. Available values: PortfolioContents, LusidEntity, External.") 
     __properties = ["leftPortfolioSources", "rightPortfolioSources", "valuationRecipes", "currencies", "rulesets", "definitionType"]
 
     class Config:

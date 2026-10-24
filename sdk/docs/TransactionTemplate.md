@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **description** | **str** | The description of the transaction template. | 
 **scope** | **str** | The scope in which the transaction template resides. | 
 **component_transactions** | [**List[ComponentTransaction]**](ComponentTransaction.md) | A set of component transactions that relate to the template to be created. | 
+**warnings** | [**List[Warning]**](Warning.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -23,8 +24,9 @@ instrument_event_type: StrictStr = "example_instrument_event_type"
 description: StrictStr = "example_description"
 scope: StrictStr = "example_scope"
 component_transactions: List[ComponentTransaction] = # Replace with your value
+warnings: Optional[List[Warning]] = None
 links: Optional[List[Link]] = None
-transaction_template_instance = TransactionTemplate(instrument_type=instrument_type, instrument_event_type=instrument_event_type, description=description, scope=scope, component_transactions=component_transactions, links=links)
+transaction_template_instance = TransactionTemplate(instrument_type=instrument_type, instrument_event_type=instrument_event_type, description=description, scope=scope, component_transactions=component_transactions, warnings=warnings, links=links)
 
 ```
 

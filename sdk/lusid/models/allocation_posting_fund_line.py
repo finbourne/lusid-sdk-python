@@ -30,13 +30,14 @@ class AllocationPostingFundLine(BaseModel):
     """
     id:  Optional[StrictStr] = Field(None,alias="id", description="The deterministic identifier of the posting: the booking reference, investor record, commitment line, component and side.") 
     portfolio: Optional[ResourceId] = None
-    transaction_type:  Optional[StrictStr] = Field(None,alias="transactionType", description="The transaction type written on the fund side, for instance PA.ContributionCalled.") 
+    transaction_type:  Optional[StrictStr] = Field(None,alias="transactionType", description="The transaction type the booking writes on the fund side, for instance PECall: the type the fund's configuration maps the partnership transaction type to.") 
+    partnership_transaction_type:  Optional[StrictStr] = Field(None,alias="partnershipTransactionType", description="The partnership transaction type the fund-side posting is classified as, for instance PA.ContributionCalled.") 
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount posted, in the event currency.")
     component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the event the posting carries.") 
     investor_record_id:  Optional[StrictStr] = Field(None,alias="investorRecordId", description="The investor record the posting is for.") 
     via_vehicle:  Optional[StrictStr] = Field(None,alias="viaVehicle", description="The vehicle the investor's share reached the fund through, when it did not come direct.") 
     admission_vehicle:  Optional[StrictStr] = Field(None,alias="admissionVehicle", description="The vehicle the investor was admitted to.") 
-    __properties = ["id", "portfolio", "transactionType", "amount", "component", "investorRecordId", "viaVehicle", "admissionVehicle"]
+    __properties = ["id", "portfolio", "transactionType", "partnershipTransactionType", "amount", "component", "investorRecordId", "viaVehicle", "admissionVehicle"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +84,11 @@ class AllocationPostingFundLine(BaseModel):
         if self.transaction_type is None and "transaction_type" in self.__fields_set__:
             _dict['transactionType'] = None
 
+        # set to None if partnership_transaction_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.partnership_transaction_type is None and "partnership_transaction_type" in self.__fields_set__:
+            _dict['partnershipTransactionType'] = None
+
         # set to None if component (nullable) is None
         # and __fields_set__ contains the field
         if self.component is None and "component" in self.__fields_set__:
@@ -118,6 +124,7 @@ class AllocationPostingFundLine(BaseModel):
             "id": obj.get("id"),
             "portfolio": ResourceId.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None,
             "transaction_type": obj.get("transactionType"),
+            "partnership_transaction_type": obj.get("partnershipTransactionType"),
             "amount": obj.get("amount"),
             "component": obj.get("component"),
             "investor_record_id": obj.get("investorRecordId"),

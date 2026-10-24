@@ -26,6 +26,8 @@ rec_definition_details_instance = RecDefinitionDetails(external_rec_definition_d
 See all compatible oneOf types with RecDefinitionDetails
 
 
+ * [LusidEntityRecDefinitionDetails](./LusidEntityRecDefinitionDetails.md)
+
  * [PortfolioContentsRecDefinitionDetails](./PortfolioContentsRecDefinitionDetails.md)
 
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Fee properties. These will be from the &#39;Fee&#39; domain. | [optional] 
+**bucket_set_seeds** | [**List[BucketSetSeed]**](BucketSetSeed.md) | The bucket set seeds set on this variant of the Valuation Point. Null when it has none. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -39,8 +40,9 @@ nav: Union[StrictFloat, StrictInt] = # Replace with your value
 holdings_as_at_override: Optional[datetime] = # Replace with your value
 valuations_as_at_override: Optional[datetime] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+bucket_set_seeds: Optional[List[BucketSetSeed]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, links=links)
+valuation_point_overview_instance = ValuationPointOverview(href=href, diary_entry_code=diary_entry_code, diary_entry_variant=diary_entry_variant, effective_from=effective_from, effective_to=effective_to, query_as_at=query_as_at, type=type, status=status, gav=gav, nav=nav, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, properties=properties, bucket_set_seeds=bucket_set_seeds, links=links)
 
 ```
 

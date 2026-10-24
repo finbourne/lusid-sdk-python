@@ -36,13 +36,14 @@ class FundPartner(BaseModel):
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUSID instrument identifier of the register line's capital-interest instrument.") 
     portfolio_id: ResourceId = Field(alias="portfolioId")
     is_vehicle: StrictBool = Field(description="Whether the partner is a vehicle (for example a feeder or parallel fund) rather than an end investor.", alias="isVehicle")
-    partner_role:  StrictStr = Field(...,alias="partnerRole", description="The role of the register line. Available values: GPRegister, LPInvestment.") 
+    partner_role:  StrictStr = Field(...,alias="partnerRole", description="The role the partner plays in the partnership. Available values: LimitedPartner (the default), GeneralPartner, GPAffiliate, Employee, CarryVehicle.") 
+    register_role:  StrictStr = Field(...,alias="registerRole", description="The role of the register line. Available values: GPRegister, LPInvestment (the default).") 
     commitment_currency:  StrictStr = Field(...,alias="commitmentCurrency", description="The currency of the partner's commitment.") 
     balances: FundPartnerBalances
     share_of_commitments: Union[StrictFloat, StrictInt] = Field(description="The partner's committed capital as a decimal fraction of the fund's total commitments in the same commitment currency.", alias="shareOfCommitments")
     admitted_on: Optional[datetime] = Field(default=None, description="The date the partner was admitted, being the date of their first commitment.", alias="admittedOn")
     totals: FundPartnersTotals
-    __properties = ["investorRecordId", "displayName", "commitmentLineId", "lusidInstrumentId", "portfolioId", "isVehicle", "partnerRole", "commitmentCurrency", "balances", "shareOfCommitments", "admittedOn", "totals"]
+    __properties = ["investorRecordId", "displayName", "commitmentLineId", "lusidInstrumentId", "portfolioId", "isVehicle", "partnerRole", "registerRole", "commitmentCurrency", "balances", "shareOfCommitments", "admittedOn", "totals"]
 
     class Config:
         """Pydantic configuration"""
@@ -114,6 +115,7 @@ class FundPartner(BaseModel):
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "is_vehicle": obj.get("isVehicle"),
             "partner_role": obj.get("partnerRole"),
+            "register_role": obj.get("registerRole"),
             "commitment_currency": obj.get("commitmentCurrency"),
             "balances": FundPartnerBalances.from_dict(obj.get("balances")) if obj.get("balances") is not None else None,
             "share_of_commitments": obj.get("shareOfCommitments"),

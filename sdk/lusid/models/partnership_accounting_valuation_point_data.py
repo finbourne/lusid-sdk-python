@@ -27,7 +27,7 @@ class PartnershipAccountingValuationPointData(BaseModel):
     """
     The partnership accounting view of a valuation point: what is left on the income summary to allocate to the  partners, and the configuration pack the allocation books under.  # noqa: E501
     """
-    unallocated_income_summary: Union[StrictFloat, StrictInt] = Field(description="The balance on the income summary account over the valuation point's period that has not yet been allocated to the partners. Must be zero before the valuation point can be finalised.", alias="unallocatedIncomeSummary")
+    unallocated_income_summary: Union[StrictFloat, StrictInt] = Field(description="The profit and loss of the valuation point's period that has not yet been allocated to the partners: what the period's income, gain and expense lines would pool, less what the partner allocation has posted for the period. Must be zero before the valuation point can be finalised.", alias="unallocatedIncomeSummary")
     config_pack_scope:  StrictStr = Field(...,alias="configPackScope", description="The scope of the configuration pack.") 
     config_pack_code:  StrictStr = Field(...,alias="configPackCode", description="The code of the configuration pack.") 
     __properties = ["unallocatedIncomeSummary", "configPackScope", "configPackCode"]

@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.component_transaction import ComponentTransaction
 from lusid.models.link import Link
+from lusid.models.warning import Warning
 
 class TransactionTemplate(BaseModel):
     """
@@ -34,8 +35,9 @@ class TransactionTemplate(BaseModel):
     description:  StrictStr = Field(...,alias="description", description="The description of the transaction template.") 
     scope:  StrictStr = Field(...,alias="scope", description="The scope in which the transaction template resides.") 
     component_transactions: List[ComponentTransaction] = Field(description="A set of component transactions that relate to the template to be created.", alias="componentTransactions")
+    warnings: Optional[List[Warning]] = None
     links: Optional[List[Link]] = None
-    __properties = ["instrumentType", "instrumentEventType", "description", "scope", "componentTransactions", "links"]
+    __properties = ["instrumentType", "instrumentEventType", "description", "scope", "componentTransactions", "warnings", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +78,13 @@ class TransactionTemplate(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['componentTransactions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -83,6 +92,11 @@ class TransactionTemplate(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -105,6 +119,7 @@ class TransactionTemplate(BaseModel):
             "description": obj.get("description"),
             "scope": obj.get("scope"),
             "component_transactions": [ComponentTransaction.from_dict(_item) for _item in obj.get("componentTransactions")] if obj.get("componentTransactions") is not None else None,
+            "warnings": [Warning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

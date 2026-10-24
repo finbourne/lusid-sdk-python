@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **holdings_as_at_override** | **datetime** | The optional AsAt Override to use for building holdings in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **valuations_as_at_override** | **datetime** | The optional AsAt Override to use for performing valuations in the Valuation Point. Defaults to QueryAsAt. | [optional] 
 **update_inclusion_date_nav_adjustments** | **bool** | Defaults to false. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] 
+**bucket_set_seeds** | [**List[BucketSetSeedRequest]**](BucketSetSeedRequest.md) | Defaults to null. The closing balances to seed for bucket sets at this estimate valuation point, at most one per bucket set. While the valuation point is an estimate, each seeded bucket set&#39;s flow bucket values are its seed; finalising the valuation point stores them, and the next valuation point opens from them. A bucket set can only be seeded when the previous final valuation point has no values for it. The seed is trusted input: it is not reconciled to the share class NAVs. | [optional] 
 ## Example
 
 ```python
@@ -35,7 +36,8 @@ holdings_as_at_override: Optional[datetime] = # Replace with your value
 valuations_as_at_override: Optional[datetime] = # Replace with your value
 update_inclusion_date_nav_adjustments: Optional[StrictBool] = # Replace with your value
 update_inclusion_date_nav_adjustments:Optional[StrictBool] = None
-create_valuation_point_request_instance = CreateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments)
+bucket_set_seeds: Optional[List[BucketSetSeedRequest]] = # Replace with your value
+create_valuation_point_request_instance = CreateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, effective_at=effective_at, query_as_at=query_as_at, properties=properties, apply_clear_down=apply_clear_down, holdings_as_at_override=holdings_as_at_override, valuations_as_at_override=valuations_as_at_override, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments, bucket_set_seeds=bucket_set_seeds)
 
 ```
 

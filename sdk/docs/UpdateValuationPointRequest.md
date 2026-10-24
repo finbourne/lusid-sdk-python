@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **apply_clear_down** | **bool** | Defaults to null. Set to true if you want the closed period to have the clear down applied. | [optional] 
 **update_inclusion_date_nav_adjustments** | **bool** | Defaults to null. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities. | [optional] 
 **pricing_methodology_override** | [**PricingMethodologyOverrideRequest**](PricingMethodologyOverrideRequest.md) |  | [optional] 
+**bucket_set_seeds** | [**List[BucketSetSeedRequest]**](BucketSetSeedRequest.md) | Defaults to null. The closing balances to seed for bucket sets at this estimate valuation point, at most one per bucket set. They replace the seeds this variant of the valuation point had, and none removes them. Null leaves them as they are. While the valuation point is an estimate, each seeded bucket set&#39;s flow bucket values are its seed; finalising the valuation point stores them, and the next valuation point opens from them. A bucket set can only be seeded when the previous final valuation point has no values for it. The seed is trusted input: it is not reconciled to the share class NAVs. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ apply_clear_down:Optional[StrictBool] = None
 update_inclusion_date_nav_adjustments: Optional[StrictBool] = # Replace with your value
 update_inclusion_date_nav_adjustments:Optional[StrictBool] = None
 pricing_methodology_override: Optional[PricingMethodologyOverrideRequest] = # Replace with your value
-update_valuation_point_request_instance = UpdateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, properties=properties, apply_clear_down=apply_clear_down, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments, pricing_methodology_override=pricing_methodology_override)
+bucket_set_seeds: Optional[List[BucketSetSeedRequest]] = # Replace with your value
+update_valuation_point_request_instance = UpdateValuationPointRequest(valuation_point_code=valuation_point_code, variant=variant, name=name, properties=properties, apply_clear_down=apply_clear_down, update_inclusion_date_nav_adjustments=update_inclusion_date_nav_adjustments, pricing_methodology_override=pricing_methodology_override, bucket_set_seeds=bucket_set_seeds)
 
 ```
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **matching_ruleset_id** | [**ResourceId**](ResourceId.md) |  | 
 **left_filter** | **str** | Optional filter over the left dataset&#39;s rows, in the dataset&#39;s own grammar, e.g. \&quot;Values[custodian] eq &#39;something&#39;\&quot;. | [optional] 
 **right_filter** | **str** | Optional filter over the right dataset&#39;s rows, in the dataset&#39;s own grammar. | [optional] 
-**definition_type** | **str** | What this definition reconciles, and so which shape of details it carries. PortfolioContents and External are supported; LusidEntity is not yet. Available values: PortfolioContents, LusidEntity, External. | 
+**definition_type** | **str** | What this definition reconciles, and so which shape of details it carries. Available values: PortfolioContents, LusidEntity, External. | 
 ## Example
 
 ```python

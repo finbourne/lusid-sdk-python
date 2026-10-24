@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The deterministic identifier of the posting: the booking reference, investor record, commitment line, component and side. | [optional] 
 **portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**transaction_type** | **str** | The transaction type written on the fund side, for instance PA.ContributionCalled. | [optional] 
+**transaction_type** | **str** | The transaction type the booking writes on the fund side, for instance PECall: the type the fund&#39;s configuration maps the partnership transaction type to. | [optional] 
+**partnership_transaction_type** | **str** | The partnership transaction type the fund-side posting is classified as, for instance PA.ContributionCalled. | [optional] 
 **amount** | **float** | The amount posted, in the event currency. | [optional] 
 **component** | **str** | The component of the event the posting carries. | [optional] 
 **investor_record_id** | **str** | The investor record the posting is for. | [optional] 
@@ -24,12 +25,13 @@ from datetime import datetime
 id: Optional[StrictStr] = "example_id"
 portfolio: Optional[ResourceId] = None
 transaction_type: Optional[StrictStr] = "example_transaction_type"
+partnership_transaction_type: Optional[StrictStr] = "example_partnership_transaction_type"
 amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 component: Optional[StrictStr] = "example_component"
 investor_record_id: Optional[StrictStr] = "example_investor_record_id"
 via_vehicle: Optional[StrictStr] = "example_via_vehicle"
 admission_vehicle: Optional[StrictStr] = "example_admission_vehicle"
-allocation_posting_fund_line_instance = AllocationPostingFundLine(id=id, portfolio=portfolio, transaction_type=transaction_type, amount=amount, component=component, investor_record_id=investor_record_id, via_vehicle=via_vehicle, admission_vehicle=admission_vehicle)
+allocation_posting_fund_line_instance = AllocationPostingFundLine(id=id, portfolio=portfolio, transaction_type=transaction_type, partnership_transaction_type=partnership_transaction_type, amount=amount, component=component, investor_record_id=investor_record_id, via_vehicle=via_vehicle, admission_vehicle=admission_vehicle)
 
 ```
 

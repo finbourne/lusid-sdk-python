@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **series** | [**SeriesConfiguration**](SeriesConfiguration.md) |  | [optional] 
 **effective_capabilities** | **Dict[str, Optional[str]]** | Derived on the way out; ignored on the way in. | [optional] 
 **presentation** | [**PresentationConfiguration**](PresentationConfiguration.md) |  | [optional] 
+**allocation_bases** | [**List[AllocationBasisRule]**](AllocationBasisRule.md) |  | [optional] 
 ## Example
 
 ```python
@@ -31,7 +32,8 @@ capability_overrides: Optional[List[CapabilityOverride]] = # Replace with your v
 series: Optional[SeriesConfiguration] = None
 effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 presentation: Optional[PresentationConfiguration] = None
-partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities, presentation=presentation)
+allocation_bases: Optional[List[AllocationBasisRule]] = # Replace with your value
+partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities, presentation=presentation, allocation_bases=allocation_bases)
 
 ```
 

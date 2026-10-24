@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.bucket_set_seed_request import BucketSetSeedRequest
 from lusid.models.model_property import ModelProperty
 from lusid.models.pricing_methodology_override_request import PricingMethodologyOverrideRequest
 
@@ -36,7 +37,8 @@ class UpdateValuationPointRequest(BaseModel):
     apply_clear_down: Optional[StrictBool] = Field(default=None, description="Defaults to null. Set to true if you want the closed period to have the clear down applied.", alias="applyClearDown")
     update_inclusion_date_nav_adjustments: Optional[StrictBool] = Field(default=None, description="Defaults to null. Set to true if you have the required licence and want the InclusionDate property values to be used to determine whether items should be automatically included in the post close activities.", alias="updateInclusionDateNavAdjustments")
     pricing_methodology_override: Optional[PricingMethodologyOverrideRequest] = Field(default=None, alias="pricingMethodologyOverride")
-    __properties = ["valuationPointCode", "variant", "name", "properties", "applyClearDown", "updateInclusionDateNavAdjustments", "pricingMethodologyOverride"]
+    bucket_set_seeds: Optional[List[BucketSetSeedRequest]] = Field(default=None, description="Defaults to null. The closing balances to seed for bucket sets at this estimate valuation point, at most one per bucket set. They replace the seeds this variant of the valuation point had, and none removes them. Null leaves them as they are. While the valuation point is an estimate, each seeded bucket set's flow bucket values are its seed; finalising the valuation point stores them, and the next valuation point opens from them. A bucket set can only be seeded when the previous final valuation point has no values for it. The seed is trusted input: it is not reconciled to the share class NAVs.", alias="bucketSetSeeds")
+    __properties = ["valuationPointCode", "variant", "name", "properties", "applyClearDown", "updateInclusionDateNavAdjustments", "pricingMethodologyOverride", "bucketSetSeeds"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +82,13 @@ class UpdateValuationPointRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of pricing_methodology_override
         if self.pricing_methodology_override:
             _dict['pricingMethodologyOverride'] = self.pricing_methodology_override.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in bucket_set_seeds (list)
+        _items = []
+        if self.bucket_set_seeds:
+            for _item in self.bucket_set_seeds:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['bucketSetSeeds'] = _items
         # set to None if variant (nullable) is None
         # and __fields_set__ contains the field
         if self.variant is None and "variant" in self.__fields_set__:
@@ -105,6 +114,11 @@ class UpdateValuationPointRequest(BaseModel):
         if self.update_inclusion_date_nav_adjustments is None and "update_inclusion_date_nav_adjustments" in self.__fields_set__:
             _dict['updateInclusionDateNavAdjustments'] = None
 
+        # set to None if bucket_set_seeds (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bucket_set_seeds is None and "bucket_set_seeds" in self.__fields_set__:
+            _dict['bucketSetSeeds'] = None
+
         return _dict
 
     @classmethod
@@ -128,7 +142,8 @@ class UpdateValuationPointRequest(BaseModel):
             else None,
             "apply_clear_down": obj.get("applyClearDown"),
             "update_inclusion_date_nav_adjustments": obj.get("updateInclusionDateNavAdjustments"),
-            "pricing_methodology_override": PricingMethodologyOverrideRequest.from_dict(obj.get("pricingMethodologyOverride")) if obj.get("pricingMethodologyOverride") is not None else None
+            "pricing_methodology_override": PricingMethodologyOverrideRequest.from_dict(obj.get("pricingMethodologyOverride")) if obj.get("pricingMethodologyOverride") is not None else None,
+            "bucket_set_seeds": [BucketSetSeedRequest.from_dict(_item) for _item in obj.get("bucketSetSeeds")] if obj.get("bucketSetSeeds") is not None else None
         })
         return _obj
 

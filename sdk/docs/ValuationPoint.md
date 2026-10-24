@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Valuation Point properties. These are from the &#39;DiaryEntry&#39; domain. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
+**bucket_set_seeds** | [**List[BucketSetSeed]**](BucketSetSeed.md) | The bucket set seeds set on this variant of the Valuation Point. Null when it has none. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -42,8 +43,9 @@ previous: Optional[PreviousValuationPoint] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 version: Optional[Version] = None
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
+bucket_set_seeds: Optional[List[BucketSetSeed]] = # Replace with your value
 links: Optional[List[Link]] = None
-valuation_point_instance = ValuationPoint(href=href, valuation_point_code=valuation_point_code, variant=variant, name=name, status=status, apply_clear_down=apply_clear_down, effective_at=effective_at, query_as_at=query_as_at, holdings_as_at=holdings_as_at, valuation_as_at=valuation_as_at, previous=previous, properties=properties, version=version, staged_modifications=staged_modifications, links=links)
+valuation_point_instance = ValuationPoint(href=href, valuation_point_code=valuation_point_code, variant=variant, name=name, status=status, apply_clear_down=apply_clear_down, effective_at=effective_at, query_as_at=query_as_at, holdings_as_at=holdings_as_at, valuation_as_at=valuation_as_at, previous=previous, properties=properties, version=version, staged_modifications=staged_modifications, bucket_set_seeds=bucket_set_seeds, links=links)
 
 ```
 

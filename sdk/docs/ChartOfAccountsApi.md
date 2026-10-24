@@ -2140,7 +2140,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_posting_module_rules**
-> PagedResourceListOfPostingModuleRuleResponse list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
+> PagedResourceListOfPostingModuleRuleResponse list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter, effective_at=effective_at)
 
 [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
 
@@ -2195,16 +2195,17 @@ def main():
     code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
     posting_module_code = 'posting_module_code_example' # str | The code of the posting module.
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. (optional)
-    page = 'page_example' # str | The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter, opts=opts)
+        # api_response =  api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter, effective_at=effective_at, opts=opts)
 
         # [EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules
-        api_response = api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter)
+        api_response = api_instance.list_posting_module_rules(scope, code, posting_module_code, as_at=as_at, page=page, limit=limit, filter=filter, effective_at=effective_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -2221,9 +2222,10 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. | 
  **posting_module_code** | **str**| The code of the posting module. | 
  **as_at** | **datetime**| The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified. | [optional] 
- **page** | **str**| The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the rule id, specify \&quot;ruleId eq &#39;rule 1&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified. | [optional] 
 
 ### Return type
 

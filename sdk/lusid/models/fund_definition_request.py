@@ -54,11 +54,12 @@ class FundDefinitionRequest(BaseModel):
     additional_nav_types: Optional[List[NavTypeDefinition]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create instruments for the Fund's share classes, series, or partner classes upon creation. Defaults to false.", alias="createInstrument")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead.") 
     share_classes: Optional[List[ShareClassDefinition]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
     pricing_methodology: Optional[PricingMethodology] = Field(default=None, alias="pricingMethodology")
     reporting_prices: Optional[List[ReportingPrice]] = Field(default=None, description="Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.", alias="reportingPrices")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
-    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "shareClasses", "pricingMethodology", "reportingPrices", "whtParameters"]
+    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "shareClasses", "pricingMethodology", "reportingPrices", "whtParameters"]
 
     class Config:
         """Pydantic configuration"""
@@ -196,6 +197,11 @@ class FundDefinitionRequest(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
+            _dict['instrumentScope'] = None
+
         # set to None if share_classes (nullable) is None
         # and __fields_set__ contains the field
         if self.share_classes is None and "share_classes" in self.__fields_set__:
@@ -241,6 +247,7 @@ class FundDefinitionRequest(BaseModel):
             if obj.get("properties") is not None
             else None,
             "create_instrument": obj.get("createInstrument"),
+            "instrument_scope": obj.get("instrumentScope"),
             "share_classes": [ShareClassDefinition.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None,
             "pricing_methodology": PricingMethodology.from_dict(obj.get("pricingMethodology")) if obj.get("pricingMethodology") is not None else None,
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.allocation_basis_rule import AllocationBasisRule
 from lusid.models.capability_override import CapabilityOverride
 from lusid.models.presentation_configuration import PresentationConfiguration
 from lusid.models.resource_id import ResourceId
@@ -40,7 +41,8 @@ class PartnershipAccountingConfiguration(BaseModel):
     series: Optional[SeriesConfiguration] = None
     effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Derived on the way out; ignored on the way in.", alias="effectiveCapabilities")
     presentation: Optional[PresentationConfiguration] = None
-    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities", "presentation"]
+    allocation_bases: Optional[List[AllocationBasisRule]] = Field(default=None, alias="allocationBases")
+    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities", "presentation", "allocationBases"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +95,13 @@ class PartnershipAccountingConfiguration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of presentation
         if self.presentation:
             _dict['presentation'] = self.presentation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in allocation_bases (list)
+        _items = []
+        if self.allocation_bases:
+            for _item in self.allocation_bases:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['allocationBases'] = _items
         # set to None if commitment_currency_policy (nullable) is None
         # and __fields_set__ contains the field
         if self.commitment_currency_policy is None and "commitment_currency_policy" in self.__fields_set__:
@@ -112,6 +121,11 @@ class PartnershipAccountingConfiguration(BaseModel):
         # and __fields_set__ contains the field
         if self.effective_capabilities is None and "effective_capabilities" in self.__fields_set__:
             _dict['effectiveCapabilities'] = None
+
+        # set to None if allocation_bases (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_bases is None and "allocation_bases" in self.__fields_set__:
+            _dict['allocationBases'] = None
 
         return _dict
 
@@ -133,7 +147,8 @@ class PartnershipAccountingConfiguration(BaseModel):
             "capability_overrides": [CapabilityOverride.from_dict(_item) for _item in obj.get("capabilityOverrides")] if obj.get("capabilityOverrides") is not None else None,
             "series": SeriesConfiguration.from_dict(obj.get("series")) if obj.get("series") is not None else None,
             "effective_capabilities": obj.get("effectiveCapabilities"),
-            "presentation": PresentationConfiguration.from_dict(obj.get("presentation")) if obj.get("presentation") is not None else None
+            "presentation": PresentationConfiguration.from_dict(obj.get("presentation")) if obj.get("presentation") is not None else None,
+            "allocation_bases": [AllocationBasisRule.from_dict(_item) for _item in obj.get("allocationBases")] if obj.get("allocationBases") is not None else None
         })
         return _obj
 

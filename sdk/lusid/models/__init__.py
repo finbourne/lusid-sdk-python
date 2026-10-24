@@ -76,6 +76,7 @@ from lusid.models.aggregation_query import AggregationQuery
 from lusid.models.aggregation_type import AggregationType
 from lusid.models.alias import Alias
 from lusid.models.allocation import Allocation
+from lusid.models.allocation_basis_rule import AllocationBasisRule
 from lusid.models.allocation_event import AllocationEvent
 from lusid.models.allocation_event_basis_diagnostics import AllocationEventBasisDiagnostics
 from lusid.models.allocation_event_basis_warning import AllocationEventBasisWarning
@@ -224,10 +225,16 @@ from lusid.models.bucket import Bucket
 from lusid.models.bucket_border_configuration import BucketBorderConfiguration
 from lusid.models.bucket_definition import BucketDefinition
 from lusid.models.bucket_membership import BucketMembership
+from lusid.models.bucket_seed_value import BucketSeedValue
+from lusid.models.bucket_seed_value_request import BucketSeedValueRequest
+from lusid.models.bucket_set_class_seed import BucketSetClassSeed
+from lusid.models.bucket_set_class_seed_request import BucketSetClassSeedRequest
 from lusid.models.bucket_set_definition import BucketSetDefinition
 from lusid.models.bucket_set_node import BucketSetNode
 from lusid.models.bucket_set_result import BucketSetResult
 from lusid.models.bucket_set_result_bucket import BucketSetResultBucket
+from lusid.models.bucket_set_seed import BucketSetSeed
+from lusid.models.bucket_set_seed_request import BucketSetSeedRequest
 from lusid.models.bucket_set_share_class_details import BucketSetShareClassDetails
 from lusid.models.bucketed_cash_flow_request import BucketedCashFlowRequest
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
@@ -914,6 +921,7 @@ from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
 from lusid.models.lusid_entity_dataset import LusidEntityDataset
+from lusid.models.lusid_entity_rec_definition_details import LusidEntityRecDefinitionDetails
 from lusid.models.lusid_entity_result import LusidEntityResult
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.lusid_problem_details import LusidProblemDetails
@@ -2075,6 +2083,7 @@ __all__ = [
     "AggregationType",
     "Alias",
     "Allocation",
+    "AllocationBasisRule",
     "AllocationEvent",
     "AllocationEventBasisDiagnostics",
     "AllocationEventBasisWarning",
@@ -2223,10 +2232,16 @@ __all__ = [
     "BucketBorderConfiguration",
     "BucketDefinition",
     "BucketMembership",
+    "BucketSeedValue",
+    "BucketSeedValueRequest",
+    "BucketSetClassSeed",
+    "BucketSetClassSeedRequest",
     "BucketSetDefinition",
     "BucketSetNode",
     "BucketSetResult",
     "BucketSetResultBucket",
+    "BucketSetSeed",
+    "BucketSetSeedRequest",
     "BucketSetShareClassDetails",
     "BucketedCashFlowRequest",
     "BucketedCashFlowResponse",
@@ -2913,6 +2928,7 @@ __all__ = [
     "LoanPrincipalRepaymentEvent",
     "LockPeriodDiaryEntryRequest",
     "LusidEntityDataset",
+    "LusidEntityRecDefinitionDetails",
     "LusidEntityResult",
     "LusidInstrument",
     "LusidProblemDetails",

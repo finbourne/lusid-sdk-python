@@ -31,7 +31,7 @@ class ExternalRecDefinitionDetails(BaseModel):
     matching_ruleset_id: ResourceId = Field(alias="matchingRulesetId")
     left_filter:  Optional[StrictStr] = Field(None,alias="leftFilter", description="Optional filter over the left dataset's rows, in the dataset's own grammar, e.g. \"Values[custodian] eq 'something'\".") 
     right_filter:  Optional[StrictStr] = Field(None,alias="rightFilter", description="Optional filter over the right dataset's rows, in the dataset's own grammar.") 
-    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, and so which shape of details it carries. PortfolioContents and External are supported; LusidEntity is not yet. Available values: PortfolioContents, LusidEntity, External.") 
+    definition_type:  StrictStr = Field(...,alias="definitionType", description="What this definition reconciles, and so which shape of details it carries. Available values: PortfolioContents, LusidEntity, External.") 
     __properties = ["matchingRulesetId", "leftFilter", "rightFilter", "definitionType"]
 
     class Config:

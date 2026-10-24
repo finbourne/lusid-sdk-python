@@ -33,7 +33,8 @@ class BucketSetResult(BaseModel):
     nodes: List[BucketSetNode] = Field(description="The nodes making up the bucket set: the fund aggregate and one per share class.")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the bucket set, as configured on the fund configuration.") 
     is_backfilled: Optional[StrictBool] = Field(default=None, description="Set to True if this bucket set was backfilled from fund inception at this valuation point, because the previous valuation point has no results for it. Its values then hold the whole history, and its previous cumulative values are zero. False otherwise.", alias="isBackfilled")
-    __properties = ["bucketSetCode", "isApportionment", "nodes", "displayName", "isBackfilled"]
+    is_seeded: Optional[StrictBool] = Field(default=None, description="Set to True if this bucket set's flow bucket values at this valuation point are the seed set on this variant of the valuation point rather than its journal entry lines. The next valuation point opens from them. False otherwise.", alias="isSeeded")
+    __properties = ["bucketSetCode", "isApportionment", "nodes", "displayName", "isBackfilled", "isSeeded"]
 
     class Config:
         """Pydantic configuration"""
@@ -95,7 +96,8 @@ class BucketSetResult(BaseModel):
             "is_apportionment": obj.get("isApportionment"),
             "nodes": [BucketSetNode.from_dict(_item) for _item in obj.get("nodes")] if obj.get("nodes") is not None else None,
             "display_name": obj.get("displayName"),
-            "is_backfilled": obj.get("isBackfilled")
+            "is_backfilled": obj.get("isBackfilled"),
+            "is_seeded": obj.get("isSeeded")
         })
         return _obj
 

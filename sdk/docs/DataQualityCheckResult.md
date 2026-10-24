@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **lusid_entity** | [**LusidEntityResult**](LusidEntityResult.md) |  | [optional] 
 **count_rule_breaches** | **int** | The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit) | [optional] 
 **error_detail** | **str** | Error details (for RulesetInvalid, RuleInvalid) | [optional] 
-**result_id** | **str** | Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType. | [optional] 
+**result_id** | **str** | Unique, stable identifier for this result, scoped to the check definition, result type, ruleset, rule and  breaching entity. Treat as opaque — composition varies by entityType. | [optional] 
 **portfolio_holding** | [**PortfolioHoldingResult**](PortfolioHoldingResult.md) |  | [optional] 
 **portfolio_transaction** | [**PortfolioTransactionResult**](PortfolioTransactionResult.md) |  | [optional] 
 **structured_result_data** | [**StructuredResultDataResult**](StructuredResultDataResult.md) |  | [optional] 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **valuation_recipes** | [**RecDefRecipeIds**](RecDefRecipeIds.md) |  | [optional] 
 **currencies** | [**RecDefCurrencies**](RecDefCurrencies.md) |  | [optional] 
 **rulesets** | [**List[RecDefRuleset]**](RecDefRuleset.md) | The types of reconciliation included in the group, each naming the matching ruleset that drives it. At least one entry is required, and each rec type may appear at most once. | 
-**definition_type** | **str** | What this definition reconciles, and so which shape of details it carries. PortfolioContents and External are supported; LusidEntity is not yet. Available values: PortfolioContents, LusidEntity, External. | 
+**definition_type** | **str** | What this definition reconciles, and so which shape of details it carries. Available values: PortfolioContents, LusidEntity, External. | 
 ## Example
 
 ```python

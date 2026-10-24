@@ -61,6 +61,7 @@ class Fund(BaseModel):
     additional_nav_types: Optional[List[NavType]] = Field(default=None, description="The definitions for any additional NAVs on the Fund.", alias="additionalNavTypes")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
     create_instrument: Optional[StrictBool] = Field(default=None, description="Whether to create instruments for the Fund's share classes, series, or partner classes upon creation. Defaults to false.", alias="createInstrument")
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instruments are created when CreateInstrument is true. Defaults to the default instrument scope. Legacy share class instruments are resolved in ShareClassInstrumentScopes instead.") 
     allocation_groups: Optional[List[AllocationGroup]] = Field(default=None, description="An optional list of Allocation Group definitions for the Fund.", alias="allocationGroups")
     share_classes: Optional[List[ShareClass]] = Field(default=None, description="An optional list of Share Class definitions for the Fund.", alias="shareClasses")
     fund_instrument: Optional[FundInstrument] = Field(default=None, alias="fundInstrument")
@@ -69,7 +70,7 @@ class Fund(BaseModel):
     version: Optional[Version] = None
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -246,6 +247,11 @@ class Fund(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
+            _dict['instrumentScope'] = None
+
         # set to None if allocation_groups (nullable) is None
         # and __fields_set__ contains the field
         if self.allocation_groups is None and "allocation_groups" in self.__fields_set__:
@@ -303,6 +309,7 @@ class Fund(BaseModel):
             if obj.get("properties") is not None
             else None,
             "create_instrument": obj.get("createInstrument"),
+            "instrument_scope": obj.get("instrumentScope"),
             "allocation_groups": [AllocationGroup.from_dict(_item) for _item in obj.get("allocationGroups")] if obj.get("allocationGroups") is not None else None,
             "share_classes": [ShareClass.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None,
             "fund_instrument": FundInstrument.from_dict(obj.get("fundInstrument")) if obj.get("fundInstrument") is not None else None,

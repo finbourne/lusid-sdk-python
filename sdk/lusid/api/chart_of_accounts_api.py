@@ -3936,22 +3936,22 @@ class ChartOfAccountsApi:
 
 
     @overload
-    async def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> PagedResourceListOfPostingModuleRuleResponse:  # noqa: E501
+    async def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.")] = None, **kwargs) -> PagedResourceListOfPostingModuleRuleResponse:  # noqa: E501
         ...
 
     @overload
-    def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfPostingModuleRuleResponse:  # noqa: E501
+    def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfPostingModuleRuleResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfPostingModuleRuleResponse, Awaitable[PagedResourceListOfPostingModuleRuleResponse]]:  # noqa: E501
+    def list_posting_module_rules(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfPostingModuleRuleResponse, Awaitable[PagedResourceListOfPostingModuleRuleResponse]]:  # noqa: E501
         """[EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
 
         List the Rules in a Posting Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_posting_module_rules(scope, code, posting_module_code, as_at, page, limit, filter, async_req=True)
+        >>> thread = api.list_posting_module_rules(scope, code, posting_module_code, as_at, page, limit, filter, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -3962,12 +3962,14 @@ class ChartOfAccountsApi:
         :type posting_module_code: str
         :param as_at: The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
         :param filter: Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param effective_at: The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -3984,17 +3986,17 @@ class ChartOfAccountsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_posting_module_rules_with_http_info(scope, code, posting_module_code, as_at, page, limit, filter, **kwargs)  # noqa: E501
+        return self.list_posting_module_rules_with_http_info(scope, code, posting_module_code, as_at, page, limit, filter, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_posting_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_posting_module_rules_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Chart of Accounts.")], code : Annotated[StrictStr, Field(..., description="The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.")], posting_module_code : Annotated[StrictStr, Field(..., description="The code of the posting module.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] ListPostingModuleRules: List Posting Module Rules  # noqa: E501
 
         List the Rules in a Posting Module  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_posting_module_rules_with_http_info(scope, code, posting_module_code, as_at, page, limit, filter, async_req=True)
+        >>> thread = api.list_posting_module_rules_with_http_info(scope, code, posting_module_code, as_at, page, limit, filter, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Chart of Accounts. (required)
@@ -4005,12 +4007,14 @@ class ChartOfAccountsApi:
         :type posting_module_code: str
         :param as_at: The asAt datetime at which to retrieve the instrument. Defaults to              returning the latest version if not specified.
         :type as_at: datetime
-        :param page: The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter              and asAt fields must not have changed since the original request.
+        :param page: The pagination token to use to continue listing posting module rules; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.
         :type page: str
         :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
         :type limit: int
         :param filter: Expression to filter the results.              For example, to filter on the rule id, specify \"ruleId eq 'rule 1'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param effective_at: The effective datetime or cut label at which to list the rules. If specified, only              the rules whose effective window contains this date are returned. Defaults to returning all rules if not specified.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -4044,7 +4048,8 @@ class ChartOfAccountsApi:
             'as_at',
             'page',
             'limit',
-            'filter'
+            'filter',
+            'effective_at'
         ]
         _all_params.extend(
             [
@@ -4099,6 +4104,9 @@ class ChartOfAccountsApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

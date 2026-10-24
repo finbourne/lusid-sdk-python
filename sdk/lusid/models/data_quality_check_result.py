@@ -46,7 +46,7 @@ class DataQualityCheckResult(BaseModel):
     lusid_entity: Optional[LusidEntityResult] = Field(default=None, alias="lusidEntity")
     count_rule_breaches: Optional[StrictInt] = Field(default=None, description="The count of rule breaches (1 for RuleBreached, multiple for RuleBreachesOverLimit)", alias="countRuleBreaches")
     error_detail:  Optional[StrictStr] = Field(None,alias="errorDetail", description="Error details (for RulesetInvalid, RuleInvalid)") 
-    result_id:  Optional[StrictStr] = Field(None,alias="resultId", description="Unique, stable identifier for this result, scoped to the check definition, ruleset, rule and breaching  entity. Treat as opaque — composition varies by entityType.") 
+    result_id:  Optional[StrictStr] = Field(None,alias="resultId", description="Unique, stable identifier for this result, scoped to the check definition, result type, ruleset, rule and  breaching entity. Treat as opaque — composition varies by entityType.") 
     portfolio_holding: Optional[PortfolioHoldingResult] = Field(default=None, alias="portfolioHolding")
     portfolio_transaction: Optional[PortfolioTransactionResult] = Field(default=None, alias="portfolioTransaction")
     structured_result_data: Optional[StructuredResultDataResult] = Field(default=None, alias="structuredResultData")
