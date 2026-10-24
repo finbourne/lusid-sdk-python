@@ -50,9 +50,12 @@ class CapitalInterestTransferEvent(InstrumentEvent):
     non_recallable_capital_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The non-recallable capital received by the destination line. Used on the 'In' side only; must not be negative.", alias="nonRecallableCapitalAmount")
     funded_capital_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The funded capital received by the destination line, for a line whose drawdowns were booked against the stored funded balance rather than paid-in capital. Used on the 'In' side only; must not be negative.", alias="fundedCapitalAmount")
     excess_capital_returned_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cumulative excess capital returned that the destination line takes over from the source line. Used on the 'In' side only; must not be negative.", alias="excessCapitalReturnedAmount")
+    paid_in_capital_portfolio_ccy_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The paid-in capital the destination line takes over, already in the portfolio's base currency: the source line's PaidInCapitalPortfolioCcy balance share, accumulated at historical rates, not a spot conversion of PaidInCapitalAmount. Used on the 'In' side only; must not be negative.", alias="paidInCapitalPortfolioCcyAmount")
+    returned_capital_portfolio_ccy_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The returned capital the destination line takes over, already in the portfolio's base currency at the source line's historical rates. Used on the 'In' side only; must not be negative.", alias="returnedCapitalPortfolioCcyAmount")
+    excess_capital_returned_portfolio_ccy_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cumulative excess capital returned that the destination line takes over, already in the portfolio's base currency at the source line's historical rates. Used on the 'In' side only; must not be negative.", alias="excessCapitalReturnedPortfolioCcyAmount")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "date", "direction", "fraction", "fromLineId", "toLineId", "mode", "toPortfolioId", "considerationAmount", "considerationCurrency", "considerationRecordOnly", "reason", "scope", "dealId", "taxTreatmentAcknowledged", "committedCapitalAmount", "calledCommitmentAmount", "paidInCapitalAmount", "returnedCapitalAmount", "recallableCapitalAmount", "nonRecallableCapitalAmount", "fundedCapitalAmount", "excessCapitalReturnedAmount"]
+    __properties = ["instrumentEventType", "date", "direction", "fraction", "fromLineId", "toLineId", "mode", "toPortfolioId", "considerationAmount", "considerationCurrency", "considerationRecordOnly", "reason", "scope", "dealId", "taxTreatmentAcknowledged", "committedCapitalAmount", "calledCommitmentAmount", "paidInCapitalAmount", "returnedCapitalAmount", "recallableCapitalAmount", "nonRecallableCapitalAmount", "fundedCapitalAmount", "excessCapitalReturnedAmount", "paidInCapitalPortfolioCcyAmount", "returnedCapitalPortfolioCcyAmount", "excessCapitalReturnedPortfolioCcyAmount"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -195,6 +198,21 @@ class CapitalInterestTransferEvent(InstrumentEvent):
         if self.excess_capital_returned_amount is None and "excess_capital_returned_amount" in self.__fields_set__:
             _dict['excessCapitalReturnedAmount'] = None
 
+        # set to None if paid_in_capital_portfolio_ccy_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.paid_in_capital_portfolio_ccy_amount is None and "paid_in_capital_portfolio_ccy_amount" in self.__fields_set__:
+            _dict['paidInCapitalPortfolioCcyAmount'] = None
+
+        # set to None if returned_capital_portfolio_ccy_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.returned_capital_portfolio_ccy_amount is None and "returned_capital_portfolio_ccy_amount" in self.__fields_set__:
+            _dict['returnedCapitalPortfolioCcyAmount'] = None
+
+        # set to None if excess_capital_returned_portfolio_ccy_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.excess_capital_returned_portfolio_ccy_amount is None and "excess_capital_returned_portfolio_ccy_amount" in self.__fields_set__:
+            _dict['excessCapitalReturnedPortfolioCcyAmount'] = None
+
         return _dict
 
     @classmethod
@@ -229,7 +247,10 @@ class CapitalInterestTransferEvent(InstrumentEvent):
             "recallable_capital_amount": obj.get("recallableCapitalAmount"),
             "non_recallable_capital_amount": obj.get("nonRecallableCapitalAmount"),
             "funded_capital_amount": obj.get("fundedCapitalAmount"),
-            "excess_capital_returned_amount": obj.get("excessCapitalReturnedAmount")
+            "excess_capital_returned_amount": obj.get("excessCapitalReturnedAmount"),
+            "paid_in_capital_portfolio_ccy_amount": obj.get("paidInCapitalPortfolioCcyAmount"),
+            "returned_capital_portfolio_ccy_amount": obj.get("returnedCapitalPortfolioCcyAmount"),
+            "excess_capital_returned_portfolio_ccy_amount": obj.get("excessCapitalReturnedPortfolioCcyAmount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

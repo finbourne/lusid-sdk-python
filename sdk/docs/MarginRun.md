@@ -5,7 +5,7 @@ A margin run: the valuation of the collateral agreements for a business date, pl
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The URI of this margin run. | [optional] 
-**id** | **str** | The identifier of the run: the effective date and the asAt it was valued at. Filterable. | 
+**id** | **str** | The identifier of the run: the effective date and the asAt it was valued at, with a suffix naming the scenario for a stress run. Filterable. | 
 **effective_at** | **datetime** | The business date the run values collateral agreements for. Filterable. | 
 **as_at** | **datetime** | The asAt datetime the run reads agreements, portfolios and market data at. Filterable. | 
 **status** | **str** | The status of the run. One of Pending, Running, Completed or CompletedWithIssues. Filterable. | 
@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **failed_shards** | **int** | The number of shards that failed to value. | 
 **issues** | [**List[MarginRunIssue]**](MarginRunIssue.md) | Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason. | 
 **shards** | [**List[MarginRunShard]**](MarginRunShard.md) | The valuation shards the run is planned as, with their progress. | 
+**scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -44,7 +45,8 @@ failed_shards: StrictInt = # Replace with your value
 failed_shards: StrictInt = 42
 issues: List[MarginRunIssue] = # Replace with your value
 shards: List[MarginRunShard] = # Replace with your value
-margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards)
+scenario: Optional[ResourceId] = None
+margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards, scenario=scenario)
 
 ```
 

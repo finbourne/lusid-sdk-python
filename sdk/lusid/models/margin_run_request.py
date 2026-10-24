@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 
 class MarginRunRequest(BaseModel):
     """
@@ -30,7 +31,8 @@ class MarginRunRequest(BaseModel):
     effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The business date, datetime or cut label to value the agreements at.") 
     as_at: Optional[datetime] = Field(default=None, description="The asAt datetime to read agreements, portfolios and market data at. Defaults to the current LUSID system datetime if not specified.", alias="asAt")
     agreement_filter:  Optional[StrictStr] = Field(None,alias="agreementFilter", description="An expression selecting the collateral agreements to run, in the same syntax as listing collateral agreements. Every agreement the caller may calculate margin for is run if not specified.") 
-    __properties = ["effectiveAt", "asAt", "agreementFilter"]
+    scenario: Optional[ResourceId] = None
+    __properties = ["effectiveAt", "asAt", "agreementFilter", "scenario"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,9 @@ class MarginRunRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of scenario
+        if self.scenario:
+            _dict['scenario'] = self.scenario.to_dict()
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -88,7 +93,8 @@ class MarginRunRequest(BaseModel):
         _obj = MarginRunRequest.parse_obj({
             "effective_at": obj.get("effectiveAt"),
             "as_at": obj.get("asAt"),
-            "agreement_filter": obj.get("agreementFilter")
+            "agreement_filter": obj.get("agreementFilter"),
+            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
         })
         return _obj
 
