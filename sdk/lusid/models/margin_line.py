@@ -41,7 +41,9 @@ class MarginLine(BaseModel):
     pv: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The present value of the holding in the agreement's base currency, when it contributes to exposure.")
     variation_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's contribution to variation margin, when it contributes to exposure.", alias="variationMargin")
     collateral_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's value as collateral after haircuts, when it is held as collateral.", alias="collateralValue")
-    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue"]
+    initial_margin_item:  Optional[StrictStr] = Field(None,alias="initialMarginItem", description="The initial-margin item the line falls under, when the holding matched one. Filterable.") 
+    initial_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's share of its netting set's initial margin, before the threshold, when it contributes to it.", alias="initialMargin")
+    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue", "initialMarginItem", "initialMargin"]
 
     class Config:
         """Pydantic configuration"""
@@ -116,6 +118,16 @@ class MarginLine(BaseModel):
         if self.collateral_value is None and "collateral_value" in self.__fields_set__:
             _dict['collateralValue'] = None
 
+        # set to None if initial_margin_item (nullable) is None
+        # and __fields_set__ contains the field
+        if self.initial_margin_item is None and "initial_margin_item" in self.__fields_set__:
+            _dict['initialMarginItem'] = None
+
+        # set to None if initial_margin (nullable) is None
+        # and __fields_set__ contains the field
+        if self.initial_margin is None and "initial_margin" in self.__fields_set__:
+            _dict['initialMargin'] = None
+
         return _dict
 
     @classmethod
@@ -140,7 +152,9 @@ class MarginLine(BaseModel):
             "units": obj.get("units"),
             "pv": obj.get("pv"),
             "variation_margin": obj.get("variationMargin"),
-            "collateral_value": obj.get("collateralValue")
+            "collateral_value": obj.get("collateralValue"),
+            "initial_margin_item": obj.get("initialMarginItem"),
+            "initial_margin": obj.get("initialMargin")
         })
         return _obj
 

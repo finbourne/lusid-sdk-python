@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
 
-Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  otherwise it is deleted from the current LUSID system datetime. Only an Allocation Event that has not been  booked can be deleted.
+Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
 
 ### Example
 
@@ -277,7 +277,7 @@ def main():
     api_instance = api_client_factory.build(AllocationEventsApi)
     scope = 'scope_example' # str | The scope of the Allocation Event.
     code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
-    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. (optional)
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **scope** | **str**| The scope of the Allocation Event. | 
  **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
- **effective_at** | **str**| The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time; any other is deleted from the current LUSID system datetime. | [optional] 
+ **effective_at** | **str**| The effective datetime or cut label from which to delete the Allocation Event. If not specified, an Allocation Event created without an effective datetime is removed from the beginning of time, dated versions upserted since included; any other is deleted from the current LUSID system datetime. | [optional] 
 
 ### Return type
 

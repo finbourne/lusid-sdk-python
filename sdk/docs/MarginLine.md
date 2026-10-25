@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **pv** | **float** | The present value of the holding in the agreement&#39;s base currency, when it contributes to exposure. | [optional] 
 **variation_margin** | **float** | The holding&#39;s contribution to variation margin, when it contributes to exposure. | [optional] 
 **collateral_value** | **float** | The holding&#39;s value as collateral after haircuts, when it is held as collateral. | [optional] 
+**initial_margin_item** | **str** | The initial-margin item the line falls under, when the holding matched one. Filterable. | [optional] 
+**initial_margin** | **float** | The holding&#39;s share of its netting set&#39;s initial margin, before the threshold, when it contributes to it. | [optional] 
 ## Example
 
 ```python
@@ -39,7 +41,9 @@ units: Union[StrictFloat, StrictInt] = # Replace with your value
 pv: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 variation_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value)
+initial_margin_item: Optional[StrictStr] = "example_initial_margin_item"
+initial_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin)
 
 ```
 
