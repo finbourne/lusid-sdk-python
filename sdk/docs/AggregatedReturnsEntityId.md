@@ -1,12 +1,12 @@
 # AggregatedReturnsEntityId
 
-Identifies an entity whose aggregated (time-weighted) returns are calculated: its scope, code and  type. Mirrors the valuation endpoint's entity identifier. Currently, supports only the  `Portfolio` entity type.
+Identifies an entity whose aggregated (time-weighted) returns are calculated: its scope, code and  type. Mirrors the valuation endpoint's entity identifier. Supports the `Portfolio` and  `PortfolioGroup` entity types.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **scope** | **str** |  | 
 **code** | **str** |  | 
-**entity_type** | **str** | Available values: Portfolio. | 
+**entity_type** | **str** | Available values: Portfolio, PortfolioGroup. | 
 ## Example
 
 ```python

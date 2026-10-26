@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **property_key** | **str** | The property the formula populates. Must be an existing, single-valued property in the RecResult domain, and may appear only once. | 
 **formula** | **str** | The formula gives the value of the property. The value must be of the property&#39;s type. A formula cannot populate an Int property, because its numbers are decimal. A null value means that the property has no value. The formula can read resultType, resultCardinality, resultLifecycle, exception.status, exception.closureType, exception.asAtClosed, exception.asAtClosureInvalidated, review.status, review.decision and review.decisionGroup.groupNumber. It reads rules by name as CoreRules[name] and AggregateRules[name]. Each rule has .leftValue, .rightValue and .appliedTolerance.toleranceType. A numeric aggregate rule also has .difference. You can compare CoreRules[name] with no side by eq, in or startswith. The comparison is true if either side matches. With neq, not in or not startswith, it is true if no side matches. Ordering comparisons must name the side. Comparisons ignore case and accents. | 
-**overwrite_manual_edits_on_re_run** | **bool** | Whether a value edited since the property was last populated is replaced. Defaults to false, so manual edits are kept. | [optional] 
+**overwrite_manual_edits_on_re_run** | **bool** | Whether a run replaces a value that a user has set or removed on the property. After a run replaces it, later runs populate it again, even if this flag is then false. Defaults to false. | [optional] 
 ## Example
 
 ```python

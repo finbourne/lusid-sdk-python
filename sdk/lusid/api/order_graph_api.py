@@ -53,22 +53,22 @@ class OrderGraphApi:
 
 
     @overload
-    async def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, **kwargs) -> PagedResourceListOfOrderGraphBlock:  # noqa: E501
+    async def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, include_swept : Annotated[Optional[StrictBool], Field(description="Include Swept Order Blocks. (default: true)")] = None, **kwargs) -> PagedResourceListOfOrderGraphBlock:  # noqa: E501
         ...
 
     @overload
-    def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrderGraphBlock:  # noqa: E501
+    def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, include_swept : Annotated[Optional[StrictBool], Field(description="Include Swept Order Blocks. (default: true)")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfOrderGraphBlock:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrderGraphBlock, Awaitable[PagedResourceListOfOrderGraphBlock]]:  # noqa: E501
+    def list_order_graph_blocks(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, include_swept : Annotated[Optional[StrictBool], Field(description="Include Swept Order Blocks. (default: true)")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfOrderGraphBlock, Awaitable[PagedResourceListOfOrderGraphBlock]]:  # noqa: E501
         """ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities.  # noqa: E501
 
         Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_order_graph_blocks(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, async_req=True)
+        >>> thread = api.list_order_graph_blocks(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, include_swept, async_req=True)
         >>> result = thread.get()
 
         :param as_at: See https://support.lusid.com/docs/what-is-the-asat-timestamp
@@ -85,6 +85,8 @@ class OrderGraphApi:
         :type property_keys: List[str]
         :param use_compliance_v2: Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)
         :type use_compliance_v2: bool
+        :param include_swept: Include Swept Order Blocks. (default: true)
+        :type include_swept: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -101,17 +103,17 @@ class OrderGraphApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_order_graph_blocks_with_http_info(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, **kwargs)  # noqa: E501
+        return self.list_order_graph_blocks_with_http_info(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, include_swept, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_order_graph_blocks_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_order_graph_blocks_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="See https://support.lusid.com/docs/what-is-the-asat-timestamp")] = None, pagination_token : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, limit : Annotated[Optional[StrictInt], Field(description="See https://support.lusid.com/docs/paging-and-limiting-an-api-request")] = None, filter : Annotated[Optional[StrictStr], Field( description="See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="Must be block-level properties. See https://support.lusid.com/docs/properties")] = None, use_compliance_v2 : Annotated[Optional[StrictBool], Field(description="Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)")] = None, include_swept : Annotated[Optional[StrictBool], Field(description="Include Swept Order Blocks. (default: true)")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListOrderGraphBlocks: Lists blocks that pass the filter provided, and builds a summary picture of the state of their associated order entities.  # noqa: E501
 
         Lists all blocks of orders, subject to the filter, along with the IDs of orders, placements, allocations and  executions in the block, the total quantities of each, and a simple text field describing the overall state.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_order_graph_blocks_with_http_info(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, async_req=True)
+        >>> thread = api.list_order_graph_blocks_with_http_info(as_at, pagination_token, sort_by, limit, filter, property_keys, use_compliance_v2, include_swept, async_req=True)
         >>> result = thread.get()
 
         :param as_at: See https://support.lusid.com/docs/what-is-the-asat-timestamp
@@ -128,6 +130,8 @@ class OrderGraphApi:
         :type property_keys: List[str]
         :param use_compliance_v2: Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false)
         :type use_compliance_v2: bool
+        :param include_swept: Include Swept Order Blocks. (default: true)
+        :type include_swept: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -161,7 +165,8 @@ class OrderGraphApi:
             'limit',
             'filter',
             'property_keys',
-            'use_compliance_v2'
+            'use_compliance_v2',
+            'include_swept'
         ]
         _all_params.extend(
             [
@@ -218,6 +223,9 @@ class OrderGraphApi:
 
         if _params.get('use_compliance_v2') is not None:  # noqa: E501
             _query_params.append(('useComplianceV2', _params['use_compliance_v2']))
+
+        if _params.get('include_swept') is not None:  # noqa: E501
+            _query_params.append(('includeSwept', _params['include_swept']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

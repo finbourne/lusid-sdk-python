@@ -28,7 +28,7 @@ from lusid.models.returns_metric import ReturnsMetric
 
 class AggregatedReturnsEntityRequest(BaseModel):
     """
-    The request body for the aggregated-returns endpoint: the entity to report returns for, the returns id  under which upserted returns are stored and the Returns entity that configures a calculation, the  effective window, the metrics to report and the period grid granularity. Supports a single  `Portfolio` entity, the period `Return` metric and a `Daily` grid.  # noqa: E501
+    The request body for the aggregated-returns endpoint: the entity to report returns for, the returns id  under which upserted returns are stored and the Returns entity that configures a calculation, the  effective window, the metrics to report and the period grid granularity. Supports a `Portfolio` or a  `PortfolioGroup` entity, the period `Return` metric and a `Daily` grid.  # noqa: E501
     """
     entity: AggregatedReturnsEntityId
     returns_id: ResourceId = Field(alias="returnsId")
