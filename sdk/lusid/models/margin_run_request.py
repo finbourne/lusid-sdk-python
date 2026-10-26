@@ -28,11 +28,12 @@ class MarginRunRequest(BaseModel):
     """
     A request to value collateral agreements for a business date and publish their margin calls.  # noqa: E501
     """
-    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The business date, datetime or cut label to value the agreements at.") 
+    effective_at:  StrictStr = Field(...,alias="effectiveAt", description="The business date, datetime or cut label to value the agreements at. With an effectiveFrom, the last date of the span.") 
     as_at: Optional[datetime] = Field(default=None, description="The asAt datetime to read agreements, portfolios and market data at. Defaults to the current LUSID system datetime if not specified.", alias="asAt")
     agreement_filter:  Optional[StrictStr] = Field(None,alias="agreementFilter", description="An expression selecting the collateral agreements to run, in the same syntax as listing collateral agreements. Every agreement the caller may calculate margin for is run if not specified.") 
-    scenario: Optional[ResourceId] = None
-    __properties = ["effectiveAt", "asAt", "agreementFilter", "scenario"]
+    scenarios: Optional[List[ResourceId]] = Field(default=None, description="The stored scenarios to value the agreements under, each as a what-if beside the base market, which the run always values. A scenario's calls are served beside the base calls only when asked for, and cannot be accepted, disputed or matched to a counterparty demand. At most 20. Only the base market is valued if not specified.")
+    effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="The first business date, datetime or cut label of a span ending at effectiveAt. Each weekday from it to effectiveAt is valued as a run of its own, all at the same asAt, and a date after the asAt is a projection valued on the market as at the asAt that cannot be accepted, disputed or matched to a counterparty demand. At most 130 weekdays. Only effectiveAt is valued if not specified.") 
+    __properties = ["effectiveAt", "asAt", "agreementFilter", "scenarios", "effectiveFrom"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,9 +67,13 @@ class MarginRunRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of scenario
-        if self.scenario:
-            _dict['scenario'] = self.scenario.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in scenarios (list)
+        _items = []
+        if self.scenarios:
+            for _item in self.scenarios:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['scenarios'] = _items
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -78,6 +83,16 @@ class MarginRunRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.agreement_filter is None and "agreement_filter" in self.__fields_set__:
             _dict['agreementFilter'] = None
+
+        # set to None if scenarios (nullable) is None
+        # and __fields_set__ contains the field
+        if self.scenarios is None and "scenarios" in self.__fields_set__:
+            _dict['scenarios'] = None
+
+        # set to None if effective_from (nullable) is None
+        # and __fields_set__ contains the field
+        if self.effective_from is None and "effective_from" in self.__fields_set__:
+            _dict['effectiveFrom'] = None
 
         return _dict
 
@@ -94,7 +109,8 @@ class MarginRunRequest(BaseModel):
             "effective_at": obj.get("effectiveAt"),
             "as_at": obj.get("asAt"),
             "agreement_filter": obj.get("agreementFilter"),
-            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
+            "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None,
+            "effective_from": obj.get("effectiveFrom")
         })
         return _obj
 

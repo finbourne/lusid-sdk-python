@@ -38,6 +38,7 @@ class ComplexBond(LusidInstrument):
     original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price the complex bond was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.", alias="originalIssuePrice")
     par_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional value used to scale accrued interest and coupon amounts only (not CleanPV), in addition to  currentNotional and units. If you do not set this field, the value is 1 and no amount changes.  A model that calculates the price from the cash flows, for example Discounting, includes the scaled coupons   in the PV and thus in the CleanPV. The CleanPV exclusion applies to a quoted price.", alias="parPerUnit")
     issue_date: Optional[datetime] = Field(default=None, description="The date the bond was issued to the market. This may be after the StartDate (dated date) from which interest accrues, for example for agency mortgage-backed securities. The payment schedule is unchanged, but no coupon entitlement (ex-dividend) date can fall before this date: a buyer settling on the issue date is entitled to the first coupon, and accrued interest includes completed-but-unpaid coupons until their entitlement passes.", alias="issueDate")
+    underlying: Optional[LusidInstrument] = None
     rounding_conventions: Optional[List[RoundingConvention]] = Field(default=None, description="Rounding conventions for analytics, if any.", alias="roundingConventions")
     asset_backed: Optional[StrictBool] = Field(default=None, description="If this flag is set to true, then the outstanding notional and principal repayments will be calculated based  on pool factors in the quote store. Usually AssetBacked bonds also require a RollConvention setting of   within the FlowConventions any given rates schedule (to ensure payment dates always happen on the same day  of the month) and US Agency MBSs with Pay Delay features also require their rates schedules to include an  ExDividendConfiguration to drive the lag between interest accrual and payment.", alias="assetBacked")
     asset_pool_identifier:  Optional[StrictStr] = Field(None,alias="assetPoolIdentifier", description="Identifier used to retrieve pool factor information about this bond from the quote store. This is typically  the bond's ISIN, but can also be ClientInternal. Please ensure you align the MarketDataKeyRule with the  correct Quote (Quote.ClientInternal.* or Quote.Isin.*)") 
@@ -45,7 +46,7 @@ class ComplexBond(LusidInstrument):
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "originalIssuePrice", "parPerUnit", "issueDate", "roundingConventions", "assetBacked", "assetPoolIdentifier", "tradingConventions", "timeZoneConventions"]
+    __properties = ["instrumentType", "identifiers", "calculationType", "schedules", "originalIssuePrice", "parPerUnit", "issueDate", "underlying", "roundingConventions", "assetBacked", "assetPoolIdentifier", "tradingConventions", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -105,6 +106,9 @@ class ComplexBond(LusidInstrument):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['schedules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of underlying
+        if self.underlying:
+            _dict['underlying'] = self.underlying.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in rounding_conventions (list)
         _items = []
         if self.rounding_conventions:
@@ -187,6 +191,7 @@ class ComplexBond(LusidInstrument):
             "original_issue_price": obj.get("originalIssuePrice"),
             "par_per_unit": obj.get("parPerUnit"),
             "issue_date": obj.get("issueDate"),
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
             "rounding_conventions": [RoundingConvention.from_dict(_item) for _item in obj.get("roundingConventions")] if obj.get("roundingConventions") is not None else None,
             "asset_backed": obj.get("assetBacked"),
             "asset_pool_identifier": obj.get("assetPoolIdentifier"),

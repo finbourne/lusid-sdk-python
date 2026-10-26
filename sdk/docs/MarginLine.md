@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **collateral_value** | **float** | The holding&#39;s value as collateral after haircuts, when it is held as collateral. | [optional] 
 **initial_margin_item** | **str** | The initial-margin item the line falls under, when the holding matched one. Filterable. | [optional] 
 **initial_margin** | **float** | The holding&#39;s share of its netting set&#39;s initial margin, before the threshold, when it contributes to it. | [optional] 
+**scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -43,7 +44,8 @@ variation_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your 
 collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 initial_margin_item: Optional[StrictStr] = "example_initial_margin_item"
 initial_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin)
+scenario: Optional[ResourceId] = None
+margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin, scenario=scenario)
 
 ```
 

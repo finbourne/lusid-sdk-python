@@ -60,7 +60,8 @@ class MarginCall(BaseModel):
     supersedes: Optional[MarginCallReference] = None
     carried_from: Optional[MarginCallReference] = Field(default=None, alias="carriedFrom")
     carried_disputed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount left in dispute on the carried call. Informational; not added to this call.", alias="carriedDisputedAmount")
-    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount"]
+    scenario: Optional[ResourceId] = None
+    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount", "scenario"]
 
     class Config:
         """Pydantic configuration"""
@@ -106,6 +107,9 @@ class MarginCall(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of carried_from
         if self.carried_from:
             _dict['carriedFrom'] = self.carried_from.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scenario
+        if self.scenario:
+            _dict['scenario'] = self.scenario.to_dict()
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -222,7 +226,8 @@ class MarginCall(BaseModel):
             "deadline": obj.get("deadline"),
             "supersedes": MarginCallReference.from_dict(obj.get("supersedes")) if obj.get("supersedes") is not None else None,
             "carried_from": MarginCallReference.from_dict(obj.get("carriedFrom")) if obj.get("carriedFrom") is not None else None,
-            "carried_disputed_amount": obj.get("carriedDisputedAmount")
+            "carried_disputed_amount": obj.get("carriedDisputedAmount"),
+            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
         })
         return _obj
 

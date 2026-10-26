@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **failed_shards** | **int** | The number of shards that failed to value. | 
 **issues** | [**List[MarginRunIssue]**](MarginRunIssue.md) | Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason. | 
 **shards** | [**List[MarginRunShard]**](MarginRunShard.md) | The valuation shards the run is planned as, with their progress. | 
-**scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**scenarios** | [**List[ResourceId]**](ResourceId.md) | The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued. | 
 ## Example
 
 ```python
@@ -45,8 +45,8 @@ failed_shards: StrictInt = # Replace with your value
 failed_shards: StrictInt = 42
 issues: List[MarginRunIssue] = # Replace with your value
 shards: List[MarginRunShard] = # Replace with your value
-scenario: Optional[ResourceId] = None
-margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards, scenario=scenario)
+scenarios: List[ResourceId] = # Replace with your value
+margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards, scenarios=scenarios)
 
 ```
 

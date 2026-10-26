@@ -43,8 +43,8 @@ class MarginRun(BaseModel):
     failed_shards: StrictInt = Field(description="The number of shards that failed to value.", alias="failedShards")
     issues: List[MarginRunIssue] = Field(description="Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason.")
     shards: List[MarginRunShard] = Field(description="The valuation shards the run is planned as, with their progress.")
-    scenario: Optional[ResourceId] = None
-    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenario"]
+    scenarios: List[ResourceId] = Field(description="The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued.")
+    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenarios"]
 
     class Config:
         """Pydantic configuration"""
@@ -99,9 +99,13 @@ class MarginRun(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['shards'] = _items
-        # override the default output from pydantic by calling `to_dict()` of scenario
-        if self.scenario:
-            _dict['scenario'] = self.scenario.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in scenarios (list)
+        _items = []
+        if self.scenarios:
+            for _item in self.scenarios:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['scenarios'] = _items
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -132,7 +136,7 @@ class MarginRun(BaseModel):
             "failed_shards": obj.get("failedShards"),
             "issues": [MarginRunIssue.from_dict(_item) for _item in obj.get("issues")] if obj.get("issues") is not None else None,
             "shards": [MarginRunShard.from_dict(_item) for _item in obj.get("shards")] if obj.get("shards") is not None else None,
-            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
+            "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None
         })
         return _obj
 

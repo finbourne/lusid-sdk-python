@@ -43,7 +43,8 @@ class MarginLine(BaseModel):
     collateral_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's value as collateral after haircuts, when it is held as collateral.", alias="collateralValue")
     initial_margin_item:  Optional[StrictStr] = Field(None,alias="initialMarginItem", description="The initial-margin item the line falls under, when the holding matched one. Filterable.") 
     initial_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's share of its netting set's initial margin, before the threshold, when it contributes to it.", alias="initialMargin")
-    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue", "initialMarginItem", "initialMargin"]
+    scenario: Optional[ResourceId] = None
+    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue", "initialMarginItem", "initialMargin", "scenario"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +84,9 @@ class MarginLine(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of scenario
+        if self.scenario:
+            _dict['scenario'] = self.scenario.to_dict()
         # set to None if holding_id (nullable) is None
         # and __fields_set__ contains the field
         if self.holding_id is None and "holding_id" in self.__fields_set__:
@@ -154,7 +158,8 @@ class MarginLine(BaseModel):
             "variation_margin": obj.get("variationMargin"),
             "collateral_value": obj.get("collateralValue"),
             "initial_margin_item": obj.get("initialMarginItem"),
-            "initial_margin": obj.get("initialMargin")
+            "initial_margin": obj.get("initialMargin"),
+            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
         })
         return _obj
 

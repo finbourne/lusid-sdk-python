@@ -34,20 +34,21 @@ class EquitySwap(LusidInstrument):
     """
     start_date: datetime = Field(description="The start date of the EquitySwap.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
-    code:  StrictStr = Field(...,alias="code", description="The code of the underlying.") 
+    code:  Optional[StrictStr] = Field(None,alias="code", description="The code of the underlying.") 
     equity_flow_conventions: FlowConventions = Field(alias="equityFlowConventions")
     funding_leg: InstrumentLeg = Field(alias="fundingLeg")
     include_dividends: StrictBool = Field(description="Dividend inclusion flag, if true dividends are included in the equity leg (total return).", alias="includeDividends")
     initial_price: Union[StrictFloat, StrictInt] = Field(description="The initial equity price of the Equity Swap.", alias="initialPrice")
     notional_reset: StrictBool = Field(description="Notional reset flag, if true the notional of the funding leg is reset at the start of every  coupon to match the value of the equity leg (equity price at start of coupon times quantity).", alias="notionalReset")
     quantity: Union[StrictFloat, StrictInt] = Field(description="The quantity or number of shares in the Equity Swap.")
-    underlying_identifier:  StrictStr = Field(...,alias="underlyingIdentifier", description="External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].") 
+    underlying_identifier:  Optional[StrictStr] = Field(None,alias="underlyingIdentifier", description="External market codes and identifiers for the EquitySwap, e.g. RIC.    Supported string (enumeration) values are: [LusidInstrumentId, Isin, Sedol, Cusip, ClientInternal, Figi, RIC, QuotePermId, REDCode, BBGId, ICECode].") 
+    underlying: Optional[LusidInstrument] = None
     equity_swap_dividend_payment_timing:  Optional[StrictStr] = Field(None,alias="equitySwapDividendPaymentTiming", description="Determines how the payment of dividends is handled for the equity swap.  Defaults to paying at the next Equity coupon date.                Supported string (enumeration) values are: [PayAtNextEquityCouponDate, PayAtMaturityOfSwap, PayAtNextFundingLegCouponDate, PayAtPaymentDateOfDividendEvent].") 
     additional_payments: Optional[List[AdditionalPayment]] = Field(default=None, description="Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.", alias="additionalPayments")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "code", "equityFlowConventions", "fundingLeg", "includeDividends", "initialPrice", "notionalReset", "quantity", "underlyingIdentifier", "equitySwapDividendPaymentTiming", "additionalPayments", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "code", "equityFlowConventions", "fundingLeg", "includeDividends", "initialPrice", "notionalReset", "quantity", "underlyingIdentifier", "underlying", "equitySwapDividendPaymentTiming", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -106,6 +107,9 @@ class EquitySwap(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of funding_leg
         if self.funding_leg:
             _dict['fundingLeg'] = self.funding_leg.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of underlying
+        if self.underlying:
+            _dict['underlying'] = self.underlying.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in additional_payments (list)
         _items = []
         if self.additional_payments:
@@ -120,6 +124,16 @@ class EquitySwap(LusidInstrument):
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
+
+        # set to None if code (nullable) is None
+        # and __fields_set__ contains the field
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
+
+        # set to None if underlying_identifier (nullable) is None
+        # and __fields_set__ contains the field
+        if self.underlying_identifier is None and "underlying_identifier" in self.__fields_set__:
+            _dict['underlyingIdentifier'] = None
 
         # set to None if equity_swap_dividend_payment_timing (nullable) is None
         # and __fields_set__ contains the field
@@ -154,6 +168,7 @@ class EquitySwap(LusidInstrument):
             "notional_reset": obj.get("notionalReset"),
             "quantity": obj.get("quantity"),
             "underlying_identifier": obj.get("underlyingIdentifier"),
+            "underlying": LusidInstrument.from_dict(obj.get("underlying")) if obj.get("underlying") is not None else None,
             "equity_swap_dividend_payment_timing": obj.get("equitySwapDividendPaymentTiming"),
             "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None

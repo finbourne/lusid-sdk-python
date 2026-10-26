@@ -20,7 +20,7 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from pydantic.v1 import Field, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.accept_margin_call_request import AcceptMarginCallRequest
 from lusid.models.batch_accept_margin_calls_request import BatchAcceptMarginCallsRequest
@@ -1194,25 +1194,25 @@ class CollateralApi:
 
 
     @overload
-    async def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> PagedResourceListOfMarginCall:  # noqa: E501
+    async def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.")] = None, effective_from : Annotated[Optional[StrictStr], Field( description="The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.")] = None, **kwargs) -> PagedResourceListOfMarginCall:  # noqa: E501
         ...
 
     @overload
-    def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMarginCall:  # noqa: E501
+    def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.")] = None, effective_from : Annotated[Optional[StrictStr], Field( description="The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMarginCall:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMarginCall, Awaitable[PagedResourceListOfMarginCall]]:  # noqa: E501
+    def list_margin_calls(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.")] = None, effective_from : Annotated[Optional[StrictStr], Field( description="The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMarginCall, Awaitable[PagedResourceListOfMarginCall]]:  # noqa: E501
         """[EXPERIMENTAL] ListMarginCalls: List margin calls.  # noqa: E501
 
-        List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.  # noqa: E501
+        List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_margin_calls(effective_at, run_id, page, limit, filter, async_req=True)
+        >>> thread = api.list_margin_calls(effective_at, run_id, page, limit, filter, scenarios, effective_from, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.
+        :param effective_at: The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.
         :type effective_at: str
         :param run_id: The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.
         :type run_id: str
@@ -1222,6 +1222,10 @@ class CollateralApi:
         :type limit: int
         :param filter: Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param scenarios: The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.
+        :type scenarios: List[str]
+        :param effective_from: The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.
+        :type effective_from: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1238,20 +1242,20 @@ class CollateralApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_margin_calls_with_http_info(effective_at, run_id, page, limit, filter, **kwargs)  # noqa: E501
+        return self.list_margin_calls_with_http_info(effective_at, run_id, page, limit, filter, scenarios, effective_from, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_margin_calls_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_margin_calls_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.")] = None, run_id : Annotated[Optional[StrictStr], Field( description="The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin calls; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.")] = None, effective_from : Annotated[Optional[StrictStr], Field( description="The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListMarginCalls: List margin calls.  # noqa: E501
 
-        List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. Restricted to the agreements the caller may read.  # noqa: E501
+        List the margin calls of one run when a run id is given. Otherwise list the current calls for a business date:  those of the latest run for the date, with an agreement that run could not value served from the most recent run  that did. With an effectiveFrom the current calls of each date from it to effectiveAt are listed, in date order.  Restricted to the agreements the caller may read.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_margin_calls_with_http_info(effective_at, run_id, page, limit, filter, async_req=True)
+        >>> thread = api.list_margin_calls_with_http_info(effective_at, run_id, page, limit, filter, scenarios, effective_from, async_req=True)
         >>> result = thread.get()
 
-        :param effective_at: The business date, datetime or cut label to list the current margin calls for. Defaults to today if not specified. Ignored when a run id is given.
+        :param effective_at: The business date, datetime or cut label to list the current margin calls for, or the last date of the range when effectiveFrom is given. Defaults to today if not specified. Ignored when a run id is given.
         :type effective_at: str
         :param run_id: The identifier of the margin run to list the calls of. Lists the current calls for the business date if not specified.
         :type run_id: str
@@ -1261,6 +1265,10 @@ class CollateralApi:
         :type limit: int
         :param filter: Expression to filter the results. The filterable fields are RunId, AgreementId.Scope, AgreementId.Code, Counterparty.Code, Counterparty.IdTypeScope, Counterparty.IdTypeCode, Item, MarginType, Method, Settlement, Direction, Currency, Required, Held, Call, CounterpartyDemand, Difference, MatchStatus, AgreedAmount, DisputedAmount, DisputeOwner, State and Deadline. For example, to find the breaks, specify \"MatchStatus eq 'Break'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param scenarios: The scenarios, each as scope/code, whose calls are listed beside the base case calls, which are always listed. Lists the base case calls only if not specified.
+        :type scenarios: List[str]
+        :param effective_from: The first business date, datetime or cut label of a range ending at effectiveAt, for a time series of calls. Lists the one business date if not specified. Ignored when a run id is given.
+        :type effective_from: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1292,7 +1300,9 @@ class CollateralApi:
             'run_id',
             'page',
             'limit',
-            'filter'
+            'filter',
+            'scenarios',
+            'effective_from'
         ]
         _all_params.extend(
             [
@@ -1339,6 +1349,13 @@ class CollateralApi:
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
 
+        if _params.get('scenarios') is not None:  # noqa: E501
+            _query_params.append(('scenarios', _params['scenarios']))
+            _collection_formats['scenarios'] = 'multi'
+
+        if _params.get('effective_from') is not None:  # noqa: E501
+            _query_params.append(('effectiveFrom', _params['effective_from']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters
@@ -1378,22 +1395,22 @@ class CollateralApi:
 
 
     @overload
-    async def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> PagedResourceListOfMarginLine:  # noqa: E501
+    async def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.")] = None, **kwargs) -> PagedResourceListOfMarginLine:  # noqa: E501
         ...
 
     @overload
-    def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMarginLine:  # noqa: E501
+    def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMarginLine:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMarginLine, Awaitable[PagedResourceListOfMarginLine]]:  # noqa: E501
+    def list_margin_lines(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMarginLine, Awaitable[PagedResourceListOfMarginLine]]:  # noqa: E501
         """[EXPERIMENTAL] ListMarginLines: List the margin lines of a run.  # noqa: E501
 
         List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_margin_lines(run_id, page, limit, filter, async_req=True)
+        >>> thread = api.list_margin_lines(run_id, page, limit, filter, scenarios, async_req=True)
         >>> result = thread.get()
 
         :param run_id: The identifier of the margin run. (required)
@@ -1404,6 +1421,8 @@ class CollateralApi:
         :type limit: int
         :param filter: Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param scenarios: The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.
+        :type scenarios: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1420,17 +1439,17 @@ class CollateralApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_margin_lines_with_http_info(run_id, page, limit, filter, **kwargs)  # noqa: E501
+        return self.list_margin_lines_with_http_info(run_id, page, limit, filter, scenarios, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_margin_lines_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_margin_lines_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing margin lines; this value is returned from the previous call.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, scenarios : Annotated[Optional[List[StrictStr]], Field(description="The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] ListMarginLines: List the margin lines of a run.  # noqa: E501
 
         List the holding lines behind every margin call of a run, restricted to the agreements the caller may read.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_margin_lines_with_http_info(run_id, page, limit, filter, async_req=True)
+        >>> thread = api.list_margin_lines_with_http_info(run_id, page, limit, filter, scenarios, async_req=True)
         >>> result = thread.get()
 
         :param run_id: The identifier of the margin run. (required)
@@ -1441,6 +1460,8 @@ class CollateralApi:
         :type limit: int
         :param filter: Expression to filter the results. The filterable fields are AgreementId.Scope, AgreementId.Code, Item, PortfolioId.Scope, PortfolioId.Code, HoldingId, CustodianAccountScope, CustodianAccountCode, CustodianAccountName, Units, Pv, VariationMargin and CollateralValue. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
         :type filter: str
+        :param scenarios: The scenarios, each as scope/code, whose lines are listed beside the base case lines, which are always listed. Lists the base case lines only if not specified.
+        :type scenarios: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1471,7 +1492,8 @@ class CollateralApi:
             'run_id',
             'page',
             'limit',
-            'filter'
+            'filter',
+            'scenarios'
         ]
         _all_params.extend(
             [
@@ -1514,6 +1536,10 @@ class CollateralApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('scenarios') is not None:  # noqa: E501
+            _query_params.append(('scenarios', _params['scenarios']))
+            _collection_formats['scenarios'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -2081,25 +2107,25 @@ class CollateralApi:
 
 
     @overload
-    async def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, and optionally the asAt and the agreements to include.")], **kwargs) -> MarginRun:  # noqa: E501
+    async def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case.")], **kwargs) -> PagedResourceListOfMarginRun:  # noqa: E501
         ...
 
     @overload
-    def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, and optionally the asAt and the agreements to include.")], async_req: Optional[bool]=True, **kwargs) -> MarginRun:  # noqa: E501
+    def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case.")], async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfMarginRun:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, and optionally the asAt and the agreements to include.")], async_req: Optional[bool]=None, **kwargs) -> Union[MarginRun, Awaitable[MarginRun]]:  # noqa: E501
+    def run_margin_calculation(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case.")], async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfMarginRun, Awaitable[PagedResourceListOfMarginRun]]:  # noqa: E501
         """[EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.  # noqa: E501
 
-        Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.  # noqa: E501
+        Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.run_margin_calculation(margin_run_request, async_req=True)
         >>> result = thread.get()
 
-        :param margin_run_request: The business date to value, and optionally the asAt and the agreements to include. (required)
+        :param margin_run_request: The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
         :type margin_run_request: MarginRunRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2109,7 +2135,7 @@ class CollateralApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: MarginRun
+        :rtype: PagedResourceListOfMarginRun
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -2120,17 +2146,17 @@ class CollateralApi:
         return self.run_margin_calculation_with_http_info(margin_run_request, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_margin_calculation_with_http_info(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, and optionally the asAt and the agreements to include.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def run_margin_calculation_with_http_info(self, margin_run_request : Annotated[MarginRunRequest, Field(description="The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case.")], **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.  # noqa: E501
 
-        Value the collateral agreements for a business date in the background and publish their margin calls as a run.  The run is returned as planned; poll GetMarginRun for its progress, and list its calls as they are published.  # noqa: E501
+        Value the collateral agreements for a business date, or for each weekday of a span, in the background and publish  their margin calls as a run for each date. The base case is always valued, with each scenario named in the request  valued beside it as a case of the same run. A date after the asAt is a projection on the market as at the asAt.  The runs are returned as planned, in date order; poll GetMarginRun for the progress of each, and list the calls as they are published.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
         >>> thread = api.run_margin_calculation_with_http_info(margin_run_request, async_req=True)
         >>> result = thread.get()
 
-        :param margin_run_request: The business date to value, and optionally the asAt and the agreements to include. (required)
+        :param margin_run_request: The business date to value, or the span of dates ending at it, and optionally the asAt, the agreements to include and the scenarios to value beside the base case. (required)
         :type margin_run_request: MarginRunRequest
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2153,7 +2179,7 @@ class CollateralApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(MarginRun, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(PagedResourceListOfMarginRun, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -2216,7 +2242,7 @@ class CollateralApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '202': "MarginRun",
+            '202': "PagedResourceListOfMarginRun",
             '400': "LusidValidationProblemDetails",
         }
 

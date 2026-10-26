@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **supersedes** | [**MarginCallReference**](MarginCallReference.md) |  | [optional] 
 **carried_from** | [**MarginCallReference**](MarginCallReference.md) |  | [optional] 
 **carried_disputed_amount** | **float** | The amount left in dispute on the carried call. Informational; not added to this call. | [optional] 
+**scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -73,7 +74,8 @@ deadline: Optional[datetime] = # Replace with your value
 supersedes: Optional[MarginCallReference] = None
 carried_from: Optional[MarginCallReference] = # Replace with your value
 carried_disputed_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-margin_call_instance = MarginCall(href=href, id=id, run_id=run_id, agreement_id=agreement_id, counterparty=counterparty, item=item, margin_type=margin_type, method=method, settlement=settlement, direction=direction, currency=currency, required=required, held=held, call=call, match_tolerance=match_tolerance, counterparty_demand=counterparty_demand, difference=difference, match_status=match_status, demand_received_at=demand_received_at, statement_reference=statement_reference, demand_note=demand_note, agreed_amount=agreed_amount, disputed_amount=disputed_amount, dispute_reason=dispute_reason, dispute_owner=dispute_owner, state=state, deadline=deadline, supersedes=supersedes, carried_from=carried_from, carried_disputed_amount=carried_disputed_amount)
+scenario: Optional[ResourceId] = None
+margin_call_instance = MarginCall(href=href, id=id, run_id=run_id, agreement_id=agreement_id, counterparty=counterparty, item=item, margin_type=margin_type, method=method, settlement=settlement, direction=direction, currency=currency, required=required, held=held, call=call, match_tolerance=match_tolerance, counterparty_demand=counterparty_demand, difference=difference, match_status=match_status, demand_received_at=demand_received_at, statement_reference=statement_reference, demand_note=demand_note, agreed_amount=agreed_amount, disputed_amount=disputed_amount, dispute_reason=dispute_reason, dispute_owner=dispute_owner, state=state, deadline=deadline, supersedes=supersedes, carried_from=carried_from, carried_disputed_amount=carried_disputed_amount, scenario=scenario)
 
 ```
 
