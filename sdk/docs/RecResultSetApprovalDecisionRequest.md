@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **approval_code** | **str** | The approval slot being decided. Must match a required approval code. | 
 **decision** | **str** | The decision made. Available values: Approve, RequestRevisions. | 
 **reason** | **str** | Rationale for the decision. | [optional] 
-**requested_result_revisions** | [**List[RecRequestedResultRevision]**](RecRequestedResultRevision.md) | The results flagged for re-review. Only applicable when the decision is Request Revisions. | [optional] 
+**requested_result_revisions** | [**List[RecRequestedResultRevision]**](RecRequestedResultRevision.md) | The results flagged for re-review. Only applicable when the decision is Request Revisions. Each result must be Reviewed. A flagged result returns to Required and keeps its decision. The reviewer must affirm or change that decision before the review can be resubmitted. Clearing the decision does not count. | [optional] 
 ## Example
 
 ```python

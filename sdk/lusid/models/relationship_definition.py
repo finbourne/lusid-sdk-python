@@ -32,8 +32,8 @@ class RelationshipDefinition(BaseModel):
     """
     version: Optional[Version] = None
     relationship_definition_id: ResourceId = Field(alias="relationshipDefinitionId")
-    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction.") 
-    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity, NextBestAction.") 
+    source_entity_type:  StrictStr = Field(...,alias="sourceEntityType", description="The entity type of the source entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity.") 
+    target_entity_type:  StrictStr = Field(...,alias="targetEntityType", description="The entity type of the target entity object. Available values: Portfolio, PortfolioGroup, Person, LegalEntity.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the relationship.") 
     outward_description:  StrictStr = Field(...,alias="outwardDescription", description="The description to relate source entity object and target entity object") 
     inward_description:  StrictStr = Field(...,alias="inwardDescription", description="The description to relate target entity object and source entity object") 

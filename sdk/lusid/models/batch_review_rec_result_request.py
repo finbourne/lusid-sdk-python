@@ -29,18 +29,17 @@ from lusid.models.rec_result_decision_update import RecResultDecisionUpdate
 
 class BatchReviewRecResultRequest(BaseModel):
     """
-    One item of a batch review request: applies review content to its targeted rec result(s). Exactly  one target, except FixAsGroup/ForceMatch which require two or more. A result id identifies a result only  within one run of one rec type of one instance, so every item names the run its targets belong to — which  also makes the same-result-set rule for group decisions structural.  # noqa: E501
+    One item of a batch review request: applies review content to its targeted rec result(s). Exactly  one target, except FixAsGroup/ForceMatch which require two or more. A result id is unique within one  instance. Every item names the rec type of its targets, so a group decision covers results of one rec type  only.  # noqa: E501
     """
     instance_id: RecInstanceId = Field(alias="instanceId")
     rec_type:  StrictStr = Field(...,alias="recType", description="The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.") 
-    run_number: StrictInt = Field(description="The run of the instance whose results this item targets.", alias="runNumber")
     rec_result_ids: List[StrictStr] = Field(description="The rec results targeted by this batch item. Exactly one, except FixAsGroup/ForceMatch which require two or more.", alias="recResultIds")
     decision: Optional[RecResultDecisionUpdate] = None
     assigned_user: Optional[RecResultAssignmentUpdate] = Field(default=None, alias="assignedUser")
     assigned_role: Optional[RecResultAssignmentUpdate] = Field(default=None, alias="assignedRole")
     add_comment_text:  Optional[StrictStr] = Field(None,alias="addCommentText", description="Optional comment text to add to each targeted result.") 
-    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet.")
-    __properties = ["instanceId", "recType", "runNumber", "recResultIds", "decision", "assignedUser", "assignedRole", "addCommentText", "properties"]
+    properties: Optional[List[PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain to set on each result. A property with a null value is deleted and omitted properties are left unchanged.")
+    __properties = ["instanceId", "recType", "recResultIds", "decision", "assignedUser", "assignedRole", "addCommentText", "properties"]
 
     class Config:
         """Pydantic configuration"""
@@ -117,7 +116,6 @@ class BatchReviewRecResultRequest(BaseModel):
         _obj = BatchReviewRecResultRequest.parse_obj({
             "instance_id": RecInstanceId.from_dict(obj.get("instanceId")) if obj.get("instanceId") is not None else None,
             "rec_type": obj.get("recType"),
-            "run_number": obj.get("runNumber"),
             "rec_result_ids": obj.get("recResultIds"),
             "decision": RecResultDecisionUpdate.from_dict(obj.get("decision")) if obj.get("decision") is not None else None,
             "assigned_user": RecResultAssignmentUpdate.from_dict(obj.get("assignedUser")) if obj.get("assignedUser") is not None else None,

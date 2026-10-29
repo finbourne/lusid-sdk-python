@@ -5,9 +5,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_name** | **str** | The reference name of the rule. | 
 **left_formula** | **str** | Derivation formula evaluated against the left side of the reconciliation. | 
-**left_operation** | **str** | Group-level operation applied to the left side&#39;s per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears. | 
+**left_operation** | **str** | Group-level operation applied to the left side&#39;s per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears. | 
 **right_formula** | **str** | Derivation formula evaluated against the right side of the reconciliation. | 
-**right_operation** | **str** | Group-level operation applied to the right side&#39;s per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears. | 
+**right_operation** | **str** | Group-level operation applied to the right side&#39;s per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears. | 
 ## Example
 
 ```python

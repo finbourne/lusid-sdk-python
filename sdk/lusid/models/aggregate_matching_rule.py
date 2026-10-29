@@ -29,9 +29,9 @@ class AggregateMatchingRule(BaseModel):
     """
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule.") 
     left_formula:  StrictStr = Field(...,alias="leftFormula", description="Derivation formula evaluated against the left side of the reconciliation.") 
-    left_operation:  StrictStr = Field(...,alias="leftOperation", description="Group-level operation applied to the left side's per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
+    left_operation:  StrictStr = Field(...,alias="leftOperation", description="Group-level operation applied to the left side's per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
     right_formula:  StrictStr = Field(...,alias="rightFormula", description="Derivation formula evaluated against the right side of the reconciliation.") 
-    right_operation:  StrictStr = Field(...,alias="rightOperation", description="Group-level operation applied to the right side's per-item values during reconciliation, e.g. Sum, Average, Count. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
+    right_operation:  StrictStr = Field(...,alias="rightOperation", description="Group-level operation applied to the right side's per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
     __properties = ["ruleName", "leftFormula", "leftOperation", "rightFormula", "rightOperation"]
 
     class Config:

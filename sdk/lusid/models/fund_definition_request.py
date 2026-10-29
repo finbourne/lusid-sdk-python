@@ -59,7 +59,8 @@ class FundDefinitionRequest(BaseModel):
     pricing_methodology: Optional[PricingMethodology] = Field(default=None, alias="pricingMethodology")
     reporting_prices: Optional[List[ReportingPrice]] = Field(default=None, description="Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.", alias="reportingPrices")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
-    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "shareClasses", "pricingMethodology", "reportingPrices", "whtParameters"]
+    valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
+    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "shareClasses", "pricingMethodology", "reportingPrices", "whtParameters", "valuationTemplateId"]
 
     class Config:
         """Pydantic configuration"""
@@ -147,6 +148,9 @@ class FundDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of wht_parameters
         if self.wht_parameters:
             _dict['whtParameters'] = self.wht_parameters.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of valuation_template_id
+        if self.valuation_template_id:
+            _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
         # set to None if short_code (nullable) is None
         # and __fields_set__ contains the field
         if self.short_code is None and "short_code" in self.__fields_set__:
@@ -251,7 +255,8 @@ class FundDefinitionRequest(BaseModel):
             "share_classes": [ShareClassDefinition.from_dict(_item) for _item in obj.get("shareClasses")] if obj.get("shareClasses") is not None else None,
             "pricing_methodology": PricingMethodology.from_dict(obj.get("pricingMethodology")) if obj.get("pricingMethodology") is not None else None,
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,
-            "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None
+            "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
+            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None
         })
         return _obj
 

@@ -31,7 +31,7 @@ class RecResultSetApprovalDecisionRequest(BaseModel):
     approval_code:  StrictStr = Field(...,alias="approvalCode", description="The approval slot being decided. Must match a required approval code.") 
     decision:  StrictStr = Field(...,alias="decision", description="The decision made. Available values: Approve, RequestRevisions.") 
     reason:  Optional[StrictStr] = Field(None,alias="reason", description="Rationale for the decision.") 
-    requested_result_revisions: Optional[List[RecRequestedResultRevision]] = Field(default=None, description="The results flagged for re-review. Only applicable when the decision is Request Revisions.", alias="requestedResultRevisions")
+    requested_result_revisions: Optional[List[RecRequestedResultRevision]] = Field(default=None, description="The results flagged for re-review. Only applicable when the decision is Request Revisions. Each result must be Reviewed. A flagged result returns to Required and keeps its decision. The reviewer must affirm or change that decision before the review can be resubmitted. Clearing the decision does not count.", alias="requestedResultRevisions")
     __properties = ["approvalCode", "decision", "reason", "requestedResultRevisions"]
 
     class Config:

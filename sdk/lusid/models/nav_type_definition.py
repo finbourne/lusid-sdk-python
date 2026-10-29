@@ -51,7 +51,8 @@ class NavTypeDefinition(BaseModel):
     pricing_basis:  Optional[StrictStr] = Field(None,alias="pricingBasis", description="The side of the quote this Nav Type values the fund on: Mid, Bid or Ask. Overrides the pricing basis of the valuation recipe's market options for this Nav Type only, so a bid NAV and an ask NAV can share one recipe. Omit it to value on the recipe's own pricing basis. Available values: Mid, Bid, Ask.") 
     swing_pricing: Optional[SwingPricingRule] = Field(default=None, alias="swingPricing")
     notional_dealing_cost_table_id: Optional[ResourceId] = Field(default=None, alias="notionalDealingCostTableId")
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId"]
+    valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId"]
 
     class Config:
         """Pydantic configuration"""
@@ -106,6 +107,9 @@ class NavTypeDefinition(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of notional_dealing_cost_table_id
         if self.notional_dealing_cost_table_id:
             _dict['notionalDealingCostTableId'] = self.notional_dealing_cost_table_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of valuation_template_id
+        if self.valuation_template_id:
+            _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
         # set to None if code (nullable) is None
         # and __fields_set__ contains the field
         if self.code is None and "code" in self.__fields_set__:
@@ -183,7 +187,8 @@ class NavTypeDefinition(BaseModel):
             "transaction_exclusion_filter": obj.get("transactionExclusionFilter"),
             "pricing_basis": obj.get("pricingBasis"),
             "swing_pricing": SwingPricingRule.from_dict(obj.get("swingPricing")) if obj.get("swingPricing") is not None else None,
-            "notional_dealing_cost_table_id": ResourceId.from_dict(obj.get("notionalDealingCostTableId")) if obj.get("notionalDealingCostTableId") is not None else None
+            "notional_dealing_cost_table_id": ResourceId.from_dict(obj.get("notionalDealingCostTableId")) if obj.get("notionalDealingCostTableId") is not None else None,
+            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None
         })
         return _obj
 

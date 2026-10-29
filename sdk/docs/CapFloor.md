@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **underlying_floating_leg** | [**FloatingLeg**](FloatingLeg.md) |  | 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven equity swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
+**trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | 
 ## Example
 
@@ -29,8 +30,9 @@ include_first_caplet:StrictBool = True
 underlying_floating_leg: FloatingLeg = # Replace with your value
 additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-cap_floor_instance = CapFloor(cap_floor_type=cap_floor_type, cap_strike=cap_strike, floor_strike=floor_strike, include_first_caplet=include_first_caplet, underlying_floating_leg=underlying_floating_leg, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+cap_floor_instance = CapFloor(cap_floor_type=cap_floor_type, cap_strike=cap_strike, floor_strike=floor_strike, include_first_caplet=include_first_caplet, underlying_floating_leg=underlying_floating_leg, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
 ```
 

@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**calculate_order_dates**](TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
+[**cancel_transfer_agency_transactions**](TransferAgencyApi.md#cancel_transfer_agency_transactions) | **POST** /api/transferagency/transactions/cancel | [EXPERIMENTAL] CancelTransferAgencyTransactions: Cancel transfer agency transactions, un-pricing their orders
 [**delete_transfer_agency_orders**](TransferAgencyApi.md#delete_transfer_agency_orders) | **POST** /api/transferagency/orders/$delete | [EXPERIMENTAL] DeleteTransferAgencyOrders: Delete transfer agency orders
 [**estimate_transfer_agency_orders**](TransferAgencyApi.md#estimate_transfer_agency_orders) | **POST** /api/transferagency/orders/$estimate | [EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders
 [**upsert_transfer_agency_orders**](TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
@@ -98,6 +99,100 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully calculated dates and any failed calculations. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **cancel_transfer_agency_transactions**
+> CancelTransferAgencyTransactionsResponse cancel_transfer_agency_transactions(request_body, success_mode=success_mode)
+
+[EXPERIMENTAL] CancelTransferAgencyTransactions: Cancel transfer agency transactions, un-pricing their orders
+
+Reverses the pricing of a transfer agency order, identified by the security transaction that pricing booked:  cancels that transaction in the investor's portfolio, amends the paired cash transaction back to its  pre-pricing amount, and moves the order from 'Priced' back to 'New'. Both changes are bitemporal, so the  priced state is still visible at an earlier as-at.  A transaction that was never booked, that names no order, that is the cash leg rather than the security leg,  or whose order is not in 'Priced' fails on its own. A leg already cancelled outside this flow is left alone and  the order is still returned to 'New'. A transaction named under two request keys fails the whole request.  The response contains both successfully un-priced orders and any failures, each in the form of a  dictionary keyed by the request's keys. For each failure, a reason is provided. It is important to  check the failed set for unsuccessful results.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransferAgencyApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransferAgencyApi)
+    request_body = {"Transaction1":{"portfolioId":{"scope":"example-scope","code":"investor-portfolio"},"transactionId":"txn-0002"}} # Dict[str, CancelTransferAgencyTransactionRequest] | The security transactions to cancel, keyed by a unique request identifier.
+    success_mode = 'Partial' # str | Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial (optional) (default to 'Partial')
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.cancel_transfer_agency_transactions(request_body, success_mode=success_mode, opts=opts)
+
+        # [EXPERIMENTAL] CancelTransferAgencyTransactions: Cancel transfer agency transactions, un-pricing their orders
+        api_response = api_instance.cancel_transfer_agency_transactions(request_body, success_mode=success_mode)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransferAgencyApi->cancel_transfer_agency_transactions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **request_body** | [**Dict[str, CancelTransferAgencyTransactionRequest]**](CancelTransferAgencyTransactionRequest.md)| The security transactions to cancel, keyed by a unique request identifier. | 
+ **success_mode** | **str**| Whether the batch request should fail Atomically or in a Partial fashion - Allowed Values: Atomic, Partial | [optional] [default to &#39;Partial&#39;]
+
+### Return type
+
+[**CancelTransferAgencyTransactionsResponse**](CancelTransferAgencyTransactionsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successfully un-priced orders and any failures. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

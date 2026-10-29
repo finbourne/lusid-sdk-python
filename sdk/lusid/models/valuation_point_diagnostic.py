@@ -27,9 +27,9 @@ class ValuationPointDiagnostic(BaseModel):
     """
     Something found while striking a valuation point that did not stop it but should be looked at.  # noqa: E501
     """
-    type:  StrictStr = Field(...,alias="type", description="What kind of finding this is. 'OwnershipDrift': a fund structure holder's declared sharing percentage in a held member differs from the share its contributions make of that member's capital by enough to misallocate more of the period's P&L than the holder's drift materiality warning amount allows.") 
+    type:  StrictStr = Field(...,alias="type", description="What kind of finding this is. 'OwnershipDrift': a fund structure holder's declared sharing percentage in a held member differs from the share its contributions make of that member's capital by enough to misallocate more of the period's P&L than the holder's drift materiality warning amount allows. 'FeeStrikeFailed': the fees struck when the valuation point was last created or updated failed, so its lines carry no fee transactions and it cannot be accepted until they are struck again.") 
     message:  StrictStr = Field(...,alias="message", description="What was found and what to do about it.") 
-    details: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The values the finding was made on, by name. For 'OwnershipDrift': holder, member, declaredShare, actualShare, delta (actual less declared) and impact (the P&L the drift would misallocate this period).")
+    details: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The values the finding was made on, by name. For 'OwnershipDrift': holder, member, declaredShare, actualShare, delta (actual less declared) and impact (the P&L the drift would misallocate this period). For 'FeeStrikeFailed': failureType and failureMessage, the cause of the failed strike.")
     __properties = ["type", "message", "details"]
 
     class Config:

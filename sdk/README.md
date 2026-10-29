@@ -323,6 +323,10 @@ Class | Method | HTTP request | Description
 *FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
 *FundStructuresApi* | [**remove_fund_structure_member**](docs/FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
 *FundStructuresApi* | [**upsert_fund_structure**](docs/FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+*FundValuationTemplatesApi* | [**delete_valuation_address_key_template**](docs/FundValuationTemplatesApi.md#delete_valuation_address_key_template) | **DELETE** /api/fundvaluationtemplates/{scope}/{code} | [EXPERIMENTAL] DeleteValuationAddressKeyTemplate: Delete a Valuation Template.
+*FundValuationTemplatesApi* | [**get_valuation_address_key_template**](docs/FundValuationTemplatesApi.md#get_valuation_address_key_template) | **GET** /api/fundvaluationtemplates/{scope}/{code} | [EXPERIMENTAL] GetValuationAddressKeyTemplate: Get a Valuation Template.
+*FundValuationTemplatesApi* | [**list_valuation_address_key_templates**](docs/FundValuationTemplatesApi.md#list_valuation_address_key_templates) | **GET** /api/fundvaluationtemplates | [EXPERIMENTAL] ListValuationAddressKeyTemplates: List Valuation Templates.
+*FundValuationTemplatesApi* | [**upsert_valuation_address_key_template**](docs/FundValuationTemplatesApi.md#upsert_valuation_address_key_template) | **PUT** /api/fundvaluationtemplates/{scope}/{code} | [EXPERIMENTAL] UpsertValuationAddressKeyTemplate: Upsert a Valuation Template.
 *FundsApi* | [**accept_estimate_valuation_point**](docs/FundsApi.md#accept_estimate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$acceptestimate | [EARLY ACCESS] AcceptEstimateValuationPoint: Accepts an Estimate Valuation Point.
 *FundsApi* | [**accrue_carry**](docs/FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
@@ -662,7 +666,7 @@ Class | Method | HTTP request | Description
 *RecsApi* | [**get_matching_ruleset**](docs/RecsApi.md#get_matching_ruleset) | **GET** /api/recs/matchingrulesets/{scope}/{code} | [EXPERIMENTAL] GetMatchingRuleset: GetMatchingRuleset
 *RecsApi* | [**get_rec_definition**](docs/RecsApi.md#get_rec_definition) | **GET** /api/recs/definitions/{scope}/{code} | [EXPERIMENTAL] GetRecDefinition: GetRecDefinition
 *RecsApi* | [**get_rec_instance**](docs/RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
-*RecsApi* | [**get_rec_result**](docs/RecsApi.md#get_rec_result) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{recType}/{runNumber}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
+*RecsApi* | [**get_rec_result**](docs/RecsApi.md#get_rec_result) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 *RecsApi* | [**get_rec_result_set**](docs/RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
 *RecsApi* | [**instantiate_rec**](docs/RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 *RecsApi* | [**list_matching_rulesets**](docs/RecsApi.md#list_matching_rulesets) | **GET** /api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
@@ -870,6 +874,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**upsert_transactions**](docs/TransactionPortfoliosApi.md#upsert_transactions) | **POST** /api/transactionportfolios/{scope}/{code}/transactions | UpsertTransactions: Upsert transactions
 *TransactionPortfoliosApi* | [**upsert_virtual_transaction_override**](docs/TransactionPortfoliosApi.md#upsert_virtual_transaction_override) | **POST** /api/transactionportfolios/{scope}/{code}/overridevirtualtransactions | [EARLY ACCESS] UpsertVirtualTransactionOverride: [EARLY ACCESS] Upsert virtual transaction overrides and suppressions
 *TransferAgencyApi* | [**calculate_order_dates**](docs/TransferAgencyApi.md#calculate_order_dates) | **POST** /api/transferagency/orderdates | [EXPERIMENTAL] CalculateOrderDates: Calculate the key dates associated with transfer agency orders
+*TransferAgencyApi* | [**cancel_transfer_agency_transactions**](docs/TransferAgencyApi.md#cancel_transfer_agency_transactions) | **POST** /api/transferagency/transactions/cancel | [EXPERIMENTAL] CancelTransferAgencyTransactions: Cancel transfer agency transactions, un-pricing their orders
 *TransferAgencyApi* | [**delete_transfer_agency_orders**](docs/TransferAgencyApi.md#delete_transfer_agency_orders) | **POST** /api/transferagency/orders/$delete | [EXPERIMENTAL] DeleteTransferAgencyOrders: Delete transfer agency orders
 *TransferAgencyApi* | [**estimate_transfer_agency_orders**](docs/TransferAgencyApi.md#estimate_transfer_agency_orders) | **POST** /api/transferagency/orders/$estimate | [EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders
 *TransferAgencyApi* | [**upsert_transfer_agency_orders**](docs/TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
@@ -1027,7 +1032,9 @@ Class | Method | HTTP request | Description
  - [AllocationReceivable](docs/AllocationReceivable.md)
  - [AllocationReceivablesAgeing](docs/AllocationReceivablesAgeing.md)
  - [AllocationRequest](docs/AllocationRequest.md)
+ - [AllocationServiceRunAllocation](docs/AllocationServiceRunAllocation.md)
  - [AllocationServiceRunResponse](docs/AllocationServiceRunResponse.md)
+ - [AllocationServiceRunWarning](docs/AllocationServiceRunWarning.md)
  - [AllocationSetRequest](docs/AllocationSetRequest.md)
  - [AmendCommitmentEvent](docs/AmendCommitmentEvent.md)
  - [AmortisationEvent](docs/AmortisationEvent.md)
@@ -1148,6 +1155,8 @@ Class | Method | HTTP request | Description
  - [CancelSchedule](docs/CancelSchedule.md)
  - [CancelSingleHoldingAdjustmentRequest](docs/CancelSingleHoldingAdjustmentRequest.md)
  - [CancelSwapEvent](docs/CancelSwapEvent.md)
+ - [CancelTransferAgencyTransactionRequest](docs/CancelTransferAgencyTransactionRequest.md)
+ - [CancelTransferAgencyTransactionsResponse](docs/CancelTransferAgencyTransactionsResponse.md)
  - [CancelledOrderResult](docs/CancelledOrderResult.md)
  - [CancelledPlacementResult](docs/CancelledPlacementResult.md)
  - [CapFloor](docs/CapFloor.md)
@@ -2057,6 +2066,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfTransactionTemplate](docs/PagedResourceListOfTransactionTemplate.md)
  - [PagedResourceListOfTransactionTemplateSpecification](docs/PagedResourceListOfTransactionTemplateSpecification.md)
  - [PagedResourceListOfTranslationScriptId](docs/PagedResourceListOfTranslationScriptId.md)
+ - [PagedResourceListOfValuationAddressKeyTemplate](docs/PagedResourceListOfValuationAddressKeyTemplate.md)
  - [PagedResourceListOfValuationPointInstrument](docs/PagedResourceListOfValuationPointInstrument.md)
  - [PagedResourceListOfValuationPointOverview](docs/PagedResourceListOfValuationPointOverview.md)
  - [PagedResourceListOfVersion](docs/PagedResourceListOfVersion.md)
@@ -2068,6 +2078,7 @@ Class | Method | HTTP request | Description
  - [PariPassuEvent](docs/PariPassuEvent.md)
  - [PartialClosureConstituent](docs/PartialClosureConstituent.md)
  - [PartialDefeasanceEvent](docs/PartialDefeasanceEvent.md)
+ - [PartialRedemptionWithoutReductionOfNominalValueEvent](docs/PartialRedemptionWithoutReductionOfNominalValueEvent.md)
  - [Participation](docs/Participation.md)
  - [ParticipationRequest](docs/ParticipationRequest.md)
  - [ParticipationSetRequest](docs/ParticipationSetRequest.md)
@@ -2694,6 +2705,7 @@ Class | Method | HTTP request | Description
  - [TransferAgencyOrderResult](docs/TransferAgencyOrderResult.md)
  - [TransferAgencyOrderToEstimate](docs/TransferAgencyOrderToEstimate.md)
  - [TransferAgencyOrdersResponse](docs/TransferAgencyOrdersResponse.md)
+ - [TransferAgencyTransactionCancellationResult](docs/TransferAgencyTransactionCancellationResult.md)
  - [TransferAgencyTransactionFromOrderResult](docs/TransferAgencyTransactionFromOrderResult.md)
  - [TransitionEvent](docs/TransitionEvent.md)
  - [TransitionPaymentInstructionsResponse](docs/TransitionPaymentInstructionsResponse.md)
@@ -2824,11 +2836,13 @@ Class | Method | HTTP request | Description
  - [UpsertTransferAgencyTransactionFromOrderRequest](docs/UpsertTransferAgencyTransactionFromOrderRequest.md)
  - [UpsertTransferAgencyTransactionsFromOrdersResponse](docs/UpsertTransferAgencyTransactionsFromOrdersResponse.md)
  - [UpsertTranslationScriptRequest](docs/UpsertTranslationScriptRequest.md)
+ - [UpsertValuationAddressKeyTemplateRequest](docs/UpsertValuationAddressKeyTemplateRequest.md)
  - [UpsertValuationPointRequest](docs/UpsertValuationPointRequest.md)
  - [UpsertVirtualTransactionOverrideResponse](docs/UpsertVirtualTransactionOverrideResponse.md)
  - [UpsertWithholdingTaxConfigurationRequest](docs/UpsertWithholdingTaxConfigurationRequest.md)
  - [UpsertWithholdingTaxRateRequest](docs/UpsertWithholdingTaxRateRequest.md)
  - [User](docs/User.md)
+ - [ValuationAddressKeyTemplate](docs/ValuationAddressKeyTemplate.md)
  - [ValuationPoint](docs/ValuationPoint.md)
  - [ValuationPointDataQueryParameters](docs/ValuationPointDataQueryParameters.md)
  - [ValuationPointDataRequest](docs/ValuationPointDataRequest.md)

@@ -69,8 +69,9 @@ class Fund(BaseModel):
     reporting_prices: Optional[List[ReportingPrice]] = Field(default=None, description="Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.", alias="reportingPrices")
     version: Optional[Version] = None
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
+    valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "valuationTemplateId", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -180,6 +181,9 @@ class Fund(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of wht_parameters
         if self.wht_parameters:
             _dict['whtParameters'] = self.wht_parameters.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of valuation_template_id
+        if self.valuation_template_id:
+            _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -317,6 +321,7 @@ class Fund(BaseModel):
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
+            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

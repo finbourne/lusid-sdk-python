@@ -72,7 +72,7 @@ def main():
     api_instance = api_client_factory.build(WithholdingTaxApi)
     scope = 'scope_example' # str | The Scope of the rate dataset's relational dataset definition.
     code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
-    request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00"}} # Dict[str, DeleteWithholdingTaxRateRequest] | The rate rows to delete, keyed by a correlation id echoed back in the response.
+    request_body = {"gb-equity-custodian-b":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"CorporateFund","assetClass":"Equity","custodian":"CustodianB"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00"}} # Dict[str, DeleteWithholdingTaxRateRequest] | The rate rows to delete, keyed by a correlation id echoed back in the response.
     success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic. In Partial mode failures are returned              in the response body with a 200 status. (optional) (default to 'Atomic')
     rule_source = 'rule_source_example' # str | The source of the rows to delete, since it is part of each row's identity. Omit it              to delete rows that apply at every source; a source's rows are only deleted when it is given. A row may not              carry ruleSource in its own series identifiers. (optional)
 
@@ -172,7 +172,7 @@ def main():
     api_instance = api_client_factory.build(WithholdingTaxApi)
     scope = 'scope_example' # str | The Scope of the rate dataset's relational dataset definition.
     code = 'code_example' # str | The Code of the rate dataset's relational dataset definition.
-    request_body = {"gb-treaty-us":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"US"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.3,"treatyRate":0.15,"treatyRAS":true}},"gb-treaty-fr":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"TreatyEligible","instrumentDomicile":"FR"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.25,"treatyRate":0.15,"treatyRAS":false}}} # Dict[str, UpsertWithholdingTaxRateRequest] | The rate rows to upsert, keyed by a correlation id echoed back in the response.
+    request_body = {"gb-equity":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"CorporateFund","assetClass":"Equity"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.35,"treatyRate":0.15,"treatyRAS":true}},"gb-equity-custodian-b":{"seriesIdentifiers":{"taxCountry":"GB","profileType":"CorporateFund","assetClass":"Equity","custodian":"CustodianB"},"effectiveAt":"2026-01-01T00:00:00.0000000+00:00","valueFields":{"countryRate":0.35,"treatyRate":0.15,"treatyRAS":false}}} # Dict[str, UpsertWithholdingTaxRateRequest] | The rate rows to upsert, keyed by a correlation id echoed back in the response.
     success_mode = 'Atomic' # str | Atomic or Partial; defaults to Atomic, because a partly loaded feed silently              under-withholds. In Partial mode failures are returned in the response body with a 200 status. (optional) (default to 'Atomic')
     rule_source = 'rule_source_example' # str | The source every row in the batch is attributed to, compared against the              configuration's source priority. Omit it for rows that apply at every source. A row may not carry ruleSource              in its own series identifiers. (optional)
 

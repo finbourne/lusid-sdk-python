@@ -25,11 +25,14 @@ from datetime import datetime
 
 class RecResultHoldingImpact(BaseModel):
     """
-    One holding, and where known the tax lot within it, that a transaction or settlement activity item impacted.  # noqa: E501
+    One holding, and where known the tax lot within it, that a transaction or settlement activity item impacted.  Also holds the display names of the holding's instrument.  # noqa: E501
     """
     holding_id:  StrictStr = Field(...,alias="holdingId", description="The impacted holding, at holding level: the id a holding item over it carries.") 
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="The impacted tax lot within the holding, where the source states one; null when the impact is known at holding level only. Opaque: compare it whole, do not parse it.") 
-    __properties = ["holdingId", "taxLotId"]
+    holding_instrument_scope:  Optional[StrictStr] = Field(None,alias="holdingInstrumentScope", description="The scope of the impacted holding's instrument. Null where the source does not state one.") 
+    holding_lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="holdingLusidInstrumentId", description="The LUID of the impacted holding's instrument. Null where the source does not state it.") 
+    holding_instrument_name:  Optional[StrictStr] = Field(None,alias="holdingInstrumentName", description="The name of the impacted holding's instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.") 
+    __properties = ["holdingId", "taxLotId", "holdingInstrumentScope", "holdingLusidInstrumentId", "holdingInstrumentName"]
 
     class Config:
         """Pydantic configuration"""
@@ -68,6 +71,21 @@ class RecResultHoldingImpact(BaseModel):
         if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
             _dict['taxLotId'] = None
 
+        # set to None if holding_instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_instrument_scope is None and "holding_instrument_scope" in self.__fields_set__:
+            _dict['holdingInstrumentScope'] = None
+
+        # set to None if holding_lusid_instrument_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_lusid_instrument_id is None and "holding_lusid_instrument_id" in self.__fields_set__:
+            _dict['holdingLusidInstrumentId'] = None
+
+        # set to None if holding_instrument_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_instrument_name is None and "holding_instrument_name" in self.__fields_set__:
+            _dict['holdingInstrumentName'] = None
+
         return _dict
 
     @classmethod
@@ -81,7 +99,10 @@ class RecResultHoldingImpact(BaseModel):
 
         _obj = RecResultHoldingImpact.parse_obj({
             "holding_id": obj.get("holdingId"),
-            "tax_lot_id": obj.get("taxLotId")
+            "tax_lot_id": obj.get("taxLotId"),
+            "holding_instrument_scope": obj.get("holdingInstrumentScope"),
+            "holding_lusid_instrument_id": obj.get("holdingLusidInstrumentId"),
+            "holding_instrument_name": obj.get("holdingInstrumentName")
         })
         return _obj
 

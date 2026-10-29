@@ -39,6 +39,7 @@ from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
 from lusid.api.fund_structures_api import FundStructuresApi
+from lusid.api.fund_valuation_templates_api import FundValuationTemplatesApi
 from lusid.api.funds_api import FundsApi
 from lusid.api.group_reconciliations_api import GroupReconciliationsApi
 from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
@@ -141,6 +142,7 @@ __all__ = [
     "FeeTypesApi",
     "FundConfigurationApi",
     "FundStructuresApi",
+    "FundValuationTemplatesApi",
     "FundsApi",
     "GroupReconciliationsApi",
     "IdentifierDefinitionsApi",

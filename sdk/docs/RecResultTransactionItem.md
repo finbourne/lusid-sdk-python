@@ -1,11 +1,15 @@
 # RecResultTransactionItem
 
-A transaction item within a rec result.
+A transaction item within a rec result. Names the portfolio and the transaction's resolved instrument alongside,  for display.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | 
+**portfolio_display_name** | **str** | The display name of the item&#39;s portfolio, as it stood at the asAt the run read its data. Null where the run did not read it. | [optional] 
 **transaction_id** | **str** | The transaction identifier. | [optional] 
+**transaction_instrument_scope** | **str** | The scope of the transaction&#39;s resolved instrument. Null where the source does not state one. | [optional] 
+**transaction_lusid_instrument_id** | **str** | The LUID of the transaction&#39;s resolved instrument. Null where the source does not state it. | [optional] 
+**transaction_instrument_name** | **str** | The name of the transaction&#39;s resolved instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it. | [optional] 
 **holding_impacts** | [**List[RecResultHoldingImpact]**](RecResultHoldingImpact.md) | The holdings, and where the source states them the tax lots, the item impacted. A distinct set ordered by holdingId then taxLotId; may be empty. An input transaction has not run the movements engine and impacts nothing yet. | 
 **item_type** | **str** | The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity or RelationalDataPoint. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint. | 
 **rule_and_attribute_values** | **Dict[str, Optional[str]]** | The core rule, aggregate rule and supplemental attribute values for the item, keyed by name. | [optional] 
@@ -20,12 +24,16 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 portfolio_id: ResourceId = # Replace with your value
+portfolio_display_name: Optional[StrictStr] = "example_portfolio_display_name"
 transaction_id: Optional[StrictStr] = "example_transaction_id"
+transaction_instrument_scope: Optional[StrictStr] = "example_transaction_instrument_scope"
+transaction_lusid_instrument_id: Optional[StrictStr] = "example_transaction_lusid_instrument_id"
+transaction_instrument_name: Optional[StrictStr] = "example_transaction_instrument_name"
 holding_impacts: List[RecResultHoldingImpact] = # Replace with your value
 item_type: StrictStr = "example_item_type"
 rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 writeback_suggestions: List[WritebackSuggestion] = # Replace with your value
-rec_result_transaction_item_instance = RecResultTransactionItem(portfolio_id=portfolio_id, transaction_id=transaction_id, holding_impacts=holding_impacts, item_type=item_type, rule_and_attribute_values=rule_and_attribute_values, writeback_suggestions=writeback_suggestions)
+rec_result_transaction_item_instance = RecResultTransactionItem(portfolio_id=portfolio_id, portfolio_display_name=portfolio_display_name, transaction_id=transaction_id, transaction_instrument_scope=transaction_instrument_scope, transaction_lusid_instrument_id=transaction_lusid_instrument_id, transaction_instrument_name=transaction_instrument_name, holding_impacts=holding_impacts, item_type=item_type, rule_and_attribute_values=rule_and_attribute_values, writeback_suggestions=writeback_suggestions)
 
 ```
 

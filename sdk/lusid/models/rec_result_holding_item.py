@@ -27,15 +27,19 @@ from lusid.models.writeback_suggestion import WritebackSuggestion
 
 class RecResultHoldingItem(BaseModel):
     """
-    A holding-shaped item within a rec result: the holding a Holding or CashHolding rec reconciled  (itemType Holding), or the one a Valuation rec valued (itemType ValuedHolding).  # noqa: E501
+    A holding-shaped item within a rec result: the holding a Holding or CashHolding rec reconciled  (itemType Holding), or the one a Valuation rec valued (itemType ValuedHolding). Also holds the display names  of the portfolio and the holding's instrument.  # noqa: E501
     """
     portfolio_id: ResourceId = Field(alias="portfolioId")
+    portfolio_display_name:  Optional[StrictStr] = Field(None,alias="portfolioDisplayName", description="The display name of the item's portfolio, as it stood at the asAt the run read its data. Null where the run did not read it.") 
     holding_id:  Optional[StrictStr] = Field(None,alias="holdingId", description="The holding identifier, at holding level: the same id whichever granularity the holding was read at, so that items of different rec types over one holding name it alike.") 
     tax_lot_id:  Optional[StrictStr] = Field(None,alias="taxLotId", description="The tax lot the item is, where the source row was a single lot: a lot of a position read by tax lot, or a cash commitment. Null for an aggregated position and for a cash balance. Opaque: compare it whole, do not parse it.") 
+    holding_instrument_scope:  Optional[StrictStr] = Field(None,alias="holdingInstrumentScope", description="The scope of the holding's instrument. Null where the source does not state one.") 
+    holding_lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="holdingLusidInstrumentId", description="The LUID of the holding's instrument. Null where the source does not state it.") 
+    holding_instrument_name:  Optional[StrictStr] = Field(None,alias="holdingInstrumentName", description="The name of the holding's instrument, as it stood at the asAt the run read its data. Null where the run did not resolve it.") 
     item_type:  StrictStr = Field(...,alias="itemType", description="The polymorphic item-type discriminator: Holding, ValuedHolding, Transaction, SettlementActivity or RelationalDataPoint. Names the item rather than the rec type: Holding and CashHolding recs produce Holding items, a Valuation rec produces ValuedHolding items, both transaction rec types produce Transaction items, and a relational dataset side produces RelationalDataPoint items whatever the rec type. Available values: SettlementActivity, Holding, Transaction, ValuedHolding, RelationalDataPoint.") 
     rule_and_attribute_values: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The core rule, aggregate rule and supplemental attribute values for the item, keyed by name.", alias="ruleAndAttributeValues")
     writeback_suggestions: List[WritebackSuggestion] = Field(description="The writebacks suggested against this item, as configured by the matching ruleset's writebackConfigurations. Only ever populated on target-side items. Suggestions only: a user is expected to review them before acting. Required, but may be empty.", alias="writebackSuggestions")
-    __properties = ["portfolioId", "holdingId", "taxLotId", "itemType", "ruleAndAttributeValues", "writebackSuggestions"]
+    __properties = ["portfolioId", "portfolioDisplayName", "holdingId", "taxLotId", "holdingInstrumentScope", "holdingLusidInstrumentId", "holdingInstrumentName", "itemType", "ruleAndAttributeValues", "writebackSuggestions"]
 
     class Config:
         """Pydantic configuration"""
@@ -80,6 +84,11 @@ class RecResultHoldingItem(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['writebackSuggestions'] = _items
+        # set to None if portfolio_display_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.portfolio_display_name is None and "portfolio_display_name" in self.__fields_set__:
+            _dict['portfolioDisplayName'] = None
+
         # set to None if holding_id (nullable) is None
         # and __fields_set__ contains the field
         if self.holding_id is None and "holding_id" in self.__fields_set__:
@@ -89,6 +98,21 @@ class RecResultHoldingItem(BaseModel):
         # and __fields_set__ contains the field
         if self.tax_lot_id is None and "tax_lot_id" in self.__fields_set__:
             _dict['taxLotId'] = None
+
+        # set to None if holding_instrument_scope (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_instrument_scope is None and "holding_instrument_scope" in self.__fields_set__:
+            _dict['holdingInstrumentScope'] = None
+
+        # set to None if holding_lusid_instrument_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_lusid_instrument_id is None and "holding_lusid_instrument_id" in self.__fields_set__:
+            _dict['holdingLusidInstrumentId'] = None
+
+        # set to None if holding_instrument_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.holding_instrument_name is None and "holding_instrument_name" in self.__fields_set__:
+            _dict['holdingInstrumentName'] = None
 
         # set to None if rule_and_attribute_values (nullable) is None
         # and __fields_set__ contains the field
@@ -108,8 +132,12 @@ class RecResultHoldingItem(BaseModel):
 
         _obj = RecResultHoldingItem.parse_obj({
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
+            "portfolio_display_name": obj.get("portfolioDisplayName"),
             "holding_id": obj.get("holdingId"),
             "tax_lot_id": obj.get("taxLotId"),
+            "holding_instrument_scope": obj.get("holdingInstrumentScope"),
+            "holding_lusid_instrument_id": obj.get("holdingLusidInstrumentId"),
+            "holding_instrument_name": obj.get("holdingInstrumentName"),
             "item_type": obj.get("itemType"),
             "rule_and_attribute_values": obj.get("ruleAndAttributeValues"),
             "writeback_suggestions": [WritebackSuggestion.from_dict(_item) for _item in obj.get("writebackSuggestions")] if obj.get("writebackSuggestions") is not None else None

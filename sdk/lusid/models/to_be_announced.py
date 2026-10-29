@@ -31,7 +31,7 @@ class ToBeAnnounced(LusidInstrument):
     LUSID representation of a TBA (To Be Announced) forward contract for generic agency mortgage-backed securities.  Valued as Quantity x Price via EOD quote lookup; carries no coupon cashflows, accrual or factor.  # noqa: E501
     """
     start_date: datetime = Field(description="The trade inception date of the TBA.", alias="startDate")
-    maturity_date: datetime = Field(description="The contractual settlement date of the TBA (e.g. the agency's announced settlement date for the month).", alias="maturityDate")
+    maturity_date: datetime = Field(description="The contractual settlement date of the TBA (e.g. the agency's announced settlement date for the month). This is a reference date only: LUSID keeps valuing a TBA that is still held after it, until the holder's own transactions close the position.", alias="maturityDate")
     dom_ccy:  StrictStr = Field(...,alias="domCcy", description="The domestic currency of the TBA.") 
     agency:  Optional[StrictStr] = Field(None,alias="agency", description="The issuing agency of the underlying generic collateral, e.g. \"FNMA\", \"FHLMC\", \"GNMA\".  Note this property does not impact valuation. From a LUSID analytics perspective, it is purely informational.") 
     coupon: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The stated coupon rate of the underlying generic collateral, e.g. 3.0, 4.5.  Note this property does not impact valuation - there are no coupon cash flows on the TBA itself.  From a LUSID analytics perspective, it is purely informational.")

@@ -22,6 +22,8 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.allocation_service_run_allocation import AllocationServiceRunAllocation
+from lusid.models.allocation_service_run_warning import AllocationServiceRunWarning
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.resource_id import ResourceId
 
@@ -29,9 +31,11 @@ class AllocationServiceRunResponse(BaseModel):
     """
     AllocationServiceRunResponse
     """
-    values: Optional[List[ResourceId]] = None
-    failed: Optional[Dict[str, ErrorDetail]] = None
-    __properties = ["values", "failed"]
+    values: Optional[List[ResourceId]] = Field(default=None, description="The placements that were allocated successfully.")
+    failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The placements that could not be allocated, keyed by placement, with the reason.")
+    allocations: Optional[List[AllocationServiceRunAllocation]] = Field(default=None, description="Every allocation the run touched across the successful placements, each with its outcome.")
+    warnings: Optional[List[AllocationServiceRunWarning]] = Field(default=None, description="Warnings raised while allocating the successful placements.")
+    __properties = ["values", "failed", "allocations", "warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +83,20 @@ class AllocationServiceRunResponse(BaseModel):
                 if self.failed[_key]:
                     _field_dict[_key] = self.failed[_key].to_dict()
             _dict['failed'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in allocations (list)
+        _items = []
+        if self.allocations:
+            for _item in self.allocations:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['allocations'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
         # set to None if values (nullable) is None
         # and __fields_set__ contains the field
         if self.values is None and "values" in self.__fields_set__:
@@ -88,6 +106,16 @@ class AllocationServiceRunResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.failed is None and "failed" in self.__fields_set__:
             _dict['failed'] = None
+
+        # set to None if allocations (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocations is None and "allocations" in self.__fields_set__:
+            _dict['allocations'] = None
+
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
 
         return _dict
 
@@ -107,7 +135,9 @@ class AllocationServiceRunResponse(BaseModel):
                 for _k, _v in obj.get("failed").items()
             )
             if obj.get("failed") is not None
-            else None
+            else None,
+            "allocations": [AllocationServiceRunAllocation.from_dict(_item) for _item in obj.get("allocations")] if obj.get("allocations") is not None else None,
+            "warnings": [AllocationServiceRunWarning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
         })
         return _obj
 

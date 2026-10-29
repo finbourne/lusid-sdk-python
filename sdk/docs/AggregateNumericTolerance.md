@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **reference_side** | **str** | Reference side (source of truth). Available values: Left, Right. | 
 **absolute_threshold** | **float** | Numeric tolerance absolute value (allowable diff compared to the reference side value). | [optional] 
-**relative_threshold** | **float** | Numeric tolerance value as a relative % of the reference value. | [optional] 
+**relative_threshold** | **float** | Allowed difference as a fraction of the reference side value, e.g. 0.01 allows a 1% difference. The fraction is applied to the magnitude of the reference value, so a negative reference is tolerated in the same way as a positive one. | [optional] 
 **threshold_priority** | **str** | Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. Required when both thresholds are provided; must be omitted when only one is. Available values: GreaterOf, LesserOf. | [optional] 
 **offset** | **str** | How the threshold should be applied to the reference side value. Defaults to Either. Available values: Above, Below, Either. | [optional] 
 **tolerance_type** | **str** | Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. | 

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_backfilled** | **bool** | Set to True if the Valuation Point has backfilled bucket set results, False otherwise. | [optional] 
 **apply_clear_down** | **bool** | Set to True if the Valuation Point applies a clear down, False otherwise. The Valuation Point shows its bucket values before the clear down, and the next Valuation Point opens from the balances after it. | [optional] 
-**diagnostics** | [**List[ValuationPointDiagnostic]**](ValuationPointDiagnostic.md) | Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital. Absent when there are none. | [optional] 
+**diagnostics** | [**List[ValuationPointDiagnostic]**](ValuationPointDiagnostic.md) | Findings made while striking the valuation point that did not stop it but should be looked at, such as a fund structure holder whose declared sharing percentage in a member has drifted from the share its contributions make of that member&#39;s capital, or fees that failed to strike. Absent when there are none. | [optional] 
 **bucket_set_seeds** | [**List[BucketSetSeed]**](BucketSetSeed.md) | The bucket set seeds set on the Valuation Point, when the request resolved to the Valuation Point itself. Null when it has none. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example

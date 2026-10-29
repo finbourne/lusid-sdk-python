@@ -55,6 +55,7 @@ from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
 from lusid.api.fund_structures_api import FundStructuresApi
+from lusid.api.fund_valuation_templates_api import FundValuationTemplatesApi
 from lusid.api.funds_api import FundsApi
 from lusid.api.group_reconciliations_api import GroupReconciliationsApi
 from lusid.api.identifier_definitions_api import IdentifierDefinitionsApi
@@ -245,7 +246,9 @@ from lusid.models.allocation_posting_roll_up import AllocationPostingRollUp
 from lusid.models.allocation_receivable import AllocationReceivable
 from lusid.models.allocation_receivables_ageing import AllocationReceivablesAgeing
 from lusid.models.allocation_request import AllocationRequest
+from lusid.models.allocation_service_run_allocation import AllocationServiceRunAllocation
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
+from lusid.models.allocation_service_run_warning import AllocationServiceRunWarning
 from lusid.models.allocation_set_request import AllocationSetRequest
 from lusid.models.amend_commitment_event import AmendCommitmentEvent
 from lusid.models.amortisation_event import AmortisationEvent
@@ -366,6 +369,8 @@ from lusid.models.cancel_placements_response import CancelPlacementsResponse
 from lusid.models.cancel_schedule import CancelSchedule
 from lusid.models.cancel_single_holding_adjustment_request import CancelSingleHoldingAdjustmentRequest
 from lusid.models.cancel_swap_event import CancelSwapEvent
+from lusid.models.cancel_transfer_agency_transaction_request import CancelTransferAgencyTransactionRequest
+from lusid.models.cancel_transfer_agency_transactions_response import CancelTransferAgencyTransactionsResponse
 from lusid.models.cancelled_order_result import CancelledOrderResult
 from lusid.models.cancelled_placement_result import CancelledPlacementResult
 from lusid.models.cap_floor import CapFloor
@@ -1275,6 +1280,7 @@ from lusid.models.paged_resource_list_of_timeline import PagedResourceListOfTime
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
 from lusid.models.paged_resource_list_of_translation_script_id import PagedResourceListOfTranslationScriptId
+from lusid.models.paged_resource_list_of_valuation_address_key_template import PagedResourceListOfValuationAddressKeyTemplate
 from lusid.models.paged_resource_list_of_valuation_point_instrument import PagedResourceListOfValuationPointInstrument
 from lusid.models.paged_resource_list_of_valuation_point_overview import PagedResourceListOfValuationPointOverview
 from lusid.models.paged_resource_list_of_version import PagedResourceListOfVersion
@@ -1286,6 +1292,7 @@ from lusid.models.paged_resource_list_of_workspace_item import PagedResourceList
 from lusid.models.pari_passu_event import PariPassuEvent
 from lusid.models.partial_closure_constituent import PartialClosureConstituent
 from lusid.models.partial_defeasance_event import PartialDefeasanceEvent
+from lusid.models.partial_redemption_without_reduction_of_nominal_value_event import PartialRedemptionWithoutReductionOfNominalValueEvent
 from lusid.models.participation import Participation
 from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
@@ -1912,6 +1919,7 @@ from lusid.models.transfer_agency_order_estimate_result import TransferAgencyOrd
 from lusid.models.transfer_agency_order_result import TransferAgencyOrderResult
 from lusid.models.transfer_agency_order_to_estimate import TransferAgencyOrderToEstimate
 from lusid.models.transfer_agency_orders_response import TransferAgencyOrdersResponse
+from lusid.models.transfer_agency_transaction_cancellation_result import TransferAgencyTransactionCancellationResult
 from lusid.models.transfer_agency_transaction_from_order_result import TransferAgencyTransactionFromOrderResult
 from lusid.models.transition_event import TransitionEvent
 from lusid.models.transition_payment_instructions_response import TransitionPaymentInstructionsResponse
@@ -2042,11 +2050,13 @@ from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgen
 from lusid.models.upsert_transfer_agency_transaction_from_order_request import UpsertTransferAgencyTransactionFromOrderRequest
 from lusid.models.upsert_transfer_agency_transactions_from_orders_response import UpsertTransferAgencyTransactionsFromOrdersResponse
 from lusid.models.upsert_translation_script_request import UpsertTranslationScriptRequest
+from lusid.models.upsert_valuation_address_key_template_request import UpsertValuationAddressKeyTemplateRequest
 from lusid.models.upsert_valuation_point_request import UpsertValuationPointRequest
 from lusid.models.upsert_virtual_transaction_override_response import UpsertVirtualTransactionOverrideResponse
 from lusid.models.upsert_withholding_tax_configuration_request import UpsertWithholdingTaxConfigurationRequest
 from lusid.models.upsert_withholding_tax_rate_request import UpsertWithholdingTaxRateRequest
 from lusid.models.user import User
+from lusid.models.valuation_address_key_template import ValuationAddressKeyTemplate
 from lusid.models.valuation_point import ValuationPoint
 from lusid.models.valuation_point_data_query_parameters import ValuationPointDataQueryParameters
 from lusid.models.valuation_point_data_request import ValuationPointDataRequest
@@ -2183,6 +2193,7 @@ __all__ = [
     "FeeTypesApi",
     "FundConfigurationApi",
     "FundStructuresApi",
+    "FundValuationTemplatesApi",
     "FundsApi",
     "GroupReconciliationsApi",
     "IdentifierDefinitionsApi",
@@ -2363,7 +2374,9 @@ __all__ = [
     "AllocationReceivable",
     "AllocationReceivablesAgeing",
     "AllocationRequest",
+    "AllocationServiceRunAllocation",
     "AllocationServiceRunResponse",
+    "AllocationServiceRunWarning",
     "AllocationSetRequest",
     "AmendCommitmentEvent",
     "AmortisationEvent",
@@ -2484,6 +2497,8 @@ __all__ = [
     "CancelSchedule",
     "CancelSingleHoldingAdjustmentRequest",
     "CancelSwapEvent",
+    "CancelTransferAgencyTransactionRequest",
+    "CancelTransferAgencyTransactionsResponse",
     "CancelledOrderResult",
     "CancelledPlacementResult",
     "CapFloor",
@@ -3393,6 +3408,7 @@ __all__ = [
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
     "PagedResourceListOfTranslationScriptId",
+    "PagedResourceListOfValuationAddressKeyTemplate",
     "PagedResourceListOfValuationPointInstrument",
     "PagedResourceListOfValuationPointOverview",
     "PagedResourceListOfVersion",
@@ -3404,6 +3420,7 @@ __all__ = [
     "PariPassuEvent",
     "PartialClosureConstituent",
     "PartialDefeasanceEvent",
+    "PartialRedemptionWithoutReductionOfNominalValueEvent",
     "Participation",
     "ParticipationRequest",
     "ParticipationSetRequest",
@@ -4030,6 +4047,7 @@ __all__ = [
     "TransferAgencyOrderResult",
     "TransferAgencyOrderToEstimate",
     "TransferAgencyOrdersResponse",
+    "TransferAgencyTransactionCancellationResult",
     "TransferAgencyTransactionFromOrderResult",
     "TransitionEvent",
     "TransitionPaymentInstructionsResponse",
@@ -4160,11 +4178,13 @@ __all__ = [
     "UpsertTransferAgencyTransactionFromOrderRequest",
     "UpsertTransferAgencyTransactionsFromOrdersResponse",
     "UpsertTranslationScriptRequest",
+    "UpsertValuationAddressKeyTemplateRequest",
     "UpsertValuationPointRequest",
     "UpsertVirtualTransactionOverrideResponse",
     "UpsertWithholdingTaxConfigurationRequest",
     "UpsertWithholdingTaxRateRequest",
     "User",
+    "ValuationAddressKeyTemplate",
     "ValuationPoint",
     "ValuationPointDataQueryParameters",
     "ValuationPointDataRequest",

@@ -29,7 +29,7 @@ class AggregateNumericTolerance(BaseModel):
     """
     reference_side:  StrictStr = Field(...,alias="referenceSide", description="Reference side (source of truth). Available values: Left, Right.") 
     absolute_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Numeric tolerance absolute value (allowable diff compared to the reference side value).", alias="absoluteThreshold")
-    relative_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Numeric tolerance value as a relative % of the reference value.", alias="relativeThreshold")
+    relative_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Allowed difference as a fraction of the reference side value, e.g. 0.01 allows a 1% difference. The fraction is applied to the magnitude of the reference value, so a negative reference is tolerated in the same way as a positive one.", alias="relativeThreshold")
     threshold_priority:  Optional[StrictStr] = Field(None,alias="thresholdPriority", description="Whether to apply the GreaterOf or LesserOf the absoluteThreshold vs relativeThreshold. Required when both thresholds are provided; must be omitted when only one is. Available values: GreaterOf, LesserOf.") 
     offset:  Optional[StrictStr] = Field(None,alias="offset", description="How the threshold should be applied to the reference side value. Defaults to Either. Available values: Above, Below, Either.") 
     tolerance_type:  StrictStr = Field(...,alias="toleranceType", description="Polymorphic discriminator. Supported types: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric. Available values: CoreStringCross, CoreAttributeOptionality, CoreDateTolerance, Numeric.") 

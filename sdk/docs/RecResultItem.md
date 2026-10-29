@@ -16,8 +16,12 @@ rec_result_holding_item_instance = lusid.models.rec_result_holding_item.RecResul
                         portfolio_id = lusid.models.resource_id.ResourceId(
                             scope = '', 
                             code = '', ), 
+                        portfolio_display_name = '', 
                         holding_id = '', 
                         tax_lot_id = '', 
+                        holding_instrument_scope = '', 
+                        holding_lusid_instrument_id = '', 
+                        holding_instrument_name = '', 
                         item_type = '', 
                         rule_and_attribute_values = {
                             'key' : ''
