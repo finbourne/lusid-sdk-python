@@ -5,7 +5,7 @@ Tender Event (TEND).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **announcement_date** | **datetime** | The date the tender is announced. | [optional] 
-**ex_date** | **datetime** | The ex date (entitlement date) of the event. | [optional] 
+**ex_date** | **datetime** | The ex date (entitlement date) of the event. Optional: if not supplied, it is set to the earliest of the record date, response deadline, market deadline and payment date that is present. | [optional] 
 **record_date** | **datetime** | Date you have to be the holder of record in order to participate in the tender. | [optional] 
 **payment_date** | **datetime** | The payment date of the event. | [optional] 
 **new_instrument** | [**NewInstrument**](NewInstrument.md) |  | [optional] 

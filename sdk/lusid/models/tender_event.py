@@ -39,7 +39,7 @@ class TenderEvent(InstrumentEvent):
     Tender Event (TEND).  # noqa: E501
     """
     announcement_date: Optional[datetime] = Field(default=None, description="The date the tender is announced.", alias="announcementDate")
-    ex_date: Optional[datetime] = Field(default=None, description="The ex date (entitlement date) of the event.", alias="exDate")
+    ex_date: Optional[datetime] = Field(default=None, description="The ex date (entitlement date) of the event. Optional: if not supplied, it is set to the earliest of the record date, response deadline, market deadline and payment date that is present.", alias="exDate")
     record_date: Optional[datetime] = Field(default=None, description="Date you have to be the holder of record in order to participate in the tender.", alias="recordDate")
     payment_date: Optional[datetime] = Field(default=None, description="The payment date of the event.", alias="paymentDate")
     new_instrument: Optional[NewInstrument] = Field(default=None, alias="newInstrument")
@@ -194,6 +194,11 @@ class TenderEvent(InstrumentEvent):
         # and __fields_set__ contains the field
         if self.announcement_date is None and "announcement_date" in self.__fields_set__:
             _dict['announcementDate'] = None
+
+        # set to None if ex_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ex_date is None and "ex_date" in self.__fields_set__:
+            _dict['exDate'] = None
 
         # set to None if record_date (nullable) is None
         # and __fields_set__ contains the field
