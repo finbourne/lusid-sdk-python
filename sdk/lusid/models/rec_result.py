@@ -47,7 +47,9 @@ class RecResult(BaseModel):
     rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.") 
     external_rec_type_name:  Optional[StrictStr] = Field(None,alias="externalRecTypeName", description="The client's name for an External rec type, as stamped from the matching ruleset's externalRecType when the run executed. Null for native rec types. Filterable.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
+    as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
+    rec_definition_display_name:  StrictStr = Field(...,alias="recDefinitionDisplayName", description="The display name of the rec definition the rec was instantiated for, as it stood as-at instantiation. Not re-synchronised if the definition is later renamed.") 
     run_number: StrictInt = Field(description="The run number within the instance. Increments with each re-run.", alias="runNumber")
     run_as_at: datetime = Field(description="The asAt datetime at which the run happened.", alias="runAsAt")
     dates_reconciled: RecDatesReconciled = Field(alias="datesReconciled")
@@ -68,7 +70,7 @@ class RecResult(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "externalRecTypeName", "instanceId", "recDefinitionId", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
+    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "externalRecTypeName", "instanceId", "asAtInstantiated", "recDefinitionId", "recDefinitionDisplayName", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -220,7 +222,9 @@ class RecResult(BaseModel):
             "rec_type": obj.get("recType"),
             "external_rec_type_name": obj.get("externalRecTypeName"),
             "instance_id": RecInstanceId.from_dict(obj.get("instanceId")) if obj.get("instanceId") is not None else None,
+            "as_at_instantiated": obj.get("asAtInstantiated"),
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,
+            "rec_definition_display_name": obj.get("recDefinitionDisplayName"),
             "run_number": obj.get("runNumber"),
             "run_as_at": obj.get("runAsAt"),
             "dates_reconciled": RecDatesReconciled.from_dict(obj.get("datesReconciled")) if obj.get("datesReconciled") is not None else None,

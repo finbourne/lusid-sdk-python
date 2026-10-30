@@ -27,7 +27,7 @@ class DealingEstimates(BaseModel):
     """
     How a fund treats estimated dealing when it strikes a valuation point before dealing is final.  # noqa: E501
     """
-    sources: List[StrictStr] = Field(description="Reserved; not yet enforced. Where the Fund's dealing estimates are read from: LusidTA, orders held in LUSID Transfer Agency, or External, estimates supplied from outside LUSID. At least one, each at most once. Available values: LusidTA, External.")
+    sources: List[StrictStr] = Field(description="Where the Fund's dealing estimates are read from: LusidTA, orders held in LUSID Transfer Agency, or External, orders dealt outside LUSID and reported to it. At least one, each at most once. Available values: LusidTA, External.")
     require_complete: Optional[StrictBool] = Field(default=None, description="Reserved; not yet enforced. Whether every source must have reported before the valuation point can be struck. Defaults to true.", alias="requireComplete")
     count_pending: Optional[StrictBool] = Field(default=None, description="Whether pending orders count towards the estimated flow alongside confirmed ones. Defaults to false.", alias="countPending")
     unit_valuation:  StrictStr = Field(...,alias="unitValuation", description="The price estimated flows are turned into units at: EstimatePrice, the estimate struck at this valuation point, or LastOfficialPrice, the last official dealing price the Fund published. Available values: EstimatePrice, LastOfficialPrice.") 
