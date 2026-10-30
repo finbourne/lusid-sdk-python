@@ -25,12 +25,13 @@ from datetime import datetime
 
 class DealingFlowSummary(BaseModel):
     """
-    The transfer agency estimates a swing decision was made on: how many orders were dealt at the valuation point and what they summed.  # noqa: E501
+    The transfer agency estimates a swing decision was made on: the orders dealt at the valuation point, what they summed, and how many pending orders were left out.  # noqa: E501
     """
     count: StrictInt = Field(description="How many orders were summed.")
     gross_inflow: Union[StrictFloat, StrictInt] = Field(description="The sum of the inflows, in the fund currency. Zero or more.", alias="grossInflow")
     gross_outflow: Union[StrictFloat, StrictInt] = Field(description="The sum of the outflows, in the fund currency, as a magnitude. Zero or more.", alias="grossOutflow")
-    __properties = ["count", "grossInflow", "grossOutflow"]
+    pending_not_counted: StrictInt = Field(description="How many pending orders at the valuation point were left out of the sums because the fund's dealing estimates do not count pending orders. Zero when the fund counts them.", alias="pendingNotCounted")
+    __properties = ["count", "grossInflow", "grossOutflow", "pendingNotCounted"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,7 +79,8 @@ class DealingFlowSummary(BaseModel):
         _obj = DealingFlowSummary.parse_obj({
             "count": obj.get("count"),
             "gross_inflow": obj.get("grossInflow"),
-            "gross_outflow": obj.get("grossOutflow")
+            "gross_outflow": obj.get("grossOutflow"),
+            "pending_not_counted": obj.get("pendingNotCounted")
         })
         return _obj
 

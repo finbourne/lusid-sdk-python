@@ -4,27 +4,27 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**book_allocation_event**](AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
-[**create_allocation_event**](AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
-[**delete_allocation_event**](AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
-[**get_allocation_event**](AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+[**book_allocation_event**](AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
+[**create_allocation_event**](AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
+[**delete_allocation_event**](AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
+[**get_allocation_event**](AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
 [**get_allocation_event_notices**](AllocationEventsApi.md#get_allocation_event_notices) | **GET** /api/allocationevents/{scope}/{code}/notices | [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
-[**get_allocation_event_receivables**](AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
-[**list_allocation_events**](AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+[**get_allocation_event_receivables**](AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+[**list_allocation_events**](AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
 [**list_allocation_payment_holds**](AllocationEventsApi.md#list_allocation_payment_holds) | **GET** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds | [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
-[**plan_allocation_event_booking**](AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+[**plan_allocation_event_booking**](AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
 [**put_allocation_payment_hold**](AllocationEventsApi.md#put_allocation_payment_hold) | **PUT** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold | [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
-[**reallocate_allocation_event**](AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
-[**receive_allocation_event**](AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
-[**reverse_allocation_event**](AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
-[**unbook_allocation_event**](AllocationEventsApi.md#unbook_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/unbook | [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
-[**upsert_allocation_event**](AllocationEventsApi.md#upsert_allocation_event) | **PUT** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+[**reallocate_allocation_event**](AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
+[**receive_allocation_event**](AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+[**reverse_allocation_event**](AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
+[**unbook_allocation_event**](AllocationEventsApi.md#unbook_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/unbook | [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
+[**upsert_allocation_event**](AllocationEventsApi.md#upsert_allocation_event) | **PUT** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
 
 
 # **book_allocation_event**
 > AllocationEvent book_allocation_event(scope, code, allocation_event_book_request, effective_at=effective_at)
 
-[EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+[EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
 
 Freeze a computed Allocation Event under a booking reference, from an effective datetime. Once booked the  event can no longer be replaced or reallocated. Booking again under the same reference returns the event  unchanged; booking under a different reference is refused.
 
@@ -87,7 +87,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.book_allocation_event(scope, code, allocation_event_book_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
+        # [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
         api_response = api_instance.book_allocation_event(scope, code, allocation_event_book_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 # **create_allocation_event**
 > AllocationEvent create_allocation_event(scope, allocation_event_request)
 
-[EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+[EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
 
 Raise a new Allocation Event. The scope is provided in the route and the code in the request body. The event  names the Allocation Map it is shared by, the kind of event, the amount and the date. Its per-investor shares  are computed on creation from the map as it stood on the event date, so the response comes back Computed.
 
@@ -188,7 +188,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_allocation_event(scope, allocation_event_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
+        # [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
         api_response = api_instance.create_allocation_event(scope, allocation_event_request)
         pprint(api_response)
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 # **delete_allocation_event**
 > DeletedEntityResponse delete_allocation_event(scope, code, effective_at=effective_at)
 
-[EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+[EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
 
 Delete an Allocation Event. Given an effective datetime, the Allocation Event is deleted from that datetime  and remains retrievable at earlier effective datetimes. Given none, an Allocation Event that was created  without an effective datetime is removed from the beginning of time, so that its code can be reused;  this includes an event first created without an effective datetime and later upserted with dated versions,  whose dated versions are removed with it. Otherwise it is deleted from the current LUSID system datetime.  Only an Allocation Event that has not been booked can be deleted.
 
@@ -283,7 +283,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_allocation_event(scope, code, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
+        # [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
         api_response = api_instance.delete_allocation_event(scope, code, effective_at=effective_at)
         pprint(api_response)
 
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 # **get_allocation_event**
 > AllocationEvent get_allocation_event(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+[EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
 
 Retrieve a particular Allocation Event at an effective and asAt datetime, including its computed  per-investor shares and, once booked, its booking reference.
 
@@ -380,7 +380,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_allocation_event(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+        # [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
         api_response = api_instance.get_allocation_event(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -520,7 +520,7 @@ Name | Type | Description  | Notes
 # **get_allocation_event_receivables**
 > AllocationReceivablesAgeing get_allocation_event_receivables(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+[EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
 
 What each investor still owes on a booked capital call as of the effective datetime, with how many days past  due it is and the ageing bucket that puts it in.
 
@@ -578,7 +578,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_allocation_event_receivables(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+        # [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
         api_response = api_instance.get_allocation_event_receivables(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -618,7 +618,7 @@ Name | Type | Description  | Notes
 # **list_allocation_events**
 > PagedResourceListOfAllocationEvent list_allocation_events(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+[EARLY ACCESS] ListAllocationEvents: List Allocation Events.
 
 List all the Allocation Events matching a particular criteria.
 
@@ -678,7 +678,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_allocation_events(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+        # [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
         api_response = api_instance.list_allocation_events(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -816,7 +816,7 @@ Name | Type | Description  | Notes
 # **plan_allocation_event_booking**
 > AllocationPostingPlan plan_allocation_event_booking(scope, code, allocation_event_book_request, effective_at=effective_at)
 
-[EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+[EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
 
 Show everything booking a computed Allocation Event under a booking reference would write, validated as the  booking itself would be, without writing any of it: the investors' lines, the roll-ups above them through the  fund structure and the fund-side transactions. A booking that would be refused fails here with every problem  listed; warnings the map's policy lets through come back on the plan.
 
@@ -879,7 +879,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.plan_allocation_event_booking(scope, code, allocation_event_book_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+        # [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
         api_response = api_instance.plan_allocation_event_booking(scope, code, allocation_event_book_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -1022,7 +1022,7 @@ Name | Type | Description  | Notes
 # **reallocate_allocation_event**
 > AllocationEvent reallocate_allocation_event(scope, code, allocation_event_reallocate_request, effective_at=effective_at)
 
-[EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+[EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
 
 Recompute the per-investor shares of an unbooked Allocation Event against its map, from an effective  datetime, recording the reason. Any basis values supplied replace those used before. A booked Allocation  Event cannot be reallocated.
 
@@ -1085,7 +1085,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.reallocate_allocation_event(scope, code, allocation_event_reallocate_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
+        # [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
         api_response = api_instance.reallocate_allocation_event(scope, code, allocation_event_reallocate_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -1125,7 +1125,7 @@ Name | Type | Description  | Notes
 # **receive_allocation_event**
 > AllocationEvent receive_allocation_event(scope, code, allocation_event_receipt_request, effective_at=effective_at)
 
-[EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+[EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
 
 Record cash received from an investor against a booked capital call. The receipt is applied to what the  investor owes on the call; anything over is recorded as a refund payable, so the outstanding amount never  goes negative. A bank charge is borne by the partner or the fund as the map's policy says, and a receipt in  another currency is converted at the rate given.
 
@@ -1188,7 +1188,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.receive_allocation_event(scope, code, allocation_event_receipt_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+        # [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
         api_response = api_instance.receive_allocation_event(scope, code, allocation_event_receipt_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -1228,7 +1228,7 @@ Name | Type | Description  | Notes
 # **reverse_allocation_event**
 > AllocationEvent reverse_allocation_event(scope, code, allocation_event_reverse_request, effective_at=effective_at)
 
-[EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
+[EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
 
 Reverse a booked Allocation Event: every posting the booking wrote is mirrored under the reversal reference and  the event is left Reversed. A reversal falling in a closed period posts in the current period unless it is  marked backdated. A reversal cannot itself be reversed; raise a new event naming the reversed one in its  replaces field to put corrected shares in the books.
 
@@ -1291,7 +1291,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.reverse_allocation_event(scope, code, allocation_event_reverse_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
+        # [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
         api_response = api_instance.reverse_allocation_event(scope, code, allocation_event_reverse_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -1331,7 +1331,7 @@ Name | Type | Description  | Notes
 # **unbook_allocation_event**
 > AllocationEvent unbook_allocation_event(scope, code, allocation_event_unbook_request, effective_at=effective_at)
 
-[EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
+[EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
 
 Take an Allocation Event whose booking stopped half way back to Computed, cancelling every posting the  booking wrote, and record why. Only an event in the Booking status can be unbooked: one that is Booked is  reversed instead.
 
@@ -1394,7 +1394,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.unbook_allocation_event(scope, code, allocation_event_unbook_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
+        # [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
         api_response = api_instance.unbook_allocation_event(scope, code, allocation_event_unbook_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -1434,7 +1434,7 @@ Name | Type | Description  | Notes
 # **upsert_allocation_event**
 > AllocationEvent upsert_allocation_event(scope, code, allocation_event_request)
 
-[EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+[EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
 
 Update or insert an Allocation Event. If the Allocation Event does not exist it is created, otherwise it is  replaced and its shares recomputed. The code in the request body must match the code in the route. A booked  Allocation Event is frozen and cannot be replaced.
 
@@ -1496,7 +1496,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_allocation_event(scope, code, allocation_event_request, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
+        # [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
         api_response = api_instance.upsert_allocation_event(scope, code, allocation_event_request)
         pprint(api_response)
 

@@ -67,7 +67,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def add_allocation_map_exception(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_exception : Annotated[AllocationMapException, Field(description="The exception to add.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label of the map version that gains the exception. Defaults to the exception's effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map's first version.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.  # noqa: E501
 
         Add a per-investor exception (an exclusion or a fixed percentage) to the map's participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -104,7 +104,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def add_allocation_map_exception_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_exception : Annotated[AllocationMapException, Field(description="The exception to add.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label of the map version that gains the exception. Defaults to the exception's effectiveFrom when that is earlier than the current LUSID system datetime, and to the current LUSID system datetime otherwise. Refused if the map has any version starting after that datetime, including a re-save of the same definition, or a later deletion, since neither would carry the exception. Also refused, with the reason, if the defaulted effectiveFrom is before the map's first version.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.  # noqa: E501
 
         Add a per-investor exception (an exclusion or a fixed percentage) to the map's participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -250,7 +250,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def create_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.  # noqa: E501
 
         Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -283,7 +283,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def create_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.  # noqa: E501
 
         Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -417,7 +417,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def delete_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Allocation Map is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.  # noqa: E501
 
         Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -452,7 +452,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def delete_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Allocation Map is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.  # noqa: E501
 
         Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -585,7 +585,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def get_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Allocation Map. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Allocation Map. Defaults to returning the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] GetAllocationMap: Get an Allocation Map.  # noqa: E501
 
         Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -622,7 +622,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def get_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Allocation Map. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Allocation Map. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] GetAllocationMap: Get an Allocation Map.  # noqa: E501
 
         Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -764,7 +764,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def list_allocation_maps(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Allocation Maps; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Allocation Map code, specify \"id.Code eq 'AllocationMap1'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfAllocationMap, Awaitable[PagedResourceListOfAllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.  # noqa: E501
+        """[EARLY ACCESS] ListAllocationMaps: List Allocation Maps.  # noqa: E501
 
         List all the Allocation Maps matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -805,7 +805,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def list_allocation_maps_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Allocation Maps. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Allocation Maps. Defaults to returning the latest version of each Allocation Map if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Allocation Maps; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Allocation Map code, specify \"id.Code eq 'AllocationMap1'\".              For more information about filtering LUSID results, see https://support.lusid.com/knowledgebase/article/KA-01914.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.  # noqa: E501
+        """[EARLY ACCESS] ListAllocationMaps: List Allocation Maps.  # noqa: E501
 
         List all the Allocation Maps matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -960,7 +960,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def remove_allocation_map_exception(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record whose exception is removed.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.  # noqa: E501
 
         Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -997,7 +997,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def remove_allocation_map_exception_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], investor_record_id : Annotated[StrictStr, Field(..., description="The investor record whose exception is removed.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the exception no longer applies. Defaults to the current LUSID system datetime if not specified. Refused if the map has any version starting after that datetime, including a re-save of the same definition, which would still carry the exception, or a later deletion.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.  # noqa: E501
 
         Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1136,7 +1136,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def resolve_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_resolve_request : Annotated[AllocationMapResolveRequest, Field(description="The event to resolve and the basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve the map. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the map. Defaults to the latest version if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMapResolution, Awaitable[AllocationMapResolution]]:  # noqa: E501
-        """[EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.  # noqa: E501
 
         Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1175,7 +1175,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def resolve_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_resolve_request : Annotated[AllocationMapResolveRequest, Field(description="The event to resolve and the basis values to use.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to resolve the map. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the map. Defaults to the latest version if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.  # noqa: E501
 
         Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1330,7 +1330,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
 
         Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1365,7 +1365,7 @@ class AllocationMapsApi:
 
     @validate_arguments
     def upsert_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
+        """[EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
 
         Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

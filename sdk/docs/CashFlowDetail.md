@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **report_currency_amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **trade_to_report_currency_rate** | **float** | The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request&#39;s report currency. For the default FxSpot rate type it is resolved at the cashflow&#39;s transaction (trade) date, not its payment date; for FxForward it is the forward rate for the payment date (see QueryBucketCashFlowDrillDownRequest.FxRateType and FxRateTypeApplied). Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error). | [optional] 
 **fx_rate_type_applied** | **str** | Which rate type produced TradeToReportCurrencyRate: FxSpot or FxForward. Under the ForwardThenSpot request option this shows whether a cashflow received the forward rate or fell back to spot. Only present when the cashflow was converted into the ReportCurrency. | [optional] 
+**sub_holding_keys** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | The sub-holding keys of the holding that produced the cashflow, keyed by property key. Each cashflow carries the keys of its own portfolio&#39;s holding, so when drilling into a portfolio group whose portfolios share the same sub-holding keys, those keys are reported on every cashflow. Empty when the portfolio defines no sub-holding keys. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -48,8 +49,9 @@ error: Optional[StrictStr] = "example_error"
 report_currency_amount: Optional[CurrencyAndAmount] = # Replace with your value
 trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 fx_rate_type_applied: Optional[StrictStr] = "example_fx_rate_type_applied"
+sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, report_currency_amount=report_currency_amount, trade_to_report_currency_rate=trade_to_report_currency_rate, fx_rate_type_applied=fx_rate_type_applied, links=links)
+cash_flow_detail_instance = CashFlowDetail(payment_date=payment_date, amount=amount, source_type=source_type, instrument_id=instrument_id, instrument_display_name=instrument_display_name, transaction_id=transaction_id, portfolio_id=portfolio_id, flow_type=flow_type, movement_name=movement_name, gross_amount=gross_amount, haircut_fraction=haircut_fraction, net_amount=net_amount, haircut_rule_applied=haircut_rule_applied, error=error, report_currency_amount=report_currency_amount, trade_to_report_currency_rate=trade_to_report_currency_rate, fx_rate_type_applied=fx_rate_type_applied, sub_holding_keys=sub_holding_keys, links=links)
 
 ```
 

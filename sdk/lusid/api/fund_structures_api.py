@@ -67,7 +67,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def add_fund_structure_member(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], fund_structure_member_request : Annotated[FundStructureMemberRequest, Field(description="The node to add and the links joining it to existing members.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.  # noqa: E501
 
         Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -104,7 +104,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def add_fund_structure_member_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], fund_structure_member_request : Annotated[FundStructureMemberRequest, Field(description="The node to add and the links joining it to existing members.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the member is part of the structure. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.  # noqa: E501
 
         Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -436,7 +436,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def create_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], fund_structure_request : Annotated[FundStructureRequest, Field(description="The definition of the Fund Structure.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] CreateFundStructure: Create a Fund Structure.  # noqa: E501
 
         Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -469,7 +469,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def create_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], fund_structure_request : Annotated[FundStructureRequest, Field(description="The definition of the Fund Structure.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] CreateFundStructure: Create a Fund Structure.  # noqa: E501
 
         Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -603,7 +603,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def delete_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
 
         Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -638,7 +638,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def delete_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure to be deleted.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure to be deleted. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the Fund Structure is deleted. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.  # noqa: E501
 
         Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -771,7 +771,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def get_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] GetFundStructure: Get a Fund Structure.  # noqa: E501
 
         Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -810,7 +810,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def get_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Fund Structure. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Fund Structure. Defaults to returning the latest version if not specified.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto the Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'. If no properties are specified, then no properties will be returned.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] GetFundStructure: Get a Fund Structure.  # noqa: E501
 
         Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -959,7 +959,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def list_fund_structures(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFundStructure, Awaitable[PagedResourceListOfFundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFundStructures: List Fund Structures.  # noqa: E501
+        """[EARLY ACCESS] ListFundStructures: List Fund Structures.  # noqa: E501
 
         List all the Fund Structures matching the given criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1002,7 +1002,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def list_fund_structures_with_http_info(self, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Fund Structures. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list Fund Structures. Defaults to returning the latest version of each Fund Structure if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing Fund Structures; this value is returned from the previous call. If a pagination token is provided, the filter and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For example, to filter on the Fund Structure code, specify \"id.Code eq 'Structure1'\". For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the 'FundStructure' domain to decorate onto each Fund Structure.              These must take the format {domain}/{scope}/{code}, for example 'FundStructure/Manager/Id'.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFundStructures: List Fund Structures.  # noqa: E501
+        """[EARLY ACCESS] ListFundStructures: List Fund Structures.  # noqa: E501
 
         List all the Fund Structures matching the given criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1164,7 +1164,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def remove_fund_structure_member(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], node_code : Annotated[StrictStr, Field(..., description="The node code of the member to remove.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.  # noqa: E501
 
         Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1201,7 +1201,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def remove_fund_structure_member_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure.")], node_code : Annotated[StrictStr, Field(..., description="The node code of the member to remove.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the member is no longer part of the structure. Defaults to the current LUSID system datetime if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.  # noqa: E501
 
         Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1340,7 +1340,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def upsert_fund_structure(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body.")], fund_structure_request : Annotated[FundStructureRequest, Field(description="The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified.")], async_req: Optional[bool]=None, **kwargs) -> Union[FundStructure, Awaitable[FundStructure]]:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.  # noqa: E501
 
         Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1375,7 +1375,7 @@ class FundStructuresApi:
 
     @validate_arguments
     def upsert_fund_structure_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund Structure.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund Structure. Together with the scope this uniquely identifies the Fund Structure, and must match the code in the request body.")], fund_structure_request : Annotated[FundStructureRequest, Field(description="The full definition of the Fund Structure from the effective datetime in the request, or the current LUSID system datetime if not specified.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.  # noqa: E501
+        """[EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.  # noqa: E501
 
         Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

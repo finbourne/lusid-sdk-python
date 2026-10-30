@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **parent_facility_details** | **Dict[str, Optional[str]]** | The details of the parent loan facility of this loan if this loan is a contract on a facility. | [optional] [readonly] 
 **schedules** | [**List[Schedule]**](Schedule.md) | Repayment schedules for the loan. | 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
-**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | 
+**trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
 ## Example
 
 ```python
@@ -28,8 +29,9 @@ parent_facility: Optional[StrictStr] = "example_parent_facility"
 parent_facility_details: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 schedules: List[Schedule] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
+trading_conventions: Optional[TradingConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-flexible_loan_instance = FlexibleLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, parent_facility=parent_facility, parent_facility_details=parent_facility_details, schedules=schedules, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+flexible_loan_instance = FlexibleLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, parent_facility=parent_facility, parent_facility_details=parent_facility_details, schedules=schedules, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
 ```
 

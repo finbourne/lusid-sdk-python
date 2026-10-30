@@ -44,29 +44,29 @@ Class | Method | HTTP request | Description
 *AggregationApi* | [**get_queryable_keys_for_metrics**](docs/AggregationApi.md#get_queryable_keys_for_metrics) | **POST** /api/aggregation/$queryablekeys | [EARLY ACCESS] GetQueryableKeysForMetrics: Query the queryable keys behind a given set of valuation metrics.
 *AggregationApi* | [**get_valuation**](docs/AggregationApi.md#get_valuation) | **POST** /api/aggregation/$valuation | GetValuation: Perform valuation for a list of portfolios and/or portfolio groups
 *AggregationApi* | [**get_valuation_of_weighted_instruments**](docs/AggregationApi.md#get_valuation_of_weighted_instruments) | **POST** /api/aggregation/$valuationinlined | GetValuationOfWeightedInstruments: Perform valuation for an inlined portfolio
-*AllocationEventsApi* | [**book_allocation_event**](docs/AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EXPERIMENTAL] BookAllocationEvent: Book an Allocation Event.
-*AllocationEventsApi* | [**create_allocation_event**](docs/AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EXPERIMENTAL] CreateAllocationEvent: Create an Allocation Event.
-*AllocationEventsApi* | [**delete_allocation_event**](docs/AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationEvent: Delete an Allocation Event.
-*AllocationEventsApi* | [**get_allocation_event**](docs/AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] GetAllocationEvent: Get an Allocation Event.
+*AllocationEventsApi* | [**book_allocation_event**](docs/AllocationEventsApi.md#book_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/book | [EARLY ACCESS] BookAllocationEvent: Book an Allocation Event.
+*AllocationEventsApi* | [**create_allocation_event**](docs/AllocationEventsApi.md#create_allocation_event) | **POST** /api/allocationevents/{scope} | [EARLY ACCESS] CreateAllocationEvent: Create an Allocation Event.
+*AllocationEventsApi* | [**delete_allocation_event**](docs/AllocationEventsApi.md#delete_allocation_event) | **DELETE** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] DeleteAllocationEvent: Delete an Allocation Event.
+*AllocationEventsApi* | [**get_allocation_event**](docs/AllocationEventsApi.md#get_allocation_event) | **GET** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] GetAllocationEvent: Get an Allocation Event.
 *AllocationEventsApi* | [**get_allocation_event_notices**](docs/AllocationEventsApi.md#get_allocation_event_notices) | **GET** /api/allocationevents/{scope}/{code}/notices | [EARLY ACCESS] GetAllocationEventNotices: [EARLY ACCESS] GetAllocationEventNotices: Get the notices an allocation event issues to its partners.
-*AllocationEventsApi* | [**get_allocation_event_receivables**](docs/AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EXPERIMENTAL] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
-*AllocationEventsApi* | [**list_allocation_events**](docs/AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EXPERIMENTAL] ListAllocationEvents: List Allocation Events.
+*AllocationEventsApi* | [**get_allocation_event_receivables**](docs/AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
+*AllocationEventsApi* | [**list_allocation_events**](docs/AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
 *AllocationEventsApi* | [**list_allocation_payment_holds**](docs/AllocationEventsApi.md#list_allocation_payment_holds) | **GET** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds | [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner's payment.
-*AllocationEventsApi* | [**plan_allocation_event_booking**](docs/AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EXPERIMENTAL] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
+*AllocationEventsApi* | [**plan_allocation_event_booking**](docs/AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
 *AllocationEventsApi* | [**put_allocation_payment_hold**](docs/AllocationEventsApi.md#put_allocation_payment_hold) | **PUT** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold | [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner's payment.
-*AllocationEventsApi* | [**reallocate_allocation_event**](docs/AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EXPERIMENTAL] ReallocateAllocationEvent: Reallocate an Allocation Event.
-*AllocationEventsApi* | [**receive_allocation_event**](docs/AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EXPERIMENTAL] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
-*AllocationEventsApi* | [**reverse_allocation_event**](docs/AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EXPERIMENTAL] ReverseAllocationEvent: Reverse an Allocation Event.
-*AllocationEventsApi* | [**unbook_allocation_event**](docs/AllocationEventsApi.md#unbook_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/unbook | [EXPERIMENTAL] UnbookAllocationEvent: Unbook an Allocation Event.
-*AllocationEventsApi* | [**upsert_allocation_event**](docs/AllocationEventsApi.md#upsert_allocation_event) | **PUT** /api/allocationevents/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationEvent: Upsert an Allocation Event.
-*AllocationMapsApi* | [**add_allocation_map_exception**](docs/AllocationMapsApi.md#add_allocation_map_exception) | **POST** /api/allocationmaps/{scope}/{code}/exceptions | [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
-*AllocationMapsApi* | [**create_allocation_map**](docs/AllocationMapsApi.md#create_allocation_map) | **POST** /api/allocationmaps/{scope} | [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
-*AllocationMapsApi* | [**delete_allocation_map**](docs/AllocationMapsApi.md#delete_allocation_map) | **DELETE** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
-*AllocationMapsApi* | [**get_allocation_map**](docs/AllocationMapsApi.md#get_allocation_map) | **GET** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
-*AllocationMapsApi* | [**list_allocation_maps**](docs/AllocationMapsApi.md#list_allocation_maps) | **GET** /api/allocationmaps | [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
-*AllocationMapsApi* | [**remove_allocation_map_exception**](docs/AllocationMapsApi.md#remove_allocation_map_exception) | **DELETE** /api/allocationmaps/{scope}/{code}/exceptions/{investorRecordId} | [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
-*AllocationMapsApi* | [**resolve_allocation_map**](docs/AllocationMapsApi.md#resolve_allocation_map) | **POST** /api/allocationmaps/{scope}/{code}/resolve | [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
-*AllocationMapsApi* | [**upsert_allocation_map**](docs/AllocationMapsApi.md#upsert_allocation_map) | **PUT** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+*AllocationEventsApi* | [**reallocate_allocation_event**](docs/AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
+*AllocationEventsApi* | [**receive_allocation_event**](docs/AllocationEventsApi.md#receive_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/receipts | [EARLY ACCESS] ReceiveAllocationEvent: Record a receipt against an Allocation Event.
+*AllocationEventsApi* | [**reverse_allocation_event**](docs/AllocationEventsApi.md#reverse_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reverse | [EARLY ACCESS] ReverseAllocationEvent: Reverse an Allocation Event.
+*AllocationEventsApi* | [**unbook_allocation_event**](docs/AllocationEventsApi.md#unbook_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/unbook | [EARLY ACCESS] UnbookAllocationEvent: Unbook an Allocation Event.
+*AllocationEventsApi* | [**upsert_allocation_event**](docs/AllocationEventsApi.md#upsert_allocation_event) | **PUT** /api/allocationevents/{scope}/{code} | [EARLY ACCESS] UpsertAllocationEvent: Upsert an Allocation Event.
+*AllocationMapsApi* | [**add_allocation_map_exception**](docs/AllocationMapsApi.md#add_allocation_map_exception) | **POST** /api/allocationmaps/{scope}/{code}/exceptions | [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
+*AllocationMapsApi* | [**create_allocation_map**](docs/AllocationMapsApi.md#create_allocation_map) | **POST** /api/allocationmaps/{scope} | [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
+*AllocationMapsApi* | [**delete_allocation_map**](docs/AllocationMapsApi.md#delete_allocation_map) | **DELETE** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
+*AllocationMapsApi* | [**get_allocation_map**](docs/AllocationMapsApi.md#get_allocation_map) | **GET** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
+*AllocationMapsApi* | [**list_allocation_maps**](docs/AllocationMapsApi.md#list_allocation_maps) | **GET** /api/allocationmaps | [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
+*AllocationMapsApi* | [**remove_allocation_map_exception**](docs/AllocationMapsApi.md#remove_allocation_map_exception) | **DELETE** /api/allocationmaps/{scope}/{code}/exceptions/{investorRecordId} | [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+*AllocationMapsApi* | [**resolve_allocation_map**](docs/AllocationMapsApi.md#resolve_allocation_map) | **POST** /api/allocationmaps/{scope}/{code}/resolve | [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
+*AllocationMapsApi* | [**upsert_allocation_map**](docs/AllocationMapsApi.md#upsert_allocation_map) | **PUT** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
 *AllocationsApi* | [**delete_allocation**](docs/AllocationsApi.md#delete_allocation) | **DELETE** /api/allocations/{scope}/{code} | [EARLY ACCESS] DeleteAllocation: Delete allocation
 *AllocationsApi* | [**get_allocation**](docs/AllocationsApi.md#get_allocation) | **GET** /api/allocations/{scope}/{code} | [EARLY ACCESS] GetAllocation: Get Allocation
 *AllocationsApi* | [**list_allocations**](docs/AllocationsApi.md#list_allocations) | **GET** /api/allocations | ListAllocations: List Allocations
@@ -315,14 +315,14 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
-*FundStructuresApi* | [**add_fund_structure_member**](docs/FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+*FundStructuresApi* | [**add_fund_structure_member**](docs/FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
 *FundStructuresApi* | [**close_fund_structure**](docs/FundStructuresApi.md#close_fund_structure) | **POST** /api/fundstructures/{scope}/{code}/$close | [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
-*FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
-*FundStructuresApi* | [**delete_fund_structure**](docs/FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
-*FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-*FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
-*FundStructuresApi* | [**remove_fund_structure_member**](docs/FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
-*FundStructuresApi* | [**upsert_fund_structure**](docs/FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+*FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
+*FundStructuresApi* | [**delete_fund_structure**](docs/FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
+*FundStructuresApi* | [**get_fund_structure**](docs/FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
+*FundStructuresApi* | [**list_fund_structures**](docs/FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EARLY ACCESS] ListFundStructures: List Fund Structures.
+*FundStructuresApi* | [**remove_fund_structure_member**](docs/FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
+*FundStructuresApi* | [**upsert_fund_structure**](docs/FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
 *FundValuationTemplatesApi* | [**delete_valuation_address_key_template**](docs/FundValuationTemplatesApi.md#delete_valuation_address_key_template) | **DELETE** /api/fundvaluationtemplates/{scope}/{code} | [EXPERIMENTAL] DeleteValuationAddressKeyTemplate: Delete a Valuation Template.
 *FundValuationTemplatesApi* | [**get_valuation_address_key_template**](docs/FundValuationTemplatesApi.md#get_valuation_address_key_template) | **GET** /api/fundvaluationtemplates/{scope}/{code} | [EXPERIMENTAL] GetValuationAddressKeyTemplate: Get a Valuation Template.
 *FundValuationTemplatesApi* | [**list_valuation_address_key_templates**](docs/FundValuationTemplatesApi.md#list_valuation_address_key_templates) | **GET** /api/fundvaluationtemplates | [EXPERIMENTAL] ListValuationAddressKeyTemplates: List Valuation Templates.
@@ -1422,7 +1422,9 @@ Class | Method | HTTP request | Description
  - [DateTimeListComplianceParameter](docs/DateTimeListComplianceParameter.md)
  - [DayMonth](docs/DayMonth.md)
  - [DayOfWeek](docs/DayOfWeek.md)
+ - [DealingEstimates](docs/DealingEstimates.md)
  - [DealingFlowSummary](docs/DealingFlowSummary.md)
+ - [DealingFlowValuation](docs/DealingFlowValuation.md)
  - [DecimalComplianceParameter](docs/DecimalComplianceParameter.md)
  - [DecimalList](docs/DecimalList.md)
  - [DecimalListComplianceParameter](docs/DecimalListComplianceParameter.md)
@@ -1505,6 +1507,9 @@ Class | Method | HTTP request | Description
  - [ErrorDetail](docs/ErrorDetail.md)
  - [EstimateTransferAgencyOrderRequest](docs/EstimateTransferAgencyOrderRequest.md)
  - [EstimateTransferAgencyOrdersResponse](docs/EstimateTransferAgencyOrdersResponse.md)
+ - [EstimateValuation](docs/EstimateValuation.md)
+ - [EstimateValuationDifference](docs/EstimateValuationDifference.md)
+ - [EstimateValuationOutcome](docs/EstimateValuationOutcome.md)
  - [EstimateVariant](docs/EstimateVariant.md)
  - [EventDateRange](docs/EventDateRange.md)
  - [EventInheritance](docs/EventInheritance.md)
@@ -2300,6 +2305,7 @@ Class | Method | HTTP request | Description
  - [RecResultDecisionGroup](docs/RecResultDecisionGroup.md)
  - [RecResultDecisionUpdate](docs/RecResultDecisionUpdate.md)
  - [RecResultException](docs/RecResultException.md)
+ - [RecResultExternalIdentifiersItem](docs/RecResultExternalIdentifiersItem.md)
  - [RecResultHoldingImpact](docs/RecResultHoldingImpact.md)
  - [RecResultHoldingItem](docs/RecResultHoldingItem.md)
  - [RecResultItem](docs/RecResultItem.md)
@@ -2603,6 +2609,9 @@ Class | Method | HTTP request | Description
  - [StringComplianceParameter](docs/StringComplianceParameter.md)
  - [StringList](docs/StringList.md)
  - [StringListComplianceParameter](docs/StringListComplianceParameter.md)
+ - [StripBond](docs/StripBond.md)
+ - [StripBondCashflowEvent](docs/StripBondCashflowEvent.md)
+ - [StripBondModelOptions](docs/StripBondModelOptions.md)
  - [StructuredResultData](docs/StructuredResultData.md)
  - [StructuredResultDataId](docs/StructuredResultDataId.md)
  - [StructuredResultDataResult](docs/StructuredResultDataResult.md)

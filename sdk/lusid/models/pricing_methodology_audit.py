@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.dealing_flow_summary import DealingFlowSummary
+from lusid.models.estimate_valuation import EstimateValuation
 from lusid.models.pricing_methodology_engine_proposal import PricingMethodologyEngineProposal
 from lusid.models.pricing_methodology_override import PricingMethodologyOverride
 from lusid.models.swing_spread_applied import SwingSpreadApplied
@@ -40,7 +41,8 @@ class PricingMethodologyAudit(BaseModel):
     inflow_trigger: Optional[SwingTriggerEvaluation] = Field(default=None, alias="inflowTrigger")
     outflow_trigger: Optional[SwingTriggerEvaluation] = Field(default=None, alias="outflowTrigger")
     dealing_flows: Optional[DealingFlowSummary] = Field(default=None, alias="dealingFlows")
-    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows"]
+    estimate_valuation: Optional[EstimateValuation] = Field(default=None, alias="estimateValuation")
+    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows", "estimateValuation"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +94,9 @@ class PricingMethodologyAudit(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of dealing_flows
         if self.dealing_flows:
             _dict['dealingFlows'] = self.dealing_flows.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of estimate_valuation
+        if self.estimate_valuation:
+            _dict['estimateValuation'] = self.estimate_valuation.to_dict()
         # set to None if net_cashflow_pct_of_nav (nullable) is None
         # and __fields_set__ contains the field
         if self.net_cashflow_pct_of_nav is None and "net_cashflow_pct_of_nav" in self.__fields_set__:
@@ -116,7 +121,8 @@ class PricingMethodologyAudit(BaseModel):
             "override": PricingMethodologyOverride.from_dict(obj.get("override")) if obj.get("override") is not None else None,
             "inflow_trigger": SwingTriggerEvaluation.from_dict(obj.get("inflowTrigger")) if obj.get("inflowTrigger") is not None else None,
             "outflow_trigger": SwingTriggerEvaluation.from_dict(obj.get("outflowTrigger")) if obj.get("outflowTrigger") is not None else None,
-            "dealing_flows": DealingFlowSummary.from_dict(obj.get("dealingFlows")) if obj.get("dealingFlows") is not None else None
+            "dealing_flows": DealingFlowSummary.from_dict(obj.get("dealingFlows")) if obj.get("dealingFlows") is not None else None,
+            "estimate_valuation": EstimateValuation.from_dict(obj.get("estimateValuation")) if obj.get("estimateValuation") is not None else None
         })
         return _obj
 

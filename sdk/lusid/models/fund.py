@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.allocation_group import AllocationGroup
 from lusid.models.day_month import DayMonth
+from lusid.models.dealing_estimates import DealingEstimates
 from lusid.models.fund_instrument import FundInstrument
 from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.link import Link
@@ -67,11 +68,12 @@ class Fund(BaseModel):
     fund_instrument: Optional[FundInstrument] = Field(default=None, alias="fundInstrument")
     pricing_methodology: Optional[PricingMethodology] = Field(default=None, alias="pricingMethodology")
     reporting_prices: Optional[List[ReportingPrice]] = Field(default=None, description="Share class prices the Fund publishes at each valuation point under labels of its own, alongside the dealing price, for example a mid price for performance reporting. Optional. Each source other than Mid must be published by the valuation recipe of every active NAV type. Labels must be unique and cannot be dealingPrice, dealingBid or dealingOffer. Patch the list whole at /reportingPrices.", alias="reportingPrices")
+    dealing_estimates: Optional[DealingEstimates] = Field(default=None, alias="dealingEstimates")
     version: Optional[Version] = None
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "version", "whtParameters", "valuationTemplateId", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "dealingEstimates", "version", "whtParameters", "valuationTemplateId", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -175,6 +177,9 @@ class Fund(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['reportingPrices'] = _items
+        # override the default output from pydantic by calling `to_dict()` of dealing_estimates
+        if self.dealing_estimates:
+            _dict['dealingEstimates'] = self.dealing_estimates.to_dict()
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -319,6 +324,7 @@ class Fund(BaseModel):
             "fund_instrument": FundInstrument.from_dict(obj.get("fundInstrument")) if obj.get("fundInstrument") is not None else None,
             "pricing_methodology": PricingMethodology.from_dict(obj.get("pricingMethodology")) if obj.get("pricingMethodology") is not None else None,
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,
+            "dealing_estimates": DealingEstimates.from_dict(obj.get("dealingEstimates")) if obj.get("dealingEstimates") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
             "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,

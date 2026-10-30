@@ -12,16 +12,13 @@ from datetime import datetime
 
 # Example with RecResultItem 
 
-rec_result_holding_item_instance = lusid.models.rec_result_holding_item.RecResultHoldingItem(
-                        portfolio_id = lusid.models.resource_id.ResourceId(
-                            scope = '', 
-                            code = '', ), 
-                        portfolio_display_name = '', 
-                        holding_id = '', 
-                        tax_lot_id = '', 
-                        holding_instrument_scope = '', 
-                        holding_lusid_instrument_id = '', 
-                        holding_instrument_name = '', 
+rec_result_external_identifiers_item_instance = lusid.models.rec_result_external_identifiers_item.RecResultExternalIdentifiersItem(
+                        entity_scope = '', 
+                        entity_unique_id = '', 
+                        entity_display_name = '', 
+                        identifiers = {
+                            'key' : ''
+                            }, 
                         item_type = '', 
                         rule_and_attribute_values = {
                             'key' : ''
@@ -31,11 +28,13 @@ rec_result_holding_item_instance = lusid.models.rec_result_holding_item.RecResul
                                 writeback_type = '', )
                             ], )
 
-rec_result_item_instance = RecResultItem(rec_result_holding_item_instance)
+rec_result_item_instance = RecResultItem(rec_result_external_identifiers_item_instance)
 
 ```
 See all compatible oneOf types with RecResultItem
 
+
+ * [RecResultHoldingItem](./RecResultHoldingItem.md)
 
  * [RecResultRelationalDataItem](./RecResultRelationalDataItem.md)
 

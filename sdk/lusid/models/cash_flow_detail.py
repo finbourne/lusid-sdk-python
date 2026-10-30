@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
+from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
 
 class CashFlowDetail(BaseModel):
@@ -47,8 +48,9 @@ class CashFlowDetail(BaseModel):
     report_currency_amount: Optional[CurrencyAndAmount] = Field(default=None, alias="reportCurrencyAmount")
     trade_to_report_currency_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate used to convert the cashflow amount from its own payment currency (see Amount) into the request's report currency. For the default FxSpot rate type it is resolved at the cashflow's transaction (trade) date, not its payment date; for FxForward it is the forward rate for the payment date (see QueryBucketCashFlowDrillDownRequest.FxRateType and FxRateTypeApplied). Only present when ReportCurrency was supplied on the request; not present when it was omitted, or when the rate could not be resolved (see Error).", alias="tradeToReportCurrencyRate")
     fx_rate_type_applied:  Optional[StrictStr] = Field(None,alias="fxRateTypeApplied", description="Which rate type produced TradeToReportCurrencyRate: FxSpot or FxForward. Under the ForwardThenSpot request option this shows whether a cashflow received the forward rate or fell back to spot. Only present when the cashflow was converted into the ReportCurrency.") 
+    sub_holding_keys: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding keys of the holding that produced the cashflow, keyed by property key. Each cashflow carries the keys of its own portfolio's holding, so when drilling into a portfolio group whose portfolios share the same sub-holding keys, those keys are reported on every cashflow. Empty when the portfolio defines no sub-holding keys.", alias="subHoldingKeys")
     links: Optional[List[Link]] = None
-    __properties = ["paymentDate", "amount", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "reportCurrencyAmount", "tradeToReportCurrencyRate", "fxRateTypeApplied", "links"]
+    __properties = ["paymentDate", "amount", "sourceType", "instrumentId", "instrumentDisplayName", "transactionId", "portfolioId", "flowType", "movementName", "grossAmount", "haircutFraction", "netAmount", "haircutRuleApplied", "error", "reportCurrencyAmount", "tradeToReportCurrencyRate", "fxRateTypeApplied", "subHoldingKeys", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -97,6 +99,13 @@ class CashFlowDetail(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of report_currency_amount
         if self.report_currency_amount:
             _dict['reportCurrencyAmount'] = self.report_currency_amount.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in sub_holding_keys (dict)
+        _field_dict = {}
+        if self.sub_holding_keys:
+            for _key in self.sub_holding_keys:
+                if self.sub_holding_keys[_key]:
+                    _field_dict[_key] = self.sub_holding_keys[_key].to_dict()
+            _dict['subHoldingKeys'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -149,6 +158,11 @@ class CashFlowDetail(BaseModel):
         if self.fx_rate_type_applied is None and "fx_rate_type_applied" in self.__fields_set__:
             _dict['fxRateTypeApplied'] = None
 
+        # set to None if sub_holding_keys (nullable) is None
+        # and __fields_set__ contains the field
+        if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
+            _dict['subHoldingKeys'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -183,6 +197,12 @@ class CashFlowDetail(BaseModel):
             "report_currency_amount": CurrencyAndAmount.from_dict(obj.get("reportCurrencyAmount")) if obj.get("reportCurrencyAmount") is not None else None,
             "trade_to_report_currency_rate": obj.get("tradeToReportCurrencyRate"),
             "fx_rate_type_applied": obj.get("fxRateTypeApplied"),
+            "sub_holding_keys": dict(
+                (_k, PerpetualProperty.from_dict(_v))
+                for _k, _v in obj.get("subHoldingKeys").items()
+            )
+            if obj.get("subHoldingKeys") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

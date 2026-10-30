@@ -10,7 +10,8 @@ Name | Type | Description | Notes
 **strike** | **float** | Agreed forward price at trade inception. Reference only — not used in the market value calculation,  which consumes the pre-netted price from the quote store. | [optional] 
 **delivery_type** | **str** | Whether the forward settles in cash or through physical delivery of the underlying.                Supported string (enumeration) values are: [Cash, Physical]. Available values: Cash, Physical. | 
 **underlying** | [**LusidInstrument**](LusidInstrument.md) |  | [optional] 
-**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility. | 
+**trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
 ## Example
 
 ```python
@@ -26,8 +27,9 @@ dom_ccy: StrictStr = "example_dom_ccy"
 strike: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 delivery_type: StrictStr = "example_delivery_type"
 underlying: Optional[LusidInstrument] = None
+trading_conventions: Optional[TradingConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-commodity_forward_instance = CommodityForward(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, strike=strike, delivery_type=delivery_type, underlying=underlying, instrument_type=instrument_type)
+commodity_forward_instance = CommodityForward(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, strike=strike, delivery_type=delivery_type, underlying=underlying, trading_conventions=trading_conventions, instrument_type=instrument_type)
 
 ```
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **inflow_trigger** | [**SwingTriggerEvaluation**](SwingTriggerEvaluation.md) |  | [optional] 
 **outflow_trigger** | [**SwingTriggerEvaluation**](SwingTriggerEvaluation.md) |  | [optional] 
 **dealing_flows** | [**DealingFlowSummary**](DealingFlowSummary.md) |  | [optional] 
+**estimate_valuation** | [**EstimateValuation**](EstimateValuation.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ override: Optional[PricingMethodologyOverride] = None
 inflow_trigger: Optional[SwingTriggerEvaluation] = # Replace with your value
 outflow_trigger: Optional[SwingTriggerEvaluation] = # Replace with your value
 dealing_flows: Optional[DealingFlowSummary] = # Replace with your value
-pricing_methodology_audit_instance = PricingMethodologyAudit(net_cashflow=net_cashflow, net_cashflow_pct_of_nav=net_cashflow_pct_of_nav, spreads_applied=spreads_applied, engine_proposal=engine_proposal, override=override, inflow_trigger=inflow_trigger, outflow_trigger=outflow_trigger, dealing_flows=dealing_flows)
+estimate_valuation: Optional[EstimateValuation] = # Replace with your value
+pricing_methodology_audit_instance = PricingMethodologyAudit(net_cashflow=net_cashflow, net_cashflow_pct_of_nav=net_cashflow_pct_of_nav, spreads_applied=spreads_applied, engine_proposal=engine_proposal, override=override, inflow_trigger=inflow_trigger, outflow_trigger=outflow_trigger, dealing_flows=dealing_flows, estimate_valuation=estimate_valuation)
 
 ```
 

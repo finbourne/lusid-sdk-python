@@ -4,20 +4,20 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_fund_structure_member**](FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+[**add_fund_structure_member**](FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
 [**close_fund_structure**](FundStructuresApi.md#close_fund_structure) | **POST** /api/fundstructures/{scope}/{code}/$close | [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
-[**create_fund_structure**](FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
-[**delete_fund_structure**](FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
-[**get_fund_structure**](FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
-[**list_fund_structures**](FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EXPERIMENTAL] ListFundStructures: List Fund Structures.
-[**remove_fund_structure_member**](FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
-[**upsert_fund_structure**](FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+[**create_fund_structure**](FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
+[**delete_fund_structure**](FundStructuresApi.md#delete_fund_structure) | **DELETE** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
+[**get_fund_structure**](FundStructuresApi.md#get_fund_structure) | **GET** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
+[**list_fund_structures**](FundStructuresApi.md#list_fund_structures) | **GET** /api/fundstructures | [EARLY ACCESS] ListFundStructures: List Fund Structures.
+[**remove_fund_structure_member**](FundStructuresApi.md#remove_fund_structure_member) | **DELETE** /api/fundstructures/{scope}/{code}/members/{nodeCode} | [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
+[**upsert_fund_structure**](FundStructuresApi.md#upsert_fund_structure) | **PUT** /api/fundstructures/{scope}/{code} | [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
 
 
 # **add_fund_structure_member**
 > FundStructure add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at)
 
-[EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+[EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
 
 Add a node and the links that join it to existing members, from an effective datetime. The result is a new  bitemporal version of the structure. The change applies to the version in force at that datetime; if a  later version of the structure already exists the request is rejected, since the member would otherwise  drop out when that version begins. Upsert the full definition for each affected version in that case.
 
@@ -80,7 +80,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] AddFundStructureMember: Add a member to a Fund Structure.
+        # [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
         api_response = api_instance.add_fund_structure_member(scope, code, fund_structure_member_request, effective_at=effective_at)
         pprint(api_response)
 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 # **create_fund_structure**
 > FundStructure create_fund_structure(scope, fund_structure_request)
 
-[EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+[EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
 
 Create a new Fund Structure Model. The scope and code of the Fund Structure are provided in the request body.
 
@@ -284,7 +284,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_fund_structure(scope, fund_structure_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateFundStructure: Create a Fund Structure.
+        # [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
         api_response = api_instance.create_fund_structure(scope, fund_structure_request)
         pprint(api_response)
 
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 # **delete_fund_structure**
 > DeletedEntityResponse delete_fund_structure(scope, code, effective_at=effective_at)
 
-[EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+[EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
 
 Delete a Fund Structure from the given effective datetime. It remains retrievable at earlier effective datetimes.
 
@@ -379,7 +379,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_fund_structure(scope, code, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] DeleteFundStructure: Delete a Fund Structure.
+        # [EARLY ACCESS] DeleteFundStructure: Delete a Fund Structure.
         api_response = api_instance.delete_fund_structure(scope, code, effective_at=effective_at)
         pprint(api_response)
 
@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 # **get_fund_structure**
 > FundStructure get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
 
-[EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+[EARLY ACCESS] GetFundStructure: Get a Fund Structure.
 
 Retrieve the definition of a particular Fund Structure at an effective and asAt datetime, including its nodes,  edges, allocation groups and the funds its nodes refer to.
 
@@ -477,7 +477,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] GetFundStructure: Get a Fund Structure.
+        # [EARLY ACCESS] GetFundStructure: Get a Fund Structure.
         api_response = api_instance.get_fund_structure(scope, code, effective_at=effective_at, as_at=as_at, property_keys=property_keys)
         pprint(api_response)
 
@@ -518,7 +518,7 @@ Name | Type | Description  | Notes
 # **list_fund_structures**
 > PagedResourceListOfFundStructure list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
 
-[EXPERIMENTAL] ListFundStructures: List Fund Structures.
+[EARLY ACCESS] ListFundStructures: List Fund Structures.
 
 List all the Fund Structures matching the given criteria.
 
@@ -579,7 +579,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
 
-        # [EXPERIMENTAL] ListFundStructures: List Fund Structures.
+        # [EARLY ACCESS] ListFundStructures: List Fund Structures.
         api_response = api_instance.list_fund_structures(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
         pprint(api_response)
 
@@ -622,7 +622,7 @@ Name | Type | Description  | Notes
 # **remove_fund_structure_member**
 > FundStructure remove_fund_structure_member(scope, code, node_code, effective_at=effective_at)
 
-[EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+[EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
 
 Remove a node and every link that touches it, from an effective datetime. The result is a new bitemporal  version of the structure. The change applies to the version in force at that datetime; if a later version  of the structure already exists the request is rejected, since the member would otherwise reappear when  that version begins. Upsert the full definition for each affected version in that case.
 
@@ -680,7 +680,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.remove_fund_structure_member(scope, code, node_code, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] RemoveFundStructureMember: Remove a member from a Fund Structure.
+        # [EARLY ACCESS] RemoveFundStructureMember: Remove a member from a Fund Structure.
         api_response = api_instance.remove_fund_structure_member(scope, code, node_code, effective_at=effective_at)
         pprint(api_response)
 
@@ -720,7 +720,7 @@ Name | Type | Description  | Notes
 # **upsert_fund_structure**
 > FundStructure upsert_fund_structure(scope, code, fund_structure_request)
 
-[EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+[EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
 
 Create or replace the full definition of a Fund Structure from an effective datetime. A change to the  definition becomes a new bitemporal version: the structure as it was declared at earlier effective datetimes,  and as of earlier asAt datetimes, remains retrievable.
 
@@ -782,7 +782,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_fund_structure(scope, code, fund_structure_request, opts=opts)
 
-        # [EXPERIMENTAL] UpsertFundStructure: Upsert a Fund Structure.
+        # [EARLY ACCESS] UpsertFundStructure: Upsert a Fund Structure.
         api_response = api_instance.upsert_fund_structure(scope, code, fund_structure_request)
         pprint(api_response)
 

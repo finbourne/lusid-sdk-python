@@ -4,20 +4,20 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_allocation_map_exception**](AllocationMapsApi.md#add_allocation_map_exception) | **POST** /api/allocationmaps/{scope}/{code}/exceptions | [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
-[**create_allocation_map**](AllocationMapsApi.md#create_allocation_map) | **POST** /api/allocationmaps/{scope} | [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
-[**delete_allocation_map**](AllocationMapsApi.md#delete_allocation_map) | **DELETE** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
-[**get_allocation_map**](AllocationMapsApi.md#get_allocation_map) | **GET** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
-[**list_allocation_maps**](AllocationMapsApi.md#list_allocation_maps) | **GET** /api/allocationmaps | [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
-[**remove_allocation_map_exception**](AllocationMapsApi.md#remove_allocation_map_exception) | **DELETE** /api/allocationmaps/{scope}/{code}/exceptions/{investorRecordId} | [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
-[**resolve_allocation_map**](AllocationMapsApi.md#resolve_allocation_map) | **POST** /api/allocationmaps/{scope}/{code}/resolve | [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
-[**upsert_allocation_map**](AllocationMapsApi.md#upsert_allocation_map) | **PUT** /api/allocationmaps/{scope}/{code} | [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+[**add_allocation_map_exception**](AllocationMapsApi.md#add_allocation_map_exception) | **POST** /api/allocationmaps/{scope}/{code}/exceptions | [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
+[**create_allocation_map**](AllocationMapsApi.md#create_allocation_map) | **POST** /api/allocationmaps/{scope} | [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
+[**delete_allocation_map**](AllocationMapsApi.md#delete_allocation_map) | **DELETE** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
+[**get_allocation_map**](AllocationMapsApi.md#get_allocation_map) | **GET** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
+[**list_allocation_maps**](AllocationMapsApi.md#list_allocation_maps) | **GET** /api/allocationmaps | [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
+[**remove_allocation_map_exception**](AllocationMapsApi.md#remove_allocation_map_exception) | **DELETE** /api/allocationmaps/{scope}/{code}/exceptions/{investorRecordId} | [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+[**resolve_allocation_map**](AllocationMapsApi.md#resolve_allocation_map) | **POST** /api/allocationmaps/{scope}/{code}/resolve | [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
+[**upsert_allocation_map**](AllocationMapsApi.md#upsert_allocation_map) | **PUT** /api/allocationmaps/{scope}/{code} | [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
 
 
 # **add_allocation_map_exception**
 > AllocationMap add_allocation_map_exception(scope, code, allocation_map_exception, effective_at=effective_at)
 
-[EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+[EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
 
 Add a per-investor exception (an exclusion or a fixed percentage) to the map's participants, from an  effective datetime. The result is a new bitemporal version of the map. An investor record may carry at most  one exception; to change it, remove the existing one first or upsert the whole map.
 
@@ -80,7 +80,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.add_allocation_map_exception(scope, code, allocation_map_exception, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] AddAllocationMapException: Add an exception to an Allocation Map.
+        # [EARLY ACCESS] AddAllocationMapException: Add an exception to an Allocation Map.
         api_response = api_instance.add_allocation_map_exception(scope, code, allocation_map_exception, effective_at=effective_at)
         pprint(api_response)
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 # **create_allocation_map**
 > AllocationMap create_allocation_map(scope, allocation_map_request)
 
-[EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+[EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
 
 Create a new Allocation Map. The scope is provided in the route and the code in the request body. The map  names the structure member it hangs off, who participates, and the basis used to share each kind of event.
 
@@ -181,7 +181,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.create_allocation_map(scope, allocation_map_request, opts=opts)
 
-        # [EXPERIMENTAL] CreateAllocationMap: Create an Allocation Map.
+        # [EARLY ACCESS] CreateAllocationMap: Create an Allocation Map.
         api_response = api_instance.create_allocation_map(scope, allocation_map_request)
         pprint(api_response)
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 # **delete_allocation_map**
 > DeletedEntityResponse delete_allocation_map(scope, code, effective_at=effective_at)
 
-[EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+[EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
 
 Delete an Allocation Map from an effective datetime. The Allocation Map is no longer readable from that  effective datetime onwards.
 
@@ -276,7 +276,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.delete_allocation_map(scope, code, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] DeleteAllocationMap: Delete an Allocation Map.
+        # [EARLY ACCESS] DeleteAllocationMap: Delete an Allocation Map.
         api_response = api_instance.delete_allocation_map(scope, code, effective_at=effective_at)
         pprint(api_response)
 
@@ -315,7 +315,7 @@ Name | Type | Description  | Notes
 # **get_allocation_map**
 > AllocationMap get_allocation_map(scope, code, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+[EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
 
 Retrieve the definition of a particular Allocation Map at an effective and asAt datetime, including its  participants, exceptions and the basis declared for each event type.
 
@@ -373,7 +373,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_allocation_map(scope, code, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] GetAllocationMap: Get an Allocation Map.
+        # [EARLY ACCESS] GetAllocationMap: Get an Allocation Map.
         api_response = api_instance.get_allocation_map(scope, code, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -413,7 +413,7 @@ Name | Type | Description  | Notes
 # **list_allocation_maps**
 > PagedResourceListOfAllocationMap list_allocation_maps(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
 
-[EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+[EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
 
 List all the Allocation Maps matching a particular criteria.
 
@@ -473,7 +473,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.list_allocation_maps(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
 
-        # [EXPERIMENTAL] ListAllocationMaps: List Allocation Maps.
+        # [EARLY ACCESS] ListAllocationMaps: List Allocation Maps.
         api_response = api_instance.list_allocation_maps(effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 # **remove_allocation_map_exception**
 > AllocationMap remove_allocation_map_exception(scope, code, investor_record_id, effective_at=effective_at)
 
-[EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+[EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
 
 Remove the exception held against an investor record, from an effective datetime. The result is a new  bitemporal version of the map in which that investor is treated like every other participant.
 
@@ -573,7 +573,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.remove_allocation_map_exception(scope, code, investor_record_id, effective_at=effective_at, opts=opts)
 
-        # [EXPERIMENTAL] RemoveAllocationMapException: Remove an exception from an Allocation Map.
+        # [EARLY ACCESS] RemoveAllocationMapException: Remove an exception from an Allocation Map.
         api_response = api_instance.remove_allocation_map_exception(scope, code, investor_record_id, effective_at=effective_at)
         pprint(api_response)
 
@@ -613,7 +613,7 @@ Name | Type | Description  | Notes
 # **resolve_allocation_map**
 > AllocationMapResolution resolve_allocation_map(scope, code, allocation_map_resolve_request, effective_at=effective_at, as_at=as_at)
 
-[EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+[EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
 
 Dry-run the map against an event: share the supplied amount across the participants in force at the  effective datetime, applying fixed-percentage exceptions off the top and the declared basis to the remainder.  Nothing is booked. Basis values (for example committed capital per investor) are supplied in the request  until the investor register can provide them.
 
@@ -677,7 +677,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.resolve_allocation_map(scope, code, allocation_map_resolve_request, effective_at=effective_at, as_at=as_at, opts=opts)
 
-        # [EXPERIMENTAL] ResolveAllocationMap: Resolve an Allocation Map.
+        # [EARLY ACCESS] ResolveAllocationMap: Resolve an Allocation Map.
         api_response = api_instance.resolve_allocation_map(scope, code, allocation_map_resolve_request, effective_at=effective_at, as_at=as_at)
         pprint(api_response)
 
@@ -718,7 +718,7 @@ Name | Type | Description  | Notes
 # **upsert_allocation_map**
 > AllocationMap upsert_allocation_map(scope, code, allocation_map_request)
 
-[EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+[EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
 
 Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.
 
@@ -780,7 +780,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.upsert_allocation_map(scope, code, allocation_map_request, opts=opts)
 
-        # [EXPERIMENTAL] UpsertAllocationMap: Upsert an Allocation Map.
+        # [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
         api_response = api_instance.upsert_allocation_map(scope, code, allocation_map_request)
         pprint(api_response)
 
