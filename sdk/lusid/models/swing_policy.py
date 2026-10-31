@@ -35,7 +35,8 @@ class SwingPolicy(BaseModel):
     spreads: Optional[SwingSpreads] = None
     inflow_trigger: Optional[SwingTrigger] = Field(default=None, alias="inflowTrigger")
     outflow_trigger: Optional[SwingTrigger] = Field(default=None, alias="outflowTrigger")
-    __properties = ["baseline", "defaultSpreadSource", "spreads", "inflowTrigger", "outflowTrigger"]
+    approval_mode:  Optional[StrictStr] = Field(None,alias="approvalMode", description="Who settles the swing decision a valuation point deals at. Automatic, the default, finalises the valuation point on the engine's proposal. Manual holds the proposal: the valuation point cannot be finalised until a manager has submitted a pricingMethodologyOverride on it, equal to the proposal to approve it or different to overrule it. Must be Automatic when defaultSpreadSource is omitted, because a price that never swings has no decision to approve. Available values: Automatic, Manual.") 
+    __properties = ["baseline", "defaultSpreadSource", "spreads", "inflowTrigger", "outflowTrigger", "approvalMode"]
 
     class Config:
         """Pydantic configuration"""
@@ -86,6 +87,11 @@ class SwingPolicy(BaseModel):
         if self.default_spread_source is None and "default_spread_source" in self.__fields_set__:
             _dict['defaultSpreadSource'] = None
 
+        # set to None if approval_mode (nullable) is None
+        # and __fields_set__ contains the field
+        if self.approval_mode is None and "approval_mode" in self.__fields_set__:
+            _dict['approvalMode'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class SwingPolicy(BaseModel):
             "default_spread_source": obj.get("defaultSpreadSource"),
             "spreads": SwingSpreads.from_dict(obj.get("spreads")) if obj.get("spreads") is not None else None,
             "inflow_trigger": SwingTrigger.from_dict(obj.get("inflowTrigger")) if obj.get("inflowTrigger") is not None else None,
-            "outflow_trigger": SwingTrigger.from_dict(obj.get("outflowTrigger")) if obj.get("outflowTrigger") is not None else None
+            "outflow_trigger": SwingTrigger.from_dict(obj.get("outflowTrigger")) if obj.get("outflowTrigger") is not None else None,
+            "approval_mode": obj.get("approvalMode")
         })
         return _obj
 

@@ -64,9 +64,10 @@ class Portfolio(BaseModel):
     tax_lot_selection_cost_basis:  Optional[StrictStr] = Field(None,alias="taxLotSelectionCostBasis", description="The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Supply Default to explicitly reset it; a reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost.") 
     fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = Field(default=None, alias="fractionalUnitsTrueUpConfiguration")
     holdings_fungibility:  Optional[StrictStr] = Field(None,alias="holdingsFungibility", description="Whether the portfolio's holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled.") 
+    chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. Defaults to Default if not specified, which means no chargeable gains pooling is applied. Under UkChargeableGains, in-scope holdings (equities, preferred shares, fund share classes and simple instruments) are depleted under the UK chargeable gains rules regardless of the accounting method on the portfolio, transaction or custodian account; other holdings use the portfolio's accounting method. Supply Default to explicitly reset it; a reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.") 
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "enablementDate", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "whtParameters", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "enablementDate", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "whtParameters", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -257,6 +258,11 @@ class Portfolio(BaseModel):
         if self.holdings_fungibility is None and "holdings_fungibility" in self.__fields_set__:
             _dict['holdingsFungibility'] = None
 
+        # set to None if chargeable_gains_regime (nullable) is None
+        # and __fields_set__ contains the field
+        if self.chargeable_gains_regime is None and "chargeable_gains_regime" in self.__fields_set__:
+            _dict['chargeableGainsRegime'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -306,6 +312,7 @@ class Portfolio(BaseModel):
             "tax_lot_selection_cost_basis": obj.get("taxLotSelectionCostBasis"),
             "fractional_units_true_up_configuration": FractionalUnitsTrueUpConfiguration.from_dict(obj.get("fractionalUnitsTrueUpConfiguration")) if obj.get("fractionalUnitsTrueUpConfiguration") is not None else None,
             "holdings_fungibility": obj.get("holdingsFungibility"),
+            "chargeable_gains_regime": obj.get("chargeableGainsRegime"),
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })

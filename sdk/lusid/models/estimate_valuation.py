@@ -29,11 +29,11 @@ class EstimateValuation(BaseModel):
     """
     The swing decision read at both unit prices the transfer agency's unit-denominated orders could be valued at: this valuation point's estimate price and the last official price, with which one the decision used and how far apart they are.  # noqa: E501
     """
-    decision_price:  StrictStr = Field(...,alias="decisionPrice", description="The unit price the swing decision was taken on. 'EstimatePrice' is the price struck at this valuation point; 'LastOfficialPrice' is the unit price the previous valuation point published. 'EstimatePrice' when the fund asked for the last official price but has none yet, as on its first valuation point.") 
+    decision_price:  StrictStr = Field(...,alias="decisionPrice", description="The unit price the swing decision was taken on. 'EstimatePrice' is the price struck at this valuation point; 'LastOfficialPrice' is the unit price the previous valuation point published or, for a share class that has not published one yet, the launch price the class was set up with.") 
     at_estimate_price: DealingFlowValuation = Field(alias="atEstimatePrice")
     at_last_official_price: Optional[DealingFlowValuation] = Field(default=None, alias="atLastOfficialPrice")
     difference: Optional[EstimateValuationDifference] = None
-    unit_based_share: Union[StrictFloat, StrictInt] = Field(description="The fraction of the decision's net cashflow that came from unit-denominated orders, from 0 to 1. Zero when the net cashflow is zero.", alias="unitBasedShare")
+    unit_based_share: Union[StrictFloat, StrictInt] = Field(description="DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped.", alias="unitBasedShare")
     __properties = ["decisionPrice", "atEstimatePrice", "atLastOfficialPrice", "difference", "unitBasedShare"]
 
     class Config:

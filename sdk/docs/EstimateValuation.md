@@ -4,11 +4,11 @@ The swing decision read at both unit prices the transfer agency's unit-denominat
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**decision_price** | **str** | The unit price the swing decision was taken on. &#39;EstimatePrice&#39; is the price struck at this valuation point; &#39;LastOfficialPrice&#39; is the unit price the previous valuation point published. &#39;EstimatePrice&#39; when the fund asked for the last official price but has none yet, as on its first valuation point. | 
+**decision_price** | **str** | The unit price the swing decision was taken on. &#39;EstimatePrice&#39; is the price struck at this valuation point; &#39;LastOfficialPrice&#39; is the unit price the previous valuation point published or, for a share class that has not published one yet, the launch price the class was set up with. | 
 **at_estimate_price** | [**DealingFlowValuation**](DealingFlowValuation.md) |  | 
 **at_last_official_price** | [**DealingFlowValuation**](DealingFlowValuation.md) |  | [optional] 
 **difference** | [**EstimateValuationDifference**](EstimateValuationDifference.md) |  | [optional] 
-**unit_based_share** | **float** | The fraction of the decision&#39;s net cashflow that came from unit-denominated orders, from 0 to 1. Zero when the net cashflow is zero. | 
+**unit_based_share** | **float** | DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped. | 
 ## Example
 
 ```python

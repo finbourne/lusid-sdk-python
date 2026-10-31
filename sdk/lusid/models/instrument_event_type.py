@@ -156,6 +156,7 @@ class InstrumentEventType(str, Enum):
     DEPOSITINTERESTCAPITALISATIONEVENT = 'DepositInterestCapitalisationEvent'
     PARTIALREDEMPTIONWITHOUTREDUCTIONOFNOMINALVALUEEVENT = 'PartialRedemptionWithoutReductionOfNominalValueEvent'
     STRIPBONDCASHFLOWEVENT = 'StripBondCashflowEvent'
+    CAPITALISATIONEVENT = 'CapitalisationEvent'
 
     @classmethod
     def from_json(cls, json_str: str) -> InstrumentEventType:

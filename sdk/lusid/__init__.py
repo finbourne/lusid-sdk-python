@@ -381,6 +381,7 @@ from lusid.models.capital_distribution_event import CapitalDistributionEvent
 from lusid.models.capital_gains_distribution_event import CapitalGainsDistributionEvent
 from lusid.models.capital_interest import CapitalInterest
 from lusid.models.capital_interest_transfer_event import CapitalInterestTransferEvent
+from lusid.models.capitalisation_event import CapitalisationEvent
 from lusid.models.caplet_floorlet_cash_flow_event import CapletFloorletCashFlowEvent
 from lusid.models.carry_accrual_amount import CarryAccrualAmount
 from lusid.models.carry_accrual_line import CarryAccrualLine
@@ -420,6 +421,7 @@ from lusid.models.change_history_action import ChangeHistoryAction
 from lusid.models.change_interval import ChangeInterval
 from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
 from lusid.models.change_item import ChangeItem
+from lusid.models.chargeable_gains_take_on import ChargeableGainsTakeOn
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
@@ -2518,6 +2520,7 @@ __all__ = [
     "CapitalGainsDistributionEvent",
     "CapitalInterest",
     "CapitalInterestTransferEvent",
+    "CapitalisationEvent",
     "CapletFloorletCashFlowEvent",
     "CarryAccrualAmount",
     "CarryAccrualLine",
@@ -2557,6 +2560,7 @@ __all__ = [
     "ChangeInterval",
     "ChangeIntervalWithOrderManagementDetail",
     "ChangeItem",
+    "ChargeableGainsTakeOn",
     "ChartOfAccounts",
     "ChartOfAccountsProperties",
     "ChartOfAccountsRequest",

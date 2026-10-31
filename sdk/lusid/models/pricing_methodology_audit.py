@@ -42,7 +42,8 @@ class PricingMethodologyAudit(BaseModel):
     outflow_trigger: Optional[SwingTriggerEvaluation] = Field(default=None, alias="outflowTrigger")
     dealing_flows: Optional[DealingFlowSummary] = Field(default=None, alias="dealingFlows")
     estimate_valuation: Optional[EstimateValuation] = Field(default=None, alias="estimateValuation")
-    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows", "estimateValuation"]
+    approval_status:  Optional[StrictStr] = Field(None,alias="approvalStatus", description="Where a manually approved swing decision stands. Pending until a manager approves or overrides the engine's proposal, or when the proposal has changed since the decision was taken; Approved when the decision equals the proposal; Overridden when it differs. Absent when the swing policy approves automatically.") 
+    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows", "estimateValuation", "approvalStatus"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +103,11 @@ class PricingMethodologyAudit(BaseModel):
         if self.net_cashflow_pct_of_nav is None and "net_cashflow_pct_of_nav" in self.__fields_set__:
             _dict['netCashflowPctOfNav'] = None
 
+        # set to None if approval_status (nullable) is None
+        # and __fields_set__ contains the field
+        if self.approval_status is None and "approval_status" in self.__fields_set__:
+            _dict['approvalStatus'] = None
+
         return _dict
 
     @classmethod
@@ -122,7 +128,8 @@ class PricingMethodologyAudit(BaseModel):
             "inflow_trigger": SwingTriggerEvaluation.from_dict(obj.get("inflowTrigger")) if obj.get("inflowTrigger") is not None else None,
             "outflow_trigger": SwingTriggerEvaluation.from_dict(obj.get("outflowTrigger")) if obj.get("outflowTrigger") is not None else None,
             "dealing_flows": DealingFlowSummary.from_dict(obj.get("dealingFlows")) if obj.get("dealingFlows") is not None else None,
-            "estimate_valuation": EstimateValuation.from_dict(obj.get("estimateValuation")) if obj.get("estimateValuation") is not None else None
+            "estimate_valuation": EstimateValuation.from_dict(obj.get("estimateValuation")) if obj.get("estimateValuation") is not None else None,
+            "approval_status": obj.get("approvalStatus")
         })
         return _obj
 
