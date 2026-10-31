@@ -528,6 +528,7 @@ from lusid.models.day_of_week import DayOfWeek
 from lusid.models.dealing_estimates import DealingEstimates
 from lusid.models.dealing_flow_summary import DealingFlowSummary
 from lusid.models.dealing_flow_valuation import DealingFlowValuation
+from lusid.models.dealing_line_not_valued import DealingLineNotValued
 from lusid.models.decimal_compliance_parameter import DecimalComplianceParameter
 from lusid.models.decimal_list import DecimalList
 from lusid.models.decimal_list_compliance_parameter import DecimalListComplianceParameter
@@ -630,6 +631,9 @@ from lusid.models.expiry_event import ExpiryEvent
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.external_rec_definition_details import ExternalRecDefinitionDetails
 from lusid.models.external_rec_type import ExternalRecType
+from lusid.models.external_transfer_agency_order_amount import ExternalTransferAgencyOrderAmount
+from lusid.models.external_transfer_agency_order_line import ExternalTransferAgencyOrderLine
+from lusid.models.external_transfer_agency_order_source import ExternalTransferAgencyOrderSource
 from lusid.models.facility import Facility
 from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEvent
 from lusid.models.facility_draw_event import FacilityDrawEvent
@@ -1903,6 +1907,9 @@ from lusid.models.upsert_data_quality_rule import UpsertDataQualityRule
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
 from lusid.models.upsert_eligible_collateral_schedule_request import UpsertEligibleCollateralScheduleRequest
 from lusid.models.upsert_entity_resolver_request import UpsertEntityResolverRequest
+from lusid.models.upsert_external_transfer_agency_order_result import UpsertExternalTransferAgencyOrderResult
+from lusid.models.upsert_external_transfer_agency_orders_request import UpsertExternalTransferAgencyOrdersRequest
+from lusid.models.upsert_external_transfer_agency_orders_response import UpsertExternalTransferAgencyOrdersResponse
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
@@ -2555,6 +2562,7 @@ __all__ = [
     "DealingEstimates",
     "DealingFlowSummary",
     "DealingFlowValuation",
+    "DealingLineNotValued",
     "DecimalComplianceParameter",
     "DecimalList",
     "DecimalListComplianceParameter",
@@ -2657,6 +2665,9 @@ __all__ = [
     "ExternalFeeComponentFilter",
     "ExternalRecDefinitionDetails",
     "ExternalRecType",
+    "ExternalTransferAgencyOrderAmount",
+    "ExternalTransferAgencyOrderLine",
+    "ExternalTransferAgencyOrderSource",
     "Facility",
     "FacilityCommitmentFeeEvent",
     "FacilityDrawEvent",
@@ -3930,6 +3941,9 @@ __all__ = [
     "UpsertDialectRequest",
     "UpsertEligibleCollateralScheduleRequest",
     "UpsertEntityResolverRequest",
+    "UpsertExternalTransferAgencyOrderResult",
+    "UpsertExternalTransferAgencyOrdersRequest",
+    "UpsertExternalTransferAgencyOrdersResponse",
     "UpsertFlowConventionsRequest",
     "UpsertFundBookmarkRequest",
     "UpsertIndexConventionRequest",

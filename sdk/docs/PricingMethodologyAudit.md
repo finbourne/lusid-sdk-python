@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **dealing_flows** | [**DealingFlowSummary**](DealingFlowSummary.md) |  | [optional] 
 **estimate_valuation** | [**EstimateValuation**](EstimateValuation.md) |  | [optional] 
 **approval_status** | **str** | Where a manually approved swing decision stands. Pending until a manager approves or overrides the engine&#39;s proposal, or when the proposal has changed since the decision was taken; Approved when the decision equals the proposal; Overridden when it differs. Absent when the swing policy approves automatically. | [optional] 
+**dealing_lines_not_valued** | [**List[DealingLineNotValued]**](DealingLineNotValued.md) | The dealing lines read for the swing decision that could not be valued into the share class currency: an amount in a currency that is neither the fund&#39;s nor any share class&#39;s, or a weight-only line. While any are present and no pricingMethodologyOverride has been submitted, no swing decision is taken, the dealing price is absent and the valuation point cannot be finalised; under an override the override&#39;s price stands and the lines remain listed here. Absent when every line was valued or the methodology does not swing. | [optional] 
 ## Example
 
 ```python
@@ -33,7 +34,8 @@ outflow_trigger: Optional[SwingTriggerEvaluation] = # Replace with your value
 dealing_flows: Optional[DealingFlowSummary] = # Replace with your value
 estimate_valuation: Optional[EstimateValuation] = # Replace with your value
 approval_status: Optional[StrictStr] = "example_approval_status"
-pricing_methodology_audit_instance = PricingMethodologyAudit(net_cashflow=net_cashflow, net_cashflow_pct_of_nav=net_cashflow_pct_of_nav, spreads_applied=spreads_applied, engine_proposal=engine_proposal, override=override, inflow_trigger=inflow_trigger, outflow_trigger=outflow_trigger, dealing_flows=dealing_flows, estimate_valuation=estimate_valuation, approval_status=approval_status)
+dealing_lines_not_valued: Optional[List[DealingLineNotValued]] = # Replace with your value
+pricing_methodology_audit_instance = PricingMethodologyAudit(net_cashflow=net_cashflow, net_cashflow_pct_of_nav=net_cashflow_pct_of_nav, spreads_applied=spreads_applied, engine_proposal=engine_proposal, override=override, inflow_trigger=inflow_trigger, outflow_trigger=outflow_trigger, dealing_flows=dealing_flows, estimate_valuation=estimate_valuation, approval_status=approval_status, dealing_lines_not_valued=dealing_lines_not_valued)
 
 ```
 

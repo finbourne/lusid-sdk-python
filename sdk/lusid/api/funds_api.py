@@ -12556,7 +12556,7 @@ class FundsApi:
     def update_valuation_point(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ValuationPoint, Awaitable[ValuationPoint]]:  # noqa: E501
         """[EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
 
-        Updates an existing Valuation Point.  # noqa: E501
+        Updates an existing Valuation Point. Supplying a pricingMethodologyOverride approves or overrides the swing  decision the Valuation Point deals at, which additionally requires the ApprovePricingMethodology action on the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -12593,7 +12593,7 @@ class FundsApi:
     def update_valuation_point_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], update_valuation_point_request : Annotated[UpdateValuationPointRequest, Field(description="The Valuation Point Estimate definition to upsert.")], nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, upserts the Valuation Point against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.  # noqa: E501
 
-        Updates an existing Valuation Point.  # noqa: E501
+        Updates an existing Valuation Point. Supplying a pricingMethodologyOverride approves or overrides the swing  decision the Valuation Point deals at, which additionally requires the ApprovePricingMethodology action on the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
