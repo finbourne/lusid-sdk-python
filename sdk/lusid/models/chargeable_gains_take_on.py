@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.chargeable_gains_take_on_addition import ChargeableGainsTakeOnAddition
 
 class ChargeableGainsTakeOn(BaseModel):
     """
@@ -33,7 +34,8 @@ class ChargeableGainsTakeOn(BaseModel):
     original_cost: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="originalCost")
     market_value1982: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="marketValue1982")
     rebasing_election: Optional[StrictBool] = Field(default=None, alias="rebasingElection")
-    __properties = ["role", "indexation", "indexedTo", "originalCost", "marketValue1982", "rebasingElection"]
+    additions: Optional[List[ChargeableGainsTakeOnAddition]] = None
+    __properties = ["role", "indexation", "indexedTo", "originalCost", "marketValue1982", "rebasingElection", "additions"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +69,13 @@ class ChargeableGainsTakeOn(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in additions (list)
+        _items = []
+        if self.additions:
+            for _item in self.additions:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['additions'] = _items
         # set to None if indexation (nullable) is None
         # and __fields_set__ contains the field
         if self.indexation is None and "indexation" in self.__fields_set__:
@@ -92,6 +101,11 @@ class ChargeableGainsTakeOn(BaseModel):
         if self.rebasing_election is None and "rebasing_election" in self.__fields_set__:
             _dict['rebasingElection'] = None
 
+        # set to None if additions (nullable) is None
+        # and __fields_set__ contains the field
+        if self.additions is None and "additions" in self.__fields_set__:
+            _dict['additions'] = None
+
         return _dict
 
     @classmethod
@@ -109,7 +123,8 @@ class ChargeableGainsTakeOn(BaseModel):
             "indexed_to": obj.get("indexedTo"),
             "original_cost": obj.get("originalCost"),
             "market_value1982": obj.get("marketValue1982"),
-            "rebasing_election": obj.get("rebasingElection")
+            "rebasing_election": obj.get("rebasingElection"),
+            "additions": [ChargeableGainsTakeOnAddition.from_dict(_item) for _item in obj.get("additions")] if obj.get("additions") is not None else None
         })
         return _obj
 

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **original_cost** | **float** |  | [optional] 
 **market_value1982** | **float** |  | [optional] 
 **rebasing_election** | **bool** |  | [optional] 
+**additions** | [**List[ChargeableGainsTakeOnAddition]**](ChargeableGainsTakeOnAddition.md) |  | [optional] 
 ## Example
 
 ```python
@@ -26,7 +27,8 @@ original_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your val
 market_value1982: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 rebasing_election: Optional[StrictBool] = # Replace with your value
 rebasing_election:Optional[StrictBool] = None
-chargeable_gains_take_on_instance = ChargeableGainsTakeOn(role=role, indexation=indexation, indexed_to=indexed_to, original_cost=original_cost, market_value1982=market_value1982, rebasing_election=rebasing_election)
+additions: Optional[List[ChargeableGainsTakeOnAddition]] = None
+chargeable_gains_take_on_instance = ChargeableGainsTakeOn(role=role, indexation=indexation, indexed_to=indexed_to, original_cost=original_cost, market_value1982=market_value1982, rebasing_election=rebasing_election, additions=additions)
 
 ```
 

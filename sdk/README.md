@@ -1209,6 +1209,7 @@ Class | Method | HTTP request | Description
  - [ChangeIntervalWithOrderManagementDetail](docs/ChangeIntervalWithOrderManagementDetail.md)
  - [ChangeItem](docs/ChangeItem.md)
  - [ChargeableGainsTakeOn](docs/ChargeableGainsTakeOn.md)
+ - [ChargeableGainsTakeOnAddition](docs/ChargeableGainsTakeOnAddition.md)
  - [ChartOfAccounts](docs/ChartOfAccounts.md)
  - [ChartOfAccountsProperties](docs/ChartOfAccountsProperties.md)
  - [ChartOfAccountsRequest](docs/ChartOfAccountsRequest.md)

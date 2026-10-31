@@ -309,6 +309,7 @@ from lusid.models.change_interval import ChangeInterval
 from lusid.models.change_interval_with_order_management_detail import ChangeIntervalWithOrderManagementDetail
 from lusid.models.change_item import ChangeItem
 from lusid.models.chargeable_gains_take_on import ChargeableGainsTakeOn
+from lusid.models.chargeable_gains_take_on_addition import ChargeableGainsTakeOnAddition
 from lusid.models.chart_of_accounts import ChartOfAccounts
 from lusid.models.chart_of_accounts_properties import ChartOfAccountsProperties
 from lusid.models.chart_of_accounts_request import ChartOfAccountsRequest
@@ -2343,6 +2344,7 @@ __all__ = [
     "ChangeIntervalWithOrderManagementDetail",
     "ChangeItem",
     "ChargeableGainsTakeOn",
+    "ChargeableGainsTakeOnAddition",
     "ChartOfAccounts",
     "ChartOfAccountsProperties",
     "ChartOfAccountsRequest",
