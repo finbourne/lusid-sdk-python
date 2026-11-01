@@ -33,7 +33,7 @@ class EstimateValuation(BaseModel):
     at_estimate_price: DealingFlowValuation = Field(alias="atEstimatePrice")
     at_last_official_price: Optional[DealingFlowValuation] = Field(default=None, alias="atLastOfficialPrice")
     difference: Optional[EstimateValuationDifference] = None
-    unit_based_share: Union[StrictFloat, StrictInt] = Field(description="DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped.", alias="unitBasedShare")
+    unit_based_share: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped.", alias="unitBasedShare")
     __properties = ["decisionPrice", "atEstimatePrice", "atLastOfficialPrice", "difference", "unitBasedShare"]
 
     class Config:

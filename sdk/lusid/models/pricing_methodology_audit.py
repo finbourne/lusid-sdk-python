@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.dealing_book_completeness import DealingBookCompleteness
 from lusid.models.dealing_flow_summary import DealingFlowSummary
 from lusid.models.dealing_line_not_valued import DealingLineNotValued
 from lusid.models.estimate_valuation import EstimateValuation
@@ -45,7 +46,8 @@ class PricingMethodologyAudit(BaseModel):
     estimate_valuation: Optional[EstimateValuation] = Field(default=None, alias="estimateValuation")
     approval_status:  Optional[StrictStr] = Field(None,alias="approvalStatus", description="Where a manually approved swing decision stands. Pending until a manager approves or overrides the engine's proposal, or when the proposal has changed since the decision was taken; Approved when the decision equals the proposal; Overridden when it differs. Absent when the swing policy approves automatically.") 
     dealing_lines_not_valued: Optional[List[DealingLineNotValued]] = Field(default=None, description="The dealing lines read for the swing decision that could not be valued into the share class currency: an amount in a currency that is neither the fund's nor any share class's, or a weight-only line. While any are present and no pricingMethodologyOverride has been submitted, no swing decision is taken, the dealing price is absent and the valuation point cannot be finalised; under an override the override's price stands and the lines remain listed here. Absent when every line was valued or the methodology does not swing.", alias="dealingLinesNotValued")
-    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows", "estimateValuation", "approvalStatus", "dealingLinesNotValued"]
+    completeness: Optional[DealingBookCompleteness] = None
+    __properties = ["netCashflow", "netCashflowPctOfNav", "spreadsApplied", "engineProposal", "override", "inflowTrigger", "outflowTrigger", "dealingFlows", "estimateValuation", "approvalStatus", "dealingLinesNotValued", "completeness"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,6 +109,9 @@ class PricingMethodologyAudit(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['dealingLinesNotValued'] = _items
+        # override the default output from pydantic by calling `to_dict()` of completeness
+        if self.completeness:
+            _dict['completeness'] = self.completeness.to_dict()
         # set to None if net_cashflow_pct_of_nav (nullable) is None
         # and __fields_set__ contains the field
         if self.net_cashflow_pct_of_nav is None and "net_cashflow_pct_of_nav" in self.__fields_set__:
@@ -144,7 +149,8 @@ class PricingMethodologyAudit(BaseModel):
             "dealing_flows": DealingFlowSummary.from_dict(obj.get("dealingFlows")) if obj.get("dealingFlows") is not None else None,
             "estimate_valuation": EstimateValuation.from_dict(obj.get("estimateValuation")) if obj.get("estimateValuation") is not None else None,
             "approval_status": obj.get("approvalStatus"),
-            "dealing_lines_not_valued": [DealingLineNotValued.from_dict(_item) for _item in obj.get("dealingLinesNotValued")] if obj.get("dealingLinesNotValued") is not None else None
+            "dealing_lines_not_valued": [DealingLineNotValued.from_dict(_item) for _item in obj.get("dealingLinesNotValued")] if obj.get("dealingLinesNotValued") is not None else None,
+            "completeness": DealingBookCompleteness.from_dict(obj.get("completeness")) if obj.get("completeness") is not None else None
         })
         return _obj
 

@@ -526,6 +526,7 @@ from lusid.models.date_time_compliance_parameter import DateTimeComplianceParame
 from lusid.models.date_time_list_compliance_parameter import DateTimeListComplianceParameter
 from lusid.models.day_month import DayMonth
 from lusid.models.day_of_week import DayOfWeek
+from lusid.models.dealing_book_completeness import DealingBookCompleteness
 from lusid.models.dealing_estimates import DealingEstimates
 from lusid.models.dealing_flow_summary import DealingFlowSummary
 from lusid.models.dealing_flow_valuation import DealingFlowValuation
@@ -2561,6 +2562,7 @@ __all__ = [
     "DateTimeListComplianceParameter",
     "DayMonth",
     "DayOfWeek",
+    "DealingBookCompleteness",
     "DealingEstimates",
     "DealingFlowSummary",
     "DealingFlowValuation",
