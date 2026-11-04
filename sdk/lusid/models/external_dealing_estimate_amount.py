@@ -23,7 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class ExternalTransferAgencyOrderAmount(BaseModel):
+class ExternalDealingEstimateAmount(BaseModel):
     """
     A cash amount in a stated currency.  # noqa: E501
     """
@@ -53,8 +53,8 @@ class ExternalTransferAgencyOrderAmount(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ExternalTransferAgencyOrderAmount:
-        """Create an instance of ExternalTransferAgencyOrderAmount from a JSON string"""
+    def from_json(cls, json_str: str) -> ExternalDealingEstimateAmount:
+        """Create an instance of ExternalDealingEstimateAmount from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -66,18 +66,18 @@ class ExternalTransferAgencyOrderAmount(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ExternalTransferAgencyOrderAmount:
-        """Create an instance of ExternalTransferAgencyOrderAmount from a dict"""
+    def from_dict(cls, obj: dict) -> ExternalDealingEstimateAmount:
+        """Create an instance of ExternalDealingEstimateAmount from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ExternalTransferAgencyOrderAmount.parse_obj(obj)
+            return ExternalDealingEstimateAmount.parse_obj(obj)
 
-        _obj = ExternalTransferAgencyOrderAmount.parse_obj({
+        _obj = ExternalDealingEstimateAmount.parse_obj({
             "value": obj.get("value"),
             "currency": obj.get("currency")
         })
         return _obj
 
-ExternalTransferAgencyOrderAmount.update_forward_refs()
+ExternalDealingEstimateAmount.update_forward_refs()

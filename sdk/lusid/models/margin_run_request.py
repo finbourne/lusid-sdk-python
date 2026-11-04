@@ -33,7 +33,8 @@ class MarginRunRequest(BaseModel):
     agreement_filter:  Optional[StrictStr] = Field(None,alias="agreementFilter", description="An expression selecting the collateral agreements to run, in the same syntax as listing collateral agreements. Every agreement the caller may calculate margin for is run if not specified.") 
     scenarios: Optional[List[ResourceId]] = Field(default=None, description="The stored scenarios to value the agreements under, each as a what-if beside the base market, which the run always values. A scenario's calls are served beside the base calls only when asked for, and cannot be accepted, disputed or matched to a counterparty demand. At most 20. Only the base market is valued if not specified.")
     effective_from:  Optional[StrictStr] = Field(None,alias="effectiveFrom", description="The first business date, datetime or cut label of a span ending at effectiveAt. Each weekday from it to effectiveAt is valued as a run of its own, all at the same asAt, and a date after the asAt is a projection valued on the market as at the asAt that cannot be accepted, disputed or matched to a counterparty demand. At most 130 weekdays. Only effectiveAt is valued if not specified.") 
-    __properties = ["effectiveAt", "asAt", "agreementFilter", "scenarios", "effectiveFrom"]
+    capture_diagnostics: Optional[StrictBool] = Field(default=None, description="Whether to store the working behind the run's figures so that it can be explained. Specified, it is honoured. Not specified, the working is stored only for a run of a single date with no scenarios, since storing it costs time and space that a span or what-if run is not expected to repay.", alias="captureDiagnostics")
+    __properties = ["effectiveAt", "asAt", "agreementFilter", "scenarios", "effectiveFrom", "captureDiagnostics"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,6 +95,11 @@ class MarginRunRequest(BaseModel):
         if self.effective_from is None and "effective_from" in self.__fields_set__:
             _dict['effectiveFrom'] = None
 
+        # set to None if capture_diagnostics (nullable) is None
+        # and __fields_set__ contains the field
+        if self.capture_diagnostics is None and "capture_diagnostics" in self.__fields_set__:
+            _dict['captureDiagnostics'] = None
+
         return _dict
 
     @classmethod
@@ -110,7 +116,8 @@ class MarginRunRequest(BaseModel):
             "as_at": obj.get("asAt"),
             "agreement_filter": obj.get("agreementFilter"),
             "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None,
-            "effective_from": obj.get("effectiveFrom")
+            "effective_from": obj.get("effectiveFrom"),
+            "capture_diagnostics": obj.get("captureDiagnostics")
         })
         return _obj
 

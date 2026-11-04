@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **at_estimate_price** | [**DealingFlowValuation**](DealingFlowValuation.md) |  | 
 **at_last_official_price** | [**DealingFlowValuation**](DealingFlowValuation.md) |  | [optional] 
 **difference** | [**EstimateValuationDifference**](EstimateValuationDifference.md) |  | [optional] 
-**unit_based_share** | **float** | DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped. | [optional] 
 ## Example
 
 ```python
@@ -22,8 +21,7 @@ decision_price: StrictStr = "example_decision_price"
 at_estimate_price: DealingFlowValuation = # Replace with your value
 at_last_official_price: Optional[DealingFlowValuation] = # Replace with your value
 difference: Optional[EstimateValuationDifference] = None
-unit_based_share: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-estimate_valuation_instance = EstimateValuation(decision_price=decision_price, at_estimate_price=at_estimate_price, at_last_official_price=at_last_official_price, difference=difference, unit_based_share=unit_based_share)
+estimate_valuation_instance = EstimateValuation(decision_price=decision_price, at_estimate_price=at_estimate_price, at_last_official_price=at_last_official_price, difference=difference)
 
 ```
 

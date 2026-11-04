@@ -33,8 +33,7 @@ class EstimateValuation(BaseModel):
     at_estimate_price: DealingFlowValuation = Field(alias="atEstimatePrice")
     at_last_official_price: Optional[DealingFlowValuation] = Field(default=None, alias="atLastOfficialPrice")
     difference: Optional[EstimateValuationDifference] = None
-    unit_based_share: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="DEPRECATED: always 0 and no longer computed. Kept on the response for one release so clients on a public SDK that requires the field can still read it; it will be removed once an SDK without it has shipped.", alias="unitBasedShare")
-    __properties = ["decisionPrice", "atEstimatePrice", "atLastOfficialPrice", "difference", "unitBasedShare"]
+    __properties = ["decisionPrice", "atEstimatePrice", "atLastOfficialPrice", "difference"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,8 +91,7 @@ class EstimateValuation(BaseModel):
             "decision_price": obj.get("decisionPrice"),
             "at_estimate_price": DealingFlowValuation.from_dict(obj.get("atEstimatePrice")) if obj.get("atEstimatePrice") is not None else None,
             "at_last_official_price": DealingFlowValuation.from_dict(obj.get("atLastOfficialPrice")) if obj.get("atLastOfficialPrice") is not None else None,
-            "difference": EstimateValuationDifference.from_dict(obj.get("difference")) if obj.get("difference") is not None else None,
-            "unit_based_share": obj.get("unitBasedShare")
+            "difference": EstimateValuationDifference.from_dict(obj.get("difference")) if obj.get("difference") is not None else None
         })
         return _obj
 

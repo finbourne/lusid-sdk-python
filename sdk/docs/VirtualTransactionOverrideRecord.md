@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **override_application_status** | **str** | Whether all, some, or none of this record&#39;s override and suppression entries are currently applied. Available values: Full, Partial, Orphaned. | [optional] 
 **cancel_active** | **bool** | True when an active event-level Cancel instruction also exists for this instrument event, taking precedence over the entries in this record. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**adjustments** | [**Dict[str, AdjustmentEntryResponse]**](AdjustmentEntryResponse.md) | The adjustments in this record, keyed by the virtual transaction id they were stored against. | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,8 @@ override_application_status: Optional[StrictStr] = "example_override_application
 cancel_active: Optional[StrictBool] = # Replace with your value
 cancel_active:Optional[StrictBool] = None
 version: Optional[Version] = None
-virtual_transaction_override_record_instance = VirtualTransactionOverrideRecord(instrument_event_id=instrument_event_id, source_portfolio_id=source_portfolio_id, overrides=overrides, suppressions=suppressions, override_match_status=override_match_status, override_application_status=override_application_status, cancel_active=cancel_active, version=version)
+adjustments: Optional[Dict[str, AdjustmentEntryResponse]] = # Replace with your value
+virtual_transaction_override_record_instance = VirtualTransactionOverrideRecord(instrument_event_id=instrument_event_id, source_portfolio_id=source_portfolio_id, overrides=overrides, suppressions=suppressions, override_match_status=override_match_status, override_application_status=override_application_status, cancel_active=cancel_active, version=version, adjustments=adjustments)
 
 ```
 

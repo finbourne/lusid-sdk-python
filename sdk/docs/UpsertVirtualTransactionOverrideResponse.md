@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **overrides** | **Dict[str, Optional[List[StoredOverrideDefinition]]]** | The replacement transactions persisted for the instrument event, keyed by the virtual transaction id being overridden. | [optional] 
 **suppressions** | **List[str]** | The virtual transaction ids suppressed for the instrument event. | [optional] 
 **cancel_active** | **bool** | True when an active event-level Cancel instruction also exists for this instrument event, taking precedence over the entries in this record. | [optional] 
+**adjustments** | [**Dict[str, AdjustmentDefinitionResponse]**](AdjustmentDefinitionResponse.md) | The adjustments stored for the instrument event, keyed by virtual transaction id. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -29,8 +30,9 @@ overrides: Optional[Dict[str, Optional[List[StoredOverrideDefinition]]]] = # Rep
 suppressions: Optional[List[StrictStr]] = # Replace with your value
 cancel_active: Optional[StrictBool] = # Replace with your value
 cancel_active:Optional[StrictBool] = None
+adjustments: Optional[Dict[str, AdjustmentDefinitionResponse]] = # Replace with your value
 links: Optional[List[Link]] = None
-upsert_virtual_transaction_override_response_instance = UpsertVirtualTransactionOverrideResponse(version=version, href=href, metadata=metadata, instrument_event_id=instrument_event_id, overrides=overrides, suppressions=suppressions, cancel_active=cancel_active, links=links)
+upsert_virtual_transaction_override_response_instance = UpsertVirtualTransactionOverrideResponse(version=version, href=href, metadata=metadata, instrument_event_id=instrument_event_id, overrides=overrides, suppressions=suppressions, cancel_active=cancel_active, adjustments=adjustments, links=links)
 
 ```
 

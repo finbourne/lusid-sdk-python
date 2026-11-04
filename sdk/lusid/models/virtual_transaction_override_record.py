@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.adjustment_entry_response import AdjustmentEntryResponse
 from lusid.models.override_entry_response import OverrideEntryResponse
 from lusid.models.resource_id import ResourceId
 from lusid.models.suppression_entry_response import SuppressionEntryResponse
@@ -39,7 +40,8 @@ class VirtualTransactionOverrideRecord(BaseModel):
     override_application_status:  Optional[StrictStr] = Field(None,alias="overrideApplicationStatus", description="Whether all, some, or none of this record's override and suppression entries are currently applied. Available values: Full, Partial, Orphaned.") 
     cancel_active: Optional[StrictBool] = Field(default=None, description="True when an active event-level Cancel instruction also exists for this instrument event, taking precedence over the entries in this record.", alias="cancelActive")
     version: Optional[Version] = None
-    __properties = ["instrumentEventId", "sourcePortfolioId", "overrides", "suppressions", "overrideMatchStatus", "overrideApplicationStatus", "cancelActive", "version"]
+    adjustments: Optional[Dict[str, AdjustmentEntryResponse]] = Field(default=None, description="The adjustments in this record, keyed by the virtual transaction id they were stored against.")
+    __properties = ["instrumentEventId", "sourcePortfolioId", "overrides", "suppressions", "overrideMatchStatus", "overrideApplicationStatus", "cancelActive", "version", "adjustments"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,6 +95,13 @@ class VirtualTransactionOverrideRecord(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in adjustments (dict)
+        _field_dict = {}
+        if self.adjustments:
+            for _key in self.adjustments:
+                if self.adjustments[_key]:
+                    _field_dict[_key] = self.adjustments[_key].to_dict()
+            _dict['adjustments'] = _field_dict
         # set to None if instrument_event_id (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_event_id is None and "instrument_event_id" in self.__fields_set__:
@@ -123,6 +132,11 @@ class VirtualTransactionOverrideRecord(BaseModel):
         if self.cancel_active is None and "cancel_active" in self.__fields_set__:
             _dict['cancelActive'] = None
 
+        # set to None if adjustments (nullable) is None
+        # and __fields_set__ contains the field
+        if self.adjustments is None and "adjustments" in self.__fields_set__:
+            _dict['adjustments'] = None
+
         return _dict
 
     @classmethod
@@ -152,7 +166,13 @@ class VirtualTransactionOverrideRecord(BaseModel):
             "override_match_status": obj.get("overrideMatchStatus"),
             "override_application_status": obj.get("overrideApplicationStatus"),
             "cancel_active": obj.get("cancelActive"),
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None
+            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
+            "adjustments": dict(
+                (_k, AdjustmentEntryResponse.from_dict(_v))
+                for _k, _v in obj.get("adjustments").items()
+            )
+            if obj.get("adjustments") is not None
+            else None
         })
         return _obj
 

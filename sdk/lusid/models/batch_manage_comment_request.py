@@ -29,7 +29,7 @@ class BatchManageCommentRequest(BaseModel):
     One item of a batch comment request. The operation (add/edit/delete) is inferred from the  combination of commentId and commentText.  # noqa: E501
     """
     instance_id: RecInstanceId = Field(alias="instanceId")
-    rec_type:  StrictStr = Field(...,alias="recType", description="The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The rec type whose results this item targets (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity.") 
     rec_result_id:  StrictStr = Field(...,alias="recResultId", description="The rec result the comment operation targets.") 
     comment_id:  Optional[StrictStr] = Field(None,alias="commentId", description="The comment id. Null with text = add; provided with text = edit; provided with null text = delete.") 
     comment_text:  Optional[StrictStr] = Field(None,alias="commentText", description="The comment body. See operation inference.") 

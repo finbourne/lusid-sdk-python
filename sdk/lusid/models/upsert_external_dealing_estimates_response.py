@@ -24,13 +24,13 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.error_detail import ErrorDetail
 from lusid.models.link import Link
-from lusid.models.upsert_external_transfer_agency_order_result import UpsertExternalTransferAgencyOrderResult
+from lusid.models.upsert_external_dealing_estimate_result import UpsertExternalDealingEstimateResult
 
-class UpsertExternalTransferAgencyOrdersResponse(BaseModel):
+class UpsertExternalDealingEstimatesResponse(BaseModel):
     """
-    UpsertExternalTransferAgencyOrdersResponse
+    UpsertExternalDealingEstimatesResponse
     """
-    successes: Optional[Dict[str, UpsertExternalTransferAgencyOrderResult]] = Field(default=None, description="A dictionary of successfully loaded sets, keyed by the request key.")
+    successes: Optional[Dict[str, UpsertExternalDealingEstimateResult]] = Field(default=None, description="A dictionary of successfully loaded sets, keyed by the request key.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="A dictionary of sets that could not be loaded, keyed by the request key, containing error details.")
     links: Optional[List[Link]] = None
     __properties = ["successes", "failed", "links"]
@@ -57,8 +57,8 @@ class UpsertExternalTransferAgencyOrdersResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertExternalTransferAgencyOrdersResponse:
-        """Create an instance of UpsertExternalTransferAgencyOrdersResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> UpsertExternalDealingEstimatesResponse:
+        """Create an instance of UpsertExternalDealingEstimatesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -106,17 +106,17 @@ class UpsertExternalTransferAgencyOrdersResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertExternalTransferAgencyOrdersResponse:
-        """Create an instance of UpsertExternalTransferAgencyOrdersResponse from a dict"""
+    def from_dict(cls, obj: dict) -> UpsertExternalDealingEstimatesResponse:
+        """Create an instance of UpsertExternalDealingEstimatesResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertExternalTransferAgencyOrdersResponse.parse_obj(obj)
+            return UpsertExternalDealingEstimatesResponse.parse_obj(obj)
 
-        _obj = UpsertExternalTransferAgencyOrdersResponse.parse_obj({
+        _obj = UpsertExternalDealingEstimatesResponse.parse_obj({
             "successes": dict(
-                (_k, UpsertExternalTransferAgencyOrderResult.from_dict(_v))
+                (_k, UpsertExternalDealingEstimateResult.from_dict(_v))
                 for _k, _v in obj.get("successes").items()
             )
             if obj.get("successes") is not None
@@ -131,4 +131,4 @@ class UpsertExternalTransferAgencyOrdersResponse(BaseModel):
         })
         return _obj
 
-UpsertExternalTransferAgencyOrdersResponse.update_forward_refs()
+UpsertExternalDealingEstimatesResponse.update_forward_refs()

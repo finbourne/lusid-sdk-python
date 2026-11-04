@@ -23,13 +23,13 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-class ExternalTransferAgencyOrderSource(BaseModel):
+class RevaluationProblem(BaseModel):
     """
-    The system that sent an external order set, and its own reference for the batch.  # noqa: E501
+    A reason why a revaluation amount could not be populated.  # noqa: E501
     """
-    system:  StrictStr = Field(...,alias="system") 
-    reference:  Optional[StrictStr] = Field(None,alias="reference") 
-    __properties = ["system", "reference"]
+    code:  Optional[StrictStr] = Field(None,alias="code", description="A machine-readable code identifying the type of problem (e.g. MissingFxRate, MissingBookedFxRate).") 
+    message:  Optional[StrictStr] = Field(None,alias="message", description="A human-readable description of why the revaluation amount could not be populated.") 
+    __properties = ["code", "message"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,8 +53,8 @@ class ExternalTransferAgencyOrderSource(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ExternalTransferAgencyOrderSource:
-        """Create an instance of ExternalTransferAgencyOrderSource from a JSON string"""
+    def from_json(cls, json_str: str) -> RevaluationProblem:
+        """Create an instance of RevaluationProblem from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -63,26 +63,31 @@ class ExternalTransferAgencyOrderSource(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if reference (nullable) is None
+        # set to None if code (nullable) is None
         # and __fields_set__ contains the field
-        if self.reference is None and "reference" in self.__fields_set__:
-            _dict['reference'] = None
+        if self.code is None and "code" in self.__fields_set__:
+            _dict['code'] = None
+
+        # set to None if message (nullable) is None
+        # and __fields_set__ contains the field
+        if self.message is None and "message" in self.__fields_set__:
+            _dict['message'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ExternalTransferAgencyOrderSource:
-        """Create an instance of ExternalTransferAgencyOrderSource from a dict"""
+    def from_dict(cls, obj: dict) -> RevaluationProblem:
+        """Create an instance of RevaluationProblem from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ExternalTransferAgencyOrderSource.parse_obj(obj)
+            return RevaluationProblem.parse_obj(obj)
 
-        _obj = ExternalTransferAgencyOrderSource.parse_obj({
-            "system": obj.get("system"),
-            "reference": obj.get("reference")
+        _obj = RevaluationProblem.parse_obj({
+            "code": obj.get("code"),
+            "message": obj.get("message")
         })
         return _obj
 
-ExternalTransferAgencyOrderSource.update_forward_refs()
+RevaluationProblem.update_forward_refs()

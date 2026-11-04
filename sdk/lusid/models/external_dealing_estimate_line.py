@@ -22,9 +22,9 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.external_transfer_agency_order_amount import ExternalTransferAgencyOrderAmount
+from lusid.models.external_dealing_estimate_amount import ExternalDealingEstimateAmount
 
-class ExternalTransferAgencyOrderLine(BaseModel):
+class ExternalDealingEstimateLine(BaseModel):
     """
     One order within an external order set: a share class, a direction and either a number of units or an amount.  # noqa: E501
     """
@@ -33,7 +33,7 @@ class ExternalTransferAgencyOrderLine(BaseModel):
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope") 
     trade_type:  StrictStr = Field(...,alias="tradeType", description="Available values: Subscription, Redemption, SwitchOut, SwitchIn, TransferOut, TransferIn.") 
     units: Optional[Union[StrictFloat, StrictInt]] = None
-    amount: Optional[ExternalTransferAgencyOrderAmount] = None
+    amount: Optional[ExternalDealingEstimateAmount] = None
     __properties = ["instrumentIdentifierType", "instrumentIdentifier", "instrumentScope", "tradeType", "units", "amount"]
 
     class Config:
@@ -58,8 +58,8 @@ class ExternalTransferAgencyOrderLine(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ExternalTransferAgencyOrderLine:
-        """Create an instance of ExternalTransferAgencyOrderLine from a JSON string"""
+    def from_json(cls, json_str: str) -> ExternalDealingEstimateLine:
+        """Create an instance of ExternalDealingEstimateLine from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -84,22 +84,22 @@ class ExternalTransferAgencyOrderLine(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ExternalTransferAgencyOrderLine:
-        """Create an instance of ExternalTransferAgencyOrderLine from a dict"""
+    def from_dict(cls, obj: dict) -> ExternalDealingEstimateLine:
+        """Create an instance of ExternalDealingEstimateLine from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ExternalTransferAgencyOrderLine.parse_obj(obj)
+            return ExternalDealingEstimateLine.parse_obj(obj)
 
-        _obj = ExternalTransferAgencyOrderLine.parse_obj({
+        _obj = ExternalDealingEstimateLine.parse_obj({
             "instrument_identifier_type": obj.get("instrumentIdentifierType"),
             "instrument_identifier": obj.get("instrumentIdentifier"),
             "instrument_scope": obj.get("instrumentScope"),
             "trade_type": obj.get("tradeType"),
             "units": obj.get("units"),
-            "amount": ExternalTransferAgencyOrderAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
+            "amount": ExternalDealingEstimateAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None
         })
         return _obj
 
-ExternalTransferAgencyOrderLine.update_forward_refs()
+ExternalDealingEstimateLine.update_forward_refs()

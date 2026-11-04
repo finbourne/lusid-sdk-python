@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] ListValuationAddressKeyTemplates: List Valuation Templates.
 
-List the stored Valuation Templates matching the given criteria. To find the domain default, filter on  \"isDefault eq true\". The system default is not stored, so it is not listed. If no stored template is the  default, the system default applies. Get it with scope \"default\" and code \"DefaultTemplate\".
+List the Valuation Templates matching the given criteria. The list includes the system default, with scope  \"default\" and code \"DefaultTemplate\". If no stored template is the default, the system default applies.  To find the domain default, filter on \"isDefault eq true\".
 
 ### Example
 

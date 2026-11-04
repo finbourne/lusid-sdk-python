@@ -35,7 +35,7 @@ class BlockAndOrdersRequest(BaseModel):
     orders: List[BlockedOrderRequest] = Field(description="An order which belongs to a block. Fields common to both entities (such as instrument) should be derived from the block.")
     block_properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this block.", alias="blockProperties")
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
-    side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the block's side (buy, sell, short, etc). BlockedOrders in the request which do not specify a side will have their side populated with this value.") 
+    side:  Optional[StrictStr] = Field(None,alias="side", description="The client's representation of the block's side (buy, sell, short, etc). Optional: the stored side is derived from the block's orders, netted by direction, and a supplied value is replaced by the derived one. BlockedOrders in the request which do not specify a side will have their side populated with this value.") 
     type:  Optional[StrictStr] = Field(None,alias="type", description="The block order's type (examples: Limit, Market, ...)") 
     time_in_force:  Optional[StrictStr] = Field(None,alias="timeInForce", description="The block orders' time in force (examples: Day, GoodTilCancel, ...)") 
     var_date: Optional[datetime] = Field(default=None, description="The date on which the block was made", alias="date")

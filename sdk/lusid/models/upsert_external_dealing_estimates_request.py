@@ -22,21 +22,19 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.external_transfer_agency_order_line import ExternalTransferAgencyOrderLine
-from lusid.models.external_transfer_agency_order_source import ExternalTransferAgencyOrderSource
-from lusid.models.resource_id import ResourceId
+from lusid.models.external_dealing_estimate_line import ExternalDealingEstimateLine
+from lusid.models.external_dealing_estimate_source import ExternalDealingEstimateSource
 
-class UpsertExternalTransferAgencyOrdersRequest(BaseModel):
+class UpsertExternalDealingEstimatesRequest(BaseModel):
     """
-    One dealing point's orders for one fund, as a third-party transfer agent sends them.  # noqa: E501
+    One dealing point's dealing estimates for the fund named in the route, as a third-party transfer agent sends them.  # noqa: E501
     """
-    fund_id: ResourceId = Field(alias="fundId")
     dealing_point: datetime = Field(alias="dealingPoint")
-    source: ExternalTransferAgencyOrderSource
+    source: ExternalDealingEstimateSource
     complete: Optional[StrictBool] = None
     sent_at: Optional[datetime] = Field(default=None, alias="sentAt")
-    lines: Dict[str, ExternalTransferAgencyOrderLine]
-    __properties = ["fundId", "dealingPoint", "source", "complete", "sentAt", "lines"]
+    lines: Dict[str, ExternalDealingEstimateLine]
+    __properties = ["dealingPoint", "source", "complete", "sentAt", "lines"]
 
     class Config:
         """Pydantic configuration"""
@@ -60,8 +58,8 @@ class UpsertExternalTransferAgencyOrdersRequest(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertExternalTransferAgencyOrdersRequest:
-        """Create an instance of UpsertExternalTransferAgencyOrdersRequest from a JSON string"""
+    def from_json(cls, json_str: str) -> UpsertExternalDealingEstimatesRequest:
+        """Create an instance of UpsertExternalDealingEstimatesRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,9 +68,6 @@ class UpsertExternalTransferAgencyOrdersRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of fund_id
-        if self.fund_id:
-            _dict['fundId'] = self.fund_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:
             _dict['source'] = self.source.to_dict()
@@ -91,22 +86,21 @@ class UpsertExternalTransferAgencyOrdersRequest(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertExternalTransferAgencyOrdersRequest:
-        """Create an instance of UpsertExternalTransferAgencyOrdersRequest from a dict"""
+    def from_dict(cls, obj: dict) -> UpsertExternalDealingEstimatesRequest:
+        """Create an instance of UpsertExternalDealingEstimatesRequest from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertExternalTransferAgencyOrdersRequest.parse_obj(obj)
+            return UpsertExternalDealingEstimatesRequest.parse_obj(obj)
 
-        _obj = UpsertExternalTransferAgencyOrdersRequest.parse_obj({
-            "fund_id": ResourceId.from_dict(obj.get("fundId")) if obj.get("fundId") is not None else None,
+        _obj = UpsertExternalDealingEstimatesRequest.parse_obj({
             "dealing_point": obj.get("dealingPoint"),
-            "source": ExternalTransferAgencyOrderSource.from_dict(obj.get("source")) if obj.get("source") is not None else None,
+            "source": ExternalDealingEstimateSource.from_dict(obj.get("source")) if obj.get("source") is not None else None,
             "complete": obj.get("complete"),
             "sent_at": obj.get("sentAt"),
             "lines": dict(
-                (_k, ExternalTransferAgencyOrderLine.from_dict(_v))
+                (_k, ExternalDealingEstimateLine.from_dict(_v))
                 for _k, _v in obj.get("lines").items()
             )
             if obj.get("lines") is not None
@@ -114,4 +108,4 @@ class UpsertExternalTransferAgencyOrdersRequest(BaseModel):
         })
         return _obj
 
-UpsertExternalTransferAgencyOrdersRequest.update_forward_refs()
+UpsertExternalDealingEstimatesRequest.update_forward_refs()

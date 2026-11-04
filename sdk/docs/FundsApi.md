@@ -70,6 +70,7 @@ Method | HTTP request | Description
 [**update_valuation_point**](FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 [**upsert_bookmark**](FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
 [**upsert_diary_entry_type_valuation_point**](FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
+[**upsert_external_dealing_estimates**](FundsApi.md#upsert_external_dealing_estimates) | **POST** /api/funds/{scope}/{code}/dealingestimates/$external | [EARLY ACCESS] UpsertExternalDealingEstimates: Load dealing estimates sent by an external transfer agent
 [**upsert_fee_properties**](FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.
 [**upsert_fund_properties**](FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.
 [**upsert_nav_activity_adjustments**](FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
@@ -6930,6 +6931,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated or inserted estimated Valuation Point |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_external_dealing_estimates**
+> UpsertExternalDealingEstimatesResponse upsert_external_dealing_estimates(scope, code, request_body)
+
+[EARLY ACCESS] UpsertExternalDealingEstimates: Load dealing estimates sent by an external transfer agent
+
+Loads the dealing estimates a third-party transfer agent dealt for the fund at a dealing point. Each request  key names one set: a dealing point, the sending source and the orders it dealt, each keyed by the source's own  line id. The orders are written in the fund's scope with the code  `{fundCode}-{source}-{yyyyMMddHHmmss}-{lineId}`, the dealing point written in UTC to the second, in the  External order state, priced at the dealing point, so the fund's External dealing source reads them at that  valuation point. A line whose code would exceed 64 characters is refused.                A set replaces what the same source sent before: every External order of that source for the fund's share  classes at the dealing point that the set does not restate is deleted, and the response names them. Two  sets in one request naming the same source and dealing point are refused after the first.                The fund must list External among its dealing estimate sources. Each line must name a share class of the  fund and exactly one of a positive number of units or a positive amount in a valid currency. A set sent  after its dealing point is loaded and flagged late; one sent exactly at the dealing point is on time.  Whether the set is complete is recorded on each order and is not yet enforced at pricing.                Each order carries the properties `Order/TA/PriceDate` (date), `Order/TA/DealingSource` (string),  `Order/TA/DealingSourceReference` (string), `Order/TA/Complete` (string, `True` or `False`),  `Order/TA/Late` (string, `True` or `False`) and `Order/TA/SentAt` (date). LUSID defines these as transfer  agency system properties.                Sets are validated independently: a set that fails validation is reported under failures and the others  still load. The sets that pass are then written together in one command, so a reader never sees half a  dealing point, and a refusal at write time fails the whole request and leaves the book as it was. A request  carries at most 200 sets and at most 2000 lines across all of them.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the fund.
+    code = 'code_example' # str | The code of the fund. Together with the scope this uniquely identifies the fund.
+    request_body = {"Set1":{"dealingPoint":"2025-06-02T12:00:00.0000000+00:00","source":{"system":"ExampleTA","reference":"BATCH-20250602-001"},"complete":true,"sentAt":"2025-06-02T11:45:00.0000000+00:00","lines":{"line-1":{"instrumentIdentifierType":"ClientInternal","instrumentIdentifier":"FUND-1-CLASS-A","instrumentScope":"example-scope","tradeType":"Subscription","amount":{"value":100000,"currency":"GBP"}},"line-2":{"instrumentIdentifierType":"ClientInternal","instrumentIdentifier":"FUND-1-CLASS-A","instrumentScope":"example-scope","tradeType":"Redemption","units":2500}}}} # Dict[str, UpsertExternalDealingEstimatesRequest] | The sets to load, keyed by a correlation key of the caller's choosing.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_external_dealing_estimates(scope, code, request_body, opts=opts)
+
+        # [EARLY ACCESS] UpsertExternalDealingEstimates: Load dealing estimates sent by an external transfer agent
+        api_response = api_instance.upsert_external_dealing_estimates(scope, code, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->upsert_external_dealing_estimates: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the fund. | 
+ **code** | **str**| The code of the fund. Together with the scope this uniquely identifies the fund. | 
+ **request_body** | [**Dict[str, UpsertExternalDealingEstimatesRequest]**](UpsertExternalDealingEstimatesRequest.md)| The sets to load, keyed by a correlation key of the caller&#39;s choosing. | 
+
+### Return type
+
+[**UpsertExternalDealingEstimatesResponse**](UpsertExternalDealingEstimatesResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The sets loaded and any that failed, keyed by the request key. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

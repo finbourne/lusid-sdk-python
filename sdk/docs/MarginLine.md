@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **initial_margin_item** | **str** | The initial-margin item the line falls under, when the holding matched one. Filterable. | [optional] 
 **initial_margin** | **float** | The holding&#39;s share of its netting set&#39;s initial margin, before the threshold, when it contributes to it. | [optional] 
 **scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**line_key** | **str** | A key that identifies the line within its run, with which its explanation is asked for. A line valued under a scenario has a different key from the same holding in the base market. Null for a line stored before lines carried a key. | [optional] 
+**explain_available** | **bool** | Whether the working behind the line&#39;s figures was stored, so that the line can be explained. One flag covers every figure of the line. | [optional] 
 ## Example
 
 ```python
@@ -45,7 +47,10 @@ collateral_value: Optional[Union[StrictFloat, StrictInt]] = # Replace with your 
 initial_margin_item: Optional[StrictStr] = "example_initial_margin_item"
 initial_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 scenario: Optional[ResourceId] = None
-margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin, scenario=scenario)
+line_key: Optional[StrictStr] = "example_line_key"
+explain_available: Optional[StrictBool] = # Replace with your value
+explain_available:Optional[StrictBool] = None
+margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin, scenario=scenario, line_key=line_key, explain_available=explain_available)
 
 ```
 

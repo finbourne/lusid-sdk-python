@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**cancel_transfer_agency_transactions**](TransferAgencyApi.md#cancel_transfer_agency_transactions) | **POST** /api/transferagency/transactions/cancel | [EXPERIMENTAL] CancelTransferAgencyTransactions: Cancel transfer agency transactions, un-pricing their orders
 [**delete_transfer_agency_orders**](TransferAgencyApi.md#delete_transfer_agency_orders) | **POST** /api/transferagency/orders/$delete | [EXPERIMENTAL] DeleteTransferAgencyOrders: Delete transfer agency orders
 [**estimate_transfer_agency_orders**](TransferAgencyApi.md#estimate_transfer_agency_orders) | **POST** /api/transferagency/orders/$estimate | [EXPERIMENTAL] EstimateTransferAgencyOrders: Estimate the values of transfer agency orders
-[**upsert_external_transfer_agency_orders**](TransferAgencyApi.md#upsert_external_transfer_agency_orders) | **POST** /api/transferagency/orders/$external | [EARLY ACCESS] UpsertExternalTransferAgencyOrders: Load transfer agency orders sent by an external transfer agent
 [**upsert_transfer_agency_orders**](TransferAgencyApi.md#upsert_transfer_agency_orders) | **POST** /api/transferagency/orders | [EXPERIMENTAL] UpsertTransferAgencyOrders: Upsert transfer agency orders
 [**upsert_transfer_agency_transactions_from_orders**](TransferAgencyApi.md#upsert_transfer_agency_transactions_from_orders) | **POST** /api/transferagency/transactions/$fromOrders | [EXPERIMENTAL] UpsertTransferAgencyTransactionsFromOrders: Upsert transfer agency transactions from transfer agency orders
 
@@ -378,98 +377,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successfully estimated orders and any failures. |  -  |
-**400** | The details of the input related failure |  -  |
-**0** | Error response |  -  |
-
-[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
-
-# **upsert_external_transfer_agency_orders**
-> UpsertExternalTransferAgencyOrdersResponse upsert_external_transfer_agency_orders(request_body)
-
-[EARLY ACCESS] UpsertExternalTransferAgencyOrders: Load transfer agency orders sent by an external transfer agent
-
-Loads the orders a third-party transfer agent dealt for a fund at a dealing point. Each request key names one  set: a fund, a dealing point, the sending source and the orders it dealt, each keyed by the source's own  line id. The orders are written in the fund's scope with the code  `{fundCode}-{source}-{yyyyMMddHHmmss}-{lineId}`, the dealing point written in UTC to the second, in the  External order state, priced at the dealing point, so the fund's External dealing source reads them at that  valuation point. A line whose code would exceed 64 characters is refused.                A set replaces what the same source sent before: every External order of that source for the fund's share  classes at the dealing point that the set does not restate is deleted, and the response names them. Two  sets in one request naming the same fund, source and dealing point are refused after the first.                The fund must list External among its dealing estimate sources. Each line must name a share class of the  fund and exactly one of a positive number of units or a positive amount in a valid currency. A set sent  after its dealing point is loaded and flagged late; one sent exactly at the dealing point is on time.  Whether the set is complete is recorded on each order and is not yet enforced at pricing.                Each order carries the properties `Order/TA/PriceDate` (date), `Order/TA/DealingSource` (string),  `Order/TA/DealingSourceReference` (string), `Order/TA/Complete` (string, `True` or `False`),  `Order/TA/Late` (string, `True` or `False`) and `Order/TA/SentAt` (date). LUSID does not create these  property definitions: define them in the domain, with those data types, before loading, as for the other  transfer agency order properties. A domain missing any of them fails the request with a property-not-defined  error and nothing is written.                Sets are validated independently: a set that fails validation is reported under failures and the others  still load. The sets that pass are then written together in one command, so a reader never sees half a  dealing point, and a refusal at write time fails the whole request and leaves the book as it was. A request  carries at most 200 sets and at most 2000 lines across all of them.
-
-### Example
-
-```python
-from lusid.exceptions import ApiException
-from lusid.extensions.configuration_options import ConfigurationOptions
-from lusid.models import *
-from pprint import pprint
-from lusid import (
-    SyncApiClientFactory,
-    TransferAgencyApi
-)
-
-def main():
-
-    with open("secrets.json", "w") as file:
-        file.write('''
-    {
-        "api":
-        {
-            "tokenUrl":"<your-token-url>",
-            "lusidUrl":"https://<your-domain>.lusid.com/api",
-            "username":"<your-username>",
-            "password":"<your-password>",
-            "clientId":"<your-client-id>",
-            "clientSecret":"<your-client-secret>"
-        }
-    }''')
-
-    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
-    # By default this will read config from environment variables
-    # Then from a secrets.json file found in the current working directory
-
-    # uncomment the below to use configuration overrides
-    # opts = ConfigurationOptions();
-    # opts.total_timeout_ms = 30_000
-
-    # uncomment the below to use an api client factory with overrides
-    # api_client_factory = SyncApiClientFactory(opts=opts)
-
-    api_client_factory = SyncApiClientFactory()
-
-    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
-    
-    # Create an instance of the API class
-    api_instance = api_client_factory.build(TransferAgencyApi)
-    request_body = {"Set1":{"fundId":{"scope":"example-scope","code":"fund-1"},"dealingPoint":"2025-06-02T12:00:00.0000000+00:00","source":{"system":"ExampleTA","reference":"BATCH-20250602-001"},"complete":true,"sentAt":"2025-06-02T11:45:00.0000000+00:00","lines":{"line-1":{"instrumentIdentifierType":"ClientInternal","instrumentIdentifier":"FUND-1-CLASS-A","instrumentScope":"example-scope","tradeType":"Subscription","amount":{"value":100000,"currency":"GBP"}},"line-2":{"instrumentIdentifierType":"ClientInternal","instrumentIdentifier":"FUND-1-CLASS-A","instrumentScope":"example-scope","tradeType":"Redemption","units":2500}}}} # Dict[str, UpsertExternalTransferAgencyOrdersRequest] | The sets to load, keyed by a correlation key of the caller's choosing.
-
-    try:
-        # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_external_transfer_agency_orders(request_body, opts=opts)
-
-        # [EARLY ACCESS] UpsertExternalTransferAgencyOrders: Load transfer agency orders sent by an external transfer agent
-        api_response = api_instance.upsert_external_transfer_agency_orders(request_body)
-        pprint(api_response)
-
-    except ApiException as e:
-        print("Exception when calling TransferAgencyApi->upsert_external_transfer_agency_orders: %s\n" % e)
-
-main()
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **request_body** | [**Dict[str, UpsertExternalTransferAgencyOrdersRequest]**](UpsertExternalTransferAgencyOrdersRequest.md)| The sets to load, keyed by a correlation key of the caller&#39;s choosing. | 
-
-### Return type
-
-[**UpsertExternalTransferAgencyOrdersResponse**](UpsertExternalTransferAgencyOrdersResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: text/plain, application/json, text/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | The sets loaded and any that failed, keyed by the request key. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

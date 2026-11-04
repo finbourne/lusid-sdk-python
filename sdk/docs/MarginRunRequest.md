@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **agreement_filter** | **str** | An expression selecting the collateral agreements to run, in the same syntax as listing collateral agreements. Every agreement the caller may calculate margin for is run if not specified. | [optional] 
 **scenarios** | [**List[ResourceId]**](ResourceId.md) | The stored scenarios to value the agreements under, each as a what-if beside the base market, which the run always values. A scenario&#39;s calls are served beside the base calls only when asked for, and cannot be accepted, disputed or matched to a counterparty demand. At most 20. Only the base market is valued if not specified. | [optional] 
 **effective_from** | **str** | The first business date, datetime or cut label of a span ending at effectiveAt. Each weekday from it to effectiveAt is valued as a run of its own, all at the same asAt, and a date after the asAt is a projection valued on the market as at the asAt that cannot be accepted, disputed or matched to a counterparty demand. At most 130 weekdays. Only effectiveAt is valued if not specified. | [optional] 
+**capture_diagnostics** | **bool** | Whether to store the working behind the run&#39;s figures so that it can be explained. Specified, it is honoured. Not specified, the working is stored only for a run of a single date with no scenarios, since storing it costs time and space that a span or what-if run is not expected to repay. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,9 @@ as_at: Optional[datetime] = # Replace with your value
 agreement_filter: Optional[StrictStr] = "example_agreement_filter"
 scenarios: Optional[List[ResourceId]] = # Replace with your value
 effective_from: Optional[StrictStr] = "example_effective_from"
-margin_run_request_instance = MarginRunRequest(effective_at=effective_at, as_at=as_at, agreement_filter=agreement_filter, scenarios=scenarios, effective_from=effective_from)
+capture_diagnostics: Optional[StrictBool] = # Replace with your value
+capture_diagnostics:Optional[StrictBool] = None
+margin_run_request_instance = MarginRunRequest(effective_at=effective_at, as_at=as_at, agreement_filter=agreement_filter, scenarios=scenarios, effective_from=effective_from, capture_diagnostics=capture_diagnostics)
 
 ```
 

@@ -4,10 +4,10 @@ A definition that reconciles one type of LUSID entity. A filter selects the popu
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_type** | **str** | The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument. | 
+**entity_type** | **str** | The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument, LegalEntity. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity. | 
 **matching_ruleset_id** | [**ResourceId**](ResourceId.md) |  | 
-**left_filter** | **str** | Optional filter that selects the population of the left side, e.g. \&quot;scope eq &#39;default&#39;\&quot;. It resolves against the left side entity fields. Null reads the whole population of the side. | [optional] 
-**right_filter** | **str** | Optional filter that selects the population of the right side. It resolves against the right side entity fields. Null reads the whole population of the side. | [optional] 
+**left_filter** | **str** | Optional filter that selects the population of the left side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side. | [optional] 
+**right_filter** | **str** | Optional filter that selects the population of the right side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side. | [optional] 
 **definition_type** | **str** | What this definition reconciles, and so which shape of details it carries. Available values: PortfolioContents, LusidEntity, External. | 
 ## Example
 

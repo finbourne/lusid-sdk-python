@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.adjustment_definition_response import AdjustmentDefinitionResponse
 from lusid.models.link import Link
 from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.stored_override_definition import StoredOverrideDefinition
@@ -38,8 +39,9 @@ class UpsertVirtualTransactionOverrideResponse(BaseModel):
     overrides: Optional[Dict[str, Optional[List[StoredOverrideDefinition]]]] = Field(default=None, description="The replacement transactions persisted for the instrument event, keyed by the virtual transaction id being overridden.")
     suppressions: Optional[List[StrictStr]] = Field(default=None, description="The virtual transaction ids suppressed for the instrument event.")
     cancel_active: Optional[StrictBool] = Field(default=None, description="True when an active event-level Cancel instruction also exists for this instrument event, taking precedence over the entries in this record.", alias="cancelActive")
+    adjustments: Optional[Dict[str, AdjustmentDefinitionResponse]] = Field(default=None, description="The adjustments stored for the instrument event, keyed by virtual transaction id.")
     links: Optional[List[Link]] = None
-    __properties = ["version", "href", "metadata", "instrumentEventId", "overrides", "suppressions", "cancelActive", "links"]
+    __properties = ["version", "href", "metadata", "instrumentEventId", "overrides", "suppressions", "cancelActive", "adjustments", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,6 +96,13 @@ class UpsertVirtualTransactionOverrideResponse(BaseModel):
                         _item.to_dict() for _item in self.overrides[_key]
                     ]
             _dict['overrides'] = _field_dict_of_array
+        # override the default output from pydantic by calling `to_dict()` of each value in adjustments (dict)
+        _field_dict = {}
+        if self.adjustments:
+            for _key in self.adjustments:
+                if self.adjustments[_key]:
+                    _field_dict[_key] = self.adjustments[_key].to_dict()
+            _dict['adjustments'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -125,6 +134,11 @@ class UpsertVirtualTransactionOverrideResponse(BaseModel):
         # and __fields_set__ contains the field
         if self.cancel_active is None and "cancel_active" in self.__fields_set__:
             _dict['cancelActive'] = None
+
+        # set to None if adjustments (nullable) is None
+        # and __fields_set__ contains the field
+        if self.adjustments is None and "adjustments" in self.__fields_set__:
+            _dict['adjustments'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -168,6 +182,12 @@ class UpsertVirtualTransactionOverrideResponse(BaseModel):
             else None,
             "suppressions": obj.get("suppressions"),
             "cancel_active": obj.get("cancelActive"),
+            "adjustments": dict(
+                (_k, AdjustmentDefinitionResponse.from_dict(_v))
+                for _k, _v in obj.get("adjustments").items()
+            )
+            if obj.get("adjustments") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

@@ -61,7 +61,8 @@ class MarginCall(BaseModel):
     carried_from: Optional[MarginCallReference] = Field(default=None, alias="carriedFrom")
     carried_disputed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount left in dispute on the carried call. Informational; not added to this call.", alias="carriedDisputedAmount")
     scenario: Optional[ResourceId] = None
-    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount", "scenario"]
+    explain_available: Optional[StrictBool] = Field(default=None, description="Whether the working behind the call's required amount was stored, so that the call can be explained. Only an initial-margin call can be explained, and only when the run stored its working.", alias="explainAvailable")
+    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount", "scenario", "explainAvailable"]
 
     class Config:
         """Pydantic configuration"""
@@ -227,7 +228,8 @@ class MarginCall(BaseModel):
             "supersedes": MarginCallReference.from_dict(obj.get("supersedes")) if obj.get("supersedes") is not None else None,
             "carried_from": MarginCallReference.from_dict(obj.get("carriedFrom")) if obj.get("carriedFrom") is not None else None,
             "carried_disputed_amount": obj.get("carriedDisputedAmount"),
-            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
+            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None,
+            "explain_available": obj.get("explainAvailable")
         })
         return _obj
 

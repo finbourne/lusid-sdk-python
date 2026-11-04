@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.output_transaction import OutputTransaction
 from lusid.models.portfolio_id import PortfolioId
+from lusid.models.unsettled_transaction_revaluation import UnsettledTransactionRevaluation
 
 class UnsettledTransaction(BaseModel):
     """
@@ -39,7 +40,8 @@ class UnsettledTransaction(BaseModel):
     stock_is_overdue: Optional[StrictBool] = Field(default=None, description="Whether the stock component is overdue for settlement.", alias="stockIsOverdue")
     deferred_cash_settlement_status:  Optional[StrictStr] = Field(None,alias="deferredCashSettlementStatus", description="The settlement status of the deferred cash component.") 
     deferred_cash_is_overdue: Optional[StrictBool] = Field(default=None, description="Whether the deferred cash component is overdue for settlement.", alias="deferredCashIsOverdue")
-    __properties = ["transaction", "portfolioId", "overallSettlementStatus", "overallIsOverdue", "cashSettlementStatus", "cashIsOverdue", "stockSettlementStatus", "stockIsOverdue", "deferredCashSettlementStatus", "deferredCashIsOverdue"]
+    revaluation: Optional[UnsettledTransactionRevaluation] = None
+    __properties = ["transaction", "portfolioId", "overallSettlementStatus", "overallIsOverdue", "cashSettlementStatus", "cashIsOverdue", "stockSettlementStatus", "stockIsOverdue", "deferredCashSettlementStatus", "deferredCashIsOverdue", "revaluation"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,9 @@ class UnsettledTransaction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of portfolio_id
         if self.portfolio_id:
             _dict['portfolioId'] = self.portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of revaluation
+        if self.revaluation:
+            _dict['revaluation'] = self.revaluation.to_dict()
         # set to None if overall_settlement_status (nullable) is None
         # and __fields_set__ contains the field
         if self.overall_settlement_status is None and "overall_settlement_status" in self.__fields_set__:
@@ -120,7 +125,8 @@ class UnsettledTransaction(BaseModel):
             "stock_settlement_status": obj.get("stockSettlementStatus"),
             "stock_is_overdue": obj.get("stockIsOverdue"),
             "deferred_cash_settlement_status": obj.get("deferredCashSettlementStatus"),
-            "deferred_cash_is_overdue": obj.get("deferredCashIsOverdue")
+            "deferred_cash_is_overdue": obj.get("deferredCashIsOverdue"),
+            "revaluation": UnsettledTransactionRevaluation.from_dict(obj.get("revaluation")) if obj.get("revaluation") is not None else None
         })
         return _obj
 

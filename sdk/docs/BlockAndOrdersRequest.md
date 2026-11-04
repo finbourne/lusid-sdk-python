@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **orders** | [**List[BlockedOrderRequest]**](BlockedOrderRequest.md) | An order which belongs to a block. Fields common to both entities (such as instrument) should be derived from the block. | 
 **block_properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this block. | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
-**side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc). BlockedOrders in the request which do not specify a side will have their side populated with this value. | [optional] 
+**side** | **str** | The client&#39;s representation of the block&#39;s side (buy, sell, short, etc). Optional: the stored side is derived from the block&#39;s orders, netted by direction, and a supplied value is replaced by the derived one. BlockedOrders in the request which do not specify a side will have their side populated with this value. | [optional] 
 **type** | **str** | The block order&#39;s type (examples: Limit, Market, ...) | [optional] 
 **time_in_force** | **str** | The block orders&#39; time in force (examples: Day, GoodTilCancel, ...) | [optional] 
 **var_date** | **datetime** | The date on which the block was made | [optional] 

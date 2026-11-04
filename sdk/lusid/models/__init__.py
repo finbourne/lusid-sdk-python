@@ -57,6 +57,9 @@ from lusid.models.adjust_global_commitment_event import AdjustGlobalCommitmentEv
 from lusid.models.adjust_holding import AdjustHolding
 from lusid.models.adjust_holding_for_date_request import AdjustHoldingForDateRequest
 from lusid.models.adjust_holding_request import AdjustHoldingRequest
+from lusid.models.adjustment_definition_request import AdjustmentDefinitionRequest
+from lusid.models.adjustment_definition_response import AdjustmentDefinitionResponse
+from lusid.models.adjustment_entry_response import AdjustmentEntryResponse
 from lusid.models.aggregate_matching_rule import AggregateMatchingRule
 from lusid.models.aggregate_numeric_tolerance import AggregateNumericTolerance
 from lusid.models.aggregate_rule_values import AggregateRuleValues
@@ -587,6 +590,8 @@ from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
 from lusid.models.economic_dependency_with_quote import EconomicDependencyWithQuote
 from lusid.models.economics import Economics
+from lusid.models.edit_transfer_request import EditTransferRequest
+from lusid.models.edit_transfer_response import EditTransferResponse
 from lusid.models.effective_range import EffectiveRange
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
@@ -630,12 +635,12 @@ from lusid.models.exercise_event import ExerciseEvent
 from lusid.models.exotic_instrument import ExoticInstrument
 from lusid.models.expanded_group import ExpandedGroup
 from lusid.models.expiry_event import ExpiryEvent
+from lusid.models.external_dealing_estimate_amount import ExternalDealingEstimateAmount
+from lusid.models.external_dealing_estimate_line import ExternalDealingEstimateLine
+from lusid.models.external_dealing_estimate_source import ExternalDealingEstimateSource
 from lusid.models.external_fee_component_filter import ExternalFeeComponentFilter
 from lusid.models.external_rec_definition_details import ExternalRecDefinitionDetails
 from lusid.models.external_rec_type import ExternalRecType
-from lusid.models.external_transfer_agency_order_amount import ExternalTransferAgencyOrderAmount
-from lusid.models.external_transfer_agency_order_line import ExternalTransferAgencyOrderLine
-from lusid.models.external_transfer_agency_order_source import ExternalTransferAgencyOrderSource
 from lusid.models.facility import Facility
 from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEvent
 from lusid.models.facility_draw_event import FacilityDrawEvent
@@ -958,6 +963,8 @@ from lusid.models.margin_calculation import MarginCalculation
 from lusid.models.margin_call import MarginCall
 from lusid.models.margin_call_key import MarginCallKey
 from lusid.models.margin_call_reference import MarginCallReference
+from lusid.models.margin_explanation import MarginExplanation
+from lusid.models.margin_explanation_component import MarginExplanationComponent
 from lusid.models.margin_item import MarginItem
 from lusid.models.margin_line import MarginLine
 from lusid.models.margin_rounding import MarginRounding
@@ -1300,6 +1307,7 @@ from lusid.models.preferred_share import PreferredShare
 from lusid.models.preferred_share_all_of_identifiers import PreferredShareAllOfIdentifiers
 from lusid.models.premium import Premium
 from lusid.models.presentation_configuration import PresentationConfiguration
+from lusid.models.preview_blocks_request import PreviewBlocksRequest
 from lusid.models.previous_fund_calendar_entry import PreviousFundCalendarEntry
 from lusid.models.previous_fund_valuation_point_data import PreviousFundValuationPointData
 from lusid.models.previous_nav import PreviousNAV
@@ -1342,6 +1350,7 @@ from lusid.models.property_type import PropertyType
 from lusid.models.property_value import PropertyValue
 from lusid.models.property_value_equals import PropertyValueEquals
 from lusid.models.property_value_in import PropertyValueIn
+from lusid.models.proposed_block_and_orders import ProposedBlockAndOrders
 from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashFlowEvent
 from lusid.models.put_redemption_event import PutRedemptionEvent
 from lusid.models.qualifier_definition import QualifierDefinition
@@ -1561,6 +1570,7 @@ from lusid.models.resource_list_of_property import ResourceListOfProperty
 from lusid.models.resource_list_of_property_definition import ResourceListOfPropertyDefinition
 from lusid.models.resource_list_of_property_interval import ResourceListOfPropertyInterval
 from lusid.models.resource_list_of_property_interval_time_series import ResourceListOfPropertyIntervalTimeSeries
+from lusid.models.resource_list_of_proposed_block_and_orders import ResourceListOfProposedBlockAndOrders
 from lusid.models.resource_list_of_queryable_key import ResourceListOfQueryableKey
 from lusid.models.resource_list_of_quote import ResourceListOfQuote
 from lusid.models.resource_list_of_quote_access_metadata_rule import ResourceListOfQuoteAccessMetadataRule
@@ -1605,6 +1615,7 @@ from lusid.models.retain_election import RetainElection
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
+from lusid.models.revaluation_problem import RevaluationProblem
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.reverse_stress_request import ReverseStressRequest
 from lusid.models.reverse_stress_response import ReverseStressResponse
@@ -1681,6 +1692,7 @@ from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdow
 from lusid.models.share_class_definition import ShareClassDefinition
 from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
+from lusid.models.shares_premium_dividend_event import SharesPremiumDividendEvent
 from lusid.models.shift_value_condition import ShiftValueCondition
 from lusid.models.side_configuration_data import SideConfigurationData
 from lusid.models.side_configuration_data_request import SideConfigurationDataRequest
@@ -1853,6 +1865,8 @@ from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unknown_proceeds_election import UnknownProceedsElection
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.unsettled_transaction import UnsettledTransaction
+from lusid.models.unsettled_transaction_counter_leg_revaluation import UnsettledTransactionCounterLegRevaluation
+from lusid.models.unsettled_transaction_revaluation import UnsettledTransactionRevaluation
 from lusid.models.update_amortisation_rule_set_details_request import UpdateAmortisationRuleSetDetailsRequest
 from lusid.models.update_calendar_request import UpdateCalendarRequest
 from lusid.models.update_check_definition_request import UpdateCheckDefinitionRequest
@@ -1909,9 +1923,9 @@ from lusid.models.upsert_data_quality_rule import UpsertDataQualityRule
 from lusid.models.upsert_dialect_request import UpsertDialectRequest
 from lusid.models.upsert_eligible_collateral_schedule_request import UpsertEligibleCollateralScheduleRequest
 from lusid.models.upsert_entity_resolver_request import UpsertEntityResolverRequest
-from lusid.models.upsert_external_transfer_agency_order_result import UpsertExternalTransferAgencyOrderResult
-from lusid.models.upsert_external_transfer_agency_orders_request import UpsertExternalTransferAgencyOrdersRequest
-from lusid.models.upsert_external_transfer_agency_orders_response import UpsertExternalTransferAgencyOrdersResponse
+from lusid.models.upsert_external_dealing_estimate_result import UpsertExternalDealingEstimateResult
+from lusid.models.upsert_external_dealing_estimates_request import UpsertExternalDealingEstimatesRequest
+from lusid.models.upsert_external_dealing_estimates_response import UpsertExternalDealingEstimatesResponse
 from lusid.models.upsert_flow_conventions_request import UpsertFlowConventionsRequest
 from lusid.models.upsert_fund_bookmark_request import UpsertFundBookmarkRequest
 from lusid.models.upsert_index_convention_request import UpsertIndexConventionRequest
@@ -2093,6 +2107,9 @@ __all__ = [
     "AdjustHolding",
     "AdjustHoldingForDateRequest",
     "AdjustHoldingRequest",
+    "AdjustmentDefinitionRequest",
+    "AdjustmentDefinitionResponse",
+    "AdjustmentEntryResponse",
     "AggregateMatchingRule",
     "AggregateNumericTolerance",
     "AggregateRuleValues",
@@ -2623,6 +2640,8 @@ __all__ = [
     "EconomicDependencyWithComplexMarketData",
     "EconomicDependencyWithQuote",
     "Economics",
+    "EditTransferRequest",
+    "EditTransferResponse",
     "EffectiveRange",
     "ElectionSpecification",
     "EligibilityCalculation",
@@ -2666,12 +2685,12 @@ __all__ = [
     "ExoticInstrument",
     "ExpandedGroup",
     "ExpiryEvent",
+    "ExternalDealingEstimateAmount",
+    "ExternalDealingEstimateLine",
+    "ExternalDealingEstimateSource",
     "ExternalFeeComponentFilter",
     "ExternalRecDefinitionDetails",
     "ExternalRecType",
-    "ExternalTransferAgencyOrderAmount",
-    "ExternalTransferAgencyOrderLine",
-    "ExternalTransferAgencyOrderSource",
     "Facility",
     "FacilityCommitmentFeeEvent",
     "FacilityDrawEvent",
@@ -2994,6 +3013,8 @@ __all__ = [
     "MarginCall",
     "MarginCallKey",
     "MarginCallReference",
+    "MarginExplanation",
+    "MarginExplanationComponent",
     "MarginItem",
     "MarginLine",
     "MarginRounding",
@@ -3336,6 +3357,7 @@ __all__ = [
     "PreferredShareAllOfIdentifiers",
     "Premium",
     "PresentationConfiguration",
+    "PreviewBlocksRequest",
     "PreviousFundCalendarEntry",
     "PreviousFundValuationPointData",
     "PreviousNAV",
@@ -3378,6 +3400,7 @@ __all__ = [
     "PropertyValue",
     "PropertyValueEquals",
     "PropertyValueIn",
+    "ProposedBlockAndOrders",
     "ProtectionPayoutCashFlowEvent",
     "PutRedemptionEvent",
     "QualifierDefinition",
@@ -3597,6 +3620,7 @@ __all__ = [
     "ResourceListOfPropertyDefinition",
     "ResourceListOfPropertyInterval",
     "ResourceListOfPropertyIntervalTimeSeries",
+    "ResourceListOfProposedBlockAndOrders",
     "ResourceListOfQueryableKey",
     "ResourceListOfQuote",
     "ResourceListOfQuoteAccessMetadataRule",
@@ -3641,6 +3665,7 @@ __all__ = [
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReturnsMetric",
+    "RevaluationProblem",
     "ReverseStockSplitEvent",
     "ReverseStressRequest",
     "ReverseStressResponse",
@@ -3717,6 +3742,7 @@ __all__ = [
     "ShareClassDefinition",
     "ShareClassDetails",
     "ShareClassPnlBreakdown",
+    "SharesPremiumDividendEvent",
     "ShiftValueCondition",
     "SideConfigurationData",
     "SideConfigurationDataRequest",
@@ -3889,6 +3915,8 @@ __all__ = [
     "UnknownProceedsElection",
     "UnmatchedHoldingMethod",
     "UnsettledTransaction",
+    "UnsettledTransactionCounterLegRevaluation",
+    "UnsettledTransactionRevaluation",
     "UpdateAmortisationRuleSetDetailsRequest",
     "UpdateCalendarRequest",
     "UpdateCheckDefinitionRequest",
@@ -3945,9 +3973,9 @@ __all__ = [
     "UpsertDialectRequest",
     "UpsertEligibleCollateralScheduleRequest",
     "UpsertEntityResolverRequest",
-    "UpsertExternalTransferAgencyOrderResult",
-    "UpsertExternalTransferAgencyOrdersRequest",
-    "UpsertExternalTransferAgencyOrdersResponse",
+    "UpsertExternalDealingEstimateResult",
+    "UpsertExternalDealingEstimatesRequest",
+    "UpsertExternalDealingEstimatesResponse",
     "UpsertFlowConventionsRequest",
     "UpsertFundBookmarkRequest",
     "UpsertIndexConventionRequest",

@@ -1,4 +1,4 @@
-# ExternalTransferAgencyOrderSource
+# ExternalDealingEstimateSource
 
 The system that sent an external order set, and its own reference for the batch.
 ## Properties
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from lusid.models.external_transfer_agency_order_source import ExternalTransferAgencyOrderSource
+from lusid.models.external_dealing_estimate_source import ExternalDealingEstimateSource
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
@@ -17,7 +17,7 @@ from datetime import datetime
 
 system: StrictStr = "example_system"
 reference: Optional[StrictStr] = "example_reference"
-external_transfer_agency_order_source_instance = ExternalTransferAgencyOrderSource(system=system, reference=reference)
+external_dealing_estimate_source_instance = ExternalDealingEstimateSource(system=system, reference=reference)
 
 ```
 

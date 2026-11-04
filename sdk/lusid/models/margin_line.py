@@ -44,7 +44,9 @@ class MarginLine(BaseModel):
     initial_margin_item:  Optional[StrictStr] = Field(None,alias="initialMarginItem", description="The initial-margin item the line falls under, when the holding matched one. Filterable.") 
     initial_margin: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The holding's share of its netting set's initial margin, before the threshold, when it contributes to it.", alias="initialMargin")
     scenario: Optional[ResourceId] = None
-    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue", "initialMarginItem", "initialMargin", "scenario"]
+    line_key:  Optional[StrictStr] = Field(None,alias="lineKey", description="A key that identifies the line within its run, with which its explanation is asked for. A line valued under a scenario has a different key from the same holding in the base market. Null for a line stored before lines carried a key.") 
+    explain_available: Optional[StrictBool] = Field(default=None, description="Whether the working behind the line's figures was stored, so that the line can be explained. One flag covers every figure of the line.", alias="explainAvailable")
+    __properties = ["runId", "agreementId", "item", "portfolioId", "holdingId", "custodianAccountScope", "custodianAccountCode", "custodianAccountName", "instrumentIdentifiers", "units", "pv", "variationMargin", "collateralValue", "initialMarginItem", "initialMargin", "scenario", "lineKey", "explainAvailable"]
 
     class Config:
         """Pydantic configuration"""
@@ -132,6 +134,11 @@ class MarginLine(BaseModel):
         if self.initial_margin is None and "initial_margin" in self.__fields_set__:
             _dict['initialMargin'] = None
 
+        # set to None if line_key (nullable) is None
+        # and __fields_set__ contains the field
+        if self.line_key is None and "line_key" in self.__fields_set__:
+            _dict['lineKey'] = None
+
         return _dict
 
     @classmethod
@@ -159,7 +166,9 @@ class MarginLine(BaseModel):
             "collateral_value": obj.get("collateralValue"),
             "initial_margin_item": obj.get("initialMarginItem"),
             "initial_margin": obj.get("initialMargin"),
-            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None
+            "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None,
+            "line_key": obj.get("lineKey"),
+            "explain_available": obj.get("explainAvailable")
         })
         return _obj
 

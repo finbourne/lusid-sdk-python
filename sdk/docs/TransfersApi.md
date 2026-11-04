@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_transfer**](TransfersApi.md#create_transfer) | **POST** /api/transfers | [EXPERIMENTAL] CreateTransfer: Create a transfer.
 [**delete_transfer**](TransfersApi.md#delete_transfer) | **DELETE** /api/transfers/{scope}/{code} | [EXPERIMENTAL] DeleteTransfer: Delete a transfer.
+[**edit_transfer**](TransfersApi.md#edit_transfer) | **POST** /api/transfers/$edit | [EXPERIMENTAL] EditTransfer: Edit a transfer.
 [**get_transfer**](TransfersApi.md#get_transfer) | **POST** /api/transfers/$get | [EXPERIMENTAL] GetTransfer: Get a transfer
 [**list_transfers**](TransfersApi.md#list_transfers) | **GET** /api/transfers | [EXPERIMENTAL] ListTransfers: List transfers
 
@@ -206,6 +207,104 @@ Name | Type | Description  | Notes
 **200** | The asAt the deletion landed at. |  -  |
 **400** | The details of the input related failure |  -  |
 **404** | No transfer with the given scope, code and portfolios. |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **edit_transfer**
+> EditTransferResponse edit_transfer(edit_transfer_request)
+
+[EXPERIMENTAL] EditTransfer: Edit a transfer.
+
+Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A value not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransfersApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransfersApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # edit_transfer_request = EditTransferRequest.from_json("")
+    # edit_transfer_request = EditTransferRequest.from_dict({})
+    edit_transfer_request = EditTransferRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.edit_transfer(edit_transfer_request, opts=opts)
+
+        # [EXPERIMENTAL] EditTransfer: Edit a transfer.
+        api_response = api_instance.edit_transfer(edit_transfer_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransfersApi->edit_transfer: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **edit_transfer_request** | [**EditTransferRequest**](EditTransferRequest.md)| The transfer as it should now stand. | 
+
+### Return type
+
+[**EditTransferResponse**](EditTransferResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The transfer that was edited. |  -  |
+**400** | The details of the input related failure |  -  |
+**404** | No transfer exists with the requested scope, code and portfolios. |  -  |
 **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)

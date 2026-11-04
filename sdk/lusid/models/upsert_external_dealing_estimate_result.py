@@ -24,16 +24,16 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.resource_id import ResourceId
 
-class UpsertExternalTransferAgencyOrderResult(BaseModel):
+class UpsertExternalDealingEstimateResult(BaseModel):
     """
-    UpsertExternalTransferAgencyOrderResult
+    UpsertExternalDealingEstimateResult
     """
     fund_id: Optional[ResourceId] = Field(default=None, alias="fundId")
     dealing_point: Optional[datetime] = Field(default=None, alias="dealingPoint")
     late: Optional[StrictBool] = None
-    upserted_orders: Optional[List[ResourceId]] = Field(default=None, alias="upsertedOrders")
-    deleted_orders: Optional[List[ResourceId]] = Field(default=None, alias="deletedOrders")
-    __properties = ["fundId", "dealingPoint", "late", "upsertedOrders", "deletedOrders"]
+    upserted_estimates: Optional[List[ResourceId]] = Field(default=None, alias="upsertedEstimates")
+    deleted_estimates: Optional[List[ResourceId]] = Field(default=None, alias="deletedEstimates")
+    __properties = ["fundId", "dealingPoint", "late", "upsertedEstimates", "deletedEstimates"]
 
     class Config:
         """Pydantic configuration"""
@@ -57,8 +57,8 @@ class UpsertExternalTransferAgencyOrderResult(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpsertExternalTransferAgencyOrderResult:
-        """Create an instance of UpsertExternalTransferAgencyOrderResult from a JSON string"""
+    def from_json(cls, json_str: str) -> UpsertExternalDealingEstimateResult:
+        """Create an instance of UpsertExternalDealingEstimateResult from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -70,48 +70,48 @@ class UpsertExternalTransferAgencyOrderResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fund_id
         if self.fund_id:
             _dict['fundId'] = self.fund_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in upserted_orders (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in upserted_estimates (list)
         _items = []
-        if self.upserted_orders:
-            for _item in self.upserted_orders:
+        if self.upserted_estimates:
+            for _item in self.upserted_estimates:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['upsertedOrders'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in deleted_orders (list)
+            _dict['upsertedEstimates'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in deleted_estimates (list)
         _items = []
-        if self.deleted_orders:
-            for _item in self.deleted_orders:
+        if self.deleted_estimates:
+            for _item in self.deleted_estimates:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['deletedOrders'] = _items
-        # set to None if upserted_orders (nullable) is None
+            _dict['deletedEstimates'] = _items
+        # set to None if upserted_estimates (nullable) is None
         # and __fields_set__ contains the field
-        if self.upserted_orders is None and "upserted_orders" in self.__fields_set__:
-            _dict['upsertedOrders'] = None
+        if self.upserted_estimates is None and "upserted_estimates" in self.__fields_set__:
+            _dict['upsertedEstimates'] = None
 
-        # set to None if deleted_orders (nullable) is None
+        # set to None if deleted_estimates (nullable) is None
         # and __fields_set__ contains the field
-        if self.deleted_orders is None and "deleted_orders" in self.__fields_set__:
-            _dict['deletedOrders'] = None
+        if self.deleted_estimates is None and "deleted_estimates" in self.__fields_set__:
+            _dict['deletedEstimates'] = None
 
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpsertExternalTransferAgencyOrderResult:
-        """Create an instance of UpsertExternalTransferAgencyOrderResult from a dict"""
+    def from_dict(cls, obj: dict) -> UpsertExternalDealingEstimateResult:
+        """Create an instance of UpsertExternalDealingEstimateResult from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpsertExternalTransferAgencyOrderResult.parse_obj(obj)
+            return UpsertExternalDealingEstimateResult.parse_obj(obj)
 
-        _obj = UpsertExternalTransferAgencyOrderResult.parse_obj({
+        _obj = UpsertExternalDealingEstimateResult.parse_obj({
             "fund_id": ResourceId.from_dict(obj.get("fundId")) if obj.get("fundId") is not None else None,
             "dealing_point": obj.get("dealingPoint"),
             "late": obj.get("late"),
-            "upserted_orders": [ResourceId.from_dict(_item) for _item in obj.get("upsertedOrders")] if obj.get("upsertedOrders") is not None else None,
-            "deleted_orders": [ResourceId.from_dict(_item) for _item in obj.get("deletedOrders")] if obj.get("deletedOrders") is not None else None
+            "upserted_estimates": [ResourceId.from_dict(_item) for _item in obj.get("upsertedEstimates")] if obj.get("upsertedEstimates") is not None else None,
+            "deleted_estimates": [ResourceId.from_dict(_item) for _item in obj.get("deletedEstimates")] if obj.get("deletedEstimates") is not None else None
         })
         return _obj
 
-UpsertExternalTransferAgencyOrderResult.update_forward_refs()
+UpsertExternalDealingEstimateResult.update_forward_refs()

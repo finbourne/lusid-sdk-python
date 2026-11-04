@@ -27,6 +27,7 @@ from lusid.models.batch_accept_margin_calls_request import BatchAcceptMarginCall
 from lusid.models.batch_accept_margin_calls_response import BatchAcceptMarginCallsResponse
 from lusid.models.dispute_margin_call_request import DisputeMarginCallRequest
 from lusid.models.margin_call import MarginCall
+from lusid.models.margin_explanation import MarginExplanation
 from lusid.models.margin_run import MarginRun
 from lusid.models.margin_run_request import MarginRunRequest
 from lusid.models.paged_resource_list_of_margin_call import PagedResourceListOfMarginCall
@@ -808,6 +809,366 @@ class CollateralApi:
 
         return self.api_client.call_api(
             '/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_margin_call_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], agreement_scope : Annotated[StrictStr, Field(..., description="The scope of the call's collateral agreement.")], agreement_code : Annotated[StrictStr, Field(..., description="The code of the call's collateral agreement.")], item : Annotated[StrictStr, Field(..., description="The margin item of the call.")], margin_type : Annotated[StrictStr, Field(..., description="The margin type of the call. Only InitialMargin calls can be explained.")], direction : Annotated[StrictStr, Field(..., description="Who posts under the call. One of WePost, TheyPost or None.")], **kwargs) -> MarginExplanation:  # noqa: E501
+        ...
+
+    @overload
+    def get_margin_call_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], agreement_scope : Annotated[StrictStr, Field(..., description="The scope of the call's collateral agreement.")], agreement_code : Annotated[StrictStr, Field(..., description="The code of the call's collateral agreement.")], item : Annotated[StrictStr, Field(..., description="The margin item of the call.")], margin_type : Annotated[StrictStr, Field(..., description="The margin type of the call. Only InitialMargin calls can be explained.")], direction : Annotated[StrictStr, Field(..., description="Who posts under the call. One of WePost, TheyPost or None.")], async_req: Optional[bool]=True, **kwargs) -> MarginExplanation:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_margin_call_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], agreement_scope : Annotated[StrictStr, Field(..., description="The scope of the call's collateral agreement.")], agreement_code : Annotated[StrictStr, Field(..., description="The code of the call's collateral agreement.")], item : Annotated[StrictStr, Field(..., description="The margin item of the call.")], margin_type : Annotated[StrictStr, Field(..., description="The margin type of the call. Only InitialMargin calls can be explained.")], direction : Annotated[StrictStr, Field(..., description="Who posts under the call. One of WePost, TheyPost or None.")], async_req: Optional[bool]=None, **kwargs) -> Union[MarginExplanation, Awaitable[MarginExplanation]]:  # noqa: E501
+        """[EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.  # noqa: E501
+
+        Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call's ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_margin_call_explanation(run_id, agreement_scope, agreement_code, item, margin_type, direction, async_req=True)
+        >>> result = thread.get()
+
+        :param run_id: The identifier of the margin run. (required)
+        :type run_id: str
+        :param agreement_scope: The scope of the call's collateral agreement. (required)
+        :type agreement_scope: str
+        :param agreement_code: The code of the call's collateral agreement. (required)
+        :type agreement_code: str
+        :param item: The margin item of the call. (required)
+        :type item: str
+        :param margin_type: The margin type of the call. Only InitialMargin calls can be explained. (required)
+        :type margin_type: str
+        :param direction: Who posts under the call. One of WePost, TheyPost or None. (required)
+        :type direction: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: MarginExplanation
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_margin_call_explanation_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_margin_call_explanation_with_http_info(run_id, agreement_scope, agreement_code, item, margin_type, direction, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_margin_call_explanation_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], agreement_scope : Annotated[StrictStr, Field(..., description="The scope of the call's collateral agreement.")], agreement_code : Annotated[StrictStr, Field(..., description="The code of the call's collateral agreement.")], item : Annotated[StrictStr, Field(..., description="The margin item of the call.")], margin_type : Annotated[StrictStr, Field(..., description="The margin type of the call. Only InitialMargin calls can be explained.")], direction : Annotated[StrictStr, Field(..., description="Who posts under the call. One of WePost, TheyPost or None.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.  # noqa: E501
+
+        Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call's ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_margin_call_explanation_with_http_info(run_id, agreement_scope, agreement_code, item, margin_type, direction, async_req=True)
+        >>> result = thread.get()
+
+        :param run_id: The identifier of the margin run. (required)
+        :type run_id: str
+        :param agreement_scope: The scope of the call's collateral agreement. (required)
+        :type agreement_scope: str
+        :param agreement_code: The code of the call's collateral agreement. (required)
+        :type agreement_code: str
+        :param item: The margin item of the call. (required)
+        :type item: str
+        :param margin_type: The margin type of the call. Only InitialMargin calls can be explained. (required)
+        :type margin_type: str
+        :param direction: Who posts under the call. One of WePost, TheyPost or None. (required)
+        :type direction: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(MarginExplanation, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'run_id',
+            'agreement_scope',
+            'agreement_code',
+            'item',
+            'margin_type',
+            'direction'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_margin_call_explanation" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['run_id']:
+            _path_params['runId'] = _params['run_id']
+
+        if _params['agreement_scope']:
+            _path_params['agreementScope'] = _params['agreement_scope']
+
+        if _params['agreement_code']:
+            _path_params['agreementCode'] = _params['agreement_code']
+
+        if _params['item']:
+            _path_params['item'] = _params['item']
+
+        if _params['margin_type']:
+            _path_params['marginType'] = _params['margin_type']
+
+        if _params['direction']:
+            _path_params['direction'] = _params['direction']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "MarginExplanation",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_margin_line_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], line_key : Annotated[StrictStr, Field(..., description="The key of the margin line, as listed in the line's LineKey.")], figure : Annotated[Optional[StrictStr], Field( description="The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.")] = None, **kwargs) -> MarginExplanation:  # noqa: E501
+        ...
+
+    @overload
+    def get_margin_line_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], line_key : Annotated[StrictStr, Field(..., description="The key of the margin line, as listed in the line's LineKey.")], figure : Annotated[Optional[StrictStr], Field( description="The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.")] = None, async_req: Optional[bool]=True, **kwargs) -> MarginExplanation:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_margin_line_explanation(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], line_key : Annotated[StrictStr, Field(..., description="The key of the margin line, as listed in the line's LineKey.")], figure : Annotated[Optional[StrictStr], Field( description="The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[MarginExplanation, Awaitable[MarginExplanation]]:  # noqa: E501
+        """[EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.  # noqa: E501
+
+        Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines' ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_margin_line_explanation(run_id, line_key, figure, async_req=True)
+        >>> result = thread.get()
+
+        :param run_id: The identifier of the margin run. (required)
+        :type run_id: str
+        :param line_key: The key of the margin line, as listed in the line's LineKey. (required)
+        :type line_key: str
+        :param figure: The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.
+        :type figure: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: MarginExplanation
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_margin_line_explanation_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_margin_line_explanation_with_http_info(run_id, line_key, figure, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_margin_line_explanation_with_http_info(self, run_id : Annotated[StrictStr, Field(..., description="The identifier of the margin run.")], line_key : Annotated[StrictStr, Field(..., description="The key of the margin line, as listed in the line's LineKey.")], figure : Annotated[Optional[StrictStr], Field( description="The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.  # noqa: E501
+
+        Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines' ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_margin_line_explanation_with_http_info(run_id, line_key, figure, async_req=True)
+        >>> result = thread.get()
+
+        :param run_id: The identifier of the margin run. (required)
+        :type run_id: str
+        :param line_key: The key of the margin line, as listed in the line's LineKey. (required)
+        :type line_key: str
+        :param figure: The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin.
+        :type figure: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(MarginExplanation, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'run_id',
+            'line_key',
+            'figure'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_margin_line_explanation" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['run_id']:
+            _path_params['runId'] = _params['run_id']
+
+        if _params['line_key']:
+            _path_params['lineKey'] = _params['line_key']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('figure') is not None:  # noqa: E501
+            _query_params.append(('figure', _params['figure']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "MarginExplanation",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/collateral/runs/{runId}/lines/{lineKey}/$explain', 'GET',
             _path_params,
             _query_params,
             _header_params,

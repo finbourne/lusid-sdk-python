@@ -44,7 +44,8 @@ class MarginRun(BaseModel):
     issues: List[MarginRunIssue] = Field(description="Agreements the run could not value or roll up into a call, or the caller may not calculate margin for, with the reason.")
     shards: List[MarginRunShard] = Field(description="The valuation shards the run is planned as, with their progress.")
     scenarios: List[ResourceId] = Field(description="The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued.")
-    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenarios"]
+    capture_diagnostics: Optional[StrictBool] = Field(default=None, description="Whether the run stored the working behind its figures, so that they can be explained. Null for a run made before runs could store it, which did not.", alias="captureDiagnostics")
+    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenarios", "captureDiagnostics"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +112,11 @@ class MarginRun(BaseModel):
         if self.href is None and "href" in self.__fields_set__:
             _dict['href'] = None
 
+        # set to None if capture_diagnostics (nullable) is None
+        # and __fields_set__ contains the field
+        if self.capture_diagnostics is None and "capture_diagnostics" in self.__fields_set__:
+            _dict['captureDiagnostics'] = None
+
         return _dict
 
     @classmethod
@@ -136,7 +142,8 @@ class MarginRun(BaseModel):
             "failed_shards": obj.get("failedShards"),
             "issues": [MarginRunIssue.from_dict(_item) for _item in obj.get("issues")] if obj.get("issues") is not None else None,
             "shards": [MarginRunShard.from_dict(_item) for _item in obj.get("shards")] if obj.get("shards") is not None else None,
-            "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None
+            "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None,
+            "capture_diagnostics": obj.get("captureDiagnostics")
         })
         return _obj
 

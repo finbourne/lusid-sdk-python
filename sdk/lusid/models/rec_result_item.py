@@ -140,6 +140,11 @@ class RecResultItem(BaseModel):
             instance.actual_instance = RecResultExternalIdentifiersItem.from_json(json_str)
             return instance
 
+        # check if data type is `RecResultExternalIdentifiersItem`
+        if _data_type == "LegalEntity":
+            instance.actual_instance = RecResultExternalIdentifiersItem.from_json(json_str)
+            return instance
+
         # check if data type is `RecResultRelationalDataItem`
         if _data_type == "RelationalDataPoint":
             instance.actual_instance = RecResultRelationalDataItem.from_json(json_str)

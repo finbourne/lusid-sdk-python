@@ -8,6 +8,8 @@ Method | HTTP request | Description
 [**batch_accept_margin_calls**](CollateralApi.md#batch_accept_margin_calls) | **POST** /api/collateral/margincalls/$batchAccept | [EXPERIMENTAL] BatchAcceptMarginCalls: Accept several margin calls.
 [**dispute_margin_call**](CollateralApi.md#dispute_margin_call) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$dispute | [EXPERIMENTAL] DisputeMarginCall: Dispute a margin call.
 [**get_margin_call**](CollateralApi.md#get_margin_call) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction} | [EXPERIMENTAL] GetMarginCall: Get a margin call.
+[**get_margin_call_explanation**](CollateralApi.md#get_margin_call_explanation) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain | [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+[**get_margin_line_explanation**](CollateralApi.md#get_margin_line_explanation) | **GET** /api/collateral/runs/{runId}/lines/{lineKey}/$explain | [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
 [**get_margin_run**](CollateralApi.md#get_margin_run) | **GET** /api/collateral/runs/{runId} | [EXPERIMENTAL] GetMarginRun: Get a margin run.
 [**list_margin_call_lines**](CollateralApi.md#list_margin_call_lines) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/lines | [EXPERIMENTAL] ListMarginCallLines: List the margin lines of a call.
 [**list_margin_calls**](CollateralApi.md#list_margin_calls) | **GET** /api/collateral/margincalls | [EXPERIMENTAL] ListMarginCalls: List margin calls.
@@ -430,6 +432,204 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested margin call. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_margin_call_explanation**
+> MarginExplanation get_margin_call_explanation(run_id, agreement_scope, agreement_code, item, margin_type, direction)
+
+[EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+
+Show how the required amount of one initial-margin call of a run was arrived at, as a tree of components. Only an  initial-margin call whose run stored its working can be explained, as the call's ExplainAvailable says. The working  of portfolios the caller may not read is replaced by a single redacted component that keeps its parent adding up.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    run_id = 'run_id_example' # str | The identifier of the margin run.
+    agreement_scope = 'agreement_scope_example' # str | The scope of the call's collateral agreement.
+    agreement_code = 'agreement_code_example' # str | The code of the call's collateral agreement.
+    item = 'item_example' # str | The margin item of the call.
+    margin_type = 'margin_type_example' # str | The margin type of the call. Only InitialMargin calls can be explained.
+    direction = 'direction_example' # str | Who posts under the call. One of WePost, TheyPost or None.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_margin_call_explanation(run_id, agreement_scope, agreement_code, item, margin_type, direction, opts=opts)
+
+        # [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
+        api_response = api_instance.get_margin_call_explanation(run_id, agreement_scope, agreement_code, item, margin_type, direction)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->get_margin_call_explanation: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| The identifier of the margin run. | 
+ **agreement_scope** | **str**| The scope of the call&#39;s collateral agreement. | 
+ **agreement_code** | **str**| The code of the call&#39;s collateral agreement. | 
+ **item** | **str**| The margin item of the call. | 
+ **margin_type** | **str**| The margin type of the call. Only InitialMargin calls can be explained. | 
+ **direction** | **str**| Who posts under the call. One of WePost, TheyPost or None. | 
+
+### Return type
+
+[**MarginExplanation**](MarginExplanation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | How the call&#39;s required amount was arrived at. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_margin_line_explanation**
+> MarginExplanation get_margin_line_explanation(run_id, line_key, figure=figure)
+
+[EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+
+Show how the figures of one margin line of a run were arrived at, as a tree of components for each figure. The run  must have stored its working, as its lines' ExplainAvailable says. The working of portfolios the caller may not  read is replaced by a single redacted component that keeps its parent adding up. A line the caller may not read is  reported as not found.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    run_id = 'run_id_example' # str | The identifier of the margin run.
+    line_key = 'line_key_example' # str | The key of the margin line, as listed in the line's LineKey.
+    figure = 'figure_example' # str | The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_margin_line_explanation(run_id, line_key, figure=figure, opts=opts)
+
+        # [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
+        api_response = api_instance.get_margin_line_explanation(run_id, line_key, figure=figure)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->get_margin_line_explanation: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| The identifier of the margin run. | 
+ **line_key** | **str**| The key of the margin line, as listed in the line&#39;s LineKey. | 
+ **figure** | **str**| The figure of the line to explain: VariationMargin or InitialMargin. Explains every figure of the line that the run explained if not specified. Available values: VariationMargin, InitialMargin. | [optional] 
+
+### Return type
+
+[**MarginExplanation**](MarginExplanation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | How the line&#39;s figures were arrived at. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

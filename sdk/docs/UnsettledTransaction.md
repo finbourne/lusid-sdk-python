@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **stock_is_overdue** | **bool** | Whether the stock component is overdue for settlement. | [optional] 
 **deferred_cash_settlement_status** | **str** | The settlement status of the deferred cash component. | [optional] 
 **deferred_cash_is_overdue** | **bool** | Whether the deferred cash component is overdue for settlement. | [optional] 
+**revaluation** | [**UnsettledTransactionRevaluation**](UnsettledTransactionRevaluation.md) |  | [optional] 
 ## Example
 
 ```python
@@ -37,7 +38,8 @@ stock_is_overdue:Optional[StrictBool] = None
 deferred_cash_settlement_status: Optional[StrictStr] = "example_deferred_cash_settlement_status"
 deferred_cash_is_overdue: Optional[StrictBool] = # Replace with your value
 deferred_cash_is_overdue:Optional[StrictBool] = None
-unsettled_transaction_instance = UnsettledTransaction(transaction=transaction, portfolio_id=portfolio_id, overall_settlement_status=overall_settlement_status, overall_is_overdue=overall_is_overdue, cash_settlement_status=cash_settlement_status, cash_is_overdue=cash_is_overdue, stock_settlement_status=stock_settlement_status, stock_is_overdue=stock_is_overdue, deferred_cash_settlement_status=deferred_cash_settlement_status, deferred_cash_is_overdue=deferred_cash_is_overdue)
+revaluation: Optional[UnsettledTransactionRevaluation] = None
+unsettled_transaction_instance = UnsettledTransaction(transaction=transaction, portfolio_id=portfolio_id, overall_settlement_status=overall_settlement_status, overall_is_overdue=overall_is_overdue, cash_settlement_status=cash_settlement_status, cash_is_overdue=cash_is_overdue, stock_settlement_status=stock_settlement_status, stock_is_overdue=stock_is_overdue, deferred_cash_settlement_status=deferred_cash_settlement_status, deferred_cash_is_overdue=deferred_cash_is_overdue, revaluation=revaluation)
 
 ```
 
