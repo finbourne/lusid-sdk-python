@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **distribution_type** | **str** | The type of distribution the ShareClass will calculate. Available values: Income, Accumulation. | [optional] 
 **dom_ccy** | **str** | The domestic currency of the ShareClass instrument. | 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
-**rounding_conventions_price** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] 
+**rounding_conventions_price** | [**List[ShareClassRoundingConvention]**](ShareClassRoundingConvention.md) | Rounding conventions used for the ShareClass quotes. | [optional] 
 **rounding_conventions_units** | [**List[SimpleRoundingConvention]**](SimpleRoundingConvention.md) | Rounding conventions used for the ShareClass units. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **distribution_payment_type** | **str** | The tax treatment applied to distributions. Available values: Invalid, Gross, Net. | [optional] 
@@ -40,7 +40,7 @@ investor_type: StrictStr = "example_investor_type"
 distribution_type: Optional[StrictStr] = "example_distribution_type"
 dom_ccy: StrictStr = "example_dom_ccy"
 trading_conventions: Optional[TradingConventions] = # Replace with your value
-rounding_conventions_price: Optional[List[SimpleRoundingConvention]] = # Replace with your value
+rounding_conventions_price: Optional[List[ShareClassRoundingConvention]] = # Replace with your value
 rounding_conventions_units: Optional[List[SimpleRoundingConvention]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 distribution_payment_type: Optional[StrictStr] = "example_distribution_payment_type"

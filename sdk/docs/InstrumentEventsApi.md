@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **query_bucket_cash_flow_drill_down**
-> ResourceListOfCashFlowDetail query_bucket_cash_flow_drill_down(query_bucket_cash_flow_drill_down_request=query_bucket_cash_flow_drill_down_request)
+> BucketCashFlowDrillDownResponse query_bucket_cash_flow_drill_down(query_bucket_cash_flow_drill_down_request=query_bucket_cash_flow_drill_down_request)
 
 QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
 
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResourceListOfCashFlowDetail**](ResourceListOfCashFlowDetail.md)
+[**BucketCashFlowDrillDownResponse**](BucketCashFlowDrillDownResponse.md)
 
 ### HTTP request headers
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The individual cashflows inside the requested bucket. |  -  |
+**200** | The individual cashflows inside the requested bucket, with the bucket&#39;s balances. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

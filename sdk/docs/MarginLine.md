@@ -22,6 +22,13 @@ Name | Type | Description | Notes
 **scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **line_key** | **str** | A key that identifies the line within its run, with which its explanation is asked for. A line valued under a scenario has a different key from the same holding in the base market. Null for a line stored before lines carried a key. | [optional] 
 **explain_available** | **bool** | Whether the working behind the line&#39;s figures was stored, so that the line can be explained. One flag covers every figure of the line. | [optional] 
+**instrument_type** | **str** | LUSID&#39;s type for the instrument held, when the run read it. | [optional] 
+**asset_class** | **str** | The instrument&#39;s asset class, when the run read it. | [optional] 
+**currency** | **str** | The currency the holding is denominated in, when the run read it. | [optional] 
+**maturity_date** | **datetime** | The instrument&#39;s maturity, when it has one. | [optional] 
+**notional** | **float** | The holding&#39;s notional in its own currency, when the instrument has one. | [optional] 
+**gross_initial_margin** | **float** | The regulatory-grid charge on the holding before its netting set&#39;s net-to-gross scaling. Null under other methods. | [optional] 
+**movable_to** | **List[str]** | The initial-margin netting sets of other agreements in the run the holding could be re-booked into, as scope/code/item. Recorded for base-case trading lines under an initial-margin item; empty otherwise. | 
 ## Example
 
 ```python
@@ -50,7 +57,14 @@ scenario: Optional[ResourceId] = None
 line_key: Optional[StrictStr] = "example_line_key"
 explain_available: Optional[StrictBool] = # Replace with your value
 explain_available:Optional[StrictBool] = None
-margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin, scenario=scenario, line_key=line_key, explain_available=explain_available)
+instrument_type: Optional[StrictStr] = "example_instrument_type"
+asset_class: Optional[StrictStr] = "example_asset_class"
+currency: Optional[StrictStr] = "example_currency"
+maturity_date: Optional[datetime] = # Replace with your value
+notional: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+gross_initial_margin: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+movable_to: List[StrictStr] = # Replace with your value
+margin_line_instance = MarginLine(run_id=run_id, agreement_id=agreement_id, item=item, portfolio_id=portfolio_id, holding_id=holding_id, custodian_account_scope=custodian_account_scope, custodian_account_code=custodian_account_code, custodian_account_name=custodian_account_name, instrument_identifiers=instrument_identifiers, units=units, pv=pv, variation_margin=variation_margin, collateral_value=collateral_value, initial_margin_item=initial_margin_item, initial_margin=initial_margin, scenario=scenario, line_key=line_key, explain_available=explain_available, instrument_type=instrument_type, asset_class=asset_class, currency=currency, maturity_date=maturity_date, notional=notional, gross_initial_margin=gross_initial_margin, movable_to=movable_to)
 
 ```
 

@@ -40,8 +40,8 @@ class ClosedPeriod(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
     version: Optional[Version] = None
     post_close_activities: Optional[List[PostCloseActivity]] = Field(default=None, description="All the post close activities for the closed period.", alias="postCloseActivities")
-    holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
-    valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="valuationAsAtClosedOverride")
+    holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
+    valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used.", alias="valuationAsAtClosedOverride")
     branch_status:  Optional[StrictStr] = Field(None,alias="branchStatus", description="The branch status of the closed period, e.g. Confirmed/Unconfirmed.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested asAt datetime.") 
     links: Optional[List[Link]] = None

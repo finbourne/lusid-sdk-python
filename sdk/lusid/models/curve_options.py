@@ -33,7 +33,7 @@ class CurveOptions(MarketDataOptions):
     back_extrapolation_type:  Optional[StrictStr] = Field(None,alias="backExtrapolationType", description="What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \"back\" direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Default value: Flat. Available values: None, Flat, Linear.") 
     interpolation_type:  Optional[StrictStr] = Field(None,alias="interpolationType", description="What type of interpolation is used to build the curve. Default value: LinearOnRates. Available values: LinearOnRates, LinearOnLogOfRates, LinearOnDiscountFactors, LinearOnLogDiscountFactors, PiecewiseLinearForward, MonotoneConvex, LinearOnLogProbability.") 
     origin_anchor:  Optional[StrictStr] = Field(None,alias="originAnchor", description="How the curve builder anchors the origin of a bootstrapped curve, i.e. the value the curve  carries in front of its shortest calibration instrument. Default value: ZeroRate, the  historical anchor, under which existing curves are unchanged. Available values: ZeroRate, FirstInstrumentRate.") 
-    market_data_options_type:  StrictStr = Field(...,alias="marketDataOptionsType", description="Available values: CurveOptions. Available values: CurveOptions.") 
+    market_data_options_type:  StrictStr = Field(...,alias="marketDataOptionsType", description="Available values: CurveOptions, VolCubeOptions. Available values: CurveOptions, VolCubeOptions.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["marketDataOptionsType", "dayCountConvention", "frontExtrapolationType", "backExtrapolationType", "interpolationType", "originAnchor"]
 
@@ -48,7 +48,7 @@ class CurveOptions(MarketDataOptions):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['CurveOptions']
+        _allowed = ['CurveOptions', 'VolCubeOptions']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **rounding** | [**MarginRounding**](MarginRounding.md) |  | 
 **settlement_lag** | [**MarginSettlementLag**](MarginSettlementLag.md) |  | 
 **match_tolerance** | **float** | The tolerance within which our margin figure and the counterparty&#39;s are considered to match. Optional. | [optional] 
+**funding** | [**CollateralFundingTerms**](CollateralFundingTerms.md) |  | [optional] 
+**optimisation** | [**CollateralOptimisationTerms**](CollateralOptimisationTerms.md) |  | [optional] 
 **variation_margin** | [**List[MarginItem]**](MarginItem.md) | The variation margin arrangements under the agreement. | [optional] 
 **initial_margin** | [**List[MarginItem]**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties to decorate onto the Collateral Agreement. Filterable. | [optional] 
@@ -37,11 +39,13 @@ minimum_transfer_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace wit
 rounding: MarginRounding
 settlement_lag: MarginSettlementLag = # Replace with your value
 match_tolerance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+funding: Optional[CollateralFundingTerms] = None
+optimisation: Optional[CollateralOptimisationTerms] = None
 variation_margin: Optional[List[MarginItem]] = # Replace with your value
 initial_margin: Optional[List[MarginItem]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 effective_at: Optional[datetime] = # Replace with your value
-collateral_agreement_request_instance = CollateralAgreementRequest(code=code, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, variation_margin=variation_margin, initial_margin=initial_margin, properties=properties, effective_at=effective_at)
+collateral_agreement_request_instance = CollateralAgreementRequest(code=code, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, properties=properties, effective_at=effective_at)
 
 ```
 

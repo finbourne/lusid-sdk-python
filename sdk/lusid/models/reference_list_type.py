@@ -40,6 +40,7 @@ class ReferenceListType(str, Enum):
     PROPERTYLIST = 'PropertyList'
     FUNDIDLIST = 'FundIdList'
     FILTEREDFUNDIDLIST = 'FilteredFundIdList'
+    FILTEREDPORTFOLIOIDLIST = 'FilteredPortfolioIdList'
 
     @classmethod
     def from_json(cls, json_str: str) -> ReferenceListType:

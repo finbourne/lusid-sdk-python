@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **back_extrapolation_type** | **str** | What type of extrapolation is used to build the curve.    Imagine that the curve is facing the observer(you), then the \&quot;back\&quot; direction is the furthest point on the curve onward.  example: 30Y tenor to infinity    Default value: Flat. Available values: None, Flat, Linear. | [optional] 
 **interpolation_type** | **str** | What type of interpolation is used to build the curve. Default value: LinearOnRates. Available values: LinearOnRates, LinearOnLogOfRates, LinearOnDiscountFactors, LinearOnLogDiscountFactors, PiecewiseLinearForward, MonotoneConvex, LinearOnLogProbability. | [optional] 
 **origin_anchor** | **str** | How the curve builder anchors the origin of a bootstrapped curve, i.e. the value the curve  carries in front of its shortest calibration instrument. Default value: ZeroRate, the  historical anchor, under which existing curves are unchanged. Available values: ZeroRate, FirstInstrumentRate. | [optional] 
-**market_data_options_type** | **str** | Available values: CurveOptions. Available values: CurveOptions. | 
+**market_data_options_type** | **str** | Available values: CurveOptions, VolCubeOptions. Available values: CurveOptions, VolCubeOptions. | 
 ## Example
 
 ```python

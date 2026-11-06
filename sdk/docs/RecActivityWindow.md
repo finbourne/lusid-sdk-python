@@ -24,5 +24,7 @@ rec_activity_window_instance = RecActivityWindow(contiguous_activity_window_inst
 See all compatible oneOf types with RecActivityWindow
 
 
+ * [FixedPeriodLookbackActivityWindow](./FixedPeriodLookbackActivityWindow.md)
+
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
 

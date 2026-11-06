@@ -31,11 +31,11 @@ class CreateClosedPeriodRequest(BaseModel):
     closed_period_id:  StrictStr = Field(...,alias="closedPeriodId", description="The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period") 
     effective_end: Optional[datetime] = Field(default=None, description="The effective end of the Closed Period", alias="effectiveEnd")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The Closed Periods properties. These will be from the 'ClosedPeriod' domain.")
-    as_at_closed: Optional[datetime] = Field(default=None, description="The asAt closed datetime for the Closed Period", alias="asAtClosed")
+    as_at_closed: Optional[datetime] = Field(default=None, description="The asAt closed datetime for the Closed Period. It must not exceed the latest asAt in LUSID. If not specified, the latest asAt in LUSID will be used.", alias="asAtClosed")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the Closed Period.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description for the Closed Period.") 
-    holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="holdingsAsAtClosedOverride")
-    valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used.", alias="valuationAsAtClosedOverride")
+    holdings_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for building holdings in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used. It must not exceed the latest asAt in LUSID.", alias="holdingsAsAtClosedOverride")
+    valuation_as_at_closed_override: Optional[datetime] = Field(default=None, description="The optional AsAtClosed Override to use for performing valuations in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used. It must not exceed the latest asAt in LUSID.", alias="valuationAsAtClosedOverride")
     __properties = ["closedPeriodId", "effectiveEnd", "properties", "asAtClosed", "displayName", "description", "holdingsAsAtClosedOverride", "valuationAsAtClosedOverride"]
 
     class Config:

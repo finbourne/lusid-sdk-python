@@ -28,8 +28,8 @@ class SupplementalAttributeValues(BaseModel):
     A supplemental attribute value carried on a rec result for context. Does not contribute to matching.  # noqa: E501
     """
     attribute_name:  StrictStr = Field(...,alias="attributeName", description="The name of the supplemental attribute.") 
-    left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value.") 
-    right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value.") 
+    left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value: the value the left items agree on, or \"[multiple values]\" where they do not. Null where the left side has no items.") 
+    right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value: the value the right items agree on, or \"[multiple values]\" where they do not. Null where the right side has no items.") 
     __properties = ["attributeName", "leftValue", "rightValue"]
 
     class Config:

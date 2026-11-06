@@ -22,19 +22,17 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.cash_flow_detail import CashFlowDetail
+from lusid.models.bucket_balance_figures import BucketBalanceFigures
 from lusid.models.link import Link
 
-class ResourceListOfCashFlowDetail(BaseModel):
+class BucketCashFlowSubtotal(BaseModel):
     """
-    ResourceListOfCashFlowDetail
+    The balances of a bucket summed across all payment currencies, in the report currency. It carries only report currency  figures, as a total across currencies has no meaning in any single payment currency, and no rate, as there is no single rate.  # noqa: E501
     """
-    values: List[CashFlowDetail]
-    href:  Optional[StrictStr] = Field(None,alias="href") 
+    report_currency: Optional[BucketBalanceFigures] = Field(default=None, alias="reportCurrency")
+    net_of_haircut: Optional[BucketBalanceFigures] = Field(default=None, alias="netOfHaircut")
     links: Optional[List[Link]] = None
-    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
-    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
-    __properties = ["values", "href", "links", "nextPage", "previousPage"]
+    __properties = ["reportCurrency", "netOfHaircut", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,8 +56,8 @@ class ResourceListOfCashFlowDetail(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ResourceListOfCashFlowDetail:
-        """Create an instance of ResourceListOfCashFlowDetail from a JSON string"""
+    def from_json(cls, json_str: str) -> BucketCashFlowSubtotal:
+        """Create an instance of BucketCashFlowSubtotal from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -68,13 +66,12 @@ class ResourceListOfCashFlowDetail(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in values (list)
-        _items = []
-        if self.values:
-            for _item in self.values:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['values'] = _items
+        # override the default output from pydantic by calling `to_dict()` of report_currency
+        if self.report_currency:
+            _dict['reportCurrency'] = self.report_currency.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of net_of_haircut
+        if self.net_of_haircut:
+            _dict['netOfHaircut'] = self.net_of_haircut.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -82,44 +79,27 @@ class ResourceListOfCashFlowDetail(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
             _dict['links'] = None
 
-        # set to None if next_page (nullable) is None
-        # and __fields_set__ contains the field
-        if self.next_page is None and "next_page" in self.__fields_set__:
-            _dict['nextPage'] = None
-
-        # set to None if previous_page (nullable) is None
-        # and __fields_set__ contains the field
-        if self.previous_page is None and "previous_page" in self.__fields_set__:
-            _dict['previousPage'] = None
-
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ResourceListOfCashFlowDetail:
-        """Create an instance of ResourceListOfCashFlowDetail from a dict"""
+    def from_dict(cls, obj: dict) -> BucketCashFlowSubtotal:
+        """Create an instance of BucketCashFlowSubtotal from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ResourceListOfCashFlowDetail.parse_obj(obj)
+            return BucketCashFlowSubtotal.parse_obj(obj)
 
-        _obj = ResourceListOfCashFlowDetail.parse_obj({
-            "values": [CashFlowDetail.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
-            "href": obj.get("href"),
-            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None,
-            "next_page": obj.get("nextPage"),
-            "previous_page": obj.get("previousPage")
+        _obj = BucketCashFlowSubtotal.parse_obj({
+            "report_currency": BucketBalanceFigures.from_dict(obj.get("reportCurrency")) if obj.get("reportCurrency") is not None else None,
+            "net_of_haircut": BucketBalanceFigures.from_dict(obj.get("netOfHaircut")) if obj.get("netOfHaircut") is not None else None,
+            "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-ResourceListOfCashFlowDetail.update_forward_refs()
+BucketCashFlowSubtotal.update_forward_refs()

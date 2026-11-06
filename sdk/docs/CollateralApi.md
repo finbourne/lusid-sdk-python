@@ -14,7 +14,9 @@ Method | HTTP request | Description
 [**list_margin_call_lines**](CollateralApi.md#list_margin_call_lines) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/lines | [EXPERIMENTAL] ListMarginCallLines: List the margin lines of a call.
 [**list_margin_calls**](CollateralApi.md#list_margin_calls) | **GET** /api/collateral/margincalls | [EXPERIMENTAL] ListMarginCalls: List margin calls.
 [**list_margin_lines**](CollateralApi.md#list_margin_lines) | **GET** /api/collateral/runs/{runId}/lines | [EXPERIMENTAL] ListMarginLines: List the margin lines of a run.
+[**list_margin_run_recommendations**](CollateralApi.md#list_margin_run_recommendations) | **GET** /api/collateral/runs/{runId}/recommendations | [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
 [**list_margin_runs**](CollateralApi.md#list_margin_runs) | **GET** /api/collateral/runs | [EXPERIMENTAL] ListMarginRuns: List margin runs.
+[**list_netting_recommendations**](CollateralApi.md#list_netting_recommendations) | **GET** /api/collateral/recommendations | [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
 [**record_counterparty_demand**](CollateralApi.md#record_counterparty_demand) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$recordCounterpartyDemand | [EXPERIMENTAL] RecordCounterpartyDemand: Record the counterparty&#39;s demand against a margin call.
 [**retry_margin_run**](CollateralApi.md#retry_margin_run) | **POST** /api/collateral/runs/{runId}/$retry | [EXPERIMENTAL] RetryMarginRun: Retry a margin run.
 [**run_margin_calculation**](CollateralApi.md#run_margin_calculation) | **POST** /api/collateral/$run | [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
@@ -1039,6 +1041,104 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_margin_run_recommendations**
+> PagedResourceListOfNettingRecommendation list_margin_run_recommendations(run_id, page=page, limit=limit, filter=filter)
+
+[EXPERIMENTAL] ListMarginRunRecommendations: List a margin run's netting recommendations.
+
+List the trades a run's optimisation pass found would attract less initial margin in another netting set of the  run, with both sets' initial margin before and after the move. Empty until the run's optimisation pass has  completed. Restricted to recommendations whose source and target agreements the caller may read.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    run_id = 'run_id_example' # str | The identifier of the margin run.
+    page = 'page_example' # str | The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_margin_run_recommendations(run_id, page=page, limit=limit, filter=filter, opts=opts)
+
+        # [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run's netting recommendations.
+        api_response = api_instance.list_margin_run_recommendations(run_id, page=page, limit=limit, filter=filter)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->list_margin_run_recommendations: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| The identifier of the margin run. | 
+ **page** | **str**| The pagination token to use to continue listing recommendations; this value is returned from the previous call. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfNettingRecommendation**](PagedResourceListOfNettingRecommendation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested recommendations. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_margin_runs**
 > PagedResourceListOfMarginRun list_margin_runs(page=page, limit=limit, filter=filter)
 
@@ -1130,6 +1230,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested margin runs. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_netting_recommendations**
+> PagedResourceListOfNettingRecommendation list_netting_recommendations(effective_at=effective_at, page=page, limit=limit, filter=filter)
+
+[EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+
+List the netting recommendations in force for a business date: those of the latest run for the date whose  optimisation pass completed, with an agreement that run could not value served from the most recent run that  did. Restricted to recommendations whose source and target agreements the caller may read.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    effective_at = 'effective_at_example' # str | The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing recommendations; this value is returned from the previous call. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_netting_recommendations(effective_at=effective_at, page=page, limit=limit, filter=filter, opts=opts)
+
+        # [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+        api_response = api_instance.list_netting_recommendations(effective_at=effective_at, page=page, limit=limit, filter=filter)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->list_netting_recommendations: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **effective_at** | **str**| The business date, datetime or cut label to list the current recommendations for. Defaults to today if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing recommendations; this value is returned from the previous call. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results. The filterable fields are RunId, SourceAgreementId.Scope, SourceAgreementId.Code, SourceItem, TargetAgreementId.Scope, TargetAgreementId.Code, TargetItem, Transfer, InstrumentType, Currency, MaturityBucket, SavingPerDay, OneOffCost, PaybackDays and InitialMarginChange. For more information about filtering results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfNettingRecommendation**](PagedResourceListOfNettingRecommendation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested recommendations. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -20,7 +20,7 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
-from pydantic.v1 import Field, StrictInt, StrictStr
+from pydantic.v1 import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.create_transfer_request import CreateTransferRequest
@@ -411,26 +411,28 @@ class TransfersApi:
 
 
     @overload
-    async def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], **kwargs) -> EditTransferResponse:  # noqa: E501
+    async def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.")] = None, **kwargs) -> EditTransferResponse:  # noqa: E501
         ...
 
     @overload
-    def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], async_req: Optional[bool]=True, **kwargs) -> EditTransferResponse:  # noqa: E501
+    def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.")] = None, async_req: Optional[bool]=True, **kwargs) -> EditTransferResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], async_req: Optional[bool]=None, **kwargs) -> Union[EditTransferResponse, Awaitable[EditTransferResponse]]:  # noqa: E501
+    def edit_transfer(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[EditTransferResponse, Awaitable[EditTransferResponse]]:  # noqa: E501
         """[EXPERIMENTAL] EditTransfer: Edit a transfer.  # noqa: E501
 
-        Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A value not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.  # noqa: E501
+        Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.edit_transfer(edit_transfer_request, async_req=True)
+        >>> thread = api.edit_transfer(edit_transfer_request, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param edit_transfer_request: The transfer as it should now stand. (required)
         :type edit_transfer_request: EditTransferRequest
+        :param preserve_properties: If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -447,21 +449,23 @@ class TransfersApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.edit_transfer_with_http_info(edit_transfer_request, **kwargs)  # noqa: E501
+        return self.edit_transfer_with_http_info(edit_transfer_request, preserve_properties, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def edit_transfer_with_http_info(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def edit_transfer_with_http_info(self, edit_transfer_request : Annotated[EditTransferRequest, Field(description="The transfer as it should now stand.")], preserve_properties : Annotated[Optional[StrictBool], Field(description="If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] EditTransfer: Edit a transfer.  # noqa: E501
 
-        Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A value not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.  # noqa: E501
+        Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.edit_transfer_with_http_info(edit_transfer_request, async_req=True)
+        >>> thread = api.edit_transfer_with_http_info(edit_transfer_request, preserve_properties, async_req=True)
         >>> result = thread.get()
 
         :param edit_transfer_request: The transfer as it should now stand. (required)
         :type edit_transfer_request: EditTransferRequest
+        :param preserve_properties: If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated.
+        :type preserve_properties: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -489,7 +493,8 @@ class TransfersApi:
         _params = locals()
 
         _all_params = [
-            'edit_transfer_request'
+            'edit_transfer_request',
+            'preserve_properties'
         ]
         _all_params.extend(
             [
@@ -521,6 +526,9 @@ class TransfersApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('preserve_properties') is not None:  # noqa: E501
+            _query_params.append(('preserveProperties', _params['preserve_properties']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

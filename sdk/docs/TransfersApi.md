@@ -212,11 +212,11 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **edit_transfer**
-> EditTransferResponse edit_transfer(edit_transfer_request)
+> EditTransferResponse edit_transfer(edit_transfer_request, preserve_properties=preserve_properties)
 
 [EXPERIMENTAL] EditTransfer: Edit a transfer.
 
-Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A value not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
+Replace an existing transfer with the request, which carries the same fields as a create request and is  validated in the same way. Both transaction legs are rebooked under their existing ids and the Transfer  entity is updated, as a single atomic operation: if any part of the request is rejected, nothing is  changed. A field not supplied is cleared, and the outgoing position is checked with the transfer's own  outgoing leg counted back in.                Properties are treated separately from fields: by default, a property not supplied is kept on the  transfer or leg that holds it, and only the properties supplied are updated. Set preserveProperties to  false to replace the whole property set of the transfer and both legs with the ones supplied.                A transfer is identified by its scope, its code and both of its portfolios, none of which can be changed.  Where no transfer has that scope and code between those portfolios, the request is reported as not found.
 
 ### Example
 
@@ -269,13 +269,14 @@ def main():
     # edit_transfer_request = EditTransferRequest.from_json("")
     # edit_transfer_request = EditTransferRequest.from_dict({})
     edit_transfer_request = EditTransferRequest()
+    preserve_properties = True # bool | If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. (optional) (default to True)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.edit_transfer(edit_transfer_request, opts=opts)
+        # api_response =  api_instance.edit_transfer(edit_transfer_request, preserve_properties=preserve_properties, opts=opts)
 
         # [EXPERIMENTAL] EditTransfer: Edit a transfer.
-        api_response = api_instance.edit_transfer(edit_transfer_request)
+        api_response = api_instance.edit_transfer(edit_transfer_request, preserve_properties=preserve_properties)
         pprint(api_response)
 
     except ApiException as e:
@@ -289,6 +290,7 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **edit_transfer_request** | [**EditTransferRequest**](EditTransferRequest.md)| The transfer as it should now stand. | 
+ **preserve_properties** | **bool**| If set to false, the entire property set of the transfer and both legs               will be overwritten by the provided properties. If not specified or set to true, only the properties               provided will be updated. | [optional] [default to True]
 
 ### Return type
 

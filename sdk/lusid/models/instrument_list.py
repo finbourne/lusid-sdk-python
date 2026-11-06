@@ -29,7 +29,7 @@ class InstrumentList(ReferenceList):
     InstrumentList
     """
     values: List[StrictStr]
-    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["referenceListType", "values"]
 
@@ -44,7 +44,7 @@ class InstrumentList(ReferenceList):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList']
+        _allowed = ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList', 'FilteredPortfolioIdList']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:

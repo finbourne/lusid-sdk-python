@@ -28,7 +28,7 @@ class ReferenceList(BaseModel):
     """
     ReferenceList
     """
-    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList.") 
+    reference_list_type:  StrictStr = Field(...,alias="referenceListType", description="The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList.") 
     __properties = ["referenceListType"]
 
     @validator('reference_list_type')
@@ -42,7 +42,7 @@ class ReferenceList(BaseModel):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList']
+        _allowed = ['PortfolioGroupIdList', 'PortfolioIdList', 'AddressKeyList', 'StringList', 'InstrumentList', 'DecimalList', 'PropertyList', 'FundIdList', 'FilteredFundIdList', 'FilteredPortfolioIdList']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -62,6 +62,7 @@ class ReferenceList(BaseModel):
         'AddressKeyList': 'AddressKeyList',
         'DecimalList': 'DecimalList',
         'FilteredFundIdList': 'FilteredFundIdList',
+        'FilteredPortfolioIdList': 'FilteredPortfolioIdList',
         'FundIdList': 'FundIdList',
         'InstrumentList': 'InstrumentList',
         'PortfolioGroupIdList': 'PortfolioGroupIdList',
@@ -96,7 +97,7 @@ class ReferenceList(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union(AddressKeyList, DecimalList, FilteredFundIdList, FundIdList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
+    def from_json(cls, json_str: str) -> Union(AddressKeyList, DecimalList, FilteredFundIdList, FilteredPortfolioIdList, FundIdList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
         """Create an instance of ReferenceList from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
@@ -109,7 +110,7 @@ class ReferenceList(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Union(AddressKeyList, DecimalList, FilteredFundIdList, FundIdList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
+    def from_dict(cls, obj: dict) -> Union(AddressKeyList, DecimalList, FilteredFundIdList, FilteredPortfolioIdList, FundIdList, InstrumentList, PortfolioGroupIdList, PortfolioIdList, PropertyList, StringList):
         """Create an instance of ReferenceList from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)

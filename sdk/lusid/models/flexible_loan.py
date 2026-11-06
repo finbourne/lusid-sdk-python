@@ -39,9 +39,10 @@ class FlexibleLoan(LusidInstrument):
     schedules: List[Schedule] = Field(description="Repayment schedules for the loan.")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     trading_conventions: Optional[TradingConventions] = Field(default=None, alias="tradingConventions")
+    original_issue_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The price the loan was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%.", alias="originalIssuePrice")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "parentFacility", "parentFacilityDetails", "schedules", "timeZoneConventions", "tradingConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "domCcy", "parentFacility", "parentFacilityDetails", "schedules", "timeZoneConventions", "tradingConventions", "originalIssuePrice"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -124,6 +125,11 @@ class FlexibleLoan(LusidInstrument):
         if self.parent_facility_details is None and "parent_facility_details" in self.__fields_set__:
             _dict['parentFacilityDetails'] = None
 
+        # set to None if original_issue_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.original_issue_price is None and "original_issue_price" in self.__fields_set__:
+            _dict['originalIssuePrice'] = None
+
         return _dict
 
     @classmethod
@@ -144,7 +150,8 @@ class FlexibleLoan(LusidInstrument):
             "parent_facility_details": obj.get("parentFacilityDetails"),
             "schedules": [Schedule.from_dict(_item) for _item in obj.get("schedules")] if obj.get("schedules") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
-            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None
+            "trading_conventions": TradingConventions.from_dict(obj.get("tradingConventions")) if obj.get("tradingConventions") is not None else None,
+            "original_issue_price": obj.get("originalIssuePrice")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

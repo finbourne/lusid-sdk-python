@@ -30,7 +30,7 @@ class RecResultException(BaseModel):
     status:  StrictStr = Field(...,alias="status", description="Whether the exception is Open or Closed. Available values: Open, Closed.") 
     closure_type:  Optional[StrictStr] = Field(None,alias="closureType", description="How the exception was closed. Non-null only when status is Closed. Available values: Cleared, Accepted, ForceMatched.") 
     as_at_closed: Optional[datetime] = Field(default=None, description="The asAt of the transaction that closed the exception. Non-null only when status is Closed.", alias="asAtClosed")
-    as_at_closure_invalidated: Optional[datetime] = Field(default=None, description="First-failure bookmark: the asAt at which a judgement closure's validity condition first failed against the latest run's data.", alias="asAtClosureInvalidated")
+    as_at_closure_invalidated: Optional[datetime] = Field(default=None, description="First-failure bookmark: the asAt at which a judgement closure's validity condition first failed against the latest run's data. The closure stays until a reviewer clears the decision, which dissolves the group. The run sets the review status to Required. You cannot affirm the decision while the condition fails.", alias="asAtClosureInvalidated")
     __properties = ["status", "closureType", "asAtClosed", "asAtClosureInvalidated"]
 
     class Config:

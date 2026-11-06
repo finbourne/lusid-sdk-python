@@ -31,7 +31,7 @@ class AllocationMapResolveRequest(BaseModel):
     event_type:  StrictStr = Field(...,alias="eventType", description="The kind of allocation event to resolve: CapitalCall, Distribution, FeeExpense or ValuationMove. The map must define a basis for it. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding.") 
     amount: Union[StrictFloat, StrictInt] = Field(description="The amount of the event to share between the participants, in the event currency.")
     currency:  StrictStr = Field(...,alias="currency", description="The currency of the amount.") 
-    basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="For a ValueWeighted or PropertyWeighted basis, the basis value of each participating investor record, supplied by the caller until investor records are read from LUSID. Under the AllCommittedToMembers rule these also name the committed investor records. Not needed for a FixedPercentage basis.", alias="basisValues")
+    basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="The basis value of each participating investor record. Optional for a register-backed basis such as Committed or PaidIn, where the members' registers are read when none are supplied. Required for a ValueWeighted or PropertyWeighted basis. Under the AllCommittedToMembers rule the supplied values replace the register value of the investor records they name; every other open line still takes part. Not needed for a FixedPercentage basis.", alias="basisValues")
     __properties = ["eventType", "amount", "currency", "basisValues"]
 
     class Config:

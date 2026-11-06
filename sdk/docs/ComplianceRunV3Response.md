@@ -1,28 +1,23 @@
-# ResourceListOfCashFlowDetail
+# ComplianceRunV3Response
 
+The outcome of a V3 compliance run: the result of each rule that was run.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**List[CashFlowDetail]**](CashFlowDetail.md) |  | 
-**href** | **str** |  | [optional] 
+**rule_results** | [**List[ComplianceRuleV3RuleResult]**](ComplianceRuleV3RuleResult.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
-**next_page** | **str** |  | [optional] 
-**previous_page** | **str** |  | [optional] 
 ## Example
 
 ```python
-from lusid.models.resource_list_of_cash_flow_detail import ResourceListOfCashFlowDetail
+from lusid.models.compliance_run_v3_response import ComplianceRunV3Response
 from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-values: List[CashFlowDetail]
-href: Optional[StrictStr] = "example_href"
+rule_results: Optional[List[ComplianceRuleV3RuleResult]] = # Replace with your value
 links: Optional[List[Link]] = None
-next_page: Optional[StrictStr] = "example_next_page"
-previous_page: Optional[StrictStr] = "example_previous_page"
-resource_list_of_cash_flow_detail_instance = ResourceListOfCashFlowDetail(values=values, href=href, links=links, next_page=next_page, previous_page=previous_page)
+compliance_run_v3_response_instance = ComplianceRunV3Response(rule_results=rule_results, links=links)
 
 ```
 

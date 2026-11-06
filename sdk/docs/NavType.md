@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **swing_pricing** | [**SwingPricingRule**](SwingPricingRule.md) |  | [optional] 
 **notional_dealing_cost_table_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **valuation_template_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**chargeable_gains_regime** | **str** | The chargeable gains regime the Nav Type&#39;s derived portfolio is elected into. This can be: Default or UkChargeableGains. Omit it, or supply Default, to leave the derived portfolio inheriting its parent portfolio&#39;s regime. Under UkChargeableGains, in-scope holdings in the derived portfolio are depleted under the UK chargeable gains rules regardless of the Nav Type&#39;s accounting method; it requires the Fund&#39;s base currency to be GBP. Available values: Default, UkChargeableGains. | [optional] 
 ## Example
 
 ```python
@@ -58,7 +59,8 @@ pricing_basis: Optional[StrictStr] = "example_pricing_basis"
 swing_pricing: Optional[SwingPricingRule] = # Replace with your value
 notional_dealing_cost_table_id: Optional[ResourceId] = # Replace with your value
 valuation_template_id: Optional[ResourceId] = # Replace with your value
-nav_type_instance = NavType(status=status, code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope, transaction_exclusion_filter=transaction_exclusion_filter, pricing_basis=pricing_basis, swing_pricing=swing_pricing, notional_dealing_cost_table_id=notional_dealing_cost_table_id, valuation_template_id=valuation_template_id)
+chargeable_gains_regime: Optional[StrictStr] = "example_chargeable_gains_regime"
+nav_type_instance = NavType(status=status, code=code, display_name=display_name, description=description, chart_of_accounts_id=chart_of_accounts_id, posting_module_codes=posting_module_codes, cleardown_module_codes=cleardown_module_codes, settlement_configuration=settlement_configuration, valuation_recipe_id=valuation_recipe_id, holding_recipe_id=holding_recipe_id, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, leader_nav_type_code=leader_nav_type_code, transaction_template_scope=transaction_template_scope, transaction_exclusion_filter=transaction_exclusion_filter, pricing_basis=pricing_basis, swing_pricing=swing_pricing, notional_dealing_cost_table_id=notional_dealing_cost_table_id, valuation_template_id=valuation_template_id, chargeable_gains_regime=chargeable_gains_regime)
 
 ```
 

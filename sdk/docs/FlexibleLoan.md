@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **schedules** | [**List[Schedule]**](Schedule.md) | Repayment schedules for the loan. | 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **trading_conventions** | [**TradingConventions**](TradingConventions.md) |  | [optional] 
+**original_issue_price** | **float** | The price the loan was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
 ## Example
 
@@ -30,8 +31,9 @@ parent_facility_details: Optional[Dict[str, Optional[StrictStr]]] = # Replace wi
 schedules: List[Schedule] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 trading_conventions: Optional[TradingConventions] = # Replace with your value
+original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-flexible_loan_instance = FlexibleLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, parent_facility=parent_facility, parent_facility_details=parent_facility_details, schedules=schedules, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, instrument_type=instrument_type)
+flexible_loan_instance = FlexibleLoan(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, parent_facility=parent_facility, parent_facility_details=parent_facility_details, schedules=schedules, time_zone_conventions=time_zone_conventions, trading_conventions=trading_conventions, original_issue_price=original_issue_price, instrument_type=instrument_type)
 
 ```
 

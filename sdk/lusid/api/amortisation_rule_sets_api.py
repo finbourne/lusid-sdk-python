@@ -225,6 +225,174 @@ class AmortisationRuleSetsApi:
 
 
     @overload
+    async def delete_amortisation_rules_interval(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_date : Annotated[StrictStr, Field(..., description="The from date of the interval to delete, as a date, datetime or cut label.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_amortisation_rules_interval(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_date : Annotated[StrictStr, Field(..., description="The from date of the interval to delete, as a date, datetime or cut label.")], async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_amortisation_rules_interval(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_date : Annotated[StrictStr, Field(..., description="The from date of the interval to delete, as a date, datetime or cut label.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """DeleteAmortisationRulesInterval: Delete a rules interval of an amortisation rule set.  # noqa: E501
+
+        Deletes the rules interval that starts at the given from date. The interval before it, if any, then applies  until the next interval starts. If there is no interval before it, the rule set has no rules until the next  interval starts.                The from date must be the start of an interval. A date inside an interval does not identify one.                The interval remains viewable at previous as at times.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_amortisation_rules_interval(scope, code, from_date, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The rule set scope. (required)
+        :type scope: str
+        :param code: The rule set code. (required)
+        :type code: str
+        :param from_date: The from date of the interval to delete, as a date, datetime or cut label. (required)
+        :type from_date: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_amortisation_rules_interval_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_amortisation_rules_interval_with_http_info(scope, code, from_date, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_amortisation_rules_interval_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], from_date : Annotated[StrictStr, Field(..., description="The from date of the interval to delete, as a date, datetime or cut label.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """DeleteAmortisationRulesInterval: Delete a rules interval of an amortisation rule set.  # noqa: E501
+
+        Deletes the rules interval that starts at the given from date. The interval before it, if any, then applies  until the next interval starts. If there is no interval before it, the rule set has no rules until the next  interval starts.                The from date must be the start of an interval. A date inside an interval does not identify one.                The interval remains viewable at previous as at times.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_amortisation_rules_interval_with_http_info(scope, code, from_date, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The rule set scope. (required)
+        :type scope: str
+        :param code: The rule set code. (required)
+        :type code: str
+        :param from_date: The from date of the interval to delete, as a date, datetime or cut label. (required)
+        :type from_date: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'from_date'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_amortisation_rules_interval" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('from_date') is not None:  # noqa: E501
+            _query_params.append(('fromDate', _params['from_date']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/amortisation/rulesets/{scope}/{code}/rulesIntervals', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def delete_amortisation_ruleset(self, scope : Annotated[StrictStr, Field(..., description="The rule set scope.")], code : Annotated[StrictStr, Field(..., description="The rule set code.")], **kwargs) -> DeletedEntityResponse:  # noqa: E501
         ...
 

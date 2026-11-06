@@ -27,13 +27,16 @@ Name | Type | Description | Notes
 **counterparty_id_in** | **str** | The counterparty identifier of the incoming leg. Defaults to CounterpartyIdOut. | [optional] 
 **custodian_account_id_out** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **custodian_account_id_in** | [**ResourceId**](ResourceId.md) |  | [optional] 
-**source** | **str** | The transaction source the generated legs are booked against. | 
+**source_out** | **str** | The transaction source the outgoing leg is booked against, and the incoming leg too when SourceIn is not supplied. Defaults to &#39;default&#39;. | [optional] 
 **accounting_method** | **str** | An accounting method to record against the transfer. Available values: AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] 
 **properties_out** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Transaction Properties to set on the outgoing transaction leg, and on the incoming transaction leg when PropertiesIn is absent. Supplying an empty collection for PropertiesIn leaves the incoming leg with no properties. | [optional] 
 **properties_in** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Transaction Properties to set on the incoming transaction leg, replacing rather than adding to PropertiesOut. | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties to set on the transfer itself, in the Transfer domain. These are separate from PropertiesOut and PropertiesIn, which are Transaction domain and land on the legs. | [optional] 
 **transaction_to_portfolio_rate_out** | **float** | The rate from the outgoing leg&#39;s trade currency to the outgoing portfolio&#39;s base currency, applied whenever supplied. | [optional] 
 **transaction_to_portfolio_rate_in** | **float** | The rate from the incoming leg&#39;s trade currency to the incoming portfolio&#39;s base currency. Required when the two portfolios have different base currencies, and applied whenever supplied. | [optional] 
+**source_in** | **str** | The transaction source the incoming leg is booked against. Defaults to SourceOut. | [optional] 
+**transaction_type_out** | **str** | The transaction type to book the outgoing leg as. Supply it together with TransactionTypeIn, or supply neither. If not supplied, it will be derived from the transfer type. It must be a different type from TransactionTypeIn, must be configured under SourceOut in the transaction type scope of PortfolioIdOut, and must reduce a position. | [optional] 
+**transaction_type_in** | **str** | The transaction type to book the incoming leg as. Supply it together with TransactionTypeOut, or supply neither. If not supplied, it will be derived from the transfer type. It must be configured under SourceIn in the transaction type scope of PortfolioIdIn, and must increase a position. | [optional] 
 ## Example
 
 ```python
@@ -66,14 +69,17 @@ counterparty_id_out: Optional[StrictStr] = "example_counterparty_id_out"
 counterparty_id_in: Optional[StrictStr] = "example_counterparty_id_in"
 custodian_account_id_out: Optional[ResourceId] = # Replace with your value
 custodian_account_id_in: Optional[ResourceId] = # Replace with your value
-source: StrictStr = "example_source"
+source_out: Optional[StrictStr] = "example_source_out"
 accounting_method: Optional[StrictStr] = "example_accounting_method"
 properties_out: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 properties_in: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 transaction_to_portfolio_rate_out: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 transaction_to_portfolio_rate_in: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-create_transfer_request_instance = CreateTransferRequest(transfer_id=transfer_id, portfolio_id_out=portfolio_id_out, portfolio_id_in=portfolio_id_in, instrument_identifier_out=instrument_identifier_out, instrument_identifier_in=instrument_identifier_in, pricing_method=pricing_method, tax_lot_structure=tax_lot_structure, units_out=units_out, units_in=units_in, amount_out=amount_out, weight_out=weight_out, trade_date_out=trade_date_out, trade_date_in=trade_date_in, settlement_date_out=settlement_date_out, settlement_date_in=settlement_date_in, exchange_rate_out=exchange_rate_out, exchange_rate_in=exchange_rate_in, transaction_price_out=transaction_price_out, transaction_price_in=transaction_price_in, counterparty_id_out=counterparty_id_out, counterparty_id_in=counterparty_id_in, custodian_account_id_out=custodian_account_id_out, custodian_account_id_in=custodian_account_id_in, source=source, accounting_method=accounting_method, properties_out=properties_out, properties_in=properties_in, properties=properties, transaction_to_portfolio_rate_out=transaction_to_portfolio_rate_out, transaction_to_portfolio_rate_in=transaction_to_portfolio_rate_in)
+source_in: Optional[StrictStr] = "example_source_in"
+transaction_type_out: Optional[StrictStr] = "example_transaction_type_out"
+transaction_type_in: Optional[StrictStr] = "example_transaction_type_in"
+create_transfer_request_instance = CreateTransferRequest(transfer_id=transfer_id, portfolio_id_out=portfolio_id_out, portfolio_id_in=portfolio_id_in, instrument_identifier_out=instrument_identifier_out, instrument_identifier_in=instrument_identifier_in, pricing_method=pricing_method, tax_lot_structure=tax_lot_structure, units_out=units_out, units_in=units_in, amount_out=amount_out, weight_out=weight_out, trade_date_out=trade_date_out, trade_date_in=trade_date_in, settlement_date_out=settlement_date_out, settlement_date_in=settlement_date_in, exchange_rate_out=exchange_rate_out, exchange_rate_in=exchange_rate_in, transaction_price_out=transaction_price_out, transaction_price_in=transaction_price_in, counterparty_id_out=counterparty_id_out, counterparty_id_in=counterparty_id_in, custodian_account_id_out=custodian_account_id_out, custodian_account_id_in=custodian_account_id_in, source_out=source_out, accounting_method=accounting_method, properties_out=properties_out, properties_in=properties_in, properties=properties, transaction_to_portfolio_rate_out=transaction_to_portfolio_rate_out, transaction_to_portfolio_rate_in=transaction_to_portfolio_rate_in, source_in=source_in, transaction_type_out=transaction_type_out, transaction_type_in=transaction_type_in)
 
 ```
 

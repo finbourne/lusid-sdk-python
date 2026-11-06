@@ -52,7 +52,8 @@ class NavTypeDefinition(BaseModel):
     swing_pricing: Optional[SwingPricingRule] = Field(default=None, alias="swingPricing")
     notional_dealing_cost_table_id: Optional[ResourceId] = Field(default=None, alias="notionalDealingCostTableId")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
-    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId"]
+    chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the Nav Type's derived portfolio is elected into. This can be: Default or UkChargeableGains. Omit it, or supply Default, to leave the derived portfolio inheriting its parent portfolio's regime. Under UkChargeableGains, in-scope holdings in the derived portfolio are depleted under the UK chargeable gains rules regardless of the Nav Type's accounting method; it requires the Fund's base currency to be GBP. Available values: Default, UkChargeableGains.") 
+    __properties = ["code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId", "chargeableGainsRegime"]
 
     class Config:
         """Pydantic configuration"""
@@ -155,6 +156,11 @@ class NavTypeDefinition(BaseModel):
         if self.pricing_basis is None and "pricing_basis" in self.__fields_set__:
             _dict['pricingBasis'] = None
 
+        # set to None if chargeable_gains_regime (nullable) is None
+        # and __fields_set__ contains the field
+        if self.chargeable_gains_regime is None and "chargeable_gains_regime" in self.__fields_set__:
+            _dict['chargeableGainsRegime'] = None
+
         return _dict
 
     @classmethod
@@ -188,7 +194,8 @@ class NavTypeDefinition(BaseModel):
             "pricing_basis": obj.get("pricingBasis"),
             "swing_pricing": SwingPricingRule.from_dict(obj.get("swingPricing")) if obj.get("swingPricing") is not None else None,
             "notional_dealing_cost_table_id": ResourceId.from_dict(obj.get("notionalDealingCostTableId")) if obj.get("notionalDealingCostTableId") is not None else None,
-            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None
+            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
+            "chargeable_gains_regime": obj.get("chargeableGainsRegime")
         })
         return _obj
 

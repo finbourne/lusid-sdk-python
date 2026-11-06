@@ -6,22 +6,29 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_compliance_template**](ComplianceApi.md#create_compliance_template) | **POST** /api/compliance/templates/{scope} | [EARLY ACCESS] CreateComplianceTemplate: Create a Compliance Rule Template
 [**delete_compliance_rule**](ComplianceApi.md#delete_compliance_rule) | **DELETE** /api/compliance/rules/{scope}/{code} | [EARLY ACCESS] DeleteComplianceRule: Delete compliance rule.
+[**delete_compliance_rule_v3**](ComplianceApi.md#delete_compliance_rule_v3) | **DELETE** /api/compliance/v3/rules/{scope}/{code} | [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
 [**delete_compliance_template**](ComplianceApi.md#delete_compliance_template) | **DELETE** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] DeleteComplianceTemplate: Delete a ComplianceRuleTemplate
+[**describe_compliance_rule_v3**](ComplianceApi.md#describe_compliance_rule_v3) | **GET** /api/compliance/v3/rules/{scope}/{code}/$describe | [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
 [**get_compliance_rule**](ComplianceApi.md#get_compliance_rule) | **GET** /api/compliance/rules/{scope}/{code} | [EARLY ACCESS] GetComplianceRule: Get compliance rule.
 [**get_compliance_rule_breakdown**](ComplianceApi.md#get_compliance_rule_breakdown) | **GET** /api/compliance/runs/breakdown/{runScope}/{runCode}/{ruleScope}/{ruleCode} | [EARLY ACCESS] GetComplianceRuleBreakdown: Get the position-level breakdown for a single rule of a compliance run.
 [**get_compliance_rule_result**](ComplianceApi.md#get_compliance_rule_result) | **GET** /api/compliance/runs/summary/{runScope}/{runCode}/{ruleScope}/{ruleCode} | [EARLY ACCESS] GetComplianceRuleResult: Get detailed results for a specific rule within a compliance run.
+[**get_compliance_rule_v3**](ComplianceApi.md#get_compliance_rule_v3) | **GET** /api/compliance/v3/rules/{scope}/{code} | [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
 [**get_compliance_template**](ComplianceApi.md#get_compliance_template) | **GET** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] GetComplianceTemplate: Get the requested compliance template.
 [**get_decorated_compliance_run_summary**](ComplianceApi.md#get_decorated_compliance_run_summary) | **GET** /api/compliance/runs/summary/{scope}/{code}/$decorate | [EARLY ACCESS] GetDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run.
 [**get_filtered_decorated_compliance_run_summary**](ComplianceApi.md#get_filtered_decorated_compliance_run_summary) | **POST** /api/compliance/runs/summary/$decorate | [EARLY ACCESS] GetFilteredDecoratedComplianceRunSummary: Get decorated summary results for a specific compliance run, optionally restricted to a set of portfolios or portfolio groups.
 [**list_compliance_rules**](ComplianceApi.md#list_compliance_rules) | **GET** /api/compliance/rules | [EARLY ACCESS] ListComplianceRules: List compliance rules.
+[**list_compliance_rules_v3**](ComplianceApi.md#list_compliance_rules_v3) | **GET** /api/compliance/v3/rules | [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
 [**list_compliance_runs**](ComplianceApi.md#list_compliance_runs) | **GET** /api/compliance/runs | [EARLY ACCESS] ListComplianceRuns: List historical compliance run identifiers.
 [**list_compliance_templates**](ComplianceApi.md#list_compliance_templates) | **GET** /api/compliance/templates | [EARLY ACCESS] ListComplianceTemplates: List compliance templates.
 [**list_order_breach_history**](ComplianceApi.md#list_order_breach_history) | **GET** /api/compliance/runs/breaches | [EXPERIMENTAL] ListOrderBreachHistory: List Historical Order Breaches.
 [**run_compliance**](ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 [**run_compliance_preview**](ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
+[**run_compliance_v3**](ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
 [**update_compliance_template**](ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 [**upsert_compliance_rule**](ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
+[**upsert_compliance_rule_v3**](ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
 [**upsert_compliance_run_summary**](ComplianceApi.md#upsert_compliance_run_summary) | **POST** /api/compliance/runs/summary | [EARLY ACCESS] UpsertComplianceRunSummary: Upsert a compliance run summary.
+[**validate_compliance_rule_v3**](ComplianceApi.md#validate_compliance_rule_v3) | **POST** /api/compliance/v3/rules/$validate | [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
 
 
 # **create_compliance_template**
@@ -217,6 +224,100 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **delete_compliance_rule_v3**
+> DeletedEntityResponse delete_compliance_rule_v3(scope, code)
+
+[EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
+
+Use this endpoint to delete a V3 compliance rule.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+    scope = 'scope_example' # str | The compliance rule's scope.
+    code = 'code_example' # str | The compliance rule's code.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_compliance_rule_v3(scope, code, opts=opts)
+
+        # [EXPERIMENTAL] DeleteComplianceRuleV3: [EXPERIMENTAL] Delete a V3 compliance rule.
+        api_response = api_instance.delete_compliance_rule_v3(scope, code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->delete_compliance_rule_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The compliance rule&#39;s scope. | 
+ **code** | **str**| The compliance rule&#39;s code. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The response from deleting a V3 compliance rule. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **delete_compliance_template**
 > DeletedEntityResponse delete_compliance_template(scope, code)
 
@@ -306,6 +407,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The response from deleting a compliance rule template. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **describe_compliance_rule_v3**
+> ComplianceRuleV3DescribeResponse describe_compliance_rule_v3(scope, code, as_at=as_at)
+
+[EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
+
+Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+    scope = 'scope_example' # str | The compliance rule's scope.
+    code = 'code_example' # str | The compliance rule's code.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.describe_compliance_rule_v3(scope, code, as_at=as_at, opts=opts)
+
+        # [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
+        api_response = api_instance.describe_compliance_rule_v3(scope, code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->describe_compliance_rule_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The compliance rule&#39;s scope. | 
+ **code** | **str**| The compliance rule&#39;s code. | 
+ **as_at** | **datetime**| Optional. The asAt datetime at which to retrieve the rule. Default: latest. | [optional] 
+
+### Return type
+
+[**ComplianceRuleV3DescribeResponse**](ComplianceRuleV3DescribeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The plain-English description of the V3 compliance rule. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -600,6 +797,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested compliance run summary details for a specific rule. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_compliance_rule_v3**
+> ComplianceRuleV3Response get_compliance_rule_v3(scope, code, as_at=as_at)
+
+[EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
+
+Use this endpoint to retrieve a single V3 compliance rule.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+    scope = 'scope_example' # str | The compliance rule's scope.
+    code = 'code_example' # str | The compliance rule's code.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The asAt datetime at which to retrieve the rule. Default: latest. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_compliance_rule_v3(scope, code, as_at=as_at, opts=opts)
+
+        # [EXPERIMENTAL] GetComplianceRuleV3: [EXPERIMENTAL] Get a V3 compliance rule.
+        api_response = api_instance.get_compliance_rule_v3(scope, code, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->get_compliance_rule_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The compliance rule&#39;s scope. | 
+ **code** | **str**| The compliance rule&#39;s code. | 
+ **as_at** | **datetime**| Optional. The asAt datetime at which to retrieve the rule. Default: latest. | [optional] 
+
+### Return type
+
+[**ComplianceRuleV3Response**](ComplianceRuleV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested V3 compliance rule. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -989,6 +1282,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The list of compliance rules. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_compliance_rules_v3**
+> PagedResourceListOfComplianceRuleV3Response list_compliance_rules_v3(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+
+[EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
+
+Use this endpoint to retrieve the V3 compliance rules in the client's scopes.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | Optional. The asAt datetime at which to list rules. Default: latest. (optional)
+    page = 'page_example' # str | Optional. The pagination token from a previous call. (optional)
+    limit = 56 # int | Optional. When paginating, limit the number of returned results to this many. (optional)
+    filter = 'filter_example' # str | Not yet supported on this experimental endpoint; supplying a filter returns a 400. (optional)
+    sort_by = ['sort_by_example'] # List[str] | Optional. A list of field names to sort by, each suffixed by \"ASC\" or \"DESC\". (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_compliance_rules_v3(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
+        # [EXPERIMENTAL] ListComplianceRulesV3: [EXPERIMENTAL] List V3 compliance rules.
+        api_response = api_instance.list_compliance_rules_v3(as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->list_compliance_rules_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **as_at** | **datetime**| Optional. The asAt datetime at which to list rules. Default: latest. | [optional] 
+ **page** | **str**| Optional. The pagination token from a previous call. | [optional] 
+ **limit** | **int**| Optional. When paginating, limit the number of returned results to this many. | [optional] 
+ **filter** | **str**| Not yet supported on this experimental endpoint; supplying a filter returns a 400. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| Optional. A list of field names to sort by, each suffixed by \&quot;ASC\&quot; or \&quot;DESC\&quot;. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfComplianceRuleV3Response**](PagedResourceListOfComplianceRuleV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The list of V3 compliance rules. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1497,6 +1890,103 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **run_compliance_v3**
+> ComplianceRunV3Response run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request)
+
+[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+
+Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule's result.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # run_compliance_v3_request = RunComplianceV3Request.from_json("")
+    # run_compliance_v3_request = RunComplianceV3Request.from_dict({})
+    run_compliance_v3_request = RunComplianceV3Request()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request, opts=opts)
+
+        # [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+        api_response = api_instance.run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->run_compliance_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_compliance_v3_request** | [**RunComplianceV3Request**](RunComplianceV3Request.md)|  | [optional] 
+
+### Return type
+
+[**ComplianceRunV3Response**](ComplianceRunV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The result of each V3 compliance rule that was run. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **update_compliance_template**
 > ComplianceRuleTemplate update_compliance_template(scope, code, update_compliance_template_request)
 
@@ -1695,6 +2185,103 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **upsert_compliance_rule_v3**
+> ComplianceRuleV3Response upsert_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request)
+
+[EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
+
+Use this endpoint to create or update a single V3 compliance rule. The rule's own record fully  describes what it checks.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request.from_json("")
+    # upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request.from_dict({})
+    upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request, opts=opts)
+
+        # [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
+        api_response = api_instance.upsert_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->upsert_compliance_rule_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **upsert_compliance_rule_v3_request** | [**UpsertComplianceRuleV3Request**](UpsertComplianceRuleV3Request.md)|  | [optional] 
+
+### Return type
+
+[**ComplianceRuleV3Response**](ComplianceRuleV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The upserted V3 compliance rule. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **upsert_compliance_run_summary**
 > UpsertComplianceRunSummaryResult upsert_compliance_run_summary(upsert_compliance_run_summary_request=upsert_compliance_run_summary_request)
 
@@ -1787,6 +2374,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The upserted compliance run summary. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **validate_compliance_rule_v3**
+> ComplianceRuleV3Response validate_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request)
+
+[EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+
+Use this endpoint to validate a V3 compliance rule definition against the vocabulary and its  referenced reference lists without persisting it. A validation failure returns a 400.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request.from_json("")
+    # upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request.from_dict({})
+    upsert_compliance_rule_v3_request = UpsertComplianceRuleV3Request()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.validate_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request, opts=opts)
+
+        # [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+        api_response = api_instance.validate_compliance_rule_v3(upsert_compliance_rule_v3_request=upsert_compliance_rule_v3_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->validate_compliance_rule_v3: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **upsert_compliance_rule_v3_request** | [**UpsertComplianceRuleV3Request**](UpsertComplianceRuleV3Request.md)|  | [optional] 
+
+### Return type
+
+[**ComplianceRuleV3Response**](ComplianceRuleV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The validated V3 compliance rule definition. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

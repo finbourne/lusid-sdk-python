@@ -32,6 +32,7 @@ class MarketDataOptionsType(str, Enum):
     allowed enum values
     """
     CURVEOPTIONS = 'CurveOptions'
+    VOLCUBEOPTIONS = 'VolCubeOptions'
 
     @classmethod
     def from_json(cls, json_str: str) -> MarketDataOptionsType:

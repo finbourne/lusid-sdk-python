@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **custodian** | [**LegalEntity**](LegalEntity.md) |  | 
 **account_type** | **str** | The type of the Custodian Account. This is a free-text field that accepts any value. Optional, with no default. | [optional] 
 **tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for disposals from this account. This can be: Cost or AmortisedCost. If not specified or reset with Default, resolution falls through to the transaction type and then the portfolio&#39;s default. Available values: Default, Cost, AmortisedCost. | [optional] 
+**inactive_from** | **datetime** | The date from which the account is inactive. Transactions with a trade date before this date still resolve to the account; those on or after it leave the account unresolved. Absent when the account is active. | [optional] 
 ## Example
 
 ```python
@@ -32,7 +33,8 @@ properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 custodian: LegalEntity
 account_type: Optional[StrictStr] = "example_account_type"
 tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_cost_basis"
-custodian_account_instance = CustodianAccount(custodian_account_id=custodian_account_id, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian=custodian, account_type=account_type, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis)
+inactive_from: Optional[datetime] = # Replace with your value
+custodian_account_instance = CustodianAccount(custodian_account_id=custodian_account_id, status=status, account_number=account_number, account_name=account_name, accounting_method=accounting_method, currency=currency, properties=properties, custodian=custodian, account_type=account_type, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, inactive_from=inactive_from)
 
 ```
 

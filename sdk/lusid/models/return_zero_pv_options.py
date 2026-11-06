@@ -27,7 +27,7 @@ class ReturnZeroPvOptions(BaseModel):
     """
     Options to indicate which errors to ignore when performing valuation.  # noqa: E501
     """
-    instrument_matured: Optional[StrictBool] = Field(default=None, description="Indicates whether attempting to value an instrument after its maturity date should produce a failure (false)  or a zero PV (true).", alias="instrumentMatured")
+    instrument_matured: Optional[StrictBool] = Field(default=None, description="Deprecated: use pricing.options.maturedInstrumentValuation, where true corresponds to  \"ZeroPv\" and false to \"Fail\". Indicates whether attempting to value an instrument after  its maturity date should produce a failure (false) or a zero PV (true).  Ignored when maturedInstrumentValuation is set.", alias="instrumentMatured")
     __properties = ["instrumentMatured"]
 
     class Config:

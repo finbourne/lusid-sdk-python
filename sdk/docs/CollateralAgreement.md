@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **rounding** | [**MarginRounding**](MarginRounding.md) |  | [optional] 
 **settlement_lag** | [**MarginSettlementLag**](MarginSettlementLag.md) |  | [optional] 
 **match_tolerance** | **float** | The tolerance within which our margin figure and the counterparty&#39;s are considered to match. Optional. | [optional] 
+**funding** | [**CollateralFundingTerms**](CollateralFundingTerms.md) |  | [optional] 
+**optimisation** | [**CollateralOptimisationTerms**](CollateralOptimisationTerms.md) |  | [optional] 
 **variation_margin** | [**List[MarginItem]**](MarginItem.md) | The variation margin arrangements under the agreement. | [optional] 
 **initial_margin** | [**List[MarginItem]**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
@@ -40,12 +42,14 @@ minimum_transfer_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace wit
 rounding: Optional[MarginRounding] = None
 settlement_lag: Optional[MarginSettlementLag] = # Replace with your value
 match_tolerance: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+funding: Optional[CollateralFundingTerms] = None
+optimisation: Optional[CollateralOptimisationTerms] = None
 variation_margin: Optional[List[MarginItem]] = # Replace with your value
 initial_margin: Optional[List[MarginItem]] = # Replace with your value
 version: Optional[Version] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-collateral_agreement_instance = CollateralAgreement(href=href, id=id, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, variation_margin=variation_margin, initial_margin=initial_margin, version=version, properties=properties, links=links)
+collateral_agreement_instance = CollateralAgreement(href=href, id=id, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, version=version, properties=properties, links=links)
 
 ```
 

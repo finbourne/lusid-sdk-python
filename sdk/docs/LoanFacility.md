@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **loan_type** | **str** | LoanType for this facility. The facility can either be a revolving or a  term loan. Available values: Revolver, TermLoan. | 
 **schedules** | [**List[Schedule]**](Schedule.md) | Repayment schedules for the loan. | 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
+**original_issue_price** | **float** | The price the loan facility was issued at. This is to be entered as a percentage of par, for example a value of 98.5 would represent 98.5%. | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
 ## Example
 
@@ -28,8 +29,9 @@ initial_commitment: Union[StrictFloat, StrictInt] = # Replace with your value
 loan_type: StrictStr = "example_loan_type"
 schedules: List[Schedule] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
+original_issue_price: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-loan_facility_instance = LoanFacility(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, initial_commitment=initial_commitment, loan_type=loan_type, schedules=schedules, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+loan_facility_instance = LoanFacility(start_date=start_date, maturity_date=maturity_date, dom_ccy=dom_ccy, initial_commitment=initial_commitment, loan_type=loan_type, schedules=schedules, time_zone_conventions=time_zone_conventions, original_issue_price=original_issue_price, instrument_type=instrument_type)
 
 ```
 

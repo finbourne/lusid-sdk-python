@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **nav_type_codes_hint** | **List[str]** |  | [optional] 
 **nav_type_selection** | **str** | Available values: First, All. | [optional] 
 **resolved_fund_nav_type_codes** | [**List[FundNavTypeCodes]**](FundNavTypeCodes.md) |  | [optional] [readonly] 
-**reference_list_type** | **str** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList. | 
+**reference_list_type** | **str** | The reference list values. Available values: PortfolioGroupIdList, PortfolioIdList, AddressKeyList, StringList, InstrumentList, DecimalList, PropertyList, FundIdList, FilteredFundIdList, FilteredPortfolioIdList. | 
 ## Example
 
 ```python

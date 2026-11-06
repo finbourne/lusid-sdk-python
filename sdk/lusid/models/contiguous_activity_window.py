@@ -29,7 +29,7 @@ class ContiguousActivityWindow(BaseModel):
     The activity window for a running series of instances: each instance's window starts where the previous  instance's ended, so the series tiles the effective timeline with no gaps and no overlap. Requires the  definition's effectiveAtProgression to be Series.  # noqa: E501
     """
     initial_activity_since_effective_at: RecActivitySinceEffectiveAt = Field(alias="initialActivitySinceEffectiveAt")
-    window_type:  StrictStr = Field(...,alias="windowType", description="Polymorphic discriminator. Supported types: Contiguous. Contiguous requires effectiveAtProgression Series. Available values: Contiguous, FixedLookback, Explicit, ClosedPeriod, ContiguousAsAt.") 
+    window_type:  StrictStr = Field(...,alias="windowType", description="Polymorphic discriminator. Supported types: Contiguous, FixedPeriodLookback. Contiguous requires effectiveAtProgression Series; FixedPeriodLookback is accepted under any progression. Available values: Contiguous, FixedPeriodLookback, Explicit, ClosedPeriod, ContiguousAsAt.") 
     __properties = ["initialActivitySinceEffectiveAt", "windowType"]
 
     class Config:

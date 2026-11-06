@@ -5,8 +5,8 @@ A supplemental attribute value carried on a rec result for context. Does not con
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **attribute_name** | **str** | The name of the supplemental attribute. | 
-**left_value** | **str** | The left-side value. | [optional] 
-**right_value** | **str** | The right-side value. | [optional] 
+**left_value** | **str** | The left-side value: the value the left items agree on, or \&quot;[multiple values]\&quot; where they do not. Null where the left side has no items. | [optional] 
+**right_value** | **str** | The right-side value: the value the right items agree on, or \&quot;[multiple values]\&quot; where they do not. Null where the right side has no items. | [optional] 
 ## Example
 
 ```python

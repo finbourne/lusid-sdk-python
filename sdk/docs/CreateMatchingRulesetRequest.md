@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **core_tolerances** | [**List[ToleranceBase]**](ToleranceBase.md) | Tolerance configurations applied to core rule matching, in the specified order. | [optional] 
 **aggregate_tolerances** | [**List[ToleranceBase]**](ToleranceBase.md) | Tolerance configurations applied to aggregate rule matching. | [optional] 
 **allow_partial_matching** | **bool** | Whether to permit partial matches when applying rules. Optional, defaults to true if a value is not provided. | [optional] 
-**supplemental_attributes** | [**List[SupplementalAttribute]**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. | [optional] 
+**supplemental_attributes** | [**List[SupplementalAttribute]**](SupplementalAttribute.md) | Supplemental attributes that decorate reconciliation results with additional values without participating in the reconciliation itself. Each attribute&#39;s formulas are compiled and evaluated as a rule&#39;s are, so both must return the same value type. | [optional] 
 **writeback_configurations** | [**List[WritebackConfiguration]**](WritebackConfiguration.md) | The writeback suggestions generated against this ruleset&#39;s results. Suggestions are made at item level on target-side items only, and are suggestions only: a user is expected to review them before acting. Optional, and may be empty. | [optional] 
 **populate_result_properties** | [**List[PopulateResultProperty]**](PopulateResultProperty.md) | The RecResult properties to populate on this ruleset&#39;s results, each from a formula over the result. Optional, and may be empty; at most 20. | [optional] 
 ## Example

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **status** | **str** | Whether the exception is Open or Closed. Available values: Open, Closed. | 
 **closure_type** | **str** | How the exception was closed. Non-null only when status is Closed. Available values: Cleared, Accepted, ForceMatched. | [optional] 
 **as_at_closed** | **datetime** | The asAt of the transaction that closed the exception. Non-null only when status is Closed. | [optional] 
-**as_at_closure_invalidated** | **datetime** | First-failure bookmark: the asAt at which a judgement closure&#39;s validity condition first failed against the latest run&#39;s data. | [optional] 
+**as_at_closure_invalidated** | **datetime** | First-failure bookmark: the asAt at which a judgement closure&#39;s validity condition first failed against the latest run&#39;s data. The closure stays until a reviewer clears the decision, which dissolves the group. The run sets the review status to Required. You cannot affirm the decision while the condition fails. | [optional] 
 ## Example
 
 ```python

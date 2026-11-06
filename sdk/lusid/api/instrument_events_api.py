@@ -23,6 +23,7 @@ from datetime import datetime
 from pydantic.v1 import Field, StrictInt
 from typing import Optional
 from typing_extensions import Annotated
+from lusid.models.bucket_cash_flow_drill_down_response import BucketCashFlowDrillDownResponse
 from lusid.models.bucketed_cash_flow_response import BucketedCashFlowResponse
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucket_cash_flow_drill_down_request import QueryBucketCashFlowDrillDownRequest
@@ -31,7 +32,6 @@ from lusid.models.query_cash_flows_request import QueryCashFlowsRequest
 from lusid.models.query_instrument_events_request import QueryInstrumentEventsRequest
 from lusid.models.query_trade_tickets_request import QueryTradeTicketsRequest
 from lusid.models.resource_list_of_applicable_instrument_event import ResourceListOfApplicableInstrumentEvent
-from lusid.models.resource_list_of_cash_flow_detail import ResourceListOfCashFlowDetail
 from lusid.models.resource_list_of_instrument_cash_flow import ResourceListOfInstrumentCashFlow
 from lusid.models.resource_list_of_instrument_event_holder import ResourceListOfInstrumentEventHolder
 from lusid.models.resource_list_of_portfolio_trade_ticket import ResourceListOfPortfolioTradeTicket
@@ -249,15 +249,15 @@ class InstrumentEventsApi:
 
 
     @overload
-    async def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, **kwargs) -> ResourceListOfCashFlowDetail:  # noqa: E501
+    async def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, **kwargs) -> BucketCashFlowDrillDownResponse:  # noqa: E501
         ...
 
     @overload
-    def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfCashFlowDetail:  # noqa: E501
+    def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=True, **kwargs) -> BucketCashFlowDrillDownResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfCashFlowDetail, Awaitable[ResourceListOfCashFlowDetail]]:  # noqa: E501
+    def query_bucket_cash_flow_drill_down(self, query_bucket_cash_flow_drill_down_request : Annotated[Optional[QueryBucketCashFlowDrillDownRequest], Field(description="The Query Information.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[BucketCashFlowDrillDownResponse, Awaitable[BucketCashFlowDrillDownResponse]]:  # noqa: E501
         """QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.  # noqa: E501
 
         Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of 'Transaction'.  # noqa: E501
@@ -277,7 +277,7 @@ class InstrumentEventsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: ResourceListOfCashFlowDetail
+        :rtype: BucketCashFlowDrillDownResponse
         """
         kwargs['_return_http_data_only'] = True
         if '_preload_content' in kwargs:
@@ -321,7 +321,7 @@ class InstrumentEventsApi:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(ResourceListOfCashFlowDetail, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(BucketCashFlowDrillDownResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         _params = locals()
@@ -384,7 +384,7 @@ class InstrumentEventsApi:
         _auth_settings = ['oauth2']  # noqa: E501
 
         _response_types_map = {
-            '200': "ResourceListOfCashFlowDetail",
+            '200': "BucketCashFlowDrillDownResponse",
             '400': "LusidValidationProblemDetails",
         }
 

@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 **closed_period_id** | **str** | The unique Id of the Closed Period. The ClosedPeriodId, together with the Timeline Scope and Code, uniquely identifies a Closed Period | 
 **effective_end** | **datetime** | The effective end of the Closed Period | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The Closed Periods properties. These will be from the &#39;ClosedPeriod&#39; domain. | [optional] 
-**as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period | [optional] 
+**as_at_closed** | **datetime** | The asAt closed datetime for the Closed Period. It must not exceed the latest asAt in LUSID. If not specified, the latest asAt in LUSID will be used. | [optional] 
 **display_name** | **str** | The name of the Closed Period. | [optional] 
 **description** | **str** | A description for the Closed Period. | [optional] 
-**holdings_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for building holdings in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used. | [optional] 
-**valuation_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for performing valuations in the Closed Period.If not specified, the AsAtClosed on the Closed Period will be used. | [optional] 
+**holdings_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for building holdings in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used. It must not exceed the latest asAt in LUSID. | [optional] 
+**valuation_as_at_closed_override** | **datetime** | The optional AsAtClosed Override to use for performing valuations in the Closed Period. If not specified, the AsAtClosed on the Closed Period will be used. It must not exceed the latest asAt in LUSID. | [optional] 
 ## Example
 
 ```python

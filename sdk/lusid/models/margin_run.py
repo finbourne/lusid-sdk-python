@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.margin_run_issue import MarginRunIssue
+from lusid.models.margin_run_optimisation import MarginRunOptimisation
 from lusid.models.margin_run_shard import MarginRunShard
 from lusid.models.resource_id import ResourceId
 
@@ -45,7 +46,8 @@ class MarginRun(BaseModel):
     shards: List[MarginRunShard] = Field(description="The valuation shards the run is planned as, with their progress.")
     scenarios: List[ResourceId] = Field(description="The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued.")
     capture_diagnostics: Optional[StrictBool] = Field(default=None, description="Whether the run stored the working behind its figures, so that they can be explained. Null for a run made before runs could store it, which did not.", alias="captureDiagnostics")
-    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenarios", "captureDiagnostics"]
+    optimisation: Optional[MarginRunOptimisation] = None
+    __properties = ["href", "id", "effectiveAt", "asAt", "status", "agreements", "callCount", "lineCount", "shardCount", "completedShards", "failedShards", "issues", "shards", "scenarios", "captureDiagnostics", "optimisation"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,6 +109,9 @@ class MarginRun(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['scenarios'] = _items
+        # override the default output from pydantic by calling `to_dict()` of optimisation
+        if self.optimisation:
+            _dict['optimisation'] = self.optimisation.to_dict()
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -143,7 +148,8 @@ class MarginRun(BaseModel):
             "issues": [MarginRunIssue.from_dict(_item) for _item in obj.get("issues")] if obj.get("issues") is not None else None,
             "shards": [MarginRunShard.from_dict(_item) for _item in obj.get("shards")] if obj.get("shards") is not None else None,
             "scenarios": [ResourceId.from_dict(_item) for _item in obj.get("scenarios")] if obj.get("scenarios") is not None else None,
-            "capture_diagnostics": obj.get("captureDiagnostics")
+            "capture_diagnostics": obj.get("captureDiagnostics"),
+            "optimisation": MarginRunOptimisation.from_dict(obj.get("optimisation")) if obj.get("optimisation") is not None else None
         })
         return _obj
 

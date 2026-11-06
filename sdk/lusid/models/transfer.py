@@ -36,13 +36,17 @@ class Transfer(BaseModel):
     transfer_type:  Optional[StrictStr] = Field(None,alias="transferType", description="The derived type of the transfer: 'Transfer' when the position moves between portfolios, 'Switch' when one instrument is exchanged for another within a portfolio, and 'Twitch' when the position moves between portfolios and changes instrument at the same time.") 
     portfolio_id_out: Optional[ResourceId] = Field(default=None, alias="portfolioIdOut")
     portfolio_id_in: Optional[ResourceId] = Field(default=None, alias="portfolioIdIn")
+    pricing_method:  Optional[StrictStr] = Field(None,alias="pricingMethod", description="How the legs were priced: 'AtCost' or 'AtPrice'.") 
+    tax_lot_structure:  Optional[StrictStr] = Field(None,alias="taxLotStructure", description="What happened to the tax lots of the outgoing position: 'Consolidate' or 'Preserve'.") 
+    weight_out: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The weighting factor recorded against the outgoing leg.", alias="weightOut")
+    accounting_method:  Optional[StrictStr] = Field(None,alias="accountingMethod", description="The accounting method recorded against the transfer.") 
     transaction_out: Optional[Transaction] = Field(default=None, alias="transactionOut")
     transaction_in: Optional[Transaction] = Field(default=None, alias="transactionIn")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties of the transfer, for the requested PropertyKeys.")
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specifc Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["transferId", "transferType", "portfolioIdOut", "portfolioIdIn", "transactionOut", "transactionIn", "properties", "href", "version", "links"]
+    __properties = ["transferId", "transferType", "portfolioIdOut", "portfolioIdIn", "pricingMethod", "taxLotStructure", "weightOut", "accountingMethod", "transactionOut", "transactionIn", "properties", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -113,6 +117,26 @@ class Transfer(BaseModel):
         if self.transfer_type is None and "transfer_type" in self.__fields_set__:
             _dict['transferType'] = None
 
+        # set to None if pricing_method (nullable) is None
+        # and __fields_set__ contains the field
+        if self.pricing_method is None and "pricing_method" in self.__fields_set__:
+            _dict['pricingMethod'] = None
+
+        # set to None if tax_lot_structure (nullable) is None
+        # and __fields_set__ contains the field
+        if self.tax_lot_structure is None and "tax_lot_structure" in self.__fields_set__:
+            _dict['taxLotStructure'] = None
+
+        # set to None if weight_out (nullable) is None
+        # and __fields_set__ contains the field
+        if self.weight_out is None and "weight_out" in self.__fields_set__:
+            _dict['weightOut'] = None
+
+        # set to None if accounting_method (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accounting_method is None and "accounting_method" in self.__fields_set__:
+            _dict['accountingMethod'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -144,6 +168,10 @@ class Transfer(BaseModel):
             "transfer_type": obj.get("transferType"),
             "portfolio_id_out": ResourceId.from_dict(obj.get("portfolioIdOut")) if obj.get("portfolioIdOut") is not None else None,
             "portfolio_id_in": ResourceId.from_dict(obj.get("portfolioIdIn")) if obj.get("portfolioIdIn") is not None else None,
+            "pricing_method": obj.get("pricingMethod"),
+            "tax_lot_structure": obj.get("taxLotStructure"),
+            "weight_out": obj.get("weightOut"),
+            "accounting_method": obj.get("accountingMethod"),
             "transaction_out": Transaction.from_dict(obj.get("transactionOut")) if obj.get("transactionOut") is not None else None,
             "transaction_in": Transaction.from_dict(obj.get("transactionIn")) if obj.get("transactionIn") is not None else None,
             "properties": dict(

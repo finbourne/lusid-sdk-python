@@ -28,7 +28,7 @@ class RecResultReview(BaseModel):
     """
     The per-result review axis: the workflow state and the recorded review decision. Always present,  including on Match and Cross.  # noqa: E501
     """
-    status:  StrictStr = Field(...,alias="status", description="The review workflow state: NotRequired, Required or Reviewed. Available values: NotRequired, Required, Reviewed.") 
+    status:  StrictStr = Field(...,alias="status", description="The review workflow state: NotRequired, Required or Reviewed. The review configuration sets it. A run sets it to Required when a Force Match no longer holds. Available values: NotRequired, Required, Reviewed.") 
     decision:  Optional[StrictStr] = Field(None,alias="decision", description="The recorded review decision. Null until a decision is made. Available values: Acknowledge, FixAtSource, FixAsGroup, Accept, ForceMatch, Tolerate.") 
     decision_group: Optional[RecResultDecisionGroup] = Field(default=None, alias="decisionGroup")
     __properties = ["status", "decision", "decisionGroup"]
