@@ -879,6 +879,7 @@ from lusid.models.inflation_curve_data import InflationCurveData
 from lusid.models.inflation_curve_shift_definition import InflationCurveShiftDefinition
 from lusid.models.inflation_fixing_dependency import InflationFixingDependency
 from lusid.models.inflation_index_conventions import InflationIndexConventions
+from lusid.models.inflation_indexation_event import InflationIndexationEvent
 from lusid.models.inflation_leg import InflationLeg
 from lusid.models.inflation_linked_bond import InflationLinkedBond
 from lusid.models.inflation_swap import InflationSwap
@@ -2962,6 +2963,7 @@ __all__ = [
     "InflationCurveShiftDefinition",
     "InflationFixingDependency",
     "InflationIndexConventions",
+    "InflationIndexationEvent",
     "InflationLeg",
     "InflationLinkedBond",
     "InflationSwap",

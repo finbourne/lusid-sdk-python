@@ -1793,6 +1793,7 @@ Class | Method | HTTP request | Description
  - [InflationCurveShiftDefinition](docs/InflationCurveShiftDefinition.md)
  - [InflationFixingDependency](docs/InflationFixingDependency.md)
  - [InflationIndexConventions](docs/InflationIndexConventions.md)
+ - [InflationIndexationEvent](docs/InflationIndexationEvent.md)
  - [InflationLeg](docs/InflationLeg.md)
  - [InflationLinkedBond](docs/InflationLinkedBond.md)
  - [InflationSwap](docs/InflationSwap.md)
