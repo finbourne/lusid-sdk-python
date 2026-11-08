@@ -22,10 +22,11 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.resource_id import ResourceId
 
 class AllocationReceivable(BaseModel):
     """
-    One investor's position on a booked capital call.  # noqa: E501
+    One investor's position on a booked capital call, on one register.  # noqa: E501
     """
     investor_record_id:  Optional[StrictStr] = Field(None,alias="investorRecordId", description="The investor record.") 
     called: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What the investor record was called for.")
@@ -33,7 +34,9 @@ class AllocationReceivable(BaseModel):
     outstanding: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What is still owed. Never negative: an overpayment becomes a refund payable instead.")
     days_past_due: Optional[StrictInt] = Field(default=None, description="How many days past the due date the outstanding amount is, or zero when not yet due or nothing is owed.", alias="daysPastDue")
     bucket:  Optional[StrictStr] = Field(None,alias="bucket", description="The ageing bucket: Current, 1-30, 31-60, 61-90 or 90+.") 
-    __properties = ["investorRecordId", "called", "received", "outstanding", "daysPastDue", "bucket"]
+    portfolio: Optional[ResourceId] = None
+    side:  Optional[StrictStr] = Field(None,alias="side", description="Whether the record owes on its own line (LP) or as a feeder's roll-up on the master (ROLLUP).") 
+    __properties = ["investorRecordId", "called", "received", "outstanding", "daysPastDue", "bucket", "portfolio", "side"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,6 +70,9 @@ class AllocationReceivable(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of portfolio
+        if self.portfolio:
+            _dict['portfolio'] = self.portfolio.to_dict()
         # set to None if investor_record_id (nullable) is None
         # and __fields_set__ contains the field
         if self.investor_record_id is None and "investor_record_id" in self.__fields_set__:
@@ -76,6 +82,11 @@ class AllocationReceivable(BaseModel):
         # and __fields_set__ contains the field
         if self.bucket is None and "bucket" in self.__fields_set__:
             _dict['bucket'] = None
+
+        # set to None if side (nullable) is None
+        # and __fields_set__ contains the field
+        if self.side is None and "side" in self.__fields_set__:
+            _dict['side'] = None
 
         return _dict
 
@@ -94,7 +105,9 @@ class AllocationReceivable(BaseModel):
             "received": obj.get("received"),
             "outstanding": obj.get("outstanding"),
             "days_past_due": obj.get("daysPastDue"),
-            "bucket": obj.get("bucket")
+            "bucket": obj.get("bucket"),
+            "portfolio": ResourceId.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None,
+            "side": obj.get("side")
         })
         return _obj
 

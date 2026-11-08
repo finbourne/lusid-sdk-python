@@ -248,6 +248,7 @@ from lusid.models.allocation_posting_plan import AllocationPostingPlan
 from lusid.models.allocation_posting_roll_up import AllocationPostingRollUp
 from lusid.models.allocation_receivable import AllocationReceivable
 from lusid.models.allocation_receivables_ageing import AllocationReceivablesAgeing
+from lusid.models.allocation_register_receivable import AllocationRegisterReceivable
 from lusid.models.allocation_request import AllocationRequest
 from lusid.models.allocation_service_run_allocation import AllocationServiceRunAllocation
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
@@ -875,6 +876,7 @@ from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
 from lusid.models.fund_structure_member_request import FundStructureMemberRequest
 from lusid.models.fund_structure_node import FundStructureNode
 from lusid.models.fund_structure_request import FundStructureRequest
+from lusid.models.fund_tax_exception_item import FundTaxExceptionItem
 from lusid.models.fund_tax_scope import FundTaxScope
 from lusid.models.fund_tax_scope_exclusions import FundTaxScopeExclusions
 from lusid.models.fund_terms import FundTerms
@@ -1686,6 +1688,7 @@ from lusid.models.resource_list_of_data_model_summary import ResourceListOfDataM
 from lusid.models.resource_list_of_data_type import ResourceListOfDataType
 from lusid.models.resource_list_of_execution import ResourceListOfExecution
 from lusid.models.resource_list_of_fee_rule import ResourceListOfFeeRule
+from lusid.models.resource_list_of_fund_tax_exception_item import ResourceListOfFundTaxExceptionItem
 from lusid.models.resource_list_of_get_cds_flow_conventions_response import ResourceListOfGetCdsFlowConventionsResponse
 from lusid.models.resource_list_of_get_counterparty_agreement_response import ResourceListOfGetCounterpartyAgreementResponse
 from lusid.models.resource_list_of_get_credit_support_annex_response import ResourceListOfGetCreditSupportAnnexResponse
@@ -1737,6 +1740,7 @@ from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDe
 from lusid.models.resource_list_of_series import ResourceListOfSeries
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.resource_list_of_string import ResourceListOfString
+from lusid.models.resource_list_of_tax_exception_item import ResourceListOfTaxExceptionItem
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTransactionFeeType
@@ -1916,8 +1920,12 @@ from lusid.models.swing_trigger import SwingTrigger
 from lusid.models.swing_trigger_evaluation import SwingTriggerEvaluation
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
+from lusid.models.tax_exception_item import TaxExceptionItem
+from lusid.models.tax_exception_root_cause import TaxExceptionRootCause
+from lusid.models.tax_portfolio_sync_status import TaxPortfolioSyncStatus
 from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
+from lusid.models.tax_sync_status import TaxSyncStatus
 from lusid.models.template_field import TemplateField
 from lusid.models.tender_event import TenderEvent
 from lusid.models.tender_offer_election import TenderOfferElection
@@ -2455,6 +2463,7 @@ __all__ = [
     "AllocationPostingRollUp",
     "AllocationReceivable",
     "AllocationReceivablesAgeing",
+    "AllocationRegisterReceivable",
     "AllocationRequest",
     "AllocationServiceRunAllocation",
     "AllocationServiceRunResponse",
@@ -3082,6 +3091,7 @@ __all__ = [
     "FundStructureMemberRequest",
     "FundStructureNode",
     "FundStructureRequest",
+    "FundTaxExceptionItem",
     "FundTaxScope",
     "FundTaxScopeExclusions",
     "FundTerms",
@@ -3893,6 +3903,7 @@ __all__ = [
     "ResourceListOfDataType",
     "ResourceListOfExecution",
     "ResourceListOfFeeRule",
+    "ResourceListOfFundTaxExceptionItem",
     "ResourceListOfGetCdsFlowConventionsResponse",
     "ResourceListOfGetCounterpartyAgreementResponse",
     "ResourceListOfGetCreditSupportAnnexResponse",
@@ -3944,6 +3955,7 @@ __all__ = [
     "ResourceListOfSeries",
     "ResourceListOfSideDefinition",
     "ResourceListOfString",
+    "ResourceListOfTaxExceptionItem",
     "ResourceListOfTaxRuleSet",
     "ResourceListOfTransaction",
     "ResourceListOfTransactionFeeType",
@@ -4123,8 +4135,12 @@ __all__ = [
     "SwingTriggerEvaluation",
     "TargetTaxLot",
     "TargetTaxLotRequest",
+    "TaxExceptionItem",
+    "TaxExceptionRootCause",
+    "TaxPortfolioSyncStatus",
     "TaxRule",
     "TaxRuleSet",
+    "TaxSyncStatus",
     "TemplateField",
     "TenderEvent",
     "TenderOfferElection",

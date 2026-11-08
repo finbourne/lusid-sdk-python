@@ -1,6 +1,6 @@
 # AllocationReceivable
 
-One investor's position on a booked capital call.
+One investor's position on a booked capital call, on one register.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **outstanding** | **float** | What is still owed. Never negative: an overpayment becomes a refund payable instead. | [optional] 
 **days_past_due** | **int** | How many days past the due date the outstanding amount is, or zero when not yet due or nothing is owed. | [optional] 
 **bucket** | **str** | The ageing bucket: Current, 1-30, 31-60, 61-90 or 90+. | [optional] 
+**portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**side** | **str** | Whether the record owes on its own line (LP) or as a feeder&#39;s roll-up on the master (ROLLUP). | [optional] 
 ## Example
 
 ```python
@@ -26,7 +28,9 @@ outstanding: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 days_past_due: Optional[StrictInt] = # Replace with your value
 days_past_due: Optional[StrictInt] = None
 bucket: Optional[StrictStr] = "example_bucket"
-allocation_receivable_instance = AllocationReceivable(investor_record_id=investor_record_id, called=called, received=received, outstanding=outstanding, days_past_due=days_past_due, bucket=bucket)
+portfolio: Optional[ResourceId] = None
+side: Optional[StrictStr] = "example_side"
+allocation_receivable_instance = AllocationReceivable(investor_record_id=investor_record_id, called=called, received=received, outstanding=outstanding, days_past_due=days_past_due, bucket=bucket, portfolio=portfolio, side=side)
 
 ```
 

@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **as_of** | **datetime** | The date the receivables are aged as of. | [optional] 
 **due_date** | **datetime** | The date the cash was due. | [optional] 
-**outstanding** | **float** | The total still owed across all investor records. | [optional] 
-**receivables** | [**List[AllocationReceivable]**](AllocationReceivable.md) | One entry per investor record that was called. | [optional] 
+**outstanding** | **float** | What the investors still owe, looking through feeders to their LPs so a roll-up is not counted twice. | [optional] 
+**receivables** | [**List[AllocationReceivable]**](AllocationReceivable.md) | One entry per investor record and side that was called on a register. | [optional] 
+**registers** | [**List[AllocationRegisterReceivable]**](AllocationRegisterReceivable.md) | What each register is owed on its own lines, a feeder&#39;s roll-up included. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ as_of: Optional[datetime] = # Replace with your value
 due_date: Optional[datetime] = # Replace with your value
 outstanding: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 receivables: Optional[List[AllocationReceivable]] = # Replace with your value
-allocation_receivables_ageing_instance = AllocationReceivablesAgeing(as_of=as_of, due_date=due_date, outstanding=outstanding, receivables=receivables)
+registers: Optional[List[AllocationRegisterReceivable]] = # Replace with your value
+allocation_receivables_ageing_instance = AllocationReceivablesAgeing(as_of=as_of, due_date=due_date, outstanding=outstanding, receivables=receivables, registers=registers)
 
 ```
 
