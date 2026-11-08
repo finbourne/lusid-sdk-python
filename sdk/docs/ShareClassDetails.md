@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the share class&#39; instrument identifiers | [optional] 
-**instrument_scope** | **str** | The scope in which the share class instrument lies. | [optional] 
+**lusid_instrument_id** | **str** | LUSID&#39;s internal unique instrument identifier, resolved from the share class&#39; instrument identifiers. Absent where no instrument was resolved for the share class: a fund defined with inline share classes resolves none, whether or not it created their instruments. | [optional] 
+**instrument_scope** | **str** | The scope in which the share class instrument lies, or the fund&#39;s instrument scope where no instrument was resolved for the share class. | [optional] 
 **short_code** | **str** | The unique code within the fund for the share class instrument. | [optional] 
 **dom_currency** | **str** | The domestic currency of the share class instrument | [optional] 
 **instrument_active** | **bool** | If the instrument of the share class is active. | [optional] 

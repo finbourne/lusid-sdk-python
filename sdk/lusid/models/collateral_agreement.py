@@ -54,8 +54,10 @@ class CollateralAgreement(BaseModel):
     initial_margin: Optional[List[MarginItem]] = Field(default=None, description="The initial margin arrangements under the agreement.", alias="initialMargin")
     version: Optional[Version] = None
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Collateral Agreement. Filterable.")
+    notification_cut_label:  Optional[StrictStr] = Field(None,alias="notificationCutLabel", description="The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call's deadline; the allocation excludes assets that cannot settle by it. Optional.") 
+    return_notification_cut_label:  Optional[StrictStr] = Field(None,alias="returnNotificationCutLabel", description="The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional.") 
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "counterpartyId", "applicabilityFilter", "baseCurrency", "cutLabel", "recipeId", "minimumTransferAmount", "rounding", "settlementLag", "matchTolerance", "funding", "optimisation", "variationMargin", "initialMargin", "version", "properties", "links"]
+    __properties = ["href", "id", "counterpartyId", "applicabilityFilter", "baseCurrency", "cutLabel", "recipeId", "minimumTransferAmount", "rounding", "settlementLag", "matchTolerance", "funding", "optimisation", "variationMargin", "initialMargin", "version", "properties", "notificationCutLabel", "returnNotificationCutLabel", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -186,6 +188,16 @@ class CollateralAgreement(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if notification_cut_label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notification_cut_label is None and "notification_cut_label" in self.__fields_set__:
+            _dict['notificationCutLabel'] = None
+
+        # set to None if return_notification_cut_label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_notification_cut_label is None and "return_notification_cut_label" in self.__fields_set__:
+            _dict['returnNotificationCutLabel'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -225,6 +237,8 @@ class CollateralAgreement(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
+            "notification_cut_label": obj.get("notificationCutLabel"),
+            "return_notification_cut_label": obj.get("returnNotificationCutLabel"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

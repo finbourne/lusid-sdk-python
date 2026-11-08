@@ -25,11 +25,12 @@ from datetime import datetime
 
 class CollateralFundingTerms(BaseModel):
     """
-    What margin posted under the agreement costs us: the annual rate it is funded at and the basis it accrues on.  # noqa: E501
+    What margin posted under the agreement costs us: the annual rate it is funded at, the basis it accrues on and the  lending fee assumed forgone on a security with no fee quote of its own when collateral is ranked.  # noqa: E501
     """
     rate: Union[StrictFloat, StrictInt] = Field(description="The annual rate posted margin is funded at, as a fraction, for example 0.053 for 5.3%. Between -1 and 1.")
     day_count_basis: StrictInt = Field(description="The number of days in the year the funding rate accrues over. Either 360 or 365.", alias="dayCountBasis")
-    __properties = ["rate", "dayCountBasis"]
+    default_lending_fee: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The annual lending fee, as a fraction, assumed forgone on a security with no fee quote of its own when collateral is ranked. Between 0 and 1. A security with no fee at all cannot be ranked. Optional.", alias="defaultLendingFee")
+    __properties = ["rate", "dayCountBasis", "defaultLendingFee"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +64,11 @@ class CollateralFundingTerms(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if default_lending_fee (nullable) is None
+        # and __fields_set__ contains the field
+        if self.default_lending_fee is None and "default_lending_fee" in self.__fields_set__:
+            _dict['defaultLendingFee'] = None
+
         return _dict
 
     @classmethod
@@ -76,7 +82,8 @@ class CollateralFundingTerms(BaseModel):
 
         _obj = CollateralFundingTerms.parse_obj({
             "rate": obj.get("rate"),
-            "day_count_basis": obj.get("dayCountBasis")
+            "day_count_basis": obj.get("dayCountBasis"),
+            "default_lending_fee": obj.get("defaultLendingFee")
         })
         return _obj
 

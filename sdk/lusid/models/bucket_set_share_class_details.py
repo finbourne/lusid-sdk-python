@@ -28,7 +28,7 @@ class BucketSetShareClassDetails(BaseModel):
     Identifying detail for the share class a bucket set node is for.  # noqa: E501
     """
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier for the share class' instrument. Absent where the instrument has not been resolved.") 
-    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies. Absent where the instrument has not been resolved.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies, or the fund's instrument scope where the instrument has not been resolved.") 
     short_code:  StrictStr = Field(...,alias="shortCode", description="The unique code within the fund for the share class.") 
     dom_currency:  Optional[StrictStr] = Field(None,alias="domCurrency", description="The domestic currency declared for the share class.") 
     instrument_active: StrictBool = Field(description="Whether the share class' instrument is active.", alias="instrumentActive")

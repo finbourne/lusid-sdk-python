@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**batch_accept_margin_calls**](CollateralApi.md#batch_accept_margin_calls) | **POST** /api/collateral/margincalls/$batchAccept | [EXPERIMENTAL] BatchAcceptMarginCalls: Accept several margin calls.
 [**dispute_margin_call**](CollateralApi.md#dispute_margin_call) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$dispute | [EXPERIMENTAL] DisputeMarginCall: Dispute a margin call.
 [**get_margin_call**](CollateralApi.md#get_margin_call) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction} | [EXPERIMENTAL] GetMarginCall: Get a margin call.
+[**get_margin_call_allocation**](CollateralApi.md#get_margin_call_allocation) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$allocation | [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
 [**get_margin_call_explanation**](CollateralApi.md#get_margin_call_explanation) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain | [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
 [**get_margin_line_explanation**](CollateralApi.md#get_margin_line_explanation) | **GET** /api/collateral/runs/{runId}/lines/{lineKey}/$explain | [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
 [**get_margin_run**](CollateralApi.md#get_margin_run) | **GET** /api/collateral/runs/{runId} | [EXPERIMENTAL] GetMarginRun: Get a margin run.
@@ -17,6 +18,7 @@ Method | HTTP request | Description
 [**list_margin_run_recommendations**](CollateralApi.md#list_margin_run_recommendations) | **GET** /api/collateral/runs/{runId}/recommendations | [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run&#39;s netting recommendations.
 [**list_margin_runs**](CollateralApi.md#list_margin_runs) | **GET** /api/collateral/runs | [EXPERIMENTAL] ListMarginRuns: List margin runs.
 [**list_netting_recommendations**](CollateralApi.md#list_netting_recommendations) | **GET** /api/collateral/recommendations | [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+[**rank_margin_call**](CollateralApi.md#rank_margin_call) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$rank | [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller&#39;s choices.
 [**record_counterparty_demand**](CollateralApi.md#record_counterparty_demand) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$recordCounterpartyDemand | [EXPERIMENTAL] RecordCounterpartyDemand: Record the counterparty&#39;s demand against a margin call.
 [**retry_margin_run**](CollateralApi.md#retry_margin_run) | **POST** /api/collateral/runs/{runId}/$retry | [EXPERIMENTAL] RetryMarginRun: Retry a margin run.
 [**run_margin_calculation**](CollateralApi.md#run_margin_calculation) | **POST** /api/collateral/$run | [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
@@ -434,6 +436,108 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested margin call. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_margin_call_allocation**
+> CollateralAllocation get_margin_call_allocation(run_id, agreement_scope, agreement_code, item, margin_type, direction)
+
+[EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+
+Retrieve the assets the run's allocation pass proposes to deliver for the call, or to take back for a return, with  every holding it considered and either its rank or the constraint that excluded it. Each line carries what a  transaction moving it needs: the instrument, the portfolio and custodian account, the units, the price and the  consideration. Not found until the run's allocation pass has completed, or when the call moves no collateral of ours.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    run_id = 'run_id_example' # str | The identifier of the margin run.
+    agreement_scope = 'agreement_scope_example' # str | The scope of the call's collateral agreement.
+    agreement_code = 'agreement_code_example' # str | The code of the call's collateral agreement.
+    item = 'item_example' # str | The margin item of the call.
+    margin_type = 'margin_type_example' # str | The margin type of the call. One of VariationMargin or InitialMargin.
+    direction = 'direction_example' # str | Who posts under the call. One of WePost, TheyPost or None.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_margin_call_allocation(run_id, agreement_scope, agreement_code, item, margin_type, direction, opts=opts)
+
+        # [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
+        api_response = api_instance.get_margin_call_allocation(run_id, agreement_scope, agreement_code, item, margin_type, direction)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->get_margin_call_allocation: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| The identifier of the margin run. | 
+ **agreement_scope** | **str**| The scope of the call&#39;s collateral agreement. | 
+ **agreement_code** | **str**| The code of the call&#39;s collateral agreement. | 
+ **item** | **str**| The margin item of the call. | 
+ **margin_type** | **str**| The margin type of the call. One of VariationMargin or InitialMargin. | 
+ **direction** | **str**| Who posts under the call. One of WePost, TheyPost or None. | 
+
+### Return type
+
+[**CollateralAllocation**](CollateralAllocation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The collateral proposed for the margin call. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -1328,6 +1432,115 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested recommendations. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **rank_margin_call**
+> CollateralAllocation rank_margin_call(run_id, agreement_scope, agreement_code, item, margin_type, direction, rank_margin_call_request=rank_margin_call_request)
+
+[EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller's choices.
+
+Value the call's agreement as of now for the run's business date and rank its free, eligible holdings for the  call again, keeping the assets and units the caller chose. Each choice is validated against the agreement's  constraints and kept with its reason when it fails one; the rest of the call is filled from the ranking, cheapest  first, unless fillRemainder is false. Nothing is stored: the result is what to book, for the caller to decide on.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    CollateralApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(CollateralApi)
+    run_id = 'run_id_example' # str | The identifier of the margin run.
+    agreement_scope = 'agreement_scope_example' # str | The scope of the call's collateral agreement.
+    agreement_code = 'agreement_code_example' # str | The code of the call's collateral agreement.
+    item = 'item_example' # str | The margin item of the call.
+    margin_type = 'margin_type_example' # str | The margin type of the call. One of VariationMargin or InitialMargin.
+    direction = 'direction_example' # str | Who posts under the call. One of WePost, TheyPost or None.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # rank_margin_call_request = RankMarginCallRequest.from_json("")
+    # rank_margin_call_request = RankMarginCallRequest.from_dict({})
+    rank_margin_call_request = RankMarginCallRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.rank_margin_call(run_id, agreement_scope, agreement_code, item, margin_type, direction, rank_margin_call_request=rank_margin_call_request, opts=opts)
+
+        # [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller's choices.
+        api_response = api_instance.rank_margin_call(run_id, agreement_scope, agreement_code, item, margin_type, direction, rank_margin_call_request=rank_margin_call_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling CollateralApi->rank_margin_call: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **str**| The identifier of the margin run. | 
+ **agreement_scope** | **str**| The scope of the call&#39;s collateral agreement. | 
+ **agreement_code** | **str**| The code of the call&#39;s collateral agreement. | 
+ **item** | **str**| The margin item of the call. | 
+ **margin_type** | **str**| The margin type of the call. One of VariationMargin or InitialMargin. | 
+ **direction** | **str**| Who posts under the call. One of WePost, TheyPost or None. | 
+ **rank_margin_call_request** | [**RankMarginCallRequest**](RankMarginCallRequest.md)| The assets the caller chose, and whether to fill the rest. | [optional] 
+
+### Return type
+
+[**CollateralAllocation**](CollateralAllocation.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The collateral ranked for the margin call. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.perpetual_property import PerpetualProperty
+from lusid.models.realised_gain_loss_chargeable_gains import RealisedGainLossChargeableGains
 
 class RealisedGainLoss(BaseModel):
     """
@@ -46,7 +47,8 @@ class RealisedGainLoss(BaseModel):
     trade_date_to_settlement_date_realised_currency: Optional[CurrencyAndAmount] = Field(default=None, alias="tradeDateToSettlementDateRealisedCurrency")
     transaction_type:  Optional[StrictStr] = Field(None,alias="transactionType", description="The transaction type resolved for the allocation slice that realised this record, which can differ from the output transaction's type when a slice resolves against the opposite side of the book (for example a Buy whose slice covers a short).") 
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="The sub-holding key properties of the holding this record was realised against, identifying the allocation slice it belongs to.")
-    __properties = ["instrumentScope", "instrumentUid", "units", "purchaseTradeDate", "purchaseSettlementDate", "purchasePrice", "costTradeCcy", "costPortfolioCcy", "realisedTradeCcy", "realisedTotal", "realisedMarket", "realisedCurrency", "taxLotId", "realisedAmortisation", "tradeDateToSettlementDateRealisedCurrency", "transactionType", "properties"]
+    chargeable_gains: Optional[RealisedGainLossChargeableGains] = Field(default=None, alias="chargeableGains")
+    __properties = ["instrumentScope", "instrumentUid", "units", "purchaseTradeDate", "purchaseSettlementDate", "purchasePrice", "costTradeCcy", "costPortfolioCcy", "realisedTradeCcy", "realisedTotal", "realisedMarket", "realisedCurrency", "taxLotId", "realisedAmortisation", "tradeDateToSettlementDateRealisedCurrency", "transactionType", "properties", "chargeableGains"]
 
     class Config:
         """Pydantic configuration"""
@@ -113,6 +115,9 @@ class RealisedGainLoss(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of chargeable_gains
+        if self.chargeable_gains:
+            _dict['chargeableGains'] = self.chargeable_gains.to_dict()
         # set to None if instrument_scope (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_scope is None and "instrument_scope" in self.__fields_set__:
@@ -181,7 +186,8 @@ class RealisedGainLoss(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "chargeable_gains": RealisedGainLossChargeableGains.from_dict(obj.get("chargeableGains")) if obj.get("chargeableGains") is not None else None
         })
         return _obj
 

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **scenarios** | [**List[ResourceId]**](ResourceId.md) | The stored scenarios the run values the agreements under, each beside the base market the run always values. Empty if only the base market was valued. | 
 **capture_diagnostics** | **bool** | Whether the run stored the working behind its figures, so that they can be explained. Null for a run made before runs could store it, which did not. | [optional] 
 **optimisation** | [**MarginRunOptimisation**](MarginRunOptimisation.md) |  | [optional] 
+**allocation** | [**MarginRunAllocation**](MarginRunAllocation.md) |  | [optional] 
 ## Example
 
 ```python
@@ -51,7 +52,8 @@ scenarios: List[ResourceId] = # Replace with your value
 capture_diagnostics: Optional[StrictBool] = # Replace with your value
 capture_diagnostics:Optional[StrictBool] = None
 optimisation: Optional[MarginRunOptimisation] = None
-margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards, scenarios=scenarios, capture_diagnostics=capture_diagnostics, optimisation=optimisation)
+allocation: Optional[MarginRunAllocation] = None
+margin_run_instance = MarginRun(href=href, id=id, effective_at=effective_at, as_at=as_at, status=status, agreements=agreements, call_count=call_count, line_count=line_count, shard_count=shard_count, completed_shards=completed_shards, failed_shards=failed_shards, issues=issues, shards=shards, scenarios=scenarios, capture_diagnostics=capture_diagnostics, optimisation=optimisation, allocation=allocation)
 
 ```
 

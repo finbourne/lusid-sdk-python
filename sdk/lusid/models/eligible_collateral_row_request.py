@@ -32,10 +32,12 @@ class EligibleCollateralRowRequest(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="A description of the row. Optional.") 
     selector: EligibleCollateralAssetSelectorRequest
     valuation_percentage: Union[StrictFloat, StrictInt] = Field(description="The fraction of an asset's value that is accepted as collateral, for example 0.95 for 95%. Greater than 0 and at most 1.", alias="valuationPercentage")
-    fx_haircut: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The further fraction deducted when the asset's currency is not the agreement's base currency, so that the effective valuation percentage is ValuationPercentage * (1 - FxHaircut). At least 0 and less than 1. Not allowed for a BaseCurrencyCash selector. Optional.", alias="fxHaircut")
+    fx_haircut: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The further fraction deducted when the asset's currency is not the agreement's base currency, so that the effective valuation percentage is ValuationPercentage - FxHaircut. At least 0 and less than the valuationPercentage. Not allowed for a BaseCurrencyCash selector. Optional.", alias="fxHaircut")
     min_residual_maturity_years: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The inclusive lower bound of the residual maturity in years that the row applies to. Only allowed for an Instrument selector. Optional.", alias="minResidualMaturityYears")
     max_residual_maturity_years: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exclusive upper bound of the residual maturity in years that the row applies to. Only allowed for an Instrument selector. Optional.", alias="maxResidualMaturityYears")
-    __properties = ["code", "description", "selector", "valuationPercentage", "fxHaircut", "minResidualMaturityYears", "maxResidualMaturityYears"]
+    concentration_group:  Optional[StrictStr] = Field(None,alias="concentrationGroup", description="The group the row's assets count towards for a concentration limit, for example 'sovereign' or 'issuer'. Rows naming the same group share one limit. Required when a concentrationLimit is set. Optional.") 
+    concentration_limit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The largest fraction of the collateral held plus the call that assets of the row's concentration group may make up, for example 0.3 for 30%. Greater than 0 and at most 1. Required when a concentrationGroup is set. Optional.", alias="concentrationLimit")
+    __properties = ["code", "description", "selector", "valuationPercentage", "fxHaircut", "minResidualMaturityYears", "maxResidualMaturityYears", "concentrationGroup", "concentrationLimit"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,6 +94,16 @@ class EligibleCollateralRowRequest(BaseModel):
         if self.max_residual_maturity_years is None and "max_residual_maturity_years" in self.__fields_set__:
             _dict['maxResidualMaturityYears'] = None
 
+        # set to None if concentration_group (nullable) is None
+        # and __fields_set__ contains the field
+        if self.concentration_group is None and "concentration_group" in self.__fields_set__:
+            _dict['concentrationGroup'] = None
+
+        # set to None if concentration_limit (nullable) is None
+        # and __fields_set__ contains the field
+        if self.concentration_limit is None and "concentration_limit" in self.__fields_set__:
+            _dict['concentrationLimit'] = None
+
         return _dict
 
     @classmethod
@@ -110,7 +122,9 @@ class EligibleCollateralRowRequest(BaseModel):
             "valuation_percentage": obj.get("valuationPercentage"),
             "fx_haircut": obj.get("fxHaircut"),
             "min_residual_maturity_years": obj.get("minResidualMaturityYears"),
-            "max_residual_maturity_years": obj.get("maxResidualMaturityYears")
+            "max_residual_maturity_years": obj.get("maxResidualMaturityYears"),
+            "concentration_group": obj.get("concentrationGroup"),
+            "concentration_limit": obj.get("concentrationLimit")
         })
         return _obj
 

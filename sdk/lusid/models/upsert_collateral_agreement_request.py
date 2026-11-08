@@ -50,7 +50,9 @@ class UpsertCollateralAgreementRequest(BaseModel):
     initial_margin: Optional[List[MarginItem]] = Field(default=None, description="The initial margin arrangements under the agreement.", alias="initialMargin")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties to decorate onto the Collateral Agreement. Filterable.")
     effective_at: Optional[datetime] = Field(default=None, description="The effective datetime or cut label from which the change applies. Defaults to the current LUSID system datetime if not specified.", alias="effectiveAt")
-    __properties = ["counterpartyId", "applicabilityFilter", "baseCurrency", "cutLabel", "recipeId", "minimumTransferAmount", "rounding", "settlementLag", "matchTolerance", "funding", "optimisation", "variationMargin", "initialMargin", "properties", "effectiveAt"]
+    notification_cut_label:  Optional[StrictStr] = Field(None,alias="notificationCutLabel", description="The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call's deadline; the allocation excludes assets that cannot settle by it. Optional.") 
+    return_notification_cut_label:  Optional[StrictStr] = Field(None,alias="returnNotificationCutLabel", description="The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional.") 
+    __properties = ["counterpartyId", "applicabilityFilter", "baseCurrency", "cutLabel", "recipeId", "minimumTransferAmount", "rounding", "settlementLag", "matchTolerance", "funding", "optimisation", "variationMargin", "initialMargin", "properties", "effectiveAt", "notificationCutLabel", "returnNotificationCutLabel"]
 
     class Config:
         """Pydantic configuration"""
@@ -153,6 +155,16 @@ class UpsertCollateralAgreementRequest(BaseModel):
         if self.effective_at is None and "effective_at" in self.__fields_set__:
             _dict['effectiveAt'] = None
 
+        # set to None if notification_cut_label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notification_cut_label is None and "notification_cut_label" in self.__fields_set__:
+            _dict['notificationCutLabel'] = None
+
+        # set to None if return_notification_cut_label (nullable) is None
+        # and __fields_set__ contains the field
+        if self.return_notification_cut_label is None and "return_notification_cut_label" in self.__fields_set__:
+            _dict['returnNotificationCutLabel'] = None
+
         return _dict
 
     @classmethod
@@ -184,7 +196,9 @@ class UpsertCollateralAgreementRequest(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
-            "effective_at": obj.get("effectiveAt")
+            "effective_at": obj.get("effectiveAt"),
+            "notification_cut_label": obj.get("notificationCutLabel"),
+            "return_notification_cut_label": obj.get("returnNotificationCutLabel")
         })
         return _obj
 

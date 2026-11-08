@@ -34,10 +34,13 @@ Class | Method | HTTP request | Description
 *AddressKeyAliasApi* | [**get_address_key_alias**](docs/AddressKeyAliasApi.md#get_address_key_alias) | **GET** /api/addresskeyaliases/{scope}/{code} | [EXPERIMENTAL] GetAddressKeyAlias: Get Address Key Alias
 *AddressKeyAliasApi* | [**list_address_key_aliases**](docs/AddressKeyAliasApi.md#list_address_key_aliases) | **GET** /api/addresskeyaliases/{scope} | [EXPERIMENTAL] ListAddressKeyAliases: List the set of Address Key Aliases
 *AddressKeyAliasApi* | [**upsert_address_key_alias**](docs/AddressKeyAliasApi.md#upsert_address_key_alias) | **POST** /api/addresskeyaliases | [EXPERIMENTAL] UpsertAddressKeyAlias: Upsert an Address Key Alias. This creates or updates the alias in LUSID.
+*AggregatedReturnsApi* | [**delete_returns**](docs/AggregatedReturnsApi.md#delete_returns) | **DELETE** /api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode}/$delete | [EXPERIMENTAL] DeleteReturns: Delete Returns
 *AggregatedReturnsApi* | [**delete_returns_entity**](docs/AggregatedReturnsApi.md#delete_returns_entity) | **DELETE** /api/returns/{scope}/{code} | [EXPERIMENTAL] DeleteReturnsEntity: Delete returns entity.
 *AggregatedReturnsApi* | [**get_aggregated_returns**](docs/AggregatedReturnsApi.md#get_aggregated_returns) | **POST** /api/returns/$aggregated | [EXPERIMENTAL] GetAggregatedReturns: Calculate aggregated returns for an entity.
+*AggregatedReturnsApi* | [**get_returns**](docs/AggregatedReturnsApi.md#get_returns) | **GET** /api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode} | [EXPERIMENTAL] GetReturns: Get Returns
 *AggregatedReturnsApi* | [**get_returns_entity**](docs/AggregatedReturnsApi.md#get_returns_entity) | **GET** /api/returns/{scope}/{code} | [EXPERIMENTAL] GetReturnsEntity: Get returns entity.
 *AggregatedReturnsApi* | [**list_returns_entities**](docs/AggregatedReturnsApi.md#list_returns_entities) | **GET** /api/returns | [EXPERIMENTAL] ListReturnsEntities: List returns entities.
+*AggregatedReturnsApi* | [**upsert_returns**](docs/AggregatedReturnsApi.md#upsert_returns) | **POST** /api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode} | [EXPERIMENTAL] UpsertReturns: Upsert Returns
 *AggregatedReturnsApi* | [**upsert_returns_entity**](docs/AggregatedReturnsApi.md#upsert_returns_entity) | **POST** /api/returns | [EXPERIMENTAL] UpsertReturnsEntity: Upsert returns entity.
 *AggregationApi* | [**generate_configuration_recipe**](docs/AggregationApi.md#generate_configuration_recipe) | **POST** /api/aggregation/{scope}/{code}/$generateconfigurationrecipe | [EXPERIMENTAL] GenerateConfigurationRecipe: Generates a recipe sufficient to perform valuations for the given portfolio.
 *AggregationApi* | [**get_queryable_keys**](docs/AggregationApi.md#get_queryable_keys) | **GET** /api/results/queryable/keys | GetQueryableKeys: Query the set of supported \"addresses\" that can be queried from the aggregation endpoint.
@@ -150,6 +153,7 @@ Class | Method | HTTP request | Description
 *CollateralApi* | [**batch_accept_margin_calls**](docs/CollateralApi.md#batch_accept_margin_calls) | **POST** /api/collateral/margincalls/$batchAccept | [EXPERIMENTAL] BatchAcceptMarginCalls: Accept several margin calls.
 *CollateralApi* | [**dispute_margin_call**](docs/CollateralApi.md#dispute_margin_call) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$dispute | [EXPERIMENTAL] DisputeMarginCall: Dispute a margin call.
 *CollateralApi* | [**get_margin_call**](docs/CollateralApi.md#get_margin_call) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction} | [EXPERIMENTAL] GetMarginCall: Get a margin call.
+*CollateralApi* | [**get_margin_call_allocation**](docs/CollateralApi.md#get_margin_call_allocation) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$allocation | [EXPERIMENTAL] GetMarginCallAllocation: [EXPERIMENTAL] GetMarginCallAllocation: Get the collateral proposed for a margin call.
 *CollateralApi* | [**get_margin_call_explanation**](docs/CollateralApi.md#get_margin_call_explanation) | **GET** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$explain | [EXPERIMENTAL] GetMarginCallExplanation: Explain a margin call.
 *CollateralApi* | [**get_margin_line_explanation**](docs/CollateralApi.md#get_margin_line_explanation) | **GET** /api/collateral/runs/{runId}/lines/{lineKey}/$explain | [EXPERIMENTAL] GetMarginLineExplanation: Explain a margin line.
 *CollateralApi* | [**get_margin_run**](docs/CollateralApi.md#get_margin_run) | **GET** /api/collateral/runs/{runId} | [EXPERIMENTAL] GetMarginRun: Get a margin run.
@@ -159,6 +163,7 @@ Class | Method | HTTP request | Description
 *CollateralApi* | [**list_margin_run_recommendations**](docs/CollateralApi.md#list_margin_run_recommendations) | **GET** /api/collateral/runs/{runId}/recommendations | [EXPERIMENTAL] ListMarginRunRecommendations: List a margin run's netting recommendations.
 *CollateralApi* | [**list_margin_runs**](docs/CollateralApi.md#list_margin_runs) | **GET** /api/collateral/runs | [EXPERIMENTAL] ListMarginRuns: List margin runs.
 *CollateralApi* | [**list_netting_recommendations**](docs/CollateralApi.md#list_netting_recommendations) | **GET** /api/collateral/recommendations | [EXPERIMENTAL] ListNettingRecommendations: List the current netting recommendations.
+*CollateralApi* | [**rank_margin_call**](docs/CollateralApi.md#rank_margin_call) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$rank | [EXPERIMENTAL] RankMarginCall: [EXPERIMENTAL] RankMarginCall: Rank the collateral for a margin call again, with the caller's choices.
 *CollateralApi* | [**record_counterparty_demand**](docs/CollateralApi.md#record_counterparty_demand) | **POST** /api/collateral/margincalls/{runId}/{agreementScope}/{agreementCode}/{item}/{marginType}/{direction}/$recordCounterpartyDemand | [EXPERIMENTAL] RecordCounterpartyDemand: Record the counterparty's demand against a margin call.
 *CollateralApi* | [**retry_margin_run**](docs/CollateralApi.md#retry_margin_run) | **POST** /api/collateral/runs/{runId}/$retry | [EXPERIMENTAL] RetryMarginRun: Retry a margin run.
 *CollateralApi* | [**run_margin_calculation**](docs/CollateralApi.md#run_margin_calculation) | **POST** /api/collateral/$run | [EXPERIMENTAL] RunMarginCalculation: Run the margin calculation.
@@ -367,6 +372,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund.
 *FundsApi* | [**get_fund_performance**](docs/FundsApi.md#get_fund_performance) | **GET** /api/funds/{scope}/{code}/performance | [EARLY ACCESS] GetFundPerformance: [EARLY ACCESS] GetFundPerformance: Get a fund's performance measures over all its partners.
 *FundsApi* | [**get_fund_properties**](docs/FundsApi.md#get_fund_properties) | **GET** /api/funds/{scope}/{code}/properties | [EARLY ACCESS] GetFundProperties: Get Fund properties.
+*FundsApi* | [**get_fund_tax_scope**](docs/FundsApi.md#get_fund_tax_scope) | **GET** /api/funds/{scope}/{code}/tax/scope | [EARLY ACCESS] GetFundTaxScope: [EARLY ACCESS] GetFundTaxScope: Get the UK chargeable-gains tax scope of a fund.
 *FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 *FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
 *FundsApi* | [**get_partner_capital_account**](docs/FundsApi.md#get_partner_capital_account) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.
@@ -1259,6 +1265,10 @@ Class | Method | HTTP request | Description
  - [CollateralAgreement](docs/CollateralAgreement.md)
  - [CollateralAgreementApplicability](docs/CollateralAgreementApplicability.md)
  - [CollateralAgreementRequest](docs/CollateralAgreementRequest.md)
+ - [CollateralAllocation](docs/CollateralAllocation.md)
+ - [CollateralAllocationCandidate](docs/CollateralAllocationCandidate.md)
+ - [CollateralAllocationLine](docs/CollateralAllocationLine.md)
+ - [CollateralAllocationOverride](docs/CollateralAllocationOverride.md)
  - [CollateralFundingTerms](docs/CollateralFundingTerms.md)
  - [CollateralInstrument](docs/CollateralInstrument.md)
  - [CollateralOptimisationTerms](docs/CollateralOptimisationTerms.md)
@@ -1672,6 +1682,8 @@ Class | Method | HTTP request | Description
  - [FundStructureMemberRequest](docs/FundStructureMemberRequest.md)
  - [FundStructureNode](docs/FundStructureNode.md)
  - [FundStructureRequest](docs/FundStructureRequest.md)
+ - [FundTaxScope](docs/FundTaxScope.md)
+ - [FundTaxScopeExclusions](docs/FundTaxScopeExclusions.md)
  - [FundTerms](docs/FundTerms.md)
  - [FundTermsVersion](docs/FundTermsVersion.md)
  - [FundValuationPointData](docs/FundValuationPointData.md)
@@ -1909,6 +1921,7 @@ Class | Method | HTTP request | Description
  - [MarginLine](docs/MarginLine.md)
  - [MarginRounding](docs/MarginRounding.md)
  - [MarginRun](docs/MarginRun.md)
+ - [MarginRunAllocation](docs/MarginRunAllocation.md)
  - [MarginRunIssue](docs/MarginRunIssue.md)
  - [MarginRunOptimisation](docs/MarginRunOptimisation.md)
  - [MarginRunRequest](docs/MarginRunRequest.md)
@@ -2321,6 +2334,7 @@ Class | Method | HTTP request | Description
  - [QuoteInstrumentIdType](docs/QuoteInstrumentIdType.md)
  - [QuoteSeriesId](docs/QuoteSeriesId.md)
  - [QuoteType](docs/QuoteType.md)
+ - [RankMarginCallRequest](docs/RankMarginCallRequest.md)
  - [RateBreakdownComponent](docs/RateBreakdownComponent.md)
  - [RateCurveShiftDefinition](docs/RateCurveShiftDefinition.md)
  - [RateCurveShiftMode](docs/RateCurveShiftMode.md)
@@ -2328,6 +2342,8 @@ Class | Method | HTTP request | Description
  - [RawVendorEvent](docs/RawVendorEvent.md)
  - [ReOpenPeriodDiaryEntryRequest](docs/ReOpenPeriodDiaryEntryRequest.md)
  - [RealisedGainLoss](docs/RealisedGainLoss.md)
+ - [RealisedGainLossChargeableGains](docs/RealisedGainLossChargeableGains.md)
+ - [RealisedGainLossMatchedLot](docs/RealisedGainLossMatchedLot.md)
  - [RecActivitySinceEffectiveAt](docs/RecActivitySinceEffectiveAt.md)
  - [RecActivityWindow](docs/RecActivityWindow.md)
  - [RecApprovalDecision](docs/RecApprovalDecision.md)
@@ -2374,6 +2390,7 @@ Class | Method | HTTP request | Description
  - [RecResultItemDetails](docs/RecResultItemDetails.md)
  - [RecResultLinkKey](docs/RecResultLinkKey.md)
  - [RecResultRelationalDataItem](docs/RecResultRelationalDataItem.md)
+ - [RecResultResourceIdItem](docs/RecResultResourceIdItem.md)
  - [RecResultReview](docs/RecResultReview.md)
  - [RecResultSet](docs/RecResultSet.md)
  - [RecResultSetApprovalDecisionRequest](docs/RecResultSetApprovalDecisionRequest.md)

@@ -27,8 +27,8 @@ class ShareClassDetails(BaseModel):
     """
     ShareClassDetails
     """
-    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the share class' instrument identifiers") 
-    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies.") 
+    lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="LUSID's internal unique instrument identifier, resolved from the share class' instrument identifiers. Absent where no instrument was resolved for the share class: a fund defined with inline share classes resolves none, whether or not it created their instruments.") 
+    instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the share class instrument lies, or the fund's instrument scope where no instrument was resolved for the share class.") 
     short_code:  Optional[StrictStr] = Field(None,alias="shortCode", description="The unique code within the fund for the share class instrument.") 
     dom_currency:  Optional[StrictStr] = Field(None,alias="domCurrency", description="The domestic currency of the share class instrument") 
     instrument_active: Optional[StrictBool] = Field(default=None, description="If the instrument of the share class is active.", alias="instrumentActive")

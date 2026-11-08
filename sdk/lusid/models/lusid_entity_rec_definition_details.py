@@ -28,7 +28,7 @@ class LusidEntityRecDefinitionDetails(BaseModel):
     """
     A definition that reconciles one type of LUSID entity. A filter selects the population of each side, and a single  matching ruleset of that entity type drives the definition.  # noqa: E501
     """
-    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument, LegalEntity. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity.") 
+    entity_type:  StrictStr = Field(...,alias="entityType", description="The type of LUSID entity to reconcile, which is also the rec type of the results. Supported types: Instrument, LegalEntity, Portfolio. Must equal the reconciliationType of the matching ruleset. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.") 
     matching_ruleset_id: ResourceId = Field(alias="matchingRulesetId")
     left_filter:  Optional[StrictStr] = Field(None,alias="leftFilter", description="Optional filter that selects the population of the left side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side.") 
     right_filter:  Optional[StrictStr] = Field(None,alias="rightFilter", description="Optional filter that selects the population of the right side. It uses the filter syntax of the list endpoint of the entity type. Null reads the whole population of the side.") 

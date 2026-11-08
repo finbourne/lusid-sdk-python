@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **carried_disputed_amount** | **float** | The amount left in dispute on the carried call. Informational; not added to this call. | [optional] 
 **scenario** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **explain_available** | **bool** | Whether the working behind the call&#39;s required amount was stored, so that the call can be explained. Only an initial-margin call can be explained, and only when the run stored its working. | [optional] 
+**proposed_allocation** | [**List[CollateralAllocationLine]**](CollateralAllocationLine.md) | The assets the allocation pass proposes to deliver for the call, or to take back for a return, cheapest first. Null until the run&#39;s allocation pass has completed, or when the call moves no collateral of ours. | [optional] 
 ## Example
 
 ```python
@@ -78,7 +79,8 @@ carried_disputed_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace wit
 scenario: Optional[ResourceId] = None
 explain_available: Optional[StrictBool] = # Replace with your value
 explain_available:Optional[StrictBool] = None
-margin_call_instance = MarginCall(href=href, id=id, run_id=run_id, agreement_id=agreement_id, counterparty=counterparty, item=item, margin_type=margin_type, method=method, settlement=settlement, direction=direction, currency=currency, required=required, held=held, call=call, match_tolerance=match_tolerance, counterparty_demand=counterparty_demand, difference=difference, match_status=match_status, demand_received_at=demand_received_at, statement_reference=statement_reference, demand_note=demand_note, agreed_amount=agreed_amount, disputed_amount=disputed_amount, dispute_reason=dispute_reason, dispute_owner=dispute_owner, state=state, deadline=deadline, supersedes=supersedes, carried_from=carried_from, carried_disputed_amount=carried_disputed_amount, scenario=scenario, explain_available=explain_available)
+proposed_allocation: Optional[List[CollateralAllocationLine]] = # Replace with your value
+margin_call_instance = MarginCall(href=href, id=id, run_id=run_id, agreement_id=agreement_id, counterparty=counterparty, item=item, margin_type=margin_type, method=method, settlement=settlement, direction=direction, currency=currency, required=required, held=held, call=call, match_tolerance=match_tolerance, counterparty_demand=counterparty_demand, difference=difference, match_status=match_status, demand_received_at=demand_received_at, statement_reference=statement_reference, demand_note=demand_note, agreed_amount=agreed_amount, disputed_amount=disputed_amount, dispute_reason=dispute_reason, dispute_owner=dispute_owner, state=state, deadline=deadline, supersedes=supersedes, carried_from=carried_from, carried_disputed_amount=carried_disputed_amount, scenario=scenario, explain_available=explain_available, proposed_allocation=proposed_allocation)
 
 ```
 

@@ -44,7 +44,7 @@ class RecResult(BaseModel):
     id:  StrictStr = Field(...,alias="id", description="The id of the result within its instance: its rec type, result type and result number, e.g. 'Holding-break-3'. Unique within the instance, and kept across its runs for as long as the result keeps its result type.") 
     result_number: StrictInt = Field(description="The result's number within its result type. Kept across runs while the result keeps its type; never reused once assigned.", alias="resultNumber")
     first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.") 
     external_rec_type_name:  Optional[StrictStr] = Field(None,alias="externalRecTypeName", description="The client's name for an External rec type, as stamped from the matching ruleset's externalRecType when the run executed. Null for native rec types. Filterable.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
     as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")

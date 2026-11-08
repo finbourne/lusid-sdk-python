@@ -38,6 +38,8 @@ See all compatible oneOf types with RecResultItem
 
  * [RecResultRelationalDataItem](./RecResultRelationalDataItem.md)
 
+ * [RecResultResourceIdItem](./RecResultResourceIdItem.md)
+
  * [RecResultSettlementActivityItem](./RecResultSettlementActivityItem.md)
 
  * [RecResultTransactionItem](./RecResultTransactionItem.md)

@@ -458,6 +458,10 @@ from lusid.models.collateral import Collateral
 from lusid.models.collateral_agreement import CollateralAgreement
 from lusid.models.collateral_agreement_applicability import CollateralAgreementApplicability
 from lusid.models.collateral_agreement_request import CollateralAgreementRequest
+from lusid.models.collateral_allocation import CollateralAllocation
+from lusid.models.collateral_allocation_candidate import CollateralAllocationCandidate
+from lusid.models.collateral_allocation_line import CollateralAllocationLine
+from lusid.models.collateral_allocation_override import CollateralAllocationOverride
 from lusid.models.collateral_funding_terms import CollateralFundingTerms
 from lusid.models.collateral_instrument import CollateralInstrument
 from lusid.models.collateral_optimisation_terms import CollateralOptimisationTerms
@@ -871,6 +875,8 @@ from lusid.models.fund_structure_edge_target import FundStructureEdgeTarget
 from lusid.models.fund_structure_member_request import FundStructureMemberRequest
 from lusid.models.fund_structure_node import FundStructureNode
 from lusid.models.fund_structure_request import FundStructureRequest
+from lusid.models.fund_tax_scope import FundTaxScope
+from lusid.models.fund_tax_scope_exclusions import FundTaxScopeExclusions
 from lusid.models.fund_terms import FundTerms
 from lusid.models.fund_terms_version import FundTermsVersion
 from lusid.models.fund_valuation_point_data import FundValuationPointData
@@ -1108,6 +1114,7 @@ from lusid.models.margin_item import MarginItem
 from lusid.models.margin_line import MarginLine
 from lusid.models.margin_rounding import MarginRounding
 from lusid.models.margin_run import MarginRun
+from lusid.models.margin_run_allocation import MarginRunAllocation
 from lusid.models.margin_run_issue import MarginRunIssue
 from lusid.models.margin_run_optimisation import MarginRunOptimisation
 from lusid.models.margin_run_request import MarginRunRequest
@@ -1520,6 +1527,7 @@ from lusid.models.quote_id import QuoteId
 from lusid.models.quote_instrument_id_type import QuoteInstrumentIdType
 from lusid.models.quote_series_id import QuoteSeriesId
 from lusid.models.quote_type import QuoteType
+from lusid.models.rank_margin_call_request import RankMarginCallRequest
 from lusid.models.rate_breakdown_component import RateBreakdownComponent
 from lusid.models.rate_curve_shift_definition import RateCurveShiftDefinition
 from lusid.models.rate_curve_shift_mode import RateCurveShiftMode
@@ -1527,6 +1535,8 @@ from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
 from lusid.models.realised_gain_loss import RealisedGainLoss
+from lusid.models.realised_gain_loss_chargeable_gains import RealisedGainLossChargeableGains
+from lusid.models.realised_gain_loss_matched_lot import RealisedGainLossMatchedLot
 from lusid.models.rec_activity_since_effective_at import RecActivitySinceEffectiveAt
 from lusid.models.rec_activity_window import RecActivityWindow
 from lusid.models.rec_approval_decision import RecApprovalDecision
@@ -1573,6 +1583,7 @@ from lusid.models.rec_result_item import RecResultItem
 from lusid.models.rec_result_item_details import RecResultItemDetails
 from lusid.models.rec_result_link_key import RecResultLinkKey
 from lusid.models.rec_result_relational_data_item import RecResultRelationalDataItem
+from lusid.models.rec_result_resource_id_item import RecResultResourceIdItem
 from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
@@ -2654,6 +2665,10 @@ __all__ = [
     "CollateralAgreement",
     "CollateralAgreementApplicability",
     "CollateralAgreementRequest",
+    "CollateralAllocation",
+    "CollateralAllocationCandidate",
+    "CollateralAllocationLine",
+    "CollateralAllocationOverride",
     "CollateralFundingTerms",
     "CollateralInstrument",
     "CollateralOptimisationTerms",
@@ -3067,6 +3082,8 @@ __all__ = [
     "FundStructureMemberRequest",
     "FundStructureNode",
     "FundStructureRequest",
+    "FundTaxScope",
+    "FundTaxScopeExclusions",
     "FundTerms",
     "FundTermsVersion",
     "FundValuationPointData",
@@ -3304,6 +3321,7 @@ __all__ = [
     "MarginLine",
     "MarginRounding",
     "MarginRun",
+    "MarginRunAllocation",
     "MarginRunIssue",
     "MarginRunOptimisation",
     "MarginRunRequest",
@@ -3716,6 +3734,7 @@ __all__ = [
     "QuoteInstrumentIdType",
     "QuoteSeriesId",
     "QuoteType",
+    "RankMarginCallRequest",
     "RateBreakdownComponent",
     "RateCurveShiftDefinition",
     "RateCurveShiftMode",
@@ -3723,6 +3742,8 @@ __all__ = [
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
     "RealisedGainLoss",
+    "RealisedGainLossChargeableGains",
+    "RealisedGainLossMatchedLot",
     "RecActivitySinceEffectiveAt",
     "RecActivityWindow",
     "RecApprovalDecision",
@@ -3769,6 +3790,7 @@ __all__ = [
     "RecResultItemDetails",
     "RecResultLinkKey",
     "RecResultRelationalDataItem",
+    "RecResultResourceIdItem",
     "RecResultReview",
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",

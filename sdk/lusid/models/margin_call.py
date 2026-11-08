@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.collateral_allocation_line import CollateralAllocationLine
 from lusid.models.counterparty_identifier import CounterpartyIdentifier
 from lusid.models.margin_call_reference import MarginCallReference
 from lusid.models.resource_id import ResourceId
@@ -62,7 +63,8 @@ class MarginCall(BaseModel):
     carried_disputed_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount left in dispute on the carried call. Informational; not added to this call.", alias="carriedDisputedAmount")
     scenario: Optional[ResourceId] = None
     explain_available: Optional[StrictBool] = Field(default=None, description="Whether the working behind the call's required amount was stored, so that the call can be explained. Only an initial-margin call can be explained, and only when the run stored its working.", alias="explainAvailable")
-    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount", "scenario", "explainAvailable"]
+    proposed_allocation: Optional[List[CollateralAllocationLine]] = Field(default=None, description="The assets the allocation pass proposes to deliver for the call, or to take back for a return, cheapest first. Null until the run's allocation pass has completed, or when the call moves no collateral of ours.", alias="proposedAllocation")
+    __properties = ["href", "id", "runId", "agreementId", "counterparty", "item", "marginType", "method", "settlement", "direction", "currency", "required", "held", "call", "matchTolerance", "counterpartyDemand", "difference", "matchStatus", "demandReceivedAt", "statementReference", "demandNote", "agreedAmount", "disputedAmount", "disputeReason", "disputeOwner", "state", "deadline", "supersedes", "carriedFrom", "carriedDisputedAmount", "scenario", "explainAvailable", "proposedAllocation"]
 
     class Config:
         """Pydantic configuration"""
@@ -111,6 +113,13 @@ class MarginCall(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of scenario
         if self.scenario:
             _dict['scenario'] = self.scenario.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in proposed_allocation (list)
+        _items = []
+        if self.proposed_allocation:
+            for _item in self.proposed_allocation:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['proposedAllocation'] = _items
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -186,6 +195,11 @@ class MarginCall(BaseModel):
         if self.carried_disputed_amount is None and "carried_disputed_amount" in self.__fields_set__:
             _dict['carriedDisputedAmount'] = None
 
+        # set to None if proposed_allocation (nullable) is None
+        # and __fields_set__ contains the field
+        if self.proposed_allocation is None and "proposed_allocation" in self.__fields_set__:
+            _dict['proposedAllocation'] = None
+
         return _dict
 
     @classmethod
@@ -229,7 +243,8 @@ class MarginCall(BaseModel):
             "carried_from": MarginCallReference.from_dict(obj.get("carriedFrom")) if obj.get("carriedFrom") is not None else None,
             "carried_disputed_amount": obj.get("carriedDisputedAmount"),
             "scenario": ResourceId.from_dict(obj.get("scenario")) if obj.get("scenario") is not None else None,
-            "explain_available": obj.get("explainAvailable")
+            "explain_available": obj.get("explainAvailable"),
+            "proposed_allocation": [CollateralAllocationLine.from_dict(_item) for _item in obj.get("proposedAllocation")] if obj.get("proposedAllocation") is not None else None
         })
         return _obj
 

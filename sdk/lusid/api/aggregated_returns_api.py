@@ -20,14 +20,17 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
-from pydantic.v1 import Field
-from typing import Optional
+from pydantic.v1 import Field, StrictStr
+from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.aggregated_returns_entity_request import AggregatedReturnsEntityRequest
 from lusid.models.aggregated_returns_response import AggregatedReturnsResponse
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.performance_return import PerformanceReturn
+from lusid.models.resource_list_of_performance_return import ResourceListOfPerformanceReturn
 from lusid.models.resource_list_of_returns_entity import ResourceListOfReturnsEntity
 from lusid.models.returns_entity import ReturnsEntity
+from lusid.models.upsert_returns_response import UpsertReturnsResponse
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -53,6 +56,214 @@ class AggregatedReturnsApi:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+    @overload
+    async def delete_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[StrictStr, Field(..., description="The start date from which to delete the Returns.")], to_effective_at : Annotated[StrictStr, Field(..., description="The end date from which to delete the Returns.")], period : Annotated[Optional[StrictStr], Field( description="The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[StrictStr, Field(..., description="The start date from which to delete the Returns.")], to_effective_at : Annotated[StrictStr, Field(..., description="The end date from which to delete the Returns.")], period : Annotated[Optional[StrictStr], Field( description="The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[StrictStr, Field(..., description="The start date from which to delete the Returns.")], to_effective_at : Annotated[StrictStr, Field(..., description="The end date from which to delete the Returns.")], period : Annotated[Optional[StrictStr], Field( description="The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] DeleteReturns: Delete Returns  # noqa: E501
+
+        Cancel the Returns stored under the returns series against the specified entity inside the window.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_returns(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param from_effective_at: The start date from which to delete the Returns. (required)
+        :type from_effective_at: str
+        :param to_effective_at: The end date from which to delete the Returns. (required)
+        :type to_effective_at: str
+        :param period: The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.
+        :type period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_returns_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_returns_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[StrictStr, Field(..., description="The start date from which to delete the Returns.")], to_effective_at : Annotated[StrictStr, Field(..., description="The end date from which to delete the Returns.")], period : Annotated[Optional[StrictStr], Field( description="The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] DeleteReturns: Delete Returns  # noqa: E501
+
+        Cancel the Returns stored under the returns series against the specified entity inside the window.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param from_effective_at: The start date from which to delete the Returns. (required)
+        :type from_effective_at: str
+        :param to_effective_at: The end date from which to delete the Returns. (required)
+        :type to_effective_at: str
+        :param period: The period of the Returns to be deleted. Default value: Daily. Available values: Daily, Monthly.
+        :type period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'entity_type',
+            'entity_scope',
+            'entity_code',
+            'from_effective_at',
+            'to_effective_at',
+            'period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_returns" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
+        if _params['entity_scope']:
+            _path_params['entityScope'] = _params['entity_scope']
+
+        if _params['entity_code']:
+            _path_params['entityCode'] = _params['entity_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('from_effective_at') is not None:  # noqa: E501
+            _query_params.append(('fromEffectiveAt', _params['from_effective_at']))
+
+        if _params.get('to_effective_at') is not None:  # noqa: E501
+            _query_params.append(('toEffectiveAt', _params['to_effective_at']))
+
+        if _params.get('period') is not None:  # noqa: E501
+            _query_params.append(('period', _params['period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode}/$delete', 'DELETE',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
 
 
     @overload
@@ -357,6 +568,225 @@ class AggregatedReturnsApi:
 
         return self.api_client.call_api(
             '/api/returns/$aggregated', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field( description="The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, **kwargs) -> ResourceListOfPerformanceReturn:  # noqa: E501
+        ...
+
+    @overload
+    def get_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field( description="The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfPerformanceReturn:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field( description="The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfPerformanceReturn, Awaitable[ResourceListOfPerformanceReturn]]:  # noqa: E501
+        """[EXPERIMENTAL] GetReturns: Get Returns  # noqa: E501
+
+        Get the Returns stored under the returns series against the specified entity.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_returns(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param from_effective_at: The start date from which to get the Returns.
+        :type from_effective_at: str
+        :param to_effective_at: The end date from which to get the Returns.
+        :type to_effective_at: str
+        :param period: The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.
+        :type period: str
+        :param as_at: The asAt datetime at which to retrieve the Returns. Defaults to the latest.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ResourceListOfPerformanceReturn
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_returns_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, as_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_returns_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], from_effective_at : Annotated[Optional[StrictStr], Field( description="The start date from which to get the Returns.")] = None, to_effective_at : Annotated[Optional[StrictStr], Field( description="The end date from which to get the Returns.")] = None, period : Annotated[Optional[StrictStr], Field( description="The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Returns. Defaults to the latest.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetReturns: Get Returns  # noqa: E501
+
+        Get the Returns stored under the returns series against the specified entity.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, from_effective_at, to_effective_at, period, as_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param from_effective_at: The start date from which to get the Returns.
+        :type from_effective_at: str
+        :param to_effective_at: The end date from which to get the Returns.
+        :type to_effective_at: str
+        :param period: The period for which to show the Returns. Default value: Daily. Available values: Daily, Monthly.
+        :type period: str
+        :param as_at: The asAt datetime at which to retrieve the Returns. Defaults to the latest.
+        :type as_at: datetime
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ResourceListOfPerformanceReturn, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'entity_type',
+            'entity_scope',
+            'entity_code',
+            'from_effective_at',
+            'to_effective_at',
+            'period',
+            'as_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_returns" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
+        if _params['entity_scope']:
+            _path_params['entityScope'] = _params['entity_scope']
+
+        if _params['entity_code']:
+            _path_params['entityCode'] = _params['entity_code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('from_effective_at') is not None:  # noqa: E501
+            _query_params.append(('fromEffectiveAt', _params['from_effective_at']))
+
+        if _params.get('to_effective_at') is not None:  # noqa: E501
+            _query_params.append(('toEffectiveAt', _params['to_effective_at']))
+
+        if _params.get('period') is not None:  # noqa: E501
+            _query_params.append(('period', _params['period']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ResourceListOfPerformanceReturn",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -683,6 +1113,205 @@ class AggregatedReturnsApi:
 
         return self.api_client.call_api(
             '/api/returns', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], performance_return : Annotated[List[PerformanceReturn], Field(description="This contains the Returns which need to be upsert.")], **kwargs) -> UpsertReturnsResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], performance_return : Annotated[List[PerformanceReturn], Field(description="This contains the Returns which need to be upsert.")], async_req: Optional[bool]=True, **kwargs) -> UpsertReturnsResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_returns(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], performance_return : Annotated[List[PerformanceReturn], Field(description="This contains the Returns which need to be upsert.")], async_req: Optional[bool]=None, **kwargs) -> Union[UpsertReturnsResponse, Awaitable[UpsertReturnsResponse]]:  # noqa: E501
+        """[EXPERIMENTAL] UpsertReturns: Upsert Returns  # noqa: E501
+
+        Update or insert returns stored under the returns series against the specified entity. Stored              returns take precedence over a calculation in the aggregated returns of that entity.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_returns(scope, code, entity_type, entity_scope, entity_code, performance_return, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param performance_return: This contains the Returns which need to be upsert. (required)
+        :type performance_return: List[PerformanceReturn]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: UpsertReturnsResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_returns_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, performance_return, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_returns_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Returns.")], code : Annotated[StrictStr, Field(..., description="The code of the Returns.")], entity_type : Annotated[StrictStr, Field(..., description="The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup.")], entity_scope : Annotated[StrictStr, Field(..., description="The scope of the entity.")], entity_code : Annotated[StrictStr, Field(..., description="The code of the entity.")], performance_return : Annotated[List[PerformanceReturn], Field(description="This contains the Returns which need to be upsert.")], **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] UpsertReturns: Upsert Returns  # noqa: E501
+
+        Update or insert returns stored under the returns series against the specified entity. Stored              returns take precedence over a calculation in the aggregated returns of that entity.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_returns_with_http_info(scope, code, entity_type, entity_scope, entity_code, performance_return, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Returns. (required)
+        :type scope: str
+        :param code: The code of the Returns. (required)
+        :type code: str
+        :param entity_type: The type of the entity the Returns are stored against: 'Portfolio' or 'PortfolioGroup'. Available values: Portfolio, PortfolioGroup. (required)
+        :type entity_type: str
+        :param entity_scope: The scope of the entity. (required)
+        :type entity_scope: str
+        :param entity_code: The code of the entity. (required)
+        :type entity_code: str
+        :param performance_return: This contains the Returns which need to be upsert. (required)
+        :type performance_return: List[PerformanceReturn]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpsertReturnsResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'entity_type',
+            'entity_scope',
+            'entity_code',
+            'performance_return'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_returns" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['entity_type']:
+            _path_params['entityType'] = _params['entity_type']
+
+        if _params['entity_scope']:
+            _path_params['entityScope'] = _params['entity_scope']
+
+        if _params['entity_code']:
+            _path_params['entityCode'] = _params['entity_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['performance_return'] is not None:
+            _body_params = _params['performance_return']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpsertReturnsResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/returns/{scope}/{code}/{entityType}/{entityScope}/{entityCode}', 'POST',
             _path_params,
             _query_params,
             _header_params,

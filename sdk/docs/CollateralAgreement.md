@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **initial_margin** | [**List[MarginItem]**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties to decorate onto the Collateral Agreement. Filterable. | [optional] 
+**notification_cut_label** | **str** | The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call&#39;s deadline; the allocation excludes assets that cannot settle by it. Optional. | [optional] 
+**return_notification_cut_label** | **str** | The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -48,8 +50,10 @@ variation_margin: Optional[List[MarginItem]] = # Replace with your value
 initial_margin: Optional[List[MarginItem]] = # Replace with your value
 version: Optional[Version] = None
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+notification_cut_label: Optional[StrictStr] = "example_notification_cut_label"
+return_notification_cut_label: Optional[StrictStr] = "example_return_notification_cut_label"
 links: Optional[List[Link]] = None
-collateral_agreement_instance = CollateralAgreement(href=href, id=id, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, version=version, properties=properties, links=links)
+collateral_agreement_instance = CollateralAgreement(href=href, id=id, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, version=version, properties=properties, notification_cut_label=notification_cut_label, return_notification_cut_label=return_notification_cut_label, links=links)
 
 ```
 

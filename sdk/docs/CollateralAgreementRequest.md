@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **initial_margin** | [**List[MarginItem]**](MarginItem.md) | The initial margin arrangements under the agreement. | [optional] 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties to decorate onto the Collateral Agreement. Filterable. | [optional] 
 **effective_at** | **datetime** | The effective datetime from which the Collateral Agreement applies. Defaults to the beginning of time if not specified, so that the agreement is visible at every effective datetime. | [optional] 
+**notification_cut_label** | **str** | The cut label giving the time of day by which collateral we deliver under a margin call must settle. Each run resolves it on the business date and records it as the call&#39;s deadline; the allocation excludes assets that cannot settle by it. Optional. | [optional] 
+**return_notification_cut_label** | **str** | The cut label giving the time of day by which collateral the counterparty delivers, or returns to us, must settle. Recorded as the deadline of the calls they post under. Optional. | [optional] 
 ## Example
 
 ```python
@@ -45,7 +47,9 @@ variation_margin: Optional[List[MarginItem]] = # Replace with your value
 initial_margin: Optional[List[MarginItem]] = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 effective_at: Optional[datetime] = # Replace with your value
-collateral_agreement_request_instance = CollateralAgreementRequest(code=code, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, properties=properties, effective_at=effective_at)
+notification_cut_label: Optional[StrictStr] = "example_notification_cut_label"
+return_notification_cut_label: Optional[StrictStr] = "example_return_notification_cut_label"
+collateral_agreement_request_instance = CollateralAgreementRequest(code=code, counterparty_id=counterparty_id, applicability_filter=applicability_filter, base_currency=base_currency, cut_label=cut_label, recipe_id=recipe_id, minimum_transfer_amount=minimum_transfer_amount, rounding=rounding, settlement_lag=settlement_lag, match_tolerance=match_tolerance, funding=funding, optimisation=optimisation, variation_margin=variation_margin, initial_margin=initial_margin, properties=properties, effective_at=effective_at, notification_cut_label=notification_cut_label, return_notification_cut_label=return_notification_cut_label)
 
 ```
 
