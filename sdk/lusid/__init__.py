@@ -106,6 +106,7 @@ from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.subscriptions_api import SubscriptionsApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
+from lusid.api.tax_classifications_api import TaxClassificationsApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
 from lusid.api.timelines_api import TimelinesApi
 from lusid.api.transaction_configuration_api import TransactionConfigurationApi
@@ -1507,6 +1508,9 @@ from lusid.models.protection_payout_cash_flow_event import ProtectionPayoutCashF
 from lusid.models.put_redemption_event import PutRedemptionEvent
 from lusid.models.qualifier_definition import QualifierDefinition
 from lusid.models.qualifier_definition_request import QualifierDefinitionRequest
+from lusid.models.qualifying_investments_crossing import QualifyingInvestmentsCrossing
+from lusid.models.qualifying_investments_history import QualifyingInvestmentsHistory
+from lusid.models.qualifying_investments_observation import QualifyingInvestmentsObservation
 from lusid.models.quantity_instructed import QuantityInstructed
 from lusid.models.query_applicable_instrument_events_request import QueryApplicableInstrumentEventsRequest
 from lusid.models.query_bucket_cash_flow_drill_down_request import QueryBucketCashFlowDrillDownRequest
@@ -1740,6 +1744,8 @@ from lusid.models.resource_list_of_scope_definition import ResourceListOfScopeDe
 from lusid.models.resource_list_of_series import ResourceListOfSeries
 from lusid.models.resource_list_of_side_definition import ResourceListOfSideDefinition
 from lusid.models.resource_list_of_string import ResourceListOfString
+from lusid.models.resource_list_of_tax_classification import ResourceListOfTaxClassification
+from lusid.models.resource_list_of_tax_classification_exception_record import ResourceListOfTaxClassificationExceptionRecord
 from lusid.models.resource_list_of_tax_exception_item import ResourceListOfTaxExceptionItem
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
@@ -1920,6 +1926,13 @@ from lusid.models.swing_trigger import SwingTrigger
 from lusid.models.swing_trigger_evaluation import SwingTriggerEvaluation
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
+from lusid.models.tax_classification import TaxClassification
+from lusid.models.tax_classification_decision_step import TaxClassificationDecisionStep
+from lusid.models.tax_classification_detail import TaxClassificationDetail
+from lusid.models.tax_classification_exception import TaxClassificationException
+from lusid.models.tax_classification_exception_record import TaxClassificationExceptionRecord
+from lusid.models.tax_classification_field_version import TaxClassificationFieldVersion
+from lusid.models.tax_classification_inputs import TaxClassificationInputs
 from lusid.models.tax_exception_item import TaxExceptionItem
 from lusid.models.tax_exception_root_cause import TaxExceptionRootCause
 from lusid.models.tax_portfolio_sync_status import TaxPortfolioSyncStatus
@@ -2131,6 +2144,7 @@ from lusid.models.upsert_single_structured_data_response import UpsertSingleStru
 from lusid.models.upsert_structured_data_response import UpsertStructuredDataResponse
 from lusid.models.upsert_structured_result_data_request import UpsertStructuredResultDataRequest
 from lusid.models.upsert_subscription_request import UpsertSubscriptionRequest
+from lusid.models.upsert_tax_treatment_override_request import UpsertTaxTreatmentOverrideRequest
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
 from lusid.models.upsert_transfer_agency_transaction_from_order_request import UpsertTransferAgencyTransactionFromOrderRequest
@@ -2331,6 +2345,7 @@ __all__ = [
     "StructuredResultDataApi",
     "SubscriptionsApi",
     "SystemConfigurationApi",
+    "TaxClassificationsApi",
     "TaxRuleSetsApi",
     "TimelinesApi",
     "TransactionConfigurationApi",
@@ -3722,6 +3737,9 @@ __all__ = [
     "PutRedemptionEvent",
     "QualifierDefinition",
     "QualifierDefinitionRequest",
+    "QualifyingInvestmentsCrossing",
+    "QualifyingInvestmentsHistory",
+    "QualifyingInvestmentsObservation",
     "QuantityInstructed",
     "QueryApplicableInstrumentEventsRequest",
     "QueryBucketCashFlowDrillDownRequest",
@@ -3955,6 +3973,8 @@ __all__ = [
     "ResourceListOfSeries",
     "ResourceListOfSideDefinition",
     "ResourceListOfString",
+    "ResourceListOfTaxClassification",
+    "ResourceListOfTaxClassificationExceptionRecord",
     "ResourceListOfTaxExceptionItem",
     "ResourceListOfTaxRuleSet",
     "ResourceListOfTransaction",
@@ -4135,6 +4155,13 @@ __all__ = [
     "SwingTriggerEvaluation",
     "TargetTaxLot",
     "TargetTaxLotRequest",
+    "TaxClassification",
+    "TaxClassificationDecisionStep",
+    "TaxClassificationDetail",
+    "TaxClassificationException",
+    "TaxClassificationExceptionRecord",
+    "TaxClassificationFieldVersion",
+    "TaxClassificationInputs",
     "TaxExceptionItem",
     "TaxExceptionRootCause",
     "TaxPortfolioSyncStatus",
@@ -4346,6 +4373,7 @@ __all__ = [
     "UpsertStructuredDataResponse",
     "UpsertStructuredResultDataRequest",
     "UpsertSubscriptionRequest",
+    "UpsertTaxTreatmentOverrideRequest",
     "UpsertTransactionPropertiesResponse",
     "UpsertTransferAgencyOrderRequest",
     "UpsertTransferAgencyTransactionFromOrderRequest",

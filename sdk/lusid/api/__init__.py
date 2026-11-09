@@ -90,6 +90,7 @@ from lusid.api.staging_rule_set_api import StagingRuleSetApi
 from lusid.api.structured_result_data_api import StructuredResultDataApi
 from lusid.api.subscriptions_api import SubscriptionsApi
 from lusid.api.system_configuration_api import SystemConfigurationApi
+from lusid.api.tax_classifications_api import TaxClassificationsApi
 from lusid.api.tax_rule_sets_api import TaxRuleSetsApi
 from lusid.api.timelines_api import TimelinesApi
 from lusid.api.transaction_configuration_api import TransactionConfigurationApi
@@ -193,6 +194,7 @@ __all__ = [
     "StructuredResultDataApi",
     "SubscriptionsApi",
     "SystemConfigurationApi",
+    "TaxClassificationsApi",
     "TaxRuleSetsApi",
     "TimelinesApi",
     "TransactionConfigurationApi",
