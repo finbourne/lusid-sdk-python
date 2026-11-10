@@ -198,6 +198,7 @@ Class | Method | HTTP request | Description
 *ComplianceApi* | [**run_compliance**](docs/ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 *ComplianceApi* | [**run_compliance_preview**](docs/ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
 *ComplianceApi* | [**run_compliance_v3**](docs/ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+*ComplianceApi* | [**run_compliance_v3_pre_trade**](docs/ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
 *ComplianceApi* | [**update_compliance_template**](docs/ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 *ComplianceApi* | [**upsert_compliance_rule**](docs/ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 *ComplianceApi* | [**upsert_compliance_rule_v3**](docs/ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
@@ -361,6 +362,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
 *FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
 *FundsApi* | [**delete_series**](docs/FundsApi.md#delete_series) | **DELETE** /api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier} | [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
+*FundsApi* | [**delete_tax_cost_record**](docs/FundsApi.md#delete_tax_cost_record) | **DELETE** /api/funds/{scope}/{code}/taxcostrecords/{taxCostRecordCode} | [EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record.
 *FundsApi* | [**delete_valuation_point**](docs/FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.
 *FundsApi* | [**diff_partner_statement**](docs/FundsApi.md#diff_partner_statement) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff | [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner's statements.
 *FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
@@ -398,6 +400,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**list_nav_activity_adjustments**](docs/FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 *FundsApi* | [**list_partner_capital_accounts**](docs/FundsApi.md#list_partner_capital_accounts) | **GET** /api/funds/{scope}/{code}/capitalaccounts | [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.
 *FundsApi* | [**list_partner_statements**](docs/FundsApi.md#list_partner_statements) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
+*FundsApi* | [**list_tax_cost_records**](docs/FundsApi.md#list_tax_cost_records) | **GET** /api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
 *FundsApi* | [**list_tax_exceptions**](docs/FundsApi.md#list_tax_exceptions) | **GET** /api/funds/{scope}/{code}/tax/exceptions | [EARLY ACCESS] ListTaxExceptions: [EARLY ACCESS] ListTaxExceptions: List the open tax exceptions of a Fund.
 *FundsApi* | [**list_tax_exceptions_across_funds**](docs/FundsApi.md#list_tax_exceptions_across_funds) | **GET** /api/tax/exceptions | [EARLY ACCESS] ListTaxExceptionsAcrossFunds: [EARLY ACCESS] ListTaxExceptionsAcrossFunds: List the open tax exceptions across every Fund.
 *FundsApi* | [**list_valuation_point_complex_market_data**](docs/FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
@@ -418,6 +421,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**upsert_fee_properties**](docs/FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.
 *FundsApi* | [**upsert_fund_properties**](docs/FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.
 *FundsApi* | [**upsert_nav_activity_adjustments**](docs/FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
+*FundsApi* | [**upsert_tax_cost_records**](docs/FundsApi.md#upsert_tax_cost_records) | **POST** /api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund.
 *GroupReconciliationsApi* | [**batch_update_comparison_results**](docs/GroupReconciliationsApi.md#batch_update_comparison_results) | **POST** /api/reconciliations/groupreconciliationdefinitions/{scope}/{code}/comparisonresults/$batchReview | [EXPERIMENTAL] BatchUpdateComparisonResults: Add User Review entries for a range of comparison results related to a specific GroupReconciliationDefinition.
 *GroupReconciliationsApi* | [**create_comparison_ruleset**](docs/GroupReconciliationsApi.md#create_comparison_ruleset) | **POST** /api/reconciliations/comparisonrulesets | [EXPERIMENTAL] CreateComparisonRuleset: Create a Group Reconciliation Comparison Ruleset
 *GroupReconciliationsApi* | [**create_group_reconciliation_definition**](docs/GroupReconciliationsApi.md#create_group_reconciliation_definition) | **POST** /api/reconciliations/groupreconciliationdefinitions | [EXPERIMENTAL] CreateGroupReconciliationDefinition: Create Group Reconciliation Definition
@@ -1495,6 +1499,7 @@ Class | Method | HTTP request | Description
  - [DecimalListComplianceParameter](docs/DecimalListComplianceParameter.md)
  - [DecoratedComplianceRunSummary](docs/DecoratedComplianceRunSummary.md)
  - [DecoratedComplianceRunSummaryRequest](docs/DecoratedComplianceRunSummaryRequest.md)
+ - [DeemedDisposal](docs/DeemedDisposal.md)
  - [DeleteAccountsResponse](docs/DeleteAccountsResponse.md)
  - [DeleteCustodianAccountsResponse](docs/DeleteCustodianAccountsResponse.md)
  - [DeleteDataQualityRule](docs/DeleteDataQualityRule.md)
@@ -1838,6 +1843,8 @@ Class | Method | HTTP request | Description
  - [InstrumentDeleteModes](docs/InstrumentDeleteModes.md)
  - [InstrumentEntity](docs/InstrumentEntity.md)
  - [InstrumentEvent](docs/InstrumentEvent.md)
+ - [InstrumentEventActivity](docs/InstrumentEventActivity.md)
+ - [InstrumentEventActivityAdjustment](docs/InstrumentEventActivityAdjustment.md)
  - [InstrumentEventConfiguration](docs/InstrumentEventConfiguration.md)
  - [InstrumentEventEntity](docs/InstrumentEventEntity.md)
  - [InstrumentEventHolder](docs/InstrumentEventHolder.md)
@@ -2151,6 +2158,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfStagedModification](docs/PagedResourceListOfStagedModification.md)
  - [PagedResourceListOfStagedModificationsRequestedChangeInterval](docs/PagedResourceListOfStagedModificationsRequestedChangeInterval.md)
  - [PagedResourceListOfStagingRuleSet](docs/PagedResourceListOfStagingRuleSet.md)
+ - [PagedResourceListOfTaxCostRecord](docs/PagedResourceListOfTaxCostRecord.md)
  - [PagedResourceListOfTimeline](docs/PagedResourceListOfTimeline.md)
  - [PagedResourceListOfTransactionTemplate](docs/PagedResourceListOfTransactionTemplate.md)
  - [PagedResourceListOfTransactionTemplateSpecification](docs/PagedResourceListOfTransactionTemplateSpecification.md)
@@ -2423,6 +2431,7 @@ Class | Method | HTTP request | Description
  - [RecallableCapitalExpiryEvent](docs/RecallableCapitalExpiryEvent.md)
  - [RecipeBlock](docs/RecipeBlock.md)
  - [RecipeComposer](docs/RecipeComposer.md)
+ - [RecipeProvenance](docs/RecipeProvenance.md)
  - [RecipeValue](docs/RecipeValue.md)
  - [RecombineStep](docs/RecombineStep.md)
  - [RecommendedSortBy](docs/RecommendedSortBy.md)
@@ -2748,6 +2757,8 @@ Class | Method | HTTP request | Description
  - [TaxClassificationExceptionRecord](docs/TaxClassificationExceptionRecord.md)
  - [TaxClassificationFieldVersion](docs/TaxClassificationFieldVersion.md)
  - [TaxClassificationInputs](docs/TaxClassificationInputs.md)
+ - [TaxCostRecord](docs/TaxCostRecord.md)
+ - [TaxCostRecordRequest](docs/TaxCostRecordRequest.md)
  - [TaxExceptionItem](docs/TaxExceptionItem.md)
  - [TaxExceptionRootCause](docs/TaxExceptionRootCause.md)
  - [TaxPortfolioSyncStatus](docs/TaxPortfolioSyncStatus.md)
@@ -2959,6 +2970,7 @@ Class | Method | HTTP request | Description
  - [UpsertStructuredDataResponse](docs/UpsertStructuredDataResponse.md)
  - [UpsertStructuredResultDataRequest](docs/UpsertStructuredResultDataRequest.md)
  - [UpsertSubscriptionRequest](docs/UpsertSubscriptionRequest.md)
+ - [UpsertTaxCostRecordsResponse](docs/UpsertTaxCostRecordsResponse.md)
  - [UpsertTaxTreatmentOverrideRequest](docs/UpsertTaxTreatmentOverrideRequest.md)
  - [UpsertTransactionPropertiesResponse](docs/UpsertTransactionPropertiesResponse.md)
  - [UpsertTransferAgencyOrderRequest](docs/UpsertTransferAgencyOrderRequest.md)

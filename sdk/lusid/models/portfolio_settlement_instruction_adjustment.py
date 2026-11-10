@@ -33,7 +33,7 @@ class PortfolioSettlementInstructionAdjustment(NavActivityAdjustmentResponse):
     portfolio_scope:  StrictStr = Field(...,alias="portfolioScope", description="The portfolio scope of the given entity") 
     portfolio_code:  StrictStr = Field(...,alias="portfolioCode", description="The portfolio code of the given entity") 
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId", description="The settlement instruction Id of the SettlementInstruction being adjusted") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment, InstrumentEventActivityAdjustment.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "navActivityAdjustmentSource", "asAt", "portfolioScope", "portfolioCode", "settlementInstructionId"]
 
@@ -48,7 +48,7 @@ class PortfolioSettlementInstructionAdjustment(NavActivityAdjustmentResponse):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment']
+        _allowed = ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment', 'InstrumentEventActivityAdjustment']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:

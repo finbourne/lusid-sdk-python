@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.deemed_disposal import DeemedDisposal
 from lusid.models.nav_settlement_configuration import NavSettlementConfiguration
 from lusid.models.resource_id import ResourceId
 from lusid.models.swing_pricing_rule import SwingPricingRule
@@ -54,7 +55,8 @@ class NavType(BaseModel):
     notional_dealing_cost_table_id: Optional[ResourceId] = Field(default=None, alias="notionalDealingCostTableId")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
     chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the Nav Type's derived portfolio is elected into. This can be: Default or UkChargeableGains. Omit it, or supply Default, to leave the derived portfolio inheriting its parent portfolio's regime. Under UkChargeableGains, in-scope holdings in the derived portfolio are depleted under the UK chargeable gains rules regardless of the Nav Type's accounting method; it requires the Fund's base currency to be GBP. Available values: Default, UkChargeableGains.") 
-    __properties = ["status", "code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId", "chargeableGainsRegime"]
+    deemed_disposal: Optional[DeemedDisposal] = Field(default=None, alias="deemedDisposal")
+    __properties = ["status", "code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId", "chargeableGainsRegime", "deemedDisposal"]
 
     class Config:
         """Pydantic configuration"""
@@ -112,6 +114,9 @@ class NavType(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of valuation_template_id
         if self.valuation_template_id:
             _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of deemed_disposal
+        if self.deemed_disposal:
+            _dict['deemedDisposal'] = self.deemed_disposal.to_dict()
         # set to None if code (nullable) is None
         # and __fields_set__ contains the field
         if self.code is None and "code" in self.__fields_set__:
@@ -197,7 +202,8 @@ class NavType(BaseModel):
             "swing_pricing": SwingPricingRule.from_dict(obj.get("swingPricing")) if obj.get("swingPricing") is not None else None,
             "notional_dealing_cost_table_id": ResourceId.from_dict(obj.get("notionalDealingCostTableId")) if obj.get("notionalDealingCostTableId") is not None else None,
             "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
-            "chargeable_gains_regime": obj.get("chargeableGainsRegime")
+            "chargeable_gains_regime": obj.get("chargeableGainsRegime"),
+            "deemed_disposal": DeemedDisposal.from_dict(obj.get("deemedDisposal")) if obj.get("deemedDisposal") is not None else None
         })
         return _obj
 

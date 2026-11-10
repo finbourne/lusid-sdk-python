@@ -45,7 +45,8 @@ class FundValuationRequest(BaseModel):
     fund_valuation_schedule: FundValuationSchedule = Field(alias="fundValuationSchedule")
     market_data_overrides: Optional[MarketDataOverrides] = Field(default=None, alias="marketDataOverrides")
     corporate_action_source_id: Optional[ResourceId] = Field(default=None, alias="corporateActionSourceId")
-    __properties = ["asAt", "metrics", "groupBy", "filters", "sort", "equipWithSubtotals", "returnResultAsExpandedTypes", "includeOrderFlow", "fundValuationSchedule", "marketDataOverrides", "corporateActionSourceId"]
+    recipe_id: Optional[ResourceId] = Field(default=None, alias="recipeId")
+    __properties = ["asAt", "metrics", "groupBy", "filters", "sort", "equipWithSubtotals", "returnResultAsExpandedTypes", "includeOrderFlow", "fundValuationSchedule", "marketDataOverrides", "corporateActionSourceId", "recipeId"]
 
     class Config:
         """Pydantic configuration"""
@@ -112,6 +113,9 @@ class FundValuationRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of corporate_action_source_id
         if self.corporate_action_source_id:
             _dict['corporateActionSourceId'] = self.corporate_action_source_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of recipe_id
+        if self.recipe_id:
+            _dict['recipeId'] = self.recipe_id.to_dict()
         # set to None if as_at (nullable) is None
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
@@ -154,7 +158,8 @@ class FundValuationRequest(BaseModel):
             "include_order_flow": OrderFlowConfiguration.from_dict(obj.get("includeOrderFlow")) if obj.get("includeOrderFlow") is not None else None,
             "fund_valuation_schedule": FundValuationSchedule.from_dict(obj.get("fundValuationSchedule")) if obj.get("fundValuationSchedule") is not None else None,
             "market_data_overrides": MarketDataOverrides.from_dict(obj.get("marketDataOverrides")) if obj.get("marketDataOverrides") is not None else None,
-            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None
+            "corporate_action_source_id": ResourceId.from_dict(obj.get("corporateActionSourceId")) if obj.get("corporateActionSourceId") is not None else None,
+            "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None
         })
         return _obj
 

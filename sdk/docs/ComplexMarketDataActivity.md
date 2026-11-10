@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **as_at** | **datetime** | The asAt time for which the adjustment is being applied. | 
 **effective_at** | **str** | The EffectiveAt time of the entity event that need to be added to the closed period. | 
 **entity_unique_id** | **str** | The EntityUniqueId from the entity which needs to be added as a post close activity. | 
-**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity. | 
+**nav_activity_adjustment_type** | **str** | The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity, InstrumentEventActivity. | 
 ## Example
 
 ```python

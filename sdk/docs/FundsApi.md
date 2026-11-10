@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**delete_fund**](FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
 [**delete_nav_activity_adjustments**](FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
 [**delete_series**](FundsApi.md#delete_series) | **DELETE** /api/funds/{scope}/{code}/shareclasses/{shareClassCode}/series/{seriesIdentifier} | [EARLY ACCESS] DeleteSeries: [EARLY ACCESS] DeleteSeries: Remove a Series from a Share Class of a Fund.
+[**delete_tax_cost_record**](FundsApi.md#delete_tax_cost_record) | **DELETE** /api/funds/{scope}/{code}/taxcostrecords/{taxCostRecordCode} | [EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record.
 [**delete_valuation_point**](FundsApi.md#delete_valuation_point) | **DELETE** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode} | [EARLY ACCESS] DeleteValuationPoint: Delete a Valuation Point.
 [**diff_partner_statement**](FundsApi.md#diff_partner_statement) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements/{statementId}/$diff | [EARLY ACCESS] DiffPartnerStatement: [EXPERIMENTAL] DiffPartnerStatement: Compare two of a partner&#39;s statements.
 [**finalise_candidate_valuation_point**](FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
@@ -58,6 +59,7 @@ Method | HTTP request | Description
 [**list_nav_activity_adjustments**](FundsApi.md#list_nav_activity_adjustments) | **GET** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] ListNavActivityAdjustments: List NAV adjustment activities applied to a valuation point
 [**list_partner_capital_accounts**](FundsApi.md#list_partner_capital_accounts) | **GET** /api/funds/{scope}/{code}/capitalaccounts | [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund&#39;s partners.
 [**list_partner_statements**](FundsApi.md#list_partner_statements) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ListPartnerStatements: [EXPERIMENTAL] ListPartnerStatements: List the statements produced for a partner.
+[**list_tax_cost_records**](FundsApi.md#list_tax_cost_records) | **GET** /api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
 [**list_tax_exceptions**](FundsApi.md#list_tax_exceptions) | **GET** /api/funds/{scope}/{code}/tax/exceptions | [EARLY ACCESS] ListTaxExceptions: [EARLY ACCESS] ListTaxExceptions: List the open tax exceptions of a Fund.
 [**list_tax_exceptions_across_funds**](FundsApi.md#list_tax_exceptions_across_funds) | **GET** /api/tax/exceptions | [EARLY ACCESS] ListTaxExceptionsAcrossFunds: [EARLY ACCESS] ListTaxExceptionsAcrossFunds: List the open tax exceptions across every Fund.
 [**list_valuation_point_complex_market_data**](FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
@@ -78,6 +80,7 @@ Method | HTTP request | Description
 [**upsert_fee_properties**](FundsApi.md#upsert_fee_properties) | **POST** /api/funds/{scope}/{code}/fees/{feeCode}/properties/$upsert | [EARLY ACCESS] UpsertFeeProperties: Upsert Fee properties.
 [**upsert_fund_properties**](FundsApi.md#upsert_fund_properties) | **POST** /api/funds/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundProperties: Upsert Fund properties.
 [**upsert_nav_activity_adjustments**](FundsApi.md#upsert_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment | [EARLY ACCESS] UpsertNavActivityAdjustments: Upsert NAV adjustment activities to a valuation point
+[**upsert_tax_cost_records**](FundsApi.md#upsert_tax_cost_records) | **POST** /api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund.
 
 
 # **accept_estimate_valuation_point**
@@ -1623,7 +1626,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
     valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to delete the adjustment from
-    nav_activity_adjustment_response = [{"navActivityAdjustmentSource":"Undefined","asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransactionAdjustment"}] # List[NavActivityAdjustmentResponse] | The request describing the Nav activity adjustments to delete from a specific valuation point and nav type
+    nav_activity_adjustment_response = [{"navActivityAdjustmentSource":"Undefined","asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransactionAdjustment"},{"navActivityAdjustmentSource":"Undefined","asAt":"2024-01-01T00:00:00.0000000+00:00","corporateActionSourceScope":"corporateActionSourceScope1","corporateActionSourceCode":"corporateActionSourceCode1","instrumentEventId":"instrumentEventId1","navActivityAdjustmentType":"InstrumentEventActivityAdjustment"}] # List[NavActivityAdjustmentResponse] | The request describing the Nav activity adjustments to delete from a specific valuation point and nav type
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     valuation_point_code_variant = 'valuation_point_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. (optional)
 
@@ -1763,6 +1766,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the Series was removed. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_tax_cost_record**
+> DeletedEntityResponse delete_tax_cost_record(scope, code, tax_cost_record_code)
+
+[EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record.
+
+Delete the given Tax Cost Record.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    tax_cost_record_code = 'tax_cost_record_code_example' # str | The code of the Tax Cost Record to be deleted.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_tax_cost_record(scope, code, tax_cost_record_code, opts=opts)
+
+        # [EXPERIMENTAL] DeleteTaxCostRecord: [EXPERIMENTAL] DeleteTaxCostRecord: Delete a Tax Cost Record.
+        api_response = api_instance.delete_tax_cost_record(scope, code, tax_cost_record_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->delete_tax_cost_record: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **tax_cost_record_code** | **str**| The code of the Tax Cost Record to be deleted. | 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the Tax Cost Record was deleted |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -5661,6 +5760,112 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_tax_cost_records**
+> PagedResourceListOfTaxCostRecord list_tax_cost_records(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+
+[EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
+
+List all the Tax Cost Records matching a particular criteria.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to list the Tax Cost Records. Defaults to the current LUSID              system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Tax Cost Records. Defaults to returning the latest version of each record if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing Tax Cost Records; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the portfolio code, specify \"portfolioCode eq 'MyPortfolio'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_tax_cost_records(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, opts=opts)
+
+        # [EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
+        api_response = api_instance.list_tax_cost_records(scope, code, effective_at=effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->list_tax_cost_records: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to list the Tax Cost Records. Defaults to the current LUSID              system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to list the Tax Cost Records. Defaults to returning the latest version of each record if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing Tax Cost Records; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results.              For example, to filter on the portfolio code, specify \&quot;portfolioCode eq &#39;MyPortfolio&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
+
+### Return type
+
+[**PagedResourceListOfTaxCostRecord**](PagedResourceListOfTaxCostRecord.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested Tax Cost Records. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_tax_exceptions**
 > ResourceListOfTaxExceptionItem list_tax_exceptions(scope, code, effective_at=effective_at, as_at=as_at)
 
@@ -7673,7 +7878,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope is the unique identifier for the given Fund.
     valuation_point_code = 'valuation_point_code_example' # str | The valuation point Code to apply the adjustment to
-    nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to apply to a specific valuation point and nav type
+    nav_activity_adjustment = [{"asAt":"2024-01-01T00:00:00.0000000+00:00","portfolioScope":"portfolioScope1","portfolioCode":"portfolioCode1","transactionId":"transactionId1","navActivityAdjustmentType":"PortfolioTransaction"},{"asAt":"2024-01-01T00:00:00.0000000+00:00","corporateActionSourceScope":"corporateActionSourceScope1","corporateActionSourceCode":"corporateActionSourceCode1","instrumentEventId":"instrumentEventId1","navActivityAdjustmentType":"InstrumentEventActivity"}] # List[NavActivityAdjustment] | The request describing the Nav activity adjustments to apply to a specific valuation point and nav type
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     valuation_point_code_variant = 'valuation_point_code_variant_example' # str | The variant of the valuation point used in the request. Together with the valuation point code marks the unique branch for the NavType. (optional)
 
@@ -7715,6 +7920,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The date and time of the successfully applied Nav Activity Adjustments. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_tax_cost_records**
+> UpsertTaxCostRecordsResponse upsert_tax_cost_records(scope, code, request_body)
+
+[EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund.
+
+Create or update Tax Cost Records for the given Fund. Each record is keyed by its code; a record with an  existing code is replaced in full.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    request_body = {"TaxCostRecordCode":{"portfolioScope":"PortfolioScope","portfolioCode":"PortfolioCode","instrumentIdentifier":"LUID_00003D4X","navTypeCode":"DefaultNavType","taxCost":1250.5,"carriedForwardAmount":75.25,"effectivePeriodEnd":"2024-12-31T00:00:00.0000000+00:00","sourceValuationPointId":"VP-2024-12-31"}} # Dict[str, TaxCostRecordRequest] | The Tax Cost Records to upsert, keyed by the code of each record.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_tax_cost_records(scope, code, request_body, opts=opts)
+
+        # [EXPERIMENTAL] UpsertTaxCostRecords: [EXPERIMENTAL] UpsertTaxCostRecords: Upsert Tax Cost Records for a specified Fund.
+        api_response = api_instance.upsert_tax_cost_records(scope, code, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->upsert_tax_cost_records: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **request_body** | [**Dict[str, TaxCostRecordRequest]**](TaxCostRecordRequest.md)| The Tax Cost Records to upsert, keyed by the code of each record. | 
+
+### Return type
+
+[**UpsertTaxCostRecordsResponse**](UpsertTaxCostRecordsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Tax Cost Records upserted and any that failed, keyed by the record code. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

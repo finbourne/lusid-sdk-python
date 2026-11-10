@@ -32,7 +32,7 @@ class PortfolioSettlementInstruction(NavActivityAdjustment):
     portfolio_scope:  StrictStr = Field(...,alias="portfolioScope", description="The portfolio scope of the given entity") 
     portfolio_code:  StrictStr = Field(...,alias="portfolioCode", description="The portfolio code of the given entity") 
     settlement_instruction_id:  StrictStr = Field(...,alias="settlementInstructionId", description="The settlement instruction Id of the SettlementInstruction being adjusted") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransaction, PortfolioSettlementInstruction, InstrumentActivity, QuoteActivity, ComplexMarketDataActivity, InstrumentEventActivity.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "asAt", "portfolioScope", "portfolioCode", "settlementInstructionId"]
 
@@ -47,7 +47,7 @@ class PortfolioSettlementInstruction(NavActivityAdjustment):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity']
+        _allowed = ['PortfolioTransaction', 'PortfolioSettlementInstruction', 'InstrumentActivity', 'QuoteActivity', 'ComplexMarketDataActivity', 'InstrumentEventActivity']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:

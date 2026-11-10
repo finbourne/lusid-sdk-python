@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**run_compliance**](ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 [**run_compliance_preview**](ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
 [**run_compliance_v3**](ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+[**run_compliance_v3_pre_trade**](ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
 [**update_compliance_template**](ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 [**upsert_compliance_rule**](ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 [**upsert_compliance_rule_v3**](ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
@@ -1982,6 +1983,103 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The result of each V3 compliance rule that was run. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **run_compliance_v3_pre_trade**
+> ComplianceRunV3Response run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request)
+
+[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+
+Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule's result.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ComplianceApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ComplianceApi)
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # run_compliance_v3_request = RunComplianceV3Request.from_json("")
+    # run_compliance_v3_request = RunComplianceV3Request.from_dict({})
+    run_compliance_v3_request = RunComplianceV3Request()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request, opts=opts)
+
+        # [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+        api_response = api_instance.run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ComplianceApi->run_compliance_v3_pre_trade: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_compliance_v3_request** | [**RunComplianceV3Request**](RunComplianceV3Request.md)|  | [optional] 
+
+### Return type
+
+[**ComplianceRunV3Response**](ComplianceRunV3Response.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The result of each V3 compliance rule that was run pre-trade. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

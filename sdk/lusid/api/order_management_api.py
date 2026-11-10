@@ -1535,28 +1535,30 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+    def run_allocation_service(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_allocation_service(resource_id, allocation_algorithm, async_req=True)
+        >>> thread = api.run_allocation_service(resource_id, allocation_algorithm, cancel_and_correct, async_req=True)
         >>> result = thread.get()
 
         :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
+        :param cancel_and_correct: Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.
+        :type cancel_and_correct: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1573,23 +1575,25 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, **kwargs)  # noqa: E501
+        return self.run_allocation_service_with_http_info(resource_id, allocation_algorithm, cancel_and_correct, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_http_info(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_allocation_service_with_http_info(self, resource_id : Annotated[List[ResourceId], Field(description="The List of Placement IDs for which you wish to allocate Executions.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """RunAllocationService: Runs the Allocation Service  # noqa: E501
 
         Allocates Executions for a given list of placements back to their originating orders using one of the LUSID algorithms, creating Allocations to record the results.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_allocation_service_with_http_info(resource_id, allocation_algorithm, async_req=True)
+        >>> thread = api.run_allocation_service_with_http_info(resource_id, allocation_algorithm, cancel_and_correct, async_req=True)
         >>> result = thread.get()
 
         :param resource_id: The List of Placement IDs for which you wish to allocate Executions. (required)
         :type resource_id: List[ResourceId]
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-FIFO\".  This defaults to \"PR-FIFO\".
         :type allocation_algorithm: str
+        :param cancel_and_correct: Whether to re-allocate allocations that already have booked transactions or to skip them.  The transactions booked against the re-allocated allocations are cancelled, and a subsequent call to  BookTransactions books corrected ones.  Defaults to false, which leaves allocations with booked transactions untouched.
+        :type cancel_and_correct: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1618,7 +1622,8 @@ class OrderManagementApi:
 
         _all_params = [
             'resource_id',
-            'allocation_algorithm'
+            'allocation_algorithm',
+            'cancel_and_correct'
         ]
         _all_params.extend(
             [
@@ -1652,6 +1657,9 @@ class OrderManagementApi:
         _query_params = []
         if _params.get('allocation_algorithm') is not None:  # noqa: E501
             _query_params.append(('allocationAlgorithm', _params['allocation_algorithm']))
+
+        if _params.get('cancel_and_correct') is not None:  # noqa: E501
+            _query_params.append(('cancelAndCorrect', _params['cancel_and_correct']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
@@ -1702,28 +1710,30 @@ class OrderManagementApi:
 
 
     @overload
-    async def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    async def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.")] = None, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @overload
-    def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
+    def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationServiceRunResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
+    def run_allocation_service_with_weights(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationServiceRunResponse, Awaitable[AllocationServiceRunResponse]]:  # noqa: E501
         """[EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights  # noqa: E501
 
         Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_allocation_service_with_weights(weighted_allocation_service_run_request, allocation_algorithm, async_req=True)
+        >>> thread = api.run_allocation_service_with_weights(weighted_allocation_service_run_request, allocation_algorithm, cancel_and_correct, async_req=True)
         >>> result = thread.get()
 
         :param weighted_allocation_service_run_request: The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
         :type weighted_allocation_service_run_request: WeightedAllocationServiceRunRequest
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".
         :type allocation_algorithm: str
+        :param cancel_and_correct: Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.
+        :type cancel_and_correct: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1740,23 +1750,25 @@ class OrderManagementApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.run_allocation_service_with_weights_with_http_info(weighted_allocation_service_run_request, allocation_algorithm, **kwargs)  # noqa: E501
+        return self.run_allocation_service_with_weights_with_http_info(weighted_allocation_service_run_request, allocation_algorithm, cancel_and_correct, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def run_allocation_service_with_weights_with_http_info(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def run_allocation_service_with_weights_with_http_info(self, weighted_allocation_service_run_request : Annotated[WeightedAllocationServiceRunRequest, Field(description="The placement IDs to allocate against, and the portfolio weights to use for the allocation split.")], allocation_algorithm : Annotated[Optional[StrictStr], Field( description="A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".")] = None, cancel_and_correct : Annotated[Optional[StrictBool], Field(description="Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights  # noqa: E501
 
         Allocates Executions for a given list of placements to a specified set of portfolios by weight,  creating Allocations to record the results. Used for the unsolicited Block and Block Trade booking flows where no Orders exist against the Block.  Weights are relative to each other and are not required to sum to 1 or 100.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.run_allocation_service_with_weights_with_http_info(weighted_allocation_service_run_request, allocation_algorithm, async_req=True)
+        >>> thread = api.run_allocation_service_with_weights_with_http_info(weighted_allocation_service_run_request, allocation_algorithm, cancel_and_correct, async_req=True)
         >>> result = thread.get()
 
         :param weighted_allocation_service_run_request: The placement IDs to allocate against, and the portfolio weights to use for the allocation split. (required)
         :type weighted_allocation_service_run_request: WeightedAllocationServiceRunRequest
         :param allocation_algorithm: A string representation of the allocation algorithm you would like to use to allocate shares from executions e.g. \"PR-LF\".  Allocating with weights means the base algorithm is always pro-rata, and the orphan allocation algorithm is either Largest First or Smallest First.  This defaults to \"PR-LF\". Valid values are \"PR-LF\", \"PR-SF\", \"LF\", \"SF\".
         :type allocation_algorithm: str
+        :param cancel_and_correct: Whether to cancel the transactions booked against this placement's allocations once the run has re-split the  full executed quantity by the weights. A subsequent call to BookTransactions then books corrected ones.  Defaults to true. Set to false to leave the booked transactions in place.
+        :type cancel_and_correct: bool
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1785,7 +1797,8 @@ class OrderManagementApi:
 
         _all_params = [
             'weighted_allocation_service_run_request',
-            'allocation_algorithm'
+            'allocation_algorithm',
+            'cancel_and_correct'
         ]
         _all_params.extend(
             [
@@ -1819,6 +1832,9 @@ class OrderManagementApi:
         _query_params = []
         if _params.get('allocation_algorithm') is not None:  # noqa: E501
             _query_params.append(('allocationAlgorithm', _params['allocation_algorithm']))
+
+        if _params.get('cancel_and_correct') is not None:  # noqa: E501
+            _query_params.append(('cancelAndCorrect', _params['cancel_and_correct']))
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

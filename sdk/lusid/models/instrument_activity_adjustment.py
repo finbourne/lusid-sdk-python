@@ -32,7 +32,7 @@ class InstrumentActivityAdjustment(NavActivityAdjustmentResponse):
     as_at: datetime = Field(description="The asAt time for which the adjustment is being applied.", alias="asAt")
     scope:  StrictStr = Field(...,alias="scope", description="The Scope of the given entity") 
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LusidInstrumentId of the given entity") 
-    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment.") 
+    nav_activity_adjustment_type:  StrictStr = Field(...,alias="navActivityAdjustmentType", description="The type of the entity being applied, for example a PortfolioTransaction. Available values: PortfolioTransactionAdjustment, PortfolioSettlementInstructionAdjustment, InstrumentActivityAdjustment, QuoteActivityAdjustment, ComplexMarketDataActivityAdjustment, InstrumentEventActivityAdjustment.") 
     additional_properties: Dict[str, Any] = {}
     __properties = ["navActivityAdjustmentType", "navActivityAdjustmentSource", "asAt", "scope", "lusidInstrumentId"]
 
@@ -47,7 +47,7 @@ class InstrumentActivityAdjustment(NavActivityAdjustmentResponse):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment']
+        _allowed = ['PortfolioTransactionAdjustment', 'PortfolioSettlementInstructionAdjustment', 'InstrumentActivityAdjustment', 'QuoteActivityAdjustment', 'ComplexMarketDataActivityAdjustment', 'InstrumentEventActivityAdjustment']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:

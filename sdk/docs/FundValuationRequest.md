@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **fund_valuation_schedule** | [**FundValuationSchedule**](FundValuationSchedule.md) |  | 
 **market_data_overrides** | [**MarketDataOverrides**](MarketDataOverrides.md) |  | [optional] 
 **corporate_action_source_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -37,7 +38,8 @@ include_order_flow: Optional[OrderFlowConfiguration] = # Replace with your value
 fund_valuation_schedule: FundValuationSchedule = # Replace with your value
 market_data_overrides: Optional[MarketDataOverrides] = # Replace with your value
 corporate_action_source_id: Optional[ResourceId] = # Replace with your value
-fund_valuation_request_instance = FundValuationRequest(as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, include_order_flow=include_order_flow, fund_valuation_schedule=fund_valuation_schedule, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id)
+recipe_id: Optional[ResourceId] = # Replace with your value
+fund_valuation_request_instance = FundValuationRequest(as_at=as_at, metrics=metrics, group_by=group_by, filters=filters, sort=sort, equip_with_subtotals=equip_with_subtotals, return_result_as_expanded_types=return_result_as_expanded_types, include_order_flow=include_order_flow, fund_valuation_schedule=fund_valuation_schedule, market_data_overrides=market_data_overrides, corporate_action_source_id=corporate_action_source_id, recipe_id=recipe_id)
 
 ```
 

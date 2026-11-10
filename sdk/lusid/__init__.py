@@ -680,6 +680,7 @@ from lusid.models.decimal_list import DecimalList
 from lusid.models.decimal_list_compliance_parameter import DecimalListComplianceParameter
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from lusid.models.decorated_compliance_run_summary_request import DecoratedComplianceRunSummaryRequest
+from lusid.models.deemed_disposal import DeemedDisposal
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
 from lusid.models.delete_data_quality_rule import DeleteDataQualityRule
@@ -1023,6 +1024,8 @@ from lusid.models.instrument_definition_format import InstrumentDefinitionFormat
 from lusid.models.instrument_delete_modes import InstrumentDeleteModes
 from lusid.models.instrument_entity import InstrumentEntity
 from lusid.models.instrument_event import InstrumentEvent
+from lusid.models.instrument_event_activity import InstrumentEventActivity
+from lusid.models.instrument_event_activity_adjustment import InstrumentEventActivityAdjustment
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.instrument_event_entity import InstrumentEventEntity
 from lusid.models.instrument_event_holder import InstrumentEventHolder
@@ -1336,6 +1339,7 @@ from lusid.models.paged_resource_list_of_sequence_definition import PagedResourc
 from lusid.models.paged_resource_list_of_staged_modification import PagedResourceListOfStagedModification
 from lusid.models.paged_resource_list_of_staged_modifications_requested_change_interval import PagedResourceListOfStagedModificationsRequestedChangeInterval
 from lusid.models.paged_resource_list_of_staging_rule_set import PagedResourceListOfStagingRuleSet
+from lusid.models.paged_resource_list_of_tax_cost_record import PagedResourceListOfTaxCostRecord
 from lusid.models.paged_resource_list_of_timeline import PagedResourceListOfTimeline
 from lusid.models.paged_resource_list_of_transaction_template import PagedResourceListOfTransactionTemplate
 from lusid.models.paged_resource_list_of_transaction_template_specification import PagedResourceListOfTransactionTemplateSpecification
@@ -1608,6 +1612,7 @@ from lusid.models.rec_user_comment import RecUserComment
 from lusid.models.recallable_capital_expiry_event import RecallableCapitalExpiryEvent
 from lusid.models.recipe_block import RecipeBlock
 from lusid.models.recipe_composer import RecipeComposer
+from lusid.models.recipe_provenance import RecipeProvenance
 from lusid.models.recipe_value import RecipeValue
 from lusid.models.recombine_step import RecombineStep
 from lusid.models.recommended_sort_by import RecommendedSortBy
@@ -1933,6 +1938,8 @@ from lusid.models.tax_classification_exception import TaxClassificationException
 from lusid.models.tax_classification_exception_record import TaxClassificationExceptionRecord
 from lusid.models.tax_classification_field_version import TaxClassificationFieldVersion
 from lusid.models.tax_classification_inputs import TaxClassificationInputs
+from lusid.models.tax_cost_record import TaxCostRecord
+from lusid.models.tax_cost_record_request import TaxCostRecordRequest
 from lusid.models.tax_exception_item import TaxExceptionItem
 from lusid.models.tax_exception_root_cause import TaxExceptionRootCause
 from lusid.models.tax_portfolio_sync_status import TaxPortfolioSyncStatus
@@ -2144,6 +2151,7 @@ from lusid.models.upsert_single_structured_data_response import UpsertSingleStru
 from lusid.models.upsert_structured_data_response import UpsertStructuredDataResponse
 from lusid.models.upsert_structured_result_data_request import UpsertStructuredResultDataRequest
 from lusid.models.upsert_subscription_request import UpsertSubscriptionRequest
+from lusid.models.upsert_tax_cost_records_response import UpsertTaxCostRecordsResponse
 from lusid.models.upsert_tax_treatment_override_request import UpsertTaxTreatmentOverrideRequest
 from lusid.models.upsert_transaction_properties_response import UpsertTransactionPropertiesResponse
 from lusid.models.upsert_transfer_agency_order_request import UpsertTransferAgencyOrderRequest
@@ -2909,6 +2917,7 @@ __all__ = [
     "DecimalListComplianceParameter",
     "DecoratedComplianceRunSummary",
     "DecoratedComplianceRunSummaryRequest",
+    "DeemedDisposal",
     "DeleteAccountsResponse",
     "DeleteCustodianAccountsResponse",
     "DeleteDataQualityRule",
@@ -3252,6 +3261,8 @@ __all__ = [
     "InstrumentDeleteModes",
     "InstrumentEntity",
     "InstrumentEvent",
+    "InstrumentEventActivity",
+    "InstrumentEventActivityAdjustment",
     "InstrumentEventConfiguration",
     "InstrumentEventEntity",
     "InstrumentEventHolder",
@@ -3565,6 +3576,7 @@ __all__ = [
     "PagedResourceListOfStagedModification",
     "PagedResourceListOfStagedModificationsRequestedChangeInterval",
     "PagedResourceListOfStagingRuleSet",
+    "PagedResourceListOfTaxCostRecord",
     "PagedResourceListOfTimeline",
     "PagedResourceListOfTransactionTemplate",
     "PagedResourceListOfTransactionTemplateSpecification",
@@ -3837,6 +3849,7 @@ __all__ = [
     "RecallableCapitalExpiryEvent",
     "RecipeBlock",
     "RecipeComposer",
+    "RecipeProvenance",
     "RecipeValue",
     "RecombineStep",
     "RecommendedSortBy",
@@ -4162,6 +4175,8 @@ __all__ = [
     "TaxClassificationExceptionRecord",
     "TaxClassificationFieldVersion",
     "TaxClassificationInputs",
+    "TaxCostRecord",
+    "TaxCostRecordRequest",
     "TaxExceptionItem",
     "TaxExceptionRootCause",
     "TaxPortfolioSyncStatus",
@@ -4373,6 +4388,7 @@ __all__ = [
     "UpsertStructuredDataResponse",
     "UpsertStructuredResultDataRequest",
     "UpsertSubscriptionRequest",
+    "UpsertTaxCostRecordsResponse",
     "UpsertTaxTreatmentOverrideRequest",
     "UpsertTransactionPropertiesResponse",
     "UpsertTransferAgencyOrderRequest",
