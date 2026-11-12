@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **end_effective_at** | **datetime** | Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping. | [optional] 
 **effective_forward_days** | **int** | How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes. | [optional] 
 **instrument_identifiers** | **List[str]** | The instrument identifiers each published holding carries, as Instrument/default/{type} property keys,  for example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5.  Not valid for a transactions subscription. | [optional] 
+**report_currency** | **str** | The currency the report-currency values are given in, as a three-letter ISO code stored upper-case. Required  when addressKeys names any key other than the quantity, cost, current face, notional cost, variation margin  and currency keys: Holding/Units, Holding/SettledUnits, Holding/Cost/Dom, Holding/Cost/Pfolio,  Holding/CurrentFace, Holding/NotionalCost, Holding/VariationMargin, Holding/VariationMarginInPortfolioCcy,  Holding/HoldingType, Holding/DomCcy and Holding/PortfolioCcy. Not valid for a transactions subscription. | [optional] 
 ## Example
 
 ```python
@@ -44,7 +45,8 @@ end_effective_at: Optional[datetime] = # Replace with your value
 effective_forward_days: Optional[StrictInt] = # Replace with your value
 effective_forward_days: Optional[StrictInt] = None
 instrument_identifiers: Optional[List[StrictStr]] = # Replace with your value
-subscription_definition_instance = SubscriptionDefinition(scope=scope, code=code, display_name=display_name, description=description, portfolio_id=portfolio_id, timeline_id=timeline_id, timeline_property=timeline_property, portfolio_filter=portfolio_filter, address_keys=address_keys, by_tax_lots=by_tax_lots, subscription_type=subscription_type, start_effective_at=start_effective_at, end_effective_at=end_effective_at, effective_forward_days=effective_forward_days, instrument_identifiers=instrument_identifiers)
+report_currency: Optional[StrictStr] = "example_report_currency"
+subscription_definition_instance = SubscriptionDefinition(scope=scope, code=code, display_name=display_name, description=description, portfolio_id=portfolio_id, timeline_id=timeline_id, timeline_property=timeline_property, portfolio_filter=portfolio_filter, address_keys=address_keys, by_tax_lots=by_tax_lots, subscription_type=subscription_type, start_effective_at=start_effective_at, end_effective_at=end_effective_at, effective_forward_days=effective_forward_days, instrument_identifiers=instrument_identifiers, report_currency=report_currency)
 
 ```
 

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **difference** | **float** | Closing unfunded less the register&#39;s unfunded at the closing datetime. Zero when the statement ties. | 
 **ties** | **bool** | Whether the closing unfunded equals the register&#39;s unfunded at the closing datetime. | 
 **lines** | [**List[FundPartnerUnfundedReconciliationLine]**](FundPartnerUnfundedReconciliationLine.md) | Every booked allocation to the partner over the period, in event date order, with the ILPA transaction type each is reported under and its effect on unfunded. | 
+**warnings** | [**List[FundPartnerUnfundedReconciliationWarning]**](FundPartnerUnfundedReconciliationWarning.md) | Soft warnings about how the statement was built. Empty when the period and the register agree without caveats. | [optional] 
 ## Example
 
 ```python
@@ -46,7 +47,8 @@ difference: Union[StrictFloat, StrictInt] = # Replace with your value
 ties: StrictBool = # Replace with your value
 ties:StrictBool = True
 lines: List[FundPartnerUnfundedReconciliationLine] = # Replace with your value
-fund_partner_unfunded_reconciliation_instance = FundPartnerUnfundedReconciliation(investor_record_id=investor_record_id, fund_id=fund_id, currency=currency, period_from=period_from, period_to=period_to, opening_unfunded=opening_unfunded, contributions_inside_commitment=contributions_inside_commitment, recallable_distributions=recallable_distributions, expired_recallable=expired_recallable, commitment_changes=commitment_changes, transfers=transfers, closing_unfunded=closing_unfunded, register_unfunded=register_unfunded, difference=difference, ties=ties, lines=lines)
+warnings: Optional[List[FundPartnerUnfundedReconciliationWarning]] = # Replace with your value
+fund_partner_unfunded_reconciliation_instance = FundPartnerUnfundedReconciliation(investor_record_id=investor_record_id, fund_id=fund_id, currency=currency, period_from=period_from, period_to=period_to, opening_unfunded=opening_unfunded, contributions_inside_commitment=contributions_inside_commitment, recallable_distributions=recallable_distributions, expired_recallable=expired_recallable, commitment_changes=commitment_changes, transfers=transfers, closing_unfunded=closing_unfunded, register_unfunded=register_unfunded, difference=difference, ties=ties, lines=lines, warnings=warnings)
 
 ```
 

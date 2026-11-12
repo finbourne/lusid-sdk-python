@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.fund_partner_unfunded_reconciliation_line import FundPartnerUnfundedReconciliationLine
+from lusid.models.fund_partner_unfunded_reconciliation_warning import FundPartnerUnfundedReconciliationWarning
 from lusid.models.resource_id import ResourceId
 
 class FundPartnerUnfundedReconciliation(BaseModel):
@@ -45,7 +46,8 @@ class FundPartnerUnfundedReconciliation(BaseModel):
     difference: Union[StrictFloat, StrictInt] = Field(description="Closing unfunded less the register's unfunded at the closing datetime. Zero when the statement ties.")
     ties: StrictBool = Field(description="Whether the closing unfunded equals the register's unfunded at the closing datetime.")
     lines: List[FundPartnerUnfundedReconciliationLine] = Field(description="Every booked allocation to the partner over the period, in event date order, with the ILPA transaction type each is reported under and its effect on unfunded.")
-    __properties = ["investorRecordId", "fundId", "currency", "periodFrom", "periodTo", "openingUnfunded", "contributionsInsideCommitment", "recallableDistributions", "expiredRecallable", "commitmentChanges", "transfers", "closingUnfunded", "registerUnfunded", "difference", "ties", "lines"]
+    warnings: Optional[List[FundPartnerUnfundedReconciliationWarning]] = Field(default=None, description="Soft warnings about how the statement was built. Empty when the period and the register agree without caveats.")
+    __properties = ["investorRecordId", "fundId", "currency", "periodFrom", "periodTo", "openingUnfunded", "contributionsInsideCommitment", "recallableDistributions", "expiredRecallable", "commitmentChanges", "transfers", "closingUnfunded", "registerUnfunded", "difference", "ties", "lines", "warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +91,18 @@ class FundPartnerUnfundedReconciliation(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['lines'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         return _dict
 
     @classmethod
@@ -116,7 +130,8 @@ class FundPartnerUnfundedReconciliation(BaseModel):
             "register_unfunded": obj.get("registerUnfunded"),
             "difference": obj.get("difference"),
             "ties": obj.get("ties"),
-            "lines": [FundPartnerUnfundedReconciliationLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None
+            "lines": [FundPartnerUnfundedReconciliationLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None,
+            "warnings": [FundPartnerUnfundedReconciliationWarning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
         })
         return _obj
 

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **recallable** | **float** | The returned capital that may be recalled. | 
 **unfunded** | **float** | The unfunded capital. | 
 **funded** | **float** | The funded capital. | 
-**outstanding_calls** | **float** | Capital called but not yet paid in. Omitted on a register line that has had returned capital marked recallable, since recalled capital is not yet tracked as a balance and the figure would exclude it. | [optional] 
+**outstanding_calls** | **float** | Capital called but not yet paid in, counting capital that was returned as recallable and has since been recalled. Omitted while a line that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall. | [optional] 
 ## Example
 
 ```python

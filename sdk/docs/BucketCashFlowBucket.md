@@ -4,7 +4,7 @@ One tenor bucket for one portfolio, payment currency and set of sub-holding keys
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bucket_id** | **str** | Identifies the bucket: the bucket&#39;s start (as yyyy-MM-dd), the payment currency, each sub-holding key&#39;s address and value, and the portfolio&#39;s scope and code, separated by &#39;|&#39;. | [optional] 
+**bucket_id** | **str** | Identifies the bucket: a 32 character lowercase hexadecimal hash of its period (start and end), payment currency, portfolio and sub-holding keys. It is stable, the same bucket has the same id in every response, and it is opaque: compare it, do not take it apart. | [optional] 
 **bucket_start** | **datetime** | The start of the period the bucket covers. | [optional] 
 **bucket_end** | **datetime** | The end of the period the bucket covers. | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 

@@ -716,7 +716,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **upsert_allocation_map**
-> AllocationMap upsert_allocation_map(scope, code, allocation_map_request)
+> AllocationMap upsert_allocation_map(scope, code, allocation_map_request, effective_at=effective_at)
 
 [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
 
@@ -775,13 +775,14 @@ def main():
     # allocation_map_request = AllocationMapRequest.from_json("")
     # allocation_map_request = AllocationMapRequest.from_dict({})
     allocation_map_request = AllocationMapRequest()
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.upsert_allocation_map(scope, code, allocation_map_request, opts=opts)
+        # api_response =  api_instance.upsert_allocation_map(scope, code, allocation_map_request, effective_at=effective_at, opts=opts)
 
         # [EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.
-        api_response = api_instance.upsert_allocation_map(scope, code, allocation_map_request)
+        api_response = api_instance.upsert_allocation_map(scope, code, allocation_map_request, effective_at=effective_at)
         pprint(api_response)
 
     except ApiException as e:
@@ -797,6 +798,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Allocation Map. | 
  **code** | **str**| The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map. | 
  **allocation_map_request** | [**AllocationMapRequest**](AllocationMapRequest.md)| The definition of the Allocation Map. | 
+ **effective_at** | **str**| The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time. | [optional] 
 
 ### Return type
 

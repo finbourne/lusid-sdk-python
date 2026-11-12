@@ -32,7 +32,9 @@ class AllocationEventComponent(BaseModel):
     origin_member_short_code:  Optional[StrictStr] = Field(None,alias="originMemberShortCode", description="The member of the structure the component originates from, for a basis measured per deal such as PaidInForDeal. Absent means the map's own member.") 
     waterfall_tier:  Optional[StrictStr] = Field(None,alias="waterfallTier", description="For a distribution component, the tier of the waterfall it was paid under: ReturnOfContributions, PreferredReturn, CatchUp, CarriedInterest or Residual.") 
     tax_character:  Optional[StrictStr] = Field(None,alias="taxCharacter", description="For a distribution component, the tax character of the amount: ROC, Gain, Income or Deemed.") 
-    __properties = ["component", "amount", "originMemberShortCode", "waterfallTier", "taxCharacter"]
+    recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For the ROC component of a Distribution only, how much of the component the fund may call back, between zero and the component amount. Shared pro rata to each investor's ROC share. Absent means the allocation map's recall window decides.", alias="recallableAmount")
+    recallable_until: Optional[datetime] = Field(default=None, description="For the ROC component of a Distribution only, the last date the recallable amount may be called back. Must not be before the event date and requires a non-zero recallable amount.", alias="recallableUntil")
+    __properties = ["component", "amount", "originMemberShortCode", "waterfallTier", "taxCharacter", "recallableAmount", "recallableUntil"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +83,16 @@ class AllocationEventComponent(BaseModel):
         if self.tax_character is None and "tax_character" in self.__fields_set__:
             _dict['taxCharacter'] = None
 
+        # set to None if recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.recallable_amount is None and "recallable_amount" in self.__fields_set__:
+            _dict['recallableAmount'] = None
+
+        # set to None if recallable_until (nullable) is None
+        # and __fields_set__ contains the field
+        if self.recallable_until is None and "recallable_until" in self.__fields_set__:
+            _dict['recallableUntil'] = None
+
         return _dict
 
     @classmethod
@@ -97,7 +109,9 @@ class AllocationEventComponent(BaseModel):
             "amount": obj.get("amount"),
             "origin_member_short_code": obj.get("originMemberShortCode"),
             "waterfall_tier": obj.get("waterfallTier"),
-            "tax_character": obj.get("taxCharacter")
+            "tax_character": obj.get("taxCharacter"),
+            "recallable_amount": obj.get("recallableAmount"),
+            "recallable_until": obj.get("recallableUntil")
         })
         return _obj
 

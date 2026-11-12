@@ -1321,22 +1321,22 @@ class AllocationMapsApi:
 
 
     @overload
-    async def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], **kwargs) -> AllocationMap:  # noqa: E501
+    async def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.")] = None, **kwargs) -> AllocationMap:  # noqa: E501
         ...
 
     @overload
-    def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], async_req: Optional[bool]=True, **kwargs) -> AllocationMap:  # noqa: E501
+    def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.")] = None, async_req: Optional[bool]=True, **kwargs) -> AllocationMap:  # noqa: E501
         ...
 
     @validate_arguments
-    def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
+    def upsert_allocation_map(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[AllocationMap, Awaitable[AllocationMap]]:  # noqa: E501
         """[EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
 
         Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_allocation_map(scope, code, allocation_map_request, async_req=True)
+        >>> thread = api.upsert_allocation_map(scope, code, allocation_map_request, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Allocation Map. (required)
@@ -1345,6 +1345,8 @@ class AllocationMapsApi:
         :type code: str
         :param allocation_map_request: The definition of the Allocation Map. (required)
         :type allocation_map_request: AllocationMapRequest
+        :param effective_at: The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1361,17 +1363,17 @@ class AllocationMapsApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.upsert_allocation_map_with_http_info(scope, code, allocation_map_request, **kwargs)  # noqa: E501
+        return self.upsert_allocation_map_with_http_info(scope, code, allocation_map_request, effective_at, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def upsert_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], **kwargs) -> ApiResponse:  # noqa: E501
+    def upsert_allocation_map_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Allocation Map.")], code : Annotated[StrictStr, Field(..., description="The code of the Allocation Map. Together with the scope this uniquely identifies the Allocation Map.")], allocation_map_request : Annotated[AllocationMapRequest, Field(description="The definition of the Allocation Map.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] UpsertAllocationMap: Upsert an Allocation Map.  # noqa: E501
 
         Update or insert an Allocation Map. If the Allocation Map does not exist it is created, otherwise it is  updated. The code in the request body must match the code in the route.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.upsert_allocation_map_with_http_info(scope, code, allocation_map_request, async_req=True)
+        >>> thread = api.upsert_allocation_map_with_http_info(scope, code, allocation_map_request, effective_at, async_req=True)
         >>> result = thread.get()
 
         :param scope: The scope of the Allocation Map. (required)
@@ -1380,6 +1382,8 @@ class AllocationMapsApi:
         :type code: str
         :param allocation_map_request: The definition of the Allocation Map. (required)
         :type allocation_map_request: AllocationMapRequest
+        :param effective_at: The effective datetime or cut label from which the definition applies, when the request body does not give one. Required to update an existing Allocation Map; a new one created without it applies from the beginning of time.
+        :type effective_at: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1409,7 +1413,8 @@ class AllocationMapsApi:
         _all_params = [
             'scope',
             'code',
-            'allocation_map_request'
+            'allocation_map_request',
+            'effective_at'
         ]
         _all_params.extend(
             [
@@ -1447,6 +1452,9 @@ class AllocationMapsApi:
 
         # process the query parameters
         _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))
         # process the form parameters

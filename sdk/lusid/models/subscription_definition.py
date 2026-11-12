@@ -43,7 +43,8 @@ class SubscriptionDefinition(BaseModel):
     end_effective_at: Optional[datetime] = Field(default=None, description="Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping.", alias="endEffectiveAt")
     effective_forward_days: Optional[StrictInt] = Field(default=None, description="How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes.", alias="effectiveForwardDays")
     instrument_identifiers: Optional[List[StrictStr]] = Field(default=None, description="The instrument identifiers each published holding carries, as Instrument/default/{type} property keys,  for example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5.  Not valid for a transactions subscription.", alias="instrumentIdentifiers")
-    __properties = ["scope", "code", "displayName", "description", "portfolioId", "timelineId", "timelineProperty", "portfolioFilter", "addressKeys", "byTaxLots", "subscriptionType", "startEffectiveAt", "endEffectiveAt", "effectiveForwardDays", "instrumentIdentifiers"]
+    report_currency:  Optional[StrictStr] = Field(None,alias="reportCurrency", description="The currency the report-currency values are given in, as a three-letter ISO code stored upper-case. Required  when addressKeys names any key other than the quantity, cost, current face, notional cost, variation margin  and currency keys: Holding/Units, Holding/SettledUnits, Holding/Cost/Dom, Holding/Cost/Pfolio,  Holding/CurrentFace, Holding/NotionalCost, Holding/VariationMargin, Holding/VariationMarginInPortfolioCcy,  Holding/HoldingType, Holding/DomCcy and Holding/PortfolioCcy. Not valid for a transactions subscription.") 
+    __properties = ["scope", "code", "displayName", "description", "portfolioId", "timelineId", "timelineProperty", "portfolioFilter", "addressKeys", "byTaxLots", "subscriptionType", "startEffectiveAt", "endEffectiveAt", "effectiveForwardDays", "instrumentIdentifiers", "reportCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -128,6 +129,11 @@ class SubscriptionDefinition(BaseModel):
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
             _dict['instrumentIdentifiers'] = None
 
+        # set to None if report_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.report_currency is None and "report_currency" in self.__fields_set__:
+            _dict['reportCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -154,7 +160,8 @@ class SubscriptionDefinition(BaseModel):
             "start_effective_at": obj.get("startEffectiveAt"),
             "end_effective_at": obj.get("endEffectiveAt"),
             "effective_forward_days": obj.get("effectiveForwardDays"),
-            "instrument_identifiers": obj.get("instrumentIdentifiers")
+            "instrument_identifiers": obj.get("instrumentIdentifiers"),
+            "report_currency": obj.get("reportCurrency")
         })
         return _obj
 

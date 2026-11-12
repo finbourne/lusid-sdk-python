@@ -37,7 +37,8 @@ class AllocationMapAllocation(BaseModel):
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     component:  Optional[StrictStr] = Field(None,alias="component", description="The component of the event the share belongs to. Absent when the event was resolved whole.") 
     origin_member_short_code:  Optional[StrictStr] = Field(None,alias="originMemberShortCode", description="The deal the share is for, when a capital call's use of proceeds split one component across deals. Absent when the component's own origin applies.") 
-    __properties = ["investorRecordId", "basisValue", "weight", "amount", "treatment", "commitmentLineId", "portfolioId", "component", "originMemberShortCode"]
+    recallable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For the ROC component of a Distribution with a recallable amount, the investor record's pro rata share of it. Absent otherwise.", alias="recallableAmount")
+    __properties = ["investorRecordId", "basisValue", "weight", "amount", "treatment", "commitmentLineId", "portfolioId", "component", "originMemberShortCode", "recallableAmount"]
 
     class Config:
         """Pydantic configuration"""
@@ -104,6 +105,11 @@ class AllocationMapAllocation(BaseModel):
         if self.origin_member_short_code is None and "origin_member_short_code" in self.__fields_set__:
             _dict['originMemberShortCode'] = None
 
+        # set to None if recallable_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.recallable_amount is None and "recallable_amount" in self.__fields_set__:
+            _dict['recallableAmount'] = None
+
         return _dict
 
     @classmethod
@@ -124,7 +130,8 @@ class AllocationMapAllocation(BaseModel):
             "commitment_line_id": obj.get("commitmentLineId"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "component": obj.get("component"),
-            "origin_member_short_code": obj.get("originMemberShortCode")
+            "origin_member_short_code": obj.get("originMemberShortCode"),
+            "recallable_amount": obj.get("recallableAmount")
         })
         return _obj
 

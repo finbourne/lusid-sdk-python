@@ -32,7 +32,7 @@ class BucketCashFlowBucket(BaseModel):
     """
     One tenor bucket for one portfolio, payment currency and set of sub-holding keys: its opening balance, closing balance and the  cash flows that make up its activity.  # noqa: E501
     """
-    bucket_id:  Optional[StrictStr] = Field(None,alias="bucketId", description="Identifies the bucket: the bucket's start (as yyyy-MM-dd), the payment currency, each sub-holding key's address and value, and the portfolio's scope and code, separated by '|'.") 
+    bucket_id:  Optional[StrictStr] = Field(None,alias="bucketId", description="Identifies the bucket: a 32 character lowercase hexadecimal hash of its period (start and end), payment currency, portfolio and sub-holding keys. It is stable, the same bucket has the same id in every response, and it is opaque: compare it, do not take it apart.") 
     bucket_start: Optional[datetime] = Field(default=None, description="The start of the period the bucket covers.", alias="bucketStart")
     bucket_end: Optional[datetime] = Field(default=None, description="The end of the period the bucket covers.", alias="bucketEnd")
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")

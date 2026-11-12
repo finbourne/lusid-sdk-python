@@ -5,7 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**query_applicable_instrument_events**](InstrumentEventsApi.md#query_applicable_instrument_events) | **POST** /api/instrumentevents/$queryApplicableInstrumentEvents | QueryApplicableInstrumentEvents: Returns a list of applicable instrument events based on the holdings of the portfolios and date range specified in the query.
-[**query_bucket_cash_flow_drill_down**](InstrumentEventsApi.md#query_bucket_cash_flow_drill_down) | **POST** /api/instrumentevents/$queryBucketCashFlowDrillDown | QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
+[**query_bucket_cash_flow_drill_down**](InstrumentEventsApi.md#query_bucket_cash_flow_drill_down) | **POST** /api/instrumentevents/$queryBucketCashFlowDrillDown | [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
 [**query_bucketed_cash_flows**](InstrumentEventsApi.md#query_bucketed_cash_flows) | **POST** /api/instrumentevents/$queryBucketedCashFlows | QueryBucketedCashFlows: Returns bucketed cashflows based on the holdings of the portfolios and date range specified in the query.
 [**query_cash_flows**](InstrumentEventsApi.md#query_cash_flows) | **POST** /api/instrumentevents/$queryCashFlows | QueryCashFlows: Returns a list of cashflows based on the holdings of the portfolios and date range specified in the query.
 [**query_instrument_events**](InstrumentEventsApi.md#query_instrument_events) | **POST** /api/instrumentevents/$query | QueryInstrumentEvents: Returns a list of instrument events based on the holdings of the portfolios and date range specified in the query.
@@ -118,9 +118,9 @@ Name | Type | Description  | Notes
 # **query_bucket_cash_flow_drill_down**
 > BucketCashFlowDrillDownResponse query_bucket_cash_flow_drill_down(query_bucket_cash_flow_drill_down_request=query_bucket_cash_flow_drill_down_request)
 
-QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
+[EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
 
-Returns the individual cashflows inside the requested bucket window for the holdings of the specified  portfolios, annotated with the source (Instrument, Transaction or SRS) that produced each cashflow.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of 'Transaction'.
+Splits the range from BucketStart to BucketEnd into periods with the BucketingSchedule, and returns one bucket per period,  member portfolio, payment currency and sub-holding key combination. Each bucket has its opening balance, the individual  cashflows that make up its activity, and its closing balance, so every balance and every cashflow appears once. Each  cashflow is annotated with the source (Instrument, Transaction or SRS) that produced it.                The drill-down returns the complete resolved stream, including transaction-sourced cashflows, which  bucketed responses using the (default) InstrumentCashFlow representation exclude. To reconcile the  drill-down against such a bucketed response, first exclude rows with a sourceType of 'Transaction'.
 
 ### Example
 
@@ -178,7 +178,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.query_bucket_cash_flow_drill_down(query_bucket_cash_flow_drill_down_request=query_bucket_cash_flow_drill_down_request, opts=opts)
 
-        # QueryBucketCashFlowDrillDown: Returns the individual cashflows that make up a single cashflow bucket, with their source lineage.
+        # [EARLY ACCESS] QueryBucketCashFlowDrillDown: Returns the cashflow buckets of a range of dates, each with its balances and the individual cashflows that make it up, with their source lineage.
         api_response = api_instance.query_bucket_cash_flow_drill_down(query_bucket_cash_flow_drill_down_request=query_bucket_cash_flow_drill_down_request)
         pprint(api_response)
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | The individual cashflows inside the requested bucket, with the bucket&#39;s balances. |  -  |
+**200** | The buckets of the requested range, each with its balances and its cashflows. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **uncalled_commitment** | **float** | The commitment not yet called. | 
 **recallable** | **float** | Distributions that the fund may recall. | 
 **available_commitment** | **float** | The commitment available to call, being uncalled plus recallable. | 
-**contributions_receivable** | **float** | Called contributions not yet received from the partner. Omitted when a register line of the partner has had returned capital marked recallable, since recalled capital is not yet tracked as a balance and the figure would exclude it. | [optional] 
+**contributions_receivable** | **float** | Called contributions not yet received from the partner, counting capital that was returned as recallable and has since been recalled. Omitted while a register line of the partner that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall; the declared distributions are then served gross. | [optional] 
 **distributions_declared_not_paid** | **float** | Distributions declared to the partner but not yet paid. | 
 ## Example
 

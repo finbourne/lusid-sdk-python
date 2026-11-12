@@ -42,7 +42,7 @@ class BlockRequest(BaseModel):
     created_date: datetime = Field(description="The date on which the block was made", alias="createdDate")
     limit_price: Optional[CurrencyAndAmount] = Field(default=None, alias="limitPrice")
     stop_price: Optional[CurrencyAndAmount] = Field(default=None, alias="stopPrice")
-    is_swept: Optional[StrictBool] = Field(default=None, description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes", alias="isSwept")
+    is_swept: Optional[StrictBool] = Field(default=None, description="Swept blocks are considered no longer of active interest, and no longer take part in various order management processes. If not supplied, an existing block keeps its current value and a new block is not swept.", alias="isSwept")
     __properties = ["id", "orderIds", "properties", "instrumentIdentifiers", "quantity", "amount", "side", "type", "timeInForce", "createdDate", "limitPrice", "stopPrice", "isSwept"]
 
     class Config:
@@ -127,6 +127,11 @@ class BlockRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.time_in_force is None and "time_in_force" in self.__fields_set__:
             _dict['timeInForce'] = None
+
+        # set to None if is_swept (nullable) is None
+        # and __fields_set__ contains the field
+        if self.is_swept is None and "is_swept" in self.__fields_set__:
+            _dict['isSwept'] = None
 
         return _dict
 

@@ -34,7 +34,7 @@ class FundPartnerBalances(BaseModel):
     recallable: Union[StrictFloat, StrictInt] = Field(description="The returned capital that may be recalled.")
     unfunded: Union[StrictFloat, StrictInt] = Field(description="The unfunded capital.")
     funded: Union[StrictFloat, StrictInt] = Field(description="The funded capital.")
-    outstanding_calls: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Capital called but not yet paid in. Omitted on a register line that has had returned capital marked recallable, since recalled capital is not yet tracked as a balance and the figure would exclude it.", alias="outstandingCalls")
+    outstanding_calls: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Capital called but not yet paid in, counting capital that was returned as recallable and has since been recalled. Omitted while a line that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall.", alias="outstandingCalls")
     __properties = ["committed", "uncalledCommitment", "paidIn", "returned", "recallable", "unfunded", "funded", "outstandingCalls"]
 
     class Config:

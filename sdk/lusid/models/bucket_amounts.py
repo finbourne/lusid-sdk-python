@@ -26,12 +26,11 @@ from lusid.models.link import Link
 
 class BucketAmounts(BaseModel):
     """
-    An amount in the payment currency and, when a report currency was requested, in the report currency.  # noqa: E501
+    An amount in the payment currency.  # noqa: E501
     """
     local: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the payment currency.")
-    report_currency: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the report currency. Absent when no report currency was requested.", alias="reportCurrency")
     links: Optional[List[Link]] = None
-    __properties = ["local", "reportCurrency", "links"]
+    __properties = ["local", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,11 +71,6 @@ class BucketAmounts(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if report_currency (nullable) is None
-        # and __fields_set__ contains the field
-        if self.report_currency is None and "report_currency" in self.__fields_set__:
-            _dict['reportCurrency'] = None
-
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -95,7 +89,6 @@ class BucketAmounts(BaseModel):
 
         _obj = BucketAmounts.parse_obj({
             "local": obj.get("local"),
-            "report_currency": obj.get("reportCurrency"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

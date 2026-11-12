@@ -229,16 +229,12 @@ from lusid.models.branch_step_request import BranchStepRequest
 from lusid.models.break_code_source import BreakCodeSource
 from lusid.models.bucket import Bucket
 from lusid.models.bucket_amounts import BucketAmounts
-from lusid.models.bucket_balance_figures import BucketBalanceFigures
 from lusid.models.bucket_border_configuration import BucketBorderConfiguration
-from lusid.models.bucket_cash_flow_balance import BucketCashFlowBalance
 from lusid.models.bucket_cash_flow_bucket import BucketCashFlowBucket
 from lusid.models.bucket_cash_flow_drill_down_response import BucketCashFlowDrillDownResponse
-from lusid.models.bucket_cash_flow_subtotal import BucketCashFlowSubtotal
 from lusid.models.bucket_currency_subtotal import BucketCurrencySubtotal
 from lusid.models.bucket_definition import BucketDefinition
 from lusid.models.bucket_membership import BucketMembership
-from lusid.models.bucket_net_of_haircut_balance import BucketNetOfHaircutBalance
 from lusid.models.bucket_seed_value import BucketSeedValue
 from lusid.models.bucket_seed_value_request import BucketSeedValueRequest
 from lusid.models.bucket_set_class_seed import BucketSetClassSeed
@@ -566,7 +562,6 @@ from lusid.models.decimal_list import DecimalList
 from lusid.models.decimal_list_compliance_parameter import DecimalListComplianceParameter
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from lusid.models.decorated_compliance_run_summary_request import DecoratedComplianceRunSummaryRequest
-from lusid.models.deemed_disposal import DeemedDisposal
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
 from lusid.models.delete_data_quality_rule import DeleteDataQualityRule
@@ -621,6 +616,7 @@ from lusid.models.economics import Economics
 from lusid.models.edit_transfer_request import EditTransferRequest
 from lusid.models.edit_transfer_response import EditTransferResponse
 from lusid.models.effective_range import EffectiveRange
+from lusid.models.election_proration_rate import ElectionProrationRate
 from lusid.models.election_specification import ElectionSpecification
 from lusid.models.eligibility_calculation import EligibilityCalculation
 from lusid.models.eligible_collateral_asset_selector import EligibleCollateralAssetSelector
@@ -747,6 +743,7 @@ from lusid.models.fund_partner import FundPartner
 from lusid.models.fund_partner_balances import FundPartnerBalances
 from lusid.models.fund_partner_unfunded_reconciliation import FundPartnerUnfundedReconciliation
 from lusid.models.fund_partner_unfunded_reconciliation_line import FundPartnerUnfundedReconciliationLine
+from lusid.models.fund_partner_unfunded_reconciliation_warning import FundPartnerUnfundedReconciliationWarning
 from lusid.models.fund_partners_totals import FundPartnersTotals
 from lusid.models.fund_pnl_breakdown import FundPnlBreakdown
 from lusid.models.fund_previous_nav import FundPreviousNAV
@@ -2353,16 +2350,12 @@ __all__ = [
     "BreakCodeSource",
     "Bucket",
     "BucketAmounts",
-    "BucketBalanceFigures",
     "BucketBorderConfiguration",
-    "BucketCashFlowBalance",
     "BucketCashFlowBucket",
     "BucketCashFlowDrillDownResponse",
-    "BucketCashFlowSubtotal",
     "BucketCurrencySubtotal",
     "BucketDefinition",
     "BucketMembership",
-    "BucketNetOfHaircutBalance",
     "BucketSeedValue",
     "BucketSeedValueRequest",
     "BucketSetClassSeed",
@@ -2690,7 +2683,6 @@ __all__ = [
     "DecimalListComplianceParameter",
     "DecoratedComplianceRunSummary",
     "DecoratedComplianceRunSummaryRequest",
-    "DeemedDisposal",
     "DeleteAccountsResponse",
     "DeleteCustodianAccountsResponse",
     "DeleteDataQualityRule",
@@ -2745,6 +2737,7 @@ __all__ = [
     "EditTransferRequest",
     "EditTransferResponse",
     "EffectiveRange",
+    "ElectionProrationRate",
     "ElectionSpecification",
     "EligibilityCalculation",
     "EligibleCollateralAssetSelector",
@@ -2871,6 +2864,7 @@ __all__ = [
     "FundPartnerBalances",
     "FundPartnerUnfundedReconciliation",
     "FundPartnerUnfundedReconciliationLine",
+    "FundPartnerUnfundedReconciliationWarning",
     "FundPartnersTotals",
     "FundPnlBreakdown",
     "FundPreviousNAV",

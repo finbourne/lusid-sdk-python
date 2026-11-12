@@ -31,7 +31,7 @@ class PartnerCapitalAccountMemo(BaseModel):
     uncalled_commitment: Union[StrictFloat, StrictInt] = Field(description="The commitment not yet called.", alias="uncalledCommitment")
     recallable: Union[StrictFloat, StrictInt] = Field(description="Distributions that the fund may recall.")
     available_commitment: Union[StrictFloat, StrictInt] = Field(description="The commitment available to call, being uncalled plus recallable.", alias="availableCommitment")
-    contributions_receivable: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Called contributions not yet received from the partner. Omitted when a register line of the partner has had returned capital marked recallable, since recalled capital is not yet tracked as a balance and the figure would exclude it.", alias="contributionsReceivable")
+    contributions_receivable: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Called contributions not yet received from the partner, counting capital that was returned as recallable and has since been recalled. Omitted while a register line of the partner that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall; the declared distributions are then served gross.", alias="contributionsReceivable")
     distributions_declared_not_paid: Union[StrictFloat, StrictInt] = Field(description="Distributions declared to the partner but not yet paid.", alias="distributionsDeclaredNotPaid")
     __properties = ["commitment", "uncalledCommitment", "recallable", "availableCommitment", "contributionsReceivable", "distributionsDeclaredNotPaid"]
 

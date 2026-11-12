@@ -6632,6 +6632,7 @@ class FundsApi:
         _response_types_map = {
             '200': "FundPartnerUnfundedReconciliation",
             '400': "LusidValidationProblemDetails",
+            '404': "LusidValidationProblemDetails",
         }
 
         return self.api_client.call_api(
