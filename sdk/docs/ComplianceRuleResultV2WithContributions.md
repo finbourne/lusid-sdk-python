@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **run_id** | [**ResourceId**](ResourceId.md) |  | 
 **instigated_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | 
+**rule_definitions_as_at** | **datetime** |  | 
 **schedule** | **str** | Available values: PreTrade, PostTrade, PreAndPostTrade. | 
 **rule_result** | [**ComplianceSummaryRuleResultWithContributions**](ComplianceSummaryRuleResultWithContributions.md) |  | 
 ## Example
@@ -20,9 +21,10 @@ from datetime import datetime
 run_id: ResourceId = # Replace with your value
 instigated_at: datetime = # Replace with your value
 completed_at: datetime = # Replace with your value
+rule_definitions_as_at: datetime = # Replace with your value
 schedule: StrictStr = "example_schedule"
 rule_result: ComplianceSummaryRuleResultWithContributions = # Replace with your value
-compliance_rule_result_v2_with_contributions_instance = ComplianceRuleResultV2WithContributions(run_id=run_id, instigated_at=instigated_at, completed_at=completed_at, schedule=schedule, rule_result=rule_result)
+compliance_rule_result_v2_with_contributions_instance = ComplianceRuleResultV2WithContributions(run_id=run_id, instigated_at=instigated_at, completed_at=completed_at, rule_definitions_as_at=rule_definitions_as_at, schedule=schedule, rule_result=rule_result)
 
 ```
 

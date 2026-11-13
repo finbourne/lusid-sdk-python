@@ -5,7 +5,7 @@ A rec result of a different rec type in the same rec instance whose items share 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | The id of the linked result, as carried in that result&#39;s own id field, e.g. &#39;CashHolding-break-3&#39;. Unique within the instance. | 
-**rec_type** | **str** | The rec type of the linked result. Always differs from this result&#39;s rec type. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio. | 
+**rec_type** | **str** | The rec type of the linked result. Always differs from this result&#39;s rec type. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity. | 
 **linked_by** | [**RecLinkedBy**](RecLinkedBy.md) |  | 
 ## Example
 

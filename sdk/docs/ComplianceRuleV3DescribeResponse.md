@@ -1,12 +1,12 @@
 # ComplianceRuleV3DescribeResponse
 
-A plain-English description of a V3 compliance rule. This is a minimal placeholder shape: the plain-English  generator is delivered separately, so the Lines property is currently empty and only the rule's identity  and subject are populated.
+A plain-English description of a V3 compliance rule: its identity, the kind of entity it examines, and a  single sentence describing what it checks. The sentence is empty for a rule the generator cannot fully  express.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **subject** | **str** | Available values: Holdings, Orders. | [optional] 
-**lines** | **List[str]** |  | [optional] 
+**plain_english** | **str** |  | [optional] 
 ## Example
 
 ```python
@@ -18,8 +18,8 @@ from datetime import datetime
 
 id: Optional[ResourceId] = None
 subject: Optional[StrictStr] = "example_subject"
-lines: Optional[List[StrictStr]] = None
-compliance_rule_v3_describe_response_instance = ComplianceRuleV3DescribeResponse(id=id, subject=subject, lines=lines)
+plain_english: Optional[StrictStr] = "example_plain_english"
+compliance_rule_v3_describe_response_instance = ComplianceRuleV3DescribeResponse(id=id, subject=subject, plain_english=plain_english)
 
 ```
 

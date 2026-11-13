@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**group_id** | **int** | A stable identifier for this group within the rule, the same across the rule-result and breakdown endpoints,  so a group can be correlated between the two. | 
 **group_status** | **str** | The status of this subset of results. | 
 **results_used** | **Dict[str, float]** | Dictionary of AddressKey (as string) and their corresponding decimal values, that were used in this rule. | 
 **formula_values** | **Dict[str, float]** | The value each formula within the check criterion evaluated to for this group. Empty where the criterion  compares a single value or is not numerical, since the operand values already recorded describe those. | [optional] 
@@ -18,13 +19,15 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
+group_id: StrictInt = # Replace with your value
+group_id: StrictInt = 42
 group_status: StrictStr = "example_group_status"
 results_used: Dict[str, Union[StrictFloat, StrictInt]] = # Replace with your value
 formula_values: Optional[Dict[str, Union[StrictFloat, StrictInt]]] = # Replace with your value
 properties_used: Dict[str, Optional[List[ModelProperty]]] = # Replace with your value
 missing_data_information: List[StrictStr] = # Replace with your value
 lineage: List[LineageMember]
-compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_status=group_status, results_used=results_used, formula_values=formula_values, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
+compliance_rule_breakdown_instance = ComplianceRuleBreakdown(group_id=group_id, group_status=group_status, results_used=results_used, formula_values=formula_values, properties_used=properties_used, missing_data_information=missing_data_information, lineage=lineage)
 
 ```
 

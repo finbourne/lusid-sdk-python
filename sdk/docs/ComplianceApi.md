@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 
 [EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.
 
-Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.
+Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.
 
 ### Example
 

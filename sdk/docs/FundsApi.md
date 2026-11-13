@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**accrue_carry**](FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund&#39;s partners.
 [**add_allocation_groups**](FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 [**add_series**](FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+[**approve_tax_provision**](FundsApi.md#approve_tax_provision) | **POST** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve | [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
 [**calculate_management_fees**](FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
 [**create_facility**](FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.
 [**create_fee**](FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
@@ -42,6 +43,7 @@ Method | HTTP request | Description
 [**get_partners**](FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 [**get_partnership_config_pack**](FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
 [**get_series**](FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
+[**get_tax_provision**](FundsApi.md#get_tax_provision) | **GET** /api/funds/{scope}/{code}/tax/provision | [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
 [**get_tax_sync_status**](FundsApi.md#get_tax_sync_status) | **GET** /api/funds/{scope}/{code}/tax/sync | [EARLY ACCESS] GetTaxSyncStatus: [EARLY ACCESS] GetTaxSyncStatus: Get the tax sync position of each portfolio in a Fund.
 [**get_valuation_for_fund**](FundsApi.md#get_valuation_for_fund) | **POST** /api/funds/{scope}/{code}/$valuation | [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
 [**get_valuation_point_data**](FundsApi.md#get_valuation_point_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/$query | [EARLY ACCESS] GetValuationPointData: Get Valuation Point Data for a Fund.
@@ -62,6 +64,7 @@ Method | HTTP request | Description
 [**list_tax_cost_records**](FundsApi.md#list_tax_cost_records) | **GET** /api/funds/{scope}/{code}/taxcostrecords | [EXPERIMENTAL] ListTaxCostRecords: [EXPERIMENTAL] ListTaxCostRecords: List Tax Cost Records for a specified Fund.
 [**list_tax_exceptions**](FundsApi.md#list_tax_exceptions) | **GET** /api/funds/{scope}/{code}/tax/exceptions | [EARLY ACCESS] ListTaxExceptions: [EARLY ACCESS] ListTaxExceptions: List the open tax exceptions of a Fund.
 [**list_tax_exceptions_across_funds**](FundsApi.md#list_tax_exceptions_across_funds) | **GET** /api/tax/exceptions | [EARLY ACCESS] ListTaxExceptionsAcrossFunds: [EARLY ACCESS] ListTaxExceptionsAcrossFunds: List the open tax exceptions across every Fund.
+[**list_tax_provisions**](FundsApi.md#list_tax_provisions) | **GET** /api/funds/{scope}/{code}/tax/provisions | [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
 [**list_valuation_point_complex_market_data**](FundsApi.md#list_valuation_point_complex_market_data) | **POST** /api/funds/{scope}/{code}/valuationpoints/complexmarketdata/$query | [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
 [**list_valuation_point_instruments**](FundsApi.md#list_valuation_point_instruments) | **GET** /api/funds/{scope}/{code}/valuationpoints/instruments/$query | [EARLY ACCESS] ListValuationPointInstruments: List Instruments inside a valuation point
 [**list_valuation_point_overview**](FundsApi.md#list_valuation_point_overview) | **GET** /api/funds/{scope}/{code}/valuationPointOverview | [EARLY ACCESS] ListValuationPointOverview: List Valuation Points Overview for a given Fund.
@@ -476,6 +479,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund with the added Series. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **approve_tax_provision**
+> TaxProvision approve_tax_provision(scope, code, diary_entry_code, nav_type_code=nav_type_code)
+
+[EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
+
+Moves the Valuation Point's deferred-tax provision from Estimate to Approved, stores it as the official  document and books the movement since the previous approved Valuation Point as an accrual on the Fund.  Approving an already approved provision fails. Until tax elections can be configured on the Fund every  provision is struck under the default elections: a 20% rate, indexation allowance applied and losses carried  forward.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    diary_entry_code = 'diary_entry_code_example' # str | The Diary Entry code of the Valuation Point whose provision is approved.
+    nav_type_code = 'nav_type_code_example' # str | When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.approve_tax_provision(scope, code, diary_entry_code, nav_type_code=nav_type_code, opts=opts)
+
+        # [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
+        api_response = api_instance.approve_tax_provision(scope, code, diary_entry_code, nav_type_code=nav_type_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->approve_tax_provision: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **diary_entry_code** | **str**| The Diary Entry code of the Valuation Point whose provision is approved. | 
+ **nav_type_code** | **str**| When provided, approves the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+
+### Return type
+
+[**TaxProvision**](TaxProvision.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The approved deferred-tax provision |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -3925,6 +4026,106 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_tax_provision**
+> TaxProvision get_tax_provision(scope, code, diary_entry_code, as_at=as_at, nav_type_code=nav_type_code)
+
+[EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
+
+Returns the deferred-tax provision struck for the specified Valuation Point. Where the provision has been  approved by the asAt it is returned as stored, otherwise a live estimate is returned. Until tax elections  can be configured on the Fund every provision is struck under the default elections: a 20% rate, indexation  allowance applied and losses carried forward.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    diary_entry_code = 'diary_entry_code_example' # str | The Diary Entry code of the Valuation Point the provision is for.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_tax_provision(scope, code, diary_entry_code, as_at=as_at, nav_type_code=nav_type_code, opts=opts)
+
+        # [EARLY ACCESS] GetTaxProvision: [EARLY ACCESS] GetTaxProvision: Get the deferred-tax provision of a Valuation Point.
+        api_response = api_instance.get_tax_provision(scope, code, diary_entry_code, as_at=as_at, nav_type_code=nav_type_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_tax_provision: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **diary_entry_code** | **str**| The Diary Entry code of the Valuation Point the provision is for. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified. | [optional] 
+ **nav_type_code** | **str**| When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+
+### Return type
+
+[**TaxProvision**](TaxProvision.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The deferred-tax provision of the Valuation Point |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_tax_sync_status**
 > TaxSyncStatus get_tax_sync_status(scope, code, as_at=as_at)
 
@@ -4234,7 +4435,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetValuationPointJournalEntryLines: Get the Journal Entry Lines for the given Fund.
 
-Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.
+Gets the Journal Entry Lines for the given Valuation Point for a Fund.                The Journal Entry Lines have been generated from transactions, translated via posting rules and used in the valuation point.                Lines are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio's lines in the order the accounting engine produced them, so the order is stable across pages.
 
 ### Example
 
@@ -4351,7 +4552,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 
-Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.
+Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
 
 ### Example
 
@@ -4407,7 +4608,7 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
     general_ledger_profile_code = 'general_ledger_profile_code_example' # str | The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. (optional)
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. (optional)
     filter = 'filter_example' # str | \"Expression to filter the result set.\" (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. (optional)
@@ -4435,7 +4636,7 @@ Name | Type | Description  | Notes
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for generating the PnL summary. | 
  **general_ledger_profile_code** | **str**| The optional code of a General Ledger Profile used to decorate Journal Entry Lines with levels. | [optional] 
- **as_at** | **datetime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve PnL summary. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
  **filter** | **str**| \&quot;Expression to filter the result set.\&quot; | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing results from a previous call to GetValuationPointPnlSummary. | [optional] 
@@ -4573,7 +4774,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
 
-Gets the Transactions for the given Valuation Point for a Fund.
+Gets the Transactions for the given Valuation Point for a Fund.                Transactions are returned grouped by portfolio, ordered by portfolio scope and then code (ordinal), with each portfolio's transactions in the order the accounting engine produced them, so the order is stable across pages.
 
 ### Example
 
@@ -4628,17 +4829,17 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'              domain to decorate onto the transactions. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', 'Account', 'LegalEntity' or 'CustodianAccount'               domain to decorate onto the transactions. (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     data_model_scope = 'data_model_scope_example' # str | The optional scope of a Custom Data Model to use (optional)
     data_model_code = 'data_model_code_example' # str | The optional code of a Custom Data Model to use (optional)
-    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. (optional)
+    show_cancelled_transactions = True # bool | Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. (optional)
     membership_type = 'membership_type_example' # str | The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. (optional)
-    return_excluded_transactions = True # bool | Option to specify whether or not to include transactions excluded by the              NavType's TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. (optional)
+    return_excluded_transactions = True # bool | Option to specify whether or not to include transactions excluded by the               NavType's TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -4661,17 +4862,17 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the transactions. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version              of each transaction if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve transactions. Defaults to returning the latest version               of each transaction if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing transactions from a previous call to GetValuationPointTransactions. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;              domain to decorate onto the transactions. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, &#39;Account&#39;, &#39;LegalEntity&#39; or &#39;CustodianAccount&#39;               domain to decorate onto the transactions. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
  **data_model_scope** | **str**| The optional scope of a Custom Data Model to use | [optional] 
  **data_model_code** | **str**| The optional code of a Custom Data Model to use | [optional] 
- **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,              including previous versions of transactions which have since been amended.              Defaults to False if not specified. | [optional] 
+ **show_cancelled_transactions** | **bool**| Option to specify whether or not to include cancelled transactions,               including previous versions of transactions which have since been amended.               Defaults to False if not specified. | [optional] 
  **membership_type** | **str**| The membership types of the specified Custom Data Model to return. Default value: Member. Available values: All, Member, Candidate. | [optional] 
- **return_excluded_transactions** | **bool**| Option to specify whether or not to include transactions excluded by the              NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of              a transaction that has since been amended to be excluded is returned regardless of this option.              Defaults to False if not specified. | [optional] 
+ **return_excluded_transactions** | **bool**| Option to specify whether or not to include transactions excluded by the               NavType&#39;s TransactionExclusionFilter, flagged with isExcluded. The reversal of a previously included version of               a transaction that has since been amended to be excluded is returned regardless of this option.               Defaults to False if not specified. | [optional] 
 
 ### Return type
 
@@ -4813,7 +5014,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
 
-Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.
+Gets all transactions that remain unsettled as at the specified Valuation Point for a Fund,  looking back from inception. Settlement status is point-in-time: post-cutoff settlement  activity does not alter the result.                Rows are returned ordered by portfolio (scope then code, ordinal), then by trade date, entry time, transaction id (ordinal) and sub-holding keys, so the order is total and stable across pages.
 
 ### Example
 
@@ -4871,7 +5072,7 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the report. Defaults to latest. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing from a previous call. (optional)
-    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'              domain to decorate onto the transactions. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Instrument', 'Transaction', 'Portfolio', or 'Account'               domain to decorate onto the transactions. (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
     filter = 'filter_example' # str | Expression to filter the result set. (optional)
 
@@ -4899,7 +5100,7 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to retrieve the report. Defaults to latest. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing from a previous call. | [optional] 
- **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;              domain to decorate onto the transactions. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Instrument&#39;, &#39;Transaction&#39;, &#39;Portfolio&#39;, or &#39;Account&#39;               domain to decorate onto the transactions. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
  **filter** | **str**| Expression to filter the result set. | [optional] 
 
@@ -6056,6 +6257,108 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The open tax exceptions across the Funds the caller can see. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **list_tax_provisions**
+> ResourceListOfTaxProvision list_tax_provisions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, nav_type_code=nav_type_code)
+
+[EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
+
+Returns the deferred-tax provision of every Valuation Point whose effective date lies in the window, oldest first.  Unapproved Valuation Points are estimated live, so the window may cover at most 100 Valuation Points. Until tax  elections can be configured on the Fund every provision is struck under the default elections: a 20% rate,  indexation allowance applied and losses carried forward.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    from_effective_at = '2013-10-20T19:20:30+01:00' # datetime | The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. (optional)
+    to_effective_at = '2013-10-20T19:20:30+01:00' # datetime | The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_tax_provisions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, nav_type_code=nav_type_code, opts=opts)
+
+        # [EARLY ACCESS] ListTaxProvisions: [EARLY ACCESS] ListTaxProvisions: List the deferred-tax provisions of a Fund.
+        api_response = api_instance.list_tax_provisions(scope, code, from_effective_at=from_effective_at, to_effective_at=to_effective_at, as_at=as_at, nav_type_code=nav_type_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->list_tax_provisions: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **from_effective_at** | **datetime**| The lower bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the start of the Fund if not specified. | [optional] 
+ **to_effective_at** | **datetime**| The upper bound effective datetime (inclusive) of the Valuation Points to include. Defaults to the latest Valuation Point if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the provisions. Defaults to returning the latest version if not specified. | [optional] 
+ **nav_type_code** | **str**| When provided, the provisions of the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+
+### Return type
+
+[**ResourceListOfTaxProvision**](ResourceListOfTaxProvision.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The deferred-tax provisions of the Fund&#39;s Valuation Points in the window |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

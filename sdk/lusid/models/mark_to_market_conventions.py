@@ -30,7 +30,9 @@ class MarkToMarketConventions(BaseModel):
     calendar_code:  Optional[StrictStr] = Field(None,alias="calendarCode", description="The calendar to use when generating mark to market cashflows and events.") 
     hour_offset_tenor:  Optional[StrictStr] = Field(None,alias="hourOffsetTenor", description="The hour tenor component of the time offset against the maturity date.  This is an optional field, if a value is provided it must be a positive value between '0hour' and '23hour'.") 
     minute_offset_tenor:  Optional[StrictStr] = Field(None,alias="minuteOffsetTenor", description="The minute tenor component of the time offset against the maturity date.  This is an optional field, if a value is provided it must be a positive value between '0min' and '59min'.") 
-    __properties = ["calendarCode", "hourOffsetTenor", "minuteOffsetTenor"]
+    mtm_settle_days: Optional[StrictInt] = Field(default=None, description="The number of business days after each mark to market date on which its variation margin is paid.  This is an optional field, defaulting to 0 (paid on the mark to market date); if a value is provided it must be between 0 and 10 inclusive.", alias="mtmSettleDays")
+    mtm_settlement_calendar:  Optional[StrictStr] = Field(None,alias="mtmSettlementCalendar", description="The calendar the mark to market settlement days are counted on.  This is an optional field; if no value is provided the mark to market calendar is used, and without that only weekends are non-business days.") 
+    __properties = ["calendarCode", "hourOffsetTenor", "minuteOffsetTenor", "mtmSettleDays", "mtmSettlementCalendar"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,6 +81,16 @@ class MarkToMarketConventions(BaseModel):
         if self.minute_offset_tenor is None and "minute_offset_tenor" in self.__fields_set__:
             _dict['minuteOffsetTenor'] = None
 
+        # set to None if mtm_settle_days (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mtm_settle_days is None and "mtm_settle_days" in self.__fields_set__:
+            _dict['mtmSettleDays'] = None
+
+        # set to None if mtm_settlement_calendar (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mtm_settlement_calendar is None and "mtm_settlement_calendar" in self.__fields_set__:
+            _dict['mtmSettlementCalendar'] = None
+
         return _dict
 
     @classmethod
@@ -93,7 +105,9 @@ class MarkToMarketConventions(BaseModel):
         _obj = MarkToMarketConventions.parse_obj({
             "calendar_code": obj.get("calendarCode"),
             "hour_offset_tenor": obj.get("hourOffsetTenor"),
-            "minute_offset_tenor": obj.get("minuteOffsetTenor")
+            "minute_offset_tenor": obj.get("minuteOffsetTenor"),
+            "mtm_settle_days": obj.get("mtmSettleDays"),
+            "mtm_settlement_calendar": obj.get("mtmSettlementCalendar")
         })
         return _obj
 

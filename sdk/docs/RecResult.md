@@ -7,8 +7,9 @@ Name | Type | Description | Notes
 **id** | **str** | The id of the result within its instance: its rec type, result type and result number, e.g. &#39;Holding-break-3&#39;. Unique within the instance, and kept across its runs for as long as the result keeps its result type. | 
 **result_number** | **int** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | 
 **first_run_seen** | **int** | The run in which the result was first assigned its id. | 
-**rec_type** | **str** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio. | 
+**rec_type** | **str** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity. | 
 **external_rec_type_name** | **str** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] 
+**custom_entity_type** | **str** | The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable. | [optional] 
 **instance_id** | [**RecInstanceId**](RecInstanceId.md) |  | 
 **as_at_instantiated** | **datetime** | The asAt datetime at which the instance was first created. | 
 **rec_definition_id** | [**ResourceId**](ResourceId.md) |  | 
@@ -49,6 +50,7 @@ first_run_seen: StrictInt = # Replace with your value
 first_run_seen: StrictInt = 42
 rec_type: StrictStr = "example_rec_type"
 external_rec_type_name: Optional[StrictStr] = "example_external_rec_type_name"
+custom_entity_type: Optional[StrictStr] = "example_custom_entity_type"
 instance_id: RecInstanceId = # Replace with your value
 as_at_instantiated: datetime = # Replace with your value
 rec_definition_id: ResourceId = # Replace with your value
@@ -74,7 +76,7 @@ assigned_role: Optional[StrictStr] = "example_assigned_role"
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_result_instance = RecResult(id=id, result_number=result_number, first_run_seen=first_run_seen, rec_type=rec_type, external_rec_type_name=external_rec_type_name, instance_id=instance_id, as_at_instantiated=as_at_instantiated, rec_definition_id=rec_definition_id, rec_definition_display_name=rec_definition_display_name, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, linked_results=linked_results, comments=comments, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
+rec_result_instance = RecResult(id=id, result_number=result_number, first_run_seen=first_run_seen, rec_type=rec_type, external_rec_type_name=external_rec_type_name, custom_entity_type=custom_entity_type, instance_id=instance_id, as_at_instantiated=as_at_instantiated, rec_definition_id=rec_definition_id, rec_definition_display_name=rec_definition_display_name, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, linked_results=linked_results, comments=comments, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
 
 ```
 

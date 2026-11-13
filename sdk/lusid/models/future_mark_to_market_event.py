@@ -31,9 +31,10 @@ class FutureMarkToMarketEvent(InstrumentEvent):
     effective_date: Optional[datetime] = Field(default=None, description="The date of the mark to market event.", alias="effectiveDate")
     settlement_currency:  StrictStr = Field(...,alias="settlementCurrency", description="The currency in which the Future contract is paid.") 
     notional_amount_per_unit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The notional value of the contract on the effective date.", alias="notionalAmountPerUnit")
+    payment_date: Optional[datetime] = Field(default=None, description="The date the variation margin is paid: the effective date plus the future's mark to market settlement offset.  This is an optional field; when absent the variation margin is paid on the effective date.", alias="paymentDate")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent, PartialRedemptionWithoutReductionOfNominalValueEvent, StripBondCashflowEvent, CapitalisationEvent, SharesPremiumDividendEvent, CashDistributionFromNonEligibleSecuritiesSalesEvent, InflationIndexationEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "settlementCurrency", "notionalAmountPerUnit"]
+    __properties = ["instrumentEventType", "effectiveDate", "settlementCurrency", "notionalAmountPerUnit", "paymentDate"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -96,6 +97,11 @@ class FutureMarkToMarketEvent(InstrumentEvent):
         if self.notional_amount_per_unit is None and "notional_amount_per_unit" in self.__fields_set__:
             _dict['notionalAmountPerUnit'] = None
 
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +117,8 @@ class FutureMarkToMarketEvent(InstrumentEvent):
             "instrument_event_type": obj.get("instrumentEventType"),
             "effective_date": obj.get("effectiveDate"),
             "settlement_currency": obj.get("settlementCurrency"),
-            "notional_amount_per_unit": obj.get("notionalAmountPerUnit")
+            "notional_amount_per_unit": obj.get("notionalAmountPerUnit"),
+            "payment_date": obj.get("paymentDate")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

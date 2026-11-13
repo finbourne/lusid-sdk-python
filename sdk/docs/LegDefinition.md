@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **last_coupon_type** | **str** | Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \&quot;ProRata\&quot; (the default), the coupon year fraction is calculated as normal,  however if set to \&quot;Full\&quot; the year fraction is overwritten with the standard year fraction  for a regular ful\&quot; coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full]. | [optional] 
 **fx_linked_notional_schedule** | [**FxLinkedNotionalSchedule**](FxLinkedNotionalSchedule.md) |  | [optional] 
 **intermediate_notional_exchange** | **bool** | Indicates whether there are intermediate notional exchanges. | [optional] 
+**initial_exchange_amount** | **float** | The amount exchanged at the start of the leg, when NotionalExchangeType is Initial or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule. | [optional] 
+**final_exchange_amount** | **float** | The amount exchanged at maturity, when NotionalExchangeType is Final or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule. | [optional] 
 ## Example
 
 ```python
@@ -48,7 +50,9 @@ last_coupon_type: Optional[StrictStr] = "example_last_coupon_type"
 fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = # Replace with your value
 intermediate_notional_exchange: Optional[StrictBool] = # Replace with your value
 intermediate_notional_exchange:Optional[StrictBool] = None
-leg_definition_instance = LegDefinition(convention_name=convention_name, conventions=conventions, index_convention=index_convention, index_convention_name=index_convention_name, notional_exchange_type=notional_exchange_type, pay_receive=pay_receive, rate_or_spread=rate_or_spread, reset_convention=reset_convention, stub_type=stub_type, compounding=compounding, amortisation=amortisation, first_regular_payment_date=first_regular_payment_date, first_coupon_type=first_coupon_type, last_regular_payment_date=last_regular_payment_date, last_coupon_type=last_coupon_type, fx_linked_notional_schedule=fx_linked_notional_schedule, intermediate_notional_exchange=intermediate_notional_exchange)
+initial_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+final_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+leg_definition_instance = LegDefinition(convention_name=convention_name, conventions=conventions, index_convention=index_convention, index_convention_name=index_convention_name, notional_exchange_type=notional_exchange_type, pay_receive=pay_receive, rate_or_spread=rate_or_spread, reset_convention=reset_convention, stub_type=stub_type, compounding=compounding, amortisation=amortisation, first_regular_payment_date=first_regular_payment_date, first_coupon_type=first_coupon_type, last_regular_payment_date=last_regular_payment_date, last_coupon_type=last_coupon_type, fx_linked_notional_schedule=fx_linked_notional_schedule, intermediate_notional_exchange=intermediate_notional_exchange, initial_exchange_amount=initial_exchange_amount, final_exchange_amount=final_exchange_amount)
 
 ```
 

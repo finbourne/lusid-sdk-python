@@ -41,7 +41,7 @@ class MatchingRuleset(BaseModel):
     """
     id: ResourceId
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the matching ruleset.") 
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. A custom entity type is written as its name, which starts with ~. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.") 
     external_rec_type: Optional[ExternalRecType] = Field(default=None, alias="externalRecType")
     dataset_schemas: RecDatasetSchemas = Field(alias="datasetSchemas")
     filters: Optional[GroupReconciliationFilters] = None

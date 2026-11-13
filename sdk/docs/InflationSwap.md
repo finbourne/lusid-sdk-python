@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_date** | **datetime** | The start date of the instrument. This is normally synonymous with the trade-date. | 
 **maturity_date** | **datetime** | The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it. | 
-**inflation_leg** | [**InflationLeg**](InflationLeg.md) |  | 
-**fixed_leg** | [**FixedLeg**](FixedLeg.md) |  | 
+**inflation_leg** | [**InflationLeg**](InflationLeg.md) |  | [optional] 
+**fixed_leg** | [**FixedLeg**](FixedLeg.md) |  | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven inflation swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
@@ -22,8 +22,8 @@ from datetime import datetime
 
 start_date: datetime = # Replace with your value
 maturity_date: datetime = # Replace with your value
-inflation_leg: InflationLeg = # Replace with your value
-fixed_leg: FixedLeg = # Replace with your value
+inflation_leg: Optional[InflationLeg] = # Replace with your value
+fixed_leg: Optional[FixedLeg] = # Replace with your value
 additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"

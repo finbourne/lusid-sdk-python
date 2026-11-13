@@ -479,6 +479,10 @@ from lusid.models.complex_market_data_activity import ComplexMarketDataActivity
 from lusid.models.complex_market_data_activity_adjustment import ComplexMarketDataActivityAdjustment
 from lusid.models.complex_market_data_id import ComplexMarketDataId
 from lusid.models.compliance_breached_order_info import ComplianceBreachedOrderInfo
+from lusid.models.compliance_comparison import ComplianceComparison
+from lusid.models.compliance_comparison_operand import ComplianceComparisonOperand
+from lusid.models.compliance_group_key import ComplianceGroupKey
+from lusid.models.compliance_key_used import ComplianceKeyUsed
 from lusid.models.compliance_parameter import ComplianceParameter
 from lusid.models.compliance_parameter_type import ComplianceParameterType
 from lusid.models.compliance_rule import ComplianceRule
@@ -1580,6 +1584,7 @@ from lusid.models.rec_result import RecResult
 from lusid.models.rec_result_assignment_update import RecResultAssignmentUpdate
 from lusid.models.rec_result_count_by_review_status import RecResultCountByReviewStatus
 from lusid.models.rec_result_counts import RecResultCounts
+from lusid.models.rec_result_custom_entity_item import RecResultCustomEntityItem
 from lusid.models.rec_result_decision_group import RecResultDecisionGroup
 from lusid.models.rec_result_decision_update import RecResultDecisionUpdate
 from lusid.models.rec_result_exception import RecResultException
@@ -1749,6 +1754,7 @@ from lusid.models.resource_list_of_string import ResourceListOfString
 from lusid.models.resource_list_of_tax_classification import ResourceListOfTaxClassification
 from lusid.models.resource_list_of_tax_classification_exception_record import ResourceListOfTaxClassificationExceptionRecord
 from lusid.models.resource_list_of_tax_exception_item import ResourceListOfTaxExceptionItem
+from lusid.models.resource_list_of_tax_provision import ResourceListOfTaxProvision
 from lusid.models.resource_list_of_tax_rule_set import ResourceListOfTaxRuleSet
 from lusid.models.resource_list_of_transaction import ResourceListOfTransaction
 from lusid.models.resource_list_of_transaction_fee_type import ResourceListOfTransactionFeeType
@@ -1940,6 +1946,8 @@ from lusid.models.tax_cost_record_request import TaxCostRecordRequest
 from lusid.models.tax_exception_item import TaxExceptionItem
 from lusid.models.tax_exception_root_cause import TaxExceptionRootCause
 from lusid.models.tax_portfolio_sync_status import TaxPortfolioSyncStatus
+from lusid.models.tax_provision import TaxProvision
+from lusid.models.tax_provision_movement import TaxProvisionMovement
 from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
 from lusid.models.tax_sync_status import TaxSyncStatus
@@ -2713,6 +2721,10 @@ __all__ = [
     "ComplexMarketDataActivityAdjustment",
     "ComplexMarketDataId",
     "ComplianceBreachedOrderInfo",
+    "ComplianceComparison",
+    "ComplianceComparisonOperand",
+    "ComplianceGroupKey",
+    "ComplianceKeyUsed",
     "ComplianceParameter",
     "ComplianceParameterType",
     "ComplianceRule",
@@ -3814,6 +3826,7 @@ __all__ = [
     "RecResultAssignmentUpdate",
     "RecResultCountByReviewStatus",
     "RecResultCounts",
+    "RecResultCustomEntityItem",
     "RecResultDecisionGroup",
     "RecResultDecisionUpdate",
     "RecResultException",
@@ -3983,6 +3996,7 @@ __all__ = [
     "ResourceListOfTaxClassification",
     "ResourceListOfTaxClassificationExceptionRecord",
     "ResourceListOfTaxExceptionItem",
+    "ResourceListOfTaxProvision",
     "ResourceListOfTaxRuleSet",
     "ResourceListOfTransaction",
     "ResourceListOfTransactionFeeType",
@@ -4174,6 +4188,8 @@ __all__ = [
     "TaxExceptionItem",
     "TaxExceptionRootCause",
     "TaxPortfolioSyncStatus",
+    "TaxProvision",
+    "TaxProvisionMovement",
     "TaxRule",
     "TaxRuleSet",
     "TaxSyncStatus",

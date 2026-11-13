@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **check** | [**ComplianceRuleV3Check**](ComplianceRuleV3Check.md) |  | [optional] 
 **computed_filter** | [**ComplianceRuleV3ComputedFilter**](ComplianceRuleV3ComputedFilter.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
+**plain_english** | **str** |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -37,8 +38,9 @@ measure: Optional[ComplianceRuleV3Measure] = None
 check: Optional[ComplianceRuleV3Check] = None
 computed_filter: Optional[ComplianceRuleV3ComputedFilter] = # Replace with your value
 version: Optional[Version] = None
+plain_english: Optional[StrictStr] = "example_plain_english"
 links: Optional[List[Link]] = None
-compliance_rule_v3_response_instance = ComplianceRuleV3Response(id=id, name=name, description=description, active=active, subject=subject, filter=filter, group_by=group_by, measure=measure, check=check, computed_filter=computed_filter, version=version, links=links)
+compliance_rule_v3_response_instance = ComplianceRuleV3Response(id=id, name=name, description=description, active=active, subject=subject, filter=filter, group_by=group_by, measure=measure, check=check, computed_filter=computed_filter, version=version, plain_english=plain_english, links=links)
 
 ```
 

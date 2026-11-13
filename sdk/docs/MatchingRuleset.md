@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
 **display_name** | **str** | The name of the matching ruleset. | 
-**rec_type** | **str** | The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio. | 
+**rec_type** | **str** | The type of reconciliation to perform. External reconciles non-native data on both sides, described by the datasetSchemas and the externalRecType. A custom entity type is written as its name, which starts with ~. Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio. | 
 **external_rec_type** | [**ExternalRecType**](ExternalRecType.md) |  | [optional] 
 **dataset_schemas** | [**RecDatasetSchemas**](RecDatasetSchemas.md) |  | 
 **filters** | [**GroupReconciliationFilters**](GroupReconciliationFilters.md) |  | [optional] 

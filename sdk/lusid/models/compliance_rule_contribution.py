@@ -22,24 +22,22 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.model_property import ModelProperty
+from lusid.models.compliance_key_used import ComplianceKeyUsed
 from lusid.models.resource_id import ResourceId
 
 class ComplianceRuleContribution(BaseModel):
     """
     ComplianceRuleContribution
     """
-    index: StrictInt = Field(description="The position of this contribution within the compliance run.")
     portfolio_id: ResourceId = Field(alias="portfolioId")
     order_id: Optional[ResourceId] = Field(default=None, alias="orderId")
     instrument:  StrictStr = Field(...,alias="instrument", description="The LUSID instrument identifier (LUID) of the instrument for this contribution.") 
     instrument_type:  Optional[StrictStr] = Field(None,alias="instrumentType", description="Optional. The economic type of the instrument for this contribution.") 
     holding_type:  Optional[StrictStr] = Field(None,alias="holdingType", description="Optional. The holding type of this contribution.") 
     holding_id:  Optional[StrictStr] = Field(None,alias="holdingId", description="Optional. The internal holding identifier encoding the detail of what the holding includes.") 
-    result_values: Dict[str, Union[StrictFloat, StrictInt]] = Field(description="Dictionary of AddressKey (as string) and their corresponding decimal valuation results for this contribution.", alias="resultValues")
-    properties: Dict[str, ModelProperty] = Field(description="Dictionary of PropertyKey (as string) and their corresponding property for this contribution.")
-    related_properties: Dict[str, Optional[StrictStr]] = Field(description="Dictionary of related property keys (as string) and their string values, read from related entities across a relationship.", alias="relatedProperties")
-    __properties = ["index", "portfolioId", "orderId", "instrument", "instrumentType", "holdingType", "holdingId", "resultValues", "properties", "relatedProperties"]
+    held_by:  Optional[StrictStr] = Field(None,alias="heldBy", description="Optional. Where this holding sits relative to the rule's benchmark: portfolio, benchmark or both.  Meaningful only for benchmark-relative rules.") 
+    keys_used: List[ComplianceKeyUsed] = Field(description="The keys this holding contributed to the rule: each key the rule read (plus the portfolio NAV key), with the  role(s) it played, the holding's own value for it, and which bag the value came from.", alias="keysUsed")
+    __properties = ["portfolioId", "orderId", "instrument", "instrumentType", "holdingType", "holdingId", "heldBy", "keysUsed"]
 
     class Config:
         """Pydantic configuration"""
@@ -79,13 +77,13 @@ class ComplianceRuleContribution(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of order_id
         if self.order_id:
             _dict['orderId'] = self.order_id.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
-        _field_dict = {}
-        if self.properties:
-            for _key in self.properties:
-                if self.properties[_key]:
-                    _field_dict[_key] = self.properties[_key].to_dict()
-            _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in keys_used (list)
+        _items = []
+        if self.keys_used:
+            for _item in self.keys_used:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['keysUsed'] = _items
         # set to None if instrument_type (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_type is None and "instrument_type" in self.__fields_set__:
@@ -101,6 +99,11 @@ class ComplianceRuleContribution(BaseModel):
         if self.holding_id is None and "holding_id" in self.__fields_set__:
             _dict['holdingId'] = None
 
+        # set to None if held_by (nullable) is None
+        # and __fields_set__ contains the field
+        if self.held_by is None and "held_by" in self.__fields_set__:
+            _dict['heldBy'] = None
+
         return _dict
 
     @classmethod
@@ -113,21 +116,14 @@ class ComplianceRuleContribution(BaseModel):
             return ComplianceRuleContribution.parse_obj(obj)
 
         _obj = ComplianceRuleContribution.parse_obj({
-            "index": obj.get("index"),
             "portfolio_id": ResourceId.from_dict(obj.get("portfolioId")) if obj.get("portfolioId") is not None else None,
             "order_id": ResourceId.from_dict(obj.get("orderId")) if obj.get("orderId") is not None else None,
             "instrument": obj.get("instrument"),
             "instrument_type": obj.get("instrumentType"),
             "holding_type": obj.get("holdingType"),
             "holding_id": obj.get("holdingId"),
-            "result_values": obj.get("resultValues"),
-            "properties": dict(
-                (_k, ModelProperty.from_dict(_v))
-                for _k, _v in obj.get("properties").items()
-            )
-            if obj.get("properties") is not None
-            else None,
-            "related_properties": obj.get("relatedProperties")
+            "held_by": obj.get("heldBy"),
+            "keys_used": [ComplianceKeyUsed.from_dict(_item) for _item in obj.get("keysUsed")] if obj.get("keysUsed") is not None else None
         })
         return _obj
 

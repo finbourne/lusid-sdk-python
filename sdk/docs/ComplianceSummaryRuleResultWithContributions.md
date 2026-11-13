@@ -4,14 +4,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **rule_id** | [**ResourceId**](ResourceId.md) |  | 
-**template_id** | [**ResourceId**](ResourceId.md) |  | 
-**variation** | **str** |  | 
-**rule_status** | **str** |  | 
+**status** | **str** |  | 
+**check_type** | **str** | The kind of check the rule applied across its groups: \&quot;PercentCheck\&quot; or \&quot;Check\&quot;. Static per rule. Absent for a  rule no check reached. | [optional] 
 **affected_portfolios** | [**List[ResourceId]**](ResourceId.md) |  | 
-**affected_orders** | [**List[ResourceId]**](ResourceId.md) |  | 
-**parameters_used** | **Dict[str, Optional[str]]** |  | 
-**rule_breakdown** | [**List[ComplianceRuleBreakdownWithContributions]**](ComplianceRuleBreakdownWithContributions.md) |  | 
-**other_positions_considered** | [**List[ComplianceRuleContribution]**](ComplianceRuleContribution.md) | The rest of the basis the rule was measured against but did not directly evaluate — the positions in  the referenced/denominator (or initial) group that are not in the RuleBreakdown&#39;s  contributions. Together with those contributions this forms the whole basis, with no overlap, so a  breach can be explained against the full picture (e.g. the non-equity remainder behind an equity limit).  Empty when the rule evaluated everything it considered. | 
+**affected_orders** | [**List[ResourceId]**](ResourceId.md) | The orders the rule affected. Omitted for a holdings-based run. | [optional] 
+**groups** | [**List[ComplianceRuleBreakdownWithContributions]**](ComplianceRuleBreakdownWithContributions.md) |  | 
+**other_positions_considered** | [**List[ComplianceRuleContribution]**](ComplianceRuleContribution.md) | The rest of the basis the rule was measured against but did not directly evaluate — the positions in  the referenced/denominator (or initial) group that are not in a group&#39;s contributions. Together with those  contributions this forms the whole basis, with no overlap, so a breach can be explained against the full picture  (e.g. the non-equity remainder behind an equity limit). Omitted when the rule evaluated everything it considered. | [optional] 
 ## Example
 
 ```python
@@ -22,15 +20,13 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 rule_id: ResourceId = # Replace with your value
-template_id: ResourceId = # Replace with your value
-variation: StrictStr = "example_variation"
-rule_status: StrictStr = "example_rule_status"
+status: StrictStr = "example_status"
+check_type: Optional[StrictStr] = "example_check_type"
 affected_portfolios: List[ResourceId] = # Replace with your value
-affected_orders: List[ResourceId] = # Replace with your value
-parameters_used: Dict[str, Optional[StrictStr]] = # Replace with your value
-rule_breakdown: List[ComplianceRuleBreakdownWithContributions] = # Replace with your value
-other_positions_considered: List[ComplianceRuleContribution] = # Replace with your value
-compliance_summary_rule_result_with_contributions_instance = ComplianceSummaryRuleResultWithContributions(rule_id=rule_id, template_id=template_id, variation=variation, rule_status=rule_status, affected_portfolios=affected_portfolios, affected_orders=affected_orders, parameters_used=parameters_used, rule_breakdown=rule_breakdown, other_positions_considered=other_positions_considered)
+affected_orders: Optional[List[ResourceId]] = # Replace with your value
+groups: List[ComplianceRuleBreakdownWithContributions]
+other_positions_considered: Optional[List[ComplianceRuleContribution]] = # Replace with your value
+compliance_summary_rule_result_with_contributions_instance = ComplianceSummaryRuleResultWithContributions(rule_id=rule_id, status=status, check_type=check_type, affected_portfolios=affected_portfolios, affected_orders=affected_orders, groups=groups, other_positions_considered=other_positions_considered)
 
 ```
 

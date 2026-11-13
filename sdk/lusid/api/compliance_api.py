@@ -734,7 +734,7 @@ class ComplianceApi:
     def describe_compliance_rule_v3(self, scope : Annotated[StrictStr, Field(..., description="The compliance rule's scope.")], code : Annotated[StrictStr, Field(..., description="The compliance rule's code.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The asAt datetime at which to retrieve the rule. Default: latest.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRuleV3DescribeResponse, Awaitable[ComplianceRuleV3DescribeResponse]]:  # noqa: E501
         """[EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.  # noqa: E501
 
-        Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.  # noqa: E501
+        Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -769,7 +769,7 @@ class ComplianceApi:
     def describe_compliance_rule_v3_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The compliance rule's scope.")], code : Annotated[StrictStr, Field(..., description="The compliance rule's code.")], as_at : Annotated[Optional[datetime], Field(description="Optional. The asAt datetime at which to retrieve the rule. Default: latest.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EXPERIMENTAL] DescribeComplianceRuleV3: [EXPERIMENTAL] Describe a V3 compliance rule in plain English.  # noqa: E501
 
-        Use this endpoint to retrieve a plain-English description of a V3 compliance rule. The description  generator is delivered separately, so the description lines are currently empty.  # noqa: E501
+        Use this endpoint to retrieve a plain-English description of a V3 compliance rule as a single  sentence. The sentence is empty for a rule the generator cannot fully express.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -44,8 +44,9 @@ class RecResult(BaseModel):
     id:  StrictStr = Field(...,alias="id", description="The id of the result within its instance: its rec type, result type and result number, e.g. 'Holding-break-3'. Unique within the instance, and kept across its runs for as long as the result keeps its result type.") 
     result_number: StrictInt = Field(description="The result's number within its result type. Kept across runs while the result keeps its type; never reused once assigned.", alias="resultNumber")
     first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
-    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio.") 
+    rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity.") 
     external_rec_type_name:  Optional[StrictStr] = Field(None,alias="externalRecTypeName", description="The client's name for an External rec type, as stamped from the matching ruleset's externalRecType when the run executed. Null for native rec types. Filterable.") 
+    custom_entity_type:  Optional[StrictStr] = Field(None,alias="customEntityType", description="The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
     as_at_instantiated: datetime = Field(description="The asAt datetime at which the instance was first created.", alias="asAtInstantiated")
     rec_definition_id: ResourceId = Field(alias="recDefinitionId")
@@ -70,7 +71,7 @@ class RecResult(BaseModel):
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "externalRecTypeName", "instanceId", "asAtInstantiated", "recDefinitionId", "recDefinitionDisplayName", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
+    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "externalRecTypeName", "customEntityType", "instanceId", "asAtInstantiated", "recDefinitionId", "recDefinitionDisplayName", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -179,6 +180,11 @@ class RecResult(BaseModel):
         if self.external_rec_type_name is None and "external_rec_type_name" in self.__fields_set__:
             _dict['externalRecTypeName'] = None
 
+        # set to None if custom_entity_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.custom_entity_type is None and "custom_entity_type" in self.__fields_set__:
+            _dict['customEntityType'] = None
+
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
@@ -221,6 +227,7 @@ class RecResult(BaseModel):
             "first_run_seen": obj.get("firstRunSeen"),
             "rec_type": obj.get("recType"),
             "external_rec_type_name": obj.get("externalRecTypeName"),
+            "custom_entity_type": obj.get("customEntityType"),
             "instance_id": RecInstanceId.from_dict(obj.get("instanceId")) if obj.get("instanceId") is not None else None,
             "as_at_instantiated": obj.get("asAtInstantiated"),
             "rec_definition_id": ResourceId.from_dict(obj.get("recDefinitionId")) if obj.get("recDefinitionId") is not None else None,

@@ -12,8 +12,8 @@ from datetime import datetime
 
 # Example with RecResultItem 
 
-rec_result_external_identifiers_item_instance = lusid.models.rec_result_external_identifiers_item.RecResultExternalIdentifiersItem(
-                        entity_scope = '', 
+rec_result_custom_entity_item_instance = lusid.models.rec_result_custom_entity_item.RecResultCustomEntityItem(
+                        entity_type = '', 
                         entity_unique_id = '', 
                         entity_display_name = '', 
                         identifiers = {
@@ -28,11 +28,13 @@ rec_result_external_identifiers_item_instance = lusid.models.rec_result_external
                                 writeback_type = '', )
                             ], )
 
-rec_result_item_instance = RecResultItem(rec_result_external_identifiers_item_instance)
+rec_result_item_instance = RecResultItem(rec_result_custom_entity_item_instance)
 
 ```
 See all compatible oneOf types with RecResultItem
 
+
+ * [RecResultExternalIdentifiersItem](./RecResultExternalIdentifiersItem.md)
 
  * [RecResultHoldingItem](./RecResultHoldingItem.md)
 

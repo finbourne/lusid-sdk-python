@@ -32,9 +32,10 @@ class ComplianceRuleResultV2WithContributions(BaseModel):
     run_id: ResourceId = Field(alias="runId")
     instigated_at: datetime = Field(alias="instigatedAt")
     completed_at: datetime = Field(alias="completedAt")
+    rule_definitions_as_at: datetime = Field(alias="ruleDefinitionsAsAt")
     schedule:  StrictStr = Field(...,alias="schedule", description="Available values: PreTrade, PostTrade, PreAndPostTrade.") 
     rule_result: ComplianceSummaryRuleResultWithContributions = Field(alias="ruleResult")
-    __properties = ["runId", "instigatedAt", "completedAt", "schedule", "ruleResult"]
+    __properties = ["runId", "instigatedAt", "completedAt", "ruleDefinitionsAsAt", "schedule", "ruleResult"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +90,7 @@ class ComplianceRuleResultV2WithContributions(BaseModel):
             "run_id": ResourceId.from_dict(obj.get("runId")) if obj.get("runId") is not None else None,
             "instigated_at": obj.get("instigatedAt"),
             "completed_at": obj.get("completedAt"),
+            "rule_definitions_as_at": obj.get("ruleDefinitionsAsAt"),
             "schedule": obj.get("schedule"),
             "rule_result": ComplianceSummaryRuleResultWithContributions.from_dict(obj.get("ruleResult")) if obj.get("ruleResult") is not None else None
         })

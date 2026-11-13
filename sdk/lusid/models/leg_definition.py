@@ -50,7 +50,9 @@ class LegDefinition(BaseModel):
     last_coupon_type:  Optional[StrictStr] = Field(None,alias="lastCouponType", description="Optional coupon type setting for the last coupon, can be used with Stub coupons.  If set to \"ProRata\" (the default), the coupon year fraction is calculated as normal,  however if set to \"Full\" the year fraction is overwritten with the standard year fraction  for a regular ful\" coupon. Note this does not use the day count convention but rather is defined  directly from the tenor (i.e. a quarterly leg will be set to 0.25).    Supported string (enumeration) values are: [ProRata, Full].") 
     fx_linked_notional_schedule: Optional[FxLinkedNotionalSchedule] = Field(default=None, alias="fxLinkedNotionalSchedule")
     intermediate_notional_exchange: Optional[StrictBool] = Field(default=None, description="Indicates whether there are intermediate notional exchanges.", alias="intermediateNotionalExchange")
-    __properties = ["conventionName", "conventions", "indexConvention", "indexConventionName", "notionalExchangeType", "payReceive", "rateOrSpread", "resetConvention", "stubType", "compounding", "amortisation", "firstRegularPaymentDate", "firstCouponType", "lastRegularPaymentDate", "lastCouponType", "fxLinkedNotionalSchedule", "intermediateNotionalExchange"]
+    initial_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount exchanged at the start of the leg, when NotionalExchangeType is Initial or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule.", alias="initialExchangeAmount")
+    final_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount exchanged at maturity, when NotionalExchangeType is Final or Both.  Defaults to the notional. Coupons accrue on the notional regardless. Must be non-negative, and cannot be  set together with an FxLinkedNotionalSchedule.", alias="finalExchangeAmount")
+    __properties = ["conventionName", "conventions", "indexConvention", "indexConventionName", "notionalExchangeType", "payReceive", "rateOrSpread", "resetConvention", "stubType", "compounding", "amortisation", "firstRegularPaymentDate", "firstCouponType", "lastRegularPaymentDate", "lastCouponType", "fxLinkedNotionalSchedule", "intermediateNotionalExchange", "initialExchangeAmount", "finalExchangeAmount"]
 
     class Config:
         """Pydantic configuration"""
@@ -135,6 +137,16 @@ class LegDefinition(BaseModel):
         if self.intermediate_notional_exchange is None and "intermediate_notional_exchange" in self.__fields_set__:
             _dict['intermediateNotionalExchange'] = None
 
+        # set to None if initial_exchange_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.initial_exchange_amount is None and "initial_exchange_amount" in self.__fields_set__:
+            _dict['initialExchangeAmount'] = None
+
+        # set to None if final_exchange_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.final_exchange_amount is None and "final_exchange_amount" in self.__fields_set__:
+            _dict['finalExchangeAmount'] = None
+
         return _dict
 
     @classmethod
@@ -163,7 +175,9 @@ class LegDefinition(BaseModel):
             "last_regular_payment_date": obj.get("lastRegularPaymentDate"),
             "last_coupon_type": obj.get("lastCouponType"),
             "fx_linked_notional_schedule": FxLinkedNotionalSchedule.from_dict(obj.get("fxLinkedNotionalSchedule")) if obj.get("fxLinkedNotionalSchedule") is not None else None,
-            "intermediate_notional_exchange": obj.get("intermediateNotionalExchange")
+            "intermediate_notional_exchange": obj.get("intermediateNotionalExchange"),
+            "initial_exchange_amount": obj.get("initialExchangeAmount"),
+            "final_exchange_amount": obj.get("finalExchangeAmount")
         })
         return _obj
 
