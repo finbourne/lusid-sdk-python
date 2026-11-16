@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **frequency** | **str** | The frequency at which the asset price is reset and the price return is exchanged, e.g. 3M. | 
 **funding_start_lag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
 **last_reset_date** | **datetime** | The date of the last price reset. Optional; when absent the reset dates are rolled forward until the swap maturity date. | [optional] 
+**payment_lag** | [**RelativeDateOffset**](RelativeDateOffset.md) |  | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ first_reset_date: Optional[datetime] = # Replace with your value
 frequency: StrictStr = "example_frequency"
 funding_start_lag: Optional[RelativeDateOffset] = # Replace with your value
 last_reset_date: Optional[datetime] = # Replace with your value
-reset_schedule_instance = ResetSchedule(conventions=conventions, first_reset_date=first_reset_date, frequency=frequency, funding_start_lag=funding_start_lag, last_reset_date=last_reset_date)
+payment_lag: Optional[RelativeDateOffset] = # Replace with your value
+reset_schedule_instance = ResetSchedule(conventions=conventions, first_reset_date=first_reset_date, frequency=frequency, funding_start_lag=funding_start_lag, last_reset_date=last_reset_date, payment_lag=payment_lag)
 
 ```
 

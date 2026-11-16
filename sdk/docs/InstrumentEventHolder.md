@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The set of identifiers which determine the instrument this event relates to. | 
 **lusid_instrument_id** | **str** | The LUID for the instrument. | 
 **instrument_scope** | **str** | The scope of the instrument. | 
-**description** | **str** | The description of the instrument event. | 
+**description** | **str** | The description of the instrument event. | [optional] 
 **event_date_range** | [**EventDateRange**](EventDateRange.md) |  | 
 **completeness** | **str** | Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). Available values: Complete, Incomplete. | [optional] [readonly] 
 **instrument_event** | [**InstrumentEvent**](InstrumentEvent.md) |  | 
@@ -33,7 +33,7 @@ corporate_action_source_id: Optional[ResourceId] = # Replace with your value
 instrument_identifiers: Dict[str, Optional[StrictStr]] = # Replace with your value
 lusid_instrument_id: StrictStr = "example_lusid_instrument_id"
 instrument_scope: StrictStr = "example_instrument_scope"
-description: StrictStr = "example_description"
+description: Optional[StrictStr] = "example_description"
 event_date_range: EventDateRange = # Replace with your value
 completeness: Optional[StrictStr] = "example_completeness"
 instrument_event: InstrumentEvent = # Replace with your value

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.unmatched_breakdown import UnmatchedBreakdown
 
 class BucketSetResultBucket(BaseModel):
     """
@@ -38,7 +39,8 @@ class BucketSetResultBucket(BaseModel):
     previous_cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the start of the period, per unit in issue at that point - so it reads as it did at the previous valuation point rather than being restated at this period's unit count. Omitted where the bucket had no per-unit value at the previous valuation point: on the fund node, where the share class or the bucket is not unitised, where the share class then had no units in issue, and at the fund's first valuation point.", alias="previousCumulativePerUnitValue")
     cumulative_per_unit_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The bucket's cumulative value at the end of the period per unit in issue (CumulativeValue divided by UnitsInIssue), unrounded. Omitted where either the share class or the bucket is not unitised, and where a unitised share class has no units in issue to divide by.", alias="cumulativePerUnitValue")
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the bucket, as configured on the fund configuration.") 
-    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue", "sourceBreakdown", "perUnitValue", "unitsInIssue", "previousCumulativePerUnitValue", "cumulativePerUnitValue", "displayName"]
+    unmatched_breakdown: Optional[UnmatchedBreakdown] = Field(default=None, alias="unmatchedBreakdown")
+    __properties = ["bucketId", "bucketType", "value", "previousCumulativeValue", "cumulativeValue", "sourceBreakdown", "perUnitValue", "unitsInIssue", "previousCumulativePerUnitValue", "cumulativePerUnitValue", "displayName", "unmatchedBreakdown"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +74,9 @@ class BucketSetResultBucket(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of unmatched_breakdown
+        if self.unmatched_breakdown:
+            _dict['unmatchedBreakdown'] = self.unmatched_breakdown.to_dict()
         # set to None if source_breakdown (nullable) is None
         # and __fields_set__ contains the field
         if self.source_breakdown is None and "source_breakdown" in self.__fields_set__:
@@ -124,7 +129,8 @@ class BucketSetResultBucket(BaseModel):
             "units_in_issue": obj.get("unitsInIssue"),
             "previous_cumulative_per_unit_value": obj.get("previousCumulativePerUnitValue"),
             "cumulative_per_unit_value": obj.get("cumulativePerUnitValue"),
-            "display_name": obj.get("displayName")
+            "display_name": obj.get("displayName"),
+            "unmatched_breakdown": UnmatchedBreakdown.from_dict(obj.get("unmatchedBreakdown")) if obj.get("unmatchedBreakdown") is not None else None
         })
         return _obj
 

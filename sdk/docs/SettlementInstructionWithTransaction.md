@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **settlement_instruction** | [**TransactionSettlementInstruction**](TransactionSettlementInstruction.md) |  | [optional] 
 **matched_transaction** | [**OutputTransaction**](OutputTransaction.md) |  | [optional] 
+**settlement_fx** | [**SettlementFx**](SettlementFx.md) |  | [optional] 
 ## Example
 
 ```python
@@ -17,7 +18,8 @@ from datetime import datetime
 
 settlement_instruction: Optional[TransactionSettlementInstruction] = # Replace with your value
 matched_transaction: Optional[OutputTransaction] = # Replace with your value
-settlement_instruction_with_transaction_instance = SettlementInstructionWithTransaction(settlement_instruction=settlement_instruction, matched_transaction=matched_transaction)
+settlement_fx: Optional[SettlementFx] = # Replace with your value
+settlement_instruction_with_transaction_instance = SettlementInstructionWithTransaction(settlement_instruction=settlement_instruction, matched_transaction=matched_transaction, settlement_fx=settlement_fx)
 
 ```
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **str** | The id of the result within its instance: its rec type, result type and result number, e.g. &#39;Holding-break-3&#39;. Unique within the instance, and kept across its runs for as long as the result keeps its result type. | 
 **result_number** | **int** | The result&#39;s number within its result type. Kept across runs while the result keeps its type; never reused once assigned. | 
 **first_run_seen** | **int** | The run in which the result was first assigned its id. | 
+**as_at_first_seen** | **datetime** | The runAsAt of the run in which the result first appeared in its instance, the run numbered firstRunSeen. Written once: re-runs leave it unchanged. | 
 **rec_type** | **str** | The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity. | 
 **external_rec_type_name** | **str** | The client&#39;s name for an External rec type, as stamped from the matching ruleset&#39;s externalRecType when the run executed. Null for native rec types. Filterable. | [optional] 
 **custom_entity_type** | **str** | The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable. | [optional] 
@@ -28,6 +29,7 @@ Name | Type | Description | Notes
 **items** | [**RecResultItemDetails**](RecResultItemDetails.md) |  | 
 **linked_results** | [**List[RecLinkedResult]**](RecLinkedResult.md) | Results of other rec types in the same rec instance run whose items share an identifier with this result&#39;s items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then. | 
 **comments** | [**List[RecUserComment]**](RecUserComment.md) | User-authored comments attached to the result. Carried forward across runs. | 
+**streak** | [**RecResultStreak**](RecResultStreak.md) |  | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet. | [optional] 
 **assigned_user** | **str** | The LUSID user id assigned to the result. | [optional] 
 **assigned_role** | **str** | The LUSID IAM role id assigned to the result. | [optional] 
@@ -48,6 +50,7 @@ result_number: StrictInt = # Replace with your value
 result_number: StrictInt = 42
 first_run_seen: StrictInt = # Replace with your value
 first_run_seen: StrictInt = 42
+as_at_first_seen: datetime = # Replace with your value
 rec_type: StrictStr = "example_rec_type"
 external_rec_type_name: Optional[StrictStr] = "example_external_rec_type_name"
 custom_entity_type: Optional[StrictStr] = "example_custom_entity_type"
@@ -70,13 +73,14 @@ supplemental_attributes: List[SupplementalAttributeValues] = # Replace with your
 items: RecResultItemDetails
 linked_results: List[RecLinkedResult] = # Replace with your value
 comments: List[RecUserComment] = # Replace with your value
+streak: Optional[RecResultStreak] = None
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
 assigned_user: Optional[StrictStr] = "example_assigned_user"
 assigned_role: Optional[StrictStr] = "example_assigned_role"
 href: Optional[StrictStr] = "example_href"
 version: Optional[Version] = None
 links: Optional[List[Link]] = None
-rec_result_instance = RecResult(id=id, result_number=result_number, first_run_seen=first_run_seen, rec_type=rec_type, external_rec_type_name=external_rec_type_name, custom_entity_type=custom_entity_type, instance_id=instance_id, as_at_instantiated=as_at_instantiated, rec_definition_id=rec_definition_id, rec_definition_display_name=rec_definition_display_name, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, linked_results=linked_results, comments=comments, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
+rec_result_instance = RecResult(id=id, result_number=result_number, first_run_seen=first_run_seen, as_at_first_seen=as_at_first_seen, rec_type=rec_type, external_rec_type_name=external_rec_type_name, custom_entity_type=custom_entity_type, instance_id=instance_id, as_at_instantiated=as_at_instantiated, rec_definition_id=rec_definition_id, rec_definition_display_name=rec_definition_display_name, run_number=run_number, run_as_at=run_as_at, dates_reconciled=dates_reconciled, result_type=result_type, result_cardinality=result_cardinality, result_life_cycle=result_life_cycle, exception=exception, review=review, core_rules=core_rules, aggregate_rules=aggregate_rules, supplemental_attributes=supplemental_attributes, items=items, linked_results=linked_results, comments=comments, streak=streak, properties=properties, assigned_user=assigned_user, assigned_role=assigned_role, href=href, version=version, links=links)
 
 ```
 

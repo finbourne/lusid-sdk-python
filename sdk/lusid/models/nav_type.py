@@ -54,7 +54,8 @@ class NavType(BaseModel):
     notional_dealing_cost_table_id: Optional[ResourceId] = Field(default=None, alias="notionalDealingCostTableId")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
     chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the Nav Type's derived portfolio is elected into. This can be: Default or UkChargeableGains. Omit it, or supply Default, to leave the derived portfolio inheriting its parent portfolio's regime. Under UkChargeableGains, in-scope holdings in the derived portfolio are depleted under the UK chargeable gains rules regardless of the Nav Type's accounting method; it requires the Fund's base currency to be GBP. Available values: Default, UkChargeableGains.") 
-    __properties = ["status", "code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId", "chargeableGainsRegime"]
+    cash_cost_relief_method:  Optional[StrictStr] = Field(None,alias="cashCostReliefMethod", description="How this Nav Type relieves base cost when a cash position's local balance reduces towards zero. This can be: AverageCost or SettlementAmount. Omit it, or supply AverageCost, and a cash disposal releases the position's average base cost and posts the difference to the contra leg as realised FX on the settlement date. Under SettlementAmount, a cash disposal releases the base amount at which the contra leg of the same transaction is posted, so the settlement nets to nil in base currency and no realised FX is posted on the cash leg; the cash position then carries the unrecognised FX in its base cost until the deemed exposure event recognises it. It cannot be combined with calculateTradeDateToSettlementFxPnL, whether set on the Nav Type's settlement configuration or inherited from a portfolio's; a valuation point on the Nav Type fails while a transaction type in its scope turns calculateTradeDateToSettlementFxPnL on for a movement; and it can be changed on an existing Nav Type only while the Nav Type has no positions. Available values: AverageCost, SettlementAmount.") 
+    __properties = ["status", "code", "displayName", "description", "chartOfAccountsId", "postingModuleCodes", "cleardownModuleCodes", "settlementConfiguration", "valuationRecipeId", "holdingRecipeId", "accountingMethod", "subHoldingKeys", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "amortisationRuleSetId", "leaderNavTypeCode", "transactionTemplateScope", "transactionExclusionFilter", "pricingBasis", "swingPricing", "notionalDealingCostTableId", "valuationTemplateId", "chargeableGainsRegime", "cashCostReliefMethod"]
 
     class Config:
         """Pydantic configuration"""
@@ -162,6 +163,11 @@ class NavType(BaseModel):
         if self.chargeable_gains_regime is None and "chargeable_gains_regime" in self.__fields_set__:
             _dict['chargeableGainsRegime'] = None
 
+        # set to None if cash_cost_relief_method (nullable) is None
+        # and __fields_set__ contains the field
+        if self.cash_cost_relief_method is None and "cash_cost_relief_method" in self.__fields_set__:
+            _dict['cashCostReliefMethod'] = None
+
         return _dict
 
     @classmethod
@@ -197,7 +203,8 @@ class NavType(BaseModel):
             "swing_pricing": SwingPricingRule.from_dict(obj.get("swingPricing")) if obj.get("swingPricing") is not None else None,
             "notional_dealing_cost_table_id": ResourceId.from_dict(obj.get("notionalDealingCostTableId")) if obj.get("notionalDealingCostTableId") is not None else None,
             "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
-            "chargeable_gains_regime": obj.get("chargeableGainsRegime")
+            "chargeable_gains_regime": obj.get("chargeableGainsRegime"),
+            "cash_cost_relief_method": obj.get("cashCostReliefMethod")
         })
         return _obj
 

@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**get_allocation_event_receivables**](AllocationEventsApi.md#get_allocation_event_receivables) | **GET** /api/allocationevents/{scope}/{code}/receivables | [EARLY ACCESS] GetAllocationEventReceivables: Get the receivables of an Allocation Event.
 [**list_allocation_events**](AllocationEventsApi.md#list_allocation_events) | **GET** /api/allocationevents | [EARLY ACCESS] ListAllocationEvents: List Allocation Events.
 [**list_allocation_payment_holds**](AllocationEventsApi.md#list_allocation_payment_holds) | **GET** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/holds | [EARLY ACCESS] ListAllocationPaymentHolds: [EARLY ACCESS] ListAllocationPaymentHolds: List the holds placed on a partner&#39;s payment.
+[**pay_allocation_event_refund**](AllocationEventsApi.md#pay_allocation_event_refund) | **POST** /api/allocationevents/{scope}/{code}/refunds | [EARLY ACCESS] PayAllocationEventRefund: Pay out a refund owed on an Allocation Event.
 [**plan_allocation_event_booking**](AllocationEventsApi.md#plan_allocation_event_booking) | **POST** /api/allocationevents/{scope}/{code}/plan | [EARLY ACCESS] PlanAllocationEventBooking: Plan the booking of an Allocation Event.
 [**put_allocation_payment_hold**](AllocationEventsApi.md#put_allocation_payment_hold) | **PUT** /api/allocationevents/{scope}/{code}/allocations/{investorRecordId}/hold | [EARLY ACCESS] PutAllocationPaymentHold: [EARLY ACCESS] PutAllocationPaymentHold: Place, move or release a hold on a partner&#39;s payment.
 [**reallocate_allocation_event**](AllocationEventsApi.md#reallocate_allocation_event) | **POST** /api/allocationevents/{scope}/{code}/reallocate | [EARLY ACCESS] ReallocateAllocationEvent: Reallocate an Allocation Event.
@@ -808,6 +809,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The holds placed on the partner&#39;s payment. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **pay_allocation_event_refund**
+> AllocationEvent pay_allocation_event_refund(scope, code, allocation_event_refund_payment_request, effective_at=effective_at)
+
+[EARLY ACCESS] PayAllocationEventRefund: Pay out a refund owed on an Allocation Event.
+
+Pay out part or all of the refund owed to an investor whose receipt against a booked capital call exceeded  what it owed. The cash leaves the fund against the refund payable the receipt recorded; no register balance  moves, since the excess was never paid-in capital. The amount may not exceed what is still payable, may be no  finer than the event currency's minor unit, and may not be dated before the receipt that created the payable.  Posting the same reference again returns the event unchanged.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    AllocationEventsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(AllocationEventsApi)
+    scope = 'scope_example' # str | The scope of the Allocation Event.
+    code = 'code_example' # str | The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # allocation_event_refund_payment_request = AllocationEventRefundPaymentRequest.from_json("")
+    # allocation_event_refund_payment_request = AllocationEventRefundPaymentRequest.from_dict({})
+    allocation_event_refund_payment_request = AllocationEventRefundPaymentRequest()
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to read the Allocation Event paying the refund. The payment is recorded on the version in force at that time, from that version's own effective date; the payment posting is dated by the request. Defaults to the current LUSID system datetime if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.pay_allocation_event_refund(scope, code, allocation_event_refund_payment_request, effective_at=effective_at, opts=opts)
+
+        # [EARLY ACCESS] PayAllocationEventRefund: Pay out a refund owed on an Allocation Event.
+        api_response = api_instance.pay_allocation_event_refund(scope, code, allocation_event_refund_payment_request, effective_at=effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling AllocationEventsApi->pay_allocation_event_refund: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Allocation Event. | 
+ **code** | **str**| The code of the Allocation Event. Together with the scope this uniquely identifies the Allocation Event. | 
+ **allocation_event_refund_payment_request** | [**AllocationEventRefundPaymentRequest**](AllocationEventRefundPaymentRequest.md)| The investor, amount, date and reference of the payment. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to read the Allocation Event paying the refund. The payment is recorded on the version in force at that time, from that version&#39;s own effective date; the payment posting is dated by the request. Defaults to the current LUSID system datetime if not specified. | [optional] 
+
+### Return type
+
+[**AllocationEvent**](AllocationEvent.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Allocation Event with the refund payment recorded. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

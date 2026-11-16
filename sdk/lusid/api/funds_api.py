@@ -79,9 +79,18 @@ from lusid.models.revert_valuation_point_data_request import RevertValuationPoin
 from lusid.models.revert_valuation_point_response import RevertValuationPointResponse
 from lusid.models.series_definition_request import SeriesDefinitionRequest
 from lusid.models.set_share_class_instruments_request import SetShareClassInstrumentsRequest
+from lusid.models.share_class_properties import ShareClassProperties
 from lusid.models.single_valuation_point_query_parameters import SingleValuationPointQueryParameters
 from lusid.models.tax_cost_record_request import TaxCostRecordRequest
+from lusid.models.tax_deemed_disposal_response import TaxDeemedDisposalResponse
+from lusid.models.tax_deemed_disposals_response import TaxDeemedDisposalsResponse
+from lusid.models.tax_fund_reconciliation_holding_response import TaxFundReconciliationHoldingResponse
+from lusid.models.tax_fund_reconciliation_response import TaxFundReconciliationResponse
+from lusid.models.tax_ledger_reconciliation_holding_response import TaxLedgerReconciliationHoldingResponse
+from lusid.models.tax_ledger_reconciliation_response import TaxLedgerReconciliationResponse
 from lusid.models.tax_provision import TaxProvision
+from lusid.models.tax_return_response import TaxReturnResponse
+from lusid.models.tax_return_transition_request import TaxReturnTransitionRequest
 from lusid.models.tax_sync_status import TaxSyncStatus
 from lusid.models.update_valuation_point_request import UpdateValuationPointRequest
 from lusid.models.upsert_external_dealing_estimates_request import UpsertExternalDealingEstimatesRequest
@@ -835,6 +844,197 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/series', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def advance_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for advancing the return.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @overload
+    def advance_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for advancing the return.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def advance_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for advancing the return.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxReturnResponse, Awaitable[TaxReturnResponse]]:  # noqa: E501
+        """[EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.  # noqa: E501
+
+        Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.advance_tax_return(scope, code, tax_return_transition_request, effective_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param tax_return_transition_request: The reason for advancing the return. (required)
+        :type tax_return_transition_request: TaxReturnTransitionRequest
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxReturnResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the advance_tax_return_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.advance_tax_return_with_http_info(scope, code, tax_return_transition_request, effective_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def advance_tax_return_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for advancing the return.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.  # noqa: E501
+
+        Moves the return from Draft to Prepared, Prepared to Reviewed, Reviewed to SignedOff or SignedOff to Final. Advancing past Reviewed requires the tax records to be in sync with the ledger. Each step is recorded with the supplied reason.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.advance_tax_return_with_http_info(scope, code, tax_return_transition_request, effective_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param tax_return_transition_request: The reason for advancing the return. (required)
+        :type tax_return_transition_request: TaxReturnTransitionRequest
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxReturnResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'tax_return_transition_request',
+            'effective_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method advance_tax_return" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['tax_return_transition_request'] is not None:
+            _body_params = _params['tax_return_transition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxReturnResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/return/advance', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -7394,6 +7594,1152 @@ class FundsApi:
 
 
     @overload
+    async def get_tax_deemed_disposal(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], var_date : Annotated[StrictStr, Field(..., description="The date of the deemed disposal.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxDeemedDisposalResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_deemed_disposal(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], var_date : Annotated[StrictStr, Field(..., description="The date of the deemed disposal.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxDeemedDisposalResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_deemed_disposal(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], var_date : Annotated[StrictStr, Field(..., description="The date of the deemed disposal.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxDeemedDisposalResponse, Awaitable[TaxDeemedDisposalResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.  # noqa: E501
+
+        Returns the deemed disposal of a holding on a given date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_deemed_disposal(scope, code, holding_id, var_date, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param var_date: The date of the deemed disposal. (required)
+        :type var_date: str
+        :param as_at: The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxDeemedDisposalResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_deemed_disposal_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_deemed_disposal_with_http_info(scope, code, holding_id, var_date, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_deemed_disposal_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], var_date : Annotated[StrictStr, Field(..., description="The date of the deemed disposal.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.  # noqa: E501
+
+        Returns the deemed disposal of a holding on a given date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_deemed_disposal_with_http_info(scope, code, holding_id, var_date, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param var_date: The date of the deemed disposal. (required)
+        :type var_date: str
+        :param as_at: The asAt datetime at which to read the deemed disposal. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxDeemedDisposalResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_id',
+            'var_date',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_deemed_disposal" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_id']:
+            _path_params['holdingId'] = _params['holding_id']
+
+        if _params['var_date']:
+            _path_params['date'] = _params['var_date']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxDeemedDisposalResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/deemed-disposals/{holdingId}/{date}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_deemed_disposals(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxDeemedDisposalsResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_deemed_disposals(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxDeemedDisposalsResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_deemed_disposals(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxDeemedDisposalsResponse, Awaitable[TaxDeemedDisposalsResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.  # noqa: E501
+
+        Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company's disposals are actual and a fund's are notional.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_deemed_disposals(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxDeemedDisposalsResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_deemed_disposals_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_deemed_disposals_with_http_info(scope, code, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_deemed_disposals_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.  # noqa: E501
+
+        Returns the period-end deemed disposals, the vintages they roll into and the seven-year spreading matrix. A company's disposals are actual and a fund's are notional.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_deemed_disposals_with_http_info(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the deemed disposals. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxDeemedDisposalsResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_deemed_disposals" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxDeemedDisposalsResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/deemed-disposals', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_fund_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxFundReconciliationResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_fund_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxFundReconciliationResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_fund_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxFundReconciliationResponse, Awaitable[TaxFundReconciliationResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company's tax figures to its member funds.  # noqa: E501
+
+        Compares the company's return total to the sum of its member funds' notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_fund_reconciliation(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxFundReconciliationResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_fund_reconciliation_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_fund_reconciliation_with_http_info(scope, code, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_fund_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxFundReconciliation: [EARLY ACCESS] GetTaxFundReconciliation: Reconcile a company's tax figures to its member funds.  # noqa: E501
+
+        Compares the company's return total to the sum of its member funds' notional figures and explains each difference by scope, pool averaging, matching, indexation, the kink test or an out-of-sync holding. Only available for a company; a fund returns a failure.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_fund_reconciliation_with_http_info(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxFundReconciliationResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_fund_reconciliation" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxFundReconciliationResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/fund-reconciliation', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_fund_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxFundReconciliationHoldingResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_fund_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxFundReconciliationHoldingResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_fund_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxFundReconciliationHoldingResponse, Awaitable[TaxFundReconciliationHoldingResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation.  # noqa: E501
+
+        Returns the company figure for a holding beside each member fund's notional figure, with the category and explanation of any difference.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_fund_reconciliation_holding(scope, code, holding_id, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxFundReconciliationHoldingResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_fund_reconciliation_holding_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_fund_reconciliation_holding_with_http_info(scope, code, holding_id, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_fund_reconciliation_holding_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxFundReconciliationHolding: [EARLY ACCESS] GetTaxFundReconciliationHolding: Drill into one holding of the company-to-funds reconciliation.  # noqa: E501
+
+        Returns the company figure for a holding beside each member fund's notional figure, with the category and explanation of any difference.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_fund_reconciliation_holding_with_http_info(scope, code, holding_id, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxFundReconciliationHoldingResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_id',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_fund_reconciliation_holding" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_id']:
+            _path_params['holdingId'] = _params['holding_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxFundReconciliationHoldingResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/fund-reconciliation/holdings/{holdingId}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_ledger_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxLedgerReconciliationResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_ledger_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxLedgerReconciliationResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_ledger_reconciliation(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxLedgerReconciliationResponse, Awaitable[TaxLedgerReconciliationResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger.  # noqa: E501
+
+        Compares the ledger's capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_ledger_reconciliation(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxLedgerReconciliationResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_ledger_reconciliation_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_ledger_reconciliation_with_http_info(scope, code, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_ledger_reconciliation_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxLedgerReconciliation: [EARLY ACCESS] GetTaxLedgerReconciliation: Reconcile the tax figures of a Fund or company to its ledger.  # noqa: E501
+
+        Compares the ledger's capital gain or loss for the period to the comparable tax figure, explains each difference as an excluded holding, a tax cost adjustment or an out-of-sync holding, and bridges from the ledger figure to the return total.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_ledger_reconciliation_with_http_info(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxLedgerReconciliationResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_ledger_reconciliation" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxLedgerReconciliationResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/ledger-reconciliation', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_ledger_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxLedgerReconciliationHoldingResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_ledger_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxLedgerReconciliationHoldingResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_ledger_reconciliation_holding(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxLedgerReconciliationHoldingResponse, Awaitable[TaxLedgerReconciliationHoldingResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation.  # noqa: E501
+
+        Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_ledger_reconciliation_holding(scope, code, holding_id, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxLedgerReconciliationHoldingResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_ledger_reconciliation_holding_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_ledger_reconciliation_holding_with_http_info(scope, code, holding_id, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_ledger_reconciliation_holding_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], holding_id : Annotated[StrictStr, Field(..., description="The identifier of the holding to drill into, as returned by the parent reconciliation.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxLedgerReconciliationHolding: [EARLY ACCESS] GetTaxLedgerReconciliationHolding: Drill into one holding of the tax-to-ledger reconciliation.  # noqa: E501
+
+        Returns the ledger and tax figures of a single holding side by side with the category and explanation of any difference.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_ledger_reconciliation_holding_with_http_info(scope, code, holding_id, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param holding_id: The identifier of the holding to drill into, as returned by the parent reconciliation. (required)
+        :type holding_id: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the reconciliation. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxLedgerReconciliationHoldingResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_id',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_ledger_reconciliation_holding" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_id']:
+            _path_params['holdingId'] = _params['holding_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxLedgerReconciliationHoldingResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/ledger-reconciliation/holdings/{holdingId}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def get_tax_provision(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], diary_entry_code : Annotated[StrictStr, Field(..., description="The Diary Entry code of the Valuation Point the provision is for.")], as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the provision. Defaults to returning the latest version if not specified.")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, the provision of the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> TaxProvision:  # noqa: E501
         ...
 
@@ -7563,6 +8909,193 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/tax/provision', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @overload
+    def get_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxReturnResponse, Awaitable[TaxReturnResponse]]:  # noqa: E501
+        """[EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company.  # noqa: E501
+
+        Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_return(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxReturnResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_tax_return_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_tax_return_with_http_info(scope, code, effective_at, as_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_tax_return_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetTaxReturn: [EARLY ACCESS] GetTaxReturn: Get the year-end tax return of a Fund or company.  # noqa: E501
+
+        Returns the chargeable gains on actual disposals (line A), the spread instalments of deemed disposals (line D), the loan relationship net credit or debit (line LR, company level), the holdings outside the regime, the memo rows and the workflow history for the accounting period containing effectiveAt.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_tax_return_with_http_info(scope, code, effective_at, as_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to read the return. Defaults to returning the latest version if not specified.
+        :type as_at: datetime
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxReturnResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_tax_return" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxReturnResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/return', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -14026,6 +15559,197 @@ class FundsApi:
 
 
     @overload
+    async def send_back_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for sending the return back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @overload
+    def send_back_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for sending the return back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=True, **kwargs) -> TaxReturnResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def send_back_tax_return(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for sending the return back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[TaxReturnResponse, Awaitable[TaxReturnResponse]]:  # noqa: E501
+        """[EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.  # noqa: E501
+
+        Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.send_back_tax_return(scope, code, tax_return_transition_request, effective_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param tax_return_transition_request: The reason for sending the return back. (required)
+        :type tax_return_transition_request: TaxReturnTransitionRequest
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: TaxReturnResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the send_back_tax_return_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.send_back_tax_return_with_http_info(scope, code, tax_return_transition_request, effective_at, tax_period, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def send_back_tax_return_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], tax_return_transition_request : Annotated[TaxReturnTransitionRequest, Field(description="The reason for sending the return back.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.")] = None, tax_period : Annotated[Optional[StrictStr], Field( description="An optional accounting period label that overrides the period selected by effectiveAt.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.  # noqa: E501
+
+        Moves the return one step towards Draft, recording the supplied reason. A Final return cannot be sent back.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.send_back_tax_return_with_http_info(scope, code, tax_return_transition_request, effective_at, tax_period, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param tax_return_transition_request: The reason for sending the return back. (required)
+        :type tax_return_transition_request: TaxReturnTransitionRequest
+        :param effective_at: The effective datetime or cut label that selects the accounting period. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param tax_period: An optional accounting period label that overrides the period selected by effectiveAt.
+        :type tax_period: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(TaxReturnResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'tax_return_transition_request',
+            'effective_at',
+            'tax_period'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method send_back_tax_return" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('tax_period') is not None:  # noqa: E501
+            _query_params.append(('taxPeriod', _params['tax_period']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['tax_return_transition_request'] is not None:
+            _body_params = _params['tax_return_transition_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "TaxReturnResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/tax/return/send-back', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def set_share_class_instruments(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], set_share_class_instruments_request : Annotated[SetShareClassInstrumentsRequest, Field(description="The scopes and instrument identifiers for the instruments to be set.")], **kwargs) -> Fund:  # noqa: E501
         ...
 
@@ -15465,6 +17189,189 @@ class FundsApi:
 
         return self.api_client.call_api(
             '/api/funds/{scope}/{code}/navAdjustment', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_share_class_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_short_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").")] = None, **kwargs) -> ShareClassProperties:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_share_class_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_short_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").")] = None, async_req: Optional[bool]=True, **kwargs) -> ShareClassProperties:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_share_class_properties(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_short_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ShareClassProperties, Awaitable[ShareClassProperties]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties.  # noqa: E501
+
+        Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_share_class_properties(scope, code, share_class_short_code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_short_code: The short code of the Share Class to update or insert the properties onto. (required)
+        :type share_class_short_code: str
+        :param request_body: The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").
+        :type request_body: Dict[str, ModelProperty]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: ShareClassProperties
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_share_class_properties_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_share_class_properties_with_http_info(scope, code, share_class_short_code, request_body, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_share_class_properties_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_short_code : Annotated[StrictStr, Field(..., description="The short code of the Share Class to update or insert the properties onto.")], request_body : Annotated[Optional[Dict[str, ModelProperty]], Field(description="The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertShareClassProperties: Upsert Share Class properties.  # noqa: E501
+
+        Update or insert one or more Instrument-domain properties onto a single Share Class.  A property will be updated if it already exists and inserted if it does not.  Upserting with a null value deletes the property instance.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_share_class_properties_with_http_info(scope, code, share_class_short_code, request_body, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param share_class_short_code: The short code of the Share Class to update or insert the properties onto. (required)
+        :type share_class_short_code: str
+        :param request_body: The properties to be updated or inserted onto the Share Class, keyed by property key (e.g. \"Instrument/Manager/Id\").
+        :type request_body: Dict[str, ModelProperty]
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(ShareClassProperties, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'share_class_short_code',
+            'request_body'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_share_class_properties" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['share_class_short_code']:
+            _path_params['shareClassShortCode'] = _params['share_class_short_code']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "ShareClassProperties",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/shareclasses/{shareClassShortCode}/properties/$upsert', 'POST',
             _path_params,
             _query_params,
             _header_params,

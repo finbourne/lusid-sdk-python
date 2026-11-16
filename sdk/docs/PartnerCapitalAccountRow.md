@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **qtd** | **float** | The quarter-to-date amount for the row. | 
 **ytd** | **float** | The year-to-date amount for the row. | 
 **itd** | **float** | The inception-to-date amount for the row. | 
+**details** | [**List[PartnerCapitalAccountRowDetail]**](PartnerCapitalAccountRowDetail.md) | Labelled parts of the row&#39;s total, each already included in the row&#39;s columns. Tax withheld from a distribution on the partner&#39;s behalf is counted as distributed and shown here as its own entry against the distribution it was withheld on. Empty for a row with nothing to break out. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ row_type: StrictStr = "example_row_type"
 qtd: Union[StrictFloat, StrictInt] = # Replace with your value
 ytd: Union[StrictFloat, StrictInt] = # Replace with your value
 itd: Union[StrictFloat, StrictInt] = # Replace with your value
-partner_capital_account_row_instance = PartnerCapitalAccountRow(row_type=row_type, qtd=qtd, ytd=ytd, itd=itd)
+details: Optional[List[PartnerCapitalAccountRowDetail]] = # Replace with your value
+partner_capital_account_row_instance = PartnerCapitalAccountRow(row_type=row_type, qtd=qtd, ytd=ytd, itd=itd, details=details)
 
 ```
 

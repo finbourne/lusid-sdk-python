@@ -16,6 +16,8 @@ Name | Type | Description | Notes
 **bank_charge_bearer** | **str** | Who bears the bank charge: Partner leaves it outstanding on the investor, Fund books it as a fund expense. Defaults to the map&#39;s policy. | [optional] 
 **shortfall_written_off** | **float** | Any small shortfall within the map&#39;s tolerance that was written off rather than left outstanding. | [optional] 
 **posting_id** | **str** | The identifier of the receipt posting on the investor&#39;s line. | [optional] 
+**settled_line_id** | **str** | The register line the receipt settled, as the booking posted it. Written by the booking, not by the caller; absent on a receipt recorded before the line was kept. | [optional] 
+**reference** | **str** | The caller&#39;s reference the receipt was recorded under, as sent. Absent on a receipt sent without one. | [optional] 
 ## Example
 
 ```python
@@ -37,7 +39,9 @@ bank_charge: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 bank_charge_bearer: Optional[StrictStr] = "example_bank_charge_bearer"
 shortfall_written_off: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 posting_id: Optional[StrictStr] = "example_posting_id"
-allocation_event_receipt_instance = AllocationEventReceipt(investor_record_id=investor_record_id, amount=amount, receipt_date=receipt_date, applied=applied, refund=refund, payment_currency=payment_currency, payment_fx_rate=payment_fx_rate, fx_difference=fx_difference, bank_charge=bank_charge, bank_charge_bearer=bank_charge_bearer, shortfall_written_off=shortfall_written_off, posting_id=posting_id)
+settled_line_id: Optional[StrictStr] = "example_settled_line_id"
+reference: Optional[StrictStr] = "example_reference"
+allocation_event_receipt_instance = AllocationEventReceipt(investor_record_id=investor_record_id, amount=amount, receipt_date=receipt_date, applied=applied, refund=refund, payment_currency=payment_currency, payment_fx_rate=payment_fx_rate, fx_difference=fx_difference, bank_charge=bank_charge, bank_charge_bearer=bank_charge_bearer, shortfall_written_off=shortfall_written_off, posting_id=posting_id, settled_line_id=settled_line_id, reference=reference)
 
 ```
 

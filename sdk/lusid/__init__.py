@@ -47,6 +47,7 @@ from lusid.api.custom_data_models_api import CustomDataModelsApi
 from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
+from lusid.api.deemed_disposal_definitions_api import DeemedDisposalDefinitionsApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.eligible_collateral_schedules_api import EligibleCollateralSchedulesApi
 from lusid.api.entities_api import EntitiesApi
@@ -154,6 +155,7 @@ from lusid.models.accounted_quote import AccountedQuote
 from lusid.models.accounted_transaction import AccountedTransaction
 from lusid.models.accounting_method import AccountingMethod
 from lusid.models.accounts_upsert_response import AccountsUpsertResponse
+from lusid.models.accrued_fee_line import AccruedFeeLine
 from lusid.models.accumulation_event import AccumulationEvent
 from lusid.models.action_id import ActionId
 from lusid.models.add_business_days_to_date_request import AddBusinessDaysToDateRequest
@@ -216,6 +218,8 @@ from lusid.models.allocation_event_reallocate_request import AllocationEventReal
 from lusid.models.allocation_event_receipt import AllocationEventReceipt
 from lusid.models.allocation_event_receipt_request import AllocationEventReceiptRequest
 from lusid.models.allocation_event_refund import AllocationEventRefund
+from lusid.models.allocation_event_refund_payment import AllocationEventRefundPayment
+from lusid.models.allocation_event_refund_payment_request import AllocationEventRefundPaymentRequest
 from lusid.models.allocation_event_request import AllocationEventRequest
 from lusid.models.allocation_event_reversal import AllocationEventReversal
 from lusid.models.allocation_event_reverse_request import AllocationEventReverseRequest
@@ -251,12 +255,15 @@ from lusid.models.allocation_receivable import AllocationReceivable
 from lusid.models.allocation_receivables_ageing import AllocationReceivablesAgeing
 from lusid.models.allocation_register_receivable import AllocationRegisterReceivable
 from lusid.models.allocation_request import AllocationRequest
+from lusid.models.allocation_rule import AllocationRule
+from lusid.models.allocation_rule_effective import AllocationRuleEffective
 from lusid.models.allocation_service_run_allocation import AllocationServiceRunAllocation
 from lusid.models.allocation_service_run_response import AllocationServiceRunResponse
 from lusid.models.allocation_service_run_warning import AllocationServiceRunWarning
 from lusid.models.allocation_set_request import AllocationSetRequest
 from lusid.models.amend_commitment_event import AmendCommitmentEvent
 from lusid.models.amortisation_event import AmortisationEvent
+from lusid.models.amortisation_horizon import AmortisationHorizon
 from lusid.models.amortisation_rule import AmortisationRule
 from lusid.models.amortisation_rule_set import AmortisationRuleSet
 from lusid.models.amount import Amount
@@ -680,6 +687,8 @@ from lusid.models.decimal_list import DecimalList
 from lusid.models.decimal_list_compliance_parameter import DecimalListComplianceParameter
 from lusid.models.decorated_compliance_run_summary import DecoratedComplianceRunSummary
 from lusid.models.decorated_compliance_run_summary_request import DecoratedComplianceRunSummaryRequest
+from lusid.models.deemed_disposal_definition import DeemedDisposalDefinition
+from lusid.models.deemed_disposal_definition_request import DeemedDisposalDefinitionRequest
 from lusid.models.delete_accounts_response import DeleteAccountsResponse
 from lusid.models.delete_custodian_accounts_response import DeleteCustodianAccountsResponse
 from lusid.models.delete_data_quality_rule import DeleteDataQualityRule
@@ -994,6 +1003,7 @@ from lusid.models.id_selector_definition import IdSelectorDefinition
 from lusid.models.identifier_definition import IdentifierDefinition
 from lusid.models.identifier_for_resolution import IdentifierForResolution
 from lusid.models.identifier_part_schema import IdentifierPartSchema
+from lusid.models.ignored_distribution_tag import IgnoredDistributionTag
 from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
 from lusid.models.index_projection_dependency import IndexProjectionDependency
@@ -1276,6 +1286,7 @@ from lusid.models.paged_resource_list_of_custom_entity_response import PagedReso
 from lusid.models.paged_resource_list_of_custom_entity_type import PagedResourceListOfCustomEntityType
 from lusid.models.paged_resource_list_of_cut_label_definition import PagedResourceListOfCutLabelDefinition
 from lusid.models.paged_resource_list_of_data_type_summary import PagedResourceListOfDataTypeSummary
+from lusid.models.paged_resource_list_of_deemed_disposal_definition import PagedResourceListOfDeemedDisposalDefinition
 from lusid.models.paged_resource_list_of_dialect_id import PagedResourceListOfDialectId
 from lusid.models.paged_resource_list_of_diary_entry import PagedResourceListOfDiaryEntry
 from lusid.models.paged_resource_list_of_eligible_collateral_schedule import PagedResourceListOfEligibleCollateralSchedule
@@ -1363,11 +1374,13 @@ from lusid.models.participation_request import ParticipationRequest
 from lusid.models.participation_set_request import ParticipationSetRequest
 from lusid.models.partner_allocation import PartnerAllocation
 from lusid.models.partner_allocation_pool import PartnerAllocationPool
+from lusid.models.partner_allocation_pool_sources import PartnerAllocationPoolSources
 from lusid.models.partner_allocation_run_request import PartnerAllocationRunRequest
 from lusid.models.partner_allocation_run_result import PartnerAllocationRunResult
 from lusid.models.partner_capital_account import PartnerCapitalAccount
 from lusid.models.partner_capital_account_memo import PartnerCapitalAccountMemo
 from lusid.models.partner_capital_account_row import PartnerCapitalAccountRow
+from lusid.models.partner_capital_account_row_detail import PartnerCapitalAccountRowDetail
 from lusid.models.partner_performance import PartnerPerformance
 from lusid.models.partner_performance_cash_flow import PartnerPerformanceCashFlow
 from lusid.models.partner_performance_measures import PartnerPerformanceMeasures
@@ -1378,6 +1391,7 @@ from lusid.models.partner_statement_line_difference import PartnerStatementLineD
 from lusid.models.partner_statement_request import PartnerStatementRequest
 from lusid.models.partnership_accounting_configuration import PartnershipAccountingConfiguration
 from lusid.models.partnership_accounting_valuation_point_data import PartnershipAccountingValuationPointData
+from lusid.models.partnership_allocation_problem import PartnershipAllocationProblem
 from lusid.models.partnership_config_pack import PartnershipConfigPack
 from lusid.models.party_terms import PartyTerms
 from lusid.models.payment_details_applicable_entity import PaymentDetailsApplicableEntity
@@ -1550,6 +1564,7 @@ from lusid.models.realised_gain_loss_chargeable_gains import RealisedGainLossCha
 from lusid.models.realised_gain_loss_matched_lot import RealisedGainLossMatchedLot
 from lusid.models.rec_activity_since_effective_at import RecActivitySinceEffectiveAt
 from lusid.models.rec_activity_window import RecActivityWindow
+from lusid.models.rec_aged_result import RecAgedResult
 from lusid.models.rec_approval_decision import RecApprovalDecision
 from lusid.models.rec_as_at_policy import RecAsAtPolicy
 from lusid.models.rec_closed_exception_counts import RecClosedExceptionCounts
@@ -1600,6 +1615,9 @@ from lusid.models.rec_result_review import RecResultReview
 from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
 from lusid.models.rec_result_settlement_activity_item import RecResultSettlementActivityItem
+from lusid.models.rec_result_streak import RecResultStreak
+from lusid.models.rec_result_streak_predecessor import RecResultStreakPredecessor
+from lusid.models.rec_result_sub_streak import RecResultSubStreak
 from lusid.models.rec_result_transaction_item import RecResultTransactionItem
 from lusid.models.rec_review import RecReview
 from lusid.models.rec_review_configuration import RecReviewConfiguration
@@ -1849,6 +1867,7 @@ from lusid.models.settlement_activity_query import SettlementActivityQuery
 from lusid.models.settlement_configuration_category import SettlementConfigurationCategory
 from lusid.models.settlement_configuration_method_override import SettlementConfigurationMethodOverride
 from lusid.models.settlement_cycle import SettlementCycle
+from lusid.models.settlement_fx import SettlementFx
 from lusid.models.settlement_in_lieu import SettlementInLieu
 from lusid.models.settlement_instruction_amend_request import SettlementInstructionAmendRequest
 from lusid.models.settlement_instruction_query import SettlementInstructionQuery
@@ -1864,6 +1883,7 @@ from lusid.models.share_class_dealing_breakdown import ShareClassDealingBreakdow
 from lusid.models.share_class_definition import ShareClassDefinition
 from lusid.models.share_class_details import ShareClassDetails
 from lusid.models.share_class_pnl_breakdown import ShareClassPnlBreakdown
+from lusid.models.share_class_properties import ShareClassProperties
 from lusid.models.share_class_rounding_convention import ShareClassRoundingConvention
 from lusid.models.shares_premium_dividend_event import SharesPremiumDividendEvent
 from lusid.models.shift_value_condition import ShiftValueCondition
@@ -1934,6 +1954,7 @@ from lusid.models.swing_trigger import SwingTrigger
 from lusid.models.swing_trigger_evaluation import SwingTriggerEvaluation
 from lusid.models.target_tax_lot import TargetTaxLot
 from lusid.models.target_tax_lot_request import TargetTaxLotRequest
+from lusid.models.tax_accounting_period import TaxAccountingPeriod
 from lusid.models.tax_classification import TaxClassification
 from lusid.models.tax_classification_decision_step import TaxClassificationDecisionStep
 from lusid.models.tax_classification_detail import TaxClassificationDetail
@@ -1943,11 +1964,29 @@ from lusid.models.tax_classification_field_version import TaxClassificationField
 from lusid.models.tax_classification_inputs import TaxClassificationInputs
 from lusid.models.tax_cost_record import TaxCostRecord
 from lusid.models.tax_cost_record_request import TaxCostRecordRequest
+from lusid.models.tax_deemed_disposal_response import TaxDeemedDisposalResponse
+from lusid.models.tax_deemed_disposals_response import TaxDeemedDisposalsResponse
 from lusid.models.tax_exception_item import TaxExceptionItem
 from lusid.models.tax_exception_root_cause import TaxExceptionRootCause
+from lusid.models.tax_fund_reconciliation_holding_response import TaxFundReconciliationHoldingResponse
+from lusid.models.tax_fund_reconciliation_proxy_row import TaxFundReconciliationProxyRow
+from lusid.models.tax_fund_reconciliation_response import TaxFundReconciliationResponse
+from lusid.models.tax_ledger_reconciliation_holding_response import TaxLedgerReconciliationHoldingResponse
+from lusid.models.tax_ledger_reconciliation_response import TaxLedgerReconciliationResponse
 from lusid.models.tax_portfolio_sync_status import TaxPortfolioSyncStatus
 from lusid.models.tax_provision import TaxProvision
 from lusid.models.tax_provision_movement import TaxProvisionMovement
+from lusid.models.tax_reconciliation_bridge_row import TaxReconciliationBridgeRow
+from lusid.models.tax_reconciliation_difference_row import TaxReconciliationDifferenceRow
+from lusid.models.tax_return_disposal_row import TaxReturnDisposalRow
+from lusid.models.tax_return_excluded_row import TaxReturnExcludedRow
+from lusid.models.tax_return_loan_relationship_row import TaxReturnLoanRelationshipRow
+from lusid.models.tax_return_memo_row import TaxReturnMemoRow
+from lusid.models.tax_return_response import TaxReturnResponse
+from lusid.models.tax_return_spread_instalment import TaxReturnSpreadInstalment
+from lusid.models.tax_return_transition_request import TaxReturnTransitionRequest
+from lusid.models.tax_return_vintage import TaxReturnVintage
+from lusid.models.tax_return_workflow_step import TaxReturnWorkflowStep
 from lusid.models.tax_rule import TaxRule
 from lusid.models.tax_rule_set import TaxRuleSet
 from lusid.models.tax_sync_status import TaxSyncStatus
@@ -2052,6 +2091,7 @@ from lusid.models.unit_schema import UnitSchema
 from lusid.models.unitisation_data import UnitisationData
 from lusid.models.units_ratio import UnitsRatio
 from lusid.models.unknown_proceeds_election import UnknownProceedsElection
+from lusid.models.unmatched_breakdown import UnmatchedBreakdown
 from lusid.models.unmatched_holding_method import UnmatchedHoldingMethod
 from lusid.models.unsettled_transaction import UnsettledTransaction
 from lusid.models.unsettled_transaction_counter_leg_revaluation import UnsettledTransactionCounterLegRevaluation
@@ -2066,6 +2106,7 @@ from lusid.models.update_custom_entity_definition_request import UpdateCustomEnt
 from lusid.models.update_custom_entity_type_request import UpdateCustomEntityTypeRequest
 from lusid.models.update_cut_label_definition_request import UpdateCutLabelDefinitionRequest
 from lusid.models.update_data_type_request import UpdateDataTypeRequest
+from lusid.models.update_deemed_disposal_definition_request import UpdateDeemedDisposalDefinitionRequest
 from lusid.models.update_deposit_amount_event import UpdateDepositAmountEvent
 from lusid.models.update_derived_property_definition_request import UpdateDerivedPropertyDefinitionRequest
 from lusid.models.update_fee_type_request import UpdateFeeTypeRequest
@@ -2299,6 +2340,7 @@ __all__ = [
     "CustomEntityTypesApi",
     "CutLabelDefinitionsApi",
     "DataTypesApi",
+    "DeemedDisposalDefinitionsApi",
     "DerivedTransactionPortfoliosApi",
     "EligibleCollateralSchedulesApi",
     "EntitiesApi",
@@ -2396,6 +2438,7 @@ __all__ = [
     "AccountedTransaction",
     "AccountingMethod",
     "AccountsUpsertResponse",
+    "AccruedFeeLine",
     "AccumulationEvent",
     "ActionId",
     "AddBusinessDaysToDateRequest",
@@ -2458,6 +2501,8 @@ __all__ = [
     "AllocationEventReceipt",
     "AllocationEventReceiptRequest",
     "AllocationEventRefund",
+    "AllocationEventRefundPayment",
+    "AllocationEventRefundPaymentRequest",
     "AllocationEventRequest",
     "AllocationEventReversal",
     "AllocationEventReverseRequest",
@@ -2493,12 +2538,15 @@ __all__ = [
     "AllocationReceivablesAgeing",
     "AllocationRegisterReceivable",
     "AllocationRequest",
+    "AllocationRule",
+    "AllocationRuleEffective",
     "AllocationServiceRunAllocation",
     "AllocationServiceRunResponse",
     "AllocationServiceRunWarning",
     "AllocationSetRequest",
     "AmendCommitmentEvent",
     "AmortisationEvent",
+    "AmortisationHorizon",
     "AmortisationRule",
     "AmortisationRuleSet",
     "Amount",
@@ -2922,6 +2970,8 @@ __all__ = [
     "DecimalListComplianceParameter",
     "DecoratedComplianceRunSummary",
     "DecoratedComplianceRunSummaryRequest",
+    "DeemedDisposalDefinition",
+    "DeemedDisposalDefinitionRequest",
     "DeleteAccountsResponse",
     "DeleteCustodianAccountsResponse",
     "DeleteDataQualityRule",
@@ -3236,6 +3286,7 @@ __all__ = [
     "IdentifierDefinition",
     "IdentifierForResolution",
     "IdentifierPartSchema",
+    "IgnoredDistributionTag",
     "IndexConvention",
     "IndexModelOptions",
     "IndexProjectionDependency",
@@ -3518,6 +3569,7 @@ __all__ = [
     "PagedResourceListOfCustomEntityType",
     "PagedResourceListOfCutLabelDefinition",
     "PagedResourceListOfDataTypeSummary",
+    "PagedResourceListOfDeemedDisposalDefinition",
     "PagedResourceListOfDialectId",
     "PagedResourceListOfDiaryEntry",
     "PagedResourceListOfEligibleCollateralSchedule",
@@ -3605,11 +3657,13 @@ __all__ = [
     "ParticipationSetRequest",
     "PartnerAllocation",
     "PartnerAllocationPool",
+    "PartnerAllocationPoolSources",
     "PartnerAllocationRunRequest",
     "PartnerAllocationRunResult",
     "PartnerCapitalAccount",
     "PartnerCapitalAccountMemo",
     "PartnerCapitalAccountRow",
+    "PartnerCapitalAccountRowDetail",
     "PartnerPerformance",
     "PartnerPerformanceCashFlow",
     "PartnerPerformanceMeasures",
@@ -3620,6 +3674,7 @@ __all__ = [
     "PartnerStatementRequest",
     "PartnershipAccountingConfiguration",
     "PartnershipAccountingValuationPointData",
+    "PartnershipAllocationProblem",
     "PartnershipConfigPack",
     "PartyTerms",
     "PaymentDetailsApplicableEntity",
@@ -3792,6 +3847,7 @@ __all__ = [
     "RealisedGainLossMatchedLot",
     "RecActivitySinceEffectiveAt",
     "RecActivityWindow",
+    "RecAgedResult",
     "RecApprovalDecision",
     "RecAsAtPolicy",
     "RecClosedExceptionCounts",
@@ -3842,6 +3898,9 @@ __all__ = [
     "RecResultSet",
     "RecResultSetApprovalDecisionRequest",
     "RecResultSettlementActivityItem",
+    "RecResultStreak",
+    "RecResultStreakPredecessor",
+    "RecResultSubStreak",
     "RecResultTransactionItem",
     "RecReview",
     "RecReviewConfiguration",
@@ -4091,6 +4150,7 @@ __all__ = [
     "SettlementConfigurationCategory",
     "SettlementConfigurationMethodOverride",
     "SettlementCycle",
+    "SettlementFx",
     "SettlementInLieu",
     "SettlementInstructionAmendRequest",
     "SettlementInstructionQuery",
@@ -4106,6 +4166,7 @@ __all__ = [
     "ShareClassDefinition",
     "ShareClassDetails",
     "ShareClassPnlBreakdown",
+    "ShareClassProperties",
     "ShareClassRoundingConvention",
     "SharesPremiumDividendEvent",
     "ShiftValueCondition",
@@ -4176,6 +4237,7 @@ __all__ = [
     "SwingTriggerEvaluation",
     "TargetTaxLot",
     "TargetTaxLotRequest",
+    "TaxAccountingPeriod",
     "TaxClassification",
     "TaxClassificationDecisionStep",
     "TaxClassificationDetail",
@@ -4185,11 +4247,29 @@ __all__ = [
     "TaxClassificationInputs",
     "TaxCostRecord",
     "TaxCostRecordRequest",
+    "TaxDeemedDisposalResponse",
+    "TaxDeemedDisposalsResponse",
     "TaxExceptionItem",
     "TaxExceptionRootCause",
+    "TaxFundReconciliationHoldingResponse",
+    "TaxFundReconciliationProxyRow",
+    "TaxFundReconciliationResponse",
+    "TaxLedgerReconciliationHoldingResponse",
+    "TaxLedgerReconciliationResponse",
     "TaxPortfolioSyncStatus",
     "TaxProvision",
     "TaxProvisionMovement",
+    "TaxReconciliationBridgeRow",
+    "TaxReconciliationDifferenceRow",
+    "TaxReturnDisposalRow",
+    "TaxReturnExcludedRow",
+    "TaxReturnLoanRelationshipRow",
+    "TaxReturnMemoRow",
+    "TaxReturnResponse",
+    "TaxReturnSpreadInstalment",
+    "TaxReturnTransitionRequest",
+    "TaxReturnVintage",
+    "TaxReturnWorkflowStep",
     "TaxRule",
     "TaxRuleSet",
     "TaxSyncStatus",
@@ -4294,6 +4374,7 @@ __all__ = [
     "UnitisationData",
     "UnitsRatio",
     "UnknownProceedsElection",
+    "UnmatchedBreakdown",
     "UnmatchedHoldingMethod",
     "UnsettledTransaction",
     "UnsettledTransactionCounterLegRevaluation",
@@ -4308,6 +4389,7 @@ __all__ = [
     "UpdateCustomEntityTypeRequest",
     "UpdateCutLabelDefinitionRequest",
     "UpdateDataTypeRequest",
+    "UpdateDeemedDisposalDefinitionRequest",
     "UpdateDepositAmountEvent",
     "UpdateDerivedPropertyDefinitionRequest",
     "UpdateFeeTypeRequest",

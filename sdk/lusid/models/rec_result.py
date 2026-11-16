@@ -32,6 +32,7 @@ from lusid.models.rec_linked_result import RecLinkedResult
 from lusid.models.rec_result_exception import RecResultException
 from lusid.models.rec_result_item_details import RecResultItemDetails
 from lusid.models.rec_result_review import RecResultReview
+from lusid.models.rec_result_streak import RecResultStreak
 from lusid.models.rec_user_comment import RecUserComment
 from lusid.models.resource_id import ResourceId
 from lusid.models.supplemental_attribute_values import SupplementalAttributeValues
@@ -44,6 +45,7 @@ class RecResult(BaseModel):
     id:  StrictStr = Field(...,alias="id", description="The id of the result within its instance: its rec type, result type and result number, e.g. 'Holding-break-3'. Unique within the instance, and kept across its runs for as long as the result keeps its result type.") 
     result_number: StrictInt = Field(description="The result's number within its result type. Kept across runs while the result keeps its type; never reused once assigned.", alias="resultNumber")
     first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
+    as_at_first_seen: datetime = Field(description="The runAsAt of the run in which the result first appeared in its instance, the run numbered firstRunSeen. Written once: re-runs leave it unchanged.", alias="asAtFirstSeen")
     rec_type:  StrictStr = Field(...,alias="recType", description="The type of rec that the result belongs to (e.g. Holding). Available values: Holding, CashHolding, Valuation, InputTransaction, OutputTransaction, SettlementActivity, External, Instrument, LegalEntity, Portfolio, CustomEntity.") 
     external_rec_type_name:  Optional[StrictStr] = Field(None,alias="externalRecTypeName", description="The client's name for an External rec type, as stamped from the matching ruleset's externalRecType when the run executed. Null for native rec types. Filterable.") 
     custom_entity_type:  Optional[StrictStr] = Field(None,alias="customEntityType", description="The name of the custom entity type, which starts with ~. Set when the rec type is CustomEntity and null for every other rec type. Filterable.") 
@@ -65,13 +67,14 @@ class RecResult(BaseModel):
     items: RecResultItemDetails
     linked_results: List[RecLinkedResult] = Field(description="Results of other rec types in the same rec instance run whose items share an identifier with this result's items. Only exceptions link, and only to exceptions; symmetric. Set by the linking pass once every rec type of the run has completed, so empty until then.", alias="linkedResults")
     comments: List[RecUserComment] = Field(description="User-authored comments attached to the result. Carried forward across runs.")
+    streak: Optional[RecResultStreak] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Properties in the RecResult domain. Filterable and sortable. Always includes the properties the matching ruleset populates, with a null value where the result holds none yet.")
     assigned_user:  Optional[StrictStr] = Field(None,alias="assignedUser", description="The LUSID user id assigned to the result.") 
     assigned_role:  Optional[StrictStr] = Field(None,alias="assignedRole", description="The LUSID IAM role id assigned to the result.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["id", "resultNumber", "firstRunSeen", "recType", "externalRecTypeName", "customEntityType", "instanceId", "asAtInstantiated", "recDefinitionId", "recDefinitionDisplayName", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
+    __properties = ["id", "resultNumber", "firstRunSeen", "asAtFirstSeen", "recType", "externalRecTypeName", "customEntityType", "instanceId", "asAtInstantiated", "recDefinitionId", "recDefinitionDisplayName", "runNumber", "runAsAt", "datesReconciled", "resultType", "resultCardinality", "resultLifeCycle", "exception", "review", "coreRules", "aggregateRules", "supplementalAttributes", "items", "linkedResults", "comments", "streak", "properties", "assignedUser", "assignedRole", "href", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -158,6 +161,9 @@ class RecResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['comments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of streak
+        if self.streak:
+            _dict['streak'] = self.streak.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
         _field_dict = {}
         if self.properties:
@@ -225,6 +231,7 @@ class RecResult(BaseModel):
             "id": obj.get("id"),
             "result_number": obj.get("resultNumber"),
             "first_run_seen": obj.get("firstRunSeen"),
+            "as_at_first_seen": obj.get("asAtFirstSeen"),
             "rec_type": obj.get("recType"),
             "external_rec_type_name": obj.get("externalRecTypeName"),
             "custom_entity_type": obj.get("customEntityType"),
@@ -246,6 +253,7 @@ class RecResult(BaseModel):
             "items": RecResultItemDetails.from_dict(obj.get("items")) if obj.get("items") is not None else None,
             "linked_results": [RecLinkedResult.from_dict(_item) for _item in obj.get("linkedResults")] if obj.get("linkedResults") is not None else None,
             "comments": [RecUserComment.from_dict(_item) for _item in obj.get("comments")] if obj.get("comments") is not None else None,
+            "streak": RecResultStreak.from_dict(obj.get("streak")) if obj.get("streak") is not None else None,
             "properties": dict(
                 (_k, PerpetualProperty.from_dict(_v))
                 for _k, _v in obj.get("properties").items()

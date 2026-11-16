@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **open** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] 
 **activity_total** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] 
 **close** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] 
+**fx_translation** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -26,8 +27,9 @@ currency: Optional[StrictStr] = "example_currency"
 open: Optional[BucketAmounts] = None
 activity_total: Optional[BucketAmounts] = # Replace with your value
 close: Optional[BucketAmounts] = None
+fx_translation: Optional[CurrencyAndAmount] = # Replace with your value
 links: Optional[List[Link]] = None
-bucket_currency_subtotal_instance = BucketCurrencySubtotal(bucket_start=bucket_start, bucket_end=bucket_end, currency=currency, open=open, activity_total=activity_total, close=close, links=links)
+bucket_currency_subtotal_instance = BucketCurrencySubtotal(bucket_start=bucket_start, bucket_end=bucket_end, currency=currency, open=open, activity_total=activity_total, close=close, fx_translation=fx_translation, links=links)
 
 ```
 

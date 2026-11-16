@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.link import Link
+from lusid.models.response_meta_data import ResponseMetaData
 
 class SideDefinition(BaseModel):
     """
@@ -37,8 +38,9 @@ class SideDefinition(BaseModel):
     notional_amount:  Optional[StrictStr] = Field(None,alias="notionalAmount", description="The value, field or property key defining the side's notional amount") 
     current_face:  Optional[StrictStr] = Field(None,alias="currentFace", description="The value, field or property key defining the side's current face / outstanding notional.") 
     scope:  Optional[StrictStr] = Field(None,alias="scope", description="The scope in which the side definition exists.") 
+    metadata: Optional[Dict[str, List[ResponseMetaData]]] = Field(default=None, description="Contains warnings related to the side definition, such as a stored copy of a platform side that differs from the platform's current definition.")
     links: Optional[List[Link]] = None
-    __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace", "scope", "links"]
+    __properties = ["side", "security", "currency", "rate", "units", "amount", "notionalAmount", "currentFace", "scope", "metadata", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -72,6 +74,15 @@ class SideDefinition(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict of array)
+        _field_dict_of_array = {}
+        if self.metadata:
+            for _key in self.metadata:
+                if self.metadata[_key]:
+                    _field_dict_of_array[_key] = [
+                        _item.to_dict() for _item in self.metadata[_key]
+                    ]
+            _dict['metadata'] = _field_dict_of_array
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -93,6 +104,11 @@ class SideDefinition(BaseModel):
         # and __fields_set__ contains the field
         if self.scope is None and "scope" in self.__fields_set__:
             _dict['scope'] = None
+
+        # set to None if metadata (nullable) is None
+        # and __fields_set__ contains the field
+        if self.metadata is None and "metadata" in self.__fields_set__:
+            _dict['metadata'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -120,6 +136,16 @@ class SideDefinition(BaseModel):
             "notional_amount": obj.get("notionalAmount"),
             "current_face": obj.get("currentFace"),
             "scope": obj.get("scope"),
+            "metadata": dict(
+                (_k,
+                        [ResponseMetaData.from_dict(_item) for _item in _v]
+                        if _v is not None
+                        else None
+                )
+                for _k, _v in obj.get("metadata").items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

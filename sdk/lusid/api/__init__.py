@@ -31,6 +31,7 @@ from lusid.api.custom_data_models_api import CustomDataModelsApi
 from lusid.api.custom_entity_types_api import CustomEntityTypesApi
 from lusid.api.cut_label_definitions_api import CutLabelDefinitionsApi
 from lusid.api.data_types_api import DataTypesApi
+from lusid.api.deemed_disposal_definitions_api import DeemedDisposalDefinitionsApi
 from lusid.api.derived_transaction_portfolios_api import DerivedTransactionPortfoliosApi
 from lusid.api.eligible_collateral_schedules_api import EligibleCollateralSchedulesApi
 from lusid.api.entities_api import EntitiesApi
@@ -135,6 +136,7 @@ __all__ = [
     "CustomEntityTypesApi",
     "CutLabelDefinitionsApi",
     "DataTypesApi",
+    "DeemedDisposalDefinitionsApi",
     "DerivedTransactionPortfoliosApi",
     "EligibleCollateralSchedulesApi",
     "EntitiesApi",

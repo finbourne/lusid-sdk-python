@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.amortisation_horizon import AmortisationHorizon
 from lusid.models.fractional_units_true_up_configuration import FractionalUnitsTrueUpConfiguration
 from lusid.models.resource_id import ResourceId
 from lusid.models.wht_parameters import WhtParameters
@@ -35,8 +36,9 @@ class CreatePortfolioDetails(BaseModel):
     fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = Field(default=None, alias="fractionalUnitsTrueUpConfiguration")
     holdings_fungibility:  Optional[StrictStr] = Field(None,alias="holdingsFungibility", description="Whether the portfolio's holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. A reset or never-configured flag reads back as absent. Available values: Default, Enabled.") 
     chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. If not supplied, the portfolio's current value is left unchanged; supply Default to reset it. A reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.") 
+    amortisation_horizon: Optional[AmortisationHorizon] = Field(default=None, alias="amortisationHorizon")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
-    __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "whtParameters"]
+    __properties = ["corporateActionSourceId", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "amortisationHorizon", "whtParameters"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +78,9 @@ class CreatePortfolioDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fractional_units_true_up_configuration
         if self.fractional_units_true_up_configuration:
             _dict['fractionalUnitsTrueUpConfiguration'] = self.fractional_units_true_up_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortisation_horizon
+        if self.amortisation_horizon:
+            _dict['amortisationHorizon'] = self.amortisation_horizon.to_dict()
         # override the default output from pydantic by calling `to_dict()` of wht_parameters
         if self.wht_parameters:
             _dict['whtParameters'] = self.wht_parameters.to_dict()
@@ -111,6 +116,7 @@ class CreatePortfolioDetails(BaseModel):
             "fractional_units_true_up_configuration": FractionalUnitsTrueUpConfiguration.from_dict(obj.get("fractionalUnitsTrueUpConfiguration")) if obj.get("fractionalUnitsTrueUpConfiguration") is not None else None,
             "holdings_fungibility": obj.get("holdingsFungibility"),
             "chargeable_gains_regime": obj.get("chargeableGainsRegime"),
+            "amortisation_horizon": AmortisationHorizon.from_dict(obj.get("amortisationHorizon")) if obj.get("amortisationHorizon") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None
         })
         return _obj

@@ -685,7 +685,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_derived_recipes**
-> ResourceListOfGetRecipeResponse list_derived_recipes(as_at=as_at, filter=filter)
+> ResourceListOfGetRecipeResponse list_derived_recipes(as_at=as_at, filter=filter, sort_by=sort_by)
 
 ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
 
@@ -737,14 +737,15 @@ def main():
     # Create an instance of the API class
     api_instance = api_client_factory.build(ConfigurationRecipeApi)
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. (optional)
-    filter = 'filter_example' # str | Expression to filter the result set, note this functionality is not yet enabled for this endpoint. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, opts=opts)
+        # api_response =  api_instance.list_derived_recipes(as_at=as_at, filter=filter, sort_by=sort_by, opts=opts)
 
         # ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.
-        api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter)
+        api_response = api_instance.list_derived_recipes(as_at=as_at, filter=filter, sort_by=sort_by)
         pprint(api_response)
 
     except ApiException as e:
@@ -758,7 +759,8 @@ main()
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **as_at** | **datetime**| The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified. | [optional] 
- **filter** | **str**| Expression to filter the result set, note this functionality is not yet enabled for this endpoint. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
 
 ### Return type
 

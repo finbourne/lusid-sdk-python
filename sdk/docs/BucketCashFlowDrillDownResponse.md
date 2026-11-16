@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **window_start** | **datetime** | The window start the buckets&#39; balances run from: where the first bucket&#39;s opening balance is taken. | 
 **buckets** | [**List[BucketCashFlowBucket]**](BucketCashFlowBucket.md) | One bucket per period of the schedule, per member portfolio, payment currency and sub-holding key combination, each with its  opening balance, activity and closing balance. | 
 **currency_subtotals** | [**List[BucketCurrencySubtotal]**](BucketCurrencySubtotal.md) | The buckets summed across portfolios and sub-holding keys, one per period and payment currency. | 
-**issues** | **List[str]** | What the balances do not cover, for example that they are in the payment currency only and gross of haircut; absent when there is nothing to report. | [optional] 
+**issues** | **List[str]** | What the balances do not cover, for example that they are gross of haircut, or that no rate was found to give them in the report currency; absent when there is nothing to report. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 

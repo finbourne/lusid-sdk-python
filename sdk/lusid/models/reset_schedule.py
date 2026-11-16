@@ -34,7 +34,8 @@ class ResetSchedule(BaseModel):
     frequency:  StrictStr = Field(...,alias="frequency", description="The frequency at which the asset price is reset and the price return is exchanged, e.g. 3M.") 
     funding_start_lag: Optional[RelativeDateOffset] = Field(default=None, alias="fundingStartLag")
     last_reset_date: Optional[datetime] = Field(default=None, description="The date of the last price reset. Optional; when absent the reset dates are rolled forward until the swap maturity date.", alias="lastResetDate")
-    __properties = ["conventions", "firstResetDate", "frequency", "fundingStartLag", "lastResetDate"]
+    payment_lag: Optional[RelativeDateOffset] = Field(default=None, alias="paymentLag")
+    __properties = ["conventions", "firstResetDate", "frequency", "fundingStartLag", "lastResetDate", "paymentLag"]
 
     class Config:
         """Pydantic configuration"""
@@ -74,6 +75,9 @@ class ResetSchedule(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of funding_start_lag
         if self.funding_start_lag:
             _dict['fundingStartLag'] = self.funding_start_lag.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of payment_lag
+        if self.payment_lag:
+            _dict['paymentLag'] = self.payment_lag.to_dict()
         # set to None if first_reset_date (nullable) is None
         # and __fields_set__ contains the field
         if self.first_reset_date is None and "first_reset_date" in self.__fields_set__:
@@ -100,7 +104,8 @@ class ResetSchedule(BaseModel):
             "first_reset_date": obj.get("firstResetDate"),
             "frequency": obj.get("frequency"),
             "funding_start_lag": RelativeDateOffset.from_dict(obj.get("fundingStartLag")) if obj.get("fundingStartLag") is not None else None,
-            "last_reset_date": obj.get("lastResetDate")
+            "last_reset_date": obj.get("lastResetDate"),
+            "payment_lag": RelativeDateOffset.from_dict(obj.get("paymentLag")) if obj.get("paymentLag") is not None else None
         })
         return _obj
 

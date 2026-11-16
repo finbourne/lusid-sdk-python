@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **bucket** | **str** | The ageing bucket: Current, 1-30, 31-60, 61-90 or 90+. | [optional] 
 **portfolio** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **side** | **str** | Whether the record owes on its own line (LP) or as a feeder&#39;s roll-up on the master (ROLLUP). | [optional] 
+**refund_payable** | **float** | What the fund still owes the investor record back: receipts beyond what it owed, less the refunds paid out. Zero once the event is reversed, when the reversal&#39;s own refund takes over. | [optional] 
 ## Example
 
 ```python
@@ -30,7 +31,8 @@ days_past_due: Optional[StrictInt] = None
 bucket: Optional[StrictStr] = "example_bucket"
 portfolio: Optional[ResourceId] = None
 side: Optional[StrictStr] = "example_side"
-allocation_receivable_instance = AllocationReceivable(investor_record_id=investor_record_id, called=called, received=received, outstanding=outstanding, days_past_due=days_past_due, bucket=bucket, portfolio=portfolio, side=side)
+refund_payable: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+allocation_receivable_instance = AllocationReceivable(investor_record_id=investor_record_id, called=called, received=received, outstanding=outstanding, days_past_due=days_past_due, bucket=bucket, portfolio=portfolio, side=side, refund_payable=refund_payable)
 
 ```
 

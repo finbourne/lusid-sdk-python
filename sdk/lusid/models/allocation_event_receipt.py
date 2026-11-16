@@ -39,7 +39,9 @@ class AllocationEventReceipt(BaseModel):
     bank_charge_bearer:  Optional[StrictStr] = Field(None,alias="bankChargeBearer", description="Who bears the bank charge: Partner leaves it outstanding on the investor, Fund books it as a fund expense. Defaults to the map's policy.") 
     shortfall_written_off: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Any small shortfall within the map's tolerance that was written off rather than left outstanding.", alias="shortfallWrittenOff")
     posting_id:  Optional[StrictStr] = Field(None,alias="postingId", description="The identifier of the receipt posting on the investor's line.") 
-    __properties = ["investorRecordId", "amount", "receiptDate", "applied", "refund", "paymentCurrency", "paymentFxRate", "fxDifference", "bankCharge", "bankChargeBearer", "shortfallWrittenOff", "postingId"]
+    settled_line_id:  Optional[StrictStr] = Field(None,alias="settledLineId", description="The register line the receipt settled, as the booking posted it. Written by the booking, not by the caller; absent on a receipt recorded before the line was kept.") 
+    reference:  Optional[StrictStr] = Field(None,alias="reference", description="The caller's reference the receipt was recorded under, as sent. Absent on a receipt sent without one.") 
+    __properties = ["investorRecordId", "amount", "receiptDate", "applied", "refund", "paymentCurrency", "paymentFxRate", "fxDifference", "bankCharge", "bankChargeBearer", "shortfallWrittenOff", "postingId", "settledLineId", "reference"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,6 +100,16 @@ class AllocationEventReceipt(BaseModel):
         if self.posting_id is None and "posting_id" in self.__fields_set__:
             _dict['postingId'] = None
 
+        # set to None if settled_line_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.settled_line_id is None and "settled_line_id" in self.__fields_set__:
+            _dict['settledLineId'] = None
+
+        # set to None if reference (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reference is None and "reference" in self.__fields_set__:
+            _dict['reference'] = None
+
         return _dict
 
     @classmethod
@@ -121,7 +133,9 @@ class AllocationEventReceipt(BaseModel):
             "bank_charge": obj.get("bankCharge"),
             "bank_charge_bearer": obj.get("bankChargeBearer"),
             "shortfall_written_off": obj.get("shortfallWrittenOff"),
-            "posting_id": obj.get("postingId")
+            "posting_id": obj.get("postingId"),
+            "settled_line_id": obj.get("settledLineId"),
+            "reference": obj.get("reference")
         })
         return _obj
 

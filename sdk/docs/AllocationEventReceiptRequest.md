@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **notice_fx_rate** | **float** | The rate the call was noticed at in the payment currency, in the same terms as the payment FX rate. With one, only the rate&#39;s effect on the payment is an FX difference; without one a payment converting to less than the call is simply short. Only with a payment currency. | [optional] 
 **bank_charge** | **float** | Any bank charge deducted from the cash before it arrived, in the event currency. | [optional] 
 **bank_charge_bearer** | **str** | Who bears the bank charge: Partner leaves it outstanding on the investor, Fund books it as a fund expense. Defaults to the map&#39;s policy. | [optional] 
+**reference** | **str** | The caller&#39;s reference for the payment, for instance a bank statement line or a source row id, of 1 to 128 characters. Optional. Posting the same reference again with the same investor record, amount, currency and receipt date returns the event unchanged and writes nothing; with other content it is refused. Without a reference a repeated receipt is a second payment, warned as a possible duplicate when an earlier receipt matches it. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ payment_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your v
 notice_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 bank_charge: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 bank_charge_bearer: Optional[StrictStr] = "example_bank_charge_bearer"
-allocation_event_receipt_request_instance = AllocationEventReceiptRequest(investor_record_id=investor_record_id, amount=amount, receipt_date=receipt_date, payment_currency=payment_currency, payment_fx_rate=payment_fx_rate, notice_fx_rate=notice_fx_rate, bank_charge=bank_charge, bank_charge_bearer=bank_charge_bearer)
+reference: Optional[StrictStr] = "example_reference"
+allocation_event_receipt_request_instance = AllocationEventReceiptRequest(investor_record_id=investor_record_id, amount=amount, receipt_date=receipt_date, payment_currency=payment_currency, payment_fx_rate=payment_fx_rate, notice_fx_rate=notice_fx_rate, bank_charge=bank_charge, bank_charge_bearer=bank_charge_bearer, reference=reference)
 
 ```
 

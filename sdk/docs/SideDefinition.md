@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **notional_amount** | **str** | The value, field or property key defining the side&#39;s notional amount | [optional] 
 **current_face** | **str** | The value, field or property key defining the side&#39;s current face / outstanding notional. | [optional] 
 **scope** | **str** | The scope in which the side definition exists. | [optional] 
+**metadata** | **Dict[str, List[ResponseMetaData]]** | Contains warnings related to the side definition, such as a stored copy of a platform side that differs from the platform&#39;s current definition. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -31,8 +32,9 @@ amount: StrictStr = "example_amount"
 notional_amount: Optional[StrictStr] = "example_notional_amount"
 current_face: Optional[StrictStr] = "example_current_face"
 scope: Optional[StrictStr] = "example_scope"
+metadata: Optional[Dict[str, List[ResponseMetaData]]] = # Replace with your value
 links: Optional[List[Link]] = None
-side_definition_instance = SideDefinition(side=side, security=security, currency=currency, rate=rate, units=units, amount=amount, notional_amount=notional_amount, current_face=current_face, scope=scope, links=links)
+side_definition_instance = SideDefinition(side=side, security=security, currency=currency, rate=rate, units=units, amount=amount, notional_amount=notional_amount, current_face=current_face, scope=scope, metadata=metadata, links=links)
 
 ```
 

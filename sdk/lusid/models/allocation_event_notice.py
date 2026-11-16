@@ -39,15 +39,16 @@ class AllocationEventNotice(BaseModel):
     event: AllocationEventNoticeEvent
     partner: AllocationEventNoticePartner
     currency:  StrictStr = Field(...,alias="currency", description="The currency the notice amounts are expressed in.") 
-    lines: List[AllocationEventNoticeLine] = Field(description="The notice lines, one per component of the partner's allocation.")
-    net_amount_due: Union[StrictFloat, StrictInt] = Field(description="The net amount due, positive when the partner pays the fund and negative when the fund pays the partner.", alias="netAmountDue")
+    lines: List[AllocationEventNoticeLine] = Field(description="The notice lines, one per component of the partner's allocation. Tax withheld from a distribution on the partner's behalf is its own line, under the Distribution: Withholding Tax transaction type, as part of what is distributed.")
+    net_amount_due: Union[StrictFloat, StrictInt] = Field(description="The net amount due, positive when the partner pays the fund and negative when the fund pays the partner. On a distribution it is what the partner is paid: the lines less any tax withheld on the partner's behalf.", alias="netAmountDue")
+    tax_withheld: Union[StrictFloat, StrictInt] = Field(description="Tax withheld from the distribution on the partner's behalf: distributed to the partner but paid to the tax authority rather than to them, so it is not in the net amount due. Zero when nothing was withheld.", alias="taxWithheld")
     unfunded_reconciliation: AllocationEventNoticeUnfundedReconciliation = Field(alias="unfundedReconciliation")
     cumulative: AllocationEventNoticeCumulative
     gp_column: Optional[AllocationEventNoticeCumulative] = Field(default=None, alias="gpColumn")
     wire: Optional[AllocationEventNoticeWire] = None
     payment_hold: Optional[AllocationPaymentHold] = Field(default=None, alias="paymentHold")
     watermark:  Optional[StrictStr] = Field(None,alias="watermark", description="DRAFT until the allocation event is booked, otherwise null.") 
-    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "watermark"]
+    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "taxWithheld", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "watermark"]
 
     class Config:
         """Pydantic configuration"""
@@ -135,6 +136,7 @@ class AllocationEventNotice(BaseModel):
             "currency": obj.get("currency"),
             "lines": [AllocationEventNoticeLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None,
             "net_amount_due": obj.get("netAmountDue"),
+            "tax_withheld": obj.get("taxWithheld"),
             "unfunded_reconciliation": AllocationEventNoticeUnfundedReconciliation.from_dict(obj.get("unfundedReconciliation")) if obj.get("unfundedReconciliation") is not None else None,
             "cumulative": AllocationEventNoticeCumulative.from_dict(obj.get("cumulative")) if obj.get("cumulative") is not None else None,
             "gp_column": AllocationEventNoticeCumulative.from_dict(obj.get("gpColumn")) if obj.get("gpColumn") is not None else None,

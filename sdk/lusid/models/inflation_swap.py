@@ -30,7 +30,7 @@ from lusid.models.time_zone_conventions import TimeZoneConventions
 
 class InflationSwap(LusidInstrument):
     """
-    LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [How does LUSID handle instrument legs?](https://support.lusid.com/docs/how-does-lusid-handle-instrument-legs).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |  # noqa: E501
+    LUSID representation of an Inflation Swap.  The implementation supports the following swap types:  * Zero Coupon inflation swap, with a single payment at maturity.  * LPI Swap (capped and floored)  * Year on Year inflation swap                This instrument has multiple legs, to see how legs are used in LUSID see [How does LUSID handle instrument legs?](https://support.lusid.com/docs/how-does-lusid-handle-instrument-legs).                | Leg Index | Leg Identifier | Description |  | --------- | -------------- | ----------- |  | 1 | InflationLeg | Cash flows with a rate relating to an underlying inflation index. |  | 2 | FixedLeg | Cash flows with a fixed rate. |  | 3 | AdditionalPayments | Cash flows relating to any additional payments (optional). |                With `legs`, the legs are in the order given and identified as InflationLeg, FixedLeg or FloatingLeg, so a  linker asset swap, a year-on-year or LPI swap against a floating leg, an income swap or a cross-currency  proceeds asset swap books as one instrument. The `inflationLeg` and `fixedLeg` fields remain for the original  shape and cannot be combined with `legs`.  # noqa: E501
     """
     start_date: datetime = Field(description="The start date of the instrument. This is normally synonymous with the trade-date.", alias="startDate")
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
@@ -38,9 +38,10 @@ class InflationSwap(LusidInstrument):
     fixed_leg: Optional[FixedLeg] = Field(default=None, alias="fixedLeg")
     additional_payments: Optional[List[AdditionalPayment]] = Field(default=None, description="Optional additional payments at a given date e.g. to level off an uneven inflation swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.", alias="additionalPayments")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
+    legs: Optional[List[LusidInstrument]] = Field(default=None, description="The legs of the swap: exactly two, exactly one of them an InflationLeg and the other a FixedLeg or a  FloatingLeg, one paid and one received, each starting on or after the swap and maturing on or before it.  The legs may be in different currencies; the first leg's currency is the swap's domestic currency.  Not set together with InflationLeg and FixedLeg. In this shape capRate and floorRate are accepted only on  a YearOnYear inflation leg.")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "inflationLeg", "fixedLeg", "additionalPayments", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "inflationLeg", "fixedLeg", "additionalPayments", "timeZoneConventions", "legs"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -109,6 +110,13 @@ class InflationSwap(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of time_zone_conventions
         if self.time_zone_conventions:
             _dict['timeZoneConventions'] = self.time_zone_conventions.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in legs (list)
+        _items = []
+        if self.legs:
+            for _item in self.legs:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['legs'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -118,6 +126,11 @@ class InflationSwap(LusidInstrument):
         # and __fields_set__ contains the field
         if self.additional_payments is None and "additional_payments" in self.__fields_set__:
             _dict['additionalPayments'] = None
+
+        # set to None if legs (nullable) is None
+        # and __fields_set__ contains the field
+        if self.legs is None and "legs" in self.__fields_set__:
+            _dict['legs'] = None
 
         return _dict
 
@@ -137,7 +150,8 @@ class InflationSwap(LusidInstrument):
             "inflation_leg": InflationLeg.from_dict(obj.get("inflationLeg")) if obj.get("inflationLeg") is not None else None,
             "fixed_leg": FixedLeg.from_dict(obj.get("fixedLeg")) if obj.get("fixedLeg") is not None else None,
             "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
-            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
+            "legs": [LusidInstrument.from_dict(_item) for _item in obj.get("legs")] if obj.get("legs") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

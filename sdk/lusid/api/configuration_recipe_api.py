@@ -20,8 +20,8 @@ from pydantic.v1 import validate_arguments, ValidationError
 from typing import overload, Optional, Union, Awaitable
 
 from datetime import datetime
-from pydantic.v1 import Field
-from typing import Optional
+from pydantic.v1 import Field, StrictStr
+from typing import List, Optional
 from typing_extensions import Annotated
 from lusid.models.annul_single_structured_data_response import AnnulSingleStructuredDataResponse
 from lusid.models.get_recipe_composer_response import GetRecipeComposerResponse
@@ -1214,28 +1214,30 @@ class ConfigurationRecipeApi:
 
 
     @overload
-    async def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    async def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @overload
-    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=True, **kwargs) -> ResourceListOfGetRecipeResponse:  # noqa: E501
         ...
 
     @validate_arguments
-    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
+    def list_derived_recipes(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ResourceListOfGetRecipeResponse, Awaitable[ResourceListOfGetRecipeResponse]]:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_derived_recipes(as_at, filter, async_req=True)
+        >>> thread = api.list_derived_recipes(as_at, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
@@ -1252,23 +1254,25 @@ class ConfigurationRecipeApi:
             raise ValueError(message)
         if async_req is not None:
             kwargs['async_req'] = async_req
-        return self.list_derived_recipes_with_http_info(as_at, filter, **kwargs)  # noqa: E501
+        return self.list_derived_recipes_with_http_info(as_at, filter, sort_by, **kwargs)  # noqa: E501
 
     @validate_arguments
-    def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set, note this functionality is not yet enabled for this endpoint.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def list_derived_recipes_with_http_info(self, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """ListDerivedRecipes: List the complete set of all Configuration Recipes, both from the configuration recipe store and also from expanded recipe composers.  # noqa: E501
 
         This endpoints returns a union of the output of ListConfigurationRecipes and the resolved Recipe Composers from the ListRecipeComposers endpoints.  Recipe Composers that fail to generate a valid Configuration Recipe will not be reported.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
-        >>> thread = api.list_derived_recipes_with_http_info(as_at, filter, async_req=True)
+        >>> thread = api.list_derived_recipes_with_http_info(as_at, filter, sort_by, async_req=True)
         >>> result = thread.get()
 
         :param as_at: The asAt datetime at which to list the Configuration Recipes. Defaults to latest if not specified.
         :type as_at: datetime
-        :param filter: Expression to filter the result set, note this functionality is not yet enabled for this endpoint.
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here:              https://support.lusid.com/filtering-results-from-lusid.
         :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
         :param _preload_content: if False, the ApiResponse.data will
@@ -1297,7 +1301,8 @@ class ConfigurationRecipeApi:
 
         _all_params = [
             'as_at',
-            'filter'
+            'filter',
+            'sort_by'
         ]
         _all_params.extend(
             [
@@ -1337,6 +1342,10 @@ class ConfigurationRecipeApi:
 
         if _params.get('filter') is not None:  # noqa: E501
             _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
 
         # process the header parameters
         _header_params = dict(_params.get('_headers', {}))

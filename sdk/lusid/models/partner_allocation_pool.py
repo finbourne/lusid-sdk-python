@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.partner_allocation import PartnerAllocation
+from lusid.models.partner_allocation_pool_sources import PartnerAllocationPoolSources
 
 class PartnerAllocationPool(BaseModel):
     """
@@ -32,9 +33,17 @@ class PartnerAllocationPool(BaseModel):
     origin_member_short_code:  Optional[StrictStr] = Field(None,alias="originMemberShortCode", description="For a deal-linked pool, the short code of the member fund the amount originates from.") 
     pool_amount: Union[StrictFloat, StrictInt] = Field(description="The amount in the pool.", alias="poolAmount")
     basis:  StrictStr = Field(...,alias="basis", description="The basis the pool was shared on. Available values: CommittedCapital, PaidInCapital, DealPaidIn.") 
+    basis_source:  Optional[StrictStr] = Field(None,alias="basisSource", description="Where the figures a deal pool was shared on came from; absent on a fund-level pool, which is shared on the register's balances. Available values: DealContributions (what each partner paid into the pool's deal, from the booked allocation events), Fallback (a deal pool no partner has paid into, shared on its character's fund-level basis instead).") 
     allocations: List[PartnerAllocation] = Field(description="Each partner's share of the pool.")
     residual: Union[StrictFloat, StrictInt] = Field(description="The rounding residual, carried by the largest allocation.")
-    __properties = ["character", "originMemberShortCode", "poolAmount", "basis", "allocations", "residual"]
+    pool_id:  StrictStr = Field(...,alias="poolId", description="The pool's identifier: the allocation rule's bucket id, or TAG: followed by the character for lines pooled by their distribution character tag.") 
+    bucket_set:  StrictStr = Field(...,alias="bucketSet", description="The code of the allocation bucket set the pool was classified by, with its version, for example PA-ALLOCATION-v1.") 
+    basis_level:  StrictStr = Field(...,alias="basisLevel", description="Which level of the basis precedence decided the pool's basis. Available values: Rule (the bucket rule's own basis), CharacterDefault (the configuration's allocationBases entry for the character), BuiltIn (the built-in default for the character).") 
+    exemption:  StrictStr = Field(...,alias="exemption", description="The register flag that sat partners out of the pool. Available values: None, FeeExempt, ExpenseExempt.") 
+    excluded_investor_record_ids: Optional[List[StrictStr]] = Field(default=None, description="The partners the pool's rule left out of it.", alias="excludedInvestorRecordIds")
+    report_row:  Optional[StrictStr] = Field(None,alias="reportRow", description="The capital account row the pool's allocations land on, derived from the character. Available values: NetOperatingIncome, ManagementFeesGross, RealisedGainLoss, UnrealisedGainLoss.") 
+    sources: PartnerAllocationPoolSources
+    __properties = ["character", "originMemberShortCode", "poolAmount", "basis", "basisSource", "allocations", "residual", "poolId", "bucketSet", "basisLevel", "exemption", "excludedInvestorRecordIds", "reportRow", "sources"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,10 +84,28 @@ class PartnerAllocationPool(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['allocations'] = _items
+        # override the default output from pydantic by calling `to_dict()` of sources
+        if self.sources:
+            _dict['sources'] = self.sources.to_dict()
         # set to None if origin_member_short_code (nullable) is None
         # and __fields_set__ contains the field
         if self.origin_member_short_code is None and "origin_member_short_code" in self.__fields_set__:
             _dict['originMemberShortCode'] = None
+
+        # set to None if basis_source (nullable) is None
+        # and __fields_set__ contains the field
+        if self.basis_source is None and "basis_source" in self.__fields_set__:
+            _dict['basisSource'] = None
+
+        # set to None if excluded_investor_record_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.excluded_investor_record_ids is None and "excluded_investor_record_ids" in self.__fields_set__:
+            _dict['excludedInvestorRecordIds'] = None
+
+        # set to None if report_row (nullable) is None
+        # and __fields_set__ contains the field
+        if self.report_row is None and "report_row" in self.__fields_set__:
+            _dict['reportRow'] = None
 
         return _dict
 
@@ -96,8 +123,16 @@ class PartnerAllocationPool(BaseModel):
             "origin_member_short_code": obj.get("originMemberShortCode"),
             "pool_amount": obj.get("poolAmount"),
             "basis": obj.get("basis"),
+            "basis_source": obj.get("basisSource"),
             "allocations": [PartnerAllocation.from_dict(_item) for _item in obj.get("allocations")] if obj.get("allocations") is not None else None,
-            "residual": obj.get("residual")
+            "residual": obj.get("residual"),
+            "pool_id": obj.get("poolId"),
+            "bucket_set": obj.get("bucketSet"),
+            "basis_level": obj.get("basisLevel"),
+            "exemption": obj.get("exemption"),
+            "excluded_investor_record_ids": obj.get("excludedInvestorRecordIds"),
+            "report_row": obj.get("reportRow"),
+            "sources": PartnerAllocationPoolSources.from_dict(obj.get("sources")) if obj.get("sources") is not None else None
         })
         return _obj
 

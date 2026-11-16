@@ -26,11 +26,13 @@ from lusid.models.link import Link
 
 class BucketAmounts(BaseModel):
     """
-    An amount in the payment currency.  # noqa: E501
+    An amount in the payment currency and, when a report currency was requested, in the report currency.  # noqa: E501
     """
     local: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the payment currency.")
+    report: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount in the report currency; absent when no report currency was requested, or when a rate needed to convert it could not be found or a cash flow could not be converted (the response's Issues says which). Under the default FxSpot rate type an opening or closing balance is the payment currency balance converted at the spot rate as at the effective date, the rate every cash flow is converted at, so it agrees with the report currency balances QueryBucketedCashFlows gives for the same date. Under any other rate type a balance is a running sum, not the value of the payment currency balance: the starting balance converted at the spot rate (see StartingBalanceRate) plus every cash flow up to that date, each at the rate that rate type gave it. It is the cumulative cash flow in the report currency, so it can have the opposite sign to Local when the rate has moved. Under FxForward a cash flow paid on or before the effective date has no forward rate, so a series with one before the bucket has no report currency balances. In both, Open + ActivityTotal = Close and each Close equals the next Open. The activity total is the sum of its cash flows' own report currency amounts.")
+    rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Under FxSpot, on an opening or closing balance, the spot rate it was converted at. On an activity total, the effective rate, Report divided by Local, which is a blended rate when its cash flows were converted at different rates. Absent when Report is, on a balance under any other rate type (a running sum has no single rate), or when the effective rate's Local is 0.")
     links: Optional[List[Link]] = None
-    __properties = ["local", "links"]
+    __properties = ["local", "report", "rate", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +73,16 @@ class BucketAmounts(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if report (nullable) is None
+        # and __fields_set__ contains the field
+        if self.report is None and "report" in self.__fields_set__:
+            _dict['report'] = None
+
+        # set to None if rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.rate is None and "rate" in self.__fields_set__:
+            _dict['rate'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -89,6 +101,8 @@ class BucketAmounts(BaseModel):
 
         _obj = BucketAmounts.parse_obj({
             "local": obj.get("local"),
+            "report": obj.get("report"),
+            "rate": obj.get("rate"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

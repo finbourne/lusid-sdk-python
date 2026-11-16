@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.bucket_amounts import BucketAmounts
 from lusid.models.cash_flow_detail import CashFlowDetail
+from lusid.models.currency_and_amount import CurrencyAndAmount
 from lusid.models.link import Link
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -42,8 +43,10 @@ class BucketCashFlowBucket(BaseModel):
     activity_total: Optional[BucketAmounts] = Field(default=None, alias="activityTotal")
     activity: Optional[List[CashFlowDetail]] = Field(default=None, description="The cash flows in the bucket, with the attributes a cash flow has in Values.")
     close: Optional[BucketAmounts] = None
+    starting_balance_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The spot rate the starting balance (the holdings' cash at the window start) was converted at to open the report currency balances, under a rate type other than FxSpot. Absent under FxSpot, when the starting balance is zero, or when no report currency was requested.", alias="startingBalanceRate")
+    fx_translation: Optional[CurrencyAndAmount] = Field(default=None, alias="fxTranslation")
     links: Optional[List[Link]] = None
-    __properties = ["bucketId", "bucketStart", "bucketEnd", "portfolioId", "currency", "subHoldingKeys", "open", "activityTotal", "activity", "close", "links"]
+    __properties = ["bucketId", "bucketStart", "bucketEnd", "portfolioId", "currency", "subHoldingKeys", "open", "activityTotal", "activity", "close", "startingBalanceRate", "fxTranslation", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -103,6 +106,9 @@ class BucketCashFlowBucket(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of close
         if self.close:
             _dict['close'] = self.close.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of fx_translation
+        if self.fx_translation:
+            _dict['fxTranslation'] = self.fx_translation.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -129,6 +135,11 @@ class BucketCashFlowBucket(BaseModel):
         # and __fields_set__ contains the field
         if self.activity is None and "activity" in self.__fields_set__:
             _dict['activity'] = None
+
+        # set to None if starting_balance_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.starting_balance_rate is None and "starting_balance_rate" in self.__fields_set__:
+            _dict['startingBalanceRate'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -162,6 +173,8 @@ class BucketCashFlowBucket(BaseModel):
             "activity_total": BucketAmounts.from_dict(obj.get("activityTotal")) if obj.get("activityTotal") is not None else None,
             "activity": [CashFlowDetail.from_dict(_item) for _item in obj.get("activity")] if obj.get("activity") is not None else None,
             "close": BucketAmounts.from_dict(obj.get("close")) if obj.get("close") is not None else None,
+            "starting_balance_rate": obj.get("startingBalanceRate"),
+            "fx_translation": CurrencyAndAmount.from_dict(obj.get("fxTranslation")) if obj.get("fxTranslation") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

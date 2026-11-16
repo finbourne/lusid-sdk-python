@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.partner_capital_account_row_detail import PartnerCapitalAccountRowDetail
 
 class PartnerCapitalAccountRow(BaseModel):
     """
@@ -31,7 +32,8 @@ class PartnerCapitalAccountRow(BaseModel):
     qtd: Union[StrictFloat, StrictInt] = Field(description="The quarter-to-date amount for the row.")
     ytd: Union[StrictFloat, StrictInt] = Field(description="The year-to-date amount for the row.")
     itd: Union[StrictFloat, StrictInt] = Field(description="The inception-to-date amount for the row.")
-    __properties = ["rowType", "qtd", "ytd", "itd"]
+    details: Optional[List[PartnerCapitalAccountRowDetail]] = Field(default=None, description="Labelled parts of the row's total, each already included in the row's columns. Tax withheld from a distribution on the partner's behalf is counted as distributed and shown here as its own entry against the distribution it was withheld on. Empty for a row with nothing to break out.")
+    __properties = ["rowType", "qtd", "ytd", "itd", "details"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,6 +67,18 @@ class PartnerCapitalAccountRow(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in details (list)
+        _items = []
+        if self.details:
+            for _item in self.details:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['details'] = _items
+        # set to None if details (nullable) is None
+        # and __fields_set__ contains the field
+        if self.details is None and "details" in self.__fields_set__:
+            _dict['details'] = None
+
         return _dict
 
     @classmethod
@@ -80,7 +94,8 @@ class PartnerCapitalAccountRow(BaseModel):
             "row_type": obj.get("rowType"),
             "qtd": obj.get("qtd"),
             "ytd": obj.get("ytd"),
-            "itd": obj.get("itd")
+            "itd": obj.get("itd"),
+            "details": [PartnerCapitalAccountRowDetail.from_dict(_item) for _item in obj.get("details")] if obj.get("details") is not None else None
         })
         return _obj
 

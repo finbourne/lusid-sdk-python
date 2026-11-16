@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **fractional_units_true_up_configuration** | [**FractionalUnitsTrueUpConfiguration**](FractionalUnitsTrueUpConfiguration.md) |  | [optional] 
 **holdings_fungibility** | **str** | Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured flag reads back as absent. Available values: Default, Enabled. | [optional] 
 **chargeable_gains_regime** | **str** | The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. If not supplied, the portfolio&#39;s current value is left unchanged; supply Default to reset it. A reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains. | [optional] 
+**amortisation_horizon** | [**AmortisationHorizon**](AmortisationHorizon.md) |  | [optional] 
 **wht_parameters** | [**WhtParameters**](WhtParameters.md) |  | [optional] 
 ## Example
 
@@ -23,8 +24,9 @@ tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_c
 fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = # Replace with your value
 holdings_fungibility: Optional[StrictStr] = "example_holdings_fungibility"
 chargeable_gains_regime: Optional[StrictStr] = "example_chargeable_gains_regime"
+amortisation_horizon: Optional[AmortisationHorizon] = # Replace with your value
 wht_parameters: Optional[WhtParameters] = # Replace with your value
-create_portfolio_details_instance = CreatePortfolioDetails(corporate_action_source_id=corporate_action_source_id, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility, chargeable_gains_regime=chargeable_gains_regime, wht_parameters=wht_parameters)
+create_portfolio_details_instance = CreatePortfolioDetails(corporate_action_source_id=corporate_action_source_id, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility, chargeable_gains_regime=chargeable_gains_regime, amortisation_horizon=amortisation_horizon, wht_parameters=wht_parameters)
 
 ```
 

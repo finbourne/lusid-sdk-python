@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **event** | [**AllocationEventNoticeEvent**](AllocationEventNoticeEvent.md) |  | 
 **partner** | [**AllocationEventNoticePartner**](AllocationEventNoticePartner.md) |  | 
 **currency** | **str** | The currency the notice amounts are expressed in. | 
-**lines** | [**List[AllocationEventNoticeLine]**](AllocationEventNoticeLine.md) | The notice lines, one per component of the partner&#39;s allocation. | 
-**net_amount_due** | **float** | The net amount due, positive when the partner pays the fund and negative when the fund pays the partner. | 
+**lines** | [**List[AllocationEventNoticeLine]**](AllocationEventNoticeLine.md) | The notice lines, one per component of the partner&#39;s allocation. Tax withheld from a distribution on the partner&#39;s behalf is its own line, under the Distribution: Withholding Tax transaction type, as part of what is distributed. | 
+**net_amount_due** | **float** | The net amount due, positive when the partner pays the fund and negative when the fund pays the partner. On a distribution it is what the partner is paid: the lines less any tax withheld on the partner&#39;s behalf. | 
+**tax_withheld** | **float** | Tax withheld from the distribution on the partner&#39;s behalf: distributed to the partner but paid to the tax authority rather than to them, so it is not in the net amount due. Zero when nothing was withheld. | 
 **unfunded_reconciliation** | [**AllocationEventNoticeUnfundedReconciliation**](AllocationEventNoticeUnfundedReconciliation.md) |  | 
 **cumulative** | [**AllocationEventNoticeCumulative**](AllocationEventNoticeCumulative.md) |  | 
 **gp_column** | [**AllocationEventNoticeCumulative**](AllocationEventNoticeCumulative.md) |  | [optional] 
@@ -31,13 +32,14 @@ partner: AllocationEventNoticePartner
 currency: StrictStr = "example_currency"
 lines: List[AllocationEventNoticeLine] = # Replace with your value
 net_amount_due: Union[StrictFloat, StrictInt] = # Replace with your value
+tax_withheld: Union[StrictFloat, StrictInt] = # Replace with your value
 unfunded_reconciliation: AllocationEventNoticeUnfundedReconciliation = # Replace with your value
 cumulative: AllocationEventNoticeCumulative
 gp_column: Optional[AllocationEventNoticeCumulative] = # Replace with your value
 wire: Optional[AllocationEventNoticeWire] = None
 payment_hold: Optional[AllocationPaymentHold] = # Replace with your value
 watermark: Optional[StrictStr] = "example_watermark"
-allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, watermark=watermark)
+allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, tax_withheld=tax_withheld, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, watermark=watermark)
 
 ```
 

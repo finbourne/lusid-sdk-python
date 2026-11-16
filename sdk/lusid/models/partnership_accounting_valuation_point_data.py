@@ -22,15 +22,17 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.partnership_allocation_problem import PartnershipAllocationProblem
 
 class PartnershipAccountingValuationPointData(BaseModel):
     """
-    The partnership accounting view of a valuation point: what is left on the income summary to allocate to the  partners, and the configuration pack the allocation books under.  # noqa: E501
+    The partnership accounting view of a valuation point: what is left on the income summary to allocate to the  partners, the configuration pack the allocation books under and, when the period cannot be allocated as it  stands, why.  # noqa: E501
     """
-    unallocated_income_summary: Union[StrictFloat, StrictInt] = Field(description="The profit and loss of the valuation point's period that has not yet been allocated to the partners: what the period's income, gain and expense lines would pool, less what the partner allocation has posted for the period. Must be zero before the valuation point can be finalised.", alias="unallocatedIncomeSummary")
+    unallocated_income_summary: Union[StrictFloat, StrictInt] = Field(description="The profit and loss of the valuation point's period that has not yet been allocated to the partners: what the period's profit and loss lines, as the allocation bucket set classifies them, would pool, less what the partner allocation has posted for the period. Lines no bucket claims count as unallocated. Must be zero before the valuation point can be finalised.", alias="unallocatedIncomeSummary")
     config_pack_scope:  StrictStr = Field(...,alias="configPackScope", description="The scope of the configuration pack.") 
     config_pack_code:  StrictStr = Field(...,alias="configPackCode", description="The code of the configuration pack.") 
-    __properties = ["unallocatedIncomeSummary", "configPackScope", "configPackCode"]
+    allocation_problem: Optional[PartnershipAllocationProblem] = Field(default=None, alias="allocationProblem")
+    __properties = ["unallocatedIncomeSummary", "configPackScope", "configPackCode", "allocationProblem"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,9 @@ class PartnershipAccountingValuationPointData(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of allocation_problem
+        if self.allocation_problem:
+            _dict['allocationProblem'] = self.allocation_problem.to_dict()
         return _dict
 
     @classmethod
@@ -78,7 +83,8 @@ class PartnershipAccountingValuationPointData(BaseModel):
         _obj = PartnershipAccountingValuationPointData.parse_obj({
             "unallocated_income_summary": obj.get("unallocatedIncomeSummary"),
             "config_pack_scope": obj.get("configPackScope"),
-            "config_pack_code": obj.get("configPackCode")
+            "config_pack_code": obj.get("configPackCode"),
+            "allocation_problem": PartnershipAllocationProblem.from_dict(obj.get("allocationProblem")) if obj.get("allocationProblem") is not None else None
         })
         return _obj
 

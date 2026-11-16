@@ -30,9 +30,10 @@ class FlexibleLoanPricerOptions(ModelOptions):
     """
     set_clean_pvto_zero: StrictBool = Field(description="If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual.", alias="setCleanPVToZero")
     use_price_quote_for_clean_pv: Optional[StrictBool] = Field(default=None, description="If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor", alias="usePriceQuoteForCleanPV")
+    exclude_income_from_pv: Optional[StrictBool] = Field(default=None, description="Read by a TotalReturnSwap whose asset leg has a ResetSchedule and whose underlying pays interest or coupons. If set to true the swap's PV leaves out the underlying's interest and coupon payments and adds the interest accrued on them to the valuation date instead, so CleanPV is the price return and PV is CleanPV + Accrued.", alias="excludeIncomeFromPV")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions, StripBondModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "setCleanPVToZero", "usePriceQuoteForCleanPV"]
+    __properties = ["modelOptionsType", "setCleanPVToZero", "usePriceQuoteForCleanPV", "excludeIncomeFromPV"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -95,6 +96,11 @@ class FlexibleLoanPricerOptions(ModelOptions):
         if self.use_price_quote_for_clean_pv is None and "use_price_quote_for_clean_pv" in self.__fields_set__:
             _dict['usePriceQuoteForCleanPV'] = None
 
+        # set to None if exclude_income_from_pv (nullable) is None
+        # and __fields_set__ contains the field
+        if self.exclude_income_from_pv is None and "exclude_income_from_pv" in self.__fields_set__:
+            _dict['excludeIncomeFromPV'] = None
+
         return _dict
 
     @classmethod
@@ -109,7 +115,8 @@ class FlexibleLoanPricerOptions(ModelOptions):
         _obj = FlexibleLoanPricerOptions.parse_obj({
             "model_options_type": obj.get("modelOptionsType"),
             "set_clean_pvto_zero": obj.get("setCleanPVToZero"),
-            "use_price_quote_for_clean_pv": obj.get("usePriceQuoteForCleanPV")
+            "use_price_quote_for_clean_pv": obj.get("usePriceQuoteForCleanPV"),
+            "exclude_income_from_pv": obj.get("excludeIncomeFromPV")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

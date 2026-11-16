@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_basis_rule import AllocationBasisRule
+from lusid.models.allocation_rule import AllocationRule
 from lusid.models.capability_override import CapabilityOverride
 from lusid.models.presentation_configuration import PresentationConfiguration
 from lusid.models.resource_id import ResourceId
@@ -42,7 +43,9 @@ class PartnershipAccountingConfiguration(BaseModel):
     effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="Derived on the way out; ignored on the way in.", alias="effectiveCapabilities")
     presentation: Optional[PresentationConfiguration] = None
     allocation_bases: Optional[List[AllocationBasisRule]] = Field(default=None, alias="allocationBases")
-    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities", "presentation", "allocationBases"]
+    allocation_bucket_set:  Optional[StrictStr] = Field(None,alias="allocationBucketSet") 
+    allocation_rules: Optional[List[AllocationRule]] = Field(default=None, description="On the way in, the configuration's rules or its overrides of a system set's rules; on the way out, the  effective rules the fund allocates by.", alias="allocationRules")
+    __properties = ["enabled", "configPack", "commitmentCurrencyPolicy", "registerPortfolioGroup", "capitalModel", "capabilityOverrides", "series", "effectiveCapabilities", "presentation", "allocationBases", "allocationBucketSet", "allocationRules"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +105,13 @@ class PartnershipAccountingConfiguration(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['allocationBases'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in allocation_rules (list)
+        _items = []
+        if self.allocation_rules:
+            for _item in self.allocation_rules:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['allocationRules'] = _items
         # set to None if commitment_currency_policy (nullable) is None
         # and __fields_set__ contains the field
         if self.commitment_currency_policy is None and "commitment_currency_policy" in self.__fields_set__:
@@ -127,6 +137,16 @@ class PartnershipAccountingConfiguration(BaseModel):
         if self.allocation_bases is None and "allocation_bases" in self.__fields_set__:
             _dict['allocationBases'] = None
 
+        # set to None if allocation_bucket_set (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_bucket_set is None and "allocation_bucket_set" in self.__fields_set__:
+            _dict['allocationBucketSet'] = None
+
+        # set to None if allocation_rules (nullable) is None
+        # and __fields_set__ contains the field
+        if self.allocation_rules is None and "allocation_rules" in self.__fields_set__:
+            _dict['allocationRules'] = None
+
         return _dict
 
     @classmethod
@@ -148,7 +168,9 @@ class PartnershipAccountingConfiguration(BaseModel):
             "series": SeriesConfiguration.from_dict(obj.get("series")) if obj.get("series") is not None else None,
             "effective_capabilities": obj.get("effectiveCapabilities"),
             "presentation": PresentationConfiguration.from_dict(obj.get("presentation")) if obj.get("presentation") is not None else None,
-            "allocation_bases": [AllocationBasisRule.from_dict(_item) for _item in obj.get("allocationBases")] if obj.get("allocationBases") is not None else None
+            "allocation_bases": [AllocationBasisRule.from_dict(_item) for _item in obj.get("allocationBases")] if obj.get("allocationBases") is not None else None,
+            "allocation_bucket_set": obj.get("allocationBucketSet"),
+            "allocation_rules": [AllocationRule.from_dict(_item) for _item in obj.get("allocationRules")] if obj.get("allocationRules") is not None else None
         })
         return _obj
 

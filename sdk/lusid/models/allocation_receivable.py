@@ -36,7 +36,8 @@ class AllocationReceivable(BaseModel):
     bucket:  Optional[StrictStr] = Field(None,alias="bucket", description="The ageing bucket: Current, 1-30, 31-60, 61-90 or 90+.") 
     portfolio: Optional[ResourceId] = None
     side:  Optional[StrictStr] = Field(None,alias="side", description="Whether the record owes on its own line (LP) or as a feeder's roll-up on the master (ROLLUP).") 
-    __properties = ["investorRecordId", "called", "received", "outstanding", "daysPastDue", "bucket", "portfolio", "side"]
+    refund_payable: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="What the fund still owes the investor record back: receipts beyond what it owed, less the refunds paid out. Zero once the event is reversed, when the reversal's own refund takes over.", alias="refundPayable")
+    __properties = ["investorRecordId", "called", "received", "outstanding", "daysPastDue", "bucket", "portfolio", "side", "refundPayable"]
 
     class Config:
         """Pydantic configuration"""
@@ -107,7 +108,8 @@ class AllocationReceivable(BaseModel):
             "days_past_due": obj.get("daysPastDue"),
             "bucket": obj.get("bucket"),
             "portfolio": ResourceId.from_dict(obj.get("portfolio")) if obj.get("portfolio") is not None else None,
-            "side": obj.get("side")
+            "side": obj.get("side"),
+            "refund_payable": obj.get("refundPayable")
         })
         return _obj
 

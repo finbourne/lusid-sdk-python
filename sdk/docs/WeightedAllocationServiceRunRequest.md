@@ -5,7 +5,7 @@ The request body for the RunAllocationServiceWithWeights endpoint.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **placement_ids** | [**List[ResourceId]**](ResourceId.md) | The set of Placement IDs to allocate. | 
-**portfolio_weights** | [**List[PortfolioWeight]**](PortfolioWeight.md) | The set of Portfolios and their associated weights to use for allocation. | [optional] 
+**portfolio_weights** | [**List[PortfolioWeight]**](PortfolioWeight.md) | The set of Portfolios and their associated weights to use for allocation. | 
 ## Example
 
 ```python
@@ -16,7 +16,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 placement_ids: List[ResourceId] = # Replace with your value
-portfolio_weights: Optional[List[PortfolioWeight]] = # Replace with your value
+portfolio_weights: List[PortfolioWeight] = # Replace with your value
 weighted_allocation_service_run_request_instance = WeightedAllocationServiceRunRequest(placement_ids=placement_ids, portfolio_weights=portfolio_weights)
 
 ```

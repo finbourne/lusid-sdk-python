@@ -35,7 +35,8 @@ class AllocationEventReceiptRequest(BaseModel):
     notice_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rate the call was noticed at in the payment currency, in the same terms as the payment FX rate. With one, only the rate's effect on the payment is an FX difference; without one a payment converting to less than the call is simply short. Only with a payment currency.", alias="noticeFxRate")
     bank_charge: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Any bank charge deducted from the cash before it arrived, in the event currency.", alias="bankCharge")
     bank_charge_bearer:  Optional[StrictStr] = Field(None,alias="bankChargeBearer", description="Who bears the bank charge: Partner leaves it outstanding on the investor, Fund books it as a fund expense. Defaults to the map's policy.") 
-    __properties = ["investorRecordId", "amount", "receiptDate", "paymentCurrency", "paymentFxRate", "noticeFxRate", "bankCharge", "bankChargeBearer"]
+    reference:  Optional[StrictStr] = Field(None,alias="reference", description="The caller's reference for the payment, for instance a bank statement line or a source row id, of 1 to 128 characters. Optional. Posting the same reference again with the same investor record, amount, currency and receipt date returns the event unchanged and writes nothing; with other content it is refused. Without a reference a repeated receipt is a second payment, warned as a possible duplicate when an earlier receipt matches it.") 
+    __properties = ["investorRecordId", "amount", "receiptDate", "paymentCurrency", "paymentFxRate", "noticeFxRate", "bankCharge", "bankChargeBearer", "reference"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +90,11 @@ class AllocationEventReceiptRequest(BaseModel):
         if self.bank_charge_bearer is None and "bank_charge_bearer" in self.__fields_set__:
             _dict['bankChargeBearer'] = None
 
+        # set to None if reference (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reference is None and "reference" in self.__fields_set__:
+            _dict['reference'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +114,8 @@ class AllocationEventReceiptRequest(BaseModel):
             "payment_fx_rate": obj.get("paymentFxRate"),
             "notice_fx_rate": obj.get("noticeFxRate"),
             "bank_charge": obj.get("bankCharge"),
-            "bank_charge_bearer": obj.get("bankChargeBearer")
+            "bank_charge_bearer": obj.get("bankChargeBearer"),
+            "reference": obj.get("reference")
         })
         return _obj
 

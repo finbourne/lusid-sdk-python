@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **set_clean_pvto_zero** | **bool** | If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual. | 
 **use_price_quote_for_clean_pv** | **bool** | If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor | [optional] 
+**exclude_income_from_pv** | **bool** | Read by a TotalReturnSwap whose asset leg has a ResetSchedule and whose underlying pays interest or coupons. If set to true the swap&#39;s PV leaves out the underlying&#39;s interest and coupon payments and adds the interest accrued on them to the valuation date instead, so CleanPV is the price return and PV is CleanPV + Accrued. | [optional] 
 **model_options_type** | **str** | Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions, StripBondModelOptions. | 
 ## Example
 
@@ -20,8 +21,10 @@ set_clean_pvto_zero: StrictBool = # Replace with your value
 set_clean_pvto_zero:StrictBool = True
 use_price_quote_for_clean_pv: Optional[StrictBool] = # Replace with your value
 use_price_quote_for_clean_pv:Optional[StrictBool] = None
+exclude_income_from_pv: Optional[StrictBool] = # Replace with your value
+exclude_income_from_pv:Optional[StrictBool] = None
 model_options_type: StrictStr = "example_model_options_type"
-flexible_loan_pricer_options_instance = FlexibleLoanPricerOptions(set_clean_pvto_zero=set_clean_pvto_zero, use_price_quote_for_clean_pv=use_price_quote_for_clean_pv, model_options_type=model_options_type)
+flexible_loan_pricer_options_instance = FlexibleLoanPricerOptions(set_clean_pvto_zero=set_clean_pvto_zero, use_price_quote_for_clean_pv=use_price_quote_for_clean_pv, exclude_income_from_pv=exclude_income_from_pv, model_options_type=model_options_type)
 
 ```
 

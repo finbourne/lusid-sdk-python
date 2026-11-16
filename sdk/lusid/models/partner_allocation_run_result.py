@@ -22,6 +22,8 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.accrued_fee_line import AccruedFeeLine
+from lusid.models.ignored_distribution_tag import IgnoredDistributionTag
 from lusid.models.partner_allocation_pool import PartnerAllocationPool
 from lusid.models.resource_id import ResourceId
 from lusid.models.unattributed_amount import UnattributedAmount
@@ -36,10 +38,13 @@ class PartnerAllocationRunResult(BaseModel):
     nav_type_code:  StrictStr = Field(...,alias="navTypeCode", description="The NAV type to allocate under. Defaults to the fund's primary NAV type.") 
     status:  StrictStr = Field(...,alias="status", description="The outcome of the run. Available values: Computed, Booked, DryRun.") 
     run_id:  StrictStr = Field(...,alias="runId", description="The identifier of the run, which prefixes every transaction it books.") 
-    pools: List[PartnerAllocationPool] = Field(description="The pools of fund-level amount that were allocated.")
-    unattributed: List[UnattributedAmount] = Field(description="Fund-level amounts that no pool claimed.")
+    pools: List[PartnerAllocationPool] = Field(description="The pools of fund-level amount that were allocated, in the allocation bucket set's bucket order with any tag pools after.")
+    unattributed: List[UnattributedAmount] = Field(description="Always empty: every profit and loss line is now pooled or the run is refused. Kept for one release.")
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions the run booked, if any.", alias="bookedTransactionIds")
-    __properties = ["fundId", "periodStart", "periodEnd", "navTypeCode", "status", "runId", "pools", "unattributed", "bookedTransactionIds"]
+    warnings: Optional[List[StrictStr]] = Field(default=None, description="What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end.")
+    ignored_tags: Optional[List[IgnoredDistributionTag]] = Field(default=None, description="The distribution character tags the run did not pool by, by account.", alias="ignoredTags")
+    accrued_fees: Optional[List[AccruedFeeLine]] = Field(default=None, description="The management fees accrued per partner in the period, which the accrual allocates and the run therefore leaves out of the pools.", alias="accruedFees")
+    __properties = ["fundId", "periodStart", "periodEnd", "navTypeCode", "status", "runId", "pools", "unattributed", "bookedTransactionIds", "warnings", "ignoredTags", "accruedFees"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +95,35 @@ class PartnerAllocationRunResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['unattributed'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in ignored_tags (list)
+        _items = []
+        if self.ignored_tags:
+            for _item in self.ignored_tags:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['ignoredTags'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in accrued_fees (list)
+        _items = []
+        if self.accrued_fees:
+            for _item in self.accrued_fees:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['accruedFees'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
+        # set to None if ignored_tags (nullable) is None
+        # and __fields_set__ contains the field
+        if self.ignored_tags is None and "ignored_tags" in self.__fields_set__:
+            _dict['ignoredTags'] = None
+
+        # set to None if accrued_fees (nullable) is None
+        # and __fields_set__ contains the field
+        if self.accrued_fees is None and "accrued_fees" in self.__fields_set__:
+            _dict['accruedFees'] = None
+
         return _dict
 
     @classmethod
@@ -110,7 +144,10 @@ class PartnerAllocationRunResult(BaseModel):
             "run_id": obj.get("runId"),
             "pools": [PartnerAllocationPool.from_dict(_item) for _item in obj.get("pools")] if obj.get("pools") is not None else None,
             "unattributed": [UnattributedAmount.from_dict(_item) for _item in obj.get("unattributed")] if obj.get("unattributed") is not None else None,
-            "booked_transaction_ids": obj.get("bookedTransactionIds")
+            "booked_transaction_ids": obj.get("bookedTransactionIds"),
+            "warnings": obj.get("warnings"),
+            "ignored_tags": [IgnoredDistributionTag.from_dict(_item) for _item in obj.get("ignoredTags")] if obj.get("ignoredTags") is not None else None,
+            "accrued_fees": [AccruedFeeLine.from_dict(_item) for _item in obj.get("accruedFees")] if obj.get("accruedFees") is not None else None
         })
         return _obj
 

@@ -35,16 +35,23 @@ class InflationLeg(LusidInstrument):
     maturity_date: datetime = Field(description="The final maturity date of the instrument. This means the last date on which the instruments makes a payment of any amount.  For the avoidance of doubt, that is not necessarily prior to its last sensitivity date for the purposes of risk; e.g. instruments such as  Constant Maturity Swaps (CMS) often have sensitivities to rates that may well be observed or set prior to the maturity date, but refer to a termination date beyond it.", alias="maturityDate")
     flow_conventions: FlowConventions = Field(alias="flowConventions")
     base_cpi: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional BaseCPI, if specified it will be used in place of BaseCPI(StartDate).  This should not be required for standard inflation swaps.", alias="baseCPI")
-    calculation_type:  StrictStr = Field(...,alias="calculationType", description="The calculation type.  ZeroCoupon is used for CPILegs where there is a single payment at maturity of  Notional * (CPI(T) / CPI(T0) - 1)  where CPI(T0) is the BaseCPI of this leg  YearOnYear is used for YoY and LPI swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(t-1) - 1)  If a cap and floor is added to this it becomes an LPI swap leg.  Compounded is used for inflation swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(T0) - 1)  i.e. the BaseCPI is used every year. These swaps are not as common as CPI or    Supported string (enumeration) values are: [ZeroCoupon, YearOnYear, Compounded].") 
-    cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional cap, needed for LPI Legs or CPI Legs with Caps", alias="capRate")
-    floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional floor, needed for LPI Legs or CPI Legs with Floors.", alias="floorRate")
+    calculation_type:  StrictStr = Field(...,alias="calculationType", description="The calculation type.  ZeroCoupon is used for CPILegs where there is a single payment at maturity of  Notional * (CPI(T) / CPI(T0) - 1)  where CPI(T0) is the BaseCPI of this leg  YearOnYear is used for YoY and LPI swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(t-1) - 1)  If a cap and floor is added to this it becomes an LPI swap leg.  Compounded is used for inflation swap legs where there is a series of annual payments  Notional * dayCount * (CPI(t) / CPI(T0) - 1)  i.e. the BaseCPI is used every year. These swaps are not as common as CPI or    IndexedCoupon is used for the coupon stream of an inflation-linked bond, where each period pays  Notional * FixedRate * dayCount * IndexRatio(t)  and IndexRatio(t) is CPI(t) / BaseCPI rounded to IndexPrecision, as on InflationLinkedBond.                Supported string (enumeration) values are: [ZeroCoupon, YearOnYear, Compounded, IndexedCoupon].") 
+    cap_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional cap on a YearOnYear leg: each period's 12-month inflation rate is clamped to at most this rate before  the accrual fraction is applied, at any payment frequency, so an LPI leg caps each year at 5%. In the legs  form of an InflationSwap it is rejected on a ZeroCoupon, Compounded or IndexedCoupon leg, where it would clamp  the total change since the start. In the deprecated inflationLeg form a ZeroCoupon or Compounded cap keeps  clamping that total change, as today.", alias="capRate")
+    floor_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional floor on a YearOnYear leg: each period's 12-month inflation rate is clamped to at least this rate  before the accrual fraction is applied, at any payment frequency, so a 0% floor stops deflation being paid.  In the legs form of an InflationSwap it is rejected on a ZeroCoupon, Compounded or IndexedCoupon leg, where it  would clamp the total change since the start. In the deprecated inflationLeg form a ZeroCoupon or Compounded  floor keeps clamping that total change, as today.", alias="floorRate")
     inflation_index_conventions: InflationIndexConventions = Field(alias="inflationIndexConventions")
     notional: Union[StrictFloat, StrictInt] = Field(description="The notional")
     pay_receive:  Optional[StrictStr] = Field(None,alias="payReceive", description="PayReceive flag for the inflation leg.  This field is optional and defaults to Pay.    Supported string (enumeration) values are: [Pay, Receive].") 
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
+    fixed_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The real coupon rate of an IndexedCoupon leg: each period pays Notional * FixedRate * dayCount * IndexRatio.  Required when CalculationType is IndexedCoupon and not allowed otherwise.", alias="fixedRate")
+    base_cpi_date: Optional[datetime] = Field(default=None, description="Optional date the base CPI is observed on, with the same meaning as on InflationLinkedBond: the un-lagged  date (for a bond asset swap, the bond's dated date) whose reference CPI is the base. Defaults to the StartDate.  Ignored when BaseCPI is given.", alias="baseCPIDate")
+    index_precision: Optional[StrictInt] = Field(default=None, description="Number of decimal places the IndexedCoupon index ratio is rounded to, as on InflationLinkedBond. Defaults to 5.", alias="indexPrecision")
+    principal_protection: Optional[StrictBool] = Field(default=None, description="Whether an indexed final notional exchange is floored at par, paying max(IndexRatio, 1) times the amount, as on  InflationLinkedBond. Coupons are never floored. Defaults to true.", alias="principalProtection")
+    notional_exchange_type:  Optional[StrictStr] = Field(None,alias="notionalExchangeType", description="Which notional exchanges the leg makes. The start exchange pays the un-indexed amount against the leg; the  maturity exchange pays the amount times the index ratio with the leg, floored at par under PrincipalProtection.                Supported string (enumeration) values are: [None, Initial, Final, Both].  Defaults to \"None\" if not set.") 
+    initial_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount exchanged at the start of the leg, when NotionalExchangeType is Initial or Both. Defaults to the  notional. Never indexed. Must be non-negative.", alias="initialExchangeAmount")
+    final_exchange_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The real amount exchanged at maturity, when NotionalExchangeType is Final or Both. Defaults to the notional.  Paid times the index ratio, floored at par under PrincipalProtection. Must be non-negative.", alias="finalExchangeAmount")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "baseCPI", "calculationType", "capRate", "floorRate", "inflationIndexConventions", "notional", "payReceive", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "baseCPI", "calculationType", "capRate", "floorRate", "inflationIndexConventions", "notional", "payReceive", "timeZoneConventions", "fixedRate", "baseCPIDate", "indexPrecision", "principalProtection", "notionalExchangeType", "initialExchangeAmount", "finalExchangeAmount"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -131,6 +138,31 @@ class InflationLeg(LusidInstrument):
         if self.pay_receive is None and "pay_receive" in self.__fields_set__:
             _dict['payReceive'] = None
 
+        # set to None if fixed_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fixed_rate is None and "fixed_rate" in self.__fields_set__:
+            _dict['fixedRate'] = None
+
+        # set to None if base_cpi_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.base_cpi_date is None and "base_cpi_date" in self.__fields_set__:
+            _dict['baseCPIDate'] = None
+
+        # set to None if notional_exchange_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.notional_exchange_type is None and "notional_exchange_type" in self.__fields_set__:
+            _dict['notionalExchangeType'] = None
+
+        # set to None if initial_exchange_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.initial_exchange_amount is None and "initial_exchange_amount" in self.__fields_set__:
+            _dict['initialExchangeAmount'] = None
+
+        # set to None if final_exchange_amount (nullable) is None
+        # and __fields_set__ contains the field
+        if self.final_exchange_amount is None and "final_exchange_amount" in self.__fields_set__:
+            _dict['finalExchangeAmount'] = None
+
         return _dict
 
     @classmethod
@@ -154,7 +186,14 @@ class InflationLeg(LusidInstrument):
             "inflation_index_conventions": InflationIndexConventions.from_dict(obj.get("inflationIndexConventions")) if obj.get("inflationIndexConventions") is not None else None,
             "notional": obj.get("notional"),
             "pay_receive": obj.get("payReceive"),
-            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
+            "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None,
+            "fixed_rate": obj.get("fixedRate"),
+            "base_cpi_date": obj.get("baseCPIDate"),
+            "index_precision": obj.get("indexPrecision"),
+            "principal_protection": obj.get("principalProtection"),
+            "notional_exchange_type": obj.get("notionalExchangeType"),
+            "initial_exchange_amount": obj.get("initialExchangeAmount"),
+            "final_exchange_amount": obj.get("finalExchangeAmount")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

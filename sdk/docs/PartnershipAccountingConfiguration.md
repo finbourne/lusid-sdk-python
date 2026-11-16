@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **effective_capabilities** | **Dict[str, Optional[str]]** | Derived on the way out; ignored on the way in. | [optional] 
 **presentation** | [**PresentationConfiguration**](PresentationConfiguration.md) |  | [optional] 
 **allocation_bases** | [**List[AllocationBasisRule]**](AllocationBasisRule.md) |  | [optional] 
+**allocation_bucket_set** | **str** |  | [optional] 
+**allocation_rules** | [**List[AllocationRule]**](AllocationRule.md) | On the way in, the configuration&#39;s rules or its overrides of a system set&#39;s rules; on the way out, the  effective rules the fund allocates by. | [optional] 
 ## Example
 
 ```python
@@ -33,7 +35,9 @@ series: Optional[SeriesConfiguration] = None
 effective_capabilities: Optional[Dict[str, Optional[StrictStr]]] = # Replace with your value
 presentation: Optional[PresentationConfiguration] = None
 allocation_bases: Optional[List[AllocationBasisRule]] = # Replace with your value
-partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities, presentation=presentation, allocation_bases=allocation_bases)
+allocation_bucket_set: Optional[StrictStr] = "example_allocation_bucket_set"
+allocation_rules: Optional[List[AllocationRule]] = # Replace with your value
+partnership_accounting_configuration_instance = PartnershipAccountingConfiguration(enabled=enabled, config_pack=config_pack, commitment_currency_policy=commitment_currency_policy, register_portfolio_group=register_portfolio_group, capital_model=capital_model, capability_overrides=capability_overrides, series=series, effective_capabilities=effective_capabilities, presentation=presentation, allocation_bases=allocation_bases, allocation_bucket_set=allocation_bucket_set, allocation_rules=allocation_rules)
 
 ```
 

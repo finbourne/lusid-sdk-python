@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **activity_total** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] 
 **activity** | [**List[CashFlowDetail]**](CashFlowDetail.md) | The cash flows in the bucket, with the attributes a cash flow has in Values. | [optional] 
 **close** | [**BucketAmounts**](BucketAmounts.md) |  | [optional] 
+**starting_balance_rate** | **float** | The spot rate the starting balance (the holdings&#39; cash at the window start) was converted at to open the report currency balances, under a rate type other than FxSpot. Absent under FxSpot, when the starting balance is zero, or when no report currency was requested. | [optional] 
+**fx_translation** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -34,8 +36,10 @@ open: Optional[BucketAmounts] = None
 activity_total: Optional[BucketAmounts] = # Replace with your value
 activity: Optional[List[CashFlowDetail]] = # Replace with your value
 close: Optional[BucketAmounts] = None
+starting_balance_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fx_translation: Optional[CurrencyAndAmount] = # Replace with your value
 links: Optional[List[Link]] = None
-bucket_cash_flow_bucket_instance = BucketCashFlowBucket(bucket_id=bucket_id, bucket_start=bucket_start, bucket_end=bucket_end, portfolio_id=portfolio_id, currency=currency, sub_holding_keys=sub_holding_keys, open=open, activity_total=activity_total, activity=activity, close=close, links=links)
+bucket_cash_flow_bucket_instance = BucketCashFlowBucket(bucket_id=bucket_id, bucket_start=bucket_start, bucket_end=bucket_end, portfolio_id=portfolio_id, currency=currency, sub_holding_keys=sub_holding_keys, open=open, activity_total=activity_total, activity=activity, close=close, starting_balance_rate=starting_balance_rate, fx_translation=fx_translation, links=links)
 
 ```
 

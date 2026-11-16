@@ -37,7 +37,7 @@ class InstrumentEventHolder(BaseModel):
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The set of identifiers which determine the instrument this event relates to.", alias="instrumentIdentifiers")
     lusid_instrument_id:  StrictStr = Field(...,alias="lusidInstrumentId", description="The LUID for the instrument.") 
     instrument_scope:  StrictStr = Field(...,alias="instrumentScope", description="The scope of the instrument.") 
-    description:  StrictStr = Field(...,alias="description", description="The description of the instrument event.") 
+    description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the instrument event.") 
     event_date_range: EventDateRange = Field(alias="eventDateRange")
     completeness:  Optional[StrictStr] = Field(None,alias="completeness", description="Is the event Economically Complete, or is it missing some DataDependent fields (Incomplete). Available values: Complete, Incomplete.") 
     instrument_event: InstrumentEvent = Field(alias="instrumentEvent")
@@ -102,6 +102,11 @@ class InstrumentEventHolder(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of staged_modifications
         if self.staged_modifications:
             _dict['stagedModifications'] = self.staged_modifications.to_dict()
+        # set to None if description (nullable) is None
+        # and __fields_set__ contains the field
+        if self.description is None and "description" in self.__fields_set__:
+            _dict['description'] = None
+
         # set to None if completeness (nullable) is None
         # and __fields_set__ contains the field
         if self.completeness is None and "completeness" in self.__fields_set__:

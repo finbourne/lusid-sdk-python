@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.amortisation_horizon import AmortisationHorizon
 from lusid.models.fractional_units_true_up_configuration import FractionalUnitsTrueUpConfiguration
 from lusid.models.instrument_event_configuration import InstrumentEventConfiguration
 from lusid.models.link import Link
@@ -56,9 +57,10 @@ class PortfolioDetails(BaseModel):
     fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = Field(default=None, alias="fractionalUnitsTrueUpConfiguration")
     holdings_fungibility:  Optional[StrictStr] = Field(None,alias="holdingsFungibility", description="Whether the portfolio's holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled.") 
     chargeable_gains_regime:  Optional[StrictStr] = Field(None,alias="chargeableGainsRegime", description="The chargeable gains regime the portfolio is elected into. This can be: Default or UkChargeableGains. Defaults to Default if not specified, which means no chargeable gains pooling is applied. Under UkChargeableGains, in-scope holdings (equities, preferred shares, fund share classes and simple instruments) are depleted under the UK chargeable gains rules regardless of the accounting method on the portfolio, transaction or custodian account; other holdings use the portfolio's accounting method. Supply Default to explicitly reset it; a reset or never-configured regime reads back as absent. Available values: Default, UkChargeableGains.") 
+    amortisation_horizon: Optional[AmortisationHorizon] = Field(default=None, alias="amortisationHorizon")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     links: Optional[List[Link]] = None
-    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "stagedModifications", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "whtParameters", "links"]
+    __properties = ["href", "originPortfolioId", "version", "baseCurrency", "corporateActionSourceId", "subHoldingKeys", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "stagedModifications", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "amortisationHorizon", "whtParameters", "links"]
 
     @validator('accounting_method')
     def accounting_method_validate_enum(cls, value):
@@ -137,6 +139,9 @@ class PortfolioDetails(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of fractional_units_true_up_configuration
         if self.fractional_units_true_up_configuration:
             _dict['fractionalUnitsTrueUpConfiguration'] = self.fractional_units_true_up_configuration.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amortisation_horizon
+        if self.amortisation_horizon:
+            _dict['amortisationHorizon'] = self.amortisation_horizon.to_dict()
         # override the default output from pydantic by calling `to_dict()` of wht_parameters
         if self.wht_parameters:
             _dict['whtParameters'] = self.wht_parameters.to_dict()
@@ -240,6 +245,7 @@ class PortfolioDetails(BaseModel):
             "fractional_units_true_up_configuration": FractionalUnitsTrueUpConfiguration.from_dict(obj.get("fractionalUnitsTrueUpConfiguration")) if obj.get("fractionalUnitsTrueUpConfiguration") is not None else None,
             "holdings_fungibility": obj.get("holdingsFungibility"),
             "chargeable_gains_regime": obj.get("chargeableGainsRegime"),
+            "amortisation_horizon": AmortisationHorizon.from_dict(obj.get("amortisationHorizon")) if obj.get("amortisationHorizon") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
