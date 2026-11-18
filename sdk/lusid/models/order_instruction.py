@@ -38,15 +38,17 @@ class OrderInstruction(BaseModel):
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     instrument_identifiers: Dict[str, Optional[StrictStr]] = Field(description="The instrument ordered.", alias="instrumentIdentifiers")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value.")
     price: Optional[CurrencyAndAmount] = None
     instrument_scope:  Optional[StrictStr] = Field(None,alias="instrumentScope", description="The scope in which the instrument lies") 
     lusid_instrument_id:  Optional[StrictStr] = Field(None,alias="lusidInstrumentId", description="The LUSID instrument id for the instrument ordered.") 
     version: Optional[Version] = None
     data_model_membership: Optional[DataModelMembership] = Field(default=None, alias="dataModelMembership")
+    amount: Optional[CurrencyAndAmount] = None
+    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="Whether the instruction is a change to the holding or a target for it, one of: Change, Target. Defaults to Target for a weight-only instruction and to Change otherwise.") 
     links: Optional[List[Link]] = None
-    __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "dataModelMembership", "links"]
+    __properties = ["id", "createdDate", "properties", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "instrumentScope", "lusidInstrumentId", "version", "dataModelMembership", "amount", "instructionType", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +104,9 @@ class OrderInstruction(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data_model_membership
         if self.data_model_membership:
             _dict['dataModelMembership'] = self.data_model_membership.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -133,6 +138,11 @@ class OrderInstruction(BaseModel):
         # and __fields_set__ contains the field
         if self.lusid_instrument_id is None and "lusid_instrument_id" in self.__fields_set__:
             _dict['lusidInstrumentId'] = None
+
+        # set to None if instruction_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instruction_type is None and "instruction_type" in self.__fields_set__:
+            _dict['instructionType'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -168,6 +178,8 @@ class OrderInstruction(BaseModel):
             "lusid_instrument_id": obj.get("lusidInstrumentId"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "data_model_membership": DataModelMembership.from_dict(obj.get("dataModelMembership")) if obj.get("dataModelMembership") is not None else None,
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
+            "instruction_type": obj.get("instructionType"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

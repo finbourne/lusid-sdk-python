@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **description** | **str** | User can assign a description to understand more humanly the recipe. | [optional] 
 **holding** | [**HoldingContext**](HoldingContext.md) |  | [optional] 
 **translation** | [**TranslationContext**](TranslationContext.md) |  | [optional] 
+**loan_options** | [**LoanOptions**](LoanOptions.md) |  | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ aggregation: Optional[AggregationContext] = None
 description: Optional[StrictStr] = "example_description"
 holding: Optional[HoldingContext] = None
 translation: Optional[TranslationContext] = None
-configuration_recipe_instance = ConfigurationRecipe(scope=scope, code=code, market=market, pricing=pricing, aggregation=aggregation, description=description, holding=holding, translation=translation)
+loan_options: Optional[LoanOptions] = # Replace with your value
+configuration_recipe_instance = ConfigurationRecipe(scope=scope, code=code, market=market, pricing=pricing, aggregation=aggregation, description=description, holding=holding, translation=translation, loan_options=loan_options)
 
 ```
 

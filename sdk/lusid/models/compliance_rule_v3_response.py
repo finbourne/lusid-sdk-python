@@ -44,10 +44,11 @@ class ComplianceRuleV3Response(BaseModel):
     measure: Optional[ComplianceRuleV3Measure] = None
     check: Optional[ComplianceRuleV3Check] = None
     computed_filter: Optional[ComplianceRuleV3ComputedFilter] = Field(default=None, alias="computedFilter")
+    schedule:  Optional[StrictStr] = Field(None,alias="schedule", description="Available values: PreTrade, PostTrade, PreAndPostTrade.") 
     version: Optional[Version] = None
     plain_english:  Optional[StrictStr] = Field(None,alias="plainEnglish") 
     links: Optional[List[Link]] = None
-    __properties = ["id", "name", "description", "active", "subject", "filter", "groupBy", "measure", "check", "computedFilter", "version", "plainEnglish", "links"]
+    __properties = ["id", "name", "description", "active", "subject", "filter", "groupBy", "measure", "check", "computedFilter", "schedule", "version", "plainEnglish", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -126,6 +127,11 @@ class ComplianceRuleV3Response(BaseModel):
         if self.group_by is None and "group_by" in self.__fields_set__:
             _dict['groupBy'] = None
 
+        # set to None if schedule (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule is None and "schedule" in self.__fields_set__:
+            _dict['schedule'] = None
+
         # set to None if plain_english (nullable) is None
         # and __fields_set__ contains the field
         if self.plain_english is None and "plain_english" in self.__fields_set__:
@@ -158,6 +164,7 @@ class ComplianceRuleV3Response(BaseModel):
             "measure": ComplianceRuleV3Measure.from_dict(obj.get("measure")) if obj.get("measure") is not None else None,
             "check": ComplianceRuleV3Check.from_dict(obj.get("check")) if obj.get("check") is not None else None,
             "computed_filter": ComplianceRuleV3ComputedFilter.from_dict(obj.get("computedFilter")) if obj.get("computedFilter") is not None else None,
+            "schedule": obj.get("schedule"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "plain_english": obj.get("plainEnglish"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

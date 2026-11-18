@@ -571,6 +571,7 @@ from lusid.models.corporate_action_transition import CorporateActionTransition
 from lusid.models.corporate_action_transition_component import CorporateActionTransitionComponent
 from lusid.models.corporate_action_transition_component_request import CorporateActionTransitionComponentRequest
 from lusid.models.corporate_action_transition_request import CorporateActionTransitionRequest
+from lusid.models.correct_posting_module_rule_version_request import CorrectPostingModuleRuleVersionRequest
 from lusid.models.counterparty_agreement import CounterpartyAgreement
 from lusid.models.counterparty_identifier import CounterpartyIdentifier
 from lusid.models.counterparty_risk_information import CounterpartyRiskInformation
@@ -1011,6 +1012,7 @@ from lusid.models.ignored_distribution_tag import IgnoredDistributionTag
 from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
 from lusid.models.index_projection_dependency import IndexProjectionDependency
+from lusid.models.indicative_amount_metric import IndicativeAmountMetric
 from lusid.models.industry_classifier import IndustryClassifier
 from lusid.models.inflation_convexity_options import InflationConvexityOptions
 from lusid.models.inflation_curve_data import InflationCurveData
@@ -1064,6 +1066,7 @@ from lusid.models.instrument_resolution_detail import InstrumentResolutionDetail
 from lusid.models.instrument_search_property import InstrumentSearchProperty
 from lusid.models.instrument_type import InstrumentType
 from lusid.models.interest_payment_event import InterestPaymentEvent
+from lusid.models.interest_payment_with_principal_event import InterestPaymentWithPrincipalEvent
 from lusid.models.interest_rate_swap import InterestRateSwap
 from lusid.models.interest_rate_swaption import InterestRateSwaption
 from lusid.models.intermediate_compliance_step import IntermediateComplianceStep
@@ -1105,6 +1108,7 @@ from lusid.models.loan_facility_tax_lot_allocation import LoanFacilityTaxLotAllo
 from lusid.models.loan_facility_tax_lot_state import LoanFacilityTaxLotState
 from lusid.models.loan_interest_capitalisation_event import LoanInterestCapitalisationEvent
 from lusid.models.loan_interest_repayment_event import LoanInterestRepaymentEvent
+from lusid.models.loan_options import LoanOptions
 from lusid.models.loan_period import LoanPeriod
 from lusid.models.loan_principal_repayment_event import LoanPrincipalRepaymentEvent
 from lusid.models.lock_period_diary_entry_request import LockPeriodDiaryEntryRequest
@@ -1197,6 +1201,7 @@ from lusid.models.nav_report_event import NavReportEvent
 from lusid.models.nav_settlement_configuration import NavSettlementConfiguration
 from lusid.models.nav_settlement_configuration_category import NavSettlementConfigurationCategory
 from lusid.models.nav_type import NavType
+from lusid.models.nav_type_catch_up import NavTypeCatchUp
 from lusid.models.nav_type_definition import NavTypeDefinition
 from lusid.models.nav_type_selection import NavTypeSelection
 from lusid.models.netting_recommendation import NettingRecommendation
@@ -1568,6 +1573,7 @@ from lusid.models.rate_curve_shift_mode import RateCurveShiftMode
 from lusid.models.rate_curve_shift_scale import RateCurveShiftScale
 from lusid.models.raw_vendor_event import RawVendorEvent
 from lusid.models.re_open_period_diary_entry_request import ReOpenPeriodDiaryEntryRequest
+from lusid.models.reactivated_nav_types_response import ReactivatedNavTypesResponse
 from lusid.models.realised_gain_loss import RealisedGainLoss
 from lusid.models.realised_gain_loss_chargeable_gains import RealisedGainLossChargeableGains
 from lusid.models.realised_gain_loss_matched_lot import RealisedGainLossMatchedLot
@@ -1811,6 +1817,7 @@ from lusid.models.result_value_int import ResultValueInt
 from lusid.models.result_value_string import ResultValueString
 from lusid.models.result_value_type import ResultValueType
 from lusid.models.retain_election import RetainElection
+from lusid.models.return_metric import ReturnMetric
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
@@ -2864,6 +2871,7 @@ __all__ = [
     "CorporateActionTransitionComponent",
     "CorporateActionTransitionComponentRequest",
     "CorporateActionTransitionRequest",
+    "CorrectPostingModuleRuleVersionRequest",
     "CounterpartyAgreement",
     "CounterpartyIdentifier",
     "CounterpartyRiskInformation",
@@ -3304,6 +3312,7 @@ __all__ = [
     "IndexConvention",
     "IndexModelOptions",
     "IndexProjectionDependency",
+    "IndicativeAmountMetric",
     "IndustryClassifier",
     "InflationConvexityOptions",
     "InflationCurveData",
@@ -3357,6 +3366,7 @@ __all__ = [
     "InstrumentSearchProperty",
     "InstrumentType",
     "InterestPaymentEvent",
+    "InterestPaymentWithPrincipalEvent",
     "InterestRateSwap",
     "InterestRateSwaption",
     "IntermediateComplianceStep",
@@ -3398,6 +3408,7 @@ __all__ = [
     "LoanFacilityTaxLotState",
     "LoanInterestCapitalisationEvent",
     "LoanInterestRepaymentEvent",
+    "LoanOptions",
     "LoanPeriod",
     "LoanPrincipalRepaymentEvent",
     "LockPeriodDiaryEntryRequest",
@@ -3490,6 +3501,7 @@ __all__ = [
     "NavSettlementConfiguration",
     "NavSettlementConfigurationCategory",
     "NavType",
+    "NavTypeCatchUp",
     "NavTypeDefinition",
     "NavTypeSelection",
     "NettingRecommendation",
@@ -3861,6 +3873,7 @@ __all__ = [
     "RateCurveShiftScale",
     "RawVendorEvent",
     "ReOpenPeriodDiaryEntryRequest",
+    "ReactivatedNavTypesResponse",
     "RealisedGainLoss",
     "RealisedGainLossChargeableGains",
     "RealisedGainLossMatchedLot",
@@ -4104,6 +4117,7 @@ __all__ = [
     "ResultValueString",
     "ResultValueType",
     "RetainElection",
+    "ReturnMetric",
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReturnsMetric",

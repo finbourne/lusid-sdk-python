@@ -13,81 +13,171 @@
 
 
 from __future__ import annotations
+from inspect import getfullargspec
+import json
 import pprint
 import re  # noqa: F401
-import json
 
-
-from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing import ClassVar, List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.indicative_amount_metric import IndicativeAmountMetric
+from lusid.models.return_metric import ReturnMetric
+
+
+RETURNSMETRIC_ONE_OF_SCHEMAS = ["IndicativeAmountMetric", "ReturnMetric"]
 
 class ReturnsMetric(BaseModel):
     """
-    A metric requested from the aggregated-returns (TWR) endpoint. Supports only the  period `Return` (the grid granularity is set on the request via Period, not per metric);  `Alias` is the key the metric appears under in the response's metricsValue dictionary.  # noqa: E501
+    Base class for a metric requested from the aggregated-returns (TWR) endpoint, measured over each period of  the grid (the grid granularity is set on the request via Period, not per metric). Polymorphic by type;  each supported type has a corresponding inherited class carrying the inputs only that metric takes.
     """
-    type:  Optional[StrictStr] = Field(None,alias="type", description="Available values: Return.") 
-    alias:  Optional[StrictStr] = Field(None,alias="alias") 
-    __properties = ["type", "alias"]
+    # data type: IndicativeAmountMetric
+    oneof_schema_1_validator: Optional[IndicativeAmountMetric] = None
+    # data type: ReturnMetric
+    oneof_schema_2_validator: Optional[ReturnMetric] = None
+    if TYPE_CHECKING:
+        actual_instance: Union[IndicativeAmountMetric, ReturnMetric]
+    else:
+        actual_instance: Any
+    one_of_schemas: List[str] = Field(RETURNSMETRIC_ONE_OF_SCHEMAS, const=True)
 
     class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
         validate_assignment = True
 
-    def __str__(self):
-        """For `print` and `pprint`"""
-        return pprint.pformat(self.dict(by_alias=False))
+    discriminator_value_class_map: ClassVar[Dict[str, str]] = {
+    }
 
-    def __repr__(self):
-        """For `print` and `pprint`"""
-        return self.to_str()
+    def __init__(self, *args, **kwargs) -> None:
+        if args:
+            if len(args) > 1:
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+            if kwargs:
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+            super().__init__(actual_instance=args[0])
+        else:
+            super().__init__(**kwargs)
 
-    def to_str(self) -> str:
-        """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
-
-    def to_json(self) -> str:
-        """Returns the JSON representation of the model using alias"""
-        return json.dumps(self.to_dict())
-
-    @classmethod
-    def from_json(cls, json_str: str) -> ReturnsMetric:
-        """Create an instance of ReturnsMetric from a JSON string"""
-        return cls.from_dict(json.loads(json_str))
-
-    def to_dict(self):
-        """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
-                          exclude={
-                          },
-                          exclude_none=True)
-        # set to None if type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.type is None and "type" in self.__fields_set__:
-            _dict['type'] = None
-
-        # set to None if alias (nullable) is None
-        # and __fields_set__ contains the field
-        if self.alias is None and "alias" in self.__fields_set__:
-            _dict['alias'] = None
-
-        return _dict
+    @validator('actual_instance')
+    def actual_instance_must_validate_oneof(cls, v):
+        instance = ReturnsMetric.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        # validate data type: IndicativeAmountMetric
+        if not isinstance(v, IndicativeAmountMetric):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `IndicativeAmountMetric`")
+        else:
+            match += 1
+            matchclass = matchclass + " IndicativeAmountMetric"
+        # validate data type: ReturnMetric
+        if not isinstance(v, ReturnMetric):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ReturnMetric`")
+        else:
+            match += 1
+            matchclass = matchclass + " ReturnMetric"
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: Matched classes " + matchclass)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: " + ", ".join(error_messages))
+        else:
+            return v
 
     @classmethod
     def from_dict(cls, obj: dict) -> ReturnsMetric:
-        """Create an instance of ReturnsMetric from a dict"""
-        if obj is None:
+        return cls.from_json(json.dumps(obj))
+
+    @classmethod
+    def from_json(cls, json_str: str) -> ReturnsMetric:
+        """Returns the object represented by the json string"""
+        instance = ReturnsMetric.construct()
+        error_messages = []
+        match = 0
+        matchclass = ""
+        
+
+        # use oneOf discriminator to lookup the data type
+        _data_type = json.loads(json_str).get("type")
+        if not _data_type:
+            raise ValueError("Failed to lookup data type from the field `type` in the input.")
+
+        # check if data type is `IndicativeAmountMetric`
+        if _data_type == "IndicativeAmount":
+            instance.actual_instance = IndicativeAmountMetric.from_json(json_str)
+            return instance
+
+        # check if data type is `ReturnMetric`
+        if _data_type == "Return":
+            instance.actual_instance = ReturnMetric.from_json(json_str)
+            return instance
+
+        # check if data type is `IndicativeAmountMetric`
+        if _data_type == "IndicativeAmountMetric":
+            instance.actual_instance = IndicativeAmountMetric.from_json(json_str)
+            return instance
+
+        # check if data type is `ReturnMetric`
+        if _data_type == "ReturnMetric":
+            instance.actual_instance = ReturnMetric.from_json(json_str)
+            return instance
+
+        # deserialize data into IndicativeAmountMetric
+        try:
+            instance.actual_instance = IndicativeAmountMetric.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " IndicativeAmountMetric"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+        # deserialize data into ReturnMetric
+        try:
+            instance.actual_instance = ReturnMetric.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " ReturnMetric"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
+
+        if match > 1:
+            # more than 1 match
+            raise ValueError("Multiple matches found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+        elif match == 0:
+            # no match
+            raise ValueError("No match found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: " + ", ".join(error_messages))
+        else:
+            return instance
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the actual instance"""
+        if self.actual_instance is None:
+            return "null"
+
+        to_json = getattr(self.actual_instance, "to_json", None)
+        if callable(to_json):
+            return self.actual_instance.to_json()
+        else:
+            return json.dumps(self.actual_instance)
+
+    def to_dict(self) -> dict:
+        """Returns the dict representation of the actual instance"""
+        if self.actual_instance is None:
             return None
 
-        if not isinstance(obj, dict):
-            return ReturnsMetric.parse_obj(obj)
+        to_dict = getattr(self.actual_instance, "to_dict", None)
+        if callable(to_dict):
+            return self.actual_instance.to_dict()
+        else:
+            # primitive type
+            return self.actual_instance
 
-        _obj = ReturnsMetric.parse_obj({
-            "type": obj.get("type"),
-            "alias": obj.get("alias")
-        })
-        return _obj
-
-ReturnsMetric.update_forward_refs()
+        def __str__(self):
+            """For `print` and `pprint`"""
+            return pprint.pformat(self.dict(by_alias=False))
+    
+        def __repr__(self):
+            """For `print` and `pprint`"""
+            return self.to_str()
+    
+        def to_str(self) -> str:
+            """Returns the string representation of the model using alias"""
+            return pprint.pformat(self.dict(by_alias=True))

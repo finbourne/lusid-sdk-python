@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **recipe_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **scenario_diagnostics** | [**ScenarioDiagnostics**](ScenarioDiagnostics.md) |  | [optional] 
 **recipe_provenance** | [**RecipeProvenance**](RecipeProvenance.md) |  | [optional] 
+**warnings** | [**List[Warning]**](Warning.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -33,8 +34,9 @@ aggregation_failures: Optional[List[AggregationMeasureFailureDetail]] = # Replac
 recipe_id: Optional[ResourceId] = # Replace with your value
 scenario_diagnostics: Optional[ScenarioDiagnostics] = # Replace with your value
 recipe_provenance: Optional[RecipeProvenance] = # Replace with your value
+warnings: Optional[List[Warning]] = None
 links: Optional[List[Link]] = None
-list_aggregation_response_instance = ListAggregationResponse(aggregation_effective_at=aggregation_effective_at, aggregation_as_at=aggregation_as_at, href=href, data=data, aggregation_currency=aggregation_currency, data_schema=data_schema, aggregation_failures=aggregation_failures, recipe_id=recipe_id, scenario_diagnostics=scenario_diagnostics, recipe_provenance=recipe_provenance, links=links)
+list_aggregation_response_instance = ListAggregationResponse(aggregation_effective_at=aggregation_effective_at, aggregation_as_at=aggregation_as_at, href=href, data=data, aggregation_currency=aggregation_currency, data_schema=data_schema, aggregation_failures=aggregation_failures, recipe_id=recipe_id, scenario_diagnostics=scenario_diagnostics, recipe_provenance=recipe_provenance, warnings=warnings, links=links)
 
 ```
 

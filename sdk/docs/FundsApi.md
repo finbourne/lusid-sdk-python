@@ -82,6 +82,7 @@ Method | HTTP request | Description
 [**produce_partner_statement**](FundsApi.md#produce_partner_statement) | **POST** /api/funds/{scope}/{code}/partners/{investorRecordId}/statements | [EARLY ACCESS] ProducePartnerStatement: [EXPERIMENTAL] ProducePartnerStatement: Produce a partner&#39;s capital statement for a period.
 [**query_cash_statement**](FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
 [**query_cash_statement_local_currency**](FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
+[**reactivate_nav_types**](FundsApi.md#reactivate_nav_types) | **POST** /api/funds/{scope}/{code}/reactivateNavTypes | [EXPERIMENTAL] ReactivateNavTypes: [EXPERIMENTAL] ReactivateNavTypes: Reactivate previously deactivated NAV types on a Fund.
 [**revert_valuation_point_to_estimate**](FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 [**run_partner_allocations**](FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period&#39;s income to the Fund&#39;s partners.
 [**send_back_tax_return**](FundsApi.md#send_back_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/send-back | [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
@@ -8133,6 +8134,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The local-currency cash statement for the specified Fund valuation point. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **reactivate_nav_types**
+> ReactivatedNavTypesResponse reactivate_nav_types(scope, code, request_body)
+
+[EXPERIMENTAL] ReactivateNavTypes: [EXPERIMENTAL] ReactivateNavTypes: Reactivate previously deactivated NAV types on a Fund.
+
+Returns the deactivated NAV types to Active. For followers, the response includes the number of valuation  points the leader finalised while the follower was dormant. Leaders reactivate with no catch-up counts.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    request_body = ["NavTypeCode1","NavTypeCode2"] # List[str] | The codes of the nav types to be reactivated.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.reactivate_nav_types(scope, code, request_body, opts=opts)
+
+        # [EXPERIMENTAL] ReactivateNavTypes: [EXPERIMENTAL] ReactivateNavTypes: Reactivate previously deactivated NAV types on a Fund.
+        api_response = api_instance.reactivate_nav_types(scope, code, request_body)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->reactivate_nav_types: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **request_body** | [**List[str]**](str.md)| The codes of the nav types to be reactivated. | 
+
+### Return type
+
+[**ReactivatedNavTypesResponse**](ReactivatedNavTypesResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated Fund with the specified NAV types reactivated, and catch-up counts for followers. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

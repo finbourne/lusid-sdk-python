@@ -8,10 +8,12 @@ Name | Type | Description | Notes
 **created_date** | **datetime** | The active date of this order instruction. | 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | [optional] 
-**quantity** | **float** | The quantity of given instrument ordered. | [optional] 
-**weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
+**quantity** | **float** | The quantity of given instrument. | [optional] 
+**weight** | **float** | The proportion of the total portfolio value. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**instruction_type** | **str** | Whether the instruction is a change to the holding or a target for it, one of: Change, Target. Defaults to Target for a weight-only instruction and to Change otherwise. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +31,9 @@ quantity: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 weight: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 price: Optional[CurrencyAndAmount] = None
 properties: Optional[Dict[str, PerpetualProperty]] = # Replace with your value
-order_instruction_request_instance = OrderInstructionRequest(id=id, created_date=created_date, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, properties=properties)
+amount: Optional[CurrencyAndAmount] = None
+instruction_type: Optional[StrictStr] = "example_instruction_type"
+order_instruction_request_instance = OrderInstructionRequest(id=id, created_date=created_date, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, properties=properties, amount=amount, instruction_type=instruction_type)
 
 ```
 

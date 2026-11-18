@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **status** | **str** | The outcome of the run. Available values: Computed, Booked, DryRun. | 
 **run_id** | **str** | The identifier of the run, which prefixes every transaction it books. | 
 **pools** | [**List[PartnerAllocationPool]**](PartnerAllocationPool.md) | The pools of fund-level amount that were allocated, in the allocation bucket set&#39;s bucket order with any tag pools after. | 
-**unattributed** | [**List[UnattributedAmount]**](UnattributedAmount.md) | Always empty: every profit and loss line is pooled or the run is refused. Kept until no published SDK requires it. | 
+**unattributed** | [**List[UnattributedAmount]**](UnattributedAmount.md) | Always empty: every profit and loss line is pooled or the run is refused. No longer required; removed once no published SDK requires it. | [optional] 
 **booked_transaction_ids** | **List[str]** | The identifiers of the transactions the run booked, if any. | 
 **warnings** | **List[str]** | What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end, or a fee accrual naming no investor that was pooled as unaccrued fee (AccruedFeeWithoutInvestor). | [optional] 
 **ignored_tags** | [**List[IgnoredDistributionTag]**](IgnoredDistributionTag.md) | The distribution character tags the run did not pool by, by account. | [optional] 
@@ -32,7 +32,7 @@ nav_type_code: StrictStr = "example_nav_type_code"
 status: StrictStr = "example_status"
 run_id: StrictStr = "example_run_id"
 pools: List[PartnerAllocationPool] = # Replace with your value
-unattributed: List[UnattributedAmount] = # Replace with your value
+unattributed: Optional[List[UnattributedAmount]] = # Replace with your value
 booked_transaction_ids: List[StrictStr] = # Replace with your value
 warnings: Optional[List[StrictStr]] = # Replace with your value
 ignored_tags: Optional[List[IgnoredDistributionTag]] = # Replace with your value

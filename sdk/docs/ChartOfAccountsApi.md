@@ -4,6 +4,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**correct_posting_module_rule_version**](ChartOfAccountsApi.md#correct_posting_module_rule_version) | **PUT** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules/{ruleId}/versions/{version} | [EARLY ACCESS] CorrectPostingModuleRuleVersion: Correct a version of a rule of a Posting Module
 [**create_chart_of_accounts**](ChartOfAccountsApi.md#create_chart_of_accounts) | **POST** /api/chartofaccounts/{scope} | [EARLY ACCESS] CreateChartOfAccounts: Create a Chart of Accounts
 [**create_cleardown_module**](ChartOfAccountsApi.md#create_cleardown_module) | **POST** /api/chartofaccounts/{scope}/{code}/cleardownmodules | [EARLY ACCESS] CreateCleardownModule: Create a Cleardown Module
 [**create_general_ledger_profile**](ChartOfAccountsApi.md#create_general_ledger_profile) | **POST** /api/chartofaccounts/{scope}/{code}/generalledgerprofile | [EARLY ACCESS] CreateGeneralLedgerProfile: Create a General Ledger Profile.
@@ -13,6 +14,7 @@ Method | HTTP request | Description
 [**delete_cleardown_module**](ChartOfAccountsApi.md#delete_cleardown_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/cleardownmodules/{cleardownModuleCode} | [EARLY ACCESS] DeleteCleardownModule: Delete a Cleardown Module.
 [**delete_general_ledger_profile**](ChartOfAccountsApi.md#delete_general_ledger_profile) | **DELETE** /api/chartofaccounts/{scope}/{code}/generalledgerprofile/{generalLedgerProfileCode} | [EARLY ACCESS] DeleteGeneralLedgerProfile: Delete a General Ledger Profile.
 [**delete_posting_module**](ChartOfAccountsApi.md#delete_posting_module) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode} | [EARLY ACCESS] DeletePostingModule: Delete a Posting Module.
+[**delete_posting_module_rule_version**](ChartOfAccountsApi.md#delete_posting_module_rule_version) | **DELETE** /api/chartofaccounts/{scope}/{code}/postingmodules/{postingModuleCode}/postingrules/{ruleId}/versions/{version} | [EARLY ACCESS] DeletePostingModuleRuleVersion: Delete a version of a rule of a Posting Module
 [**get_account**](ChartOfAccountsApi.md#get_account) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode} | [EARLY ACCESS] GetAccount: Get Account
 [**get_account_properties**](ChartOfAccountsApi.md#get_account_properties) | **GET** /api/chartofaccounts/{scope}/{code}/accounts/{accountCode}/properties | [EARLY ACCESS] GetAccountProperties: Get Account properties
 [**get_chart_of_accounts**](ChartOfAccountsApi.md#get_chart_of_accounts) | **GET** /api/chartofaccounts/{scope}/{code} | [EARLY ACCESS] GetChartOfAccounts: Get ChartOfAccounts
@@ -40,6 +42,113 @@ Method | HTTP request | Description
 [**upsert_accounts**](ChartOfAccountsApi.md#upsert_accounts) | **POST** /api/chartofaccounts/{scope}/{code}/accounts | [EARLY ACCESS] UpsertAccounts: Upsert Accounts
 [**upsert_chart_of_accounts_properties**](ChartOfAccountsApi.md#upsert_chart_of_accounts_properties) | **POST** /api/chartofaccounts/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertChartOfAccountsProperties: Upsert Chart of Accounts properties
 
+
+# **correct_posting_module_rule_version**
+> PostingModuleRulesUpdatedResponse correct_posting_module_rule_version(scope, code, posting_module_code, rule_id, version, correct_posting_module_rule_version_request)
+
+[EARLY ACCESS] CorrectPostingModuleRuleVersion: Correct a version of a rule of a Posting Module
+
+Replace the general ledger account, filter and effective window of one version of a Posting Rule, identified by  its ruleId and version. The version keeps its ruleId, version and originalRuleId. The rule's other versions and  every other rule are left as they are. The request replaces all four fields: an effectiveFrom or effectiveUntil  that is not provided is cleared, so provide the existing dates to keep the version's window.                Journal Entry Lines in closed periods are not changed. Activity in a closed period that falls in the corrected  version's window is moved to the corrected account in the next open period, by a reversal and a true-up. To  change the account from a date onwards without restating earlier activity, supersede the rule instead.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ChartOfAccountsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ChartOfAccountsApi)
+    scope = 'scope_example' # str | The scope of the Chart of Accounts.
+    code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
+    posting_module_code = 'posting_module_code_example' # str | The code of the Posting Module to be updated.
+    rule_id = 'rule_id_example' # str | The identifier of the Posting Rule.
+    version = 56 # int | The version of the Posting Rule to correct.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # correct_posting_module_rule_version_request = CorrectPostingModuleRuleVersionRequest.from_json("")
+    # correct_posting_module_rule_version_request = CorrectPostingModuleRuleVersionRequest.from_dict({})
+    correct_posting_module_rule_version_request = CorrectPostingModuleRuleVersionRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.correct_posting_module_rule_version(scope, code, posting_module_code, rule_id, version, correct_posting_module_rule_version_request, opts=opts)
+
+        # [EARLY ACCESS] CorrectPostingModuleRuleVersion: Correct a version of a rule of a Posting Module
+        api_response = api_instance.correct_posting_module_rule_version(scope, code, posting_module_code, rule_id, version, correct_posting_module_rule_version_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ChartOfAccountsApi->correct_posting_module_rule_version: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Chart of Accounts. | 
+ **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. | 
+ **posting_module_code** | **str**| The code of the Posting Module to be updated. | 
+ **rule_id** | **str**| The identifier of the Posting Rule. | 
+ **version** | **int**| The version of the Posting Rule to correct. | 
+ **correct_posting_module_rule_version_request** | [**CorrectPostingModuleRuleVersionRequest**](CorrectPostingModuleRuleVersionRequest.md)| The corrected content of the version. | 
+
+### Return type
+
+[**PostingModuleRulesUpdatedResponse**](PostingModuleRulesUpdatedResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Posting Module with updated rules. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **create_chart_of_accounts**
 > ChartOfAccounts create_chart_of_accounts(scope, chart_of_accounts_request)
@@ -918,6 +1027,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The datetime that the Posting Module was deleted. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_posting_module_rule_version**
+> PostingModuleRulesUpdatedResponse delete_posting_module_rule_version(scope, code, posting_module_code, rule_id, version)
+
+[EARLY ACCESS] DeletePostingModuleRuleVersion: Delete a version of a rule of a Posting Module
+
+Delete one version of a Posting Rule, identified by its ruleId and version. The rule's other versions and every  other rule are left as they are, and keep their version numbers.                Journal Entry Lines in closed periods are not changed. Activity in a closed period that the deleted version  posted is moved, in the next open period, to the account of the rule that now matches it, by a reversal and a  true-up.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    ChartOfAccountsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(ChartOfAccountsApi)
+    scope = 'scope_example' # str | The scope of the Chart of Accounts.
+    code = 'code_example' # str | The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts.
+    posting_module_code = 'posting_module_code_example' # str | The code of the Posting Module to be updated.
+    rule_id = 'rule_id_example' # str | The identifier of the Posting Rule.
+    version = 56 # int | The version of the Posting Rule to delete.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_posting_module_rule_version(scope, code, posting_module_code, rule_id, version, opts=opts)
+
+        # [EARLY ACCESS] DeletePostingModuleRuleVersion: Delete a version of a rule of a Posting Module
+        api_response = api_instance.delete_posting_module_rule_version(scope, code, posting_module_code, rule_id, version)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling ChartOfAccountsApi->delete_posting_module_rule_version: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Chart of Accounts. | 
+ **code** | **str**| The code of the Chart of Accounts. Together with the scope this uniquely identifies the Chart of Accounts. | 
+ **posting_module_code** | **str**| The code of the Posting Module to be updated. | 
+ **rule_id** | **str**| The identifier of the Posting Rule. | 
+ **version** | **int**| The version of the Posting Rule to delete. | 
+
+### Return type
+
+[**PostingModuleRulesUpdatedResponse**](PostingModuleRulesUpdatedResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The Posting Module with updated rules. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

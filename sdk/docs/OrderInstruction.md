@@ -9,13 +9,15 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, PerpetualProperty]**](PerpetualProperty.md) | Client-defined properties associated with this execution. | [optional] 
 **portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **instrument_identifiers** | **Dict[str, Optional[str]]** | The instrument ordered. | 
-**quantity** | **float** | The quantity of given instrument ordered. | [optional] 
-**weight** | **float** | The proportion of the total portfolio value ordered for the given instrument ordered. | [optional] 
+**quantity** | **float** | The quantity of given instrument. | [optional] 
+**weight** | **float** | The proportion of the total portfolio value. | [optional] 
 **price** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **instrument_scope** | **str** | The scope in which the instrument lies | [optional] 
 **lusid_instrument_id** | **str** | The LUSID instrument id for the instrument ordered. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **data_model_membership** | [**DataModelMembership**](DataModelMembership.md) |  | [optional] 
+**amount** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**instruction_type** | **str** | Whether the instruction is a change to the holding or a target for it, one of: Change, Target. Defaults to Target for a weight-only instruction and to Change otherwise. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -38,8 +40,10 @@ instrument_scope: Optional[StrictStr] = "example_instrument_scope"
 lusid_instrument_id: Optional[StrictStr] = "example_lusid_instrument_id"
 version: Optional[Version] = None
 data_model_membership: Optional[DataModelMembership] = # Replace with your value
+amount: Optional[CurrencyAndAmount] = None
+instruction_type: Optional[StrictStr] = "example_instruction_type"
 links: Optional[List[Link]] = None
-order_instruction_instance = OrderInstruction(id=id, created_date=created_date, properties=properties, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, version=version, data_model_membership=data_model_membership, links=links)
+order_instruction_instance = OrderInstruction(id=id, created_date=created_date, properties=properties, portfolio_id=portfolio_id, instrument_identifiers=instrument_identifiers, quantity=quantity, weight=weight, price=price, instrument_scope=instrument_scope, lusid_instrument_id=lusid_instrument_id, version=version, data_model_membership=data_model_membership, amount=amount, instruction_type=instruction_type, links=links)
 
 ```
 

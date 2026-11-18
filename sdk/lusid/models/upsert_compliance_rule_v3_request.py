@@ -42,7 +42,8 @@ class UpsertComplianceRuleV3Request(BaseModel):
     measure: ComplianceRuleV3Measure
     check: ComplianceRuleV3Check
     computed_filter: Optional[ComplianceRuleV3ComputedFilter] = Field(default=None, alias="computedFilter")
-    __properties = ["id", "name", "description", "active", "subject", "filter", "groupBy", "measure", "check", "computedFilter"]
+    schedule:  Optional[StrictStr] = Field(None,alias="schedule", description="Available values: PreTrade, PostTrade, PreAndPostTrade.") 
+    __properties = ["id", "name", "description", "active", "subject", "filter", "groupBy", "measure", "check", "computedFilter", "schedule"]
 
     class Config:
         """Pydantic configuration"""
@@ -106,6 +107,11 @@ class UpsertComplianceRuleV3Request(BaseModel):
         if self.group_by is None and "group_by" in self.__fields_set__:
             _dict['groupBy'] = None
 
+        # set to None if schedule (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule is None and "schedule" in self.__fields_set__:
+            _dict['schedule'] = None
+
         return _dict
 
     @classmethod
@@ -127,7 +133,8 @@ class UpsertComplianceRuleV3Request(BaseModel):
             "group_by": obj.get("groupBy"),
             "measure": ComplianceRuleV3Measure.from_dict(obj.get("measure")) if obj.get("measure") is not None else None,
             "check": ComplianceRuleV3Check.from_dict(obj.get("check")) if obj.get("check") is not None else None,
-            "computed_filter": ComplianceRuleV3ComputedFilter.from_dict(obj.get("computedFilter")) if obj.get("computedFilter") is not None else None
+            "computed_filter": ComplianceRuleV3ComputedFilter.from_dict(obj.get("computedFilter")) if obj.get("computedFilter") is not None else None,
+            "schedule": obj.get("schedule")
         })
         return _obj
 

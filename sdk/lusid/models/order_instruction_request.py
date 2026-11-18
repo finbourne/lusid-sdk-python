@@ -34,11 +34,13 @@ class OrderInstructionRequest(BaseModel):
     created_date: datetime = Field(description="The active date of this order instruction.", alias="createdDate")
     portfolio_id: Optional[ResourceId] = Field(default=None, alias="portfolioId")
     instrument_identifiers: Optional[Dict[str, Optional[StrictStr]]] = Field(default=None, description="The instrument ordered.", alias="instrumentIdentifiers")
-    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument ordered.")
-    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value ordered for the given instrument ordered.")
+    quantity: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The quantity of given instrument.")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The proportion of the total portfolio value.")
     price: Optional[CurrencyAndAmount] = None
     properties: Optional[Dict[str, PerpetualProperty]] = Field(default=None, description="Client-defined properties associated with this execution.")
-    __properties = ["id", "createdDate", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "properties"]
+    amount: Optional[CurrencyAndAmount] = None
+    instruction_type:  Optional[StrictStr] = Field(None,alias="instructionType", description="Whether the instruction is a change to the holding or a target for it, one of: Change, Target. Defaults to Target for a weight-only instruction and to Change otherwise.") 
+    __properties = ["id", "createdDate", "portfolioId", "instrumentIdentifiers", "quantity", "weight", "price", "properties", "amount", "instructionType"]
 
     class Config:
         """Pydantic configuration"""
@@ -88,6 +90,9 @@ class OrderInstructionRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of amount
+        if self.amount:
+            _dict['amount'] = self.amount.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -107,6 +112,11 @@ class OrderInstructionRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
+
+        # set to None if instruction_type (nullable) is None
+        # and __fields_set__ contains the field
+        if self.instruction_type is None and "instruction_type" in self.__fields_set__:
+            _dict['instructionType'] = None
 
         return _dict
 
@@ -132,7 +142,9 @@ class OrderInstructionRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "amount": CurrencyAndAmount.from_dict(obj.get("amount")) if obj.get("amount") is not None else None,
+            "instruction_type": obj.get("instructionType")
         })
         return _obj
 

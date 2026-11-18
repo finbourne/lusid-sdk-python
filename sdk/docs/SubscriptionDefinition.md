@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **start_effective_at** | **datetime** |  | [optional] 
 **end_effective_at** | **datetime** | Deprecated and no longer honoured: a fixed forward date stops being a forward view once  the live edge passes it. Use effectiveForwardDays instead. Still accepted and echoed back  so existing subscriptions keep round-tripping. | [optional] 
 **effective_forward_days** | **int** | How far forward the subscription reports, as a number of calendar days past the live  edge — a rolling forward view that advances as time passes. | [optional] 
-**instrument_identifiers** | **List[str]** | The instrument identifiers each published holding carries, as Instrument/default/{type} property keys,  for example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5.  Not valid for a transactions subscription. | [optional] 
+**instrument_identifiers** | **List[str]** | The instrument identifiers each published change carries, as Instrument/default/{type} property keys, for  example Instrument/default/ClientInternal. Each must name an instrument identifier type. At most 5. | [optional] 
 **report_currency** | **str** | The currency the report-currency values are given in, as a three-letter ISO code stored upper-case. Required  when addressKeys names any key other than the quantity, cost, current face, notional cost, variation margin  and currency keys: Holding/Units, Holding/SettledUnits, Holding/Cost/Dom, Holding/Cost/Pfolio,  Holding/CurrentFace, Holding/NotionalCost, Holding/VariationMargin, Holding/VariationMarginInPortfolioCcy,  Holding/HoldingType, Holding/DomCcy and Holding/PortfolioCcy. Not valid for a transactions subscription. | [optional] 
 ## Example
 

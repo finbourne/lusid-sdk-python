@@ -39,7 +39,7 @@ class PartnerAllocationRunResult(BaseModel):
     status:  StrictStr = Field(...,alias="status", description="The outcome of the run. Available values: Computed, Booked, DryRun.") 
     run_id:  StrictStr = Field(...,alias="runId", description="The identifier of the run, which prefixes every transaction it books.") 
     pools: List[PartnerAllocationPool] = Field(description="The pools of fund-level amount that were allocated, in the allocation bucket set's bucket order with any tag pools after.")
-    unattributed: List[UnattributedAmount] = Field(description="Always empty: every profit and loss line is pooled or the run is refused. Kept until no published SDK requires it.")
+    unattributed: Optional[List[UnattributedAmount]] = Field(default=None, description="Always empty: every profit and loss line is pooled or the run is refused. No longer required; removed once no published SDK requires it.")
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions the run booked, if any.", alias="bookedTransactionIds")
     warnings: Optional[List[StrictStr]] = Field(default=None, description="What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end, or a fee accrual naming no investor that was pooled as unaccrued fee (AccruedFeeWithoutInvestor).")
     ignored_tags: Optional[List[IgnoredDistributionTag]] = Field(default=None, description="The distribution character tags the run did not pool by, by account.", alias="ignoredTags")
@@ -109,6 +109,11 @@ class PartnerAllocationRunResult(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['accruedFees'] = _items
+        # set to None if unattributed (nullable) is None
+        # and __fields_set__ contains the field
+        if self.unattributed is None and "unattributed" in self.__fields_set__:
+            _dict['unattributed'] = None
+
         # set to None if warnings (nullable) is None
         # and __fields_set__ contains the field
         if self.warnings is None and "warnings" in self.__fields_set__:

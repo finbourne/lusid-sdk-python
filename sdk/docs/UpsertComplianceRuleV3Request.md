@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **measure** | [**ComplianceRuleV3Measure**](ComplianceRuleV3Measure.md) |  | 
 **check** | [**ComplianceRuleV3Check**](ComplianceRuleV3Check.md) |  | 
 **computed_filter** | [**ComplianceRuleV3ComputedFilter**](ComplianceRuleV3ComputedFilter.md) |  | [optional] 
+**schedule** | **str** | Available values: PreTrade, PostTrade, PreAndPostTrade. | [optional] 
 ## Example
 
 ```python
@@ -34,7 +35,8 @@ group_by: Optional[List[StrictStr]] = # Replace with your value
 measure: ComplianceRuleV3Measure
 check: ComplianceRuleV3Check
 computed_filter: Optional[ComplianceRuleV3ComputedFilter] = # Replace with your value
-upsert_compliance_rule_v3_request_instance = UpsertComplianceRuleV3Request(id=id, name=name, description=description, active=active, subject=subject, filter=filter, group_by=group_by, measure=measure, check=check, computed_filter=computed_filter)
+schedule: Optional[StrictStr] = "example_schedule"
+upsert_compliance_rule_v3_request_instance = UpsertComplianceRuleV3Request(id=id, name=name, description=description, active=active, subject=subject, filter=filter, group_by=group_by, measure=measure, check=check, computed_filter=computed_filter, schedule=schedule)
 
 ```
 

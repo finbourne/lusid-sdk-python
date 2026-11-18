@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.aggregation_context import AggregationContext
 from lusid.models.holding_context import HoldingContext
+from lusid.models.loan_options import LoanOptions
 from lusid.models.market_context import MarketContext
 from lusid.models.pricing_context import PricingContext
 from lusid.models.translation_context import TranslationContext
@@ -40,7 +41,8 @@ class ConfigurationRecipe(BaseModel):
     description:  Optional[StrictStr] = Field(None,alias="description", description="User can assign a description to understand more humanly the recipe.") 
     holding: Optional[HoldingContext] = None
     translation: Optional[TranslationContext] = None
-    __properties = ["scope", "code", "market", "pricing", "aggregation", "description", "holding", "translation"]
+    loan_options: Optional[LoanOptions] = Field(default=None, alias="loanOptions")
+    __properties = ["scope", "code", "market", "pricing", "aggregation", "description", "holding", "translation", "loanOptions"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +91,9 @@ class ConfigurationRecipe(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of translation
         if self.translation:
             _dict['translation'] = self.translation.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of loan_options
+        if self.loan_options:
+            _dict['loanOptions'] = self.loan_options.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -113,7 +118,8 @@ class ConfigurationRecipe(BaseModel):
             "aggregation": AggregationContext.from_dict(obj.get("aggregation")) if obj.get("aggregation") is not None else None,
             "description": obj.get("description"),
             "holding": HoldingContext.from_dict(obj.get("holding")) if obj.get("holding") is not None else None,
-            "translation": TranslationContext.from_dict(obj.get("translation")) if obj.get("translation") is not None else None
+            "translation": TranslationContext.from_dict(obj.get("translation")) if obj.get("translation") is not None else None,
+            "loan_options": LoanOptions.from_dict(obj.get("loanOptions")) if obj.get("loanOptions") is not None else None
         })
         return _obj
 
