@@ -37,14 +37,15 @@ class CompletePortfolio(BaseModel):
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The name of the portfolio.") 
     created: Optional[datetime] = Field(default=None, description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
+    parent_portfolio_ids: Optional[List[ResourceId]] = Field(default=None, description="The scope and code of each portfolio this portfolio takes its contents from: the parent of a derived transaction portfolio, or the constituents of a composite portfolio at the effective date. Empty for a portfolio with no parent.", alias="parentPortfolioIds")
     is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
-    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
+    type:  Optional[StrictStr] = Field(None,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition, Composite.") 
     version: Version
     properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="If the portfolio is a transaction portfolio or derived transaction portfolio, this is the base currency of the portfolio.") 
     sub_holding_keys: Optional[List[StrictStr]] = Field(default=None, description="The sub holding key properties configured for the portfolio", alias="subHoldingKeys")
     links: Optional[List[Link]] = None
-    __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "isDerived", "type", "version", "properties", "baseCurrency", "subHoldingKeys", "links"]
+    __properties = ["id", "href", "description", "displayName", "created", "parentPortfolioId", "parentPortfolioIds", "isDerived", "type", "version", "properties", "baseCurrency", "subHoldingKeys", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -60,7 +61,7 @@ class CompletePortfolio(BaseModel):
         if value is None:
             return value
 
-        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']
+        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition', 'Composite']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -106,6 +107,13 @@ class CompletePortfolio(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of parent_portfolio_id
         if self.parent_portfolio_id:
             _dict['parentPortfolioId'] = self.parent_portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in parent_portfolio_ids (list)
+        _items = []
+        if self.parent_portfolio_ids:
+            for _item in self.parent_portfolio_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['parentPortfolioIds'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -137,6 +145,11 @@ class CompletePortfolio(BaseModel):
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
             _dict['displayName'] = None
+
+        # set to None if parent_portfolio_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.parent_portfolio_ids is None and "parent_portfolio_ids" in self.__fields_set__:
+            _dict['parentPortfolioIds'] = None
 
         # set to None if properties (nullable) is None
         # and __fields_set__ contains the field
@@ -176,6 +189,7 @@ class CompletePortfolio(BaseModel):
             "display_name": obj.get("displayName"),
             "created": obj.get("created"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
+            "parent_portfolio_ids": [ResourceId.from_dict(_item) for _item in obj.get("parentPortfolioIds")] if obj.get("parentPortfolioIds") is not None else None,
             "is_derived": obj.get("isDerived"),
             "type": obj.get("type"),
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,

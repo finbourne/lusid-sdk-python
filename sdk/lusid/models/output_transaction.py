@@ -88,7 +88,8 @@ class OutputTransaction(BaseModel):
     unresolved_custodian_accounts: Optional[List[CustodianEntry]] = Field(default=None, description="Set of Custodian Entries on the Transaction that no movement was booked against, i.e. those which did not match a movement's account type and selector.", alias="unresolvedCustodianAccounts")
     is_excluded: Optional[StrictBool] = Field(default=None, description="Whether the transaction was excluded from the portfolio's holdings by the portfolio's transaction exclusion filter.", alias="isExcluded")
     entity_links: Optional[List[TransactionEntityLink]] = Field(default=None, description="Links to the entities that manage this transaction.", alias="entityLinks")
-    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications", "custodianEntries", "resolvedCustodianAccounts", "unresolvedCustodianAccounts", "isExcluded", "entityLinks"]
+    source_portfolio_id: Optional[ResourceId] = Field(default=None, alias="sourcePortfolioId")
+    __properties = ["transactionId", "type", "description", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionAmount", "transactionPrice", "totalConsideration", "exchangeRate", "transactionToPortfolioRate", "transactionCurrency", "properties", "counterpartyId", "source", "transactionStatus", "entryDateTime", "cancelDateTime", "realisedGainLoss", "holdingIds", "sourceType", "sourceInstrumentEventId", "custodianAccount", "transactionGroupId", "resolvedTransactionTypeDetails", "grossTransactionAmount", "otcConfirmation", "orderId", "allocationId", "accountingDate", "economics", "dataModelMembership", "sequence", "sequencePriority", "settlementSummary", "version", "stagedModifications", "custodianEntries", "resolvedCustodianAccounts", "unresolvedCustodianAccounts", "isExcluded", "entityLinks", "sourcePortfolioId"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -225,6 +226,9 @@ class OutputTransaction(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['entityLinks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of source_portfolio_id
+        if self.source_portfolio_id:
+            _dict['sourcePortfolioId'] = self.source_portfolio_id.to_dict()
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -396,7 +400,8 @@ class OutputTransaction(BaseModel):
             "resolved_custodian_accounts": [ResolvedCustodianAccount.from_dict(_item) for _item in obj.get("resolvedCustodianAccounts")] if obj.get("resolvedCustodianAccounts") is not None else None,
             "unresolved_custodian_accounts": [CustodianEntry.from_dict(_item) for _item in obj.get("unresolvedCustodianAccounts")] if obj.get("unresolvedCustodianAccounts") is not None else None,
             "is_excluded": obj.get("isExcluded"),
-            "entity_links": [TransactionEntityLink.from_dict(_item) for _item in obj.get("entityLinks")] if obj.get("entityLinks") is not None else None
+            "entity_links": [TransactionEntityLink.from_dict(_item) for _item in obj.get("entityLinks")] if obj.get("entityLinks") is not None else None,
+            "source_portfolio_id": ResourceId.from_dict(obj.get("sourcePortfolioId")) if obj.get("sourcePortfolioId") is not None else None
         })
         return _obj
 

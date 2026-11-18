@@ -35,7 +35,9 @@ class CashAndSecurityOfferElection(BaseModel):
     is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
     units_ratio: UnitsRatio = Field(alias="unitsRatio")
-    __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio"]
+    consent_fee_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The consent fee paid to holders who consent, on top of the exchange consideration. Quoted per 1,000 of face for bonds, using the current notional at the effective date of the event, and per unit for other instruments. Must be greater than 0. Required together with ConsentFeeCurrency, and only supported on an ExchangeOfferEvent.", alias="consentFeePrice")
+    consent_fee_currency:  Optional[StrictStr] = Field(None,alias="consentFeeCurrency", description="Optional. Currency of the consent fee. Required if a consent fee price is provided, and only supported on an ExchangeOfferEvent.") 
+    __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio", "consentFeePrice", "consentFeeCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -77,6 +79,16 @@ class CashAndSecurityOfferElection(BaseModel):
         if self.cost_factor is None and "cost_factor" in self.__fields_set__:
             _dict['costFactor'] = None
 
+        # set to None if consent_fee_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.consent_fee_price is None and "consent_fee_price" in self.__fields_set__:
+            _dict['consentFeePrice'] = None
+
+        # set to None if consent_fee_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.consent_fee_currency is None and "consent_fee_currency" in self.__fields_set__:
+            _dict['consentFeeCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -95,7 +107,9 @@ class CashAndSecurityOfferElection(BaseModel):
             "election_key": obj.get("electionKey"),
             "is_chosen": obj.get("isChosen"),
             "is_default": obj.get("isDefault"),
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
+            "consent_fee_price": obj.get("consentFeePrice"),
+            "consent_fee_currency": obj.get("consentFeeCurrency")
         })
         return _obj
 

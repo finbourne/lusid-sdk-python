@@ -20,6 +20,7 @@ from lusid.api.collateral_api import CollateralApi
 from lusid.api.collateral_agreements_api import CollateralAgreementsApi
 from lusid.api.complex_market_data_api import ComplexMarketDataApi
 from lusid.api.compliance_api import ComplianceApi
+from lusid.api.composite_portfolios_api import CompositePortfoliosApi
 from lusid.api.configuration_recipe_api import ConfigurationRecipeApi
 from lusid.api.conventions_api import ConventionsApi
 from lusid.api.corporate_action_sources_api import CorporateActionSourcesApi
@@ -125,6 +126,7 @@ __all__ = [
     "CollateralAgreementsApi",
     "ComplexMarketDataApi",
     "ComplianceApi",
+    "CompositePortfoliosApi",
     "ConfigurationRecipeApi",
     "ConventionsApi",
     "CorporateActionSourcesApi",

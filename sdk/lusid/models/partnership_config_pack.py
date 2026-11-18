@@ -25,10 +25,11 @@ from datetime import datetime
 from lusid.models.pack_account import PackAccount
 from lusid.models.pack_posting_rule import PackPostingRule
 from lusid.models.pack_transaction_type import PackTransactionType
+from lusid.models.pack_type_contract import PackTypeContract
 
 class PartnershipConfigPack(BaseModel):
     """
-    The partnership configuration pack a fund resolves to: the transaction types, chart of accounts and posting rules  the partners' ledger is booked under.  # noqa: E501
+    The partnership configuration pack a fund resolves to: the transaction types, chart of accounts and posting rules  the partners' ledger is booked under, and the register deltas each transaction type the partner register depends  on must carry.  # noqa: E501
     """
     scope:  StrictStr = Field(...,alias="scope", description="The scope of the configuration pack.") 
     code:  StrictStr = Field(...,alias="code", description="The code of the configuration pack.") 
@@ -37,7 +38,8 @@ class PartnershipConfigPack(BaseModel):
     chart_of_accounts: List[PackAccount] = Field(description="The accounts the pack posts partner capital to.", alias="chartOfAccounts")
     posting_rules: List[PackPostingRule] = Field(description="The rules that move each transaction type between its accounts.", alias="postingRules")
     general_ledger_profile_code:  Optional[StrictStr] = Field(None,alias="generalLedgerProfileCode", description="The code of the general ledger profile the pack's posting rules belong to.") 
-    __properties = ["scope", "code", "version", "transactionTypes", "chartOfAccounts", "postingRules", "generalLedgerProfileCode"]
+    type_contracts: Optional[List[PackTypeContract]] = Field(default=None, description="The register balance deltas each transaction type the partner register depends on must carry. A type not named must carry none.", alias="typeContracts")
+    __properties = ["scope", "code", "version", "transactionTypes", "chartOfAccounts", "postingRules", "generalLedgerProfileCode", "typeContracts"]
 
     class Config:
         """Pydantic configuration"""
@@ -92,10 +94,22 @@ class PartnershipConfigPack(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['postingRules'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in type_contracts (list)
+        _items = []
+        if self.type_contracts:
+            for _item in self.type_contracts:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['typeContracts'] = _items
         # set to None if general_ledger_profile_code (nullable) is None
         # and __fields_set__ contains the field
         if self.general_ledger_profile_code is None and "general_ledger_profile_code" in self.__fields_set__:
             _dict['generalLedgerProfileCode'] = None
+
+        # set to None if type_contracts (nullable) is None
+        # and __fields_set__ contains the field
+        if self.type_contracts is None and "type_contracts" in self.__fields_set__:
+            _dict['typeContracts'] = None
 
         return _dict
 
@@ -115,7 +129,8 @@ class PartnershipConfigPack(BaseModel):
             "transaction_types": [PackTransactionType.from_dict(_item) for _item in obj.get("transactionTypes")] if obj.get("transactionTypes") is not None else None,
             "chart_of_accounts": [PackAccount.from_dict(_item) for _item in obj.get("chartOfAccounts")] if obj.get("chartOfAccounts") is not None else None,
             "posting_rules": [PackPostingRule.from_dict(_item) for _item in obj.get("postingRules")] if obj.get("postingRules") is not None else None,
-            "general_ledger_profile_code": obj.get("generalLedgerProfileCode")
+            "general_ledger_profile_code": obj.get("generalLedgerProfileCode"),
+            "type_contracts": [PackTypeContract.from_dict(_item) for _item in obj.get("typeContracts")] if obj.get("typeContracts") is not None else None
         })
         return _obj
 

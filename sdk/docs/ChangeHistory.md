@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **request_id** | **str** | The unique identifier of the request that the changes were part of. | 
 **action** | **str** | The action performed on the transaction. Available values: Create, Update, Delete. | 
 **changes** | [**List[ChangeItem]**](ChangeItem.md) | The collection of changes that were made. | 
+**source_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -24,8 +25,9 @@ modified_as_at: datetime = # Replace with your value
 request_id: StrictStr = "example_request_id"
 action: StrictStr = "example_action"
 changes: List[ChangeItem] = # Replace with your value
+source_portfolio_id: Optional[ResourceId] = # Replace with your value
 links: Optional[List[Link]] = None
-change_history_instance = ChangeHistory(user_id=user_id, modified_as_at=modified_as_at, request_id=request_id, action=action, changes=changes, links=links)
+change_history_instance = ChangeHistory(user_id=user_id, modified_as_at=modified_as_at, request_id=request_id, action=action, changes=changes, source_portfolio_id=source_portfolio_id, links=links)
 
 ```
 

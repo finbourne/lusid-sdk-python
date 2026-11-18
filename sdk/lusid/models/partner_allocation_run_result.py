@@ -39,9 +39,9 @@ class PartnerAllocationRunResult(BaseModel):
     status:  StrictStr = Field(...,alias="status", description="The outcome of the run. Available values: Computed, Booked, DryRun.") 
     run_id:  StrictStr = Field(...,alias="runId", description="The identifier of the run, which prefixes every transaction it books.") 
     pools: List[PartnerAllocationPool] = Field(description="The pools of fund-level amount that were allocated, in the allocation bucket set's bucket order with any tag pools after.")
-    unattributed: List[UnattributedAmount] = Field(description="Always empty: every profit and loss line is now pooled or the run is refused. Kept for one release.")
+    unattributed: List[UnattributedAmount] = Field(description="Always empty: every profit and loss line is pooled or the run is refused. Kept until no published SDK requires it.")
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions the run booked, if any.", alias="bookedTransactionIds")
-    warnings: Optional[List[StrictStr]] = Field(default=None, description="What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end.")
+    warnings: Optional[List[StrictStr]] = Field(default=None, description="What the run noticed but did not refuse, for example an excluded investor record that is not on the register at the period end, or a fee accrual naming no investor that was pooled as unaccrued fee (AccruedFeeWithoutInvestor).")
     ignored_tags: Optional[List[IgnoredDistributionTag]] = Field(default=None, description="The distribution character tags the run did not pool by, by account.", alias="ignoredTags")
     accrued_fees: Optional[List[AccruedFeeLine]] = Field(default=None, description="The management fees accrued per partner in the period, which the accrual allocates and the run therefore leaves out of the pools.", alias="accruedFees")
     __properties = ["fundId", "periodStart", "periodEnd", "navTypeCode", "status", "runId", "pools", "unattributed", "bookedTransactionIds", "warnings", "ignoredTags", "accruedFees"]

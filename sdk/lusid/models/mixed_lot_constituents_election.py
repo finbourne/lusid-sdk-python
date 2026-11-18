@@ -35,7 +35,9 @@ class MixedLotConstituentsElection(BaseModel):
     securities_constituents: Optional[List[SecurityOfferConstituent]] = Field(default=None, alias="securitiesConstituents")
     cash_constituents: Optional[List[CashOfferConstituent]] = Field(default=None, alias="cashConstituents")
     cost_factor: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="costFactor")
-    __properties = ["electionKey", "isDefault", "isChosen", "securitiesConstituents", "cashConstituents", "costFactor"]
+    consent_fee_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The consent fee paid to holders who consent, on top of the exchange consideration. Quoted per 1,000 of face for bonds, using the current notional at the effective date of the event, and per unit for other instruments. Must be greater than 0. Required together with ConsentFeeCurrency, and only supported on an ExchangeOfferEvent.", alias="consentFeePrice")
+    consent_fee_currency:  Optional[StrictStr] = Field(None,alias="consentFeeCurrency", description="Optional. Currency of the consent fee. Required if a consent fee price is provided, and only supported on an ExchangeOfferEvent.") 
+    __properties = ["electionKey", "isDefault", "isChosen", "securitiesConstituents", "cashConstituents", "costFactor", "consentFeePrice", "consentFeeCurrency"]
 
     class Config:
         """Pydantic configuration"""
@@ -98,6 +100,16 @@ class MixedLotConstituentsElection(BaseModel):
         if self.cost_factor is None and "cost_factor" in self.__fields_set__:
             _dict['costFactor'] = None
 
+        # set to None if consent_fee_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.consent_fee_price is None and "consent_fee_price" in self.__fields_set__:
+            _dict['consentFeePrice'] = None
+
+        # set to None if consent_fee_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.consent_fee_currency is None and "consent_fee_currency" in self.__fields_set__:
+            _dict['consentFeeCurrency'] = None
+
         return _dict
 
     @classmethod
@@ -115,7 +127,9 @@ class MixedLotConstituentsElection(BaseModel):
             "is_chosen": obj.get("isChosen"),
             "securities_constituents": [SecurityOfferConstituent.from_dict(_item) for _item in obj.get("securitiesConstituents")] if obj.get("securitiesConstituents") is not None else None,
             "cash_constituents": [CashOfferConstituent.from_dict(_item) for _item in obj.get("cashConstituents")] if obj.get("cashConstituents") is not None else None,
-            "cost_factor": obj.get("costFactor")
+            "cost_factor": obj.get("costFactor"),
+            "consent_fee_price": obj.get("consentFeePrice"),
+            "consent_fee_currency": obj.get("consentFeeCurrency")
         })
         return _obj
 

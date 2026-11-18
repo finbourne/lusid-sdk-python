@@ -40,12 +40,13 @@ class Portfolio(BaseModel):
     """
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     id: ResourceId
-    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition, Composite.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     enablement_date: Optional[datetime] = Field(default=None, description="The effective datetime from which instrument events and corporate actions are generated and applied to the portfolio. Transactions and holdings booked to the portfolio contribute to holdings, valuations and other computed results from its creation date whatever the enablement date. Defaults to the portfolio's creation date when not explicitly set.", alias="enablementDate")
     parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
+    parent_portfolio_ids: Optional[List[ResourceId]] = Field(default=None, description="The scope and code of each portfolio this portfolio takes its contents from: the parent of a derived transaction portfolio, or the constituents of a composite portfolio at the effective date. Empty for a portfolio with no parent.", alias="parentPortfolioIds")
     version: Optional[Version] = None
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
@@ -69,7 +70,7 @@ class Portfolio(BaseModel):
     amortisation_horizon: Optional[AmortisationHorizon] = Field(default=None, alias="amortisationHorizon")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "type", "displayName", "description", "created", "enablementDate", "parentPortfolioId", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "amortisationHorizon", "whtParameters", "links"]
+    __properties = ["href", "id", "type", "displayName", "description", "created", "enablementDate", "parentPortfolioId", "parentPortfolioIds", "version", "stagedModifications", "isDerived", "baseCurrency", "properties", "relationships", "instrumentScopes", "accountingMethod", "amortisationMethod", "transactionTypeScope", "cashGainLossCalculationDate", "instrumentEventConfiguration", "amortisationRuleSetId", "taxRuleSetScope", "settlementConfiguration", "transactionExclusionFilter", "taxLotSelectionCostBasis", "fractionalUnitsTrueUpConfiguration", "holdingsFungibility", "chargeableGainsRegime", "amortisationHorizon", "whtParameters", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -82,7 +83,7 @@ class Portfolio(BaseModel):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']
+        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition', 'Composite']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -148,6 +149,13 @@ class Portfolio(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of parent_portfolio_id
         if self.parent_portfolio_id:
             _dict['parentPortfolioId'] = self.parent_portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in parent_portfolio_ids (list)
+        _items = []
+        if self.parent_portfolio_ids:
+            for _item in self.parent_portfolio_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['parentPortfolioIds'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -207,6 +215,11 @@ class Portfolio(BaseModel):
         # and __fields_set__ contains the field
         if self.enablement_date is None and "enablement_date" in self.__fields_set__:
             _dict['enablementDate'] = None
+
+        # set to None if parent_portfolio_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.parent_portfolio_ids is None and "parent_portfolio_ids" in self.__fields_set__:
+            _dict['parentPortfolioIds'] = None
 
         # set to None if base_currency (nullable) is None
         # and __fields_set__ contains the field
@@ -293,6 +306,7 @@ class Portfolio(BaseModel):
             "created": obj.get("created"),
             "enablement_date": obj.get("enablementDate"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
+            "parent_portfolio_ids": [ResourceId.from_dict(_item) for _item in obj.get("parentPortfolioIds")] if obj.get("parentPortfolioIds") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "is_derived": obj.get("isDerived"),

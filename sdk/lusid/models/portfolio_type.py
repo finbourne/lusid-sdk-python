@@ -35,6 +35,7 @@ class PortfolioType(str, Enum):
     REFERENCE = 'Reference'
     DERIVEDTRANSACTION = 'DerivedTransaction'
     SIMPLEPOSITION = 'SimplePosition'
+    COMPOSITE = 'Composite'
 
     @classmethod
     def from_json(cls, json_str: str) -> PortfolioType:

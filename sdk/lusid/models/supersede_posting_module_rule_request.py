@@ -27,8 +27,8 @@ class SupersedePostingModuleRuleRequest(BaseModel):
     """
     The next version of a Posting Rule, which takes over from its latest version on an accounting date  # noqa: E501
     """
-    rule_id:  StrictStr = Field(...,alias="ruleId", description="The identifier of the Posting Rule. At most one rule in the request may have the ruleId of the superseded rule. If it does, the existing rule is capped so that it stops applying from this rule's EffectiveFrom, and this rule is created as its next version. Otherwise this rule is created as a new rule.") 
-    effective_from: datetime = Field(description="The inclusive accounting date from which this rule applies. If this rule has the ruleId of the superseded rule, the superseded rule's latest version stops applying from this date, unless it already ends by then; it is never extended.", alias="effectiveFrom")
+    rule_id:  StrictStr = Field(...,alias="ruleId", description="The identifier of the Posting Rule. At most one rule in the request may have the ruleId of the superseded rule, in which case this rule is created as its next version. Otherwise this rule is created as a new rule.") 
+    effective_from: datetime = Field(description="The inclusive accounting date from which this rule applies. All rules in the request must share the same EffectiveFrom. The superseded rule's latest version stops applying from this date.", alias="effectiveFrom")
     effective_until: Optional[datetime] = Field(default=None, description="The exclusive accounting date until which this rule applies. If not set, it applies until the end of time.", alias="effectiveUntil")
     general_ledger_account_code:  StrictStr = Field(...,alias="generalLedgerAccountCode", description="The general ledger account this rule posts the Activity credit or debit to.") 
     rule_filter:  StrictStr = Field(...,alias="ruleFilter", description="The filter syntax for this rule. See https://support.lusid.com/docs/assigning-economic-activity-to-general-ledger-accounts-using-posting-rules for more information on filter syntax.") 

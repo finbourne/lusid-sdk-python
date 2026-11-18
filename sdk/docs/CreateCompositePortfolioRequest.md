@@ -1,0 +1,56 @@
+# CreateCompositePortfolioRequest
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**display_name** | **str** | The name of the composite portfolio. | 
+**description** | **str** | A description for the composite portfolio. | [optional] 
+**code** | **str** | The code of the composite portfolio. Together with the scope this uniquely identifies the composite portfolio. | 
+**constituents** | [**List[CompositePortfolioConstituentRequest]**](CompositePortfolioConstituentRequest.md) | The portfolios that the composite portfolio composes. At least one is required. Each constituent contributes its whole history. | 
+**created** | **datetime** | The original creation date. Defaults to the earliest creation date of the constituents if not specified, because the composite portfolio cannot exist before the first of the portfolios it composes. A constituent created later contributes from its own creation date. | [optional] 
+**enablement_date** | **datetime** | The effective datetime from which instrument events and corporate actions are generated and applied to the composite portfolio. Transactions contribute to holdings, valuations and other computed results from the portfolio&#39;s creation date whatever the enablement date. Defaults to the portfolio&#39;s creation date if not specified. | [optional] 
+**base_currency** | **str** | The base currency of the composite portfolio. Every constituent must have the same base currency. | 
+**accounting_method** | **str** | Determines the accounting treatment given to the composite portfolio&#39;s tax lots. Default value: AverageCost. Available values: Default, AverageCost, FirstInFirstOut, LastInFirstOut, HighestCostFirst, LowestCostFirst, ProRateByUnits, ProRateByCost, ProRateByCostPortfolioCurrency, IntraDayThenFirstInFirstOut, LongTermHighestCostFirst, LongTermHighestCostFirstPortfolioCurrency, HighestCostFirstPortfolioCurrency, LowestCostFirstPortfolioCurrency, MaximumLossMinimumGain, MaximumLossMinimumGainPortfolioCurrency. | [optional] 
+**sub_holding_keys** | **List[str]** | A set of unique transaction properties to group the composite portfolio&#39;s holdings by, perhaps for strategy tagging. Each property must be from the &#39;Transaction&#39; domain and identified by a key in the format {domain}/{scope}/{code}, for example &#39;Transaction/strategies/quantsignal&#39;. See https://support.lusid.com/docs/how-do-i-register-sub-holding-keys-shks-with-a-portfolio for more information. | [optional] 
+**properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | Properties to add to the composite portfolio. Each property must be from the &#39;Portfolio&#39; domain. | [optional] 
+**amortisation_method** | **str** | The amortisation method used by the portfolio for the calculation. Available values: NoAmortisation, StraightLine, EffectiveYield, StraightLineSettlementDate, EffectiveYieldSettlementDate. | [optional] 
+**cash_gain_loss_calculation_date** | **str** | The option when the Cash Gain Loss to be calulated. Default value: SettlementDate. Available values: Default, SettlementDate, TransactionDate. | [optional] 
+**amortisation_rule_set_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**instrument_event_configuration** | [**InstrumentEventConfiguration**](InstrumentEventConfiguration.md) |  | [optional] 
+**transaction_exclusion_filter** | **str** | A filter expression that identifies transactions to exclude when building the transaction portfolio&#39;s transactions and holdings. Transactions matching this filter are flagged as excluded. | [optional] 
+**tax_lot_selection_cost_basis** | **str** | The cost figure that cost-referencing accounting methods evaluate when selecting tax lots for a disposal. This can be: Cost or AmortisedCost. Defaults to Cost if not specified. Supply Default to explicitly reset it; a reset or never-configured basis reads back as absent. Available values: Default, Cost, AmortisedCost. | [optional] 
+**fractional_units_true_up_configuration** | [**FractionalUnitsTrueUpConfiguration**](FractionalUnitsTrueUpConfiguration.md) |  | [optional] 
+**holdings_fungibility** | **str** | Whether the portfolio&#39;s holdings are fungible across the currencies of a currency group. This can be: Default or Enabled. Defaults to Default if not specified, which currently means holdings fungibility is not applied. Supply Default to explicitly reset it; a reset or never-configured flag reads back as absent. Available values: Default, Enabled. | [optional] 
+## Example
+
+```python
+from lusid.models.create_composite_portfolio_request import CreateCompositePortfolioRequest
+from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
+from typing_extensions import Annotated
+from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
+from datetime import datetime
+
+display_name: StrictStr = "example_display_name"
+description: Optional[StrictStr] = "example_description"
+code: StrictStr = "example_code"
+constituents: List[CompositePortfolioConstituentRequest] = # Replace with your value
+created: Optional[datetime] = # Replace with your value
+enablement_date: Optional[datetime] = # Replace with your value
+base_currency: StrictStr = "example_base_currency"
+accounting_method: Optional[StrictStr] = "example_accounting_method"
+sub_holding_keys: Optional[List[StrictStr]] = # Replace with your value
+properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
+amortisation_method: Optional[StrictStr] = "example_amortisation_method"
+cash_gain_loss_calculation_date: Optional[StrictStr] = "example_cash_gain_loss_calculation_date"
+amortisation_rule_set_id: Optional[ResourceId] = # Replace with your value
+instrument_event_configuration: Optional[InstrumentEventConfiguration] = # Replace with your value
+transaction_exclusion_filter: Optional[StrictStr] = "example_transaction_exclusion_filter"
+tax_lot_selection_cost_basis: Optional[StrictStr] = "example_tax_lot_selection_cost_basis"
+fractional_units_true_up_configuration: Optional[FractionalUnitsTrueUpConfiguration] = # Replace with your value
+holdings_fungibility: Optional[StrictStr] = "example_holdings_fungibility"
+create_composite_portfolio_request_instance = CreateCompositePortfolioRequest(display_name=display_name, description=description, code=code, constituents=constituents, created=created, enablement_date=enablement_date, base_currency=base_currency, accounting_method=accounting_method, sub_holding_keys=sub_holding_keys, properties=properties, amortisation_method=amortisation_method, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, amortisation_rule_set_id=amortisation_rule_set_id, instrument_event_configuration=instrument_event_configuration, transaction_exclusion_filter=transaction_exclusion_filter, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility)
+
+```
+
+[Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)
+

@@ -34,7 +34,7 @@ class PartnerAllocationPool(BaseModel):
     pool_amount: Union[StrictFloat, StrictInt] = Field(description="The amount in the pool.", alias="poolAmount")
     basis:  StrictStr = Field(...,alias="basis", description="The basis the pool was shared on. Available values: CommittedCapital, PaidInCapital, DealPaidIn.") 
     basis_source:  Optional[StrictStr] = Field(None,alias="basisSource", description="Where the figures a deal pool was shared on came from; absent on a fund-level pool, which is shared on the register's balances. Available values: DealContributions (what each partner paid into the pool's deal, from the booked allocation events), Fallback (a deal pool no partner has paid into, shared on its character's fund-level basis instead).") 
-    allocations: List[PartnerAllocation] = Field(description="Each partner's share of the pool.")
+    allocations: List[PartnerAllocation] = Field(description="Each partner's share of the pool; a partner who took none is listed at 0.00 with the reason.")
     residual: Union[StrictFloat, StrictInt] = Field(description="The rounding residual, carried by the largest allocation.")
     pool_id:  StrictStr = Field(...,alias="poolId", description="The pool's identifier: the allocation rule's bucket id, or TAG: followed by the character for lines pooled by their distribution character tag.") 
     bucket_set:  StrictStr = Field(...,alias="bucketSet", description="The code of the allocation bucket set the pool was classified by, with its version, for example PA-ALLOCATION-v1.") 

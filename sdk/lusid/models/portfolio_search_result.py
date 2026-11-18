@@ -31,17 +31,18 @@ class PortfolioSearchResult(BaseModel):
     A list of portfolios.  # noqa: E501
     """
     id: ResourceId
-    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition.") 
+    type:  StrictStr = Field(...,alias="type", description="The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition, Composite.") 
     href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The long form description of the portfolio.") 
     display_name:  StrictStr = Field(...,alias="displayName", description="The name of the portfolio.") 
     is_derived: Optional[StrictBool] = Field(default=None, description="Whether or not this is a derived portfolio.", alias="isDerived")
     created: datetime = Field(description="The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date.")
     parent_portfolio_id: Optional[ResourceId] = Field(default=None, alias="parentPortfolioId")
+    parent_portfolio_ids: Optional[List[ResourceId]] = Field(default=None, description="The scope and code of each portfolio this portfolio takes its contents from: the parent of a derived transaction portfolio, or the constituents of a composite portfolio at the effective date. Empty for a portfolio with no parent.", alias="parentPortfolioIds")
     base_currency:  Optional[StrictStr] = Field(None,alias="baseCurrency", description="The base currency of the portfolio.") 
     properties: Optional[List[ModelProperty]] = Field(default=None, description="The requested portfolio properties. These will be from the 'Portfolio' domain.")
     links: Optional[List[Link]] = None
-    __properties = ["id", "type", "href", "description", "displayName", "isDerived", "created", "parentPortfolioId", "baseCurrency", "properties", "links"]
+    __properties = ["id", "type", "href", "description", "displayName", "isDerived", "created", "parentPortfolioId", "parentPortfolioIds", "baseCurrency", "properties", "links"]
 
     @validator('type')
     def type_validate_enum(cls, value):
@@ -54,7 +55,7 @@ class PortfolioSearchResult(BaseModel):
         # union. We detect that shape here (single allowable value) — no
         # manual class list, no hard-coded discriminator name.
 
-        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition']
+        _allowed = ['Transaction', 'Reference', 'DerivedTransaction', 'SimplePosition', 'Composite']
         if len(_allowed) != 1:
             return value
         if value not in _allowed:
@@ -100,6 +101,13 @@ class PortfolioSearchResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of parent_portfolio_id
         if self.parent_portfolio_id:
             _dict['parentPortfolioId'] = self.parent_portfolio_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in parent_portfolio_ids (list)
+        _items = []
+        if self.parent_portfolio_ids:
+            for _item in self.parent_portfolio_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['parentPortfolioIds'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in properties (list)
         _items = []
         if self.properties:
@@ -123,6 +131,11 @@ class PortfolioSearchResult(BaseModel):
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
             _dict['description'] = None
+
+        # set to None if parent_portfolio_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.parent_portfolio_ids is None and "parent_portfolio_ids" in self.__fields_set__:
+            _dict['parentPortfolioIds'] = None
 
         # set to None if base_currency (nullable) is None
         # and __fields_set__ contains the field
@@ -159,6 +172,7 @@ class PortfolioSearchResult(BaseModel):
             "is_derived": obj.get("isDerived"),
             "created": obj.get("created"),
             "parent_portfolio_id": ResourceId.from_dict(obj.get("parentPortfolioId")) if obj.get("parentPortfolioId") is not None else None,
+            "parent_portfolio_ids": [ResourceId.from_dict(_item) for _item in obj.get("parentPortfolioIds")] if obj.get("parentPortfolioIds") is not None else None,
             "base_currency": obj.get("baseCurrency"),
             "properties": [ModelProperty.from_dict(_item) for _item in obj.get("properties")] if obj.get("properties") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None

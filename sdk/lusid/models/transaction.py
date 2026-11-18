@@ -70,7 +70,8 @@ class Transaction(BaseModel):
     staged_modifications: Optional[StagedModificationsInfo] = Field(default=None, alias="stagedModifications")
     custodian_entries: Optional[List[CustodianEntry]] = Field(default=None, description="A list of Custodian Entries associated with the transaction.", alias="custodianEntries")
     entity_links: Optional[List[TransactionEntityLink]] = Field(default=None, description="Links to the entities that manage this transaction.", alias="entityLinks")
-    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership", "version", "stagedModifications", "custodianEntries", "entityLinks"]
+    source_portfolio_id: Optional[ResourceId] = Field(default=None, alias="sourcePortfolioId")
+    __properties = ["transactionId", "type", "instrumentIdentifiers", "instrumentScope", "instrumentUid", "transactionDate", "settlementDate", "units", "transactionPrice", "totalConsideration", "exchangeRate", "transactionCurrency", "properties", "counterpartyId", "source", "entryDateTime", "otcConfirmation", "transactionStatus", "cancelDateTime", "orderId", "allocationId", "custodianAccount", "transactionGroupId", "strategyTag", "resolvedTransactionTypeDetails", "dataModelMembership", "version", "stagedModifications", "custodianEntries", "entityLinks", "sourcePortfolioId"]
 
     @validator('transaction_status')
     def transaction_status_validate_enum(cls, value):
@@ -183,6 +184,9 @@ class Transaction(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['entityLinks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of source_portfolio_id
+        if self.source_portfolio_id:
+            _dict['sourcePortfolioId'] = self.source_portfolio_id.to_dict()
         # set to None if instrument_identifiers (nullable) is None
         # and __fields_set__ contains the field
         if self.instrument_identifiers is None and "instrument_identifiers" in self.__fields_set__:
@@ -289,7 +293,8 @@ class Transaction(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "staged_modifications": StagedModificationsInfo.from_dict(obj.get("stagedModifications")) if obj.get("stagedModifications") is not None else None,
             "custodian_entries": [CustodianEntry.from_dict(_item) for _item in obj.get("custodianEntries")] if obj.get("custodianEntries") is not None else None,
-            "entity_links": [TransactionEntityLink.from_dict(_item) for _item in obj.get("entityLinks")] if obj.get("entityLinks") is not None else None
+            "entity_links": [TransactionEntityLink.from_dict(_item) for _item in obj.get("entityLinks")] if obj.get("entityLinks") is not None else None,
+            "source_portfolio_id": ResourceId.from_dict(obj.get("sourcePortfolioId")) if obj.get("sourcePortfolioId") is not None else None
         })
         return _obj
 

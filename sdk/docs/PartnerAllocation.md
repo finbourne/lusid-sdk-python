@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **investor_record_id** | **str** | The investor record the allocation belongs to. | 
 **basis_weight** | **float** | The partner&#39;s weight in the pool&#39;s basis. | 
 **amount** | **float** | The amount allocated to the partner. | 
+**reason** | **str** | Why a partner listed at 0.00 took no share of the pool. Available values: Excluded (the bucket&#39;s rule leaves the partner out), Exempt (the partner&#39;s register flag sits it out), ZeroBasis (the partner has nothing on the pool&#39;s basis). Absent on a partner that shares; a partner at 0.00 with no reason shares the pool, but its share rounded to nothing at the pool&#39;s scale. | [optional] 
 ## Example
 
 ```python
@@ -19,7 +20,8 @@ from datetime import datetime
 investor_record_id: StrictStr = "example_investor_record_id"
 basis_weight: Union[StrictFloat, StrictInt] = # Replace with your value
 amount: Union[StrictFloat, StrictInt] = # Replace with your value
-partner_allocation_instance = PartnerAllocation(investor_record_id=investor_record_id, basis_weight=basis_weight, amount=amount)
+reason: Optional[StrictStr] = "example_reason"
+partner_allocation_instance = PartnerAllocation(investor_record_id=investor_record_id, basis_weight=basis_weight, amount=amount, reason=reason)
 
 ```
 

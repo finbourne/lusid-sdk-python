@@ -205,6 +205,8 @@ Class | Method | HTTP request | Description
 *ComplianceApi* | [**upsert_compliance_rule_v3**](docs/ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
 *ComplianceApi* | [**upsert_compliance_run_summary**](docs/ComplianceApi.md#upsert_compliance_run_summary) | **POST** /api/compliance/runs/summary | [EARLY ACCESS] UpsertComplianceRunSummary: Upsert a compliance run summary.
 *ComplianceApi* | [**validate_compliance_rule_v3**](docs/ComplianceApi.md#validate_compliance_rule_v3) | **POST** /api/compliance/v3/rules/$validate | [EXPERIMENTAL] ValidateComplianceRuleV3: [EXPERIMENTAL] Validate a V3 compliance rule definition.
+*CompositePortfoliosApi* | [**change_composite_portfolio_membership**](docs/CompositePortfoliosApi.md#change_composite_portfolio_membership) | **POST** /api/compositeportfolios/{scope}/{code}/constituents | [EXPERIMENTAL] ChangeCompositePortfolioMembership: Change composite portfolio membership
+*CompositePortfoliosApi* | [**create_composite_portfolio**](docs/CompositePortfoliosApi.md#create_composite_portfolio) | **POST** /api/compositeportfolios/{scope} | [EXPERIMENTAL] CreateCompositePortfolio: Create composite portfolio
 *ConfigurationRecipeApi* | [**delete_configuration_recipe**](docs/ConfigurationRecipeApi.md#delete_configuration_recipe) | **DELETE** /api/recipes/{scope}/{code} | DeleteConfigurationRecipe: Delete a Configuration Recipe, assuming that it is present.
 *ConfigurationRecipeApi* | [**delete_recipe_composer**](docs/ConfigurationRecipeApi.md#delete_recipe_composer) | **DELETE** /api/recipes/composer/{scope}/{code} | DeleteRecipeComposer: Delete a Recipe Composer, assuming that it is present.
 *ConfigurationRecipeApi* | [**get_configuration_recipe**](docs/ConfigurationRecipeApi.md#get_configuration_recipe) | **GET** /api/recipes/{scope}/{code} | GetConfigurationRecipe: Get Configuration Recipe
@@ -358,6 +360,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**advance_tax_return**](docs/FundsApi.md#advance_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/advance | [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
 *FundsApi* | [**approve_tax_provision**](docs/FundsApi.md#approve_tax_provision) | **POST** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve | [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
 *FundsApi* | [**calculate_management_fees**](docs/FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
+*FundsApi* | [**check_partnership_transaction_types**](docs/FundsApi.md#check_partnership_transaction_types) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/typecheck | [EARLY ACCESS] CheckPartnershipTransactionTypes: [EXPERIMENTAL] CheckPartnershipTransactionTypes: Check the Fund's transaction types against its partnership configuration pack.
 *FundsApi* | [**create_facility**](docs/FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EARLY ACCESS] CreateFund: Create a Fund.
@@ -1269,6 +1272,7 @@ Class | Method | HTTP request | Description
  - [CdsProtectionDetailSpecification](docs/CdsProtectionDetailSpecification.md)
  - [CdxCreditEvent](docs/CdxCreditEvent.md)
  - [Change](docs/Change.md)
+ - [ChangeCompositePortfolioMembershipRequest](docs/ChangeCompositePortfolioMembershipRequest.md)
  - [ChangeEvent](docs/ChangeEvent.md)
  - [ChangeHistory](docs/ChangeHistory.md)
  - [ChangeHistoryAction](docs/ChangeHistoryAction.md)
@@ -1378,6 +1382,7 @@ Class | Method | HTTP request | Description
  - [CompositeBreakdownResponse](docs/CompositeBreakdownResponse.md)
  - [CompositeDispersion](docs/CompositeDispersion.md)
  - [CompositeDispersionResponse](docs/CompositeDispersionResponse.md)
+ - [CompositePortfolioConstituentRequest](docs/CompositePortfolioConstituentRequest.md)
  - [Compounding](docs/Compounding.md)
  - [ConfigurationRecipe](docs/ConfigurationRecipe.md)
  - [ConsentAndExchangeElection](docs/ConsentAndExchangeElection.md)
@@ -1415,6 +1420,7 @@ Class | Method | HTTP request | Description
  - [CreateCheckDefinitionRequest](docs/CreateCheckDefinitionRequest.md)
  - [CreateClosedPeriodRequest](docs/CreateClosedPeriodRequest.md)
  - [CreateComplianceTemplateRequest](docs/CreateComplianceTemplateRequest.md)
+ - [CreateCompositePortfolioRequest](docs/CreateCompositePortfolioRequest.md)
  - [CreateCorporateActionSourceRequest](docs/CreateCorporateActionSourceRequest.md)
  - [CreateCustomDataModelRequest](docs/CreateCustomDataModelRequest.md)
  - [CreateCustomEntityTypeRequest](docs/CreateCustomEntityTypeRequest.md)
@@ -2091,7 +2097,9 @@ Class | Method | HTTP request | Description
  - [OversubscribeElection](docs/OversubscribeElection.md)
  - [PackAccount](docs/PackAccount.md)
  - [PackPostingRule](docs/PackPostingRule.md)
+ - [PackRegisterDelta](docs/PackRegisterDelta.md)
  - [PackTransactionType](docs/PackTransactionType.md)
+ - [PackTypeContract](docs/PackTypeContract.md)
  - [Package](docs/Package.md)
  - [PackageRequest](docs/PackageRequest.md)
  - [PackageSetRequest](docs/PackageSetRequest.md)
@@ -2230,6 +2238,8 @@ Class | Method | HTTP request | Description
  - [PartnershipAccountingValuationPointData](docs/PartnershipAccountingValuationPointData.md)
  - [PartnershipAllocationProblem](docs/PartnershipAllocationProblem.md)
  - [PartnershipConfigPack](docs/PartnershipConfigPack.md)
+ - [PartnershipTypeCheckResult](docs/PartnershipTypeCheckResult.md)
+ - [PartnershipTypeDifference](docs/PartnershipTypeDifference.md)
  - [PartyTerms](docs/PartyTerms.md)
  - [PaymentDetailsApplicableEntity](docs/PaymentDetailsApplicableEntity.md)
  - [PaymentDetailsReference](docs/PaymentDetailsReference.md)
@@ -2301,6 +2311,7 @@ Class | Method | HTTP request | Description
  - [PortfolioTransactionResult](docs/PortfolioTransactionResult.md)
  - [PortfolioType](docs/PortfolioType.md)
  - [PortfolioWeight](docs/PortfolioWeight.md)
+ - [PortfolioWithWarnings](docs/PortfolioWithWarnings.md)
  - [PortfolioWithoutHref](docs/PortfolioWithoutHref.md)
  - [PortfoliosReconciliationRequest](docs/PortfoliosReconciliationRequest.md)
  - [PostCloseActivitiesRequest](docs/PostCloseActivitiesRequest.md)
@@ -2500,6 +2511,7 @@ Class | Method | HTTP request | Description
  - [ReferencePortfolioConstituent](docs/ReferencePortfolioConstituent.md)
  - [ReferencePortfolioConstituentRequest](docs/ReferencePortfolioConstituentRequest.md)
  - [ReferencePortfolioWeightType](docs/ReferencePortfolioWeightType.md)
+ - [RegisterDeltaMovement](docs/RegisterDeltaMovement.md)
  - [RelatedEntity](docs/RelatedEntity.md)
  - [Relation](docs/Relation.md)
  - [RelationDefinition](docs/RelationDefinition.md)

@@ -5,13 +5,14 @@ A list of portfolios.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**type** | **str** | The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition. | 
+**type** | **str** | The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition, Composite. | 
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **description** | **str** | The long form description of the portfolio. | [optional] 
 **display_name** | **str** | The name of the portfolio. | 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] [readonly] 
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**parent_portfolio_ids** | [**List[ResourceId]**](ResourceId.md) | The scope and code of each portfolio this portfolio takes its contents from: the parent of a derived transaction portfolio, or the constituents of a composite portfolio at the effective date. Empty for a portfolio with no parent. | [optional] 
 **base_currency** | **str** | The base currency of the portfolio. | [optional] 
 **properties** | [**List[ModelProperty]**](ModelProperty.md) | The requested portfolio properties. These will be from the &#39;Portfolio&#39; domain. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
@@ -33,10 +34,11 @@ is_derived: Optional[StrictBool] = # Replace with your value
 is_derived:Optional[StrictBool] = None
 created: datetime = # Replace with your value
 parent_portfolio_id: Optional[ResourceId] = # Replace with your value
+parent_portfolio_ids: Optional[List[ResourceId]] = # Replace with your value
 base_currency: Optional[StrictStr] = "example_base_currency"
 properties: Optional[List[ModelProperty]] = # Replace with your value
 links: Optional[List[Link]] = None
-portfolio_search_result_instance = PortfolioSearchResult(id=id, type=type, href=href, description=description, display_name=display_name, is_derived=is_derived, created=created, parent_portfolio_id=parent_portfolio_id, base_currency=base_currency, properties=properties, links=links)
+portfolio_search_result_instance = PortfolioSearchResult(id=id, type=type, href=href, description=description, display_name=display_name, is_derived=is_derived, created=created, parent_portfolio_id=parent_portfolio_id, parent_portfolio_ids=parent_portfolio_ids, base_currency=base_currency, properties=properties, links=links)
 
 ```
 

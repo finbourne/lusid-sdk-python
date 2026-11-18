@@ -25,7 +25,7 @@ from datetime import datetime
 
 class UnattributedAmount(BaseModel):
     """
-    An amount on the income summary an allocation run could not attribute to any pool.  # noqa: E501
+    An amount on the income summary an allocation run could not attribute to any pool. Always empty: every profit and  loss line is pooled or the run is refused. Kept, required, until no published SDK requires it.  # noqa: E501
     """
     gl_code:  StrictStr = Field(...,alias="glCode", description="The general ledger account the unattributed amount sits in.") 
     amount: Union[StrictFloat, StrictInt] = Field(description="The amount allocated to the partner.")

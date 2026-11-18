@@ -30,7 +30,8 @@ class PartnerAllocation(BaseModel):
     investor_record_id:  StrictStr = Field(...,alias="investorRecordId", description="The investor record the allocation belongs to.") 
     basis_weight: Union[StrictFloat, StrictInt] = Field(description="The partner's weight in the pool's basis.", alias="basisWeight")
     amount: Union[StrictFloat, StrictInt] = Field(description="The amount allocated to the partner.")
-    __properties = ["investorRecordId", "basisWeight", "amount"]
+    reason:  Optional[StrictStr] = Field(None,alias="reason", description="Why a partner listed at 0.00 took no share of the pool. Available values: Excluded (the bucket's rule leaves the partner out), Exempt (the partner's register flag sits it out), ZeroBasis (the partner has nothing on the pool's basis). Absent on a partner that shares; a partner at 0.00 with no reason shares the pool, but its share rounded to nothing at the pool's scale.") 
+    __properties = ["investorRecordId", "basisWeight", "amount", "reason"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +65,11 @@ class PartnerAllocation(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if reason (nullable) is None
+        # and __fields_set__ contains the field
+        if self.reason is None and "reason" in self.__fields_set__:
+            _dict['reason'] = None
+
         return _dict
 
     @classmethod
@@ -78,7 +84,8 @@ class PartnerAllocation(BaseModel):
         _obj = PartnerAllocation.parse_obj({
             "investor_record_id": obj.get("investorRecordId"),
             "basis_weight": obj.get("basisWeight"),
-            "amount": obj.get("amount")
+            "amount": obj.get("amount"),
+            "reason": obj.get("reason")
         })
         return _obj
 

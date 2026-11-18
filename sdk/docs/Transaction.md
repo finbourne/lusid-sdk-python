@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **custodian_entries** | [**List[CustodianEntry]**](CustodianEntry.md) | A list of Custodian Entries associated with the transaction. | [optional] 
 **entity_links** | [**List[TransactionEntityLink]**](TransactionEntityLink.md) | Links to the entities that manage this transaction. | [optional] 
+**source_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -73,7 +74,8 @@ version: Optional[Version] = None
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 custodian_entries: Optional[List[CustodianEntry]] = # Replace with your value
 entity_links: Optional[List[TransactionEntityLink]] = # Replace with your value
-transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership, version=version, staged_modifications=staged_modifications, custodian_entries=custodian_entries, entity_links=entity_links)
+source_portfolio_id: Optional[ResourceId] = # Replace with your value
+transaction_instance = Transaction(transaction_id=transaction_id, type=type, instrument_identifiers=instrument_identifiers, instrument_scope=instrument_scope, instrument_uid=instrument_uid, transaction_date=transaction_date, settlement_date=settlement_date, units=units, transaction_price=transaction_price, total_consideration=total_consideration, exchange_rate=exchange_rate, transaction_currency=transaction_currency, properties=properties, counterparty_id=counterparty_id, source=source, entry_date_time=entry_date_time, otc_confirmation=otc_confirmation, transaction_status=transaction_status, cancel_date_time=cancel_date_time, order_id=order_id, allocation_id=allocation_id, custodian_account=custodian_account, transaction_group_id=transaction_group_id, strategy_tag=strategy_tag, resolved_transaction_type_details=resolved_transaction_type_details, data_model_membership=data_model_membership, version=version, staged_modifications=staged_modifications, custodian_entries=custodian_entries, entity_links=entity_links, source_portfolio_id=source_portfolio_id)
 
 ```
 

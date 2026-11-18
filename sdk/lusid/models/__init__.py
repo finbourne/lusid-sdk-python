@@ -317,6 +317,7 @@ from lusid.models.cds_option import CdsOption
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.cdx_credit_event import CdxCreditEvent
 from lusid.models.change import Change
+from lusid.models.change_composite_portfolio_membership_request import ChangeCompositePortfolioMembershipRequest
 from lusid.models.change_event import ChangeEvent
 from lusid.models.change_history import ChangeHistory
 from lusid.models.change_history_action import ChangeHistoryAction
@@ -426,6 +427,7 @@ from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
 from lusid.models.composite_breakdown_response import CompositeBreakdownResponse
 from lusid.models.composite_dispersion import CompositeDispersion
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
+from lusid.models.composite_portfolio_constituent_request import CompositePortfolioConstituentRequest
 from lusid.models.compounding import Compounding
 from lusid.models.configuration_recipe import ConfigurationRecipe
 from lusid.models.consent_and_exchange_election import ConsentAndExchangeElection
@@ -463,6 +465,7 @@ from lusid.models.create_calendar_request import CreateCalendarRequest
 from lusid.models.create_check_definition_request import CreateCheckDefinitionRequest
 from lusid.models.create_closed_period_request import CreateClosedPeriodRequest
 from lusid.models.create_compliance_template_request import CreateComplianceTemplateRequest
+from lusid.models.create_composite_portfolio_request import CreateCompositePortfolioRequest
 from lusid.models.create_corporate_action_source_request import CreateCorporateActionSourceRequest
 from lusid.models.create_custom_data_model_request import CreateCustomDataModelRequest
 from lusid.models.create_custom_entity_type_request import CreateCustomEntityTypeRequest
@@ -1139,7 +1142,9 @@ from lusid.models.override_virtual_transactions_request import OverrideVirtualTr
 from lusid.models.oversubscribe_election import OversubscribeElection
 from lusid.models.pack_account import PackAccount
 from lusid.models.pack_posting_rule import PackPostingRule
+from lusid.models.pack_register_delta import PackRegisterDelta
 from lusid.models.pack_transaction_type import PackTransactionType
+from lusid.models.pack_type_contract import PackTypeContract
 from lusid.models.package import Package
 from lusid.models.package_request import PackageRequest
 from lusid.models.package_set_request import PackageSetRequest
@@ -1278,6 +1283,8 @@ from lusid.models.partnership_accounting_configuration import PartnershipAccount
 from lusid.models.partnership_accounting_valuation_point_data import PartnershipAccountingValuationPointData
 from lusid.models.partnership_allocation_problem import PartnershipAllocationProblem
 from lusid.models.partnership_config_pack import PartnershipConfigPack
+from lusid.models.partnership_type_check_result import PartnershipTypeCheckResult
+from lusid.models.partnership_type_difference import PartnershipTypeDifference
 from lusid.models.party_terms import PartyTerms
 from lusid.models.payment_details_applicable_entity import PaymentDetailsApplicableEntity
 from lusid.models.payment_details_reference import PaymentDetailsReference
@@ -1349,6 +1356,7 @@ from lusid.models.portfolio_transaction_dataset import PortfolioTransactionDatas
 from lusid.models.portfolio_transaction_result import PortfolioTransactionResult
 from lusid.models.portfolio_type import PortfolioType
 from lusid.models.portfolio_weight import PortfolioWeight
+from lusid.models.portfolio_with_warnings import PortfolioWithWarnings
 from lusid.models.portfolio_without_href import PortfolioWithoutHref
 from lusid.models.portfolios_reconciliation_request import PortfoliosReconciliationRequest
 from lusid.models.post_close_activities_request import PostCloseActivitiesRequest
@@ -1548,6 +1556,7 @@ from lusid.models.reference_list_type import ReferenceListType
 from lusid.models.reference_portfolio_constituent import ReferencePortfolioConstituent
 from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from lusid.models.reference_portfolio_weight_type import ReferencePortfolioWeightType
+from lusid.models.register_delta_movement import RegisterDeltaMovement
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.relation import Relation
 from lusid.models.relation_definition import RelationDefinition
@@ -2486,6 +2495,7 @@ __all__ = [
     "CdsProtectionDetailSpecification",
     "CdxCreditEvent",
     "Change",
+    "ChangeCompositePortfolioMembershipRequest",
     "ChangeEvent",
     "ChangeHistory",
     "ChangeHistoryAction",
@@ -2595,6 +2605,7 @@ __all__ = [
     "CompositeBreakdownResponse",
     "CompositeDispersion",
     "CompositeDispersionResponse",
+    "CompositePortfolioConstituentRequest",
     "Compounding",
     "ConfigurationRecipe",
     "ConsentAndExchangeElection",
@@ -2632,6 +2643,7 @@ __all__ = [
     "CreateCheckDefinitionRequest",
     "CreateClosedPeriodRequest",
     "CreateComplianceTemplateRequest",
+    "CreateCompositePortfolioRequest",
     "CreateCorporateActionSourceRequest",
     "CreateCustomDataModelRequest",
     "CreateCustomEntityTypeRequest",
@@ -3308,7 +3320,9 @@ __all__ = [
     "OversubscribeElection",
     "PackAccount",
     "PackPostingRule",
+    "PackRegisterDelta",
     "PackTransactionType",
+    "PackTypeContract",
     "Package",
     "PackageRequest",
     "PackageSetRequest",
@@ -3447,6 +3461,8 @@ __all__ = [
     "PartnershipAccountingValuationPointData",
     "PartnershipAllocationProblem",
     "PartnershipConfigPack",
+    "PartnershipTypeCheckResult",
+    "PartnershipTypeDifference",
     "PartyTerms",
     "PaymentDetailsApplicableEntity",
     "PaymentDetailsReference",
@@ -3518,6 +3534,7 @@ __all__ = [
     "PortfolioTransactionResult",
     "PortfolioType",
     "PortfolioWeight",
+    "PortfolioWithWarnings",
     "PortfolioWithoutHref",
     "PortfoliosReconciliationRequest",
     "PostCloseActivitiesRequest",
@@ -3717,6 +3734,7 @@ __all__ = [
     "ReferencePortfolioConstituent",
     "ReferencePortfolioConstituentRequest",
     "ReferencePortfolioWeightType",
+    "RegisterDeltaMovement",
     "RelatedEntity",
     "Relation",
     "RelationDefinition",

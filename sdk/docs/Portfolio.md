@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **href** | **str** | The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime. | [optional] 
 **id** | [**ResourceId**](ResourceId.md) |  | 
-**type** | **str** | The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition. | 
+**type** | **str** | The type of the portfolio. Available values: Transaction, Reference, DerivedTransaction, SimplePosition, Composite. | 
 **display_name** | **str** | The name of the portfolio. | 
 **description** | **str** | The long form description of the portfolio. | [optional] 
 **created** | **datetime** | The effective datetime at which the portfolio was created. No transactions or constituents can be added to the portfolio before this date. | 
 **enablement_date** | **datetime** | The effective datetime from which instrument events and corporate actions are generated and applied to the portfolio. Transactions and holdings booked to the portfolio contribute to holdings, valuations and other computed results from its creation date whatever the enablement date. Defaults to the portfolio&#39;s creation date when not explicitly set. | [optional] 
 **parent_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
+**parent_portfolio_ids** | [**List[ResourceId]**](ResourceId.md) | The scope and code of each portfolio this portfolio takes its contents from: the parent of a derived transaction portfolio, or the constituents of a composite portfolio at the effective date. Empty for a portfolio with no parent. | [optional] 
 **version** | [**Version**](Version.md) |  | [optional] 
 **staged_modifications** | [**StagedModificationsInfo**](StagedModificationsInfo.md) |  | [optional] 
 **is_derived** | **bool** | Whether or not this is a derived portfolio. | [optional] 
@@ -52,6 +53,7 @@ description: Optional[StrictStr] = "example_description"
 created: datetime = # Replace with your value
 enablement_date: Optional[datetime] = # Replace with your value
 parent_portfolio_id: Optional[ResourceId] = # Replace with your value
+parent_portfolio_ids: Optional[List[ResourceId]] = # Replace with your value
 version: Optional[Version] = None
 staged_modifications: Optional[StagedModificationsInfo] = # Replace with your value
 is_derived: Optional[StrictBool] = # Replace with your value
@@ -76,7 +78,7 @@ chargeable_gains_regime: Optional[StrictStr] = "example_chargeable_gains_regime"
 amortisation_horizon: Optional[AmortisationHorizon] = # Replace with your value
 wht_parameters: Optional[WhtParameters] = # Replace with your value
 links: Optional[List[Link]] = None
-portfolio_instance = Portfolio(href=href, id=id, type=type, display_name=display_name, description=description, created=created, enablement_date=enablement_date, parent_portfolio_id=parent_portfolio_id, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, transaction_exclusion_filter=transaction_exclusion_filter, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility, chargeable_gains_regime=chargeable_gains_regime, amortisation_horizon=amortisation_horizon, wht_parameters=wht_parameters, links=links)
+portfolio_instance = Portfolio(href=href, id=id, type=type, display_name=display_name, description=description, created=created, enablement_date=enablement_date, parent_portfolio_id=parent_portfolio_id, parent_portfolio_ids=parent_portfolio_ids, version=version, staged_modifications=staged_modifications, is_derived=is_derived, base_currency=base_currency, properties=properties, relationships=relationships, instrument_scopes=instrument_scopes, accounting_method=accounting_method, amortisation_method=amortisation_method, transaction_type_scope=transaction_type_scope, cash_gain_loss_calculation_date=cash_gain_loss_calculation_date, instrument_event_configuration=instrument_event_configuration, amortisation_rule_set_id=amortisation_rule_set_id, tax_rule_set_scope=tax_rule_set_scope, settlement_configuration=settlement_configuration, transaction_exclusion_filter=transaction_exclusion_filter, tax_lot_selection_cost_basis=tax_lot_selection_cost_basis, fractional_units_true_up_configuration=fractional_units_true_up_configuration, holdings_fungibility=holdings_fungibility, chargeable_gains_regime=chargeable_gains_regime, amortisation_horizon=amortisation_horizon, wht_parameters=wht_parameters, links=links)
 
 ```
 

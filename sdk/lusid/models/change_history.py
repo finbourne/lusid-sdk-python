@@ -24,6 +24,7 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.change_item import ChangeItem
 from lusid.models.link import Link
+from lusid.models.resource_id import ResourceId
 
 class ChangeHistory(BaseModel):
     """
@@ -34,8 +35,9 @@ class ChangeHistory(BaseModel):
     request_id:  StrictStr = Field(...,alias="requestId", description="The unique identifier of the request that the changes were part of.") 
     action:  StrictStr = Field(...,alias="action", description="The action performed on the transaction. Available values: Create, Update, Delete.") 
     changes: List[ChangeItem] = Field(description="The collection of changes that were made.")
+    source_portfolio_id: Optional[ResourceId] = Field(default=None, alias="sourcePortfolioId")
     links: Optional[List[Link]] = None
-    __properties = ["userId", "modifiedAsAt", "requestId", "action", "changes", "links"]
+    __properties = ["userId", "modifiedAsAt", "requestId", "action", "changes", "sourcePortfolioId", "links"]
 
     @validator('action')
     def action_validate_enum(cls, value):
@@ -94,6 +96,9 @@ class ChangeHistory(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['changes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of source_portfolio_id
+        if self.source_portfolio_id:
+            _dict['sourcePortfolioId'] = self.source_portfolio_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -123,6 +128,7 @@ class ChangeHistory(BaseModel):
             "request_id": obj.get("requestId"),
             "action": obj.get("action"),
             "changes": [ChangeItem.from_dict(_item) for _item in obj.get("changes")] if obj.get("changes") is not None else None,
+            "source_portfolio_id": ResourceId.from_dict(obj.get("sourcePortfolioId")) if obj.get("sourcePortfolioId") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
