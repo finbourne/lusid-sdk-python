@@ -132,6 +132,7 @@ from lusid.exceptions import ApiException
 # import models into sdk package
 from lusid.models.a2_b_breakdown import A2BBreakdown
 from lusid.models.a2_b_category import A2BCategory
+from lusid.models.a2_b_correction_cause import A2BCorrectionCause
 from lusid.models.a2_b_data_record import A2BDataRecord
 from lusid.models.a2_b_movement_record import A2BMovementRecord
 from lusid.models.abor import Abor
@@ -564,6 +565,7 @@ from lusid.models.conversion_event import ConversionEvent
 from lusid.models.core_attribute_optionality_tolerance import CoreAttributeOptionalityTolerance
 from lusid.models.core_date_tolerance import CoreDateTolerance
 from lusid.models.core_matching_rule import CoreMatchingRule
+from lusid.models.core_matching_set_tolerance import CoreMatchingSetTolerance
 from lusid.models.core_rule_values import CoreRuleValues
 from lusid.models.core_string_cross_tolerance import CoreStringCrossTolerance
 from lusid.models.corporate_action import CorporateAction
@@ -2436,6 +2438,7 @@ __all__ = [
     "WorkspaceApi",
     "A2BBreakdown",
     "A2BCategory",
+    "A2BCorrectionCause",
     "A2BDataRecord",
     "A2BMovementRecord",
     "Abor",
@@ -2868,6 +2871,7 @@ __all__ = [
     "CoreAttributeOptionalityTolerance",
     "CoreDateTolerance",
     "CoreMatchingRule",
+    "CoreMatchingSetTolerance",
     "CoreRuleValues",
     "CoreStringCrossTolerance",
     "CorporateAction",

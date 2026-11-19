@@ -25,10 +25,11 @@ from datetime import datetime
 from lusid.models.aggregate_numeric_tolerance import AggregateNumericTolerance
 from lusid.models.core_attribute_optionality_tolerance import CoreAttributeOptionalityTolerance
 from lusid.models.core_date_tolerance import CoreDateTolerance
+from lusid.models.core_matching_set_tolerance import CoreMatchingSetTolerance
 from lusid.models.core_string_cross_tolerance import CoreStringCrossTolerance
 
 
-TOLERANCEBASE_ONE_OF_SCHEMAS = ["AggregateNumericTolerance", "CoreAttributeOptionalityTolerance", "CoreDateTolerance", "CoreStringCrossTolerance"]
+TOLERANCEBASE_ONE_OF_SCHEMAS = ["AggregateNumericTolerance", "CoreAttributeOptionalityTolerance", "CoreDateTolerance", "CoreMatchingSetTolerance", "CoreStringCrossTolerance"]
 
 class ToleranceBase(BaseModel):
     """
@@ -40,10 +41,12 @@ class ToleranceBase(BaseModel):
     oneof_schema_2_validator: Optional[CoreAttributeOptionalityTolerance] = None
     # data type: CoreDateTolerance
     oneof_schema_3_validator: Optional[CoreDateTolerance] = None
+    # data type: CoreMatchingSetTolerance
+    oneof_schema_4_validator: Optional[CoreMatchingSetTolerance] = None
     # data type: CoreStringCrossTolerance
-    oneof_schema_4_validator: Optional[CoreStringCrossTolerance] = None
+    oneof_schema_5_validator: Optional[CoreStringCrossTolerance] = None
     if TYPE_CHECKING:
-        actual_instance: Union[AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance]
+        actual_instance: Union[AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreMatchingSetTolerance, CoreStringCrossTolerance]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(TOLERANCEBASE_ONE_OF_SCHEMAS, const=True)
@@ -88,6 +91,12 @@ class ToleranceBase(BaseModel):
         else:
             match += 1
             matchclass = matchclass + " CoreDateTolerance"
+        # validate data type: CoreMatchingSetTolerance
+        if not isinstance(v, CoreMatchingSetTolerance):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CoreMatchingSetTolerance`")
+        else:
+            match += 1
+            matchclass = matchclass + " CoreMatchingSetTolerance"
         # validate data type: CoreStringCrossTolerance
         if not isinstance(v, CoreStringCrossTolerance):
             error_messages.append(f"Error! Input type `{type(v)}` is not `CoreStringCrossTolerance`")
@@ -96,10 +105,10 @@ class ToleranceBase(BaseModel):
             matchclass = matchclass + " CoreStringCrossTolerance"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: Matched classes " + matchclass)
+            raise ValueError("Multiple matches found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreMatchingSetTolerance, CoreStringCrossTolerance. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreMatchingSetTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -131,6 +140,11 @@ class ToleranceBase(BaseModel):
             instance.actual_instance = CoreDateTolerance.from_json(json_str)
             return instance
 
+        # check if data type is `CoreMatchingSetTolerance`
+        if _data_type == "CoreMatchingSet":
+            instance.actual_instance = CoreMatchingSetTolerance.from_json(json_str)
+            return instance
+
         # check if data type is `CoreStringCrossTolerance`
         if _data_type == "CoreStringCross":
             instance.actual_instance = CoreStringCrossTolerance.from_json(json_str)
@@ -149,6 +163,11 @@ class ToleranceBase(BaseModel):
         # check if data type is `CoreAttributeOptionalityTolerance`
         if _data_type == "CoreAttributeOptionalityTolerance":
             instance.actual_instance = CoreAttributeOptionalityTolerance.from_json(json_str)
+            return instance
+
+        # check if data type is `CoreMatchingSetTolerance`
+        if _data_type == "CoreMatchingSetTolerance":
+            instance.actual_instance = CoreMatchingSetTolerance.from_json(json_str)
             return instance
 
         # check if data type is `CoreStringCrossTolerance`
@@ -177,6 +196,13 @@ class ToleranceBase(BaseModel):
             matchclass =matchclass + " CoreDateTolerance"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into CoreMatchingSetTolerance
+        try:
+            instance.actual_instance = CoreMatchingSetTolerance.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " CoreMatchingSetTolerance"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into CoreStringCrossTolerance
         try:
             instance.actual_instance = CoreStringCrossTolerance.from_json(json_str)
@@ -187,10 +213,10 @@ class ToleranceBase(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+            raise ValueError("Multiple matches found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreMatchingSetTolerance, CoreStringCrossTolerance. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ToleranceBase with oneOf schemas: AggregateNumericTolerance, CoreAttributeOptionalityTolerance, CoreDateTolerance, CoreMatchingSetTolerance, CoreStringCrossTolerance. Details: " + ", ".join(error_messages))
         else:
             return instance
 

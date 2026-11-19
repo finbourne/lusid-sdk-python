@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | The properties which have been requested to be decorated onto the holding. These will be from the &#39;Instrument&#39; domain. | [optional] 
 **group_id** | **str** | Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon. | [optional] 
 **errors** | [**List[ResponseMetaData]**](ResponseMetaData.md) | Any errors with the record are reported here. | [optional] 
+**causes** | [**List[A2BCorrectionCause]**](A2BCorrectionCause.md) | For a BackdatedCorrection movement, the transactions booked, amended or cancelled after the previous period closed that the correction reconciles, each with the journal action that explains it. Empty for any other movement. | [optional] 
 ## Example
 
 ```python
@@ -55,7 +56,8 @@ running_cost: Optional[Union[StrictFloat, StrictInt]] = # Replace with your valu
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
 group_id: Optional[StrictStr] = "example_group_id"
 errors: Optional[List[ResponseMetaData]] = # Replace with your value
-fund_a2_b_movement_record_instance = FundA2BMovementRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, movement_name=movement_name, effective_date=effective_date, units=units, start=start, flows=flows, gains=gains, carry=carry, end=end, running_units=running_units, running_balance=running_balance, running_cost=running_cost, properties=properties, group_id=group_id, errors=errors)
+causes: Optional[List[A2BCorrectionCause]] = # Replace with your value
+fund_a2_b_movement_record_instance = FundA2BMovementRecord(portfolio_id=portfolio_id, holding_type=holding_type, instrument_scope=instrument_scope, instrument_uid=instrument_uid, sub_holding_keys=sub_holding_keys, currency=currency, transaction_id=transaction_id, movement_name=movement_name, effective_date=effective_date, units=units, start=start, flows=flows, gains=gains, carry=carry, end=end, running_units=running_units, running_balance=running_balance, running_cost=running_cost, properties=properties, group_id=group_id, errors=errors, causes=causes)
 
 ```
 

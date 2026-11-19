@@ -31,6 +31,8 @@ See all compatible oneOf types with ToleranceBase
 
  * [CoreDateTolerance](./CoreDateTolerance.md)
 
+ * [CoreMatchingSetTolerance](./CoreMatchingSetTolerance.md)
+
  * [CoreStringCrossTolerance](./CoreStringCrossTolerance.md)
 
 [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to README](../README.md)

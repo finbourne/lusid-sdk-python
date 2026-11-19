@@ -975,6 +975,7 @@ Class | Method | HTTP request | Description
 
  - [A2BBreakdown](docs/A2BBreakdown.md)
  - [A2BCategory](docs/A2BCategory.md)
+ - [A2BCorrectionCause](docs/A2BCorrectionCause.md)
  - [A2BDataRecord](docs/A2BDataRecord.md)
  - [A2BMovementRecord](docs/A2BMovementRecord.md)
  - [Abor](docs/Abor.md)
@@ -1407,6 +1408,7 @@ Class | Method | HTTP request | Description
  - [CoreAttributeOptionalityTolerance](docs/CoreAttributeOptionalityTolerance.md)
  - [CoreDateTolerance](docs/CoreDateTolerance.md)
  - [CoreMatchingRule](docs/CoreMatchingRule.md)
+ - [CoreMatchingSetTolerance](docs/CoreMatchingSetTolerance.md)
  - [CoreRuleValues](docs/CoreRuleValues.md)
  - [CoreStringCrossTolerance](docs/CoreStringCrossTolerance.md)
  - [CorporateAction](docs/CorporateAction.md)

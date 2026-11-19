@@ -39,8 +39,13 @@ class FeeAccrual(BaseModel):
     cap_period_accrual: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount accrued so far in the current fee year (from the fee's AnchorDate), in the fund currency, against which an annual FeeCap is assessed.", alias="capPeriodAccrual")
     fee_cap_applied: Optional[StrictBool] = Field(default=None, description="Whether the FeeCap reduced the amount accrued at this valuation point.", alias="feeCapApplied")
     fee_floor_applied: Optional[StrictBool] = Field(default=None, description="Whether the FeeFloor raised the amount accrued at this valuation point.", alias="feeFloorApplied")
+    is_payable_date: Optional[StrictBool] = Field(default=None, description="Whether the valuation point's window, from the day after the previous valuation point to this one, holds one of the fee's payable dates, set by its PayableFrequency and AnchorDate and rolled by its BusinessDayConvention.", alias="isPayableDate")
+    payable_date: Optional[datetime] = Field(default=None, description="The latest payable date of the fee in the valuation point's window, after business day adjustment. Null when the window holds no payable date.", alias="payableDate")
+    payable_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The accrued balance that became payable at this valuation point: the previous valuation point's AccruedBalance plus the accrual through the end of the PayableDate, less what the fund's own transactions tagged with the fee's code in a Transaction/<fund scope>/FeeCode property deemed payable on or before it. Several payable dates in one window give one combined payable. Never negative: zero when the window holds no payable date, or when the balance due is not positive, as when tagged transactions already deemed more than was due. A share class's PayableAmount is its share of the fund's, apportioned by each class's balance due before deems, so the classes' add up to the fund's.", alias="payableAmount")
+    accrued_balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount accrued and not yet payable. It resets on a payable date, unlike TotalAccrual, and the total consideration of each of the fund's transactions in the valuation point's window tagged with the fee's code in a Transaction/<fund scope>/FeeCode property comes off it. A negative balance, from deeming more than was due, nets off later accruals before anything is payable again, as a prepaid fee does.", alias="accruedBalance")
+    previous_accrued_balance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The previous valuation point's AccruedBalance.", alias="previousAccruedBalance")
     links: Optional[List[Link]] = None
-    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "capPeriodAccrual", "feeCapApplied", "feeFloorApplied", "links"]
+    __properties = ["effectiveAt", "code", "name", "calculationBase", "amount", "previousAccrual", "previousTotalAccrual", "totalAccrual", "capPeriodAccrual", "feeCapApplied", "feeFloorApplied", "isPayableDate", "payableDate", "payableAmount", "accruedBalance", "previousAccruedBalance", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -81,6 +86,11 @@ class FeeAccrual(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if payable_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payable_date is None and "payable_date" in self.__fields_set__:
+            _dict['payableDate'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -109,6 +119,11 @@ class FeeAccrual(BaseModel):
             "cap_period_accrual": obj.get("capPeriodAccrual"),
             "fee_cap_applied": obj.get("feeCapApplied"),
             "fee_floor_applied": obj.get("feeFloorApplied"),
+            "is_payable_date": obj.get("isPayableDate"),
+            "payable_date": obj.get("payableDate"),
+            "payable_amount": obj.get("payableAmount"),
+            "accrued_balance": obj.get("accruedBalance"),
+            "previous_accrued_balance": obj.get("previousAccruedBalance"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

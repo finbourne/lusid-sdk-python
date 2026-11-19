@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.a2_b_category import A2BCategory
+from lusid.models.a2_b_correction_cause import A2BCorrectionCause
 from lusid.models.model_property import ModelProperty
 from lusid.models.perpetual_property import PerpetualProperty
 from lusid.models.resource_id import ResourceId
@@ -53,7 +54,8 @@ class FundA2BMovementRecord(BaseModel):
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The properties which have been requested to be decorated onto the holding. These will be from the 'Instrument' domain.")
     group_id:  Optional[StrictStr] = Field(None,alias="groupId", description="Arbitrary string that can be used to cross reference an entry in the A2B report with activity in the A2B-Movements. This should be used purely as a token. The content should not be relied upon.") 
     errors: Optional[List[ResponseMetaData]] = Field(default=None, description="Any errors with the record are reported here.")
-    __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "movementName", "effectiveDate", "units", "start", "flows", "gains", "carry", "end", "runningUnits", "runningBalance", "runningCost", "properties", "groupId", "errors"]
+    causes: Optional[List[A2BCorrectionCause]] = Field(default=None, description="For a BackdatedCorrection movement, the transactions booked, amended or cancelled after the previous period closed that the correction reconciles, each with the journal action that explains it. Empty for any other movement.")
+    __properties = ["portfolioId", "holdingType", "instrumentScope", "instrumentUid", "subHoldingKeys", "currency", "transactionId", "movementName", "effectiveDate", "units", "start", "flows", "gains", "carry", "end", "runningUnits", "runningBalance", "runningCost", "properties", "groupId", "errors", "causes"]
 
     class Config:
         """Pydantic configuration"""
@@ -129,6 +131,13 @@ class FundA2BMovementRecord(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['errors'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in causes (list)
+        _items = []
+        if self.causes:
+            for _item in self.causes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['causes'] = _items
         # set to None if holding_type (nullable) is None
         # and __fields_set__ contains the field
         if self.holding_type is None and "holding_type" in self.__fields_set__:
@@ -189,6 +198,11 @@ class FundA2BMovementRecord(BaseModel):
         if self.errors is None and "errors" in self.__fields_set__:
             _dict['errors'] = None
 
+        # set to None if causes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.causes is None and "causes" in self.__fields_set__:
+            _dict['causes'] = None
+
         return _dict
 
     @classmethod
@@ -231,7 +245,8 @@ class FundA2BMovementRecord(BaseModel):
             if obj.get("properties") is not None
             else None,
             "group_id": obj.get("groupId"),
-            "errors": [ResponseMetaData.from_dict(_item) for _item in obj.get("errors")] if obj.get("errors") is not None else None
+            "errors": [ResponseMetaData.from_dict(_item) for _item in obj.get("errors")] if obj.get("errors") is not None else None,
+            "causes": [A2BCorrectionCause.from_dict(_item) for _item in obj.get("causes")] if obj.get("causes") is not None else None
         })
         return _obj
 

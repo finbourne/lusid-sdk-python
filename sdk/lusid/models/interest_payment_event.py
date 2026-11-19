@@ -34,10 +34,11 @@ class InterestPaymentEvent(InstrumentEvent):
     response_deadline: Optional[datetime] = Field(default=None, description="The holder-instruction deadline. Required for MandatoryWithChoices; must be null for Mandatory.", alias="responseDeadline")
     market_deadline: Optional[datetime] = Field(default=None, description="The market-organisation deadline. Required for MandatoryWithChoices; must be null for Mandatory.", alias="marketDeadline")
     announcement_date: Optional[datetime] = Field(default=None, description="The date the event was announced by the issuer. Optional.", alias="announcementDate")
+    due_date: Optional[datetime] = Field(default=None, description="The date the interest was originally due, when it is paid after the bond's scheduled coupon date. Optional. When set, the interest is booked on this date and settles on the payment date, and the coupon the bond's schedule generates for this date is not booked. It must fall between the record date and the payment date.", alias="dueDate")
     cash_elections: List[CashElection] = Field(description="The cash elections for this event. For Mandatory participation a single declared election is supplied  with IsDeclared, IsDefault and IsChosen all true; for MandatoryWithChoices one entry per offered  currency is supplied, with exactly one declared, one default and one chosen. Every election carries a  per-unit absolute (signed) DividendRate and an ExchangeRate of 1.", alias="cashElections")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent, PartialRedemptionWithoutReductionOfNominalValueEvent, StripBondCashflowEvent, CapitalisationEvent, SharesPremiumDividendEvent, CashDistributionFromNonEligibleSecuritiesSalesEvent, InflationIndexationEvent, InterestPaymentWithPrincipalEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "recordDate", "paymentDate", "responseDeadline", "marketDeadline", "announcementDate", "cashElections"]
+    __properties = ["instrumentEventType", "recordDate", "paymentDate", "responseDeadline", "marketDeadline", "announcementDate", "dueDate", "cashElections"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -117,6 +118,11 @@ class InterestPaymentEvent(InstrumentEvent):
         if self.announcement_date is None and "announcement_date" in self.__fields_set__:
             _dict['announcementDate'] = None
 
+        # set to None if due_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.due_date is None and "due_date" in self.__fields_set__:
+            _dict['dueDate'] = None
+
         return _dict
 
     @classmethod
@@ -135,6 +141,7 @@ class InterestPaymentEvent(InstrumentEvent):
             "response_deadline": obj.get("responseDeadline"),
             "market_deadline": obj.get("marketDeadline"),
             "announcement_date": obj.get("announcementDate"),
+            "due_date": obj.get("dueDate"),
             "cash_elections": [CashElection.from_dict(_item) for _item in obj.get("cashElections")] if obj.get("cashElections") is not None else None
         })
         # store additional fields in additional_properties
