@@ -97,6 +97,8 @@ from lusid.models.allocation_event_notice_cumulative import AllocationEventNotic
 from lusid.models.allocation_event_notice_event import AllocationEventNoticeEvent
 from lusid.models.allocation_event_notice_line import AllocationEventNoticeLine
 from lusid.models.allocation_event_notice_partner import AllocationEventNoticePartner
+from lusid.models.allocation_event_notice_partner_line import AllocationEventNoticePartnerLine
+from lusid.models.allocation_event_notice_transfer import AllocationEventNoticeTransfer
 from lusid.models.allocation_event_notice_unfunded_reconciliation import AllocationEventNoticeUnfundedReconciliation
 from lusid.models.allocation_event_notice_wire import AllocationEventNoticeWire
 from lusid.models.allocation_event_reallocate_request import AllocationEventReallocateRequest
@@ -685,6 +687,7 @@ from lusid.models.facility import Facility
 from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEvent
 from lusid.models.facility_draw_event import FacilityDrawEvent
 from lusid.models.facility_interest_event import FacilityInterestEvent
+from lusid.models.facility_limit_change import FacilityLimitChange
 from lusid.models.facility_repayment_event import FacilityRepaymentEvent
 from lusid.models.facility_request import FacilityRequest
 from lusid.models.fee import Fee
@@ -1276,6 +1279,7 @@ from lusid.models.partner_capital_account import PartnerCapitalAccount
 from lusid.models.partner_capital_account_memo import PartnerCapitalAccountMemo
 from lusid.models.partner_capital_account_row import PartnerCapitalAccountRow
 from lusid.models.partner_capital_account_row_detail import PartnerCapitalAccountRowDetail
+from lusid.models.partner_interest_share import PartnerInterestShare
 from lusid.models.partner_performance import PartnerPerformance
 from lusid.models.partner_performance_cash_flow import PartnerPerformanceCashFlow
 from lusid.models.partner_performance_measures import PartnerPerformanceMeasures
@@ -2282,6 +2286,8 @@ __all__ = [
     "AllocationEventNoticeEvent",
     "AllocationEventNoticeLine",
     "AllocationEventNoticePartner",
+    "AllocationEventNoticePartnerLine",
+    "AllocationEventNoticeTransfer",
     "AllocationEventNoticeUnfundedReconciliation",
     "AllocationEventNoticeWire",
     "AllocationEventReallocateRequest",
@@ -2870,6 +2876,7 @@ __all__ = [
     "FacilityCommitmentFeeEvent",
     "FacilityDrawEvent",
     "FacilityInterestEvent",
+    "FacilityLimitChange",
     "FacilityRepaymentEvent",
     "FacilityRequest",
     "Fee",
@@ -3461,6 +3468,7 @@ __all__ = [
     "PartnerCapitalAccountMemo",
     "PartnerCapitalAccountRow",
     "PartnerCapitalAccountRowDetail",
+    "PartnerInterestShare",
     "PartnerPerformance",
     "PartnerPerformanceCashFlow",
     "PartnerPerformanceMeasures",

@@ -28,9 +28,10 @@ class AllocationEventNoticeCumulative(BaseModel):
     Cumulative balances to date for a partner on a notice.  # noqa: E501
     """
     contributions: Union[StrictFloat, StrictInt] = Field(description="Cumulative contributions after the event.")
-    distributions: Union[StrictFloat, StrictInt] = Field(description="Cumulative distributions after the event.")
+    distributions: Union[StrictFloat, StrictInt] = Field(description="Cumulative distributions after the event, tax withheld on the partner's behalf included, as the capital account's distributions row counts them.")
     recallable: Union[StrictFloat, StrictInt] = Field(description="Cumulative recallable distributions after the event.")
-    __properties = ["contributions", "distributions", "recallable"]
+    tax_withheld: Union[StrictFloat, StrictInt] = Field(description="Tax withheld from the partner's distributions to date and paid to the tax authority on its behalf: counted in the cumulative distributions, so the cash the partner actually received is distributions less this.", alias="taxWithheld")
+    __properties = ["contributions", "distributions", "recallable", "taxWithheld"]
 
     class Config:
         """Pydantic configuration"""
@@ -78,7 +79,8 @@ class AllocationEventNoticeCumulative(BaseModel):
         _obj = AllocationEventNoticeCumulative.parse_obj({
             "contributions": obj.get("contributions"),
             "distributions": obj.get("distributions"),
-            "recallable": obj.get("recallable")
+            "recallable": obj.get("recallable"),
+            "tax_withheld": obj.get("taxWithheld")
         })
         return _obj
 

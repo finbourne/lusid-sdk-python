@@ -5,8 +5,9 @@ Cumulative balances to date for a partner on a notice.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contributions** | **float** | Cumulative contributions after the event. | 
-**distributions** | **float** | Cumulative distributions after the event. | 
+**distributions** | **float** | Cumulative distributions after the event, tax withheld on the partner&#39;s behalf included, as the capital account&#39;s distributions row counts them. | 
 **recallable** | **float** | Cumulative recallable distributions after the event. | 
+**tax_withheld** | **float** | Tax withheld from the partner&#39;s distributions to date and paid to the tax authority on its behalf: counted in the cumulative distributions, so the cash the partner actually received is distributions less this. | 
 ## Example
 
 ```python
@@ -19,7 +20,8 @@ from datetime import datetime
 contributions: Union[StrictFloat, StrictInt] = # Replace with your value
 distributions: Union[StrictFloat, StrictInt] = # Replace with your value
 recallable: Union[StrictFloat, StrictInt] = # Replace with your value
-allocation_event_notice_cumulative_instance = AllocationEventNoticeCumulative(contributions=contributions, distributions=distributions, recallable=recallable)
+tax_withheld: Union[StrictFloat, StrictInt] = # Replace with your value
+allocation_event_notice_cumulative_instance = AllocationEventNoticeCumulative(contributions=contributions, distributions=distributions, recallable=recallable, tax_withheld=tax_withheld)
 
 ```
 

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.allocation_event_notice_partner_line import AllocationEventNoticePartnerLine
 
 class AllocationEventNoticePartner(BaseModel):
     """
@@ -29,8 +30,9 @@ class AllocationEventNoticePartner(BaseModel):
     """
     investor_record_id:  StrictStr = Field(...,alias="investorRecordId", description="The investor record identifier of the partner.") 
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the partner.") 
-    commitment: Union[StrictFloat, StrictInt] = Field(description="The partner's total commitment.")
-    __properties = ["investorRecordId", "displayName", "commitment"]
+    commitment: Union[StrictFloat, StrictInt] = Field(description="The partner's committed capital on the fund the event allocates over at the event date, summed over the lines the event allocates to there; for a partner looked through to, its line on the feeder. Never the partner's total across funds.")
+    lines: Optional[List[AllocationEventNoticePartnerLine]] = Field(default=None, description="The register lines the partner was allocated on, one per line, each with the fund whose register holds it, its commitment at the event date and the partner's share landing on it. The shares sum to the net amount due before tax withheld.")
+    __properties = ["investorRecordId", "displayName", "commitment", "lines"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,10 +66,22 @@ class AllocationEventNoticePartner(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in lines (list)
+        _items = []
+        if self.lines:
+            for _item in self.lines:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['lines'] = _items
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
             _dict['displayName'] = None
+
+        # set to None if lines (nullable) is None
+        # and __fields_set__ contains the field
+        if self.lines is None and "lines" in self.__fields_set__:
+            _dict['lines'] = None
 
         return _dict
 
@@ -83,7 +97,8 @@ class AllocationEventNoticePartner(BaseModel):
         _obj = AllocationEventNoticePartner.parse_obj({
             "investor_record_id": obj.get("investorRecordId"),
             "display_name": obj.get("displayName"),
-            "commitment": obj.get("commitment")
+            "commitment": obj.get("commitment"),
+            "lines": [AllocationEventNoticePartnerLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None
         })
         return _obj
 

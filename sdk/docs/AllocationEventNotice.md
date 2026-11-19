@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **gp_column** | [**AllocationEventNoticeCumulative**](AllocationEventNoticeCumulative.md) |  | [optional] 
 **wire** | [**AllocationEventNoticeWire**](AllocationEventNoticeWire.md) |  | [optional] 
 **payment_hold** | [**AllocationPaymentHold**](AllocationPaymentHold.md) |  | [optional] 
+**transfer** | [**AllocationEventNoticeTransfer**](AllocationEventNoticeTransfer.md) |  | [optional] 
 **watermark** | **str** | DRAFT until the allocation event is booked, otherwise null. | [optional] 
 ## Example
 
@@ -38,8 +39,9 @@ cumulative: AllocationEventNoticeCumulative
 gp_column: Optional[AllocationEventNoticeCumulative] = # Replace with your value
 wire: Optional[AllocationEventNoticeWire] = None
 payment_hold: Optional[AllocationPaymentHold] = # Replace with your value
+transfer: Optional[AllocationEventNoticeTransfer] = None
 watermark: Optional[StrictStr] = "example_watermark"
-allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, tax_withheld=tax_withheld, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, watermark=watermark)
+allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, tax_withheld=tax_withheld, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, transfer=transfer, watermark=watermark)
 
 ```
 

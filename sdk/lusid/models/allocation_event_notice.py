@@ -26,6 +26,7 @@ from lusid.models.allocation_event_notice_cumulative import AllocationEventNotic
 from lusid.models.allocation_event_notice_event import AllocationEventNoticeEvent
 from lusid.models.allocation_event_notice_line import AllocationEventNoticeLine
 from lusid.models.allocation_event_notice_partner import AllocationEventNoticePartner
+from lusid.models.allocation_event_notice_transfer import AllocationEventNoticeTransfer
 from lusid.models.allocation_event_notice_unfunded_reconciliation import AllocationEventNoticeUnfundedReconciliation
 from lusid.models.allocation_event_notice_wire import AllocationEventNoticeWire
 from lusid.models.allocation_payment_hold import AllocationPaymentHold
@@ -47,8 +48,9 @@ class AllocationEventNotice(BaseModel):
     gp_column: Optional[AllocationEventNoticeCumulative] = Field(default=None, alias="gpColumn")
     wire: Optional[AllocationEventNoticeWire] = None
     payment_hold: Optional[AllocationPaymentHold] = Field(default=None, alias="paymentHold")
+    transfer: Optional[AllocationEventNoticeTransfer] = None
     watermark:  Optional[StrictStr] = Field(None,alias="watermark", description="DRAFT until the allocation event is booked, otherwise null.") 
-    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "taxWithheld", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "watermark"]
+    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "taxWithheld", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "transfer", "watermark"]
 
     class Config:
         """Pydantic configuration"""
@@ -113,6 +115,9 @@ class AllocationEventNotice(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of payment_hold
         if self.payment_hold:
             _dict['paymentHold'] = self.payment_hold.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of transfer
+        if self.transfer:
+            _dict['transfer'] = self.transfer.to_dict()
         # set to None if watermark (nullable) is None
         # and __fields_set__ contains the field
         if self.watermark is None and "watermark" in self.__fields_set__:
@@ -142,6 +147,7 @@ class AllocationEventNotice(BaseModel):
             "gp_column": AllocationEventNoticeCumulative.from_dict(obj.get("gpColumn")) if obj.get("gpColumn") is not None else None,
             "wire": AllocationEventNoticeWire.from_dict(obj.get("wire")) if obj.get("wire") is not None else None,
             "payment_hold": AllocationPaymentHold.from_dict(obj.get("paymentHold")) if obj.get("paymentHold") is not None else None,
+            "transfer": AllocationEventNoticeTransfer.from_dict(obj.get("transfer")) if obj.get("transfer") is not None else None,
             "watermark": obj.get("watermark")
         })
         return _obj

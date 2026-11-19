@@ -25,10 +25,11 @@ from datetime import datetime
 from lusid.models.cash_offer_election import CashOfferElection
 from lusid.models.instrument_event import InstrumentEvent
 from lusid.models.lapse_election import LapseElection
+from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 
 class BankruptcyEvent(InstrumentEvent):
     """
-    A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. With no elections it is a pure informational marker, generating no transactions and  having no position impact. It may also carry a ballot: one CashOfferElection per option that pays  cash and one LapseElection per option that pays nothing.  # noqa: E501
+    A Bankruptcy (BRUP) event recording the legal status of a company unable to meet its financial  obligations. With no elections it is a pure informational marker, generating no transactions and  having no position impact. It may also carry a ballot: one CashOfferElection per option that pays  cash, one LapseElection per option that pays nothing, and one MixedLotConstituentsElection per option that  delivers new securities, cash, or both and removes the original position.  # noqa: E501
     """
     effective_date: Optional[datetime] = Field(default=None, description="Date of the bankruptcy filing or court ruling.", alias="effectiveDate")
     notification_type:  StrictStr = Field(...,alias="notificationType", description="Notification type: NEWM (new announcement), REPL (replacement/correction), or CANC (proceedings dismissed). Available values: NEWM, REPL, CANC.") 
@@ -37,9 +38,14 @@ class BankruptcyEvent(InstrumentEvent):
     payment_date: Optional[datetime] = Field(default=None, description="Settlement date of the cash leg. Required when a CashOfferElection is offered, and accepted  but unused otherwise — inbound ballot notifications populate a pay date on pure votes that  settle no cash.", alias="paymentDate")
     cash_offer_elections: Optional[List[CashOfferElection]] = Field(default=None, description="One election per ballot option that pays cash, keyed \"{OptionNumber}-{OptionCode}\", for  example \"1-CASH\". Each election's CashOfferPrice is per eligible unit, not per 1000 of face.  Defaults to an empty list.", alias="cashOfferElections")
     lapse_elections: Optional[List[LapseElection]] = Field(default=None, description="One election per ballot option that pays nothing — consent granted with no fee, consent  denied, abstain, or no action — keyed \"{OptionNumber}-{OptionCode}\", for example \"6-NOAC\".  Keys are free-form because a real ballot carries CONY twice and CONN twice. Defaults to an  empty list.", alias="lapseElections")
+    mixed_lot_constituents_elections: Optional[List[MixedLotConstituentsElection]] = Field(default=None, description="List of possible mixed lot options for this event, if any. Each election removes the original position  and delivers one or more distinct new securities and/or cash legs of its own, each with its own  settlement date. The event has no event-level NewInstrument: every security constituent carries its own.  Defaults to an empty list.", alias="mixedLotConstituentsElections")
+    fractional_units_cash_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The cash price paid in lieu of fractional units.", alias="fractionalUnitsCashPrice")
+    fractional_units_cash_currency:  Optional[StrictStr] = Field(None,alias="fractionalUnitsCashCurrency", description="The currency of the cash paid in lieu of fractional units.") 
+    fractional_units_rounding_convention:  Optional[StrictStr] = Field(None,alias="fractionalUnitsRoundingConvention", description="The convention used to round the fractional units entitlement. Defaults to Floor. BuyUp is not supported. Available values: Floor, Ceiling, RoundHalfUp, RoundHalfDown, RoundToDecimalPlaces, BuyUp, BankerRounding.") 
+    fractional_units_decimal_places: Optional[StrictInt] = Field(default=None, description="The number of decimal places to round to when FractionalUnitsRoundingConvention is RoundToDecimalPlaces.", alias="fractionalUnitsDecimalPlaces")
     instrument_event_type:  StrictStr = Field(...,alias="instrumentEventType", description="The Type of Event. Available values: TransitionEvent, InformationalEvent, OpenEvent, CloseEvent, StockSplitEvent, BondDefaultEvent, CashDividendEvent, AmortisationEvent, CashFlowEvent, ExerciseEvent, ResetEvent, TriggerEvent, RawVendorEvent, InformationalErrorEvent, BondCouponEvent, DividendReinvestmentEvent, AccumulationEvent, BondPrincipalEvent, DividendOptionEvent, MaturityEvent, FxForwardSettlementEvent, ExpiryEvent, ScripDividendEvent, StockDividendEvent, ReverseStockSplitEvent, CapitalDistributionEvent, SpinOffEvent, MergerEvent, FutureExpiryEvent, SwapCashFlowEvent, SwapPrincipalEvent, CreditPremiumCashFlowEvent, CdsCreditEvent, CdxCreditEvent, MbsCouponEvent, MbsPrincipalEvent, BonusIssueEvent, MbsPrincipalWriteOffEvent, MbsInterestDeferralEvent, MbsInterestShortfallEvent, TenderEvent, CallOnIntermediateSecuritiesEvent, IntermediateSecuritiesDistributionEvent, OptionExercisePhysicalEvent, OptionExerciseCashEvent, ProtectionPayoutCashFlowEvent, TermDepositInterestEvent, TermDepositPrincipalEvent, EarlyRedemptionEvent, FutureMarkToMarketEvent, AdjustGlobalCommitmentEvent, ContractInitialisationEvent, DrawdownEvent, LoanInterestRepaymentEvent, UpdateDepositAmountEvent, LoanPrincipalRepaymentEvent, DepositInterestPaymentEvent, DepositCloseEvent, LoanFacilityContractRolloverEvent, RepurchaseOfferEvent, RepoPartialClosureEvent, RepoCashFlowEvent, FlexibleRepoInterestPaymentEvent, FlexibleRepoCashFlowEvent, FlexibleRepoCollateralEvent, ConversionEvent, FlexibleRepoPartialClosureEvent, FlexibleRepoFullClosureEvent, CapletFloorletCashFlowEvent, EarlyCloseOutEvent, DepositRollEvent, ConsentEvent, DrawingEvent, CapitalGainsDistributionEvent, ExchangeOfferEvent, DutchAuctionEvent, WorthlessEvent, PutRedemptionEvent, LoanFacilityDelayedCompensationPaymentEvent, InterestPaymentEvent, PriorityIssueEvent, ClassActionEvent, BankruptcyEvent, LiquidationPaymentEvent, PartialDefeasanceEvent, SecurityWriteOffEvent, WarrantsExerciseEvent, PariPassuEvent, ChangeEvent, PikBondCouponEvent, PikBondCashCouponEvent, PikBondInterestCapitalisationEvent, PikBondPrincipalEvent, DelistingEvent, PikBondInterestEvent, CommodityForwardCashSettlementEvent, PaymentInKindEvent, CommodityForwardPhysicalSettlementEvent, CancelSwapEvent, BondOptionTerminationEvent, TerminationEvent, CommodityCalendarSwapCashFlowEvent, DepositSweepEvent, BondForwardCashSettlementEvent, BondForwardTerminationEvent, AmendCommitmentEvent, CapitalCallEvent, FundDistributionEvent, NavReportEvent, DividendSuspensionEvent, LoanInterestCapitalisationEvent, TotalReturnSwapCashFlowEvent, GlobalLoanFacilityReinitialisationEvent, InvestorLoanFacilityReinitialisationEvent, CapitalCallReceiptEvent, RecallableCapitalExpiryEvent, CapitalInterestTransferEvent, FacilityDrawEvent, FacilityRepaymentEvent, FacilityInterestEvent, FacilityCommitmentFeeEvent, InstalmentCallEvent, DepositInterestCapitalisationEvent, PartialRedemptionWithoutReductionOfNominalValueEvent, StripBondCashflowEvent, CapitalisationEvent, SharesPremiumDividendEvent, CashDistributionFromNonEligibleSecuritiesSalesEvent, InflationIndexationEvent, InterestPaymentWithPrincipalEvent.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentEventType", "effectiveDate", "notificationType", "claimFilingDeadline", "narrative", "paymentDate", "cashOfferElections", "lapseElections"]
+    __properties = ["instrumentEventType", "effectiveDate", "notificationType", "claimFilingDeadline", "narrative", "paymentDate", "cashOfferElections", "lapseElections", "mixedLotConstituentsElections", "fractionalUnitsCashPrice", "fractionalUnitsCashCurrency", "fractionalUnitsRoundingConvention", "fractionalUnitsDecimalPlaces"]
 
     @validator('instrument_event_type')
     def instrument_event_type_validate_enum(cls, value):
@@ -106,6 +112,13 @@ class BankruptcyEvent(InstrumentEvent):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['lapseElections'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in mixed_lot_constituents_elections (list)
+        _items = []
+        if self.mixed_lot_constituents_elections:
+            for _item in self.mixed_lot_constituents_elections:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['mixedLotConstituentsElections'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -136,6 +149,31 @@ class BankruptcyEvent(InstrumentEvent):
         if self.lapse_elections is None and "lapse_elections" in self.__fields_set__:
             _dict['lapseElections'] = None
 
+        # set to None if mixed_lot_constituents_elections (nullable) is None
+        # and __fields_set__ contains the field
+        if self.mixed_lot_constituents_elections is None and "mixed_lot_constituents_elections" in self.__fields_set__:
+            _dict['mixedLotConstituentsElections'] = None
+
+        # set to None if fractional_units_cash_price (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_price is None and "fractional_units_cash_price" in self.__fields_set__:
+            _dict['fractionalUnitsCashPrice'] = None
+
+        # set to None if fractional_units_cash_currency (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_cash_currency is None and "fractional_units_cash_currency" in self.__fields_set__:
+            _dict['fractionalUnitsCashCurrency'] = None
+
+        # set to None if fractional_units_rounding_convention (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_rounding_convention is None and "fractional_units_rounding_convention" in self.__fields_set__:
+            _dict['fractionalUnitsRoundingConvention'] = None
+
+        # set to None if fractional_units_decimal_places (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fractional_units_decimal_places is None and "fractional_units_decimal_places" in self.__fields_set__:
+            _dict['fractionalUnitsDecimalPlaces'] = None
+
         return _dict
 
     @classmethod
@@ -155,7 +193,12 @@ class BankruptcyEvent(InstrumentEvent):
             "narrative": obj.get("narrative"),
             "payment_date": obj.get("paymentDate"),
             "cash_offer_elections": [CashOfferElection.from_dict(_item) for _item in obj.get("cashOfferElections")] if obj.get("cashOfferElections") is not None else None,
-            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None
+            "lapse_elections": [LapseElection.from_dict(_item) for _item in obj.get("lapseElections")] if obj.get("lapseElections") is not None else None,
+            "mixed_lot_constituents_elections": [MixedLotConstituentsElection.from_dict(_item) for _item in obj.get("mixedLotConstituentsElections")] if obj.get("mixedLotConstituentsElections") is not None else None,
+            "fractional_units_cash_price": obj.get("fractionalUnitsCashPrice"),
+            "fractional_units_cash_currency": obj.get("fractionalUnitsCashCurrency"),
+            "fractional_units_rounding_convention": obj.get("fractionalUnitsRoundingConvention"),
+            "fractional_units_decimal_places": obj.get("fractionalUnitsDecimalPlaces")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

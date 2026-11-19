@@ -87,6 +87,7 @@ Method | HTTP request | Description
 [**run_partner_allocations**](FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period&#39;s income to the Fund&#39;s partners.
 [**send_back_tax_return**](FundsApi.md#send_back_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/send-back | [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
 [**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
+[**update_facility**](FundsApi.md#update_facility) | **PUT** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.
 [**update_valuation_point**](FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 [**upsert_bookmark**](FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
 [**upsert_diary_entry_type_valuation_point**](FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
@@ -8642,6 +8643,109 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund definition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **update_facility**
+> Facility update_facility(scope, code, facility_code, facility_request)
+
+[EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.
+
+Replace the definition of a Facility of a Fund. The code, the Fund and the currency cannot change. Lowering  the limit below what is already drawn is accepted and the response carries a warning: the draws already  booked stand, and further draws are refused until the Facility is repaid within its limit.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    facility_code = 'facility_code_example' # str | The code of the Facility to update.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # facility_request = FacilityRequest.from_json("")
+    # facility_request = FacilityRequest.from_dict({})
+    facility_request = FacilityRequest()
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.update_facility(scope, code, facility_code, facility_request, opts=opts)
+
+        # [EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.
+        api_response = api_instance.update_facility(scope, code, facility_code, facility_request)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->update_facility: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **facility_code** | **str**| The code of the Facility to update. | 
+ **facility_request** | [**FacilityRequest**](FacilityRequest.md)| The Facility definition to store. | 
+
+### Return type
+
+[**Facility**](Facility.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated Facility. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

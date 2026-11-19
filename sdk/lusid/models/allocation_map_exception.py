@@ -25,14 +25,15 @@ from datetime import datetime
 
 class AllocationMapException(BaseModel):
     """
-    A departure from the default participation of an Allocation Map for one investor record.  # noqa: E501
+    A departure from the default participation of an Allocation Map for one investor record or one of its register lines.  # noqa: E501
     """
     investor_record_id:  StrictStr = Field(...,alias="investorRecordId", description="The investor record the exception applies to.") 
     treatment:  StrictStr = Field(...,alias="treatment", description="What the exception does. Excluded removes the investor record from every allocation; FixedPercentage gives it participationPercent of each event off the top, before the remainder is shared pro rata between the other participants. Available values: Excluded, FixedPercentage.") 
     participation_percent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For a FixedPercentage exception, the fixed share as a fraction in the range (0, 1]. Not allowed on an Excluded exception. The fixed shares of all exceptions may not sum to more than 1.", alias="participationPercent")
     reason:  StrictStr = Field(...,alias="reason", description="Why the exception exists, for example a side letter or regulatory restriction. Required.") 
     effective_from: Optional[datetime] = Field(default=None, description="The datetime from which the exception is in force. Defaults to always if not specified.", alias="effectiveFrom")
-    __properties = ["investorRecordId", "treatment", "participationPercent", "reason", "effectiveFrom"]
+    commitment_line_id:  Optional[StrictStr] = Field(None,alias="commitmentLineId", description="The register line of the investor record the exception applies to, when it applies to one line rather than the record as a whole. The record's other lines take part as usual: an Excluded line's basis leaves the event's basis total, and a FixedPercentage line takes its fixed share off the top. Optional.") 
+    __properties = ["investorRecordId", "treatment", "participationPercent", "reason", "effectiveFrom", "commitmentLineId"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +77,11 @@ class AllocationMapException(BaseModel):
         if self.effective_from is None and "effective_from" in self.__fields_set__:
             _dict['effectiveFrom'] = None
 
+        # set to None if commitment_line_id (nullable) is None
+        # and __fields_set__ contains the field
+        if self.commitment_line_id is None and "commitment_line_id" in self.__fields_set__:
+            _dict['commitmentLineId'] = None
+
         return _dict
 
     @classmethod
@@ -92,7 +98,8 @@ class AllocationMapException(BaseModel):
             "treatment": obj.get("treatment"),
             "participation_percent": obj.get("participationPercent"),
             "reason": obj.get("reason"),
-            "effective_from": obj.get("effectiveFrom")
+            "effective_from": obj.get("effectiveFrom"),
+            "commitment_line_id": obj.get("commitmentLineId")
         })
         return _obj
 

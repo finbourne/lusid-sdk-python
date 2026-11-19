@@ -1,6 +1,6 @@
 # AllocationMapException
 
-A departure from the default participation of an Allocation Map for one investor record.
+A departure from the default participation of an Allocation Map for one investor record or one of its register lines.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **participation_percent** | **float** | For a FixedPercentage exception, the fixed share as a fraction in the range (0, 1]. Not allowed on an Excluded exception. The fixed shares of all exceptions may not sum to more than 1. | [optional] 
 **reason** | **str** | Why the exception exists, for example a side letter or regulatory restriction. Required. | 
 **effective_from** | **datetime** | The datetime from which the exception is in force. Defaults to always if not specified. | [optional] 
+**commitment_line_id** | **str** | The register line of the investor record the exception applies to, when it applies to one line rather than the record as a whole. The record&#39;s other lines take part as usual: an Excluded line&#39;s basis leaves the event&#39;s basis total, and a FixedPercentage line takes its fixed share off the top. Optional. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ treatment: StrictStr = "example_treatment"
 participation_percent: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 reason: StrictStr = "example_reason"
 effective_from: Optional[datetime] = # Replace with your value
-allocation_map_exception_instance = AllocationMapException(investor_record_id=investor_record_id, treatment=treatment, participation_percent=participation_percent, reason=reason, effective_from=effective_from)
+commitment_line_id: Optional[StrictStr] = "example_commitment_line_id"
+allocation_map_exception_instance = AllocationMapException(investor_record_id=investor_record_id, treatment=treatment, participation_percent=participation_percent, reason=reason, effective_from=effective_from, commitment_line_id=commitment_line_id)
 
 ```
 

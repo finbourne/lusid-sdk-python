@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **margin** | **float** | The margin over the reference rate, expressed as a decimal. Must be zero or greater. | 
 **commitment_fee_rate** | **float** | The annual commitment fee rate charged on the undrawn balance, expressed as a decimal. Must be zero or greater. | 
 **day_count_convention** | **str** | The day count convention used to accrue interest. One of: Act360, Act365, Act365F, Thirty360. | 
+**available_from** | **datetime** | The first date the Facility may be drawn, inclusive. A draw dated before it is refused. Required on creation; a Facility stored without one may be drawn on any date. | 
+**maturity_date** | **datetime** | The last date the Facility may be drawn, inclusive. A draw dated after it is refused; a repayment is not. Optional; omit for a Facility with no maturity. | [optional] 
+**limit_changes** | [**List[FacilityLimitChange]**](FacilityLimitChange.md) | Changes to the committed limit after the initial limit, each in force from its effective date until the next. Each must take effect after AvailableFrom and, when set, on or before MaturityDate. A draw is held to the limit in force on its date. | [optional] 
 ## Example
 
 ```python
@@ -32,7 +35,10 @@ rate_reference: Optional[StrictStr] = "example_rate_reference"
 margin: Union[StrictFloat, StrictInt] = # Replace with your value
 commitment_fee_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 day_count_convention: StrictStr = "example_day_count_convention"
-facility_request_instance = FacilityRequest(code=code, display_name=display_name, description=description, lender=lender, limit=limit, currency=currency, rate_reference=rate_reference, margin=margin, commitment_fee_rate=commitment_fee_rate, day_count_convention=day_count_convention)
+available_from: datetime = # Replace with your value
+maturity_date: Optional[datetime] = # Replace with your value
+limit_changes: Optional[List[FacilityLimitChange]] = # Replace with your value
+facility_request_instance = FacilityRequest(code=code, display_name=display_name, description=description, lender=lender, limit=limit, currency=currency, rate_reference=rate_reference, margin=margin, commitment_fee_rate=commitment_fee_rate, day_count_convention=day_count_convention, available_from=available_from, maturity_date=maturity_date, limit_changes=limit_changes)
 
 ```
 

@@ -22,6 +22,7 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.facility_limit_change import FacilityLimitChange
 
 class FacilityRequest(BaseModel):
     """
@@ -37,7 +38,10 @@ class FacilityRequest(BaseModel):
     margin: Union[StrictFloat, StrictInt] = Field(description="The margin over the reference rate, expressed as a decimal. Must be zero or greater.")
     commitment_fee_rate: Union[StrictFloat, StrictInt] = Field(description="The annual commitment fee rate charged on the undrawn balance, expressed as a decimal. Must be zero or greater.", alias="commitmentFeeRate")
     day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="The day count convention used to accrue interest. One of: Act360, Act365, Act365F, Thirty360.") 
-    __properties = ["code", "displayName", "description", "lender", "limit", "currency", "rateReference", "margin", "commitmentFeeRate", "dayCountConvention"]
+    available_from: datetime = Field(description="The first date the Facility may be drawn, inclusive. A draw dated before it is refused. Required on creation; a Facility stored without one may be drawn on any date.", alias="availableFrom")
+    maturity_date: Optional[datetime] = Field(default=None, description="The last date the Facility may be drawn, inclusive. A draw dated after it is refused; a repayment is not. Optional; omit for a Facility with no maturity.", alias="maturityDate")
+    limit_changes: Optional[List[FacilityLimitChange]] = Field(default=None, description="Changes to the committed limit after the initial limit, each in force from its effective date until the next. Each must take effect after AvailableFrom and, when set, on or before MaturityDate. A draw is held to the limit in force on its date.", alias="limitChanges")
+    __properties = ["code", "displayName", "description", "lender", "limit", "currency", "rateReference", "margin", "commitmentFeeRate", "dayCountConvention", "availableFrom", "maturityDate", "limitChanges"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,6 +75,13 @@ class FacilityRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in limit_changes (list)
+        _items = []
+        if self.limit_changes:
+            for _item in self.limit_changes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['limitChanges'] = _items
         # set to None if description (nullable) is None
         # and __fields_set__ contains the field
         if self.description is None and "description" in self.__fields_set__:
@@ -80,6 +91,16 @@ class FacilityRequest(BaseModel):
         # and __fields_set__ contains the field
         if self.rate_reference is None and "rate_reference" in self.__fields_set__:
             _dict['rateReference'] = None
+
+        # set to None if maturity_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.maturity_date is None and "maturity_date" in self.__fields_set__:
+            _dict['maturityDate'] = None
+
+        # set to None if limit_changes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.limit_changes is None and "limit_changes" in self.__fields_set__:
+            _dict['limitChanges'] = None
 
         return _dict
 
@@ -102,7 +123,10 @@ class FacilityRequest(BaseModel):
             "rate_reference": obj.get("rateReference"),
             "margin": obj.get("margin"),
             "commitment_fee_rate": obj.get("commitmentFeeRate"),
-            "day_count_convention": obj.get("dayCountConvention")
+            "day_count_convention": obj.get("dayCountConvention"),
+            "available_from": obj.get("availableFrom"),
+            "maturity_date": obj.get("maturityDate"),
+            "limit_changes": [FacilityLimitChange.from_dict(_item) for _item in obj.get("limitChanges")] if obj.get("limitChanges") is not None else None
         })
         return _obj
 

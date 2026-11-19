@@ -22,8 +22,10 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.facility_limit_change import FacilityLimitChange
 from lusid.models.link import Link
 from lusid.models.version import Version
+from lusid.models.warning import Warning
 
 class Facility(BaseModel):
     """
@@ -40,9 +42,13 @@ class Facility(BaseModel):
     margin: Union[StrictFloat, StrictInt] = Field(description="The margin over the reference rate, expressed as a decimal. Must be zero or greater.")
     commitment_fee_rate: Union[StrictFloat, StrictInt] = Field(description="The annual commitment fee rate charged on the undrawn balance, expressed as a decimal. Must be zero or greater.", alias="commitmentFeeRate")
     day_count_convention:  StrictStr = Field(...,alias="dayCountConvention", description="The day count convention used to accrue interest. One of: Act360, Act365, Act365F, Thirty360.") 
+    available_from: Optional[datetime] = Field(default=None, description="The first date the Facility may be drawn, inclusive. A draw dated before it is refused. Required on creation; a Facility stored without one may be drawn on any date.", alias="availableFrom")
+    maturity_date: Optional[datetime] = Field(default=None, description="The last date the Facility may be drawn, inclusive. A draw dated after it is refused; a repayment is not. Optional; omit for a Facility with no maturity.", alias="maturityDate")
+    limit_changes: Optional[List[FacilityLimitChange]] = Field(default=None, description="Changes to the committed limit after the initial limit, each in force from its effective date until the next. Each must take effect after AvailableFrom and, when set, on or before MaturityDate. A draw is held to the limit in force on its date.", alias="limitChanges")
+    warnings: Optional[List[Warning]] = Field(default=None, description="Warnings about the Facility as stored, for example that its limit is now below what is already drawn. Only present on a successful update.")
     version: Optional[Version] = None
     links: Optional[List[Link]] = None
-    __properties = ["href", "facilityCode", "displayName", "description", "lender", "limit", "currency", "rateReference", "margin", "commitmentFeeRate", "dayCountConvention", "version", "links"]
+    __properties = ["href", "facilityCode", "displayName", "description", "lender", "limit", "currency", "rateReference", "margin", "commitmentFeeRate", "dayCountConvention", "availableFrom", "maturityDate", "limitChanges", "warnings", "version", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -76,6 +82,20 @@ class Facility(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of each item in limit_changes (list)
+        _items = []
+        if self.limit_changes:
+            for _item in self.limit_changes:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['limitChanges'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -106,6 +126,26 @@ class Facility(BaseModel):
         if self.rate_reference is None and "rate_reference" in self.__fields_set__:
             _dict['rateReference'] = None
 
+        # set to None if available_from (nullable) is None
+        # and __fields_set__ contains the field
+        if self.available_from is None and "available_from" in self.__fields_set__:
+            _dict['availableFrom'] = None
+
+        # set to None if maturity_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.maturity_date is None and "maturity_date" in self.__fields_set__:
+            _dict['maturityDate'] = None
+
+        # set to None if limit_changes (nullable) is None
+        # and __fields_set__ contains the field
+        if self.limit_changes is None and "limit_changes" in self.__fields_set__:
+            _dict['limitChanges'] = None
+
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -134,6 +174,10 @@ class Facility(BaseModel):
             "margin": obj.get("margin"),
             "commitment_fee_rate": obj.get("commitmentFeeRate"),
             "day_count_convention": obj.get("dayCountConvention"),
+            "available_from": obj.get("availableFrom"),
+            "maturity_date": obj.get("maturityDate"),
+            "limit_changes": [FacilityLimitChange.from_dict(_item) for _item in obj.get("limitChanges")] if obj.get("limitChanges") is not None else None,
+            "warnings": [Warning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
