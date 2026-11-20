@@ -26,15 +26,14 @@ from lusid.models.resource_id import ResourceId
 
 class RunComplianceV3Request(BaseModel):
     """
-    A request to run one or more V3 compliance rules against a portfolio group, valuing holdings with the  supplied recipe. The pre-trade variant additionally includes the group's live order flow.  # noqa: E501
+    A request to run one or more V3 compliance rules against one or more individual portfolios, valuing  holdings with the supplied recipe. Each portfolio is evaluated on its own. The pre-trade variant  additionally includes each portfolio's live order flow.  # noqa: E501
     """
     rule_ids: List[ResourceId] = Field(alias="ruleIds")
-    portfolio_group_id: ResourceId = Field(alias="portfolioGroupId")
+    portfolio_ids: List[ResourceId] = Field(alias="portfolioIds")
     recipe_id: ResourceId = Field(alias="recipeId")
     effective_at: Optional[datetime] = Field(default=None, alias="effectiveAt")
     as_at: Optional[datetime] = Field(default=None, alias="asAt")
-    evaluation_mode:  Optional[StrictStr] = Field(None,alias="evaluationMode", description="Available values: PerPortfolio, GroupTotal.") 
-    __properties = ["ruleIds", "portfolioGroupId", "recipeId", "effectiveAt", "asAt", "evaluationMode"]
+    __properties = ["ruleIds", "portfolioIds", "recipeId", "effectiveAt", "asAt"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,9 +74,13 @@ class RunComplianceV3Request(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['ruleIds'] = _items
-        # override the default output from pydantic by calling `to_dict()` of portfolio_group_id
-        if self.portfolio_group_id:
-            _dict['portfolioGroupId'] = self.portfolio_group_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in portfolio_ids (list)
+        _items = []
+        if self.portfolio_ids:
+            for _item in self.portfolio_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['portfolioIds'] = _items
         # override the default output from pydantic by calling `to_dict()` of recipe_id
         if self.recipe_id:
             _dict['recipeId'] = self.recipe_id.to_dict()
@@ -90,11 +93,6 @@ class RunComplianceV3Request(BaseModel):
         # and __fields_set__ contains the field
         if self.as_at is None and "as_at" in self.__fields_set__:
             _dict['asAt'] = None
-
-        # set to None if evaluation_mode (nullable) is None
-        # and __fields_set__ contains the field
-        if self.evaluation_mode is None and "evaluation_mode" in self.__fields_set__:
-            _dict['evaluationMode'] = None
 
         return _dict
 
@@ -109,11 +107,10 @@ class RunComplianceV3Request(BaseModel):
 
         _obj = RunComplianceV3Request.parse_obj({
             "rule_ids": [ResourceId.from_dict(_item) for _item in obj.get("ruleIds")] if obj.get("ruleIds") is not None else None,
-            "portfolio_group_id": ResourceId.from_dict(obj.get("portfolioGroupId")) if obj.get("portfolioGroupId") is not None else None,
+            "portfolio_ids": [ResourceId.from_dict(_item) for _item in obj.get("portfolioIds")] if obj.get("portfolioIds") is not None else None,
             "recipe_id": ResourceId.from_dict(obj.get("recipeId")) if obj.get("recipeId") is not None else None,
             "effective_at": obj.get("effectiveAt"),
-            "as_at": obj.get("asAt"),
-            "evaluation_mode": obj.get("evaluationMode")
+            "as_at": obj.get("asAt")
         })
         return _obj
 

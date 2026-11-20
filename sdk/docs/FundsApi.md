@@ -44,6 +44,7 @@ Method | HTTP request | Description
 [**get_partner_unfunded_reconciliation**](FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner&#39;s unfunded commitment statement.
 [**get_partners**](FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 [**get_partnership_config_pack**](FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+[**get_registry_for_fund**](FundsApi.md#get_registry_for_fund) | **GET** /api/funds/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
 [**get_series**](FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
 [**get_tax_deemed_disposal**](FundsApi.md#get_tax_deemed_disposal) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals/{holdingId}/{date} | [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
 [**get_tax_deemed_disposals**](FundsApi.md#get_tax_deemed_disposals) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals | [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
@@ -4140,6 +4141,110 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_registry_for_fund**
+> VersionedResourceListWithWarningsOfRegistryLine get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
+
+[EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
+
+Get the register lines of a Fund at the given effective and asAt datetimes: the registry lines of its  transaction portfolios, each tagged with the portfolio it sits in, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the Fund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\". (optional)
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+
+        # [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
+        api_response = api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_registry_for_fund: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/CommittedCapital\&quot;. | [optional] 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+
+### Return type
+
+[**VersionedResourceListWithWarningsOfRegistryLine**](VersionedResourceListWithWarningsOfRegistryLine.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The registry lines of the transaction portfolios of a Fund |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_series**
 > ResourceListOfSeries get_series(scope, code, share_class_code=share_class_code, effective_at=effective_at, as_at=as_at)
 
@@ -7716,7 +7821,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] PatchFund: Patch a Fund.
 
-Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId.
+Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId, PartnershipAccountingPortfolioId.
 
 ### Example
 

@@ -27,17 +27,17 @@ from lusid.models.rec_instance_id import RecInstanceId
 
 class RecAgedResult(BaseModel):
     """
-    A summary of a rec result in another instance, as at the stamp that first recorded it.  # noqa: E501
+    A summary of a rec result in another instance, as at the stamp, or as last recorded if the result can no longer be read.  # noqa: E501
     """
     id:  StrictStr = Field(...,alias="id", description="The id of the result within its instance, e.g. 'Holding-break-1'. With instanceId, it fully qualifies the result.") 
     instance_id: RecInstanceId = Field(alias="instanceId")
-    run_number: StrictInt = Field(description="The result's latest run as at the stamp that first recorded it.", alias="runNumber")
-    run_as_at: datetime = Field(description="The asAt datetime of the result's latest run as at the stamp that first recorded it.", alias="runAsAt")
+    run_number: StrictInt = Field(description="The result's latest run as at the stamp, or as last recorded if the result can no longer be read.", alias="runNumber")
+    run_as_at: datetime = Field(description="The asAt datetime of the result's latest run as at the stamp, or as last recorded if the result can no longer be read.", alias="runAsAt")
     first_run_seen: StrictInt = Field(description="The run in which the result was first assigned its id.", alias="firstRunSeen")
     as_at_first_seen: datetime = Field(description="The runAsAt of the run in which the result first appeared in its instance, the run numbered firstRunSeen. Written once: re-runs leave it unchanged.", alias="asAtFirstSeen")
     dates_reconciled: RecDatesReconciled = Field(alias="datesReconciled")
-    exception_status:  StrictStr = Field(...,alias="exceptionStatus", description="The result's exception status as at the stamp that first recorded it: Open or Closed. Available values: Open, Closed.") 
-    closure_type:  Optional[StrictStr] = Field(None,alias="closureType", description="The result's exception closure type as at the stamp that first recorded it. Null while the exception is open. Available values: Cleared, Accepted, ForceMatched.") 
+    exception_status:  StrictStr = Field(...,alias="exceptionStatus", description="The result's exception status as at the stamp, or as last recorded if the result can no longer be read: Open or Closed. Available values: Open, Closed.") 
+    closure_type:  Optional[StrictStr] = Field(None,alias="closureType", description="The result's exception closure type as at the stamp, or as last recorded if the result can no longer be read. Null while the exception is open. Available values: Cleared, Accepted, ForceMatched.") 
     __properties = ["id", "instanceId", "runNumber", "runAsAt", "firstRunSeen", "asAtFirstSeen", "datesReconciled", "exceptionStatus", "closureType"]
 
     class Config:

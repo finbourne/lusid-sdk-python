@@ -30,7 +30,7 @@ class UpdateDataTypeRequest(BaseModel):
     """
     display_name:  Optional[StrictStr] = Field(None,alias="displayName", description="The display name of the data type.") 
     description:  Optional[StrictStr] = Field(None,alias="description", description="The description of the data type.") 
-    acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies to 'open' value type range.", alias="acceptableValues")
+    acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies when the type value range is 'Closed'; it is ignored on write and returned as null for 'Open' data types. If reference data is supplied on a 'Closed' data type and this field is omitted, the acceptable values are derived from the reference data values.", alias="acceptableValues")
     acceptable_units: Optional[List[UpdateUnitRequest]] = Field(default=None, description="The definitions of the acceptable units.", alias="acceptableUnits")
     __properties = ["displayName", "description", "acceptableValues", "acceptableUnits"]
 

@@ -72,8 +72,9 @@ class Fund(BaseModel):
     version: Optional[Version] = None
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
+    partnership_accounting_portfolio_id: Optional[ResourceId] = Field(default=None, alias="partnershipAccountingPortfolioId")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "dealingEstimates", "version", "whtParameters", "valuationTemplateId", "links"]
+    __properties = ["href", "id", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shortCode", "aborId", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "yearEndDate", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "allocationGroups", "shareClasses", "fundInstrument", "pricingMethodology", "reportingPrices", "dealingEstimates", "version", "whtParameters", "valuationTemplateId", "partnershipAccountingPortfolioId", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -189,6 +190,9 @@ class Fund(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of valuation_template_id
         if self.valuation_template_id:
             _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of partnership_accounting_portfolio_id
+        if self.partnership_accounting_portfolio_id:
+            _dict['partnershipAccountingPortfolioId'] = self.partnership_accounting_portfolio_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -328,6 +332,7 @@ class Fund(BaseModel):
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
             "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
+            "partnership_accounting_portfolio_id": ResourceId.from_dict(obj.get("partnershipAccountingPortfolioId")) if obj.get("partnershipAccountingPortfolioId") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

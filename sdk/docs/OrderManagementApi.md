@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**preview_blocks**](OrderManagementApi.md#preview_blocks) | **POST** /api/ordermanagement/$previewblocks | PreviewBlocks: Preview the blocks a set of orders would form
 [**run_allocation_service**](OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | RunAllocationService: Runs the Allocation Service
 [**run_allocation_service_with_weights**](OrderManagementApi.md#run_allocation_service_with_weights) | **POST** /api/ordermanagement/allocate/weighted | RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
-[**sweep_blocks**](OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
+[**sweep_blocks**](OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/sweepblocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
 [**update_orders**](OrderManagementApi.md#update_orders) | **POST** /api/ordermanagement/updateorders | [EARLY ACCESS] UpdateOrders: Update existing orders
 [**update_placements**](OrderManagementApi.md#update_placements) | **POST** /api/ordermanagement/$updateplacements | [EARLY ACCESS] UpdatePlacements: Update existing placements
 

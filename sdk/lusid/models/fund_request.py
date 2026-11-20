@@ -43,7 +43,8 @@ class FundRequest(BaseModel):
     decimal_places: Optional[StrictInt] = Field(default=None, description="Number of decimal places for reporting", alias="decimalPlaces")
     year_end_date: DayMonth = Field(alias="yearEndDate")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="A set of properties for the Fund.")
-    __properties = ["code", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties"]
+    partnership_accounting_portfolio_id: Optional[ResourceId] = Field(default=None, alias="partnershipAccountingPortfolioId")
+    __properties = ["code", "displayName", "description", "fundConfigurationId", "aborId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "inceptionDate", "decimalPlaces", "yearEndDate", "properties", "partnershipAccountingPortfolioId"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,6 +101,9 @@ class FundRequest(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of partnership_accounting_portfolio_id
+        if self.partnership_accounting_portfolio_id:
+            _dict['partnershipAccountingPortfolioId'] = self.partnership_accounting_portfolio_id.to_dict()
         # set to None if display_name (nullable) is None
         # and __fields_set__ contains the field
         if self.display_name is None and "display_name" in self.__fields_set__:
@@ -158,7 +162,8 @@ class FundRequest(BaseModel):
                 for _k, _v in obj.get("properties").items()
             )
             if obj.get("properties") is not None
-            else None
+            else None,
+            "partnership_accounting_portfolio_id": ResourceId.from_dict(obj.get("partnershipAccountingPortfolioId")) if obj.get("partnershipAccountingPortfolioId") is not None else None
         })
         return _obj
 

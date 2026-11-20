@@ -3411,9 +3411,9 @@ class ComplianceApi:
 
     @validate_arguments
     def run_compliance_v3(self, run_compliance_v3_request : Optional[RunComplianceV3Request] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunV3Response, Awaitable[ComplianceRunV3Response]]:  # noqa: E501
-        """[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.  # noqa: E501
+        """[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.  # noqa: E501
 
-        Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule's result.  # noqa: E501
+        Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, valuing holdings with the supplied recipe, and return each rule's result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -3442,9 +3442,9 @@ class ComplianceApi:
 
     @validate_arguments
     def run_compliance_v3_with_http_info(self, run_compliance_v3_request : Optional[RunComplianceV3Request] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.  # noqa: E501
+        """[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.  # noqa: E501
 
-        Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule's result.  # noqa: E501
+        Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, valuing holdings with the supplied recipe, and return each rule's result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -3570,9 +3570,9 @@ class ComplianceApi:
 
     @validate_arguments
     def run_compliance_v3_pre_trade(self, run_compliance_v3_request : Optional[RunComplianceV3Request] = None, async_req: Optional[bool]=None, **kwargs) -> Union[ComplianceRunV3Response, Awaitable[ComplianceRunV3Response]]:  # noqa: E501
-        """[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.  # noqa: E501
+        """[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.  # noqa: E501
 
-        Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule's result.  # noqa: E501
+        Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, including each portfolio's live order flow (pre-trade), valuing holdings  with the supplied recipe, and return each rule's result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -3601,9 +3601,9 @@ class ComplianceApi:
 
     @validate_arguments
     def run_compliance_v3_pre_trade_with_http_info(self, run_compliance_v3_request : Optional[RunComplianceV3Request] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.  # noqa: E501
+        """[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.  # noqa: E501
 
-        Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule's result.  # noqa: E501
+        Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, including each portfolio's live order flow (pre-trade), valuing holdings  with the supplied recipe, and return each rule's result.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

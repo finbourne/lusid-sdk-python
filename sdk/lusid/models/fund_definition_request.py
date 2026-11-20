@@ -62,7 +62,8 @@ class FundDefinitionRequest(BaseModel):
     dealing_estimates: Optional[DealingEstimates] = Field(default=None, alias="dealingEstimates")
     wht_parameters: Optional[WhtParameters] = Field(default=None, alias="whtParameters")
     valuation_template_id: Optional[ResourceId] = Field(default=None, alias="valuationTemplateId")
-    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "shareClasses", "pricingMethodology", "reportingPrices", "dealingEstimates", "whtParameters", "valuationTemplateId"]
+    partnership_accounting_portfolio_id: Optional[ResourceId] = Field(default=None, alias="partnershipAccountingPortfolioId")
+    __properties = ["code", "shortCode", "displayName", "description", "baseCurrency", "investorStructure", "portfolioIds", "fundConfigurationId", "shareClassInstrumentScopes", "shareClassInstruments", "type", "taxTransparency", "inceptionDate", "decimalPlaces", "primaryNavType", "additionalNavTypes", "properties", "createInstrument", "instrumentScope", "shareClasses", "pricingMethodology", "reportingPrices", "dealingEstimates", "whtParameters", "valuationTemplateId", "partnershipAccountingPortfolioId"]
 
     class Config:
         """Pydantic configuration"""
@@ -156,6 +157,9 @@ class FundDefinitionRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of valuation_template_id
         if self.valuation_template_id:
             _dict['valuationTemplateId'] = self.valuation_template_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of partnership_accounting_portfolio_id
+        if self.partnership_accounting_portfolio_id:
+            _dict['partnershipAccountingPortfolioId'] = self.partnership_accounting_portfolio_id.to_dict()
         # set to None if short_code (nullable) is None
         # and __fields_set__ contains the field
         if self.short_code is None and "short_code" in self.__fields_set__:
@@ -262,7 +266,8 @@ class FundDefinitionRequest(BaseModel):
             "reporting_prices": [ReportingPrice.from_dict(_item) for _item in obj.get("reportingPrices")] if obj.get("reportingPrices") is not None else None,
             "dealing_estimates": DealingEstimates.from_dict(obj.get("dealingEstimates")) if obj.get("dealingEstimates") is not None else None,
             "wht_parameters": WhtParameters.from_dict(obj.get("whtParameters")) if obj.get("whtParameters") is not None else None,
-            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None
+            "valuation_template_id": ResourceId.from_dict(obj.get("valuationTemplateId")) if obj.get("valuationTemplateId") is not None else None,
+            "partnership_accounting_portfolio_id": ResourceId.from_dict(obj.get("partnershipAccountingPortfolioId")) if obj.get("partnershipAccountingPortfolioId") is not None else None
         })
         return _obj
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **decimal_places** | **int** | Number of decimal places for reporting | [optional] 
 **year_end_date** | [**DayMonth**](DayMonth.md) |  | 
 **properties** | [**Dict[str, ModelProperty]**](ModelProperty.md) | A set of properties for the Fund. | [optional] 
+**partnership_accounting_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 ## Example
 
 ```python
@@ -38,7 +39,8 @@ decimal_places: Optional[StrictInt] = # Replace with your value
 decimal_places: Optional[StrictInt] = None
 year_end_date: DayMonth = # Replace with your value
 properties: Optional[Dict[str, ModelProperty]] = # Replace with your value
-fund_request_instance = FundRequest(code=code, display_name=display_name, description=description, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, properties=properties)
+partnership_accounting_portfolio_id: Optional[ResourceId] = # Replace with your value
+fund_request_instance = FundRequest(code=code, display_name=display_name, description=description, fund_configuration_id=fund_configuration_id, abor_id=abor_id, share_class_instrument_scopes=share_class_instrument_scopes, share_class_instruments=share_class_instruments, type=type, inception_date=inception_date, decimal_places=decimal_places, year_end_date=year_end_date, properties=properties, partnership_accounting_portfolio_id=partnership_accounting_portfolio_id)
 
 ```
 

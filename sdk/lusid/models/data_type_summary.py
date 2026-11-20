@@ -35,7 +35,7 @@ class DataTypeSummary(BaseModel):
     display_name:  StrictStr = Field(...,alias="displayName", description="The display name of the data type.") 
     description:  StrictStr = Field(...,alias="description", description="The description of the data type.") 
     value_type:  StrictStr = Field(...,alias="valueType", description="The expected type of the values. Available values: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText.") 
-    acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies to 'open' value type range.", alias="acceptableValues")
+    acceptable_values: Optional[List[StrictStr]] = Field(default=None, description="The acceptable set of values for this data type. Only applies when the type value range is 'Closed'; it is ignored on write and returned as null for 'Open' data types. If reference data is supplied on a 'Closed' data type and this field is omitted, the acceptable values are derived from the reference data values.", alias="acceptableValues")
     unit_schema:  Optional[StrictStr] = Field(None,alias="unitSchema", description="The schema of the data type's units. Available values: NoUnits, Basic, Iso4217Currency.") 
     acceptable_units: Optional[List[IUnitDefinitionDto]] = Field(default=None, description="The definitions of the acceptable units.", alias="acceptableUnits")
     version: Optional[Version] = None

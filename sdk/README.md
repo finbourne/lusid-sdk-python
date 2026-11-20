@@ -200,8 +200,8 @@ Class | Method | HTTP request | Description
 *ComplianceApi* | [**list_order_breach_history**](docs/ComplianceApi.md#list_order_breach_history) | **GET** /api/compliance/runs/breaches | [EXPERIMENTAL] ListOrderBreachHistory: List Historical Order Breaches.
 *ComplianceApi* | [**run_compliance**](docs/ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 *ComplianceApi* | [**run_compliance_preview**](docs/ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
-*ComplianceApi* | [**run_compliance_v3**](docs/ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
-*ComplianceApi* | [**run_compliance_v3_pre_trade**](docs/ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+*ComplianceApi* | [**run_compliance_v3**](docs/ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.
+*ComplianceApi* | [**run_compliance_v3_pre_trade**](docs/ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.
 *ComplianceApi* | [**update_compliance_template**](docs/ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 *ComplianceApi* | [**upsert_compliance_rule**](docs/ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 *ComplianceApi* | [**upsert_compliance_rule_v3**](docs/ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
@@ -395,6 +395,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_partner_unfunded_reconciliation**](docs/FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner's unfunded commitment statement.
 *FundsApi* | [**get_partners**](docs/FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 *FundsApi* | [**get_partnership_config_pack**](docs/FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
+*FundsApi* | [**get_registry_for_fund**](docs/FundsApi.md#get_registry_for_fund) | **GET** /api/funds/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
 *FundsApi* | [**get_series**](docs/FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
 *FundsApi* | [**get_tax_deemed_disposal**](docs/FundsApi.md#get_tax_deemed_disposal) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals/{holdingId}/{date} | [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
 *FundsApi* | [**get_tax_deemed_disposals**](docs/FundsApi.md#get_tax_deemed_disposals) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals | [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
@@ -563,7 +564,7 @@ Class | Method | HTTP request | Description
 *OrderManagementApi* | [**preview_blocks**](docs/OrderManagementApi.md#preview_blocks) | **POST** /api/ordermanagement/$previewblocks | PreviewBlocks: Preview the blocks a set of orders would form
 *OrderManagementApi* | [**run_allocation_service**](docs/OrderManagementApi.md#run_allocation_service) | **POST** /api/ordermanagement/allocate | RunAllocationService: Runs the Allocation Service
 *OrderManagementApi* | [**run_allocation_service_with_weights**](docs/OrderManagementApi.md#run_allocation_service_with_weights) | **POST** /api/ordermanagement/allocate/weighted | RunAllocationServiceWithWeights: Runs the Allocation Service with portfolio weights
-*OrderManagementApi* | [**sweep_blocks**](docs/OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/SweepBlocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
+*OrderManagementApi* | [**sweep_blocks**](docs/OrderManagementApi.md#sweep_blocks) | **POST** /api/ordermanagement/sweepblocks | [EXPERIMENTAL] SweepBlocks: Sweeps specified blocks, for each block that meets the requirements. The request may be partially successful.
 *OrderManagementApi* | [**update_orders**](docs/OrderManagementApi.md#update_orders) | **POST** /api/ordermanagement/updateorders | [EARLY ACCESS] UpdateOrders: Update existing orders
 *OrderManagementApi* | [**update_placements**](docs/OrderManagementApi.md#update_placements) | **POST** /api/ordermanagement/$updateplacements | [EARLY ACCESS] UpdatePlacements: Update existing placements
 *OrdersApi* | [**delete_order**](docs/OrdersApi.md#delete_order) | **DELETE** /api/orders/{scope}/{code} | [EARLY ACCESS] DeleteOrder: Delete order
@@ -912,6 +913,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**get_portfolio_cash_flows**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 *TransactionPortfoliosApi* | [**get_portfolio_cash_ladder**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 *TransactionPortfoliosApi* | [**get_portfolio_cash_statement**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
+*TransactionPortfoliosApi* | [**get_registry**](docs/TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
 *TransactionPortfoliosApi* | [**get_transaction_history**](docs/TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
 *TransactionPortfoliosApi* | [**get_transaction_settlement_status**](docs/TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 *TransactionPortfoliosApi* | [**get_transactions**](docs/TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
@@ -2528,6 +2530,7 @@ Class | Method | HTTP request | Description
  - [ReferencePortfolioConstituentRequest](docs/ReferencePortfolioConstituentRequest.md)
  - [ReferencePortfolioWeightType](docs/ReferencePortfolioWeightType.md)
  - [RegisterDeltaMovement](docs/RegisterDeltaMovement.md)
+ - [RegistryLine](docs/RegistryLine.md)
  - [RelatedEntity](docs/RelatedEntity.md)
  - [Relation](docs/Relation.md)
  - [RelationDefinition](docs/RelationDefinition.md)
@@ -3116,6 +3119,7 @@ Class | Method | HTTP request | Description
  - [VersionedResourceListOfTrialBalance](docs/VersionedResourceListOfTrialBalance.md)
  - [VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery](docs/VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery.md)
  - [VersionedResourceListWithWarningsOfPortfolioHolding](docs/VersionedResourceListWithWarningsOfPortfolioHolding.md)
+ - [VersionedResourceListWithWarningsOfRegistryLine](docs/VersionedResourceListWithWarningsOfRegistryLine.md)
  - [VirtualDocument](docs/VirtualDocument.md)
  - [VirtualDocumentRow](docs/VirtualDocumentRow.md)
  - [VirtualRow](docs/VirtualRow.md)

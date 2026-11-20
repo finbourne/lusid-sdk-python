@@ -1685,6 +1685,7 @@ from lusid.models.reference_portfolio_constituent import ReferencePortfolioConst
 from lusid.models.reference_portfolio_constituent_request import ReferencePortfolioConstituentRequest
 from lusid.models.reference_portfolio_weight_type import ReferencePortfolioWeightType
 from lusid.models.register_delta_movement import RegisterDeltaMovement
+from lusid.models.registry_line import RegistryLine
 from lusid.models.related_entity import RelatedEntity
 from lusid.models.relation import Relation
 from lusid.models.relation_definition import RelationDefinition
@@ -2273,6 +2274,7 @@ from lusid.models.versioned_resource_list_of_transaction_settlement_instruction 
 from lusid.models.versioned_resource_list_of_trial_balance import VersionedResourceListOfTrialBalance
 from lusid.models.versioned_resource_list_with_post_bodies_of_settlement_instruction_with_transaction_to_settlement_instruction_query import VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery
 from lusid.models.versioned_resource_list_with_warnings_of_portfolio_holding import VersionedResourceListWithWarningsOfPortfolioHolding
+from lusid.models.versioned_resource_list_with_warnings_of_registry_line import VersionedResourceListWithWarningsOfRegistryLine
 from lusid.models.virtual_document import VirtualDocument
 from lusid.models.virtual_document_row import VirtualDocumentRow
 from lusid.models.virtual_row import VirtualRow
@@ -3991,6 +3993,7 @@ __all__ = [
     "ReferencePortfolioConstituentRequest",
     "ReferencePortfolioWeightType",
     "RegisterDeltaMovement",
+    "RegistryLine",
     "RelatedEntity",
     "Relation",
     "RelationDefinition",
@@ -4579,6 +4582,7 @@ __all__ = [
     "VersionedResourceListOfTrialBalance",
     "VersionedResourceListWithPostBodiesOfSettlementInstructionWithTransactionToSettlementInstructionQuery",
     "VersionedResourceListWithWarningsOfPortfolioHolding",
+    "VersionedResourceListWithWarningsOfRegistryLine",
     "VirtualDocument",
     "VirtualDocumentRow",
     "VirtualRow",

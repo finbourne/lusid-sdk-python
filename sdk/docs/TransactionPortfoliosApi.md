@@ -36,6 +36,7 @@ Method | HTTP request | Description
 [**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
+[**get_registry**](TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
 [**get_transaction_history**](TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
 [**get_transaction_settlement_status**](TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
@@ -3398,6 +3399,108 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested portfolio cash flow data |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_registry**
+> VersionedResourceListWithWarningsOfRegistryLine get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+
+[EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+
+Get the registry lines of a transaction portfolio at the given effective and asAt datetimes: the partner  register lines that transaction types flagged 'Registry' apply to, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the portfolio.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    TransactionPortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(TransactionPortfoliosApi)
+    scope = 'scope_example' # str | The scope of the transaction portfolio.
+    code = 'code_example' # str | The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which to retrieve the registry of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the registry of the transaction portfolio. Defaults              to return the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Holding Type, use \"holdingType eq 'p'\".              For more information about filtering LUSID results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+    property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\". (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+        api_response = api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling TransactionPortfoliosApi->get_registry: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the transaction portfolio. | 
+ **code** | **str**| The code of the transaction portfolio. Together with the scope this uniquely identifies              the transaction portfolio. | 
+ **effective_at** | **str**| The effective datetime or cut label at which to retrieve the registry of the transaction              portfolio. Defaults to the current LUSID system datetime if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the registry of the transaction portfolio. Defaults              to return the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set.              For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the lines. These must have the format {domain}/{scope}/{code}, for example \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/CommittedCapital\&quot;. | [optional] 
+
+### Return type
+
+[**VersionedResourceListWithWarningsOfRegistryLine**](VersionedResourceListWithWarningsOfRegistryLine.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The registry lines and version of the specified transaction portfolio |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

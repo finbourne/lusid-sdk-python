@@ -28,9 +28,10 @@ class SweepBlocksRequest(BaseModel):
     """
     A request to sweep specified blocks.  # noqa: E501
     """
-    block_ids: Dict[str, ResourceId] = Field(description="A dictionary mapping ephemeral identifiers, which live as long as the request, to specific blocks to sweep.", alias="blockIds")
-    latest_allowable_modification_time:  StrictStr = Field(...,alias="latestAllowableModificationTime", description="Timestamp or cut label which the  block or related entities must not have been updated after.") 
-    __properties = ["blockIds", "latestAllowableModificationTime"]
+    block_ids: List[ResourceId] = Field(description="The identifiers of the blocks to sweep.", alias="blockIds")
+    latest_allowable_modification_time:  StrictStr = Field(...,alias="latestAllowableModificationTime", description="Timestamp, cut label or tenor. A block can only be swept if none of its executions or allocations were modified after this time. A tenor is relative to the current time, for example '1D' means one day ago. A business day tenor, for example '1BD', requires calendarId. A tenor cannot go back further than 1 January 1900. For more information on tenors, see [Specifying tenors in LUSID](https://support.lusid.com/docs/specifying-tenors-in-lusid)") 
+    calendar_id: Optional[ResourceId] = Field(default=None, alias="calendarId")
+    __properties = ["blockIds", "latestAllowableModificationTime", "calendarId"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,13 +65,16 @@ class SweepBlocksRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in block_ids (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of each item in block_ids (list)
+        _items = []
         if self.block_ids:
-            for _key in self.block_ids:
-                if self.block_ids[_key]:
-                    _field_dict[_key] = self.block_ids[_key].to_dict()
-            _dict['blockIds'] = _field_dict
+            for _item in self.block_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['blockIds'] = _items
+        # override the default output from pydantic by calling `to_dict()` of calendar_id
+        if self.calendar_id:
+            _dict['calendarId'] = self.calendar_id.to_dict()
         return _dict
 
     @classmethod
@@ -83,13 +87,9 @@ class SweepBlocksRequest(BaseModel):
             return SweepBlocksRequest.parse_obj(obj)
 
         _obj = SweepBlocksRequest.parse_obj({
-            "block_ids": dict(
-                (_k, ResourceId.from_dict(_v))
-                for _k, _v in obj.get("blockIds").items()
-            )
-            if obj.get("blockIds") is not None
-            else None,
-            "latest_allowable_modification_time": obj.get("latestAllowableModificationTime")
+            "block_ids": [ResourceId.from_dict(_item) for _item in obj.get("blockIds")] if obj.get("blockIds") is not None else None,
+            "latest_allowable_modification_time": obj.get("latestAllowableModificationTime"),
+            "calendar_id": ResourceId.from_dict(obj.get("calendarId")) if obj.get("calendarId") is not None else None
         })
         return _obj
 

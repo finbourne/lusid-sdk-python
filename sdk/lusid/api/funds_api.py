@@ -117,6 +117,7 @@ from lusid.models.versioned_resource_list_of_fund_a2_b_data_record import Versio
 from lusid.models.versioned_resource_list_of_fund_a2_b_movement_record import VersionedResourceListOfFundA2BMovementRecord
 from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
+from lusid.models.versioned_resource_list_with_warnings_of_registry_line import VersionedResourceListWithWarningsOfRegistryLine
 
 from lusid.api_client import ApiClient
 from lusid.api_response import ApiResponse
@@ -7580,6 +7581,210 @@ class FundsApi:
 
 
     @overload
+    async def get_registry_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> VersionedResourceListWithWarningsOfRegistryLine:  # noqa: E501
+        ...
+
+    @overload
+    def get_registry_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=True, **kwargs) -> VersionedResourceListWithWarningsOfRegistryLine:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_registry_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListWithWarningsOfRegistryLine, Awaitable[VersionedResourceListWithWarningsOfRegistryLine]]:  # noqa: E501
+        """[EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
+
+        Get the register lines of a Fund at the given effective and asAt datetimes: the registry lines of its  transaction portfolios, each tagged with the portfolio it sits in, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_registry_for_fund(scope, code, effective_at, as_at, filter, property_keys, nav_type_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param property_keys: A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".
+        :type property_keys: List[str]
+        :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: VersionedResourceListWithWarningsOfRegistryLine
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_registry_for_fund_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_registry_for_fund_with_http_info(scope, code, effective_at, as_at, filter, property_keys, nav_type_code, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_registry_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
+
+        Get the register lines of a Fund at the given effective and asAt datetimes: the registry lines of its  transaction portfolios, each tagged with the portfolio it sits in, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the Fund.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_registry_for_fund_with_http_info(scope, code, effective_at, as_at, filter, property_keys, nav_type_code, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the Fund. (required)
+        :type scope: str
+        :param code: The code of the Fund. Together with the scope this uniquely identifies the Fund. (required)
+        :type code: str
+        :param effective_at: The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.
+        :type effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.
+        :type as_at: datetime
+        :param filter: Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.
+        :type filter: str
+        :param property_keys: A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".
+        :type property_keys: List[str]
+        :param nav_type_code: When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.
+        :type nav_type_code: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VersionedResourceListWithWarningsOfRegistryLine, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'effective_at',
+            'as_at',
+            'filter',
+            'property_keys',
+            'nav_type_code'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_registry_for_fund" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('effective_at') is not None:  # noqa: E501
+            _query_params.append(('effectiveAt', _params['effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('property_keys') is not None:  # noqa: E501
+            _query_params.append(('propertyKeys', _params['property_keys']))
+            _collection_formats['propertyKeys'] = 'multi'
+
+        if _params.get('nav_type_code') is not None:  # noqa: E501
+            _query_params.append(('navTypeCode', _params['nav_type_code']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VersionedResourceListWithWarningsOfRegistryLine",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/funds/{scope}/{code}/registry', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def get_series(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], share_class_code : Annotated[Optional[StrictStr], Field( description="Optionally, the short code of the Share Class whose Series to list. Defaults to all Share Classes.")] = None, effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to read the Fund. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to read the Fund. Defaults to returning the latest version if not specified.")] = None, **kwargs) -> ResourceListOfSeries:  # noqa: E501
         ...
 
@@ -14543,7 +14748,7 @@ class FundsApi:
     def patch_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only displayName, description, pricingMethodology, reportingPrices and dealingEstimates, or a field inside the first              and last, can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.              A field patched with an effectiveAt merges over the block in force at that datetime and does not carry into a version of              the block that starts later: a whole pricingMethodology or dealingEstimates set from a later datetime keeps its own values.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Fund, Awaitable[Fund]]:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
-        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId.  # noqa: E501
+        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId, PartnershipAccountingPortfolioId.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -14580,7 +14785,7 @@ class FundsApi:
     def patch_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], operation : Annotated[List[Operation], Field(description="The json patch document. For more information see: https://datatracker.ietf.org/doc/html/rfc6902.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label from which the patch applies. If not specified, the patch applies for all time.              Only displayName, description, pricingMethodology, reportingPrices and dealingEstimates, or a field inside the first              and last, can be patched with an effectiveAt, and the Fund is returned as at that datetime.              A value patched with an effectiveAt stays in force from that datetime. A later patch of the same field without an effectiveAt              changes it only before that datetime; to change it from that datetime, patch it again with the same effectiveAt.              A field patched with an effectiveAt merges over the block in force at that datetime and does not carry into a version of              the block that starts later: a whole pricingMethodology or dealingEstimates set from a later datetime keeps its own values.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """[EARLY ACCESS] PatchFund: Patch a Fund.  # noqa: E501
 
-        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId.  # noqa: E501
+        Update fields on a Fund.  The behaviour is defined by the JSON Patch specification.    Currently supported fields are: ShortCode, DisplayName, Description, BaseCurrency, PortfolioIds, FundConfigurationId, ShareClassInstruments, Type, TaxTransparency, InceptionDate, DecimalPlaces, PrimaryNavType, AdditionalNavTypes, ShareClasses, PricingMethodology, ReportingPrices, DealingEstimates, WhtParameters, ValuationTemplateId, PartnershipAccountingPortfolioId.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **display_name** | **str** | The display name of the data type. | 
 **description** | **str** | The description of the data type. | 
 **value_type** | **str** | The expected type of the values. Available values: String, Int, Decimal, DateTime, Boolean, Map, List, PropertyArray, Percentage, Code, Id, Uri, CurrencyAndAmount, TradePrice, Currency, MetricValue, ResourceId, ResultValue, CutLocalTime, DateOrCutLabel, UnindexedText. | 
-**acceptable_values** | **List[str]** | The acceptable set of values for this data type. Only applies to &#39;open&#39; value type range. | [optional] 
+**acceptable_values** | **List[str]** | The acceptable set of values for this data type. Only applies when the type value range is &#39;Closed&#39;; it is ignored on write and returned as null for &#39;Open&#39; data types. If reference data is supplied on a &#39;Closed&#39; data type and this field is omitted, the acceptable values are derived from the reference data values. | [optional] 
 **unit_schema** | **str** | The schema of the data type&#39;s units. Available values: NoUnits, Basic, Iso4217Currency. | [optional] 
 **acceptable_units** | [**List[CreateUnitDefinition]**](CreateUnitDefinition.md) | The definitions of the acceptable units. | [optional] 
 **reference_data** | [**ReferenceData**](ReferenceData.md) |  | [optional] 

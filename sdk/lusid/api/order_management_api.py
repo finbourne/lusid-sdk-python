@@ -2041,7 +2041,7 @@ class OrderManagementApi:
         }
 
         return self.api_client.call_api(
-            '/api/ordermanagement/SweepBlocks', 'POST',
+            '/api/ordermanagement/sweepblocks', 'POST',
             _path_params,
             _query_params,
             _header_params,

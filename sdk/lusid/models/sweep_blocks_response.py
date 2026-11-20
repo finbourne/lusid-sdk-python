@@ -29,7 +29,7 @@ class SweepBlocksResponse(BaseModel):
     """
     SweepBlocksResponse
     """
-    values: Optional[Dict[str, ResourceId]] = Field(default=None, description="The identifiers of blocks which have been successfully swept, indexed by ephemeral request-lived id.")
+    values: Optional[List[ResourceId]] = Field(default=None, description="The identifiers of blocks which have been successfully swept.")
     failed: Optional[Dict[str, ErrorDetail]] = Field(default=None, description="The identifiers of blocks that could not be swept, along with a reason for their failure.")
     __properties = ["values", "failed"]
 
@@ -65,13 +65,13 @@ class SweepBlocksResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each value in values (dict)
-        _field_dict = {}
+        # override the default output from pydantic by calling `to_dict()` of each item in values (list)
+        _items = []
         if self.values:
-            for _key in self.values:
-                if self.values[_key]:
-                    _field_dict[_key] = self.values[_key].to_dict()
-            _dict['values'] = _field_dict
+            for _item in self.values:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['values'] = _items
         # override the default output from pydantic by calling `to_dict()` of each value in failed (dict)
         _field_dict = {}
         if self.failed:
@@ -101,12 +101,7 @@ class SweepBlocksResponse(BaseModel):
             return SweepBlocksResponse.parse_obj(obj)
 
         _obj = SweepBlocksResponse.parse_obj({
-            "values": dict(
-                (_k, ResourceId.from_dict(_v))
-                for _k, _v in obj.get("values").items()
-            )
-            if obj.get("values") is not None
-            else None,
+            "values": [ResourceId.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "failed": dict(
                 (_k, ErrorDetail.from_dict(_v))
                 for _k, _v in obj.get("failed").items()

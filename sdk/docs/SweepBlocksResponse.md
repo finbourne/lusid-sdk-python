@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**values** | [**Dict[str, ResourceId]**](ResourceId.md) | The identifiers of blocks which have been successfully swept, indexed by ephemeral request-lived id. | [optional] 
+**values** | [**List[ResourceId]**](ResourceId.md) | The identifiers of blocks which have been successfully swept. | [optional] 
 **failed** | [**Dict[str, ErrorDetail]**](ErrorDetail.md) | The identifiers of blocks that could not be swept, along with a reason for their failure. | [optional] 
 ## Example
 
@@ -14,7 +14,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 
-values: Optional[Dict[str, ResourceId]] = # Replace with your value
+values: Optional[List[ResourceId]] = # Replace with your value
 failed: Optional[Dict[str, ErrorDetail]] = # Replace with your value
 sweep_blocks_response_instance = SweepBlocksResponse(values=values, failed=failed)
 

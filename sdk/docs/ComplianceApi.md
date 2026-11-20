@@ -23,8 +23,8 @@ Method | HTTP request | Description
 [**list_order_breach_history**](ComplianceApi.md#list_order_breach_history) | **GET** /api/compliance/runs/breaches | [EXPERIMENTAL] ListOrderBreachHistory: List Historical Order Breaches.
 [**run_compliance**](ComplianceApi.md#run_compliance) | **POST** /api/compliance/runs | [EARLY ACCESS] RunCompliance: Run a compliance check.
 [**run_compliance_preview**](ComplianceApi.md#run_compliance_preview) | **POST** /api/compliance/preview/runs | [EARLY ACCESS] RunCompliancePreview: Run a compliance check.
-[**run_compliance_v3**](ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
-[**run_compliance_v3_pre_trade**](ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+[**run_compliance_v3**](ComplianceApi.md#run_compliance_v3) | **POST** /api/compliance/v3/runs | [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.
+[**run_compliance_v3_pre_trade**](ComplianceApi.md#run_compliance_v3_pre_trade) | **POST** /api/compliance/v3/runs/$pretrade | [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.
 [**update_compliance_template**](ComplianceApi.md#update_compliance_template) | **PUT** /api/compliance/templates/{scope}/{code} | [EARLY ACCESS] UpdateComplianceTemplate: Update a ComplianceRuleTemplate
 [**upsert_compliance_rule**](ComplianceApi.md#upsert_compliance_rule) | **POST** /api/compliance/rules | [EARLY ACCESS] UpsertComplianceRule: Upsert a compliance rule.
 [**upsert_compliance_rule_v3**](ComplianceApi.md#upsert_compliance_rule_v3) | **POST** /api/compliance/v3/rules | [EXPERIMENTAL] UpsertComplianceRuleV3: [EXPERIMENTAL] Upsert a V3 compliance rule.
@@ -1894,9 +1894,9 @@ Name | Type | Description  | Notes
 # **run_compliance_v3**
 > ComplianceRunV3Response run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request)
 
-[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+[EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.
 
-Use this endpoint to run one or more V3 compliance rules against a portfolio group, valuing holdings  with the supplied recipe, and return each rule's result.
+Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, valuing holdings with the supplied recipe, and return each rule's result.
 
 ### Example
 
@@ -1954,7 +1954,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request, opts=opts)
 
-        # [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against a portfolio group.
+        # [EXPERIMENTAL] RunComplianceV3: [EXPERIMENTAL] Run V3 compliance rules against one or more individual portfolios.
         api_response = api_instance.run_compliance_v3(run_compliance_v3_request=run_compliance_v3_request)
         pprint(api_response)
 
@@ -1991,9 +1991,9 @@ Name | Type | Description  | Notes
 # **run_compliance_v3_pre_trade**
 > ComplianceRunV3Response run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request)
 
-[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+[EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.
 
-Use this endpoint to run one or more V3 compliance rules against a portfolio group including its live  order flow (pre-trade), valuing holdings with the supplied recipe, and return each rule's result.
+Use this endpoint to run one or more V3 compliance rules against one or more individual portfolios,  each evaluated on its own, including each portfolio's live order flow (pre-trade), valuing holdings  with the supplied recipe, and return each rule's result.
 
 ### Example
 
@@ -2051,7 +2051,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request, opts=opts)
 
-        # [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against a portfolio group.
+        # [EXPERIMENTAL] RunComplianceV3PreTrade: [EXPERIMENTAL] Run V3 compliance rules pre-trade against one or more individual portfolios.
         api_response = api_instance.run_compliance_v3_pre_trade(run_compliance_v3_request=run_compliance_v3_request)
         pprint(api_response)
 

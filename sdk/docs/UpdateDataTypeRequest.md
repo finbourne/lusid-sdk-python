@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** | The display name of the data type. | [optional] 
 **description** | **str** | The description of the data type. | [optional] 
-**acceptable_values** | **List[str]** | The acceptable set of values for this data type. Only applies to &#39;open&#39; value type range. | [optional] 
+**acceptable_values** | **List[str]** | The acceptable set of values for this data type. Only applies when the type value range is &#39;Closed&#39;; it is ignored on write and returned as null for &#39;Open&#39; data types. If reference data is supplied on a &#39;Closed&#39; data type and this field is omitted, the acceptable values are derived from the reference data values. | [optional] 
 **acceptable_units** | [**List[UpdateUnitRequest]**](UpdateUnitRequest.md) | The definitions of the acceptable units. | [optional] 
 ## Example
 
