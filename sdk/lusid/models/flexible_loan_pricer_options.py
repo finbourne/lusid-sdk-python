@@ -31,9 +31,10 @@ class FlexibleLoanPricerOptions(ModelOptions):
     set_clean_pvto_zero: StrictBool = Field(description="If set to true the CleanPV will be set to zero in valuations and PV will effectively just be the Accrual.", alias="setCleanPVToZero")
     use_price_quote_for_clean_pv: Optional[StrictBool] = Field(default=None, description="If set to true the CleanPV calculation will be looking for a price quote (no default price is assumed). CleanPV will be calculated as Holding/Balance * priceQuote / quoteScaleFactor", alias="usePriceQuoteForCleanPV")
     exclude_income_from_pv: Optional[StrictBool] = Field(default=None, description="Read by a TotalReturnSwap whose asset leg has a ResetSchedule and whose underlying pays interest or coupons. If set to true the swap's PV leaves out the underlying's interest and coupon payments and adds the interest accrued on them to the valuation date instead, so CleanPV is the price return and PV is CleanPV + Accrued.", alias="excludeIncomeFromPV")
+    funding_leg_accrued_only: Optional[StrictBool] = Field(default=None, description="Read by a TotalReturnSwap. If set to true the funding leg's PV is the interest it has accrued to the valuation date, in place of the coupons it has still to earn, so the swap carries no funding interest not yet earned: PV is the asset leg's PV plus the funding accrued, and CleanPV is PV less Accrued. A coupon already earned but not yet paid and a notional exchange keep the value they have with the option off. Under a funding notional reset the accrued is the re-struck one; an end-of-day valuation on a reset day whose reset is not yet stored re-strikes on the spot in its place, so the figure moves once that reset is stored. Supported by the price-return pricer (asset leg with a ResetSchedule) and by BondLookupPricer and FlexibleLoanPricer; refused for a swap without a ResetSchedule under ConstantTimeValueOfMoney or Discounting.", alias="fundingLegAccruedOnly")
     model_options_type:  StrictStr = Field(...,alias="modelOptionsType", description="Available values: Invalid, OpaqueModelOptions, EmptyModelOptions, IndexModelOptions, FxForwardModelOptions, FundingLegModelOptions, EquityModelOptions, CdsModelOptions, FlexibleLoanPricerOptions, HullWhiteModelOptions, BondLookupModelOptions, BondForwardModelOptions, SimpleModelOptions, StripBondModelOptions.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["modelOptionsType", "setCleanPVToZero", "usePriceQuoteForCleanPV", "excludeIncomeFromPV"]
+    __properties = ["modelOptionsType", "setCleanPVToZero", "usePriceQuoteForCleanPV", "excludeIncomeFromPV", "fundingLegAccruedOnly"]
 
     @validator('model_options_type')
     def model_options_type_validate_enum(cls, value):
@@ -101,6 +102,11 @@ class FlexibleLoanPricerOptions(ModelOptions):
         if self.exclude_income_from_pv is None and "exclude_income_from_pv" in self.__fields_set__:
             _dict['excludeIncomeFromPV'] = None
 
+        # set to None if funding_leg_accrued_only (nullable) is None
+        # and __fields_set__ contains the field
+        if self.funding_leg_accrued_only is None and "funding_leg_accrued_only" in self.__fields_set__:
+            _dict['fundingLegAccruedOnly'] = None
+
         return _dict
 
     @classmethod
@@ -116,7 +122,8 @@ class FlexibleLoanPricerOptions(ModelOptions):
             "model_options_type": obj.get("modelOptionsType"),
             "set_clean_pvto_zero": obj.get("setCleanPVToZero"),
             "use_price_quote_for_clean_pv": obj.get("usePriceQuoteForCleanPV"),
-            "exclude_income_from_pv": obj.get("excludeIncomeFromPV")
+            "exclude_income_from_pv": obj.get("excludeIncomeFromPV"),
+            "funding_leg_accrued_only": obj.get("fundingLegAccruedOnly")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

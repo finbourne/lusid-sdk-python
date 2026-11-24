@@ -38,7 +38,8 @@ class ManagementFeeResult(BaseModel):
     totals: ManagementFeeTotals
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions booked, if any.", alias="bookedTransactionIds")
     fund_transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The identifiers of the fee transactions the run holds in the fund's own books, one per partner and fee component, when the run was booked.", alias="fundTransactionIds")
-    __properties = ["fundId", "periodStart", "periodEnd", "basis", "lines", "totals", "bookedTransactionIds", "fundTransactionIds"]
+    warnings: Optional[List[StrictStr]] = Field(default=None, description="What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee's, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored). Absent when there is nothing to warn of.")
+    __properties = ["fundId", "periodStart", "periodEnd", "basis", "lines", "totals", "bookedTransactionIds", "fundTransactionIds", "warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -90,6 +91,11 @@ class ManagementFeeResult(BaseModel):
         if self.fund_transaction_ids is None and "fund_transaction_ids" in self.__fields_set__:
             _dict['fundTransactionIds'] = None
 
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         return _dict
 
     @classmethod
@@ -109,7 +115,8 @@ class ManagementFeeResult(BaseModel):
             "lines": [ManagementFeeLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None,
             "totals": ManagementFeeTotals.from_dict(obj.get("totals")) if obj.get("totals") is not None else None,
             "booked_transaction_ids": obj.get("bookedTransactionIds"),
-            "fund_transaction_ids": obj.get("fundTransactionIds")
+            "fund_transaction_ids": obj.get("fundTransactionIds"),
+            "warnings": obj.get("warnings")
         })
         return _obj
 

@@ -41,13 +41,16 @@ class PortfolioCashFlow(BaseModel):
     balance: CurrencyAndAmount
     fx_rate: Union[StrictFloat, StrictInt] = Field(description="Exchange rate between the currency of this cash flow and the reporting currency.", alias="fxRate")
     cashflow_reporting_currency: CurrencyAndAmount = Field(alias="cashflowReportingCurrency")
-    balance_reporting_currency: CurrencyAndAmount = Field(alias="balanceReportingCurrency")
+    balance_reporting_currency: Optional[CurrencyAndAmount] = Field(default=None, alias="balanceReportingCurrency")
     translation_gain_loss: CurrencyAndAmount = Field(alias="translationGainLoss")
     cost_basis_reporting_currency: CurrencyAndAmount = Field(alias="costBasisReportingCurrency")
     transaction: Optional[Transaction] = None
-    unrealised_gain_loss_reporting_currency: CurrencyAndAmount = Field(alias="unrealisedGainLossReportingCurrency")
+    unrealised_gain_loss_reporting_currency: Optional[CurrencyAndAmount] = Field(default=None, alias="unrealisedGainLossReportingCurrency")
+    trade_date_to_settlement_date_gain_loss_reporting_currency: CurrencyAndAmount = Field(alias="tradeDateToSettlementDateGainLossReportingCurrency")
+    balance_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The exchange rate the balance in the reporting currency was struck at: on an Activity row the recipe's quote for the row's date, after the recipe's quote lookback. Differs from FxRate when the cash flow was booked at another rate. The cash flow's own rate (FxRate) when no quote could be found; see BalanceFailureReason.", alias="balanceFxRate")
+    balance_failure_reason:  Optional[StrictStr] = Field(None,alias="balanceFailureReason", description="Why the balance in the reporting currency could not be struck at the recipe's quote for the row's date and is at the cash flow's own rate instead; absent when it was struck at the quote, including on a row whose local balance is zero.") 
     links: Optional[List[Link]] = None
-    __properties = ["groupById", "sequenceNumber", "effectiveDate", "subHoldingKeys", "type", "movementName", "cashflow", "balance", "fxRate", "cashflowReportingCurrency", "balanceReportingCurrency", "translationGainLoss", "costBasisReportingCurrency", "transaction", "unrealisedGainLossReportingCurrency", "links"]
+    __properties = ["groupById", "sequenceNumber", "effectiveDate", "subHoldingKeys", "type", "movementName", "cashflow", "balance", "fxRate", "cashflowReportingCurrency", "balanceReportingCurrency", "translationGainLoss", "costBasisReportingCurrency", "transaction", "unrealisedGainLossReportingCurrency", "tradeDateToSettlementDateGainLossReportingCurrency", "balanceFxRate", "balanceFailureReason", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -112,6 +115,9 @@ class PortfolioCashFlow(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of unrealised_gain_loss_reporting_currency
         if self.unrealised_gain_loss_reporting_currency:
             _dict['unrealisedGainLossReportingCurrency'] = self.unrealised_gain_loss_reporting_currency.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of trade_date_to_settlement_date_gain_loss_reporting_currency
+        if self.trade_date_to_settlement_date_gain_loss_reporting_currency:
+            _dict['tradeDateToSettlementDateGainLossReportingCurrency'] = self.trade_date_to_settlement_date_gain_loss_reporting_currency.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -123,6 +129,16 @@ class PortfolioCashFlow(BaseModel):
         # and __fields_set__ contains the field
         if self.sub_holding_keys is None and "sub_holding_keys" in self.__fields_set__:
             _dict['subHoldingKeys'] = None
+
+        # set to None if balance_fx_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.balance_fx_rate is None and "balance_fx_rate" in self.__fields_set__:
+            _dict['balanceFxRate'] = None
+
+        # set to None if balance_failure_reason (nullable) is None
+        # and __fields_set__ contains the field
+        if self.balance_failure_reason is None and "balance_failure_reason" in self.__fields_set__:
+            _dict['balanceFailureReason'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -161,6 +177,9 @@ class PortfolioCashFlow(BaseModel):
             "cost_basis_reporting_currency": CurrencyAndAmount.from_dict(obj.get("costBasisReportingCurrency")) if obj.get("costBasisReportingCurrency") is not None else None,
             "transaction": Transaction.from_dict(obj.get("transaction")) if obj.get("transaction") is not None else None,
             "unrealised_gain_loss_reporting_currency": CurrencyAndAmount.from_dict(obj.get("unrealisedGainLossReportingCurrency")) if obj.get("unrealisedGainLossReportingCurrency") is not None else None,
+            "trade_date_to_settlement_date_gain_loss_reporting_currency": CurrencyAndAmount.from_dict(obj.get("tradeDateToSettlementDateGainLossReportingCurrency")) if obj.get("tradeDateToSettlementDateGainLossReportingCurrency") is not None else None,
+            "balance_fx_rate": obj.get("balanceFxRate"),
+            "balance_failure_reason": obj.get("balanceFailureReason"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

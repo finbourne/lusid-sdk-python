@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **settlement_date** | **datetime** | The date the postings settle. Defaults to the event date. | [optional] 
 **receipts** | [**List[AllocationEventReceipt]**](AllocationEventReceipt.md) | The cash received against the event, in the order it was recorded. | [optional] 
 **refund_payments** | [**List[AllocationEventRefundPayment]**](AllocationEventRefundPayment.md) | The refunds paid out against the event to investors whose receipts exceeded what they owed, in the order they were recorded. | [optional] 
+**transferees** | [**List[AllocationEventTransferee]**](AllocationEventTransferee.md) | For a Transfer event, each transferee the booking gives a line: the line, and the investment account it is opened under. On a dry run, the account and line the booking would create; on a booking, what it created. Empty on every other event. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -80,8 +81,9 @@ due_date: Optional[datetime] = # Replace with your value
 settlement_date: Optional[datetime] = # Replace with your value
 receipts: Optional[List[AllocationEventReceipt]] = # Replace with your value
 refund_payments: Optional[List[AllocationEventRefundPayment]] = # Replace with your value
+transferees: Optional[List[AllocationEventTransferee]] = # Replace with your value
 links: Optional[List[Link]] = None
-allocation_event_instance = AllocationEvent(href=href, id=id, description=description, allocation_map_id=allocation_map_id, event_type=event_type, amount=amount, currency=currency, event_date=event_date, status=status, basis_source=basis_source, allocations=allocations, booking_reference=booking_reference, booked_at=booked_at, reallocation_reason=reallocation_reason, components=components, residuals=residuals, basis_diagnostics=basis_diagnostics, written_ids=written_ids, booking_errors=booking_errors, warnings=warnings, transfers=transfers, equalisation=equalisation, use_of_proceeds=use_of_proceeds, deal_funding=deal_funding, version=version, parent_allocation_event_id=parent_allocation_event_id, replaces=replaces, reversal=reversal, notice_date=notice_date, due_date=due_date, settlement_date=settlement_date, receipts=receipts, refund_payments=refund_payments, links=links)
+allocation_event_instance = AllocationEvent(href=href, id=id, description=description, allocation_map_id=allocation_map_id, event_type=event_type, amount=amount, currency=currency, event_date=event_date, status=status, basis_source=basis_source, allocations=allocations, booking_reference=booking_reference, booked_at=booked_at, reallocation_reason=reallocation_reason, components=components, residuals=residuals, basis_diagnostics=basis_diagnostics, written_ids=written_ids, booking_errors=booking_errors, warnings=warnings, transfers=transfers, equalisation=equalisation, use_of_proceeds=use_of_proceeds, deal_funding=deal_funding, version=version, parent_allocation_event_id=parent_allocation_event_id, replaces=replaces, reversal=reversal, notice_date=notice_date, due_date=due_date, settlement_date=settlement_date, receipts=receipts, refund_payments=refund_payments, transferees=transferees, links=links)
 
 ```
 

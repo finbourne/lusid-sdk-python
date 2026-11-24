@@ -29,7 +29,7 @@ class AllocationEventReallocateRequest(BaseModel):
     The request used to recompute an unbooked Allocation Event: why, and with which basis values.  # noqa: E501
     """
     reason:  StrictStr = Field(...,alias="reason", description="Why the event is being recomputed.") 
-    basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="Optional replacement basis values per investor record.", alias="basisValues")
+    basis_values: Optional[List[AllocationMapBasisValue]] = Field(default=None, description="Optional replacement basis values per investor record. As on the event, for a register-backed basis they override the register value of the investor records they name rather than defining who takes part.", alias="basisValues")
     __properties = ["reason", "basisValues"]
 
     class Config:

@@ -22,15 +22,17 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.returns_metric_window import ReturnsMetricWindow
 
 class IndicativeAmountMetric(BaseModel):
     """
-    The amount a seed amount has grown to by the end of each period of the grid: the seed amount multiplied by  one plus the return since the start of the requested window, geometrically linking the period returns.  # noqa: E501
+    The amount a seed amount has grown to by the end of each period of the grid: the seed amount multiplied by  one plus the return since the start of the requested range, geometrically linking the period returns, or  by one plus the return over a window looking back from each period when one is given.  # noqa: E501
     """
     seed_amount:  StrictStr = Field(...,alias="seedAmount") 
+    window: Optional[ReturnsMetricWindow] = None
     type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount.") 
     alias:  Optional[StrictStr] = Field(None,alias="alias") 
-    __properties = ["seedAmount", "type", "alias"]
+    __properties = ["seedAmount", "window", "type", "alias"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,6 +66,9 @@ class IndicativeAmountMetric(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of window
+        if self.window:
+            _dict['window'] = self.window.to_dict()
         # set to None if alias (nullable) is None
         # and __fields_set__ contains the field
         if self.alias is None and "alias" in self.__fields_set__:
@@ -82,6 +87,7 @@ class IndicativeAmountMetric(BaseModel):
 
         _obj = IndicativeAmountMetric.parse_obj({
             "seed_amount": obj.get("seedAmount"),
+            "window": ReturnsMetricWindow.from_dict(obj.get("window")) if obj.get("window") is not None else None,
             "type": obj.get("type"),
             "alias": obj.get("alias")
         })

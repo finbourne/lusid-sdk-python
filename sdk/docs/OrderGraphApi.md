@@ -68,7 +68,7 @@ def main():
     filter = '' # str | See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid (optional) (default to '')
     property_keys = ['property_keys_example'] # List[str] | Must be block-level properties. See https://support.lusid.com/docs/properties (optional)
     use_compliance_v2 = False # bool | Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) (optional) (default to False)
-    include_swept = True # bool | Include Swept Order Blocks. (default: true) (optional) (default to True)
+    include_swept = False # bool | Include Swept Order Blocks. (default: false) (optional) (default to False)
 
     try:
         # uncomment the below to set overrides at the request level
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
  **filter** | **str**| See https://support.lusid.com/docs/filtering-information-retrieved-from-lusid | [optional] [default to &#39;&#39;]
  **property_keys** | [**List[str]**](str.md)| Must be block-level properties. See https://support.lusid.com/docs/properties | [optional] 
  **use_compliance_v2** | **bool**| Whether to use the V2 compliance engine when deriving compliance statuses for orders. (default: false) | [optional] [default to False]
- **include_swept** | **bool**| Include Swept Order Blocks. (default: true) | [optional] [default to True]
+ **include_swept** | **bool**| Include Swept Order Blocks. (default: false) | [optional] [default to False]
 
 ### Return type
 

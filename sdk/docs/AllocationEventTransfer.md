@@ -5,8 +5,8 @@ One leg of a Transfer Allocation Event: a fraction of a capital interest line mo
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **from_line_id** | **str** | The identifier of the capital interest line the fraction moves from, as it appears on the register of one of the map&#39;s members. | 
-**to_investor_record_id** | **str** | The investor record that receives the transferred interest. | 
-**to_line_id** | **str** | The identifier of the capital interest line the fraction moves to. Created if it does not exist. | 
+**to_investor_record_id** | **str** | The investor record that receives the transferred interest, in the fund&#39;s scope: &#39;idTypeScope/idTypeCode/value&#39;, the form the register and the partners&#39; capital report carry, or a bare value, read as the system InvestorRecordId. A record that is not in the fund&#39;s scope is refused with TransferDestinationRecordNotFound; it is never looked for in another scope. A record with no investment account in the fund has one opened for it when the transfer is booked. | 
+**to_line_id** | **str** | The identifier of the capital interest line the fraction moves to. Created if it does not exist, under the investment account the investor record holds in the fund, or the one the booking opens for it. | 
 **to_portfolio_id** | [**ResourceId**](ResourceId.md) |  | [optional] 
 **fraction** | **float** | The fraction of the source line transferred, greater than zero and at most one. The legs out of one line together move each balance times the sum of their fractions, rounded to the currency&#39;s minor unit; each leg takes its share truncated to the minor unit and the last leg out of the line takes the remainder, so no leg takes more than its share, the legs never move more than the line holds, and fractions summing to one close the line. | 
 **pnl_split** | **str** | How the profit and loss of the period containing the transfer is split: InterimClose closes the books on the transfer date; DailyProration prorates by days held. Defaults to InterimClose. Available values: InterimClose, DailyProration. | [optional] 

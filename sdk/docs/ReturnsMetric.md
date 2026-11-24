@@ -14,6 +14,10 @@ from datetime import datetime
 
 indicative_amount_metric_instance = lusid.models.indicative_amount_metric.IndicativeAmountMetric(
                         seed_amount = '', 
+                        window = lusid.models.returns_metric_window.ReturnsMetricWindow(
+                            lookback = '', 
+                            allow_partial = True, 
+                            annualised = True, ), 
                         type = '', 
                         alias = '', )
 

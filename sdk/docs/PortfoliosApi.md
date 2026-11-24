@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batch_upsert_portfolio_access_metadata**](PortfoliosApi.md#batch_upsert_portfolio_access_metadata) | **PUT** /api/portfolios/metadata | [EARLY ACCESS] BatchUpsertPortfolioAccessMetadata: Upsert multiple Portfolio Access Metadata Rules to multiple Portfolios
+[**delete_holding_entitlement**](PortfoliosApi.md#delete_holding_entitlement) | **DELETE** /api/portfolios/{scope}/{code}/holdingentitlements/{holdingEntitlementId} | [EARLY ACCESS] DeleteHoldingEntitlement: [EARLY ACCESS] Delete Holding Entitlement
 [**delete_instrument_event_instruction**](PortfoliosApi.md#delete_instrument_event_instruction) | **DELETE** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] DeleteInstrumentEventInstruction: Delete Instrument Event Instruction
 [**delete_key_from_portfolio_access_metadata**](PortfoliosApi.md#delete_key_from_portfolio_access_metadata) | **DELETE** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | DeleteKeyFromPortfolioAccessMetadata: Delete a Portfolio Access Metadata Rule
 [**delete_portfolio**](PortfoliosApi.md#delete_portfolio) | **DELETE** /api/portfolios/{scope}/{code} | DeletePortfolio: Delete portfolio
@@ -12,6 +13,7 @@ Method | HTTP request | Description
 [**delete_portfolio_returns**](PortfoliosApi.md#delete_portfolio_returns) | **DELETE** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/$delete | [EARLY ACCESS] DeletePortfolioReturns: Delete Returns
 [**get_aggregated_returns_dispersion_metrics**](PortfoliosApi.md#get_aggregated_returns_dispersion_metrics) | **POST** /api/portfolios/{scope}/{code}/returns/dispersion/$aggregated | [EARLY ACCESS] GetAggregatedReturnsDispersionMetrics: Get the Aggregated Returns Dispersion metric
 [**get_composite_breakdown**](PortfoliosApi.md#get_composite_breakdown) | **POST** /api/portfolios/{scope}/{code}/returns/breakdown | [EARLY ACCESS] GetCompositeBreakdown: Get the Composite Breakdown on how the composite Returns are calculated
+[**get_holding_entitlement**](PortfoliosApi.md#get_holding_entitlement) | **GET** /api/portfolios/{scope}/{code}/holdingentitlements/{holdingEntitlementId} | [EARLY ACCESS] GetHoldingEntitlement: [EARLY ACCESS] Get Holding Entitlement
 [**get_instrument_event_instruction**](PortfoliosApi.md#get_instrument_event_instruction) | **GET** /api/portfolios/{scope}/{code}/instrumenteventinstructions/{instrumentEventInstructionId} | [EARLY ACCESS] GetInstrumentEventInstruction: Get Instrument Event Instruction
 [**get_portfolio**](PortfoliosApi.md#get_portfolio) | **GET** /api/portfolios/{scope}/{code} | GetPortfolio: Get portfolio
 [**get_portfolio_aggregate_returns**](PortfoliosApi.md#get_portfolio_aggregate_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode}/aggregated | [DEPRECATED] GetPortfolioAggregateReturns: Aggregate Returns (This is a deprecated endpoint).
@@ -25,6 +27,7 @@ Method | HTTP request | Description
 [**get_portfolio_relationships**](PortfoliosApi.md#get_portfolio_relationships) | **GET** /api/portfolios/{scope}/{code}/relationships | GetPortfolioRelationships: Get portfolio relationships
 [**get_portfolio_returns**](PortfoliosApi.md#get_portfolio_returns) | **GET** /api/portfolios/{scope}/{code}/returns/{returnScope}/{returnCode} | GetPortfolioReturns: Get Returns
 [**get_portfolios_access_metadata_by_key**](PortfoliosApi.md#get_portfolios_access_metadata_by_key) | **GET** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | [EARLY ACCESS] GetPortfoliosAccessMetadataByKey: Get an entry identified by a metadataKey in the access metadata object
+[**list_holding_entitlements**](PortfoliosApi.md#list_holding_entitlements) | **GET** /api/portfolios/{scope}/{code}/holdingentitlements | [EARLY ACCESS] ListHoldingEntitlements: [EARLY ACCESS] List Holding Entitlements
 [**list_instrument_event_instructions**](PortfoliosApi.md#list_instrument_event_instructions) | **GET** /api/portfolios/{scope}/{code}/instrumenteventinstructions | [EARLY ACCESS] ListInstrumentEventInstructions: List Instrument Event Instructions
 [**list_portfolio_properties**](PortfoliosApi.md#list_portfolio_properties) | **GET** /api/portfolios/{scope}/{code}/properties/list | [EARLY ACCESS] ListPortfolioProperties: Get portfolio properties
 [**list_portfolios**](PortfoliosApi.md#list_portfolios) | **GET** /api/portfolios | ListPortfolios: List portfolios
@@ -32,6 +35,7 @@ Method | HTTP request | Description
 [**patch_portfolio**](PortfoliosApi.md#patch_portfolio) | **PATCH** /api/portfolios/{scope}/{code} | PatchPortfolio: Patch portfolio.
 [**patch_portfolio_access_metadata**](PortfoliosApi.md#patch_portfolio_access_metadata) | **PATCH** /api/portfolios/{scope}/{code}/metadata | [EARLY ACCESS] PatchPortfolioAccessMetadata: Patch Access Metadata rules for a Portfolio.
 [**update_portfolio**](PortfoliosApi.md#update_portfolio) | **PUT** /api/portfolios/{scope}/{code} | UpdatePortfolio: Update portfolio
+[**upsert_holding_entitlements**](PortfoliosApi.md#upsert_holding_entitlements) | **POST** /api/portfolios/{scope}/{code}/holdingentitlements | [EARLY ACCESS] UpsertHoldingEntitlements: [EARLY ACCESS] Upsert Holding Entitlements
 [**upsert_instrument_event_instructions**](PortfoliosApi.md#upsert_instrument_event_instructions) | **POST** /api/portfolios/{scope}/{code}/instrumenteventinstructions | [EARLY ACCESS] UpsertInstrumentEventInstructions: Upsert Instrument Event Instructions
 [**upsert_portfolio_access_metadata**](PortfoliosApi.md#upsert_portfolio_access_metadata) | **PUT** /api/portfolios/{scope}/{code}/metadata/{metadataKey} | UpsertPortfolioAccessMetadata: Upsert a Portfolio Access Metadata Rule associated with specific metadataKey. This creates or updates the data in LUSID.
 [**upsert_portfolio_properties**](PortfoliosApi.md#upsert_portfolio_properties) | **POST** /api/portfolios/{scope}/{code}/properties | UpsertPortfolioProperties: Upsert portfolio properties
@@ -129,6 +133,104 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The successfully updated or inserted items or any failures |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **delete_holding_entitlement**
+> DeletedEntityResponse delete_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at)
+
+[EARLY ACCESS] DeleteHoldingEntitlement: [EARLY ACCESS] Delete Holding Entitlement
+
+Delete a particular holding entitlement of a particular portfolio.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    holding_entitlement_id = 'holding_entitlement_id_example' # str | The id of the entitlement to be deleted.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.delete_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at, opts=opts)
+
+        # [EARLY ACCESS] DeleteHoldingEntitlement: [EARLY ACCESS] Delete Holding Entitlement
+        api_response = api_instance.delete_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PortfoliosApi->delete_holding_entitlement: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **holding_entitlement_id** | **str**| The id of the entitlement to be deleted. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+
+### Return type
+
+[**DeletedEntityResponse**](DeletedEntityResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The datetime that the entitlement was deleted |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -833,6 +935,112 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The aggregated returns grouped by return stream. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_holding_entitlement**
+> HoldingEntitlement get_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+
+[EARLY ACCESS] GetHoldingEntitlement: [EARLY ACCESS] Get Holding Entitlement
+
+Get a particular holding entitlement of a particular portfolio.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    holding_entitlement_id = 'holding_entitlement_id_example' # str | The id of the entitlement to be retrieved.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified. (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+
+        # [EARLY ACCESS] GetHoldingEntitlement: [EARLY ACCESS] Get Holding Entitlement
+        api_response = api_instance.get_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at=portfolio_effective_at, as_at=as_at, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PortfoliosApi->get_holding_entitlement: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **holding_entitlement_id** | **str**| The id of the entitlement to be retrieved. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. | [optional] 
+
+### Return type
+
+[**HoldingEntitlement**](HoldingEntitlement.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested holding entitlement |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -2193,6 +2401,118 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **list_holding_entitlements**
+> PagedResourceListOfHoldingEntitlement list_holding_entitlements(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+
+[EARLY ACCESS] ListHoldingEntitlements: [EARLY ACCESS] List Holding Entitlements
+
+List the holding entitlements of a particular portfolio.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\". (optional)
+    timeline_scope = 'timeline_scope_example' # str | The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided. (optional)
+    timeline_code = 'timeline_code_example' # str | The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided. (optional)
+    closed_period_id = 'closed_period_id_example' # str | The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.list_holding_entitlements(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id, opts=opts)
+
+        # [EARLY ACCESS] ListHoldingEntitlements: [EARLY ACCESS] List Holding Entitlements
+        api_response = api_instance.list_holding_entitlements(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PortfoliosApi->list_holding_entitlements: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. | [optional] 
+ **timeline_scope** | **str**| The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided. | [optional] 
+ **timeline_code** | **str**| The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided. | [optional] 
+ **closed_period_id** | **str**| The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfHoldingEntitlement**](PagedResourceListOfHoldingEntitlement.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested holding entitlements |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **list_instrument_event_instructions**
 > PagedResourceListOfInstrumentEventInstruction list_instrument_event_instructions(scope, code, portfolio_effective_at=portfolio_effective_at, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, timeline_scope=timeline_scope, timeline_code=timeline_code, closed_period_id=closed_period_id)
 
@@ -2917,6 +3237,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated definition of the portfolio |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **upsert_holding_entitlements**
+> HoldingEntitlementsResponse upsert_holding_entitlements(scope, code, success_mode, request_body, portfolio_effective_at=portfolio_effective_at)
+
+[EARLY ACCESS] UpsertHoldingEntitlements: [EARLY ACCESS] Upsert Holding Entitlements
+
+Create or update holding entitlements on a portfolio. A holding entitlement states what one holding receives  under a corporate action, in the client's own figures, and is booked at its ex date.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    PortfoliosApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(PortfoliosApi)
+    scope = 'scope_example' # str | The scope of the portfolio.
+    code = 'code_example' # str | The code of the portfolio. Together with the scope this uniquely identifies the portfolio.
+    success_mode = 'Partial' # str | Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (default to 'Partial')
+    request_body = {"request":{"holdingEntitlementId":"ExampleEntitlementId","holdingId":123456789,"instrumentScope":"default","instrumentId":"LUID_00003D4X","exDate":"2020-01-01T00:00:00.0000000+00:00","paymentDate":"2020-01-15T00:00:00.0000000+00:00","description":"Rights issue","parentUnitsRetained":1000,"legs":[{"legId":"rights","instrumentScope":"default","instrumentId":"LUID_00003D4Y","units":250,"costFraction":0.1,"treatment":"CarryCost"},{"legId":"cash","amount":300,"settlementCurrency":"GBP","treatment":"ReceiveDividendIncome"}]}} # Dict[str, HoldingEntitlementRequest] | The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing.
+    portfolio_effective_at = 'portfolio_effective_at_example' # str | The effective date at which the portfolio will be resolved. Defaults to current time if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.upsert_holding_entitlements(scope, code, success_mode, request_body, portfolio_effective_at=portfolio_effective_at, opts=opts)
+
+        # [EARLY ACCESS] UpsertHoldingEntitlements: [EARLY ACCESS] Upsert Holding Entitlements
+        api_response = api_instance.upsert_holding_entitlements(scope, code, success_mode, request_body, portfolio_effective_at=portfolio_effective_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling PortfoliosApi->upsert_holding_entitlements: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the portfolio. | 
+ **code** | **str**| The code of the portfolio. Together with the scope this uniquely identifies the portfolio. | 
+ **success_mode** | **str**| Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) | [default to &#39;Partial&#39;]
+ **request_body** | [**Dict[str, HoldingEntitlementRequest]**](HoldingEntitlementRequest.md)| The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller&#39;s choosing. | 
+ **portfolio_effective_at** | **str**| The effective date at which the portfolio will be resolved. Defaults to current time if not specified. | [optional] 
+
+### Return type
+
+[**HoldingEntitlementsResponse**](HoldingEntitlementsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The newly inserted or updated holding entitlements |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

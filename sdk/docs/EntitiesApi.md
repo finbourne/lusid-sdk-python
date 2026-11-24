@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**get_custom_entity_by_entity_unique_id**](EntitiesApi.md#get_custom_entity_by_entity_unique_id) | **GET** /api/entities/customentities/{entityUniqueId} | GetCustomEntityByEntityUniqueId: Get a Custom Entity instance by its EntityUniqueId
 [**get_data_type_by_entity_unique_id**](EntitiesApi.md#get_data_type_by_entity_unique_id) | **GET** /api/entities/datatypes/{entityUniqueId} | GetDataTypeByEntityUniqueId: Get DataType by EntityUniqueId
 [**get_entity_history**](EntitiesApi.md#get_entity_history) | **GET** /api/entities/{entityType}/{entityUniqueId}/history | GetEntityHistory: List an entity&#39;s history information
+[**get_holding_entitlement_by_entity_unique_id**](EntitiesApi.md#get_holding_entitlement_by_entity_unique_id) | **GET** /api/entities/holdingentitlements/{entityUniqueId} | [EARLY ACCESS] GetHoldingEntitlementByEntityUniqueId: [EARLY ACCESS] Get holding entitlement by unique id
 [**get_instrument_by_entity_unique_id**](EntitiesApi.md#get_instrument_by_entity_unique_id) | **GET** /api/entities/instruments/{entityUniqueId} | GetInstrumentByEntityUniqueId: Get instrument by EntityUniqueId
 [**get_instrument_event_by_entity_unique_id**](EntitiesApi.md#get_instrument_event_by_entity_unique_id) | **GET** /api/entities/instrumentevents/{entityUniqueId} | [EARLY ACCESS] GetInstrumentEventByEntityUniqueId: Get instrument event by EntityUniqueId
 [**get_instrument_event_instruction_by_entity_unique_id**](EntitiesApi.md#get_instrument_event_instruction_by_entity_unique_id) | **GET** /api/entities/instrumenteventinstructions/{entityUniqueId} | GetInstrumentEventInstructionByEntityUniqueId: Get instrument event instruction by EntityUniqueId
@@ -698,6 +699,100 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The change history of the provided entity. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_holding_entitlement_by_entity_unique_id**
+> HoldingEntitlementEntity get_holding_entitlement_by_entity_unique_id(entity_unique_id, as_at=as_at)
+
+[EARLY ACCESS] GetHoldingEntitlementByEntityUniqueId: [EARLY ACCESS] Get holding entitlement by unique id
+
+Retrieve the definition of a holding entitlement by its entity unique id, whichever state it is in.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    EntitiesApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(EntitiesApi)
+    entity_unique_id = 'entity_unique_id_example' # str | The entity unique identifier of the holding entitlement. The expected format is '{portfolioEntityUniqueId}_{holdingEntitlementId}'.
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the holding entitlement. Defaults to returning the latest version of the holding entitlement if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_holding_entitlement_by_entity_unique_id(entity_unique_id, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] GetHoldingEntitlementByEntityUniqueId: [EARLY ACCESS] Get holding entitlement by unique id
+        api_response = api_instance.get_holding_entitlement_by_entity_unique_id(entity_unique_id, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling EntitiesApi->get_holding_entitlement_by_entity_unique_id: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **entity_unique_id** | **str**| The entity unique identifier of the holding entitlement. The expected format is &#39;{portfolioEntityUniqueId}_{holdingEntitlementId}&#39;. | 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve the holding entitlement. Defaults to returning the latest version of the holding entitlement if not specified. | [optional] 
+
+### Return type
+
+[**HoldingEntitlementEntity**](HoldingEntitlementEntity.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The requested holding entitlement entity |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

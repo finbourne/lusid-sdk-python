@@ -14,11 +14,14 @@ Name | Type | Description | Notes
 **balance** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **fx_rate** | **float** | Exchange rate between the currency of this cash flow and the reporting currency. | 
 **cashflow_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
-**balance_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
+**balance_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
 **translation_gain_loss** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **cost_basis_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
 **transaction** | [**Transaction**](Transaction.md) |  | [optional] 
-**unrealised_gain_loss_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
+**unrealised_gain_loss_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | [optional] 
+**trade_date_to_settlement_date_gain_loss_reporting_currency** | [**CurrencyAndAmount**](CurrencyAndAmount.md) |  | 
+**balance_fx_rate** | **float** | The exchange rate the balance in the reporting currency was struck at: on an Activity row the recipe&#39;s quote for the row&#39;s date, after the recipe&#39;s quote lookback. Differs from FxRate when the cash flow was booked at another rate. The cash flow&#39;s own rate (FxRate) when no quote could be found; see BalanceFailureReason. | [optional] 
+**balance_failure_reason** | **str** | Why the balance in the reporting currency could not be struck at the recipe&#39;s quote for the row&#39;s date and is at the cash flow&#39;s own rate instead; absent when it was struck at the quote, including on a row whose local balance is zero. | [optional] 
 **links** | [**List[Link]**](Link.md) |  | [optional] 
 ## Example
 
@@ -41,13 +44,16 @@ cashflow: CurrencyAndAmount
 balance: CurrencyAndAmount
 fx_rate: Union[StrictFloat, StrictInt] = # Replace with your value
 cashflow_reporting_currency: CurrencyAndAmount = # Replace with your value
-balance_reporting_currency: CurrencyAndAmount = # Replace with your value
+balance_reporting_currency: Optional[CurrencyAndAmount] = # Replace with your value
 translation_gain_loss: CurrencyAndAmount = # Replace with your value
 cost_basis_reporting_currency: CurrencyAndAmount = # Replace with your value
 transaction: Optional[Transaction] = None
-unrealised_gain_loss_reporting_currency: CurrencyAndAmount = # Replace with your value
+unrealised_gain_loss_reporting_currency: Optional[CurrencyAndAmount] = # Replace with your value
+trade_date_to_settlement_date_gain_loss_reporting_currency: CurrencyAndAmount = # Replace with your value
+balance_fx_rate: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+balance_failure_reason: Optional[StrictStr] = "example_balance_failure_reason"
 links: Optional[List[Link]] = None
-portfolio_cash_flow_instance = PortfolioCashFlow(group_by_id=group_by_id, sequence_number=sequence_number, effective_date=effective_date, sub_holding_keys=sub_holding_keys, type=type, movement_name=movement_name, cashflow=cashflow, balance=balance, fx_rate=fx_rate, cashflow_reporting_currency=cashflow_reporting_currency, balance_reporting_currency=balance_reporting_currency, translation_gain_loss=translation_gain_loss, cost_basis_reporting_currency=cost_basis_reporting_currency, transaction=transaction, unrealised_gain_loss_reporting_currency=unrealised_gain_loss_reporting_currency, links=links)
+portfolio_cash_flow_instance = PortfolioCashFlow(group_by_id=group_by_id, sequence_number=sequence_number, effective_date=effective_date, sub_holding_keys=sub_holding_keys, type=type, movement_name=movement_name, cashflow=cashflow, balance=balance, fx_rate=fx_rate, cashflow_reporting_currency=cashflow_reporting_currency, balance_reporting_currency=balance_reporting_currency, translation_gain_loss=translation_gain_loss, cost_basis_reporting_currency=cost_basis_reporting_currency, transaction=transaction, unrealised_gain_loss_reporting_currency=unrealised_gain_loss_reporting_currency, trade_date_to_settlement_date_gain_loss_reporting_currency=trade_date_to_settlement_date_gain_loss_reporting_currency, balance_fx_rate=balance_fx_rate, balance_failure_reason=balance_failure_reason, links=links)
 
 ```
 

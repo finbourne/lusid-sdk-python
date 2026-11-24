@@ -33,6 +33,7 @@ from lusid.models.allocation_event_refund_payment import AllocationEventRefundPa
 from lusid.models.allocation_event_reversal import AllocationEventReversal
 from lusid.models.allocation_event_rounding_residual import AllocationEventRoundingResidual
 from lusid.models.allocation_event_transfer import AllocationEventTransfer
+from lusid.models.allocation_event_transferee import AllocationEventTransferee
 from lusid.models.allocation_event_use_of_proceeds import AllocationEventUseOfProceeds
 from lusid.models.allocation_map_allocation import AllocationMapAllocation
 from lusid.models.link import Link
@@ -76,8 +77,9 @@ class AllocationEvent(BaseModel):
     settlement_date: Optional[datetime] = Field(default=None, description="The date the postings settle. Defaults to the event date.", alias="settlementDate")
     receipts: Optional[List[AllocationEventReceipt]] = Field(default=None, description="The cash received against the event, in the order it was recorded.")
     refund_payments: Optional[List[AllocationEventRefundPayment]] = Field(default=None, description="The refunds paid out against the event to investors whose receipts exceeded what they owed, in the order they were recorded.", alias="refundPayments")
+    transferees: Optional[List[AllocationEventTransferee]] = Field(default=None, description="For a Transfer event, each transferee the booking gives a line: the line, and the investment account it is opened under. On a dry run, the account and line the booking would create; on a booking, what it created. Empty on every other event.")
     links: Optional[List[Link]] = None
-    __properties = ["href", "id", "description", "allocationMapId", "eventType", "amount", "currency", "eventDate", "status", "basisSource", "allocations", "bookingReference", "bookedAt", "reallocationReason", "components", "residuals", "basisDiagnostics", "writtenIds", "bookingErrors", "warnings", "transfers", "equalisation", "useOfProceeds", "dealFunding", "version", "parentAllocationEventId", "replaces", "reversal", "noticeDate", "dueDate", "settlementDate", "receipts", "refundPayments", "links"]
+    __properties = ["href", "id", "description", "allocationMapId", "eventType", "amount", "currency", "eventDate", "status", "basisSource", "allocations", "bookingReference", "bookedAt", "reallocationReason", "components", "residuals", "basisDiagnostics", "writtenIds", "bookingErrors", "warnings", "transfers", "equalisation", "useOfProceeds", "dealFunding", "version", "parentAllocationEventId", "replaces", "reversal", "noticeDate", "dueDate", "settlementDate", "receipts", "refundPayments", "transferees", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -201,6 +203,13 @@ class AllocationEvent(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['refundPayments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in transferees (list)
+        _items = []
+        if self.transferees:
+            for _item in self.transferees:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transferees'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -298,6 +307,11 @@ class AllocationEvent(BaseModel):
         if self.refund_payments is None and "refund_payments" in self.__fields_set__:
             _dict['refundPayments'] = None
 
+        # set to None if transferees (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transferees is None and "transferees" in self.__fields_set__:
+            _dict['transferees'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -348,6 +362,7 @@ class AllocationEvent(BaseModel):
             "settlement_date": obj.get("settlementDate"),
             "receipts": [AllocationEventReceipt.from_dict(_item) for _item in obj.get("receipts")] if obj.get("receipts") is not None else None,
             "refund_payments": [AllocationEventRefundPayment.from_dict(_item) for _item in obj.get("refundPayments")] if obj.get("refundPayments") is not None else None,
+            "transferees": [AllocationEventTransferee.from_dict(_item) for _item in obj.get("transferees")] if obj.get("transferees") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

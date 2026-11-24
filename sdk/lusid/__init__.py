@@ -56,6 +56,7 @@ from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
+from lusid.api.fund_groups_api import FundGroupsApi
 from lusid.api.fund_structures_api import FundStructuresApi
 from lusid.api.fund_valuation_templates_api import FundValuationTemplatesApi
 from lusid.api.funds_api import FundsApi
@@ -230,6 +231,7 @@ from lusid.models.allocation_event_reverse_request import AllocationEventReverse
 from lusid.models.allocation_event_rounding_residual import AllocationEventRoundingResidual
 from lusid.models.allocation_event_transfer import AllocationEventTransfer
 from lusid.models.allocation_event_transfer_consideration import AllocationEventTransferConsideration
+from lusid.models.allocation_event_transferee import AllocationEventTransferee
 from lusid.models.allocation_event_unbook_request import AllocationEventUnbookRequest
 from lusid.models.allocation_event_use_of_proceeds import AllocationEventUseOfProceeds
 from lusid.models.allocation_group import AllocationGroup
@@ -764,6 +766,8 @@ from lusid.models.eligible_collateral_row_request import EligibleCollateralRowRe
 from lusid.models.eligible_collateral_schedule import EligibleCollateralSchedule
 from lusid.models.eligible_collateral_schedule_request import EligibleCollateralScheduleRequest
 from lusid.models.empty_model_options import EmptyModelOptions
+from lusid.models.entitlement_leg import EntitlementLeg
+from lusid.models.entitlement_leg_request import EntitlementLegRequest
 from lusid.models.entity_identifier import EntityIdentifier
 from lusid.models.entity_resolver import EntityResolver
 from lusid.models.equalisation_terms import EqualisationTerms
@@ -873,6 +877,12 @@ from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_distribution_event import FundDistributionEvent
 from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoint
+from lusid.models.fund_group_report_output import FundGroupReportOutput
+from lusid.models.fund_group_report_result import FundGroupReportResult
+from lusid.models.fund_group_report_valuation_point import FundGroupReportValuationPoint
+from lusid.models.fund_group_trial_balance import FundGroupTrialBalance
+from lusid.models.fund_group_trial_balance_request import FundGroupTrialBalanceRequest
+from lusid.models.fund_group_trial_balance_response import FundGroupTrialBalanceResponse
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_instrument import FundInstrument
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
@@ -1003,6 +1013,10 @@ from lusid.models.holding_adjustment import HoldingAdjustment
 from lusid.models.holding_adjustment_with_date import HoldingAdjustmentWithDate
 from lusid.models.holding_context import HoldingContext
 from lusid.models.holding_contributor import HoldingContributor
+from lusid.models.holding_entitlement import HoldingEntitlement
+from lusid.models.holding_entitlement_entity import HoldingEntitlementEntity
+from lusid.models.holding_entitlement_request import HoldingEntitlementRequest
+from lusid.models.holding_entitlements_response import HoldingEntitlementsResponse
 from lusid.models.holding_ids_request import HoldingIdsRequest
 from lusid.models.holding_pricing_info import HoldingPricingInfo
 from lusid.models.holding_property_delta import HoldingPropertyDelta
@@ -1015,6 +1029,7 @@ from lusid.models.identifier_definition import IdentifierDefinition
 from lusid.models.identifier_for_resolution import IdentifierForResolution
 from lusid.models.identifier_part_schema import IdentifierPartSchema
 from lusid.models.ignored_distribution_tag import IgnoredDistributionTag
+from lusid.models.increase_in_value_event import IncreaseInValueEvent
 from lusid.models.index_convention import IndexConvention
 from lusid.models.index_model_options import IndexModelOptions
 from lusid.models.index_projection_dependency import IndexProjectionDependency
@@ -1326,6 +1341,7 @@ from lusid.models.paged_resource_list_of_get_subscription_response import PagedR
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_result import PagedResourceListOfGroupReconciliationComparisonResult
 from lusid.models.paged_resource_list_of_group_reconciliation_comparison_ruleset import PagedResourceListOfGroupReconciliationComparisonRuleset
 from lusid.models.paged_resource_list_of_group_reconciliation_definition import PagedResourceListOfGroupReconciliationDefinition
+from lusid.models.paged_resource_list_of_holding_entitlement import PagedResourceListOfHoldingEntitlement
 from lusid.models.paged_resource_list_of_identifier_definition import PagedResourceListOfIdentifierDefinition
 from lusid.models.paged_resource_list_of_instrument import PagedResourceListOfInstrument
 from lusid.models.paged_resource_list_of_instrument_event_holder import PagedResourceListOfInstrumentEventHolder
@@ -1832,6 +1848,7 @@ from lusid.models.return_metric import ReturnMetric
 from lusid.models.return_zero_pv_options import ReturnZeroPvOptions
 from lusid.models.returns_entity import ReturnsEntity
 from lusid.models.returns_metric import ReturnsMetric
+from lusid.models.returns_metric_window import ReturnsMetricWindow
 from lusid.models.revaluation_problem import RevaluationProblem
 from lusid.models.reverse_stock_split_event import ReverseStockSplitEvent
 from lusid.models.reverse_stress_request import ReverseStressRequest
@@ -2379,6 +2396,7 @@ __all__ = [
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",
+    "FundGroupsApi",
     "FundStructuresApi",
     "FundValuationTemplatesApi",
     "FundsApi",
@@ -2543,6 +2561,7 @@ __all__ = [
     "AllocationEventRoundingResidual",
     "AllocationEventTransfer",
     "AllocationEventTransferConsideration",
+    "AllocationEventTransferee",
     "AllocationEventUnbookRequest",
     "AllocationEventUseOfProceeds",
     "AllocationGroup",
@@ -3077,6 +3096,8 @@ __all__ = [
     "EligibleCollateralSchedule",
     "EligibleCollateralScheduleRequest",
     "EmptyModelOptions",
+    "EntitlementLeg",
+    "EntitlementLegRequest",
     "EntityIdentifier",
     "EntityResolver",
     "EqualisationTerms",
@@ -3186,6 +3207,12 @@ __all__ = [
     "FundDetails",
     "FundDistributionEvent",
     "FundEstimateValuationPoint",
+    "FundGroupReportOutput",
+    "FundGroupReportResult",
+    "FundGroupReportValuationPoint",
+    "FundGroupTrialBalance",
+    "FundGroupTrialBalanceRequest",
+    "FundGroupTrialBalanceResponse",
     "FundIdList",
     "FundInstrument",
     "FundJournalEntryLine",
@@ -3316,6 +3343,10 @@ __all__ = [
     "HoldingAdjustmentWithDate",
     "HoldingContext",
     "HoldingContributor",
+    "HoldingEntitlement",
+    "HoldingEntitlementEntity",
+    "HoldingEntitlementRequest",
+    "HoldingEntitlementsResponse",
     "HoldingIdsRequest",
     "HoldingPricingInfo",
     "HoldingPropertyDelta",
@@ -3328,6 +3359,7 @@ __all__ = [
     "IdentifierForResolution",
     "IdentifierPartSchema",
     "IgnoredDistributionTag",
+    "IncreaseInValueEvent",
     "IndexConvention",
     "IndexModelOptions",
     "IndexProjectionDependency",
@@ -3639,6 +3671,7 @@ __all__ = [
     "PagedResourceListOfGroupReconciliationComparisonResult",
     "PagedResourceListOfGroupReconciliationComparisonRuleset",
     "PagedResourceListOfGroupReconciliationDefinition",
+    "PagedResourceListOfHoldingEntitlement",
     "PagedResourceListOfIdentifierDefinition",
     "PagedResourceListOfInstrument",
     "PagedResourceListOfInstrumentEventHolder",
@@ -4145,6 +4178,7 @@ __all__ = [
     "ReturnZeroPvOptions",
     "ReturnsEntity",
     "ReturnsMetric",
+    "ReturnsMetricWindow",
     "RevaluationProblem",
     "ReverseStockSplitEvent",
     "ReverseStressRequest",

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **totals** | [**ManagementFeeTotals**](ManagementFeeTotals.md) |  | 
 **booked_transaction_ids** | **List[str]** | The identifiers of the transactions booked, if any. | 
 **fund_transaction_ids** | **List[str]** | The identifiers of the fee transactions the run holds in the fund&#39;s own books, one per partner and fee component, when the run was booked. | [optional] 
+**warnings** | **List[str]** | What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee&#39;s, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored). Absent when there is nothing to warn of. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ lines: List[ManagementFeeLine] = # Replace with your value
 totals: ManagementFeeTotals
 booked_transaction_ids: List[StrictStr] = # Replace with your value
 fund_transaction_ids: Optional[List[StrictStr]] = # Replace with your value
-management_fee_result_instance = ManagementFeeResult(fund_id=fund_id, period_start=period_start, period_end=period_end, basis=basis, lines=lines, totals=totals, booked_transaction_ids=booked_transaction_ids, fund_transaction_ids=fund_transaction_ids)
+warnings: Optional[List[StrictStr]] = # Replace with your value
+management_fee_result_instance = ManagementFeeResult(fund_id=fund_id, period_start=period_start, period_end=period_end, basis=basis, lines=lines, totals=totals, booked_transaction_ids=booked_transaction_ids, fund_transaction_ids=fund_transaction_ids, warnings=warnings)
 
 ```
 

@@ -40,6 +40,7 @@ from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
+from lusid.api.fund_groups_api import FundGroupsApi
 from lusid.api.fund_structures_api import FundStructuresApi
 from lusid.api.fund_valuation_templates_api import FundValuationTemplatesApi
 from lusid.api.funds_api import FundsApi
@@ -146,6 +147,7 @@ __all__ = [
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",
+    "FundGroupsApi",
     "FundStructuresApi",
     "FundValuationTemplatesApi",
     "FundsApi",

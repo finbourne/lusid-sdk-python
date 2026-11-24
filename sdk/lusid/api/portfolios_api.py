@@ -34,11 +34,15 @@ from lusid.models.composite_breakdown_request import CompositeBreakdownRequest
 from lusid.models.composite_breakdown_response import CompositeBreakdownResponse
 from lusid.models.composite_dispersion_response import CompositeDispersionResponse
 from lusid.models.deleted_entity_response import DeletedEntityResponse
+from lusid.models.holding_entitlement import HoldingEntitlement
+from lusid.models.holding_entitlement_request import HoldingEntitlementRequest
+from lusid.models.holding_entitlements_response import HoldingEntitlementsResponse
 from lusid.models.instrument_event_instruction import InstrumentEventInstruction
 from lusid.models.instrument_event_instruction_request import InstrumentEventInstructionRequest
 from lusid.models.instrument_event_instructions_response import InstrumentEventInstructionsResponse
 from lusid.models.model_property import ModelProperty
 from lusid.models.operation import Operation
+from lusid.models.paged_resource_list_of_holding_entitlement import PagedResourceListOfHoldingEntitlement
 from lusid.models.paged_resource_list_of_instrument_event_instruction import PagedResourceListOfInstrumentEventInstruction
 from lusid.models.performance_return import PerformanceReturn
 from lusid.models.portfolio import Portfolio
@@ -241,6 +245,182 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/metadata', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def delete_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be deleted.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @overload
+    def delete_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be deleted.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> DeletedEntityResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def delete_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be deleted.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
+        """[EARLY ACCESS] DeleteHoldingEntitlement: [EARLY ACCESS] Delete Holding Entitlement  # noqa: E501
+
+        Delete a particular holding entitlement of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param holding_entitlement_id: The id of the entitlement to be deleted. (required)
+        :type holding_entitlement_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: DeletedEntityResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the delete_holding_entitlement_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.delete_holding_entitlement_with_http_info(scope, code, holding_entitlement_id, portfolio_effective_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def delete_holding_entitlement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be deleted.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] DeleteHoldingEntitlement: [EARLY ACCESS] Delete Holding Entitlement  # noqa: E501
+
+        Delete a particular holding entitlement of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.delete_holding_entitlement_with_http_info(scope, code, holding_entitlement_id, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param holding_entitlement_id: The id of the entitlement to be deleted. (required)
+        :type holding_entitlement_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DeletedEntityResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_entitlement_id',
+            'portfolio_effective_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_holding_entitlement" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_entitlement_id']:
+            _path_params['holdingEntitlementId'] = _params['holding_entitlement_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DeletedEntityResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/holdingentitlements/{holdingEntitlementId}', 'DELETE',
             _path_params,
             _query_params,
             _header_params,
@@ -1529,6 +1709,217 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/{scope}/{code}/returns/breakdown', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def get_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> HoldingEntitlement:  # noqa: E501
+        ...
+
+    @overload
+    def get_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=True, **kwargs) -> HoldingEntitlement:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def get_holding_entitlement(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[HoldingEntitlement, Awaitable[HoldingEntitlement]]:  # noqa: E501
+        """[EARLY ACCESS] GetHoldingEntitlement: [EARLY ACCESS] Get Holding Entitlement  # noqa: E501
+
+        Get a particular holding entitlement of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_entitlement(scope, code, holding_entitlement_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param holding_entitlement_id: The id of the entitlement to be retrieved. (required)
+        :type holding_entitlement_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.
+        :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: HoldingEntitlement
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the get_holding_entitlement_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.get_holding_entitlement_with_http_info(scope, code, holding_entitlement_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def get_holding_entitlement_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], holding_entitlement_id : Annotated[StrictStr, Field(..., description="The id of the entitlement to be retrieved.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] GetHoldingEntitlement: [EARLY ACCESS] Get Holding Entitlement  # noqa: E501
+
+        Get a particular holding entitlement of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.get_holding_entitlement_with_http_info(scope, code, holding_entitlement_id, portfolio_effective_at, as_at, timeline_scope, timeline_code, closed_period_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param holding_entitlement_id: The id of the entitlement to be retrieved. (required)
+        :type holding_entitlement_id: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the entitlement. Defaults to return the latest version of the entitlement if not specified.
+        :type as_at: datetime
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(HoldingEntitlement, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'holding_entitlement_id',
+            'portfolio_effective_at',
+            'as_at',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_holding_entitlement" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+        if _params['holding_entitlement_id']:
+            _path_params['holdingEntitlementId'] = _params['holding_entitlement_id']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "HoldingEntitlement",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/holdingentitlements/{holdingEntitlementId}', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -4194,6 +4585,242 @@ class PortfoliosApi:
 
 
     @overload
+    async def list_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> PagedResourceListOfHoldingEntitlement:  # noqa: E501
+        ...
+
+    @overload
+    def list_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=True, **kwargs) -> PagedResourceListOfHoldingEntitlement:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def list_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfHoldingEntitlement, Awaitable[PagedResourceListOfHoldingEntitlement]]:  # noqa: E501
+        """[EARLY ACCESS] ListHoldingEntitlements: [EARLY ACCESS] List Holding Entitlements  # noqa: E501
+
+        List the holding entitlements of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_holding_entitlements(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: PagedResourceListOfHoldingEntitlement
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the list_holding_entitlements_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.list_holding_entitlements_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def list_holding_entitlements_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] ListHoldingEntitlements: [EARLY ACCESS] List Holding Entitlements  # noqa: E501
+
+        List the holding entitlements of a particular portfolio.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.list_holding_entitlements_with_http_info(scope, code, portfolio_effective_at, as_at, page, limit, filter, sort_by, timeline_scope, timeline_code, closed_period_id, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param as_at: The asAt datetime at which to retrieve the entitlements. Defaults to latest if not specified.
+        :type as_at: datetime
+        :param page: The pagination token to use to continue listing entitlements; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.
+        :type page: str
+        :param limit: When paginating, limit the results to this number. Defaults to 100 if not specified.
+        :type limit: int
+        :param filter: Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.
+        :type filter: str
+        :param sort_by: A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".
+        :type sort_by: List[str]
+        :param timeline_scope: The scope of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineCode must also be provided.
+        :type timeline_scope: str
+        :param timeline_code: The code of the Timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this is provided, timelineScope must also be provided.
+        :type timeline_code: str
+        :param closed_period_id: The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and read the entitlements as they stood when the period closed. Entitlements written after the period closed are not included.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.
+        :type closed_period_id: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(PagedResourceListOfHoldingEntitlement, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'portfolio_effective_at',
+            'as_at',
+            'page',
+            'limit',
+            'filter',
+            'sort_by',
+            'timeline_scope',
+            'timeline_code',
+            'closed_period_id'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method list_holding_entitlements" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('as_at') is not None:  # noqa: E501
+            if isinstance(_params['as_at'], datetime):
+                _query_params.append(('asAt', _params['as_at'].strftime(self.api_client.configuration.datetime_format)))
+            else:
+                _query_params.append(('asAt', _params['as_at']))
+
+        if _params.get('page') is not None:  # noqa: E501
+            _query_params.append(('page', _params['page']))
+
+        if _params.get('limit') is not None:  # noqa: E501
+            _query_params.append(('limit', _params['limit']))
+
+        if _params.get('filter') is not None:  # noqa: E501
+            _query_params.append(('filter', _params['filter']))
+
+        if _params.get('sort_by') is not None:  # noqa: E501
+            _query_params.append(('sortBy', _params['sort_by']))
+            _collection_formats['sortBy'] = 'multi'
+
+        if _params.get('timeline_scope') is not None:  # noqa: E501
+            _query_params.append(('timelineScope', _params['timeline_scope']))
+
+        if _params.get('timeline_code') is not None:  # noqa: E501
+            _query_params.append(('timelineCode', _params['timeline_code']))
+
+        if _params.get('closed_period_id') is not None:  # noqa: E501
+            _query_params.append(('closedPeriodId', _params['closed_period_id']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "PagedResourceListOfHoldingEntitlement",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/holdingentitlements', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
     async def list_instrument_event_instructions(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the instructions. Defaults to latest if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing instructions; this value is returned from the previous call.              If a pagination token is provided, the filter, effectiveAt and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\".")] = None, timeline_scope : Annotated[Optional[StrictStr], Field( description="The scope of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineCode must also be provided.")] = None, timeline_code : Annotated[Optional[StrictStr], Field( description="The code of the Timeline, used to override the AsAt, and fetch post close activity data.              If this is provided, timelineScope must also be provided.")] = None, closed_period_id : Annotated[Optional[StrictStr], Field( description="The code of the ClosedPeriod attached to the timeline, used to override the AsAt, and fetch post close activity data.              If this field is left empty and the timelineScope and timelineCode fields are filled out, the portfolioEffectiveAt will be used to resolve the relevant closed period.")] = None, **kwargs) -> PagedResourceListOfInstrumentEventInstruction:  # noqa: E501
         ...
 
@@ -5603,6 +6230,197 @@ class PortfoliosApi:
 
         return self.api_client.call_api(
             '/api/portfolios/{scope}/{code}', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            opts=_params.get('opts'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+
+    @overload
+    async def upsert_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, HoldingEntitlementRequest], Field(description="The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> HoldingEntitlementsResponse:  # noqa: E501
+        ...
+
+    @overload
+    def upsert_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, HoldingEntitlementRequest], Field(description="The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=True, **kwargs) -> HoldingEntitlementsResponse:  # noqa: E501
+        ...
+
+    @validate_arguments
+    def upsert_holding_entitlements(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, HoldingEntitlementRequest], Field(description="The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[HoldingEntitlementsResponse, Awaitable[HoldingEntitlementsResponse]]:  # noqa: E501
+        """[EARLY ACCESS] UpsertHoldingEntitlements: [EARLY ACCESS] Upsert Holding Entitlements  # noqa: E501
+
+        Create or update holding entitlements on a portfolio. A holding entitlement states what one holding receives  under a corporate action, in the client's own figures, and is booked at its ex date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_holding_entitlements(scope, code, success_mode, request_body, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (required)
+        :type success_mode: str
+        :param request_body: The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing. (required)
+        :type request_body: Dict[str, HoldingEntitlementRequest]
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: HoldingEntitlementsResponse
+        """
+        kwargs['_return_http_data_only'] = True
+        if '_preload_content' in kwargs:
+            message = "Error! Please call the upsert_holding_entitlements_with_http_info method with `_preload_content` instead and obtain raw data from ApiResponse.raw_data"  # noqa: E501
+            raise ValueError(message)
+        if async_req is not None:
+            kwargs['async_req'] = async_req
+        return self.upsert_holding_entitlements_with_http_info(scope, code, success_mode, request_body, portfolio_effective_at, **kwargs)  # noqa: E501
+
+    @validate_arguments
+    def upsert_holding_entitlements_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the portfolio.")], code : Annotated[StrictStr, Field(..., description="The code of the portfolio. Together with the scope this uniquely identifies the portfolio.")], success_mode : Annotated[StrictStr, Field(..., description="Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default)")], request_body : Annotated[Dict[str, HoldingEntitlementRequest], Field(description="The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing.")], portfolio_effective_at : Annotated[Optional[StrictStr], Field( description="The effective date at which the portfolio will be resolved. Defaults to current time if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """[EARLY ACCESS] UpsertHoldingEntitlements: [EARLY ACCESS] Upsert Holding Entitlements  # noqa: E501
+
+        Create or update holding entitlements on a portfolio. A holding entitlement states what one holding receives  under a corporate action, in the client's own figures, and is booked at its ex date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.upsert_holding_entitlements_with_http_info(scope, code, success_mode, request_body, portfolio_effective_at, async_req=True)
+        >>> result = thread.get()
+
+        :param scope: The scope of the portfolio. (required)
+        :type scope: str
+        :param code: The code of the portfolio. Together with the scope this uniquely identifies the portfolio. (required)
+        :type code: str
+        :param success_mode: Whether the batch request should fail atomically or in a partial fashion - allowed values: Atomic, Partial (default) (required)
+        :type success_mode: str
+        :param request_body: The entitlements to be upserted to the portfolio, keyed by a correlation id of the caller's choosing. (required)
+        :type request_body: Dict[str, HoldingEntitlementRequest]
+        :param portfolio_effective_at: The effective date at which the portfolio will be resolved. Defaults to current time if not specified.
+        :type portfolio_effective_at: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: Timeout setting. Do not use - use the opts parameter instead
+        :param opts: Configuration options for this request
+        :type opts: ConfigurationOptions, optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(HoldingEntitlementsResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        _params = locals()
+
+        _all_params = [
+            'scope',
+            'code',
+            'success_mode',
+            'request_body',
+            'portfolio_effective_at'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers',
+                'opts'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method upsert_holding_entitlements" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['scope']:
+            _path_params['scope'] = _params['scope']
+
+        if _params['code']:
+            _path_params['code'] = _params['code']
+
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('portfolio_effective_at') is not None:  # noqa: E501
+            _query_params.append(('portfolioEffectiveAt', _params['portfolio_effective_at']))
+
+        if _params.get('success_mode') is not None:  # noqa: E501
+            _query_params.append(('successMode', _params['success_mode']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['request_body'] is not None:
+            _body_params = _params['request_body']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            ['text/plain', 'application/json', 'text/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            self.api_client.select_header_content_type(
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/*+json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['oauth2']  # noqa: E501
+
+        _response_types_map = {
+            '200': "HoldingEntitlementsResponse",
+            '400': "LusidValidationProblemDetails",
+        }
+
+        return self.api_client.call_api(
+            '/api/portfolios/{scope}/{code}/holdingentitlements', 'POST',
             _path_params,
             _query_params,
             _header_params,

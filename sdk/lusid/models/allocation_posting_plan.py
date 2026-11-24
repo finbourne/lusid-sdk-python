@@ -23,6 +23,7 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.allocation_event_booking_warning import AllocationEventBookingWarning
+from lusid.models.allocation_event_transferee import AllocationEventTransferee
 from lusid.models.allocation_posting_counts import AllocationPostingCounts
 from lusid.models.allocation_posting_fund_line import AllocationPostingFundLine
 from lusid.models.allocation_posting_lp_line import AllocationPostingLpLine
@@ -37,7 +38,8 @@ class AllocationPostingPlan(BaseModel):
     fund_side: Optional[List[AllocationPostingFundLine]] = Field(default=None, description="The transactions written on the fund's own books.", alias="fundSide")
     counts: Optional[AllocationPostingCounts] = None
     warnings: Optional[List[AllocationEventBookingWarning]] = Field(default=None, description="The validation rules the booking would be allowed to proceed through under the map's policy.")
-    __properties = ["lpSide", "rollUps", "fundSide", "counts", "warnings"]
+    transferees: Optional[List[AllocationEventTransferee]] = Field(default=None, description="For a Transfer, each transferee the booking would give a line, with the investment account the line would be opened under and whether the booking would open that account too.")
+    __properties = ["lpSide", "rollUps", "fundSide", "counts", "warnings", "transferees"]
 
     class Config:
         """Pydantic configuration"""
@@ -102,6 +104,13 @@ class AllocationPostingPlan(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['warnings'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in transferees (list)
+        _items = []
+        if self.transferees:
+            for _item in self.transferees:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['transferees'] = _items
         # set to None if lp_side (nullable) is None
         # and __fields_set__ contains the field
         if self.lp_side is None and "lp_side" in self.__fields_set__:
@@ -122,6 +131,11 @@ class AllocationPostingPlan(BaseModel):
         if self.warnings is None and "warnings" in self.__fields_set__:
             _dict['warnings'] = None
 
+        # set to None if transferees (nullable) is None
+        # and __fields_set__ contains the field
+        if self.transferees is None and "transferees" in self.__fields_set__:
+            _dict['transferees'] = None
+
         return _dict
 
     @classmethod
@@ -138,7 +152,8 @@ class AllocationPostingPlan(BaseModel):
             "roll_ups": [AllocationPostingRollUp.from_dict(_item) for _item in obj.get("rollUps")] if obj.get("rollUps") is not None else None,
             "fund_side": [AllocationPostingFundLine.from_dict(_item) for _item in obj.get("fundSide")] if obj.get("fundSide") is not None else None,
             "counts": AllocationPostingCounts.from_dict(obj.get("counts")) if obj.get("counts") is not None else None,
-            "warnings": [AllocationEventBookingWarning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
+            "warnings": [AllocationEventBookingWarning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None,
+            "transferees": [AllocationEventTransferee.from_dict(_item) for _item in obj.get("transferees")] if obj.get("transferees") is not None else None
         })
         return _obj
 

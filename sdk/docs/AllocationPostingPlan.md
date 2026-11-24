@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **fund_side** | [**List[AllocationPostingFundLine]**](AllocationPostingFundLine.md) | The transactions written on the fund&#39;s own books. | [optional] 
 **counts** | [**AllocationPostingCounts**](AllocationPostingCounts.md) |  | [optional] 
 **warnings** | [**List[AllocationEventBookingWarning]**](AllocationEventBookingWarning.md) | The validation rules the booking would be allowed to proceed through under the map&#39;s policy. | [optional] 
+**transferees** | [**List[AllocationEventTransferee]**](AllocationEventTransferee.md) | For a Transfer, each transferee the booking would give a line, with the investment account the line would be opened under and whether the booking would open that account too. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ roll_ups: Optional[List[AllocationPostingRollUp]] = # Replace with your value
 fund_side: Optional[List[AllocationPostingFundLine]] = # Replace with your value
 counts: Optional[AllocationPostingCounts] = None
 warnings: Optional[List[AllocationEventBookingWarning]] = # Replace with your value
-allocation_posting_plan_instance = AllocationPostingPlan(lp_side=lp_side, roll_ups=roll_ups, fund_side=fund_side, counts=counts, warnings=warnings)
+transferees: Optional[List[AllocationEventTransferee]] = # Replace with your value
+allocation_posting_plan_instance = AllocationPostingPlan(lp_side=lp_side, roll_ups=roll_ups, fund_side=fund_side, counts=counts, warnings=warnings, transferees=transferees)
 
 ```
 

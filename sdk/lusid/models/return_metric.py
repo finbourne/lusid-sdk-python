@@ -22,14 +22,16 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.returns_metric_window import ReturnsMetricWindow
 
 class ReturnMetric(BaseModel):
     """
-    The rate of return over each period of the grid.  # noqa: E501
+    The rate of return over each period of the grid, or over a window looking back from each period when  one is given.  # noqa: E501
     """
+    window: Optional[ReturnsMetricWindow] = None
     type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount.") 
     alias:  Optional[StrictStr] = Field(None,alias="alias") 
-    __properties = ["type", "alias"]
+    __properties = ["window", "type", "alias"]
 
     class Config:
         """Pydantic configuration"""
@@ -63,6 +65,9 @@ class ReturnMetric(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of window
+        if self.window:
+            _dict['window'] = self.window.to_dict()
         # set to None if alias (nullable) is None
         # and __fields_set__ contains the field
         if self.alias is None and "alias" in self.__fields_set__:
@@ -80,6 +85,7 @@ class ReturnMetric(BaseModel):
             return ReturnMetric.parse_obj(obj)
 
         _obj = ReturnMetric.parse_obj({
+            "window": ReturnsMetricWindow.from_dict(obj.get("window")) if obj.get("window") is not None else None,
             "type": obj.get("type"),
             "alias": obj.get("alias")
         })

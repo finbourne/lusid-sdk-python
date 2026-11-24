@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **event_type** | **str** | The kind of allocation event to resolve: CapitalCall, Distribution, FeeExpense or ValuationMove. The map must define a basis for it. Available values: CapitalCall, Distribution, FeeExpense, ValuationMove, Commitment, Equalisation, RecallExpiry, Transfer, Default, DealFunding. | 
 **amount** | **float** | The amount of the event to share between the participants, in the event currency. | 
 **currency** | **str** | The currency of the amount. | 
-**basis_values** | [**List[AllocationMapBasisValue]**](AllocationMapBasisValue.md) | The basis value of each participating investor record. Optional for a register-backed basis such as Committed or PaidIn, where the members&#39; registers are read when none are supplied. Required for a ValueWeighted or PropertyWeighted basis. Under the AllCommittedToMembers rule the supplied values replace the register value of the investor records they name; every other open line still takes part. Not needed for a FixedPercentage basis. | [optional] 
+**basis_values** | [**List[AllocationMapBasisValue]**](AllocationMapBasisValue.md) | The basis value of investor records the map weights. Optional for a register-backed basis such as Committed or PaidIn, where the members&#39; registers are read when none are supplied. Supplied values override the register value of the investor records they name rather than defining who takes part: every other open line on the map&#39;s members still takes part at its register value, so to leave an investor record out, exclude it on the map. Required for a ValueWeighted or PropertyWeighted basis. Not needed for a FixedPercentage basis. | [optional] 
 ## Example
 
 ```python
