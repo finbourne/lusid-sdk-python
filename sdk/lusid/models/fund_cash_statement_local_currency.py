@@ -30,7 +30,7 @@ from lusid.models.resource_id import ResourceId
 
 class FundCashStatementLocalCurrency(BaseModel):
     """
-    A single row in the local-currency Fund Cash Statement report. Each row is a settled cash  movement with a running balance in local currency only; base-currency columns are out of  scope for this variant and are not returned.  # noqa: E501
+    A single row in the local-currency Fund Cash Statement report. Each row is a settled cash  movement with a running balance in local currency, and the base-currency cash flow, realised FX  (split into its trade-date-to-settlement-date and cash pool parts), cost basis, balance at the  recipe's rate on the row's date and the unrealised FX between the two.  # noqa: E501
     """
     group_by_id: Optional[StrictInt] = Field(default=None, description="The groupBy subHoldings and currency.", alias="groupById")
     sequence_number: Optional[StrictInt] = Field(default=None, description="Sequence number determining the order of the cash flow records.", alias="sequenceNumber")
@@ -48,8 +48,18 @@ class FundCashStatementLocalCurrency(BaseModel):
     cashflow_local: Optional[CurrencyAndAmount] = Field(default=None, alias="cashflowLocal")
     balance_local: Optional[CurrencyAndAmount] = Field(default=None, alias="balanceLocal")
     properties: Optional[Dict[str, ModelProperty]] = Field(default=None, description="The requested properties decorated onto the cash statement row.")
+    cashflow_base: Optional[CurrencyAndAmount] = Field(default=None, alias="cashflowBase")
+    trade_date_to_settlement_date_fx_pnl_base: Optional[CurrencyAndAmount] = Field(default=None, alias="tradeDateToSettlementDateFxPnlBase")
+    cash_pool_fx_pnl_base: Optional[CurrencyAndAmount] = Field(default=None, alias="cashPoolFxPnlBase")
+    cost_basis_base: Optional[CurrencyAndAmount] = Field(default=None, alias="costBasisBase")
+    balance_base: Optional[CurrencyAndAmount] = Field(default=None, alias="balanceBase")
+    unrealised_fx_pnl_base: Optional[CurrencyAndAmount] = Field(default=None, alias="unrealisedFxPnlBase")
+    balance_fx_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The FX rate BalanceBase was struck at, from the row's currency to the base currency, or 1 for a balance already in the base currency. Not returned when BalanceBase is not, nor when BalanceLocal is zero and no rate was found.", alias="balanceFxRate")
+    balance_base_failure_reason:  Optional[StrictStr] = Field(None,alias="balanceBaseFailureReason", description="Why BalanceBase, BalanceFxRate and UnrealisedFxPnlBase are not returned on this row: no FX rate was found for the row's currency at its accounting date within the recipe's quote interval, the rate found was not positive, or the rates could not be read. Null when the balance was struck, and on a row whose BalanceLocal is zero, which is zero in the base currency without a rate.") 
+    avg_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Weighted average FX rate (costBasisBase / balanceLocal). Null when balance is zero.", alias="avgRate")
+    fx_rate_movement: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="FX rate for this specific movement (CashflowBase / CashFlowLocal). Null when localAmount is zero.", alias="fxRateMovement")
     links: Optional[List[Link]] = None
-    __properties = ["groupById", "sequenceNumber", "subHoldingKeys", "sourceId", "cashStatementActionType", "entryType", "accountingDate", "activityDate", "movementName", "portfolioId", "instructionType", "diaryEntryCode", "originDiaryEntryCode", "cashflowLocal", "balanceLocal", "properties", "links"]
+    __properties = ["groupById", "sequenceNumber", "subHoldingKeys", "sourceId", "cashStatementActionType", "entryType", "accountingDate", "activityDate", "movementName", "portfolioId", "instructionType", "diaryEntryCode", "originDiaryEntryCode", "cashflowLocal", "balanceLocal", "properties", "cashflowBase", "tradeDateToSettlementDateFxPnlBase", "cashPoolFxPnlBase", "costBasisBase", "balanceBase", "unrealisedFxPnlBase", "balanceFxRate", "balanceBaseFailureReason", "avgRate", "fxRateMovement", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -106,6 +116,24 @@ class FundCashStatementLocalCurrency(BaseModel):
                 if self.properties[_key]:
                     _field_dict[_key] = self.properties[_key].to_dict()
             _dict['properties'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of cashflow_base
+        if self.cashflow_base:
+            _dict['cashflowBase'] = self.cashflow_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of trade_date_to_settlement_date_fx_pnl_base
+        if self.trade_date_to_settlement_date_fx_pnl_base:
+            _dict['tradeDateToSettlementDateFxPnlBase'] = self.trade_date_to_settlement_date_fx_pnl_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cash_pool_fx_pnl_base
+        if self.cash_pool_fx_pnl_base:
+            _dict['cashPoolFxPnlBase'] = self.cash_pool_fx_pnl_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cost_basis_base
+        if self.cost_basis_base:
+            _dict['costBasisBase'] = self.cost_basis_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of balance_base
+        if self.balance_base:
+            _dict['balanceBase'] = self.balance_base.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of unrealised_fx_pnl_base
+        if self.unrealised_fx_pnl_base:
+            _dict['unrealisedFxPnlBase'] = self.unrealised_fx_pnl_base.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -158,6 +186,26 @@ class FundCashStatementLocalCurrency(BaseModel):
         if self.properties is None and "properties" in self.__fields_set__:
             _dict['properties'] = None
 
+        # set to None if balance_fx_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.balance_fx_rate is None and "balance_fx_rate" in self.__fields_set__:
+            _dict['balanceFxRate'] = None
+
+        # set to None if balance_base_failure_reason (nullable) is None
+        # and __fields_set__ contains the field
+        if self.balance_base_failure_reason is None and "balance_base_failure_reason" in self.__fields_set__:
+            _dict['balanceBaseFailureReason'] = None
+
+        # set to None if avg_rate (nullable) is None
+        # and __fields_set__ contains the field
+        if self.avg_rate is None and "avg_rate" in self.__fields_set__:
+            _dict['avgRate'] = None
+
+        # set to None if fx_rate_movement (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fx_rate_movement is None and "fx_rate_movement" in self.__fields_set__:
+            _dict['fxRateMovement'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -201,6 +249,16 @@ class FundCashStatementLocalCurrency(BaseModel):
             )
             if obj.get("properties") is not None
             else None,
+            "cashflow_base": CurrencyAndAmount.from_dict(obj.get("cashflowBase")) if obj.get("cashflowBase") is not None else None,
+            "trade_date_to_settlement_date_fx_pnl_base": CurrencyAndAmount.from_dict(obj.get("tradeDateToSettlementDateFxPnlBase")) if obj.get("tradeDateToSettlementDateFxPnlBase") is not None else None,
+            "cash_pool_fx_pnl_base": CurrencyAndAmount.from_dict(obj.get("cashPoolFxPnlBase")) if obj.get("cashPoolFxPnlBase") is not None else None,
+            "cost_basis_base": CurrencyAndAmount.from_dict(obj.get("costBasisBase")) if obj.get("costBasisBase") is not None else None,
+            "balance_base": CurrencyAndAmount.from_dict(obj.get("balanceBase")) if obj.get("balanceBase") is not None else None,
+            "unrealised_fx_pnl_base": CurrencyAndAmount.from_dict(obj.get("unrealisedFxPnlBase")) if obj.get("unrealisedFxPnlBase") is not None else None,
+            "balance_fx_rate": obj.get("balanceFxRate"),
+            "balance_base_failure_reason": obj.get("balanceBaseFailureReason"),
+            "avg_rate": obj.get("avgRate"),
+            "fx_rate_movement": obj.get("fxRateMovement"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj

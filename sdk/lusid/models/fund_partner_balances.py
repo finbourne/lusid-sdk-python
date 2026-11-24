@@ -35,7 +35,8 @@ class FundPartnerBalances(BaseModel):
     unfunded: Union[StrictFloat, StrictInt] = Field(description="The unfunded capital.")
     funded: Union[StrictFloat, StrictInt] = Field(description="The funded capital.")
     outstanding_calls: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Capital called but not yet paid in, counting capital that was returned as recallable and has since been recalled. Omitted while a line that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall.", alias="outstandingCalls")
-    __properties = ["committed", "uncalledCommitment", "paidIn", "returned", "recallable", "unfunded", "funded", "outstandingCalls"]
+    call_credit: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The credit an equalisation kept against the line's future calls, less what later calls have drawn on it: a liability to the partner, not capital, until a call applies it. Zero when the line holds none.", alias="callCredit")
+    __properties = ["committed", "uncalledCommitment", "paidIn", "returned", "recallable", "unfunded", "funded", "outstandingCalls", "callCredit"]
 
     class Config:
         """Pydantic configuration"""
@@ -93,7 +94,8 @@ class FundPartnerBalances(BaseModel):
             "recallable": obj.get("recallable"),
             "unfunded": obj.get("unfunded"),
             "funded": obj.get("funded"),
-            "outstanding_calls": obj.get("outstandingCalls")
+            "outstanding_calls": obj.get("outstandingCalls"),
+            "call_credit": obj.get("callCredit")
         })
         return _obj
 

@@ -31,7 +31,7 @@ class PartnershipTypeCheckResult(BaseModel):
     """
     pack: PartnershipConfigPack
     status:  StrictStr = Field(...,alias="status", description="The outcome of the check. Available values: Ok, Differences.") 
-    differences: List[PartnershipTypeDifference] = Field(description="The transaction types whose register balance deltas are not their contract in the pack, or whose movements book through a side the fund's transaction type scope does not define; empty when the status is Ok.")
+    differences: List[PartnershipTypeDifference] = Field(description="The transaction types whose register balance deltas are not their contract in the pack, whose movements book through a side the fund's transaction type scope does not define, or whose line legs lack the 'Registry' movement option that books them into the registry; empty when the status is Ok.")
     __properties = ["pack", "status", "differences"]
 
     class Config:

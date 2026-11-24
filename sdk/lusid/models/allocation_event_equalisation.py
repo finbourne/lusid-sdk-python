@@ -35,11 +35,14 @@ class AllocationEventEqualisation(BaseModel):
     interest_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The simple annual rate of equalisation interest the admitted partners pay on each catch-up from the prior call's due date to the event date. Defaults to 0.08.", alias="interestRate")
     day_count_convention:  Optional[StrictStr] = Field(None,alias="dayCountConvention", description="The day count of the equalisation interest: ACT/365 or ACT/360. Defaults to ACT/365.") 
     interest_on_fees: Optional[StrictBool] = Field(default=None, description="Whether equalisation interest is also charged on the management fee catch-ups, from each fee's due date. Defaults to false.", alias="interestOnFees")
-    treatment:  Optional[StrictStr] = Field(None,alias="treatment", description="How the existing partners' excess is returned: ReturnOfExcess restores it to their uncalled commitment; RecallableDistribution distributes it as recallable capital. Defaults to ReturnOfExcess. Available values: ReturnOfExcess, RecallableDistribution.") 
-    pnl:  Optional[StrictStr] = Field(None,alias="pnl", description="Whether profit and loss already allocated is re-trued between partners with no cash so each holds its post-close share (ReTrue), or the equalisation is kept to capital (CapitalOnly). Defaults to ReTrue. Available values: ReTrue, CapitalOnly.") 
+    treatment:  Optional[StrictStr] = Field(None,alias="treatment", description="How the existing partners' excess is returned: ReturnOfExcess restores it to their uncalled commitment; RecallableDistribution distributes it as recallable capital; CreditAgainstFutureCalls restores it to their uncalled commitment and keeps the cash in the fund as a credit their next calls draw down; RetainedByFund hands nothing back and instead calls the admitted partners up to the existing partners' level on the commitments before the close. Defaults to ReturnOfExcess. Available values: ReturnOfExcess, RecallableDistribution, CreditAgainstFutureCalls, RetainedByFund.") 
+    pnl:  Optional[StrictStr] = Field(None,alias="pnl", description="Whether profit and loss already allocated is re-trued between partners with no cash so each holds its post-close share (ReTrue), or the equalisation is kept to capital (CapitalOnly). Defaults to CapitalOnly when omitted on a request. An equalisation stored before this default was introduced keeps the treatment it was stored with, which is ReTrue. Available values: ReTrue, CapitalOnly.") 
     fee_catch_ups: Optional[List[AllocationEventEqualisationFeeCatchUp]] = Field(default=None, description="The management fees each admitted partner owes from the first fee date to the close, including any stub period, as explicit amounts. Paid to the manager and allocated to that partner only.", alias="feeCatchUps")
     marks: Optional[List[AllocationEventEqualisationMark]] = Field(default=None, description="The valuation moves already allocated to the existing partners, by the member of the structure they belong to, to re-true to the admitted partners. Ignored when the profit and loss treatment is CapitalOnly.")
-    __properties = ["priorCallIds", "newInvestorRecordIds", "interestRate", "dayCountConvention", "interestOnFees", "treatment", "pnl", "feeCatchUps", "marks"]
+    prior_distribution_ids: Optional[List[ResourceId]] = Field(default=None, description="The booked distributions on the same allocation map, dated before the close, whose return of capital is re-spread net of the prior calls. When omitted, every booked distribution on the map dated before the close counts.", alias="priorDistributionIds")
+    interest_treatment:  Optional[StrictStr] = Field(None,alias="interestTreatment", description="How the equalisation interest reaches the existing partners: Cash pays it to them; CapitalCredit credits it to their capital accounts with no cash; None charges and pays no equalisation interest. Defaults to Cash. Available values: Cash, CapitalCredit, None.") 
+    excluded_components: Optional[List[StrictStr]] = Field(default=None, description="The call components left out of the re-spread: ManagementFee, OtherFee, Expense, OrganisationCost or Recall. Defaults to ManagementFee. A component no prior call carries, other than ManagementFee, is refused. Available values: ManagementFee, OtherFee, Expense, OrganisationCost, Recall.", alias="excludedComponents")
+    __properties = ["priorCallIds", "newInvestorRecordIds", "interestRate", "dayCountConvention", "interestOnFees", "treatment", "pnl", "feeCatchUps", "marks", "priorDistributionIds", "interestTreatment", "excludedComponents"]
 
     class Config:
         """Pydantic configuration"""
@@ -94,6 +97,13 @@ class AllocationEventEqualisation(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['marks'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in prior_distribution_ids (list)
+        _items = []
+        if self.prior_distribution_ids:
+            for _item in self.prior_distribution_ids:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['priorDistributionIds'] = _items
         # set to None if interest_rate (nullable) is None
         # and __fields_set__ contains the field
         if self.interest_rate is None and "interest_rate" in self.__fields_set__:
@@ -129,6 +139,21 @@ class AllocationEventEqualisation(BaseModel):
         if self.marks is None and "marks" in self.__fields_set__:
             _dict['marks'] = None
 
+        # set to None if prior_distribution_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.prior_distribution_ids is None and "prior_distribution_ids" in self.__fields_set__:
+            _dict['priorDistributionIds'] = None
+
+        # set to None if interest_treatment (nullable) is None
+        # and __fields_set__ contains the field
+        if self.interest_treatment is None and "interest_treatment" in self.__fields_set__:
+            _dict['interestTreatment'] = None
+
+        # set to None if excluded_components (nullable) is None
+        # and __fields_set__ contains the field
+        if self.excluded_components is None and "excluded_components" in self.__fields_set__:
+            _dict['excludedComponents'] = None
+
         return _dict
 
     @classmethod
@@ -149,7 +174,10 @@ class AllocationEventEqualisation(BaseModel):
             "treatment": obj.get("treatment"),
             "pnl": obj.get("pnl"),
             "fee_catch_ups": [AllocationEventEqualisationFeeCatchUp.from_dict(_item) for _item in obj.get("feeCatchUps")] if obj.get("feeCatchUps") is not None else None,
-            "marks": [AllocationEventEqualisationMark.from_dict(_item) for _item in obj.get("marks")] if obj.get("marks") is not None else None
+            "marks": [AllocationEventEqualisationMark.from_dict(_item) for _item in obj.get("marks")] if obj.get("marks") is not None else None,
+            "prior_distribution_ids": [ResourceId.from_dict(_item) for _item in obj.get("priorDistributionIds")] if obj.get("priorDistributionIds") is not None else None,
+            "interest_treatment": obj.get("interestTreatment"),
+            "excluded_components": obj.get("excludedComponents")
         })
         return _obj
 

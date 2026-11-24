@@ -33,7 +33,8 @@ class ManagementFeeRequest(BaseModel):
     basis:  Optional[StrictStr] = Field(None,alias="basis", description="The capital base the fee is charged on. Available values: Auto, CommittedCapital, InvestedCapital. Auto charges on committed capital until the investment period ends and on invested capital after.") 
     offsets: Optional[List[ManagementFeeOffset]] = Field(default=None, description="Fee income received by the manager that offsets the management fee.")
     book: Optional[StrictBool] = Field(default=None, description="When true, the net fee per partner is booked.")
-    __properties = ["periodStart", "periodEnd", "basis", "offsets", "book"]
+    prepaid: Optional[StrictBool] = Field(default=None, description="When true with book, the period's fee is booked in advance: the fund prepays each partner's gross fee per component against the fee payable at the period's start, and the partnership ledger is not charged. Offsets are not prepaid. Fee runs accruing inside the period then charge the fee against the prepayment, up to its balance and at the prepayment's rate, and any excess against the payable; an offset arising inside the period reduces the payable, and any part of it above the payable is booked as a receivable from the manager. Defaults to false.")
+    __properties = ["periodStart", "periodEnd", "basis", "offsets", "book", "prepaid"]
 
     class Config:
         """Pydantic configuration"""
@@ -100,7 +101,8 @@ class ManagementFeeRequest(BaseModel):
             "period_end": obj.get("periodEnd"),
             "basis": obj.get("basis"),
             "offsets": [ManagementFeeOffset.from_dict(_item) for _item in obj.get("offsets")] if obj.get("offsets") is not None else None,
-            "book": obj.get("book")
+            "book": obj.get("book"),
+            "prepaid": obj.get("prepaid")
         })
         return _obj
 

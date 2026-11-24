@@ -359,6 +359,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**accrue_carry**](docs/FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund's partners.
 *FundsApi* | [**add_allocation_groups**](docs/FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 *FundsApi* | [**add_series**](docs/FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+*FundsApi* | [**add_share_classes**](docs/FundsApi.md#add_share_classes) | **POST** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] AddShareClasses: Add ShareClasses to a Fund.
 *FundsApi* | [**advance_tax_return**](docs/FundsApi.md#advance_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/advance | [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
 *FundsApi* | [**approve_tax_provision**](docs/FundsApi.md#approve_tax_provision) | **POST** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve | [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
 *FundsApi* | [**calculate_management_fees**](docs/FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
@@ -390,6 +391,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_fund_tax_scope**](docs/FundsApi.md#get_fund_tax_scope) | **GET** /api/funds/{scope}/{code}/tax/scope | [EARLY ACCESS] GetFundTaxScope: [EARLY ACCESS] GetFundTaxScope: Get the UK chargeable-gains tax scope of a fund.
 *FundsApi* | [**get_holding_contributors_for_fund**](docs/FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 *FundsApi* | [**get_holdings_for_fund**](docs/FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
+*FundsApi* | [**get_open_close_movement_report_for_fund**](docs/FundsApi.md#get_open_close_movement_report_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/openclose/$query | [EARLY ACCESS] GetOpenCloseMovementReportForFund: Get the open, close and movement report for a Fund.
 *FundsApi* | [**get_partner_capital_account**](docs/FundsApi.md#get_partner_capital_account) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner's capital account statement.
 *FundsApi* | [**get_partner_performance**](docs/FundsApi.md#get_partner_performance) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/performance | [EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner's performance measures.
 *FundsApi* | [**get_partner_unfunded_reconciliation**](docs/FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner's unfunded commitment statement.
@@ -1589,6 +1591,7 @@ Class | Method | HTTP request | Description
  - [EarlyCloseOutEvent](docs/EarlyCloseOutEvent.md)
  - [EarlyRedemptionElection](docs/EarlyRedemptionElection.md)
  - [EarlyRedemptionEvent](docs/EarlyRedemptionEvent.md)
+ - [EconomicBucketAmount](docs/EconomicBucketAmount.md)
  - [EconomicDependency](docs/EconomicDependency.md)
  - [EconomicDependencyType](docs/EconomicDependencyType.md)
  - [EconomicDependencyWithComplexMarketData](docs/EconomicDependencyWithComplexMarketData.md)
@@ -2028,6 +2031,7 @@ Class | Method | HTTP request | Description
  - [MetadataFieldsToRemove](docs/MetadataFieldsToRemove.md)
  - [MetadataFieldsToUpdate](docs/MetadataFieldsToUpdate.md)
  - [MetricValue](docs/MetricValue.md)
+ - [MissingMovementOption](docs/MissingMovementOption.md)
  - [MixedLotConstituentsElection](docs/MixedLotConstituentsElection.md)
  - [ModelOptionShiftDefinition](docs/ModelOptionShiftDefinition.md)
  - [ModelOptionShiftMode](docs/ModelOptionShiftMode.md)
@@ -2062,6 +2066,8 @@ Class | Method | HTTP request | Description
  - [OpaqueDependency](docs/OpaqueDependency.md)
  - [OpaqueMarketData](docs/OpaqueMarketData.md)
  - [OpaqueModelOptions](docs/OpaqueModelOptions.md)
+ - [OpenCloseMovementQueryParameters](docs/OpenCloseMovementQueryParameters.md)
+ - [OpenCloseMovementRecord](docs/OpenCloseMovementRecord.md)
  - [OpenEvent](docs/OpenEvent.md)
  - [OperandType](docs/OperandType.md)
  - [Operation](docs/Operation.md)
@@ -2159,7 +2165,6 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfFundCalendarEntries](docs/PagedResourceListOfFundCalendarEntries.md)
  - [PagedResourceListOfFundCalendarEntry](docs/PagedResourceListOfFundCalendarEntry.md)
  - [PagedResourceListOfFundConfiguration](docs/PagedResourceListOfFundConfiguration.md)
- - [PagedResourceListOfFundPartner](docs/PagedResourceListOfFundPartner.md)
  - [PagedResourceListOfFundStructure](docs/PagedResourceListOfFundStructure.md)
  - [PagedResourceListOfGeneralLedgerProfileResponse](docs/PagedResourceListOfGeneralLedgerProfileResponse.md)
  - [PagedResourceListOfGetAddressKeyAliasResponse](docs/PagedResourceListOfGetAddressKeyAliasResponse.md)
@@ -2186,7 +2191,6 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfOrderInstruction](docs/PagedResourceListOfOrderInstruction.md)
  - [PagedResourceListOfPackage](docs/PagedResourceListOfPackage.md)
  - [PagedResourceListOfParticipation](docs/PagedResourceListOfParticipation.md)
- - [PagedResourceListOfPartnerCapitalAccount](docs/PagedResourceListOfPartnerCapitalAccount.md)
  - [PagedResourceListOfPaymentInstruction](docs/PagedResourceListOfPaymentInstruction.md)
  - [PagedResourceListOfPerson](docs/PagedResourceListOfPerson.md)
  - [PagedResourceListOfPlacement](docs/PagedResourceListOfPlacement.md)
@@ -2650,6 +2654,8 @@ Class | Method | HTTP request | Description
  - [ResourceListOfValueType](docs/ResourceListOfValueType.md)
  - [ResourceListOfVirtualTransactionOverrideRecord](docs/ResourceListOfVirtualTransactionOverrideRecord.md)
  - [ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery](docs/ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery.md)
+ - [ResourceListWithWarningsOfFundPartner](docs/ResourceListWithWarningsOfFundPartner.md)
+ - [ResourceListWithWarningsOfPartnerCapitalAccount](docs/ResourceListWithWarningsOfPartnerCapitalAccount.md)
  - [ResourceRecord](docs/ResourceRecord.md)
  - [ResponseMetaData](docs/ResponseMetaData.md)
  - [ResultAxisDefinition](docs/ResultAxisDefinition.md)
@@ -3112,6 +3118,7 @@ Class | Method | HTTP request | Description
  - [VersionedResourceListOfFundA2BMovementRecord](docs/VersionedResourceListOfFundA2BMovementRecord.md)
  - [VersionedResourceListOfHoldingContributor](docs/VersionedResourceListOfHoldingContributor.md)
  - [VersionedResourceListOfJournalEntryLine](docs/VersionedResourceListOfJournalEntryLine.md)
+ - [VersionedResourceListOfOpenCloseMovementRecord](docs/VersionedResourceListOfOpenCloseMovementRecord.md)
  - [VersionedResourceListOfOutputTransaction](docs/VersionedResourceListOfOutputTransaction.md)
  - [VersionedResourceListOfPortfolioHolding](docs/VersionedResourceListOfPortfolioHolding.md)
  - [VersionedResourceListOfTransaction](docs/VersionedResourceListOfTransaction.md)

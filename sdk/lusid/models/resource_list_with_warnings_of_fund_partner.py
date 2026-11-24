@@ -24,17 +24,19 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.fund_partner import FundPartner
 from lusid.models.link import Link
+from lusid.models.warning import Warning
 
-class PagedResourceListOfFundPartner(BaseModel):
+class ResourceListWithWarningsOfFundPartner(BaseModel):
     """
-    PagedResourceListOfFundPartner
+    ResourceListWithWarningsOfFundPartner
     """
-    next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
-    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
-    values: List[FundPartner]
-    href:  Optional[StrictStr] = Field(None,alias="href") 
+    values: List[FundPartner] = Field(description="The resources to list.")
+    href:  Optional[StrictStr] = Field(None,alias="href", description="The URI of the resource list.") 
+    next_page:  Optional[StrictStr] = Field(None,alias="nextPage", description="The next page of results.") 
+    previous_page:  Optional[StrictStr] = Field(None,alias="previousPage", description="The previous page of results.") 
+    warnings: Optional[List[Warning]] = None
     links: Optional[List[Link]] = None
-    __properties = ["nextPage", "previousPage", "values", "href", "links"]
+    __properties = ["values", "href", "nextPage", "previousPage", "warnings", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,8 +60,8 @@ class PagedResourceListOfFundPartner(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PagedResourceListOfFundPartner:
-        """Create an instance of PagedResourceListOfFundPartner from a JSON string"""
+    def from_json(cls, json_str: str) -> ResourceListWithWarningsOfFundPartner:
+        """Create an instance of ResourceListWithWarningsOfFundPartner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -75,6 +77,13 @@ class PagedResourceListOfFundPartner(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['values'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in links (list)
         _items = []
         if self.links:
@@ -82,6 +91,11 @@ class PagedResourceListOfFundPartner(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if href (nullable) is None
+        # and __fields_set__ contains the field
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
+
         # set to None if next_page (nullable) is None
         # and __fields_set__ contains the field
         if self.next_page is None and "next_page" in self.__fields_set__:
@@ -92,10 +106,10 @@ class PagedResourceListOfFundPartner(BaseModel):
         if self.previous_page is None and "previous_page" in self.__fields_set__:
             _dict['previousPage'] = None
 
-        # set to None if href (nullable) is None
+        # set to None if warnings (nullable) is None
         # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
 
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
@@ -105,21 +119,22 @@ class PagedResourceListOfFundPartner(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PagedResourceListOfFundPartner:
-        """Create an instance of PagedResourceListOfFundPartner from a dict"""
+    def from_dict(cls, obj: dict) -> ResourceListWithWarningsOfFundPartner:
+        """Create an instance of ResourceListWithWarningsOfFundPartner from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PagedResourceListOfFundPartner.parse_obj(obj)
+            return ResourceListWithWarningsOfFundPartner.parse_obj(obj)
 
-        _obj = PagedResourceListOfFundPartner.parse_obj({
-            "next_page": obj.get("nextPage"),
-            "previous_page": obj.get("previousPage"),
+        _obj = ResourceListWithWarningsOfFundPartner.parse_obj({
             "values": [FundPartner.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),
+            "next_page": obj.get("nextPage"),
+            "previous_page": obj.get("previousPage"),
+            "warnings": [Warning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None,
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-PagedResourceListOfFundPartner.update_forward_refs()
+ResourceListWithWarningsOfFundPartner.update_forward_refs()

@@ -30,7 +30,7 @@ class TaxExceptionItem(BaseModel):
     TaxExceptionItem
     """
     id:  StrictStr = Field(...,alias="id", description="An identifier stable within a response, built from the category, portfolio and instrument.") 
-    category:  StrictStr = Field(...,alias="category", description="The kind of exception: UnmatchedDisposal, NegativePool, MissingValuation or UnclassifiedInstrument.") 
+    category:  StrictStr = Field(...,alias="category", description="The kind of exception: UnmatchedDisposal, NegativePool, MissingValuation, UnclassifiedInstrument or CostWithoutUnits.") 
     severity:  StrictStr = Field(...,alias="severity", description="Error when the exception blocks the tax computation, Warning when it casts doubt on it.") 
     portfolio: ResourceId
     instrument:  Optional[StrictStr] = Field(None,alias="instrument", description="The LUSID unique identifier of the instrument the exception was raised against.") 

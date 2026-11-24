@@ -29,10 +29,11 @@ class AggregateMatchingRule(BaseModel):
     """
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The reference name of the rule.") 
     left_formula:  StrictStr = Field(...,alias="leftFormula", description="Derivation formula evaluated against the left side of the reconciliation.") 
-    left_operation:  StrictStr = Field(...,alias="leftOperation", description="Group-level operation applied to the left side's per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
+    left_operation:  StrictStr = Field(...,alias="leftOperation", description="Group-level operation applied to the left side's per-item values during reconciliation. Sum adds up decimal values. UniformValue requires all items on the side to carry the same value of any type, and compares it with the other side's value. UniformValue must be used on both sides or on neither. Available values: Sum, UniformValue.") 
     right_formula:  StrictStr = Field(...,alias="rightFormula", description="Derivation formula evaluated against the right side of the reconciliation.") 
-    right_operation:  StrictStr = Field(...,alias="rightOperation", description="Group-level operation applied to the right side's per-item values during reconciliation. Only Sum is currently supported; the other listed values are reserved and are rejected. Available values: Sum, Proportion, Average, Count, Min, Max, Value, SumOfPositiveValues, SumOfNegativeValues, SumOfAbsoluteValues, ProportionOfAbsoluteValues, SumCumulativeInAdvance, SumCumulativeInArrears.") 
-    __properties = ["ruleName", "leftFormula", "leftOperation", "rightFormula", "rightOperation"]
+    right_operation:  StrictStr = Field(...,alias="rightOperation", description="Group-level operation applied to the right side's per-item values during reconciliation. Sum adds up decimal values. UniformValue requires all items on the side to carry the same value of any type, and compares it with the other side's value. UniformValue must be used on both sides or on neither. Available values: Sum, UniformValue.") 
+    is_case_sensitive: Optional[StrictBool] = Field(default=None, description="Whether the comparison of a string rule is case sensitive. Optional, defaults to false. Only a rule whose values are strings can declare it.", alias="isCaseSensitive")
+    __properties = ["ruleName", "leftFormula", "leftOperation", "rightFormula", "rightOperation", "isCaseSensitive"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class AggregateMatchingRule(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if is_case_sensitive (nullable) is None
+        # and __fields_set__ contains the field
+        if self.is_case_sensitive is None and "is_case_sensitive" in self.__fields_set__:
+            _dict['isCaseSensitive'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class AggregateMatchingRule(BaseModel):
             "left_formula": obj.get("leftFormula"),
             "left_operation": obj.get("leftOperation"),
             "right_formula": obj.get("rightFormula"),
-            "right_operation": obj.get("rightOperation")
+            "right_operation": obj.get("rightOperation"),
+            "is_case_sensitive": obj.get("isCaseSensitive")
         })
         return _obj
 

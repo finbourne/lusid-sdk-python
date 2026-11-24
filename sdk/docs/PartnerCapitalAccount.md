@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **memo** | [**PartnerCapitalAccountMemo**](PartnerCapitalAccountMemo.md) |  | 
 **foots** | **bool** | Whether the ending capital agrees across the quarter-to-date, year-to-date and inception-to-date columns within tolerance. | 
 **footing_difference** | **float** | The largest difference between the ending capital of any two columns. | 
+**warnings** | [**List[Warning]**](Warning.md) | Warnings about the register the account was read from, for example a transaction type of the fund that books a register line outside the registry, so that line is not in the account. Empty when there is nothing to warn of. | [optional] 
 ## Example
 
 ```python
@@ -34,7 +35,8 @@ memo: PartnerCapitalAccountMemo
 foots: StrictBool = # Replace with your value
 foots:StrictBool = True
 footing_difference: Union[StrictFloat, StrictInt] = # Replace with your value
-partner_capital_account_instance = PartnerCapitalAccount(fund_id=fund_id, investor_record_id=investor_record_id, currency=currency, period_start=period_start, period_end=period_end, status=status, rows=rows, memo=memo, foots=foots, footing_difference=footing_difference)
+warnings: Optional[List[Warning]] = # Replace with your value
+partner_capital_account_instance = PartnerCapitalAccount(fund_id=fund_id, investor_record_id=investor_record_id, currency=currency, period_start=period_start, period_end=period_end, status=status, rows=rows, memo=memo, foots=foots, footing_difference=footing_difference, warnings=warnings)
 
 ```
 

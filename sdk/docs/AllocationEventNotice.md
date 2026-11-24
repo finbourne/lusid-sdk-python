@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **payment_hold** | [**AllocationPaymentHold**](AllocationPaymentHold.md) |  | [optional] 
 **transfer** | [**AllocationEventNoticeTransfer**](AllocationEventNoticeTransfer.md) |  | [optional] 
 **watermark** | **str** | DRAFT until the allocation event is booked, otherwise null. | [optional] 
+**call_credit_applied** | **float** | The call credit an earlier equalisation kept for the partner that this call draws on, as a positive amount. The lines show the partner&#39;s gross share; the net amount due is that share less the credit applied. Zero when no credit was applied. | [optional] 
 ## Example
 
 ```python
@@ -41,7 +42,8 @@ wire: Optional[AllocationEventNoticeWire] = None
 payment_hold: Optional[AllocationPaymentHold] = # Replace with your value
 transfer: Optional[AllocationEventNoticeTransfer] = None
 watermark: Optional[StrictStr] = "example_watermark"
-allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, tax_withheld=tax_withheld, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, transfer=transfer, watermark=watermark)
+call_credit_applied: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+allocation_event_notice_instance = AllocationEventNotice(fund=fund, event=event, partner=partner, currency=currency, lines=lines, net_amount_due=net_amount_due, tax_withheld=tax_withheld, unfunded_reconciliation=unfunded_reconciliation, cumulative=cumulative, gp_column=gp_column, wire=wire, payment_hold=payment_hold, transfer=transfer, watermark=watermark, call_credit_applied=call_credit_applied)
 
 ```
 

@@ -22,12 +22,13 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.missing_movement_option import MissingMovementOption
 from lusid.models.pack_register_delta import PackRegisterDelta
 from lusid.models.register_delta_movement import RegisterDeltaMovement
 
 class PartnershipTypeDifference(BaseModel):
     """
-    A transaction type a fund's portfolios resolve whose register deltas are not its contract, or whose sides its scope does not define.  # noqa: E501
+    A transaction type a fund's portfolios resolve whose register deltas are not its contract, whose sides its scope does not define, or whose line legs lack the option that books them into the registry.  # noqa: E501
     """
     source:  StrictStr = Field(...,alias="source", description="The source the transaction type is defined in.") 
     type:  StrictStr = Field(...,alias="type", description="The transaction type.") 
@@ -35,7 +36,8 @@ class PartnershipTypeDifference(BaseModel):
     expected: List[PackRegisterDelta] = Field(description="The register balance deltas the pack's contract expects of the type.")
     actual: List[RegisterDeltaMovement] = Field(description="The register balance deltas the type's movements carry, each named by its movement.")
     missing_sides: List[StrictStr] = Field(description="The sides the type's movements book through that the fund's transaction type scope does not define, so the type cannot be booked there; empty when every side is defined.", alias="missingSides")
-    __properties = ["source", "type", "scope", "expected", "actual", "missingSides"]
+    missing_options: List[MissingMovementOption] = Field(description="The movement options the type's line legs must carry to book the register and do not, each named by its movement. A leg that moves a register balance, or books the line's units and cost, without the 'Registry' option books into the portfolio's holdings, where the register never looks; empty when every line leg carries it.", alias="missingOptions")
+    __properties = ["source", "type", "scope", "expected", "actual", "missingSides", "missingOptions"]
 
     class Config:
         """Pydantic configuration"""
@@ -83,6 +85,13 @@ class PartnershipTypeDifference(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['actual'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in missing_options (list)
+        _items = []
+        if self.missing_options:
+            for _item in self.missing_options:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['missingOptions'] = _items
         return _dict
 
     @classmethod
@@ -100,7 +109,8 @@ class PartnershipTypeDifference(BaseModel):
             "scope": obj.get("scope"),
             "expected": [PackRegisterDelta.from_dict(_item) for _item in obj.get("expected")] if obj.get("expected") is not None else None,
             "actual": [RegisterDeltaMovement.from_dict(_item) for _item in obj.get("actual")] if obj.get("actual") is not None else None,
-            "missing_sides": obj.get("missingSides")
+            "missing_sides": obj.get("missingSides"),
+            "missing_options": [MissingMovementOption.from_dict(_item) for _item in obj.get("missingOptions")] if obj.get("missingOptions") is not None else None
         })
         return _obj
 

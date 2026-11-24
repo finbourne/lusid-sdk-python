@@ -3405,7 +3405,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_registry**
-> VersionedResourceListWithWarningsOfRegistryLine get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+> VersionedResourceListWithWarningsOfRegistryLine get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
 
 [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
 
@@ -3462,13 +3462,17 @@ def main():
     as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve the registry of the transaction portfolio. Defaults              to return the latest version if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the result set.              For example, to filter on the Holding Type, use \"holdingType eq 'p'\".              For more information about filtering LUSID results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These must have the format {domain}/{scope}/{code}, for example \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\". (optional)
+    investor_record_id = 'investor_record_id_example' # str | When provided, only the lines of this investor record are returned. (optional)
+    commitment_line_id = 'commitment_line_id_example' # str | When provided, only the lines of this commitment line are returned. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page, opts=opts)
 
         # [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
-        api_response = api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys)
+        api_response = api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
         pprint(api_response)
 
     except ApiException as e:
@@ -3487,6 +3491,10 @@ Name | Type | Description  | Notes
  **as_at** | **datetime**| The asAt datetime at which to retrieve the registry of the transaction portfolio. Defaults              to return the latest version if not specified. | [optional] 
  **filter** | **str**| Expression to filter the result set.              For example, to filter on the Holding Type, use \&quot;holdingType eq &#39;p&#39;\&quot;.              For more information about filtering LUSID results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the lines. These must have the format {domain}/{scope}/{code}, for example \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/CommittedCapital\&quot;. | [optional] 
+ **investor_record_id** | **str**| When provided, only the lines of this investor record are returned. | [optional] 
+ **commitment_line_id** | **str**| When provided, only the lines of this commitment line are returned. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls. | [optional] 
 
 ### Return type
 

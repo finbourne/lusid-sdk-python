@@ -28,7 +28,7 @@ class PartnerCapitalAccountRow(BaseModel):
     """
     One row of the capital account statement with its quarter-, year- and inception-to-date amounts.  # noqa: E501
     """
-    row_type:  StrictStr = Field(...,alias="rowType", description="The row type: BeginningCapital, Contributions, Distributions, TransfersIn, TransfersOut, NetOperatingIncome, ManagementFeesGross, ManagementFeeOffsets, RealisedGainLoss, UnrealisedGainLoss, CarriedInterest or EndingCapital.") 
+    row_type:  StrictStr = Field(...,alias="rowType", description="The row type: BeginningCapital, Contributions, Distributions, TransfersIn, TransfersOut, NetOperatingIncome, ManagementFeesGross, ManagementFeeOffsets, RealisedGainLoss, UnrealisedGainLoss, CarriedInterest, EndingCapital, EqualisationInterest (equalisation interest credited to the partner's capital with no cash, reported after ending capital, which counts it, and only when there is some) or CallCredit (a memo of the call credit equalisations kept for the partner against its future calls: the quarter-to-date and year-to-date columns are its movement in each and inception to date is the credit left at the period end. It is a liability of the fund to the partner, not capital, so ending capital does not count it. Reported last, and only while a credit is left or one moved in the year).") 
     qtd: Union[StrictFloat, StrictInt] = Field(description="The quarter-to-date amount for the row.")
     ytd: Union[StrictFloat, StrictInt] = Field(description="The year-to-date amount for the row.")
     itd: Union[StrictFloat, StrictInt] = Field(description="The inception-to-date amount for the row.")

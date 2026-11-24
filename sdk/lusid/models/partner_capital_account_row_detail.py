@@ -28,7 +28,7 @@ class PartnerCapitalAccountRowDetail(BaseModel):
     """
     One labelled part of a capital account row's total: the kind of amount, the allocation event it arose on and its  quarter-, year- and inception-to-date amounts, each already included in the row's own column.  # noqa: E501
     """
-    kind:  StrictStr = Field(...,alias="kind", description="The kind of amount the entry labels: WithholdingTax for tax withheld from a distribution on the partner's behalf.") 
+    kind:  StrictStr = Field(...,alias="kind", description="The kind of amount the entry labels: WithholdingTax for tax withheld from a distribution on the partner's behalf; on the CallCredit row, CallCreditGranted for a credit an equalisation kept for the partner and CallCreditApplied, negative, for the part of it a call drew on.") 
     allocation_event_id: ResourceId = Field(alias="allocationEventId")
     event_date: datetime = Field(description="The effective date of the allocation event the amount arose on.", alias="eventDate")
     qtd: Union[StrictFloat, StrictInt] = Field(description="The part of the row's quarter-to-date amount the entry labels; zero when the event falls outside the quarter.")

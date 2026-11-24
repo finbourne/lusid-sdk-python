@@ -37,7 +37,8 @@ class ManagementFeeResult(BaseModel):
     lines: List[ManagementFeeLine] = Field(description="The fee per partner.")
     totals: ManagementFeeTotals
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions booked, if any.", alias="bookedTransactionIds")
-    __properties = ["fundId", "periodStart", "periodEnd", "basis", "lines", "totals", "bookedTransactionIds"]
+    fund_transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The identifiers of the fee transactions the run holds in the fund's own books, one per partner and fee component, when the run was booked.", alias="fundTransactionIds")
+    __properties = ["fundId", "periodStart", "periodEnd", "basis", "lines", "totals", "bookedTransactionIds", "fundTransactionIds"]
 
     class Config:
         """Pydantic configuration"""
@@ -84,6 +85,11 @@ class ManagementFeeResult(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of totals
         if self.totals:
             _dict['totals'] = self.totals.to_dict()
+        # set to None if fund_transaction_ids (nullable) is None
+        # and __fields_set__ contains the field
+        if self.fund_transaction_ids is None and "fund_transaction_ids" in self.__fields_set__:
+            _dict['fundTransactionIds'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class ManagementFeeResult(BaseModel):
             "basis": obj.get("basis"),
             "lines": [ManagementFeeLine.from_dict(_item) for _item in obj.get("lines")] if obj.get("lines") is not None else None,
             "totals": ManagementFeeTotals.from_dict(obj.get("totals")) if obj.get("totals") is not None else None,
-            "booked_transaction_ids": obj.get("bookedTransactionIds")
+            "booked_transaction_ids": obj.get("bookedTransactionIds"),
+            "fund_transaction_ids": obj.get("fundTransactionIds")
         })
         return _obj
 

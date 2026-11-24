@@ -31,7 +31,7 @@ class AggregateRuleValues(BaseModel):
     rule_name:  StrictStr = Field(...,alias="ruleName", description="The name of the rule.") 
     left_value:  Optional[StrictStr] = Field(None,alias="leftValue", description="The left-side value.") 
     right_value:  Optional[StrictStr] = Field(None,alias="rightValue", description="The right-side value.") 
-    difference:  Optional[StrictStr] = Field(None,alias="difference", description="The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)).") 
+    difference:  Optional[StrictStr] = Field(None,alias="difference", description="The unsigned size of the difference: ABS(leftValue - rightValue) for a number, the Levenshtein distance for a string, days for a date, 0 or 1 for a boolean.") 
     applied_tolerance: Optional[ToleranceBase] = Field(default=None, alias="appliedTolerance")
     __properties = ["ruleName", "leftValue", "rightValue", "difference", "appliedTolerance"]
 

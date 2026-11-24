@@ -628,6 +628,7 @@ from lusid.models.dutch_auction_event import DutchAuctionEvent
 from lusid.models.early_close_out_event import EarlyCloseOutEvent
 from lusid.models.early_redemption_election import EarlyRedemptionElection
 from lusid.models.early_redemption_event import EarlyRedemptionEvent
+from lusid.models.economic_bucket_amount import EconomicBucketAmount
 from lusid.models.economic_dependency import EconomicDependency
 from lusid.models.economic_dependency_type import EconomicDependencyType
 from lusid.models.economic_dependency_with_complex_market_data import EconomicDependencyWithComplexMarketData
@@ -1067,6 +1068,7 @@ from lusid.models.metadata_fields_to_add import MetadataFieldsToAdd
 from lusid.models.metadata_fields_to_remove import MetadataFieldsToRemove
 from lusid.models.metadata_fields_to_update import MetadataFieldsToUpdate
 from lusid.models.metric_value import MetricValue
+from lusid.models.missing_movement_option import MissingMovementOption
 from lusid.models.mixed_lot_constituents_election import MixedLotConstituentsElection
 from lusid.models.model_option_shift_definition import ModelOptionShiftDefinition
 from lusid.models.model_option_shift_mode import ModelOptionShiftMode
@@ -1101,6 +1103,8 @@ from lusid.models.numeric_comparison_type import NumericComparisonType
 from lusid.models.opaque_dependency import OpaqueDependency
 from lusid.models.opaque_market_data import OpaqueMarketData
 from lusid.models.opaque_model_options import OpaqueModelOptions
+from lusid.models.open_close_movement_query_parameters import OpenCloseMovementQueryParameters
+from lusid.models.open_close_movement_record import OpenCloseMovementRecord
 from lusid.models.open_event import OpenEvent
 from lusid.models.operand_type import OperandType
 from lusid.models.operation import Operation
@@ -1198,7 +1202,6 @@ from lusid.models.paged_resource_list_of_fund import PagedResourceListOfFund
 from lusid.models.paged_resource_list_of_fund_calendar_entries import PagedResourceListOfFundCalendarEntries
 from lusid.models.paged_resource_list_of_fund_calendar_entry import PagedResourceListOfFundCalendarEntry
 from lusid.models.paged_resource_list_of_fund_configuration import PagedResourceListOfFundConfiguration
-from lusid.models.paged_resource_list_of_fund_partner import PagedResourceListOfFundPartner
 from lusid.models.paged_resource_list_of_fund_structure import PagedResourceListOfFundStructure
 from lusid.models.paged_resource_list_of_general_ledger_profile_response import PagedResourceListOfGeneralLedgerProfileResponse
 from lusid.models.paged_resource_list_of_get_address_key_alias_response import PagedResourceListOfGetAddressKeyAliasResponse
@@ -1225,7 +1228,6 @@ from lusid.models.paged_resource_list_of_order_graph_placement import PagedResou
 from lusid.models.paged_resource_list_of_order_instruction import PagedResourceListOfOrderInstruction
 from lusid.models.paged_resource_list_of_package import PagedResourceListOfPackage
 from lusid.models.paged_resource_list_of_participation import PagedResourceListOfParticipation
-from lusid.models.paged_resource_list_of_partner_capital_account import PagedResourceListOfPartnerCapitalAccount
 from lusid.models.paged_resource_list_of_payment_instruction import PagedResourceListOfPaymentInstruction
 from lusid.models.paged_resource_list_of_person import PagedResourceListOfPerson
 from lusid.models.paged_resource_list_of_placement import PagedResourceListOfPlacement
@@ -1689,6 +1691,8 @@ from lusid.models.resource_list_of_transfer import ResourceListOfTransfer
 from lusid.models.resource_list_of_value_type import ResourceListOfValueType
 from lusid.models.resource_list_of_virtual_transaction_override_record import ResourceListOfVirtualTransactionOverrideRecord
 from lusid.models.resource_list_with_post_bodies_of_settlement_activity_to_settlement_activity_query import ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery
+from lusid.models.resource_list_with_warnings_of_fund_partner import ResourceListWithWarningsOfFundPartner
+from lusid.models.resource_list_with_warnings_of_partner_capital_account import ResourceListWithWarningsOfPartnerCapitalAccount
 from lusid.models.resource_record import ResourceRecord
 from lusid.models.response_meta_data import ResponseMetaData
 from lusid.models.result_axis_definition import ResultAxisDefinition
@@ -2151,6 +2155,7 @@ from lusid.models.versioned_resource_list_of_fund_a2_b_data_record import Versio
 from lusid.models.versioned_resource_list_of_fund_a2_b_movement_record import VersionedResourceListOfFundA2BMovementRecord
 from lusid.models.versioned_resource_list_of_holding_contributor import VersionedResourceListOfHoldingContributor
 from lusid.models.versioned_resource_list_of_journal_entry_line import VersionedResourceListOfJournalEntryLine
+from lusid.models.versioned_resource_list_of_open_close_movement_record import VersionedResourceListOfOpenCloseMovementRecord
 from lusid.models.versioned_resource_list_of_output_transaction import VersionedResourceListOfOutputTransaction
 from lusid.models.versioned_resource_list_of_portfolio_holding import VersionedResourceListOfPortfolioHolding
 from lusid.models.versioned_resource_list_of_transaction import VersionedResourceListOfTransaction
@@ -2821,6 +2826,7 @@ __all__ = [
     "EarlyCloseOutEvent",
     "EarlyRedemptionElection",
     "EarlyRedemptionEvent",
+    "EconomicBucketAmount",
     "EconomicDependency",
     "EconomicDependencyType",
     "EconomicDependencyWithComplexMarketData",
@@ -3260,6 +3266,7 @@ __all__ = [
     "MetadataFieldsToRemove",
     "MetadataFieldsToUpdate",
     "MetricValue",
+    "MissingMovementOption",
     "MixedLotConstituentsElection",
     "ModelOptionShiftDefinition",
     "ModelOptionShiftMode",
@@ -3294,6 +3301,8 @@ __all__ = [
     "OpaqueDependency",
     "OpaqueMarketData",
     "OpaqueModelOptions",
+    "OpenCloseMovementQueryParameters",
+    "OpenCloseMovementRecord",
     "OpenEvent",
     "OperandType",
     "Operation",
@@ -3391,7 +3400,6 @@ __all__ = [
     "PagedResourceListOfFundCalendarEntries",
     "PagedResourceListOfFundCalendarEntry",
     "PagedResourceListOfFundConfiguration",
-    "PagedResourceListOfFundPartner",
     "PagedResourceListOfFundStructure",
     "PagedResourceListOfGeneralLedgerProfileResponse",
     "PagedResourceListOfGetAddressKeyAliasResponse",
@@ -3418,7 +3426,6 @@ __all__ = [
     "PagedResourceListOfOrderInstruction",
     "PagedResourceListOfPackage",
     "PagedResourceListOfParticipation",
-    "PagedResourceListOfPartnerCapitalAccount",
     "PagedResourceListOfPaymentInstruction",
     "PagedResourceListOfPerson",
     "PagedResourceListOfPlacement",
@@ -3882,6 +3889,8 @@ __all__ = [
     "ResourceListOfValueType",
     "ResourceListOfVirtualTransactionOverrideRecord",
     "ResourceListWithPostBodiesOfSettlementActivityToSettlementActivityQuery",
+    "ResourceListWithWarningsOfFundPartner",
+    "ResourceListWithWarningsOfPartnerCapitalAccount",
     "ResourceRecord",
     "ResponseMetaData",
     "ResultAxisDefinition",
@@ -4344,6 +4353,7 @@ __all__ = [
     "VersionedResourceListOfFundA2BMovementRecord",
     "VersionedResourceListOfHoldingContributor",
     "VersionedResourceListOfJournalEntryLine",
+    "VersionedResourceListOfOpenCloseMovementRecord",
     "VersionedResourceListOfOutputTransaction",
     "VersionedResourceListOfPortfolioHolding",
     "VersionedResourceListOfTransaction",

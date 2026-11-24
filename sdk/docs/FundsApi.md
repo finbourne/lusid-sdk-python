@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**accrue_carry**](FundsApi.md#accrue_carry) | **POST** /api/funds/{scope}/{code}/carry/$accrue | [EARLY ACCESS] AccrueCarry: [EXPERIMENTAL] AccrueCarry: Accrue carried interest to the Fund&#39;s partners.
 [**add_allocation_groups**](FundsApi.md#add_allocation_groups) | **POST** /api/funds/{scope}/{code}/allocationgroups | [EARLY ACCESS] AddAllocationGroups: Add Allocation Groups to a Fund.
 [**add_series**](FundsApi.md#add_series) | **POST** /api/funds/{scope}/{code}/series | [EARLY ACCESS] AddSeries: Add Series to a Fund.
+[**add_share_classes**](FundsApi.md#add_share_classes) | **POST** /api/funds/{scope}/{code}/shareclasses | [EXPERIMENTAL] AddShareClasses: Add ShareClasses to a Fund.
 [**advance_tax_return**](FundsApi.md#advance_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/advance | [EARLY ACCESS] AdvanceTaxReturn: [EARLY ACCESS] AdvanceTaxReturn: Advance the tax return one workflow step.
 [**approve_tax_provision**](FundsApi.md#approve_tax_provision) | **POST** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve | [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
 [**calculate_management_fees**](FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
@@ -39,6 +40,7 @@ Method | HTTP request | Description
 [**get_fund_tax_scope**](FundsApi.md#get_fund_tax_scope) | **GET** /api/funds/{scope}/{code}/tax/scope | [EARLY ACCESS] GetFundTaxScope: [EARLY ACCESS] GetFundTaxScope: Get the UK chargeable-gains tax scope of a fund.
 [**get_holding_contributors_for_fund**](FundsApi.md#get_holding_contributors_for_fund) | **POST** /api/funds/{scope}/{code}/holdings/{holdingId}/contributors | [EARLY ACCESS] GetHoldingContributorsForFund: Get holdings contributors for transaction portfolios in a Fund.
 [**get_holdings_for_fund**](FundsApi.md#get_holdings_for_fund) | **POST** /api/funds/{scope}/{code}/$holdings | [EARLY ACCESS] GetHoldingsForFund: Get holdings for transaction portfolios in a Fund.
+[**get_open_close_movement_report_for_fund**](FundsApi.md#get_open_close_movement_report_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/openclose/$query | [EARLY ACCESS] GetOpenCloseMovementReportForFund: Get the open, close and movement report for a Fund.
 [**get_partner_capital_account**](FundsApi.md#get_partner_capital_account) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/capitalaccount | [EARLY ACCESS] GetPartnerCapitalAccount: [EARLY ACCESS] GetPartnerCapitalAccount: Get a partner&#39;s capital account statement.
 [**get_partner_performance**](FundsApi.md#get_partner_performance) | **GET** /api/funds/{scope}/{code}/partners/{irScope}/{irCode}/performance | [EARLY ACCESS] GetPartnerPerformance: [EARLY ACCESS] GetPartnerPerformance: Get a partner&#39;s performance measures.
 [**get_partner_unfunded_reconciliation**](FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner&#39;s unfunded commitment statement.
@@ -493,6 +495,102 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The updated Fund with the added Series. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **add_share_classes**
+> Fund add_share_classes(scope, code, share_class_definition)
+
+[EXPERIMENTAL] AddShareClasses: Add ShareClasses to a Fund.
+
+Add new ShareClass definitions to the Fund. All requested ShareClassShortCodes must be new;  to update existing share classes use PatchFund.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    share_class_definition = [{"instrumentIdentifiers":{"Instrument/default/ClientInternal":"ShareClassA"},"name":"Share Class A","shareClassShortCode":"ScA","properties":{},"investorType":"Income","distributionType":"Net","domCcy":"GBP","distributionPaymentType":"Gross","hedging":"None"}] # List[ShareClassDefinition] | The definitions of the ShareClasses to add to the Fund.
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.add_share_classes(scope, code, share_class_definition, opts=opts)
+
+        # [EXPERIMENTAL] AddShareClasses: Add ShareClasses to a Fund.
+        api_response = api_instance.add_share_classes(scope, code, share_class_definition)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->add_share_classes: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **share_class_definition** | [**List[ShareClassDefinition]**](ShareClassDefinition.md)| The definitions of the ShareClasses to add to the Fund. | 
+
+### Return type
+
+[**Fund**](Fund.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The updated Fund with the added ShareClasses. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 
@@ -3630,6 +3728,113 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **get_open_close_movement_report_for_fund**
+> VersionedResourceListOfOpenCloseMovementRecord get_open_close_movement_report_for_fund(scope, code, open_close_movement_query_parameters, nav_type_code=nav_type_code, as_at=as_at, filter=filter)
+
+[EARLY ACCESS] GetOpenCloseMovementReportForFund: Get the open, close and movement report for a Fund.
+
+Get, for each instrument held by the transaction portfolios of a Fund (or each kept sub-holding key), the  net asset economic buckets at the opening and closing of a valuation point window, the period's movements  by economic bucket classified as the journal entry lines classify them, and the requested valuation  metrics and instrument properties. Signs follow the journal entry line convention.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # open_close_movement_query_parameters = OpenCloseMovementQueryParameters.from_json("")
+    # open_close_movement_query_parameters = OpenCloseMovementQueryParameters.from_dict({})
+    open_close_movement_query_parameters = OpenCloseMovementQueryParameters()
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_open_close_movement_report_for_fund(scope, code, open_close_movement_query_parameters, nav_type_code=nav_type_code, as_at=as_at, filter=filter, opts=opts)
+
+        # [EARLY ACCESS] GetOpenCloseMovementReportForFund: Get the open, close and movement report for a Fund.
+        api_response = api_instance.get_open_close_movement_report_for_fund(scope, code, open_close_movement_query_parameters, nav_type_code=nav_type_code, as_at=as_at, filter=filter)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->get_open_close_movement_report_for_fund: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **open_close_movement_query_parameters** | [**OpenCloseMovementQueryParameters**](OpenCloseMovementQueryParameters.md)| The window, the sub-holding keys to keep separate, the instrument property keys and the valuation metrics to report. | 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to resolve the fund and the timeline. Defaults              to return the latest version if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+
+### Return type
+
+[**VersionedResourceListOfOpenCloseMovementRecord**](VersionedResourceListOfOpenCloseMovementRecord.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The open, close and movement report for transaction portfolios in a Fund |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **get_partner_capital_account**
 > PartnerCapitalAccount get_partner_capital_account(scope, code, ir_scope, ir_code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at)
 
@@ -3942,7 +4147,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_partners**
-> PagedResourceListOfFundPartner get_partners(scope, code, effective_at=effective_at, as_at=as_at, include_closed=include_closed, page=page, limit=limit)
+> ResourceListWithWarningsOfFundPartner get_partners(scope, code, effective_at=effective_at, as_at=as_at, include_closed=include_closed, page=page, limit=limit)
 
 [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 
@@ -4029,7 +4234,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PagedResourceListOfFundPartner**](PagedResourceListOfFundPartner.md)
+[**ResourceListWithWarningsOfFundPartner**](ResourceListWithWarningsOfFundPartner.md)
 
 ### HTTP request headers
 
@@ -4142,7 +4347,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_registry_for_fund**
-> VersionedResourceListWithWarningsOfRegistryLine get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
+> VersionedResourceListWithWarningsOfRegistryLine get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
 
 [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
 
@@ -4200,13 +4405,17 @@ def main():
     filter = 'filter_example' # str | Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\". (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    investor_record_id = 'investor_record_id_example' # str | When provided, only the lines of this investor record are returned. (optional)
+    commitment_line_id = 'commitment_line_id_example' # str | When provided, only the lines of this commitment line are returned. (optional)
+    limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, opts=opts)
+        # api_response =  api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page, opts=opts)
 
         # [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
-        api_response = api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code)
+        api_response = api_instance.get_registry_for_fund(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, nav_type_code=nav_type_code, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
         pprint(api_response)
 
     except ApiException as e:
@@ -4226,6 +4435,10 @@ Name | Type | Description  | Notes
  **filter** | **str**| Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Holding\&quot; domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or \&quot;Holding/system/CommittedCapital\&quot;. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **investor_record_id** | **str**| When provided, only the lines of this investor record are returned. | [optional] 
+ **commitment_line_id** | **str**| When provided, only the lines of this commitment line are returned. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls. | [optional] 
 
 ### Return type
 
@@ -5248,7 +5461,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_valuation_for_fund**
-> ListAggregationResponse get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request)
+> ListAggregationResponse get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, audit_mode=audit_mode, fund_valuation_request=fund_valuation_request)
 
 [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
 
@@ -5302,6 +5515,7 @@ def main():
     scope = 'scope_example' # str | The scope of the Fund.
     code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    audit_mode = False # bool | When true, returns the stored valuation address keys instead of running the full aggregation engine, and returns no data if none are stored for the valuation point. Defaults to false. (optional) (default to False)
 
     # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
     # Change the lines below to switch approach
@@ -5311,10 +5525,10 @@ def main():
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request, opts=opts)
+        # api_response =  api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, audit_mode=audit_mode, fund_valuation_request=fund_valuation_request, opts=opts)
 
         # [EARLY ACCESS] GetValuationForFund: Perform valuation for a Fund.
-        api_response = api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, fund_valuation_request=fund_valuation_request)
+        api_response = api_instance.get_valuation_for_fund(scope, code, nav_type_code=nav_type_code, audit_mode=audit_mode, fund_valuation_request=fund_valuation_request)
         pprint(api_response)
 
     except ApiException as e:
@@ -5330,6 +5544,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **audit_mode** | **bool**| When true, returns the stored valuation address keys instead of running the full aggregation engine, and returns no data if none are stored for the valuation point. Defaults to false. | [optional] [default to False]
  **fund_valuation_request** | [**FundValuationRequest**](FundValuationRequest.md)| The request specifying the dates (or DiaryEntry) on which to calculate a set of valuation metrics. | [optional] 
 
 ### Return type
@@ -5577,7 +5792,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] GetValuationPointPnlSummary: Get a PnL summary for the given Valuation Point in the Fund.
 
-Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
+Gets the PnL Summary lines from the Journal Entry Lines produced when calculating the Valuation Point.                Only the Journal Entry Lines selected by the pnlFilters and externalFeeFilters of the Fund Configuration are returned. If the Fund Configuration has neither pnlFilters nor externalFeeFilters, no rows are returned.                Rows are returned ordered by PnL bucket (ordinal), then portfolio scope and code (ordinal), then accounting date, activity date and source id, with the remaining Journal Entry Line fields as tie-breakers, so the order is total and stable across pages.
 
 ### Example
 
@@ -6312,7 +6527,7 @@ def main():
     page = 'page_example' # str | The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. (optional)
     limit = 56 # int | When paginating, limit the results to this number. Defaults to 100 if not specified. (optional)
     filter = 'filter_example' # str | Expression to filter the results.              For example, to filter on the treatment, specify \"treatment eq 'Monthly'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. (optional)
-    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\" (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names or properties to sort by, each suffixed by \" ASC\" or \" DESC\".              The fields that can be sorted on are FeeCode, DisplayName, Description, Origin, CalculationBase, AccrualCurrency,              Treatment, TotalAnnualAccrualAmount, FeeRatePercentage, PayableFrequency, BusinessDayConvention, StartDate, EndDate,              NavTypeCode, FeeTypeId.Scope, FeeTypeId.Code, PortfolioId.Scope, PortfolioId.Code, AnchorDate.Day and AnchorDate.Month.              To sort on a property from the 'Fee' domain, specify \"Properties[{domain}/{scope}/{code}]\", for example              \"Properties[Fee/Account/Id] ASC\". Sorting on any other field of a Fee returns a 400 that names the field. (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the 'Fee' domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example 'Fee/Account/Id'. (optional)
 
     try:
@@ -6340,7 +6555,7 @@ Name | Type | Description  | Notes
  **page** | **str**| The pagination token to use to continue listing fees; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request. | [optional] 
  **limit** | **int**| When paginating, limit the results to this number. Defaults to 100 if not specified. | [optional] 
  **filter** | **str**| Expression to filter the results.              For example, to filter on the treatment, specify \&quot;treatment eq &#39;Monthly&#39;\&quot;. For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid. | [optional] 
- **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot; | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names or properties to sort by, each suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;.              The fields that can be sorted on are FeeCode, DisplayName, Description, Origin, CalculationBase, AccrualCurrency,              Treatment, TotalAnnualAccrualAmount, FeeRatePercentage, PayableFrequency, BusinessDayConvention, StartDate, EndDate,              NavTypeCode, FeeTypeId.Scope, FeeTypeId.Code, PortfolioId.Scope, PortfolioId.Code, AnchorDate.Day and AnchorDate.Month.              To sort on a property from the &#39;Fee&#39; domain, specify \&quot;Properties[{domain}/{scope}/{code}]\&quot;, for example              \&quot;Properties[Fee/Account/Id] ASC\&quot;. Sorting on any other field of a Fee returns a 400 that names the field. | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the &#39;Fee&#39; domain to decorate onto each Fee.              These must take the format {domain}/{scope}/{code}, for example &#39;Fee/Account/Id&#39;. | [optional] 
 
 ### Return type
@@ -6786,7 +7001,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **list_partner_capital_accounts**
-> PagedResourceListOfPartnerCapitalAccount list_partner_capital_accounts(scope, code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, page=page, limit=limit)
+> ResourceListWithWarningsOfPartnerCapitalAccount list_partner_capital_accounts(scope, code, period_start=period_start, period_end=period_end, nav_type_code=nav_type_code, as_at=as_at, page=page, limit=limit)
 
 [EARLY ACCESS] ListPartnerCapitalAccounts: [EARLY ACCESS] ListPartnerCapitalAccounts: List the capital account statements of a fund's partners.
 
@@ -6875,7 +7090,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PagedResourceListOfPartnerCapitalAccount**](PagedResourceListOfPartnerCapitalAccount.md)
+[**ResourceListWithWarningsOfPartnerCapitalAccount**](ResourceListWithWarningsOfPartnerCapitalAccount.md)
 
 ### HTTP request headers
 
@@ -7394,7 +7609,7 @@ Name | Type | Description  | Notes
 
 [EARLY ACCESS] ListValuationPointComplexMarketData: List the Complex Market Data for the given Fund and Valuation Point.
 
-Lists all complex market data within the effective date range of the specified Valuation Point for a Fund,  including any items added via a Complex Close (Post-Close Activity).
+Lists the complex market data that the valuation of the specified Valuation Point consumed for a Fund,  including any items added via a Complex Close (Post-Close Activity).                Complex market data that is available but that the valuation did not consume is not listed, so a Fund whose holdings are all priced from quotes returns no rows.
 
 ### Example
 
@@ -7449,7 +7664,7 @@ def main():
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_json("")
     # valuation_point_data_query_parameters = ValuationPointDataQueryParameters.from_dict({})
     valuation_point_data_query_parameters = ValuationPointDataQueryParameters()
-    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified. (optional)
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version               of each item if not specified. (optional)
     limit = 56 # int | When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. (optional)
     page = 'page_example' # str | The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData. (optional)
     nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
@@ -7475,7 +7690,7 @@ Name | Type | Description  | Notes
  **scope** | **str**| The scope of the Fund. | 
  **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
  **valuation_point_data_query_parameters** | [**ValuationPointDataQueryParameters**](ValuationPointDataQueryParameters.md)| The arguments to use for querying the complex market data. | 
- **as_at** | **datetime**| The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version              of each item if not specified. | [optional] 
+ **as_at** | **datetime**| The asAt datetime at which to retrieve complex market data. Defaults to returning the latest version               of each item if not specified. | [optional] 
  **limit** | **int**| When paginating, limit the number of returned results to this many. Defaults to 100 if not specified. | [optional] 
  **page** | **str**| The pagination token to use to continue listing complex market data from a previous call to ListValuationPointComplexMarketData. | [optional] 
  **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 

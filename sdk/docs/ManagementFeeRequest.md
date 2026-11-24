@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **basis** | **str** | The capital base the fee is charged on. Available values: Auto, CommittedCapital, InvestedCapital. Auto charges on committed capital until the investment period ends and on invested capital after. | [optional] 
 **offsets** | [**List[ManagementFeeOffset]**](ManagementFeeOffset.md) | Fee income received by the manager that offsets the management fee. | [optional] 
 **book** | **bool** | When true, the net fee per partner is booked. | [optional] 
+**prepaid** | **bool** | When true with book, the period&#39;s fee is booked in advance: the fund prepays each partner&#39;s gross fee per component against the fee payable at the period&#39;s start, and the partnership ledger is not charged. Offsets are not prepaid. Fee runs accruing inside the period then charge the fee against the prepayment, up to its balance and at the prepayment&#39;s rate, and any excess against the payable; an offset arising inside the period reduces the payable, and any part of it above the payable is booked as a receivable from the manager. Defaults to false. | [optional] 
 ## Example
 
 ```python
@@ -24,7 +25,9 @@ basis: Optional[StrictStr] = "example_basis"
 offsets: Optional[List[ManagementFeeOffset]] = # Replace with your value
 book: Optional[StrictBool] = # Replace with your value
 book:Optional[StrictBool] = None
-management_fee_request_instance = ManagementFeeRequest(period_start=period_start, period_end=period_end, basis=basis, offsets=offsets, book=book)
+prepaid: Optional[StrictBool] = # Replace with your value
+prepaid:Optional[StrictBool] = None
+management_fee_request_instance = ManagementFeeRequest(period_start=period_start, period_end=period_end, basis=basis, offsets=offsets, book=book, prepaid=prepaid)
 
 ```
 

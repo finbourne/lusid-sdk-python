@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | An identifier stable within a response, built from the category, portfolio and instrument. | 
-**category** | **str** | The kind of exception: UnmatchedDisposal, NegativePool, MissingValuation or UnclassifiedInstrument. | 
+**category** | **str** | The kind of exception: UnmatchedDisposal, NegativePool, MissingValuation, UnclassifiedInstrument or CostWithoutUnits. | 
 **severity** | **str** | Error when the exception blocks the tax computation, Warning when it casts doubt on it. | 
 **portfolio** | [**ResourceId**](ResourceId.md) |  | 
 **instrument** | **str** | The LUSID unique identifier of the instrument the exception was raised against. | [optional] 

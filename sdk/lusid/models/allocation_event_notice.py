@@ -50,7 +50,8 @@ class AllocationEventNotice(BaseModel):
     payment_hold: Optional[AllocationPaymentHold] = Field(default=None, alias="paymentHold")
     transfer: Optional[AllocationEventNoticeTransfer] = None
     watermark:  Optional[StrictStr] = Field(None,alias="watermark", description="DRAFT until the allocation event is booked, otherwise null.") 
-    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "taxWithheld", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "transfer", "watermark"]
+    call_credit_applied: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The call credit an earlier equalisation kept for the partner that this call draws on, as a positive amount. The lines show the partner's gross share; the net amount due is that share less the credit applied. Zero when no credit was applied.", alias="callCreditApplied")
+    __properties = ["fund", "event", "partner", "currency", "lines", "netAmountDue", "taxWithheld", "unfundedReconciliation", "cumulative", "gpColumn", "wire", "paymentHold", "transfer", "watermark", "callCreditApplied"]
 
     class Config:
         """Pydantic configuration"""
@@ -148,7 +149,8 @@ class AllocationEventNotice(BaseModel):
             "wire": AllocationEventNoticeWire.from_dict(obj.get("wire")) if obj.get("wire") is not None else None,
             "payment_hold": AllocationPaymentHold.from_dict(obj.get("paymentHold")) if obj.get("paymentHold") is not None else None,
             "transfer": AllocationEventNoticeTransfer.from_dict(obj.get("transfer")) if obj.get("transfer") is not None else None,
-            "watermark": obj.get("watermark")
+            "watermark": obj.get("watermark"),
+            "call_credit_applied": obj.get("callCreditApplied")
         })
         return _obj
 

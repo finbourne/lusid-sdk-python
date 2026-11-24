@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **rule_name** | **str** | The name of the rule. | 
 **left_value** | **str** | The left-side value. | [optional] 
 **right_value** | **str** | The right-side value. | [optional] 
-**difference** | **str** | The measured magnitude of the difference, ToString(ABS(leftValue - rightValue)). | [optional] 
+**difference** | **str** | The unsigned size of the difference: ABS(leftValue - rightValue) for a number, the Levenshtein distance for a string, days for a date, 0 or 1 for a boolean. | [optional] 
 **applied_tolerance** | [**ToleranceBase**](ToleranceBase.md) |  | [optional] 
 ## Example
 

@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.partner_capital_account_memo import PartnerCapitalAccountMemo
 from lusid.models.partner_capital_account_row import PartnerCapitalAccountRow
 from lusid.models.resource_id import ResourceId
+from lusid.models.warning import Warning
 
 class PartnerCapitalAccount(BaseModel):
     """
@@ -40,7 +41,8 @@ class PartnerCapitalAccount(BaseModel):
     memo: PartnerCapitalAccountMemo
     foots: StrictBool = Field(description="Whether the ending capital agrees across the quarter-to-date, year-to-date and inception-to-date columns within tolerance.")
     footing_difference: Union[StrictFloat, StrictInt] = Field(description="The largest difference between the ending capital of any two columns.", alias="footingDifference")
-    __properties = ["fundId", "investorRecordId", "currency", "periodStart", "periodEnd", "status", "rows", "memo", "foots", "footingDifference"]
+    warnings: Optional[List[Warning]] = Field(default=None, description="Warnings about the register the account was read from, for example a transaction type of the fund that books a register line outside the registry, so that line is not in the account. Empty when there is nothing to warn of.")
+    __properties = ["fundId", "investorRecordId", "currency", "periodStart", "periodEnd", "status", "rows", "memo", "foots", "footingDifference", "warnings"]
 
     class Config:
         """Pydantic configuration"""
@@ -87,6 +89,18 @@ class PartnerCapitalAccount(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of memo
         if self.memo:
             _dict['memo'] = self.memo.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in warnings (list)
+        _items = []
+        if self.warnings:
+            for _item in self.warnings:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['warnings'] = _items
+        # set to None if warnings (nullable) is None
+        # and __fields_set__ contains the field
+        if self.warnings is None and "warnings" in self.__fields_set__:
+            _dict['warnings'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +122,8 @@ class PartnerCapitalAccount(BaseModel):
             "rows": [PartnerCapitalAccountRow.from_dict(_item) for _item in obj.get("rows")] if obj.get("rows") is not None else None,
             "memo": PartnerCapitalAccountMemo.from_dict(obj.get("memo")) if obj.get("memo") is not None else None,
             "foots": obj.get("foots"),
-            "footing_difference": obj.get("footingDifference")
+            "footing_difference": obj.get("footingDifference"),
+            "warnings": [Warning.from_dict(_item) for _item in obj.get("warnings")] if obj.get("warnings") is not None else None
         })
         return _obj
 

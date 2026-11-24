@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **unfunded** | **float** | The unfunded capital. | 
 **funded** | **float** | The funded capital. | 
 **outstanding_calls** | **float** | Capital called but not yet paid in, counting capital that was returned as recallable and has since been recalled. Omitted while a line that has had returned capital marked recallable has not been rebuilt with recalled capital as a balance, since the figure could then miss an unpaid recall. | [optional] 
+**call_credit** | **float** | The credit an equalisation kept against the line&#39;s future calls, less what later calls have drawn on it: a liability to the partner, not capital, until a call applies it. Zero when the line holds none. | [optional] 
 ## Example
 
 ```python
@@ -29,7 +30,8 @@ recallable: Union[StrictFloat, StrictInt] = # Replace with your value
 unfunded: Union[StrictFloat, StrictInt] = # Replace with your value
 funded: Union[StrictFloat, StrictInt] = # Replace with your value
 outstanding_calls: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
-fund_partner_balances_instance = FundPartnerBalances(committed=committed, uncalled_commitment=uncalled_commitment, paid_in=paid_in, returned=returned, recallable=recallable, unfunded=unfunded, funded=funded, outstanding_calls=outstanding_calls)
+call_credit: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+fund_partner_balances_instance = FundPartnerBalances(committed=committed, uncalled_commitment=uncalled_commitment, paid_in=paid_in, returned=returned, recallable=recallable, unfunded=unfunded, funded=funded, outstanding_calls=outstanding_calls, call_credit=call_credit)
 
 ```
 
