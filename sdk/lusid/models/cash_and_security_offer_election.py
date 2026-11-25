@@ -37,7 +37,8 @@ class CashAndSecurityOfferElection(BaseModel):
     units_ratio: UnitsRatio = Field(alias="unitsRatio")
     consent_fee_price: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Optional. The consent fee paid to holders who consent, on top of the exchange consideration. Quoted per 1,000 of face for bonds, using the current notional at the effective date of the event, and per unit for other instruments. Must be greater than 0. Required together with ConsentFeeCurrency, and only supported on an ExchangeOfferEvent.", alias="consentFeePrice")
     consent_fee_currency:  Optional[StrictStr] = Field(None,alias="consentFeeCurrency", description="Optional. Currency of the consent fee. Required if a consent fee price is provided, and only supported on an ExchangeOfferEvent.") 
-    __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio", "consentFeePrice", "consentFeeCurrency"]
+    payment_date: Optional[datetime] = Field(default=None, description="Optional. The date this option pays, for both its cash and its security. On MergerEvent,  RepurchaseOfferEvent and ExchangeOfferEvent it sets the settlement date of this option's transactions;  when omitted, the event-level date applies. Not supported on other events.", alias="paymentDate")
+    __properties = ["cashOfferCurrency", "cashOfferPrice", "costFactor", "electionKey", "isChosen", "isDefault", "unitsRatio", "consentFeePrice", "consentFeeCurrency", "paymentDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -89,6 +90,11 @@ class CashAndSecurityOfferElection(BaseModel):
         if self.consent_fee_currency is None and "consent_fee_currency" in self.__fields_set__:
             _dict['consentFeeCurrency'] = None
 
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
         return _dict
 
     @classmethod
@@ -109,7 +115,8 @@ class CashAndSecurityOfferElection(BaseModel):
             "is_default": obj.get("isDefault"),
             "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
             "consent_fee_price": obj.get("consentFeePrice"),
-            "consent_fee_currency": obj.get("consentFeeCurrency")
+            "consent_fee_currency": obj.get("consentFeeCurrency"),
+            "payment_date": obj.get("paymentDate")
         })
         return _obj
 

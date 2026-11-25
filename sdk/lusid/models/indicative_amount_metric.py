@@ -30,7 +30,7 @@ class IndicativeAmountMetric(BaseModel):
     """
     seed_amount:  StrictStr = Field(...,alias="seedAmount") 
     window: Optional[ReturnsMetricWindow] = None
-    type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount.") 
+    type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount, Volatility.") 
     alias:  Optional[StrictStr] = Field(None,alias="alias") 
     __properties = ["seedAmount", "window", "type", "alias"]
 

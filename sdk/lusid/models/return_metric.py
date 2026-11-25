@@ -29,7 +29,7 @@ class ReturnMetric(BaseModel):
     The rate of return over each period of the grid, or over a window looking back from each period when  one is given.  # noqa: E501
     """
     window: Optional[ReturnsMetricWindow] = None
-    type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount.") 
+    type:  StrictStr = Field(...,alias="type", description="Available values: Return, IndicativeAmount, Volatility.") 
     alias:  Optional[StrictStr] = Field(None,alias="alias") 
     __properties = ["window", "type", "alias"]
 

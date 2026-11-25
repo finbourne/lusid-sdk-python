@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **notional** | **float** | The notional quantity that applies to both the premium and protection legs. | 
 **is_non_standard** | **bool** | By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard&#x3D;true, the premium schedule uses the stated start and maturity dates. The payment  frequency can be any whole number of days, weeks, months, quarters, half-years or years, for example  1W, 1M or 4M. Term (T) and business-day (BD) frequencies are not accepted. The payment dates are  generated as for a fixed leg with a short front stub: backwards from the maturity, so a term that is not  a whole number of payment periods has a short first period. When the roll convention is a day of the  month (1 to 30) or EndOfMonth, each payment date falls on that day and the final period runs from the  last roll date to the maturity, for example a CDS on ABS paying on the 25th. Payments are adjusted to the  following business day. IMM and nth-weekday roll conventions are not accepted. | [optional] 
 **protection_detail_specification** | [**CdsProtectionDetailSpecification**](CdsProtectionDetailSpecification.md) |  | [optional] 
+**index_convention** | [**IndexConvention**](IndexConvention.md) |  | [optional] 
+**index_convention_name** | [**FlowConventionName**](FlowConventionName.md) |  | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
 **instrument_type** | **str** | Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond. | 
@@ -37,10 +39,12 @@ notional: Union[StrictFloat, StrictInt] = # Replace with your value
 is_non_standard: Optional[StrictBool] = # Replace with your value
 is_non_standard:Optional[StrictBool] = None
 protection_detail_specification: Optional[CdsProtectionDetailSpecification] = # Replace with your value
+index_convention: Optional[IndexConvention] = # Replace with your value
+index_convention_name: Optional[FlowConventionName] = # Replace with your value
 additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, is_non_standard=is_non_standard, protection_detail_specification=protection_detail_specification, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+cds_index_instance = CdsIndex(start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, identifiers=identifiers, basket=basket, convention_name=convention_name, notional=notional, is_non_standard=is_non_standard, protection_detail_specification=protection_detail_specification, index_convention=index_convention, index_convention_name=index_convention_name, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

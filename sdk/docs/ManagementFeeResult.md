@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **totals** | [**ManagementFeeTotals**](ManagementFeeTotals.md) |  | 
 **booked_transaction_ids** | **List[str]** | The identifiers of the transactions booked, if any. | 
 **fund_transaction_ids** | **List[str]** | The identifiers of the fee transactions the run holds in the fund&#39;s own books, one per partner and fee component, when the run was booked. | [optional] 
-**warnings** | **List[str]** | What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee&#39;s, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored). Absent when there is nothing to warn of. | [optional] 
+**warnings** | **List[str]** | What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee&#39;s, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored), or a prepaid period in the year to the run&#39;s period end whose split between the fee payable and the receivable from the manager is out of date, because a payment to the manager was booked, amended or cancelled since it was derived (FeePrepaidSplitStale): its balances are provisional until the period is re-split. Absent when there is nothing to warn of. | [optional] 
 ## Example
 
 ```python

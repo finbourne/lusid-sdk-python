@@ -360,6 +360,7 @@ from lusid.models.collateral_allocation_override import CollateralAllocationOver
 from lusid.models.collateral_funding_terms import CollateralFundingTerms
 from lusid.models.collateral_instrument import CollateralInstrument
 from lusid.models.collateral_optimisation_terms import CollateralOptimisationTerms
+from lusid.models.collateral_substitution_constituent import CollateralSubstitutionConstituent
 from lusid.models.commodity_calendar_schedule import CommodityCalendarSchedule
 from lusid.models.commodity_calendar_swap import CommodityCalendarSwap
 from lusid.models.commodity_calendar_swap_cash_flow_event import CommodityCalendarSwapCashFlowEvent
@@ -694,8 +695,13 @@ from lusid.models.facility_commitment_fee_event import FacilityCommitmentFeeEven
 from lusid.models.facility_draw_event import FacilityDrawEvent
 from lusid.models.facility_interest_event import FacilityInterestEvent
 from lusid.models.facility_limit_change import FacilityLimitChange
+from lusid.models.facility_payable_check import FacilityPayableCheck
+from lusid.models.facility_payable_difference import FacilityPayableDifference
+from lusid.models.facility_payable_line import FacilityPayableLine
 from lusid.models.facility_repayment_event import FacilityRepaymentEvent
 from lusid.models.facility_request import FacilityRequest
+from lusid.models.facility_reseed_flow import FacilityReseedFlow
+from lusid.models.facility_reseed_result import FacilityReseedResult
 from lusid.models.fee import Fee
 from lusid.models.fee_accrual import FeeAccrual
 from lusid.models.fee_calculation_request import FeeCalculationRequest
@@ -721,6 +727,7 @@ from lusid.models.filter_step_request import FilterStepRequest
 from lusid.models.filtered_fund_id_list import FilteredFundIdList
 from lusid.models.filtered_portfolio_id_list import FilteredPortfolioIdList
 from lusid.models.finalised_valuation_point import FinalisedValuationPoint
+from lusid.models.fixed_business_day_lookback_activity_window import FixedBusinessDayLookbackActivityWindow
 from lusid.models.fixed_leg import FixedLeg
 from lusid.models.fixed_leg_all_of_overrides import FixedLegAllOfOverrides
 from lusid.models.fixed_period_lookback_activity_window import FixedPeriodLookbackActivityWindow
@@ -731,6 +738,7 @@ from lusid.models.flexible_loan_pricer_options import FlexibleLoanPricerOptions
 from lusid.models.flexible_repo import FlexibleRepo
 from lusid.models.flexible_repo_cash_flow_event import FlexibleRepoCashFlowEvent
 from lusid.models.flexible_repo_collateral_event import FlexibleRepoCollateralEvent
+from lusid.models.flexible_repo_collateral_substitution_event import FlexibleRepoCollateralSubstitutionEvent
 from lusid.models.flexible_repo_full_closure_event import FlexibleRepoFullClosureEvent
 from lusid.models.flexible_repo_interest_payment_event import FlexibleRepoInterestPaymentEvent
 from lusid.models.flexible_repo_partial_closure_event import FlexibleRepoPartialClosureEvent
@@ -1026,7 +1034,10 @@ from lusid.models.lusid_unique_id import LusidUniqueId
 from lusid.models.lusid_validation_problem_details import LusidValidationProblemDetails
 from lusid.models.management_fee_line import ManagementFeeLine
 from lusid.models.management_fee_offset import ManagementFeeOffset
+from lusid.models.management_fee_prepaid_split import ManagementFeePrepaidSplit
 from lusid.models.management_fee_request import ManagementFeeRequest
+from lusid.models.management_fee_resplit_request import ManagementFeeResplitRequest
+from lusid.models.management_fee_resplit_result import ManagementFeeResplitResult
 from lusid.models.management_fee_result import ManagementFeeResult
 from lusid.models.management_fee_totals import ManagementFeeTotals
 from lusid.models.mapped_string import MappedString
@@ -1489,6 +1500,7 @@ from lusid.models.rec_activity_window import RecActivityWindow
 from lusid.models.rec_aged_result import RecAgedResult
 from lusid.models.rec_approval_decision import RecApprovalDecision
 from lusid.models.rec_as_at_policy import RecAsAtPolicy
+from lusid.models.rec_business_day_lookback_side import RecBusinessDayLookbackSide
 from lusid.models.rec_closed_exception_counts import RecClosedExceptionCounts
 from lusid.models.rec_closed_period_reference import RecClosedPeriodReference
 from lusid.models.rec_closed_periods import RecClosedPeriods
@@ -1550,6 +1562,7 @@ from lusid.models.rec_run_log import RecRunLog
 from lusid.models.rec_run_log_entry import RecRunLogEntry
 from lusid.models.rec_submission import RecSubmission
 from lusid.models.rec_superseded_run import RecSupersededRun
+from lusid.models.rec_time_of_day import RecTimeOfDay
 from lusid.models.rec_user_comment import RecUserComment
 from lusid.models.recallable_capital_expiry_event import RecallableCapitalExpiryEvent
 from lusid.models.recipe_block import RecipeBlock
@@ -2188,6 +2201,7 @@ from lusid.models.virtual_transaction_overrides_response import VirtualTransacti
 from lusid.models.vol_cube_options import VolCubeOptions
 from lusid.models.vol_surface_shift_definition import VolSurfaceShiftDefinition
 from lusid.models.vol_surface_shift_mode import VolSurfaceShiftMode
+from lusid.models.volatility_metric import VolatilityMetric
 from lusid.models.volatility_swap import VolatilitySwap
 from lusid.models.warning import Warning
 from lusid.models.warrants_exercise_event import WarrantsExerciseEvent
@@ -2574,6 +2588,7 @@ __all__ = [
     "CollateralFundingTerms",
     "CollateralInstrument",
     "CollateralOptimisationTerms",
+    "CollateralSubstitutionConstituent",
     "CommodityCalendarSchedule",
     "CommodityCalendarSwap",
     "CommodityCalendarSwapCashFlowEvent",
@@ -2908,8 +2923,13 @@ __all__ = [
     "FacilityDrawEvent",
     "FacilityInterestEvent",
     "FacilityLimitChange",
+    "FacilityPayableCheck",
+    "FacilityPayableDifference",
+    "FacilityPayableLine",
     "FacilityRepaymentEvent",
     "FacilityRequest",
+    "FacilityReseedFlow",
+    "FacilityReseedResult",
     "Fee",
     "FeeAccrual",
     "FeeCalculationRequest",
@@ -2935,6 +2955,7 @@ __all__ = [
     "FilteredFundIdList",
     "FilteredPortfolioIdList",
     "FinalisedValuationPoint",
+    "FixedBusinessDayLookbackActivityWindow",
     "FixedLeg",
     "FixedLegAllOfOverrides",
     "FixedPeriodLookbackActivityWindow",
@@ -2945,6 +2966,7 @@ __all__ = [
     "FlexibleRepo",
     "FlexibleRepoCashFlowEvent",
     "FlexibleRepoCollateralEvent",
+    "FlexibleRepoCollateralSubstitutionEvent",
     "FlexibleRepoFullClosureEvent",
     "FlexibleRepoInterestPaymentEvent",
     "FlexibleRepoPartialClosureEvent",
@@ -3240,7 +3262,10 @@ __all__ = [
     "LusidValidationProblemDetails",
     "ManagementFeeLine",
     "ManagementFeeOffset",
+    "ManagementFeePrepaidSplit",
     "ManagementFeeRequest",
+    "ManagementFeeResplitRequest",
+    "ManagementFeeResplitResult",
     "ManagementFeeResult",
     "ManagementFeeTotals",
     "MappedString",
@@ -3703,6 +3728,7 @@ __all__ = [
     "RecAgedResult",
     "RecApprovalDecision",
     "RecAsAtPolicy",
+    "RecBusinessDayLookbackSide",
     "RecClosedExceptionCounts",
     "RecClosedPeriodReference",
     "RecClosedPeriods",
@@ -3764,6 +3790,7 @@ __all__ = [
     "RecRunLogEntry",
     "RecSubmission",
     "RecSupersededRun",
+    "RecTimeOfDay",
     "RecUserComment",
     "RecallableCapitalExpiryEvent",
     "RecipeBlock",
@@ -4402,6 +4429,7 @@ __all__ = [
     "VolCubeOptions",
     "VolSurfaceShiftDefinition",
     "VolSurfaceShiftMode",
+    "VolatilityMetric",
     "VolatilitySwap",
     "Warning",
     "WarrantsExerciseEvent",

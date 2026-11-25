@@ -86,9 +86,12 @@ Method | HTTP request | Description
 [**query_cash_statement**](FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
 [**query_cash_statement_local_currency**](FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
 [**reactivate_nav_types**](FundsApi.md#reactivate_nav_types) | **POST** /api/funds/{scope}/{code}/reactivateNavTypes | [EXPERIMENTAL] ReactivateNavTypes: [EXPERIMENTAL] ReactivateNavTypes: Reactivate previously deactivated NAV types on a Fund.
+[**reseed_facility_balance**](FundsApi.md#reseed_facility_balance) | **POST** /api/funds/{scope}/{code}/facilities/{facilityCode}/$reseed | [EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility&#39;s balance from its booked draws and repayments.
+[**resplit_prepaid_management_fees**](FundsApi.md#resplit_prepaid_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$resplit | [EARLY ACCESS] ResplitPrepaidManagementFees: [EXPERIMENTAL] ResplitPrepaidManagementFees: Re-split the Fund&#39;s prepaid management fee periods.
 [**revert_valuation_point_to_estimate**](FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 [**run_partner_allocations**](FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period&#39;s income to the Fund&#39;s partners.
 [**send_back_tax_return**](FundsApi.md#send_back_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/send-back | [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
+[**set_holdings_for_fund**](FundsApi.md#set_holdings_for_fund) | **PUT** /api/funds/{scope}/{code}/holdings | [EXPERIMENTAL] SetHoldingsForFund: Set holdings for a Fund.
 [**set_share_class_instruments**](FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
 [**update_facility**](FundsApi.md#update_facility) | **PUT** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.
 [**update_valuation_point**](FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
@@ -8556,6 +8559,207 @@ Name | Type | Description  | Notes
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
+# **reseed_facility_balance**
+> FacilityReseedResult reseed_facility_balance(scope, code, facility_code, dry_run=dry_run)
+
+[EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.
+
+Rebuild the balance a Facility's limit is judged on from the draws and repayments booked on it: DealFundings  drawn from it and capital calls repaying it, in Booked or Booking status, on allocation maps whose  structureMemberId is the Fund, and FacilityDrawEvents and FacilityRepaymentEvents in the sources of the Fund's  portfolios. Afterwards the balance is the booked draws and repayments. Running it again writes nothing. A  Facility with nothing booked on it is seeded with 0. Draws and repayments still in Booking status count, and  are named in a FacilityBookingInProgress warning.  A draw or repayment written at the same time makes the re-seed fail as a concurrent modification; retry it.  A draw or repayment naming the Facility on an allocation map whose structureMemberId is not a fund cannot be  attributed, and the re-seed is refused with 409 FacilityFlowsUnattributable naming them; nothing is written,  and draws, repayments, FacilityInterestEvents and FacilityCommitmentFeeEvents on the Facility are refused the  same way until the maps are fixed and the Facility is re-seeded.  With dryRun, nothing is written: the response says what a re-seed would write, or lists the draws and  repayments that cannot be attributed. Requires the Fund's update entitlement, except for a dry run.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    facility_code = 'facility_code_example' # str | The code of the Facility to re-seed.
+    dry_run = True # bool | Report what a re-seed would write, and any draws or repayments that cannot be attributed, without writing anything. Defaults to false. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.reseed_facility_balance(scope, code, facility_code, dry_run=dry_run, opts=opts)
+
+        # [EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.
+        api_response = api_instance.reseed_facility_balance(scope, code, facility_code, dry_run=dry_run)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->reseed_facility_balance: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **facility_code** | **str**| The code of the Facility to re-seed. | 
+ **dry_run** | **bool**| Report what a re-seed would write, and any draws or repayments that cannot be attributed, without writing anything. Defaults to false. | [optional] 
+
+### Return type
+
+[**FacilityReseedResult**](FacilityReseedResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The outcome of the re-seed, or of the dry run. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **resplit_prepaid_management_fees**
+> ManagementFeeResplitResult resplit_prepaid_management_fees(scope, code, management_fee_resplit_request, as_at=as_at)
+
+[EARLY ACCESS] ResplitPrepaidManagementFees: [EXPERIMENTAL] ResplitPrepaidManagementFees: Re-split the Fund's prepaid management fee periods.
+
+Derive again, for every prepaid management fee period meeting the window, the split of its offsets between the  fee payable and a receivable from the manager, from the period's prepayment, its accruals and the payments to  the manager the Fund's books now hold, without calculating any fee again. A payment booked after a split leaves  it out of date until the period is re-split, which a valuation point over the period does before it is struck.  An unchanged split writes nothing, a re-split into a final period is its post-close activity, and a dry run  writes nothing and says which periods' splits are out of date.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+
+    # Objects can be created either via the class constructor, or using the 'from_dict' or 'from_json' methods
+    # Change the lines below to switch approach
+    # management_fee_resplit_request = ManagementFeeResplitRequest.from_json("")
+    # management_fee_resplit_request = ManagementFeeResplitRequest.from_dict({})
+    management_fee_resplit_request = ManagementFeeResplitRequest()
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the Fund, on a dry run only. Defaults to return the latest version if not specified. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.resplit_prepaid_management_fees(scope, code, management_fee_resplit_request, as_at=as_at, opts=opts)
+
+        # [EARLY ACCESS] ResplitPrepaidManagementFees: [EXPERIMENTAL] ResplitPrepaidManagementFees: Re-split the Fund's prepaid management fee periods.
+        api_response = api_instance.resplit_prepaid_management_fees(scope, code, management_fee_resplit_request, as_at=as_at)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->resplit_prepaid_management_fees: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **management_fee_resplit_request** | [**ManagementFeeResplitRequest**](ManagementFeeResplitRequest.md)| The window to re-split, and whether to write. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the Fund, on a dry run only. Defaults to return the latest version if not specified. | [optional] 
+
+### Return type
+
+[**ManagementFeeResplitResult**](ManagementFeeResplitResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The prepaid periods re-split and the fee transactions written. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
 # **revert_valuation_point_to_estimate**
 > RevertValuationPointResponse revert_valuation_point_to_estimate(scope, code, revert_valuation_point_data_request, nav_type_code=nav_type_code)
 
@@ -8862,6 +9066,112 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The tax return after the transition. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **set_holdings_for_fund**
+> AdjustHolding set_holdings_for_fund(scope, code, effective_at, adjust_holding_request, nav_type_code=nav_type_code, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
+
+[EXPERIMENTAL] SetHoldingsForFund: Set holdings for a Fund.
+
+Set the holdings of the derived portfolio a Fund maintains for a NAV type to the provided targets. LUSID will  automatically construct adjustment transactions to ensure that the entire set of holdings for the derived  portfolio are always set to the provided targets for the specified effective datetime.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    FundsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(FundsApi)
+    scope = 'scope_example' # str | The scope of the Fund.
+    code = 'code_example' # str | The code of the Fund. Together with the scope this uniquely identifies the Fund.
+    effective_at = 'effective_at_example' # str | The effective datetime or cut label at which the holdings should be set to the provided targets.
+    adjust_holding_request = [{"instrumentIdentifiers":{"Instrument/default/Figi":"BBG000C6K6G9","Instrument/default/Isin":"GB00BH4HKS39"},"subHoldingKeys":{"Transaction/Algo/Name":{"key":"Transaction/Algo/Name","value":{"labelValue":"Algo1"}}},"properties":{"Holding/ibor/CurrentMarketValue":{"key":"Holding/ibor/CurrentMarketValue","value":{"metricValue":{"value":1000}}}},"taxLots":[{"units":100,"cost":{"amount":10000,"currency":"GBP"},"portfolioCost":10000,"price":100,"purchaseDate":"2018-03-05T00:00:00.0000000+00:00","settlementDate":"2018-03-08T00:00:00.0000000+00:00","notionalCost":100,"variationMargin":25,"variationMarginPortfolioCcy":25,"chargeableGainsTakeOn":{"role":"Holding1982","indexation":125050,"originalCost":10000,"marketValue1982":50000,"rebasingElection":false,"additions":[{"date":"1990-06-01T00:00:00.0000000+00:00","cost":130908.33,"indexation":48500,"paidCost":172500}]}}],"currency":"GBP","custodianAccountId":{"scope":"CustodianAccountScope","code":"CustodianAccountCode"}}] # List[AdjustHoldingRequest] | The complete set of target holdings for the Fund's derived portfolio.
+    nav_type_code = 'nav_type_code_example' # str | When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. (optional)
+    reconciliation_methods = ['reconciliation_methods_example'] # List[str] | Optional parameter for specifying a reconciliation method: e.g. FxForward. Available values: FxForward. (optional)
+    override_movement_name = 'override_movement_name_example' # str | Optional parameter to override movement name for the set holdings. (optional)
+    override_offset_movement_name = 'override_offset_movement_name_example' # str | Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.set_holdings_for_fund(scope, code, effective_at, adjust_holding_request, nav_type_code=nav_type_code, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name, opts=opts)
+
+        # [EXPERIMENTAL] SetHoldingsForFund: Set holdings for a Fund.
+        api_response = api_instance.set_holdings_for_fund(scope, code, effective_at, adjust_holding_request, nav_type_code=nav_type_code, reconciliation_methods=reconciliation_methods, override_movement_name=override_movement_name, override_offset_movement_name=override_offset_movement_name)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling FundsApi->set_holdings_for_fund: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **scope** | **str**| The scope of the Fund. | 
+ **code** | **str**| The code of the Fund. Together with the scope this uniquely identifies the Fund. | 
+ **effective_at** | **str**| The effective datetime or cut label at which the holdings should be set to the provided targets. | 
+ **adjust_holding_request** | [**List[AdjustHoldingRequest]**](AdjustHoldingRequest.md)| The complete set of target holdings for the Fund&#39;s derived portfolio. | 
+ **nav_type_code** | **str**| When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used. | [optional] 
+ **reconciliation_methods** | [**List[str]**](str.md)| Optional parameter for specifying a reconciliation method: e.g. FxForward. Available values: FxForward. | [optional] 
+ **override_movement_name** | **str**| Optional parameter to override movement name for the set holdings. | [optional] 
+ **override_offset_movement_name** | **str**| Optional parameter will create an additional offset movement for the set holdings with this new name and transaction type: CarryAsPnl | [optional] 
+
+### Return type
+
+[**AdjustHolding**](AdjustHolding.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The version of the derived portfolio that contains the newly set holdings |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

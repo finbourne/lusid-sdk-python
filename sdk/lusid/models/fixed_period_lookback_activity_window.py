@@ -28,7 +28,7 @@ class FixedPeriodLookbackActivityWindow(BaseModel):
     The activity window whose since bound on each side is that side's effectiveAt less a fixed ISO 8601 period,  the same period on both sides. Stateless, so it is accepted under every effectiveAtProgression.  # noqa: E501
     """
     lookback_period:  StrictStr = Field(...,alias="lookbackPeriod", description="The ISO 8601 period each side's window reaches back from its effectiveAt, e.g. P1D or PT12H. Whole counts of years, months, days, hours, minutes and seconds (P[n]Y[n]M[n]DT[n]H[n]M[n]S); weeks and fractions are not supported. Must be greater than zero, and applies to both sides. Evaluated in UTC, so P1D is exactly 24 hours. The since bound is exclusive.") 
-    window_type:  StrictStr = Field(...,alias="windowType", description="Polymorphic discriminator. Supported types: Contiguous, FixedPeriodLookback. Contiguous requires effectiveAtProgression Series; FixedPeriodLookback is accepted under any progression. Available values: Contiguous, FixedPeriodLookback, Explicit, ClosedPeriod, ContiguousAsAt.") 
+    window_type:  StrictStr = Field(...,alias="windowType", description="Polymorphic discriminator. Supported types: Contiguous, FixedPeriodLookback, FixedBusinessDayLookback. Contiguous requires effectiveAtProgression Series; the lookback types are accepted under any progression. Available values: Contiguous, FixedPeriodLookback, FixedBusinessDayLookback, Explicit, ClosedPeriod, ContiguousAsAt.") 
     __properties = ["lookbackPeriod", "windowType"]
 
     class Config:

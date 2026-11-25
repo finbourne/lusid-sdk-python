@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **spreads** | [**SwingSpreads**](SwingSpreads.md) |  | [optional] 
 **inflow_trigger** | [**SwingTrigger**](SwingTrigger.md) |  | [optional] 
 **outflow_trigger** | [**SwingTrigger**](SwingTrigger.md) |  | [optional] 
-**approval_mode** | **str** | Who settles the swing decision a valuation point deals at. Automatic, the default, finalises the valuation point on the engine&#39;s proposal. Manual holds the proposal: the valuation point cannot be finalised until a manager has submitted a pricingMethodologyOverride on it, equal to the proposal to approve it or different to overrule it. Must be Automatic when defaultSpreadSource is omitted, because a price that never swings has no decision to approve. Available values: Automatic, Manual. | [optional] 
+**approval_mode** | **str** | Who settles the swing decision a valuation point deals at. Automatic, the default, finalises the valuation point on the engine&#39;s proposal. Manual holds the proposal: the valuation point cannot be finalised until a manager has submitted a pricingMethodologyOverride on it, equal to the proposal to approve it or different to overrule it. A valuation point keeps the approval mode in force when it was struck, with the rest of its pricing methodology, so a change reaches an open valuation point only once it is struck again. Must be Automatic when defaultSpreadSource is omitted, because a price that never swings has no decision to approve. Available values: Automatic, Manual. | [optional] 
 ## Example
 
 ```python

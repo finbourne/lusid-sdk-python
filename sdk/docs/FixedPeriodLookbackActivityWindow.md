@@ -5,7 +5,7 @@ The activity window whose since bound on each side is that side's effectiveAt le
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **lookback_period** | **str** | The ISO 8601 period each side&#39;s window reaches back from its effectiveAt, e.g. P1D or PT12H. Whole counts of years, months, days, hours, minutes and seconds (P[n]Y[n]M[n]DT[n]H[n]M[n]S); weeks and fractions are not supported. Must be greater than zero, and applies to both sides. Evaluated in UTC, so P1D is exactly 24 hours. The since bound is exclusive. | 
-**window_type** | **str** | Polymorphic discriminator. Supported types: Contiguous, FixedPeriodLookback. Contiguous requires effectiveAtProgression Series; FixedPeriodLookback is accepted under any progression. Available values: Contiguous, FixedPeriodLookback, Explicit, ClosedPeriod, ContiguousAsAt. | 
+**window_type** | **str** | Polymorphic discriminator. Supported types: Contiguous, FixedPeriodLookback, FixedBusinessDayLookback. Contiguous requires effectiveAtProgression Series; the lookback types are accepted under any progression. Available values: Contiguous, FixedPeriodLookback, FixedBusinessDayLookback, Explicit, ClosedPeriod, ContiguousAsAt. | 
 ## Example
 
 ```python

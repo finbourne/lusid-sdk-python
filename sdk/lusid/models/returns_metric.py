@@ -24,9 +24,10 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 from lusid.models.indicative_amount_metric import IndicativeAmountMetric
 from lusid.models.return_metric import ReturnMetric
+from lusid.models.volatility_metric import VolatilityMetric
 
 
-RETURNSMETRIC_ONE_OF_SCHEMAS = ["IndicativeAmountMetric", "ReturnMetric"]
+RETURNSMETRIC_ONE_OF_SCHEMAS = ["IndicativeAmountMetric", "ReturnMetric", "VolatilityMetric"]
 
 class ReturnsMetric(BaseModel):
     """
@@ -36,8 +37,10 @@ class ReturnsMetric(BaseModel):
     oneof_schema_1_validator: Optional[IndicativeAmountMetric] = None
     # data type: ReturnMetric
     oneof_schema_2_validator: Optional[ReturnMetric] = None
+    # data type: VolatilityMetric
+    oneof_schema_3_validator: Optional[VolatilityMetric] = None
     if TYPE_CHECKING:
-        actual_instance: Union[IndicativeAmountMetric, ReturnMetric]
+        actual_instance: Union[IndicativeAmountMetric, ReturnMetric, VolatilityMetric]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(RETURNSMETRIC_ONE_OF_SCHEMAS, const=True)
@@ -76,12 +79,18 @@ class ReturnsMetric(BaseModel):
         else:
             match += 1
             matchclass = matchclass + " ReturnMetric"
+        # validate data type: VolatilityMetric
+        if not isinstance(v, VolatilityMetric):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `VolatilityMetric`")
+        else:
+            match += 1
+            matchclass = matchclass + " VolatilityMetric"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: Matched classes " + matchclass)
+            raise ValueError("Multiple matches found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric, VolatilityMetric. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric, VolatilityMetric. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -113,6 +122,11 @@ class ReturnsMetric(BaseModel):
             instance.actual_instance = ReturnMetric.from_json(json_str)
             return instance
 
+        # check if data type is `VolatilityMetric`
+        if _data_type == "Volatility":
+            instance.actual_instance = VolatilityMetric.from_json(json_str)
+            return instance
+
         # check if data type is `IndicativeAmountMetric`
         if _data_type == "IndicativeAmountMetric":
             instance.actual_instance = IndicativeAmountMetric.from_json(json_str)
@@ -121,6 +135,11 @@ class ReturnsMetric(BaseModel):
         # check if data type is `ReturnMetric`
         if _data_type == "ReturnMetric":
             instance.actual_instance = ReturnMetric.from_json(json_str)
+            return instance
+
+        # check if data type is `VolatilityMetric`
+        if _data_type == "VolatilityMetric":
+            instance.actual_instance = VolatilityMetric.from_json(json_str)
             return instance
 
         # deserialize data into IndicativeAmountMetric
@@ -137,13 +156,20 @@ class ReturnsMetric(BaseModel):
             matchclass =matchclass + " ReturnMetric"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into VolatilityMetric
+        try:
+            instance.actual_instance = VolatilityMetric.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " VolatilityMetric"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+            raise ValueError("Multiple matches found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric, VolatilityMetric. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into ReturnsMetric with oneOf schemas: IndicativeAmountMetric, ReturnMetric, VolatilityMetric. Details: " + ", ".join(error_messages))
         else:
             return instance
 

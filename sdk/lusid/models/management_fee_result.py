@@ -38,7 +38,7 @@ class ManagementFeeResult(BaseModel):
     totals: ManagementFeeTotals
     booked_transaction_ids: List[StrictStr] = Field(description="The identifiers of the transactions booked, if any.", alias="bookedTransactionIds")
     fund_transaction_ids: Optional[List[StrictStr]] = Field(default=None, description="The identifiers of the fee transactions the run holds in the fund's own books, one per partner and fee component, when the run was booked.", alias="fundTransactionIds")
-    warnings: Optional[List[StrictStr]] = Field(default=None, description="What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee's, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored). Absent when there is nothing to warn of.")
+    warnings: Optional[List[StrictStr]] = Field(default=None, description="What booking the run noticed but did not refuse, each starting with its code, for example a payment to the manager on the fee payable in a currency other than the fee's, which settles none of the payable an offset is set against (FeePaymentCurrencyIgnored), or a prepaid period in the year to the run's period end whose split between the fee payable and the receivable from the manager is out of date, because a payment to the manager was booked, amended or cancelled since it was derived (FeePrepaidSplitStale): its balances are provisional until the period is re-split. Absent when there is nothing to warn of.")
     __properties = ["fundId", "periodStart", "periodEnd", "basis", "lines", "totals", "bookedTransactionIds", "fundTransactionIds", "warnings"]
 
     class Config:

@@ -23,10 +23,11 @@ from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
 from lusid.models.contiguous_activity_window import ContiguousActivityWindow
+from lusid.models.fixed_business_day_lookback_activity_window import FixedBusinessDayLookbackActivityWindow
 from lusid.models.fixed_period_lookback_activity_window import FixedPeriodLookbackActivityWindow
 
 
-RECACTIVITYWINDOW_ONE_OF_SCHEMAS = ["ContiguousActivityWindow", "FixedPeriodLookbackActivityWindow"]
+RECACTIVITYWINDOW_ONE_OF_SCHEMAS = ["ContiguousActivityWindow", "FixedBusinessDayLookbackActivityWindow", "FixedPeriodLookbackActivityWindow"]
 
 class RecActivityWindow(BaseModel):
     """
@@ -34,10 +35,12 @@ class RecActivityWindow(BaseModel):
     """
     # data type: ContiguousActivityWindow
     oneof_schema_1_validator: Optional[ContiguousActivityWindow] = None
+    # data type: FixedBusinessDayLookbackActivityWindow
+    oneof_schema_2_validator: Optional[FixedBusinessDayLookbackActivityWindow] = None
     # data type: FixedPeriodLookbackActivityWindow
-    oneof_schema_2_validator: Optional[FixedPeriodLookbackActivityWindow] = None
+    oneof_schema_3_validator: Optional[FixedPeriodLookbackActivityWindow] = None
     if TYPE_CHECKING:
-        actual_instance: Union[ContiguousActivityWindow, FixedPeriodLookbackActivityWindow]
+        actual_instance: Union[ContiguousActivityWindow, FixedBusinessDayLookbackActivityWindow, FixedPeriodLookbackActivityWindow]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(RECACTIVITYWINDOW_ONE_OF_SCHEMAS, const=True)
@@ -70,6 +73,12 @@ class RecActivityWindow(BaseModel):
         else:
             match += 1
             matchclass = matchclass + " ContiguousActivityWindow"
+        # validate data type: FixedBusinessDayLookbackActivityWindow
+        if not isinstance(v, FixedBusinessDayLookbackActivityWindow):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `FixedBusinessDayLookbackActivityWindow`")
+        else:
+            match += 1
+            matchclass = matchclass + " FixedBusinessDayLookbackActivityWindow"
         # validate data type: FixedPeriodLookbackActivityWindow
         if not isinstance(v, FixedPeriodLookbackActivityWindow):
             error_messages.append(f"Error! Input type `{type(v)}` is not `FixedPeriodLookbackActivityWindow`")
@@ -78,10 +87,10 @@ class RecActivityWindow(BaseModel):
             matchclass = matchclass + " FixedPeriodLookbackActivityWindow"
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedPeriodLookbackActivityWindow. Details: Matched classes " + matchclass)
+            raise ValueError("Multiple matches found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedBusinessDayLookbackActivityWindow, FixedPeriodLookbackActivityWindow. Details: Matched classes " + matchclass)
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedPeriodLookbackActivityWindow. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedBusinessDayLookbackActivityWindow, FixedPeriodLookbackActivityWindow. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -108,6 +117,11 @@ class RecActivityWindow(BaseModel):
             instance.actual_instance = ContiguousActivityWindow.from_json(json_str)
             return instance
 
+        # check if data type is `FixedBusinessDayLookbackActivityWindow`
+        if _data_type == "FixedBusinessDayLookback":
+            instance.actual_instance = FixedBusinessDayLookbackActivityWindow.from_json(json_str)
+            return instance
+
         # check if data type is `FixedPeriodLookbackActivityWindow`
         if _data_type == "FixedPeriodLookback":
             instance.actual_instance = FixedPeriodLookbackActivityWindow.from_json(json_str)
@@ -116,6 +130,11 @@ class RecActivityWindow(BaseModel):
         # check if data type is `ContiguousActivityWindow`
         if _data_type == "ContiguousActivityWindow":
             instance.actual_instance = ContiguousActivityWindow.from_json(json_str)
+            return instance
+
+        # check if data type is `FixedBusinessDayLookbackActivityWindow`
+        if _data_type == "FixedBusinessDayLookbackActivityWindow":
+            instance.actual_instance = FixedBusinessDayLookbackActivityWindow.from_json(json_str)
             return instance
 
         # check if data type is `FixedPeriodLookbackActivityWindow`
@@ -130,6 +149,13 @@ class RecActivityWindow(BaseModel):
             matchclass =matchclass + " ContiguousActivityWindow"
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into FixedBusinessDayLookbackActivityWindow
+        try:
+            instance.actual_instance = FixedBusinessDayLookbackActivityWindow.from_json(json_str)
+            match += 1
+            matchclass =matchclass + " FixedBusinessDayLookbackActivityWindow"
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
         # deserialize data into FixedPeriodLookbackActivityWindow
         try:
             instance.actual_instance = FixedPeriodLookbackActivityWindow.from_json(json_str)
@@ -140,10 +166,10 @@ class RecActivityWindow(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedPeriodLookbackActivityWindow. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
+            raise ValueError("Multiple matches found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedBusinessDayLookbackActivityWindow, FixedPeriodLookbackActivityWindow. Matches: "+matchclass+", Details: " + ", ".join(error_messages) + ", JSON: " + json_str)
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedPeriodLookbackActivityWindow. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into RecActivityWindow with oneOf schemas: ContiguousActivityWindow, FixedBusinessDayLookbackActivityWindow, FixedPeriodLookbackActivityWindow. Details: " + ", ".join(error_messages))
         else:
             return instance
 

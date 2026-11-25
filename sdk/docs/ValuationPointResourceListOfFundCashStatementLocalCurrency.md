@@ -5,6 +5,7 @@ ResourceList with extra header fields used by the various ValuationPoint endpoin
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **start_valuation_point** | [**DiaryEntry**](DiaryEntry.md) |  | [optional] 
+**diagnostics** | [**List[ValuationPointDiagnostic]**](ValuationPointDiagnostic.md) |  | [optional] 
 **version** | [**Version**](Version.md) |  | 
 **values** | [**List[FundCashStatementLocalCurrency]**](FundCashStatementLocalCurrency.md) |  | 
 **href** | **str** |  | [optional] 
@@ -21,13 +22,14 @@ from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat
 from datetime import datetime
 
 start_valuation_point: Optional[DiaryEntry] = # Replace with your value
+diagnostics: Optional[List[ValuationPointDiagnostic]] = None
 version: Version
 values: List[FundCashStatementLocalCurrency]
 href: Optional[StrictStr] = "example_href"
 next_page: Optional[StrictStr] = "example_next_page"
 previous_page: Optional[StrictStr] = "example_previous_page"
 links: Optional[List[Link]] = None
-valuation_point_resource_list_of_fund_cash_statement_local_currency_instance = ValuationPointResourceListOfFundCashStatementLocalCurrency(start_valuation_point=start_valuation_point, version=version, values=values, href=href, next_page=next_page, previous_page=previous_page, links=links)
+valuation_point_resource_list_of_fund_cash_statement_local_currency_instance = ValuationPointResourceListOfFundCashStatementLocalCurrency(start_valuation_point=start_valuation_point, diagnostics=diagnostics, version=version, values=values, href=href, next_page=next_page, previous_page=previous_page, links=links)
 
 ```
 

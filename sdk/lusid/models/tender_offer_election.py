@@ -32,7 +32,8 @@ class TenderOfferElection(BaseModel):
     election_key:  StrictStr = Field(...,alias="electionKey", description="Unique key associated to this election.") 
     is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
-    __properties = ["tenderOfferCurrency", "tenderOfferPrice", "electionKey", "isChosen", "isDefault"]
+    payment_date: Optional[datetime] = Field(default=None, description="Optional. The date this option pays. On RepurchaseOfferEvent it sets the settlement date of this  option's transactions; when omitted, the event-level date applies. Not supported on other events.", alias="paymentDate")
+    __properties = ["tenderOfferCurrency", "tenderOfferPrice", "electionKey", "isChosen", "isDefault", "paymentDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -66,6 +67,11 @@ class TenderOfferElection(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
         return _dict
 
     @classmethod
@@ -82,7 +88,8 @@ class TenderOfferElection(BaseModel):
             "tender_offer_price": obj.get("tenderOfferPrice"),
             "election_key": obj.get("electionKey"),
             "is_chosen": obj.get("isChosen"),
-            "is_default": obj.get("isDefault")
+            "is_default": obj.get("isDefault"),
+            "payment_date": obj.get("paymentDate")
         })
         return _obj
 

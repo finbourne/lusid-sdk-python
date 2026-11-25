@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **convention_name** | [**FlowConventionName**](FlowConventionName.md) |  | [optional] 
 **notional** | **float** | The notional protected by the Credit Default Swap | [optional] 
 **is_non_standard** | **bool** | By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard&#x3D;true, the premium schedule uses the stated start and maturity dates. The payment  frequency can be any whole number of days, weeks, months, quarters, half-years or years, for example  1W, 1M or 4M. Term (T) and business-day (BD) frequencies are not accepted. The payment dates are  generated as for a fixed leg with a short front stub: backwards from the maturity, so a term that is not  a whole number of payment periods has a short first period. When the roll convention is a day of the  month (1 to 30) or EndOfMonth, each payment date falls on that day and the final period runs from the  last roll date to the maturity, for example a CDS on ABS paying on the 25th. Payments are adjusted to the  following business day. IMM and nth-weekday roll conventions are not accepted. | [optional] 
+**index_convention** | [**IndexConvention**](IndexConvention.md) |  | [optional] 
+**index_convention_name** | [**FlowConventionName**](FlowConventionName.md) |  | [optional] 
 **protection_detail_specification** | [**CdsProtectionDetailSpecification**](CdsProtectionDetailSpecification.md) |  | [optional] 
 **additional_payments** | [**List[AdditionalPayment]**](AdditionalPayment.md) | Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive. | [optional] 
 **time_zone_conventions** | [**TimeZoneConventions**](TimeZoneConventions.md) |  | [optional] 
@@ -34,11 +36,13 @@ convention_name: Optional[FlowConventionName] = # Replace with your value
 notional: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
 is_non_standard: Optional[StrictBool] = # Replace with your value
 is_non_standard:Optional[StrictBool] = None
+index_convention: Optional[IndexConvention] = # Replace with your value
+index_convention_name: Optional[FlowConventionName] = # Replace with your value
 protection_detail_specification: Optional[CdsProtectionDetailSpecification] = # Replace with your value
 additional_payments: Optional[List[AdditionalPayment]] = # Replace with your value
 time_zone_conventions: Optional[TimeZoneConventions] = # Replace with your value
 instrument_type: StrictStr = "example_instrument_type"
-credit_default_swap_instance = CreditDefaultSwap(ticker=ticker, start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, convention_name=convention_name, notional=notional, is_non_standard=is_non_standard, protection_detail_specification=protection_detail_specification, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
+credit_default_swap_instance = CreditDefaultSwap(ticker=ticker, start_date=start_date, maturity_date=maturity_date, flow_conventions=flow_conventions, coupon_rate=coupon_rate, convention_name=convention_name, notional=notional, is_non_standard=is_non_standard, index_convention=index_convention, index_convention_name=index_convention_name, protection_detail_specification=protection_detail_specification, additional_payments=additional_payments, time_zone_conventions=time_zone_conventions, instrument_type=instrument_type)
 
 ```
 

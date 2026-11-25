@@ -25,6 +25,7 @@ from datetime import datetime
 from lusid.models.diary_entry import DiaryEntry
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
 from lusid.models.link import Link
+from lusid.models.valuation_point_diagnostic import ValuationPointDiagnostic
 from lusid.models.version import Version
 
 class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
@@ -32,13 +33,14 @@ class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
     ResourceList with extra header fields used by the various ValuationPoint endpoints for returning additional context related to the list of results.  # noqa: E501
     """
     start_valuation_point: Optional[DiaryEntry] = Field(default=None, alias="startValuationPoint")
+    diagnostics: Optional[List[ValuationPointDiagnostic]] = None
     version: Version
     values: List[FundJournalEntryLine]
     href:  Optional[StrictStr] = Field(None,alias="href") 
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
     links: Optional[List[Link]] = None
-    __properties = ["startValuationPoint", "version", "values", "href", "nextPage", "previousPage", "links"]
+    __properties = ["startValuationPoint", "diagnostics", "version", "values", "href", "nextPage", "previousPage", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -75,6 +77,13 @@ class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of start_valuation_point
         if self.start_valuation_point:
             _dict['startValuationPoint'] = self.start_valuation_point.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in diagnostics (list)
+        _items = []
+        if self.diagnostics:
+            for _item in self.diagnostics:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['diagnostics'] = _items
         # override the default output from pydantic by calling `to_dict()` of version
         if self.version:
             _dict['version'] = self.version.to_dict()
@@ -92,6 +101,11 @@ class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
+        # set to None if diagnostics (nullable) is None
+        # and __fields_set__ contains the field
+        if self.diagnostics is None and "diagnostics" in self.__fields_set__:
+            _dict['diagnostics'] = None
+
         # set to None if href (nullable) is None
         # and __fields_set__ contains the field
         if self.href is None and "href" in self.__fields_set__:
@@ -125,6 +139,7 @@ class ValuationPointResourceListOfFundJournalEntryLine(BaseModel):
 
         _obj = ValuationPointResourceListOfFundJournalEntryLine.parse_obj({
             "start_valuation_point": DiaryEntry.from_dict(obj.get("startValuationPoint")) if obj.get("startValuationPoint") is not None else None,
+            "diagnostics": [ValuationPointDiagnostic.from_dict(_item) for _item in obj.get("diagnostics")] if obj.get("diagnostics") is not None else None,
             "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
             "values": [FundJournalEntryLine.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
             "href": obj.get("href"),

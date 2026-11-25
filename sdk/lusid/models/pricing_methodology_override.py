@@ -31,7 +31,8 @@ class PricingMethodologyOverride(BaseModel):
     reason:  StrictStr = Field(...,alias="reason", description="Why the fund manager overrode the methodology's decision.") 
     user:  Optional[StrictStr] = Field(None,alias="user", description="The user who made the override.") 
     timestamp: datetime = Field(description="When the override was made.")
-    __properties = ["decision", "reason", "user", "timestamp"]
+    net_cashflow: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The fund's net dealing cashflow the decision was taken on, in the fund currency, read as at the override's timestamp. An inflow is positive and an outflow negative. A net that moves within its swing tier leaves the decision standing, so this can differ from the audit's current netCashflow, and both are kept on the final valuation point. Null when the swing policy approves automatically, or the decision was taken before the net was recorded.", alias="netCashflow")
+    __properties = ["decision", "reason", "user", "timestamp", "netCashflow"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,6 +71,11 @@ class PricingMethodologyOverride(BaseModel):
         if self.user is None and "user" in self.__fields_set__:
             _dict['user'] = None
 
+        # set to None if net_cashflow (nullable) is None
+        # and __fields_set__ contains the field
+        if self.net_cashflow is None and "net_cashflow" in self.__fields_set__:
+            _dict['netCashflow'] = None
+
         return _dict
 
     @classmethod
@@ -85,7 +91,8 @@ class PricingMethodologyOverride(BaseModel):
             "decision": obj.get("decision"),
             "reason": obj.get("reason"),
             "user": obj.get("user"),
-            "timestamp": obj.get("timestamp")
+            "timestamp": obj.get("timestamp"),
+            "net_cashflow": obj.get("netCashflow")
         })
         return _obj
 

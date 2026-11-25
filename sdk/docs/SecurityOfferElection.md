@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **is_chosen** | **bool** | Is this the election that has been explicitly chosen from multiple options. | [optional] 
 **is_default** | **bool** | Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided. | [optional] 
 **units_ratio** | [**UnitsRatio**](UnitsRatio.md) |  | 
+**payment_date** | **datetime** | Optional. The date this option pays. On MergerEvent, RepurchaseOfferEvent, BonusIssueEvent and  ExchangeOfferEvent it sets the settlement date of this option&#39;s transactions; when omitted, the  event-level date applies. Not supported on other events. | [optional] 
 ## Example
 
 ```python
@@ -23,7 +24,8 @@ is_chosen:Optional[StrictBool] = None
 is_default: Optional[StrictBool] = # Replace with your value
 is_default:Optional[StrictBool] = None
 units_ratio: UnitsRatio = # Replace with your value
-security_offer_election_instance = SecurityOfferElection(election_key=election_key, is_chosen=is_chosen, is_default=is_default, units_ratio=units_ratio)
+payment_date: Optional[datetime] = # Replace with your value
+security_offer_election_instance = SecurityOfferElection(election_key=election_key, is_chosen=is_chosen, is_default=is_default, units_ratio=units_ratio, payment_date=payment_date)
 
 ```
 

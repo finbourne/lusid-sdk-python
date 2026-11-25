@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **seed_amount** | **str** |  | 
 **window** | [**ReturnsMetricWindow**](ReturnsMetricWindow.md) |  | [optional] 
-**type** | **str** | Available values: Return, IndicativeAmount. | 
+**type** | **str** | Available values: Return, IndicativeAmount, Volatility. | 
 **alias** | **str** |  | [optional] 
 ## Example
 

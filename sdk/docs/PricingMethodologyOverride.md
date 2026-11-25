@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **reason** | **str** | Why the fund manager overrode the methodology&#39;s decision. | 
 **user** | **str** | The user who made the override. | [optional] 
 **timestamp** | **datetime** | When the override was made. | 
+**net_cashflow** | **float** | The fund&#39;s net dealing cashflow the decision was taken on, in the fund currency, read as at the override&#39;s timestamp. An inflow is positive and an outflow negative. A net that moves within its swing tier leaves the decision standing, so this can differ from the audit&#39;s current netCashflow, and both are kept on the final valuation point. Null when the swing policy approves automatically, or the decision was taken before the net was recorded. | [optional] 
 ## Example
 
 ```python
@@ -21,7 +22,8 @@ decision: StrictStr = "example_decision"
 reason: StrictStr = "example_reason"
 user: Optional[StrictStr] = "example_user"
 timestamp: datetime = # Replace with your value
-pricing_methodology_override_instance = PricingMethodologyOverride(decision=decision, reason=reason, user=user, timestamp=timestamp)
+net_cashflow: Optional[Union[StrictFloat, StrictInt]] = # Replace with your value
+pricing_methodology_override_instance = PricingMethodologyOverride(decision=decision, reason=reason, user=user, timestamp=timestamp, net_cashflow=net_cashflow)
 
 ```
 

@@ -32,7 +32,8 @@ class SecurityOfferElection(BaseModel):
     is_chosen: Optional[StrictBool] = Field(default=None, description="Is this the election that has been explicitly chosen from multiple options.", alias="isChosen")
     is_default: Optional[StrictBool] = Field(default=None, description="Is this election automatically applied in the absence of an election having been made.  May only be true for one election if multiple are provided.", alias="isDefault")
     units_ratio: UnitsRatio = Field(alias="unitsRatio")
-    __properties = ["electionKey", "isChosen", "isDefault", "unitsRatio"]
+    payment_date: Optional[datetime] = Field(default=None, description="Optional. The date this option pays. On MergerEvent, RepurchaseOfferEvent, BonusIssueEvent and  ExchangeOfferEvent it sets the settlement date of this option's transactions; when omitted, the  event-level date applies. Not supported on other events.", alias="paymentDate")
+    __properties = ["electionKey", "isChosen", "isDefault", "unitsRatio", "paymentDate"]
 
     class Config:
         """Pydantic configuration"""
@@ -69,6 +70,11 @@ class SecurityOfferElection(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of units_ratio
         if self.units_ratio:
             _dict['unitsRatio'] = self.units_ratio.to_dict()
+        # set to None if payment_date (nullable) is None
+        # and __fields_set__ contains the field
+        if self.payment_date is None and "payment_date" in self.__fields_set__:
+            _dict['paymentDate'] = None
+
         return _dict
 
     @classmethod
@@ -84,7 +90,8 @@ class SecurityOfferElection(BaseModel):
             "election_key": obj.get("electionKey"),
             "is_chosen": obj.get("isChosen"),
             "is_default": obj.get("isDefault"),
-            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None
+            "units_ratio": UnitsRatio.from_dict(obj.get("unitsRatio")) if obj.get("unitsRatio") is not None else None,
+            "payment_date": obj.get("paymentDate")
         })
         return _obj
 

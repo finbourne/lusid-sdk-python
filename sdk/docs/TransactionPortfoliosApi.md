@@ -3297,7 +3297,7 @@ Name | Type | Description  | Notes
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
 # **get_portfolio_cash_statement**
-> ResourceListOfPortfolioCashFlow get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys)
+> ResourceListOfPortfolioCashFlow get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, date_range_basis=date_range_basis)
 
 GetPortfolioCashStatement: Get portfolio cash statement
 
@@ -3357,13 +3357,14 @@ def main():
     recipe_id_scope = 'recipe_id_scope_example' # str | The scope of the given recipeId (optional)
     recipe_id_code = 'recipe_id_code_example' # str | The code of the given recipeID (optional)
     property_keys = ['property_keys_example'] # List[str] | A list of property keys from the \"Instrument\" or \"Transaction\" domain to decorate onto              the cash flows' transactions. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or              \"Transaction/strategy/quantsignal\". (optional)
+    date_range_basis = 'date_range_basis_example' # str | The date basis for selecting cash statement rows.              SettlementDate (default): rows whose cash movement settles in the date range, with Open and Closed balance rows.              TransactionDate: Activity rows only whose originating transaction date falls in the range (no Open/Closed).              AsAt: Activity rows only whose originating transaction entry date/time falls in the range (no Open/Closed).              For TransactionDate and AsAt the date range also drives the settlement window used to fetch cash flows,              so only transactions whose settlement date falls within the range are candidates for filtering. Available values: SettlementDate, TransactionDate, AsAt. (optional)
 
     try:
         # uncomment the below to set overrides at the request level
-        # api_response =  api_instance.get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, opts=opts)
+        # api_response =  api_instance.get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, date_range_basis=date_range_basis, opts=opts)
 
         # GetPortfolioCashStatement: Get portfolio cash statement
-        api_response = api_instance.get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys)
+        api_response = api_instance.get_portfolio_cash_statement(scope, code, from_effective_at, to_effective_at, as_at=as_at, filter=filter, recipe_id_scope=recipe_id_scope, recipe_id_code=recipe_id_code, property_keys=property_keys, date_range_basis=date_range_basis)
         pprint(api_response)
 
     except ApiException as e:
@@ -3385,6 +3386,7 @@ Name | Type | Description  | Notes
  **recipe_id_scope** | **str**| The scope of the given recipeId | [optional] 
  **recipe_id_code** | **str**| The code of the given recipeID | [optional] 
  **property_keys** | [**List[str]**](str.md)| A list of property keys from the \&quot;Instrument\&quot; or \&quot;Transaction\&quot; domain to decorate onto              the cash flows&#39; transactions. These take the format {domain}/{scope}/{code} e.g. \&quot;Instrument/system/Name\&quot; or              \&quot;Transaction/strategy/quantsignal\&quot;. | [optional] 
+ **date_range_basis** | **str**| The date basis for selecting cash statement rows.              SettlementDate (default): rows whose cash movement settles in the date range, with Open and Closed balance rows.              TransactionDate: Activity rows only whose originating transaction date falls in the range (no Open/Closed).              AsAt: Activity rows only whose originating transaction entry date/time falls in the range (no Open/Closed).              For TransactionDate and AsAt the date range also drives the settlement window used to fetch cash flows,              so only transactions whose settlement date falls within the range are candidates for filtering. Available values: SettlementDate, TransactionDate, AsAt. | [optional] 
 
 ### Return type
 

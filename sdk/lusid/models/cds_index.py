@@ -27,6 +27,7 @@ from lusid.models.basket import Basket
 from lusid.models.cds_flow_conventions import CdsFlowConventions
 from lusid.models.cds_protection_detail_specification import CdsProtectionDetailSpecification
 from lusid.models.flow_convention_name import FlowConventionName
+from lusid.models.index_convention import IndexConvention
 from lusid.models.lusid_instrument import LusidInstrument
 from lusid.models.time_zone_conventions import TimeZoneConventions
 
@@ -44,11 +45,13 @@ class CdsIndex(LusidInstrument):
     notional: Union[StrictFloat, StrictInt] = Field(description="The notional quantity that applies to both the premium and protection legs.")
     is_non_standard: Optional[StrictBool] = Field(default=None, description="By default IsNonStandard is false, and the contract follows the IMM convention: the roll and payment  frequencies must be 3M or 6M, and the start and maturity dates are rolled onto IMM dates  (the 20th of March, June, September or December).  If IsNonStandard=true, the premium schedule uses the stated start and maturity dates. The payment  frequency can be any whole number of days, weeks, months, quarters, half-years or years, for example  1W, 1M or 4M. Term (T) and business-day (BD) frequencies are not accepted. The payment dates are  generated as for a fixed leg with a short front stub: backwards from the maturity, so a term that is not  a whole number of payment periods has a short first period. When the roll convention is a day of the  month (1 to 30) or EndOfMonth, each payment date falls on that day and the final period runs from the  last roll date to the maturity, for example a CDS on ABS paying on the 25th. Payments are adjusted to the  following business day. IMM and nth-weekday roll conventions are not accepted.", alias="isNonStandard")
     protection_detail_specification: Optional[CdsProtectionDetailSpecification] = Field(default=None, alias="protectionDetailSpecification")
+    index_convention: Optional[IndexConvention] = Field(default=None, alias="indexConvention")
+    index_convention_name: Optional[FlowConventionName] = Field(default=None, alias="indexConventionName")
     additional_payments: Optional[List[AdditionalPayment]] = Field(default=None, description="Optional additional payments at a given date e.g. to level off an uneven swap.  The dates must be distinct and either all payments are Pay or all payments are Receive.", alias="additionalPayments")
     time_zone_conventions: Optional[TimeZoneConventions] = Field(default=None, alias="timeZoneConventions")
     instrument_type:  StrictStr = Field(...,alias="instrumentType", description="Available values: QuotedSecurity, InterestRateSwap, FxForward, Future, ExoticInstrument, FxOption, CreditDefaultSwap, InterestRateSwaption, Bond, EquityOption, FixedLeg, FloatingLeg, BespokeCashFlowsLeg, Unknown, TermDeposit, ContractForDifference, EquitySwap, CashPerpetual, CapFloor, CashSettled, CdsIndex, Basket, FundingLeg, FxSwap, ForwardRateAgreement, SimpleInstrument, Repo, Equity, ExchangeTradedOption, ReferenceInstrument, ComplexBond, InflationLinkedBond, InflationSwap, SimpleCashFlowLoan, TotalReturnSwap, InflationLeg, FundShareClass, FlexibleLoan, UnsettledCash, Cash, MasteredInstrument, LoanFacility, FlexibleDeposit, FlexibleRepo, ToBeAnnounced, VolatilitySwap, ToBeAnnouncedOption, CommodityForward, BondOption, CdsOption, CommodityCalendarSwap, BondForward, PreferredShare, CapitalInterest, WholeLoanFacility, StripBond.") 
     additional_properties: Dict[str, Any] = {}
-    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional", "isNonStandard", "protectionDetailSpecification", "additionalPayments", "timeZoneConventions"]
+    __properties = ["instrumentType", "startDate", "maturityDate", "flowConventions", "couponRate", "identifiers", "basket", "conventionName", "notional", "isNonStandard", "protectionDetailSpecification", "indexConvention", "indexConventionName", "additionalPayments", "timeZoneConventions"]
 
     @validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
@@ -113,6 +116,12 @@ class CdsIndex(LusidInstrument):
         # override the default output from pydantic by calling `to_dict()` of protection_detail_specification
         if self.protection_detail_specification:
             _dict['protectionDetailSpecification'] = self.protection_detail_specification.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of index_convention
+        if self.index_convention:
+            _dict['indexConvention'] = self.index_convention.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of index_convention_name
+        if self.index_convention_name:
+            _dict['indexConventionName'] = self.index_convention_name.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in additional_payments (list)
         _items = []
         if self.additional_payments:
@@ -156,6 +165,8 @@ class CdsIndex(LusidInstrument):
             "notional": obj.get("notional"),
             "is_non_standard": obj.get("isNonStandard"),
             "protection_detail_specification": CdsProtectionDetailSpecification.from_dict(obj.get("protectionDetailSpecification")) if obj.get("protectionDetailSpecification") is not None else None,
+            "index_convention": IndexConvention.from_dict(obj.get("indexConvention")) if obj.get("indexConvention") is not None else None,
+            "index_convention_name": FlowConventionName.from_dict(obj.get("indexConventionName")) if obj.get("indexConventionName") is not None else None,
             "additional_payments": [AdditionalPayment.from_dict(_item) for _item in obj.get("additionalPayments")] if obj.get("additionalPayments") is not None else None,
             "time_zone_conventions": TimeZoneConventions.from_dict(obj.get("timeZoneConventions")) if obj.get("timeZoneConventions") is not None else None
         })
