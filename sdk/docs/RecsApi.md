@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**get_rec_instance**](RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
 [**get_rec_result**](RecsApi.md#get_rec_result) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 [**get_rec_result_set**](RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
+[**get_rec_result_streak**](RecsApi.md#get_rec_result_streak) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{id}/streak | [EXPERIMENTAL] GetRecResultStreak: GetRecResultStreak
 [**instantiate_rec**](RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 [**list_matching_rulesets**](RecsApi.md#list_matching_rulesets) | **GET** /api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
 [**list_rec_definitions**](RecsApi.md#list_rec_definitions) | **GET** /api/recs/definitions | [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
@@ -1179,6 +1180,114 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | The requested rec result set. |  -  |
+**400** | The details of the input related failure |  -  |
+**0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+# **get_rec_result_streak**
+> PagedResourceListOfRecResultStreakMember get_rec_result_streak(instance_id_type, instance_id_value, id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+
+[EXPERIMENTAL] GetRecResultStreak: GetRecResultStreak
+
+List every member of a rec result's streak, the result itself included, read from the stored predecessor links. Each member is a full result, tagged with the streaks it shares with the requested result and where it sits relative to it.
+
+### Example
+
+```python
+from lusid.exceptions import ApiException
+from lusid.extensions.configuration_options import ConfigurationOptions
+from lusid.models import *
+from pprint import pprint
+from lusid import (
+    SyncApiClientFactory,
+    RecsApi
+)
+
+def main():
+
+    with open("secrets.json", "w") as file:
+        file.write('''
+    {
+        "api":
+        {
+            "tokenUrl":"<your-token-url>",
+            "lusidUrl":"https://<your-domain>.lusid.com/api",
+            "username":"<your-username>",
+            "password":"<your-password>",
+            "clientId":"<your-client-id>",
+            "clientSecret":"<your-client-secret>"
+        }
+    }''')
+
+    # Use the lusid SyncApiClientFactory to build Api instances with a configured api client
+    # By default this will read config from environment variables
+    # Then from a secrets.json file found in the current working directory
+
+    # uncomment the below to use configuration overrides
+    # opts = ConfigurationOptions();
+    # opts.total_timeout_ms = 30_000
+
+    # uncomment the below to use an api client factory with overrides
+    # api_client_factory = SyncApiClientFactory(opts=opts)
+
+    api_client_factory = SyncApiClientFactory()
+
+    # Enter a context with an instance of the SyncApiClientFactory to ensure the connection pool is closed after use
+    
+    # Create an instance of the API class
+    api_instance = api_client_factory.build(RecsApi)
+    instance_id_type = 'instance_id_type_example' # str | How the instance was created: \"WorkflowServiceTaskId\" or \"Manual\". Available values: WorkflowServiceTaskId, Manual.
+    instance_id_value = 'instance_id_value_example' # str | The unique identifier of the rec instance.
+    id = 'id_example' # str | The id of the rec result, e.g. \"Holding-break-3\".
+    as_at = '2013-10-20T19:20:30+01:00' # datetime | The asAt datetime at which to read the streak and its members. Defaults to latest if not specified. (optional)
+    page = 'page_example' # str | The pagination token to use to continue listing members from a previous call. If a pagination token is provided the filter, sortBy and asAt fields must not have changed since the original request. (optional)
+    limit = 56 # int | When paginating, limit the number of returned members to this many. Defaults to 100 if not specified. (optional)
+    filter = 'filter_example' # str | Expression to filter the members, on relation, streakTypes and any field under result. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. (optional)
+    sort_by = ['sort_by_example'] # List[str] | A list of field names suffixed by \" ASC\" or \" DESC\". Defaults to result.asAtInstantiated DESC, newest instance first. (optional)
+    property_keys = ['property_keys_example'] # List[str] | The property keys to decorate onto each member's result. The keys its matching ruleset populates always come back, so list only others here. (optional)
+
+    try:
+        # uncomment the below to set overrides at the request level
+        # api_response =  api_instance.get_rec_result_streak(instance_id_type, instance_id_value, id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys, opts=opts)
+
+        # [EXPERIMENTAL] GetRecResultStreak: GetRecResultStreak
+        api_response = api_instance.get_rec_result_streak(instance_id_type, instance_id_value, id, as_at=as_at, page=page, limit=limit, filter=filter, sort_by=sort_by, property_keys=property_keys)
+        pprint(api_response)
+
+    except ApiException as e:
+        print("Exception when calling RecsApi->get_rec_result_streak: %s\n" % e)
+
+main()
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **instance_id_type** | **str**| How the instance was created: \&quot;WorkflowServiceTaskId\&quot; or \&quot;Manual\&quot;. Available values: WorkflowServiceTaskId, Manual. | 
+ **instance_id_value** | **str**| The unique identifier of the rec instance. | 
+ **id** | **str**| The id of the rec result, e.g. \&quot;Holding-break-3\&quot;. | 
+ **as_at** | **datetime**| The asAt datetime at which to read the streak and its members. Defaults to latest if not specified. | [optional] 
+ **page** | **str**| The pagination token to use to continue listing members from a previous call. If a pagination token is provided the filter, sortBy and asAt fields must not have changed since the original request. | [optional] 
+ **limit** | **int**| When paginating, limit the number of returned members to this many. Defaults to 100 if not specified. | [optional] 
+ **filter** | **str**| Expression to filter the members, on relation, streakTypes and any field under result. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid. | [optional] 
+ **sort_by** | [**List[str]**](str.md)| A list of field names suffixed by \&quot; ASC\&quot; or \&quot; DESC\&quot;. Defaults to result.asAtInstantiated DESC, newest instance first. | [optional] 
+ **property_keys** | [**List[str]**](str.md)| The property keys to decorate onto each member&#39;s result. The keys its matching ruleset populates always come back, so list only others here. | [optional] 
+
+### Return type
+
+[**PagedResourceListOfRecResultStreakMember**](PagedResourceListOfRecResultStreakMember.md)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | The members of the rec result&#39;s streak. |  -  |
 **400** | The details of the input related failure |  -  |
 **0** | Error response |  -  |
 

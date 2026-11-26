@@ -22,15 +22,16 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
+from lusid.models.rec_result import RecResult
 
-class FundGroupReportValuationPoint(BaseModel):
+class RecResultStreakMember(BaseModel):
     """
-    FundGroupReportValuationPoint
+    A member of a result's streak, tagged relative to the requested result.  # noqa: E501
     """
-    diary_entry_code:  Optional[StrictStr] = Field(None,alias="diaryEntryCode", description="The code of the valuation point the row was produced for.") 
-    status:  Optional[StrictStr] = Field(None,alias="status", description="The status of the valuation point the row was produced for, such as Final or Estimate.") 
-    effective_end: Optional[datetime] = Field(default=None, description="The effective end date of the valuation point the row was produced for.", alias="effectiveEnd")
-    __properties = ["diaryEntryCode", "status", "effectiveEnd"]
+    result: RecResult
+    streak_types: List[StrictStr] = Field(description="Which streaks the member shares with the requested result: always Core; Difference when every link between them has unchanged aggregate rule differences; Open when it, the requested result and every member between them have an open exception. The requested result is always Difference. Available values: Core, Difference, Open.", alias="streakTypes")
+    relation:  StrictStr = Field(...,alias="relation", description="Where the member sits relative to the requested result: Predecessor in an earlier instance, Requested for the result itself, Successor in a later instance. Available values: Predecessor, Requested, Successor.") 
+    __properties = ["result", "streakTypes", "relation"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,8 +55,8 @@ class FundGroupReportValuationPoint(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundGroupReportValuationPoint:
-        """Create an instance of FundGroupReportValuationPoint from a JSON string"""
+    def from_json(cls, json_str: str) -> RecResultStreakMember:
+        """Create an instance of RecResultStreakMember from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -64,32 +65,25 @@ class FundGroupReportValuationPoint(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if diary_entry_code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.diary_entry_code is None and "diary_entry_code" in self.__fields_set__:
-            _dict['diaryEntryCode'] = None
-
-        # set to None if status (nullable) is None
-        # and __fields_set__ contains the field
-        if self.status is None and "status" in self.__fields_set__:
-            _dict['status'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of result
+        if self.result:
+            _dict['result'] = self.result.to_dict()
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundGroupReportValuationPoint:
-        """Create an instance of FundGroupReportValuationPoint from a dict"""
+    def from_dict(cls, obj: dict) -> RecResultStreakMember:
+        """Create an instance of RecResultStreakMember from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundGroupReportValuationPoint.parse_obj(obj)
+            return RecResultStreakMember.parse_obj(obj)
 
-        _obj = FundGroupReportValuationPoint.parse_obj({
-            "diary_entry_code": obj.get("diaryEntryCode"),
-            "status": obj.get("status"),
-            "effective_end": obj.get("effectiveEnd")
+        _obj = RecResultStreakMember.parse_obj({
+            "result": RecResult.from_dict(obj.get("result")) if obj.get("result") is not None else None,
+            "streak_types": obj.get("streakTypes"),
+            "relation": obj.get("relation")
         })
         return _obj
 
-FundGroupReportValuationPoint.update_forward_refs()
+RecResultStreakMember.update_forward_refs()

@@ -1781,7 +1781,7 @@ class FundsApi:
 
     @validate_arguments
     def create_facility(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_request : Annotated[FacilityRequest, Field(description="The Facility to create.")], async_req: Optional[bool]=None, **kwargs) -> Union[Facility, Awaitable[Facility]]:  # noqa: E501
-        """[EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.  # noqa: E501
+        """[EARLY ACCESS] CreateFacility: [EARLY ACCESS] CreateFacility: Create a Facility.  # noqa: E501
 
         Create the given Facility against a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1816,7 +1816,7 @@ class FundsApi:
 
     @validate_arguments
     def create_facility_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_request : Annotated[FacilityRequest, Field(description="The Facility to create.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.  # noqa: E501
+        """[EARLY ACCESS] CreateFacility: [EARLY ACCESS] CreateFacility: Create a Facility.  # noqa: E501
 
         Create the given Facility against a Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3015,7 +3015,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_facility(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to be deleted.")], async_req: Optional[bool]=None, **kwargs) -> Union[DeletedEntityResponse, Awaitable[DeletedEntityResponse]]:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFacility: [EXPERIMENTAL] DeleteFacility: Delete a Facility.  # noqa: E501
+        """[EARLY ACCESS] DeleteFacility: [EARLY ACCESS] DeleteFacility: Delete a Facility.  # noqa: E501
 
         Delete the given Facility.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3050,7 +3050,7 @@ class FundsApi:
 
     @validate_arguments
     def delete_facility_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to be deleted.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] DeleteFacility: [EXPERIMENTAL] DeleteFacility: Delete a Facility.  # noqa: E501
+        """[EARLY ACCESS] DeleteFacility: [EARLY ACCESS] DeleteFacility: Delete a Facility.  # noqa: E501
 
         Delete the given Facility.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5027,7 +5027,7 @@ class FundsApi:
 
     @validate_arguments
     def get_facility(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Facility. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Facility. Defaults to returning the latest version of the Facility if not specified.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[Facility, Awaitable[Facility]]:  # noqa: E501
-        """[EXPERIMENTAL] GetFacility: [EXPERIMENTAL] GetFacility: Get a Facility for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFacility: [EARLY ACCESS] GetFacility: Get a Facility for a specified Fund.  # noqa: E501
 
         Retrieve a Facility for a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5066,7 +5066,7 @@ class FundsApi:
 
     @validate_arguments
     def get_facility_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the Facility. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the Facility. Defaults to returning the latest version of the Facility if not specified.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetFacility: [EXPERIMENTAL] GetFacility: Get a Facility for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] GetFacility: [EARLY ACCESS] GetFacility: Get a Facility for a specified Fund.  # noqa: E501
 
         Retrieve a Facility for a specified Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -7975,7 +7975,7 @@ class FundsApi:
 
     @validate_arguments
     def get_registry_for_fund(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, investor_record_id : Annotated[Optional[StrictStr], Field( description="When provided, only the lines of this investor record are returned.")] = None, commitment_line_id : Annotated[Optional[StrictStr], Field( description="When provided, only the lines of this commitment line are returned.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[VersionedResourceListWithWarningsOfRegistryLine, Awaitable[VersionedResourceListWithWarningsOfRegistryLine]]:  # noqa: E501
-        """[EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetRegistryForFund: [EARLY ACCESS] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
 
         Get the register lines of a Fund at the given effective and asAt datetimes: the registry lines of its  transaction portfolios, each tagged with the portfolio it sits in, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -8026,7 +8026,7 @@ class FundsApi:
 
     @validate_arguments
     def get_registry_for_fund_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to retrieve the registry. Defaults to the current LUSID system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to retrieve the registry. Defaults to return the latest version if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the result set. Read more about filtering results from LUSID here https://support.lusid.com/filtering-results-from-lusid.")] = None, property_keys : Annotated[Optional[List[StrictStr]], Field(description="A list of property keys from the \"Instrument\" or \"Holding\" domain to decorate onto              the lines. These take the format {domain}/{scope}/{code} e.g. \"Instrument/system/Name\" or \"Holding/system/CommittedCapital\".")] = None, nav_type_code : Annotated[Optional[StrictStr], Field( description="When provided, runs against the specified NAV Type, otherwise the Primary NAV Type will be used.")] = None, investor_record_id : Annotated[Optional[StrictStr], Field( description="When provided, only the lines of this investor record are returned.")] = None, commitment_line_id : Annotated[Optional[StrictStr], Field( description="When provided, only the lines of this commitment line are returned.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the number of returned results to this many. Defaults to 5000 if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing registry lines from a previous call to get the registry.              This value is returned from the previous call. If a pagination token is provided, the effectiveAt, asAt, filter,              propertyKeys, investorRecordId and commitmentLineId must not change between calls.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
+        """[EARLY ACCESS] GetRegistryForFund: [EARLY ACCESS] GetRegistryForFund: Get the registry of a Fund.  # noqa: E501
 
         Get the register lines of a Fund at the given effective and asAt datetimes: the registry lines of its  transaction portfolios, each tagged with the portfolio it sits in, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the Fund.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -11890,7 +11890,7 @@ class FundsApi:
 
     @validate_arguments
     def list_facilities(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Facilities. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Facilities. Defaults to returning the latest version of each Facility if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing facilities; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the lender, specify \"lender eq 'Bank'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[PagedResourceListOfFacility, Awaitable[PagedResourceListOfFacility]]:  # noqa: E501
-        """[EXPERIMENTAL] ListFacilities: [EXPERIMENTAL] ListFacilities: List Facilities for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] ListFacilities: [EARLY ACCESS] ListFacilities: List Facilities for a specified Fund.  # noqa: E501
 
         List all the Facilities matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -11935,7 +11935,7 @@ class FundsApi:
 
     @validate_arguments
     def list_facilities_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], effective_at : Annotated[Optional[StrictStr], Field( description="The effective datetime or cut label at which to list the Facilities. Defaults to the current LUSID              system datetime if not specified.")] = None, as_at : Annotated[Optional[datetime], Field(description="The asAt datetime at which to list the Facilities. Defaults to returning the latest version of each Facility if not specified.")] = None, page : Annotated[Optional[StrictStr], Field( description="The pagination token to use to continue listing facilities; this              value is returned from the previous call. If a pagination token is provided, the filter, effectiveAt              and asAt fields must not have changed since the original request.")] = None, limit : Annotated[Optional[StrictInt], Field(description="When paginating, limit the results to this number. Defaults to 100 if not specified.")] = None, filter : Annotated[Optional[StrictStr], Field( description="Expression to filter the results.              For example, to filter on the lender, specify \"lender eq 'Bank'\". For more information about filtering              results, see https://support.lusid.com/docs/filtering-information-retrieved-from-lusid.")] = None, sort_by : Annotated[Optional[List[StrictStr]], Field(description="A list of field names to sort by, each suffixed by \" ASC\" or \" DESC\"")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ListFacilities: [EXPERIMENTAL] ListFacilities: List Facilities for a specified Fund.  # noqa: E501
+        """[EARLY ACCESS] ListFacilities: [EARLY ACCESS] ListFacilities: List Facilities for a specified Fund.  # noqa: E501
 
         List all the Facilities matching a particular criteria.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -16177,7 +16177,7 @@ class FundsApi:
 
     @validate_arguments
     def reseed_facility_balance(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to re-seed.")], dry_run : Annotated[Optional[StrictBool], Field(description="Report what a re-seed would write, and any draws or repayments that cannot be attributed, without writing anything. Defaults to false.")] = None, async_req: Optional[bool]=None, **kwargs) -> Union[FacilityReseedResult, Awaitable[FacilityReseedResult]]:  # noqa: E501
-        """[EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.  # noqa: E501
+        """[EARLY ACCESS] ReseedFacilityBalance: [EARLY ACCESS] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.  # noqa: E501
 
         Rebuild the balance a Facility's limit is judged on from the draws and repayments booked on it: DealFundings  drawn from it and capital calls repaying it, in Booked or Booking status, on allocation maps whose  structureMemberId is the Fund, and FacilityDrawEvents and FacilityRepaymentEvents in the sources of the Fund's  portfolios. Afterwards the balance is the booked draws and repayments. Running it again writes nothing. A  Facility with nothing booked on it is seeded with 0. Draws and repayments still in Booking status count, and  are named in a FacilityBookingInProgress warning.  A draw or repayment written at the same time makes the re-seed fail as a concurrent modification; retry it.  A draw or repayment naming the Facility on an allocation map whose structureMemberId is not a fund cannot be  attributed, and the re-seed is refused with 409 FacilityFlowsUnattributable naming them; nothing is written,  and draws, repayments, FacilityInterestEvents and FacilityCommitmentFeeEvents on the Facility are refused the  same way until the maps are fixed and the Facility is re-seeded.  With dryRun, nothing is written: the response says what a re-seed would write, or lists the draws and  repayments that cannot be attributed. Requires the Fund's update entitlement, except for a dry run.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -16214,7 +16214,7 @@ class FundsApi:
 
     @validate_arguments
     def reseed_facility_balance_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to re-seed.")], dry_run : Annotated[Optional[StrictBool], Field(description="Report what a re-seed would write, and any draws or repayments that cannot be attributed, without writing anything. Defaults to false.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.  # noqa: E501
+        """[EARLY ACCESS] ReseedFacilityBalance: [EARLY ACCESS] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.  # noqa: E501
 
         Rebuild the balance a Facility's limit is judged on from the draws and repayments booked on it: DealFundings  drawn from it and capital calls repaying it, in Booked or Booking status, on allocation maps whose  structureMemberId is the Fund, and FacilityDrawEvents and FacilityRepaymentEvents in the sources of the Fund's  portfolios. Afterwards the balance is the booked draws and repayments. Running it again writes nothing. A  Facility with nothing booked on it is seeded with 0. Draws and repayments still in Booking status count, and  are named in a FacilityBookingInProgress warning.  A draw or repayment written at the same time makes the re-seed fail as a concurrent modification; retry it.  A draw or repayment naming the Facility on an allocation map whose structureMemberId is not a fund cannot be  attributed, and the re-seed is refused with 409 FacilityFlowsUnattributable naming them; nothing is written,  and draws, repayments, FacilityInterestEvents and FacilityCommitmentFeeEvents on the Facility are refused the  same way until the maps are fixed and the Facility is re-seeded.  With dryRun, nothing is written: the response says what a re-seed would write, or lists the draws and  repayments that cannot be attributed. Requires the Fund's update entitlement, except for a dry run.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -17490,7 +17490,7 @@ class FundsApi:
 
     @validate_arguments
     def update_facility(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to update.")], facility_request : Annotated[FacilityRequest, Field(description="The Facility definition to store.")], async_req: Optional[bool]=None, **kwargs) -> Union[Facility, Awaitable[Facility]]:  # noqa: E501
-        """[EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.  # noqa: E501
+        """[EARLY ACCESS] UpdateFacility: [EARLY ACCESS] UpdateFacility: Update a Facility.  # noqa: E501
 
         Replace the definition of a Facility of a Fund. The code, the Fund and the currency cannot change. Lowering  the limit below what is already drawn is accepted and the response carries a warning: the draws already  booked stand, and further draws are refused until the Facility is repaid within its limit.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -17527,7 +17527,7 @@ class FundsApi:
 
     @validate_arguments
     def update_facility_with_http_info(self, scope : Annotated[StrictStr, Field(..., description="The scope of the Fund.")], code : Annotated[StrictStr, Field(..., description="The code of the Fund. Together with the scope this uniquely identifies the Fund.")], facility_code : Annotated[StrictStr, Field(..., description="The code of the Facility to update.")], facility_request : Annotated[FacilityRequest, Field(description="The Facility definition to store.")], **kwargs) -> ApiResponse:  # noqa: E501
-        """[EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.  # noqa: E501
+        """[EARLY ACCESS] UpdateFacility: [EARLY ACCESS] UpdateFacility: Update a Facility.  # noqa: E501
 
         Replace the definition of a Facility of a Fund. The code, the Fund and the currency cannot change. Lowering  the limit below what is already drawn is accepted and the response carries a warning: the draws already  booked stand, and further draws are refused until the Facility is repaid within its limit.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

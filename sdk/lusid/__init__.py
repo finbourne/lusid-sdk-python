@@ -56,7 +56,6 @@ from lusid.api.entity_resolvers_api import EntityResolversApi
 from lusid.api.executions_api import ExecutionsApi
 from lusid.api.fee_types_api import FeeTypesApi
 from lusid.api.fund_configuration_api import FundConfigurationApi
-from lusid.api.fund_groups_api import FundGroupsApi
 from lusid.api.fund_structures_api import FundStructuresApi
 from lusid.api.fund_valuation_templates_api import FundValuationTemplatesApi
 from lusid.api.funds_api import FundsApi
@@ -885,12 +884,6 @@ from lusid.models.fund_definition_request import FundDefinitionRequest
 from lusid.models.fund_details import FundDetails
 from lusid.models.fund_distribution_event import FundDistributionEvent
 from lusid.models.fund_estimate_valuation_point import FundEstimateValuationPoint
-from lusid.models.fund_group_report_output import FundGroupReportOutput
-from lusid.models.fund_group_report_result import FundGroupReportResult
-from lusid.models.fund_group_report_valuation_point import FundGroupReportValuationPoint
-from lusid.models.fund_group_trial_balance import FundGroupTrialBalance
-from lusid.models.fund_group_trial_balance_request import FundGroupTrialBalanceRequest
-from lusid.models.fund_group_trial_balance_response import FundGroupTrialBalanceResponse
 from lusid.models.fund_id_list import FundIdList
 from lusid.models.fund_instrument import FundInstrument
 from lusid.models.fund_journal_entry_line import FundJournalEntryLine
@@ -1386,6 +1379,7 @@ from lusid.models.paged_resource_list_of_rec_definition import PagedResourceList
 from lusid.models.paged_resource_list_of_rec_instance import PagedResourceListOfRecInstance
 from lusid.models.paged_resource_list_of_rec_result import PagedResourceListOfRecResult
 from lusid.models.paged_resource_list_of_rec_result_set import PagedResourceListOfRecResultSet
+from lusid.models.paged_resource_list_of_rec_result_streak_member import PagedResourceListOfRecResultStreakMember
 from lusid.models.paged_resource_list_of_reconciliation import PagedResourceListOfReconciliation
 from lusid.models.paged_resource_list_of_reference_list_response import PagedResourceListOfReferenceListResponse
 from lusid.models.paged_resource_list_of_relational_data_point_response import PagedResourceListOfRelationalDataPointResponse
@@ -1667,6 +1661,7 @@ from lusid.models.rec_result_set import RecResultSet
 from lusid.models.rec_result_set_approval_decision_request import RecResultSetApprovalDecisionRequest
 from lusid.models.rec_result_settlement_activity_item import RecResultSettlementActivityItem
 from lusid.models.rec_result_streak import RecResultStreak
+from lusid.models.rec_result_streak_member import RecResultStreakMember
 from lusid.models.rec_result_streak_predecessor import RecResultStreakPredecessor
 from lusid.models.rec_result_sub_streak import RecResultSubStreak
 from lusid.models.rec_result_transaction_item import RecResultTransactionItem
@@ -2410,7 +2405,6 @@ __all__ = [
     "ExecutionsApi",
     "FeeTypesApi",
     "FundConfigurationApi",
-    "FundGroupsApi",
     "FundStructuresApi",
     "FundValuationTemplatesApi",
     "FundsApi",
@@ -3229,12 +3223,6 @@ __all__ = [
     "FundDetails",
     "FundDistributionEvent",
     "FundEstimateValuationPoint",
-    "FundGroupReportOutput",
-    "FundGroupReportResult",
-    "FundGroupReportValuationPoint",
-    "FundGroupTrialBalance",
-    "FundGroupTrialBalanceRequest",
-    "FundGroupTrialBalanceResponse",
     "FundIdList",
     "FundInstrument",
     "FundJournalEntryLine",
@@ -3730,6 +3718,7 @@ __all__ = [
     "PagedResourceListOfRecInstance",
     "PagedResourceListOfRecResult",
     "PagedResourceListOfRecResultSet",
+    "PagedResourceListOfRecResultStreakMember",
     "PagedResourceListOfReconciliation",
     "PagedResourceListOfReferenceListResponse",
     "PagedResourceListOfRelationalDataPointResponse",
@@ -4011,6 +4000,7 @@ __all__ = [
     "RecResultSetApprovalDecisionRequest",
     "RecResultSettlementActivityItem",
     "RecResultStreak",
+    "RecResultStreakMember",
     "RecResultStreakPredecessor",
     "RecResultSubStreak",
     "RecResultTransactionItem",

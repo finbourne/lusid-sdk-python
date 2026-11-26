@@ -344,7 +344,6 @@ Class | Method | HTTP request | Description
 *FundConfigurationApi* | [**list_fund_configurations**](docs/FundConfigurationApi.md#list_fund_configurations) | **GET** /api/fundconfigurations | [EARLY ACCESS] ListFundConfigurations: List FundConfiguration.
 *FundConfigurationApi* | [**patch_fund_configuration**](docs/FundConfigurationApi.md#patch_fund_configuration) | **PATCH** /api/fundconfigurations/{scope}/{code} | [EARLY ACCESS] PatchFundConfiguration: Patch Fund Configuration.
 *FundConfigurationApi* | [**upsert_fund_configuration_properties**](docs/FundConfigurationApi.md#upsert_fund_configuration_properties) | **POST** /api/fundconfigurations/{scope}/{code}/properties/$upsert | [EARLY ACCESS] UpsertFundConfigurationProperties: Upsert FundConfiguration properties
-*FundGroupsApi* | [**get_fund_group_trial_balance**](docs/FundGroupsApi.md#get_fund_group_trial_balance) | **POST** /api/fundgroups/{scope}/{code}/trialbalance/$query | [EARLY ACCESS] GetFundGroupTrialBalance: Get the Trial Balance for a group of Funds.
 *FundStructuresApi* | [**add_fund_structure_member**](docs/FundStructuresApi.md#add_fund_structure_member) | **POST** /api/fundstructures/{scope}/{code}/members | [EARLY ACCESS] AddFundStructureMember: Add a member to a Fund Structure.
 *FundStructuresApi* | [**close_fund_structure**](docs/FundStructuresApi.md#close_fund_structure) | **POST** /api/fundstructures/{scope}/{code}/$close | [EARLY ACCESS] CloseFundStructure: [EXPERIMENTAL] CloseFundStructure: Finalise a valuation point across a Fund Structure.
 *FundStructuresApi* | [**create_fund_structure**](docs/FundStructuresApi.md#create_fund_structure) | **POST** /api/fundstructures/{scope} | [EARLY ACCESS] CreateFundStructure: Create a Fund Structure.
@@ -366,14 +365,14 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**approve_tax_provision**](docs/FundsApi.md#approve_tax_provision) | **POST** /api/funds/{scope}/{code}/valuationpoints/{diaryEntryCode}/tax/provision/approve | [EARLY ACCESS] ApproveTaxProvision: [EARLY ACCESS] ApproveTaxProvision: Approve the deferred-tax provision of a Valuation Point.
 *FundsApi* | [**calculate_management_fees**](docs/FundsApi.md#calculate_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$calculate | [EARLY ACCESS] CalculateManagementFees: [EXPERIMENTAL] CalculateManagementFees: Calculate the management fee per partner for a period.
 *FundsApi* | [**check_partnership_transaction_types**](docs/FundsApi.md#check_partnership_transaction_types) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/typecheck | [EARLY ACCESS] CheckPartnershipTransactionTypes: [EXPERIMENTAL] CheckPartnershipTransactionTypes: Check the Fund's transaction types against its partnership configuration pack.
-*FundsApi* | [**create_facility**](docs/FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] CreateFacility: [EXPERIMENTAL] CreateFacility: Create a Facility.
+*FundsApi* | [**create_facility**](docs/FundsApi.md#create_facility) | **POST** /api/funds/{scope}/{code}/facilities | [EARLY ACCESS] CreateFacility: [EARLY ACCESS] CreateFacility: Create a Facility.
 *FundsApi* | [**create_fee**](docs/FundsApi.md#create_fee) | **POST** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] CreateFee: Create a Fee.
 *FundsApi* | [**create_fund**](docs/FundsApi.md#create_fund) | **POST** /api/funds/{scope} | [EARLY ACCESS] CreateFund: Create a Fund.
 *FundsApi* | [**create_fund_v2**](docs/FundsApi.md#create_fund_v2) | **POST** /api/funds/v2/{scope} | [EARLY ACCESS] CreateFundV2: Create a Fund V2 (Preview).
 *FundsApi* | [**create_valuation_point**](docs/FundsApi.md#create_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$create | [EARLY ACCESS] CreateValuationPoint: Create a Valuation Point.
 *FundsApi* | [**deactivate_nav_types**](docs/FundsApi.md#deactivate_nav_types) | **POST** /api/funds/{scope}/{code}/deactivateNavTypes | [EARLY ACCESS] DeactivateNavTypes: Deactivate NAV types on a Fund.
 *FundsApi* | [**delete_bookmark**](docs/FundsApi.md#delete_bookmark) | **DELETE** /api/funds/{scope}/{code}/bookmarks/{bookmarkCode} | [EARLY ACCESS] DeleteBookmark: Delete a Bookmark.
-*FundsApi* | [**delete_facility**](docs/FundsApi.md#delete_facility) | **DELETE** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EXPERIMENTAL] DeleteFacility: [EXPERIMENTAL] DeleteFacility: Delete a Facility.
+*FundsApi* | [**delete_facility**](docs/FundsApi.md#delete_facility) | **DELETE** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EARLY ACCESS] DeleteFacility: [EARLY ACCESS] DeleteFacility: Delete a Facility.
 *FundsApi* | [**delete_fee**](docs/FundsApi.md#delete_fee) | **DELETE** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] DeleteFee: Delete a Fee.
 *FundsApi* | [**delete_fund**](docs/FundsApi.md#delete_fund) | **DELETE** /api/funds/{scope}/{code} | [EARLY ACCESS] DeleteFund: Delete a Fund.
 *FundsApi* | [**delete_nav_activity_adjustments**](docs/FundsApi.md#delete_nav_activity_adjustments) | **POST** /api/funds/{scope}/{code}/navAdjustment/$delete | [EARLY ACCESS] DeleteNavActivityAdjustments: Delete Nav activity adjustments.
@@ -384,7 +383,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**finalise_candidate_valuation_point**](docs/FundsApi.md#finalise_candidate_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints/$finalisecandidate | [EARLY ACCESS] FinaliseCandidateValuationPoint: Finalise a Candidate Valuation Point.
 *FundsApi* | [**get_a2_b_data_for_fund**](docs/FundsApi.md#get_a2_b_data_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2b/$query | [EARLY ACCESS] GetA2BDataForFund: Get A2B data for a Fund.
 *FundsApi* | [**get_a2_b_movements_for_fund**](docs/FundsApi.md#get_a2_b_movements_for_fund) | **POST** /api/funds/{scope}/{code}/valuationpoints/a2bmovements/$query | [EARLY ACCESS] GetA2BMovementsForFund: Get A2B movements for transaction portfolios in a Fund.
-*FundsApi* | [**get_facility**](docs/FundsApi.md#get_facility) | **GET** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EXPERIMENTAL] GetFacility: [EXPERIMENTAL] GetFacility: Get a Facility for a specified Fund.
+*FundsApi* | [**get_facility**](docs/FundsApi.md#get_facility) | **GET** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EARLY ACCESS] GetFacility: [EARLY ACCESS] GetFacility: Get a Facility for a specified Fund.
 *FundsApi* | [**get_fee**](docs/FundsApi.md#get_fee) | **GET** /api/funds/{scope}/{code}/fees/{feeCode} | [EARLY ACCESS] GetFee: Get a Fee for a specified Fund.
 *FundsApi* | [**get_fee_properties**](docs/FundsApi.md#get_fee_properties) | **GET** /api/funds/{scope}/{code}/fees/{feeCode}/properties | [EARLY ACCESS] GetFeeProperties: Get Fee properties.
 *FundsApi* | [**get_fund**](docs/FundsApi.md#get_fund) | **GET** /api/funds/{scope}/{code} | [EARLY ACCESS] GetFund: Get a Fund.
@@ -399,7 +398,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_partner_unfunded_reconciliation**](docs/FundsApi.md#get_partner_unfunded_reconciliation) | **GET** /api/funds/{scope}/{code}/partners/{investorRecordId}/unfundedreconciliation | [EARLY ACCESS] GetPartnerUnfundedReconciliation: [EARLY ACCESS] GetPartnerUnfundedReconciliation: Get a partner's unfunded commitment statement.
 *FundsApi* | [**get_partners**](docs/FundsApi.md#get_partners) | **GET** /api/funds/{scope}/{code}/partners | [EARLY ACCESS] GetPartners: [EARLY ACCESS] GetPartners: Get the partners of a partnership fund.
 *FundsApi* | [**get_partnership_config_pack**](docs/FundsApi.md#get_partnership_config_pack) | **GET** /api/funds/{scope}/{code}/partnershipaccounting/configpack | [EARLY ACCESS] GetPartnershipConfigPack: [EXPERIMENTAL] GetPartnershipConfigPack: Get the partnership configuration pack of a Fund.
-*FundsApi* | [**get_registry_for_fund**](docs/FundsApi.md#get_registry_for_fund) | **GET** /api/funds/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistryForFund: [EXPERIMENTAL] GetRegistryForFund: Get the registry of a Fund.
+*FundsApi* | [**get_registry_for_fund**](docs/FundsApi.md#get_registry_for_fund) | **GET** /api/funds/{scope}/{code}/registry | [EARLY ACCESS] GetRegistryForFund: [EARLY ACCESS] GetRegistryForFund: Get the registry of a Fund.
 *FundsApi* | [**get_series**](docs/FundsApi.md#get_series) | **GET** /api/funds/{scope}/{code}/series | [EARLY ACCESS] GetSeries: [EARLY ACCESS] GetSeries: List the Series of a Fund.
 *FundsApi* | [**get_tax_deemed_disposal**](docs/FundsApi.md#get_tax_deemed_disposal) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals/{holdingId}/{date} | [EARLY ACCESS] GetTaxDeemedDisposal: [EARLY ACCESS] GetTaxDeemedDisposal: Get one deemed disposal.
 *FundsApi* | [**get_tax_deemed_disposals**](docs/FundsApi.md#get_tax_deemed_disposals) | **GET** /api/funds/{scope}/{code}/tax/deemed-disposals | [EARLY ACCESS] GetTaxDeemedDisposals: [EARLY ACCESS] GetTaxDeemedDisposals: List the deemed disposals of a Fund or company.
@@ -418,7 +417,7 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**get_valuation_point_transactions**](docs/FundsApi.md#get_valuation_point_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/transactions/$query | [EARLY ACCESS] GetValuationPointTransactions: Get the Transactions for the given Fund.
 *FundsApi* | [**get_valuation_point_trial_balance**](docs/FundsApi.md#get_valuation_point_trial_balance) | **POST** /api/funds/{scope}/{code}/valuationpoints/trialbalance/$query | [EARLY ACCESS] GetValuationPointTrialBalance: Get Trial Balance for the given Fund.
 *FundsApi* | [**get_valuation_point_unsettled_transactions**](docs/FundsApi.md#get_valuation_point_unsettled_transactions) | **POST** /api/funds/{scope}/{code}/valuationpoints/unsettledtransactions/$query | [EARLY ACCESS] GetValuationPointUnsettledTransactions: Get Unsettled Transactions for the given Fund.
-*FundsApi* | [**list_facilities**](docs/FundsApi.md#list_facilities) | **GET** /api/funds/{scope}/{code}/facilities | [EXPERIMENTAL] ListFacilities: [EXPERIMENTAL] ListFacilities: List Facilities for a specified Fund.
+*FundsApi* | [**list_facilities**](docs/FundsApi.md#list_facilities) | **GET** /api/funds/{scope}/{code}/facilities | [EARLY ACCESS] ListFacilities: [EARLY ACCESS] ListFacilities: List Facilities for a specified Fund.
 *FundsApi* | [**list_fees**](docs/FundsApi.md#list_fees) | **GET** /api/funds/{scope}/{code}/fees | [EARLY ACCESS] ListFees: List Fees for a specified Fund.
 *FundsApi* | [**list_fund_calendar**](docs/FundsApi.md#list_fund_calendar) | **GET** /api/funds/{scope}/{code}/calendar | [EARLY ACCESS] ListFundCalendar: List Fund Calendar.
 *FundsApi* | [**list_fund_calendar_entries**](docs/FundsApi.md#list_fund_calendar_entries) | **GET** /api/funds/{scope}/{code}/calendars | [EARLY ACCESS] ListFundCalendarEntries: List Fund Calendar Entries.
@@ -439,14 +438,14 @@ Class | Method | HTTP request | Description
 *FundsApi* | [**query_cash_statement**](docs/FundsApi.md#query_cash_statement) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatement/$query | [DEPRECATED] QueryCashStatement: [DEPRECATED] QueryCashStatement: Query cash statement for a Fund valuation point.
 *FundsApi* | [**query_cash_statement_local_currency**](docs/FundsApi.md#query_cash_statement_local_currency) | **POST** /api/funds/{scope}/{code}/valuationpoints/cashstatementlocalcurrency/$query | [EARLY ACCESS] QueryCashStatementLocalCurrency: [EXPERIMENTAL] QueryCashStatementLocalCurrency: Query the local-currency cash statement for a Fund valuation point.
 *FundsApi* | [**reactivate_nav_types**](docs/FundsApi.md#reactivate_nav_types) | **POST** /api/funds/{scope}/{code}/reactivateNavTypes | [EXPERIMENTAL] ReactivateNavTypes: [EXPERIMENTAL] ReactivateNavTypes: Reactivate previously deactivated NAV types on a Fund.
-*FundsApi* | [**reseed_facility_balance**](docs/FundsApi.md#reseed_facility_balance) | **POST** /api/funds/{scope}/{code}/facilities/{facilityCode}/$reseed | [EXPERIMENTAL] ReseedFacilityBalance: [EXPERIMENTAL] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.
+*FundsApi* | [**reseed_facility_balance**](docs/FundsApi.md#reseed_facility_balance) | **POST** /api/funds/{scope}/{code}/facilities/{facilityCode}/$reseed | [EARLY ACCESS] ReseedFacilityBalance: [EARLY ACCESS] ReseedFacilityBalance: Re-seed a Facility's balance from its booked draws and repayments.
 *FundsApi* | [**resplit_prepaid_management_fees**](docs/FundsApi.md#resplit_prepaid_management_fees) | **POST** /api/funds/{scope}/{code}/fees/$resplit | [EARLY ACCESS] ResplitPrepaidManagementFees: [EXPERIMENTAL] ResplitPrepaidManagementFees: Re-split the Fund's prepaid management fee periods.
 *FundsApi* | [**revert_valuation_point_to_estimate**](docs/FundsApi.md#revert_valuation_point_to_estimate) | **POST** /api/funds/{scope}/{code}/valuationpoints/$reverttoestimate | [EARLY ACCESS] RevertValuationPointToEstimate: Reverts a Final Valuation Point to Estimate.
 *FundsApi* | [**run_partner_allocations**](docs/FundsApi.md#run_partner_allocations) | **POST** /api/funds/{scope}/{code}/partnerallocations/$run | [EARLY ACCESS] RunPartnerAllocations: [EXPERIMENTAL] RunPartnerAllocations: Allocate a period's income to the Fund's partners.
 *FundsApi* | [**send_back_tax_return**](docs/FundsApi.md#send_back_tax_return) | **POST** /api/funds/{scope}/{code}/tax/return/send-back | [EARLY ACCESS] SendBackTaxReturn: [EARLY ACCESS] SendBackTaxReturn: Send the tax return back one workflow step.
 *FundsApi* | [**set_holdings_for_fund**](docs/FundsApi.md#set_holdings_for_fund) | **PUT** /api/funds/{scope}/{code}/holdings | [EXPERIMENTAL] SetHoldingsForFund: Set holdings for a Fund.
 *FundsApi* | [**set_share_class_instruments**](docs/FundsApi.md#set_share_class_instruments) | **PUT** /api/funds/{scope}/{code}/shareclasses | [EARLY ACCESS] SetShareClassInstruments: Set the ShareClass Instruments on a Fund.
-*FundsApi* | [**update_facility**](docs/FundsApi.md#update_facility) | **PUT** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EXPERIMENTAL] UpdateFacility: [EXPERIMENTAL] UpdateFacility: Update a Facility.
+*FundsApi* | [**update_facility**](docs/FundsApi.md#update_facility) | **PUT** /api/funds/{scope}/{code}/facilities/{facilityCode} | [EARLY ACCESS] UpdateFacility: [EARLY ACCESS] UpdateFacility: Update a Facility.
 *FundsApi* | [**update_valuation_point**](docs/FundsApi.md#update_valuation_point) | **PUT** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpdateValuationPoint: Update a Valuation Point.
 *FundsApi* | [**upsert_bookmark**](docs/FundsApi.md#upsert_bookmark) | **POST** /api/funds/{scope}/{code}/bookmarks | [EARLY ACCESS] UpsertBookmark: Upsert a bookmark.
 *FundsApi* | [**upsert_diary_entry_type_valuation_point**](docs/FundsApi.md#upsert_diary_entry_type_valuation_point) | **POST** /api/funds/{scope}/{code}/valuationpoints | [EARLY ACCESS] UpsertDiaryEntryTypeValuationPoint: Upsert a Valuation Point.
@@ -733,6 +732,7 @@ Class | Method | HTTP request | Description
 *RecsApi* | [**get_rec_instance**](docs/RecsApi.md#get_rec_instance) | **GET** /api/recs/instances/{instanceIdType}/{instanceIdValue} | [EXPERIMENTAL] GetRecInstance: GetRecInstance
 *RecsApi* | [**get_rec_result**](docs/RecsApi.md#get_rec_result) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{id} | [EXPERIMENTAL] GetRecResult: GetRecResult
 *RecsApi* | [**get_rec_result_set**](docs/RecsApi.md#get_rec_result_set) | **GET** /api/recs/resultsets/{entityUniqueId} | [EXPERIMENTAL] GetRecResultSet: GetRecResultSet
+*RecsApi* | [**get_rec_result_streak**](docs/RecsApi.md#get_rec_result_streak) | **GET** /api/recs/results/{instanceIdType}/{instanceIdValue}/{id}/streak | [EXPERIMENTAL] GetRecResultStreak: GetRecResultStreak
 *RecsApi* | [**instantiate_rec**](docs/RecsApi.md#instantiate_rec) | **POST** /api/recs/instances | [EXPERIMENTAL] InstantiateRec: InstantiateRec
 *RecsApi* | [**list_matching_rulesets**](docs/RecsApi.md#list_matching_rulesets) | **GET** /api/recs/matchingrulesets | [EXPERIMENTAL] ListMatchingRulesets: ListMatchingRulesets
 *RecsApi* | [**list_rec_definitions**](docs/RecsApi.md#list_rec_definitions) | **GET** /api/recs/definitions | [EXPERIMENTAL] ListRecDefinitions: ListRecDefinitions
@@ -924,7 +924,7 @@ Class | Method | HTTP request | Description
 *TransactionPortfoliosApi* | [**get_portfolio_cash_flows**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 *TransactionPortfoliosApi* | [**get_portfolio_cash_ladder**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 *TransactionPortfoliosApi* | [**get_portfolio_cash_statement**](docs/TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
-*TransactionPortfoliosApi* | [**get_registry**](docs/TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+*TransactionPortfoliosApi* | [**get_registry**](docs/TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EARLY ACCESS] GetRegistry: [EARLY ACCESS] GetRegistry: Get the registry of a transaction portfolio.
 *TransactionPortfoliosApi* | [**get_transaction_history**](docs/TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
 *TransactionPortfoliosApi* | [**get_transaction_settlement_status**](docs/TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 *TransactionPortfoliosApi* | [**get_transactions**](docs/TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
@@ -1740,12 +1740,6 @@ Class | Method | HTTP request | Description
  - [FundDetails](docs/FundDetails.md)
  - [FundDistributionEvent](docs/FundDistributionEvent.md)
  - [FundEstimateValuationPoint](docs/FundEstimateValuationPoint.md)
- - [FundGroupReportOutput](docs/FundGroupReportOutput.md)
- - [FundGroupReportResult](docs/FundGroupReportResult.md)
- - [FundGroupReportValuationPoint](docs/FundGroupReportValuationPoint.md)
- - [FundGroupTrialBalance](docs/FundGroupTrialBalance.md)
- - [FundGroupTrialBalanceRequest](docs/FundGroupTrialBalanceRequest.md)
- - [FundGroupTrialBalanceResponse](docs/FundGroupTrialBalanceResponse.md)
  - [FundIdList](docs/FundIdList.md)
  - [FundInstrument](docs/FundInstrument.md)
  - [FundJournalEntryLine](docs/FundJournalEntryLine.md)
@@ -2241,6 +2235,7 @@ Class | Method | HTTP request | Description
  - [PagedResourceListOfRecInstance](docs/PagedResourceListOfRecInstance.md)
  - [PagedResourceListOfRecResult](docs/PagedResourceListOfRecResult.md)
  - [PagedResourceListOfRecResultSet](docs/PagedResourceListOfRecResultSet.md)
+ - [PagedResourceListOfRecResultStreakMember](docs/PagedResourceListOfRecResultStreakMember.md)
  - [PagedResourceListOfReconciliation](docs/PagedResourceListOfReconciliation.md)
  - [PagedResourceListOfReferenceListResponse](docs/PagedResourceListOfReferenceListResponse.md)
  - [PagedResourceListOfRelationalDataPointResponse](docs/PagedResourceListOfRelationalDataPointResponse.md)
@@ -2522,6 +2517,7 @@ Class | Method | HTTP request | Description
  - [RecResultSetApprovalDecisionRequest](docs/RecResultSetApprovalDecisionRequest.md)
  - [RecResultSettlementActivityItem](docs/RecResultSettlementActivityItem.md)
  - [RecResultStreak](docs/RecResultStreak.md)
+ - [RecResultStreakMember](docs/RecResultStreakMember.md)
  - [RecResultStreakPredecessor](docs/RecResultStreakPredecessor.md)
  - [RecResultSubStreak](docs/RecResultSubStreak.md)
  - [RecResultTransactionItem](docs/RecResultTransactionItem.md)

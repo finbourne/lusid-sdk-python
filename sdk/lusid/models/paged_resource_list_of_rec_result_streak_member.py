@@ -22,23 +22,19 @@ from typing import List, Dict, Optional, Any, Union, TYPE_CHECKING
 from typing_extensions import Annotated
 from pydantic.v1 import BaseModel, StrictStr, StrictInt, StrictBool, StrictFloat, StrictBytes, Field, validator, ValidationError, conlist, constr
 from datetime import datetime
-from lusid.models.fund_group_report_result import FundGroupReportResult
-from lusid.models.fund_group_trial_balance import FundGroupTrialBalance
 from lusid.models.link import Link
-from lusid.models.version import Version
+from lusid.models.rec_result_streak_member import RecResultStreakMember
 
-class FundGroupTrialBalanceResponse(BaseModel):
+class PagedResourceListOfRecResultStreakMember(BaseModel):
     """
-    FundGroupTrialBalanceResponse
+    PagedResourceListOfRecResultStreakMember
     """
-    fund_results: Optional[List[FundGroupReportResult]] = Field(default=None, description="One entry per fund and NAV type in the group: the valuation points reported, or the reason nothing was reported for it.", alias="fundResults")
-    version: Version
-    values: List[FundGroupTrialBalance]
-    href:  Optional[StrictStr] = Field(None,alias="href", description="The specific Uniform Resource Identifier (URI) for this resource at the requested effective and asAt datetime.") 
     next_page:  Optional[StrictStr] = Field(None,alias="nextPage") 
     previous_page:  Optional[StrictStr] = Field(None,alias="previousPage") 
+    values: List[RecResultStreakMember]
+    href:  Optional[StrictStr] = Field(None,alias="href") 
     links: Optional[List[Link]] = None
-    __properties = ["fundResults", "version", "values", "href", "nextPage", "previousPage", "links"]
+    __properties = ["nextPage", "previousPage", "values", "href", "links"]
 
     class Config:
         """Pydantic configuration"""
@@ -62,8 +58,8 @@ class FundGroupTrialBalanceResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> FundGroupTrialBalanceResponse:
-        """Create an instance of FundGroupTrialBalanceResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> PagedResourceListOfRecResultStreakMember:
+        """Create an instance of PagedResourceListOfRecResultStreakMember from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
@@ -72,16 +68,6 @@ class FundGroupTrialBalanceResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in fund_results (list)
-        _items = []
-        if self.fund_results:
-            for _item in self.fund_results:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['fundResults'] = _items
-        # override the default output from pydantic by calling `to_dict()` of version
-        if self.version:
-            _dict['version'] = self.version.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in values (list)
         _items = []
         if self.values:
@@ -96,16 +82,6 @@ class FundGroupTrialBalanceResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['links'] = _items
-        # set to None if fund_results (nullable) is None
-        # and __fields_set__ contains the field
-        if self.fund_results is None and "fund_results" in self.__fields_set__:
-            _dict['fundResults'] = None
-
-        # set to None if href (nullable) is None
-        # and __fields_set__ contains the field
-        if self.href is None and "href" in self.__fields_set__:
-            _dict['href'] = None
-
         # set to None if next_page (nullable) is None
         # and __fields_set__ contains the field
         if self.next_page is None and "next_page" in self.__fields_set__:
@@ -116,6 +92,11 @@ class FundGroupTrialBalanceResponse(BaseModel):
         if self.previous_page is None and "previous_page" in self.__fields_set__:
             _dict['previousPage'] = None
 
+        # set to None if href (nullable) is None
+        # and __fields_set__ contains the field
+        if self.href is None and "href" in self.__fields_set__:
+            _dict['href'] = None
+
         # set to None if links (nullable) is None
         # and __fields_set__ contains the field
         if self.links is None and "links" in self.__fields_set__:
@@ -124,23 +105,21 @@ class FundGroupTrialBalanceResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> FundGroupTrialBalanceResponse:
-        """Create an instance of FundGroupTrialBalanceResponse from a dict"""
+    def from_dict(cls, obj: dict) -> PagedResourceListOfRecResultStreakMember:
+        """Create an instance of PagedResourceListOfRecResultStreakMember from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return FundGroupTrialBalanceResponse.parse_obj(obj)
+            return PagedResourceListOfRecResultStreakMember.parse_obj(obj)
 
-        _obj = FundGroupTrialBalanceResponse.parse_obj({
-            "fund_results": [FundGroupReportResult.from_dict(_item) for _item in obj.get("fundResults")] if obj.get("fundResults") is not None else None,
-            "version": Version.from_dict(obj.get("version")) if obj.get("version") is not None else None,
-            "values": [FundGroupTrialBalance.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
-            "href": obj.get("href"),
+        _obj = PagedResourceListOfRecResultStreakMember.parse_obj({
             "next_page": obj.get("nextPage"),
             "previous_page": obj.get("previousPage"),
+            "values": [RecResultStreakMember.from_dict(_item) for _item in obj.get("values")] if obj.get("values") is not None else None,
+            "href": obj.get("href"),
             "links": [Link.from_dict(_item) for _item in obj.get("links")] if obj.get("links") is not None else None
         })
         return _obj
 
-FundGroupTrialBalanceResponse.update_forward_refs()
+PagedResourceListOfRecResultStreakMember.update_forward_refs()

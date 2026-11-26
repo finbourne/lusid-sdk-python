@@ -36,7 +36,7 @@ Method | HTTP request | Description
 [**get_portfolio_cash_flows**](TransactionPortfoliosApi.md#get_portfolio_cash_flows) | **GET** /api/transactionportfolios/{scope}/{code}/cashflows | GetPortfolioCashFlows: Get portfolio cash flows
 [**get_portfolio_cash_ladder**](TransactionPortfoliosApi.md#get_portfolio_cash_ladder) | **GET** /api/transactionportfolios/{scope}/{code}/cashladder | GetPortfolioCashLadder: Get portfolio cash ladder
 [**get_portfolio_cash_statement**](TransactionPortfoliosApi.md#get_portfolio_cash_statement) | **GET** /api/transactionportfolios/{scope}/{code}/cashstatement | GetPortfolioCashStatement: Get portfolio cash statement
-[**get_registry**](TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+[**get_registry**](TransactionPortfoliosApi.md#get_registry) | **GET** /api/transactionportfolios/{scope}/{code}/registry | [EARLY ACCESS] GetRegistry: [EARLY ACCESS] GetRegistry: Get the registry of a transaction portfolio.
 [**get_transaction_history**](TransactionPortfoliosApi.md#get_transaction_history) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/history | GetTransactionHistory: Get the history of a transaction
 [**get_transaction_settlement_status**](TransactionPortfoliosApi.md#get_transaction_settlement_status) | **GET** /api/transactionportfolios/{scope}/{code}/transactions/{transactionId}/settlementstatus | [EARLY ACCESS] GetTransactionSettlementStatus: Get transaction settlement status
 [**get_transactions**](TransactionPortfoliosApi.md#get_transactions) | **GET** /api/transactionportfolios/{scope}/{code}/transactions | GetTransactions: Get transactions
@@ -3409,7 +3409,7 @@ Name | Type | Description  | Notes
 # **get_registry**
 > VersionedResourceListWithWarningsOfRegistryLine get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
 
-[EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+[EARLY ACCESS] GetRegistry: [EARLY ACCESS] GetRegistry: Get the registry of a transaction portfolio.
 
 Get the registry lines of a transaction portfolio at the given effective and asAt datetimes: the partner  register lines that transaction types flagged 'Registry' apply to, with their units, cost and capital  balances. Registry lines are never holdings, so they do not appear in the holdings of the portfolio.
 
@@ -3473,7 +3473,7 @@ def main():
         # uncomment the below to set overrides at the request level
         # api_response =  api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page, opts=opts)
 
-        # [EXPERIMENTAL] GetRegistry: [EXPERIMENTAL] GetRegistry: Get the registry of a transaction portfolio.
+        # [EARLY ACCESS] GetRegistry: [EARLY ACCESS] GetRegistry: Get the registry of a transaction portfolio.
         api_response = api_instance.get_registry(scope, code, effective_at=effective_at, as_at=as_at, filter=filter, property_keys=property_keys, investor_record_id=investor_record_id, commitment_line_id=commitment_line_id, limit=limit, page=page)
         pprint(api_response)
 
